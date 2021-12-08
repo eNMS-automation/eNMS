@@ -26,8 +26,7 @@ Version 4.1.0
 - Add duplicate button in service table
 - Refactor the geographical and Logical View to behave like the workflow builder:
   * List of all pools that contain at least one device or link, stored in user browser local storage
-  * Remove default pool mechanism. Remove "visualization_default" property in pool model.
-    By design, the default pool becomes the first pool in alphabetical order
+  * Remove default pool mechanism. Remove "visualization_default" property in pool model. By design, the default pool becomes the first pool in alphabetical order
   * Add backward / forward control like the workflow builder
 - Rename "monitor_requests" function to "process_requests": impact on plugins
 - Add global "factory" and "delete" functions in the workflow builder to create and delete new objects
@@ -180,12 +179,9 @@ Version 4.0.0
   * Use pools extension to user and services to define user access.
   * Add new "default access" property to choose between creator, admin, and public
   * Remove "group" table (a group is a pool of users)
-  * Add "groups" property to user and add "creator" property for pools, devices and links. By defining pools of services
-    based on the group property, and autofilling the groups property of an object when it is created with the user "groups",
-    objects can be automatically added to the pool of services of the appropriate groups.
+  * Add "groups" property to user and add "creator" property for pools, devices and links.
 - New Credentials mechanism:
-  * Credentials can be either username / password or SSH key. Both passwords and SSH key are stored in the Vault (no key file
-    stored on the unix server).
+  * Credentials can be either username / password or SSH key. Both passwords and SSH key are stored in the Vault (no key file stored on the unix server).
   * Credentials also have an "Enable Password" field to go to enable mode after logging in.
   * Credentials have a priority field; credential object with higher priority is used if multiple available credentials.
   * Credentials have two pools: user pool to define which users can use the credentials, and device pools to define which
@@ -429,11 +425,6 @@ Version 3.20.1
 - Fix retry numbering
 - Add Search REST endpoint
 
-MIGRATION:
-All iteration variable became GLOBAL VARIABLE, which means that you need to use
-{{variable}} instead of {{get_var("variable")}} previously
-All services that use iteration variables must be updated in the migration files.
-
 Version 3.20
 ------------
 
@@ -448,14 +439,6 @@ Version 3.20
 - Refactoring of the search system: next to the input, old "Advanced Search" button now dedicated
   to relationship. Everything is now persisted in the DOM.
 
-MIGRATION:
-- In netmiko configuration backup service, rename:
-
-  - "configuration" -> "configuration_command"
-  - "operational_data" -> "operational_data_command"
-
-- Moved ansible, pyats to a dedicated file called "requirements_optional.txt":
-
 Version 3.19
 ------------
 
@@ -463,11 +446,9 @@ Version 3.19
   Mechanism to use local files as part of the automation services.
 - Add new color code for the logs window.
 - Add New Copy to clipboard mechanism:
-
-    - copy from RC on a service in Workflow builder
-    - copy from icon in result tables
-    - copy dict path to result in the json window.
-
+  - copy from RC on a service in Workflow builder
+  - copy from icon in result tables
+  - copy dict path to result in the json window.
 - Full screen workflow builder
 - Remember menu size PER USER
 - Refactoring of all the tables
@@ -476,11 +457,6 @@ Version 3.19
 - Remove recipients from settings.json. Recipients is now a mandatory field if mail notification is ticked.
 - Add support for netmiko genie / pyATS (`use_genie`) option.
 - New "Desktop session" mechanism to SSH to a device using teraterm / putty / etc.
-
-MIGRATION:
-- Renaming "config" -> "settings". All services that use the "config" global variable must change it to "settings".
-- Session change log: some traceback previously returned as "result" key of service "results" now returned as "error":
-can create backward-compatibility issue when a workflow relies on the content of the traceback.
 
 Version 3.18.2
 --------------

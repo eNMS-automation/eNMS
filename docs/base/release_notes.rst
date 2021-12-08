@@ -209,7 +209,7 @@ Version 4.0.0
 - Add mechanism to save only failed results (e.g for config collection workflow)
 - New database.json to define engine parameters, import / export properties, many to many relationship, etc.
 - Fork based on string value instead of just True / False: new discard mode for the skip mechanism. When using discard,
-devices do not follow any edge after the skipped service.
+  devices do not follow any edge after the skipped service.
 - Refactor skip property so that it is no longer a property of the service to avoid side effect of skipping shared services.
 - Add new option in pool to invert logic for each property.
 - New Option "Update pools after running" for workflow like the configuration management workflow.
@@ -217,24 +217,24 @@ devices do not follow any edge after the skipped service.
 - Don't reset run status when running a CLI command with CLI plugins
 - Refactor log mechanism to send log to client bit by bit, instead of all run logs at each refresh request
 - "No validation" in the service panel is now an option of the "validation condition" instead of the
-"validation method". Migration impact.
+  "validation method". Migration impact.
 - The timestamps like "last runtime", "last failure", etc are now per configuration property. The timestamps are
-all stored per device in a json.file called "timestamps.json". These timestamps properties have been added to
-the configuration table.
+  all stored per device in a json.file called "timestamps.json". These timestamps properties have been added to
+  the configuration table.
 - Add ability to hard-code logic to mask password hashes when config is displayed in custom controller.
 - Add workflow tree in the workflow builder to visualize workflow and subworkflows as a tree with buttons:
-edit / new mechanism: highlight to teleport to any service. Makes it easier to work with large multi-level workflows.
+  edit / new mechanism: highlight to teleport to any service. Makes it easier to work with large multi-level workflows.
 - Replace gotty with pure python implementation. Save session output with webssh. Need to set ENMS_USER and ENMS_PASSWORD
-like with the scheduler to save the session via REST API. For this to work, admin credentials must be defined via
-two new environment variables: ENMS_USER and ENMS_PASSWORD (same as scheduler)
+  like with the scheduler to save the session via REST API. For this to work, admin credentials must be defined via
+  two new environment variables: ENMS_USER and ENMS_PASSWORD (same as scheduler)
 - Fix bug connection not cached when using iteration values with a standalone service
 - Fix bug when exporting table to .csv - column shift if comma in property value
 - When scheduling a task, the creator of the service run is not properly set to the user who scheduled
-the task instead of the admin user.
+  the task instead of the admin user.
 - Add a cap for number of threads when running a service with multiprocessing enabled. Maximum number 
-of threads configurable from settings.json > automation > max process.
+  of threads configurable from settings.json > automation > max process.
 - Add runtimes select list in service results window, so you can visualize service results in workflow
-builder.
+  builder.
 - Include private properties (custom password, ...) when exporting a service, or migration files.
 - New color property for workflow edges.
 - Export service now exports to user browser besides exporting the tgz to the VM.
@@ -267,7 +267,7 @@ Test:
 - test new bulk edit, bulk delete, copy clipboard mechanism
 - test new relation table mechanism with add to relation (individual and bulk selection) and remove from relation.
 - test new logical and geographical views (right-click menu, scalability with 10K+ devices, default pools mechanism,
-network filtering mechanism, run service mechanism, etc)
+  network filtering mechanism, run service mechanism, etc)
 - test new get_neighbors function, including using get_neighbors output for service iteration
 - test that notification mechanism still works
 - test that the new web SSH mechanism works, make sure that the session saving mechanism works as intended.
@@ -278,10 +278,10 @@ network filtering mechanism, run service mechanism, etc)
   * test new discard option
   * test that skip works fine with services in "run once" mode.
 - test the iteration mechanism (both iteration on value and iteration on devices). Tests that the connection
-is cached and reused for iteration values.
+  is cached and reused for iteration values.
 - test the device query mechanism.
 - user rbac (access to UI + access to models) is properly updated when one of its associated pool OR access
-is modified.
+  is modified.
 - test new credentials mechanism
 - test new option in pool to invert logic
 - test new "update pools after running mechanism"
@@ -295,32 +295,32 @@ is modified.
 - test new "maximum number of thread" mechanism
 - test new troubleshooting snippet mechanism
 - test performances and scalability compared to last version (no improvements to be expected as no work as made on performances,
-but we have to make sure it's not worse).
+  but we have to make sure it's not worse).
 - test rest call services as the rest service was refactored.
 
 Migration:
 - Update endpoint: view/network and view/site no longer exists, to be replaced with 
-geographical_view and view_builder
+  geographical_view and view_builder
 - Configure the new visualization.json file, remove visualization settings from settings.json
 - In the service.yaml file, the "devices" and "pools" relationship with services have to be renamed
-"target_devices" and "target_pools". Besides, "update_pools" must be renamed to "update_target_pools".
+  "target_devices" and "target_pools". Besides, "update_pools" must be renamed to "update_target_pools".
 - In service.yaml, remove the skip property: it will not be migrated (refactoring of skip mechanism so that skip
-is per workflow and not a property of the service itself)
+  is per workflow and not a property of the service itself)
 - In service.yaml, "No Validation" is now part of the "Validation Condition" section. This means that all services
-where "validation_method" is set to "none", it must be replaced with "text" and "validation_condition"
-must be set to "none" instead.
+  where "validation_method" is set to "none", it must be replaced with "text" and "validation_condition"
+  must be set to "none" instead.
 - Add ENMS_USER and ENMS_PASSWORD (admin credentials) to environment variables.
 - The create_pool endpoint has been removed, make sure the /instance/pool endpoint is used instead.
 - The Rest service has been refactored in case the response is not in range 200 - 300: the "response_code" key
-is now "status_code", and "response" key becomes "result" (consistent with the case where the
-rest call is successful). Need to check these keys in the migration files, i.e for services that use
-these keys as part of the post-processing or as part of the workflow later one.
+  is now "status_code", and "response" key becomes "result" (consistent with the case where the
+  rest call is successful). Need to check these keys in the migration files, i.e for services that use
+  these keys as part of the post-processing or as part of the workflow later one.
 - Whenever the "Use host keys" option is used, need to create a credential object instead with the key.
-The "Use host key" option in all connection services no longer exists.
+  The "Use host key" option in all connection services no longer exists.
 - In service.yaml, the "skip_value" property is "success" / "failure" instead of "True" / "False"
-(skip_value: 'True' -> skip_value: 'success' / skip_value: 'False' -> skip_value: 'failure')
+  (skip_value: 'True' -> skip_value: 'success' / skip_value: 'False' -> skip_value: 'failure')
 - In service.yaml, all references to devices via "self.devices" must use "self.target_devices" instead as the row
-was renamed in the Service table.
+  was renamed in the Service table.
 
 
 Version 3.22.4
@@ -330,7 +330,7 @@ Version 3.22.4
 - Fix object numbers not updated for manually defined pool
 - Catch exception in query rest endpoint when no results found to avoid stacktrace in server logs
 - Add "fetch" and "fetch_all" function to workflow global space. Set rbac to "edit" and username to current user
-for both these functions.
+  for both these functions.
 - Add "encrypt" function to workflow global space to encrypt password and use substitution in custom passwords.
 - Return json object in get result REST endpoint when no results found for consistency.
 - Reset service status to "Idle" when reloading the app along with the run status.
@@ -375,11 +375,11 @@ Version 3.22
 - Remote scheduler
 - Remove TACACS+ parameters from settings, use env variable instead: TACACS_ADDR, TACACS_PASSWORD
 - Make REST API accept Tacacs and LDAP credentials (in the last version, if you were using TACACS+ or LDAP, you could authenticate
-in the UI but couldn't make calls to the REST API)
+  in the UI but couldn't make calls to the REST API)
 - Remove LDAP parameters from settings. The LDAP authentication is in the custom controller, there is a default
-function that works with a standard LDAP installation, but you can customize however you want.
-The LDAP server is now configured with the env variable LDAP_SERVER.
-The settings contain a new section "database" to enable ldap, database or tacacs authentication.
+  function that works with a standard LDAP installation, but you can customize however you want.
+  The LDAP server is now configured with the env variable LDAP_SERVER.
+  The settings contain a new section "database" to enable ldap, database or tacacs authentication.
 - Add replier option in send mail mechanism
 - Rename "app_log" option to "changelog" in log function for services
 - Add new entry in workflow RC menu "Workflow Results Table": contains all results for a given runtime,

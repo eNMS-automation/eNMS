@@ -128,6 +128,16 @@
   },
   "relationships": {
     "associations": {
+      "object_view": {
+        "model1": {
+          "column": "object_id",
+          "foreign_key": "object"
+        },
+        "model2": {
+          "column": "view_id",
+          "foreign_key": "view"
+        }
+      },
       "pool_device": {
         "model1": {
           "column": "pool_id",

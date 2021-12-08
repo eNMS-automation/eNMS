@@ -176,7 +176,6 @@
     "/counters": "all",
     "/count_models": "all",
     "/create_label": "access",
-    "/create_view_object": "access",
     "/database_deletion": "admin",
     "/delete_corrupted_edges": "access",
     "/delete_instance": "access",

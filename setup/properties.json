@@ -242,7 +242,7 @@
       },
       {
         "data": "buttons",
-        "width": "300px",
+        "width": "270px",
         "orderable": false,
         "export": false
       }

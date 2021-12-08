@@ -614,7 +614,7 @@ function showDeviceModel(device) {
     title: `3D Visualization of '${device.name}'`,
     size: "700 500",
     id: device.id,
-    content: `<div id="map" style="height:100%; width:100%"></div>`,
+    content: `<div id="3D-${device.id}" style="height:100%; width:100%"></div>`,
     callback: () => {
       function animate() {
         requestAnimationFrame(animate);
@@ -626,7 +626,7 @@ function showDeviceModel(device) {
       camera.lookAt(100, 100, 300);
       let scene = new THREE.Scene();
       scene.background = new THREE.Color(0xffffff);
-      const container = document.getElementById("map");
+      const container = document.getElementById(`3D-${device.id}`);
       const renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setSize(700, 485);
       container.appendChild(renderer.domElement);

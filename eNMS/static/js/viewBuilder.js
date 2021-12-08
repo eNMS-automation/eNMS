@@ -31,11 +31,11 @@ function displayView({ direction } = {}) {
 }
 
 function createNewView(mode) {
-  if (mode == "create") {
+  if (mode == "create_view") {
     showInstancePanel("view");
   } else if (!currentView) {
     notify("No view has been created yet.", "error", 5);
-  } else if (mode == "duplicate") {
+  } else if (mode == "duplicate_view") {
     showInstancePanel("view", currentView.id, "duplicate");
   } else {
     showInstancePanel("view", currentView.id);
@@ -47,15 +47,15 @@ function openDeletionPanel() {
 
 function updateRightClickBindings() {
   Object.assign(action, {
-    "Create View": () => createNewView("create_workflow"),
-    "Duplicate View": () => createNewView("duplicate_workflow"),
-    "Edit View": () => showInstancePanel("workflow", workflow.id),
+    "Create View": () => createNewView("create_view"),
+    "Duplicate View": () => createNewView("duplicate_view"),
+    "Edit View": () => showInstancePanel("view", view.id),
     Delete: openDeletionPanel,
     "Create Label": () => showLabelPanel({ usePosition: true }),
     "Create Label Button": () => showLabelPanel({ usePosition: false }),
     "Edit Label": (label) => showLabelPanel({ label: label, usePosition: true }),
     "Edit Edge": (edge) => {
-      showInstancePanel("workflow_edge", edge.id);
+      showInstancePanel("link", edge.id);
     },
     Skip: () => skipServices(),
     "Zoom In": () => graph.zoom(0.2),

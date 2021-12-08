@@ -608,6 +608,49 @@ function initFiltering() {
   }
 }
 
+function showDeviceModel(device) {
+  openPanel({
+    name: "device_view",
+    title: `3D Visualization of '${device.name}'`,
+    size: "700 500",
+    id: device.id,
+    content: `<div id="map" style="height:100%; width:100%"></div>`,
+    callback: () => {
+      function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+      const aspect = $(".main_frame").width() / $(".main_frame").height();
+      let camera = new THREE.PerspectiveCamera(45, aspect, 1, 100000);
+      camera.position.set(650, 6, 120);
+      camera.lookAt(100, 100, 300);
+      let scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xffffff);
+      const container = document.getElementById("map");
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(700, 485);
+      container.appendChild(renderer.domElement);
+      const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
+      scene.add(ambientLight);
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+      directionalLight.position.set(1, 1, 0).normalize();
+      scene.add(directionalLight);
+      // RESIZE REINSTATE.
+      new THREE.OrbitControls(camera, renderer.domElement);
+      new THREE.ColladaLoader().load(
+        `/static/img/view/models/cisco_catalyst_me4924.dae`,
+        function (collada) {
+          collada.scene.scale.set(20, 20, 20);
+          collada.scene.rotation.set(- Math.PI / 2, 0, Math.PI / 2);
+          collada.scene.position.set(2300, 0, 800);
+          scene.add(collada.scene);
+        }
+      );
+      animate();
+    },
+  });
+}
+
 export function initView() {
   $("body").contextMenu({
     menuSelector: "#contextMenu",
@@ -622,6 +665,7 @@ export function initView() {
     Connect: (d) => showConnectionPanel(d),
     Configuration: (d) => showDeviceData(d),
     "Run Service": (d) => showRunServicePanel({ instance: d }),
+    "Visualize in 3D": (d) => showDeviceModel(d),
   });
   call({
     url: `/get_visualization_pools/${page}`,

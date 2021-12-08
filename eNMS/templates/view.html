@@ -235,37 +235,10 @@
   <li class="menu-entry node-selection">
     <a tabindex="-1" href="#">Duplicate</a>
   </li>
-  <li class="menu-entry node-selection">
-    <a tabindex="-1" href="#">Logs</a>
-  </li>
-  <li class="menu-entry node-selection">
-    <a tabindex="-1" href="#">Results</a>
-  </li>
   <li class="menu-entry node-selection workflow-selection">
-    <a tabindex="-1" href="#">Enter Workflow</a>
-  </li>
-  <li class="dropdown-submenu menu-entry node-selection">
-    <a class="menu-submenu" tabindex="-1" href="#"
-      >Reference<span class="caret-right"></span
-    ></a>
-    <ul class="dropdown-menu">
-      <li><a tabindex="-1" href="#">Service Name</a></li>
-      <li><a tabindex="-1" href="#">Top-level Result</a></li>
-      <li><a tabindex="-1" href="#">Per-device Result</a></li>
-    </ul>
+    <a tabindex="-1" href="#">Enter View</a>
   </li>
   <li class="menu-entry divider node-selection">&nbsp</li>
-  <li class="menu-entry node-selection"><a tabindex="-1" href="#">Run</a></li>
-  <li class="menu-entry node-selection">
-    <a tabindex="-1" href="#">Parameterized Run</a>
-  </li>
-  <li class="menu-entry node-selection">
-    <a tabindex="-1" href="#">Restart Workflow from Here</a>
-  </li>
-  <li class="menu-entry divider node-selection">&nbsp</li>
-  <li class="menu-entry node-selection">
-    <a tabindex="-1" href="#">Skip</a>
-  </li>
   <li class="menu-entry node-selection edge-selection">
     <a tabindex="-1" href="#">Delete</a>
   </li>
@@ -278,35 +251,6 @@
   <li class="menu-entry label-selection">
     <a tabindex="-1" href="#">Delete</a>
   </li>
-  <li class="dropdown-submenu menu-entry global">
-    <a class="menu-submenu" tabindex="-1" href="#"
-      >Change Mode<span class="caret-right"></span
-    ></a>
-    <ul class="dropdown-menu">
-      <li><a tabindex="-1" href="#">Move Nodes</a></li>
-      <li class="divider"><a tabindex="-1" href="#">&nbsp</a></li>
-      <li><a tabindex="-1" href="#">Create 'Success' edge</a></li>
-      <li><a tabindex="-1" href="#">Create 'Failure' edge</a></li>
-    </ul>
-  </li>
-  <li class="dropdown-submenu menu-entry global">
-    <a class="menu-submenu" tabindex="-1" href="#"
-      >Workflow<span class="caret-right"></span
-    ></a>
-    <ul class="dropdown-menu">
-      <li><a tabindex="-1" href="#">Edit Workflow</a></li>
-      <li><a tabindex="-1" href="#">Create Workflow</a></li>
-      <li><a tabindex="-1" href="#">Add to Workflow</a></li>
-      <li class="divider"><a tabindex="-1" href="#">&nbsp</a></li>
-      <li><a tabindex="-1" href="#">Run Workflow</a></li>
-      <li><a tabindex="-1" href="#">Parameterized Workflow Run</a></li>
-      <li><a tabindex="-1" href="#">Stop Workflow</a></li>
-      <li class="divider"><a tabindex="-1" href="#">&nbsp</a></li>
-      <li><a tabindex="-1" href="#">Workflow Result Tree</a></li>
-      <li><a tabindex="-1" href="#">Workflow Result Table</a></li>
-      <li><a tabindex="-1" href="#">Workflow Logs</a></li>
-    </ul>
-  </li>
   <li class="menu-entry global">
     <a tabindex="-1" href="#">Create Label</a>
   </li>
@@ -315,6 +259,6 @@
 <script src="{{ url_for('static', filename='lib/vis/vis.min.js') }}"></script>
 <script
   type="module"
-  src="{{ url_for('static', filename='js/workflowBuilder.js') }}"
+  src="{{ url_for('static', filename='js/viewBuilder.js') }}"
 ></script>
 {% endblock javascripts %}

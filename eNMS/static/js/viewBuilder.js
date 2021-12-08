@@ -2,10 +2,8 @@
 global
 action: false
 page: false
-THREE: false
 */
 
-import { showRunServicePanel } from "./automation.js";
 import {
   call,
   history,
@@ -14,14 +12,8 @@ import {
   notify,
   showInstancePanel,
 } from "./base.js";
-import { showConnectionPanel, showDeviceData } from "./inventory.js";
 
 let currentView;
-let camera;
-let scene;
-let renderer;
-let nodes = {};
-
 let currentPath = localStorage.getItem(page);
 
 function displayView({ direction } = {}) {
@@ -71,3 +63,30 @@ function initLogicalFramework() {
   $("#transform-mode").selectpicker();
 }
 
+function createNewView(mode) {
+  if (mode == "create") {
+    showInstancePanel("view");
+  } else if (!currentView) {
+    notify("No view has been created yet.", "error", 5);
+  } else if (mode == "duplicate") {
+    showInstancePanel("view", currentView.id, "duplicate");
+  } else {
+    showInstancePanel("view", currentView.id);
+  }
+}
+
+export function viewCreation(instance) {
+  if (instance.type == "view") {
+    if (instance.id == currentView.id) {
+      $("#current-view option:selected").text(instance.name).trigger("change");
+    } else {
+      $("#current-view").append(
+        `<option value="${instance.id}">${instance.name}</option>`
+      );
+      $("#current-view").val(instance.id).trigger("change");
+      displayView();
+    }
+  } else if (instance.type == "node") {
+    setNodePosition(nodes[instance.id], instance);
+  }
+}

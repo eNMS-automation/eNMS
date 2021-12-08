@@ -11,6 +11,12 @@ from eNMS.database import db
 from eNMS.variables import vs
 
 
+class View(AbstractBase):
+
+    __tablename__ = type = "view"
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+
 class Object(AbstractBase):
 
     __tablename__ = "object"
@@ -402,93 +408,3 @@ class Session(AbstractBase):
         "Device", back_populates="sessions", foreign_keys="Session.device_id"
     )
     device_name = association_proxy("device", "name")
-
-
-class ViewObject(AbstractBase):
-
-    __tablename__ = export_type = "view_object"
-    type = db.Column(db.SmallString)
-    __mapper_args__ = {"polymorphic_identity": "view_object", "polymorphic_on": type}
-    id = db.Column(Integer, primary_key=True)
-    name = db.Column(db.SmallString, unique=True)
-    view_id = db.Column(Integer, ForeignKey("view_object.id", ondelete="cascade"))
-    view = relationship(
-        "View", remote_side=[id], foreign_keys=view_id, back_populates="objects"
-    )
-    position_x = db.Column(Float, default=0.0)
-    position_y = db.Column(Float, default=0.0)
-    position_z = db.Column(Float, default=0.0)
-    scale_x = db.Column(Float, default=1.0)
-    scale_y = db.Column(Float, default=1.0)
-    scale_z = db.Column(Float, default=1.0)
-    rotation_x = db.Column(Float, default=0.0)
-    rotation_y = db.Column(Float, default=0.0)
-    rotation_z = db.Column(Float, default=0.0)
-
-    def update(self, **kwargs):
-        super().update(**kwargs)
-        if "name" in kwargs:
-            prefix = f"[{self.view}] " if self.view else ""
-            self.name = f"{prefix}{kwargs['name']}"
-        else:
-            self.name = vs.get_time()
-
-
-class Node(ViewObject):
-
-    __tablename__ = class_type = "node"
-    __mapper_args__ = {"polymorphic_identity": "node"}
-    parent_type = "view_object"
-    id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
-    model = db.Column(db.SmallString)
-    device_id = db.Column(Integer, ForeignKey("device.id"))
-    device = relationship("Device", foreign_keys="Node.device_id")
-    device_name = association_proxy("device", "name")
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        if not self.name:
-            self.name = vs.get_time()
-
-
-class Line(ViewObject):
-
-    __tablename__ = class_type = "line"
-    __mapper_args__ = {"polymorphic_identity": "line"}
-    parent_type = "view_object"
-    id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
-    link_id = db.Column(Integer, ForeignKey("link.id"))
-    link = relationship("Link", foreign_keys="Line.link_id")
-    link_name = association_proxy("link", "name")
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        if not self.name:
-            self.name = vs.get_time()
-
-
-class Plan(ViewObject):
-
-    __tablename__ = class_type = "plan"
-    __mapper_args__ = {"polymorphic_identity": "plan"}
-    parent_type = "view_object"
-    id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
-
-
-class Label(ViewObject):
-
-    __tablename__ = class_type = "label"
-    __mapper_args__ = {"polymorphic_identity": "label"}
-    parent_type = "view_object"
-    id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
-    text = db.Column(db.SmallString)
-
-
-class View(ViewObject):
-
-    __tablename__ = class_type = "view"
-    __mapper_args__ = {"polymorphic_identity": "view"}
-    parent_type = "view_object"
-    id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
-    last_modified = db.Column(db.TinyString, info={"log_change": False})
-    objects = relationship("ViewObject", foreign_keys="ViewObject.view_id")

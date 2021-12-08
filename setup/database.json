@@ -44,7 +44,7 @@
     "task",
     "access",
     "credential",
-    "view_object",
+    "view",
     "pool"
   ],
   "dont_migrate": {
@@ -124,8 +124,7 @@
       "upper_menu",
       "pages"
     ],
-    "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"],
-    "view_object": ["id", "device_id", "device_name", "view_id"]
+    "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"]
   },
   "relationships": {
     "associations": {

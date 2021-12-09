@@ -574,9 +574,6 @@ function updateRightClickBindings() {
     "Create 'Success' edge": () => switchMode("success"),
     "Create 'Failure' edge": () => switchMode("failure"),
     "Move Nodes": () => switchMode("motion"),
-    "Create Label": () => showLabelPanel({ usePosition: true }),
-    "Create Label Button": () => showLabelPanel({ usePosition: false }),
-    "Edit Label": (label) => showLabelPanel({ label: label, usePosition: true }),
     "Edit Edge": (edge) => {
       showInstancePanel("workflow_edge", edge.id);
     },

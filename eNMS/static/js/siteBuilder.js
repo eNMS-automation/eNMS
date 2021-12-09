@@ -76,17 +76,7 @@ function switchToSite(path, direction) {
 }
 
 export function displaySite(site) {
-  nodes = new vis.DataSet([]);
-  edges = new vis.DataSet([]);
-  graph = configureGraph(
-    site,
-    {
-      nodes: [],
-      edges: [],
-      inactive: [],
-    },
-    options
-  );
+  graph = configureGraph(site, { nodes: [], edges: [], inactive: []}, options);
   graph.on("click", () => {
     if (!ctrlKeyPressed) graph.selectNodes([]);
   });

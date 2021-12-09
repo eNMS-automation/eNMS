@@ -116,9 +116,6 @@ export function displayWorkflow(workflowData) {
       showInstancePanel(node.type, node.id);
     }
   });
-  graph.on("dragEnd", (event) => {
-    if (graph.getNodeAt(event.pointer.DOM)) savePositions();
-  });
   displayWorkflowState(workflowData);
   rectangleSelection($("#network"), graph, nodes);
   switchMode(currentMode, true);
@@ -488,16 +485,6 @@ $("#current-workflow").on("change", function () {
 $("#current-runtime").on("change", function () {
   getWorkflowState();
 });
-
-function savePositions() {
-  call({
-    url: `/save_positions/${workflow.id}`,
-    data: graph.getPositions(),
-    callback: function (updateTime) {
-      if (updateTime) workflow.last_modified = updateTime;
-    },
-  });
-}
 
 function addServicePanel() {
   openPanel({

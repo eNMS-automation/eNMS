@@ -1,9 +1,10 @@
 import { call, configureNamespace, notify, openPanel } from "./base.js";
 
 const container = document.getElementById("network");
-
 let currentLabel;
+let currentInstance;
 let mousePosition;
+let network;
 let selectedObject;
 export let edges;
 export let nodes;
@@ -12,10 +13,11 @@ export let triggerMenu;
 export function configureGraph(instance, graph, options) {
   nodes = new vis.DataSet(graph.nodes);
   edges = new vis.DataSet(graph.edges);
+  currentInstance = instance;
   for (const [id, label] of Object.entries(instance.labels)) {
     drawLabel(id, label);
   }
-  let network = new vis.Network(container, { nodes: nodes, edges: edges }, options);
+  network = new vis.Network(container, { nodes: nodes, edges: edges }, options);
   network.setOptions({ physics: false });
   for (const objectType of ["Node", "Edge"]) {
     network.on(`hover${objectType}`, function () {
@@ -60,7 +62,20 @@ export function configureGraph(instance, graph, options) {
     );
   }
   $(`#current-${instance.type}`).val(instance.id).selectpicker("refresh");
+  network.on("dragEnd", (event) => {
+    if (network.getNodeAt(event.pointer.DOM)) savePositions();
+  });
   return network;
+}
+
+function savePositions() {
+  call({
+    url: `/save_positions/${currentInstance.id}`,
+    data: network.getPositions(),
+    callback: function (updateTime) {
+      if (updateTime) currentInstance.last_modified = updateTime;
+    },
+  });
 }
 
 export function showLabelPanel({ label, usePosition }) {

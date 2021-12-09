@@ -78,36 +78,15 @@ function switchToSite(path, direction) {
 export function displaySite(site) {
   nodes = new vis.DataSet([]);
   edges = new vis.DataSet([]);
-  for (const [id, label] of Object.entries(site.labels)) {
-    drawLabel(id, label);
-  }
-  graph = new vis.Network(site, { nodes: nodes, edges: edges }, options);
-  graph.setOptions({ physics: false });
-  graph.on("oncontext", function (properties) {
-    if (triggerMenu) {
-      properties.event.preventDefault();
-      const node = this.getNodeAt(properties.pointer.DOM);
-      const edge = this.getEdgeAt(properties.pointer.DOM);
-      if (typeof node !== "undefined" && !ends.has(node)) {
-        graph.selectNodes([node, ...graph.getSelectedNodes()]);
-        $(".menu-entry ").hide();
-        $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
-        selectedObject = nodes.get(node);
-        $(".site-selection").toggle(selectedObject.type == "site");
-      } else if (typeof edge !== "undefined" && !ends.has(node)) {
-        graph.selectEdges([edge, ...graph.getSelectedEdges()]);
-        $(".menu-entry ").hide();
-        $(".edge-selection").show();
-        selectedObject = edges.get(edge);
-      } else {
-        $(".menu-entry").hide();
-        $(".global").show();
-      }
-    } else {
-      properties.event.stopPropagation();
-      properties.event.preventDefault();
-    }
-  });
+  graph = configureGraph(
+    site,
+    {
+      nodes: [],
+      edges: [],
+      inactive: [],
+    },
+    options
+  );
   graph.on("click", () => {
     if (!ctrlKeyPressed) graph.selectNodes([]);
   });
@@ -124,20 +103,6 @@ export function displaySite(site) {
       showInstancePanel(node.type, node.id);
     }
   });
-  for (const objectType of ["Node", "Edge"]) {
-    graph.on(`hover${objectType}`, function () {
-      graph.canvas.body.container.style.cursor = "pointer";
-    });
-    graph.on(`blur${objectType}`, function () {
-      graph.canvas.body.container.style.cursor = "default";
-    });
-  }
-  if (!$(`#current-site option[value='${site.id}']`).length) {
-    $("#current-site").append(
-      `<option value="${site.id}">${site.scoped_name}</option>`
-    );
-  }
-  $("#current-site").val(site.id).selectpicker("refresh");
 }
 
 function createNewSite(mode) {

@@ -12,7 +12,12 @@ import {
   notify,
   showInstancePanel,
 } from "./base.js";
-import { rectangleSelection, triggerMenu } from "./builder.js";
+import {
+  rectangleSelection,
+  showLabelPanel,
+  triggerMenu,
+  updateBuilderBindings,
+} from "./builder.js";
 
 let ctrlKeyPressed;
 let currentSite;
@@ -80,8 +85,6 @@ export function displaySite(site) {
   graph.setOptions({ physics: false });
   graph.on("oncontext", function (properties) {
     if (triggerMenu) {
-      // eslint-disable-next-line new-cap
-      mousePosition = properties.pointer.canvas;
       properties.event.preventDefault();
       const node = this.getNodeAt(properties.pointer.DOM);
       const edge = this.getEdgeAt(properties.pointer.DOM);
@@ -156,14 +159,12 @@ function createNewSite(mode) {
 function openDeletionPanel() {}
 
 function updateRightClickBindings() {
+  updateBuilderBindings(action);
   Object.assign(action, {
     "Create Site": () => createNewSite("create_site"),
     "Duplicate Site": () => createNewSite("duplicate_site"),
     "Edit Site": () => showInstancePanel("site", currentSite.id),
     Delete: openDeletionPanel,
-    "Create Label": () => showLabelPanel({ usePosition: true }),
-    "Create Label Button": () => showLabelPanel({ usePosition: false }),
-    "Edit Label": (label) => showLabelPanel({ label: label, usePosition: true }),
     "Edit Edge": (edge) => {
       showInstancePanel("link", edge.id);
     },
@@ -176,13 +177,6 @@ function updateRightClickBindings() {
     Upward: () => {
       const parentPath = currentPath.split(">").slice(0, -1).join(">");
       if (parentPath) switchToSite(parentPath);
-    },
-  });
-  $("#network").contextMenu({
-    menuSelector: "#contextMenu",
-    menuSelected: function (selectedMenu) {
-      const row = selectedMenu.text();
-      action[row](selectedObject);
     },
   });
 }

@@ -59,6 +59,7 @@ class Site(Object):
     id = db.Column(Integer, ForeignKey(Object.id), primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     labels = db.Column(db.Dict, info={"log_change": False})
+    positions = db.Column(db.Dict, info={"log_change": False})
     objects = relationship(
         "Object", secondary=db.object_site_table, back_populates="sites"
     )
@@ -85,6 +86,7 @@ class Device(Object):
     scrapli_driver = db.Column(db.TinyString, default="cisco_iosxe")
     netconf_driver = db.Column(db.TinyString, default="default")
     configuration = db.Column(db.LargeString, info={"log_change": False})
+    positions = db.Column(db.Dict, info={"log_change": False})
     target_services = relationship(
         "Service",
         secondary=db.service_target_device_table,

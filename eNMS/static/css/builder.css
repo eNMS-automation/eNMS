@@ -1,0 +1,8 @@
+#network {
+  height: calc(100vh - 80px);
+}
+
+/* Prevent Chrome from highlight the builder div with an outline */
+*:focus {
+  outline: none;
+}

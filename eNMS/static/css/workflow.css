@@ -1,8 +1,0 @@
-#network {
-  height: calc(100vh - 80px);
-}
-
-/* Prevent Chrome from highlight the workflow builder div with an outline */
-*:focus {
-  outline: none;
-}

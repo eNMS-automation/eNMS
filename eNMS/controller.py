@@ -229,8 +229,8 @@ class Controller:
     def counters(self, property, model):
         return Counter(v for v, in db.query(model, property=property, rbac=None))
 
-    def create_label(self, workflow_id, x, y, label_id, **kwargs):
-        workflow = db.fetch("workflow", id=workflow_id, rbac="edit")
+    def create_label(self, type, id, x, y, label_id, **kwargs):
+        workflow = db.fetch(type, id=id, rbac="edit")
         label_id = str(uuid4()) if label_id == "undefined" else label_id
         label = {
             "positions": [x, y],

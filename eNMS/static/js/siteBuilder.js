@@ -25,7 +25,6 @@ let nodes;
 export let currentPath = localStorage.getItem("path");
 export let site = JSON.parse(localStorage.getItem("site"));
 
-const container = document.getElementById("network");
 const options = {
   interaction: {
     hover: true,

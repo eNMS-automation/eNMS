@@ -71,7 +71,7 @@ export function configureGraph(instance, graph, options) {
 
 function savePositions() {
   call({
-    url: `/save_positions/${currentInstance.id}`,
+    url: `/save_positions/${currentInstance.type}/${currentInstance.id}`,
     data: network.getPositions(),
     callback: function (updateTime) {
       if (updateTime) currentInstance.last_modified = updateTime;
@@ -82,12 +82,12 @@ function savePositions() {
 export function showLabelPanel({ label, usePosition }) {
   if (!usePosition) mousePosition = null;
   openPanel({
-    name: "workflow_label",
+    name: "label",
     title: label ? "Edit label" : "Create a new label",
     callback: () => {
       if (label) {
-        $("#workflow_label-text").val(label.label);
-        $("#workflow_label-alignment").val(label.font.align).selectpicker("refresh");
+        $("#label-text").val(label.label);
+        $("#label-alignment").val(label.font.align).selectpicker("refresh");
         currentLabel = label;
       } else {
         currentLabel = null;
@@ -98,12 +98,13 @@ export function showLabelPanel({ label, usePosition }) {
 
 function createLabel() {
   const pos = mousePosition ? [mousePosition.x, mousePosition.y] : [0, 0];
+  const instance = `${currentInstance.type}/${currentInstance.id}`
   call({
-    url: `/create_label/${workflow.id}/${pos[0]}/${pos[1]}/${currentLabel?.id}`,
-    form: "workflow_label-form",
+    url: `/create_label/${instance}/${pos[0]}/${pos[1]}/${currentLabel?.id}`,
+    form: "label-form",
     callback: function (result) {
       drawLabel(result.id, result);
-      $("#workflow_label").remove();
+      $("#label").remove();
       notify("Label created.", "success", 5);
     },
   });

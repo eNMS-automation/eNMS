@@ -60,6 +60,7 @@
       "destination",
       "destination_id",
       "pools",
+      "sites",
       "target_services",
       "tasks",
       "users"
@@ -72,7 +73,8 @@
       "destination_id",
       "destination_name",
       "source_id",
-      "source_name"
+      "source_name",
+      "sites"
     ],
     "pool": [
       "access",

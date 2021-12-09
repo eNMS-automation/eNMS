@@ -828,7 +828,7 @@ class UploadFilesForm(BaseForm):
 
 class WorkflowLabelForm(BaseForm):
     form_type = HiddenField(default="workflow_label")
-    action = "eNMS.workflowBuilder.createLabel"
+    action = "eNMS.builder.createLabel"
     text = StringField(widget=TextArea(), render_kw={"rows": 15})
     alignment = SelectField(
         "Text Alignment",

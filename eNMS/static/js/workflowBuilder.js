@@ -28,7 +28,7 @@ import {
   userIsActive,
   showConfirmationPanel,
 } from "./base.js";
-import { configureGraph, rectangleSelection, triggerMenu } from "./builder.js";
+import { configureGraph, rectangleSelection, triggerMenu, updateBuilderBindings } from "./builder.js";
 import { clearSearch, tables, tableInstances } from "./table.js";
 
 export let currentPath = localStorage.getItem("path");
@@ -606,6 +606,7 @@ function getResultLink(service, device) {
 }
 
 function updateRightClickBindings() {
+  updateBuilderBindings(action);
   Object.assign(action, {
     "Run Workflow": () => runWorkflow(),
     "Parameterized Workflow Run": () => runWorkflow(true),
@@ -651,36 +652,6 @@ function updateRightClickBindings() {
     menuSelected: function (selectedMenu) {
       const row = selectedMenu.text();
       action[row](selectedObject);
-    },
-  });
-}
-
-function showLabelPanel({ label, usePosition }) {
-  if (!usePosition) mousePosition = null;
-  openPanel({
-    name: "workflow_label",
-    title: label ? "Edit label" : "Create a new label",
-    callback: () => {
-      if (label) {
-        $("#workflow_label-text").val(label.label);
-        $("#workflow_label-alignment").val(label.font.align).selectpicker("refresh");
-        currentLabel = label;
-      } else {
-        currentLabel = null;
-      }
-    },
-  });
-}
-
-function createLabel() {
-  const pos = mousePosition ? [mousePosition.x, mousePosition.y] : [0, 0];
-  call({
-    url: `/create_label/${workflow.id}/${pos[0]}/${pos[1]}/${currentLabel?.id}`,
-    form: "workflow_label-form",
-    callback: function (result) {
-      drawLabel(result.id, result);
-      $("#workflow_label").remove();
-      notify("Label created.", "success", 5);
     },
   });
 }
@@ -1074,7 +1045,6 @@ export function initWorkflowBuilder() {
 
 configureNamespace("workflowBuilder", [
   addServicesToWorkflow,
-  createLabel,
   deleteSelection,
   highlightService,
   filterWorkflowTable,

@@ -1,3 +1,10 @@
+import {
+  call,
+  configureNamespace,
+  notify,
+  openPanel,
+} from "./base.js";
+
 let mousePosition;
 export let triggerMenu;
 
@@ -16,6 +23,44 @@ export function configureGraph(graph) {
   })
   graph.on("doubleClick", function (event) {
     mousePosition = event.pointer.canvas;
+  });
+}
+
+function showLabelPanel({ label, usePosition }) {
+  if (!usePosition) mousePosition = null;
+  openPanel({
+    name: "workflow_label",
+    title: label ? "Edit label" : "Create a new label",
+    callback: () => {
+      if (label) {
+        $("#workflow_label-text").val(label.label);
+        $("#workflow_label-alignment").val(label.font.align).selectpicker("refresh");
+        currentLabel = label;
+      } else {
+        currentLabel = null;
+      }
+    },
+  });
+}
+
+function createLabel() {
+  const pos = mousePosition ? [mousePosition.x, mousePosition.y] : [0, 0];
+  call({
+    url: `/create_label/${workflow.id}/${pos[0]}/${pos[1]}/${currentLabel?.id}`,
+    form: "workflow_label-form",
+    callback: function (result) {
+      drawLabel(result.id, result);
+      $("#workflow_label").remove();
+      notify("Label created.", "success", 5);
+    },
+  });
+}
+
+export function updateBuilderBindings(action) {
+  Object.assign(action, {
+    "Create Label": () => showLabelPanel({ usePosition: true }),
+    "Create Label Button": () => showLabelPanel({ usePosition: false }),
+    "Edit Label": (label) => showLabelPanel({ label: label, usePosition: true })
   });
 }
 
@@ -98,3 +143,8 @@ export const rectangleSelection = (container, graph, nodes) => {
     }
   });
 };
+
+configureNamespace("workflowBuilder", [
+
+  createLabel,
+]);

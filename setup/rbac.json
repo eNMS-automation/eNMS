@@ -135,7 +135,7 @@
     "/parameterized_form": "all",
     "/instance_deletion_form": "access",
     "/link_table": "access",
-    "/view_builder": "access",
+    "/site_builder": "access",
     "/login": "none",
     "/logout": "all",
     "/logs_form": "access",

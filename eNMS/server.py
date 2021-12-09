@@ -275,8 +275,8 @@ class Server(Flask):
 
         @blueprint.route("/site_builder")
         @self.process_requests
-        def view_builder():
-            return render_template("site.html", endpoint="view_builder")
+        def site_builder():
+            return render_template("site.html", endpoint="site_builder")
 
         @blueprint.route("/workflow_builder")
         @self.process_requests

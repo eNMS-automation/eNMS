@@ -273,15 +273,10 @@ class Server(Flask):
         def visualization():
             return render_template("visualization.html", endpoint=request.path[1:])
 
-        @blueprint.route("/site_builder")
+        @blueprint.route("/<type>_builder")
         @self.process_requests
-        def site_builder():
-            return render_template("site.html", endpoint="site_builder")
-
-        @blueprint.route("/workflow_builder")
-        @self.process_requests
-        def workflow_builder():
-            return render_template("workflow.html", endpoint="workflow_builder")
+        def builder(type):
+            return render_template(f"{type}_builder.html", endpoint=f"{type}_builder")
 
         @blueprint.route("/<form_type>_form")
         @self.process_requests

@@ -1039,22 +1039,22 @@ class Controller:
             with open(Path(filepath.replace(">", "/")), "w") as file:
                 return file.write(kwargs["file_content"])
 
-    def save_positions(self, workflow_id, **kwargs):
+    def save_positions(self, type, id, **kwargs):
         now, old_position = vs.get_time(), None
-        workflow = db.fetch("workflow", allow_none=True, id=workflow_id, rbac="edit")
-        if not workflow:
+        instance = db.fetch(type, allow_none=True, id=id, rbac="edit")
+        if not instance:
             return
         for id, position in kwargs.items():
             new_position = [position["x"], position["y"]]
             if "-" not in id:
                 service = db.fetch("service", id=id, rbac=None)
-                old_position = service.positions.get(workflow.name)
-                service.positions[workflow.name] = new_position
-            elif id in workflow.labels:
-                old_position = workflow.labels[id].pop("positions")
-                workflow.labels[id] = {"positions": new_position, **workflow.labels[id]}
+                old_position = service.positions.get(instance.name)
+                service.positions[instance.name] = new_position
+            elif id in instance.labels:
+                old_position = instance.labels[id].pop("positions")
+                instance.labels[id] = {"positions": new_position, **instance.labels[id]}
             if new_position != old_position:
-                workflow.last_modified = now
+                instance.last_modified = now
         return now
 
     def save_settings(self, **kwargs):

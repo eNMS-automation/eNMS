@@ -652,13 +652,6 @@ function updateRightClickBindings() {
       if (parentPath) switchToWorkflow(parentPath);
     },
   });
-  $("#network").contextMenu({
-    menuSelector: "#contextMenu",
-    menuSelected: function (selectedMenu) {
-      const row = selectedMenu.text();
-      action[row](selectedObject);
-    },
-  });
 }
 
 function runWorkflow(parametrization) {

@@ -58,6 +58,13 @@ export function updateBuilderBindings(action) {
     "Create Label Button": () => showLabelPanel({ usePosition: false }),
     "Edit Label": (label) => showLabelPanel({ label: label, usePosition: true }),
   });
+  $("#network").contextMenu({
+    menuSelector: "#contextMenu",
+    menuSelected: function (selectedMenu) {
+      const row = selectedMenu.text();
+      action[row](selectedObject);
+    },
+  });
 }
 
 export const rectangleSelection = (container, graph, nodes) => {

@@ -30,6 +30,8 @@ import {
 } from "./base.js";
 import {
   configureGraph,
+  edges,
+  nodes,
   rectangleSelection,
   showLabelPanel,
   triggerMenu,
@@ -37,11 +39,6 @@ import {
 } from "./builder.js";
 import { clearSearch, tables, tableInstances } from "./table.js";
 
-export let currentPath = localStorage.getItem("path");
-export let workflow = JSON.parse(localStorage.getItem("workflow"));
-export let currentRuntime;
-
-const container = document.getElementById("network");
 const options = {
   interaction: {
     hover: true,
@@ -69,10 +66,12 @@ const options = {
   ...theme.workflow,
 };
 
+export let currentPath = localStorage.getItem("path");
+export let workflow = JSON.parse(localStorage.getItem("workflow"));
+export let currentRuntime;
+
 let ctrlKeyPressed;
 let currentRun;
-let nodes;
-let edges;
 let graph;
 let selectedObject;
 let ends = new Set();
@@ -89,14 +88,8 @@ export function displayWorkflow(workflowData) {
   placeholder = null;
   currentPlaceholder = workflowData.state?.[currentPath]?.placeholder;
   isSuperworkflow = false;
-  nodes = new vis.DataSet(workflow.services.map(serviceToNode));
-  edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
+  graph = configureGraph(workflow, {nodes: workflow.services.map(serviceToNode), edges: workflow.edges.map(edgeToEdge)}, options);
   workflow.services.map(drawIterationEdge);
-  for (const [id, label] of Object.entries(workflow.labels)) {
-    drawLabel(id, label);
-  }
-  graph = new vis.Network(container, { nodes: nodes, edges: edges }, options);
-  configureGraph(graph);
   graph.on("oncontext", function (properties) {
     if (triggerMenu) {
       properties.event.preventDefault();
@@ -445,20 +438,6 @@ function serviceToNode(service) {
     x: service.positions[workflow.name] ? service.positions[workflow.name][0] : 0,
     y: service.positions[workflow.name] ? service.positions[workflow.name][1] : 0,
   };
-}
-
-function drawLabel(id, label) {
-  nodes.update({
-    id: id,
-    shape: "box",
-    type: "label",
-    font: { align: label.alignment || "center" },
-    label: label.content,
-    borderWidth: 0,
-    color: "#FFFFFF",
-    x: label.positions[0],
-    y: label.positions[1],
-  });
 }
 
 function drawIterationEdge(service) {

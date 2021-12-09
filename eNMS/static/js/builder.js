@@ -1,10 +1,21 @@
 import { call, configureNamespace, notify, openPanel } from "./base.js";
 
+
+const container = document.getElementById("network");
+
 let currentLabel;
 let mousePosition;
+export let edges;
+export let nodes;
 export let triggerMenu;
 
-export function configureGraph(graph) {
+export function configureGraph(instance, graph, options) {
+  nodes = new vis.DataSet(graph.nodes);
+  edges = new vis.DataSet(graph.edges);
+  for (const [id, label] of Object.entries(instance.labels)) {
+    drawLabel(id, label);
+  }
+  graph = new vis.Network(container, { nodes: nodes, edges: edges }, options);
   graph.setOptions({ physics: false });
   for (const objectType of ["Node", "Edge"]) {
     graph.on(`hover${objectType}`, function () {
@@ -20,6 +31,7 @@ export function configureGraph(graph) {
   graph.on("doubleClick", function (event) {
     mousePosition = event.pointer.canvas;
   });
+  return graph
 }
 
 export function showLabelPanel({ label, usePosition }) {
@@ -49,6 +61,20 @@ function createLabel() {
       $("#workflow_label").remove();
       notify("Label created.", "success", 5);
     },
+  });
+}
+
+export function drawLabel(id, label) {
+  nodes.update({
+    id: id,
+    shape: "box",
+    type: "label",
+    font: { align: label.alignment || "center" },
+    label: label.content,
+    borderWidth: 0,
+    color: "#FFFFFF",
+    x: label.positions[0],
+    y: label.positions[1],
   });
 }
 

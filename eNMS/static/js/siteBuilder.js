@@ -81,7 +81,7 @@ export function displaySite(site) {
   for (const [id, label] of Object.entries(site.labels)) {
     drawLabel(id, label);
   }
-  graph = new vis.Network(container, { nodes: nodes, edges: edges }, options);
+  graph = new vis.Network(site, { nodes: nodes, edges: edges }, options);
   graph.setOptions({ physics: false });
   graph.on("oncontext", function (properties) {
     if (triggerMenu) {

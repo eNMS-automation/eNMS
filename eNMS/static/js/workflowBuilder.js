@@ -116,12 +116,6 @@ export function displayWorkflow(workflowData) {
       showInstancePanel(node.type, node.id);
     }
   });
-  if (!$(`#current-workflow option[value='${workflow.id}']`).length) {
-    $("#current-workflow").append(
-      `<option value="${workflow.id}">${workflow.scoped_name}</option>`
-    );
-  }
-  $("#current-workflow").val(workflow.id).selectpicker("refresh");
   graph.on("dragEnd", (event) => {
     if (graph.getNodeAt(event.pointer.DOM)) savePositions();
   });

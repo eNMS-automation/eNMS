@@ -54,6 +54,12 @@ export function configureGraph(instance, graph, options) {
   network.on("doubleClick", function (event) {
     mousePosition = event.pointer.canvas;
   });
+  if (!$(`#current-${instance.type} option[value='${instance.id}']`).length) {
+    $(`#current-${instance.type}`).append(
+      `<option value="${instance.id}">${instance.scoped_name}</option>`
+    );
+  }
+  $(`#current-${instance.type}`).val(instance.id).selectpicker("refresh");
   return network;
 }
 

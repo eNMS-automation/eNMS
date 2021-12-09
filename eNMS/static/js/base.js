@@ -1162,7 +1162,7 @@ $(document).ready(function () {
   } else if (page == "workflow_builder") {
     initWorkflowBuilder();
   } else if (page == "site_builder") {
-    initsiteBuilder();
+    initSiteBuilder();
   } else if (page.includes("view")) {
     initVisualization();
   } else if (page == "dashboard") {

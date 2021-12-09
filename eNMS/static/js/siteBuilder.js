@@ -188,7 +188,7 @@ function updateRightClickBindings() {
   });
 }
 
-export function initsiteBuilder() {
+export function initSiteBuilder() {
   window.onkeydown = () => {
     ctrlKeyPressed = true;
   };

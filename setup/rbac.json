@@ -74,8 +74,8 @@
           "endpoint": "/logical_view",
           "rbac": "access"
         },
-        "View Builder": {
-          "endpoint": "/view_builder",
+        "Site Builder": {
+          "endpoint": "/site_builder",
           "rbac": "access"
         }
       }

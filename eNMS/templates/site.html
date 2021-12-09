@@ -1,4 +1,4 @@
-{% extends "base_site.html" %} {% block title %} View Builder {% endblock title %} {%
+{% extends "base_site.html" %} {% block title %} Site Builder {% endblock title %} {%
 block stylesheets %} {{ super() }}
 <link href="{{ url_for('static', filename='lib/vis/vis.min.css') }}" rel="stylesheet" />
 <link href="{{ url_for('static', filename='css/workflow.css') }}" rel="stylesheet" />
@@ -11,7 +11,7 @@ block stylesheets %} {{ super() }}
   >
     <div style="width: 100%; margin: 0px;">
       <select
-        id="current-view"
+        id="current-site"
         class="form-control"
         data-dropdown-align-right="true"
         data-size="20"
@@ -20,32 +20,32 @@ block stylesheets %} {{ super() }}
     <ul class="pagination" style="margin: 0px; padding-top: 10px;">
       <li>
         <a
-          onclick="action['Edit View']()"
-          data-tooltip="Edit View"
+          onclick="action['Edit Site']()"
+          data-tooltip="Edit Site"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-edit cursor"></span
         ></a>
       </li>
       <li>
         <a
-          onclick="action['Duplicate View']()"
-          data-tooltip="Duplicate View"
+          onclick="action['Duplicate Site']()"
+          data-tooltip="Duplicate Site"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-duplicate"></span
         ></a>
       </li>
       <li>
         <a
-          onclick="action['Create View']()"
-          data-tooltip="Create Top Level View"
+          onclick="action['Create Site']()"
+          data-tooltip="Create Top Level Site"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-plus"></span
         ></a>
       </li>
       <li>
         <a
-          onclick="action['Add to View']()"
-          data-tooltip="Add to View"
+          onclick="action['Add to Site']()"
+          data-tooltip="Add to Site"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-book"></span
         ></a>
@@ -65,8 +65,8 @@ block stylesheets %} {{ super() }}
       </li>
       <li>
         <a
-          onclick="eNMS.viewBuilder.getViewTree()"
-          data-tooltip="View Tree"
+          onclick="eNMS.siteBuilder.getSiteTree()"
+          data-tooltip="Site Tree"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-tree-conifer"></span
         ></a>
@@ -87,7 +87,7 @@ block stylesheets %} {{ super() }}
       <li id="left-arrow">
         <a
           onclick="action['Backward']()"
-          data-tooltip="Previous View"
+          data-tooltip="Previous Site"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-chevron-left"></span
         ></a>
@@ -95,7 +95,7 @@ block stylesheets %} {{ super() }}
       <li id="up-arrow">
         <a
           onclick="action['Upward']()"
-          data-tooltip="Switch to Parent View"
+          data-tooltip="Switch to Parent Site"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-chevron-up"></span
         ></a>
@@ -103,7 +103,7 @@ block stylesheets %} {{ super() }}
       <li id="right-arrow">
         <a
           onclick="action['Forward']()"
-          data-tooltip="Next View"
+          data-tooltip="Next Site"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-chevron-right"></span
         ></a>
@@ -119,8 +119,8 @@ block stylesheets %} {{ super() }}
   <li class="menu-entry node-selection">
     <a tabindex="-1" href="#">Duplicate</a>
   </li>
-  <li class="menu-entry node-selection view-selection">
-    <a tabindex="-1" href="#">Enter View</a>
+  <li class="menu-entry node-selection site-selection">
+    <a tabindex="-1" href="#">Enter Site</a>
   </li>
   <li class="menu-entry divider node-selection">&nbsp</li>
   <li class="menu-entry node-selection edge-selection">
@@ -143,6 +143,6 @@ block stylesheets %} {{ super() }}
 <script src="{{ url_for('static', filename='lib/vis/vis.min.js') }}"></script>
 <script
   type="module"
-  src="{{ url_for('static', filename='js/viewBuilder.js') }}"
+  src="{{ url_for('static', filename='js/siteBuilder.js') }}"
 ></script>
 {% endblock javascripts %}

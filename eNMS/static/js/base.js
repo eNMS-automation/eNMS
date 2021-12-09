@@ -21,7 +21,7 @@ import { openDebugPanel, showCredentialPanel } from "./administration.js";
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
 import { initVisualization } from "./visualization.js";
-import { initViewBuilder, viewCreation } from "./viewBuilder.js";
+import { initSiteBuilder, siteCreation } from "./siteBuilder.js";
 import {
   creationMode,
   initWorkflowBuilder,
@@ -786,8 +786,8 @@ function processData(type, id) {
         refreshTable(tableType);
       } else if (page == "workflow_builder") {
         processWorkflowData(instance, id);
-      } else if (page == "view_builder") {
-        viewCreation(instance);
+      } else if (page == "site_builder") {
+        siteCreation(instance);
       }
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       notify(
@@ -1058,7 +1058,7 @@ function doc(page) {
     service_table: "automation/services.html",
     task_table: "automation/scheduling.html",
     user_table: "advanced/administration.html",
-    view_table: "inventory/network_visualization.html",
+    site_builder_table: "inventory/network_visualization.html",
     workflow_builder_table: "automation/workflows.html",
   }[page];
   $("#doc-link").attr("href", `${settings.app.documentation_url}${endpoint || ""}`);
@@ -1161,8 +1161,8 @@ $(document).ready(function () {
     new tables[type]();
   } else if (page == "workflow_builder") {
     initWorkflowBuilder();
-  } else if (page == "view_builder") {
-    initViewBuilder();
+  } else if (page == "site_builder") {
+    initsiteBuilder();
   } else if (page.includes("view")) {
     initVisualization();
   } else if (page == "dashboard") {

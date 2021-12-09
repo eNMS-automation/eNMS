@@ -25,12 +25,12 @@ class Object(AbstractBase):
     model = db.Column(db.SmallString)
     location = db.Column(db.SmallString)
     vendor = db.Column(db.SmallString)
-    views = relationship(
-        "View", secondary=db.object_view_table, back_populates="objects"
+    sites = relationship(
+        "Site", secondary=db.object_site_table, back_populates="objects"
     )
 
     def delete(self):
-        if self.class_type == "view":
+        if self.class_type == "site":
             return
         number = f"{self.class_type}_number"
         for pool in self.pools:
@@ -50,17 +50,17 @@ class Object(AbstractBase):
         )
 
 
-class View(Object):
+class Site(Object):
 
-    __tablename__ = class_type = "view"
-    __mapper_args__ = {"polymorphic_identity": "view"}
+    __tablename__ = class_type = "site"
+    __mapper_args__ = {"polymorphic_identity": "site"}
     pool_model = False
     parent_type = "object"
     id = db.Column(Integer, ForeignKey(Object.id), primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     labels = db.Column(db.Dict, info={"log_change": False})
     objects = relationship(
-        "Object", secondary=db.object_view_table, back_populates="views"
+        "Object", secondary=db.object_site_table, back_populates="sites"
     )
 
 

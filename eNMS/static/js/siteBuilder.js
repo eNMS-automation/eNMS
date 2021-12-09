@@ -15,12 +15,12 @@ import {
 import { rectangleSelection, triggerMenu } from "./builder.js";
 
 let ctrlKeyPressed;
-let currentView;
+let currentSite;
 let graph;
 let edges;
 let nodes;
 export let currentPath = localStorage.getItem("path");
-export let view = JSON.parse(localStorage.getItem("view"));
+export let site = JSON.parse(localStorage.getItem("site"));
 
 const container = document.getElementById("network");
 const options = {
@@ -39,7 +39,7 @@ const options = {
   },
 };
 
-function switchToView(path, direction) {
+function switchToSite(path, direction) {
   if (typeof path === "undefined") return;
   if (path.toString().includes(">")) {
     $("#up-arrow").removeClass("disabled");
@@ -49,31 +49,31 @@ function switchToView(path, direction) {
   currentPath = path;
   localStorage.setItem(page, currentPath);
   moveHistory(path, direction);
-  const [viewId] = currentPath.split(">").slice(-1);
+  const [siteId] = currentPath.split(">").slice(-1);
   if (!path && page == "object_table") {
-    $("#view-filtering").val("");
+    $("#site-filtering").val("");
     tableInstances["object"].table.page(0).ajax.reload(null, false);
     return;
   }
   call({
-    url: `/get/view/${viewId}`,
-    callback: function (view) {
-      currentView = view;
-      if (page == "view_builder") {
-        if (view) localStorage.setItem("view", JSON.stringify(view));
-        displayView(view);
+    url: `/get/site/${siteId}`,
+    callback: function (site) {
+      currentSite = site;
+      if (page == "site_builder") {
+        if (site) localStorage.setItem("site", JSON.stringify(site));
+        displaySite(site);
       } else {
-        $("#view-filtering").val(path ? view.name : "");
+        $("#site-filtering").val(path ? site.name : "");
         tableInstances["object"].table.page(0).ajax.reload(null, false);
       }
     },
   });
 };
 
-export function displayView(view) {
+export function displaySite(site) {
   nodes = new vis.DataSet([]);
   edges = new vis.DataSet([]);
-  for (const [id, label] of Object.entries(view.labels)) {
+  for (const [id, label] of Object.entries(site.labels)) {
     drawLabel(id, label);
   }
   graph = new vis.Network(container, { nodes: nodes, edges: edges }, options);
@@ -90,7 +90,7 @@ export function displayView(view) {
         $(".menu-entry ").hide();
         $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
         selectedObject = nodes.get(node);
-        $(".view-selection").toggle(selectedObject.type == "view");
+        $(".site-selection").toggle(selectedObject.type == "site");
       } else if (typeof edge !== "undefined" && !ends.has(node)) {
         graph.selectEdges([edge, ...graph.getSelectedEdges()]);
         $(".menu-entry ").hide();
@@ -116,8 +116,8 @@ export function displayView(view) {
       return;
     } else if (node.type == "label") {
       showLabelPanel({ label: node, usePosition: true });
-    } else if (node.type == "view") {
-      switchToView(`${currentPath}>${node.id}`);
+    } else if (node.type == "site") {
+      switchToSite(`${currentPath}>${node.id}`);
     } else {
       showInstancePanel(node.type, node.id);
     }
@@ -130,27 +130,27 @@ export function displayView(view) {
       graph.canvas.body.container.style.cursor = "default";
     });
   }
-  if (!$(`#current-view option[value='${view.id}']`).length) {
-    $("#current-view").append(
-      `<option value="${view.id}">${view.scoped_name}</option>`
+  if (!$(`#current-site option[value='${site.id}']`).length) {
+    $("#current-site").append(
+      `<option value="${site.id}">${site.scoped_name}</option>`
     );
   }
-  $("#current-view").val(view.id).selectpicker("refresh");
+  $("#current-site").val(site.id).selectpicker("refresh");
   graph.on("dragEnd", (event) => {
     if (graph.getNodeAt(event.pointer.DOM)) savePositions();
   });
   rectangleSelection($("#network"), graph, nodes);
 }
 
-function createNewView(mode) {
-  if (mode == "create_view") {
-    showInstancePanel("view");
-  } else if (!currentView) {
-    notify("No view has been created yet.", "error", 5);
-  } else if (mode == "duplicate_view") {
-    showInstancePanel("view", currentView.id, "duplicate");
+function createNewSite(mode) {
+  if (mode == "create_site") {
+    showInstancePanel("site");
+  } else if (!currentSite) {
+    notify("No site has been created yet.", "error", 5);
+  } else if (mode == "duplicate_site") {
+    showInstancePanel("site", currentSite.id, "duplicate");
   } else {
-    showInstancePanel("view", currentView.id);
+    showInstancePanel("site", currentSite.id);
   }
 }
 
@@ -158,9 +158,9 @@ function openDeletionPanel() {}
 
 function updateRightClickBindings() {
   Object.assign(action, {
-    "Create View": () => createNewView("create_view"),
-    "Duplicate View": () => createNewView("duplicate_view"),
-    "Edit View": () => showInstancePanel("view", currentView.id),
+    "Create Site": () => createNewSite("create_site"),
+    "Duplicate Site": () => createNewSite("duplicate_site"),
+    "Edit Site": () => showInstancePanel("site", currentSite.id),
     Delete: openDeletionPanel,
     "Create Label": () => showLabelPanel({ usePosition: true }),
     "Create Label Button": () => showLabelPanel({ usePosition: false }),
@@ -171,12 +171,12 @@ function updateRightClickBindings() {
     Skip: () => skipServices(),
     "Zoom In": () => graph.zoom(0.2),
     "Zoom Out": () => graph.zoom(-0.2),
-    "Enter View": (node) => switchToView(`${currentPath}>${node.id}`),
-    Backward: () => switchToView(history[historyPosition - 1], "left"),
-    Forward: () => switchToView(history[historyPosition + 1], "right"),
+    "Enter Site": (node) => switchToSite(`${currentPath}>${node.id}`),
+    Backward: () => switchToSite(history[historyPosition - 1], "left"),
+    Forward: () => switchToSite(history[historyPosition + 1], "right"),
     Upward: () => {
       const parentPath = currentPath.split(">").slice(0, -1).join(">");
-      if (parentPath) switchToView(parentPath);
+      if (parentPath) switchToSite(parentPath);
     },
   });
   $("#network").contextMenu({
@@ -188,7 +188,7 @@ function updateRightClickBindings() {
   });
 }
 
-export function initViewBuilder() {
+export function initsiteBuilder() {
   window.onkeydown = () => {
     ctrlKeyPressed = true;
   };
@@ -204,42 +204,42 @@ export function initViewBuilder() {
   };
   $("#left-arrow,#right-arrow").addClass("disabled");
   call({
-    url: "/get_top_level_instances/view",
-    callback: function (views) {
-      views.sort((a, b) => a.name.localeCompare(b.name));
-      for (let i = 0; i < views.length; i++) {
-        $("#current-view").append(
-          `<option value="${views[i].id}">${views[i].name}</option>`
+    url: "/get_top_level_instances/site",
+    callback: function (sites) {
+      sites.sort((a, b) => a.name.localeCompare(b.name));
+      for (let i = 0; i < sites.length; i++) {
+        $("#current-site").append(
+          `<option value="${sites[i].id}">${sites[i].name}</option>`
         );
       }
-      if (currentPath && views.some((w) => w.id == currentPath.split(">")[0])) {
-        $("#current-view").val(currentPath.split(">")[0]);
-        switchToView(currentPath);
+      if (currentPath && sites.some((w) => w.id == currentPath.split(">")[0])) {
+        $("#current-site").val(currentPath.split(">")[0]);
+        switchToSite(currentPath);
       } else {
-        view = $("#current-view").val();
-        if (view) {
-          switchToView(view);
+        site = $("#current-site").val();
+        if (site) {
+          switchToSite(site);
         } else {
-          notify("No view has been created yet.", "error", 5);
+          notify("No site has been created yet.", "error", 5);
         }
       }
-      $("#current-view").selectpicker({ liveSearch: true });
+      $("#current-site").selectpicker({ liveSearch: true });
     },
   });
-  $("#current-view").on("change", function () {
-    if (!view || this.value != view.id) switchToView(this.value);
+  $("#current-site").on("change", function () {
+    if (!site || this.value != site.id) switchToSite(this.value);
   });
   updateRightClickBindings();
 }
 
-export function viewCreation(instance) {
-  if (instance.id == currentView?.id) {
-    $("#current-view option:selected").text(instance.name).trigger("change");
+export function siteCreation(instance) {
+  if (instance.id == currentSite?.id) {
+    $("#current-site option:selected").text(instance.name).trigger("change");
   } else {
-    $("#current-view").append(
+    $("#current-site").append(
       `<option value="${instance.id}">${instance.name}</option>`
     );
-    $("#current-view").val(instance.id).trigger("change");
-    displayView(instance);
+    $("#current-site").val(instance.id).trigger("change");
+    displaySite(instance);
   }
 }

@@ -44,7 +44,7 @@
     "task",
     "access",
     "credential",
-    "view",
+    "site",
     "pool"
   ],
   "dont_migrate": {
@@ -124,21 +124,21 @@
       "upper_menu",
       "pages"
     ],
-    "view": [
+    "site": [
       "id"
     ],
     "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"]
   },
   "relationships": {
     "associations": {
-      "object_view": {
+      "object_site": {
         "model1": {
           "column": "object_id",
           "foreign_key": "object"
         },
         "model2": {
-          "column": "view_id",
-          "foreign_key": "view"
+          "column": "site_id",
+          "foreign_key": "site"
         }
       },
       "pool_device": {

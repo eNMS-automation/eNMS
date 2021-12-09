@@ -109,7 +109,6 @@ export function displaySite(site) {
     if (!ctrlKeyPressed) graph.selectNodes([]);
   });
   graph.on("doubleClick", function (event) {
-    mousePosition = event.pointer.canvas;
     event.event.preventDefault();
     let node = nodes.get(this.getNodeAt(event.pointer.DOM));
     if (!node || !node.id) {

@@ -28,7 +28,7 @@ import {
   userIsActive,
   showConfirmationPanel,
 } from "./base.js";
-import { rectangleSelection, triggerMenu } from "./builder.js";
+import { configureGraph, rectangleSelection, triggerMenu } from "./builder.js";
 import { clearSearch, tables, tableInstances } from "./table.js";
 
 export let currentPath = localStorage.getItem("path");
@@ -73,7 +73,6 @@ let ends = new Set();
 let currentMode = "motion";
 let runtimeDisplay;
 export let creationMode;
-let mousePosition;
 let currentLabel;
 let currentPlaceholder;
 let placeholder;
@@ -92,41 +91,13 @@ export function displayWorkflow(workflowData) {
     drawLabel(id, label);
   }
   graph = new vis.Network(container, { nodes: nodes, edges: edges }, options);
-  graph.setOptions({ physics: false });
-  graph.on("oncontext", function (properties) {
-    if (triggerMenu) {
-      // eslint-disable-next-line new-cap
-      mousePosition = properties.pointer.canvas;
-      properties.event.preventDefault();
-      const node = this.getNodeAt(properties.pointer.DOM);
-      const edge = this.getEdgeAt(properties.pointer.DOM);
-      if (typeof node !== "undefined" && !ends.has(node)) {
-        graph.selectNodes([node, ...graph.getSelectedNodes()]);
-        $(".menu-entry ").hide();
-        $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
-        selectedObject = nodes.get(node);
-        $(".workflow-selection").toggle(selectedObject.type == "workflow");
-      } else if (typeof edge !== "undefined" && !ends.has(node)) {
-        graph.selectEdges([edge, ...graph.getSelectedEdges()]);
-        $(".menu-entry ").hide();
-        $(".edge-selection").show();
-        selectedObject = edges.get(edge);
-      } else {
-        $(".menu-entry").hide();
-        $(".global").show();
-      }
-    } else {
-      properties.event.stopPropagation();
-      properties.event.preventDefault();
-    }
-  });
+  configureGraph(graph);
   graph.on("click", function (event) {
     const node = this.getNodeAt(event.pointer.DOM);
     if (currentMode != "motion" && !node) switchMode("motion", true);
     if (!ctrlKeyPressed) graph.selectNodes([]);
   });
   graph.on("doubleClick", function (event) {
-    mousePosition = event.pointer.canvas;
     event.event.preventDefault();
     let node = nodes.get(this.getNodeAt(event.pointer.DOM));
     if (["Placeholder", "Start", "End"].includes(node.name)) node = currentPlaceholder;

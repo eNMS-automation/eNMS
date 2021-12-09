@@ -1,0 +1,26 @@
+- access_groups: ''
+  creator: admin
+  description: ''
+  labels: {}
+  last_modified: '2021-12-09 03:49:51.455846'
+  location: ''
+  model: ''
+  name: 'Example 1: Top Level Network'
+  objects: []
+  sites: []
+  subtype: ''
+  type: site
+  vendor: ''
+- access_groups: ''
+  creator: admin
+  description: ''
+  labels: {}
+  last_modified: '2021-12-09 03:49:38.332432'
+  location: ''
+  model: ''
+  name: 'Example 2: Subsite and Subsubsites'
+  objects: []
+  sites: []
+  subtype: ''
+  type: site
+  vendor: ''

@@ -8,6 +8,7 @@
   description: Jackson
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.56.51
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -54,6 +55,7 @@
   description: PaloAlto
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.1.86
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -100,6 +102,7 @@
   description: Austin
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -146,18 +149,19 @@
   description: Washington
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
-  last_configuration_duration: 2.376184s
+  last_configuration_duration: 6.308002s
   last_configuration_failure: Never
-  last_configuration_runtime: '2021-03-17 08:46:08.180643'
+  last_configuration_runtime: '2020-10-02 11:16:49.363284'
   last_configuration_status: Success
-  last_configuration_update: '2021-03-17 08:46:08.180643'
+  last_configuration_update: '2020-10-02 11:16:49.363284'
   last_modified: ''
-  last_operational_data_duration: 0.129928s
-  last_operational_data_failure: '2021-10-15 08:17:14.025988'
-  last_operational_data_runtime: '2021-10-15 08:17:14.025988'
-  last_operational_data_status: Failure
-  last_operational_data_update: '2021-03-17 09:33:55.715730'
+  last_operational_data_duration: 3.509847s
+  last_operational_data_failure: Never
+  last_operational_data_runtime: '2020-10-02 11:16:55.905709'
+  last_operational_data_status: Success
+  last_operational_data_update: '2020-10-02 11:16:55.905709'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -192,6 +196,7 @@
   description: Chicago
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -238,6 +243,7 @@
   description: SanJose
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.1.187
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -284,6 +290,7 @@
   description: SanDiego
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.12
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -330,6 +337,7 @@
   description: Dallas
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.100
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -376,6 +384,7 @@
   description: Philadelphia
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.101
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -422,6 +431,7 @@
   description: LosAngeles
   down: false
   icon: optical_switch
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.13
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -468,6 +478,7 @@
   description: Detroit
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.14
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -514,6 +525,7 @@
   description: Richmond
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.15
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -560,6 +572,7 @@
   description: Atlanta
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.102
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -606,6 +619,7 @@
   description: Boston
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -652,6 +666,7 @@
   description: Houston
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.104
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -698,6 +713,7 @@
   description: Baltimore
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -744,6 +760,7 @@
   description: Cleveland
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -790,6 +807,7 @@
   description: Columbus
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -836,6 +854,7 @@
   description: Cincinnati
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -882,6 +901,7 @@
   description: Cambridge
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -928,6 +948,7 @@
   description: Minneapolis
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.110
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -974,6 +995,7 @@
   description: NewYork
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.1.88
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1020,6 +1042,7 @@
   description: Sacramento
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.111
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1066,6 +1089,7 @@
   description: SanFrancisco
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.1.89
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1112,6 +1136,7 @@
   description: Orange
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.114
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1158,6 +1183,7 @@
   description: Oakland
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.112
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1204,6 +1230,7 @@
   description: Denver
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.113
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1250,6 +1277,7 @@
   description: france
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.1.85
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1296,6 +1324,7 @@
   description: france
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.1.86
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1342,6 +1371,7 @@
   description: france
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.1.87
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1388,6 +1418,7 @@
   description: eastern europe
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.1.88
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1434,6 +1465,7 @@
   description: france
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.1.188
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1480,6 +1512,7 @@
   description: france
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.1.187
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1526,6 +1559,7 @@
   description: france
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.12
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1572,6 +1606,7 @@
   description: eastern europe
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.13
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1618,6 +1653,7 @@
   description: france
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.14
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1664,6 +1700,7 @@
   description: eastern europe
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.15
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1710,6 +1747,7 @@
   description: eastern europe
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.16
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1756,6 +1794,7 @@
   description: france
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.17
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1802,6 +1841,7 @@
   description: france
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.18
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1848,6 +1888,7 @@
   description: eastern europe
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.19
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1894,6 +1935,7 @@
   description: eastern europe
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.20
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1940,6 +1982,7 @@
   description: eastern europe
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.21
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1986,6 +2029,7 @@
   description: eastern europe
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.22
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2032,6 +2076,7 @@
   description: eastern europe
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.23
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2078,6 +2123,7 @@
   description: eastern europe
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.24
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2124,6 +2170,7 @@
   description: eastern europe
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.25
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2170,6 +2217,7 @@
   description: france
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.26
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2216,6 +2264,7 @@
   description: france
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.27
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2262,6 +2311,7 @@
   description: france
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.28
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2308,6 +2358,7 @@
   description: spain
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.29
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2354,6 +2405,7 @@
   description: spain
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.30
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2400,6 +2452,7 @@
   description: spain
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.31
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2446,6 +2499,7 @@
   description: spain
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.32
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2492,6 +2546,7 @@
   description: spain
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.33
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2538,6 +2593,7 @@
   description: spain
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.34
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2584,6 +2640,7 @@
   description: eastern europe
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.35
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2630,6 +2687,7 @@
   description: spain
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.36
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2676,6 +2734,7 @@
   description: spain
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.37
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2722,6 +2781,7 @@
   description: spain
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.38
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2768,6 +2828,7 @@
   description: Washington
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.56.103
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2814,6 +2875,7 @@
   description: Denver
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 127.0.0.1
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2860,6 +2922,7 @@
   description: Dallas
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.100
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2906,6 +2969,7 @@
   description: Dallas
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.100
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2952,6 +3016,7 @@
   description: Dallas
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.100
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2998,6 +3063,7 @@
   description: Austin
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -3044,6 +3110,7 @@
   description: Austin
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -3090,6 +3157,7 @@
   description: Jackson
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 192.168.56.51
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -3136,6 +3204,7 @@
   description: Oakland
   down: false
   icon: router
+  icon_3d: juniper_ex3300
   ip_address: 10.0.0.112
   last_configuration_duration: Never
   last_configuration_failure: Never

@@ -3,33 +3,17 @@ export let triggerMenu;
 
 export function configureGraph(graph) {
   graph.setOptions({ physics: false });
+  for (const objectType of ["Node", "Edge"]) {
+    graph.on(`hover${objectType}`, function () {
+      graph.canvas.body.container.style.cursor = "pointer";
+    });
+    graph.on(`blur${objectType}`, function () {
+      graph.canvas.body.container.style.cursor = "default";
+    });
+  }
   graph.on("oncontext", function (properties) {
-    if (triggerMenu) {
-      // eslint-disable-next-line new-cap
-      mousePosition = properties.pointer.canvas;
-      properties.event.preventDefault();
-      const node = this.getNodeAt(properties.pointer.DOM);
-      const edge = this.getEdgeAt(properties.pointer.DOM);
-      if (typeof node !== "undefined" && !ends.has(node)) {
-        graph.selectNodes([node, ...graph.getSelectedNodes()]);
-        $(".menu-entry ").hide();
-        $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
-        selectedObject = nodes.get(node);
-        $(".workflow-selection").toggle(selectedObject.type == "workflow");
-      } else if (typeof edge !== "undefined" && !ends.has(node)) {
-        graph.selectEdges([edge, ...graph.getSelectedEdges()]);
-        $(".menu-entry ").hide();
-        $(".edge-selection").show();
-        selectedObject = edges.get(edge);
-      } else {
-        $(".menu-entry").hide();
-        $(".global").show();
-      }
-    } else {
-      properties.event.stopPropagation();
-      properties.event.preventDefault();
-    }
-  });
+    if (triggerMenu) mousePosition = properties.pointer.canvas;
+  })
   graph.on("doubleClick", function (event) {
     mousePosition = event.pointer.canvas;
   });

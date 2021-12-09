@@ -138,7 +138,6 @@ export function displaySite(site) {
     );
   }
   $("#current-site").val(site.id).selectpicker("refresh");
-  rectangleSelection($("#network"), graph, nodes);
 }
 
 function createNewSite(mode) {

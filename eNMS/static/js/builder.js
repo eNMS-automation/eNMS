@@ -65,6 +65,7 @@ export function configureGraph(instance, graph, options) {
   network.on("dragEnd", (event) => {
     if (network.getNodeAt(event.pointer.DOM)) savePositions();
   });
+  rectangleSelection($("#network"), network, nodes);
   return network;
 }
 

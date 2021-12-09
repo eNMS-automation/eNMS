@@ -117,7 +117,6 @@ export function displayWorkflow(workflowData) {
     }
   });
   displayWorkflowState(workflowData);
-  rectangleSelection($("#network"), graph, nodes);
   switchMode(currentMode, true);
 }
 

@@ -240,6 +240,6 @@ export function viewCreation(instance) {
       `<option value="${instance.id}">${instance.name}</option>`
     );
     $("#current-view").val(instance.id).trigger("change");
-    displayView();
+    displayView(instance);
   }
 }

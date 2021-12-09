@@ -61,8 +61,6 @@ class Runner:
         self.progress_key = f"progress/{device_progress}"
         self.is_admin_run = db.fetch("user", name=self.creator).is_admin
         self.main_run = db.fetch("run", runtime=self.parent_runtime)
-        if self.service not in self.main_run.services:
-            self.main_run.services.append(self.service)
         if self.is_main_run:
             self.path = str(self.service.id)
         else:

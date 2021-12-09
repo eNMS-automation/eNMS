@@ -68,7 +68,7 @@ function switchToSite(path, direction) {
       }
     },
   });
-};
+}
 
 export function displaySite(site) {
   nodes = new vis.DataSet([]);

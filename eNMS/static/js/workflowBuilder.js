@@ -28,7 +28,12 @@ import {
   userIsActive,
   showConfirmationPanel,
 } from "./base.js";
-import { configureGraph, rectangleSelection, triggerMenu, updateBuilderBindings } from "./builder.js";
+import {
+  configureGraph,
+  rectangleSelection,
+  triggerMenu,
+  updateBuilderBindings,
+} from "./builder.js";
 import { clearSearch, tables, tableInstances } from "./table.js";
 
 export let currentPath = localStorage.getItem("path");

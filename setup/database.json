@@ -126,9 +126,7 @@
       "upper_menu",
       "pages"
     ],
-    "site": [
-      "id"
-    ],
+    "site": ["id"],
     "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"]
   },
   "relationships": {

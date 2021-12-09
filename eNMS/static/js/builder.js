@@ -1,9 +1,4 @@
-import {
-  call,
-  configureNamespace,
-  notify,
-  openPanel,
-} from "./base.js";
+import { call, configureNamespace, notify, openPanel } from "./base.js";
 
 let mousePosition;
 export let triggerMenu;
@@ -20,7 +15,7 @@ export function configureGraph(graph) {
   }
   graph.on("oncontext", function (properties) {
     if (triggerMenu) mousePosition = properties.pointer.canvas;
-  })
+  });
   graph.on("doubleClick", function (event) {
     mousePosition = event.pointer.canvas;
   });
@@ -60,7 +55,7 @@ export function updateBuilderBindings(action) {
   Object.assign(action, {
     "Create Label": () => showLabelPanel({ usePosition: true }),
     "Create Label Button": () => showLabelPanel({ usePosition: false }),
-    "Edit Label": (label) => showLabelPanel({ label: label, usePosition: true })
+    "Edit Label": (label) => showLabelPanel({ label: label, usePosition: true }),
   });
 }
 
@@ -144,7 +139,4 @@ export const rectangleSelection = (container, graph, nodes) => {
   });
 };
 
-configureNamespace("workflowBuilder", [
-
-  createLabel,
-]);
+configureNamespace("workflowBuilder", [createLabel]);

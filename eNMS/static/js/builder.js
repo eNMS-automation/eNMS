@@ -1,6 +1,5 @@
 import { call, configureNamespace, notify, openPanel } from "./base.js";
 
-
 const container = document.getElementById("network");
 
 let currentLabel;
@@ -31,7 +30,7 @@ export function configureGraph(instance, graph, options) {
   graph.on("doubleClick", function (event) {
     mousePosition = event.pointer.canvas;
   });
-  return graph
+  return graph;
 }
 
 export function showLabelPanel({ label, usePosition }) {

@@ -88,7 +88,14 @@ export function displayWorkflow(workflowData) {
   placeholder = null;
   currentPlaceholder = workflowData.state?.[currentPath]?.placeholder;
   isSuperworkflow = false;
-  graph = configureGraph(workflow, {nodes: workflow.services.map(serviceToNode), edges: workflow.edges.map(edgeToEdge)}, options);
+  graph = configureGraph(
+    workflow,
+    {
+      nodes: workflow.services.map(serviceToNode),
+      edges: workflow.edges.map(edgeToEdge),
+    },
+    options
+  );
   workflow.services.map(drawIterationEdge);
   graph.on("oncontext", function (properties) {
     if (triggerMenu) {

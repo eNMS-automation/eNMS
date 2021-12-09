@@ -417,9 +417,9 @@ class ImportServices(BaseForm):
     form_type = HiddenField(default="import_services")
 
 
-class LogicalViewForm(BaseForm):
+class SiteForm(BaseForm):
     action = "eNMS.base.processData"
-    form_type = HiddenField(default="view")
+    form_type = HiddenField(default="site")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
 

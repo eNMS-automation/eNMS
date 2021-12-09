@@ -13,16 +13,14 @@ import {
   showInstancePanel,
 } from "./base.js";
 import {
-  rectangleSelection,
+  configureGraph,
   showLabelPanel,
-  triggerMenu,
   updateBuilderBindings,
 } from "./builder.js";
 
 let ctrlKeyPressed;
 let currentSite;
 let graph;
-let edges;
 let nodes;
 export let currentPath = localStorage.getItem("path");
 export let site = JSON.parse(localStorage.getItem("site"));

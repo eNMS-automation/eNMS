@@ -32,9 +32,7 @@ import {
   configureGraph,
   edges,
   nodes,
-  rectangleSelection,
   showLabelPanel,
-  triggerMenu,
   updateBuilderBindings,
 } from "./builder.js";
 import { clearSearch, tables, tableInstances } from "./table.js";

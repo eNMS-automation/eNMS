@@ -73,7 +73,6 @@ export let currentRuntime;
 let ctrlKeyPressed;
 let currentRun;
 let graph;
-let selectedObject;
 let ends = new Set();
 let currentMode = "motion";
 let runtimeDisplay;
@@ -93,35 +92,11 @@ export function displayWorkflow(workflowData) {
     {
       nodes: workflow.services.map(serviceToNode),
       edges: workflow.edges.map(edgeToEdge),
+      inactive: ends,
     },
     options
   );
   workflow.services.map(drawIterationEdge);
-  graph.on("oncontext", function (properties) {
-    if (triggerMenu) {
-      properties.event.preventDefault();
-      const node = this.getNodeAt(properties.pointer.DOM);
-      const edge = this.getEdgeAt(properties.pointer.DOM);
-      if (typeof node !== "undefined" && !ends.has(node)) {
-        graph.selectNodes([node, ...graph.getSelectedNodes()]);
-        $(".menu-entry ").hide();
-        $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
-        selectedObject = nodes.get(node);
-        $(".workflow-selection").toggle(selectedObject.type == "workflow");
-      } else if (typeof edge !== "undefined" && !ends.has(node)) {
-        graph.selectEdges([edge, ...graph.getSelectedEdges()]);
-        $(".menu-entry ").hide();
-        $(".edge-selection").show();
-        selectedObject = edges.get(edge);
-      } else {
-        $(".menu-entry").hide();
-        $(".global").show();
-      }
-    } else {
-      properties.event.stopPropagation();
-      properties.event.preventDefault();
-    }
-  });
   graph.on("click", function (event) {
     const node = this.getNodeAt(event.pointer.DOM);
     if (currentMode != "motion" && !node) switchMode("motion", true);

@@ -4,6 +4,7 @@ const container = document.getElementById("network");
 
 let currentLabel;
 let mousePosition;
+let selectedObject;
 export let edges;
 export let nodes;
 export let triggerMenu;
@@ -14,23 +15,46 @@ export function configureGraph(instance, graph, options) {
   for (const [id, label] of Object.entries(instance.labels)) {
     drawLabel(id, label);
   }
-  graph = new vis.Network(container, { nodes: nodes, edges: edges }, options);
-  graph.setOptions({ physics: false });
+  let network = new vis.Network(container, { nodes: nodes, edges: edges }, options);
+  network.setOptions({ physics: false });
   for (const objectType of ["Node", "Edge"]) {
-    graph.on(`hover${objectType}`, function () {
-      graph.canvas.body.container.style.cursor = "pointer";
+    network.on(`hover${objectType}`, function () {
+      network.canvas.body.container.style.cursor = "pointer";
     });
-    graph.on(`blur${objectType}`, function () {
-      graph.canvas.body.container.style.cursor = "default";
+    network.on(`blur${objectType}`, function () {
+      network.canvas.body.container.style.cursor = "default";
     });
   }
-  graph.on("oncontext", function (properties) {
-    if (triggerMenu) mousePosition = properties.pointer.canvas;
+  network.on("oncontext", function (properties) {
+    if (triggerMenu) {
+      properties.event.preventDefault();
+      mousePosition = properties.pointer.canvas;
+      const node = this.getNodeAt(properties.pointer.DOM);
+      const edge = this.getEdgeAt(properties.pointer.DOM);
+      if (typeof node !== "undefined" && !graph.inactive.has(node)) {
+        network.selectNodes([node, ...network.getSelectedNodes()]);
+        $(".menu-entry ").hide();
+        $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
+        selectedObject = nodes.get(node);
+        $(`.${instance.type}-selection`).toggle(selectedObject.type == instance.type);
+      } else if (typeof edge !== "undefined" && !graph.inactive.has(node)) {
+        network.selectEdges([edge, ...network.getSelectedEdges()]);
+        $(".menu-entry ").hide();
+        $(".edge-selection").show();
+        selectedObject = edges.get(edge);
+      } else {
+        $(".menu-entry").hide();
+        $(".global").show();
+      }
+    } else {
+      properties.event.stopPropagation();
+      properties.event.preventDefault();
+    }
   });
-  graph.on("doubleClick", function (event) {
+  network.on("doubleClick", function (event) {
     mousePosition = event.pointer.canvas;
   });
-  return graph;
+  return network;
 }
 
 export function showLabelPanel({ label, usePosition }) {

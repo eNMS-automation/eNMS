@@ -1,5 +1,6 @@
 import { call, configureNamespace, notify, openPanel } from "./base.js";
 
+let currentLabel;
 let mousePosition;
 export let triggerMenu;
 
@@ -21,7 +22,7 @@ export function configureGraph(graph) {
   });
 }
 
-function showLabelPanel({ label, usePosition }) {
+export function showLabelPanel({ label, usePosition }) {
   if (!usePosition) mousePosition = null;
   openPanel({
     name: "workflow_label",
@@ -139,4 +140,4 @@ export const rectangleSelection = (container, graph, nodes) => {
   });
 };
 
-configureNamespace("workflowBuilder", [createLabel]);
+configureNamespace("builder", [createLabel]);

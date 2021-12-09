@@ -31,6 +31,7 @@ import {
 import {
   configureGraph,
   rectangleSelection,
+  showLabelPanel,
   triggerMenu,
   updateBuilderBindings,
 } from "./builder.js";
@@ -78,7 +79,6 @@ let ends = new Set();
 let currentMode = "motion";
 let runtimeDisplay;
 export let creationMode;
-let currentLabel;
 let currentPlaceholder;
 let placeholder;
 let isSuperworkflow;

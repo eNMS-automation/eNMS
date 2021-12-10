@@ -67,7 +67,6 @@ class Runner:
             self.path = f"{run.path}>{self.service.id}"
         db.session.commit()
         self.start_run()
-        self.payload = self.make_json_compliant("payload", self.payload)
         vs.run_instances.pop(self.runtime)
 
     def __repr__(self):
@@ -272,14 +271,14 @@ class Runner:
                 env.redis("delete", *runtime_keys)
         self.results = results
 
-    def make_json_compliant(self, input_type, input):
+    def make_json_compliant(self, input):
         def rec(value):
             if isinstance(value, dict):
                 return {key: rec(value[key]) for key in list(value)}
             elif isinstance(value, list):
                 return list(map(rec, value))
             elif not isinstance(value, (int, str, bool, float, None.__class__)):
-                self.log("info", f"Converting {value} to string in {input_type}")
+                self.log("info", f"Converting {value} to string")
                 return str(value)
             else:
                 return value
@@ -441,6 +440,7 @@ class Runner:
         if device:
             result_kw["device"] = device.id
         if self.is_main_run and not device:
+            self.payload = self.make_json_compliant(self.payload)
             results["payload"] = self.payload
             services = list(vs.run_logs.get(self.parent_runtime, []))
             for service_id in services:
@@ -460,7 +460,7 @@ class Runner:
         else:
             results.pop("payload", None)
         create_failed_results = self.disable_result_creation and not self.success
-        results = self.make_json_compliant("results", results)
+        results = self.make_json_compliant(results)
         if not self.disable_result_creation or create_failed_results or run_result:
             self.has_result = True
             db.factory("result", result=results, commit=commit, **result_kw)

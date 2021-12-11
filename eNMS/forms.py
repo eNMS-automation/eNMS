@@ -428,8 +428,8 @@ class NodeForm(BaseForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="node")
     id = HiddenField()
-    name = StringField("Name")
-    scoped_name = StringField("Scoped Name", [InputRequired()])
+    scoped_name = StringField("Name", [InputRequired()])
+    name = StringField("Full Name")
     subtype = SelectField(
         "Subtype",
         choices=list(vs.visualization["Site Builder"]["nodes"].items()),

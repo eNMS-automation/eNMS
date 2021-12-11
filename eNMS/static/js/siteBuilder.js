@@ -100,7 +100,7 @@ function createNewNode(mode) {
   } else if (mode == "duplicate_site") {
     showInstancePanel("site", currentSite.id, "duplicate");
   } else {
-    showInstancePanel("node", currentSite.id);
+    showInstancePanel("node");
   }
 }
 

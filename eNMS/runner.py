@@ -397,6 +397,7 @@ class Runner:
                 self.multiprocessing
                 and len(non_skipped_targets) > 1
                 and not self.in_process
+                and not self.iteration_run
             ):
                 processes = min(len(non_skipped_targets), self.max_processes)
                 process_args = [

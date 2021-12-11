@@ -92,7 +92,7 @@ export function displaySite(site) {
   });
 }
 
-function createNewSite(mode) {
+function createNewNode(mode) {
   if (mode == "create_site") {
     showInstancePanel("site");
   } else if (!currentSite) {
@@ -100,7 +100,7 @@ function createNewSite(mode) {
   } else if (mode == "duplicate_site") {
     showInstancePanel("site", currentSite.id, "duplicate");
   } else {
-    showInstancePanel("site", currentSite.id);
+    showInstancePanel("node", currentSite.id);
   }
 }
 
@@ -109,8 +109,9 @@ function openDeletionPanel() {}
 function updateRightClickBindings() {
   updateBuilderBindings(action);
   Object.assign(action, {
-    "Create Site": () => createNewSite("create_site"),
-    "Duplicate Site": () => createNewSite("duplicate_site"),
+    "Create Site": () => createNewNode("create_site"),
+    "Duplicate Site": () => createNewNode("duplicate_site"),
+    "Create New Node": () => createNewNode("create_node"),
     "Edit Site": () => showInstancePanel("site", currentSite.id),
     Delete: openDeletionPanel,
     "Edit Edge": (edge) => {

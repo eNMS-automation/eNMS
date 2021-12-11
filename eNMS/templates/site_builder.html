@@ -4,6 +4,36 @@ block stylesheets %} {{ super() }}
 <link href="{{ url_for('static', filename='css/builder.css') }}" rel="stylesheet" />
 {% endblock stylesheets %} {% block content %}
 <div class="controls">
+  <div class="controls_mode navbar navbar-default navbar-color">
+    <table class="table" cellspacing="0" style="margin: 0px;" width="100%">
+      <tbody>
+        <tr>
+          <td style="text-align: center; vertical-align: middle;">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="action['Create New Node']()"
+              data-tooltip="Create New Node"
+            >
+              <span class="glyphicon glyphicon-plus"></span>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="eNMS.siteBuilder.switchMode()"
+              data-tooltip="Change Mode"
+            >
+              <span id="mode-icon" class="glyphicon glyphicon-move"></span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <nav
     class="navbar navbar-default navbar-custom navbar-color"
     style="padding-bottom: 2px;"

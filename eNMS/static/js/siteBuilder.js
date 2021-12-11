@@ -230,7 +230,7 @@ export function siteCreation(instance) {
 }
 
 export function processSiteData(instance) {
-  if (instance.id == site.id) {
+  if (instance.id == site?.id) {
     site = instance;
     $("#current-site option:selected").text(instance.name).trigger("change");
   }

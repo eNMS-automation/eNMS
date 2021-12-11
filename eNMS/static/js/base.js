@@ -602,6 +602,7 @@ function showServicePanel(type, id, mode, tableId) {
 }
 
 function showNodePanel(type, id, mode) {
+  $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
   if (id && mode == "duplicate" && type == "site") $(`#copy-${id}`).val(id);
   $(id ? `#${type}-sites-${id}` : `#${type}-sites`).prop("disabled", true);
 }
@@ -712,12 +713,9 @@ export function showInstancePanel(type, id, mode, tableId) {
         }
         if (page == "site_builder") updateSitePanel();
       }
-      if (isService) {
-        $(`#${type}-scoped_name`).focus();
-        loadScript(`../static/js/services/${type}.js`, id);
-      } else {
-        $(`#${type}-name`).focus();
-      }
+      if (isService) loadScript(`../static/js/services/${type}.js`, id);
+      const property = isService || type == "node" ? "scoped_name" : "name";
+      $(`#${type}-${property}`).focus();
     },
     type: type,
     duplicate: mode == "duplicate",
@@ -905,7 +903,7 @@ export function setTriggerMenu(value) {
       return position;
     }
   };
-})(jQuery, window);
+})($, window);
 
 export function notify(...args) {
   if (args.length == 4) {

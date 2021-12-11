@@ -416,9 +416,7 @@ class Node(AbstractBase):
     description = db.Column(db.LargeString)
     subtype = db.Column(db.SmallString)
     positions = db.Column(db.Dict, info={"log_change": False})
-    sites = relationship(
-        "Site", secondary=db.node_site_table, back_populates="nodes"
-    )
+    sites = relationship("Site", secondary=db.node_site_table, back_populates="nodes")
 
 
 class Site(Node):
@@ -428,6 +426,4 @@ class Site(Node):
     parent_type = "node"
     id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
     labels = db.Column(db.Dict, info={"log_change": False})
-    nodes = relationship(
-        "Node", secondary=db.node_site_table, back_populates="sites"
-    )
+    nodes = relationship("Node", secondary=db.node_site_table, back_populates="sites")

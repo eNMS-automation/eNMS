@@ -432,7 +432,8 @@ class NodeForm(BaseForm):
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     subtype = SelectField(
         "Subtype",
-        choices=(("password", "Username / Password"), ("key", "SSH Key")),
+        choices=list(vs.visualization["Site Builder"]["nodes"].items()),
+        default="router",
     )
 
 

@@ -169,5 +169,17 @@
       "juniper_ex3300": "Juniper EX3300",
       "cisco_catalyst_me4924": "Cisco Catalyst ME"
     }
+  },
+  "Site Builder": {
+    "nodes": {
+      "antenna": "Antenna",
+      "firewall": "Firewall",
+      "host": "Host",
+      "optical_switch": "Optical switch",
+      "regenerator": "Regenerator",
+      "router": "Router",
+      "server": "Server",
+      "switch": "Switch"
+    }
   }
 }

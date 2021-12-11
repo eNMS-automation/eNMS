@@ -428,7 +428,9 @@ class NodeForm(BaseForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="node")
     id = HiddenField()
-    name = StringField("Name", [InputRequired()])
+    name = StringField("Name")
+    scoped_name = StringField("Scoped Name", [InputRequired()])
+    shared = BooleanField("Shared")
     sites = MultipleInstanceField("Sites", model="site")
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     subtype = SelectField(

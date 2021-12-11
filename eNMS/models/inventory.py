@@ -408,15 +408,26 @@ class Session(AbstractBase):
 
 class Node(AbstractBase):
 
-    __tablename__ = "node"
+    __tablename__ = class_type = "node"
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "node", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    scoped_name = db.Column(db.SmallString, index=True)
+    shared = db.Column(Boolean, default=False)
     description = db.Column(db.LargeString)
     subtype = db.Column(db.SmallString)
     positions = db.Column(db.Dict, info={"log_change": False})
     sites = relationship("Site", secondary=db.node_site_table, back_populates="nodes")
+
+    def set_name(self, name=None):
+        if self.shared:
+            site = "[Shared] "
+        elif not self.sites:
+            site = ""
+        else:
+            site = f"[{self.sites[0].name}] "
+        self.name = f"{site}{name or self.scoped_name}"
 
 
 class Site(Node):

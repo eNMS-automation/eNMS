@@ -246,7 +246,7 @@ export function processSiteData(instance) {
   } else if (["node", "site"].includes(instance.type)) {
     if (!instance.sites.some((w) => w.id == site.id)) return;
     let serviceIndex = site.nodes.findIndex((s) => s.id == instance.id);
-    nodes.update(serviceToNode(instance));
+    nodes.update(drawNode(instance));
     if (serviceIndex == -1) {
       site.nodes.push(instance);
     } else {

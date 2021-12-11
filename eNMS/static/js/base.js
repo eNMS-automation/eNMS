@@ -779,8 +779,10 @@ function processInstance(type, instance) {
 
 function processData(type, id) {
   const isService = type.includes("service") || type == "workflow";
-  if (isService) {
-    $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop("disabled", false);
+  if (isService || type == "node") {
+    const relation = isService ? "workflow" : "site";
+    const property = id ? `#${type}-${relation}s-${id}` : `#${type}-${relation}s`;
+    $(property).prop("disabled", false);
   }
   call({
     url: `/update/${type}`,

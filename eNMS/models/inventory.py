@@ -420,6 +420,13 @@ class Node(AbstractBase):
     positions = db.Column(db.Dict, info={"log_change": False})
     sites = relationship("Site", secondary=db.node_site_table, back_populates="nodes")
 
+    def update(self, **kwargs):
+        if self.positions and "positions" in kwargs:
+            kwargs["positions"] = {**self.positions, **kwargs["positions"]}
+        super().update(**kwargs)
+        if not kwargs.get("migration_import"):
+            self.set_name()
+
     def set_name(self, name=None):
         if self.shared:
             site = "[Shared] "

@@ -428,7 +428,7 @@ class NodeForm(BaseForm):
         choices=list(vs.visualization["Site Builder"]["nodes"].items()),
         default="router",
     )
-    shared = BooleanField("Shared")
+    shared = BooleanField("Shared", default=False)
     sites = MultipleInstanceField("Sites", model="site")
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
 

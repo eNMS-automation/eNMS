@@ -14,14 +14,15 @@ import {
 } from "./base.js";
 import {
   configureGraph,
+  nodes,
   showLabelPanel,
   updateBuilderBindings,
 } from "./builder.js";
 
 let creationMode;
+let currentMode;
 let ctrlKeyPressed;
 let graph;
-let nodes;
 export let currentPath = localStorage.getItem("path");
 export let site = JSON.parse(localStorage.getItem("site"));
 
@@ -229,6 +230,24 @@ export function siteCreation(instance) {
   }
 }
 
+function switchMode(mode, noNotification) {
+  const oldMode = currentMode;
+  currentMode = mode || (currentMode == "motion" ? $("#edge-type").val() : "motion");
+  if ((oldMode == "motion" || currentMode == "motion") && oldMode != currentMode) {
+    $("#mode-icon").toggleClass("glyphicon-move").toggleClass("glyphicon-random");
+  }
+  let notification;
+  if (currentMode == "motion") {
+    graph.addNodeMode();
+    notification = "Mode: Motion.";
+  } else {
+    graph.setSelection({ nodes: [], edges: [] });
+    graph.addEdgeMode();
+    notification = "Mode: Creation of link.";
+  }
+  if (!noNotification) notify(notification, "success", 5);
+}
+
 export function processSiteData(instance) {
   if (instance.id == site?.id) {
     site = instance;
@@ -252,7 +271,6 @@ export function processSiteData(instance) {
     } else {
       site.nodes[serviceIndex] = instance;
     }
-    drawIterationEdge(instance);
     switchMode("motion");
   }
 }

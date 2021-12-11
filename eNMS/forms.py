@@ -424,6 +424,18 @@ class SiteForm(BaseForm):
     name = StringField("Name", [InputRequired()])
 
 
+class NodeForm(BaseForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="node")
+    id = HiddenField()
+    name = StringField("Name", [InputRequired()])
+    description = StringField(widget=TextArea(), render_kw={"rows": 6})
+    subtype = SelectField(
+        "Subtype",
+        choices=(("password", "Username / Password"), ("key", "SSH Key")),
+    )
+
+
 class LoginForm(BaseForm):
     form_type = HiddenField(default="login")
     get_request_allowed = False

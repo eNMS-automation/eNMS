@@ -430,14 +430,14 @@ class NodeForm(BaseForm):
     id = HiddenField()
     name = StringField("Name")
     scoped_name = StringField("Scoped Name", [InputRequired()])
-    shared = BooleanField("Shared")
-    sites = MultipleInstanceField("Sites", model="site")
-    description = StringField(widget=TextArea(), render_kw={"rows": 6})
     subtype = SelectField(
         "Subtype",
         choices=list(vs.visualization["Site Builder"]["nodes"].items()),
         default="router",
     )
+    shared = BooleanField("Shared")
+    sites = MultipleInstanceField("Sites", model="site")
+    description = StringField(widget=TextArea(), render_kw={"rows": 6})
 
 
 class LoginForm(BaseForm):

@@ -21,7 +21,7 @@ import { openDebugPanel, showCredentialPanel } from "./administration.js";
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
 import { initVisualization } from "./visualization.js";
-import { initSiteBuilder, siteCreation } from "./siteBuilder.js";
+import { processSiteData, initSiteBuilder, siteCreation } from "./siteBuilder.js";
 import {
   creationMode,
   initWorkflowBuilder,
@@ -787,7 +787,7 @@ function processData(type, id) {
       } else if (page == "workflow_builder") {
         processWorkflowData(instance, id);
       } else if (page == "site_builder") {
-        siteCreation(instance);
+        processSiteData(instance, id)
       }
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       notify(

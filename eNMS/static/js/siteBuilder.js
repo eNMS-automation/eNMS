@@ -73,7 +73,15 @@ function switchToSite(path, direction) {
 }
 
 export function displaySite(site) {
-  graph = configureGraph(site, { nodes: [], edges: [], inactive: []}, options);
+  graph = configureGraph(
+    site,
+    {
+      nodes: site.nodes.map(drawNode),
+      edges: [],
+      inactive: [],
+    },
+    options
+  );
   graph.on("click", () => {
     if (!ctrlKeyPressed) graph.selectNodes([]);
   });
@@ -90,6 +98,34 @@ export function displaySite(site) {
       showInstancePanel(node.type, node.id);
     }
   });
+}
+
+function drawNode(node) {
+  return {
+    id: node.id,
+    shape: "box",
+    color: "#D2E5FF",
+    font: {
+      size: 15,
+      multi: "html",
+      align: "center",
+      bold: { color: "#000000" },
+    },
+    shadow: {
+      enabled: true,
+      color: "#6666FF",
+      size: 15,
+    },
+    label: node.name,
+    name: node.name,
+    type: node.type,
+    x: node.positions[site.name] ? node.positions[site.name][0] : 0,
+    y: node.positions[site.name] ? node.positions[site.name][1] : 0,
+  };
+}
+
+function drawLine() {
+  return {}
 }
 
 function createNewNode(mode) {
@@ -117,7 +153,6 @@ function updateRightClickBindings() {
     "Edit Edge": (edge) => {
       showInstancePanel("link", edge.id);
     },
-    Skip: () => skipServices(),
     "Zoom In": () => graph.zoom(0.2),
     "Zoom Out": () => graph.zoom(-0.2),
     "Enter Site": (node) => switchToSite(`${currentPath}>${node.id}`),
@@ -183,5 +218,33 @@ export function siteCreation(instance) {
     );
     $("#current-site").val(instance.id).trigger("change");
     displaySite(instance);
+  }
+}
+
+export function processSiteData(instance) {
+  if (instance.id == site.id) {
+    site = instance;
+    $("#current-site option:selected").text(instance.name).trigger("change");
+  }
+  if (["create_site", "duplicate_site"].includes(creationMode)) {
+    $("#current-site").append(
+      `<option value="${instance.id}">${instance.name}</option>`
+    );
+    $("#current-site").val(instance.id).trigger("change");
+    creationMode = null;
+    switchToSite(`${instance.id}`);
+  } else if (!instance.type) {
+    edges.update(edgeToEdge(instance));
+  } else if (["node", "site"].includes(instance.type)) {
+    if (!instance.sites.some((w) => w.id == site.id)) return;
+    let serviceIndex = site.nodes.findIndex((s) => s.id == instance.id);
+    nodes.update(serviceToNode(instance));
+    if (serviceIndex == -1) {
+      site.nodes.push(instance);
+    } else {
+      site.nodes[serviceIndex] = instance;
+    }
+    drawIterationEdge(instance);
+    switchMode("motion");
   }
 }

@@ -556,12 +556,12 @@ class Controller:
         }
 
     def get_service_state(self, path, **kwargs):
-        service_id, state, run = path.split(">")[-1], None, None
+        state, run, path_id = None, None, path.split(">")
         runtime, display = kwargs.get("runtime"), kwargs.get("display")
-        service = db.fetch("service", id=service_id, allow_none=True)
+        service = db.fetch("service", id=path_id[-1], allow_none=True)
         if not service:
             raise db.rbac_error
-        runs = db.query("run").filter(vs.models["run"].services.any(id=service_id))
+        runs = db.query("run").filter(vs.models["run"].service_id.in_(path_id))
         if display == "user":
             runs = runs.filter(vs.models["run"].creator == current_user.name)
         runs = runs.all()

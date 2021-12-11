@@ -93,9 +93,6 @@ class Service(AbstractBase):
         back_populates="service",
         cascade="all, delete-orphan",
     )
-    runs = relationship(
-        "Run", secondary=db.run_service_table, back_populates="services"
-    )
     originals = relationship(
         "Service",
         secondary=db.originals_association_table,
@@ -319,9 +316,6 @@ class Run(AbstractBase):
     service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
     service = relationship("Service", foreign_keys="Run.service_id")
     service_name = db.Column(db.SmallString)
-    services = relationship(
-        "Service", secondary=db.run_service_table, back_populates="runs"
-    )
     target_devices = relationship(
         "Device", secondary=db.run_device_table, back_populates="runs"
     )

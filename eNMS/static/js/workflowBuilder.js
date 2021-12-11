@@ -691,10 +691,10 @@ function displayWorkflowState(result) {
             ? "#D3D3D3"
             : success + failure + skipped < total
             ? "#89CFF0"
+            : state.success === false || failure > 0
+            ? "#FF6666"
             : state.success === true
             ? "#32cd32"
-            : state.success === false
-            ? "#FF6666"
             : "#00CCFF"
         );
         if (total) {

@@ -21,7 +21,7 @@ import { openDebugPanel, showCredentialPanel } from "./administration.js";
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
 import { initVisualization } from "./visualization.js";
-import { processSiteData, initSiteBuilder, siteCreation } from "./siteBuilder.js";
+import { processSiteData, initSiteBuilder, updateSitePanel } from "./siteBuilder.js";
 import {
   creationMode,
   initWorkflowBuilder,
@@ -601,6 +601,11 @@ function showServicePanel(type, id, mode, tableId) {
   $(wizardId).smartWizard("fixHeight");
 }
 
+function showNodePanel(type, id, mode) {
+  if (id && mode == "duplicate" && type == "site") $(`#copy-${id}`).val(id);
+  $(id ? `#${type}-sites-${id}` : `#${type}-sites`).prop("disabled", true);
+}
+
 function showAddInstancePanel(tableId, model, relation) {
   openPanel({
     name: `add_${model}s`,
@@ -641,6 +646,7 @@ export function showInstancePanel(type, id, mode, tableId) {
     callback: function (panel) {
       const isService = type.includes("service") || type == "workflow";
       if (isService) showServicePanel(type, id, mode, tableId);
+      if (type == "node") showNodePanel(type, id, mode, tableId);
       if (type == "credential") showCredentialPanel(id);
       if (id) {
         const properties = type === "pool" ? "_properties" : "";
@@ -704,6 +710,7 @@ export function showInstancePanel(type, id, mode, tableId) {
           $(`#${type}-workflows`).append(new Option(workflow.name, workflow.name));
           $(`#${type}-workflows`).val(workflow.name).trigger("change");
         }
+        if (page == "site_builder") updateSitePanel();
       }
       if (isService) {
         $(`#${type}-scoped_name`).focus();

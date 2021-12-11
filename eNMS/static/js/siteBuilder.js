@@ -18,8 +18,8 @@ import {
   updateBuilderBindings,
 } from "./builder.js";
 
+let creationMode;
 let ctrlKeyPressed;
-let currentSite;
 let graph;
 let nodes;
 export let currentPath = localStorage.getItem("path");
@@ -59,8 +59,8 @@ function switchToSite(path, direction) {
   }
   call({
     url: `/get/site/${siteId}`,
-    callback: function (site) {
-      currentSite = site;
+    callback: function (newSite) {
+      site = newSite;
       if (page == "site_builder") {
         if (site) localStorage.setItem("site", JSON.stringify(site));
         displaySite(site);
@@ -128,13 +128,21 @@ function drawLine() {
   return {}
 }
 
+export function updateSitePanel() {
+  if (creationMode == "create_node") {
+    $(`#node-sites`).append(new Option(site.name, site.name));
+    $(`#node-sites`).val(site.name).trigger("change");
+  }
+}
+
 function createNewNode(mode) {
+  creationMode = mode;
   if (mode == "create_site") {
     showInstancePanel("site");
-  } else if (!currentSite) {
+  } else if (!site) {
     notify("No site has been created yet.", "error", 5);
   } else if (mode == "duplicate_site") {
-    showInstancePanel("site", currentSite.id, "duplicate");
+    showInstancePanel("site", site.id, "duplicate");
   } else {
     showInstancePanel("node");
   }
@@ -148,7 +156,7 @@ function updateRightClickBindings() {
     "Create Site": () => createNewNode("create_site"),
     "Duplicate Site": () => createNewNode("duplicate_site"),
     "Create New Node": () => createNewNode("create_node"),
-    "Edit Site": () => showInstancePanel("site", currentSite.id),
+    "Edit Site": () => showInstancePanel("site", site.id),
     Delete: openDeletionPanel,
     "Edit Edge": (edge) => {
       showInstancePanel("link", edge.id);
@@ -210,7 +218,7 @@ export function initSiteBuilder() {
 }
 
 export function siteCreation(instance) {
-  if (instance.id == currentSite?.id) {
+  if (instance.id == site?.id) {
     $("#current-site option:selected").text(instance.name).trigger("change");
   } else {
     $("#current-site").append(

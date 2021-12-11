@@ -417,13 +417,6 @@ class ImportServices(BaseForm):
     form_type = HiddenField(default="import_services")
 
 
-class SiteForm(BaseForm):
-    action = "eNMS.base.processData"
-    form_type = HiddenField(default="site")
-    id = HiddenField()
-    name = StringField("Name", [InputRequired()])
-
-
 class NodeForm(BaseForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="node")
@@ -438,6 +431,10 @@ class NodeForm(BaseForm):
     shared = BooleanField("Shared")
     sites = MultipleInstanceField("Sites", model="site")
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
+
+
+class SiteForm(NodeForm):
+    form_type = HiddenField(default="site")
 
 
 class LoginForm(BaseForm):

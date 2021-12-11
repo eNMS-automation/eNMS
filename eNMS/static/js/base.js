@@ -646,8 +646,9 @@ export function showInstancePanel(type, id, mode, tableId) {
     id: id || tableId,
     callback: function (panel) {
       const isService = type.includes("service") || type == "workflow";
+      const isNode = type == "site" || type == "node"
       if (isService) showServicePanel(type, id, mode, tableId);
-      if (type == "node") showNodePanel(type, id, mode, tableId);
+      if (isNode) showNodePanel(type, id, mode, tableId);
       if (type == "credential") showCredentialPanel(id);
       if (id) {
         const properties = type === "pool" ? "_properties" : "";
@@ -714,7 +715,7 @@ export function showInstancePanel(type, id, mode, tableId) {
         if (page == "site_builder") updateSitePanel();
       }
       if (isService) loadScript(`../static/js/services/${type}.js`, id);
-      const property = isService || type == "node" ? "scoped_name" : "name";
+      const property = isService || isNode ? "scoped_name" : "name";
       $(`#${type}-${property}`).focus();
     },
     type: type,

@@ -45,13 +45,52 @@ class Object(AbstractBase):
         )
 
 
-class Device(Object):
+class Node(Object):
+
+    __tablename__ = "node"
+    __mapper_args__ = {"polymorphic_identity": "node"}
+    parent_type = "object"
+    id = db.Column(Integer, ForeignKey(Object.id), primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    scoped_name = db.Column(db.SmallString, index=True)
+    shared = db.Column(Boolean, default=False)
+    positions = db.Column(db.Dict, info={"log_change": False})
+    sites = relationship("Site", secondary=db.node_site_table, back_populates="nodes")
+
+    def update(self, **kwargs):
+        if self.positions and "positions" in kwargs:
+            kwargs["positions"] = {**self.positions, **kwargs["positions"]}
+        super().update(**kwargs)
+        if not kwargs.get("migration_import"):
+            self.set_name()
+
+    def set_name(self, name=None):
+        if self.shared:
+            site = "[Shared] "
+        elif not self.sites:
+            site = ""
+        else:
+            site = f"[{self.sites[0].name}] "
+        self.name = f"{site}{name or self.scoped_name}"
+
+
+class Site(Node):
+
+    __tablename__ = class_type = "site"
+    __mapper_args__ = {"polymorphic_identity": "site"}
+    parent_type = "node"
+    id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
+    labels = db.Column(db.Dict, info={"log_change": False})
+    nodes = relationship("Node", secondary=db.node_site_table, back_populates="sites")
+
+
+class Device(Node):
 
     __tablename__ = class_type = "device"
     __mapper_args__ = {"polymorphic_identity": "device"}
     pool_model = True
-    parent_type = "object"
-    id = db.Column(Integer, ForeignKey(Object.id), primary_key=True)
+    parent_type = "node"
+    id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     icon = db.Column(db.TinyString, default="router")
     icon_3d = db.Column(db.TinyString, default="juniper_ex3300")
@@ -404,44 +443,3 @@ class Session(AbstractBase):
         "Device", back_populates="sessions", foreign_keys="Session.device_id"
     )
     device_name = association_proxy("device", "name")
-
-
-class Node(AbstractBase):
-
-    __tablename__ = class_type = "node"
-    type = db.Column(db.SmallString)
-    __mapper_args__ = {"polymorphic_identity": "node", "polymorphic_on": type}
-    id = db.Column(Integer, primary_key=True)
-    name = db.Column(db.SmallString, unique=True)
-    scoped_name = db.Column(db.SmallString, index=True)
-    shared = db.Column(Boolean, default=False)
-    description = db.Column(db.LargeString)
-    subtype = db.Column(db.SmallString)
-    positions = db.Column(db.Dict, info={"log_change": False})
-    sites = relationship("Site", secondary=db.node_site_table, back_populates="nodes")
-
-    def update(self, **kwargs):
-        if self.positions and "positions" in kwargs:
-            kwargs["positions"] = {**self.positions, **kwargs["positions"]}
-        super().update(**kwargs)
-        if not kwargs.get("migration_import"):
-            self.set_name()
-
-    def set_name(self, name=None):
-        if self.shared:
-            site = "[Shared] "
-        elif not self.sites:
-            site = ""
-        else:
-            site = f"[{self.sites[0].name}] "
-        self.name = f"{site}{name or self.scoped_name}"
-
-
-class Site(Node):
-
-    __tablename__ = class_type = "site"
-    __mapper_args__ = {"polymorphic_identity": "site"}
-    parent_type = "node"
-    id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
-    labels = db.Column(db.Dict, info={"log_change": False})
-    nodes = relationship("Node", secondary=db.node_site_table, back_populates="sites")

@@ -25,13 +25,8 @@ class Object(AbstractBase):
     model = db.Column(db.SmallString)
     location = db.Column(db.SmallString)
     vendor = db.Column(db.SmallString)
-    sites = relationship(
-        "Site", secondary=db.object_site_table, back_populates="objects"
-    )
 
     def delete(self):
-        if self.class_type == "site":
-            return
         number = f"{self.class_type}_number"
         for pool in self.pools:
             setattr(pool, number, getattr(pool, number) - 1)
@@ -48,21 +43,6 @@ class Object(AbstractBase):
             .filter(vs.models["user"].name == user.name)
             .group_by(cls.id)
         )
-
-
-class Site(Object):
-
-    __tablename__ = class_type = "site"
-    __mapper_args__ = {"polymorphic_identity": "site"}
-    pool_model = False
-    parent_type = "object"
-    id = db.Column(Integer, ForeignKey(Object.id), primary_key=True)
-    name = db.Column(db.SmallString, unique=True)
-    labels = db.Column(db.Dict, info={"log_change": False})
-    positions = db.Column(db.Dict, info={"log_change": False})
-    objects = relationship(
-        "Object", secondary=db.object_site_table, back_populates="sites"
-    )
 
 
 class Device(Object):
@@ -424,3 +404,30 @@ class Session(AbstractBase):
         "Device", back_populates="sessions", foreign_keys="Session.device_id"
     )
     device_name = association_proxy("device", "name")
+
+
+class Node(AbstractBase):
+
+    __tablename__ = "node"
+    type = db.Column(db.SmallString)
+    __mapper_args__ = {"polymorphic_identity": "node", "polymorphic_on": type}
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    description = db.Column(db.LargeString)
+    subtype = db.Column(db.SmallString)
+    positions = db.Column(db.Dict, info={"log_change": False})
+    sites = relationship(
+        "Site", secondary=db.node_site_table, back_populates="nodes"
+    )
+
+
+class Site(Node):
+
+    __tablename__ = class_type = "site"
+    __mapper_args__ = {"polymorphic_identity": "site"}
+    parent_type = "node"
+    id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
+    labels = db.Column(db.Dict, info={"log_change": False})
+    nodes = relationship(
+        "Node", secondary=db.node_site_table, back_populates="sites"
+    )

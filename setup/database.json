@@ -44,7 +44,7 @@
     "task",
     "access",
     "credential",
-    "site",
+    "node",
     "pool"
   ],
   "dont_migrate": {
@@ -60,7 +60,6 @@
       "destination",
       "destination_id",
       "pools",
-      "sites",
       "target_services",
       "tasks",
       "users"
@@ -73,9 +72,9 @@
       "destination_id",
       "destination_name",
       "source_id",
-      "source_name",
-      "sites"
+      "source_name"
     ],
+    "node": ["id"],
     "pool": [
       "access",
       "access_users",
@@ -126,15 +125,14 @@
       "upper_menu",
       "pages"
     ],
-    "site": ["id"],
     "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"]
   },
   "relationships": {
     "associations": {
-      "object_site": {
+      "node_site": {
         "model1": {
-          "column": "object_id",
-          "foreign_key": "object"
+          "column": "node_id",
+          "foreign_key": "node"
         },
         "model2": {
           "column": "site_id",

@@ -117,7 +117,7 @@ function drawNode(node) {
       color: "#6666FF",
       size: 15,
     },
-    label: node.name,
+    label: node.scoped_name,
     name: node.name,
     type: node.type,
     x: node.positions[site.name] ? node.positions[site.name][0] : 0,

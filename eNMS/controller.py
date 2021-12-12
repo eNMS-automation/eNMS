@@ -1044,12 +1044,13 @@ class Controller:
         instance = db.fetch(type, allow_none=True, id=id, rbac="edit")
         if not instance:
             return
+        relation_type = "node" if type == "site" else "service"
         for id, position in kwargs.items():
             new_position = [position["x"], position["y"]]
             if "-" not in id:
-                service = db.fetch("service", id=id, rbac=None)
-                old_position = service.positions.get(instance.name)
-                service.positions[instance.name] = new_position
+                relation = db.fetch(relation_type, id=id, rbac=None)
+                old_position = relation.positions.get(instance.name)
+                relation.positions[instance.name] = new_position
             elif id in instance.labels:
                 old_position = instance.labels[id].pop("positions")
                 instance.labels[id] = {"positions": new_position, **instance.labels[id]}

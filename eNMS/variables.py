@@ -125,17 +125,20 @@ class VariableStore:
         self.service_run_count = defaultdict(int)
 
     def set_template_context(self):
+        subtypes = {}
+        for model in ("device", "service"):
+            subtypes[model] = {
+                service: service_class.pretty_name
+                for service, service_class in sorted(self.models.items())
+                if hasattr(service_class, "pretty_name")
+            }
         self.template_context = {
             "configuration_properties": self.configuration_properties,
             "form_properties": self.form_properties,
             "names": self.property_names,
             "rbac": self.rbac,
             "relationships": self.relationships,
-            "service_types": {
-                service: service_class.pretty_name
-                for service, service_class in sorted(self.models.items())
-                if hasattr(service_class, "pretty_name")
-            },
+            "subtypes": subtypes,
             "settings": self.settings,
             "themes": self.themes,
             "table_properties": self.properties["tables"],

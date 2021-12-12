@@ -2,7 +2,7 @@
 global
 action: false
 page: false
-serviceTypes: false
+subtypes: false
 theme: false
 user: false
 vis: false
@@ -374,7 +374,7 @@ function getServiceLabel(service) {
   if (service.scoped_name == "Placeholder" && currentPlaceholder) {
     label += currentPlaceholder.scoped_name;
   } else {
-    label += service.type == "workflow" ? "Subworkflow" : serviceTypes[service.type];
+    label += service.type == "workflow" ? "Subworkflow" : subtypes["service"][service.type];
   }
   return label;
 }

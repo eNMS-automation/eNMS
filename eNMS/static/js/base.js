@@ -259,8 +259,8 @@ export function createTooltips(panel) {
 
 export function loadTypes(model) {
   $(`#${model}-type`).selectpicker({ liveSearch: true });
-  for (const [serviceType, serviceName] of Object.entries(serviceTypes)) {
-    $(`#${model}-type`).append(new Option(serviceName, serviceType));
+  for (const [subtype, name] of Object.entries(subtypes[model])) {
+    $(`#${model}-type`).append(new Option(name, subtype));
   }
   $(`#${model}-type`).selectpicker("refresh");
 }

@@ -438,22 +438,23 @@ class Database:
         return credentials
 
     def register_services(self):
-        path_services = [vs.path / "eNMS" / "models" / "services"]
-        load_examples = vs.settings["app"].get("startup_migration") == "examples"
-        if vs.settings["paths"]["custom_services"]:
-            path_services.append(Path(vs.settings["paths"]["custom_services"]))
-        for path in path_services:
-            for file in path.glob("**/*.py"):
-                if "init" in str(file):
-                    continue
-                if not load_examples and "examples" in str(file):
-                    continue
-                info(f"Loading service: {file}")
-                spec = spec_from_file_location(file.stem, str(file))
-                try:
-                    spec.loader.exec_module(module_from_spec(spec))
-                except InvalidRequestError:
-                    error(f"Error loading service '{file}'\n{format_exc()}")
+        for model in ("device", "link", "service"):
+            paths = [vs.path / "eNMS" / "models" / f"{model}s"]
+            load_examples = vs.settings["app"].get("startup_migration") == "examples"
+            if vs.settings["paths"][f"custom_{model}s"]:
+                paths.append(Path(vs.settings["paths"][f"custom_{model}s"]))
+            for path in paths:
+                for file in path.glob("**/*.py"):
+                    if "init" in str(file):
+                        continue
+                    if not load_examples and "examples" in str(file):
+                        continue
+                    info(f"Loading service: {file}")
+                    spec = spec_from_file_location(file.stem, str(file))
+                    try:
+                        spec.loader.exec_module(module_from_spec(spec))
+                    except InvalidRequestError:
+                        error(f"Error loading {model} '{file}'\n{format_exc()}")
 
     @contextmanager
     def session_scope(self):

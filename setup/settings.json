@@ -66,6 +66,8 @@
   },
   "paths": {
     "custom_code": "",
+    "custom_devices": "",
+    "custom_links": "",
     "custom_services": "",
     "files": "",
     "playbooks": ""

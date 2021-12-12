@@ -18,6 +18,14 @@ block stylesheets %} {{ super() }}
               <span class="glyphicon glyphicon-plus"></span>
             </button>
           </td>
+          <td style="min-width: 200px;">
+            <select
+              id="node-type"
+              class="form-control"
+              data-width="200px"
+              data-size="20"
+            ></select>
+          </td>
         </tr>
         <tr>
           <td style="text-align: center;">
@@ -29,6 +37,14 @@ block stylesheets %} {{ super() }}
             >
               <span id="mode-icon" class="glyphicon glyphicon-move"></span>
             </button>
+          </td>
+          <td style="min-width: 200px;">
+            <select
+              id="line-type"
+              class="form-control"
+              data-width="200px"
+              data-size="20"
+            ></select>
           </td>
         </tr>
       </tbody>

@@ -438,7 +438,7 @@ class Database:
         return credentials
 
     def register_services(self):
-        path_services = [vs.path / "eNMS" / "services"]
+        path_services = [vs.path / "eNMS" / "models" / "services"]
         load_examples = vs.settings["app"].get("startup_migration") == "examples"
         if vs.settings["paths"]["custom_services"]:
             path_services.append(Path(vs.settings["paths"]["custom_services"]))

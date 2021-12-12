@@ -120,6 +120,8 @@ function drawNode(node) {
     label: node.scoped_name,
     name: node.name,
     type: node.type,
+    image: `/static/img/view/2D/router.gif`,
+    shape: "image",
     x: node.positions[site.name] ? node.positions[site.name][0] : 0,
     y: node.positions[site.name] ? node.positions[site.name][1] : 0,
   };

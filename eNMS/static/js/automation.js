@@ -736,14 +736,6 @@ Object.assign(action, {
   Forward: () => switchToWorkflow(history[historyPosition + 1], "right"),
 });
 
-export function loadServiceTypes() {
-  $("#service-type").selectpicker({ liveSearch: true });
-  for (const [serviceType, serviceName] of Object.entries(serviceTypes)) {
-    $("#service-type").append(new Option(serviceName, serviceType));
-  }
-  $("#service-type").selectpicker("refresh");
-}
-
 export function deleteCorruptedEdges() {
   call({
     url: "/delete_corrupted_edges",

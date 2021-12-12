@@ -141,7 +141,6 @@ export function initDashboard() {
       }
     },
   });
-
   Object.keys(defaultProperties).forEach((type) => {
     $(`#${type}-properties`)
       .selectpicker()

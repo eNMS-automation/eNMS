@@ -10,13 +10,14 @@ import {
   createTooltip,
   createTooltips,
   downloadFile,
+  loadTypes,
   notify,
   openPanel,
   serializeForm,
   showConfirmationPanel,
   userIsActive,
 } from "./base.js";
-import { exportServices, loadServiceTypes } from "./automation.js";
+import { exportServices } from "./automation.js";
 
 export let tables = {};
 export let tableInstances = {};
@@ -919,7 +920,7 @@ tables.service = class ServiceTable extends Table {
   postProcessing(...args) {
     let self = this;
     super.postProcessing(...args);
-    loadServiceTypes();
+    loadTypes("service");
     $("#parent-filtering")
       .selectpicker()
       .on("change", function () {

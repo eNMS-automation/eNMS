@@ -9,7 +9,6 @@ vis: false
 */
 
 import {
-  loadServiceTypes,
   runService,
   runLogic,
   showRuntimePanel,
@@ -21,6 +20,7 @@ import {
   createTooltips,
   history,
   historyPosition,
+  loadTypes,
   moveHistory,
   notify,
   openPanel,
@@ -941,7 +941,7 @@ export function initWorkflowBuilder() {
     };
     this.view.moveTo(animationOptions);
   };
-  loadServiceTypes();
+  loadTypes("service");
   flipRuntimeDisplay(localStorage.getItem("runtimeDisplay") || "user");
   $("#left-arrow,#right-arrow").addClass("disabled");
   $("#edge-type").on("change", function () {

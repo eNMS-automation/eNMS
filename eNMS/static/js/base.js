@@ -257,6 +257,14 @@ export function createTooltips(panel) {
     });
 }
 
+export function loadTypes(model) {
+  $(`#${model}-type`).selectpicker({ liveSearch: true });
+  for (const [serviceType, serviceName] of Object.entries(serviceTypes)) {
+    $(`#${model}-type`).append(new Option(serviceName, serviceType));
+  }
+  $(`#${model}-type`).selectpicker("refresh");
+}
+
 export function openPanel({
   name,
   title,

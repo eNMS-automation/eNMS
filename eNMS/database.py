@@ -72,7 +72,7 @@ class Database:
         register(self.cleanup)
 
     def _initialize(self, env):
-        self.register_services()
+        self.register_custom_models()
         try:
             self.base.metadata.create_all(bind=self.engine)
         except OperationalError:
@@ -437,7 +437,7 @@ class Database:
             raise Exception(f"No matching credentials found for DEVICE '{device.name}'")
         return credentials
 
-    def register_services(self):
+    def register_custom_models(self):
         for model in ("device", "link", "service"):
             paths = [vs.path / "eNMS" / "models" / f"{model}s"]
             load_examples = vs.settings["app"].get("startup_migration") == "examples"

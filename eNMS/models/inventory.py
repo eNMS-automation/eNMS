@@ -91,7 +91,6 @@ class Device(Node):
     pool_model = True
     parent_type = "node"
     id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
-    name = db.Column(db.SmallString, unique=True)
     icon = db.Column(db.TinyString, default="router")
     icon_3d = db.Column(db.TinyString, default="juniper_ex3300")
     operating_system = db.Column(db.SmallString)

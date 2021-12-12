@@ -8,7 +8,6 @@ formProperties: true
 JSONEditor: false
 jsPanel: false
 page: false
-serviceTypes: false
 */
 
 import {

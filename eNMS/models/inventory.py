@@ -78,6 +78,7 @@ class Site(Node):
 
     __tablename__ = class_type = "site"
     __mapper_args__ = {"polymorphic_identity": "site"}
+    pretty_name = "Site"
     parent_type = "node"
     id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
     labels = db.Column(db.Dict, info={"log_change": False})
@@ -88,6 +89,7 @@ class Device(Node):
 
     __tablename__ = class_type = "device"
     __mapper_args__ = {"polymorphic_identity": "device"}
+    pretty_name = "Network Device"
     pool_model = True
     parent_type = "node"
     id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)

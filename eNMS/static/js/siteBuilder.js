@@ -114,7 +114,7 @@ function drawNode(node) {
     },
     shadow: {
       enabled: true,
-      color: "#6666FF",
+      color: node.shared ? "#FF1694" : "#6666FF",
       size: 15,
     },
     label: node.scoped_name,

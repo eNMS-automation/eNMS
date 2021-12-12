@@ -109,7 +109,7 @@ class Database:
         class SubDeclarativeMeta(DeclarativeMeta):
             def __init__(cls, *args):  # noqa: N805
                 DeclarativeMeta.__init__(cls, *args)
-                if hasattr(cls, "database_init"):
+                if hasattr(cls, "database_init") and "database_init" in cls.__dict__:
                     cls.database_init()
                 self.set_custom_properties(cls)
 
@@ -449,7 +449,7 @@ class Database:
                         continue
                     if not load_examples and "examples" in str(file):
                         continue
-                    info(f"Loading service: {file}")
+                    info(f"Loading {model}: {file}")
                     spec = spec_from_file_location(file.stem, str(file))
                     try:
                         spec.loader.exec_module(module_from_spec(spec))

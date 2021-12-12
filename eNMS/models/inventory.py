@@ -104,7 +104,6 @@ class Device(Node):
     scrapli_driver = db.Column(db.TinyString, default="cisco_iosxe")
     netconf_driver = db.Column(db.TinyString, default="default")
     configuration = db.Column(db.LargeString, info={"log_change": False})
-    positions = db.Column(db.Dict, info={"log_change": False})
     target_services = relationship(
         "Service",
         secondary=db.service_target_device_table,

@@ -239,6 +239,7 @@ class Link(Object):
 
     __tablename__ = class_type = "link"
     __mapper_args__ = {"polymorphic_identity": "link"}
+    pretty_name = "Link"
     pool_model = True
     parent_type = "object"
     id = db.Column(Integer, ForeignKey("object.id"), primary_key=True)

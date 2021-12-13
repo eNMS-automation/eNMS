@@ -149,7 +149,7 @@ function createNewNode(mode) {
   } else if (mode == "duplicate_site") {
     showInstancePanel("site", site.id, "duplicate");
   } else {
-    showInstancePanel("node");
+    showInstancePanel($("#node-type").val());
   }
 }
 

@@ -129,6 +129,16 @@
   },
   "relationships": {
     "associations": {
+      "link_site": {
+        "model1": {
+          "column": "link_id",
+          "foreign_key": "link"
+        },
+        "model2": {
+          "column": "site_id",
+          "foreign_key": "site"
+        }
+      },
       "node_site": {
         "model1": {
           "column": "node_id",

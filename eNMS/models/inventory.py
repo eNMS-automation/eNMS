@@ -83,6 +83,7 @@ class Site(Node):
     id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
     labels = db.Column(db.Dict, info={"log_change": False})
     nodes = relationship("Node", secondary=db.node_site_table, back_populates="sites")
+    links = relationship("Link", secondary=db.link_site_table, back_populates="sites")
 
 
 class Device(Node):
@@ -260,6 +261,7 @@ class Link(Object):
     )
     destination_name = association_proxy("destination", "name")
     pools = relationship("Pool", secondary=db.pool_link_table, back_populates="links")
+    sites = relationship("Site", secondary=db.link_site_table, back_populates="links")
     __table_args__ = (UniqueConstraint(name, source_id, destination_id),)
 
     def __init__(self, **kwargs):

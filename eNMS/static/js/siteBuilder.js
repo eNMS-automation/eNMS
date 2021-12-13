@@ -22,7 +22,7 @@ import {
 } from "./builder.js";
 
 let creationMode;
-let currentMode;
+let currentMode = "motion";
 let ctrlKeyPressed;
 let graph;
 export let currentPath = localStorage.getItem("path");
@@ -269,4 +269,4 @@ export function processSiteData(instance) {
   }
 }
 
-configureNamespace("workflowBuilder", [switchMode]);
+configureNamespace("siteBuilder", [switchMode]);

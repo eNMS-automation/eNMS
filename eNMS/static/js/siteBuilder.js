@@ -8,6 +8,7 @@ import {
   call,
   history,
   historyPosition,
+  loadTypes,
   moveHistory,
   notify,
   showInstancePanel,
@@ -190,6 +191,7 @@ export function initSiteBuilder() {
     };
     this.view.moveTo(animationOptions);
   };
+  loadTypes("node");
   $("#left-arrow,#right-arrow").addClass("disabled");
   call({
     url: "/get_top_level_instances/site",

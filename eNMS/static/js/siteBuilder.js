@@ -6,6 +6,7 @@ page: false
 
 import {
   call,
+  configureNamespace,
   history,
   historyPosition,
   loadTypes,
@@ -223,18 +224,6 @@ export function initSiteBuilder() {
   updateRightClickBindings();
 }
 
-export function siteCreation(instance) {
-  if (instance.id == site?.id) {
-    $("#current-site option:selected").text(instance.name).trigger("change");
-  } else {
-    $("#current-site").append(
-      `<option value="${instance.id}">${instance.name}</option>`
-    );
-    $("#current-site").val(instance.id).trigger("change");
-    displaySite(instance);
-  }
-}
-
 function switchMode(mode, noNotification) {
   const oldMode = currentMode;
   currentMode = mode || (currentMode == "motion" ? $("#edge-type").val() : "motion");
@@ -279,3 +268,5 @@ export function processSiteData(instance) {
     switchMode("motion");
   }
 }
+
+configureNamespace("workflowBuilder", [switchMode]);

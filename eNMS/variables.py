@@ -138,7 +138,7 @@ class VariableStore:
                     if issubclass(service_class, self.models[model])
                     and hasattr(service_class, "pretty_name")
                 }
-                for model in ("node", "service")
+                for model in ("link", "node", "service")
             },
             "settings": self.settings,
             "themes": self.themes,

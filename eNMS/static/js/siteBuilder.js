@@ -192,6 +192,7 @@ export function initSiteBuilder() {
     this.view.moveTo(animationOptions);
   };
   loadTypes("node");
+  loadTypes("link");
   $("#left-arrow,#right-arrow").addClass("disabled");
   call({
     url: "/get_top_level_instances/site",

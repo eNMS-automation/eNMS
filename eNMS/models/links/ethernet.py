@@ -20,7 +20,7 @@ class RouterForm(LinkForm):
     form_type = HiddenField(default="router")
     speed = StringField("Serial Number", default=22)
     standard = SelectField(
-        "Standard",	10BASE5, 10BASE2, 10BASE-T, 100BASE-TX, 1000BASE-T, 10GBASE-T
+        "Standard",
         choices=(
             ("10BASE2", "10BASE2"),
             ("10BASE5", "10BASE5"),

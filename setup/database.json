@@ -40,11 +40,11 @@
     "device",
     "link",
     "service",
+    "site",
     "workflow_edge",
     "task",
     "access",
     "credential",
-    "node",
     "pool"
   ],
   "dont_migrate": {
@@ -60,6 +60,7 @@
       "destination",
       "destination_id",
       "pools",
+      "sites",
       "target_services",
       "tasks",
       "users"
@@ -68,13 +69,13 @@
       "access",
       "id",
       "pools",
+      "sites",
       "users",
       "destination_id",
       "destination_name",
       "source_id",
       "source_name"
     ],
-    "node": ["id"],
     "pool": [
       "access",
       "access_users",
@@ -100,6 +101,9 @@
       "workflows",
       "tasks",
       "edges"
+    ],
+    "sites": [
+      "id"
     ],
     "task": [
       "access",

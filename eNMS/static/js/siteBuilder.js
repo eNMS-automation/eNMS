@@ -133,10 +133,10 @@ function drawLine() {
   return {}
 }
 
-export function updateSitePanel() {
+export function updateSitePanel(type) {
   if (creationMode == "create_node") {
-    $(`#node-sites`).append(new Option(site.name, site.name));
-    $(`#node-sites`).val(site.name).trigger("change");
+    $(`#${type}-sites`).append(new Option(site.name, site.name));
+    $(`#${type}-sites`).val(site.name).trigger("change");
   }
 }
 

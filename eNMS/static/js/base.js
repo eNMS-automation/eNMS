@@ -720,7 +720,7 @@ export function showInstancePanel(type, id, mode, tableId) {
           $(`#${type}-workflows`).append(new Option(workflow.name, workflow.name));
           $(`#${type}-workflows`).val(workflow.name).trigger("change");
         }
-        if (page == "site_builder") updateSitePanel();
+        if (page == "site_builder") updateSitePanel(type);
       }
       if (isService) loadScript(`../static/js/services/${type}.js`, id);
       const property = isService || isNode ? "scoped_name" : "name";
@@ -788,7 +788,7 @@ function processInstance(type, instance) {
 
 function processData(type, id) {
   const isService = type.includes("service") || type == "workflow";
-  if (isService || type == "node") {
+  if (isService || type in subtypes.node) {
     const relation = isService ? "workflow" : "site";
     const property = id ? `#${type}-${relation}s-${id}` : `#${type}-${relation}s`;
     $(property).prop("disabled", false);

@@ -432,17 +432,6 @@ class LoginForm(BaseForm):
     password = PasswordField("Password", [InputRequired()])
 
 
-class SiteForm(BaseForm):
-    action = "eNMS.base.processData"
-    form_type = HiddenField(default="site")
-    id = HiddenField()
-    scoped_name = StringField("Name", [InputRequired()])
-    name = StringField("Full Name")
-    shared = BooleanField("Shared", default=False)
-    sites = MultipleInstanceField("Sites", model="site")
-    description = StringField(widget=TextArea(), render_kw={"rows": 6})
-
-
 class ObjectForm(BaseForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="object")
@@ -772,6 +761,17 @@ class SettingsForm(BaseForm):
     action = "eNMS.administration.saveSettings"
     settings = JsonField("Settings")
     write_changes = BooleanField("Write changes back to 'settings.json' file")
+
+
+class SiteForm(BaseForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="site")
+    id = HiddenField()
+    scoped_name = StringField("Name", [InputRequired()])
+    name = StringField("Full Name")
+    shared = BooleanField("Shared", default=False)
+    sites = MultipleInstanceField("Sites", model="site")
+    description = StringField(widget=TextArea(), render_kw={"rows": 6})
 
 
 class TaskForm(BaseForm):

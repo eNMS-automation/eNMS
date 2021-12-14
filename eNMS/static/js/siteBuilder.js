@@ -161,7 +161,7 @@ function updateRightClickBindings() {
     "Create Site": () => createNewNode("create_site"),
     "Duplicate Site": () => createNewNode("duplicate_site"),
     "Create New Node": () => createNewNode("create_node"),
-    "Edit Site": () => showInstancePanel("site", site.id),
+    "Edit Site": () => showInstancePanel("site", site?.id),
     Delete: openDeletionPanel,
     "Edit Edge": (edge) => {
       showInstancePanel("link", edge.id);

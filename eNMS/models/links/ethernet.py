@@ -16,8 +16,8 @@ class EthernetLink(Link):
     standard = db.Column(db.SmallString)
 
 
-class RouterForm(LinkForm):
-    form_type = HiddenField(default="router")
+class EthernetLinkForm(LinkForm):
+    form_type = HiddenField(default="ethernet_link")
     speed = StringField("Serial Number", default=22)
     standard = SelectField(
         "Standard",

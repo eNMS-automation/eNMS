@@ -17,4 +17,4 @@ class Router(Device):
 
 class RouterForm(DeviceForm):
     form_type = HiddenField(default="router")
-    serial_number = StringField("Serial Number", default=22)
+    serial_number = StringField("Serial Number")

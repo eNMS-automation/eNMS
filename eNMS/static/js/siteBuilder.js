@@ -256,7 +256,7 @@ export function processSiteData(instance) {
     switchToSite(`${instance.id}`);
   } else if (!instance.type) {
     edges.update(edgeToEdge(instance));
-  } else if (["node", "site"].includes(instance.type)) {
+  } else if (instance.type in subtypes.node) {
     if (!instance.sites.some((w) => w.id == site.id)) return;
     let serviceIndex = site.nodes.findIndex((s) => s.id == instance.id);
     nodes.update(drawNode(instance));

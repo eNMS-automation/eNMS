@@ -417,26 +417,6 @@ class ImportServices(BaseForm):
     form_type = HiddenField(default="import_services")
 
 
-class NodeForm(BaseForm):
-    action = "eNMS.base.processData"
-    form_type = HiddenField(default="node")
-    id = HiddenField()
-    scoped_name = StringField("Name", [InputRequired()])
-    name = StringField("Full Name")
-    subtype = SelectField(
-        "Subtype",
-        choices=list(vs.visualization["Site Builder"]["nodes"].items()),
-        default="router",
-    )
-    shared = BooleanField("Shared", default=False)
-    sites = MultipleInstanceField("Sites", model="site")
-    description = StringField(widget=TextArea(), render_kw={"rows": 6})
-
-
-class SiteForm(NodeForm):
-    form_type = HiddenField(default="site")
-
-
 class LoginForm(BaseForm):
     form_type = HiddenField(default="login")
     get_request_allowed = False
@@ -452,12 +432,26 @@ class LoginForm(BaseForm):
     password = PasswordField("Password", [InputRequired()])
 
 
+class SiteForm(BaseForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="site")
+    id = HiddenField()
+    scoped_name = StringField("Name", [InputRequired()])
+    name = StringField("Full Name")
+    shared = BooleanField("Shared", default=False)
+    sites = MultipleInstanceField("Sites", model="site")
+    description = StringField(widget=TextArea(), render_kw={"rows": 6})
+
+
 class ObjectForm(BaseForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="object")
     get_request_allowed = False
     id = HiddenField()
-    name = StringField("Name", [InputRequired()])
+    scoped_name = StringField("Name", [InputRequired()])
+    shared = BooleanField("Shared", default=False)
+    sites = MultipleInstanceField("Sites", model="site")
+    name = StringField("Full Name")
     access_groups = StringField("Groups")
     description = StringField("Description")
     subtype = StringField("Subtype")
@@ -892,7 +886,7 @@ class ConnectionForm(ServiceForm):
 class DeviceForm(ObjectForm):
     form_type = HiddenField(default="device")
     icon = SelectField("Icon", choices=list(vs.visualization["icons"]["2D"].items()))
-    icon_3d = SelectField("Icon", choices=list(vs.visualization["icons"]["3D"].items()))
+    icon_3d = SelectField("3D Icon", choices=list(vs.visualization["icons"]["3D"].items()))
     ip_address = StringField("IP address")
     port = IntegerField("Port", default=22)
     operating_system = StringField("Operating System")

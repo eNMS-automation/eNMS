@@ -444,8 +444,8 @@ export function preprocessForm(panel, id, type, duplicate) {
   }
   panel.querySelectorAll(".add-id").forEach((el) => {
     if (duplicate) {
-      const property =
-        type.includes("service") || type == "workflow" ? "scoped_name" : "name";
+      const isScoped = type in subtypes.node || type in subtypes.service
+      const property = isScoped ? "scoped_name" : "name";
       if ([property, "id"].includes(el.name)) return;
     }
     if (id) $(el).prop("id", `${$(el).attr("id")}-${id}`);

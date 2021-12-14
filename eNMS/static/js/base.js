@@ -653,8 +653,8 @@ export function showInstancePanel(type, id, mode, tableId) {
     name: type,
     id: id || tableId,
     callback: function (panel) {
-      const isService = type.includes("service") || type == "workflow";
-      const isNode = type == "site" || type == "node"
+      const isService = type in subtypes.service;
+      const isNode = type in subtypes.node;
       if (isService) showServicePanel(type, id, mode, tableId);
       if (isNode) showNodePanel(type, id, mode, tableId);
       if (type == "credential") showCredentialPanel(id);

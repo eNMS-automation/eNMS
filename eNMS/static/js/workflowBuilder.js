@@ -8,11 +8,7 @@ user: false
 vis: false
 */
 
-import {
-  runService,
-  runLogic,
-  showRuntimePanel,
-} from "./automation.js";
+import { runService, runLogic, showRuntimePanel } from "./automation.js";
 import {
   call,
   configureNamespace,
@@ -374,7 +370,8 @@ function getServiceLabel(service) {
   if (service.scoped_name == "Placeholder" && currentPlaceholder) {
     label += currentPlaceholder.scoped_name;
   } else {
-    label += service.type == "workflow" ? "Subworkflow" : subtypes["service"][service.type];
+    label +=
+      service.type == "workflow" ? "Subworkflow" : subtypes["service"][service.type];
   }
   return label;
 }

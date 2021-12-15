@@ -102,9 +102,7 @@
       "tasks",
       "edges"
     ],
-    "site": [
-      "id"
-    ],
+    "site": ["id"],
     "task": [
       "access",
       "id",

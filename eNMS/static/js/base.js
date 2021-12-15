@@ -21,7 +21,12 @@ import { openDebugPanel, showCredentialPanel } from "./administration.js";
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
 import { initVisualization } from "./visualization.js";
-import { processSiteData, initSiteBuilder, updateSitePanel } from "./siteBuilder.js";
+import {
+  processSiteData,
+  initSiteBuilder,
+  showLinkPanel,
+  updateSitePanel,
+} from "./siteBuilder.js";
 import {
   creationMode,
   initWorkflowBuilder,
@@ -444,7 +449,7 @@ export function preprocessForm(panel, id, type, duplicate) {
   }
   panel.querySelectorAll(".add-id").forEach((el) => {
     if (duplicate) {
-      const isScoped = type in subtypes.node || type in subtypes.service
+      const isScoped = type in subtypes.node || type in subtypes.service;
       const property = isScoped ? "scoped_name" : "name";
       if ([property, "id"].includes(el.name)) return;
     }
@@ -648,7 +653,7 @@ function addInstancesToRelation(type, id) {
   });
 }
 
-export function showInstancePanel(type, id, mode, tableId) {
+export function showInstancePanel(type, id, mode, tableId, edge) {
   openPanel({
     name: type,
     id: id || tableId,
@@ -657,6 +662,7 @@ export function showInstancePanel(type, id, mode, tableId) {
       const isNode = type in subtypes.node;
       if (isService) showServicePanel(type, id, mode, tableId);
       if (isNode) showNodePanel(type, id, mode, tableId);
+      if (type in subtypes.link && edge) showLinkPanel(edge);
       if (type == "credential") showCredentialPanel(id);
       if (id) {
         const properties = type === "pool" ? "_properties" : "";
@@ -803,7 +809,7 @@ function processData(type, id) {
       } else if (page == "workflow_builder") {
         processWorkflowData(instance, id);
       } else if (page == "site_builder") {
-        processSiteData(instance, id)
+        processSiteData(instance, id);
       }
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       notify(

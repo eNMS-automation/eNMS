@@ -98,7 +98,7 @@ export function showLabelPanel({ label, usePosition }) {
 
 function createLabel() {
   const pos = mousePosition ? [mousePosition.x, mousePosition.y] : [0, 0];
-  const instance = `${currentInstance.type}/${currentInstance.id}`
+  const instance = `${currentInstance.type}/${currentInstance.id}`;
   call({
     url: `/create_label/${instance}/${pos[0]}/${pos[1]}/${currentLabel?.id}`,
     form: "label-form",

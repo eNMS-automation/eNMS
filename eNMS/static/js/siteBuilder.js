@@ -16,6 +16,7 @@ import {
 } from "./base.js";
 import {
   configureGraph,
+  edges,
   nodes,
   showLabelPanel,
   updateBuilderBindings,
@@ -37,7 +38,9 @@ const options = {
   manipulation: {
     enabled: false,
     addNode: function (data, callback) {},
-    addEdge: function (data, callback) {},
+    addEdge: function (data, callback) {
+      saveLink(data);
+    },
     deleteNode: function (data, callback) {
       callback(data);
     },
@@ -80,7 +83,7 @@ export function displaySite(site) {
     site,
     {
       nodes: site.nodes.map(drawNode),
-      edges: [],
+      edges: site.links.map(linkToEdge),
       inactive: [],
     },
     options
@@ -130,7 +133,7 @@ function drawNode(node) {
 }
 
 function drawLine() {
-  return {}
+  return {};
 }
 
 export function updateSitePanel(type) {
@@ -151,6 +154,38 @@ function createNewNode(mode) {
   } else {
     showInstancePanel($("#node-type").val());
   }
+}
+
+function saveLink(edge) {
+  showInstancePanel($("#link-type").val(), null, null, null, edge);
+}
+
+export function showLinkPanel(edge) {
+  const sourceName = nodes.get(edge.from).name;
+  const destinationName = nodes.get(edge.to).name;
+  $(`#${$("#link-type").val()}-sites`)
+    .append(new Option(site.name, site.name))
+    .val([site.name])
+    .trigger("change");
+  $(`#${$("#link-type").val()}-source`)
+    .append(new Option(sourceName, edge.from))
+    .val([edge.from])
+    .trigger("change");
+  $(`#${$("#link-type").val()}-destination`)
+    .append(new Option(destinationName, edge.to))
+    .val([edge.to])
+    .trigger("change");
+}
+
+function linkToEdge(link) {
+  return {
+    id: link.id,
+    label: link.scoped_name,
+    type: link.subtype,
+    from: link.source_id,
+    to: link.destination_id,
+    color: { color: link.color },
+  };
 }
 
 function openDeletionPanel() {}
@@ -254,8 +289,8 @@ export function processSiteData(instance) {
     $("#current-site").val(instance.id).trigger("change");
     creationMode = null;
     switchToSite(`${instance.id}`);
-  } else if (!instance.type) {
-    edges.update(edgeToEdge(instance));
+  } else if (instance.type in subtypes.link) {
+    edges.update(linkToEdge(instance));
   } else if (instance.type in subtypes.node) {
     if (!instance.sites.some((w) => w.id == site.id)) return;
     let serviceIndex = site.nodes.findIndex((s) => s.id == instance.id);
@@ -269,4 +304,4 @@ export function processSiteData(instance) {
   }
 }
 
-configureNamespace("siteBuilder", [switchMode]);
+configureNamespace("siteBuilder", [showLinkPanel, switchMode]);

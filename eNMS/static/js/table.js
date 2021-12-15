@@ -560,6 +560,16 @@ tables.device = class DeviceTable extends Table {
         ${this.deleteInstanceButton(row)}
       </ul>`;
   }
+
+  postProcessing(...args) {
+    let self = this;
+    super.postProcessing(...args);
+    $("#parent-filtering")
+      .selectpicker()
+      .on("change", function () {
+        self.table.page(0).ajax.reload(null, false);
+      });
+  }
 };
 
 tables.configuration = class ConfigurationTable extends Table {

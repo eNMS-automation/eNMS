@@ -562,13 +562,8 @@ tables.device = class DeviceTable extends Table {
 tables.site = class SiteTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
-    row.name =
-      row.type === "site"
-        ? `<b><a href="#" onclick="eNMS.siteBuilder.filterSiteTable(
+    row.name = `<b><a href="#" onclick="eNMS.siteBuilder.filterSiteTable(
       '${this.id}', ${row.id})">${row.scoped_name}</a></b>`
-        : $("#parent-filtering").val() == "true"
-        ? row.scoped_name
-        : row.name;
     return row;
   }
 
@@ -605,21 +600,6 @@ tables.site = class SiteTable extends Table {
         </li>
         ${this.deleteInstanceButton(row)}
       </ul>`;
-  }
-
-  get filteringConstraints() {
-    const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
-    const siteFiltering = $("#site-filtering").val();
-    if (siteFiltering?.length) {
-      return { sites: [siteFiltering] };
-    } else {
-      return { sites_filter: parentFiltering ? "empty" : "union" };
-    }
-  }
-
-  postProcessing(...args) {
-    let self = this;
-    super.postProcessing(...args);
   }
 };
 

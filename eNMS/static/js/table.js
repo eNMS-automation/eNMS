@@ -475,6 +475,22 @@ tables.device = class DeviceTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
+      `<input type="hidden" id="site-filtering" name="site-filtering">
+        <button
+          style="background:transparent; border:none; 
+          color:transparent; width: 240px;"
+          type="button"
+        >
+          <select
+            id="parent-filtering"
+            name="parent-filtering"
+            class="form-control"
+          >
+            <option value="true">Display services hierarchically</option>
+            <option value="false">Display all services</option>
+          </select>
+        </button>
+      </input>`,
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
@@ -783,20 +799,20 @@ tables.service = class ServiceTable extends Table {
       this.columnDisplay(),
       `
       <input type="hidden" id="workflow-filtering" name="workflow-filtering">
-      <button
-        style="background:transparent; border:none; 
-        color:transparent; width: 240px;"
-        type="button"
-      >
-        <select
-          id="parent-filtering"
-          name="parent-filtering"
-          class="form-control"
+        <button
+          style="background:transparent; border:none; 
+          color:transparent; width: 240px;"
+          type="button"
         >
-          <option value="true">Display services hierarchically</option>
-          <option value="false">Display all services</option>
-        </select>
-      </button>
+          <select
+            id="parent-filtering"
+            name="parent-filtering"
+            class="form-control"
+          >
+            <option value="true">Display services hierarchically</option>
+            <option value="false">Display all services</option>
+          </select>
+        </button>
       </input>
       <button
         class="btn btn-info"

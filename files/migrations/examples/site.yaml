@@ -1,0 +1,18 @@
+- access_groups: ''
+  creator: admin
+  description: ''
+  labels: {}
+  last_modified: '2021-12-15 02:10:28.192819'
+  links: []
+  location: ''
+  model: ''
+  name: 'Site 1: Top Level Objects'
+  nodes: ['[Site 1: Top Level Objects] Router 1', '[Site 1: Top Level Objects] Router
+      2']
+  positions: {}
+  scoped_name: 'Site 1: Top Level Objects'
+  shared: false
+  sites: []
+  subtype: ''
+  type: site
+  vendor: ''

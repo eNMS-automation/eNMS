@@ -37,11 +37,14 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -84,11 +87,14 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -131,11 +137,14 @@
   operating_system: eos
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Arista
@@ -178,11 +187,14 @@
   operating_system: eos
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Arista
@@ -225,11 +237,14 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -272,11 +287,14 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -319,11 +337,14 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -366,11 +387,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -413,11 +437,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -460,11 +487,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -507,11 +537,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -554,11 +587,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -601,11 +637,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -648,11 +687,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -695,11 +737,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -742,11 +787,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Juniper
@@ -789,11 +837,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Juniper
@@ -836,11 +887,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Juniper
@@ -883,11 +937,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Juniper
@@ -930,11 +987,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Juniper
@@ -977,11 +1037,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Juniper
@@ -1024,11 +1087,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Juniper
@@ -1071,11 +1137,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Juniper
@@ -1118,11 +1187,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Juniper
@@ -1165,11 +1237,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Juniper
@@ -1212,11 +1287,14 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -1259,11 +1337,14 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -1306,11 +1387,14 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -1353,11 +1437,14 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -1400,11 +1487,14 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -1447,11 +1537,14 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -1494,11 +1587,14 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -1541,11 +1637,14 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -1588,11 +1687,14 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -1635,11 +1737,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -1682,11 +1787,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -1729,11 +1837,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -1776,11 +1887,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -1823,11 +1937,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -1870,11 +1987,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -1917,11 +2037,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -1964,11 +2087,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -2011,11 +2137,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Juniper
@@ -2058,11 +2187,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Juniper
@@ -2105,11 +2237,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Juniper
@@ -2152,11 +2287,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Juniper
@@ -2199,11 +2337,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Juniper
@@ -2246,11 +2387,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Juniper
@@ -2293,11 +2437,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Juniper
@@ -2340,11 +2487,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Juniper
@@ -2387,11 +2537,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Juniper
@@ -2434,11 +2587,14 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Juniper
@@ -2481,11 +2637,14 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -2528,11 +2687,14 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -2575,11 +2737,14 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -2622,11 +2787,14 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -2669,11 +2837,14 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -2716,11 +2887,14 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -2763,11 +2937,14 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -2810,11 +2987,14 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: cisco_iosxe
+  shared: false
   subtype: router
   type: device
   vendor: Cisco
@@ -2857,11 +3037,14 @@
   operating_system: linux
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: linux
@@ -2904,11 +3087,14 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -2951,11 +3137,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -2998,11 +3187,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -3045,11 +3237,14 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -3092,11 +3287,14 @@
   operating_system: eos
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Arista
@@ -3139,11 +3337,14 @@
   operating_system: eos
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Arista
@@ -3186,11 +3387,14 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
@@ -3233,11 +3437,112 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
   reachable: true
+  scoped_name: ''
   scrapli_driver: arista_eos
+  shared: false
   subtype: ''
   type: device
   vendor: Cisco
+- access_groups: admin
+  creator: admin
+  custom_json: {}
+  custom_multiselect: []
+  custom_select: b
+  description: ''
+  down: false
+  icon: antenna
+  icon_3d: juniper_ex3300
+  ip_address: ''
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2021-12-15 02:10:20.566837'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '0.0'
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: '[Site 1: Top Level Objects] Router 1'
+  napalm_driver: ios
+  netconf_driver: default
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  positions:
+    'Site 1: Top Level Objects': [-211, 1]
+  property1: 10.145.14.1
+  property2: CP
+  property3: password
+  reachable: true
+  scoped_name: Router 1
+  scrapli_driver: cisco_iosxe
+  shared: false
+  subtype: ''
+  type: device
+  vendor: ''
+- access_groups: admin
+  creator: admin
+  custom_json: {}
+  custom_multiselect: []
+  custom_select: b
+  description: ''
+  down: false
+  icon: antenna
+  icon_3d: juniper_ex3300
+  ip_address: ''
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2021-12-15 02:10:25.218204'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '0.0'
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: '[Site 1: Top Level Objects] Router 2'
+  napalm_driver: ios
+  netconf_driver: default
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  positions:
+    'Site 1: Top Level Objects': [209, -7]
+  property1: 10.145.14.1
+  property2: CP
+  property3: password
+  reachable: true
+  scoped_name: Router 2
+  scrapli_driver: cisco_iosxe
+  shared: false
+  subtype: ''
+  type: device
+  vendor: ''

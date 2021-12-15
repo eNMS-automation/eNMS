@@ -663,7 +663,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
       const isLink = type in subtypes.link;
       if (isService) showServicePanel(type, id, mode, tableId);
       if (isNode) showNodePanel(type, id, mode, tableId);
-      if (isLink && edge) showLinkPanel(edge);
+      if (isLink) showLinkPanel(type, id, edge);
       if (type == "credential") showCredentialPanel(id);
       if (id) {
         const properties = type === "pool" ? "_properties" : "";

@@ -160,23 +160,24 @@ function saveLink(edge) {
   showInstancePanel($("#link-type").val(), null, null, null, edge);
 }
 
-export function showLinkPanel(edge) {
-  const linkType = $("#link-type").val();
-  $(`#${linkType}-name`).prop("disabled", true);
-  const sourceName = nodes.get(edge.from).name;
-  const destinationName = nodes.get(edge.to).name;
-  $(`#${linkType}-sites`)
-    .append(new Option(site.name, site.name))
-    .val([site.name])
-    .trigger("change");
-  $(`#${linkType}-source`)
-    .append(new Option(sourceName, edge.from))
-    .val([edge.from])
-    .trigger("change");
-  $(`#${linkType}-destination`)
-    .append(new Option(destinationName, edge.to))
-    .val([edge.to])
-    .trigger("change");
+export function showLinkPanel(type, id, edge) {
+  $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
+  if (edge) {
+    const sourceName = nodes.get(edge.from).name;
+    const destinationName = nodes.get(edge.to).name;
+    $(`#${type}-sites`)
+      .append(new Option(site.name, site.name))
+      .val([site.name])
+      .trigger("change");
+    $(`#${type}-source`)
+      .append(new Option(sourceName, edge.from))
+      .val([edge.from])
+      .trigger("change");
+    $(`#${type}-destination`)
+      .append(new Option(destinationName, edge.to))
+      .val([edge.to])
+      .trigger("change");
+  }
 }
 
 function linkToEdge(link) {

@@ -9,6 +9,10 @@ Version 4.2.0
 To be tested:
 - Export and re-import of workflows and top-level services
 
+MIGRATION:
+- scoped_name must be added to all devices and links, and must be equal to name. "shared" must be added
+  and set to true for all devices and links.
+
 Version 4.1.0
 -------------
 

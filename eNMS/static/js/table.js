@@ -567,9 +567,14 @@ tables.site = class SiteTable extends Table {
     return row;
   }
 
+  get modelFiltering() {
+    return "node";
+  }
+
   get controls() {
     return [
       this.columnDisplay(),
+      `<input type="hidden" id="site-filtering" name="site-filtering"></input>`,
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
@@ -600,6 +605,16 @@ tables.site = class SiteTable extends Table {
         </li>
         ${this.deleteInstanceButton(row)}
       </ul>`;
+  }
+
+  get filteringConstraints() {
+    const siteFiltering = $("#site-filtering").val();
+    console.log(siteFiltering)
+    if (siteFiltering?.length) {
+      return { sites: [siteFiltering] };
+    } else {
+      return { sites_filter: "empty", type: "site" };
+    }
   }
 };
 

@@ -462,6 +462,13 @@ tables.device = class DeviceTable extends Table {
       derivedProperties: ["last_runtime"],
       ...kwargs,
     });
+    row.name =
+      row.type === "site"
+        ? `<b><a href="#" onclick="eNMS.siteBuilder.filterSiteTable(
+      '${this.id}', ${row.id})">${row.scoped_name}</a></b>`
+        : $("#parent-filtering").val() == "true"
+        ? row.scoped_name
+        : row.name;
     for (const model of ["service", "task", "pool"]) {
       const from = model == "service" ? "target_devices" : "devices";
       const to = model == "service" ? `target_${model}s` : `${model}s`;

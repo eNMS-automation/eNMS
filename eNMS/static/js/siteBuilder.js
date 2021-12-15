@@ -132,10 +132,6 @@ function drawNode(node) {
   };
 }
 
-function drawLine() {
-  return {};
-}
-
 export function updateSitePanel(type) {
   if (creationMode == "create_node") {
     $(`#${type}-sites`).append(new Option(site.name, site.name));
@@ -154,6 +150,11 @@ function createNewNode(mode) {
   } else {
     showInstancePanel($("#node-type").val());
   }
+}
+
+function filterSiteTable(tableId, path) {
+  clearSearch(tableId);
+  switchToSite(path);
 }
 
 function saveLink(edge) {
@@ -305,4 +306,4 @@ export function processSiteData(instance) {
   }
 }
 
-configureNamespace("siteBuilder", [showLinkPanel, switchMode]);
+configureNamespace("siteBuilder", [filterSiteTable, showLinkPanel, switchMode]);

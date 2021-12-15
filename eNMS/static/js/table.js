@@ -562,7 +562,7 @@ tables.device = class DeviceTable extends Table {
 tables.site = class SiteTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
-    row.name = `<b><a href="#" onclick="eNMS.siteBuilder.filterSiteTable(
+    row.scoped_name = `<b><a href="#" onclick="eNMS.siteBuilder.filterSiteTable(
       '${this.id}', ${row.id})">${row.scoped_name}</a></b>`
     return row;
   }

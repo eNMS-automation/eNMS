@@ -21,6 +21,7 @@ import {
   showLabelPanel,
   updateBuilderBindings,
 } from "./builder.js";
+import { clearSearch, tableInstances } from "./table.js";
 
 let creationMode;
 let currentMode = "motion";
@@ -57,12 +58,11 @@ function switchToSite(path, direction) {
   currentPath = path;
   localStorage.setItem(page, currentPath);
   moveHistory(path, direction);
-  const [siteId] = currentPath.split(">").slice(-1);
-  if (!path && page == "object_table") {
-    $("#site-filtering").val("");
-    tableInstances["object"].table.page(0).ajax.reload(null, false);
+  if (!path && page == "site_table") {
+    tableInstances["site"].table.page(0).ajax.reload(null, false);
     return;
   }
+  const [siteId] = currentPath.split(">").slice(-1);
   call({
     url: `/get/site/${siteId}`,
     callback: function (newSite) {
@@ -72,7 +72,7 @@ function switchToSite(path, direction) {
         displaySite(site);
       } else {
         $("#site-filtering").val(path ? site.name : "");
-        tableInstances["object"].table.page(0).ajax.reload(null, false);
+        tableInstances["site"].table.page(0).ajax.reload(null, false);
       }
     },
   });

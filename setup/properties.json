@@ -600,7 +600,7 @@
     ],
     "site": [
       {
-        "data": "name",
+        "data": "scoped_name",
         "title": "Name",
         "search": "text"
       },

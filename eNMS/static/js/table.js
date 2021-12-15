@@ -462,13 +462,6 @@ tables.device = class DeviceTable extends Table {
       derivedProperties: ["last_runtime"],
       ...kwargs,
     });
-    row.name =
-      row.type === "site"
-        ? `<b><a href="#" onclick="eNMS.siteBuilder.filterSiteTable(
-      '${this.id}', ${row.id})">${row.scoped_name}</a></b>`
-        : $("#parent-filtering").val() == "true"
-        ? row.scoped_name
-        : row.name;
     for (const model of ["service", "task", "pool"]) {
       const from = model == "service" ? "target_devices" : "devices";
       const to = model == "service" ? `target_${model}s` : `${model}s`;
@@ -482,22 +475,6 @@ tables.device = class DeviceTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      `<input type="hidden" id="site-filtering" name="site-filtering">
-        <button
-          style="background:transparent; border:none; 
-          color:transparent; width: 240px;"
-          type="button"
-        >
-          <select
-            id="parent-filtering"
-            name="parent-filtering"
-            class="form-control"
-          >
-            <option value="true">Display services hierarchically</option>
-            <option value="false">Display all services</option>
-          </select>
-        </button>
-      </input>`,
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
@@ -576,6 +553,60 @@ tables.device = class DeviceTable extends Table {
       </ul>`;
   }
 
+  postProcessing(...args) {
+    super.postProcessing(...args);
+    loadTypes("node");
+  }
+};
+
+tables.site = class SiteTable extends Table {
+  addRow(kwargs) {
+    let row = super.addRow();
+    row.name =
+      row.type === "site"
+        ? `<b><a href="#" onclick="eNMS.siteBuilder.filterSiteTable(
+      '${this.id}', ${row.id})">${row.scoped_name}</a></b>`
+        : $("#parent-filtering").val() == "true"
+        ? row.scoped_name
+        : row.name;
+    return row;
+  }
+
+  get controls() {
+    return [
+      this.columnDisplay(),
+      this.refreshTableButton(),
+      this.searchTableButton(),
+      this.clearSearchButton(),
+      this.copyTableButton(),
+      this.createNewButton(),
+      this.bulkEditButton(),
+      this.bulkDeletionButton(),
+    ];
+  }
+
+  buttons(row) {
+    return `
+      <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showInstancePanel('site', '${
+            row.id
+          }')" data-tooltip="Edit"
+            ><span class="glyphicon glyphicon-edit"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showInstancePanel('site', '${row.id}', 'duplicate')"
+          data-tooltip="Duplicate"
+            ><span class="glyphicon glyphicon-duplicate"></span
+          ></button>
+        </li>
+        ${this.deleteInstanceButton(row)}
+      </ul>`;
+  }
+
   get filteringConstraints() {
     const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
     const siteFiltering = $("#site-filtering").val();
@@ -589,12 +620,6 @@ tables.device = class DeviceTable extends Table {
   postProcessing(...args) {
     let self = this;
     super.postProcessing(...args);
-    loadTypes("node");
-    $("#parent-filtering")
-      .selectpicker()
-      .on("change", function () {
-        self.table.page(0).ajax.reload(null, false);
-      });
   }
 };
 

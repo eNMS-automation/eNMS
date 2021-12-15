@@ -56,6 +56,10 @@
           "endpoint": "/link_table",
           "rbac": "access"
         },
+        "Sites": {
+          "endpoint": "/site_table",
+          "rbac": "access"
+        },
         "Pools": {
           "endpoint": "/pool_table",
           "rbac": "access"

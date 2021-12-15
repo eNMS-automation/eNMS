@@ -496,6 +496,14 @@ tables.device = class DeviceTable extends Table {
       this.clearSearchButton(),
       this.copyTableButton(),
       this.createNewButton(),
+      `
+      <button
+        style="background:transparent; border:none; 
+        color:transparent; width: 200px;"
+        type="button"
+      >
+        <select id="node-type" class="form-control"></select>
+      </button>`,
       this.bulkEditButton(),
       this.exportTableButton(),
       ` <button
@@ -564,6 +572,7 @@ tables.device = class DeviceTable extends Table {
   postProcessing(...args) {
     let self = this;
     super.postProcessing(...args);
+    loadTypes("node");
     $("#parent-filtering")
       .selectpicker()
       .on("change", function () {

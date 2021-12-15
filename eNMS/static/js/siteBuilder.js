@@ -84,7 +84,7 @@ export function displaySite(site) {
     {
       nodes: site.nodes.map(drawNode),
       edges: site.links.map(linkToEdge),
-      inactive: [],
+      inactive: new Set(),
     },
     options
   );
@@ -183,7 +183,7 @@ function linkToEdge(link) {
   return {
     id: link.id,
     label: link.scoped_name,
-    type: link.subtype,
+    type: link.type,
     from: link.source_id,
     to: link.destination_id,
     color: { color: link.color },
@@ -200,9 +200,7 @@ function updateRightClickBindings() {
     "Create New Node": () => createNewNode("create_node"),
     "Edit Site": () => showInstancePanel("site", site?.id),
     Delete: openDeletionPanel,
-    "Edit Edge": (edge) => {
-      showInstancePanel("link", edge.id);
-    },
+    "Edit Edge": (edge) => showInstancePanel(edge.type, edge.id),
     "Zoom In": () => graph.zoom(0.2),
     "Zoom Out": () => graph.zoom(-0.2),
     "Enter Site": (node) => switchToSite(`${currentPath}>${node.id}`),

@@ -926,7 +926,8 @@
   device_vendor_match: inclusion
   devices: [Austin, Washington, Chicago, SanDiego, Philadelphia, Detroit, Richmond,
     Baltimore, Cincinnati, Cambridge, Minneapolis, SanFrancisco, router10 (public),
-    router18 (public), router20 (admin), router23 (admin), Austin-2, Austin-3]
+    router18 (public), router20 (admin), router23 (admin), Austin-2, Austin-3, '[Site
+      1: Top Level Objects] Router 1', '[Site 1: Top Level Objects] Router 2']
   last_modified: '2020-09-21 06:22:36.450390'
   link_access_groups: ''
   link_access_groups_invert: false
@@ -2011,8 +2012,7 @@
     Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
     Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
     SanFrancisco, Orange, Oakland, Denver, Server 2, Aserver, Dallas-2, Dallas-3,
-    Dallas-4, Austin-2, Austin-3, Jackson-2, Oakland-2, '[Site 1: Top Level Objects]
-      Router 1', '[Site 1: Top Level Objects] Router 2']
+    Dallas-4, Austin-2, Austin-3, Jackson-2, Oakland-2]
   last_modified: '2020-09-26 00:47:22.329360'
   link_access_groups: ''
   link_access_groups_invert: false

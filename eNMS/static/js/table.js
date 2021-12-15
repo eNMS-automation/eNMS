@@ -569,6 +569,16 @@ tables.device = class DeviceTable extends Table {
       </ul>`;
   }
 
+  get filteringConstraints() {
+    const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
+    const siteFiltering = $("#site-filtering").val();
+    if (siteFiltering?.length) {
+      return { sites: [siteFiltering] };
+    } else {
+      return { sites_filter: parentFiltering ? "empty" : "union" };
+    }
+  }
+
   postProcessing(...args) {
     let self = this;
     super.postProcessing(...args);

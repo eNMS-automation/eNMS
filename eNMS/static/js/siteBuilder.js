@@ -55,7 +55,7 @@ function switchToSite(path, direction) {
   } else {
     $("#up-arrow").addClass("disabled");
   }
-  currentPath = path;
+  currentPath = path.toString();
   localStorage.setItem(page, currentPath);
   moveHistory(path, direction);
   if (!path && page == "site_table") {

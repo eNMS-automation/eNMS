@@ -161,17 +161,19 @@ function saveLink(edge) {
 }
 
 export function showLinkPanel(edge) {
+  const linkType = $("#link-type").val();
+  $(`#${linkType}-name`).prop("disabled", true);
   const sourceName = nodes.get(edge.from).name;
   const destinationName = nodes.get(edge.to).name;
-  $(`#${$("#link-type").val()}-sites`)
+  $(`#${linkType}-sites`)
     .append(new Option(site.name, site.name))
     .val([site.name])
     .trigger("change");
-  $(`#${$("#link-type").val()}-source`)
+  $(`#${linkType}-source`)
     .append(new Option(sourceName, edge.from))
     .val([edge.from])
     .trigger("change");
-  $(`#${$("#link-type").val()}-destination`)
+  $(`#${linkType}-destination`)
     .append(new Option(destinationName, edge.to))
     .val([edge.to])
     .trigger("change");

@@ -660,9 +660,10 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
     callback: function (panel) {
       const isService = type in subtypes.service;
       const isNode = type in subtypes.node;
+      const isLink = type in subtypes.link;
       if (isService) showServicePanel(type, id, mode, tableId);
       if (isNode) showNodePanel(type, id, mode, tableId);
-      if (type in subtypes.link && edge) showLinkPanel(edge);
+      if (isLink && edge) showLinkPanel(edge);
       if (type == "credential") showCredentialPanel(id);
       if (id) {
         const properties = type === "pool" ? "_properties" : "";
@@ -729,7 +730,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
         if (page == "site_builder") updateSitePanel(type);
       }
       if (isService) loadScript(`../static/js/services/${type}.js`, id);
-      const property = isService || isNode ? "scoped_name" : "name";
+      const property = isService || isNode || isLink ? "scoped_name" : "name";
       $(`#${type}-${property}`).focus();
     },
     type: type,

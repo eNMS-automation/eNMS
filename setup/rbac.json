@@ -157,6 +157,7 @@
     "/service_table": "access",
     "/session_log_form": "access",
     "/session_table": "access",
+    "/site_table": "access",
     "/table_form": "access",
     "/task_table": "access",
     "/terminal": "access",

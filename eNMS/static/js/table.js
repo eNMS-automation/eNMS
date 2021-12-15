@@ -561,7 +561,7 @@ tables.device = class DeviceTable extends Table {
 
 tables.site = class SiteTable extends Table {
   addRow(kwargs) {
-    let row = super.addRow();
+    let row = super.addRow(kwargs);
     row.name =
       row.type === "site"
         ? `<b><a href="#" onclick="eNMS.siteBuilder.filterSiteTable(

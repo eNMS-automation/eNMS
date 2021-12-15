@@ -598,6 +598,38 @@
         "export": false
       }
     ],
+    "site": [
+      {
+        "data": "name",
+        "title": "Name",
+        "search": "text"
+      },
+      {
+        "data": "description",
+        "title": "Description",
+        "search": "text",
+        "visible": false,
+        "orderable": false
+      },
+      {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "location",
+        "title": "Location",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "buttons",
+        "width": "270px",
+        "orderable": false,
+        "export": false
+      }
+    ],
     "run": [
       {
         "data": "name",

@@ -244,7 +244,9 @@ class Link(Object):
     pool_model = True
     parent_type = "object"
     id = db.Column(Integer, ForeignKey("object.id"), primary_key=True)
-    name = db.Column(db.SmallString)
+    name = db.Column(db.SmallString, unique=True)
+    scoped_name = db.Column(db.SmallString, index=True)
+    shared = db.Column(Boolean, default=False)
     color = db.Column(db.TinyString, default="#000000")
     source_id = db.Column(Integer, ForeignKey("device.id"))
     destination_id = db.Column(Integer, ForeignKey("device.id"))
@@ -264,8 +266,12 @@ class Link(Object):
     sites = relationship("Site", secondary=db.link_site_table, back_populates="links")
     __table_args__ = (UniqueConstraint(name, source_id, destination_id),)
 
-    def __init__(self, **kwargs):
-        self.update(**kwargs)
+    def set_name(self, name=None):
+        if self.shared or not self.sites:
+            site = ""
+        else:
+            site = f"[{self.sites[0].name}] "
+        self.name = f"{site}{name or self.scoped_name}"
 
     @property
     def view_properties(self):
@@ -296,6 +302,8 @@ class Link(Object):
                 {"source_id": kwargs["source"], "destination_id": kwargs["destination"]}
             )
         super().update(**kwargs)
+        if not kwargs.get("migration_import"):
+            self.set_name()
 
 
 class Pool(AbstractBase):

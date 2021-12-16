@@ -18,12 +18,11 @@ user: false
 */
 
 import { openDebugPanel, showCredentialPanel } from "./administration.js";
-import { creationMode, initBuilder, processBuilderData } from "./builder.js";
+import { creationMode, initBuilder, instance, processBuilderData } from "./builder.js";
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
 import { initVisualization } from "./visualization.js";
 import { showLinkPanel, updateSitePanel } from "./siteBuilder.js";
-import { workflow } from "./workflowBuilder.js";
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 export let editors = {};
@@ -666,7 +665,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
             processInstance(type, instance);
             if (mode == "duplicate" && isService) {
-              const value = page == "workflow_builder" ? [workflow.name] : [];
+              const value = page == "workflow_builder" ? [instance.name] : [];
               $(`#${type}-workflows-${id}`).val(value).trigger("change");
             }
           },
@@ -716,8 +715,8 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
         panel.setHeaderTitle(`Create a New ${type}`);
         $(`#${type}-access_groups`).val(user.groups);
         if (page == "workflow_builder" && creationMode == "create_service") {
-          $(`#${type}-workflows`).append(new Option(workflow.name, workflow.name));
-          $(`#${type}-workflows`).val(workflow.name).trigger("change");
+          $(`#${type}-workflows`).append(new Option(instance.name, instance.name));
+          $(`#${type}-workflows`).val(instance.name).trigger("change");
         }
         if (page == "site_builder") updateSitePanel(type);
       }

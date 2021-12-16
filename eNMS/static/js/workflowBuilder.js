@@ -85,8 +85,8 @@ export function displayWorkflow(workflowData) {
   graph = configureGraph(
     workflow,
     {
-      nodes: workflow.services.map(serviceToNode),
-      edges: workflow.edges.map(edgeToEdge),
+      nodes: workflow.services.map(drawWorkflowNode),
+      edges: workflow.edges.map(drawWorkflowEdge),
       inactive: ends,
     },
     options
@@ -211,11 +211,11 @@ export function processWorkflowData(instance) {
     creationMode = null;
     switchToWorkflow(`${instance.id}`);
   } else if (!instance.type) {
-    edges.update(edgeToEdge(instance));
+    edges.update(drawWorkflowEdge(instance));
   } else if (instance.type.includes("service") || instance.type == "workflow") {
     if (!instance.workflows.some((w) => w.id == workflow.id)) return;
     let serviceIndex = workflow.services.findIndex((s) => s.id == instance.id);
-    nodes.update(serviceToNode(instance));
+    nodes.update(drawWorkflowNode(instance));
     if (serviceIndex == -1) {
       workflow.services.push(instance);
     } else {
@@ -227,7 +227,7 @@ export function processWorkflowData(instance) {
 }
 
 function updateWorkflowService(service) {
-  nodes.add(serviceToNode(service));
+  nodes.add(drawWorkflowNode(service));
   workflow.services.push(service);
   switchMode("motion", true);
   notify(`Service '${service.scoped_name}' added to the workflow.`, "success", 5);
@@ -303,7 +303,7 @@ function saveEdge(edge) {
     url: `/add_edge/${param}`,
     callback: function (result) {
       workflow.last_modified = result.update_time;
-      const newEdge = edgeToEdge(result);
+      const newEdge = drawWorkflowEdge(result);
       edges.add(newEdge);
       workflow.edges.push(newEdge);
       graph.addEdgeMode();
@@ -377,7 +377,7 @@ function getServiceLabel(service) {
   return label;
 }
 
-function serviceToNode(service) {
+export function drawWorkflowNode(service) {
   const isPlaceholder = service.scoped_name == "Placeholder";
   if (isPlaceholder) {
     isSuperworkflow = true;
@@ -437,7 +437,7 @@ function drawIterationEdge(service) {
   }
 }
 
-function edgeToEdge(edge) {
+export function drawWorkflowEdge(edge) {
   return {
     id: edge.id,
     label: edge.label,

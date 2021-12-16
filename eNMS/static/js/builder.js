@@ -10,6 +10,8 @@ import {
 } from "./base.js";
 import { drawSiteEdge, drawSiteNode, switchToSite } from "./siteBuilder.js";
 import {
+  drawWorkflowEdge,
+  drawWorkflowNode,
   getWorkflowState,
   flipRuntimeDisplay,
   switchToWorkflow,
@@ -266,7 +268,7 @@ function drawNode(node) {
 }
 
 function drawEdge(edge) {
-  return type == "site" ? drawSiteEdge(edge) : drawWokflowEdge(edge);
+  return type == "site" ? drawSiteEdge(edge) : drawWorkflowEdge(edge);
 }
 
 function switchMode(mode, noNotification) {

@@ -2,7 +2,7 @@ import { call, configureNamespace, notify, openPanel } from "./base.js";
 
 const container = document.getElementById("network");
 let currentLabel;
-let currentInstance;
+let instance;
 let mousePosition;
 let network;
 let selectedObject;
@@ -10,10 +10,10 @@ export let edges;
 export let nodes;
 export let triggerMenu;
 
-export function configureGraph(instance, graph, options) {
+export function configureGraph(newInstance, graph, options) {
   nodes = new vis.DataSet(graph.nodes);
   edges = new vis.DataSet(graph.edges);
-  currentInstance = instance;
+  instance = newInstance;
   for (const [id, label] of Object.entries(instance.labels)) {
     drawLabel(id, label);
   }
@@ -71,10 +71,10 @@ export function configureGraph(instance, graph, options) {
 
 function savePositions() {
   call({
-    url: `/save_positions/${currentInstance.type}/${currentInstance.id}`,
+    url: `/save_positions/${instance.type}/${instance.id}`,
     data: network.getPositions(),
     callback: function (updateTime) {
-      if (updateTime) currentInstance.last_modified = updateTime;
+      if (updateTime) instance.last_modified = updateTime;
     },
   });
 }
@@ -98,7 +98,7 @@ export function showLabelPanel({ label, usePosition }) {
 
 function createLabel() {
   const pos = mousePosition ? [mousePosition.x, mousePosition.y] : [0, 0];
-  const instance = `${currentInstance.type}/${currentInstance.id}`;
+  const instance = `${instance.type}/${instance.id}`;
   call({
     url: `/create_label/${instance}/${pos[0]}/${pos[1]}/${currentLabel?.id}`,
     form: "label-form",

@@ -3448,3 +3448,101 @@
   subtype: ''
   type: device
   vendor: Cisco
+- access_groups: admin
+  creator: admin
+  custom_json: {}
+  custom_multiselect: []
+  custom_select: b
+  description: ''
+  down: false
+  icon: antenna
+  icon_3d: juniper_ex3300
+  ip_address: ''
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2021-12-16 04:02:30.905020'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '0.0'
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: '[Site 1: Top Level Objects] Router 1'
+  napalm_driver: ios
+  netconf_driver: default
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  positions:
+    'Site 1: Top Level Objects': [-244, -56]
+  property1: 10.145.14.1
+  property2: CP
+  property3: password
+  reachable: true
+  scoped_name: Router 1
+  scrapli_driver: cisco_iosxe
+  shared: false
+  subtype: ''
+  type: device
+  vendor: ''
+- access_groups: admin
+  creator: admin
+  custom_json: {}
+  custom_multiselect: []
+  custom_select: b
+  description: ''
+  down: false
+  icon: antenna
+  icon_3d: juniper_ex3300
+  ip_address: ''
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2021-12-16 04:02:37.277641'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '0.0'
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: '[Site 1: Top Level Objects] Router 2'
+  napalm_driver: ios
+  netconf_driver: default
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  positions:
+    'Site 1: Top Level Objects': [102, 130]
+  property1: 10.145.14.1
+  property2: CP
+  property3: password
+  reachable: true
+  scoped_name: Router 2
+  scrapli_driver: cisco_iosxe
+  shared: false
+  subtype: ''
+  type: device
+  vendor: ''

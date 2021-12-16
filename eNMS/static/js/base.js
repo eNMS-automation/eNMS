@@ -18,12 +18,11 @@ user: false
 */
 
 import { openDebugPanel, showCredentialPanel } from "./administration.js";
-import { initBuilder } from "./builder.js";
+import { initBuilder, processBuilderData } from "./builder.js";
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
 import { initVisualization } from "./visualization.js";
 import {
-  processSiteData,
   showLinkPanel,
   updateSitePanel,
 } from "./siteBuilder.js";
@@ -811,7 +810,7 @@ function processData(type, id) {
       } else if (page == "workflow_builder") {
         processWorkflowData(instance, id);
       } else if (page == "site_builder") {
-        processSiteData(instance, id);
+        processBuilderData(instance, id);
       }
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       notify(

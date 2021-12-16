@@ -1,5 +1,5 @@
 import { call, configureNamespace,   history,
-  historyPosition, loadTypes, notify, openPanel } from "./base.js";
+  historyPosition, loadTypes, notify, openPanel, showInstancePanel } from "./base.js";
 import { switchToSite } from "./siteBuilder.js";
 
 const container = document.getElementById("network");
@@ -9,6 +9,7 @@ let instance;
 let mousePosition;
 let network;
 let selectedObject;
+export let creationMode;
 export let currentPath = localStorage.getItem("path");
 export let edges;
 export let nodes;
@@ -228,6 +229,46 @@ export const rectangleSelection = (container, graph, nodes) => {
 
 export function setPath(path) {
   currentPath = path;
+}
+
+function createNewNode(mode) {
+  creationMode = mode;
+  if (mode == "create_site") {
+    showInstancePanel("site");
+  } else if (!instance) {
+    notify("No site has been created yet.", "error", 5);
+  } else if (mode == "duplicate_site") {
+    showInstancePanel("site", instance.id, "duplicate");
+  } else {
+    showInstancePanel($("#node-type").val());
+  }
+}
+
+export function processBuilderData(newInstance) {
+  if (newInstance.id == instance?.id) {
+    instance = newInstance;
+    $("#current-site option:selected").text(newInstance.name).trigger("change");
+  }
+  if (["create_site", "duplicate_site"].includes(creationMode)) {
+    $("#current-site").append(
+      `<option value="${newInstance.id}">${newInstance.name}</option>`
+    );
+    $("#current-site").val(newInstance.id).trigger("change");
+    creationMode = null;
+    switchToSite(`${newInstance.id}`);
+  } else if (newInstance.type in subtypes.link) {
+    edges.update(linkToEdge(newInstance));
+  } else if (newInstance.type in subtypes.node) {
+    if (!newInstance.sites.some((w) => w.id == instance.id)) return;
+    let serviceIndex = instance.nodes.findIndex((s) => s.id == newInstance.id);
+    nodes.update(drawNode(newInstance));
+    if (serviceIndex == -1) {
+      instance.nodes.push(newInstance);
+    } else {
+      instance.nodes[serviceIndex] = newInstance;
+    }
+    switchMode("motion");
+  }
 }
 
 export function updateSiteRightClickBindings() {

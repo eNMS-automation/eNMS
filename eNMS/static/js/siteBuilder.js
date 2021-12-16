@@ -13,15 +13,14 @@ import {
 } from "./base.js";
 import {
   configureGraph,
+  creationMode,
   currentPath,
-  edges,
   nodes,
   setPath,
   showLabelPanel,
 } from "./builder.js";
 import { clearSearch, tableInstances } from "./table.js";
 
-let creationMode;
 let currentMode = "motion";
 let graph;
 export let site = JSON.parse(localStorage.getItem("site"));
@@ -133,19 +132,6 @@ export function updateSitePanel(type) {
   }
 }
 
-function createNewNode(mode) {
-  creationMode = mode;
-  if (mode == "create_site") {
-    showInstancePanel("site");
-  } else if (!site) {
-    notify("No site has been created yet.", "error", 5);
-  } else if (mode == "duplicate_site") {
-    showInstancePanel("site", site.id, "duplicate");
-  } else {
-    showInstancePanel($("#node-type").val());
-  }
-}
-
 function filterSiteTable(tableId, path) {
   clearSearch(tableId);
   switchToSite(path);
@@ -202,33 +188,6 @@ function switchMode(mode, noNotification) {
     notification = "Mode: Creation of link.";
   }
   if (!noNotification) notify(notification, "success", 5);
-}
-
-export function processSiteData(instance) {
-  if (instance.id == site?.id) {
-    site = instance;
-    $("#current-site option:selected").text(instance.name).trigger("change");
-  }
-  if (["create_site", "duplicate_site"].includes(creationMode)) {
-    $("#current-site").append(
-      `<option value="${instance.id}">${instance.name}</option>`
-    );
-    $("#current-site").val(instance.id).trigger("change");
-    creationMode = null;
-    switchToSite(`${instance.id}`);
-  } else if (instance.type in subtypes.link) {
-    edges.update(linkToEdge(instance));
-  } else if (instance.type in subtypes.node) {
-    if (!instance.sites.some((w) => w.id == site.id)) return;
-    let serviceIndex = site.nodes.findIndex((s) => s.id == instance.id);
-    nodes.update(drawNode(instance));
-    if (serviceIndex == -1) {
-      site.nodes.push(instance);
-    } else {
-      site.nodes[serviceIndex] = instance;
-    }
-    switchMode("motion");
-  }
 }
 
 configureNamespace("siteBuilder", [filterSiteTable, showLinkPanel, switchMode]);

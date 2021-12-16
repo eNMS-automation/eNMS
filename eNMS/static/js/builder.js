@@ -11,6 +11,7 @@ let mousePosition;
 let network;
 let selectedObject;
 export let creationMode;
+export let currentMode = "motion";
 export let currentPath = localStorage.getItem("path");
 export let edges;
 export let nodes;
@@ -42,13 +43,13 @@ export function configureGraph(newInstance, graph, options) {
       mousePosition = properties.pointer.canvas;
       const node = this.getNodeAt(properties.pointer.DOM);
       const edge = this.getEdgeAt(properties.pointer.DOM);
-      if (typeof node !== "undefined" && !graph.inactive.has(node)) {
+      if (typeof node !== "undefined" && !network.inactive.has(node)) {
         network.selectNodes([node, ...network.getSelectedNodes()]);
         $(".menu-entry ").hide();
         $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
         selectedObject = nodes.get(node);
         $(`.${instance.type}-selection`).toggle(selectedObject.type == instance.type);
-      } else if (typeof edge !== "undefined" && !graph.inactive.has(node)) {
+      } else if (typeof edge !== "undefined" && !network.inactive.has(node)) {
         network.selectEdges([edge, ...network.getSelectedEdges()]);
         $(".menu-entry ").hide();
         $(".edge-selection").show();
@@ -257,11 +258,11 @@ function switchMode(mode, noNotification) {
   }
   let notification;
   if (currentMode == "motion") {
-    graph.addNodeMode();
+    network.addNodeMode();
     notification = "Mode: Motion.";
   } else {
-    graph.setSelection({ nodes: [], edges: [] });
-    graph.addEdgeMode();
+    network.setSelection({ nodes: [], edges: [] });
+    network.addEdgeMode();
     notification = "Mode: Creation of link.";
   }
   if (!noNotification) notify(notification, "success", 5);
@@ -302,8 +303,8 @@ export function updateSiteRightClickBindings() {
     "Create New Node": () => createNewNode("create_node"),
     "Edit Site": () => showInstancePanel("site", instance?.id),
     "Edit Edge": (edge) => showInstancePanel(edge.type, edge.id),
-    "Zoom In": () => graph.zoom(0.2),
-    "Zoom Out": () => graph.zoom(-0.2),
+    "Zoom In": () => network.zoom(0.2),
+    "Zoom Out": () => network.zoom(-0.2),
     "Enter Site": (node) => switchToSite(`${currentPath}>${node.id}`),
     "Site Backward": () => switchToSite(history[historyPosition - 1], "left"),
     "Site Forward": () => switchToSite(history[historyPosition + 1], "right"),

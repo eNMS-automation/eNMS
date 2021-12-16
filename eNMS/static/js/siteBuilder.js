@@ -14,6 +14,7 @@ import {
 import {
   configureGraph,
   creationMode,
+  currentMode,
   currentPath,
   nodes,
   setPath,
@@ -21,7 +22,6 @@ import {
 } from "./builder.js";
 import { clearSearch, tableInstances } from "./table.js";
 
-let currentMode = "motion";
 let graph;
 export let site = JSON.parse(localStorage.getItem("site"));
 

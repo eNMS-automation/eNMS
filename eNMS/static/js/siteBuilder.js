@@ -134,7 +134,7 @@ function drawNode(node) {
 }
 
 export function updateSitePanel(type) {
-  if (creationMode == "create_node") {
+  if (currentMode == "motion" && creationMode == "create_node") {
     $(`#${type}-sites`).append(new Option(site.name, site.name));
     $(`#${type}-sites`).val(site.name).trigger("change");
   }
@@ -261,7 +261,7 @@ export function initSiteBuilder() {
 
 function switchMode(mode, noNotification) {
   const oldMode = currentMode;
-  currentMode = mode || (currentMode == "motion" ? $("#edge-type").val() : "motion");
+  currentMode = mode || (currentMode == "motion" ? "create_link" : "motion");
   if ((oldMode == "motion" || currentMode == "motion") && oldMode != currentMode) {
     $("#mode-icon").toggleClass("glyphicon-move").toggleClass("glyphicon-random");
   }

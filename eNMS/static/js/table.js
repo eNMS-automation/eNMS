@@ -563,11 +563,17 @@ tables.device = class DeviceTable extends Table {
 tables.site = class SiteTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
-    row.scoped_name =
+    row.name =
       row.type == "site"
         ? `<b><a href="#" onclick="eNMS.siteBuilder.filterSiteTable(
       '${this.id}', ${row.id})">${row.scoped_name}</a></b>`
         : row.scoped_name;
+    row.links =
+      row.type == "site"
+        ? `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+      'link', ${row.instance}, {parent: '${this.id}', from: 'sites',
+      to: 'links'})">Links</a></b>`
+        : "No links";
     return row;
   }
 
@@ -579,7 +585,7 @@ tables.site = class SiteTable extends Table {
     super.postProcessing(...args);
     updateSiteRightClickBindings();
   }
-  
+
   get controls() {
     return [
       this.columnDisplay(),

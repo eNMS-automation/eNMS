@@ -8,7 +8,6 @@ import {
   call,
   configureNamespace,
   moveHistory,
-  notify,
   showInstancePanel,
 } from "./base.js";
 import {
@@ -79,7 +78,7 @@ export function displaySite(site) {
     site,
     {
       nodes: site.nodes.map(drawSiteNode),
-      edges: site.links.map(linkToEdge),
+      edges: site.links.map(drawSiteEdge),
       inactive: new Set(),
     },
     options
@@ -161,7 +160,7 @@ export function showLinkPanel(type, id, edge) {
   }
 }
 
-function linkToEdge(link) {
+export function drawSiteEdge(link) {
   return {
     id: link.id,
     label: link.scoped_name,

@@ -8,7 +8,7 @@ import {
   openPanel,
   showInstancePanel,
 } from "./base.js";
-import { drawSiteNode, switchToSite } from "./siteBuilder.js";
+import { drawSiteEdge, drawSiteNode, switchToSite } from "./siteBuilder.js";
 
 const container = document.getElementById("network");
 const type = page == "site_builder" ? "site" : "workflow";
@@ -258,6 +258,10 @@ function drawNode(node) {
   return type == "site" ? drawSiteNode(node) : drawSiteNode(node);
 }
 
+function drawEdge(edge) {
+  return type == "site" ? drawSiteEdge(edge) : drawSiteEdge(edge);
+}
+
 function switchMode(mode, noNotification) {
   const oldMode = currentMode;
   currentMode = mode || (currentMode == "motion" ? "create_link" : "motion");
@@ -289,7 +293,7 @@ export function processBuilderData(newInstance) {
     creationMode = null;
     switchToSite(`${newInstance.id}`);
   } else if (newInstance.type in subtypes.link) {
-    edges.update(linkToEdge(newInstance));
+    edges.update(drawEdge(newInstance));
   } else if (newInstance.type in subtypes.node) {
     if (!newInstance.sites.some((w) => w.id == instance.id)) return;
     let serviceIndex = instance.nodes.findIndex((s) => s.id == newInstance.id);

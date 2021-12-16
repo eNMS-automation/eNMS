@@ -23,7 +23,6 @@ import { clearSearch, tableInstances } from "./table.js";
 
 let creationMode;
 let currentMode = "motion";
-let ctrlKeyPressed;
 let graph;
 export let site = JSON.parse(localStorage.getItem("site"));
 
@@ -86,9 +85,6 @@ export function displaySite(site) {
     },
     options
   );
-  graph.on("click", () => {
-    if (!ctrlKeyPressed) graph.selectNodes([]);
-  });
   graph.on("doubleClick", function (event) {
     event.event.preventDefault();
     let node = nodes.get(this.getNodeAt(event.pointer.DOM));

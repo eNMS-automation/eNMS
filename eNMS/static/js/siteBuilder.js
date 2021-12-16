@@ -50,12 +50,12 @@ const options = {
 
 function switchToSite(path, direction) {
   if (typeof path === "undefined") return;
-  if (path.toString().includes(">")) {
+  currentPath = path.toString();
+  if (currentPath.includes(">")) {
     $("#up-arrow").removeClass("disabled");
   } else {
     $("#up-arrow").addClass("disabled");
   }
-  currentPath = path.toString();
   moveHistory(path, direction);
   if (!path && page == "site_table") {
     $("#site-filtering").val("");
@@ -193,23 +193,20 @@ function linkToEdge(link) {
   };
 }
 
-function openDeletionPanel() {}
-
-function updateRightClickBindings() {
+export function updateSiteRightClickBindings() {
   updateBuilderBindings(action);
   Object.assign(action, {
     "Create Site": () => createNewNode("create_site"),
     "Duplicate Site": () => createNewNode("duplicate_site"),
     "Create New Node": () => createNewNode("create_node"),
     "Edit Site": () => showInstancePanel("site", site?.id),
-    Delete: openDeletionPanel,
     "Edit Edge": (edge) => showInstancePanel(edge.type, edge.id),
     "Zoom In": () => graph.zoom(0.2),
     "Zoom Out": () => graph.zoom(-0.2),
     "Enter Site": (node) => switchToSite(`${currentPath}>${node.id}`),
-    Backward: () => switchToSite(history[historyPosition - 1], "left"),
-    Forward: () => switchToSite(history[historyPosition + 1], "right"),
-    Upward: () => {
+    "Site Backward": () => switchToSite(history[historyPosition - 1], "left"),
+    "Site Forward": () => switchToSite(history[historyPosition + 1], "right"),
+    "Site Upward": () => {
       const parentPath = currentPath.split(">").slice(0, -1).join(">");
       if (parentPath) switchToSite(parentPath);
     },
@@ -259,7 +256,7 @@ export function initSiteBuilder() {
   $("#current-site").on("change", function () {
     if (!site || this.value != site.id) switchToSite(this.value);
   });
-  updateRightClickBindings();
+  updateSiteRightClickBindings();
 }
 
 function switchMode(mode, noNotification) {

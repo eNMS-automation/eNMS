@@ -36,8 +36,8 @@ import {
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 export let editors = {};
-export let history = ["workflow_builder", "service_table"].includes(page) ? [""] : [];
-export let historyPosition = page == "service_table" ? 0 : -1;
+export let history = ["workflow_builder", "service_table", "site_table"].includes(page) ? [""] : [];
+export let historyPosition = page.includes("table") ? 0 : -1;
 export let jsonEditors = {};
 export let userIsActive = true;
 

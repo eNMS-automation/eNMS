@@ -18,6 +18,7 @@ import {
   userIsActive,
 } from "./base.js";
 import { exportServices } from "./automation.js";
+import { updateSiteRightClickBindings } from "./siteBuilder.js";
 
 export let tables = {};
 export let tableInstances = {};
@@ -574,6 +575,11 @@ tables.site = class SiteTable extends Table {
     return "node";
   }
 
+  postProcessing(...args) {
+    super.postProcessing(...args);
+    updateSiteRightClickBindings();
+  }
+  
   get controls() {
     return [
       this.columnDisplay(),
@@ -586,7 +592,7 @@ tables.site = class SiteTable extends Table {
       <a
         id="left-arrow"
         class="btn btn-info disabled"
-        onclick="action['Backward']()"
+        onclick="action['Site Backward']()"
         type="button"
       >
         <span class="glyphicon glyphicon-chevron-left"></span>
@@ -594,7 +600,7 @@ tables.site = class SiteTable extends Table {
       <a
         id="right-arrow"
         class="btn btn-info disabled"
-        onclick="action['Forward']()"
+        onclick="action['Site Forward']()"
         type="button"
       >
         <span class="glyphicon glyphicon-chevron-right"></span>

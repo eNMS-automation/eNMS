@@ -9,7 +9,12 @@ import {
   showInstancePanel,
 } from "./base.js";
 import { drawSiteEdge, drawSiteNode, switchToSite } from "./siteBuilder.js";
-import { getWorkflowState, flipRuntimeDisplay, switchToWorkflow, updateWorkflowRightClickBindings } from "./workflowBuilder.js";
+import {
+  getWorkflowState,
+  flipRuntimeDisplay,
+  switchToWorkflow,
+  updateWorkflowRightClickBindings,
+} from "./workflowBuilder.js";
 
 const container = document.getElementById("network");
 const type = page == "site_builder" ? "site" : "workflow";
@@ -335,7 +340,7 @@ function switchTo(path) {
   } else {
     switchToWorkflow(path);
   }
-} 
+}
 
 function updateRightClickBindings() {
   if (type == "site") {

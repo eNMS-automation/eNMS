@@ -4,12 +4,7 @@ action: false
 page: false
 */
 
-import {
-  call,
-  configureNamespace,
-  moveHistory,
-  showInstancePanel,
-} from "./base.js";
+import { call, configureNamespace, moveHistory, showInstancePanel } from "./base.js";
 import {
   configureGraph,
   creationMode,

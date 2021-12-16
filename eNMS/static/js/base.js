@@ -23,11 +23,7 @@ import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
 import { initVisualization } from "./visualization.js";
 import { showLinkPanel, updateSitePanel } from "./siteBuilder.js";
-import {
-  creationMode,
-  processWorkflowData,
-  workflow,
-} from "./workflowBuilder.js";
+import { creationMode, processWorkflowData, workflow } from "./workflowBuilder.js";
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 export let editors = {};

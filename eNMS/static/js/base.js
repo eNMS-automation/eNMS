@@ -25,7 +25,6 @@ import { initVisualization } from "./visualization.js";
 import { showLinkPanel, updateSitePanel } from "./siteBuilder.js";
 import {
   creationMode,
-  initWorkflowBuilder,
   processWorkflowData,
   workflow,
 } from "./workflowBuilder.js";
@@ -1179,9 +1178,7 @@ $(document).ready(function () {
   if (page.includes("table")) {
     const type = page.split("_")[0];
     new tables[type]();
-  } else if (page == "workflow_builder") {
-    initWorkflowBuilder();
-  } else if (page == "site_builder") {
+  } else if (page.includes("builder")) {
     initBuilder();
   } else if (page.includes("view")) {
     initVisualization();

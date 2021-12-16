@@ -26,6 +26,7 @@ import {
 } from "./base.js";
 import {
   configureGraph,
+  ctrlKeyPressed,
   currentPath,
   edges,
   nodes,
@@ -65,7 +66,6 @@ const options = {
 export let workflow = JSON.parse(localStorage.getItem("workflow"));
 export let currentRuntime;
 
-let ctrlKeyPressed;
 let currentRun;
 let graph;
 let ends = new Set();
@@ -547,7 +547,7 @@ function getResultLink(service, device) {
   copyToClipboard({ text: link });
 }
 
-function updateRightClickBindings() {
+export function updateWorkflowRightClickBindings() {
   updateBuilderBindings(action);
   Object.assign(action, {
     "Run Workflow": () => runWorkflow(),
@@ -923,56 +923,6 @@ function highlightService(service) {
   } else if (serviceId) {
     graph.setSelection(selection);
   }
-}
-
-export function initWorkflowBuilder() {
-  window.onkeydown = () => {
-    ctrlKeyPressed = true;
-  };
-  window.onkeyup = () => {
-    ctrlKeyPressed = false;
-  };
-  vis.Network.prototype.zoom = function (scale) {
-    const animationOptions = {
-      scale: this.getScale() + scale,
-      animation: { duration: 300 },
-    };
-    this.view.moveTo(animationOptions);
-  };
-  loadTypes("service");
-  flipRuntimeDisplay(localStorage.getItem("runtimeDisplay") || "user");
-  $("#left-arrow,#right-arrow").addClass("disabled");
-  $("#edge-type").on("change", function () {
-    switchMode(this.value);
-  });
-  call({
-    url: "/get_top_level_instances/workflow",
-    callback: function (workflows) {
-      workflows.sort((a, b) => a.name.localeCompare(b.name));
-      for (let i = 0; i < workflows.length; i++) {
-        $("#current-workflow").append(
-          `<option value="${workflows[i].id}">${workflows[i].name}</option>`
-        );
-      }
-      if (currentPath && workflows.some((w) => w.id == currentPath.split(">")[0])) {
-        $("#current-workflow").val(currentPath.split(">")[0]);
-        switchToWorkflow(currentPath);
-      } else {
-        workflow = $("#current-workflow").val();
-        if (workflow) {
-          switchToWorkflow(workflow);
-        } else {
-          notify("No workflow has been created yet.", "error", 5);
-        }
-      }
-      $("#current-workflow,#current-runtimes").selectpicker({
-        liveSearch: true,
-      });
-      $("#edge-type").selectpicker();
-      getWorkflowState(true, true);
-    },
-  });
-  updateRightClickBindings();
 }
 
 configureNamespace("workflowBuilder", [

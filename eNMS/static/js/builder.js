@@ -9,11 +9,11 @@ import {
   showInstancePanel,
 } from "./base.js";
 import { drawSiteEdge, drawSiteNode, switchToSite } from "./siteBuilder.js";
-import { getWorkflowState, flipRuntimeDisplay, switchToWorkflow } from "./workflowBuilder.js";
+import { getWorkflowState, flipRuntimeDisplay, switchToWorkflow, updateWorkflowRightClickBindings } from "./workflowBuilder.js";
 
 const container = document.getElementById("network");
 const type = page == "site_builder" ? "site" : "workflow";
-let ctrlKeyPressed;
+export let ctrlKeyPressed;
 let currentLabel;
 let instance;
 let mousePosition;
@@ -328,6 +328,22 @@ export function updateSiteRightClickBindings() {
   });
 }
 
+function switchTo(path) {
+  if (type == "site") {
+    switchToSite(path);
+  } else {
+    switchToWorkflow(path);
+  }
+} 
+
+function updateRightClickBindings() {
+  if (type == "site") {
+    updateSiteRightClickBindings();
+  } else {
+    updateWorkflowRightClickBindings();
+  }
+}
+
 export function initBuilder() {
   window.onkeydown = () => {
     ctrlKeyPressed = true;
@@ -342,8 +358,16 @@ export function initBuilder() {
     };
     this.view.moveTo(animationOptions);
   };
-  loadTypes("node");
-  loadTypes("link");
+  if (type == "site") {
+    loadTypes("node");
+    loadTypes("link");
+  } else {
+    loadTypes("service");
+    flipRuntimeDisplay(localStorage.getItem("runtimeDisplay") || "user");
+    $("#edge-type").on("change", function () {
+      switchMode(this.value);
+    });
+  }
   $("#left-arrow,#right-arrow").addClass("disabled");
   call({
     url: `/get_top_level_instances/${type}`,
@@ -356,22 +380,26 @@ export function initBuilder() {
       }
       if (currentPath && instances.some((w) => w.id == currentPath.split(">")[0])) {
         $(`#current-${type}`).val(currentPath.split(">")[0]);
-        switchToSite(currentPath);
+        switchTo(currentPath);
       } else {
         instance = $(`#current-${type}`).val();
         if (instance) {
-          switchToSite(instance);
+          switchTo(instance);
         } else {
           notify(`No ${type} has been created yet.`, "error", 5);
         }
       }
-      $(`#current-${type}`).selectpicker({ liveSearch: true });
+      $(`#current-${type},#current-runtimes`).selectpicker({ liveSearch: true });
+      if (type == "workflow") {
+        $("#edge-type").selectpicker();
+        getWorkflowState(true, true);
+      }
     },
   });
   $(`#current-${type}`).on("change", function () {
-    if (!instance || this.value != instance.id) switchToSite(this.value);
+    if (!instance || this.value != instance.id) switchTo(this.value);
   });
-  updateSiteRightClickBindings();
+  updateRightClickBindings();
 }
 
 configureNamespace("builder", [createLabel, switchMode]);

@@ -562,8 +562,11 @@ tables.device = class DeviceTable extends Table {
 tables.site = class SiteTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
-    row.scoped_name = `<b><a href="#" onclick="eNMS.siteBuilder.filterSiteTable(
+    row.scoped_name =
+      row.type == "site"
+        ? `<b><a href="#" onclick="eNMS.siteBuilder.filterSiteTable(
       '${this.id}', ${row.id})">${row.scoped_name}</a></b>`
+        : row.scoped_name;
     return row;
   }
 
@@ -608,8 +611,8 @@ tables.site = class SiteTable extends Table {
         <li>
           <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.base.showInstancePanel('${row.type}', '${
-            row.id
-          }')" data-tooltip="Edit"
+      row.id
+    }')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>

@@ -345,29 +345,29 @@ export function initBuilder() {
   loadTypes("link");
   $("#left-arrow,#right-arrow").addClass("disabled");
   call({
-    url: "/get_top_level_instances/site",
-    callback: function (sites) {
-      sites.sort((a, b) => a.name.localeCompare(b.name));
-      for (let i = 0; i < sites.length; i++) {
-        $("#current-site").append(
-          `<option value="${sites[i].id}">${sites[i].name}</option>`
+    url: `/get_top_level_instances/${type}`,
+    callback: function (instances) {
+      instances.sort((a, b) => a.name.localeCompare(b.name));
+      for (let i = 0; i < instances.length; i++) {
+        $(`#current-site`).append(
+          `<option value="${instances[i].id}">${instances[i].name}</option>`
         );
       }
-      if (currentPath && sites.some((w) => w.id == currentPath.split(">")[0])) {
-        $("#current-site").val(currentPath.split(">")[0]);
+      if (currentPath && instances.some((w) => w.id == currentPath.split(">")[0])) {
+        $(`#current-${type}`).val(currentPath.split(">")[0]);
         switchToSite(currentPath);
       } else {
-        instance = $("#current-site").val();
+        instance = $(`#current-${type}`).val();
         if (instance) {
           switchToSite(instance);
         } else {
-          notify("No site has been created yet.", "error", 5);
+          notify(`No ${type} has been created yet.`, "error", 5);
         }
       }
-      $("#current-site").selectpicker({ liveSearch: true });
+      $(`#current-${type}`).selectpicker({ liveSearch: true });
     },
   });
-  $("#current-site").on("change", function () {
+  $(`#current-${type}`).on("change", function () {
     if (!instance || this.value != instance.id) switchToSite(this.value);
   });
   updateSiteRightClickBindings();

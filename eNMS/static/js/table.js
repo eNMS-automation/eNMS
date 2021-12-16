@@ -441,11 +441,7 @@ export class Table {
 
   addRow({ properties, tableId, derivedProperties }) {
     let row = { tableId: tableId, ...properties };
-    row.instanceProperties = {
-      id: row.id,
-      name: row.dbName || row.name,
-      type: row.type,
-    };
+    row.instanceProperties = { id: row.id, name: row.name, type: row.type };
     if (derivedProperties) {
       derivedProperties.forEach((property) => {
         row.instanceProperties[property] = row[property];

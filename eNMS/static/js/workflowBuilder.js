@@ -144,7 +144,7 @@ function updateRuntimes(result) {
   $("#current-runtime").selectpicker("refresh");
 }
 
-function flipRuntimeDisplay(display) {
+export function flipRuntimeDisplay(display) {
   runtimeDisplay = display || (runtimeDisplay == "users" ? "user" : "users");
   runtimeDisplayFlip = true;
   localStorage.setItem("runtimeDisplay", runtimeDisplay);
@@ -761,7 +761,7 @@ function resetDisplay() {
   }
 }
 
-function getWorkflowState(periodic, first) {
+export function getWorkflowState(periodic, first) {
   const runtime = $("#current-runtime").val();
   if (userIsActive && workflow?.id && !first) {
     call({

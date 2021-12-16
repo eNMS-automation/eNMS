@@ -9,6 +9,7 @@ import {
   showInstancePanel,
 } from "./base.js";
 import { drawSiteEdge, drawSiteNode, switchToSite } from "./siteBuilder.js";
+import { getWorkflowState, flipRuntimeDisplay, switchToWorkflow } from "./workflowBuilder.js";
 
 const container = document.getElementById("network");
 const type = page == "site_builder" ? "site" : "workflow";
@@ -349,7 +350,7 @@ export function initBuilder() {
     callback: function (instances) {
       instances.sort((a, b) => a.name.localeCompare(b.name));
       for (let i = 0; i < instances.length; i++) {
-        $(`#current-site`).append(
+        $(`#current-${type}`).append(
           `<option value="${instances[i].id}">${instances[i].name}</option>`
         );
       }

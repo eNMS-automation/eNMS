@@ -242,25 +242,26 @@ export function setPath(path) {
   currentPath = path;
 }
 
-function createNewNode(mode) {
+export function createNewNode(mode) {
   creationMode = mode;
-  if (mode == "create_site") {
-    showInstancePanel("site");
+  if (mode == `create_${type}`) {
+    showInstancePanel(type);
   } else if (!instance) {
-    notify("No site has been created yet.", "error", 5);
-  } else if (mode == "duplicate_site") {
-    showInstancePanel("site", instance.id, "duplicate");
+    notify(`No ${type} has been created yet.`, "error", 5);
+  } else if (mode == `duplicate_${type}`) {
+    showInstancePanel(type, instance.id, "duplicate");
   } else {
-    showInstancePanel($("#node-type").val());
+    const nodeType = type == "site" ? "node" : "service";
+    showInstancePanel($(`#${nodeType}-type`).val());
   }
 }
 
 function drawNode(node) {
-  return type == "site" ? drawSiteNode(node) : drawSiteNode(node);
+  return type == "site" ? drawSiteNode(node) : drawWorkflowNode(node);
 }
 
 function drawEdge(edge) {
-  return type == "site" ? drawSiteEdge(edge) : drawSiteEdge(edge);
+  return type == "site" ? drawSiteEdge(edge) : drawWokflowEdge(edge);
 }
 
 function switchMode(mode, noNotification) {

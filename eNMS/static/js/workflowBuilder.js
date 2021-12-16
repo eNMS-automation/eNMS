@@ -16,7 +16,6 @@ import {
   createTooltips,
   history,
   historyPosition,
-  loadTypes,
   moveHistory,
   notify,
   openPanel,
@@ -26,6 +25,7 @@ import {
 } from "./base.js";
 import {
   configureGraph,
+  createNewNode,
   ctrlKeyPressed,
   currentPath,
   edges,
@@ -531,17 +531,6 @@ function addServicePanel() {
   });
 }
 
-function createNew(mode) {
-  creationMode = mode;
-  if (mode == "create_workflow") {
-    showInstancePanel("workflow");
-  } else if (mode == "duplicate_workflow") {
-    showInstancePanel("workflow", workflow.id, "duplicate");
-  } else {
-    showInstancePanel($("#service-type").val());
-  }
-}
-
 function getResultLink(service, device) {
   const link = `get_result("${service.name}"${device ? ", device=device.name" : ""})`;
   copyToClipboard({ text: link });
@@ -552,9 +541,9 @@ export function updateWorkflowRightClickBindings() {
   Object.assign(action, {
     "Run Workflow": () => runWorkflow(),
     "Parameterized Workflow Run": () => runWorkflow(true),
-    "Create Workflow": () => createNew("create_workflow"),
-    "Duplicate Workflow": () => createNew("duplicate_workflow"),
-    "Create New Service": () => createNew("create_service"),
+    "Create Workflow": () => createNewNode("create_workflow"),
+    "Duplicate Workflow": () => createNewNode("duplicate_workflow"),
+    "Create New Service": () => createNewNode("create_service"),
     "Edit Workflow": () => showInstancePanel("workflow", workflow.id),
     "Restart Workflow from Here": showRestartWorkflowPanel,
     "Workflow Result Tree": () => showRuntimePanel("results", workflow),

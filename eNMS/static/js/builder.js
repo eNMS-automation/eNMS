@@ -399,6 +399,9 @@ export function initBuilder() {
       }
       $(`#current-${type},#current-runtimes`).selectpicker({ liveSearch: true });
       if (type == "workflow") {
+        $("#current-runtime").on("change", function () {
+          getWorkflowState();
+        });
         $("#edge-type").selectpicker();
         getWorkflowState(true, true);
       }

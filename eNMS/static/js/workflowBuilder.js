@@ -473,14 +473,6 @@ function switchMode(mode, noNotification) {
   if (!noNotification) notify(notification, "success", 5);
 }
 
-$("#current-workflow").on("change", function () {
-  if (!workflow || this.value != workflow.id) switchToWorkflow(this.value);
-});
-
-$("#current-runtime").on("change", function () {
-  getWorkflowState();
-});
-
 function addServicePanel() {
   openPanel({
     name: "add_services_to_workflow",

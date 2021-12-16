@@ -7,19 +7,17 @@ page: false
 import {
   call,
   configureNamespace,
-  history,
-  historyPosition,
-  loadTypes,
   moveHistory,
   notify,
   showInstancePanel,
 } from "./base.js";
 import {
   configureGraph,
+  currentPath,
   edges,
   nodes,
+  setPath,
   showLabelPanel,
-  updateBuilderBindings,
 } from "./builder.js";
 import { clearSearch, tableInstances } from "./table.js";
 
@@ -27,7 +25,6 @@ let creationMode;
 let currentMode = "motion";
 let ctrlKeyPressed;
 let graph;
-export let currentPath = localStorage.getItem("path");
 export let site = JSON.parse(localStorage.getItem("site"));
 
 const options = {
@@ -48,9 +45,9 @@ const options = {
   },
 };
 
-function switchToSite(path, direction) {
+export function switchToSite(path, direction) {
   if (typeof path === "undefined") return;
-  currentPath = path.toString();
+  setPath(path.toString());
   if (currentPath.includes(">")) {
     $("#up-arrow").removeClass("disabled");
   } else {
@@ -191,72 +188,6 @@ function linkToEdge(link) {
     to: link.destination_id,
     color: { color: link.color },
   };
-}
-
-export function updateSiteRightClickBindings() {
-  updateBuilderBindings(action);
-  Object.assign(action, {
-    "Create Site": () => createNewNode("create_site"),
-    "Duplicate Site": () => createNewNode("duplicate_site"),
-    "Create New Node": () => createNewNode("create_node"),
-    "Edit Site": () => showInstancePanel("site", site?.id),
-    "Edit Edge": (edge) => showInstancePanel(edge.type, edge.id),
-    "Zoom In": () => graph.zoom(0.2),
-    "Zoom Out": () => graph.zoom(-0.2),
-    "Enter Site": (node) => switchToSite(`${currentPath}>${node.id}`),
-    "Site Backward": () => switchToSite(history[historyPosition - 1], "left"),
-    "Site Forward": () => switchToSite(history[historyPosition + 1], "right"),
-    "Site Upward": () => {
-      const parentPath = currentPath.split(">").slice(0, -1).join(">");
-      if (parentPath) switchToSite(parentPath);
-    },
-  });
-}
-
-export function initSiteBuilder() {
-  window.onkeydown = () => {
-    ctrlKeyPressed = true;
-  };
-  window.onkeyup = () => {
-    ctrlKeyPressed = false;
-  };
-  vis.Network.prototype.zoom = function (scale) {
-    const animationOptions = {
-      scale: this.getScale() + scale,
-      animation: { duration: 300 },
-    };
-    this.view.moveTo(animationOptions);
-  };
-  loadTypes("node");
-  loadTypes("link");
-  $("#left-arrow,#right-arrow").addClass("disabled");
-  call({
-    url: "/get_top_level_instances/site",
-    callback: function (sites) {
-      sites.sort((a, b) => a.name.localeCompare(b.name));
-      for (let i = 0; i < sites.length; i++) {
-        $("#current-site").append(
-          `<option value="${sites[i].id}">${sites[i].name}</option>`
-        );
-      }
-      if (currentPath && sites.some((w) => w.id == currentPath.split(">")[0])) {
-        $("#current-site").val(currentPath.split(">")[0]);
-        switchToSite(currentPath);
-      } else {
-        site = $("#current-site").val();
-        if (site) {
-          switchToSite(site);
-        } else {
-          notify("No site has been created yet.", "error", 5);
-        }
-      }
-      $("#current-site").selectpicker({ liveSearch: true });
-    },
-  });
-  $("#current-site").on("change", function () {
-    if (!site || this.value != site.id) switchToSite(this.value);
-  });
-  updateSiteRightClickBindings();
 }
 
 function switchMode(mode, noNotification) {

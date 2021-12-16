@@ -68,6 +68,7 @@ function switchToSite(path, direction) {
     callback: function (newSite) {
       site = newSite;
       if (page == "site_builder") {
+        localStorage.setItem("path", path);
         if (site) localStorage.setItem("site", JSON.stringify(site));
         displaySite(site);
       } else {

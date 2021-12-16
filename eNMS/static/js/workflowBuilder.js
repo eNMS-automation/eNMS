@@ -541,7 +541,7 @@ export function updateWorkflowRightClickBindings() {
     "Workflow Result Tree": () => showRuntimePanel("results", workflow),
     "Workflow Result Table": () =>
       showRuntimePanel("results", workflow, null, "full_result", null, true),
-    "Workflow Result Comparison": () => compareWorkflowResults(workflow),
+    "Workflow Result Comparison": () => compareWorkflowResults(),
     "Workflow Logs": () => showRuntimePanel("logs", workflow),
     "Add to Workflow": addServicePanel,
     "Stop Workflow": () => stopWorkflow(),
@@ -849,7 +849,7 @@ function getWorkflowTree() {
   });
 }
 
-function compareWorkflowResults(workflow) {
+function compareWorkflowResults() {
   const mainId = parseInt(currentPath.split(">")[0]);
   openPanel({
     content: `

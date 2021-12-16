@@ -26,8 +26,10 @@ import {
 } from "./base.js";
 import {
   configureGraph,
+  currentPath,
   edges,
   nodes,
+  setPath,
   showLabelPanel,
   updateBuilderBindings,
 } from "./builder.js";
@@ -60,7 +62,6 @@ const options = {
   ...theme.workflow,
 };
 
-export let currentPath = localStorage.getItem("path");
 export let workflow = JSON.parse(localStorage.getItem("workflow"));
 export let currentRuntime;
 
@@ -163,7 +164,7 @@ export const switchToWorkflow = function (path, direction, runtime, selection) {
   } else {
     $("#up-arrow").addClass("disabled");
   }
-  currentPath = path;
+  setPath(path);
   moveHistory(path, direction);
   if (!path && page == "service_table") {
     $("#workflow-filtering").val("");
@@ -179,7 +180,7 @@ export const switchToWorkflow = function (path, direction, runtime, selection) {
       if (page == "workflow_builder") {
         if (workflow?.superworkflow) {
           if (!currentPath.includes(workflow.superworkflow.id)) {
-            currentPath = `${workflow.superworkflow.id}>${path}`;
+            setPath(`${workflow.superworkflow.id}>${path}`);
           }
           $("#up-arrow").removeClass("disabled");
         }

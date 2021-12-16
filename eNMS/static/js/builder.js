@@ -302,11 +302,17 @@ export function processBuilderData(newInstance) {
     $(`#current-${type}`).val(newInstance.id).trigger("change");
     creationMode = null;
     switchTo(`${newInstance.id}`);
-  } else if (type == "workflow" && !instance.type || type == "site" && newInstance.type in subtypes.link) {
+  } else if (
+    (type == "workflow" && !instance.type) ||
+    (type == "site" && newInstance.type in subtypes.link)
+  ) {
     edges.update(drawEdge(newInstance));
-  } else if (type == "workflow" && newInstance.type in subtypes.service || type == "site" && newInstance.type in subtypes.node) {
+  } else if (
+    (type == "workflow" && newInstance.type in subtypes.service) ||
+    (type == "site" && newInstance.type in subtypes.node)
+  ) {
     if (!newInstance[`${type}s`].some((w) => w.id == instance.id)) return;
-    const property = type == "site" ? "nodes" : "services"
+    const property = type == "site" ? "nodes" : "services";
     let index = instance[property].findIndex((s) => s.id == newInstance.id);
     nodes.update(drawNode(newInstance));
     if (index == -1) {

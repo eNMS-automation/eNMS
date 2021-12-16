@@ -1158,6 +1158,7 @@
       "status"
     ],
     "server": ["name", "description", "ip_address", "weight", "status"],
+    "site": ["name", "description", "creator", "location"],
     "service": [
       "name",
       "type",

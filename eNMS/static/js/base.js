@@ -18,12 +18,12 @@ user: false
 */
 
 import { openDebugPanel, showCredentialPanel } from "./administration.js";
-import { initBuilder, processBuilderData } from "./builder.js";
+import { creationMode, initBuilder, processBuilderData } from "./builder.js";
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
 import { initVisualization } from "./visualization.js";
 import { showLinkPanel, updateSitePanel } from "./siteBuilder.js";
-import { creationMode, processWorkflowData, workflow } from "./workflowBuilder.js";
+import { workflow } from "./workflowBuilder.js";
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 export let editors = {};
@@ -799,9 +799,7 @@ function processData(type, id) {
       const tableType = isService ? "service" : type;
       if (page.includes("table")) {
         refreshTable(tableType);
-      } else if (page == "workflow_builder") {
-        processWorkflowData(instance, id);
-      } else if (page == "site_builder") {
+      } else if (page.includes("builder")) {
         processBuilderData(instance, id);
       }
       $(id ? `#${type}-${id}` : `#${type}`).remove();

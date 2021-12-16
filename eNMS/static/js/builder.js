@@ -10,6 +10,7 @@ import {
 } from "./base.js";
 import { drawSiteEdge, drawSiteNode, switchToSite } from "./siteBuilder.js";
 import {
+  drawIterationEdge,
   drawWorkflowEdge,
   drawWorkflowNode,
   getWorkflowState,
@@ -292,26 +293,28 @@ function switchMode(mode, noNotification) {
 export function processBuilderData(newInstance) {
   if (newInstance.id == instance?.id) {
     instance = newInstance;
-    $("#current-site option:selected").text(newInstance.name).trigger("change");
+    $(`#current-${type} option:selected`).text(newInstance.name).trigger("change");
   }
-  if (["create_site", "duplicate_site"].includes(creationMode)) {
-    $("#current-site").append(
+  if ([`create_${type}`, `duplicate_${type}`].includes(creationMode)) {
+    $(`#current-${type}`).append(
       `<option value="${newInstance.id}">${newInstance.name}</option>`
     );
-    $("#current-site").val(newInstance.id).trigger("change");
+    $(`#current-${type}`).val(newInstance.id).trigger("change");
     creationMode = null;
-    switchToSite(`${newInstance.id}`);
-  } else if (newInstance.type in subtypes.link) {
+    switchTo(`${newInstance.id}`);
+  } else if (type == "workflow" && !instance.type || type == "site" && newInstance.type in subtypes.link) {
     edges.update(drawEdge(newInstance));
-  } else if (newInstance.type in subtypes.node) {
-    if (!newInstance.sites.some((w) => w.id == instance.id)) return;
-    let serviceIndex = instance.nodes.findIndex((s) => s.id == newInstance.id);
+  } else if (type == "workflow" && newInstance.type in subtypes.service || type == "site" && newInstance.type in subtypes.node) {
+    if (!newInstance[`${type}s`].some((w) => w.id == instance.id)) return;
+    const property = type == "site" ? "nodes" : "services"
+    let index = instance[property].findIndex((s) => s.id == newInstance.id);
     nodes.update(drawNode(newInstance));
-    if (serviceIndex == -1) {
-      instance.nodes.push(newInstance);
+    if (index == -1) {
+      instance[property].push(newInstance);
     } else {
-      instance.nodes[serviceIndex] = newInstance;
+      instance[property][index] = newInstance;
     }
+    if (type == "workflow") drawIterationEdge(instance);
     switchMode("motion");
   }
 }

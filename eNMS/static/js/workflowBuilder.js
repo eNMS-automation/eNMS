@@ -71,7 +71,6 @@ let graph;
 let ends = new Set();
 let currentMode = "motion";
 let runtimeDisplay;
-export let creationMode;
 let currentPlaceholder;
 let placeholder;
 let isSuperworkflow;
@@ -197,34 +196,6 @@ export const switchToWorkflow = function (path, direction, runtime, selection) {
     },
   });
 };
-
-export function processWorkflowData(instance) {
-  if (instance.id == workflow.id) {
-    workflow = instance;
-    $("#current-workflow option:selected").text(instance.name).trigger("change");
-  }
-  if (["create_workflow", "duplicate_workflow"].includes(creationMode)) {
-    $("#current-workflow").append(
-      `<option value="${instance.id}">${instance.name}</option>`
-    );
-    $("#current-workflow").val(instance.id).trigger("change");
-    creationMode = null;
-    switchToWorkflow(`${instance.id}`);
-  } else if (!instance.type) {
-    edges.update(drawWorkflowEdge(instance));
-  } else if (instance.type.includes("service") || instance.type == "workflow") {
-    if (!instance.workflows.some((w) => w.id == workflow.id)) return;
-    let serviceIndex = workflow.services.findIndex((s) => s.id == instance.id);
-    nodes.update(drawWorkflowNode(instance));
-    if (serviceIndex == -1) {
-      workflow.services.push(instance);
-    } else {
-      workflow.services[serviceIndex] = instance;
-    }
-    drawIterationEdge(instance);
-    switchMode("motion");
-  }
-}
 
 function updateWorkflowService(service) {
   nodes.add(drawWorkflowNode(service));
@@ -408,7 +379,7 @@ export function drawWorkflowNode(service) {
   };
 }
 
-function drawIterationEdge(service) {
+export function drawIterationEdge(service) {
   if (!service.iteration_values && !service.iteration_devices) {
     edges.remove(-service.id);
   } else if (!edges.get(-service.id)) {

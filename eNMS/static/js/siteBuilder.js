@@ -78,7 +78,7 @@ export function displaySite(site) {
   graph = configureGraph(
     site,
     {
-      nodes: site.nodes.map(drawNode),
+      nodes: site.nodes.map(drawSiteNode),
       edges: site.links.map(linkToEdge),
       inactive: new Set(),
     },
@@ -99,7 +99,7 @@ export function displaySite(site) {
   });
 }
 
-function drawNode(node) {
+export function drawSiteNode(node) {
   return {
     id: node.id,
     shape: "box",

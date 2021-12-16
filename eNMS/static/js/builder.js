@@ -1,8 +1,9 @@
 import { call, configureNamespace,   history,
   historyPosition, loadTypes, notify, openPanel, showInstancePanel } from "./base.js";
-import { switchToSite } from "./siteBuilder.js";
+import { drawSiteNode, switchToSite } from "./siteBuilder.js";
 
 const container = document.getElementById("network");
+const type = page == "site_builder" ? "site" : "workflow";
 let ctrlKeyPressed;
 let currentLabel;
 let instance;
@@ -242,6 +243,10 @@ function createNewNode(mode) {
   } else {
     showInstancePanel($("#node-type").val());
   }
+}
+
+function drawNode(node) {
+  return type == "site" ? drawSiteNode(node) : drawSiteNode(node);
 }
 
 export function processBuilderData(newInstance) {

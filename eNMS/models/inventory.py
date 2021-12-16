@@ -28,6 +28,8 @@ class Object(AbstractBase):
 
     def delete(self):
         number = f"{self.class_type}_number"
+        if self.class_type == "site":
+            return
         for pool in self.pools:
             setattr(pool, number, getattr(pool, number) - 1)
 
@@ -84,6 +86,11 @@ class Site(Node):
     labels = db.Column(db.Dict, info={"log_change": False})
     nodes = relationship("Node", secondary=db.node_site_table, back_populates="sites")
     links = relationship("Link", secondary=db.link_site_table, back_populates="sites")
+
+    def delete(self):
+        for instance in self.nodes + self.links:
+            if not instance.shared:
+                db.delete_instance(instance)
 
 
 class Device(Node):

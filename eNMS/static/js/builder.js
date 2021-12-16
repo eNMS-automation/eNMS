@@ -236,7 +236,7 @@ export function updateSiteRightClickBindings() {
     "Create Site": () => createNewNode("create_site"),
     "Duplicate Site": () => createNewNode("duplicate_site"),
     "Create New Node": () => createNewNode("create_node"),
-    "Edit Site": () => showInstancePanel("site", site?.id),
+    "Edit Site": () => showInstancePanel("site", instance?.id),
     "Edit Edge": (edge) => showInstancePanel(edge.type, edge.id),
     "Zoom In": () => graph.zoom(0.2),
     "Zoom Out": () => graph.zoom(-0.2),
@@ -280,9 +280,9 @@ export function initBuilder() {
         $("#current-site").val(currentPath.split(">")[0]);
         switchToSite(currentPath);
       } else {
-        site = $("#current-site").val();
-        if (site) {
-          switchToSite(site);
+        instance = $("#current-site").val();
+        if (instance) {
+          switchToSite(instance);
         } else {
           notify("No site has been created yet.", "error", 5);
         }
@@ -291,7 +291,7 @@ export function initBuilder() {
     },
   });
   $("#current-site").on("change", function () {
-    if (!site || this.value != site.id) switchToSite(this.value);
+    if (!instance || this.value != instance.id) switchToSite(this.value);
   });
   updateSiteRightClickBindings();
 }

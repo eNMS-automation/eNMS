@@ -630,7 +630,7 @@
       },
       {
         "data": "buttons",
-        "width": "270px",
+        "width": "120px",
         "orderable": false,
         "export": false
       }

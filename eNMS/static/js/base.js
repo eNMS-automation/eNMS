@@ -22,10 +22,7 @@ import { initBuilder, processBuilderData } from "./builder.js";
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
 import { initVisualization } from "./visualization.js";
-import {
-  showLinkPanel,
-  updateSitePanel,
-} from "./siteBuilder.js";
+import { showLinkPanel, updateSitePanel } from "./siteBuilder.js";
 import {
   creationMode,
   initWorkflowBuilder,
@@ -35,7 +32,7 @@ import {
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 export let editors = {};
-const pageHistory = ["workflow_builder", "service_table", "site_table"]
+const pageHistory = ["workflow_builder", "service_table", "site_table"];
 export let history = pageHistory.includes(page) ? [""] : [];
 export let historyPosition = page.includes("table") ? 0 : -1;
 export let jsonEditors = {};

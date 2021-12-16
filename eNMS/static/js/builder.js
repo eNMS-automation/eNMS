@@ -1,5 +1,13 @@
-import { call, configureNamespace,   history,
-  historyPosition, loadTypes, notify, openPanel, showInstancePanel } from "./base.js";
+import {
+  call,
+  configureNamespace,
+  history,
+  historyPosition,
+  loadTypes,
+  notify,
+  openPanel,
+  showInstancePanel,
+} from "./base.js";
 import { drawSiteNode, switchToSite } from "./siteBuilder.js";
 
 const container = document.getElementById("network");

@@ -249,6 +249,24 @@ function drawNode(node) {
   return type == "site" ? drawSiteNode(node) : drawSiteNode(node);
 }
 
+function switchMode(mode, noNotification) {
+  const oldMode = currentMode;
+  currentMode = mode || (currentMode == "motion" ? "create_link" : "motion");
+  if ((oldMode == "motion" || currentMode == "motion") && oldMode != currentMode) {
+    $("#mode-icon").toggleClass("glyphicon-move").toggleClass("glyphicon-random");
+  }
+  let notification;
+  if (currentMode == "motion") {
+    graph.addNodeMode();
+    notification = "Mode: Motion.";
+  } else {
+    graph.setSelection({ nodes: [], edges: [] });
+    graph.addEdgeMode();
+    notification = "Mode: Creation of link.";
+  }
+  if (!noNotification) notify(notification, "success", 5);
+}
+
 export function processBuilderData(newInstance) {
   if (newInstance.id == instance?.id) {
     instance = newInstance;
@@ -342,4 +360,4 @@ export function initBuilder() {
   updateSiteRightClickBindings();
 }
 
-configureNamespace("builder", [createLabel]);
+configureNamespace("builder", [createLabel, switchMode]);

@@ -56,9 +56,9 @@ function switchToSite(path, direction) {
     $("#up-arrow").addClass("disabled");
   }
   currentPath = path.toString();
-  localStorage.setItem(page, currentPath);
   moveHistory(path, direction);
   if (!path && page == "site_table") {
+    $("#site-filtering").val("");
     tableInstances["site"].table.page(0).ajax.reload(null, false);
     return;
   }

@@ -609,7 +609,6 @@ tables.site = class SiteTable extends Table {
 
   get filteringConstraints() {
     const siteFiltering = $("#site-filtering").val();
-    console.log(siteFiltering)
     if (siteFiltering?.length) {
       return { sites: [siteFiltering] };
     } else {

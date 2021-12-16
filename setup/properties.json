@@ -614,14 +614,17 @@
       {
         "data": "creator",
         "title": "Creator",
-        "search": "text",
-        "visible": false
+        "search": "text"
       },
       {
         "data": "location",
         "title": "Location",
-        "search": "text",
-        "visible": false
+        "search": "text"
+      },
+      {
+        "data": "edges",
+        "title": "Edges",
+        "width": "100px"
       },
       {
         "data": "buttons",

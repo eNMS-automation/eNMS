@@ -283,7 +283,12 @@ class Runner:
             else:
                 return value
 
-        return rec(input)
+        try:
+            return rec(input)
+        except Exception:
+            log = f"Payload conversion to JSON failed:\n{format_exc()}"
+            self.log("error", log)
+            return {"error": log}
 
     @staticmethod
     def get_device_result(args):

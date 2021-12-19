@@ -1,6 +1,7 @@
 import {
   call,
   configureNamespace,
+  createTooltips,
   history,
   historyPosition,
   loadTypes,
@@ -423,27 +424,27 @@ export function initBuilder() {
 }
 
 function getTree() {
-  const workflowId = workflow.id;
+  const instanceId = instance.id;
   openPanel({
     name: "workflow_tree",
-    title: `${workflow.scoped_name} - Tree Structure`,
+    title: `${instance.scoped_name} - Tree Structure`,
     content: `
       <div class="modal-body">
         <input
           type="text"
           class="form-control"
-          id="tree-search-${workflowId}"
+          id="tree-search-${instanceId}"
           placeholder="Search"
         >
         <hr />
-        <div id="workflow-tree-${workflowId}"></div>
+        <div id="workflow-tree-${instanceId}"></div>
         <input type="hidden" name="services" id="services" />
       </div>`,
     callback: function () {
       call({
         url: `/get_workflow_tree/${currentPath}`,
         callback: function (data) {
-          $(`#workflow-tree-${workflowId}`)
+          $(`#workflow-tree-${instanceId}`)
             .bind("loaded.jstree", function (e, data) {
               createTooltips();
             })
@@ -495,11 +496,11 @@ function getTree() {
               },
             });
           let timer = false;
-          $(`#tree-search-${workflowId}`).keyup(function () {
+          $(`#tree-search-${instanceId}`).keyup(function () {
             if (timer) clearTimeout(timer);
             timer = setTimeout(function () {
-              const searchValue = $(`#tree-search-${workflowId}`).val();
-              $(`#workflow-tree-${workflowId}`).jstree(true).search(searchValue);
+              const searchValue = $(`#tree-search-${instanceId}`).val();
+              $(`#workflow-tree-${instanceId}`).jstree(true).search(searchValue);
             }, 500);
           });
         },

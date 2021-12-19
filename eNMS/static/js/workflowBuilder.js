@@ -13,7 +13,6 @@ import {
   call,
   configureNamespace,
   copyToClipboard,
-  createTooltips,
   history,
   historyPosition,
   moveHistory,

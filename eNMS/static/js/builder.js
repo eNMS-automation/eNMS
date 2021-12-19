@@ -442,7 +442,7 @@ function getTree() {
       </div>`,
     callback: function () {
       call({
-        url: `/get_instance_tree/${currentPath}`,
+        url: `/get_instance_tree/${type}/${currentPath}`,
         callback: function (data) {
           $(`#instance-tree-${instanceId}`)
             .bind("loaded.jstree", function (e, data) {

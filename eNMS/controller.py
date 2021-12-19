@@ -765,37 +765,45 @@ class Controller:
                 key=itemgetter("text"),
             )
 
-    def get_instance_tree(self, full_path):
+    def get_instance_tree(self, type, full_path):
         path_id = full_path.split(">")
 
-        def rec(service, path=""):
-            path += ">" * bool(path) + str(service.id)
-            if service.scoped_name in ("Start", "End"):
-                return
-            elif service.scoped_name == "Placeholder" and len(path_id) > 1:
-                service = db.fetch("workflow", id=path_id[1])
+        def rec(instance, path=""):
+            path += ">" * bool(path) + str(instance.id)
+            if type == "workflow":
+                if instance.scoped_name in ("Start", "End"):
+                    return
+                elif instance.scoped_name == "Placeholder" and len(path_id) > 1:
+                    instance = db.fetch(type, id=path_id[1])
+            child_property = "nodes" if type == "site" else "services"
             return {
-                "data": {"path": path, **service.base_properties},
-                "id": service.id,
+                "data": {"path": path, **instance.base_properties},
+                "id": instance.id,
                 "state": {"opened": full_path.startswith(path)},
-                "text": service.scoped_name,
+                "text": instance.scoped_name,
                 "children": sorted(
-                    filter(None, [rec(child, path) for child in service.services]),
+                    filter(
+                        None,
+                        [
+                            rec(child, path)
+                            for child in getattr(instance, child_property)
+                        ],
+                    ),
                     key=lambda node: node["text"].lower(),
                 )
-                if service.type == "workflow"
+                if instance.type == type
                 else False,
                 "a_attr": {
                     "class": "no_checkbox",
                     "style": (
-                        f"color: #{'FF1694' if service.shared else '6666FF'};"
+                        f"color: #{'FF1694' if instance.shared else '6666FF'};"
                         "width: 100%"
                     ),
                 },
-                "type": service.type,
+                "type": instance.type,
             }
 
-        return rec(db.fetch("workflow", id=path_id[0]))
+        return rec(db.fetch(type, id=path_id[0]))
 
     def load_debug_snippets(self):
         snippets = {}

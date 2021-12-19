@@ -26,6 +26,6 @@ class EthernetLinkForm(LinkForm):
             ("10BASE5", "10BASE5"),
             ("10BASE-T", "10BASE-T"),
             ("1000BASE-T", "1000BASE-T"),
-            ("10GBASE-T", "10GBASE-T")
+            ("10GBASE-T", "10GBASE-T"),
         ),
     )

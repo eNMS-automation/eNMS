@@ -437,14 +437,14 @@ function getTree() {
           placeholder="Search"
         >
         <hr />
-        <div id="workflow-tree-${instanceId}"></div>
+        <div id="instance-tree-${instanceId}"></div>
         <input type="hidden" name="services" id="services" />
       </div>`,
     callback: function () {
       call({
         url: `/get_instance_tree/${currentPath}`,
         callback: function (data) {
-          $(`#workflow-tree-${instanceId}`)
+          $(`#instance-tree-${instanceId}`)
             .bind("loaded.jstree", function (e, data) {
               createTooltips();
             })
@@ -500,7 +500,7 @@ function getTree() {
             if (timer) clearTimeout(timer);
             timer = setTimeout(function () {
               const searchValue = $(`#tree-search-${instanceId}`).val();
-              $(`#workflow-tree-${instanceId}`).jstree(true).search(searchValue);
+              $(`#instance-tree-${instanceId}`).jstree(true).search(searchValue);
             }, 500);
           });
         },

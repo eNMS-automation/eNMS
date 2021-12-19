@@ -734,92 +734,6 @@ export function getWorkflowState(periodic, first) {
   if (periodic) setTimeout(() => getWorkflowState(true, false), 4000);
 }
 
-function getWorkflowTree() {
-  const workflowId = workflow.id;
-  openPanel({
-    name: "workflow_tree",
-    title: `${workflow.scoped_name} - Tree Structure`,
-    content: `
-      <div class="modal-body">
-        <input
-          type="text"
-          class="form-control"
-          id="tree-search-${workflowId}"
-          placeholder="Search"
-        >
-        <hr />
-        <div id="workflow-tree-${workflowId}"></div>
-        <input type="hidden" name="services" id="services" />
-      </div>`,
-    callback: function () {
-      call({
-        url: `/get_workflow_tree/${currentPath}`,
-        callback: function (data) {
-          $(`#workflow-tree-${workflowId}`)
-            .bind("loaded.jstree", function (e, data) {
-              createTooltips();
-            })
-            .jstree({
-              core: {
-                animation: 100,
-                themes: { stripes: true },
-                data: data,
-              },
-              plugins: ["html_row", "search", "types", "wholerow"],
-              html_row: {
-                default: function (el, node) {
-                  if (!node) return;
-                  const service = JSON.stringify(node.data);
-                  $(el).find("a").first().append(`
-                  <div style="position: absolute; top: 0px; right: 20px">
-                    <button
-                      type="button"
-                      class="btn btn-xs btn-info"
-                      data-tooltip="Find"
-                      onclick='eNMS.workflowBuilder.highlightService(${service})'
-                    >
-                      <span class="glyphicon glyphicon-screenshot"></span>
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-xs btn-primary"
-                      data-tooltip="Edit"
-                      onclick='eNMS.base.showInstancePanel(
-                        "${node.data.type}", ${node.data.id}
-                      )'
-                    >
-                      <span class="glyphicon glyphicon-edit"></span>
-                    </button>
-                  </div>
-                `);
-                },
-              },
-              search: {
-                show_only_matches: true,
-              },
-              types: {
-                default: {
-                  icon: "glyphicon glyphicon-file",
-                },
-                workflow: {
-                  icon: "fa fa-sitemap",
-                },
-              },
-            });
-          let timer = false;
-          $(`#tree-search-${workflowId}`).keyup(function () {
-            if (timer) clearTimeout(timer);
-            timer = setTimeout(function () {
-              const searchValue = $(`#tree-search-${workflowId}`).val();
-              $(`#workflow-tree-${workflowId}`).jstree(true).search(searchValue);
-            }, 500);
-          });
-        },
-      });
-    },
-  });
-}
-
 function compareWorkflowResults() {
   const mainId = parseInt(currentPath.split(">")[0]);
   openPanel({
@@ -883,7 +797,6 @@ configureNamespace("workflowBuilder", [
   highlightService,
   filterWorkflowTable,
   getWorkflowState,
-  getWorkflowTree,
   restartWorkflow,
   switchMode,
   switchToWorkflow,

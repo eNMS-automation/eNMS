@@ -22,7 +22,7 @@ ignored_endpoints = [
     "/table_form",
     "/terminal",
     "/tree_form",
-    "/workflow_tree_form",
+    "/instance_tree_form",
     "/logout",
     "/rest/",
     "/result_comparison_form",

@@ -165,7 +165,7 @@
     "/user_table": "admin",
     "/view_service_results": "access",
     "/workflow_builder": "access",
-    "/workflow_tree_form": "access"
+    "/instance_tree_form": "access"
   },
   "post_requests": {
     "/add_edge": "access",
@@ -216,7 +216,7 @@
     "/get_visualization_pools": "access",
     "/get_workflow_results": "access",
     "/get_workflow_services": "access",
-    "/get_workflow_tree": "access",
+    "/get_instance_tree": "access",
     "/import_services": "access",
     "/import_topology": "admin",
     "/load_debug_snippets": "admin",

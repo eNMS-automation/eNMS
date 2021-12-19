@@ -426,7 +426,7 @@ export function initBuilder() {
 function getTree() {
   const instanceId = instance.id;
   openPanel({
-    name: "workflow_tree",
+    name: "instance_tree",
     title: `${instance.scoped_name} - Tree Structure`,
     content: `
       <div class="modal-body">
@@ -442,7 +442,7 @@ function getTree() {
       </div>`,
     callback: function () {
       call({
-        url: `/get_workflow_tree/${currentPath}`,
+        url: `/get_instance_tree/${currentPath}`,
         callback: function (data) {
           $(`#workflow-tree-${instanceId}`)
             .bind("loaded.jstree", function (e, data) {

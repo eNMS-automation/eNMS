@@ -765,7 +765,7 @@ class Controller:
                 key=itemgetter("text"),
             )
 
-    def get_workflow_tree(self, full_path):
+    def get_instance_tree(self, full_path):
         path_id = full_path.split(">")
 
         def rec(service, path=""):

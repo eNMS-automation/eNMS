@@ -326,11 +326,7 @@
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for property, values in form.custom_properties.items() %} {% set
                 label %} {% if "help" in values %}
-                <label
-                  for="{{ property }}"
-                  help="{{ values['help'] }}"
-                  property="{{ property }}"
-                >
+                <label for="{{ property }}" help="{{ values['help'] }}">
                   {{ values["pretty_name"] }}
                 </label>
                 {% else %}
@@ -397,10 +393,7 @@
                 <div id="{{ form_type }}-{{ field_name }}-div" class="add-id">
                   {% set label %} {% if form[field_name].render_kw and "help" in
                   form[field_name].render_kw %}
-                  <label
-                    help="{{ form[field_name].render_kw['help'] }}"
-                    property="{{ field_name }}"
-                  >
+                  <label help="{{ form[field_name].render_kw['help'] }}">
                     {{ form[field_name].label }}
                   </label>
                   {% else %}

@@ -95,7 +95,7 @@ class Site(Node):
 
 class Device(Node):
 
-    __tablename__ = class_type = "device"
+    __tablename__ = class_type = export_type = "device"
     __mapper_args__ = {"polymorphic_identity": "device"}
     pretty_name = "Network Device"
     pool_model = True
@@ -245,7 +245,7 @@ class Device(Node):
 
 class Link(Object):
 
-    __tablename__ = class_type = "link"
+    __tablename__ = class_type = export_type = "link"
     __mapper_args__ = {"polymorphic_identity": "link"}
     pretty_name = "Link"
     pool_model = True

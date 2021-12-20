@@ -392,30 +392,8 @@
     fiber 40G, destination: Dallas-3, last_modified: '2020-11-11 10:34:16.497981',
   location: '', model: 40G, name: link13-2, scoped_name: link13-2, shared: true, source: Austin-2,
   subtype: ODU2, type: link, vendor: Ciena}
-- access_groups: admin
-  color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: '[Site 1: Top Level Objects] Router 2'
-  destination_id: 171
-  destination_name: '[Site 1: Top Level Objects] Router 2'
-  id: 172
-  last_modified: '2021-12-16 04:02:59.079962'
-  location: ''
-  model: ''
-  name: '[Site 1: Top Level Objects] R1 - R2'
-  pools: [Datacenter San Francisco, 'All devices, links, services and users', Datacenter
-      New York, 'Pool Invert Mechanism: ~router in name, ~link[1-9] in name', Datacenter
-      Chicago, Links only]
-  scoped_name: R1 - R2
-  shared: false
-  sites: ['Site 1: Top Level Objects']
-  source: '[Site 1: Top Level Objects] Router 1'
-  source_id: 170
-  source_name: '[Site 1: Top Level Objects] Router 1'
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: '[Site 1: Top Level Objects] Router 2', last_modified: '2021-12-19
+    21:38:24.712489', location: '', model: '', name: '[Site 1: Top Level Objects]
+    R1 - R2', scoped_name: R1 - R2, shared: false, source: '[Site 1: Top Level Objects]
+    Router 1', speed: '22', standard: 10BASE2, subtype: '', type: ethernet_link, vendor: ''}

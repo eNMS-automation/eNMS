@@ -874,8 +874,7 @@ class Runner:
     def database_function(self, func, model, **kwargs):
         if model not in vs.automation["workflow"]["allowed_models"][func]:
             raise db.rbac_error(f"Use of '{func}' not allowed on {model}s.")
-        if "fetch" in func:
-            kwargs["rbac"] = "edit"
+        kwargs["rbac"] = "edit"
         return getattr(db, func)(model, username=self.creator, **kwargs)
 
     def get_credential(self, **kwargs):

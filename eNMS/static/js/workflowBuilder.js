@@ -62,12 +62,12 @@ const options = {
   ...theme.workflow,
 };
 
+export let ends = new Set();
 export let workflow = JSON.parse(localStorage.getItem("workflow"));
 export let currentRuntime;
 
 let currentRun;
 let graph;
-let ends = new Set();
 let currentMode = "motion";
 let runtimeDisplay;
 let currentPlaceholder;
@@ -85,7 +85,6 @@ export function displayWorkflow(workflowData) {
     {
       nodes: workflow.services.map(drawWorkflowNode),
       edges: workflow.edges.map(drawWorkflowEdge),
-      inactive: ends,
     },
     options
   );

@@ -14,6 +14,7 @@ import {
   drawIterationEdge,
   drawWorkflowEdge,
   drawWorkflowNode,
+  ends,
   getWorkflowState,
   flipRuntimeDisplay,
   switchToWorkflow,
@@ -61,13 +62,14 @@ export function configureGraph(newInstance, graph, options) {
       mousePosition = properties.pointer.canvas;
       const node = this.getNodeAt(properties.pointer.DOM);
       const edge = this.getEdgeAt(properties.pointer.DOM);
-      if (typeof node !== "undefined" && !network.inactive.has(node)) {
+      if (typeof node !== "undefined" && !ends.has(node)) {
         network.selectNodes([node, ...network.getSelectedNodes()]);
         $(".menu-entry ").hide();
         $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
         selectedObject = nodes.get(node);
         $(`.${instance.type}-selection`).toggle(selectedObject.type == instance.type);
-      } else if (typeof edge !== "undefined" && !network.inactive.has(node)) {
+      } else if (typeof edge !== "undefined") {
+        if (type == "workflow" && !ends.has(node)) return;
         network.selectEdges([edge, ...network.getSelectedEdges()]);
         $(".menu-entry ").hide();
         $(".edge-selection").show();

@@ -777,22 +777,9 @@ function compareWorkflowResults() {
   });
 }
 
-function highlightService(service) {
-  const servicePath = service.path.split(">");
-  const [workflowId, serviceId] = servicePath.slice(-2);
-  const selection = { nodes: [parseInt(serviceId)], edges: [] };
-  if (workflowId != workflow.id) {
-    const workflowPath = servicePath.slice(0, -1).join(">");
-    switchToWorkflow(workflowPath, null, currentRuntime, selection);
-  } else if (serviceId) {
-    graph.setSelection(selection);
-  }
-}
-
 configureNamespace("workflowBuilder", [
   addServicesToWorkflow,
   deleteSelection,
-  highlightService,
   filterWorkflowTable,
   getWorkflowState,
   restartWorkflow,

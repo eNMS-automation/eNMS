@@ -99,6 +99,17 @@ export function configureGraph(newInstance, graph, options) {
   return network;
 }
 
+function highlightNode(node) {
+  const nodePath = node.path.split(">");
+  const [containerId, nodeId] = nodePath.slice(-2);
+  const selection = { nodes: [parseInt(nodeId)], edges: [] };
+  if (containerId != instance.id) {
+    switchTo(nodePath.slice(0, -1).join(">"), null, null, selection);
+  } else if (nodeId) {
+    network.setSelection(selection);
+  }
+}
+
 function savePositions() {
   call({
     url: `/save_positions/${instance.type}/${instance.id}`,
@@ -460,14 +471,13 @@ function getTree() {
               html_row: {
                 default: function (el, node) {
                   if (!node) return;
-                  const service = JSON.stringify(node.data);
                   $(el).find("a").first().append(`
                   <div style="position: absolute; top: 0px; right: 20px">
                     <button
                       type="button"
                       class="btn btn-xs btn-info"
                       data-tooltip="Find"
-                      onclick='eNMS.workflowBuilder.highlightService(${service})'
+                      onclick='eNMS.builder.highlightNode(${JSON.stringify(node.data)})'
                     >
                       <span class="glyphicon glyphicon-screenshot"></span>
                     </button>
@@ -511,4 +521,4 @@ function getTree() {
   });
 }
 
-configureNamespace("builder", [createLabel, getTree, switchMode]);
+configureNamespace("builder", [createLabel, getTree, highlightNode, switchMode]);

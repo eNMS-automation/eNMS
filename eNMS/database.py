@@ -81,7 +81,7 @@ class Database:
         self.configure_model_events(env)
         if env.detect_cli():
             return
-        first_init = not self.get_user("admin")
+        first_init = not db.fetch("user", allow_none=True, name="admin")
         if first_init:
             admin_user = vs.models["user"](name="admin", is_admin=True)
             self.session.add(admin_user)
@@ -302,14 +302,11 @@ class Database:
                 ),
             )
 
-    def get_user(self, name):
-        return self.session.query(vs.models["user"]).filter_by(name=name).first()
-
     def query(self, model, rbac="read", username=None, property=None):
         entity = getattr(vs.models[model], property) if property else vs.models[model]
         query = self.session.query(entity)
-        if rbac:
-            user = current_user or self.get_user(username or "admin")
+        if rbac and model != "user":
+            user = current_user or self.fetch("user", name=username or "admin")
             if user.is_authenticated and not user.is_admin:
                 if model in vs.rbac["admin_models"].get(rbac, []):
                     raise self.rbac_error

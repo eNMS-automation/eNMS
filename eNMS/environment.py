@@ -60,7 +60,7 @@ class Environment:
         name, password = kwargs["username"], kwargs["password"]
         if not name or not password:
             return False
-        user = db.get_user(name)
+        user = db.fetch("user", allow_none=True, name=name)
         default_method = vs.settings["authentication"]["default"]
         user_method = getattr(user, "authentication", default_method)
         method = kwargs.get("authentication_method", user_method)

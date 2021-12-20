@@ -359,20 +359,12 @@ export function updateSiteRightClickBindings() {
   });
 }
 
-function switchTo(path) {
-  if (type == "site") {
-    switchToSite(path);
-  } else {
-    switchToWorkflow(path);
-  }
+function switchTo(...args) {
+  (type == "site" ? switchToSite : switchToWorkflow)(...args);
 }
 
 function updateRightClickBindings() {
-  if (type == "site") {
-    updateSiteRightClickBindings();
-  } else {
-    updateWorkflowRightClickBindings();
-  }
+  (type == "site" ? updateSiteRightClickBindings : updateWorkflowRightClickBindings)();
 }
 
 export function initBuilder() {

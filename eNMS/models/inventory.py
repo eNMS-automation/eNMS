@@ -46,6 +46,10 @@ class Object(AbstractBase):
             .group_by(cls.id)
         )
 
+    def set_name(self, name=None):
+        site = "" if self.shared or not self.sites else f"[{self.sites[0].name}] "
+        self.name = f"{site}{name or self.scoped_name}"
+
 
 class Node(Object):
 
@@ -65,15 +69,6 @@ class Node(Object):
         super().update(**kwargs)
         if not kwargs.get("migration_import"):
             self.set_name()
-
-    def set_name(self, name=None):
-        if self.shared:
-            site = "[Shared] "
-        elif not self.sites:
-            site = ""
-        else:
-            site = f"[{self.sites[0].name}] "
-        self.name = f"{site}{name or self.scoped_name}"
 
 
 class Site(Node):
@@ -272,13 +267,6 @@ class Link(Object):
     pools = relationship("Pool", secondary=db.pool_link_table, back_populates="links")
     sites = relationship("Site", secondary=db.link_site_table, back_populates="links")
     __table_args__ = (UniqueConstraint(name, source_id, destination_id),)
-
-    def set_name(self, name=None):
-        if self.shared or not self.sites:
-            site = ""
-        else:
-            site = f"[{self.sites[0].name}] "
-        self.name = f"{site}{name or self.scoped_name}"
 
     @property
     def view_properties(self):

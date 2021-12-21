@@ -3478,7 +3478,7 @@
   location: ''
   longitude: '0.0'
   model: ''
-  name: '[Site 1: Top Level Objects] Router 1'
+  name: '[Site 1: Top Level Shared and Non Shared Objects] Router 1'
   napalm_driver: ios
   netconf_driver: default
   netmiko_driver: cisco_ios
@@ -3487,6 +3487,7 @@
   port: 22
   positions:
     'Site 1: Top Level Objects': [-472, 10]
+    'Site 1: Top Level Shared and Non Shared Objects': [-652, 266]
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -3527,7 +3528,7 @@
   location: ''
   longitude: '0.0'
   model: ''
-  name: '[Site 1: Top Level Objects] Router 2'
+  name: '[Site 1: Top Level Shared and Non Shared Objects] Router 2'
   napalm_driver: ios
   netconf_driver: default
   netmiko_driver: cisco_ios
@@ -3536,6 +3537,7 @@
   port: 22
   positions:
     'Site 1: Top Level Objects': [-150, 300]
+    'Site 1: Top Level Shared and Non Shared Objects': [179, 299]
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -3585,6 +3587,7 @@
   port: 22
   positions:
     'Site 1: Top Level Objects': [0, 0]
+    'Site 1: Top Level Shared and Non Shared Objects': [-231, 455]
   property1: 10.145.14.1
   property2: CP
   property3: password

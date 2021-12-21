@@ -134,6 +134,7 @@ function saveLink(edge) {
 }
 
 export function showLinkPanel(type, id, edge) {
+  $(id ? `#${type}-type-${id}` : `#${type}-type`).val(type).prop("disabled", true);
   $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
   if (edge) {
     const sourceName = nodes.get(edge.from).name;

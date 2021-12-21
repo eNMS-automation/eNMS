@@ -397,3 +397,11 @@
     21:38:24.712489', location: '', model: '', name: '[Site 1: Top Level Objects]
     R1 - R2', scoped_name: R1 - R2, shared: false, source: '[Site 1: Top Level Objects]
     Router 1', speed: '22', standard: 10BASE2, subtype: '', type: ethernet_link, vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: Router 3, last_modified: '2021-12-21 12:06:21.622171', location: '',
+  model: '', name: R1 - R3, scoped_name: R1 - R3, shared: true, source: '[Site 1:
+    Top Level Objects] Router 1', subtype: '', type: link, vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: Router 3, last_modified: '2021-12-21 12:06:39.986009', location: '',
+  model: '', name: R2 - R3, scoped_name: R2 - R3, shared: true, source: '[Site 1:
+    Top Level Objects] Router 2', subtype: '', type: link, vendor: ''}

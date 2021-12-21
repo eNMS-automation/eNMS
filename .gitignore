@@ -29,9 +29,8 @@ venv
 # ansible retry files
 *.retry
 
-# sphinx docs 
-_build
-_templates
+# MkDocs x
+docs/build
 
 # javascript
 package-lock.json
@@ -52,3 +51,4 @@ node_modules/
 
 # SSH Handoff
 rsa.key
+x

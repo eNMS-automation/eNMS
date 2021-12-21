@@ -19,15 +19,15 @@
   exit()  # while not required, can be used in middle of script
   results["success"] = True
   results["result"] = ["Data to be retuned in 'result'"]
-  Availble variables: device, results, run</textarea
+  Available variables: device, results, run</textarea
       >
     </p>
   </div>
 
   <div>
     <h3>Logging</h3>
-    For best visibility, we recommend that you use the 'log' function. You can also
-    'import logging'; however, those logs are only seen in the server logs
+    For best visibility, it is recommended that you use the 'log' function. You
+    can also 'import logging'; however, those logs are only seen in the server logs
     <code>log(severity, message, logger=logger)</code> where severity is "info",
     "error", "warning", or "critical" and logger is omitted (default), "security", or
     some other user configured logger in settings
@@ -49,12 +49,8 @@ r = get_result("run_once_service")</textarea
   </div>
   <div>
     <h3>Retrieving variables via get_var</h3>
-    See also:
-    <a
-      href="/docs/automation/workflows.html#saving-and-retrieving-values-in-a-workflow"
-      style="text-decoration: underline;"
-      >get_var/set_var documentation</a
-    >
+    See also: Saving and Retrieving Values in a Workflow: get_var(),set_var()
+    in the Automation->Workflows documentation section.
     <textarea class="help-snippet" style="height: fit-content;">
 # get a general variable
 hostname = get_var("hostname")
@@ -66,12 +62,8 @@ config_data = get_var("config_element", section="config")</textarea
   </div>
   <div>
     <h3>Setting variables via set_var</h3>
-    See also:
-    <a
-      href="/docs/automation/workflows.html#saving-and-retrieving-values-in-a-workflow"
-      style="text-decoration: underline;"
-      >get_var/set_var documentation</a
-    >
+    See also: Saving and Retrieving Values in a Workflow: get_var(),set_var()
+    in the Automation->Workflows documentation section.
     <textarea class="help-snippet" style="height: fit-content;">
 set_var("test_hostname", "hostname");
 set_var("ip_addresses", ["127.0.0.1", "192.168.0.1" ],
@@ -80,11 +72,8 @@ set_var("ip_addresses", ["127.0.0.1", "192.168.0.1" ],
   </div>
   <div>
     <h3>Additional information on available variables</h3>
-    See also:<a
-      href="/docs/automation/services.html#using-python-code-in-the-service-panel"
-      style="text-decoration: underline;"
-      >Available variables and functions in Python</a
-    >
+    See also: Using python code in the Service Editor Panel in the
+    Automation->Services documentation section.
   </div>
   <div>
     <h3>Allowed imports</h3>

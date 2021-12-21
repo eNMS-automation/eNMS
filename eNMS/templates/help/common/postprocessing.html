@@ -3,7 +3,7 @@
     <p>
       The <b>postprocessing</b> parameter provides a means for the user to modify the
       service results before the completion of the service. It also allows the user to
-      inspect previously saved information with <b>set_var</b> and compare to
+      inspect information previously saved with <b>set_var</b> and compare to
       information retrieved by this service to make further decisions as to what actions
       should be taken.
     </p>
@@ -16,8 +16,8 @@
     <p>
       In the below example, card states are compared to ensure all cards are ready for
       an upgrade. By setting <b>results['success'] = False</b>, we can force the service
-      to be re-executed using the <b>retries</b> and <b>time between retries</b> set in
-      <b>Step 1</b>
+      to be re-executed using the <b>Number of retries</b> and <b>Time between retries
+      (in seconds)</b> set in <b>Step 1</b>
     </p>
   </div>
   <textarea class="help-snippet" style="height: fit-content;">

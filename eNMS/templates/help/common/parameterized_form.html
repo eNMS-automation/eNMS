@@ -7,12 +7,32 @@
     </p>
     <p>
       When a parameter from the form corresponds to a property of the "Run" class, it
-      will override the run parameter. Otherwise, ...
+      will override the run parameter.
     </p>
   </div>
-  <textarea class="help-snippet" style="height: fit-content;">
-    class Form(...):
+  <div>
+    <p>
+      An example of parameter fields to include on the parameterized form is
+      below.  Most commonly, the target_devices and target_pools should be
+      included, otherwise, the users must edit the service or workflow every
+      time they run it on different targets.
 
-      ...
-  </textarea>
+      <textarea class="help-snippet" style="height: fit-content;">
+# Setting the name field helps identify and filter the runtime in the results table:
+# name = StringField('Name')
+# Allow the user to provide initial_payload variables
+# initial_payload = DictField()
+# Prompt the user for target devices and pools
+target_devices = MultipleInstanceField('Devices', model='device')
+target_pools = MultipleInstanceField('Pools', model='pool')
+# Alternatively prompt the user for a device_query to derive the device targets
+# device_query = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows': 2})
+#  as well as indicate of those derived targets are names or ip addresses
+# device_query_property = SelectField('Query Property Type', choices=(('name', 'Name'), ('ip_address', 'IP address')))
+# Prompt the user for multiprocessing enabled or not
+# multiprocessing = BooleanField('Multiprocessing', default=False)
+#  as well as set the max number of processes when multiprocessing is enabled
+# max_processes = IntegerField('Maximum number of processes', default=15)</textarea>
+    </p>
+  </div>
 </div>

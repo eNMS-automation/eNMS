@@ -438,6 +438,7 @@ class ObjectForm(BaseForm):
     get_request_allowed = False
     id = HiddenField()
     scoped_name = StringField("Name", [InputRequired()])
+    type = StringField("Type")
     shared = BooleanField("Shared", default=True)
     sites = MultipleInstanceField("Sites", model="site")
     name = StringField("Full Name")

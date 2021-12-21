@@ -14,6 +14,7 @@ NProgress: false
 page: false
 rbac: false
 relationships: false
+subtypes: false
 user: false
 */
 

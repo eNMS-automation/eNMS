@@ -5,7 +5,6 @@ page: false
 subtypes: false
 theme: false
 user: false
-vis: false
 */
 
 import { runService, runLogic, showRuntimePanel } from "./automation.js";

@@ -1,6 +1,5 @@
 /*
 global
-action: false
 page: false
 */
 
@@ -96,7 +95,6 @@ export function displaySite(site) {
 export function drawSiteNode(node) {
   return {
     id: node.id,
-    shape: "box",
     color: "#D2E5FF",
     font: {
       size: 15,

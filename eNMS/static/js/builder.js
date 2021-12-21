@@ -1,3 +1,11 @@
+/*
+global
+action: true
+page: false
+subtypes: false
+vis: false
+*/
+
 import {
   call,
   configureNamespace,

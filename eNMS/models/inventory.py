@@ -1,5 +1,5 @@
 from re import search, sub
-from sqlalchemy import and_, Boolean, event, Float, ForeignKey, Integer, or_
+from sqlalchemy import and_, Boolean, event, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import aliased, backref, relationship
 from sqlalchemy.schema import UniqueConstraint

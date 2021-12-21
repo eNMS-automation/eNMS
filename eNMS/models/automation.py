@@ -6,6 +6,7 @@ from sqlalchemy import Boolean, case, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import aliased, relationship
+from sqlalchemy.sql.expression import true
 
 from eNMS.controller import controller
 from eNMS.database import db
@@ -176,7 +177,7 @@ class Service(AbstractBase):
                 query.join(originals_alias, cls.originals)
                 .join(owners_alias, originals_alias.owners)
                 .filter(owners_alias.name == user.name),
-                query.filter(cls.shared == True),
+                query.filter(cls.shared == true),
             )
         return query
 

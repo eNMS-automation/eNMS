@@ -466,9 +466,10 @@ export function preprocessForm(panel, id, type, duplicate) {
       </button>
     `).on("click", function () {
       const helpUrl = $(el).attr("help");
+      const propertyName = helpUrl.split("/").at(-1);
       openPanel({
-        name: `help-${$(el).attr("property")}`,
-        title: $(el).attr("property"),
+        name: `help-${propertyName}`,
+        title: propertyName.replace("_", " "),
         size: "600px auto",
         url: helpUrl.charAt(0) === "/" ? `..${helpUrl}` : `../help/${helpUrl}`,
         callback: function (helpPanel) {

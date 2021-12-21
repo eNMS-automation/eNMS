@@ -87,6 +87,15 @@ class Site(Node):
             if not instance.shared:
                 db.delete_instance(instance)
 
+    def set_name(self, name=None):
+        old_name = self.name
+        super().set_name(name)
+        for instance in self.nodes + self.links:
+            if not instance.shared:
+                instance.set_name()
+            if instance.parent_type == "node" and old_name in instance.positions:
+                instance.positions[self.name] = instance.positions[old_name]
+
 
 class Device(Node):
 

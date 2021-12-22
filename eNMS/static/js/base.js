@@ -1061,20 +1061,20 @@ function fullScreen() {
 
 function doc(page) {
   let endpoint = {
-    administration: "base/installation.html",
-    dashboard: "base/features.html",
-    configuration_table: "advanced/configuration_management.html",
-    device_table: "inventory/network_creation.html",
-    event_table: "automation/scheduling.html",
-    link_table: "inventory/network_creation.html",
-    changelog_table: "advanced/administration.html",
-    pool_table: "inventory/pools.html",
-    run_table: "automation/services.html",
-    service_table: "automation/services.html",
-    task_table: "automation/scheduling.html",
-    user_table: "advanced/administration.html",
-    site_builder_table: "inventory/network_visualization.html",
-    workflow_builder_table: "automation/workflows.html",
+    administration: "base/installation",
+    dashboard: "base/features",
+    configuration_table: "advanced/configuration_management",
+    device_table: "inventory/network_creation",
+    event_table: "automation/scheduling",
+    link_table: "inventory/network_creation",
+    changelog_table: "advanced/administration",
+    pool_table: "inventory/pools",
+    run_table: "automation/services",
+    service_table: "automation/services",
+    task_table: "automation/scheduling",
+    user_table: "advanced/administration",
+    site_builder_table: "inventory/network_visualization",
+    workflow_builder_table: "automation/workflows",
   }[page];
   $("#doc-link").attr("href", `${settings.app.documentation_url}${endpoint || ""}`);
 }

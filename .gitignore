@@ -29,9 +29,8 @@ venv
 # ansible retry files
 *.retry
 
-# sphinx docs 
-_build
-_templates
+# MkDocs
+docs/build
 
 # javascript
 package-lock.json

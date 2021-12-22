@@ -175,6 +175,8 @@ export function drawLabel(id, label) {
 
 export function updateBuilderBindings(action) {
   Object.assign(action, {
+    "Zoom In": () => network.zoom(0.2),
+    "Zoom Out": () => network.zoom(-0.2),
     "Create Label": () => showLabelPanel({ usePosition: true }),
     "Create Label Button": () => showLabelPanel({ usePosition: false }),
     "Edit Label": (label) => showLabelPanel({ label: label, usePosition: true }),
@@ -355,8 +357,6 @@ export function updateSiteRightClickBindings() {
     "Create New Node": () => createNewNode("create_node"),
     "Edit Site": () => showInstancePanel("site", instance?.id),
     "Edit Edge": (edge) => showInstancePanel(edge.type, edge.id),
-    "Zoom In": () => network.zoom(0.2),
-    "Zoom Out": () => network.zoom(-0.2),
     "Enter Site": (node) => switchToSite(`${currentPath}>${node.id}`),
     "Site Backward": () => switchToSite(history[historyPosition - 1], "left"),
     "Site Forward": () => switchToSite(history[historyPosition + 1], "right"),

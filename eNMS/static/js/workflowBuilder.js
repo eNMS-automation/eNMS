@@ -525,8 +525,6 @@ export function updateWorkflowRightClickBindings() {
       showInstancePanel("workflow_edge", edge.id);
     },
     Skip: () => skipServices(),
-    "Zoom In": () => graph.zoom(0.2),
-    "Zoom Out": () => graph.zoom(-0.2),
     "Enter Workflow": (node) => switchToWorkflow(`${currentPath}>${node.id}`),
     Backward: () => switchToWorkflow(history[historyPosition - 1], "left"),
     Forward: () => switchToWorkflow(history[historyPosition + 1], "right"),

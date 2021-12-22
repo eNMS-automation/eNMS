@@ -31,7 +31,6 @@ venv
 
 # MkDocs
 docs/build
-docs/_build
 
 # javascript
 package-lock.json

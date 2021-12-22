@@ -430,7 +430,7 @@ export class Table {
       ? `eNMS.base.removeInstance(
           '${this.id}', ${row.instance}, ${this.relationString}
         )`
-      : `eNMS.base.showDeletionPanel(${row.instance})`;
+      : `eNMS.base.showDeletionPanel(${row.instance}, '${this.id}')`;
     return `
       <li>
         <button type="button" class="btn btn-sm btn-danger"

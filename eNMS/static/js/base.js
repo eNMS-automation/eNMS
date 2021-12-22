@@ -170,7 +170,7 @@ export function serializeForm(form, formDefault) {
   return result;
 }
 
-const deleteInstance = function (type, id) {
+const deleteInstance = function (type, id, tableId) {
   call({
     url: `/delete_instance/${type}/${id}`,
     callback: function (result) {
@@ -181,10 +181,9 @@ const deleteInstance = function (type, id) {
           localStorage.removeItem("path");
         }
       }
-      tableInstances[type].table
-        .row($(`#${id}`))
-        .remove()
-        .draw(false);
+      if (tableId) {
+        tableInstances[tableId].table.row($(`#${id}`)).remove().draw(false);
+      }
       const name = result.name ? `'${result.name}'` : "";
       notify(`${type.toUpperCase()} ${name} deleted.`, "success", 5, true);
     },
@@ -423,13 +422,13 @@ export function createTooltip({
   }
 }
 
-function showDeletionPanel(instance) {
+function showDeletionPanel(instance, tableId) {
   showConfirmationPanel({
     id: `${instance.type}-${instance.id}`,
     title: `Delete ${instance.type} '${instance.name}'`,
     message: "Are you sure you want to permanently remove this item ?",
     confirmButton: "Delete",
-    onConfirm: () => deleteInstance(instance.type, instance.id),
+    onConfirm: () => deleteInstance(instance.type, instance.id, tableId),
   });
 }
 
@@ -1196,7 +1195,6 @@ configureNamespace("base", [
   clearAlerts,
   copyToClipboard,
   createAlerts,
-  deleteInstance,
   fullScreen,
   loadScript,
   openPanel,

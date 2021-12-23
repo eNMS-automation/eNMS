@@ -518,11 +518,6 @@ class Controller:
     def get_migration_folders(self):
         return listdir(vs.path / "files" / "migrations")
 
-    def get_parent_workflows(self, workflow=None):
-        yield workflow
-        for parent_workflow in workflow.workflows:
-            yield from self.get_parent_workflows(parent_workflow)
-
     def get_properties(self, model, id):
         return db.fetch(model, id=id).get_properties()
 
@@ -665,7 +660,7 @@ class Controller:
         return rec(service)
 
     def get_workflow_services(self, id, node):
-        parents = list(self.get_parent_workflows(db.fetch("workflow", id=id)))
+        parents = db.fetch("workflow", id=id).originals
         if node == "all":
             return (
                 [

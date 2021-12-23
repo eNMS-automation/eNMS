@@ -374,15 +374,15 @@ export function initBuilder() {
     };
     this.view.moveTo(animationOptions);
   };
+  $("#edge-type,#link-type").on("change", function () {
+    switchMode(this.value);
+  });
   if (type == "site") {
     loadTypes("node");
     loadTypes("link");
   } else {
     loadTypes("service");
     flipRuntimeDisplay(localStorage.getItem("runtimeDisplay") || "user");
-    $("#edge-type").on("change", function () {
-      switchMode(this.value);
-    });
   }
   $("#left-arrow,#right-arrow").addClass("disabled");
   call({

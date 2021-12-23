@@ -23,7 +23,7 @@ import {
   serializeForm,
   showInstancePanel,
 } from "./base.js";
-import { showConnectionPanel, showDeviceData } from "./inventory.js";
+import { showConnectionPanel, showDeviceData, showDeviceResultsPanel } from "./inventory.js";
 import { tables } from "./table.js";
 
 let graph;
@@ -662,6 +662,7 @@ export function initVisualization() {
     Properties: (o) => showInstancePanel(o.type, o.id),
     Connect: (d) => showConnectionPanel(d),
     Configuration: (d) => showDeviceData(d),
+    Results: (d) => showDeviceResultsPanel(d),
     "Run Service": (d) => showRunServicePanel({ instance: d }),
     "Visualize in 3D": (d) => showDeviceModel(d),
   });

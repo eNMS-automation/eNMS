@@ -434,7 +434,7 @@ function showGitHistory(device) {
   });
 }
 
-function showDeviceResultsPanel(device) {
+export function showDeviceResultsPanel(device) {
   openPanel({
     name: "table",
     content: `

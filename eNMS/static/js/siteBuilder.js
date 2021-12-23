@@ -13,6 +13,7 @@ import {
 } from "./base.js";
 import {
   configureGraph,
+  createNewNode,
   creationMode,
   currentMode,
   currentPath,
@@ -21,6 +22,7 @@ import {
   showLabelPanel,
   updateBuilderBindings,
 } from "./builder.js";
+import { showConnectionPanel, showDeviceData, showDeviceResultsPanel } from "./inventory.js";
 import { clearSearch, tableInstances } from "./table.js";
 
 let graph;
@@ -111,8 +113,8 @@ export function drawSiteNode(node) {
       bold: { color: "#000000" },
     },
     shadow: {
-      enabled: true,
-      color: node.shared ? "#FF1694" : "#6666FF",
+      enabled: !node.shared,
+      color: "#6666FF",
       size: 15,
     },
     label: node.scoped_name,
@@ -170,7 +172,12 @@ export function updateSiteRightClickBindings() {
     "Create Site": () => createNewNode("create_site"),
     "Duplicate Site": () => createNewNode("duplicate_site"),
     "Create New Node": () => createNewNode("create_node"),
-    "Edit Site": () => showInstancePanel("site", instance?.id),
+    Connect: (node) => showConnectionPanel(node),
+    Configuration: (node) => showDeviceData(node),
+    Results: (node) => showDeviceResultsPanel(node),
+    "Run Service": (node) => showRunServicePanel({ instance: node }),
+    "Visualize in 3D": (node) => showDeviceModel(node.id),
+    "Edit Site": () => showInstancePanel("site", site?.id),
     "Edit Edge": (edge) => showInstancePanel(edge.type, edge.id),
     "Enter Site": (node) => switchToSite(`${currentPath}>${node.id}`),
     "Site Backward": () => switchToSite(history[historyPosition - 1], "left"),

@@ -23,11 +23,7 @@ import {
   serializeForm,
   showInstancePanel,
 } from "./base.js";
-import {
-  showConnectionPanel,
-  showDeviceData,
-  showDeviceResultsPanel,
-} from "./inventory.js";
+import { showConnectionPanel, showDeviceData, showDeviceResultsPanel } from "./inventory.js";
 import { tables } from "./table.js";
 
 let graph;

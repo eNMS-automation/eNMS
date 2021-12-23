@@ -3,6 +3,7 @@ global
 page: false
 */
 
+import { showRunServicePanel } from "./automation.js";
 import {
   call,
   configureNamespace,
@@ -24,6 +25,7 @@ import {
 } from "./builder.js";
 import { showConnectionPanel, showDeviceData, showDeviceResultsPanel } from "./inventory.js";
 import { clearSearch, tableInstances } from "./table.js";
+import { showDeviceModel } from "./visualization.js";
 
 let graph;
 export let site = JSON.parse(localStorage.getItem("site"));

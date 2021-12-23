@@ -608,7 +608,7 @@ function initFiltering() {
   }
 }
 
-function showDeviceModel(device) {
+export function showDeviceModel(device) {
   openPanel({
     name: "device_view",
     title: `3D Visualization of '${device.name}'`,

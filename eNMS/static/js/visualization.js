@@ -664,7 +664,7 @@ export function initVisualization() {
     Configuration: (d) => showDeviceData(d),
     Results: (d) => showDeviceResultsPanel(d),
     "Run Service": (d) => showRunServicePanel({ instance: d }),
-    "Visualize in 3D": (d) => showDeviceModel(d),
+    "3D Visualization": (d) => showDeviceModel(d),
   });
   call({
     url: `/get_visualization_pools/${page}`,

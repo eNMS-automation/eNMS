@@ -178,7 +178,7 @@ export function updateSiteRightClickBindings() {
     Configuration: (node) => showDeviceData(node),
     Results: (node) => showDeviceResultsPanel(node),
     "Run Service": (node) => showRunServicePanel({ instance: node }),
-    "Visualize in 3D": (node) => showDeviceModel(node.id),
+    "3D Visualization": (node) => showDeviceModel(node.id),
     "Edit Site": () => showInstancePanel("site", site?.id),
     "Edit Edge": (edge) => showInstancePanel(edge.type, edge.id),
     "Enter Site": (node) => switchToSite(`${currentPath}>${node.id}`),

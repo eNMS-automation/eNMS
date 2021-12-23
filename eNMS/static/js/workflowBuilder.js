@@ -444,6 +444,7 @@ function switchMode(mode, noNotification) {
 function addServicePanel() {
   openPanel({
     name: "add_services_to_workflow",
+    title: "Add Services to Worfklow",
     callback: function () {
       $("#service-tree").jstree({
         core: {

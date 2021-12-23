@@ -15,7 +15,12 @@ import {
   openPanel,
   showInstancePanel,
 } from "./base.js";
-import { drawSiteEdge, drawSiteNode, switchToSite, updateSiteRightClickBindings } from "./siteBuilder.js";
+import {
+  drawSiteEdge,
+  drawSiteNode,
+  switchToSite,
+  updateSiteRightClickBindings,
+} from "./siteBuilder.js";
 import {
   drawIterationEdge,
   drawWorkflowEdge,

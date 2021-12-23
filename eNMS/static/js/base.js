@@ -182,7 +182,10 @@ const deleteInstance = function (type, id, tableId) {
         }
       }
       if (tableId) {
-        tableInstances[tableId].table.row($(`#${id}`)).remove().draw(false);
+        tableInstances[tableId].table
+          .row($(`#${id}`))
+          .remove()
+          .draw(false);
       }
       const name = result.name ? `'${result.name}'` : "";
       notify(`${type.toUpperCase()} ${name} deleted.`, "success", 5, true);
@@ -607,7 +610,9 @@ function showServicePanel(type, id, mode, tableId) {
 }
 
 function showNodePanel(type, id, mode) {
-  $(id ? `#${type}-type-${id}` : `#${type}-type`).val(type).prop("disabled", true);
+  $(id ? `#${type}-type-${id}` : `#${type}-type`)
+    .val(type)
+    .prop("disabled", true);
   $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
   if (id && mode == "duplicate" && type == "site") $(`#copy-${id}`).val(id);
   $(id ? `#${type}-sites-${id}` : `#${type}-sites`).prop("disabled", true);

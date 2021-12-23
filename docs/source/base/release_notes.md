@@ -3,6 +3,8 @@
 
 Version 4.2.0
 -------------
+- Add Site builder mechanism
+- Add 3D visualization of network devices
 - Remove deep_services function used for export, use service.children relationship instead.
 
 To be tested:

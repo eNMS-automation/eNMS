@@ -10,6 +10,7 @@ import {
   history,
   historyPosition,
   moveHistory,
+  notify,
   showInstancePanel,
 } from "./base.js";
 import {
@@ -169,9 +170,10 @@ export function showLinkPanel(type, id, edge) {
 }
 
 function drawNetwork() {
+  const enabled = graph.physics.physicsEnabled;
   graph.setOptions({
     physics: {
-      enabled: !graph.physics.physicsEnabled,
+      enabled: !enabled,
       barnesHut: {
         springLength: 250,
         springConstant: 0.05,
@@ -179,6 +181,8 @@ function drawNetwork() {
       },
     }
   });
+  const status = enabled ? "disabled" : "enabled";
+  notify(`Automatic Display ${status}.`, "success", 5);
 }
 
 export function updateSiteRightClickBindings() {

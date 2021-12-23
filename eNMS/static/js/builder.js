@@ -10,14 +10,12 @@ import {
   call,
   configureNamespace,
   createTooltips,
-  history,
-  historyPosition,
   loadTypes,
   notify,
   openPanel,
   showInstancePanel,
 } from "./base.js";
-import { drawSiteEdge, drawSiteNode, switchToSite } from "./siteBuilder.js";
+import { drawSiteEdge, drawSiteNode, switchToSite, updateSiteRightClickBindings } from "./siteBuilder.js";
 import {
   drawIterationEdge,
   drawWorkflowEdge,
@@ -347,24 +345,6 @@ export function processBuilderData(newInstance) {
     if (type == "workflow") drawIterationEdge(instance);
     switchMode("motion");
   }
-}
-
-export function updateSiteRightClickBindings() {
-  updateBuilderBindings(action);
-  Object.assign(action, {
-    "Create Site": () => createNewNode("create_site"),
-    "Duplicate Site": () => createNewNode("duplicate_site"),
-    "Create New Node": () => createNewNode("create_node"),
-    "Edit Site": () => showInstancePanel("site", instance?.id),
-    "Edit Edge": (edge) => showInstancePanel(edge.type, edge.id),
-    "Enter Site": (node) => switchToSite(`${currentPath}>${node.id}`),
-    "Site Backward": () => switchToSite(history[historyPosition - 1], "left"),
-    "Site Forward": () => switchToSite(history[historyPosition + 1], "right"),
-    "Site Upward": () => {
-      const parentPath = currentPath.split(">").slice(0, -1).join(">");
-      if (parentPath) switchToSite(parentPath);
-    },
-  });
 }
 
 function switchTo(...args) {

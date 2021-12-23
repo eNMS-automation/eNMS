@@ -3,7 +3,8 @@ global
 page: false
 */
 
-import { call, configureNamespace, moveHistory, showInstancePanel } from "./base.js";
+import { call, configureNamespace,   history,
+  historyPosition,moveHistory, showInstancePanel } from "./base.js";
 import {
   configureGraph,
   creationMode,
@@ -12,6 +13,7 @@ import {
   nodes,
   setPath,
   showLabelPanel,
+  updateBuilderBindings,
 } from "./builder.js";
 import { clearSearch, tableInstances } from "./table.js";
 
@@ -152,6 +154,24 @@ export function showLinkPanel(type, id, edge) {
       .val([edge.to])
       .trigger("change");
   }
+}
+
+export function updateSiteRightClickBindings() {
+  updateBuilderBindings(action);
+  Object.assign(action, {
+    "Create Site": () => createNewNode("create_site"),
+    "Duplicate Site": () => createNewNode("duplicate_site"),
+    "Create New Node": () => createNewNode("create_node"),
+    "Edit Site": () => showInstancePanel("site", instance?.id),
+    "Edit Edge": (edge) => showInstancePanel(edge.type, edge.id),
+    "Enter Site": (node) => switchToSite(`${currentPath}>${node.id}`),
+    "Site Backward": () => switchToSite(history[historyPosition - 1], "left"),
+    "Site Forward": () => switchToSite(history[historyPosition + 1], "right"),
+    "Site Upward": () => {
+      const parentPath = currentPath.split(">").slice(0, -1).join(">");
+      if (parentPath) switchToSite(parentPath);
+    },
+  });
 }
 
 export function drawSiteEdge(link) {

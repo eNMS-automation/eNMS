@@ -18,7 +18,7 @@ import {
   userIsActive,
 } from "./base.js";
 import { exportServices } from "./automation.js";
-import { updateSiteRightClickBindings } from "./builder.js";
+import { updateSiteRightClickBindings } from "./siteBuilder.js";
 
 export let tables = {};
 export let tableInstances = {};

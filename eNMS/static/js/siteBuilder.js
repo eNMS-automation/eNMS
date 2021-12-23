@@ -168,9 +168,23 @@ export function showLinkPanel(type, id, edge) {
   }
 }
 
+function drawNetwork() {
+  graph.setOptions({
+    physics: {
+      enabled: !graph.physics.physicsEnabled,
+      barnesHut: {
+        springLength: 250,
+        springConstant: 0.05,
+        damping: 0.09,
+      },
+    }
+  });
+}
+
 export function updateSiteRightClickBindings() {
   updateBuilderBindings(action);
   Object.assign(action, {
+    "Automatic Layout": () => drawNetwork(),
     "Create Site": () => createNewNode("create_site"),
     "Duplicate Site": () => createNewNode("duplicate_site"),
     "Create New Node": () => createNewNode("create_node"),

@@ -197,14 +197,18 @@ function addObjectsToSite() {
   });
 }
 
+function openAddToSitePanel() {
+  openPanel({
+    name: "add_to_site",
+    title: `Add objects to site '${site.name}'`,
+    size: "800 350",
+  });
+}
+
 export function updateSiteRightClickBindings() {
   updateBuilderBindings(action);
   Object.assign(action, {
-    "Add to Site": () =>
-      openPanel({
-        name: "add_to_site",
-        title: `Add objects to site '${site.name}'`,
-      }),
+    "Add to Site": openAddToSitePanel,
     "Automatic Layout": () => drawNetwork(),
     "Create Site": () => createNewNode("create_site"),
     "Duplicate Site": () => createNewNode("duplicate_site"),

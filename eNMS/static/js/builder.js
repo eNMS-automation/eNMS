@@ -423,6 +423,7 @@ export function initBuilder() {
 }
 
 function getTree() {
+  if (!instance) return notify(`No ${type} has been created yet.`, "error", 5);
   const instanceId = instance.id;
   openPanel({
     name: "instance_tree",

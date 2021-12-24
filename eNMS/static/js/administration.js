@@ -55,6 +55,7 @@ export function openDebugPanel() {
             $("#debug-snippets").append(`<option value="${name}">${name}</option>`);
           }
           $("#debug-snippets")
+            .val("empty.py")
             .on("change", function () {
               const value = snippets[this.value];
               editors[undefined]["code"].setValue(value);

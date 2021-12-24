@@ -197,10 +197,11 @@ function deleteSelection() {
     data: selection,
     callback: function (updateTime) {
       network.deleteSelected();
-      instance.services = instance.services.filter(
+      const edgeType = type == "site" ? "links" : "edges"
+      instance[`${nodeType}s`] = instance[`${nodeType}s`].filter(
         (n) => !selection.nodes.includes(n.id)
       );
-      instance.edges = instance.edges.filter((e) => !selection.edges.includes(e.id));
+      instance[edgeType] = instance[edgeType].filter((e) => !selection.edges.includes(e.id));
       instance.last_modified = updateTime;
       notify("Selection removed.", "success", 5);
       switchMode(currentMode, true);

@@ -500,7 +500,6 @@ export function updateWorkflowRightClickBindings() {
   Object.assign(action, {
     "Run Workflow": () => runWorkflow(),
     "Parameterized Workflow Run": () => runWorkflow(true),
-    "Create New Service": () => createNewNode("create_service"),
     "Restart Workflow from Here": showRestartWorkflowPanel,
     "Workflow Result Tree": () => showRuntimePanel("results", workflow),
     "Workflow Result Table": () =>
@@ -521,7 +520,6 @@ export function updateWorkflowRightClickBindings() {
       showInstancePanel("workflow_edge", edge.id);
     },
     Skip: () => skipServices(),
-    "Enter Workflow": (node) => switchToWorkflow(`${currentPath}>${node.id}`),
   });
 }
 

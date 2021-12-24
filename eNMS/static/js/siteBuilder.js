@@ -208,14 +208,12 @@ export function updateSiteRightClickBindings() {
   Object.assign(action, {
     "Add to Site": openAddToSitePanel,
     "Automatic Layout": () => drawNetwork(),
-    "Create New Node": () => createNewNode("create_node"),
     Connect: (node) => showConnectionPanel(node),
     Configuration: (node) => showDeviceData(node),
     Results: (node) => showDeviceResultsPanel(node),
     "Run Service": (node) => showRunServicePanel({ instance: node }),
     "3D Visualization": (node) => showDeviceModel(node.id),
     "Edit Edge": (edge) => showInstancePanel(edge.type, edge.id),
-    "Enter Site": (node) => switchToSite(`${currentPath}>${node.id}`),
   });
 }
 

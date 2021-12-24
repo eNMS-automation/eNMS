@@ -91,9 +91,22 @@ class Controller:
         self.update_rbac(*instances)
         return {"number": len(instances), "target": target.base_properties}
 
-    def add_objects_to_site(self, site_id):
+    def add_objects_to_site(self, site_id, **kwargs):
         site = db.fetch("site", id=site_id)
-        return
+        nodes = set(db.objectify("node", kwargs["nodes"]))
+        links = set(db.objectify("link", kwargs["links"]))
+        for pool in db.objectify("pool", kwargs["pools"]):
+            nodes |= set(pool.devices)
+            links |= set(pool.links)
+        for node in nodes:
+            if node in site.nodes:
+                continue
+            site.nodes.append(node)
+        for link in links:
+            if link in site.links:
+                continue
+            site.links.append(link)
+        return {"nodes": [node.serialized for node in nodes], "links": [link.serialized for link in links]}
 
     def bulk_deletion(self, table, **kwargs):
         instances = self.filtering(table, bulk="id", form=kwargs)

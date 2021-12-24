@@ -290,7 +290,7 @@ class AddServiceForm(BaseForm):
 class AddToSiteForm(BaseForm):
     action = "eNMS.siteBuilder.addObjectsToSite"
     form_type = HiddenField(default="add_to_site")
-    devices = MultipleInstanceField("Devices", model="device")
+    nodes = MultipleInstanceField("Nodes", model="node")
     links = MultipleInstanceField("Links", model="link")
     pools = MultipleInstanceField("Pools", model="pool")
 

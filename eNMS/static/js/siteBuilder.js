@@ -180,17 +180,12 @@ function drawNetwork() {
   notify(`Automatic Display ${status}.`, "success", 5);
 }
 
-function openAddToSitePanel() {
-  openPanel({
-    name: "add_to_site",
-    title: `Add objects to site '${site.name}'`,
-  });
-}
-
 function addObjectsToSite() {
   call({
     url: `/add_objects_to_site/${site.id}`,
-    callback: function (newSite) {
+    form: "add_to_site-form",
+    callback: function (result) {
+      console.log(result)
       $("#add_to_site").remove();
     },
   });
@@ -199,7 +194,10 @@ function addObjectsToSite() {
 export function updateSiteRightClickBindings() {
   updateBuilderBindings(action);
   Object.assign(action, {
-    "Add to Site": () => openAddToSitePanel(),
+    "Add to Site": () => openPanel({
+      name: "add_to_site",
+      title: `Add objects to site '${site.name}'`,
+    }),
     "Automatic Layout": () => drawNetwork(),
     "Create Site": () => createNewNode("create_site"),
     "Duplicate Site": () => createNewNode("duplicate_site"),

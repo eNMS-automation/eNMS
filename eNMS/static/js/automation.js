@@ -735,15 +735,6 @@ Object.assign(action, {
   Forward: () => switchToWorkflow(history[historyPosition + 1], "right"),
 });
 
-export function deleteCorruptedEdges() {
-  call({
-    url: "/delete_corrupted_edges",
-    callback: function (number) {
-      notify(`${number} Corrupted edges successfully deleted.`, "success", 5);
-    },
-  });
-}
-
 export function showRunServicePanel({ instance, tableId, type }) {
   const table = tableInstances?.[tableId];
   const targetType = type || instance.type;
@@ -817,7 +808,6 @@ function showImportServicesPanel() {
 configureNamespace("automation", [
   displayDiff,
   copyClipboard,
-  deleteCorruptedEdges,
   displayCalendar,
   downloadLogs,
   field,

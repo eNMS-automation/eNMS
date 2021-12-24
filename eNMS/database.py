@@ -146,15 +146,12 @@ class Database:
             Text: "",
         }
 
-        class CustomColumn(Column):
-            inherit_cache = True
+        def init_column(column_type, *args, **kwargs):
+            if "default" not in kwargs and column_type in default_ctypes:
+                kwargs["default"] = default_ctypes[column_type]
+            return Column(column_type, *args, **kwargs)
 
-            def __init__(self, ctype, *args, **kwargs):
-                if "default" not in kwargs and ctype in default_ctypes:
-                    kwargs["default"] = default_ctypes[ctype]
-                super().__init__(ctype, *args, **kwargs)
-
-        self.Column = CustomColumn
+        self.Column = init_column
 
     def configure_events(self):
         if self.dialect == "sqlite":

@@ -83,8 +83,7 @@ export function configureGraph(newInstance, graph, options) {
         $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
         selectedObject = nodes.get(node);
         $(`.${instance.type}-selection`).toggle(selectedObject.type == instance.type);
-      } else if (typeof edge !== "undefined") {
-        if (type == "workflow" && !ends.has(node)) return;
+      } else if (typeof edge !== "undefined" && !ends.has(node)) {
         network.selectEdges([edge, ...network.getSelectedEdges()]);
         $(".menu-entry ").hide();
         $(".edge-selection").show();

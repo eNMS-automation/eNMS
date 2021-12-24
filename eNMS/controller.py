@@ -269,22 +269,27 @@ class Controller:
     def delete_instance(self, model, instance_id):
         return db.delete(model, id=instance_id)
 
-    def delete_builder_selection(self, workflow_id, **selection):
-        workflow = db.fetch("workflow", id=workflow_id)
-        workflow.last_modified = vs.get_time()
+    def delete_builder_selection(self, type, id, **selection):
+        instance = db.fetch(type, id=id)
+        instance.last_modified = vs.get_time()
         for edge_id in selection["edges"]:
-            db.delete("workflow_edge", id=edge_id)
+            if type == "workflow":
+                db.delete("workflow_edge", id=edge_id)
+            else:
+                instance.links.remove(db.fetch("link", id=edge_id))
         for node_id in selection["nodes"]:
             if isinstance(node_id, str):
-                workflow.labels.pop(node_id)
+                instance.labels.pop(node_id)
+            elif type == "site":
+                instance.nodes.remove(db.fetch("node", id=node_id))
             else:
                 service = db.fetch("service", id=node_id)
-                workflow.services.remove(service)
+                instance.services.remove(service)
                 if not service.shared:
                     db.delete("service", id=service.id)
                 else:
                     service.update_originals()
-        return workflow.last_modified
+        return instance.last_modified
 
     def duplicate_workflow(self, workflow_id):
         workflow = db.fetch("workflow", id=workflow_id)

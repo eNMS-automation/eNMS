@@ -334,6 +334,7 @@ export function processBuilderData(newInstance) {
     (type == "site" && newInstance.type in subtypes.link)
   ) {
     edges.update(drawEdge(newInstance));
+    network.addEdgeMode();
   } else if (
     (type == "workflow" && newInstance.type in subtypes.service) ||
     (type == "site" && newInstance.type in subtypes.node)

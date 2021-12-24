@@ -106,7 +106,10 @@ class Controller:
             if link in site.links:
                 continue
             site.links.append(link)
-        return {"nodes": [node.serialized for node in nodes], "links": [link.serialized for link in links]}
+        return {
+            "nodes": [node.serialized for node in nodes],
+            "links": [link.serialized for link in links],
+        }
 
     def bulk_deletion(self, table, **kwargs):
         instances = self.filtering(table, bulk="id", form=kwargs)
@@ -808,7 +811,7 @@ class Controller:
                 else False,
                 "a_attr": {
                     "class": "no_checkbox",
-                    "style": f"color: #{color}; width: 100%"
+                    "style": f"color: #{color}; width: 100%",
                 },
                 "type": instance.type,
             }

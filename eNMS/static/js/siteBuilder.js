@@ -26,7 +26,11 @@ import {
   showLabelPanel,
   updateBuilderBindings,
 } from "./builder.js";
-import { showConnectionPanel, showDeviceData, showDeviceResultsPanel } from "./inventory.js";
+import {
+  showConnectionPanel,
+  showDeviceData,
+  showDeviceResultsPanel,
+} from "./inventory.js";
 import { clearSearch, tableInstances } from "./table.js";
 import { showDeviceModel } from "./visualization.js";
 
@@ -175,7 +179,7 @@ function drawNetwork() {
         springConstant: 0.05,
         damping: 0.09,
       },
-    }
+    },
   });
   const status = enabled ? "disabled" : "enabled";
   notify(`Automatic Display ${status}.`, "success", 5);
@@ -196,10 +200,11 @@ function addObjectsToSite() {
 export function updateSiteRightClickBindings() {
   updateBuilderBindings(action);
   Object.assign(action, {
-    "Add to Site": () => openPanel({
-      name: "add_to_site",
-      title: `Add objects to site '${site.name}'`,
-    }),
+    "Add to Site": () =>
+      openPanel({
+        name: "add_to_site",
+        title: `Add objects to site '${site.name}'`,
+      }),
     "Automatic Layout": () => drawNetwork(),
     "Create Site": () => createNewNode("create_site"),
     "Duplicate Site": () => createNewNode("duplicate_site"),

@@ -3310,3 +3310,146 @@
   subtype: ''
   type: device
   vendor: Cisco
+- access_groups: admin
+  creator: admin
+  custom_json: {}
+  custom_multiselect: []
+  custom_select: b
+  description: ''
+  down: false
+  icon: antenna
+  icon_3d: juniper_ex3300
+  ip_address: ''
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2021-12-24 05:00:25.998621'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '0.0'
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: Router 1
+  napalm_driver: ios
+  netconf_driver: default
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  positions:
+    'Site 1: Top-level Devices and Links': [-223, -105]
+  property1: 10.145.14.1
+  property2: CP
+  property3: password
+  reachable: true
+  scrapli_driver: cisco_iosxe
+  subtype: ''
+  type: device
+  vendor: ''
+- access_groups: admin
+  creator: admin
+  custom_json: {}
+  custom_multiselect: []
+  custom_select: b
+  description: ''
+  down: false
+  icon: antenna
+  icon_3d: juniper_ex3300
+  ip_address: ''
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2021-12-24 05:00:37.199442'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '0.0'
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: Router 2
+  napalm_driver: ios
+  netconf_driver: default
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  positions:
+    'Site 1: Top-level Devices and Links': [-154, 189]
+  property1: 10.145.14.1
+  property2: CP
+  property3: password
+  reachable: true
+  scrapli_driver: cisco_iosxe
+  serial_number: ''
+  subtype: ''
+  type: router
+  vendor: ''
+- access_groups: admin
+  creator: admin
+  custom_json: {}
+  custom_multiselect: []
+  custom_select: b
+  description: ''
+  down: false
+  icon: antenna
+  icon_3d: juniper_ex3300
+  ip_address: ''
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2021-12-24 05:00:42.682204'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '0.0'
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: Router 3
+  napalm_driver: ios
+  netconf_driver: default
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  positions:
+    'Site 1: Top-level Devices and Links': [269, -14]
+  property1: 10.145.14.1
+  property2: CP
+  property3: password
+  reachable: true
+  scrapli_driver: cisco_iosxe
+  serial_number: ''
+  subtype: ''
+  type: router
+  vendor: ''

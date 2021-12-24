@@ -1,1 +1,15 @@
-[]
+- access_groups: ''
+  creator: admin
+  description: ''
+  labels: {}
+  last_modified: '2021-12-24 05:01:19.104408'
+  links: [R1 - R2, R2 - R3, R1 - R3]
+  location: ''
+  model: ''
+  name: 'Site 1: Top-level Devices and Links'
+  nodes: [Router 1, Router 2, Router 3]
+  positions: {}
+  sites: []
+  subtype: ''
+  type: site
+  vendor: ''

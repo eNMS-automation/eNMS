@@ -15,6 +15,7 @@ import {
   loadTypes,
   notify,
   openPanel,
+  showConfirmationPanel,
   showInstancePanel,
 } from "./base.js";
 import {
@@ -180,6 +181,55 @@ export function drawLabel(id, label) {
   });
 }
 
+function deleteSelection() {
+  const selection = {
+    nodes: network.getSelectedNodes().filter((node) => !ends.has(node)),
+    edges: network.getSelectedEdges(),
+  };
+  selection.nodes.forEach((node) => {
+    delete instance.labels[node];
+    network.getConnectedEdges(node).forEach((edge) => {
+      if (!selection.edges.includes(edge)) selection.edges.push(edge);
+    });
+  });
+  selection.edges = selection.edges.filter((edge) => edge > 0);
+  call({
+    url: `/delete_workflow_selection/${instance.id}`,
+    data: selection,
+    callback: function (updateTime) {
+      network.deleteSelected();
+      instance.services = instance.services.filter(
+        (n) => !selection.nodes.includes(n.id)
+      );
+      instance.edges = instance.edges.filter((e) => !selection.edges.includes(e.id));
+      instance.last_modified = updateTime;
+      notify("Selection removed.", "success", 5);
+      switchMode(currentMode, true);
+      $("#builder_deletion").remove();
+    },
+  });
+}
+
+function openDeletionPanel() {
+  const nodeSelection = network.getSelectedNodes().length;
+  const edgeSelection = network.getSelectedEdges().length;
+  if (!nodeSelection && !edgeSelection) {
+    notify("Nothing has been selected for deletion.", "error", 5);
+  } else if (nodeSelection == 1 || edgeSelection == 1) {
+    deleteSelection();
+  } else {
+    showConfirmationPanel({
+      id: "builder_deletion",
+      title: `Deletion from ${type}`,
+      message: `Are you sure you want to permanently remove the current selection
+      (<b>${nodeSelection} node${nodeSelection > 1 ? "s" : ""}
+      and ${edgeSelection} link${edgeSelection > 1 ? "s" : ""}</b>) ?`,
+      confirmButton: "Delete",
+      onConfirm: deleteSelection,
+    });
+  }
+}
+
 export function updateBuilderBindings(action) {
   Object.assign(action, {
     [`Create ${type}`]: () => createNewNode(`create_${type}`),
@@ -187,11 +237,12 @@ export function updateBuilderBindings(action) {
     [`Duplicate ${type}`]: () => createNewNode(`duplicate_${type}`),
     [`Edit ${type}`]: () => showInstancePanel(type, instance?.id),
     [`Enter ${type}`]: (node) => switchTo(`${currentPath}>${node.id}`),
-    "Zoom In": () => network.zoom(0.2),
-    "Zoom Out": () => network.zoom(-0.2),
     "Create Label": () => showLabelPanel({ usePosition: true }),
     "Create Label Button": () => showLabelPanel({ usePosition: false }),
     "Edit Label": (label) => showLabelPanel({ label: label, usePosition: true }),
+    Delete: openDeletionPanel,
+    "Zoom In": () => network.zoom(0.2),
+    "Zoom Out": () => network.zoom(-0.2),
     Backward: () => switchTo(history[historyPosition - 1], "left"),
     Forward: () => switchTo(history[historyPosition + 1], "right"),
     Upward: () => {

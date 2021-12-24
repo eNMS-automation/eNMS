@@ -214,55 +214,6 @@ function addServicesToWorkflow() {
   });
 }
 
-function openDeletionPanel() {
-  const nodeSelection = graph.getSelectedNodes().length;
-  const edgeSelection = graph.getSelectedEdges().length;
-  if (!nodeSelection && !edgeSelection) {
-    notify("Nothing has been selected for deletion.", "error", 5);
-  } else if (nodeSelection == 1 || edgeSelection == 1) {
-    deleteSelection();
-  } else {
-    showConfirmationPanel({
-      id: `workflow_builder_deletion`,
-      title: "Deletion from workflow",
-      message: `Are you sure you want to permanently remove the current selection
-      (<b>${nodeSelection} node${nodeSelection > 1 ? "s" : ""}
-      and ${edgeSelection} link${edgeSelection > 1 ? "s" : ""}</b>) ?`,
-      confirmButton: "Delete",
-      onConfirm: deleteSelection,
-    });
-  }
-}
-
-function deleteSelection() {
-  const selection = {
-    nodes: graph.getSelectedNodes().filter((node) => !ends.has(node)),
-    edges: graph.getSelectedEdges(),
-  };
-  selection.nodes.forEach((node) => {
-    delete workflow.labels[node];
-    graph.getConnectedEdges(node).forEach((edge) => {
-      if (!selection.edges.includes(edge)) selection.edges.push(edge);
-    });
-  });
-  selection.edges = selection.edges.filter((edge) => edge > 0);
-  call({
-    url: `/delete_workflow_selection/${workflow.id}`,
-    data: selection,
-    callback: function (updateTime) {
-      graph.deleteSelected();
-      workflow.services = workflow.services.filter(
-        (n) => !selection.nodes.includes(n.id)
-      );
-      workflow.edges = workflow.edges.filter((e) => !selection.edges.includes(e.id));
-      workflow.last_modified = updateTime;
-      notify("Selection removed.", "success", 5);
-      switchMode(currentMode, true);
-      $("#workflow_deletion").remove();
-    },
-  });
-}
-
 function saveEdge(edge) {
   const param = `${workflow.id}/${edge.subtype}/${edge.from}/${edge.to}`;
   call({
@@ -508,7 +459,6 @@ export function updateWorkflowRightClickBindings() {
     "Workflow Logs": () => showRuntimePanel("logs", workflow),
     "Add to Workflow": addServicePanel,
     "Stop Workflow": () => stopWorkflow(),
-    Delete: openDeletionPanel,
     "Runtimes Display": flipRuntimeDisplay,
     "Service Name": (service) => copyToClipboard({ text: service.name }),
     "Top-level Result": getResultLink,
@@ -764,7 +714,6 @@ function compareWorkflowResults() {
 
 configureNamespace("workflowBuilder", [
   addServicesToWorkflow,
-  deleteSelection,
   filterWorkflowTable,
   getWorkflowState,
   restartWorkflow,

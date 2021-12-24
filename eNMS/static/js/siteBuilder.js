@@ -20,6 +20,7 @@ import {
   creationMode,
   currentMode,
   currentPath,
+  edges,
   nodes,
   setPath,
   showLabelPanel,
@@ -185,7 +186,8 @@ function addObjectsToSite() {
     url: `/add_objects_to_site/${site.id}`,
     form: "add_to_site-form",
     callback: function (result) {
-      console.log(result)
+      result.nodes.map((node) => nodes.update(drawSiteNode(node)));
+      result.links.map((link) => edges.update(drawSiteEdge(link)));
       $("#add_to_site").remove();
     },
   });

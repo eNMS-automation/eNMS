@@ -54,7 +54,6 @@ class Node(Object):
     parent_type = "object"
     id = db.Column(Integer, ForeignKey(Object.id), primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    scoped_name = db.Column(db.SmallString, index=True)
     positions = db.Column(db.Dict, info={"log_change": False})
     sites = relationship("Site", secondary=db.node_site_table, back_populates="nodes")
 
@@ -244,7 +243,6 @@ class Link(Object):
     parent_type = "object"
     id = db.Column(Integer, ForeignKey("object.id"), primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    scoped_name = db.Column(db.SmallString, index=True)
     color = db.Column(db.TinyString, default="#000000")
     source_id = db.Column(Integer, ForeignKey("device.id"))
     destination_id = db.Column(Integer, ForeignKey("device.id"))

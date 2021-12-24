@@ -443,8 +443,7 @@ export function preprocessForm(panel, id, type, duplicate) {
   }
   panel.querySelectorAll(".add-id").forEach((el) => {
     if (duplicate) {
-      const isScoped = type in subtypes.node || type in subtypes.service;
-      const property = isScoped ? "scoped_name" : "name";
+      const property = type in subtypes.service ? "scoped_name" : "name";
       if ([property, "id"].includes(el.name)) return;
     }
     if (id) $(el).prop("id", `${$(el).attr("id")}-${id}`);
@@ -728,7 +727,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
         if (page == "site_builder") updateSitePanel(type);
       }
       if (isService) loadScript(`../static/js/services/${type}.js`, id);
-      const property = isService || isNode || isLink ? "scoped_name" : "name";
+      const property = isService ? "scoped_name" : "name";
       $(`#${type}-${property}`).focus();
     },
     type: type,

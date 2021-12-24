@@ -437,10 +437,9 @@ class ObjectForm(BaseForm):
     form_type = HiddenField(default="object")
     get_request_allowed = False
     id = HiddenField()
-    scoped_name = StringField("Name", [InputRequired()])
+    name = StringField("Name")
     type = StringField("Type")
     sites = MultipleInstanceField("Sites", model="site")
-    name = StringField("Full Name")
     access_groups = StringField("Groups")
     description = StringField("Description")
     subtype = StringField("Subtype")
@@ -767,8 +766,7 @@ class SiteForm(BaseForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="site")
     id = HiddenField()
-    scoped_name = StringField("Name", [InputRequired()])
-    name = StringField("Full Name")
+    name = StringField("Name")
     sites = MultipleInstanceField("Sites", model="site")
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
 

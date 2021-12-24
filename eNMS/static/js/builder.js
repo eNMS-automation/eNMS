@@ -178,6 +178,9 @@ export function drawLabel(id, label) {
 
 export function updateBuilderBindings(action) {
   Object.assign(action, {
+    [`Create ${type}`]: () => createNewNode(`create_${type}`),
+    [`Duplicate ${type}`]: () => createNewNode(`duplicate_${type}`),
+    [`Edit ${type}`]: () => showInstancePanel(type, instance?.id),
     "Zoom In": () => network.zoom(0.2),
     "Zoom Out": () => network.zoom(-0.2),
     "Create Label": () => showLabelPanel({ usePosition: true }),

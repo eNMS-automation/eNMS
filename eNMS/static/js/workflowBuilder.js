@@ -502,10 +502,7 @@ export function updateWorkflowRightClickBindings() {
   Object.assign(action, {
     "Run Workflow": () => runWorkflow(),
     "Parameterized Workflow Run": () => runWorkflow(true),
-    "Create Workflow": () => createNewNode("create_workflow"),
-    "Duplicate Workflow": () => createNewNode("duplicate_workflow"),
     "Create New Service": () => createNewNode("create_service"),
-    "Edit Workflow": () => showInstancePanel("workflow", workflow.id),
     "Restart Workflow from Here": showRestartWorkflowPanel,
     "Workflow Result Tree": () => showRuntimePanel("results", workflow),
     "Workflow Result Table": () =>

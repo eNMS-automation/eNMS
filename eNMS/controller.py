@@ -91,6 +91,10 @@ class Controller:
         self.update_rbac(*instances)
         return {"number": len(instances), "target": target.base_properties}
 
+    def add_objects_to_site(self, site_id):
+        site = db.fetch("site", id=site_id)
+        return
+
     def bulk_deletion(self, table, **kwargs):
         instances = self.filtering(table, bulk="id", form=kwargs)
         for instance_id in instances:

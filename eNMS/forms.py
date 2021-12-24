@@ -287,6 +287,14 @@ class AddServiceForm(BaseForm):
     search = StringField()
 
 
+class AddToSiteForm(BaseForm):
+    action = "eNMS.siteBuilder.addObjectsToSite"
+    form_type = HiddenField(default="add_to_site")
+    devices = MultipleInstanceField("Devices", model="device")
+    links = MultipleInstanceField("Links", model="link")
+    pools = MultipleInstanceField("Pools", model="pool")
+
+
 class AdminForm(BaseForm):
     template = "administration"
     form_type = HiddenField(default="administration")

@@ -8,6 +8,7 @@ Version 4.2.0
 - Add 3D visualization of network devices
 - Remove deep_services function used for export, use service.children relationship instead.
 - Dont subclass SQLAlchemy Column following advice of SQLAlchemy creator.
+- Make corrupted edges deletion mechanism a troublehooting snippet instead of a button in the admin panel.
 
 To be tested:
 - Performances (SQL Column function init)

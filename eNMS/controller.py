@@ -263,37 +263,6 @@ class Controller:
     def database_deletion(self, **kwargs):
         db.delete_all(*kwargs["deletion_types"])
 
-    def delete_corrupted_edges(self):
-        edges = set(db.fetch_all("workflow_edge"))
-        duplicated_edges, number_of_corrupted_edges = defaultdict(list), 0
-        for edge in list(edges):
-            services = getattr(edge.workflow, "services", [])
-            if (
-                not edge.source
-                or not edge.destination
-                or not edge.workflow
-                or edge.source not in services
-                or edge.destination not in services
-            ):
-                edges.remove(edge)
-                db.session.delete(edge)
-                number_of_corrupted_edges += 1
-        db.session.commit()
-        for edge in edges:
-            duplicated_edges[
-                (
-                    edge.source.name,
-                    edge.destination.name,
-                    edge.workflow.name,
-                    edge.subtype,
-                )
-            ].append(edge)
-        for duplicates in duplicated_edges.values():
-            for duplicate in duplicates[1:]:
-                db.session.delete(duplicate)
-                number_of_corrupted_edges += 1
-        return number_of_corrupted_edges
-
     def delete_file(self, filepath):
         remove(Path(filepath.replace(">", "/")))
 

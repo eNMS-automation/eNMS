@@ -115,7 +115,7 @@ export function drawSiteNode(node) {
       align: "center",
       bold: { color: "#000000" },
     },
-    label: node.scoped_name,
+    label: node.name,
     name: node.name,
     type: node.type,
     image: `/static/img/view/2D/router.gif`,
@@ -207,7 +207,7 @@ export function updateSiteRightClickBindings() {
 export function drawSiteEdge(link) {
   return {
     id: link.id,
-    label: link.scoped_name,
+    label: link.name,
     type: link.type,
     from: link.source_id,
     to: link.destination_id,

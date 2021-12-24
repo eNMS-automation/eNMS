@@ -562,8 +562,8 @@ tables.site = class SiteTable extends Table {
     row.name =
       row.type == "site"
         ? `<b><a href="#" onclick="eNMS.siteBuilder.filterSiteTable(
-      '${this.id}', ${row.id})">${row.scoped_name}</a></b>`
-        : row.scoped_name;
+      '${this.id}', ${row.id})">${row.name}</a></b>`
+        : row.name;
     row.links =
       row.type == "site"
         ? `<b><a href="#" onclick="eNMS.table.displayRelationTable(

@@ -771,11 +771,12 @@ class Controller:
                 elif instance.scoped_name == "Placeholder" and len(path_id) > 1:
                     instance = db.fetch(type, id=path_id[1])
             child_property = "nodes" if type == "site" else "services"
+            color = "FF1694" if getattr(instance, "shared", False) else "6666FF"
             return {
                 "data": {"path": path, **instance.base_properties},
                 "id": instance.id,
                 "state": {"opened": full_path.startswith(path)},
-                "text": instance.scoped_name,
+                "text": instance.scoped_name if type == "workflow" else instance.name,
                 "children": sorted(
                     filter(
                         None,
@@ -790,10 +791,7 @@ class Controller:
                 else False,
                 "a_attr": {
                     "class": "no_checkbox",
-                    "style": (
-                        f"color: #{'FF1694' if instance.shared else '6666FF'};"
-                        "width: 100%"
-                    ),
+                    "style": f"color: #{color}; width: 100%"
                 },
                 "type": instance.type,
             }

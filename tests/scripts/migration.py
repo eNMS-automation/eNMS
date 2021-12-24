@@ -14,7 +14,6 @@ def update_property(project, value=None, types=None):
             objects = yaml.load(migration_file)
         for obj in objects:
             obj["scoped_name"] = obj["name"]
-            obj["shared"] = True
         with open(path / f"{instance_type}.yaml", "w") as migration_file:
             yaml.dump(objects, migration_file)
 

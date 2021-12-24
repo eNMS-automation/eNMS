@@ -115,11 +115,6 @@ export function drawSiteNode(node) {
       align: "center",
       bold: { color: "#000000" },
     },
-    shadow: {
-      enabled: !node.shared,
-      color: "#6666FF",
-      size: 15,
-    },
     label: node.scoped_name,
     name: node.name,
     type: node.type,

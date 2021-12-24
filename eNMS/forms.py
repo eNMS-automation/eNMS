@@ -439,7 +439,6 @@ class ObjectForm(BaseForm):
     id = HiddenField()
     scoped_name = StringField("Name", [InputRequired()])
     type = StringField("Type")
-    shared = BooleanField("Shared", default=True)
     sites = MultipleInstanceField("Sites", model="site")
     name = StringField("Full Name")
     access_groups = StringField("Groups")
@@ -770,7 +769,6 @@ class SiteForm(BaseForm):
     id = HiddenField()
     scoped_name = StringField("Name", [InputRequired()])
     name = StringField("Full Name")
-    shared = BooleanField("Shared", default=False)
     sites = MultipleInstanceField("Sites", model="site")
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
 

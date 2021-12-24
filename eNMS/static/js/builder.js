@@ -215,7 +215,7 @@ function openDeletionPanel() {
   const edgeSelection = network.getSelectedEdges().length;
   if (!nodeSelection && !edgeSelection) {
     notify("Nothing has been selected for deletion.", "error", 5);
-  } else if (nodeSelection == 1 || edgeSelection == 1) {
+  } else if (nodeSelection == 1 || !nodeSelection && edgeSelection == 1) {
     deleteSelection();
   } else {
     showConfirmationPanel({

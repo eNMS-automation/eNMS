@@ -7,8 +7,6 @@ import { showRunServicePanel } from "./automation.js";
 import {
   call,
   configureNamespace,
-  history,
-  historyPosition,
   moveHistory,
   notify,
   openPanel,
@@ -218,12 +216,6 @@ export function updateSiteRightClickBindings() {
     "3D Visualization": (node) => showDeviceModel(node.id),
     "Edit Edge": (edge) => showInstancePanel(edge.type, edge.id),
     "Enter Site": (node) => switchToSite(`${currentPath}>${node.id}`),
-    "Site Backward": () => switchToSite(history[historyPosition - 1], "left"),
-    "Site Forward": () => switchToSite(history[historyPosition + 1], "right"),
-    "Site Upward": () => {
-      const parentPath = currentPath.split(">").slice(0, -1).join(">");
-      if (parentPath) switchToSite(parentPath);
-    },
   });
 }
 

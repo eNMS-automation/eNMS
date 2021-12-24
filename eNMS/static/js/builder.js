@@ -10,6 +10,8 @@ import {
   call,
   configureNamespace,
   createTooltips,
+  history,
+  historyPosition,
   loadTypes,
   notify,
   openPanel,
@@ -186,6 +188,12 @@ export function updateBuilderBindings(action) {
     "Create Label": () => showLabelPanel({ usePosition: true }),
     "Create Label Button": () => showLabelPanel({ usePosition: false }),
     "Edit Label": (label) => showLabelPanel({ label: label, usePosition: true }),
+    Backward: () => switchTo(history[historyPosition - 1], "left"),
+    Forward: () => switchTo(history[historyPosition + 1], "right"),
+    Upward: () => {
+      const parentPath = currentPath.split(">").slice(0, -1).join(">");
+      if (parentPath) switchTo(parentPath);
+    },
   });
   $("#network").contextMenu({
     menuSelector: "#contextMenu",

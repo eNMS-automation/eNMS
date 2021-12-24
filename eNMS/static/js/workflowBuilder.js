@@ -12,8 +12,6 @@ import {
   call,
   configureNamespace,
   copyToClipboard,
-  history,
-  historyPosition,
   moveHistory,
   notify,
   openPanel,
@@ -524,12 +522,6 @@ export function updateWorkflowRightClickBindings() {
     },
     Skip: () => skipServices(),
     "Enter Workflow": (node) => switchToWorkflow(`${currentPath}>${node.id}`),
-    Backward: () => switchToWorkflow(history[historyPosition - 1], "left"),
-    Forward: () => switchToWorkflow(history[historyPosition + 1], "right"),
-    Upward: () => {
-      const parentPath = currentPath.split(">").slice(0, -1).join(">");
-      if (parentPath) switchToWorkflow(parentPath);
-    },
   });
 }
 

@@ -42,9 +42,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Jackson
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -92,9 +90,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: PaloAlto
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -142,9 +138,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Austin
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Arista
@@ -192,9 +186,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Washington
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Arista
@@ -242,9 +234,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Chicago
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -292,9 +282,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: SanJose
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -342,9 +330,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: SanDiego
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -392,9 +378,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Dallas
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -442,9 +426,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Philadelphia
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -492,9 +474,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: LosAngeles
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -542,9 +522,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Detroit
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -592,9 +570,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Richmond
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -642,9 +618,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Atlanta
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -692,9 +666,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Boston
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -742,9 +714,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Houston
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -792,9 +762,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Baltimore
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Juniper
@@ -842,9 +810,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Cleveland
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Juniper
@@ -892,9 +858,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Columbus
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Juniper
@@ -942,9 +906,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Cincinnati
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Juniper
@@ -992,9 +954,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Cambridge
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Juniper
@@ -1042,9 +1002,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Minneapolis
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Juniper
@@ -1092,9 +1050,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: NewYork
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Juniper
@@ -1142,9 +1098,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Sacramento
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Juniper
@@ -1192,9 +1146,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: SanFrancisco
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Juniper
@@ -1242,9 +1194,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Orange
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Juniper
@@ -1292,9 +1242,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Oakland
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -1342,9 +1290,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Denver
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -1392,9 +1338,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router5
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -1442,9 +1386,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router6
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -1492,9 +1434,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router7
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -1542,9 +1482,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router8
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -1592,9 +1530,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router9
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -1642,9 +1578,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router10 (public)
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -1692,9 +1626,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router11
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -1742,9 +1674,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router12
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -1792,9 +1722,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router13
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -1842,9 +1770,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router14
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -1892,9 +1818,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router15
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -1942,9 +1866,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router16
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -1992,9 +1914,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router17
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -2042,9 +1962,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router18 (public)
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -2092,9 +2010,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router19
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -2142,9 +2058,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router20 (admin)
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Juniper
@@ -2192,9 +2106,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router21
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Juniper
@@ -2242,9 +2154,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router22
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Juniper
@@ -2292,9 +2202,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router23 (admin)
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Juniper
@@ -2342,9 +2250,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router24
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Juniper
@@ -2392,9 +2298,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router25
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Juniper
@@ -2417,9 +2321,9 @@
   last_configuration_update: Never
   last_modified: ''
   last_operational_data_duration: Never
-  last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
+  last_operational_data_failure: '2021-12-22 15:24:38.592728'
+  last_operational_data_runtime: '2021-12-22 15:24:38.592728'
+  last_operational_data_status: Failure
   last_operational_data_update: Never
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
@@ -2442,9 +2346,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router26
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Juniper
@@ -2492,9 +2394,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router27
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Juniper
@@ -2542,9 +2442,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router28
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Juniper
@@ -2592,9 +2490,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router29
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Juniper
@@ -2642,9 +2538,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router30
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -2692,9 +2586,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router31
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -2742,9 +2634,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router32
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -2792,9 +2682,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router33
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -2842,9 +2730,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router34
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -2892,9 +2778,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router35
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -2942,9 +2826,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router36
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -2992,9 +2874,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: router37
   scrapli_driver: cisco_iosxe
-  shared: true
   subtype: router
   type: device
   vendor: Cisco
@@ -3042,9 +2922,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Server 2
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: linux
@@ -3092,9 +2970,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Aserver
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -3142,9 +3018,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Dallas-2
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -3192,9 +3066,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Dallas-3
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -3242,9 +3114,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Dallas-4
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -3292,9 +3162,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Austin-2
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Arista
@@ -3342,9 +3210,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Austin-3
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Arista
@@ -3392,9 +3258,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Jackson-2
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
@@ -3442,159 +3306,7 @@
   property2: CP
   property3: ''
   reachable: true
-  scoped_name: Oakland-2
   scrapli_driver: arista_eos
-  shared: true
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: admin
-  creator: admin
-  custom_json: {}
-  custom_multiselect: []
-  custom_select: b
-  description: ''
-  down: false
-  icon: antenna
-  icon_3d: juniper_ex3300
-  ip_address: ''
-  last_configuration_duration: Never
-  last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
-  last_modified: '2021-12-16 04:02:30.905020'
-  last_operational_data_duration: Never
-  last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
-  last_specialized_data_duration: Never
-  last_specialized_data_failure: Never
-  last_specialized_data_runtime: Never
-  last_specialized_data_status: Never
-  last_specialized_data_update: Never
-  latitude: '0.0'
-  location: ''
-  longitude: '0.0'
-  model: ''
-  name: '[Site 1: Top Level Shared and Non Shared Objects] Router 1'
-  napalm_driver: ios
-  netconf_driver: default
-  netmiko_driver: cisco_ios
-  operating_system: ''
-  os_version: ''
-  port: 22
-  positions:
-    'Site 1: Top Level Objects': [-472, 10]
-    'Site 1: Top Level Shared and Non Shared Objects': [-652, 266]
-  property1: 10.145.14.1
-  property2: CP
-  property3: password
-  reachable: true
-  scoped_name: Router 1
-  scrapli_driver: cisco_iosxe
-  shared: false
-  subtype: ''
-  type: device
-  vendor: ''
-- access_groups: admin
-  creator: admin
-  custom_json: {}
-  custom_multiselect: []
-  custom_select: b
-  description: ''
-  down: false
-  icon: antenna
-  icon_3d: juniper_ex3300
-  ip_address: ''
-  last_configuration_duration: Never
-  last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
-  last_modified: '2021-12-16 04:02:37.277641'
-  last_operational_data_duration: Never
-  last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
-  last_specialized_data_duration: Never
-  last_specialized_data_failure: Never
-  last_specialized_data_runtime: Never
-  last_specialized_data_status: Never
-  last_specialized_data_update: Never
-  latitude: '0.0'
-  location: ''
-  longitude: '0.0'
-  model: ''
-  name: '[Site 1: Top Level Shared and Non Shared Objects] Router 2'
-  napalm_driver: ios
-  netconf_driver: default
-  netmiko_driver: cisco_ios
-  operating_system: ''
-  os_version: ''
-  port: 22
-  positions:
-    'Site 1: Top Level Objects': [-150, 300]
-    'Site 1: Top Level Shared and Non Shared Objects': [179, 299]
-  property1: 10.145.14.1
-  property2: CP
-  property3: password
-  reachable: true
-  scoped_name: Router 2
-  scrapli_driver: cisco_iosxe
-  shared: false
-  subtype: ''
-  type: device
-  vendor: ''
-- access_groups: admin
-  creator: admin
-  custom_json: {}
-  custom_multiselect: []
-  custom_select: b
-  description: ''
-  down: false
-  icon: antenna
-  icon_3d: juniper_ex3300
-  ip_address: ''
-  last_configuration_duration: Never
-  last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
-  last_modified: '2021-12-21 12:05:57.952444'
-  last_operational_data_duration: Never
-  last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
-  last_specialized_data_duration: Never
-  last_specialized_data_failure: Never
-  last_specialized_data_runtime: Never
-  last_specialized_data_status: Never
-  last_specialized_data_update: Never
-  latitude: '0.0'
-  location: ''
-  longitude: '0.0'
-  model: ''
-  name: Router 3
-  napalm_driver: ios
-  netconf_driver: default
-  netmiko_driver: cisco_ios
-  operating_system: ''
-  os_version: ''
-  port: 22
-  positions:
-    'Site 1: Top Level Objects': [0, 0]
-    'Site 1: Top Level Shared and Non Shared Objects': [-231, 455]
-  property1: 10.145.14.1
-  property2: CP
-  property3: password
-  reachable: true
-  scoped_name: Router 3
-  scrapli_driver: cisco_iosxe
-  shared: true
-  subtype: ''
-  type: device
-  vendor: ''

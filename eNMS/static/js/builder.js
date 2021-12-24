@@ -101,8 +101,9 @@ export function configureGraph(newInstance, graph, options) {
     mousePosition = event.pointer.canvas;
   });
   if (!$(`#current-${instance.type} option[value='${instance.id}']`).length) {
+    const name = instance[type == "workflow" ? "scoped_name" : "name"];
     $(`#current-${instance.type}`).append(
-      `<option value="${instance.id}">${instance.scoped_name}</option>`
+      `<option value="${instance.id}">${name}</option>`
     );
   }
   $(`#current-${instance.type}`).val(instance.id).selectpicker("refresh");
@@ -440,7 +441,7 @@ function getTree() {
   const instanceId = instance.id;
   openPanel({
     name: "instance_tree",
-    title: `${instance.scoped_name} - Tree Structure`,
+    title: `${instance.name} - Tree Structure`,
     content: `
       <div class="modal-body">
         <input

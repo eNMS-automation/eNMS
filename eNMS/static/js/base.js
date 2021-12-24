@@ -612,7 +612,6 @@ function showNodePanel(type, id, mode) {
   $(id ? `#${type}-type-${id}` : `#${type}-type`)
     .val(type)
     .prop("disabled", true);
-  $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
   if (id && mode == "duplicate" && type == "site") $(`#copy-${id}`).val(id);
   $(id ? `#${type}-sites-${id}` : `#${type}-sites`).prop("disabled", true);
 }

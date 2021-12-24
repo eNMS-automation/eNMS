@@ -61,8 +61,6 @@ class Node(Object):
         if self.positions and "positions" in kwargs:
             kwargs["positions"] = {**self.positions, **kwargs["positions"]}
         super().update(**kwargs)
-        if not kwargs.get("migration_import"):
-            self.set_name()
 
 
 class Site(Node):
@@ -75,13 +73,6 @@ class Site(Node):
     labels = db.Column(db.Dict, info={"log_change": False})
     nodes = relationship("Node", secondary=db.node_site_table, back_populates="sites")
     links = relationship("Link", secondary=db.link_site_table, back_populates="sites")
-
-    def set_name(self, name=None):
-        old_name = self.name
-        super().set_name(name)
-        for instance in self.nodes + self.links:
-            if instance.parent_type == "node" and old_name in instance.positions:
-                instance.positions[self.name] = instance.positions[old_name]
 
 
 class Device(Node):
@@ -291,8 +282,6 @@ class Link(Object):
                 {"source_id": kwargs["source"], "destination_id": kwargs["destination"]}
             )
         super().update(**kwargs)
-        if not kwargs.get("migration_import"):
-            self.set_name()
 
 
 class Pool(AbstractBase):

@@ -3317,7 +3317,7 @@
   custom_select: b
   description: ''
   down: false
-  icon: antenna
+  icon: router
   icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
@@ -3325,7 +3325,7 @@
   last_configuration_runtime: Never
   last_configuration_status: Never
   last_configuration_update: Never
-  last_modified: '2021-12-24 05:00:25.998621'
+  last_modified: '2021-12-24 12:29:20.016415'
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -3364,7 +3364,7 @@
   custom_select: b
   description: ''
   down: false
-  icon: antenna
+  icon: server
   icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
@@ -3372,7 +3372,7 @@
   last_configuration_runtime: Never
   last_configuration_status: Never
   last_configuration_update: Never
-  last_modified: '2021-12-24 05:00:37.199442'
+  last_modified: '2021-12-24 12:29:33.757035'
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -3412,7 +3412,7 @@
   custom_select: b
   description: ''
   down: false
-  icon: antenna
+  icon: optical_switch
   icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
@@ -3420,7 +3420,7 @@
   last_configuration_runtime: Never
   last_configuration_status: Never
   last_configuration_update: Never
-  last_modified: '2021-12-24 05:00:42.682204'
+  last_modified: '2021-12-24 12:29:26.980532'
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never

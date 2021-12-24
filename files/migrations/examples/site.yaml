@@ -1,6 +1,7 @@
 - access_groups: ''
   creator: admin
   description: ''
+  icon: site
   labels: {}
   last_modified: '2021-12-24 05:01:19.104408'
   links: [R1 - R2, R2 - R3, R1 - R3]
@@ -10,6 +11,39 @@
   nodes: [Router 1, Router 2, Router 3]
   positions: {}
   sites: []
+  subtype: ''
+  type: site
+  vendor: ''
+- access_groups: ''
+  creator: admin
+  description: ''
+  icon: site
+  labels: {}
+  last_modified: '2021-12-24 12:28:36.018073'
+  links: []
+  location: ''
+  model: ''
+  name: 'Site 2: Subsite'
+  nodes: [Subsite 1]
+  positions: {}
+  sites: []
+  subtype: ''
+  type: site
+  vendor: ''
+- access_groups: ''
+  creator: admin
+  description: ''
+  icon: site
+  labels: {}
+  last_modified: '2021-12-24 12:28:17.906358'
+  links: []
+  location: ''
+  model: ''
+  name: Subsite 1
+  nodes: []
+  positions:
+    'Site 2: Subsite': [-314, -18]
+  sites: ['Site 2: Subsite']
   subtype: ''
   type: site
   vendor: ''

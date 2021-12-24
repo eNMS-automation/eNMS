@@ -14,13 +14,13 @@ import {
 } from "./base.js";
 import {
   configureGraph,
-  createNewNode,
   creationMode,
   currentMode,
   currentPath,
   edges,
   nodes,
   setPath,
+  savePositions,
   showLabelPanel,
   updateBuilderBindings,
 } from "./builder.js";
@@ -180,6 +180,7 @@ function drawNetwork() {
     },
   });
   const status = enabled ? "disabled" : "enabled";
+  if (enabled) savePositions();
   notify(`Automatic Display ${status}.`, "success", 5);
 }
 

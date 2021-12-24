@@ -125,7 +125,7 @@ function highlightNode(node) {
   }
 }
 
-function savePositions() {
+export function savePositions() {
   call({
     url: `/save_positions/${instance.type}/${instance.id}`,
     data: network.getPositions(),

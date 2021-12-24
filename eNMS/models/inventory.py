@@ -46,10 +46,6 @@ class Object(AbstractBase):
             .group_by(cls.id)
         )
 
-    def set_name(self, name=None):
-        site = "" if self.shared or not self.sites else f"[{self.sites[0].name}] "
-        self.name = f"{site}{name or self.scoped_name}"
-
 
 class Node(Object):
 
@@ -82,17 +78,10 @@ class Site(Node):
     nodes = relationship("Node", secondary=db.node_site_table, back_populates="sites")
     links = relationship("Link", secondary=db.link_site_table, back_populates="sites")
 
-    def delete(self):
-        for instance in self.nodes + self.links:
-            if not instance.shared:
-                db.delete_instance(instance)
-
     def set_name(self, name=None):
         old_name = self.name
         super().set_name(name)
         for instance in self.nodes + self.links:
-            if not instance.shared:
-                instance.set_name()
             if instance.parent_type == "node" and old_name in instance.positions:
                 instance.positions[self.name] = instance.positions[old_name]
 

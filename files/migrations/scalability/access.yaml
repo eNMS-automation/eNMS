@@ -38,7 +38,7 @@
   post_requests: [/add_edge, /add_instances_in_bulk, /bulk_deletion, /bulk_edit, /bulk_removal,
     /copy_service_in_workflow, /calendar_init, /clear_results, /clear_configurations,
     /compare, /counters, /count_models, /create_label, /database_deletion, /delete_corrupted_edges,
-    /delete_instance, /delete_workflow_selection, /desktop_connection, /duplicate_workflow,
+    /delete_instance, /delete_builder_selection, /desktop_connection, /duplicate_workflow,
     /export_service, /topology_export, /delete_file, /edit_file, /get, /get_all, /get_cluster_status,
     /get_git_history, /get_device_network_data, /get_device_logs, /get_exported_services,
     /get_git_network_data, /get_git_content, /get_migration_folders, /get_service_logs,

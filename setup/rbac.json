@@ -184,7 +184,7 @@
     "/create_label": "access",
     "/database_deletion": "admin",
     "/delete_instance": "access",
-    "/delete_workflow_selection": "access",
+    "/delete_builder_selection": "access",
     "/desktop_connection": "access",
     "/duplicate_workflow": "access",
     "/export_service": "access",

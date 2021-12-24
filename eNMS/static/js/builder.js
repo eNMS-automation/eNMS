@@ -194,7 +194,7 @@ function deleteSelection() {
   });
   selection.edges = selection.edges.filter((edge) => edge > 0);
   call({
-    url: `/delete_workflow_selection/${instance.id}`,
+    url: `/delete_builder_selection/${instance.id}`,
     data: selection,
     callback: function (updateTime) {
       network.deleteSelected();

@@ -269,7 +269,7 @@ class Controller:
     def delete_instance(self, model, instance_id):
         return db.delete(model, id=instance_id)
 
-    def delete_workflow_selection(self, workflow_id, **selection):
+    def delete_builder_selection(self, workflow_id, **selection):
         workflow = db.fetch("workflow", id=workflow_id)
         workflow.last_modified = vs.get_time()
         for edge_id in selection["edges"]:

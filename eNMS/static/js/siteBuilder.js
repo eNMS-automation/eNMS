@@ -33,6 +33,7 @@ import { clearSearch, tableInstances } from "./table.js";
 import { showDeviceModel } from "./visualization.js";
 
 let graph;
+let parallelLinks = {};
 export let site = JSON.parse(localStorage.getItem("site"));
 
 const options = {
@@ -85,6 +86,7 @@ export function switchToSite(path, direction) {
 }
 
 export function displaySite(site) {
+  parallelLinks = {};
   graph = configureGraph(
     site,
     {
@@ -218,7 +220,14 @@ export function updateSiteRightClickBindings() {
   });
 }
 
+function communtativePairing(a, b) {
+  return (Math.max(a, b) * (Math.max(a, b) + 1)) / 2 + Math.min(a, b);
+}
+
 export function drawSiteEdge(link) {
+  const key = communtativePairing(link.source_id, link.destination_id);
+  parallelLinks[key] = (parallelLinks[key] || 0) + 1
+  const isEven = parallelLinks[key] % 2 === 0;
   return {
     id: link.id,
     label: link.name,
@@ -226,6 +235,11 @@ export function drawSiteEdge(link) {
     from: link.source_id,
     to: link.destination_id,
     color: { color: link.color },
+    smooth: {
+      type: "curvedCW",
+      forceDirection: "none",
+      roundness: (parallelLinks[key] - isEven) / 20 * (isEven ? -1 : 1)
+    },
   };
 }
 

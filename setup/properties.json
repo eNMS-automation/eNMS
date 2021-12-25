@@ -522,7 +522,7 @@
       {
         "data": "objectNumber",
         "title": "Object Count",
-        "width": "150px",
+        "width": "170px",
         "orderable": false
       },
       {

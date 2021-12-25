@@ -74,6 +74,7 @@ class Site(Node):
     labels = db.Column(db.Dict, info={"log_change": False})
     nodes = relationship("Node", secondary=db.node_site_table, back_populates="sites")
     links = relationship("Link", secondary=db.link_site_table, back_populates="sites")
+    pools = relationship("Pool", secondary=db.pool_site_table, back_populates="sites")
 
 
 class Device(Node):
@@ -288,7 +289,7 @@ class Link(Object):
 class Pool(AbstractBase):
 
     __tablename__ = type = "pool"
-    models = ("device", "link", "service", "user")
+    models = ("device", "link", "service", "site", "user")
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     manually_defined = db.Column(Boolean, default=False)

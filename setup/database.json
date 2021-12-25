@@ -183,6 +183,16 @@
           "foreign_key": "service"
         }
       },
+      "pool_site": {
+        "model1": {
+          "column": "pool_id",
+          "foreign_key": "pool"
+        },
+        "model2": {
+          "column": "site_id",
+          "foreign_key": "site"
+        }
+      },
       "pool_user": {
         "model1": {
           "column": "pool_id",

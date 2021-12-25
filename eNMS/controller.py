@@ -96,7 +96,7 @@ class Controller:
         nodes = set(db.objectify("node", kwargs["nodes"]))
         links = set(db.objectify("link", kwargs["links"]))
         for pool in db.objectify("pool", kwargs["pools"]):
-            nodes |= set(pool.devices)
+            nodes |= set(pool.devices) | set(pool.sites)
             links |= set(pool.links)
         for node in nodes:
             if node in site.nodes:

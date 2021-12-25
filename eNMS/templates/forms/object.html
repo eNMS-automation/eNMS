@@ -34,10 +34,8 @@
           </center>
         </div>
         <div class="tab-pane fade" id="specific">
-          Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin
-          coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next
-          level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
-          booth letterpress, commodo enim craft beer mlkshk aliquip
+          {% for property in form.properties %} {% set field = form[property] %} {{
+          field_template(form_type, field) }} {% endfor %}
         </div>
       </div>
     </div>

@@ -3,12 +3,15 @@
   description: ''
   icon: site
   labels: {}
-  last_modified: '2021-12-24 05:01:19.104408'
+  last_modified: '2021-12-25 03:27:34.573413'
+  latitude: '0.0'
   links: [R1 - R2, R2 - R3, R1 - R3]
   location: ''
+  longitude: '1.0'
   model: ''
   name: 'Site 1: Top-level Devices and Links'
   nodes: [Router 1, Router 2, Router 3]
+  pools: [Everything, All Sites]
   positions: {}
   sites: []
   subtype: ''
@@ -20,11 +23,14 @@
   icon: site
   labels: {}
   last_modified: '2021-12-24 12:28:36.018073'
+  latitude: '0.0'
   links: []
   location: ''
+  longitude: '0.0'
   model: ''
   name: 'Site 2: Subsite'
   nodes: [Subsite 1]
+  pools: [Everything, All Sites]
   positions: {}
   sites: []
   subtype: ''
@@ -36,11 +42,14 @@
   icon: site
   labels: {}
   last_modified: '2021-12-24 12:28:17.906358'
+  latitude: '0.0'
   links: []
   location: ''
+  longitude: '0.0'
   model: ''
   name: Subsite 1
   nodes: []
+  pools: [Everything, All Sites]
   positions:
     'Site 2: Subsite': [-314, -18]
   sites: ['Site 2: Subsite']

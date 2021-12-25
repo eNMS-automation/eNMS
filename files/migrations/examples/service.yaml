@@ -45,7 +45,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Advanced Iteration Targets: &id009 [-131, -24]
     Advanced Multiprocessing (admin): &id002 [-492, -39]
@@ -412,7 +412,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Advanced Iteration Targets: &id072 [350, -6]
     Advanced Multiprocessing (admin): &id065 [505, -10]
@@ -790,7 +790,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -876,7 +876,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Advanced Multiprocessing (admin): &id128 [-266, -204]
     'Miscellaneous: DxD Multiprocessing, RBAC Admin Only, Skip Mechanism': *id128
@@ -973,7 +973,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Advanced Multiprocessing (admin): &id131 [299, -170]
     'Miscellaneous: DxD Multiprocessing, RBAC Admin Only, Skip Mechanism': *id131
@@ -1064,7 +1064,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Operational Data Backup (admin): &id133 [-259, 351]
     'Regression Workflow 9: Operational Data Backup': *id133
@@ -1165,7 +1165,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Miscellaneous: Netmiko Services, Connection Cache Management': [-38, -86]
     'Miscellaneous: Netmiko Services, Connection Cache, Targets Definition': [-115,
@@ -1275,7 +1275,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Iteration Services Test Workflow: ['147', '-14']
     'Miscellaneous: Netmiko Services, Connection Cache Management': [445, -37]
@@ -1383,7 +1383,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Miscellaneous: Netmiko Services, Connection Cache Management': [476, 119]
     'Miscellaneous: Netmiko Services, Connection Cache, Targets Definition': [347,
@@ -1494,7 +1494,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Miscellaneous: Fork based on Result with Success & Failure Edges': [-179, 259]
     'Miscellaneous: Netmiko Services, Connection Cache Management': [-10, 157]
@@ -1595,7 +1595,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Advanced Multiprocessing (admin): &id139 [386, 124]
     'Miscellaneous: DxD Multiprocessing, RBAC Admin Only, Skip Mechanism': *id139
@@ -1705,7 +1705,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Miscellaneous: Fork based on Result with Success & Failure Edges': [-31, -43]
     'Regression Workflow 2: Separate Failure - Success paths': &id147 [-102, -130]
@@ -1801,7 +1801,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Miscellaneous: Fork based on Result with Success & Failure Edges': [608, 46]
     'Regression Workflow 2: Separate Failure - Success paths': &id150 [611, -72]
@@ -1897,7 +1897,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow 3: Napalm getters (postprocessing)': &id153 [303, 43]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
@@ -1990,7 +1990,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow 3: Napalm getters (postprocessing)': &id155 [652, -22]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
@@ -2073,7 +2073,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow 3: Napalm getters (postprocessing)': &id157 [424, 229]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
@@ -2153,7 +2153,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Iteration Mechanism: Combined Device & Target Iteration': [-201, -15]
     Iteration Services Test Workflow: ['3', '-144']
@@ -2265,7 +2265,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Netmiko Prompts: &id161 [22, -74]
     'Regression Workflow D: Prompts': *id161
@@ -2372,7 +2372,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Netmiko Prompts: &id162 [350, 108]
     'Regression Workflow D: Prompts': *id162
@@ -2455,7 +2455,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow A: get_var, set_var, get_result': &id163 [-376, -138]
     'Regression Workflow: Using get_var, set_var, get_result functions': *id163
@@ -2534,7 +2534,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow A: get_var, set_var, get_result': &id164 [0, -144]
     'Regression Workflow: Using get_var, set_var, get_result functions': *id164
@@ -2640,7 +2640,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow A: get_var, set_var, get_result': &id165 [474, -11]
     'Regression Workflow: Using get_var, set_var, get_result functions': *id165
@@ -2746,7 +2746,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow A: get_var, set_var, get_result': &id166 [425, 190]
     'Regression Workflow: Using get_var, set_var, get_result functions': *id166
@@ -2853,7 +2853,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow A: get_var, set_var, get_result': &id167 [-445, 128]
     'Regression Workflow: Using get_var, set_var, get_result functions': *id167
@@ -2945,7 +2945,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Napalm Getters Validation: &id168 [581, 136]
     Payload Extraction with Operations: &id169 [-348, -240]
@@ -3055,7 +3055,7 @@
     \ default=15)"
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_version.yml
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Ansible with Validation: [-116, 248]
     'Regression Workflow 6: Ansible with Validation': &id170 [-107, 153]
@@ -3140,7 +3140,7 @@
     \ default=15)"
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_running_config.yml
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Ansible with Validation: [370, 229]
     'Regression Workflow 6: Ansible with Validation': &id171 [179, -62]
@@ -3224,7 +3224,7 @@
     \ default=15)"
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_running_config.yml
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Ansible with Validation: [348, 36]
     'Regression Workflow 6: Ansible with Validation': &id172 [486, 173]
@@ -3326,7 +3326,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Advanced Multiprocessing (admin): &id173 [-315, 157]
     'Miscellaneous: DxD Multiprocessing, RBAC Admin Only, Skip Mechanism': *id173
@@ -3436,7 +3436,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Iteration Mechanism: Combined Device & Target Iteration': [214, 72]
     Iteration Targets Mechanism: [198, -59]
@@ -3544,7 +3544,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Iteration Mechanism: Combined Device & Target Iteration': [633, 36]
     Iteration Targets Mechanism: [572, -4]
@@ -3652,7 +3652,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Iteration Mechanism: Combined Device & Target Iteration': [468, 196]
     Iteration Targets Mechanism: [647, 164]
@@ -3742,7 +3742,7 @@
   params: {}
   password: YWRtaW4=
   payload: {}
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Iteration Mechanism: Combined Device & Target Iteration': [-120, 211]
     Iteration Targets Mechanism: [36, 183]
@@ -3830,7 +3830,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow F S1: Subworkflow of Workflow': [200, -205]
   postprocessing: ''
@@ -3945,7 +3945,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow F: Workflow of Workflows': [-423, -31]
   postprocessing: ''
@@ -4044,7 +4044,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow F: Workflow of Workflows': [464, 224]
   postprocessing: ''
@@ -4157,7 +4157,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4249,7 +4249,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4350,7 +4350,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4469,7 +4469,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4569,7 +4569,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4703,7 +4703,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4816,7 +4816,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Operational Data Backup (admin): &id179 [-125, 15]
     'Regression Workflow 9: Operational Data Backup': *id179
@@ -4913,7 +4913,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4995,7 +4995,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     DxD and SxS Run Methods: &id180 [-296, -98]
     'Regression Workflow G: run methods (BFS)': *id180
@@ -5080,7 +5080,7 @@
   params: {}
   password: ''
   payload: {}
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     DxD and SxS Run Methods: &id181 [-135, 189]
     'Regression Workflow G: run methods (BFS)': *id181
@@ -5163,7 +5163,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     DxD and SxS Run Methods: &id182 [123, -96]
     'Regression Workflow G: run methods (BFS)': *id182
@@ -5248,7 +5248,7 @@
   params: {}
   password: ''
   payload: {}
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     DxD and SxS Run Methods: &id183 [254, 163]
     'Regression Workflow G: run methods (BFS)': *id183
@@ -5331,7 +5331,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     DxD and SxS Run Methods: &id184 [622, -89]
     'Regression Workflow G: run methods (BFS)': *id184
@@ -5435,7 +5435,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     '[DxD and SxS Run Methods] Workflow  in device by device mode': &id185 [248, -94]
     '[Regression Workflow G: run methods (BFS)] Workflow  in device by device mode': *id185
@@ -5542,7 +5542,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     '[DxD and SxS Run Methods] Workflow in service by service mode (workflow targets)': &id186 [
       239, -108]
@@ -5650,7 +5650,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     '[DxD and SxS Run Methods] Workflow in service targets mode': &id187 [234, -86]
     '[Regression Workflow G: run methods (BFS)] Workflow in service targets mode': *id187
@@ -5757,7 +5757,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -5836,7 +5836,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow H: shared service in multiple subworkflows': &id188 [-241,
       197]
@@ -5919,7 +5919,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow H: shared service in multiple subworkflows': &id189 [548,
       48]
@@ -6023,7 +6023,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 1': &id190 [
       167, -185]
@@ -6116,7 +6116,7 @@
     \ default=15)"
   pass_device_properties: false
   playbook_path: /media/sf_shared/eNMS/files/playbooks/simple_playbook.yml
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Ansible with Validation: [-630, 214]
     'Regression Workflow 6: Ansible with Validation': &id192 [-536, 192]
@@ -6217,7 +6217,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -6296,7 +6296,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Advanced Iteration Targets: &id194 [132, -202]
     Basic Iteration Targets with Netmiko: [-209, -7]
@@ -6404,7 +6404,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Advanced Iteration Targets: &id196 [135, 100]
     Basic Iteration Targets with Netmiko: [436, -6]
@@ -6529,7 +6529,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -6610,7 +6610,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Iteration Mechanism: Workflow and Subworkflow Iteration': [-197, 268]
     'Regression Workflow J: Workflow and Subworkflow Iteration': [226, -76]
@@ -6693,7 +6693,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Iteration Mechanism: Workflow and Subworkflow Iteration': [-182, 477]
     'Regression Workflow J: Workflow and Subworkflow Iteration': [218, 171]
@@ -6775,7 +6775,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow Value Iteration': &id197 [
       231, -87]
@@ -6877,7 +6877,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -6956,7 +6956,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Preprocessing and Postprocessing Mechanism: &id198 [-26, 123]
     'Regression Workflow K: preprocessing and postprocessing': *id198
@@ -7038,7 +7038,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Preprocessing and Postprocessing Mechanism: &id199 [558, 152]
     'Regression Workflow K: preprocessing and postprocessing': *id199
@@ -7117,7 +7117,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Basic Superworkflow: [187, 18]
     'Regression Workflow L: superworkflow': &id200 [511, -111]
@@ -7201,7 +7201,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7286,7 +7286,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7369,7 +7369,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id202 [
       -177, -94]
@@ -7462,7 +7462,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id203 [
       -113, 220]
@@ -7552,7 +7552,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   ports: '22'
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id204 [
@@ -7637,7 +7637,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7723,7 +7723,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': &id205 [
       113, -104]
@@ -7825,7 +7825,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id206 [
       358, 190]
@@ -7917,7 +7917,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow L: superworkflow': &id207 [227, 151]
     'Regression Workflow: Specific Superworkflow': *id207
@@ -8022,7 +8022,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8134,7 +8134,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Operational Data Backup (admin): &id208 [-455, 15]
     'Regression Workflow 9: Operational Data Backup': *id208
@@ -8232,7 +8232,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Operational Data Backup (admin): &id209 [148, 191]
     'Regression Workflow 9: Operational Data Backup': *id209
@@ -8313,7 +8313,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow L: superworkflow': &id210 [606, 47]
     'Regression Workflow: Specific Superworkflow': *id210
@@ -8395,7 +8395,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8481,7 +8481,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow O: Scrapli': &id211 [-33, -167]
     'Regression Workflow: Scrapli': *id211
@@ -8569,7 +8569,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow O: Scrapli': &id212 [402, -161]
     'Regression Workflow: Scrapli': *id212
@@ -8657,7 +8657,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow O: Scrapli': &id213 [6, 112]
     'Regression Workflow: Scrapli': *id213
@@ -8745,7 +8745,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow O: Scrapli': &id214 [373, 107]
     'Regression Workflow: Scrapli': *id214
@@ -8827,7 +8827,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8861,10 +8861,9 @@
   skip_query: ''
   skip_value: success
   target_devices: []
-  target_pools: ['All devices, links, services and users', Devices only, Links only,
-    Datacenter San Francisco, Datacenter New York, Datacenter Chicago, Washington,
-    Links 0 through 5 - Non-public pool - Access set up, Links 6 through 9 - Public
-      pools]
+  target_pools: [Everything, All Devices, All Links, Datacenter San Francisco, Datacenter
+      New York, Datacenter Chicago, Washington, Links 0 through 5 - Non-public pool
+      - Access set up, Links 6 through 9 - Public pools]
   time_between_retries: 10
   type: workflow
   update_pools_after_running: false
@@ -8929,7 +8928,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
@@ -9024,7 +9023,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id216 [-406, 73]
     'Regression Workflow: Scalability Test (large workflow)': *id216
@@ -9113,7 +9112,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id217 [-402, 156]
     'Regression Workflow: Scalability Test (large workflow)': *id217
@@ -9202,7 +9201,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id218 [-94, 200]
     'Regression Workflow: Scalability Test (large workflow)': *id218
@@ -9291,7 +9290,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id219 [-94, 109]
     'Regression Workflow: Scalability Test (large workflow)': *id219
@@ -9396,7 +9395,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id220 [-117, 5]
     'Regression Workflow: Scalability Test (large workflow)': *id220
@@ -9503,7 +9502,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id221 [-81, -125]
     'Regression Workflow: Scalability Test (large workflow)': *id221
@@ -9610,7 +9609,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id222 [-89, -196]
     'Regression Workflow: Scalability Test (large workflow)': *id222
@@ -9717,7 +9716,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id223 [183, -222]
     'Regression Workflow: Scalability Test (large workflow)': *id223
@@ -9824,7 +9823,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id224 [188, -130]
     'Regression Workflow: Scalability Test (large workflow)': *id224
@@ -9931,7 +9930,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id225 [190, -36]
     'Regression Workflow: Scalability Test (large workflow)': *id225
@@ -10015,7 +10014,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id226 [194, 47]
     'Regression Workflow: Scalability Test (large workflow)': *id226
@@ -10095,7 +10094,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id227 [203, 127]
     'Regression Workflow: Scalability Test (large workflow)': *id227
@@ -10175,7 +10174,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id228 [207, 230]
     'Regression Workflow: Scalability Test (large workflow)': *id228
@@ -10255,7 +10254,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id229 [476, 232]
     'Regression Workflow: Scalability Test (large workflow)': *id229
@@ -10335,7 +10334,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id230 [471, 142]
     'Regression Workflow: Scalability Test (large workflow)': *id230
@@ -10415,7 +10414,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id231 [476, 44]
     'Regression Workflow: Scalability Test (large workflow)': *id231
@@ -10495,7 +10494,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id232 [469, -50]
     'Regression Workflow: Scalability Test (large workflow)': *id232
@@ -10575,7 +10574,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id233 [467, -163]
     'Regression Workflow: Scalability Test (large workflow)': *id233
@@ -10664,7 +10663,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -10767,7 +10766,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Generic File Transfer: &id235 [-243, -73]
     'Regression Workflow Q: File transfer': &id234 [-171, -148]
@@ -10859,7 +10858,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Generic File Transfer: &id237 [-120, 143]
     'Regression Workflow Q: File transfer': &id236 [-21, 255]
@@ -10965,7 +10964,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Generic File Transfer: &id239 [209, 155]
     'Regression Workflow Q: File transfer': &id238 [362, 239]
@@ -11059,7 +11058,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Generic File Transfer: &id241 [126, -84]
     'Regression Workflow Q: File transfer': &id240 [187, -140]
@@ -11165,7 +11164,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Generic File Transfer: &id243 [460, -83]
     'Regression Workflow Q: File transfer': &id242 [517, -138]
@@ -11257,7 +11256,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Generic File Transfer: &id245 [-385, 147]
     'Regression Workflow Q: File transfer': &id244 [-332, 180]
@@ -11360,7 +11359,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -11439,7 +11438,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow R: Skip Services in SxS mode': &id246 [-124, -154]
     'Regression Workflow R: skip services in service by service mode': *id246
@@ -11526,7 +11525,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow R: Skip Services in SxS mode': &id247 [304, -102]
     'Regression Workflow R: skip services in service by service mode': *id247
@@ -11613,7 +11612,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow R: Skip Services in SxS mode': &id248 [12, 179]
     'Regression Workflow R: skip services in service by service mode': *id248
@@ -11736,7 +11735,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -11819,7 +11818,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Conditional Skip Query in Failed and Discard Modes: &id249 [-242, 237]
     'Regression Workflow S: conditional skip query in failed and discard mode': *id249
@@ -11907,7 +11906,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Conditional Skip Query in Failed and Discard Modes: &id250 [412, 108]
     'Regression Workflow S: conditional skip query in failed and discard mode': *id250
@@ -11995,7 +11994,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Conditional Skip Query in Failed and Discard Modes: &id251 [605, 248]
     'Regression Workflow S: conditional skip query in failed and discard mode': *id251
@@ -12083,7 +12082,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Conditional Skip Query in Failed and Discard Modes: &id252 [660, 13]
     'Regression Workflow S: conditional skip query in failed and discard mode': *id252
@@ -12201,7 +12200,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -12281,7 +12280,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Link Neighbors Mechanism (public): [-291, 68]
     'Miscellaneous: Link Neighbors Mechanism and RBAC default access (public)': [
@@ -12396,7 +12395,7 @@
   params: {}
   password: ''
   payload: {}
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Link Neighbors Mechanism (public): [466, 49]
     'Miscellaneous: Link Neighbors Mechanism and RBAC default access (public)': [
@@ -12506,7 +12505,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Netmiko Prompts: &id255 [-291, -104]
     'Regression Workflow 1: Netmiko with validation and retries': [-142, -137]
@@ -12619,7 +12618,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -12702,7 +12701,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Global Variables and post-run Pool Update Mechanism: &id256 [28, 6]
     'Regression Workflow T: global variables': [-180, 198]
@@ -12790,7 +12789,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Global Variables and post-run Pool Update Mechanism: &id257 [568, 6]
     'Regression Workflow T: global variables': [42, -43]
@@ -12896,7 +12895,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Global Variables and post-run Pool Update Mechanism: &id258 [514, 220]
     'Regression Workflow T: global variables': [487, 104]
@@ -12981,7 +12980,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Conditional Skip Query in Failed and Discard Modes: &id259 [-215, 70]
     'Regression Workflow S: conditional skip query in failed and discard mode': *id259
@@ -13093,7 +13092,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -13182,7 +13181,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Fork based on value with Skip Discard Mechanism: &id260 [-354, -22]
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
@@ -13273,7 +13272,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Fork based on value with Skip Discard Mechanism: &id262 [47, -29]
     'Regression Workflow U: fork based on value with skip discard mode': *id262
@@ -13358,7 +13357,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Fork based on value with Skip Discard Mechanism: &id263 [-430, 342]
     'Regression Workflow U: fork based on value with skip discard mode': *id263
@@ -13465,7 +13464,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Fork based on value with Skip Discard Mechanism: &id264 [574, 0]
     'Regression Workflow U: fork based on value with skip discard mode': *id264
@@ -13557,7 +13556,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Fork based on value with Skip Discard Mechanism: &id265 [32, 431]
     'Regression Workflow U: fork based on value with skip discard mode': *id265
@@ -13664,7 +13663,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -13746,7 +13745,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow V: skip query with device in run once mode': &id266 [-221,
       154]
@@ -13827,7 +13826,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow V: skip query with device in run once mode': &id267 [-31,
       3]
@@ -13911,7 +13910,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow V: skip query with device in run once mode': &id268 [342,
       205]
@@ -13992,7 +13991,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - workflow targets': &id269 [
       230, -19]
@@ -14098,7 +14097,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -14179,7 +14178,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow W: disable result creation mode': [-312, -10]
     'Regression Workflow W: skip, discard and disable result creation mechanism': &id270 [
@@ -14262,7 +14261,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow W: disable result creation mode': [-174, 154]
     'Regression Workflow W: skip, discard and disable result creation mechanism': &id271 [
@@ -14346,7 +14345,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow W: disable result creation mode': [442, 205]
     'Regression Workflow W: skip, discard and disable result creation mechanism': &id272 [
@@ -14429,7 +14428,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow W: disable result creation mode': [101, -37]
     'Regression Workflow W: skip, discard and disable result creation mechanism': &id273 [
@@ -14511,7 +14510,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': &id274 [
       224, -51]
@@ -14593,7 +14592,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS mode': &id275 [
       220, -28]
@@ -14696,7 +14695,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -14806,7 +14805,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -14906,7 +14905,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Credentials (Password & Key, Priority Mechanism): &id276 [220, 52]
     'Regression Workflow X: Credentials (password & key, priority)': [220, 52]
@@ -15002,7 +15001,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -15081,7 +15080,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Optional Prerequisite Services: &id277 [-342, 317]
     'Regression Workflow: Optional Prerequisite Services': *id277
@@ -15159,7 +15158,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Optional Prerequisite Services: &id278 [644, 318]
     'Regression Workflow: Optional Prerequisite Services': *id278
@@ -15237,7 +15236,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Optional Prerequisite Services: &id279 [-214, -47]
     'Regression Workflow: Optional Prerequisite Services': *id279
@@ -15316,7 +15315,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Optional Prerequisite Services: &id280 [601, -27]
     'Regression Workflow: Optional Prerequisite Services': *id280
@@ -15418,7 +15417,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -15497,7 +15496,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Device Iteration: [-100, 67]
     'Iteration Mechanism: Device Iteration': [-151, 24]
@@ -15579,7 +15578,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Iteration Mechanism: Workflow and Subworkflow Iteration': [233, 471]
     'Regression Workflow: Workflow and Subworkflow Iteration': [233, 471]
@@ -15662,7 +15661,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Iteration Mechanism: Workflow and Subworkflow Iteration': [628, 455]
     'Regression Workflow: Workflow and Subworkflow Iteration': [649, 409]
@@ -15743,7 +15742,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2': &id281 [
       233, -24]
@@ -15824,7 +15823,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow Device Iteration': &id282 [
       241, -26]
@@ -15905,7 +15904,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Global Variables and post-run Pool Update Mechanism: &id283 [-165, 199]
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': *id283
@@ -15984,7 +15983,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Global Variables and post-run Pool Update Mechanism: &id284 [182, 132]
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': *id284
@@ -16078,7 +16077,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -16156,7 +16155,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     RBAC Target Restriction: &id285 [-162, 99]
     'Regression Workflow: RBAC Target Restriction': *id285
@@ -16234,7 +16233,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     RBAC Target Restriction: &id286 [181, 119]
     'Regression Workflow: RBAC Target Restriction': *id286
@@ -16312,7 +16311,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     RBAC Target Restriction: &id287 [590, 138]
     'Regression Workflow: RBAC Target Restriction': *id287
@@ -16414,7 +16413,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -16500,7 +16499,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow: Scrapli Netconf Service': &id288 [479, -63]
     Scrapli Netconf Service: *id288
@@ -16591,7 +16590,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow: Scrapli Netconf Service': &id289 [26, 125]
     Scrapli Netconf Service: *id289
@@ -16685,7 +16684,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow: Scrapli Netconf Service': &id290 [20, -72]
     Scrapli Netconf Service: *id290
@@ -16775,7 +16774,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow: Scrapli Netconf Service': &id291 [510, 143]
     Scrapli Netconf Service: *id291
@@ -16872,7 +16871,7 @@
     tag1\", \"Tag 1\"),\r\n    (\"tag2\", \"Tag 2\"),\r\n    (\"precheck\", \"Pre-checks\"\
     ),\r\n    (\"postcheck\", \"Post-checks\"))\r\n)\r\ninterface = StringField(\"\
     Interface\", default=\"Lo1\")\r\n"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -16974,7 +16973,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Parameterized Form (override labels & targets, add payload): &id292 [-78, 122]
     'Regression Workflow: Parameterized Form (override labels & targets, add payload)': *id292
@@ -17087,7 +17086,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -17167,7 +17166,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow: Validation Section Mechanism': [-384, 34]
     'Validation Mechanism: Section to Validate Property': [-467, 119]
@@ -17250,7 +17249,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow: Validation Section Mechanism': [-39, -193]
     'Validation Mechanism: Section to Validate Property': [-55, 123]
@@ -17332,7 +17331,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow: Validation Section Mechanism': [77, 51]
     'Validation Mechanism: Section to Validate Property': [290, 124]
@@ -17429,7 +17428,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -17521,7 +17520,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     NCClient Netconf Service: &id293 [-414, 116]
     'Regression Workflow: NCClient Netconf Service': *id293
@@ -17618,7 +17617,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     NCClient Netconf Service: &id294 [-132, -139]
     'Regression Workflow: NCClient Netconf Service': *id294
@@ -17720,7 +17719,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     NCClient Netconf Service: &id295 [30, 126]
     'Regression Workflow: NCClient Netconf Service': *id295
@@ -17817,7 +17816,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     NCClient Netconf Service: &id296 [249, -136]
     'Regression Workflow: NCClient Netconf Service': *id296
@@ -17919,7 +17918,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     NCClient Netconf Service: &id297 [388, 123]
     'Regression Workflow: NCClient Netconf Service': *id297
@@ -18029,7 +18028,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -18131,7 +18130,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Multiple parallel connections to same device: &id298 [-72, -122]
     'Regression Workflow: multiple parallel connections to same device': *id298
@@ -18236,7 +18235,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Multiple parallel connections to same device: &id299 [-231, 101]
     'Regression Workflow: multiple parallel connections to same device': *id299
@@ -18342,7 +18341,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Multiple parallel connections to same device: &id300 [454, -84]
     'Regression Workflow: multiple parallel connections to same device': *id300
@@ -18449,7 +18448,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -18527,7 +18526,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Notifications: &id301 [-422, 198]
     'Regression Workflow: Notifications': *id301
@@ -18607,7 +18606,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Notifications: &id302 [-26, 64]
     'Regression Workflow: Notifications': *id302
@@ -18687,7 +18686,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Notifications: &id303 [384, 192]
     'Regression Workflow: Notifications': *id303
@@ -18784,7 +18783,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -18886,7 +18885,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Netmiko File Transfer: &id304 [-346, 74]
     'Regression Workflow: Netmiko File Transfer': *id304
@@ -18984,7 +18983,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Netmiko File Transfer: &id305 [-138, -122]
     'Regression Workflow: Netmiko File Transfer': *id305
@@ -19087,7 +19086,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Netmiko File Transfer: &id306 [13, 69]
     'Regression Workflow: Netmiko File Transfer': *id306
@@ -19192,7 +19191,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Netmiko File Transfer: &id307 [196, -120]
     'Regression Workflow: Netmiko File Transfer': *id307
@@ -19297,7 +19296,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Netmiko File Transfer: &id308 [358, 66]
     'Regression Workflow: Netmiko File Transfer': *id308
@@ -19410,7 +19409,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -19489,7 +19488,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Global get_credential Function and Log Obfuscation: &id309 [-315, 9]
     'Regression Workflow: Global get_credential Function and Log Obfuscation': *id309
@@ -19591,7 +19590,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Global get_credential Function and Log Obfuscation: &id310 [14, 146]
     'Regression Workflow: Global get_credential Function and Log Obfuscation': *id310
@@ -19678,7 +19677,7 @@
   params: {}
   password: YWRtaW4=
   payload: {}
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Global get_credential Function and Log Obfuscation: &id311 [447, 101]
     'Regression Workflow: Global get_credential Function and Log Obfuscation': *id311
@@ -19784,7 +19783,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -19863,7 +19862,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow: SxS Service Targets with Run Once + Skip': &id312 [-361,
       360]
@@ -19943,7 +19942,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow: SxS Service Targets with Run Once + Skip': &id313 [267,
       355]
@@ -20022,7 +20021,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow: SxS Service Targets with Run Once + Skip': &id314 [-201,
       121]
@@ -20101,7 +20100,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow: SxS Service Targets with Run Once + Skip': &id315 [429,
       170]
@@ -20124,7 +20123,7 @@
     \r\nresult = {}\r\nlog(\"warning\", \"Should appear only ONCE\")\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
   target_devices: []
-  target_pools: [Devices only]
+  target_pools: [All Devices]
   time_between_retries: 10
   type: python_snippet_service
   update_pools_after_running: false
@@ -20183,7 +20182,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -20264,7 +20263,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Data Extraction Service: &id316 [-521, 287]
     'Regression Workflow: Data Extraction Service': *id316
@@ -20355,7 +20354,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Data Extraction Service: &id317 [-410, 425]
     'Regression Workflow: Data Extraction Service': *id317
@@ -20446,7 +20445,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Data Extraction Service: &id318 [-102, 128]
     'Regression Workflow: Data Extraction Service': *id318
@@ -20537,7 +20536,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Data Extraction Service: &id319 [-201, 416]
     'Regression Workflow: Data Extraction Service': *id319
@@ -20628,7 +20627,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Data Extraction Service: &id320 [-307, 222]
     'Regression Workflow: Data Extraction Service': *id320
@@ -20719,7 +20718,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Data Extraction Service: &id321 [-1, 512]
     'Regression Workflow: Data Extraction Service': *id321
@@ -20810,7 +20809,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Data Extraction Service: &id322 [31, 308]
     'Regression Workflow: Data Extraction Service': *id322
@@ -20901,7 +20900,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Data Extraction Service: &id323 [159, 138]
     'Regression Workflow: Data Extraction Service': *id323
@@ -20983,7 +20982,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Data Extraction Service: &id324 [274, 366]
     'Regression Workflow: Data Extraction Service': *id324
@@ -21090,7 +21089,7 @@
     \ Type', choices=(('name', 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing\
     \ = BooleanField('Multiprocessing', default=False)\r\nmax_processes = IntegerField('Maximum\
     \ number of processes', default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -21168,7 +21167,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Parameterized Superworkflow Run: &id325 [142, -32]
     'Regression Workflow: Parameterized Superworkflow Run': *id325
@@ -21254,7 +21253,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -21336,7 +21335,7 @@
   params: {verify: 'false'}
   password: YWRtaW4=
   payload: {}
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow: Superworkflow in SxS w WT with Run Once service': &id326 [
       -101, 129]
@@ -21441,7 +21440,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Parameterized Form (override labels & targets, add payload): &id327 [435, 118]
     'Regression Workflow: Parameterized Form (override labels & targets, add payload)': *id327
@@ -21538,7 +21537,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -21639,7 +21638,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Netmiko TextFSM Option: &id328 [-132, -29]
     'Regression Workflow: Netmiko TextFSM Option': *id328
@@ -21744,7 +21743,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Netmiko TextFSM Option: &id329 [-28, 186]
     'Regression Workflow: Netmiko TextFSM Option': *id329
@@ -21849,7 +21848,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Netmiko TextFSM Option: &id330 [316, 137]
     'Regression Workflow: Netmiko TextFSM Option': *id330
@@ -21954,7 +21953,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Netmiko TextFSM Option: &id331 [269, -27]
     'Regression Workflow: Netmiko TextFSM Option': *id331
@@ -22044,7 +22043,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -22133,7 +22132,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow: VRF Creation and Deletion with Napalm': &id332 [-374, -164]
     VRF Creation and Deletion with Napalm: *id332
@@ -22222,7 +22221,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow: VRF Creation and Deletion with Napalm': &id333 [287, 136]
     VRF Creation and Deletion with Napalm: *id333
@@ -22327,7 +22326,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow A: get_var, set_var, get_result': ['266', '161']
     'Regression Workflow C: Advanced multiprocessing': [123, -187]
@@ -22438,7 +22437,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Regression Workflow: VRF Creation and Deletion with Napalm': &id335 [-348, 160]
     VRF Creation and Deletion with Napalm: *id335
@@ -22561,7 +22560,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -22650,7 +22649,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Napalm Getters Validation: &id336 [-405, -99]
     'Regression Workflow: Napalm Getters Validation': *id336
@@ -22749,7 +22748,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Napalm Getters Validation: &id337 [18, -122]
     'Regression Workflow: Napalm Getters Validation': *id337
@@ -22848,7 +22847,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Napalm Getters Validation: &id338 [-45, 144]
     'Regression Workflow: Napalm Getters Validation': *id338
@@ -22947,7 +22946,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Napalm Getters Validation: &id339 [535, -147]
     'Regression Workflow: Napalm Getters Validation': *id339
@@ -23080,7 +23079,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -23183,7 +23182,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Payload Extraction & Validation: [-18, -145]
     'Regression Workflow: Payload Extraction & Validation': &id340 [49, -207]
@@ -23291,7 +23290,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Payload Extraction & Validation: [-19, -26]
     'Regression Workflow: Payload Extraction & Validation': &id341 [130, -95]
@@ -23386,7 +23385,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Payload Extraction & Validation: [-362, 111]
     'Regression Workflow: Payload Extraction & Validation': &id342 [-338, -9]
@@ -23477,7 +23476,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Payload Extraction & Validation: [-124, 296]
     'Regression Workflow: Payload Extraction & Validation': &id343 [-236, 214]
@@ -23569,7 +23568,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Payload Extraction & Validation: [451, -43]
     'Regression Workflow: Payload Extraction & Validation': &id344 [679, -114]
@@ -23659,7 +23658,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Payload Extraction & Validation: [808, 157]
     'Regression Workflow: Payload Extraction & Validation': &id345 [808, 157]
@@ -23751,7 +23750,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -23832,7 +23831,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Payload Extraction with Operations: &id346 [118, -243]
     'Regression Workflow: Payload Extraction with Operations': *id346
@@ -23932,7 +23931,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Payload Extraction with Operations: &id347 [619, -236]
     'Regression Workflow: Payload Extraction with Operations': *id347
@@ -24035,7 +24034,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Payload Extraction with Operations: &id348 [600, 70]
     'Regression Workflow: Payload Extraction with Operations': *id348
@@ -24129,7 +24128,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Payload Extraction with Operations: &id349 [5, 75]
     'Regression Workflow: Payload Extraction with Operations': *id349
@@ -24219,7 +24218,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Payload Extraction with Operations: &id350 [-461, 60]
     'Regression Workflow: Payload Extraction with Operations': *id350
@@ -24311,7 +24310,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -24393,7 +24392,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Restart Mechanism, payload + results recursive conservation: [-255, 25]
   postprocessing: ''
@@ -24472,7 +24471,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Restart Mechanism, payload + results recursive conservation: [36, -178]
   postprocessing: ''
@@ -24550,7 +24549,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Restart Mechanism, payload + results recursive conservation: [394, -170]
   postprocessing: ''
@@ -24628,7 +24627,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Restart Mechanism, payload + results recursive conservation: [77, 130]
   postprocessing: ''
@@ -24706,7 +24705,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Restart Mechanism, payload + results recursive conservation: [410, 129]
   postprocessing: ''
@@ -24784,7 +24783,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Iteration Mechanism: Device Iteration': [245, 25]
   postprocessing: ''
@@ -24863,7 +24862,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -24944,7 +24943,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -25021,7 +25020,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Basic Superworkflow: [5, -109]
   postprocessing: ''
@@ -25098,7 +25097,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Basic Superworkflow: [293, 159]
   postprocessing: ''
@@ -25175,7 +25174,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Restart From Feature and Superworkflow Interaction: [-9, -137]
   postprocessing: ''
@@ -25252,7 +25251,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Restart From Feature and Superworkflow Interaction: [149, -3]
   postprocessing: ''
@@ -25329,7 +25328,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     Restart From Feature and Superworkflow Interaction: [305, 150]
   postprocessing: ''
@@ -25417,7 +25416,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -25497,7 +25496,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Global variables: get_result and get_var': [-187, -139]
   postprocessing: ''
@@ -25574,7 +25573,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Global variables: get_result and get_var': [-172, 94]
   postprocessing: ''
@@ -25654,7 +25653,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Global variables: get_result and get_var': [194, -49]
   postprocessing: ''
@@ -25732,7 +25731,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Global variables: get_result and get_var': [582, -169]
   postprocessing: ''
@@ -25812,7 +25811,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     'Global variables: get_result and get_var': [579, 82]
   postprocessing: ''
@@ -25892,7 +25891,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: ['All devices, links, services and users']
+  pools: [Everything]
   positions:
     '[Global variables: get_result and get_var] Subworkflow': [228, -43]
   postprocessing: ''

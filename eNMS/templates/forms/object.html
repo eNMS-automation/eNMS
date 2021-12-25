@@ -15,25 +15,27 @@
       </li>
     </ul>
     <div class="form-group">
-      <div class="tab-pane fade in active" id="common">
-        <div id="content" class="add-id" style="height: 100%;"></div>
-        {% for field in form %} {% set properties = form.properties or {} %} {% if
-        field.name not in properties %} {{ field_template(form_type, field) }} {% endif
-        %} {% endfor %}
-        <center>
-          <button
-            id="{{ form_type }}-action-btn"
-            type="button"
-            class="btn btn-{{ button_class }} add-id btn-id"
-            value="{{ action }}"
-          >
-            {{ button_label }}
-          </button>
-        </center>
-      </div>
-      <div class="tab-pane fade" id="specific">
-        {% for property in form.properties %} {% set field = form[property] %} {{
-        field_template(form_type, field) }} {% endfor %}
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="common">
+          <div id="content" class="add-id" style="height: 100%;"></div>
+          {% for field in form %} {% set properties = form.properties or {} %} {% if
+          field.name not in properties %} {{ field_template(form_type, field) }} {%
+          endif %} {% endfor %}
+          <center>
+            <button
+              id="{{ form_type }}-action-btn"
+              type="button"
+              class="btn btn-{{ button_class }} add-id btn-id"
+              value="{{ action }}"
+            >
+              {{ button_label }}
+            </button>
+          </center>
+        </div>
+        <div class="tab-pane fade" id="specific">
+          {% for property in form.properties %} {% set field = form[property] %} {{
+          field_template(form_type, field) }} {% endfor %}
+        </div>
       </div>
     </div>
   </div>

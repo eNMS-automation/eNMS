@@ -933,7 +933,7 @@ table.dataTable thead > tr > th.sorting_desc {
   pointer-events: all;
 }
 
-/** Tabs **/
+/** Multiple Tabs for Object Form Edit Panel **/
 ul.bar_tabs {
   overflow: visible;
   background: #f5f7fa;

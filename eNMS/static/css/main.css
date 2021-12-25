@@ -932,3 +932,48 @@ table.dataTable thead > tr > th.sorting_desc {
 .table-search {
   pointer-events: all;
 }
+
+/** Tabs **/
+ul.bar_tabs {
+  overflow: visible;
+  background: #F5F7FA;
+  height: 25px;
+  margin: 21px 0 14px;
+  padding-left: 14px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  border-bottom: 1px solid #E6E9ED;
+}
+ul.bar_tabs > li {
+  border: 1px solid #E6E9ED;
+  color: #333 !important;
+  margin-top: -17px;
+  margin-left: 8px;
+  background: #fff;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+}
+ul.bar_tabs > li.active {
+  border-right: 6px solid #D3D6DA;
+  border-top: 0;
+  margin-top: -15px;
+}
+ul.bar_tabs > li a {
+  padding: 10px 17px;
+  background: #F5F7FA;
+  margin: 0;
+  border-top-right-radius: 0;
+}
+ul.bar_tabs > li a:hover {
+  border: 1px solid transparent;
+}
+ul.bar_tabs > li.active a {
+  border-bottom: none;
+}
+ul.bar_tabs.right {
+  padding-right: 14px;
+}
+ul.bar_tabs.right li {
+  float: right
+}

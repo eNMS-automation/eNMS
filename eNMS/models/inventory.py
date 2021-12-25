@@ -55,6 +55,8 @@ class Node(Object):
     id = db.Column(Integer, ForeignKey(Object.id), primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     positions = db.Column(db.Dict, info={"log_change": False})
+    longitude = db.Column(db.TinyString, default="0.0")
+    latitude = db.Column(db.TinyString, default="0.0")
     sites = relationship("Site", secondary=db.node_site_table, back_populates="nodes")
 
     def update(self, **kwargs):
@@ -90,8 +92,6 @@ class Device(Node):
     operating_system = db.Column(db.SmallString)
     os_version = db.Column(db.SmallString)
     ip_address = db.Column(db.TinyString)
-    longitude = db.Column(db.TinyString, default="0.0")
-    latitude = db.Column(db.TinyString, default="0.0")
     port = db.Column(Integer, default=22)
     netmiko_driver = db.Column(db.TinyString, default="cisco_ios")
     napalm_driver = db.Column(db.TinyString, default="ios")

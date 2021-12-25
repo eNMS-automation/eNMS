@@ -775,6 +775,8 @@ class SiteForm(BaseForm):
     form_type = HiddenField(default="site")
     id = HiddenField()
     name = StringField("Name")
+    longitude = StringField("Longitude", default=0.0)
+    latitude = StringField("Latitude", default=0.0)
     sites = MultipleInstanceField("Sites", model="site")
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
 

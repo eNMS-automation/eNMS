@@ -197,11 +197,13 @@ function deleteSelection() {
     data: selection,
     callback: function (updateTime) {
       network.deleteSelected();
-      const edgeType = type == "site" ? "links" : "edges"
+      const edgeType = type == "site" ? "links" : "edges";
       instance[`${nodeType}s`] = instance[`${nodeType}s`].filter(
         (n) => !selection.nodes.includes(n.id)
       );
-      instance[edgeType] = instance[edgeType].filter((e) => !selection.edges.includes(e.id));
+      instance[edgeType] = instance[edgeType].filter(
+        (e) => !selection.edges.includes(e.id)
+      );
       instance.last_modified = updateTime;
       notify("Selection removed.", "success", 5);
       switchMode(currentMode, true);
@@ -215,7 +217,7 @@ function openDeletionPanel() {
   const edgeSelection = network.getSelectedEdges().length;
   if (!nodeSelection && !edgeSelection) {
     notify("Nothing has been selected for deletion.", "error", 5);
-  } else if (nodeSelection == 1 || !nodeSelection && edgeSelection == 1) {
+  } else if (nodeSelection == 1 || (!nodeSelection && edgeSelection == 1)) {
     deleteSelection();
   } else {
     showConfirmationPanel({

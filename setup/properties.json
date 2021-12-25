@@ -1108,7 +1108,13 @@
     ]
   },
   "tables_additional": {
-    "pool": ["device_number", "link_number", "service_number", "site_number", "user_number"],
+    "pool": [
+      "device_number",
+      "link_number",
+      "service_number",
+      "site_number",
+      "user_number"
+    ],
     "run": ["service_properties"],
     "service": ["scoped_name"],
     "site": ["scoped_name"],

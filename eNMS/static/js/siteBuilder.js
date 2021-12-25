@@ -226,7 +226,7 @@ function communtativePairing(a, b) {
 
 export function drawSiteEdge(link) {
   const key = communtativePairing(link.source_id, link.destination_id);
-  parallelLinks[key] = (parallelLinks[key] || 0) + 1
+  parallelLinks[key] = (parallelLinks[key] || 0) + 1;
   const isEven = parallelLinks[key] % 2 === 0;
   return {
     id: link.id,
@@ -238,7 +238,7 @@ export function drawSiteEdge(link) {
     smooth: {
       type: "curvedCW",
       forceDirection: "none",
-      roundness: (parallelLinks[key] - isEven) / 20 * (isEven ? -1 : 1)
+      roundness: ((parallelLinks[key] - isEven) / 20) * (isEven ? -1 : 1),
     },
   };
 }

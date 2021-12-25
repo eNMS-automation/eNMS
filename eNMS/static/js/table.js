@@ -773,7 +773,7 @@ tables.pool = class PoolTable extends Table {
   addRow(properties) {
     let row = super.addRow(properties);
     row.objectNumber = "";
-    for (const model of ["device", "link", "service", "user"]) {
+    for (const model of ["device", "link", "service", "site", "user"]) {
       row.objectNumber += `${row[`${model}_number`]} ${model}s`;
       if (model !== "user") row.objectNumber += " - ";
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(

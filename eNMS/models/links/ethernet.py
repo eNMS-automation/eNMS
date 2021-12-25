@@ -29,3 +29,4 @@ class EthernetLinkForm(LinkForm):
             ("10GBASE-T", "10GBASE-T"),
         ),
     )
+    properties = ["speed", "standard"]

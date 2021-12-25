@@ -17,7 +17,7 @@
       <div class="tab-pane fade in active" id="common">
         <div class="form-group">
           <div id="content" class="add-id" style="height: 100%;"></div>
-          {% for field in form %} {% set id = "{}-{}".format(form_type, field.name) %} {%
+          {% for field in form %} {% set properties = form.properties or {} %} {% if field.name not in properties %} {% set id = "{}-{}".format(form_type, field.name) %} {%
           set style = "height: {}px".format(field.render_kw["rows"]*20 + 17) if "TextArea"
           in field.widget|string else "" %}
           <div id="{{ id }}-div" class="add-id" style="{{ style }}">
@@ -37,7 +37,6 @@
               >{{ field.label }}</label
             >
             {% endif %}
-    
             <div class="col-md-9 col-sm-9 col-xs-12">
               {{ field(id=id, class="collapsed {} add-id".format(class),
               checked=field.default) }}
@@ -45,6 +44,7 @@
             <br /><br />
             {% endif %}
           </div>
+          {% endif %}
           {% endfor %}
         </div>
         <center>

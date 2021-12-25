@@ -527,7 +527,7 @@ tables.device = class DeviceTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showInstancePanel('device', '${
+          onclick="eNMS.base.showInstancePanel('${row.type}', '${
             row.id
           }')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
@@ -535,7 +535,7 @@ tables.device = class DeviceTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showInstancePanel('device', '${row.id}', 'duplicate')"
+          onclick="eNMS.base.showInstancePanel('${row.type}', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
@@ -717,7 +717,7 @@ tables.configuration = class ConfigurationTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showInstancePanel('device', '${row.id}')"
+          onclick="eNMS.base.showInstancePanel('${row.type}', '${row.id}')"
           data-tooltip="Edit"><span class="glyphicon glyphicon-edit">
           </span></button>
         </li>

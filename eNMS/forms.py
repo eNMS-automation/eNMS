@@ -442,6 +442,7 @@ class LoginForm(BaseForm):
 
 class ObjectForm(BaseForm):
     action = "eNMS.base.processData"
+    template = "object"
     form_type = HiddenField(default="object")
     get_request_allowed = False
     id = HiddenField()
@@ -920,7 +921,6 @@ class DeviceForm(ObjectForm):
 
 class LinkForm(ObjectForm):
     action = "eNMS.base.processData"
-    template = "object"
     form_type = HiddenField(default="link")
     source = InstanceField("Source", model="device")
     destination = InstanceField("Destination", model="device")

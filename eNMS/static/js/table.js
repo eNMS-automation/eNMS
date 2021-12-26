@@ -594,7 +594,7 @@ tables.site = class SiteTable extends Table {
       <a
         id="left-arrow"
         class="btn btn-info disabled"
-        onclick="action['Site Backward']()"
+        onclick="action['Backward']()"
         type="button"
       >
         <span class="glyphicon glyphicon-chevron-left"></span>
@@ -602,7 +602,7 @@ tables.site = class SiteTable extends Table {
       <a
         id="right-arrow"
         class="btn btn-info disabled"
-        onclick="action['Site Forward']()"
+        onclick="action['Forward']()"
         type="button"
       >
         <span class="glyphicon glyphicon-chevron-right"></span>

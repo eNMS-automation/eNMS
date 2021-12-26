@@ -36,7 +36,7 @@ import {
 } from "./workflowBuilder.js";
 
 const container = document.getElementById("network");
-const type = page == "site_builder" ? "site" : "workflow";
+const type = page.includes("site") ? "site" : "workflow";
 const nodeType = type == "site" ? "node" : "service";
 export let ctrlKeyPressed;
 let currentLabel;

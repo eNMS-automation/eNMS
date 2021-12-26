@@ -65,20 +65,6 @@ class Node(Object):
         super().update(**kwargs)
 
 
-class Site(Node):
-
-    __tablename__ = class_type = "site"
-    __mapper_args__ = {"polymorphic_identity": "site"}
-    pretty_name = "Site"
-    parent_type = "node"
-    icon = db.Column(db.TinyString, default="site")
-    id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
-    labels = db.Column(db.Dict, info={"log_change": False})
-    nodes = relationship("Node", secondary=db.node_site_table, back_populates="sites")
-    links = relationship("Link", secondary=db.link_site_table, back_populates="sites")
-    pools = relationship("Pool", secondary=db.pool_site_table, back_populates="sites")
-
-
 class Device(Node):
 
     __tablename__ = class_type = export_type = "device"

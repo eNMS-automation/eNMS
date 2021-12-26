@@ -735,7 +735,10 @@ Object.assign(action, {
   Forward: () => switchToWorkflow(history[historyPosition + 1], "right"),
 });
 
-export function showRunServicePanel({ instance, tableId, type }) {
+export function showRunServicePanel({ instance, tableId, targets, type }) {
+  if (targets && !targets.length) {
+    return notify("No targets has been selected", "error", 5);
+  }
   const table = tableInstances?.[tableId];
   const targetType = type || instance.type;
   const title = type
@@ -751,7 +754,7 @@ export function showRunServicePanel({ instance, tableId, type }) {
     id: panelId,
     callback: function () {
       $(`#run_service-type-${panelId}`).val(targetType);
-      if (type) {
+      if (type && !targets) {
         let form = serializeForm(`#search-form-${panelId}`, `${type}_filtering`);
         if (table) form = { ...form, ...table.constraints };
         call({
@@ -761,6 +764,8 @@ export function showRunServicePanel({ instance, tableId, type }) {
             $(`#run_service-targets-${panelId}`).val(instances.join("-"));
           },
         });
+      } else if (targets) {
+        $(`#run_service-targets-${panelId}`).val(targets.join("-"));
       } else {
         $(`#run_service-targets-${panelId}`).val(instance.id);
       }

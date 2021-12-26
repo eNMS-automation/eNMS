@@ -214,7 +214,7 @@ export function updateSiteRightClickBindings() {
     Connect: (node) => showConnectionPanel(node),
     Configuration: (node) => showDeviceData(node),
     Results: (node) => showDeviceResultsPanel(node),
-    "Run Service": (node) => showRunServicePanel({ instance: node }),
+    "Run Service": () => showRunServicePanel({ type: "device", targets: graph.getSelectedNodes() }),
     "3D Visualization": (node) => showDeviceModel(node.id),
     "Edit Edge": (edge) => showInstancePanel(edge.type, edge.id),
   });

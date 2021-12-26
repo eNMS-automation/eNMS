@@ -354,7 +354,7 @@ export const showRuntimePanel = function (
             >
               <button
                 style="background:transparent; border:none; 
-                color:transparent; width: 250px;"
+                color:transparent; width: 300px;"
                 type="button"
               >
                 <select

@@ -168,11 +168,15 @@
     "3D": {
       "juniper_ex3300": {
         "name": "Juniper EX3300",
-        "other": "o"
+        "position": [2406, 28, 169]
+      },
+      "juniper-9204": {
+        "name": "Juniper EX9204",
+        "position": [1795, 215, -465]
       },
       "cisco_catalyst_me4924": {
         "name": "Cisco Catalyst ME",
-        "other": "ok"
+        "position": [745, 135, 125]
       }
     }
   },

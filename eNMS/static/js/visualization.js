@@ -622,8 +622,7 @@ export function showDeviceModel(device) {
     callback: () => {
       const aspect = $(".main_frame").width() / $(".main_frame").height();
       let camera = new THREE.PerspectiveCamera(45, aspect, 1, 100000);
-      camera.position.set(650, 6, 120);
-      camera.lookAt(100, 100, 300);
+      camera.position.set(2406, 28, 169);
       let scene = new THREE.Scene();
       scene.background = new THREE.Color(0xffffff);
       const container = document.getElementById(`3D-${device.id}`);
@@ -637,7 +636,7 @@ export function showDeviceModel(device) {
       scene.add(directionalLight);
       new THREE.OrbitControls(camera, renderer.domElement);
       new THREE.ColladaLoader().load(
-        `/static/img/view/models/juniper-9204.dae`,
+        `/static/img/view/models/juniper_ex3300.dae`,
         function (collada) {
           collada.scene.scale.set(20, 20, 20);
           collada.scene.rotation.set(-Math.PI / 2, 0, Math.PI / 2);

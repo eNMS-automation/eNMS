@@ -166,8 +166,14 @@
       "switch": "Switch"
     },
     "3D": {
-      "juniper_ex3300": "Juniper EX3300",
-      "cisco_catalyst_me4924": "Cisco Catalyst ME"
+      "juniper_ex3300": {
+        "name": "Juniper EX3300",
+        "other": "o"
+      },
+      "cisco_catalyst_me4924": {
+        "name": "Cisco Catalyst ME",
+        "other": "ok"
+      }
     }
   },
   "Site Builder": {

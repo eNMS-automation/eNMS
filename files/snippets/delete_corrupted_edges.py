@@ -1,7 +1,7 @@
 # Delete corrupted edges in a workflow:
 # - edges missing a source, destinaton or a workflow
 # - edges whose source or destination is not in the workflow's services
-# - duplicated edges i.e with same source, destination, workflow and subtype 
+# - duplicated edges i.e with same source, destination, workflow and subtype
 # flake8: noqa
 
 from collections import defaultdict

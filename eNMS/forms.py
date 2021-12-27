@@ -884,7 +884,11 @@ class DeviceForm(ObjectForm):
     form_type = HiddenField(default="device")
     icon = SelectField("Icon", choices=list(vs.visualization["icons"]["2D"].items()))
     icon_3d = SelectField(
-        "3D Icon", choices=list(vs.visualization["icons"]["3D"].items())
+        "3D Icon",
+        choices=(
+            (name, icon["name"])
+            for name, icon in vs.visualization["icons"]["3D"].items()
+        ),
     )
     ip_address = StringField("IP address")
     port = IntegerField("Port", default=22)

@@ -636,7 +636,7 @@ export function showDeviceModel(device) {
       scene.add(directionalLight);
       new THREE.OrbitControls(camera, renderer.domElement);
       new THREE.ColladaLoader().load(
-        `/static/img/view/models/juniper_ex3300.dae`,
+        `/static/img/view/models/${device.icon_3d}.dae`,
         function (collada) {
           collada.scene.scale.set(20, 20, 20);
           collada.scene.rotation.set(-Math.PI / 2, 0, Math.PI / 2);

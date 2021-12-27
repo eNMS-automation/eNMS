@@ -622,7 +622,7 @@ export function showDeviceModel(device) {
     callback: () => {
       const aspect = $(".main_frame").width() / $(".main_frame").height();
       let camera = new THREE.PerspectiveCamera(45, aspect, 1, 100000);
-      camera.position.set(2406, 28, 169);
+      camera.position.set(...visualization.icons["3D"][device.icon_3d].position);
       let scene = new THREE.Scene();
       scene.background = new THREE.Color(0xffffff);
       const container = document.getElementById(`3D-${device.id}`);

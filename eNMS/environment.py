@@ -153,18 +153,7 @@ class Environment:
 
     def init_redis(self):
         host = getenv("REDIS_ADDR")
-        self.redis_queue = (
-            Redis(
-                host=host,
-                port=6379,
-                db=0,
-                charset="utf-8",
-                decode_responses=True,
-                socket_timeout=0.1,
-            )
-            if host
-            else None
-        )
+        self.redis_queue = Redis(host=host, **vs.settings["redis"]) if host else None
 
     def init_vault_client(self):
         url = getenv("VAULT_ADDR", "http://127.0.0.1:8200")

@@ -72,6 +72,13 @@
     "files": "",
     "playbooks": ""
   },
+  "redis": {
+    "charset": "utf-8",
+    "db": 0,
+    "decode_responses": true,
+    "port": 6379,
+    "socket_timeout": 0.1
+  },
   "requests": {
     "pool": {
       "pool_block": false,

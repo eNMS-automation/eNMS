@@ -9,11 +9,19 @@ Version 4.2.0
 - Remove deep_services function used for export, use service.children relationship instead.
 - Dont subclass SQLAlchemy Column following advice of SQLAlchemy creator.
 - Make corrupted edges deletion mechanism a troublehooting snippet instead of a button in the admin panel.
-- Rename endpoint "delete_workflow_selection" to "delete_builder_selection"
+- Move redis configuration in settings.json > "redis" key
 
-To be tested:
+Tests:
 - Performances (SQL Column function init)
 - Export and re-import of workflows and top-level services
+
+Migration:
+- Rename endpoint "delete_workflow_selection" to "delete_builder_selection"
+- Redis config in settings.json
+
+Documentation update:
+- Redis config in settings.json
+- Site Builder mechanism and 3D visualization of .dae files
 
 Version 4.1.0
 -------------

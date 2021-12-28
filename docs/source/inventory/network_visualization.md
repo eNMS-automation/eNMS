@@ -17,7 +17,7 @@ There are several components at the top center of the display that
 can be used to customize what data is shown.  These components are common to 
 all network visualization options.
 
-![Main Controls](/_static/inventory/network_visualization/controls_1.png)
+![Main Controls](../_static/inventory/network_visualization/controls_1.png)
 
 - Dropdown list - Contains all pools containing devices and links, all devices
 and links defined in a selected pool will be displayed
@@ -54,7 +54,7 @@ is displayed.
 In the upper right corner of the Geographic View display are icons that affect 
 how the data is displayed.
 
-![Secondary Controls](/_static/inventory/network_visualization/controls_2.png)
+![Secondary Controls](../_static/inventory/network_visualization/controls_2.png)
 
 From left to right:
 
@@ -77,7 +77,7 @@ to exit full-screen mode.
 
 #### 3D Visualization - 3D Mode - Satellite Imagery
 
-![3D Network Map](/_static/inventory/network_visualization/network_view_3d.png)
+![3D Network Map](../_static/inventory/network_visualization/network_view_3d.png)
 
 
 ### Network Data 
@@ -105,7 +105,7 @@ multiple devices are at the same location.  All colocated devices can be viewed
 by clicking on this image on the map. A dialog will open showing all devices 
 that are at the selected location.
 
-![Colcated Devices](/_static/inventory/network_visualization/
+![Colcated Devices](../_static/inventory/network_visualization/
 colocated_devices.png)
 
 
@@ -152,7 +152,7 @@ locations are included in the cluster by drawing a polygon connecting the outer
 sites of those included in cluster total. The below image uses the Circle Marker
 to indicate device locations on the Open Street Map tile layer.
 
-![Colcated Devices](/_static/inventory/network_visualization/
+![Colcated Devices](../_static/inventory/network_visualization/
 enms_clustered_view.png)
 
 

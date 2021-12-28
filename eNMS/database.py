@@ -341,7 +341,7 @@ class Database:
             )
 
     def delete(self, model, **kwargs):
-        instance = self.fetch(model, rbac="edit", **kwargs)
+        instance = self.fetch(model, **{"rbac": "edit", **kwargs})
         return self.delete_instance(instance)
 
     def fetch_all(self, model, **kwargs):

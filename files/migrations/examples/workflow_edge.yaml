@@ -1451,7 +1451,11 @@
     of Service2', label: success, name: '2021-12-28 11:55:38.276023', source: '[Basic:
     Deletion (Device, Link, Service, Task)] Deletion of SanJose', subtype: success,
   type: workflow_edge, workflow: 'Basic: Deletion (Device, Link, Service, Task)'}
-- {color: green, destination: '[Shared] End', label: success, name: '2021-12-28 11:55:39.482477',
-  source: '[Basic: Deletion (Device, Link, Service, Task)] Deletion of Service2',
+- {color: green, destination: '[Basic: Deletion (Device, Link, Service, Task)] Link
+    & Task Deletion', label: success, name: '2021-12-28 12:12:52.924954', source: '[Basic:
+    Deletion (Device, Link, Service, Task)] Deletion of Service2', subtype: success,
+  type: workflow_edge, workflow: 'Basic: Deletion (Device, Link, Service, Task)'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-12-28 12:12:53.991753',
+  source: '[Basic: Deletion (Device, Link, Service, Task)] Link & Task Deletion',
   subtype: success, type: workflow_edge, workflow: 'Basic: Deletion (Device, Link,
     Service, Task)'}

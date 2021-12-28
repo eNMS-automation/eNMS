@@ -20,7 +20,7 @@ a form in the UI for the script input parameters.
 
 # Architecture
 
-
+[![eNMS System Overview](docs/source/_static/eNMS_overview.PNG)](https://enms.readthedocs.io/en/latest/)
 
 ___
 

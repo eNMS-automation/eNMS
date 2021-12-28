@@ -1459,6 +1459,6 @@
     Deletion', label: success, name: '2021-12-28 12:24:50.636317', source: '[Basic:
     Deletion (Device, Link, Service, Task)] Link Deletion', subtype: success, type: workflow_edge,
   workflow: 'Basic: Deletion (Device, Link, Service, Task)'}
-- {color: green, destination: '[Shared] End', label: success, name: '2021-12-28 12:24:51.758390',
-  source: '[Basic: Deletion (Device, Link, Service, Task)] Task Deletion', subtype: success,
+- {color: red, destination: '[Shared] End', label: motion, name: '2021-12-28 12:32:27.618403',
+  source: '[Basic: Deletion (Device, Link, Service, Task)] Task Deletion', subtype: motion,
   type: workflow_edge, workflow: 'Basic: Deletion (Device, Link, Service, Task)'}

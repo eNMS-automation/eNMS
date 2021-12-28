@@ -25958,12 +25958,13 @@
       alignment: left
       content: "This workflow runs in SxS with Service Targets.\r\n- The first service\
         \ runs on \"SanJose\"\r\n- The second service runs on \"router14\" and \"\
-        router15\"\r\nThe third service will delete :\r\n* \"SanJose\" to test cascade\
-        \ deletion of results when the associated device is deleted.\r\n* \"Service1\"\
-        \ to test cascade deletion of results when the associated service is deleted.\r\
-        \nThe last two services test that link and task deletion doesn't work as they\
-        \ are not\r\nin the \"allowed_models\" for deletion in automation.json"
-      positions: [375, -18]
+        router15\"\r\n- The third service will delete :\r\n    * \"SanJose\" to test\
+        \ cascade deletion of results when the associated device is deleted.\r\n \
+        \   * \"Service1\" to test cascade deletion of results when the associated\
+        \ service is deleted.\r\n- The fourth service will deleted a link.\r\n- The\
+        \ last service should fail at deleting a task (tasks are not\r\nin the \"\
+        allowed_models\" for deletion in automation.json)"
+      positions: [389, -12]
     2636fd0a-5a91-4600-b090-d7ba4b831aa6:
       alignment: left
       content: Runs on "router14" and "router15"
@@ -25972,7 +25973,7 @@
       alignment: left
       content: Runs on "SanJose"
       positions: [-98, 334]
-  last_modified: '2021-12-28 12:25:13.943699'
+  last_modified: '2021-12-28 12:32:35.462789'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -26438,7 +26439,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-12-28 12:24:38.942931'
+  last_modified: '2021-12-28 12:32:20.352135'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -26470,7 +26471,7 @@
   priority: 1
   reply_to: ''
   reserved: false
-  run_method: per_device
+  run_method: once
   scoped_name: Task Deletion
   send_notification: false
   send_notification_method: mail

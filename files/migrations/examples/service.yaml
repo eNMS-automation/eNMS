@@ -52,7 +52,7 @@
     Ansible with Validation: [-634, -20]
     Basic Iteration Targets with Netmiko: [-308, -231]
     Basic Superworkflow: [-149, 39]
-    'Basic: Deletion (Device, Link, Service, Task)': [-206, 36]
+    'Basic: Deletion (Device, Link, Service, Task)': [-268, 2]
     Conditional Skip Query in Failed and Discard Modes: &id012 [-205, -81]
     Credentials (Password & Key, Priority Mechanism): &id015 [-157, 96]
     Data Extraction Service: &id016 [-421, 129]
@@ -420,7 +420,7 @@
     Ansible with Validation: [468, 147]
     Basic Iteration Targets with Netmiko: [596, -221]
     Basic Superworkflow: [500, 0]
-    'Basic: Deletion (Device, Link, Service, Task)': [672, 122]
+    'Basic: Deletion (Device, Link, Service, Task)': [614, 78]
     Conditional Skip Query in Failed and Discard Modes: &id075 [640, -155]
     Credentials (Password & Key, Priority Mechanism): &id078 [590, 124]
     Data Extraction Service: &id079 [365, 216]
@@ -25956,10 +25956,21 @@
   labels:
     0041059d-b9b7-422e-9e82-5c2b6ff4db6f:
       alignment: left
-      content: "This workflow runs in SxS with Service Targets.\r\nThe first service\
-        \ runs on SanJose, then "
-      positions: [254, -136]
-  last_modified: '2021-12-28 11:55:39.482477'
+      content: "This workflow runs in SxS with Service Targets.\r\n- The first service\
+        \ runs on \"SanJose\"\r\n- The second service runs on \"router14\" and \"\
+        router15\"\r\nThe third service will delete :\r\n* \"SanJose\" to test cascade\
+        \ deletion of results when the associated device is deleted.\r\n* \"Service1\"\
+        \ to test cascade deletion of results when the associated service is deleted."
+      positions: [243, -128]
+    2636fd0a-5a91-4600-b090-d7ba4b831aa6:
+      alignment: left
+      content: Runs on "router14" and "router15"
+      positions: [-28, -40]
+    f55f5e94-bed6-46bc-a7dc-13405d8f1be0:
+      alignment: left
+      content: Runs on "SanJose"
+      positions: [-48, 244]
+  last_modified: '2021-12-28 12:01:44.148832'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -25995,10 +26006,9 @@
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Basic: Deletion (Device, Link, Service,
-      Task)] SanJose', '[Basic: Deletion (Device, Link, Service, Task)] router14 and
-      router15', '[Basic: Deletion (Device, Link, Service, Task)] DEVICE deletion:
-      SanJose', '[Basic: Deletion (Device, Link, Service, Task)] SERVICE deletion:
-      router14 and router15']
+      Task)] Service1', '[Basic: Deletion (Device, Link, Service, Task)] Service2',
+    '[Basic: Deletion (Device, Link, Service, Task)] Deletion of SanJose', '[Basic:
+      Deletion (Device, Link, Service, Task)] Deletion of Service2']
   shared: false
   skip: {}
   skip_query: ''
@@ -26039,7 +26049,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-12-28 11:53:48.053093'
+  last_modified: '2021-12-28 12:00:50.083903'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -26047,7 +26057,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Basic: Deletion (Device, Link, Service, Task)] SanJose'
+  name: '[Basic: Deletion (Device, Link, Service, Task)] Service1'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -26064,7 +26074,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    'Basic: Deletion (Device, Link, Service, Task)': [7, 141]
+    'Basic: Deletion (Device, Link, Service, Task)': [-46, 180]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -26072,7 +26082,7 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: SanJose
+  scoped_name: Service1
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -26116,7 +26126,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-12-28 11:54:05.791575'
+  last_modified: '2021-12-28 12:00:44.276785'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -26124,7 +26134,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Basic: Deletion (Device, Link, Service, Task)] router14 and router15'
+  name: '[Basic: Deletion (Device, Link, Service, Task)] Service2'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -26141,7 +26151,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    'Basic: Deletion (Device, Link, Service, Task)': [15, -33]
+    'Basic: Deletion (Device, Link, Service, Task)': [-45, 13]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -26149,7 +26159,7 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: router14 and router15
+  scoped_name: Service2
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -26193,7 +26203,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-12-28 11:55:34.393236'
+  last_modified: '2021-12-28 12:01:40.623753'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -26201,7 +26211,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Basic: Deletion (Device, Link, Service, Task)] DEVICE deletion: SanJose'
+  name: '[Basic: Deletion (Device, Link, Service, Task)] Deletion of SanJose'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -26218,7 +26228,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    'Basic: Deletion (Device, Link, Service, Task)': [291, -30]
+    'Basic: Deletion (Device, Link, Service, Task)': [239, 19]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -26226,7 +26236,7 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: 'DEVICE deletion: SanJose'
+  scoped_name: Deletion of SanJose
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -26271,7 +26281,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-12-28 11:55:28.482219'
+  last_modified: '2021-12-28 12:01:34.887489'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -26279,8 +26289,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Basic: Deletion (Device, Link, Service, Task)] SERVICE deletion: router14
-    and router15'
+  name: '[Basic: Deletion (Device, Link, Service, Task)] Deletion of Service2'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -26297,7 +26306,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    'Basic: Deletion (Device, Link, Service, Task)': [297, 136]
+    'Basic: Deletion (Device, Link, Service, Task)': [237, 191]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -26305,7 +26314,7 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: 'SERVICE deletion: router14 and router15'
+  scoped_name: Deletion of Service2
   send_notification: false
   send_notification_method: mail
   shared: false

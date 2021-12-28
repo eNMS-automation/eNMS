@@ -40,7 +40,7 @@ ___
 
 eNMS is a vendor-agnostic NMS designed for building workflow-based network automation solutions.
 
-[![eNMS](docs/_static/enms.png)](http://afourmy.pythonanywhere.com/views/geographical_view)
+[![eNMS](docs/source/_static/base/workflow.png)](https://www.demo.enms.io/workflow_builder)
 
 It encompasses the following aspects of network automation:
   - **Configuration Management Service**: Backup with Git, change and rollback of configurations.
@@ -66,7 +66,7 @@ A dashboard provides a graphical overview of your network with dynamic charts.
 
 Inventory                           |  Dashboard
 :----------------------------------:|:-----------------------------------:
-[![Inventory](docs/_static/base/inventory.png)](https://enms.readthedocs.io/en/develop/inventory/network_creation.html) |  [![Dashboard](docs/_static/base/dashboard.png)](https://enms.readthedocs.io/en/develop/inventory/network_creation.html)
+[![Inventory](docs/source/_static/base/inventory.png)](https://enms.readthedocs.io/en/develop/inventory/network_creation.html) |  [![Dashboard](docs/source/_static/base/dashboard.png)](https://enms.readthedocs.io/en/develop/inventory/network_creation.html)
 
 - Docs: _[Objects](https://enms.readthedocs.io/en/develop/inventory/network_creation.html)_
 

@@ -229,10 +229,10 @@ class Result(AbstractBase):
     parent_service_name = association_proxy(
         "service", "scoped_name", info={"name": "parent_service_name"}
     )
-    parent_device_id = db.Column(Integer, ForeignKey("device.id"))
+    parent_device_id = db.Column(Integer, ForeignKey("device.id", ondelete="cascade"))
     parent_device = relationship("Device", uselist=False, foreign_keys=parent_device_id)
     parent_device_name = association_proxy("parent_device", "name")
-    device_id = db.Column(Integer, ForeignKey("device.id"))
+    device_id = db.Column(Integer, ForeignKey("device.id", ondelete="cascade"))
     device = relationship("Device", uselist=False, foreign_keys=device_id)
     device_name = association_proxy("device", "name")
     service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
@@ -310,7 +310,7 @@ class Run(AbstractBase):
     )
     children = relationship("Run", foreign_keys="Run.parent_id")
     path = db.Column(db.TinyString)
-    parent_device_id = db.Column(Integer, ForeignKey("device.id"))
+    parent_device_id = db.Column(Integer, ForeignKey("device.id", ondelete="cascade"))
     parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
     parameterized_run = db.Column(Boolean, default=False)
     service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))

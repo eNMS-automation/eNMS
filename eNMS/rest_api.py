@@ -47,14 +47,14 @@ class RestApi:
             self.rest_endpoints["POST"][endpoint] = endpoint
             setattr(self, endpoint, getattr(controller, endpoint))
 
-    def delete_instance(self, model, name):
-        return db.delete(model, name=name)
+    def delete_instance(self, instance_type, name):
+        return db.delete(instance_type, name=name)
 
     def get_configuration(self, device_name, property="configuration", **_):
         return getattr(db.fetch("device", name=device_name), property)
 
-    def get_instance(self, model, name, **_):
-        return db.fetch(model, name=name).to_dict(
+    def get_instance(self, instance_type, name, **_):
+        return db.fetch(instance_type, name=name).to_dict(
             relation_names_only=True, exclude=["positions"]
         )
 
@@ -89,8 +89,8 @@ class RestApi:
     def migrate(self, direction, **kwargs):
         return getattr(controller, f"migration_{direction}")(**kwargs)
 
-    def query(self, model, **kwargs):
-        results = db.fetch(model, all_matches=True, **kwargs)
+    def query(self, instance_type, **kwargs):
+        results = db.fetch(instance_type, all_matches=True, **kwargs)
         return [result.get_properties(exclude=["positions"]) for result in results]
 
     def run_service(self, **kwargs):
@@ -167,16 +167,16 @@ class RestApi:
             controller.topology_export(**kwargs)
             return "Topology Export successfully executed."
 
-    def update_instance(self, model, list_data=None, **data):
+    def update_instance(self, instance_type, list_data=None, **data):
         result, data = defaultdict(list), list_data or [data]
         for instance in data:
             if "name" not in instance:
                 result["failure"].append((instance, "Name is missing"))
                 continue
             try:
-                object_data = controller.objectify(model, instance)
+                object_data = controller.objectify(instance_type, instance)
                 object_data["update_pools"] = instance.get("update_pools", True)
-                instance = db.factory(model, **object_data)
+                instance = db.factory(instance_type, **object_data)
                 result["success"].append(instance.name)
             except Exception:
                 result["failure"].append((instance, format_exc()))

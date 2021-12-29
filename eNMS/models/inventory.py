@@ -440,7 +440,7 @@ class Node(ViewObject):
     parent_type = "view_object"
     id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
     model = db.Column(db.SmallString)
-    device_id = db.Column(Integer, ForeignKey("device.id"))
+    device_id = db.Column(Integer, ForeignKey("device.id", ondelete="cascade"))
     device = relationship("Device", foreign_keys="Node.device_id")
     device_name = association_proxy("device", "name")
 
@@ -456,7 +456,7 @@ class Line(ViewObject):
     __mapper_args__ = {"polymorphic_identity": "line"}
     parent_type = "view_object"
     id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
-    link_id = db.Column(Integer, ForeignKey("link.id"))
+    link_id = db.Column(Integer, ForeignKey("link.id", ondelete="cascade"))
     link = relationship("Link", foreign_keys="Line.link_id")
     link_name = association_proxy("link", "name")
 

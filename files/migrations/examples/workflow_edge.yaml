@@ -1444,10 +1444,6 @@
     Link, Service, Task)] Service1', subtype: success, type: workflow_edge, workflow: 'Basic:
     Deletion (Device, Link, Service, Task)'}
 - {color: green, destination: '[Basic: Deletion (Device, Link, Service, Task)] Deletion
-    of SanJose', label: success, name: '2021-12-28 11:55:37.306306', source: '[Basic:
-    Deletion (Device, Link, Service, Task)] Service2', subtype: success, type: workflow_edge,
-  workflow: 'Basic: Deletion (Device, Link, Service, Task)'}
-- {color: green, destination: '[Basic: Deletion (Device, Link, Service, Task)] Deletion
     of Service2', label: success, name: '2021-12-28 11:55:38.276023', source: '[Basic:
     Deletion (Device, Link, Service, Task)] Deletion of SanJose', subtype: success,
   type: workflow_edge, workflow: 'Basic: Deletion (Device, Link, Service, Task)'}
@@ -1461,4 +1457,11 @@
   workflow: 'Basic: Deletion (Device, Link, Service, Task)'}
 - {color: red, destination: '[Shared] End', label: motion, name: '2021-12-28 12:32:27.618403',
   source: '[Basic: Deletion (Device, Link, Service, Task)] Task Deletion', subtype: motion,
+  type: workflow_edge, workflow: 'Basic: Deletion (Device, Link, Service, Task)'}
+- {color: green, destination: '[Basic: Deletion (Device, Link, Service, Task)] Deletion
+    of SanJose', label: success, name: '2021-12-29 02:00:37.972328', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Basic: Deletion (Device,
+    Link, Service, Task)'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-12-29 02:00:40.390281',
+  source: '[Basic: Deletion (Device, Link, Service, Task)] Service2', subtype: success,
   type: workflow_edge, workflow: 'Basic: Deletion (Device, Link, Service, Task)'}

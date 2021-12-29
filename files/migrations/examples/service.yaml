@@ -52,7 +52,7 @@
     Ansible with Validation: [-634, -20]
     Basic Iteration Targets with Netmiko: [-308, -231]
     Basic Superworkflow: [-149, 39]
-    'Basic: Deletion (Device, Link, Service, Task)': [-307, 32]
+    'Basic: Deletion (Device, Link, Service, Task)': [-335, 173]
     Conditional Skip Query in Failed and Discard Modes: &id012 [-205, -81]
     Credentials (Password & Key, Priority Mechanism): &id015 [-157, 96]
     Data Extraction Service: &id016 [-421, 129]
@@ -25956,24 +25956,33 @@
   labels:
     0041059d-b9b7-422e-9e82-5c2b6ff4db6f:
       alignment: left
-      content: "This workflow runs in SxS with Service Targets.\r\n- The first service\
-        \ runs on \"SanJose\"\r\n- The second service runs on \"router14\" and \"\
-        router15\"\r\n- The third service will delete :\r\n    * \"SanJose\" to test\
-        \ cascade deletion of results when the associated device is deleted.\r\n \
-        \   * \"Service1\" to test cascade deletion of results when the associated\
-        \ service is deleted.\r\n- The fourth service will deleted a link.\r\n- The\
-        \ last service should fail at deleting a task (tasks are not\r\nin the \"\
-        allowed_models\" for deletion in automation.json)"
-      positions: [389, -12]
+      content: "This workflow runs in SxS with Service Targets. It must be run in\
+        \ two times:\r\n1) The first service runs on \"SanJose\", and the second service\
+        \ runs\r\non \"router14\" and \"router15\"\r\n2) - The third service will\
+        \ delete :\r\n    * \"SanJose\" to test cascade deletion of results when the\
+        \ associated device is deleted.\r\n    * \"Service1\" to test cascade deletion\
+        \ of results when the associated service is deleted.\r\n- The fourth service\
+        \ will deleted a link.\r\n- The last service should fail at deleting a task\
+        \ (tasks are not\r\nin the \"allowed_models\" for deletion in automation.json)"
+      positions: [147, 152]
     2636fd0a-5a91-4600-b090-d7ba4b831aa6:
       alignment: left
       content: Runs on "router14" and "router15"
-      positions: [-59, 26]
+      positions: [448, -44]
+    519df264-b0ab-4075-b662-dd4fca05e5c8:
+      alignment: left
+      content: "Delete LINK \"atlantic-r26-boston-3\"\r\nExpected result: success"
+      positions: [289, 371]
+    aac54a20-a7bd-4444-8ef3-2c3ce8ae87cc:
+      alignment: left
+      content: "Attempts to delete TASK \"Configuration Poller\"\r\nExpected result:\
+        \ failure"
+      positions: [579, 351]
     f55f5e94-bed6-46bc-a7dc-13405d8f1be0:
       alignment: left
       content: Runs on "SanJose"
-      positions: [-98, 334]
-  last_modified: '2021-12-28 12:32:35.462789'
+      positions: [-134, -47]
+  last_modified: '2021-12-29 02:03:09.440114'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -26079,7 +26088,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    'Basic: Deletion (Device, Link, Service, Task)': [-99, 264]
+    'Basic: Deletion (Device, Link, Service, Task)': [-142, 9]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -26156,7 +26165,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    'Basic: Deletion (Device, Link, Service, Task)': [-74, 81]
+    'Basic: Deletion (Device, Link, Service, Task)': [432, 13]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -26233,7 +26242,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    'Basic: Deletion (Device, Link, Service, Task)': [221, 106]
+    'Basic: Deletion (Device, Link, Service, Task)': [-204, 300]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -26310,7 +26319,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    'Basic: Deletion (Device, Link, Service, Task)': [218, 291]
+    'Basic: Deletion (Device, Link, Service, Task)': [33, 305]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -26387,7 +26396,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    'Basic: Deletion (Device, Link, Service, Task)': [512, 106]
+    'Basic: Deletion (Device, Link, Service, Task)': [265, 307]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -26464,7 +26473,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    'Basic: Deletion (Device, Link, Service, Task)': [513, 288]
+    'Basic: Deletion (Device, Link, Service, Task)': [530, 289]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''

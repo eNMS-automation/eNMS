@@ -77,6 +77,7 @@ export function switchToSite(path, direction) {
         localStorage.setItem("path", path);
         if (site) localStorage.setItem("site", JSON.stringify(site));
         displaySite(site);
+        switchMode(currentMode, true);
       } else {
         $("#site-filtering").val(path ? site.name : "");
         tableInstances["site"].table.page(0).ajax.reload(null, false);

@@ -111,7 +111,6 @@ export function displayWorkflow(workflowData) {
     }
   });
   displayWorkflowState(workflowData);
-  switchMode(currentMode, true);
 }
 
 function updateRuntimes(result) {
@@ -189,6 +188,7 @@ export const switchToWorkflow = function (path, direction, runtime, selection) {
         }
         displayWorkflow(result);
         if (selection) graph.setSelection(selection);
+        switchMode(currentMode, true);
       } else {
         $("#workflow-filtering").val(path ? workflow.name : "");
         tableInstances["service"].table.page(0).ajax.reload(null, false);
@@ -631,7 +631,7 @@ function resetDisplay() {
     }
   });
   if (nodes) nodes.update(nodeUpdates);
-  if (edges && !mouseIsDown) {
+  if (edges) {
     workflow.edges.forEach((edge) => {
       edgeUpdates.push({ id: edge.id, label: edge.label });
     });

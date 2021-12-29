@@ -128,7 +128,7 @@ export function drawSiteNode(node) {
     label: node.name,
     name: node.name,
     type: node.type,
-    image: `/static/img/view/2D/${node.icon}.gif`,
+    image: `/static/img/view/2D/default/${node.icon}.gif`,
     shape: "image",
     x: node.positions[site.name] ? node.positions[site.name][0] : 0,
     y: node.positions[site.name] ? node.positions[site.name][1] : 0,

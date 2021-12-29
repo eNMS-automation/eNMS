@@ -30,7 +30,6 @@ import {
   showLabelPanel,
   switchMode,
   updateBuilderBindings,
-  mouseIsDown,
 } from "./builder.js";
 import { clearSearch, tables, tableInstances } from "./table.js";
 

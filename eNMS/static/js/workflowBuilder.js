@@ -43,7 +43,9 @@ const options = {
     enabled: false,
     addNode: function (data, callback) {},
     addEdge: function (data, callback) {
-      if (data.to == startId) {
+      if (data.from.length == 36 || data.to.length == 36) {
+        notify("You cannot use a label to draw an edge.", "error", 5);
+      } else if (data.to == startId) {
         notify("You cannot draw an edge to 'Start'.", "error", 5);
       } else if (data.from == endId) {
         notify("You cannot draw an edge from 'End'.", "error", 5);

@@ -166,7 +166,7 @@ export function showServicePanel(type, id, mode, tableId) {
     const value = page == "workflow_builder" ? [workflow.name] : [];
     $(workflowId).val(value).trigger("change");
   }
-  $(workflowId).prop("disabled",true);
+  $(workflowId).prop("disabled", true);
   const wizardId = id ? `#${type}-wizard-${id}` : `#${type}-wizard${postfix}`;
   $(wizardId).smartWizard({
     enableAllSteps: true,

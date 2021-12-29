@@ -645,7 +645,6 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
             processInstance(type, instance);
-
           },
         });
       } else if (mode == "bulk") {

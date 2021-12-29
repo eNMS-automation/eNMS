@@ -528,8 +528,8 @@ tables.device = class DeviceTable extends Table {
         <li>
           <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.base.showInstancePanel('${row.type}', '${
-            row.id
-          }')" data-tooltip="Edit"
+      row.id
+    }')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>

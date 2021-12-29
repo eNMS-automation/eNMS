@@ -444,9 +444,11 @@ export function initBuilder() {
     };
     this.view.moveTo(animationOptions);
   };
-  $("#edge-type").selectpicker().on("change", function () {
-    switchMode(this.value);
-  });
+  $("#edge-type")
+    .selectpicker()
+    .on("change", function () {
+      switchMode(this.value);
+    });
   if (type == "site") {
     loadTypes("node");
     loadTypes("edge");

@@ -21,13 +21,14 @@ import {
 } from "./base.js";
 import {
   configureGraph,
-  createNewNode,
+  currentMode,
   ctrlKeyPressed,
   currentPath,
   edges,
   nodes,
   setPath,
   showLabelPanel,
+  switchMode,
   updateBuilderBindings,
 } from "./builder.js";
 import { clearSearch, tables, tableInstances } from "./table.js";
@@ -42,6 +43,7 @@ const options = {
     enabled: false,
     addNode: function (data, callback) {},
     addEdge: function (data, callback) {
+      console.log(data)
       if (data.to == "Start") {
         notify("You cannot draw an edge to 'Start'.", "error", 5);
       } else if (data.from == "End") {
@@ -65,7 +67,6 @@ export let currentRuntime;
 
 let currentRun;
 let graph;
-let currentMode = "motion";
 let runtimeDisplay;
 let currentPlaceholder;
 let placeholder;
@@ -370,24 +371,6 @@ export function drawWorkflowEdge(edge) {
     },
     arrows: { to: { enabled: true } },
   };
-}
-
-function switchMode(mode, noNotification) {
-  const oldMode = currentMode;
-  currentMode = mode || (currentMode == "motion" ? $("#edge-type").val() : "motion");
-  if ((oldMode == "motion" || currentMode == "motion") && oldMode != currentMode) {
-    $("#mode-icon").toggleClass("glyphicon-move").toggleClass("glyphicon-random");
-  }
-  let notification;
-  if (currentMode == "motion") {
-    graph.addNodeMode();
-    notification = "Mode: Motion.";
-  } else {
-    graph.setSelection({ nodes: [], edges: [] });
-    graph.addEdgeMode();
-    notification = `Mode: Creation of '${currentMode}' Edge.`;
-  }
-  if (!noNotification) notify(notification, "success", 5);
 }
 
 function addServicePanel() {
@@ -717,6 +700,5 @@ configureNamespace("workflowBuilder", [
   filterWorkflowTable,
   getWorkflowState,
   restartWorkflow,
-  switchMode,
   switchToWorkflow,
 ]);

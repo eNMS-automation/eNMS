@@ -366,9 +366,10 @@ function drawEdge(edge) {
   return type == "site" ? drawSiteEdge(edge) : drawWorkflowEdge(edge);
 }
 
-function switchMode(mode, noNotification) {
+export function switchMode(mode, noNotification) {
   const oldMode = currentMode;
-  currentMode = mode || (currentMode == "motion" ? "create_link" : "motion");
+  const newLinkMode = type == "site" ? "create_link" : $("#edge-type").val();
+  currentMode = mode || (currentMode == "motion" ? newLinkMode : "motion");
   if ((oldMode == "motion" || currentMode == "motion") && oldMode != currentMode) {
     $("#mode-icon").toggleClass("glyphicon-move").toggleClass("glyphicon-random");
   }
@@ -379,7 +380,8 @@ function switchMode(mode, noNotification) {
   } else {
     network.setSelection({ nodes: [], edges: [] });
     network.addEdgeMode();
-    notification = "Mode: Creation of link.";
+    const linkLog = type == "site" ? "link" : `'${currentMode}' Edge.`;
+    notification = `Mode: Creation of ${linkLog}.`;
   }
   if (!noNotification) notify(notification, "success", 5);
 }

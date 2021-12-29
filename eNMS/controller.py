@@ -578,7 +578,14 @@ class Controller:
         site = db.fetch("site", id=path.split(">")[-1], allow_none=True)
         if not site:
             raise db.rbac_error
-        return {"site": site.to_dict(include=["nodes", "links"])}
+        return {
+            "site": site.to_dict(include=["nodes", "links"]),
+            "device_results": {
+                result.device_id: result.success
+                for result in db.fetch_all("result", parent_runtime=runtime)
+                if result.device_id
+            },
+        }
 
     def get_top_level_instances(self, type):
         constraint = {"constraints": {f"{type}s_filter": "empty"}}

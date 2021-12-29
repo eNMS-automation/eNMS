@@ -230,6 +230,10 @@ function communtativePairing(a, b) {
   return (Math.max(a, b) * (Math.max(a, b) + 1)) / 2 + Math.min(a, b);
 }
 
+function displaySiteState(results) {
+
+}
+
 export function getSiteState(periodic, first) {
   if (userIsActive && site?.id && !first) {
     call({
@@ -240,6 +244,7 @@ export function getSiteState(periodic, first) {
           site.last_modified = result.site.last_modified;
           displaySite(result.site);
         }
+        if (result.device_results) displaySiteState(result.device_results)
       },
     });
   }

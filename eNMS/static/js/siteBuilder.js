@@ -22,6 +22,7 @@ import {
   setPath,
   savePositions,
   showLabelPanel,
+  switchMode,
   updateBuilderBindings,
 } from "./builder.js";
 import {

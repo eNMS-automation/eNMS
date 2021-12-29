@@ -12,6 +12,7 @@ import {
   call,
   configureNamespace,
   copyToClipboard,
+  editors,
   moveHistory,
   notify,
   openPanel,
@@ -152,6 +153,34 @@ export function flipRuntimeDisplay(display) {
 function filterWorkflowTable(tableId, path) {
   clearSearch(tableId);
   switchToWorkflow(path);
+}
+
+export function showServicePanel(type, id, mode, tableId) {
+  const postfix = tableId ? `-${tableId}` : "";
+  const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
+  typeInput.val(type).prop("disabled", true);
+  $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
+  if (id && mode == "duplicate" && type == "workflow") $(`#copy-${id}`).val(id);
+  const workflowId = id ? `#${type}-workflows-${id}` : `#${type}-workflows${postfix}`;
+  if (id && mode == "duplicate") {
+    const value = page == "workflow_builder" ? [workflow.name] : [];
+    $(workflowId).val(value).trigger("change");
+  }
+  $(workflowId).prop("disabled",true);
+  const wizardId = id ? `#${type}-wizard-${id}` : `#${type}-wizard${postfix}`;
+  $(wizardId).smartWizard({
+    enableAllSteps: true,
+    keyNavigation: false,
+    transitionEffect: "none",
+    onShowStep: function () {
+      if (!editors[id]) return;
+      Object.keys(editors[id]).forEach(function (field) {
+        editors[id][field].refresh();
+      });
+    },
+  });
+  $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
+  $(wizardId).smartWizard("fixHeight");
 }
 
 export const switchToWorkflow = function (path, direction, runtime, selection) {

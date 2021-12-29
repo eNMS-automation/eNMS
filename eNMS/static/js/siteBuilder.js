@@ -246,4 +246,4 @@ export function drawSiteEdge(link) {
   };
 }
 
-configureNamespace("siteBuilder", [addObjectsToSite, filterSiteTable, showLinkPanel]);
+configureNamespace("siteBuilder", [addObjectsToSite, filterSiteTable]);

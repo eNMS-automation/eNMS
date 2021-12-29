@@ -24,6 +24,7 @@ import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
 import { initVisualization } from "./visualization.js";
 import { showLinkPanel, updateSitePanel } from "./siteBuilder.js";
+import { showServicePanel } from "./workflowBuilder.js";
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 export let editors = {};
@@ -583,32 +584,6 @@ export function configureForm(form, id, panelId) {
   }
 }
 
-function showServicePanel(type, id, mode, tableId) {
-  const postfix = tableId ? `-${tableId}` : "";
-  const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
-  typeInput.val(type).prop("disabled", true);
-  $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
-  if (id && mode == "duplicate" && type == "workflow") $(`#copy-${id}`).val(id);
-  $(id ? `#${type}-workflows-${id}` : `#${type}-workflows${postfix}`).prop(
-    "disabled",
-    true
-  );
-  const wizardId = id ? `#${type}-wizard-${id}` : `#${type}-wizard${postfix}`;
-  $(wizardId).smartWizard({
-    enableAllSteps: true,
-    keyNavigation: false,
-    transitionEffect: "none",
-    onShowStep: function () {
-      if (!editors[id]) return;
-      Object.keys(editors[id]).forEach(function (field) {
-        editors[id][field].refresh();
-      });
-    },
-  });
-  $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
-  $(wizardId).smartWizard("fixHeight");
-}
-
 function showNodePanel(type, id, mode) {
   $(id ? `#${type}-type-${id}` : `#${type}-type`)
     .val(type)
@@ -670,10 +645,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
             processInstance(type, instance);
-            if (mode == "duplicate" && isService) {
-              const value = page == "workflow_builder" ? [instance.name] : [];
-              $(`#${type}-workflows-${id}`).val(value).trigger("change");
-            }
+
           },
         });
       } else if (mode == "bulk") {

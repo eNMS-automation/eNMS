@@ -12,6 +12,7 @@ import {
   notify,
   openPanel,
   showInstancePanel,
+  userIsActive,
 } from "./base.js";
 import {
   configureGraph,
@@ -227,6 +228,20 @@ export function updateSiteRightClickBindings() {
 
 function communtativePairing(a, b) {
   return (Math.max(a, b) * (Math.max(a, b) + 1)) / 2 + Math.min(a, b);
+}
+
+export function getSiteState(periodic, first) {
+  if (userIsActive && site?.id && !first) {
+    call({
+      url: `/get_site_state/${currentPath}`,
+      callback: function (result) {
+        if (result.last_modified !== site.last_modified) {
+          displaySite(result);
+        }
+      },
+    });
+  }
+  if (periodic) setTimeout(() => getSiteState(true, false), 4000);
 }
 
 export function drawSiteEdge(link) {

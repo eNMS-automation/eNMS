@@ -20,6 +20,7 @@ import {
 import {
   drawSiteEdge,
   drawSiteNode,
+  getSiteState,
   switchToSite,
   updateSiteRightClickBindings,
 } from "./siteBuilder.js";
@@ -482,6 +483,8 @@ export function initBuilder() {
           getWorkflowState();
         });
         getWorkflowState(true, true);
+      } else {
+        getSiteState(true, true);
       }
     },
   });

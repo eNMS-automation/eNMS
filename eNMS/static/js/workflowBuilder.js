@@ -43,10 +43,9 @@ const options = {
     enabled: false,
     addNode: function (data, callback) {},
     addEdge: function (data, callback) {
-      console.log(data)
-      if (data.to == "Start") {
+      if (data.to == startId) {
         notify("You cannot draw an edge to 'Start'.", "error", 5);
-      } else if (data.from == "End") {
+      } else if (data.from == endId) {
         notify("You cannot draw an edge from 'End'.", "error", 5);
       } else if (data.from != data.to) {
         data.subtype = currentMode;
@@ -72,6 +71,8 @@ let currentPlaceholder;
 let placeholder;
 let isSuperworkflow;
 let runtimeDisplayFlip;
+let startId;
+let endId;
 
 export function displayWorkflow(workflowData) {
   workflow = workflowData.service;
@@ -302,7 +303,14 @@ export function drawWorkflowNode(service) {
     placeholder = service;
   }
   const defaultService = ["Start", "End"].includes(service.scoped_name);
-  if (defaultService) ends.add(service.id);
+  if (defaultService) {
+    ends.add(service.id);
+    if (service.scoped_name == "Start") {
+      startId = service.id;
+    } else {
+      endId = service.id;
+    }
+  }
   return {
     id: service.id,
     shape: service.type == "workflow" ? "ellipse" : defaultService ? "circle" : "box",

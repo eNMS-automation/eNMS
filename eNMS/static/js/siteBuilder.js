@@ -118,6 +118,7 @@ export function displaySite(site) {
 export function drawSiteNode(node) {
   return {
     id: node.id,
+    icon: node.icon,
     icon_3d: node.icon_3d,
     color: "#D2E5FF",
     font: {
@@ -231,7 +232,12 @@ function communtativePairing(a, b) {
 }
 
 function displaySiteState(results) {
-
+  for (const [nodeId, success] of Object.entries(results)) {
+    const color = success ? "green" : "red";
+    const icon = nodes.get(parseInt(nodeId)).icon;
+    const image = `/static/img/view/2D/${color}/${icon}.gif`;
+    nodes.update({ id: parseInt(nodeId), image: image });
+  }
 }
 
 export function getSiteState(periodic, first) {

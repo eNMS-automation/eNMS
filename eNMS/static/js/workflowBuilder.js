@@ -30,6 +30,7 @@ import {
   showLabelPanel,
   switchMode,
   updateBuilderBindings,
+  mouseIsDown,
 } from "./builder.js";
 import { clearSearch, tables, tableInstances } from "./table.js";
 
@@ -613,7 +614,6 @@ function displayWorkflowState(result) {
 function resetDisplay() {
   let nodeUpdates = [];
   let edgeUpdates = [];
-  $("#progressbar").hide();
   workflow.services.forEach((service) => {
     if (service.scoped_name == "Placeholder") {
       nodeUpdates.push({
@@ -631,7 +631,7 @@ function resetDisplay() {
     }
   });
   if (nodes) nodes.update(nodeUpdates);
-  if (edges) {
+  if (edges && !mouseIsDown) {
     workflow.edges.forEach((edge) => {
       edgeUpdates.push({ id: edge.id, label: edge.label });
     });

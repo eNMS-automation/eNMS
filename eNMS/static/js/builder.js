@@ -444,12 +444,12 @@ export function initBuilder() {
     };
     this.view.moveTo(animationOptions);
   };
-  $("#edge-type,#link-type").on("change", function () {
+  $("#edge-type").selectpicker().on("change", function () {
     switchMode(this.value);
   });
   if (type == "site") {
     loadTypes("node");
-    loadTypes("link");
+    loadTypes("edge");
   } else {
     loadTypes("service");
     flipRuntimeDisplay(localStorage.getItem("runtimeDisplay") || "user");
@@ -480,7 +480,6 @@ export function initBuilder() {
         $("#current-runtime").on("change", function () {
           getWorkflowState();
         });
-        $("#edge-type").selectpicker();
         getWorkflowState(true, true);
       }
     },

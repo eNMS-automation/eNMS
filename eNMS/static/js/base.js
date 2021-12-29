@@ -257,8 +257,9 @@ export function createTooltips(panel) {
 }
 
 export function loadTypes(model) {
+  const subtypeModel = model == "edge" ? "link" : model;
   $(`#${model}-type`).selectpicker({ liveSearch: true });
-  for (const [subtype, name] of Object.entries(subtypes[model])) {
+  for (const [subtype, name] of Object.entries(subtypes[subtypeModel])) {
     $(`#${model}-type`).append(new Option(name, subtype));
   }
   $(`#${model}-type`).selectpicker("refresh");

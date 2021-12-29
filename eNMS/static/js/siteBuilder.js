@@ -1,5 +1,6 @@
 /*
 global
+action: true
 page: false
 */
 

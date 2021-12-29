@@ -47,7 +47,6 @@ export let creationMode;
 export let currentMode = "motion";
 export let currentPath = localStorage.getItem("path");
 export let instance;
-export let mouseIsDown = false;
 export let edges;
 export let nodes;
 export let triggerMenu;
@@ -294,7 +293,6 @@ export const rectangleSelection = (container, graph, nodes) => {
   };
 
   container.on("mousedown", function ({ which, pageX, pageY }) {
-    mouseIsDown = true;
     const startX = pageX - this.offsetLeft + offsetLeft;
     const startY = pageY - this.offsetTop + offsetTop;
     if (which === 3) {
@@ -322,7 +320,6 @@ export const rectangleSelection = (container, graph, nodes) => {
   });
 
   container.on("mouseup", function ({ which }) {
-    mouseIsDown = false;
     if (which === 3) {
       drag = false;
       graph.redraw();

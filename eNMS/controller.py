@@ -574,7 +574,7 @@ class Controller:
     def get_session_log(self, session_id):
         return db.fetch("session", id=session_id).content
 
-    def get_site_state(self, path):
+    def get_site_state(self, path, runtime=None):
         site = db.fetch("site", id=path.split(">")[-1], allow_none=True)
         if not site:
             raise db.rbac_error

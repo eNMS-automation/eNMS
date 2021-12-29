@@ -234,6 +234,7 @@ export function getSiteState(periodic, first) {
   if (userIsActive && site?.id && !first) {
     call({
       url: `/get_site_state/${currentPath}`,
+      data: { runtime: site.runtime },
       callback: function (result) {
         if (result.site.last_modified !== site.last_modified) {
           site.last_modified = result.site.last_modified;

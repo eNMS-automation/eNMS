@@ -27,7 +27,7 @@
 {% else %}
 <div id="map"></div>
 {% endif %}
-<ul id="contextMenu" class="dropdown-menu" role="menu">
+<ul id="contextMenu" oncontextmenu="return false;" class="dropdown-menu" role="menu">
   {% if dimension == "2D" %}
   <li class="menu dropdown-submenu geo-menu">
     <a class="menu-submenu" tabindex="-1" href="#"

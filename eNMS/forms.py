@@ -75,6 +75,7 @@ class MetaForm(FormMeta):
             properties[field_name] = {
                 "type": field_type,
                 "model": field.kwargs.get("model", None),
+                "constraints": field.kwargs.get("constraints", {}),
             }
             if field.args and isinstance(field.args[0], str):
                 vs.property_names[field_name] = field.args[0]

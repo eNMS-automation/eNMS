@@ -894,16 +894,17 @@ class Controller:
 
     def multiselect_filtering(self, model, **params):
         table = vs.models[model]
-        results = db.query(model).filter(table.name.contains(params.get("term")))
+        query = db.query(model).filter(table.name.contains(params.get("term")))
+        query = query.filter(and_(*self.filtering_base_constraints(model, **params)))
         property = "name" if params["multiple"] else "id"
         return {
             "items": [
                 {"text": result.ui_name, "id": getattr(result, property)}
-                for result in results.limit(10)
+                for result in query.limit(10)
                 .offset((int(params["page"]) - 1) * 10)
                 .all()
             ],
-            "total_count": results.count(),
+            "total_count": query.count(),
         }
 
     def import_services(self, **kwargs):

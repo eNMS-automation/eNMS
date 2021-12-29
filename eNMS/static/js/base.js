@@ -492,7 +492,7 @@ export function preprocessForm(panel, id, type, duplicate) {
   });
 }
 
-function initSelect(el, model, parentId, single) {
+function initSelect(el, model, parentId, single, constraints) {
   el.select2({
     multiple: !single,
     allowClear: true,
@@ -510,6 +510,7 @@ function initSelect(el, model, parentId, single) {
         return JSON.stringify({
           term: params.term || "",
           page: params.page || 1,
+          constraints: constraints,
           multiple: !single,
         });
       },
@@ -579,7 +580,7 @@ export function configureForm(form, id, panelId) {
       } else {
         model = field.model;
       }
-      initSelect(el, model, panelId, field.type == "object");
+      initSelect(el, model, panelId, field.type == "object", field.constraints);
     }
   }
 }

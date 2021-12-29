@@ -164,6 +164,7 @@ class InstanceField(SelectField):
 
     def __init__(self, *args, **kwargs):
         kwargs["coerce"] = int
+        self.constraints = kwargs.pop("constraints", None)
         self.model = kwargs.pop("model", None)
         super().__init__(*args, **kwargs)
         self.choices = ()

@@ -25957,18 +25957,21 @@
     0041059d-b9b7-422e-9e82-5c2b6ff4db6f:
       alignment: left
       content: "This workflow runs in SxS with Service Targets. It must be run in\
-        \ two times:\r\n1) The first service runs on \"SanJose\", and the second service\
-        \ runs\r\non \"router14\" and \"router15\"\r\n2) - The third service will\
-        \ delete :\r\n    * \"SanJose\" to test cascade deletion of results when the\
-        \ associated device is deleted.\r\n    * \"Service1\" to test cascade deletion\
-        \ of results when the associated service is deleted.\r\n- The fourth service\
-        \ will deleted a link.\r\n- The last service should fail at deleting a task\
-        \ (tasks are not\r\nin the \"allowed_models\" for deletion in automation.json)"
-      positions: [147, 152]
+        \ two times,\r\nfirst with an edge from \"Start\" to \"Service1\", then with\
+        \ an edge from \"Start\"\r\nto \"Deletion of SanJose\". Deleting immediately\
+        \ after running Service1 and\r\nService2 would yield an \"Out of session scope\"\
+        \ database error.\r\n1) The first service runs on \"SanJose\", and the second\
+        \ service runs\r\non \"router14\" and \"router15\"\r\n2) - The third service\
+        \ will delete :\r\n    * \"SanJose\" to test cascade deletion of results when\
+        \ the associated device is deleted.\r\n    * \"Service1\" to test cascade\
+        \ deletion of results when the associated service is deleted.\r\n- The fourth\
+        \ service will deleted a link.\r\n- The last service should fail at deleting\
+        \ a task (tasks are not\r\nin the \"allowed_models\" for deletion in automation.json)"
+      positions: [105, 169]
     2636fd0a-5a91-4600-b090-d7ba4b831aa6:
       alignment: left
       content: Runs on "router14" and "router15"
-      positions: [448, -44]
+      positions: [410, -11]
     519df264-b0ab-4075-b662-dd4fca05e5c8:
       alignment: left
       content: "Delete LINK \"atlantic-r26-boston-3\"\r\nExpected result: success"
@@ -25981,8 +25984,8 @@
     f55f5e94-bed6-46bc-a7dc-13405d8f1be0:
       alignment: left
       content: Runs on "SanJose"
-      positions: [-134, -47]
-  last_modified: '2021-12-29 02:03:09.440114'
+      positions: [-118, -18]
+  last_modified: '2021-12-29 02:11:24.036002'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -26088,7 +26091,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    'Basic: Deletion (Device, Link, Service, Task)': [-142, 9]
+    'Basic: Deletion (Device, Link, Service, Task)': [-119, 33]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -26165,7 +26168,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    'Basic: Deletion (Device, Link, Service, Task)': [432, 13]
+    'Basic: Deletion (Device, Link, Service, Task)': [380, 42]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''

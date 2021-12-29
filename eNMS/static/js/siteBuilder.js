@@ -235,8 +235,9 @@ export function getSiteState(periodic, first) {
     call({
       url: `/get_site_state/${currentPath}`,
       callback: function (result) {
-        if (result.last_modified !== site.last_modified) {
-          displaySite(result);
+        if (result.site.last_modified !== site.last_modified) {
+          site.last_modified = result.site.last_modified;
+          displaySite(result.site);
         }
       },
     });

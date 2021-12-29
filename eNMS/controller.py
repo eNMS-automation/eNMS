@@ -574,6 +574,12 @@ class Controller:
     def get_session_log(self, session_id):
         return db.fetch("session", id=session_id).content
 
+    def get_site_state(self, path):
+        site = db.fetch("site", id=path.split(">")[-1], allow_none=True)
+        if not site:
+            raise db.rbac_error
+        return {"site": site.to_dict(include=["nodes", "links"])}
+
     def get_top_level_instances(self, type):
         constraint = {"constraints": {f"{type}s_filter": "empty"}}
         return self.filtering(type, bulk="base_properties", **constraint)

@@ -211,6 +211,7 @@
     "/get_view_topology": "access",
     "/get_service_state": "access",
     "/get_session_log": "access",
+    "/get_site_state": "access",
     "/get_top_level_instances": "access",
     "/get_tree_files": "access",
     "/get_visualization_pools": "access",

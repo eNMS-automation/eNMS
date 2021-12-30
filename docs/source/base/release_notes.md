@@ -12,6 +12,7 @@ Version 4.2.0
 - Move redis configuration in settings.json > "redis" key
 - Add new mechanism to limit results in server-side drop-down list with filtering constraints.
 - Limit superworkflow selection to workflows that contains the shared Placeholder service.
+- Set trigger variable to "Regular Run" or "Parameterized Run" when service is triggered from the UI instead of "UI".
 
 Tests:
 - Performances (SQL Column function init)

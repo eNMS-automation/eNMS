@@ -895,6 +895,7 @@ class Controller:
     def multiselect_filtering(self, model, **params):
         table = vs.models[model]
         query = db.query(model).filter(table.name.contains(params.get("term")))
+        query = self.filtering_relationship_constraints(query, model, **params)
         query = query.filter(and_(*self.filtering_base_constraints(model, **params)))
         property = "name" if params["multiple"] else "id"
         return {

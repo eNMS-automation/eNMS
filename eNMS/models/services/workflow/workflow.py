@@ -201,7 +201,10 @@ class WorkflowForm(ServiceForm):
             ),
         ),
     )
-    superworkflow = InstanceField("Superworkflow")
+    superworkflow = InstanceField(
+        "Superworkflow",
+        constraints={"children": ["[Shared] Placeholder"], "children_filter": "union"},
+    )
 
 
 class WorkflowEdge(AbstractBase):

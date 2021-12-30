@@ -1462,12 +1462,22 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2021-12-29 02:00:40.390281',
   source: '[Basic: Deletion (Device, Link, Service, Task)] Service2', subtype: success,
   type: workflow_edge, workflow: 'Basic: Deletion (Device, Link, Service, Task)'}
-- {color: green, destination: '[REST API: GET Endpoints] is_alive', label: success,
-  name: '2021-12-30 04:58:50.635488', source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: 'REST API: GET Endpoints'}
-- {color: green, destination: '[REST API: GET Endpoints] configuration', label: success,
-  name: '2021-12-30 04:58:52.034555', source: '[REST API: GET Endpoints] is_alive',
-  subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints'}
-- {color: green, destination: '[REST API: GET Endpoints] operational_data', label: success,
-  name: '2021-12-30 05:24:35.948532', source: '[REST API: GET Endpoints] configuration',
-  subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints'}
+- {color: green, destination: '[REST API: GET Endpoints is_alive, configuration and
+    instance] is_alive', label: success, name: '2021-12-30 04:58:50.635488', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints
+    is_alive, configuration and instance'}
+- {color: green, destination: '[REST API: GET Endpoints is_alive, configuration and
+    instance] configuration', label: success, name: '2021-12-30 04:58:52.034555',
+  source: '[REST API: GET Endpoints is_alive, configuration and instance] is_alive',
+  subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints is_alive,
+    configuration and instance'}
+- {color: green, destination: '[REST API: GET Endpoints is_alive, configuration and
+    instance] operational_data', label: success, name: '2021-12-30 05:24:35.948532',
+  source: '[REST API: GET Endpoints is_alive, configuration and instance] configuration',
+  subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints is_alive,
+    configuration and instance'}
+- {color: green, destination: '[REST API: GET Endpoints is_alive, configuration and
+    instance] instance - device', label: success, name: '2021-12-30 09:21:27.437082',
+  source: '[REST API: GET Endpoints is_alive, configuration and instance] operational_data',
+  subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints is_alive,
+    configuration and instance'}

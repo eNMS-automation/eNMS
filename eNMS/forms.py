@@ -540,7 +540,14 @@ class RunServiceForm(BaseForm):
     form_type = HiddenField(default="run_service")
     targets = HiddenField()
     type = HiddenField()
-    service = InstanceField("Services", model="service")
+    service = InstanceField(
+        "Services",
+        model="service",
+        constraints={
+            "visualization_target": True,
+            "visualization_target_filter": "equality",
+        },
+    )
 
 
 class ServerForm(BaseForm):

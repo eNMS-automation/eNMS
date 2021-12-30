@@ -1490,22 +1490,26 @@
   source: '[REST API: GET Endpoints is_alive, configuration and instance] instance
     - user', subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints
     is_alive, configuration and instance'}
-- {color: green, destination: '[REST API: GET Endpoints query, result and token] Query
-    Device - Washington', label: success, name: '2021-12-30 10:20:33.363327', source: '[Shared]
+- {color: green, destination: '[REST API: GET Endpoints query and token] Query Device
+    - Washington', label: success, name: '2021-12-30 10:20:33.363327', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints
-    query, result and token'}
-- {color: green, destination: '[REST API: GET Endpoints query, result and token] Query
-    Device - NonExisting', label: success, name: '2021-12-30 10:30:11.496504', source: '[REST
-    API: GET Endpoints query, result and token] Query Device - Washington', subtype: success,
-  type: workflow_edge, workflow: 'REST API: GET Endpoints query, result and token'}
-- {color: green, destination: '[REST API: GET Endpoints query, result and token] Query
-    Device - OS eos', label: success, name: '2021-12-30 10:51:49.275620', source: '[REST
-    API: GET Endpoints query, result and token] Query Device - NonExisting', subtype: success,
-  type: workflow_edge, workflow: 'REST API: GET Endpoints query, result and token'}
-- {color: green, destination: '[REST API: GET Endpoints query, result and token] Get
-    Token', label: success, name: '2021-12-30 10:56:24.181911', source: '[REST API:
-    GET Endpoints query, result and token] Query Device - OS eos', subtype: success,
-  type: workflow_edge, workflow: 'REST API: GET Endpoints query, result and token'}
+    query and token'}
+- {color: green, destination: '[REST API: GET Endpoints query and token] Query Device
+    - NonExisting', label: success, name: '2021-12-30 10:30:11.496504', source: '[REST
+    API: GET Endpoints query and token] Query Device - Washington', subtype: success,
+  type: workflow_edge, workflow: 'REST API: GET Endpoints query and token'}
+- {color: green, destination: '[REST API: GET Endpoints query and token] Query Device
+    - OS eos', label: success, name: '2021-12-30 10:51:49.275620', source: '[REST
+    API: GET Endpoints query and token] Query Device - NonExisting', subtype: success,
+  type: workflow_edge, workflow: 'REST API: GET Endpoints query and token'}
+- {color: green, destination: '[REST API: GET Endpoints query and token] Get Token',
+  label: success, name: '2021-12-30 10:56:24.181911', source: '[REST API: GET Endpoints
+    query and token] Query Device - OS eos', subtype: success, type: workflow_edge,
+  workflow: 'REST API: GET Endpoints query and token'}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-12-30 10:56:25.486031',
-  source: '[REST API: GET Endpoints query, result and token] Get Token', subtype: success,
-  type: workflow_edge, workflow: 'REST API: GET Endpoints query, result and token'}
+  source: '[REST API: GET Endpoints query and token] Get Token', subtype: success,
+  type: workflow_edge, workflow: 'REST API: GET Endpoints query and token'}
+- {color: green, destination: '[REST API: POST Endpoints update and search] Search
+    5 devices', label: success, name: '2021-12-30 11:08:32.597472', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'REST API: POST Endpoints
+    update and search'}

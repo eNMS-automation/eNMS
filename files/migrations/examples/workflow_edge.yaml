@@ -1517,3 +1517,11 @@
     with i', label: success, name: '2021-12-30 11:39:38.851253', source: '[REST API:
     POST Endpoints update and search] First 5 devices', subtype: success, type: workflow_edge,
   workflow: 'REST API: POST Endpoints update and search'}
+- {color: green, destination: '[REST API: POST Endpoints update and search] Configuration
+    with regex TRAFFIC-dd', label: success, name: '2021-12-30 12:25:03.239301', source: '[REST
+    API: POST Endpoints update and search] Devices with i', subtype: success, type: workflow_edge,
+  workflow: 'REST API: POST Endpoints update and search'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-12-30 12:29:13.526131',
+  source: '[REST API: POST Endpoints update and search] Configuration with regex TRAFFIC-dd',
+  subtype: success, type: workflow_edge, workflow: 'REST API: POST Endpoints update
+    and search'}

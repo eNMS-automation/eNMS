@@ -473,7 +473,7 @@
     'REST API: GET Endpoints query and token': &id066 [604, 81]
     'REST API: GET Endpoints query, result and token': *id066
     'REST API: Main Endpoints': [500, 0]
-    'REST API: POST Endpoints update and search': [585, -5]
+    'REST API: POST Endpoints update and search': [626, -40]
     'Regression Workflow 1: Netmiko with validation and retries': [115, 3]
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id068 [-383,
       167]
@@ -27899,6 +27899,17 @@
         \  for all 5 devices, that the\r\nIP address is set to 192.168.56.50 and the\
         \ configuration\r\ncontains \"Command: show running-config\"."
       positions: [-114, -207]
+    502aae2b-86f8-4130-8dc0-d9a1c84fae6e:
+      alignment: left
+      content: "Search for the [\"name\",\"configuration_matches\",\"ip_address\"\
+        ] of the\r\ndevices whose configuration is matched by the regular expression\r\
+        \n\"TRAFFIC-\\d\\d\".\r\nThe configuration_matches is a special property designed\
+        \ to return\r\nthe lines of the device configuration that matched the filter.\r\
+        \nUses post-processing to check that there are 27 devices that match,\r\n\
+        and that for each device, the two following lines are a match:\r\n\"L19: vrf\
+        \ instance CUSTOMER-TRAFFIC-28\"\r\n\"L32: no ip routing vrf CUSTOMER-TRAFFIC-28\"\
+        \r\nunder the \"configuration_matches\" property.\r\n"
+      positions: [390, -181]
     c8bac4e7-7a50-4e05-8b3c-b79e85ca2535:
       alignment: left
       content: "Search for the [\"name\",\"operating_system\",\"ip_address\"] of all\r\
@@ -27906,8 +27917,8 @@
         \ there are as many devices\r\nin the results as there are in the pool \"\
         Datacenter Chicago\",\r\nwhich is also configured to match devices with an\
         \ \"i\"."
-      positions: [-39, 171]
-  last_modified: '2021-12-30 11:45:59.397496'
+      positions: [-35, 181]
+  last_modified: '2021-12-30 12:29:13.526131'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -27944,7 +27955,8 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[REST API: POST Endpoints update and
       search] First 5 devices', '[REST API: POST Endpoints update and search] Devices
-      with i']
+      with i', '[REST API: POST Endpoints update and search] Configuration with regex
+      TRAFFIC-dd']
   shared: false
   skip: {}
   skip_query: ''
@@ -28112,7 +28124,7 @@
     type: device
   pools: [Everything]
   positions:
-    'REST API: POST Endpoints update and search': [-84, 71]
+    'REST API: POST Endpoints update and search': [-26, 82]
   postprocessing: "chicago_pool = fetch(\"pool\", name=\"Datacenter Chicago\")\r\n\
     results[\"success\"] = len(chicago_pool.devices) == len(results[\"result\"])"
   postprocessing_mode: success
@@ -28123,6 +28135,98 @@
   rest_url: http://192.168.56.102/rest/search
   run_method: per_device
   scoped_name: Devices with i
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 15
+  type: rest_call_service
+  update_pools_after_running: false
+  update_target_pools: false
+  username: admin
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  verify_ssl_certificate: false
+  visualization_target: false
+  waiting_time: 0
+- access_groups: admin
+  call_type: POST
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: json
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  headers: {}
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-12-30 12:29:01.853798'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[REST API: POST Endpoints update and search] Configuration with regex TRAFFIC-dd'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  params: {}
+  password: YWRtaW4=
+  payload:
+    columns: [name, configuration_matches, ip_address]
+    maximum_return_records: 50
+    search_criteria: {configuration: TRAFFIC-\d\d, configuration_filter: regex}
+    type: device
+  pools: [Everything]
+  positions:
+    'REST API: POST Endpoints update and search': [365, -56]
+  postprocessing: "all_devices = len(results[\"result\"]) == 27\r\nall_matches = all(\r\
+    \n  device[\"configuration_matches\"] == [\r\n    \"L19: vrf instance CUSTOMER-TRAFFIC-28\"\
+    ,\r\n    \"L32: no ip routing vrf CUSTOMER-TRAFFIC-28\"\r\n  ] for device in results[\"\
+    result\"]\r\n)\r\nresults[\"success\"] = all_devices and all_matches"
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  rest_url: http://192.168.56.102/rest/search
+  run_method: per_device
+  scoped_name: Configuration with regex TRAFFIC-dd
   send_notification: false
   send_notification_method: mail
   shared: false

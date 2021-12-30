@@ -10,6 +10,8 @@ Version 4.2.0
 - Dont subclass SQLAlchemy Column following advice of SQLAlchemy creator.
 - Make corrupted edges deletion mechanism a troublehooting snippet instead of a button in the admin panel.
 - Move redis configuration in settings.json > "redis" key
+- Add new mechanism to limit results in server-side drop-down list with filtering constraints.
+- Limit superworkflow selection to workflows that contains the shared Placeholder service.
 
 Tests:
 - Performances (SQL Column function init)

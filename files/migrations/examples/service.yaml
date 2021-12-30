@@ -365,6 +365,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -744,6 +745,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -818,6 +820,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - a_dict: {}
   a_float: 5.0
@@ -852,7 +855,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-02 10:16:48.005751'
+  last_modified: '2021-12-30 03:59:06.111065'
   log_level: 1
   mac_address: FF:FF:FF:FF:FF:FF
   mail_address: aaa@gmail.com
@@ -869,7 +872,7 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
+  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -917,6 +920,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: true
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -1009,6 +1013,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   vrf_name: configure_BGP_test
   waiting_time: 0
 - access_groups: ''
@@ -1104,6 +1109,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -1206,6 +1212,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: Arista
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -1322,6 +1329,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: Arista
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -1425,6 +1433,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: Arista
+  visualization_target: false
   waiting_time: 1
 - access_groups: ''
   auto_find_prompt: true
@@ -1542,6 +1551,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: Arista
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   call_type: GET
@@ -1651,6 +1661,7 @@
   validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -1747,6 +1758,7 @@
   validation_method: dict_included
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -1843,6 +1855,7 @@
   validation_method: dict_included
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -1936,6 +1949,7 @@
   validation_method: dict_included
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -2027,6 +2041,7 @@
   validation_method: dict_included
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -2107,6 +2122,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -2195,6 +2211,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -2302,6 +2319,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -2409,6 +2427,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -2488,6 +2507,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -2570,6 +2590,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -2677,6 +2698,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -2783,6 +2805,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -2890,6 +2913,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -3004,6 +3028,7 @@
   validation_method: dict_included
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   arguments: ''
@@ -3088,6 +3113,7 @@
   validation_method: dict_included
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   arguments: ''
@@ -3172,6 +3198,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   arguments: ''
@@ -3256,6 +3283,7 @@
   validation_method: dict_included
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -3366,6 +3394,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -3474,6 +3503,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: Arista
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -3582,6 +3612,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: Arista
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -3690,6 +3721,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: Arista
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   call_type: GET
@@ -3778,6 +3810,7 @@
   validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: false
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -3863,6 +3896,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -3980,6 +4014,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -4077,6 +4112,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -4189,6 +4225,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -4280,6 +4317,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -4385,6 +4423,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -4502,6 +4541,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -4603,6 +4643,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -4737,6 +4778,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -4865,6 +4907,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -4946,6 +4989,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -5028,6 +5072,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -5115,6 +5160,7 @@
   validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: false
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -5196,6 +5242,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -5283,6 +5330,7 @@
   validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: false
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -5364,6 +5412,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -5472,6 +5521,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -5580,6 +5630,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -5687,6 +5738,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -5787,6 +5839,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -5870,6 +5923,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -5953,6 +6007,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -6065,6 +6120,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   arguments: ''
@@ -6148,6 +6204,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -6248,6 +6305,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -6334,6 +6392,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -6444,6 +6503,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -6563,6 +6623,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -6644,6 +6705,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -6727,6 +6789,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -6811,6 +6874,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -6909,6 +6973,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -6992,6 +7057,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -7071,6 +7137,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -7153,6 +7220,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -7232,6 +7300,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -7320,6 +7389,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -7402,6 +7472,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: false
@@ -7504,6 +7575,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -7589,6 +7661,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -7667,6 +7740,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -7755,6 +7829,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -7864,6 +7939,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   call_type: GET
@@ -7953,6 +8029,7 @@
   validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -8056,6 +8133,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   add_header: true
@@ -8183,6 +8261,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   add_commit: true
@@ -8267,6 +8346,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -8347,6 +8427,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -8374,7 +8455,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-10-09 03:25:57.383540'
+  last_modified: '2021-12-30 04:00:10.979065'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -8388,7 +8469,7 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
+  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -8426,6 +8507,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: true
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -8515,6 +8597,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -8603,6 +8686,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -8691,6 +8775,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -8779,6 +8864,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -8874,6 +8960,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -8970,6 +9057,7 @@
   validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   call_type: GET
@@ -9059,6 +9147,7 @@
   validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   call_type: GET
@@ -9148,6 +9237,7 @@
   validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   call_type: GET
@@ -9237,6 +9327,7 @@
   validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   call_type: GET
@@ -9326,6 +9417,7 @@
   validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -9433,6 +9525,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -9540,6 +9633,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -9647,6 +9741,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -9754,6 +9849,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -9861,6 +9957,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -9968,6 +10065,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -10048,6 +10146,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -10128,6 +10227,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -10208,6 +10308,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -10288,6 +10389,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -10368,6 +10470,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -10448,6 +10551,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -10528,6 +10632,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -10608,6 +10713,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -10696,6 +10802,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -10804,6 +10911,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -10894,6 +11002,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   window_size: 1073741824
 - access_groups: ''
@@ -11004,6 +11113,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -11094,6 +11204,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   window_size: 1073741824
 - access_groups: ''
@@ -11202,6 +11313,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -11292,6 +11404,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   window_size: 1073741824
 - access_groups: ''
@@ -11391,6 +11504,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -11479,6 +11593,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -11566,6 +11681,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -11654,6 +11770,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -11770,6 +11887,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -11859,6 +11977,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -11947,6 +12066,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -12035,6 +12155,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -12123,6 +12244,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -12232,6 +12354,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -12343,6 +12466,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   call_type: GET
@@ -12436,6 +12560,7 @@
   validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: false
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -12543,6 +12668,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -12653,6 +12779,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -12743,6 +12870,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -12824,6 +12952,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -12933,6 +13062,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -13019,6 +13149,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -13126,6 +13257,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -13225,6 +13357,7 @@
   validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -13310,6 +13443,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -13395,6 +13529,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -13502,6 +13637,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   call_type: GET
@@ -13592,6 +13728,7 @@
   validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -13695,6 +13832,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -13779,6 +13917,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -13861,6 +14000,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -13943,6 +14083,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -14029,6 +14170,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -14130,6 +14272,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -14213,6 +14356,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -14296,6 +14440,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -14380,6 +14525,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -14463,6 +14609,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -14545,6 +14692,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -14626,6 +14774,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -14729,6 +14878,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -14835,6 +14985,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -14942,6 +15093,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -15033,6 +15185,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -15112,6 +15265,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -15190,6 +15344,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -15269,6 +15424,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -15347,6 +15503,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -15449,6 +15606,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -15529,6 +15687,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -15611,6 +15770,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -15694,6 +15854,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -15776,6 +15937,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -15857,6 +16019,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -15936,6 +16099,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -16015,6 +16179,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -16108,6 +16273,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -16187,6 +16353,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -16265,6 +16432,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -16343,6 +16511,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -16444,6 +16613,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -16534,6 +16704,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -16627,6 +16798,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -16717,6 +16889,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -16807,6 +16980,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -16902,6 +17076,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -17009,6 +17184,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -17118,6 +17294,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -17200,6 +17377,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -17284,6 +17462,7 @@
   validation_method: dict_included
   validation_section: results['new_key']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -17365,6 +17544,7 @@
   validation_method: text
   validation_section: results['result']["a"]["b"]
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -17460,6 +17640,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -17556,6 +17737,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   xml_conversion: true
   xml_filter: ''
@@ -17653,6 +17835,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   xml_conversion: true
   xml_filter: "    <nc:config xmlns:nc=\"urn:ietf:params:xml:ns:netconf:base:1.0\"\
@@ -17755,6 +17938,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   xml_conversion: true
   xml_filter: ''
@@ -17852,6 +18036,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   xml_conversion: true
   xml_filter: "    <nc:config xmlns:nc=\"urn:ietf:params:xml:ns:netconf:base:1.0\"\
@@ -17954,6 +18139,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   xml_conversion: true
   xml_filter: ''
@@ -18060,6 +18246,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -18166,6 +18353,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   auto_find_prompt: true
@@ -18271,6 +18459,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   auto_find_prompt: true
@@ -18377,6 +18566,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -18478,6 +18668,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -18558,6 +18749,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -18638,6 +18830,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -18718,6 +18911,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -18815,6 +19009,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -18921,6 +19116,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -19017,6 +19213,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   auto_find_prompt: true
@@ -19122,6 +19319,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   auto_find_prompt: true
@@ -19227,6 +19425,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   auto_find_prompt: true
@@ -19332,6 +19531,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -19441,6 +19641,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -19521,6 +19722,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   auto_find_prompt: true
@@ -19626,6 +19828,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   call_type: GET
@@ -19712,6 +19915,7 @@
   validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: false
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -19815,6 +20019,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -19896,6 +20101,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -19975,6 +20181,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -20054,6 +20261,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -20134,6 +20342,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -20216,6 +20425,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -20299,6 +20509,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -20390,6 +20601,7 @@
   variable2: ''
   variable3: ''
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -20481,6 +20693,7 @@
   variable2: ''
   variable3: ''
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -20572,6 +20785,7 @@
   variable2: ''
   variable3: ''
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -20663,6 +20877,7 @@
   variable2: ''
   variable3: ''
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -20754,6 +20969,7 @@
   variable2: ''
   variable3: ''
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -20845,6 +21061,7 @@
   variable2: ''
   variable3: ''
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -20936,6 +21153,7 @@
   variable2: ''
   variable3: ''
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -21021,6 +21239,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -21120,6 +21339,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -21199,6 +21419,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -21283,6 +21504,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -21370,6 +21592,7 @@
   validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: false
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   auto_find_prompt: true
@@ -21476,6 +21699,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -21568,6 +21792,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -21674,6 +21899,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   auto_find_prompt: true
@@ -21779,6 +22005,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   auto_find_prompt: true
@@ -21884,6 +22111,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   auto_find_prompt: true
@@ -21989,6 +22217,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -22076,6 +22305,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -22168,6 +22398,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: Arista
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -22257,6 +22488,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -22367,6 +22599,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   auto_find_prompt: true
@@ -22477,6 +22710,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -22593,6 +22827,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -22694,6 +22929,7 @@
   validation_method: dict_equal
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -22793,6 +23029,7 @@
   validation_method: dict_included
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -22892,6 +23129,7 @@
   validation_method: dict_equal
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -22991,6 +23229,7 @@
   validation_method: dict_included
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -23112,6 +23351,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -23161,7 +23401,7 @@
   jump_on_connect: false
   jump_password: ''
   jump_username: ''
-  last_modified: '2019-10-10 13:42:39.673781'
+  last_modified: '2021-12-30 03:59:55.217474'
   log_level: 1
   mail_recipient: antoine.fourmy@gmail.com
   mandatory_parametrization: false
@@ -23175,7 +23415,7 @@
   number_of_retries: 0
   operating_system: eos
   owners: []
-  owners_access: ''
+  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -23230,6 +23470,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: Arista
+  visualization_target: true
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -23338,6 +23579,7 @@
   variable2: regex_variable
   variable3: textfsm_variable
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -23430,6 +23672,7 @@
   validation_method: dict_included
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -23521,6 +23764,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -23612,6 +23856,7 @@
   validation_method: dict_included
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -23702,6 +23947,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   close_connection: false
@@ -23784,6 +24030,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
@@ -23876,6 +24123,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -23979,6 +24227,7 @@
   variable2: list
   variable3: dict
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -24082,6 +24331,7 @@
   variable2: list
   variable3: dict
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -24172,6 +24422,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: ''
   completion_time: 1
@@ -24262,6 +24513,7 @@
   validation_method: dict_included
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -24344,6 +24596,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -24424,6 +24677,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -24502,6 +24756,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -24580,6 +24835,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -24658,6 +24914,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -24736,6 +24993,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -24814,6 +25072,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -24894,6 +25153,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -24973,6 +25233,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -25051,6 +25312,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -25128,6 +25390,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -25205,6 +25468,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -25282,6 +25546,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -25359,6 +25624,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -25449,6 +25715,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -25527,6 +25794,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -25605,6 +25873,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -25684,6 +25953,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -25765,6 +26035,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -25845,6 +26116,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -25927,6 +26199,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   close_connection: false
@@ -26040,6 +26313,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
@@ -26118,6 +26392,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -26195,6 +26470,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -26272,6 +26548,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -26349,6 +26626,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -26426,6 +26704,7 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
   waiting_time: 0
 - access_groups: admin
   completion_time: 1
@@ -26503,4 +26782,86 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  visualization_target: false
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  count: 5
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-12-30 04:00:48.116548'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: ICMP Ping
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  packet_size: 56
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  ports: '22'
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  protocol: ICMP
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: ICMP Ping
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 2
+  ttl: 60
+  type: ping_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  visualization_target: true
   waiting_time: 0

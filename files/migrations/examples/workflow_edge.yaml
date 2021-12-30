@@ -1490,3 +1490,7 @@
   source: '[REST API: GET Endpoints is_alive, configuration and instance] instance
     - user', subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints
     is_alive, configuration and instance'}
+- {color: green, destination: '[REST API: GET Endpoints query, result and token] Query
+    Device - Washington', label: success, name: '2021-12-30 10:20:33.363327', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints
+    query, result and token'}

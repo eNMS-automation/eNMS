@@ -94,7 +94,7 @@ class RestApi:
         return [result.get_properties(exclude=["positions"]) for result in results]
 
     def run_service(self, **kwargs):
-        data = {"trigger": "REST", "creator": current_user.name, **kwargs}
+        data = {"trigger": "REST API", "creator": current_user.name, **kwargs}
         errors, devices, pools = [], [], []
         service = db.fetch("service", name=data.pop("name"), rbac="run")
         handle_asynchronously = data.get("async", False)

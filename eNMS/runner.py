@@ -457,7 +457,7 @@ class Runner:
                     service=service_id,
                     content="\n".join(logs or []),
                 )
-            if self.main_run.trigger == "REST":
+            if self.main_run.trigger == "REST API":
                 results["devices"] = {}
                 for result in self.main_run.results:
                     if not result.device:

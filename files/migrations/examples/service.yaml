@@ -26897,9 +26897,14 @@
   labels:
     2bf39fbe-bdb2-4589-be78-c391137ba834:
       alignment: left
-      content: "/configuration endpoint with\r\n\"?property=operational_data\""
-      positions: [-51, -183]
-  last_modified: '2021-12-30 05:48:21.234002'
+      content: "/configuration endpoint with \"?property=operational_data\"\r\nCheck\
+        \ for \"ipv4,ipv6\" in the result, which is part of the\r\n\"show vrf\" command."
+      positions: [3, -207]
+    86e4f63f-e6a3-4e0d-9c98-a282ed9b7039:
+      alignment: left
+      content: "Check for \"Command: show running-config\"\r\nin the results."
+      positions: [-286, 178]
+  last_modified: '2021-12-30 09:16:43.886280'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -27042,7 +27047,7 @@
 - access_groups: admin
   call_type: GET
   completion_time: 1
-  content_match: ''
+  content_match: 'Command: show running-config'
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -27065,7 +27070,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-12-30 05:23:29.537692'
+  last_modified: '2021-12-30 09:14:43.897124'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -27093,7 +27098,7 @@
   payload: {}
   pools: [Everything]
   positions:
-    'REST API: GET Endpoints': [-313, 124]
+    'REST API: GET Endpoints': [-294, 105]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -27127,7 +27132,7 @@
 - access_groups: admin
   call_type: GET
   completion_time: 1
-  content_match: ''
+  content_match: ipv4,ipv6
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -27150,7 +27155,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-12-30 05:48:28.139656'
+  last_modified: '2021-12-30 09:15:32.868374'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false

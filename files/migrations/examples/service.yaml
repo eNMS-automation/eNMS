@@ -94,7 +94,7 @@
     Payload Extraction with Operations: &id031 [-661, -226]
     Preprocessing and Postprocessing Mechanism: &id010 [-197, -37]
     RBAC Target Restriction: &id032 [-176, -144]
-    'REST API: GET Endpoints': [-320, -53]
+    'REST API: GET Endpoints': [-425, -25]
     'REST API: Main Endpoints': [0, 0]
     'Regression Workflow 1: Netmiko with validation and retries': [-385, 11]
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id004 [-383,
@@ -26894,8 +26894,12 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2021-12-30 04:58:52.034555'
+  labels:
+    2bf39fbe-bdb2-4589-be78-c391137ba834:
+      alignment: left
+      content: "/configuration endpoint with\r\n\"&property=operational_data\""
+      positions: [-49, -184]
+  last_modified: '2021-12-30 05:25:11.556533'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -26931,7 +26935,7 @@
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[REST API: GET Endpoints] is_alive',
-    '[REST API: GET Endpoints] get_configuration']
+    '[REST API: GET Endpoints] configuration', '[REST API: GET Endpoints] operational_data']
   shared: false
   skip: {}
   skip_query: ''
@@ -27003,7 +27007,7 @@
   payload: {}
   pools: [Everything]
   positions:
-    'REST API: GET Endpoints': [-134, -145]
+    'REST API: GET Endpoints': [-288, -141]
     'REST API: Main Endpoints': [56, -43]
   postprocessing: ''
   postprocessing_mode: success
@@ -27061,7 +27065,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-12-30 05:00:14.195893'
+  last_modified: '2021-12-30 05:23:29.537692'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -27069,7 +27073,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[REST API: GET Endpoints] get_configuration'
+  name: '[REST API: GET Endpoints] configuration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -27089,7 +27093,7 @@
   payload: {}
   pools: [Everything]
   positions:
-    'REST API: GET Endpoints': [-134, 109]
+    'REST API: GET Endpoints': [-313, 124]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -27098,7 +27102,92 @@
   reserved: false
   rest_url: http://192.168.56.102/rest/configuration/{{ device.name }}
   run_method: per_device
-  scoped_name: get_configuration
+  scoped_name: configuration
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 15
+  type: rest_call_service
+  update_pools_after_running: false
+  update_target_pools: false
+  username: admin
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  verify_ssl_certificate: false
+  visualization_target: false
+  waiting_time: 0
+- access_groups: admin
+  call_type: GET
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  headers: {}
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-12-30 05:25:31.472346'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[REST API: GET Endpoints] operational_data'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  params: {}
+  password: YWRtaW4=
+  payload: {}
+  pools: [Everything]
+  positions:
+    'REST API: GET Endpoints': [-59, -129]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  rest_url: http://192.168.56.102/rest/configuration/{{ device.name }}&property=operational_data
+  run_method: per_device
+  scoped_name: operational_data
   send_notification: false
   send_notification_method: mail
   shared: false

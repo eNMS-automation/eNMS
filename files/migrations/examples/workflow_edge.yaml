@@ -1502,3 +1502,10 @@
     Device - OS eos', label: success, name: '2021-12-30 10:51:49.275620', source: '[REST
     API: GET Endpoints query, result and token] Query Device - NonExisting', subtype: success,
   type: workflow_edge, workflow: 'REST API: GET Endpoints query, result and token'}
+- {color: green, destination: '[REST API: GET Endpoints query, result and token] Get
+    Token', label: success, name: '2021-12-30 10:56:24.181911', source: '[REST API:
+    GET Endpoints query, result and token] Query Device - OS eos', subtype: success,
+  type: workflow_edge, workflow: 'REST API: GET Endpoints query, result and token'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-12-30 10:56:25.486031',
+  source: '[REST API: GET Endpoints query, result and token] Get Token', subtype: success,
+  type: workflow_edge, workflow: 'REST API: GET Endpoints query, result and token'}

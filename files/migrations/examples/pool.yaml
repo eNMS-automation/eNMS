@@ -171,7 +171,7 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: ['Site 1: Top-level Devices and Links', 'Site 2: Subsite', Subsite 1]
+  sites: ['Site 2: Subsite', 'Site 1: Top-level Devices and Links', Subsite 1]
   target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
@@ -3399,7 +3399,7 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: ['Site 1: Top-level Devices and Links', 'Site 2: Subsite', Subsite 1]
+  sites: ['Site 2: Subsite', 'Site 1: Top-level Devices and Links', Subsite 1]
   target_services: []
   tasks: []
   type: pool

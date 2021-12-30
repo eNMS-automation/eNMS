@@ -96,7 +96,7 @@
     RBAC Target Restriction: &id032 [-176, -144]
     'REST API: GET Endpoints': [-425, -25]
     'REST API: GET Endpoints is_alive, configuration and instance': [-477, 22]
-    'REST API: GET Endpoints query, result and token': [-212, 69]
+    'REST API: GET Endpoints query, result and token': [-423, -76]
     'REST API: Main Endpoints': [0, 0]
     'Regression Workflow 1: Netmiko with validation and retries': [-385, 11]
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id004 [-383,
@@ -27435,13 +27435,26 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    2cd79427-3e98-4039-9417-dcd0dd5a3d1c:
+      alignment: left
+      content: "Query to query/device?operating_system=eos\r\nReturns a list of all\
+        \ devices as dictionaries\r\nwhere the operating system is set to \"eos\"\
+        .\r\nUses post-processing to check all results have\r\nthe operating system\
+        \ set to \"eos\"."
+      positions: [63, 245]
+    6ac4682f-9fd2-496a-b95f-73f8c14d158b:
+      alignment: left
+      content: "Query to query/device?name=NonExisting&allow_none=true\r\nReturns\
+        \ an empty dictionary because allow_none is set to True.\r\nUses post-processing\
+        \ to check that the list is indeed empty."
+      positions: [-89, -121]
     98d96f4f-361a-4658-ad93-d5b03174bea1:
       alignment: left
       content: "Query to query/device?name=Washington\r\nReturns a list of one dictionary\
         \ with \"Washington\"\r\nproperties. Uses post-processing to check list\r\n\
         length and device name = \"Washington\""
-      positions: [52, -141]
-  last_modified: '2021-12-30 10:22:08.460785'
+      positions: [-276, 241]
+  last_modified: '2021-12-30 10:53:12.364511'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -27477,7 +27490,9 @@
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[REST API: GET Endpoints query, result
-      and token] Query Device - Washington']
+      and token] Query Device - Washington', '[REST API: GET Endpoints query, result
+      and token] Query Device - NonExisting', '[REST API: GET Endpoints query, result
+      and token] Query Device - OS eos']
   shared: false
   skip: {}
   skip_query: ''
@@ -27549,7 +27564,7 @@
   payload: {}
   pools: [Everything]
   positions:
-    'REST API: GET Endpoints query, result and token': [26, -61]
+    'REST API: GET Endpoints query, result and token': [-312, 158]
   postprocessing: "one_element_list = len(results[\"result\"]) == 1\r\nhas_washington\
     \ = results[\"result\"][0][\"name\"] == \"Washington\"\r\nresults[\"success\"\
     ] = one_element_list and has_washington"
@@ -27561,6 +27576,177 @@
   rest_url: http://192.168.56.102/rest/query/device?name={{ device.name }}
   run_method: per_device
   scoped_name: Query Device - Washington
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 15
+  type: rest_call_service
+  update_pools_after_running: false
+  update_target_pools: false
+  username: admin
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  verify_ssl_certificate: false
+  visualization_target: false
+  waiting_time: 0
+- access_groups: admin
+  call_type: GET
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: json
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  headers: {}
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-12-30 10:30:43.494121'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[REST API: GET Endpoints query, result and token] Query Device - NonExisting'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  params: {}
+  password: YWRtaW4=
+  payload: {}
+  pools: [Everything]
+  positions:
+    'REST API: GET Endpoints query, result and token': [-120, -41]
+  postprocessing: results["success"] = not len(results["result"])
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  rest_url: http://192.168.56.102/rest/query/device?name=NonExisting&allow_none=true
+  run_method: per_device
+  scoped_name: Query Device - NonExisting
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 15
+  type: rest_call_service
+  update_pools_after_running: false
+  update_target_pools: false
+  username: admin
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  verify_ssl_certificate: false
+  visualization_target: false
+  waiting_time: 0
+- access_groups: admin
+  call_type: GET
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: json
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  headers: {}
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-12-30 10:52:26.463394'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[REST API: GET Endpoints query, result and token] Query Device - OS eos'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  params: {}
+  password: YWRtaW4=
+  payload: {}
+  pools: [Everything]
+  positions:
+    'REST API: GET Endpoints query, result and token': [49, 153]
+  postprocessing: "results[\"success\"] = all(\r\n  device[\"operating_system\"] ==\
+    \ \"eos\"\r\n  for device in results[\"result\"]\r\n)"
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  rest_url: http://192.168.56.102/rest/query/device?operating_system=eos
+  run_method: per_device
+  scoped_name: Query Device - OS eos
   send_notification: false
   send_notification_method: mail
   shared: false

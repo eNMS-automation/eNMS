@@ -26897,9 +26897,9 @@
   labels:
     2bf39fbe-bdb2-4589-be78-c391137ba834:
       alignment: left
-      content: "/configuration endpoint with\r\n\"&property=operational_data\""
-      positions: [-49, -184]
-  last_modified: '2021-12-30 05:25:11.556533'
+      content: "/configuration endpoint with\r\n\"?property=operational_data\""
+      positions: [-51, -183]
+  last_modified: '2021-12-30 05:48:21.234002'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -27150,7 +27150,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-12-30 05:25:31.472346'
+  last_modified: '2021-12-30 05:48:28.139656'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -27185,7 +27185,7 @@
   priority: 1
   reply_to: ''
   reserved: false
-  rest_url: http://192.168.56.102/rest/configuration/{{ device.name }}&property=operational_data
+  rest_url: http://192.168.56.102/rest/configuration/{{ device.name }}?property=operational_data
   run_method: per_device
   scoped_name: operational_data
   send_notification: false

@@ -305,7 +305,7 @@ class Run(AbstractBase):
     status = db.Column(db.TinyString, default="Running")
     runtime = db.Column(db.TinyString, index=True)
     duration = db.Column(db.TinyString)
-    trigger = db.Column(db.TinyString, default="UI")
+    trigger = db.Column(db.TinyString)
     parent_id = db.Column(Integer, ForeignKey("run.id", ondelete="cascade"))
     parent = relationship(
         "Run", remote_side=[id], foreign_keys="Run.parent_id", back_populates="children"
@@ -421,6 +421,9 @@ class Run(AbstractBase):
                 "device", bulk="id", rbac="target", username=self.creator
             )
         )
+        if not self.trigger:
+            run_type = "Parameterized" if self.parameterized_run else "Regular"
+            self.trigger = f"{run_type} Run"
         self.service_run = Runner(
             self,
             payload=self.payload,

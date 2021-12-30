@@ -99,7 +99,7 @@
     'REST API: GET Endpoints query and token': &id003 [-423, -76]
     'REST API: GET Endpoints query, result and token': *id003
     'REST API: Main Endpoints': [0, 0]
-    'REST API: POST Endpoints update and search': [-341, 65]
+    'REST API: POST Endpoints update and search': [-374, 42]
     'Regression Workflow 1: Netmiko with validation and retries': [-385, 11]
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id005 [-383,
       -95]
@@ -473,7 +473,7 @@
     'REST API: GET Endpoints query and token': &id066 [604, 81]
     'REST API: GET Endpoints query, result and token': *id066
     'REST API: Main Endpoints': [500, 0]
-    'REST API: POST Endpoints update and search': [626, -40]
+    'REST API: POST Endpoints update and search': [576, 170]
     'Regression Workflow 1: Netmiko with validation and retries': [115, 3]
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id068 [-383,
       167]
@@ -27898,7 +27898,7 @@
         \n5 first devices ordered alphabetically.\r\nUses post-processing to check,\
         \  for all 5 devices, that the\r\nIP address is set to 192.168.56.50 and the\
         \ configuration\r\ncontains \"Command: show running-config\"."
-      positions: [-114, -207]
+      positions: [-82, -120]
     502aae2b-86f8-4130-8dc0-d9a1c84fae6e:
       alignment: left
       content: "Search for the [\"name\",\"configuration_matches\",\"ip_address\"\
@@ -27909,7 +27909,7 @@
         and that for each device, the two following lines are a match:\r\n\"L19: vrf\
         \ instance CUSTOMER-TRAFFIC-28\"\r\n\"L32: no ip routing vrf CUSTOMER-TRAFFIC-28\"\
         \r\nunder the \"configuration_matches\" property.\r\n"
-      positions: [390, -181]
+      positions: [430, -69]
     c8bac4e7-7a50-4e05-8b3c-b79e85ca2535:
       alignment: left
       content: "Search for the [\"name\",\"operating_system\",\"ip_address\"] of all\r\
@@ -27917,8 +27917,8 @@
         \ there are as many devices\r\nin the results as there are in the pool \"\
         Datacenter Chicago\",\r\nwhich is also configured to match devices with an\
         \ \"i\"."
-      positions: [-35, 181]
-  last_modified: '2021-12-30 12:29:13.526131'
+      positions: [1, 212]
+  last_modified: '2021-12-30 12:31:17.979934'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -28032,7 +28032,7 @@
     type: device
   pools: [Everything]
   positions:
-    'REST API: POST Endpoints update and search': [-149, -120]
+    'REST API: POST Endpoints update and search': [-117, -35]
   postprocessing: "results[\"success\"] = (\r\n  len(results[\"result\"]) == 5\r\n\
     \  and all(\r\n    device[\"ip_address\"] == \"192.168.56.50\"\r\n    and \"Command:\
     \ show running-config\" in device[\"configuration\"]\r\n    for device in results[\"\
@@ -28124,7 +28124,7 @@
     type: device
   pools: [Everything]
   positions:
-    'REST API: POST Endpoints update and search': [-26, 82]
+    'REST API: POST Endpoints update and search': [-29, 112]
   postprocessing: "chicago_pool = fetch(\"pool\", name=\"Datacenter Chicago\")\r\n\
     results[\"success\"] = len(chicago_pool.devices) == len(results[\"result\"])"
   postprocessing_mode: success
@@ -28214,7 +28214,7 @@
     type: device
   pools: [Everything]
   positions:
-    'REST API: POST Endpoints update and search': [365, -56]
+    'REST API: POST Endpoints update and search': [389, 58]
   postprocessing: "all_devices = len(results[\"result\"]) == 27\r\nall_matches = all(\r\
     \n  device[\"configuration_matches\"] == [\r\n    \"L19: vrf instance CUSTOMER-TRAFFIC-28\"\
     ,\r\n    \"L32: no ip routing vrf CUSTOMER-TRAFFIC-28\"\r\n  ] for device in results[\"\

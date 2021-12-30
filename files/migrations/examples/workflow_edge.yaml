@@ -1481,3 +1481,12 @@
   source: '[REST API: GET Endpoints is_alive, configuration and instance] operational_data',
   subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints is_alive,
     configuration and instance'}
+- {color: green, destination: '[REST API: GET Endpoints is_alive, configuration and
+    instance] instance - user', label: success, name: '2021-12-30 09:32:09.462081',
+  source: '[REST API: GET Endpoints is_alive, configuration and instance] instance
+    - device', subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints
+    is_alive, configuration and instance'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-12-30 09:32:10.672966',
+  source: '[REST API: GET Endpoints is_alive, configuration and instance] instance
+    - user', subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints
+    is_alive, configuration and instance'}

@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from eNMS.database import db
 from eNMS.fields import MultipleInstanceField
 from eNMS.forms import DeviceForm
-from eNMS.fields import HiddenField
+from eNMS.fields import HiddenField, IntegerField
 from eNMS.models.inventory import Device
 
 
@@ -14,6 +14,7 @@ class Gateway(Device):
     __mapper_args__ = {"polymorphic_identity": "gateway"}
     pretty_name = "Gateway"
     id = db.Column(Integer, ForeignKey("device.id"), primary_key=True)
+    priority = db.Column(Integer, default=1)
     devices = relationship(
         "Device", secondary=db.device_gateway_table, back_populates="gateways"
     )
@@ -21,5 +22,6 @@ class Gateway(Device):
 
 class GatewayForm(DeviceForm):
     form_type = HiddenField(default="gateway")
+    priority = IntegerField("Priority", default=1)
     devices = MultipleInstanceField("Devices", model="device")
     properties = ["devices"]

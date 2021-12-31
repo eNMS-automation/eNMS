@@ -11,7 +11,7 @@ from napalm import get_network_driver
 from ncclient import manager
 from netmiko import ConnectHandler
 from os import getenv
-from paramiko import RSAKey, SFTPClient
+from paramiko import AutoAddPolicy, RSAKey, SFTPClient, SSHClient
 from re import compile, search
 from requests import post
 from scp import SCPClient
@@ -994,6 +994,18 @@ class Runner:
             logger="security",
         )
         driver = device.netmiko_driver if self.use_device_driver else self.driver
+        if True:
+            client = SSHClient()
+            client.set_missing_host_key_policy(AutoAddPolicy())
+            client.connect(
+                hostname="192.168.56.104",
+                port=22,
+                username="USERNAME",
+                password="PASSWORD",
+            )
+            sock = client.get_transport().open_channel(
+                'direct-tcpip', (device.ip_address, 22), ('', 0)
+            )
         netmiko_connection = ConnectHandler(
             device_type=driver,
             ip=device.ip_address,
@@ -1003,6 +1015,7 @@ class Runner:
             global_delay_factor=self.global_delay_factor,
             session_log=BytesIO(),
             global_cmd_verify=False,
+            sock=sock,
             **self.get_credentials(device),
         )
         if self.enable_mode:

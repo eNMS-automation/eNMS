@@ -763,10 +763,8 @@ function processInstance(type, instance) {
 }
 
 function processData(type, id) {
-  const isService = type in subtypes.service;
-  const isNode = type in subtypes.node;
-  if (isService || isNode) {
-    const relation = isService ? "workflow" : "site";
+  if (type in subtypes.service || type in subtypes.node) {
+    const relation = type in subtypes.service ? "workflow" : "site";
     const property = id ? `#${type}-${relation}s-${id}` : `#${type}-${relation}s`;
     $(property).prop("disabled", false);
   }
@@ -774,9 +772,8 @@ function processData(type, id) {
     url: `/update/${type}`,
     form: id ? `${type}-form-${id}` : `${type}-form`,
     callback: (instance) => {
-      const tableType = isService ? "service" : isNode ? "device" : type;
       if (page.includes("table")) {
-        refreshTable(tableType);
+        refreshTable(page.split("_")[0]);
       } else if (page.includes("builder")) {
         processBuilderData(instance, id);
       }

@@ -175,7 +175,7 @@ const deleteInstance = function (type, id, tableId) {
   call({
     url: `/delete_instance/${type}/${id}`,
     callback: function (result) {
-      if (type.includes("service") || type == "workflow") {
+      if (type in subtypes.service) {
         type = "service";
         const path = localStorage.getItem("path");
         if (path && path.includes(id)) {
@@ -763,8 +763,9 @@ function processInstance(type, instance) {
 }
 
 function processData(type, id) {
-  const isService = type.includes("service") || type == "workflow";
-  if (isService || type in subtypes.node) {
+  const isService = type in subtypes.service;
+  const isNode = type in subtypes.node;
+  if (isService || isNode) {
     const relation = isService ? "workflow" : "site";
     const property = id ? `#${type}-${relation}s-${id}` : `#${type}-${relation}s`;
     $(property).prop("disabled", false);
@@ -773,7 +774,7 @@ function processData(type, id) {
     url: `/update/${type}`,
     form: id ? `${type}-form-${id}` : `${type}-form`,
     callback: (instance) => {
-      const tableType = isService ? "service" : type;
+      const tableType = isService ? "service" : isNode ? "device" : type;
       if (page.includes("table")) {
         refreshTable(tableType);
       } else if (page.includes("builder")) {

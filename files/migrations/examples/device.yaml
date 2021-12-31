@@ -7,6 +7,7 @@
   custom_select: b
   description: Jackson
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.51
@@ -55,6 +56,7 @@
   custom_select: b
   description: PaloAlto
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.1.86
@@ -103,6 +105,7 @@
   custom_select: b
   description: Austin
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
@@ -151,6 +154,7 @@
   custom_select: b
   description: Washington
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
@@ -199,6 +203,7 @@
   custom_select: b
   description: Chicago
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
@@ -247,6 +252,7 @@
   custom_select: b
   description: SanJose
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.1.187
@@ -295,6 +301,7 @@
   custom_select: b
   description: SanDiego
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.12
@@ -343,6 +350,7 @@
   custom_select: b
   description: Dallas
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.100
@@ -391,6 +399,7 @@
   custom_select: b
   description: Philadelphia
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.101
@@ -439,6 +448,7 @@
   custom_select: b
   description: LosAngeles
   down: false
+  gateways: []
   icon: optical_switch
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.13
@@ -487,6 +497,7 @@
   custom_select: b
   description: Detroit
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.14
@@ -535,6 +546,7 @@
   custom_select: b
   description: Richmond
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.15
@@ -583,6 +595,7 @@
   custom_select: b
   description: Atlanta
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.102
@@ -631,6 +644,7 @@
   custom_select: b
   description: Boston
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
@@ -679,6 +693,7 @@
   custom_select: b
   description: Houston
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.104
@@ -727,6 +742,7 @@
   custom_select: b
   description: Baltimore
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
@@ -775,6 +791,7 @@
   custom_select: b
   description: Cleveland
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
@@ -823,6 +840,7 @@
   custom_select: b
   description: Columbus
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
@@ -871,6 +889,7 @@
   custom_select: b
   description: Cincinnati
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
@@ -919,6 +938,7 @@
   custom_select: b
   description: Cambridge
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
@@ -967,6 +987,7 @@
   custom_select: b
   description: Minneapolis
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.110
@@ -1015,6 +1036,7 @@
   custom_select: b
   description: NewYork
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.1.88
@@ -1063,6 +1085,7 @@
   custom_select: b
   description: Sacramento
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.111
@@ -1111,6 +1134,7 @@
   custom_select: b
   description: SanFrancisco
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.1.89
@@ -1159,6 +1183,7 @@
   custom_select: b
   description: Orange
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.114
@@ -1207,6 +1232,7 @@
   custom_select: b
   description: Oakland
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.112
@@ -1255,6 +1281,7 @@
   custom_select: b
   description: Denver
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.113
@@ -1303,6 +1330,7 @@
   custom_select: b
   description: france
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.1.85
@@ -1351,6 +1379,7 @@
   custom_select: b
   description: france
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.1.86
@@ -1399,6 +1428,7 @@
   custom_select: b
   description: france
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.1.87
@@ -1447,6 +1477,7 @@
   custom_select: b
   description: eastern europe
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.1.88
@@ -1495,6 +1526,7 @@
   custom_select: b
   description: france
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.1.188
@@ -1543,6 +1575,7 @@
   custom_select: b
   description: france
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.1.187
@@ -1591,6 +1624,7 @@
   custom_select: b
   description: france
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.12
@@ -1639,6 +1673,7 @@
   custom_select: b
   description: eastern europe
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.13
@@ -1687,6 +1722,7 @@
   custom_select: b
   description: france
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.14
@@ -1735,6 +1771,7 @@
   custom_select: b
   description: eastern europe
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.15
@@ -1783,6 +1820,7 @@
   custom_select: b
   description: eastern europe
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.16
@@ -1831,6 +1869,7 @@
   custom_select: b
   description: france
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.17
@@ -1879,6 +1918,7 @@
   custom_select: b
   description: france
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.18
@@ -1927,6 +1967,7 @@
   custom_select: b
   description: eastern europe
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.19
@@ -1975,6 +2016,7 @@
   custom_select: b
   description: eastern europe
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.20
@@ -2023,6 +2065,7 @@
   custom_select: b
   description: eastern europe
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.21
@@ -2071,6 +2114,7 @@
   custom_select: b
   description: eastern europe
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.22
@@ -2119,6 +2163,7 @@
   custom_select: b
   description: eastern europe
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.23
@@ -2167,6 +2212,7 @@
   custom_select: b
   description: eastern europe
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.24
@@ -2215,6 +2261,7 @@
   custom_select: b
   description: eastern europe
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.25
@@ -2263,6 +2310,7 @@
   custom_select: b
   description: france
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.26
@@ -2311,6 +2359,7 @@
   custom_select: b
   description: france
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.27
@@ -2359,6 +2408,7 @@
   custom_select: b
   description: france
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.28
@@ -2407,6 +2457,7 @@
   custom_select: b
   description: spain
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.29
@@ -2455,6 +2506,7 @@
   custom_select: b
   description: spain
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.30
@@ -2503,6 +2555,7 @@
   custom_select: b
   description: spain
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.31
@@ -2551,6 +2604,7 @@
   custom_select: b
   description: spain
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.32
@@ -2599,6 +2653,7 @@
   custom_select: b
   description: spain
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.33
@@ -2647,6 +2702,7 @@
   custom_select: b
   description: spain
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.34
@@ -2695,6 +2751,7 @@
   custom_select: b
   description: eastern europe
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.35
@@ -2743,6 +2800,7 @@
   custom_select: b
   description: spain
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.36
@@ -2791,6 +2849,7 @@
   custom_select: b
   description: spain
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.37
@@ -2839,6 +2898,7 @@
   custom_select: b
   description: spain
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.38
@@ -2887,6 +2947,7 @@
   custom_select: b
   description: Washington
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.103
@@ -2935,6 +2996,7 @@
   custom_select: b
   description: Denver
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 127.0.0.1
@@ -2983,6 +3045,7 @@
   custom_select: b
   description: Dallas
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.100
@@ -3031,6 +3094,7 @@
   custom_select: b
   description: Dallas
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.100
@@ -3079,6 +3143,7 @@
   custom_select: b
   description: Dallas
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.100
@@ -3127,6 +3192,7 @@
   custom_select: b
   description: Austin
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
@@ -3175,6 +3241,7 @@
   custom_select: b
   description: Austin
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
@@ -3223,6 +3290,7 @@
   custom_select: b
   description: Jackson
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.51
@@ -3271,6 +3339,7 @@
   custom_select: b
   description: Oakland
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.112
@@ -3317,6 +3386,7 @@
   custom_select: b
   description: ''
   down: false
+  gateways: []
   icon: router
   icon_3d: juniper_ex3300
   ip_address: ''
@@ -3364,6 +3434,7 @@
   custom_select: b
   description: ''
   down: false
+  gateways: []
   icon: server
   icon_3d: juniper_ex3300
   ip_address: ''
@@ -3412,6 +3483,7 @@
   custom_select: b
   description: ''
   down: false
+  gateways: []
   icon: optical_switch
   icon_3d: juniper_ex3300
   ip_address: ''
@@ -3452,4 +3524,100 @@
   serial_number: ''
   subtype: ''
   type: router
+  vendor: ''
+- access_groups: admin
+  creator: admin
+  custom_json: {}
+  custom_multiselect: []
+  custom_select: b
+  description: ''
+  down: false
+  gateways: [Gateway 1]
+  icon: antenna
+  icon_3d: juniper_ex3300
+  ip_address: ''
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2021-12-31 12:46:44.351204'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '0.0'
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: Router Behind Gateway 1
+  napalm_driver: ios
+  netconf_driver: default
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  positions: {}
+  property1: 10.145.14.1
+  property2: CP
+  property3: password
+  reachable: true
+  scrapli_driver: cisco_iosxe
+  serial_number: ''
+  subtype: ''
+  type: router
+  vendor: ''
+- access_groups: admin
+  creator: admin
+  custom_json: {}
+  custom_multiselect: []
+  custom_select: b
+  description: ''
+  devices: [Router Behind Gateway 1]
+  down: false
+  gateways: []
+  icon: antenna
+  icon_3d: juniper_ex3300
+  ip_address: ''
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2021-12-31 12:46:30.454959'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '0.0'
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: Gateway 1
+  napalm_driver: ios
+  netconf_driver: default
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  positions: {}
+  property1: 10.145.14.1
+  property2: CP
+  property3: password
+  reachable: true
+  scrapli_driver: cisco_iosxe
+  subtype: ''
+  type: gateway
   vendor: ''

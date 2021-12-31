@@ -50,6 +50,7 @@
     Advanced Iteration Targets: &id011 [-131, -24]
     Advanced Multiprocessing (admin): &id002 [-492, -39]
     Ansible with Validation: [-634, -20]
+    'Automation: gateways (SSH Proxy with Paramiko)': [-106, 23]
     Basic Iteration Targets with Netmiko: [-308, -231]
     Basic Superworkflow: [-149, 39]
     'Basic: Deletion (Device, Link, Service, Task)': [-335, 173]
@@ -427,6 +428,7 @@
     Advanced Iteration Targets: &id075 [350, -6]
     Advanced Multiprocessing (admin): &id066 [505, -10]
     Ansible with Validation: [468, 147]
+    'Automation: gateways (SSH Proxy with Paramiko)': [563, 20]
     Basic Iteration Targets with Netmiko: [596, -221]
     Basic Superworkflow: [500, 0]
     'Basic: Deletion (Device, Link, Service, Task)': [664, 197]
@@ -28802,3 +28804,89 @@
   verify_ssl_certificate: false
   visualization_target: false
   waiting_time: 0
+- access_groups: admin
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    c23ca0ee-235d-404a-bc08-fe900792803a:
+      alignment: left
+      content: "This workflows tests the Gateway feature: we connect to a\r\nremote\
+        \ network device via a Gateway device, called \"Gateway\".\r\nThe workflow\
+        \ has one target, \"Router Behind Gateway\" whose\r\n\"gateways\" field is\
+        \ set to \"Gateway\"."
+      positions: [228, -130]
+  last_modified: '2021-12-31 12:45:30.088700'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Automation: gateways (SSH Proxy with Paramiko)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Automation: gateways (SSH Proxy with Paramiko)'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  visualization_target: false
+  waiting_time: 0
+  workflow_category: Example workflow(s)

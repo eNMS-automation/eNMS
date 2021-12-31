@@ -919,6 +919,7 @@ class DeviceForm(ObjectForm):
     netconf_driver = SelectField(
         "Netconf Driver", choices=vs.netconf_drivers, default="default"
     )
+    gateways = MultipleInstanceField("Gateways", model="gateway")
 
 
 class LinkForm(ObjectForm):

@@ -583,7 +583,7 @@ function create3dGraphNetwork(container) {
           color: theme.view.logical.sphere,
         })
       );
-      const imageUrl = `../static/img/view/2D/default/${icon}.gif`
+      const imageUrl = `../static/img/view/2D/default/${icon}.gif`;
       const sprite = new THREE.Sprite(
         new THREE.SpriteMaterial({
           map: new THREE.TextureLoader().load(imageUrl),

@@ -232,12 +232,14 @@ function communtativePairing(a, b) {
 }
 
 function displaySiteState(results) {
-  nodes.update(Object.entries(results).map(([nodeId, success]) => {
-    const color = success ? "green" : "red";
-    const icon = nodes.get(parseInt(nodeId)).icon;
-    const image = `/static/img/view/2D/${color}/${icon}.gif`;
-    return { id: parseInt(nodeId), image: image }
-  }));
+  nodes.update(
+    Object.entries(results).map(([nodeId, success]) => {
+      const color = success ? "green" : "red";
+      const icon = nodes.get(parseInt(nodeId)).icon;
+      const image = `/static/img/view/2D/${color}/${icon}.gif`;
+      return { id: parseInt(nodeId), image: image };
+    })
+  );
 }
 
 export function getSiteState(periodic, first) {
@@ -250,7 +252,7 @@ export function getSiteState(periodic, first) {
           site.last_modified = result.site.last_modified;
           displaySite(result.site);
         }
-        if (result.device_results) displaySiteState(result.device_results)
+        if (result.device_results) displaySiteState(result.device_results);
       },
     });
   }

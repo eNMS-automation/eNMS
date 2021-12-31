@@ -132,6 +132,16 @@
   },
   "relationships": {
     "associations": {
+      "device_gateway": {
+        "model1": {
+          "column": "device_id",
+          "foreign_key": "device"
+        },
+        "model2": {
+          "column": "gateway_id",
+          "foreign_key": "gateway"
+        }
+      },
       "link_site": {
         "model1": {
           "column": "link_id",

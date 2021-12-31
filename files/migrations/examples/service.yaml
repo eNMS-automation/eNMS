@@ -28280,6 +28280,13 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    0af0ce02-f0ee-4cbe-82dc-89cd73b96f75:
+      alignment: left
+      content: "Uses the \"runtime\" global variable set in the\r\nworkflow pre-processing\
+        \ to send a GET call\r\nto \"result\" and get the results for the on-going\r\
+        \nrun. Uses post-processing to check that its\r\nstatus is set to \"Running\"\
+        ."
+      positions: [-90, 218]
     0bf89145-fb73-44cc-8ff4-b5cc37a74b35:
       alignment: left
       content: "Create new device \"NewDevice\"\r\nand uses \"fetch\" in post-processing\r\
@@ -28295,7 +28302,7 @@
       content: "Set NewDevice propert1 to \"UPDATED\"\r\nand uses \"fetch\" in post-processing\
         \ to\r\ncheck that the value is indeed \"UPDATED\"."
       positions: [187, -169]
-  last_modified: '2021-12-31 03:28:21.351788'
+  last_modified: '2021-12-31 03:38:31.497094'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -28322,7 +28329,7 @@
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
-  preprocessing: ''
+  preprocessing: set_var("runtime", self.parent_runtime)
   priority: 1
   reply_to: ''
   reserved: false
@@ -28333,7 +28340,8 @@
   services: ['[Shared] Start', '[Shared] End', '[REST API: POST update, DELETE delete
       and GET & POST results] Update NewDevice property1', '[REST API: POST update,
       DELETE delete and GET & POST results] Create NewDevice', '[REST API: POST update,
-      DELETE delete and GET & POST results] Delete NewDevice']
+      DELETE delete and GET & POST results] Delete NewDevice', '[REST API: POST update,
+      DELETE delete and GET & POST results] GET result']
   shared: false
   skip: {}
   skip_query: ''
@@ -28588,6 +28596,92 @@
   rest_url: http://192.168.56.102/rest/instance/device/NewDevice
   run_method: once
   scoped_name: Delete NewDevice
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 15
+  type: rest_call_service
+  update_pools_after_running: false
+  update_target_pools: false
+  username: admin
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  verify_ssl_certificate: false
+  visualization_target: false
+  waiting_time: 0
+- access_groups: admin
+  call_type: GET
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: json
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  headers: {}
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-12-31 03:37:28.832022'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[REST API: POST update, DELETE delete and GET & POST results] GET result'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  params: {}
+  password: YWRtaW4=
+  payload: {}
+  pools: [Everything]
+  positions:
+    'REST API: POST update, DELETE delete and GET & POST results': [-124, 141]
+  postprocessing: results["success"] = results["result"]["status"] == "Running"
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  rest_url: 'http://192.168.56.102/rest/result/REST API: POST update, DELETE delete
+    and GET & POST results/{{ runtime }}'
+  run_method: once
+  scoped_name: GET result
   send_notification: false
   send_notification_method: mail
   shared: false

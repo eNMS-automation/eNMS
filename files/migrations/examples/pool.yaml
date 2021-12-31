@@ -1247,8 +1247,8 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: ['[Operational Data Backup (admin)] Retrieve Operational Data',
-    Scalability Test (large workflow), Parameterized Superworkflow Run]
+  target_services: [Scalability Test (large workflow), '[Operational Data Backup (admin)]
+      Retrieve Operational Data', Parameterized Superworkflow Run]
   tasks: []
   type: pool
   user_description: ''

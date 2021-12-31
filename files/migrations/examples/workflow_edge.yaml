@@ -1537,7 +1537,8 @@
   source: '[REST API: POST update, DELETE delete and GET & POST results] Update NewDevice
     property1', subtype: success, type: workflow_edge, workflow: 'REST API: POST update,
     DELETE delete and GET & POST results'}
-- {color: green, destination: '[Shared] End', label: success, name: '2021-12-31 03:25:08.976436',
-  source: '[REST API: POST update, DELETE delete and GET & POST results] Delete NewDevice',
-  subtype: success, type: workflow_edge, workflow: 'REST API: POST update, DELETE
-    delete and GET & POST results'}
+- {color: green, destination: '[REST API: POST update, DELETE delete and GET & POST
+    results] GET result', label: success, name: '2021-12-31 03:33:31.545144', source: '[REST
+    API: POST update, DELETE delete and GET & POST results] Delete NewDevice', subtype: success,
+  type: workflow_edge, workflow: 'REST API: POST update, DELETE delete and GET & POST
+    results'}

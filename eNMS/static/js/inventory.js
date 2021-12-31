@@ -16,6 +16,7 @@ import {
   notify,
   openPanel,
   openUrl,
+  showInstancePanel,
 } from "./base.js";
 import { tables, tableInstances } from "./table.js";
 
@@ -292,6 +293,10 @@ function displayNetworkData({ type, name, id, result, datetime }) {
   });
 }
 
+function openNodePanel() {
+  showInstancePanel($("#node-type").val());
+}
+
 export const showDeviceData = function (device) {
   call({
     url: `/get_device_network_data/${device.id}`,
@@ -514,6 +519,7 @@ function importTopology() {
 configureNamespace("inventory", [
   downloadNetworkData,
   exportTopology,
+  openNodePanel,
   showConnectionPanel,
   webConnection,
   updatePools,

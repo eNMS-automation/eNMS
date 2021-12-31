@@ -101,7 +101,7 @@
     'REST API: Main Endpoints': [0, 0]
     'REST API: POST Endpoint search': &id004 [-374, 42]
     'REST API: POST Endpoints update and search': *id004
-    'REST API: POST update, DELETE delete and GET & POST results': [-282, 105]
+    'REST API: POST update, DELETE delete and GET & POST results': [-359, 245]
     'Regression Workflow 1: Netmiko with validation and retries': [-385, 11]
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id006 [-383,
       -95]
@@ -477,7 +477,7 @@
     'REST API: Main Endpoints': [500, 0]
     'REST API: POST Endpoint search': &id068 [576, 170]
     'REST API: POST Endpoints update and search': *id068
-    'REST API: POST update, DELETE delete and GET & POST results': [709, 87]
+    'REST API: POST update, DELETE delete and GET & POST results': [503, 145]
     'Regression Workflow 1: Netmiko with validation and retries': [115, 3]
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id070 [-383,
       167]
@@ -28286,23 +28286,30 @@
         \ to send a GET call\r\nto \"result\" and get the results for the on-going\r\
         \nrun. Uses post-processing to check that its\r\nstatus is set to \"Running\"\
         ."
-      positions: [-90, 218]
+      positions: [-131, 263]
     0bf89145-fb73-44cc-8ff4-b5cc37a74b35:
       alignment: left
       content: "Create new device \"NewDevice\"\r\nand uses \"fetch\" in post-processing\r\
         \nto check that it exists."
-      positions: [-134, -168]
+      positions: [-209, -8]
     4a4ee54e-814c-456a-8eee-b1a2992c4785:
       alignment: left
       content: "Deletes NewDevice with a DELETE\r\nREST call and check with fetch\
         \ and\r\nallow_none=True that NewDevice no\r\nlonger exists."
-      positions: [502, -167]
+      positions: [531, -4]
     5e7bca9e-658d-4e24-b7ea-ef95f886e31f:
       alignment: left
       content: "Set NewDevice propert1 to \"UPDATED\"\r\nand uses \"fetch\" in post-processing\
         \ to\r\ncheck that the value is indeed \"UPDATED\"."
-      positions: [187, -169]
-  last_modified: '2021-12-31 03:38:31.497094'
+      positions: [145, -16]
+    9e8cbbbc-e680-43a6-99f2-0bb23048c085:
+      alignment: left
+      content: "Uses the \"runtime\" global variable set in the\r\nworkflow pre-processing\
+        \ to send a POST call\r\nto \"search\" and get the results for the on-going\r\
+        \nrun. Uses post-processing to check there are\r\n4 results, one for each\
+        \ of the previous services."
+      positions: [339, 312]
+  last_modified: '2021-12-31 03:53:30.251121'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -28338,10 +28345,11 @@
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[REST API: POST update, DELETE delete
-      and GET & POST results] Update NewDevice property1', '[REST API: POST update,
-      DELETE delete and GET & POST results] Create NewDevice', '[REST API: POST update,
-      DELETE delete and GET & POST results] Delete NewDevice', '[REST API: POST update,
-      DELETE delete and GET & POST results] GET result']
+      and GET & POST results] POST Update NewDevice property1', '[REST API: POST update,
+      DELETE delete and GET & POST results] POST Create NewDevice', '[REST API: POST
+      update, DELETE delete and GET & POST results] DELETE NewDevice', '[REST API:
+      POST update, DELETE delete and GET & POST results] GET result', '[REST API:
+      POST update, DELETE delete and GET & POST results] POST Search Result']
   shared: false
   skip: {}
   skip_query: ''
@@ -28385,7 +28393,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-12-31 03:25:55.962414'
+  last_modified: '2021-12-31 03:47:47.438589'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -28393,8 +28401,8 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[REST API: POST update, DELETE delete and GET & POST results] Update NewDevice
-    property1'
+  name: '[REST API: POST update, DELETE delete and GET & POST results] POST Update
+    NewDevice property1'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -28414,7 +28422,7 @@
   payload: {name: NewDevice, property1: UPDATED}
   pools: [Everything]
   positions:
-    'REST API: POST update, DELETE delete and GET & POST results': [179, -103]
+    'REST API: POST update, DELETE delete and GET & POST results': [140, 51]
   postprocessing: results["success"] = fetch("device", name="NewDevice").property1
     == "UPDATED"
   postprocessing_mode: success
@@ -28424,7 +28432,7 @@
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device
   run_method: once
-  scoped_name: Update NewDevice property1
+  scoped_name: POST Update NewDevice property1
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -28472,7 +28480,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-12-31 03:24:26.978426'
+  last_modified: '2021-12-31 03:47:42.124002'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -28480,7 +28488,8 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[REST API: POST update, DELETE delete and GET & POST results] Create NewDevice'
+  name: '[REST API: POST update, DELETE delete and GET & POST results] POST Create
+    NewDevice'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -28500,7 +28509,7 @@
   payload: {name: NewDevice}
   pools: [Everything]
   positions:
-    'REST API: POST update, DELETE delete and GET & POST results': [-148, -99]
+    'REST API: POST update, DELETE delete and GET & POST results': [-232, 66]
   postprocessing: fetch("device", name="NewDevice")
   postprocessing_mode: success
   preprocessing: ''
@@ -28509,7 +28518,7 @@
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device
   run_method: once
-  scoped_name: Create NewDevice
+  scoped_name: POST Create NewDevice
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -28557,7 +28566,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-12-31 03:25:29.563899'
+  last_modified: '2021-12-31 03:47:53.783395'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -28565,7 +28574,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[REST API: POST update, DELETE delete and GET & POST results] Delete NewDevice'
+  name: '[REST API: POST update, DELETE delete and GET & POST results] DELETE NewDevice'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -28585,7 +28594,7 @@
   payload: {}
   pools: [Everything]
   positions:
-    'REST API: POST update, DELETE delete and GET & POST results': [493, -99]
+    'REST API: POST update, DELETE delete and GET & POST results': [473, 77]
   postprocessing: results["success"] = fetch("device", name="NewDevice", allow_none=True)
     is None
   postprocessing_mode: success
@@ -28595,7 +28604,7 @@
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device/NewDevice
   run_method: once
-  scoped_name: Delete NewDevice
+  scoped_name: DELETE NewDevice
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -28671,7 +28680,7 @@
   payload: {}
   pools: [Everything]
   positions:
-    'REST API: POST update, DELETE delete and GET & POST results': [-124, 141]
+    'REST API: POST update, DELETE delete and GET & POST results': [-123, 167]
   postprocessing: results["success"] = results["result"]["status"] == "Running"
   postprocessing_mode: success
   preprocessing: ''
@@ -28682,6 +28691,96 @@
     and GET & POST results/{{ runtime }}'
   run_method: once
   scoped_name: GET result
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 15
+  type: rest_call_service
+  update_pools_after_running: false
+  update_target_pools: false
+  username: admin
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  verify_ssl_certificate: false
+  visualization_target: false
+  waiting_time: 0
+- access_groups: admin
+  call_type: POST
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: json
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  headers: {}
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-12-31 03:52:29.182943'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[REST API: POST update, DELETE delete and GET & POST results] POST Search
+    Result'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  params: {}
+  password: YWRtaW4=
+  payload:
+    columns: [result, parent_runtime, service_name]
+    maximum_return_records: 1000
+    search_criteria: {parent_runtime: '{{ runtime }}'}
+    type: result
+  pools: [Everything]
+  positions:
+    'REST API: POST update, DELETE delete and GET & POST results': [319, 227]
+  postprocessing: results["success"] = len(results["result"]) == 4
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  rest_url: http://192.168.56.102/rest/search
+  run_method: once
+  scoped_name: POST Search Result
   send_notification: false
   send_notification_method: mail
   shared: false

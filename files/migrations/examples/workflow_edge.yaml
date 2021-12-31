@@ -1524,21 +1524,30 @@
   source: '[REST API: POST Endpoint search] Configuration with regex TRAFFIC-dd',
   subtype: success, type: workflow_edge, workflow: 'REST API: POST Endpoint search'}
 - {color: green, destination: '[REST API: POST update, DELETE delete and GET & POST
-    results] Create NewDevice', label: success, name: '2021-12-31 03:20:01.023676',
+    results] POST Create NewDevice', label: success, name: '2021-12-31 03:20:01.023676',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'REST
     API: POST update, DELETE delete and GET & POST results'}
 - {color: green, destination: '[REST API: POST update, DELETE delete and GET & POST
-    results] Update NewDevice property1', label: success, name: '2021-12-31 03:20:01.894998',
-  source: '[REST API: POST update, DELETE delete and GET & POST results] Create NewDevice',
-  subtype: success, type: workflow_edge, workflow: 'REST API: POST update, DELETE
-    delete and GET & POST results'}
-- {color: green, destination: '[REST API: POST update, DELETE delete and GET & POST
-    results] Delete NewDevice', label: success, name: '2021-12-31 03:25:07.815735',
-  source: '[REST API: POST update, DELETE delete and GET & POST results] Update NewDevice
-    property1', subtype: success, type: workflow_edge, workflow: 'REST API: POST update,
+    results] POST Update NewDevice property1', label: success, name: '2021-12-31 03:20:01.894998',
+  source: '[REST API: POST update, DELETE delete and GET & POST results] POST Create
+    NewDevice', subtype: success, type: workflow_edge, workflow: 'REST API: POST update,
     DELETE delete and GET & POST results'}
 - {color: green, destination: '[REST API: POST update, DELETE delete and GET & POST
+    results] DELETE NewDevice', label: success, name: '2021-12-31 03:25:07.815735',
+  source: '[REST API: POST update, DELETE delete and GET & POST results] POST Update
+    NewDevice property1', subtype: success, type: workflow_edge, workflow: 'REST API:
+    POST update, DELETE delete and GET & POST results'}
+- {color: green, destination: '[REST API: POST update, DELETE delete and GET & POST
     results] GET result', label: success, name: '2021-12-31 03:33:31.545144', source: '[REST
-    API: POST update, DELETE delete and GET & POST results] Delete NewDevice', subtype: success,
+    API: POST update, DELETE delete and GET & POST results] DELETE NewDevice', subtype: success,
   type: workflow_edge, workflow: 'REST API: POST update, DELETE delete and GET & POST
     results'}
+- {color: green, destination: '[REST API: POST update, DELETE delete and GET & POST
+    results] POST Search Result', label: success, name: '2021-12-31 03:48:10.355955',
+  source: '[REST API: POST update, DELETE delete and GET & POST results] GET result',
+  subtype: success, type: workflow_edge, workflow: 'REST API: POST update, DELETE
+    delete and GET & POST results'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-12-31 03:48:11.763703',
+  source: '[REST API: POST update, DELETE delete and GET & POST results] POST Search
+    Result', subtype: success, type: workflow_edge, workflow: 'REST API: POST update,
+    DELETE delete and GET & POST results'}

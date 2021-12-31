@@ -24,4 +24,4 @@ class GatewayForm(DeviceForm):
     form_type = HiddenField(default="gateway")
     priority = IntegerField("Priority", default=1)
     devices = MultipleInstanceField("Devices", model="device")
-    properties = ["devices"]
+    properties = ["priority", "devices"]

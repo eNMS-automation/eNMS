@@ -1,10 +1,7 @@
 black
-coveralls
-coverage
 flake8
 flake8-print
 mkdocs
 mkdocs-material
 pep8-naming
 pympler
-pytest

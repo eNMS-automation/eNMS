@@ -2,10 +2,6 @@
 __pycache__/
 *.py[cod]
 
-# tests and coverage
-*.pytest_cache
-.coverage
-
 # database & logs
 *.db
 *.db-journal

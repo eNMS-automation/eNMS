@@ -71,7 +71,6 @@ class Server(Flask):
                 "WTF_CSRF_TIME_LIMIT": None,
                 "ERROR_404_HELP": False,
                 "MAX_CONTENT_LENGTH": 20 * 1024 * 1024,
-                "WTF_CSRF_ENABLED": "pytest" not in modules,
                 "PERMANENT_SESSION_LIFETIME": timedelta(minutes=session_timeout),
             }
         )

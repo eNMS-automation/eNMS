@@ -1007,10 +1007,11 @@ class Runner:
                     client.connect(
                         hostname=gateway.ip_address,
                         port=gateway.port,
-                        **credentials
+                        username=credentials["username"],
+                        password=credentials["password"],
                     )
                     sock = client.get_transport().open_channel(
-                        'direct-tcpip', (device.ip_address, 22), ('', 0)
+                        "direct-tcpip", (device.ip_address, 22), ("", 0)
                     )
                 except Exception:
                     error_log = f"Connection to {gateway} failed:\n{format_exc()}"

@@ -157,6 +157,7 @@ export function showLinkPanel(type, id, edge) {
   $(id ? `#${type}-type-${id}` : `#${type}-type`)
     .val(type)
     .prop("disabled", true);
+  $(id ? `#${type}-sites-${id}` : `#${type}-sites`).prop("disabled", true);
   if (edge) {
     const sourceName = nodes.get(edge.from).name;
     const destinationName = nodes.get(edge.to).name;
@@ -173,6 +174,14 @@ export function showLinkPanel(type, id, edge) {
       .val([edge.to])
       .trigger("change");
   }
+}
+
+export function showNodePanel(type, id, mode) {
+  $(id ? `#${type}-type-${id}` : `#${type}-type`)
+    .val(type)
+    .prop("disabled", true);
+  if (id && mode == "duplicate" && type == "site") $(`#copy-${id}`).val(id);
+  $(id ? `#${type}-sites-${id}` : `#${type}-sites`).prop("disabled", true);
 }
 
 function drawNetwork() {

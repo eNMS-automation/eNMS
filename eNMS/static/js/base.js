@@ -23,7 +23,7 @@ import { creationMode, initBuilder, instance, processBuilderData } from "./build
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
 import { initVisualization } from "./visualization.js";
-import { showLinkPanel, updateSitePanel } from "./siteBuilder.js";
+import { showLinkPanel, showNodePanel, updateSitePanel } from "./siteBuilder.js";
 import { showServicePanel } from "./workflowBuilder.js";
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
@@ -583,14 +583,6 @@ export function configureForm(form, id, panelId) {
       initSelect(el, model, panelId, field.type == "object", field.constraints);
     }
   }
-}
-
-function showNodePanel(type, id, mode) {
-  $(id ? `#${type}-type-${id}` : `#${type}-type`)
-    .val(type)
-    .prop("disabled", true);
-  if (id && mode == "duplicate" && type == "site") $(`#copy-${id}`).val(id);
-  $(id ? `#${type}-sites-${id}` : `#${type}-sites`).prop("disabled", true);
 }
 
 function showAddInstancePanel(tableId, model, relation) {

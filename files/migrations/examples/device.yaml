@@ -3418,7 +3418,7 @@
   os_version: ''
   port: 22
   positions:
-    'Site 1: Top-level Devices and Links': [-223, -105]
+    'Site 1: Top-level Devices and Links': [-314, 42]
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -3466,7 +3466,7 @@
   os_version: ''
   port: 22
   positions:
-    'Site 1: Top-level Devices and Links': [-154, 189]
+    'Site 1: Top-level Devices and Links': [-59, 267]
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -3515,7 +3515,7 @@
   os_version: ''
   port: 22
   positions:
-    'Site 1: Top-level Devices and Links': [269, -14]
+    'Site 1: Top-level Devices and Links': [310, 56]
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -3727,7 +3727,7 @@
   custom_select: b
   description: ''
   down: false
-  gateways: [Gateway 2, Gateway 1, Gateway 3]
+  gateways: [Gateway 3, Gateway 1, Gateway 2]
   icon: antenna
   icon_3d: juniper_ex3300
   ip_address: "192.168.56.50\t"

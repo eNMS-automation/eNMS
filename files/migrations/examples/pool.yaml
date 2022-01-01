@@ -174,8 +174,8 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: ['Site 2: Subsite', Subsite 1, 'Site 3: Creation, Edit and Deletion', 'Site
-      1: Top-level Devices and Links']
+  sites: ['Site 2: Subsite', 'Site 1: Top-level Devices and Links', Subsite 1, 'Site
+      3: Creation, Edit and Deletion', Subsite 2]
   target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
@@ -1263,8 +1263,8 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: ['[Operational Data Backup (admin)] Retrieve Operational Data',
-    Scalability Test (large workflow), Parameterized Superworkflow Run]
+  target_services: [Scalability Test (large workflow), '[Operational Data Backup (admin)]
+      Retrieve Operational Data', Parameterized Superworkflow Run]
   tasks: []
   type: pool
   user_description: ''
@@ -3416,8 +3416,8 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: ['Site 2: Subsite', Subsite 1, 'Site 3: Creation, Edit and Deletion', 'Site
-      1: Top-level Devices and Links']
+  sites: ['Site 2: Subsite', 'Site 1: Top-level Devices and Links', Subsite 1, 'Site
+      3: Creation, Edit and Deletion', Subsite 2]
   target_services: []
   tasks: []
   type: pool

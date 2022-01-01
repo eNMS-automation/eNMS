@@ -2,8 +2,15 @@
   creator: admin
   description: ''
   icon: site
-  labels: {}
-  last_modified: '2021-12-25 03:27:34.573413'
+  labels:
+    22ddf544-3151-4361-940b-7516b78c179a:
+      alignment: left
+      content: "Basic site with three devices: Router 1 is of type \"device\" and\
+        \ the other two are \"router\".\r\nAll three links are Ethernet links.\r\n\
+        Router 1 should be displayed as a router, Router 2 as a host and Router 3\
+        \ as an optical switch.\r\nThe icon of a device is decoupled from its type."
+      positions: [19, -70]
+  last_modified: '2022-01-01 11:49:31.237079'
   latitude: '0.0'
   links: [R1 - R2, R2 - R3, R1 - R3]
   location: ''
@@ -104,7 +111,7 @@
   model: ''
   name: Subsite 2
   nodes: [Subsite 2 - G1, Subsite 2 - G2]
-  pools: []
+  pools: [Everything, All Sites]
   positions:
     'Site 2: Subsite': [-144, -36]
   sites: ['Site 2: Subsite']

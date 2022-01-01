@@ -10,6 +10,7 @@ from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from ncclient import manager
 from netmiko import ConnectHandler
+from operator import attrgetter
 from os import getenv
 from paramiko import AutoAddPolicy, RSAKey, SFTPClient, SSHClient
 from re import compile, search
@@ -994,18 +995,26 @@ class Runner:
             logger="security",
         )
         driver = device.netmiko_driver if self.use_device_driver else self.driver
-        if True:
-            client = SSHClient()
-            client.set_missing_host_key_policy(AutoAddPolicy())
-            client.connect(
-                hostname="192.168.56.104",
-                port=22,
-                username="USERNAME",
-                password="PASSWORD",
-            )
-            sock = client.get_transport().open_channel(
-                'direct-tcpip', (device.ip_address, 22), ('', 0)
-            )
+        sock = None
+        if device.gateways:
+            for gateway in sorted(device.gateways, key=attrgetter("priority")):
+                try:
+                    credentials = self.get_credentials(device)
+                    connection_log = f"Trying to establish connection to {gateway}"
+                    self.log("info", connection_log, device, logger="security")
+                    client = SSHClient()
+                    client.set_missing_host_key_policy(AutoAddPolicy())
+                    client.connect(
+                        hostname=gateway.ip_address,
+                        port=gateway.port,
+                        **credentials
+                    )
+                    sock = client.get_transport().open_channel(
+                        'direct-tcpip', (device.ip_address, 22), ('', 0)
+                    )
+                except Exception:
+                    error_log = f"Connection to {gateway} failed:\n{format_exc()}"
+                    self.log("error", error_log, device)
         netmiko_connection = ConnectHandler(
             device_type=driver,
             ip=device.ip_address,

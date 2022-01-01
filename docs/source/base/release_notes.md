@@ -15,6 +15,7 @@ Version 4.2.0
 - Set trigger variable to "Regular Run" or "Parameterized Run" when service is triggered from the UI instead of "UI".
 - Add SSH Proxy mechanism (multiple jump server in gateways property, gateway device subtype, priority
   tie-break mechanism)
+- Remove pytest, coverage, and travis dependencies.
 
 Tests:
 - Performances (SQL Column function init)

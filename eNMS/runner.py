@@ -997,7 +997,8 @@ class Runner:
         driver = device.netmiko_driver if self.use_device_driver else self.driver
         sock = None
         if device.gateways:
-            for gateway in sorted(device.gateways, key=attrgetter("priority")):
+            gateways = sorted(device.gateways, key=attrgetter("priority"), reverse=True)
+            for gateway in gateways:
                 try:
                     credentials = self.get_credentials(gateway)
                     connection_log = f"Trying to establish connection to {gateway}"

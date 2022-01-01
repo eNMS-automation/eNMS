@@ -65,18 +65,19 @@
       alignment: left
       content: "Tests the creation, editing and deletion of sites and the nodes inside\
         \ it.\r\n- Create three devices: 1 Device, 1 Router and 1 Gateway. The default\r\
-        \nicon for all three of them should be a router.\r\n- Create links between\
-        \ them, including Ethernet Link and Link.\r\n- Edit the name of a node and\
-        \ the name of a link: the name must be instantly\r\nupdated.\r\n- Edit the\
-        \ name of the site and refresh: check that the positions are the same \r\n\
-        (the \"update\" position of the Site class is replacing old with new positions).\r\
-        \n- Delete a device: check that the two connected links are also deleted from\
-        \ the site.\r\nCheck that these objects still exist in the inventory:\r\n\
-        deleting from a site should not delete the original objects.\r\n- Use the\
-        \ right-click multiple selection rectangle to delete the remaining objects.\r\
-        \n- Delete the site itself from the Site table."
-      positions: [104, -184]
-  last_modified: '2022-01-01 10:05:39.732732'
+        \nicon for the Device and Router should be a router,\r\nbut it should a host\
+        \ (computer) for the Gateway.\r\n- Create links between them, including Ethernet\
+        \ Link and Link.\r\n- Edit the name of a node and the name of a link: the\
+        \ name must be instantly\r\nupdated.\r\n- Edit the name of the site and refresh:\
+        \ check that the positions are the same \r\n(the \"update\" position of the\
+        \ Site class is replacing old with new positions).\r\n- Delete a device: check\
+        \ that the two connected links are also deleted from the site.\r\nCheck that\
+        \ these objects still exist in the inventory:\r\ndeleting from a site should\
+        \ not delete the original objects.\r\n- Use the right-click multiple selection\
+        \ rectangle to delete the remaining objects.\r\n- Delete the site itself from\
+        \ the Site table."
+      positions: [148, -279]
+  last_modified: '2022-01-01 10:18:19.872880'
   latitude: '0.0'
   links: []
   location: ''
@@ -84,7 +85,7 @@
   model: ''
   name: 'Site 3: Creation, Edit and Deletion'
   nodes: []
-  pools: []
+  pools: [All Sites, Everything]
   positions: {}
   sites: []
   subtype: ''

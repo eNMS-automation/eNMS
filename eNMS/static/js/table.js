@@ -744,6 +744,14 @@ tables.link = class LinkTable extends Table {
       this.clearSearchButton(),
       this.copyTableButton(),
       this.createNewButton(),
+      `
+      <button
+        style="background:transparent; border:none; 
+        color:transparent; width: 200px;"
+        type="button"
+      >
+        <select id="link-type" class="form-control"></select>
+      </button>`,
       this.bulkEditButton(),
       this.exportTableButton(),
       this.bulkDeletionButton(),
@@ -770,6 +778,11 @@ tables.link = class LinkTable extends Table {
         </li>
         ${this.deleteInstanceButton(row)}
       </ul>`;
+  }
+
+  postProcessing(...args) {
+    super.postProcessing(...args);
+    loadTypes("link");
   }
 };
 

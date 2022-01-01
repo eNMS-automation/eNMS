@@ -891,7 +891,9 @@ class ConnectionForm(ServiceForm):
 
 class DeviceForm(ObjectForm):
     form_type = HiddenField(default="device")
-    icon = SelectField("Icon", choices=list(vs.visualization["icons"]["2D"].items()))
+    icon = SelectField(
+        "Icon", choices=list(vs.visualization["icons"]["2D"].items()), default="router"
+    )
     icon_3d = SelectField(
         "3D Icon",
         choices=[

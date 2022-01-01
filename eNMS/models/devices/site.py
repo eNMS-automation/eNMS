@@ -25,6 +25,16 @@ class Site(Node):
     links = relationship("Link", secondary=db.link_site_table, back_populates="sites")
     pools = relationship("Pool", secondary=db.pool_site_table, back_populates="sites")
 
+    def update(self, **kwargs):
+        old_name = self.name
+        super().update(**kwargs)
+        if self.name == old_name:
+            return
+        for node in self.nodes:
+            if old_name not in node.positions:
+                continue
+            node.positions[self.name] = node.positions[old_name]
+
 
 class SiteForm(BaseForm):
     action = "eNMS.base.processData"

@@ -322,8 +322,8 @@ export class Table {
         )`
       : this.type == "service"
       ? `eNMS.automation.openServicePanel()`
-      : this.type == "device"
-      ? "eNMS.inventory.openNodePanel()"
+      : this.type == "device" || this.type == "link"
+      ? `eNMS.inventory.openObjectPanel('${this.type}')`
       : `eNMS.base.showInstancePanel('${this.type}')`;
     return `
       <button

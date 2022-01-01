@@ -293,8 +293,9 @@ function displayNetworkData({ type, name, id, result, datetime }) {
   });
 }
 
-function openNodePanel() {
-  showInstancePanel($("#node-type").val());
+function openObjectPanel(model) {
+  const panelType = model == "device" ? "node" : "link"
+  showInstancePanel($(`#${panelType}-type`).val());
 }
 
 export const showDeviceData = function (device) {
@@ -519,7 +520,7 @@ function importTopology() {
 configureNamespace("inventory", [
   downloadNetworkData,
   exportTopology,
-  openNodePanel,
+  openObjectPanel,
   showConnectionPanel,
   webConnection,
   updatePools,

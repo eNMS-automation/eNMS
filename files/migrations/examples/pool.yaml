@@ -172,7 +172,7 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [Subsite 1, 'Site 1: Top-level Devices and Links', 'Site 2: Subsite']
+  sites: [Subsite 1, 'Site 2: Subsite', 'Site 1: Top-level Devices and Links']
   target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
@@ -1253,8 +1253,8 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: [Scalability Test (large workflow), '[Operational Data Backup (admin)]
-      Retrieve Operational Data', Parameterized Superworkflow Run]
+  target_services: ['[Operational Data Backup (admin)] Retrieve Operational Data',
+    Scalability Test (large workflow), Parameterized Superworkflow Run]
   tasks: []
   type: pool
   user_description: ''
@@ -2173,7 +2173,7 @@
     Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
     SanFrancisco, Orange, Oakland, Denver, Server 2, Aserver, Dallas-2, Dallas-3,
     Dallas-4, Austin-2, Austin-3, Jackson-2, Oakland-2, Gateway 1, Gateway 2, Gateway
-      3, Router behind Gateway 1, 'Router behind Gateway 1, 2 and 3']
+      3]
   last_modified: '2020-09-26 00:47:22.329360'
   link_access_groups: ''
   link_access_groups_invert: false
@@ -3406,7 +3406,7 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [Subsite 1, 'Site 1: Top-level Devices and Links', 'Site 2: Subsite']
+  sites: [Subsite 1, 'Site 2: Subsite', 'Site 1: Top-level Devices and Links']
   target_services: []
   tasks: []
   type: pool

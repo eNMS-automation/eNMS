@@ -50,7 +50,7 @@
     Advanced Iteration Targets: &id011 [-131, -24]
     Advanced Multiprocessing (admin): &id002 [-492, -39]
     Ansible with Validation: [-634, -20]
-    'Automation: gateways (SSH Proxy with Paramiko)': [-106, 23]
+    'Automation: gateways (SSH Proxy with Paramiko)': [-208, -125]
     Basic Iteration Targets with Netmiko: [-308, -231]
     Basic Superworkflow: [-149, 39]
     'Basic: Deletion (Device, Link, Service, Task)': [-335, 173]
@@ -428,7 +428,7 @@
     Advanced Iteration Targets: &id075 [350, -6]
     Advanced Multiprocessing (admin): &id066 [505, -10]
     Ansible with Validation: [468, 147]
-    'Automation: gateways (SSH Proxy with Paramiko)': [563, 20]
+    'Automation: gateways (SSH Proxy with Paramiko)': [862, -109]
     Basic Iteration Targets with Netmiko: [596, -221]
     Basic Superworkflow: [500, 0]
     'Basic: Deletion (Device, Link, Service, Task)': [664, 197]
@@ -28841,11 +28841,15 @@
         \ break mechanism: eNMS tries the gateways from the highest to the lowest\
         \ priority until one is reachable.\r\nIt has one target: \"Router behind Gateway\
         \ 1, 2 and 3\".\r\nGateway 3 has the highest priority, it should be selected\
-        \ but is unreachable (wrong IP).\r\neNMS should then try Gateway 2 (higher\
-        \ priority than Gateway 1, also unreachable) and finally fall back on Gateway\
-        \ 1."
-      positions: [265, -209]
-  last_modified: '2022-01-01 02:54:52.256951'
+        \ but is unreachable (wrong IP).\r\nIt should then try Gateway 2 (higher priority\
+        \ than Gateway 1, also unreachable) and finally fall back on Gateway 1.\r\n\
+        - the last service runs on both \"Router behind Gateway 1\" and \"Router behind\
+        \ Gateway 1, 2 and 3\".\r\nThe behavior should be the same as that of the\
+        \ first and second services:\r\n* Gateway 1 should be used right away \"Router\
+        \ behind Gateway 1\"\r\n* Gateway 1 should be used as a fall back after trying\
+        \ Gateway 2 and 3 for \"Router behind Gateway 1, 2 and 3\""
+      positions: [324, -202]
+  last_modified: '2022-01-01 03:02:35.591653'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -28880,7 +28884,9 @@
   scoped_name: 'Automation: gateways (SSH Proxy with Paramiko)'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End']
+  services: ['[Shared] Start', '[Shared] End', '[Automation: gateways (SSH Proxy with
+      Paramiko)] Gateway 1', '[Automation: gateways (SSH Proxy with Paramiko)] Gateway
+      3, 2 then 1', '[Automation: gateways (SSH Proxy with Paramiko)] Both']
   shared: false
   skip: {}
   skip_query: ''
@@ -28898,3 +28904,318 @@
   visualization_target: false
   waiting_time: 0
   workflow_category: Example workflow(s)
+- access_groups: admin
+  auto_find_prompt: true
+  close_connection: false
+  command: sh ip int br
+  completion_time: 1
+  config_mode: false
+  config_mode_command: ''
+  connection_name: default
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_access: creator
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_password: ''
+  jump_username: ''
+  last_modified: '2022-01-01 03:01:33.611561'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Automation: gateways (SSH Proxy with Paramiko)] Gateway 1'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    'Automation: gateways (SSH Proxy with Paramiko)': [-28, 36]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Gateway 1
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: [Router behind Gateway 1]
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_device_driver: true
+  use_textfsm: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  visualization_target: false
+  waiting_time: 0
+- access_groups: admin
+  auto_find_prompt: true
+  close_connection: false
+  command: sh ip int br
+  completion_time: 1
+  config_mode: false
+  config_mode_command: ''
+  connection_name: default
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_access: creator
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_password: ''
+  jump_username: ''
+  last_modified: '2022-01-01 03:01:18.510188'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Automation: gateways (SSH Proxy with Paramiko)] Gateway 3, 2 then 1'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    'Automation: gateways (SSH Proxy with Paramiko)': [301, 39]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Gateway 3, 2 then 1
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: ['Router behind Gateway 1, 2 and 3']
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_device_driver: true
+  use_textfsm: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  visualization_target: false
+  waiting_time: 0
+- access_groups: admin
+  auto_find_prompt: true
+  close_connection: false
+  command: sh ip int br
+  completion_time: 1
+  config_mode: false
+  config_mode_command: ''
+  connection_name: default
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_access: creator
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_password: ''
+  jump_username: ''
+  last_modified: '2022-01-01 03:02:00.816577'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Automation: gateways (SSH Proxy with Paramiko)] Both'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    'Automation: gateways (SSH Proxy with Paramiko)': [660, 34]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Both
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: ['Router behind Gateway 1, 2 and 3', Router behind Gateway 1]
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_device_driver: true
+  use_textfsm: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  visualization_target: false
+  waiting_time: 0

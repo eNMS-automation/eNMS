@@ -999,7 +999,7 @@ class Runner:
         if device.gateways:
             for gateway in sorted(device.gateways, key=attrgetter("priority")):
                 try:
-                    credentials = self.get_credentials(device)
+                    credentials = self.get_credentials(gateway)
                     connection_log = f"Trying to establish connection to {gateway}"
                     self.log("info", connection_log, device, logger="security")
                     client = SSHClient()
@@ -1013,6 +1013,7 @@ class Runner:
                     sock = client.get_transport().open_channel(
                         "direct-tcpip", (device.ip_address, 22), ("", 0)
                     )
+                    break
                 except Exception:
                     error_log = f"Connection to {gateway} failed:\n{format_exc()}"
                     self.log("error", error_log, device)

@@ -1012,7 +1012,7 @@ class Runner:
                         password=credentials["password"],
                     )
                     sock = client.get_transport().open_channel(
-                        "direct-tcpip", (device.ip_address, 22), ("", 0)
+                        "direct-tcpip", (device.ip_address, device.port), ("", 0)
                     )
                     break
                 except Exception:

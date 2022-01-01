@@ -485,7 +485,7 @@ tables.device = class DeviceTable extends Table {
         color:transparent; width: 200px;"
         type="button"
       >
-        <select id="node-type" class="form-control"></select>
+        <select id="node-type-list" class="form-control"></select>
       </button>`,
       this.bulkEditButton(),
       this.exportTableButton(),
@@ -750,7 +750,7 @@ tables.link = class LinkTable extends Table {
         color:transparent; width: 200px;"
         type="button"
       >
-        <select id="link-type" class="form-control"></select>
+        <select id="link-type-list" class="form-control"></select>
       </button>`,
       this.bulkEditButton(),
       this.exportTableButton(),
@@ -949,7 +949,7 @@ tables.service = class ServiceTable extends Table {
         color:transparent; width: 200px;"
         type="button"
       >
-        <select id="service-type" class="form-control"></select>
+        <select id="service-type-list" class="form-control"></select>
       </button>`,
       `<button
         class="btn btn-primary"

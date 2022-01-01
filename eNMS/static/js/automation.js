@@ -35,7 +35,7 @@ import {
 
 function openServicePanel(tableId) {
   const args = tableId ? [null, "bulk", tableId] : [];
-  showInstancePanel($("#service-type").val(), ...args);
+  showInstancePanel($("#service-type-list").val(), ...args);
 }
 
 export function displayDiff(type, instanceId) {

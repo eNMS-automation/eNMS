@@ -259,11 +259,11 @@ export function createTooltips(panel) {
 
 export function loadTypes(model) {
   const subtypeModel = model == "edge" ? "link" : model;
-  $(`#${model}-type`).selectpicker({ liveSearch: true });
+  $(`#${model}-type-list`).selectpicker({ liveSearch: true });
   for (const [subtype, name] of Object.entries(subtypes[subtypeModel])) {
-    $(`#${model}-type`).append(new Option(name, subtype));
+    $(`#${model}-type-list`).append(new Option(name, subtype));
   }
-  $(`#${model}-type`).selectpicker("refresh");
+  $(`#${model}-type-list`).selectpicker("refresh");
 }
 
 export function openPanel({

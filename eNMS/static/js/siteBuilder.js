@@ -150,7 +150,7 @@ function filterSiteTable(tableId, path) {
 }
 
 function saveLink(edge) {
-  showInstancePanel($("#edge-type").val(), null, null, null, edge);
+  showInstancePanel($("#edge-type-list").val(), null, null, null, edge);
 }
 
 export function showLinkPanel(type, id, edge) {

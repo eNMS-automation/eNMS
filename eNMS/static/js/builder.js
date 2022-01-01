@@ -354,7 +354,7 @@ export function createNewNode(mode) {
   } else if (mode == `duplicate_${type}`) {
     showInstancePanel(type, instance.id, "duplicate");
   } else {
-    showInstancePanel($(`#${nodeType}-type`).val());
+    showInstancePanel($(`#${nodeType}-type-list`).val());
   }
 }
 
@@ -368,7 +368,7 @@ function drawEdge(edge) {
 
 export function switchMode(mode, noNotification) {
   const oldMode = currentMode;
-  const newLinkMode = type == "site" ? "create_link" : $("#edge-type").val();
+  const newLinkMode = type == "site" ? "create_link" : $("#edge-type-list").val();
   currentMode = mode || (currentMode == "motion" ? newLinkMode : "motion");
   if ((oldMode == "motion" || currentMode == "motion") && oldMode != currentMode) {
     $("#mode-icon").toggleClass("glyphicon-move").toggleClass("glyphicon-random");
@@ -444,7 +444,7 @@ export function initBuilder() {
     };
     this.view.moveTo(animationOptions);
   };
-  $("#edge-type")
+  $("#edge-type-list")
     .selectpicker()
     .on("change", function () {
       switchMode(this.value);

@@ -57,16 +57,6 @@ that:
 
         `npm run lint`
 
-3. All tests are passing
-
-    `pytest`
-
-If one of these checks fails, so will Travis CI after opening the pull
-request.
-
-Pull Requests automatically trigger Travis CI. As such, the CI/CD and PR processes 
-are the same.
-
 # Documentation
 
 Concerning documentation updates, one can build a local version of

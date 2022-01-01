@@ -428,7 +428,7 @@
     Advanced Iteration Targets: &id075 [350, -6]
     Advanced Multiprocessing (admin): &id066 [505, -10]
     Ansible with Validation: [468, 147]
-    'Automation: gateways (SSH Proxy with Paramiko)': [862, -109]
+    'Automation: gateways (SSH Proxy with Paramiko)': [795, -51]
     Basic Iteration Targets with Netmiko: [596, -221]
     Basic Superworkflow: [500, 0]
     'Basic: Deletion (Device, Link, Service, Task)': [664, 197]
@@ -28830,6 +28830,17 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    4a139d74-317c-4623-ae5d-b4715b9ae95b:
+      alignment: left
+      content: "Runs on \"Router behind Gateway 1\".\r\nShould try and succeed connecting\r\
+        \nto \"Gateway 1\"."
+      positions: [-49, 127]
+    bfee4cbb-eaef-446f-ae5c-4aee02381dc4:
+      alignment: left
+      content: "Should re-use cached proxy connections\r\nfor both \"Router behind\
+        \ Gateway 1\" and\r\n\"Router behind Gateway 1, 2 and 3\".\r\nNo stacktrace\
+        \ expected."
+      positions: [712, 128]
     c23ca0ee-235d-404a-bc08-fe900792803a:
       alignment: left
       content: "This workflows tests the Gateway feature: we connect to a remote network\
@@ -28838,7 +28849,7 @@
         \ tests the gateway mechanism in case there is one, reachable gateway. It\
         \ has one target, \"Router behind Gateway 1\"\r\nwhose \"gateways\" field\
         \ is set to \"Gateway 1\". \r\n- the second service tests the priority tie\
-        \ break mechanism: eNMS tries the gateways from the highest to the lowest\
+        \ break mechanism: eNMS tries the gateways,\r\nfrom the highest to the lowest\
         \ priority until one is reachable.\r\nIt has one target: \"Router behind Gateway\
         \ 1, 2 and 3\".\r\nGateway 3 has the highest priority, it should be selected\
         \ but is unreachable (wrong IP).\r\nIt should then try Gateway 2 (higher priority\
@@ -28848,8 +28859,14 @@
         \ first and second services:\r\n* Gateway 1 should be used right away \"Router\
         \ behind Gateway 1\"\r\n* Gateway 1 should be used as a fall back after trying\
         \ Gateway 2 and 3 for \"Router behind Gateway 1, 2 and 3\""
-      positions: [324, -202]
-  last_modified: '2022-01-01 03:11:23.471930'
+      positions: [367, -135]
+    dd3e4d77-8a48-4292-8f3c-fe8aaf0bc273:
+      alignment: left
+      content: "Runs on \"Router behind Gateway 1, 2 and 3\".\r\nShould try and fail\
+        \ connecting to Gateway 3,\r\nthen Gateway 2, and finally succeed connecting\r\
+        \nto Gateway 1.\r\nTwo stacktraces expected in the logs."
+      positions: [311, 132]
+  last_modified: '2022-01-01 03:42:14.496490'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -28976,7 +28993,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    'Automation: gateways (SSH Proxy with Paramiko)': [-28, 36]
+    'Automation: gateways (SSH Proxy with Paramiko)': [-39, 41]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''

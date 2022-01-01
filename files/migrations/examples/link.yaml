@@ -337,3 +337,11 @@
   destination: Router 3, last_modified: '2021-12-24 05:01:14.403509', location: '',
   model: '', name: R1 - R3, source: Router 1, speed: '22', standard: 10BASE2, subtype: '',
   type: ethernet_link, vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: Subsite 1 - R2, last_modified: '2022-01-01 10:34:32.084786', location: '',
+  model: '', name: Subsite 1 - L1, source: Subsite 1 - R1, speed: '22', standard: 10BASE2,
+  subtype: '', type: ethernet_link, vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: Subsite 2 - G2, last_modified: '2022-01-01 10:35:19.556241', location: '',
+  model: '', name: Subsite 2 - L1, source: Subsite 2 - G1, subtype: '', type: link,
+  vendor: ''}

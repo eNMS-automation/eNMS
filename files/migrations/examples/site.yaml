@@ -22,14 +22,14 @@
   description: ''
   icon: site
   labels: {}
-  last_modified: '2021-12-24 12:28:36.018073'
+  last_modified: '2022-01-01 10:34:44.505600'
   latitude: '0.0'
   links: []
   location: ''
   longitude: '0.0'
   model: ''
   name: 'Site 2: Subsite'
-  nodes: [Subsite 1]
+  nodes: [Subsite 1, Subsite 2]
   pools: [Everything, All Sites]
   positions: {}
   sites: []
@@ -41,17 +41,17 @@
   description: ''
   icon: site
   labels: {}
-  last_modified: '2021-12-24 12:28:17.906358'
+  last_modified: '2022-01-01 10:34:38.195095'
   latitude: '0.0'
-  links: []
+  links: [Subsite 1 - L1]
   location: ''
   longitude: '0.0'
   model: ''
   name: Subsite 1
-  nodes: []
+  nodes: [Subsite 1 - R1, Subsite 1 - R2]
   pools: [Everything, All Sites]
   positions:
-    'Site 2: Subsite': [-314, -18]
+    'Site 2: Subsite': [-558, -27]
   sites: ['Site 2: Subsite']
   subtype: ''
   type: site
@@ -64,20 +64,20 @@
     6bc3e996-eb39-4d52-9294-15cdd7d10f92:
       alignment: left
       content: "Tests the creation, editing and deletion of sites and the nodes inside\
-        \ it.\r\n- Create three devices: 1 Device, 1 Router and 1 Gateway. The default\r\
-        \nicon for the Device and Router should be a router,\r\nbut it should a host\
+        \ it.\r\n- Create three devices: 1 Device, 1 Router and 1 Gateway. The default\
+        \ icon for the Device and Router should be a router,\r\nbut it should a host\
         \ (computer) for the Gateway.\r\n- Create links between them, including Ethernet\
         \ Link and Link.\r\n- Edit the name of a node and the name of a link: the\
         \ name must be instantly\r\nupdated.\r\n- Edit the name of the site and refresh:\
-        \ check that the positions are the same \r\n(the \"update\" position of the\
-        \ Site class is replacing old with new positions).\r\n- Delete a device: check\
+        \ check that the positions are the same (the \"update\" position of the Site\
+        \ class is replacing old with new positions).\r\n- Delete a device: check\
         \ that the two connected links are also deleted from the site.\r\nCheck that\
-        \ these objects still exist in the inventory:\r\ndeleting from a site should\
+        \ these objects still exist in the inventory: deleting from a site should\
         \ not delete the original objects.\r\n- Use the right-click multiple selection\
         \ rectangle to delete the remaining objects.\r\n- Delete the site itself from\
         \ the Site table."
-      positions: [148, -279]
-  last_modified: '2022-01-01 10:18:19.872880'
+      positions: [227, -507]
+  last_modified: '2022-01-01 10:33:29.627883'
   latitude: '0.0'
   links: []
   location: ''
@@ -88,6 +88,26 @@
   pools: [All Sites, Everything]
   positions: {}
   sites: []
+  subtype: ''
+  type: site
+  vendor: ''
+- access_groups: ''
+  creator: admin
+  description: ''
+  icon: site
+  labels: {}
+  last_modified: '2022-01-01 10:35:25.381842'
+  latitude: '0.0'
+  links: [Subsite 2 - L1]
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: Subsite 2
+  nodes: [Subsite 2 - G1, Subsite 2 - G2]
+  pools: []
+  positions:
+    'Site 2: Subsite': [-144, -36]
+  sites: ['Site 2: Subsite']
   subtype: ''
   type: site
   vendor: ''

@@ -3579,7 +3579,7 @@
   custom_multiselect: []
   custom_select: b
   description: ''
-  devices: [Router behind Gateway 1, 'Router behind Gateway 1, 2 and 3']
+  devices: ['Router behind Gateway 1, 2 and 3', Router behind Gateway 1]
   down: false
   gateways: []
   icon: antenna
@@ -3768,3 +3768,201 @@
   subtype: ''
   type: router
   vendor: Arista
+- access_groups: admin
+  creator: admin
+  custom_json: {}
+  custom_multiselect: []
+  custom_select: b
+  description: ''
+  down: false
+  gateways: []
+  icon: router
+  icon_3d: juniper_ex3300
+  ip_address: ''
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2022-01-01 10:34:12.609346'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '0.0'
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: Subsite 1 - R1
+  napalm_driver: ios
+  netconf_driver: default
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  positions:
+    Subsite 1: [-179, 8]
+  property1: 10.145.14.1
+  property2: CP
+  property3: password
+  reachable: true
+  scrapli_driver: cisco_iosxe
+  serial_number: ''
+  subtype: ''
+  type: router
+  vendor: ''
+- access_groups: admin
+  creator: admin
+  custom_json: {}
+  custom_multiselect: []
+  custom_select: b
+  description: ''
+  down: false
+  gateways: []
+  icon: router
+  icon_3d: juniper_ex3300
+  ip_address: ''
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2022-01-01 10:34:21.544114'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '0.0'
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: Subsite 1 - R2
+  napalm_driver: ios
+  netconf_driver: default
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  positions:
+    Subsite 1: [202, 7]
+  property1: 10.145.14.1
+  property2: CP
+  property3: password
+  reachable: true
+  scrapli_driver: cisco_iosxe
+  serial_number: ''
+  subtype: ''
+  type: router
+  vendor: ''
+- access_groups: admin
+  creator: admin
+  custom_json: {}
+  custom_multiselect: []
+  custom_select: b
+  description: ''
+  devices: []
+  down: false
+  gateways: []
+  icon: host
+  icon_3d: juniper_ex3300
+  ip_address: ''
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2022-01-01 10:34:56.257187'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '0.0'
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: Subsite 2 - G1
+  napalm_driver: ios
+  netconf_driver: default
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  positions:
+    Subsite 2: [-187, -4]
+  priority: 1
+  property1: 10.145.14.1
+  property2: CP
+  property3: password
+  reachable: true
+  scrapli_driver: cisco_iosxe
+  subtype: ''
+  type: gateway
+  vendor: ''
+- access_groups: admin
+  creator: admin
+  custom_json: {}
+  custom_multiselect: []
+  custom_select: b
+  description: ''
+  devices: []
+  down: false
+  gateways: []
+  icon: host
+  icon_3d: juniper_ex3300
+  ip_address: ''
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2022-01-01 10:35:00.548021'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '0.0'
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: Subsite 2 - G2
+  napalm_driver: ios
+  netconf_driver: default
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  positions:
+    Subsite 2: [166, -11]
+  priority: 1
+  property1: 10.145.14.1
+  property2: CP
+  property3: password
+  reachable: true
+  scrapli_driver: cisco_iosxe
+  subtype: ''
+  type: gateway
+  vendor: ''

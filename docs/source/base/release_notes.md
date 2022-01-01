@@ -13,10 +13,13 @@ Version 4.2.0
 - Add new mechanism to limit results in server-side drop-down list with filtering constraints.
 - Limit superworkflow selection to workflows that contains the shared Placeholder service.
 - Set trigger variable to "Regular Run" or "Parameterized Run" when service is triggered from the UI instead of "UI".
+- Add SSH Proxy mechanism (multiple jump server in gateways property, gateway device subtype, priority
+  tie-break mechanism)
 
 Tests:
 - Performances (SQL Column function init)
 - Export and re-import of workflows and top-level services
+- SSH Proxy / Jump Server mechanism (+ tie-breaker priority mechanism)
 
 Migration:
 - Rename endpoint "delete_workflow_selection" to "delete_builder_selection"

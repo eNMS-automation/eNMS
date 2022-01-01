@@ -1,10 +1,10 @@
 from sqlalchemy import ForeignKey, Integer
 from sqlalchemy.orm import relationship
 
-from eNMS.database import db
+from eNMS.database import db, vs
 from eNMS.fields import MultipleInstanceField
 from eNMS.forms import DeviceForm
-from eNMS.fields import HiddenField, IntegerField
+from eNMS.fields import HiddenField, IntegerField, SelectField
 from eNMS.models.inventory import Device
 
 
@@ -22,6 +22,9 @@ class Gateway(Device):
 
 class GatewayForm(DeviceForm):
     form_type = HiddenField(default="gateway")
+    icon = SelectField(
+        "Icon", choices=list(vs.visualization["icons"]["2D"].items()), default="host"
+    )
     priority = IntegerField("Priority", default=1)
     devices = MultipleInstanceField("Devices", model="device")
     properties = ["priority", "devices"]

@@ -172,7 +172,7 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: ['Site 2: Subsite', Subsite 1, 'Site 1: Top-level Devices and Links']
+  sites: [Subsite 1, 'Site 1: Top-level Devices and Links', 'Site 2: Subsite']
   target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
@@ -2173,7 +2173,7 @@
     Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
     SanFrancisco, Orange, Oakland, Denver, Server 2, Aserver, Dallas-2, Dallas-3,
     Dallas-4, Austin-2, Austin-3, Jackson-2, Oakland-2, Gateway 1, Gateway 2, Gateway
-      3, 'Router behind Gateway 1, 2 and 3', Router behind Gateway 1]
+      3, Router behind Gateway 1, 'Router behind Gateway 1, 2 and 3']
   last_modified: '2020-09-26 00:47:22.329360'
   link_access_groups: ''
   link_access_groups_invert: false
@@ -3406,7 +3406,7 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: ['Site 2: Subsite', Subsite 1, 'Site 1: Top-level Devices and Links']
+  sites: [Subsite 1, 'Site 1: Top-level Devices and Links', 'Site 2: Subsite']
   target_services: []
   tasks: []
   type: pool

@@ -28832,12 +28832,20 @@
   labels:
     c23ca0ee-235d-404a-bc08-fe900792803a:
       alignment: left
-      content: "This workflows tests the Gateway feature: we connect to a\r\nremote\
-        \ network device via a Gateway device, called \"Gateway\".\r\nThe workflow\
-        \ has one target, \"Router Behind Gateway\" whose\r\n\"gateways\" field is\
-        \ set to \"Gateway\"."
-      positions: [228, -130]
-  last_modified: '2021-12-31 12:45:30.088700'
+      content: "This workflows tests the Gateway feature: we connect to a remote network\
+        \ device via a Gateway device, called \"Gateway\".\r\nThe workflow runs in\
+        \ Service Targets mode, with two Netmiko Validation services :\r\n- the first\
+        \ tests the gateway mechanism in case there is one, reachable gateway. It\
+        \ has one target, \"Router behind Gateway 1\"\r\nwhose \"gateways\" field\
+        \ is set to \"Gateway 1\". \r\n- the second service tests the priority tie\
+        \ break mechanism: eNMS tries the gateways from the highest to the lowest\
+        \ priority until one is reachable.\r\nIt has one target: \"Router behind Gateway\
+        \ 1, 2 and 3\".\r\nGateway 3 has the highest priority, it should be selected\
+        \ but is unreachable (wrong IP).\r\neNMS should then try Gateway 2 (higher\
+        \ priority than Gateway 1, also unreachable) and finally fall back on Gateway\
+        \ 1."
+      positions: [265, -209]
+  last_modified: '2022-01-01 02:54:52.256951'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false

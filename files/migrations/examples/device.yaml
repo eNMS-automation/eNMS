@@ -3535,13 +3535,13 @@
   gateways: [Gateway 1]
   icon: antenna
   icon_3d: juniper_ex3300
-  ip_address: ''
+  ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
   last_configuration_runtime: Never
   last_configuration_status: Never
   last_configuration_update: Never
-  last_modified: '2021-12-31 13:06:55.470574'
+  last_modified: '2022-01-01 02:47:52.588960'
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -3555,12 +3555,12 @@
   latitude: '0.0'
   location: ''
   longitude: '0.0'
-  model: ''
+  model: EOS
   name: Router behind Gateway 1
-  napalm_driver: ios
+  napalm_driver: eos
   netconf_driver: default
-  netmiko_driver: cisco_ios
-  operating_system: ''
+  netmiko_driver: arista_eos
+  operating_system: eos
   os_version: ''
   port: 22
   positions: {}
@@ -3568,11 +3568,11 @@
   property2: CP
   property3: password
   reachable: true
-  scrapli_driver: cisco_iosxe
+  scrapli_driver: arista_eos
   serial_number: ''
   subtype: ''
   type: router
-  vendor: ''
+  vendor: Arista
 - access_groups: admin
   creator: admin
   custom_json: {}
@@ -3727,16 +3727,16 @@
   custom_select: b
   description: ''
   down: false
-  gateways: [Gateway 1, Gateway 2, Gateway 3]
+  gateways: [Gateway 2, Gateway 3, Gateway 1]
   icon: antenna
   icon_3d: juniper_ex3300
-  ip_address: ''
+  ip_address: "192.168.56.50\t"
   last_configuration_duration: Never
   last_configuration_failure: Never
   last_configuration_runtime: Never
   last_configuration_status: Never
   last_configuration_update: Never
-  last_modified: '2021-12-31 13:06:47.124393'
+  last_modified: '2022-01-01 02:48:16.568443'
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -3750,12 +3750,12 @@
   latitude: '0.0'
   location: ''
   longitude: '0.0'
-  model: ''
+  model: EOS
   name: Router behind Gateway 1, 2 and 3
-  napalm_driver: ios
+  napalm_driver: eos
   netconf_driver: default
-  netmiko_driver: cisco_ios
-  operating_system: ''
+  netmiko_driver: arista_eos
+  operating_system: eos
   os_version: ''
   port: 22
   positions: {}
@@ -3763,8 +3763,8 @@
   property2: CP
   property3: password
   reachable: true
-  scrapli_driver: cisco_iosxe
+  scrapli_driver: arista_eos
   serial_number: ''
   subtype: ''
   type: router
-  vendor: ''
+  vendor: Arista

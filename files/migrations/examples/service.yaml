@@ -28849,7 +28849,7 @@
         \ behind Gateway 1\"\r\n* Gateway 1 should be used as a fall back after trying\
         \ Gateway 2 and 3 for \"Router behind Gateway 1, 2 and 3\""
       positions: [324, -202]
-  last_modified: '2022-01-01 03:02:35.591653'
+  last_modified: '2022-01-01 03:11:23.471930'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -28880,7 +28880,7 @@
   priority: 1
   reply_to: ''
   reserved: false
-  run_method: per_device
+  run_method: per_service_with_service_targets
   scoped_name: 'Automation: gateways (SSH Proxy with Paramiko)'
   send_notification: false
   send_notification_method: mail

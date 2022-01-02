@@ -278,7 +278,7 @@ export function drawSiteEdge(link) {
     type: link.type,
     from: link.source_id,
     to: link.destination_id,
-    color: { color: link.color },
+    color: { color: link.color || "#000000" },
     smooth: {
       type: "curvedCW",
       forceDirection: "none",

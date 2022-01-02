@@ -220,3 +220,80 @@
   subtype: ''
   type: site
   vendor: ''
+- access_groups: ''
+  creator: admin
+  description: ''
+  icon: site
+  labels: {}
+  last_modified: '2022-01-02 12:46:05.616066'
+  latitude: '0.0'
+  links: []
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: 'Site 6: Subsubsite and Subsubsubsite'
+  nodes: [L1 Site]
+  pools: []
+  positions: {}
+  sites: []
+  subtype: ''
+  type: site
+  vendor: ''
+- access_groups: ''
+  creator: admin
+  description: ''
+  icon: site
+  labels: {}
+  last_modified: '2022-01-02 12:46:03.753457'
+  latitude: '0.0'
+  links: []
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: L1 Site
+  nodes: [L2 Site]
+  pools: []
+  positions:
+    'Site 6: Subsubsite and Subsubsubsite': [-27, -55]
+  sites: ['Site 6: Subsubsite and Subsubsubsite']
+  subtype: ''
+  type: site
+  vendor: ''
+- access_groups: ''
+  creator: admin
+  description: ''
+  icon: site
+  labels: {}
+  last_modified: '2022-01-02 12:46:14.439473'
+  latitude: '0.0'
+  links: []
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: L2 Site
+  nodes: [L3 Site]
+  pools: []
+  positions: {}
+  sites: [L1 Site]
+  subtype: ''
+  type: site
+  vendor: ''
+- access_groups: ''
+  creator: admin
+  description: ''
+  icon: site
+  labels: {}
+  last_modified: '2022-01-02 12:47:02.746851'
+  latitude: '0.0'
+  links: [S6 L1]
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: L3 Site
+  nodes: [S6 L3 R1, S6 L3 R2]
+  pools: []
+  positions: {}
+  sites: [L2 Site]
+  subtype: ''
+  type: site
+  vendor: ''

@@ -464,3 +464,7 @@
   destination: S5 R3, last_modified: '2022-01-02 12:41:04.824162', location: '', model: '',
   name: R4 -> R3 L8, source: S5 R4, speed: '22', standard: 10BASE2, subtype: '', type: ethernet_link,
   vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: S6 L3 R2, last_modified: '2022-01-02 12:47:14.772897', location: '',
+  model: '', name: S6 L1, source: S6 L3 R1, speed: '22', standard: 10BASE2, subtype: '',
+  type: ethernet_link, vendor: ''}

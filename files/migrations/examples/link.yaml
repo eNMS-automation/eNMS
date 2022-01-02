@@ -412,3 +412,55 @@
   destination: S5 R1, last_modified: '2022-01-02 06:02:58.060697', location: '', model: '',
   name: R3 -> R1 L4, source: S5 R3, speed: '22', standard: 10BASE2, subtype: '', type: ethernet_link,
   vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: S5 R4, last_modified: '2022-01-02 12:39:24.647258', location: '', model: '',
+  name: R2 -> R4 L1, source: S5 R2, speed: '22', standard: 10BASE2, subtype: '', type: ethernet_link,
+  vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: S5 R4, last_modified: '2022-01-02 12:39:30.554448', location: '', model: '',
+  name: R2 -> R4 L2, source: S5 R2, speed: '22', standard: 10BASE2, subtype: '', type: ethernet_link,
+  vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: S5 R2, last_modified: '2022-01-02 12:39:40.666734', location: '', model: '',
+  name: R4 -> R2 L3, source: S5 R4, speed: '22', standard: 10BASE2, subtype: '', type: ethernet_link,
+  vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: S5 R4, last_modified: '2022-01-02 12:39:56.271605', location: '', model: '',
+  name: R4 Loopback 1, source: S5 R4, speed: '22', standard: 10BASE2, subtype: '',
+  type: ethernet_link, vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: S5 R4, last_modified: '2022-01-02 12:40:06.429980', location: '', model: '',
+  name: R1 - R4, source: S5 R1, speed: '22', standard: 10BASE2, subtype: '', type: ethernet_link,
+  vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: S5 R4, last_modified: '2022-01-02 12:40:21.655638', location: '', model: '',
+  name: R3 -> R4 L1, source: S5 R3, speed: '22', standard: 10BASE2, subtype: '', type: ethernet_link,
+  vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: S5 R4, last_modified: '2022-01-02 12:40:26.006293', location: '', model: '',
+  name: R3 -> R4 L2, source: S5 R3, speed: '22', standard: 10BASE2, subtype: '', type: ethernet_link,
+  vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: S5 R4, last_modified: '2022-01-02 12:40:31.979536', location: '', model: '',
+  name: R3 -> R4 L3, source: S5 R3, speed: '22', standard: 10BASE2, subtype: '', type: ethernet_link,
+  vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: S5 R4, last_modified: '2022-01-02 12:40:37.348118', location: '', model: '',
+  name: R3 -> R4 L4, source: S5 R3, speed: '22', standard: 10BASE2, subtype: '', type: ethernet_link,
+  vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: S5 R3, last_modified: '2022-01-02 12:40:48.442805', location: '', model: '',
+  name: R4 -> R3 L5, source: S5 R4, speed: '22', standard: 10BASE2, subtype: '', type: ethernet_link,
+  vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: S5 R3, last_modified: '2022-01-02 12:40:53.823481', location: '', model: '',
+  name: R4 -> R3 L6, source: S5 R4, speed: '22', standard: 10BASE2, subtype: '', type: ethernet_link,
+  vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: S5 R3, last_modified: '2022-01-02 12:40:59.120003', location: '', model: '',
+  name: R4 -> R3 L7, source: S5 R4, speed: '22', standard: 10BASE2, subtype: '', type: ethernet_link,
+  vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: S5 R3, last_modified: '2022-01-02 12:41:04.824162', location: '', model: '',
+  name: R4 -> R3 L8, source: S5 R4, speed: '22', standard: 10BASE2, subtype: '', type: ethernet_link,
+  vendor: ''}

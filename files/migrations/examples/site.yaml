@@ -44,7 +44,7 @@
   longitude: '0.0'
   model: ''
   name: 'Site 2: Subsite'
-  nodes: [Subsite 1, Subsite 2]
+  nodes: [Subsite 2, Subsite 1]
   pools: [Everything, All Sites]
   positions: {}
   sites: []
@@ -161,7 +161,7 @@
   longitude: '0.0'
   model: ''
   name: 'Site 4: Duplication of Devices, Subsites and Top-level Sites'
-  nodes: [Duplicate me 1, Duplicate me 2]
+  nodes: [Duplicate me 2, Duplicate me 1]
   pools: [All Sites, Everything]
   positions: {}
   sites: []
@@ -197,15 +197,18 @@
       alignment: left
       content: "Tests the display of loopback and parallel links:\r\n- One loopback\
         \ link for each device.\r\n- Odd number (3) of same direction links between\
-        \ R1 and R2\r\n- Even number (4) of different direction links between R1 and\
-        \ R3\r\n- Odd number (3) of same direction links between R1 and R2\r\n- Even\
-        \ number (4) of same direction links between R2 and R4"
-      positions: [-70, -59]
-  last_modified: '2022-01-02 06:02:49.790190'
+        \ R1 and R2\r\n- Even number (4) of different direction links (3 / 1) between\
+        \ R1 and R3\r\n- Odd number (3) of different direction links (2 / 1) between\
+        \ R2 and R4\r\n- Even number (8) of different direction links (4 / 4) between\
+        \ R3 and R4\r\n- One link between R1 and R4"
+      positions: [-499, 98]
+  last_modified: '2022-01-02 12:41:17.767672'
   latitude: '0.0'
   links: [R3 -> R2 L1, R3 -> R2 L2, R3 -> R2 L3, R3 -> R2 L4, R3 Loopback 1, R1 Loopback
       1, R1 -> R2 L1, R1 -> R2 L2, R1 -> R2 L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1
-      L3, R3 -> R1 L4]
+      L3, R3 -> R1 L4, R2 -> R4 L1, R2 -> R4 L2, R4 -> R2 L3, R4 Loopback 1, R1 -
+      R4, R3 -> R4 L1, R3 -> R4 L2, R3 -> R4 L3, R3 -> R4 L4, R4 -> R3 L5, R4 -> R3
+      L6, R4 -> R3 L7, R4 -> R3 L8]
   location: ''
   longitude: '0.0'
   model: ''

@@ -138,7 +138,9 @@
       2 - L1, G1 - R1, Duplicate 1 - 2, Subsite 1 - L2, Subsite 1 - L3, R3 -> R2 L1,
     R3 -> R2 L2, R3 -> R2 L3, R3 -> R2 L4, R3 Loopback 1, R1 Loopback 1, R1 -> R2
       L1, R1 -> R2 L2, R1 -> R2 L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1 L3, R3 -> R1
-      L4]
+      L4, R2 -> R4 L1, R2 -> R4 L2, R4 -> R2 L3, R4 Loopback 1, R1 - R4, R3 -> R4
+      L1, R3 -> R4 L2, R3 -> R4 L3, R3 -> R4 L4, R4 -> R3 L5, R4 -> R3 L6, R4 -> R3
+      L7, R4 -> R3 L8]
   manually_defined: false
   name: Everything
   property1: CP
@@ -178,10 +180,9 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: ['Site 3: Creation, Edit and Deletion', 'Site 2: Subsite', Subsite 1, 'Site
-      4: Duplication of Devices, Subsites and Top-level Sites', Subsite 2, Duplicate
-      me 2, 'Site 1: Top-level Devices and Links', 'Site 5: Loopback and Parallel
-      Links']
+  sites: [Duplicate me 2, Subsite 2, Subsite 1, 'Site 1: Top-level Devices and Links',
+    'Site 3: Creation, Edit and Deletion', 'Site 2: Subsite', 'Site 4: Duplication
+      of Devices, Subsites and Top-level Sites', 'Site 5: Loopback and Parallel Links']
   target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
@@ -504,7 +505,9 @@
       2 - L1, G1 - R1, Duplicate 1 - 2, Subsite 1 - L2, Subsite 1 - L3, R3 -> R2 L1,
     R3 -> R2 L2, R3 -> R2 L3, R3 -> R2 L4, R3 Loopback 1, R1 Loopback 1, R1 -> R2
       L1, R1 -> R2 L2, R1 -> R2 L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1 L3, R3 -> R1
-      L4]
+      L4, R2 -> R4 L1, R2 -> R4 L2, R4 -> R2 L3, R4 Loopback 1, R1 - R4, R3 -> R4
+      L1, R3 -> R4 L2, R3 -> R4 L3, R3 -> R4 L4, R4 -> R3 L5, R4 -> R3 L6, R4 -> R3
+      L7, R4 -> R3 L8]
   manually_defined: false
   name: All Links
   property1: CP
@@ -698,7 +701,9 @@
       2 - L1, G1 - R1, Duplicate 1 - 2, Subsite 1 - L2, Subsite 1 - L3, R3 -> R2 L1,
     R3 -> R2 L2, R3 -> R2 L3, R3 -> R2 L4, R3 Loopback 1, R1 Loopback 1, R1 -> R2
       L1, R1 -> R2 L2, R1 -> R2 L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1 L3, R3 -> R1
-      L4]
+      L4, R2 -> R4 L1, R2 -> R4 L2, R4 -> R2 L3, R4 Loopback 1, R1 - R4, R3 -> R4
+      L1, R3 -> R4 L2, R3 -> R4 L3, R3 -> R4 L4, R4 -> R3 L5, R4 -> R3 L6, R4 -> R3
+      L7, R4 -> R3 L8]
   manually_defined: false
   name: Datacenter San Francisco
   property1: CP
@@ -888,7 +893,9 @@
       2 - L1, G1 - R1, Duplicate 1 - 2, Subsite 1 - L2, Subsite 1 - L3, R3 -> R2 L1,
     R3 -> R2 L2, R3 -> R2 L3, R3 -> R2 L4, R3 Loopback 1, R1 Loopback 1, R1 -> R2
       L1, R1 -> R2 L2, R1 -> R2 L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1 L3, R3 -> R1
-      L4]
+      L4, R2 -> R4 L1, R2 -> R4 L2, R4 -> R2 L3, R4 Loopback 1, R1 - R4, R3 -> R4
+      L1, R3 -> R4 L2, R3 -> R4 L3, R3 -> R4 L4, R4 -> R3 L5, R4 -> R3 L6, R4 -> R3
+      L7, R4 -> R3 L8]
   manually_defined: false
   name: Datacenter New York
   property1: CP
@@ -1078,7 +1085,9 @@
       2 - L1, G1 - R1, Duplicate 1 - 2, Subsite 1 - L2, Subsite 1 - L3, R3 -> R2 L1,
     R3 -> R2 L2, R3 -> R2 L3, R3 -> R2 L4, R3 Loopback 1, R1 Loopback 1, R1 -> R2
       L1, R1 -> R2 L2, R1 -> R2 L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1 L3, R3 -> R1
-      L4]
+      L4, R2 -> R4 L1, R2 -> R4 L2, R4 -> R2 L3, R4 Loopback 1, R1 - R4, R3 -> R4
+      L1, R3 -> R4 L2, R3 -> R4 L3, R3 -> R4 L4, R4 -> R3 L5, R4 -> R3 L6, R4 -> R3
+      L7, R4 -> R3 L8]
   manually_defined: false
   name: Datacenter Chicago
   property1: CP
@@ -2247,7 +2256,9 @@
     R1 - R2, R2 - R3, R1 - R3, Subsite 1 - L1, Subsite 2 - L1, G1 - R1, Duplicate
       1 - 2, Subsite 1 - L2, Subsite 1 - L3, R3 -> R2 L1, R3 -> R2 L2, R3 -> R2 L3,
     R3 -> R2 L4, R3 Loopback 1, R1 Loopback 1, R1 -> R2 L1, R1 -> R2 L2, R1 -> R2
-      L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1 L3, R3 -> R1 L4]
+      L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1 L3, R3 -> R1 L4, R2 -> R4 L1, R2 -> R4
+      L2, R4 -> R2 L3, R4 Loopback 1, R1 - R4, R3 -> R4 L1, R3 -> R4 L2, R3 -> R4
+      L3, R3 -> R4 L4, R4 -> R3 L5, R4 -> R3 L6, R4 -> R3 L7, R4 -> R3 L8]
   manually_defined: false
   name: 'Pool Invert Mechanism: ~router in name, ~link[1-9] in name'
   property1: CP
@@ -3442,10 +3453,9 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: ['Site 3: Creation, Edit and Deletion', 'Site 2: Subsite', Subsite 1, 'Site
-      4: Duplication of Devices, Subsites and Top-level Sites', Subsite 2, Duplicate
-      me 2, 'Site 1: Top-level Devices and Links', 'Site 5: Loopback and Parallel
-      Links']
+  sites: [Duplicate me 2, Subsite 2, Subsite 1, 'Site 1: Top-level Devices and Links',
+    'Site 3: Creation, Edit and Deletion', 'Site 2: Subsite', 'Site 4: Duplication
+      of Devices, Subsites and Top-level Sites', 'Site 5: Loopback and Parallel Links']
   target_services: []
   tasks: []
   type: pool

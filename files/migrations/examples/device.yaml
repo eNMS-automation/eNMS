@@ -3727,7 +3727,7 @@
   custom_select: b
   description: ''
   down: false
-  gateways: [Gateway 3, Gateway 2, Gateway 1]
+  gateways: [Gateway 3, Gateway 1, Gateway 2]
   icon: antenna
   icon_3d: juniper_ex3300
   ip_address: "192.168.56.50\t"
@@ -4201,7 +4201,7 @@
   os_version: ''
   port: 22
   positions:
-    'Site 5: Loopback and Parallel Links': [-478, 130]
+    'Site 5: Loopback and Parallel Links': [-765, 312]
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -4249,7 +4249,7 @@
   os_version: ''
   port: 22
   positions:
-    'Site 5: Loopback and Parallel Links': [-65, 46]
+    'Site 5: Loopback and Parallel Links': [-345, 194]
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -4297,7 +4297,7 @@
   os_version: ''
   port: 22
   positions:
-    'Site 5: Loopback and Parallel Links': [-70, 326]
+    'Site 5: Loopback and Parallel Links': [-325, 426]
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -4345,7 +4345,7 @@
   os_version: ''
   port: 22
   positions:
-    'Site 5: Loopback and Parallel Links': [346, 147]
+    'Site 5: Loopback and Parallel Links': [243, 271]
   property1: 10.145.14.1
   property2: CP
   property3: password

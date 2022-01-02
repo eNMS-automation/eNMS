@@ -3579,7 +3579,7 @@
   custom_multiselect: []
   custom_select: b
   description: ''
-  devices: ['Router behind Gateway 1, 2 and 3', Router behind Gateway 1]
+  devices: [Router behind Gateway 1, 'Router behind Gateway 1, 2 and 3']
   down: false
   gateways: []
   icon: antenna
@@ -4201,7 +4201,7 @@
   os_version: ''
   port: 22
   positions:
-    'Site 5: Loopback and Parallel Links': [-410, -78]
+    'Site 5: Loopback and Parallel Links': [-478, 130]
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -4249,7 +4249,7 @@
   os_version: ''
   port: 22
   positions:
-    'Site 5: Loopback and Parallel Links': [-14, -25]
+    'Site 5: Loopback and Parallel Links': [-65, 46]
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -4297,7 +4297,7 @@
   os_version: ''
   port: 22
   positions:
-    'Site 5: Loopback and Parallel Links': [-299, 229]
+    'Site 5: Loopback and Parallel Links': [-70, 326]
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -4345,7 +4345,7 @@
   os_version: ''
   port: 22
   positions:
-    'Site 5: Loopback and Parallel Links': [319, -17]
+    'Site 5: Loopback and Parallel Links': [346, 147]
   property1: 10.145.14.1
   property2: CP
   property3: password

@@ -192,17 +192,26 @@
   creator: admin
   description: ''
   icon: site
-  labels: {}
-  last_modified: '2022-01-02 05:26:31.148388'
+  labels:
+    65702104-28b9-4392-9472-727f6f3bf273:
+      alignment: left
+      content: "Tests the display of loopback and parallel links:\r\n- One loopback\
+        \ link for each device.\r\n- Odd number (3) of same direction links between\
+        \ R1 and R2\r\n- Even number (4) of different direction links between R1 and\
+        \ R3\r\n- Odd number (3) of same direction links between R1 and R2\r\n- Even\
+        \ number (4) of same direction links between R2 and R4"
+      positions: [-70, -59]
+  last_modified: '2022-01-02 06:02:49.790190'
   latitude: '0.0'
   links: [R3 -> R2 L1, R3 -> R2 L2, R3 -> R2 L3, R3 -> R2 L4, R3 Loopback 1, R1 Loopback
-      1, R1 -> R2 L1, R1 -> R2 L2, R1 -> R2 L3]
+      1, R1 -> R2 L1, R1 -> R2 L2, R1 -> R2 L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1
+      L3, R3 -> R1 L4]
   location: ''
   longitude: '0.0'
   model: ''
   name: 'Site 5: Loopback and Parallel Links'
   nodes: [S5 R1, S5 R2, S5 R3, S5 R4]
-  pools: []
+  pools: [Everything, All Sites]
   positions: {}
   sites: []
   subtype: ''

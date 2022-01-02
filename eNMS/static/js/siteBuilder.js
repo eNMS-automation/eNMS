@@ -7,6 +7,7 @@ page: false
 import { showRunServicePanel } from "./automation.js";
 import {
   call,
+  cantorPairing,
   configureNamespace,
   moveHistory,
   notify,
@@ -236,10 +237,6 @@ export function updateSiteRightClickBindings() {
   });
 }
 
-function communtativePairing(a, b) {
-  return (Math.max(a, b) * (Math.max(a, b) + 1)) / 2 + Math.min(a, b);
-}
-
 function displaySiteState(results) {
   nodes.update(
     Object.entries(results).map(([nodeId, success]) => {
@@ -269,20 +266,19 @@ export function getSiteState(periodic, first) {
 }
 
 export function drawSiteEdge(link) {
-  const key = communtativePairing(link.source_id, link.destination_id);
+  const key = cantorPairing(link.source_id, link.destination_id);
+  const flip = link.source_id > link.destination_id;
   parallelLinks[key] = (parallelLinks[key] || 0) + 1;
-  const isEven = parallelLinks[key] % 2 === 0;
   return {
     id: link.id,
     label: link.name,
     type: link.type,
-    from: link.source_id,
-    to: link.destination_id,
+    from: flip ? link.source_id : link.destination_id,
+    to: flip ? link.destination_id : link.source_id,
     color: { color: link.color || "#000000" },
     smooth: {
-      type: "curvedCW",
-      forceDirection: "none",
-      roundness: ((parallelLinks[key] - isEven) / 20) * (isEven ? -1 : 1),
+      type: "curvedCCW",
+      roundness: (parallelLinks[key] * (flip ? -1 : 1)) / 10,
     },
   };
 }

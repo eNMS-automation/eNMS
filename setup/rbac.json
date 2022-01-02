@@ -186,7 +186,6 @@
     "/delete_instance": "access",
     "/delete_builder_selection": "access",
     "/desktop_connection": "access",
-    "/duplicate_workflow": "access",
     "/export_service": "access",
     "/export_services": "access",
     "/topology_export": "access",

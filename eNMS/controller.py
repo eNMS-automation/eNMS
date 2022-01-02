@@ -291,10 +291,6 @@ class Controller:
                     service.update_originals()
         return instance.last_modified
 
-    def duplicate_workflow(self, workflow_id):
-        workflow = db.fetch("workflow", id=workflow_id)
-        return workflow.duplicate().serialized
-
     def edit_file(self, filepath):
         try:
             with open(Path(filepath.replace(">", "/"))) as file:

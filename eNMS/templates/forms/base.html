@@ -6,6 +6,7 @@
 >
   <div class="modal-body">
     <div class="form-group">
+      <input type="hidden" id="copy" name="copy" class="add-id" />
       <div id="content" class="add-id" style="height: 100%;"></div>
       {% for field in form %} {% set id = "{}-{}".format(form_type, field.name) %} {%
       set style = "height: {}px".format(field.render_kw["rows"]*20 + 17) if "TextArea"

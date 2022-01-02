@@ -25,6 +25,14 @@ class Site(Node):
     links = relationship("Link", secondary=db.link_site_table, back_populates="sites")
     pools = relationship("Pool", secondary=db.pool_site_table, back_populates="sites")
 
+    def duplicate(self, clone=None):
+        for property in ("labels", "nodes", "links"):
+            setattr(clone, property, getattr(self, property))
+        for node in self.nodes:
+            node.positions[clone.name] = node.positions[self.name]
+        db.session.commit()
+        return clone
+
     def update(self, **kwargs):
         old_name = self.name
         super().update(**kwargs)

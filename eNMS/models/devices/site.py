@@ -29,7 +29,7 @@ class Site(Node):
         for property in ("labels", "nodes", "links"):
             setattr(clone, property, getattr(self, property))
         for node in self.nodes:
-            node.positions[clone.name] = node.positions[self.name]
+            node.positions[clone.name] = node.positions.get(self.name, (0, 0))
         db.session.commit()
         return clone
 

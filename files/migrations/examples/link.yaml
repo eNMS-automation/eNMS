@@ -352,3 +352,11 @@
 - {access_groups: admin, color: '#000000', creator: '', custom_property: CP, description: '',
   last_modified: '', location: '', model: '', name: Duplicate 1 - 2, source: Duplicate
     me 1, subtype: '', type: link, vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: Subsite 1 - R3, last_modified: '2022-01-02 03:16:24.461291', location: '',
+  model: '', name: Subsite 1 - L2, source: Subsite 1 - R1, speed: '22', standard: 10BASE2,
+  subtype: '', type: ethernet_link, vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: Subsite 1 - R2, last_modified: '2022-01-02 03:16:35.290050', location: '',
+  model: '', name: Subsite 1 - L3, source: Subsite 1 - R3, speed: '22', standard: 10BASE2,
+  subtype: '', type: ethernet_link, vendor: ''}

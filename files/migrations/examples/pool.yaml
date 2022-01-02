@@ -82,7 +82,8 @@
     Aserver, Dallas-2, Dallas-3, Dallas-4, Austin-2, Austin-3, Jackson-2, Oakland-2,
     Router 1, Router 2, Router 3, Router behind Gateway 1, Gateway 1, Gateway 2, Gateway
       3, 'Router behind Gateway 1, 2 and 3', Subsite 1 - R1, Subsite 1 - R2, Subsite
-      2 - G1, Subsite 2 - G2, Duplicate me 1, Duplication - G1, Duplication - R1]
+      2 - G1, Subsite 2 - G2, Duplicate me 1, Duplication - G1, Duplication - R1,
+    Subsite 1 - R3]
   last_modified: '2021-12-25 03:28:09.531118'
   link_access_groups: ''
   link_access_groups_invert: false
@@ -134,7 +135,7 @@
     atlantic-r20-richmond-1, europe-link30-2, europe-link31-2, europe-link35-2, europe-link35-3,
     atlantic-r26-boston-4-inverted, link25-2, link25-3, link25-dallas2, link25-reversed,
     link25-reversed-2, link13-2, R1 - R2, R2 - R3, R1 - R3, Subsite 1 - L1, Subsite
-      2 - L1, G1 - R1, Duplicate 1 - 2]
+      2 - L1, G1 - R1, Duplicate 1 - 2, Subsite 1 - L2, Subsite 1 - L3]
   manually_defined: false
   name: Everything
   property1: CP
@@ -174,9 +175,9 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [Subsite 2, 'Site 3: Creation, Edit and Deletion', 'Site 2: Subsite', 'Site
-      1: Top-level Devices and Links', Subsite 1, 'Site 4: Duplication of Devices,
-      Subsites and Top-level Sites', Duplicate me 2]
+  sites: [Subsite 1, Subsite 2, 'Site 4: Duplication of Devices, Subsites and Top-level
+      Sites', 'Site 1: Top-level Devices and Links', 'Site 3: Creation, Edit and Deletion',
+    'Site 2: Subsite', Duplicate me 2]
   target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
@@ -277,7 +278,8 @@
     Aserver, Dallas-2, Dallas-3, Dallas-4, Austin-2, Austin-3, Jackson-2, Oakland-2,
     Router 1, Router 2, Router 3, Router behind Gateway 1, Gateway 1, Gateway 2, Gateway
       3, 'Router behind Gateway 1, 2 and 3', Subsite 1 - R1, Subsite 1 - R2, Subsite
-      2 - G1, Subsite 2 - G2, Duplicate me 1, Duplication - G1, Duplication - R1]
+      2 - G1, Subsite 2 - G2, Duplicate me 1, Duplication - G1, Duplication - R1,
+    Subsite 1 - R3]
   last_modified: '2021-12-25 03:29:21.230786'
   link_access_groups: ''
   link_access_groups_invert: false
@@ -495,7 +497,7 @@
     atlantic-r20-richmond-1, europe-link30-2, europe-link31-2, europe-link35-2, europe-link35-3,
     atlantic-r26-boston-4-inverted, link25-2, link25-3, link25-dallas2, link25-reversed,
     link25-reversed-2, link13-2, R1 - R2, R2 - R3, R1 - R3, Subsite 1 - L1, Subsite
-      2 - L1, G1 - R1, Duplicate 1 - 2]
+      2 - L1, G1 - R1, Duplicate 1 - 2, Subsite 1 - L2, Subsite 1 - L3]
   manually_defined: false
   name: All Links
   property1: CP
@@ -633,7 +635,8 @@
     router29, router30, router31, router32, router33, router34, router35, router36,
     router37, Server 2, Aserver, Router 1, Router 2, Router 3, Router behind Gateway
       1, Gateway 1, Gateway 2, Gateway 3, 'Router behind Gateway 1, 2 and 3', Subsite
-      1 - R1, Subsite 1 - R2, Subsite 2 - G1, Subsite 2 - G2, Duplicate me 1]
+      1 - R1, Subsite 1 - R2, Subsite 2 - G1, Subsite 2 - G2, Duplicate me 1, Subsite
+      1 - R3]
   last_modified: '2020-09-21 06:22:51.921859'
   link_access_groups: ''
   link_access_groups_invert: false
@@ -685,7 +688,7 @@
     atlantic-r20-richmond-1, europe-link30-2, europe-link31-2, europe-link35-2, europe-link35-3,
     atlantic-r26-boston-4-inverted, link25-2, link25-3, link25-dallas2, link25-reversed,
     link25-reversed-2, link13-2, R1 - R2, R2 - R3, R1 - R3, Subsite 1 - L1, Subsite
-      2 - L1, G1 - R1, Duplicate 1 - 2]
+      2 - L1, G1 - R1, Duplicate 1 - 2, Subsite 1 - L2, Subsite 1 - L3]
   manually_defined: false
   name: Datacenter San Francisco
   property1: CP
@@ -872,7 +875,7 @@
     atlantic-r20-richmond-1, europe-link30-2, europe-link31-2, europe-link35-2, europe-link35-3,
     atlantic-r26-boston-4-inverted, link25-2, link25-3, link25-dallas2, link25-reversed,
     link25-reversed-2, link13-2, R1 - R2, R2 - R3, R1 - R3, Subsite 1 - L1, Subsite
-      2 - L1, G1 - R1, Duplicate 1 - 2]
+      2 - L1, G1 - R1, Duplicate 1 - 2, Subsite 1 - L2, Subsite 1 - L3]
   manually_defined: false
   name: Datacenter New York
   property1: CP
@@ -1007,7 +1010,7 @@
     router18 (public), router20 (admin), router23 (admin), Austin-2, Austin-3, Router
       behind Gateway 1, 'Router behind Gateway 1, 2 and 3', Subsite 1 - R1, Subsite
       1 - R2, Subsite 2 - G1, Subsite 2 - G2, Duplicate me 1, Duplication - G1, Duplication
-      - R1]
+      - R1, Subsite 1 - R3]
   last_modified: '2020-09-21 06:22:36.450390'
   link_access_groups: ''
   link_access_groups_invert: false
@@ -1059,7 +1062,7 @@
     atlantic-r20-richmond-1, europe-link30-2, europe-link31-2, europe-link35-2, europe-link35-3,
     atlantic-r26-boston-4-inverted, link25-2, link25-3, link25-dallas2, link25-reversed,
     link25-reversed-2, link13-2, R1 - R2, R2 - R3, R1 - R3, Subsite 1 - L1, Subsite
-      2 - L1, G1 - R1, Duplicate 1 - 2]
+      2 - L1, G1 - R1, Duplicate 1 - 2, Subsite 1 - L2, Subsite 1 - L3]
   manually_defined: false
   name: Datacenter Chicago
   property1: CP
@@ -2186,7 +2189,7 @@
     SanFrancisco, Orange, Oakland, Denver, Server 2, Aserver, Dallas-2, Dallas-3,
     Dallas-4, Austin-2, Austin-3, Jackson-2, Oakland-2, Gateway 1, Gateway 2, Gateway
       3, Subsite 1 - R1, Subsite 1 - R2, Subsite 2 - G1, Subsite 2 - G2, Duplicate
-      me 1, Duplication - G1, Duplication - R1]
+      me 1, Duplication - G1, Duplication - R1, Subsite 1 - R3]
   last_modified: '2020-09-26 00:47:22.329360'
   link_access_groups: ''
   link_access_groups_invert: false
@@ -2225,7 +2228,7 @@
     atlantic-r28-ny, atlantic-r28-washington, atlantic-r20-boston-1, atlantic-r20-richmond-2,
     atlantic-r26-boston-3, atlantic-r20-boston-2, atlantic-r20-richmond-1, atlantic-r26-boston-4-inverted,
     R1 - R2, R2 - R3, R1 - R3, Subsite 1 - L1, Subsite 2 - L1, G1 - R1, Duplicate
-      1 - 2]
+      1 - 2, Subsite 1 - L2, Subsite 1 - L3]
   manually_defined: false
   name: 'Pool Invert Mechanism: ~router in name, ~link[1-9] in name'
   property1: CP
@@ -3420,9 +3423,9 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [Subsite 2, 'Site 3: Creation, Edit and Deletion', 'Site 2: Subsite', 'Site
-      1: Top-level Devices and Links', Subsite 1, 'Site 4: Duplication of Devices,
-      Subsites and Top-level Sites', Duplicate me 2]
+  sites: [Subsite 1, Subsite 2, 'Site 4: Duplication of Devices, Subsites and Top-level
+      Sites', 'Site 1: Top-level Devices and Links', 'Site 3: Creation, Edit and Deletion',
+    'Site 2: Subsite', Duplicate me 2]
   target_services: []
   tasks: []
   type: pool

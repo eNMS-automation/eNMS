@@ -32,12 +32,12 @@
     ebac22df-1242-4dcd-90b0-fbeeee517991:
       alignment: left
       content: "- Enter subsite 1 and subsite 2 and make sure all of them have the\
-        \ expected content.\r\n- Tests the backward, forward and upward navigation\
+        \ expected content.\r\n- Test the backward, forward and upward navigation\
         \ buttons.\r\n- Test the Site Tree to select any node, including a node that\
         \ is in a different site:\r\nthe view should immediately switch to the site\
         \ of the selected node."
-      positions: [-320, -157]
-  last_modified: '2022-01-02 02:50:07.620145'
+      positions: [-337, -211]
+  last_modified: '2022-01-02 03:15:20.152655'
   latitude: '0.0'
   links: []
   location: ''
@@ -55,15 +55,20 @@
   creator: admin
   description: ''
   icon: site
-  labels: {}
-  last_modified: '2022-01-02 02:50:15.488212'
+  labels:
+    6eb6d97f-31c8-4a2a-8142-8c1427cea64d:
+      alignment: left
+      content: "This subsite should contain\r\n- three routers, \"Subsite 1 - R1-3\"\
+        \r\n- three links between each pair of routers, \"Subsite 1 - L1-3\""
+      positions: [69, -210]
+  last_modified: '2022-01-02 03:17:24.630619'
   latitude: '0.0'
-  links: [Subsite 1 - L1]
+  links: [Subsite 1 - L1, Subsite 1 - L2, Subsite 1 - L3]
   location: ''
   longitude: '0.0'
   model: ''
   name: Subsite 1
-  nodes: [Subsite 1 - R1, Subsite 1 - R2]
+  nodes: [Subsite 1 - R1, Subsite 1 - R2, Subsite 1 - R3]
   pools: [Everything, All Sites]
   positions:
     'Site 2: Subsite': [-558, -27]
@@ -110,8 +115,13 @@
   creator: admin
   description: ''
   icon: site
-  labels: {}
-  last_modified: '2022-01-01 10:35:25.381842'
+  labels:
+    56c77f3e-481c-476d-a045-1120b3cb0cc2:
+      alignment: left
+      content: "This subsite should contain\r\n- two gateways, \"Subsite 2 - G1-2\"\
+        \r\n- one link between them, \"Subsite 2 - L1\""
+      positions: [-1, -160]
+  last_modified: '2022-01-02 03:18:09.429309'
   latitude: '0.0'
   links: [Subsite 2 - L1]
   location: ''

@@ -3727,7 +3727,7 @@
   custom_select: b
   description: ''
   down: false
-  gateways: [Gateway 3, Gateway 1, Gateway 2]
+  gateways: [Gateway 2, Gateway 3, Gateway 1]
   icon: antenna
   icon_3d: juniper_ex3300
   ip_address: "192.168.56.50\t"
@@ -3807,7 +3807,7 @@
   os_version: ''
   port: 22
   positions:
-    Subsite 1: [-179, 8]
+    Subsite 1: [-181, -92]
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -3856,7 +3856,7 @@
   os_version: ''
   port: 22
   positions:
-    Subsite 1: [202, 7]
+    Subsite 1: [257, -85]
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -3965,4 +3965,151 @@
   scrapli_driver: cisco_iosxe
   subtype: ''
   type: gateway
+  vendor: ''
+- access_groups: admin
+  creator: admin
+  custom_json: {}
+  custom_multiselect: []
+  custom_select: b
+  description: ''
+  down: false
+  gateways: []
+  icon: router
+  icon_3d: juniper_ex3300
+  ip_address: ''
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2022-01-01 11:54:16.905934'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '0.0'
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: Duplicate me 1
+  napalm_driver: ios
+  netconf_driver: default
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  positions:
+    'Site 4: Duplication of Devices, Subsites and Top-level Sites': [-356, 0]
+  property1: 10.145.14.1
+  property2: CP
+  property3: password
+  reachable: true
+  scrapli_driver: cisco_iosxe
+  subtype: ''
+  type: device
+  vendor: ''
+- access_groups: admin
+  creator: admin
+  custom_json: {}
+  custom_multiselect: []
+  custom_select: b
+  description: ''
+  devices: []
+  down: false
+  gateways: []
+  icon: host
+  icon_3d: juniper_ex3300
+  ip_address: ''
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2022-01-01 11:55:03.583298'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '0.0'
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: Duplication - G1
+  napalm_driver: ios
+  netconf_driver: default
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  positions:
+    Duplicate me 2: [-127, -54]
+  priority: 1
+  property1: 10.145.14.1
+  property2: CP
+  property3: password
+  reachable: true
+  scrapli_driver: cisco_iosxe
+  subtype: ''
+  type: gateway
+  vendor: ''
+- access_groups: admin
+  creator: admin
+  custom_json: {}
+  custom_multiselect: []
+  custom_select: b
+  description: ''
+  down: false
+  gateways: []
+  icon: router
+  icon_3d: juniper_ex3300
+  ip_address: ''
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2022-01-01 11:55:12.994632'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '0.0'
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: Duplication - R1
+  napalm_driver: ios
+  netconf_driver: default
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  positions:
+    Duplicate me 2: [127, 87]
+  property1: 10.145.14.1
+  property2: CP
+  property3: password
+  reachable: true
+  scrapli_driver: cisco_iosxe
+  serial_number: ''
+  subtype: ''
+  type: router
   vendor: ''

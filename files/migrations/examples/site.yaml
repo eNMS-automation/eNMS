@@ -28,8 +28,16 @@
   creator: admin
   description: ''
   icon: site
-  labels: {}
-  last_modified: '2022-01-01 10:34:44.505600'
+  labels:
+    ebac22df-1242-4dcd-90b0-fbeeee517991:
+      alignment: left
+      content: "- Enter subsite 1 and subsite 2 and make sure all of them have the\
+        \ expected content.\r\n- Tests the backward, forward and upward navigation\
+        \ buttons.\r\n- Test the Site Tree to select any node, including a node that\
+        \ is in a different site:\r\nthe view should immediately switch to the site\
+        \ of the selected node."
+      positions: [-320, -157]
+  last_modified: '2022-01-02 02:50:07.620145'
   latitude: '0.0'
   links: []
   location: ''
@@ -48,7 +56,7 @@
   description: ''
   icon: site
   labels: {}
-  last_modified: '2022-01-01 10:34:38.195095'
+  last_modified: '2022-01-02 02:50:15.488212'
   latitude: '0.0'
   links: [Subsite 1 - L1]
   location: ''
@@ -115,6 +123,58 @@
   positions:
     'Site 2: Subsite': [-144, -36]
   sites: ['Site 2: Subsite']
+  subtype: ''
+  type: site
+  vendor: ''
+- access_groups: ''
+  creator: admin
+  description: ''
+  icon: site
+  labels:
+    0a8dc15c-8f31-4fe2-b84d-1b2e9680876e:
+      alignment: left
+      content: "Tests the duplication of devices, subsites and top-level sites.\r\n\
+        - Duplicate \"Duplicate me 1\": the duplicated device should be immediately\
+        \ added to the site.\r\nRefresh and check that it is still displayed at the\
+        \ same position.\r\n- Duplicate \"Duplicate me 2\": the duplicate subsite\
+        \ should be immediately added to the site.\r\nDouble-click on it to check\
+        \ that the content is the same as \"Duplicate me 2\".\r\n- Create a link between\
+        \ the two devices.\r\n- Duplicate the top-level site: check that it contains\
+        \ the two devices and the link between them,\r\nas well as the two subsites,\r\
+        \nCheck that the content of the subsites is the same as that of the original\
+        \ top-level site."
+      positions: [-47, -187]
+  last_modified: '2022-01-02 02:48:13.708604'
+  latitude: '0.0'
+  links: [Duplicate 1 - 2]
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: 'Site 4: Duplication of Devices, Subsites and Top-level Sites'
+  nodes: [Duplicate me 1, Duplicate me 2]
+  pools: [All Sites, Everything]
+  positions: {}
+  sites: []
+  subtype: ''
+  type: site
+  vendor: ''
+- access_groups: ''
+  creator: admin
+  description: ''
+  icon: site
+  labels: {}
+  last_modified: '2022-01-01 11:55:14.172281'
+  latitude: '0.0'
+  links: [G1 - R1]
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: Duplicate me 2
+  nodes: [Duplication - G1, Duplication - R1]
+  pools: [All Sites, Everything]
+  positions:
+    'Site 4: Duplication of Devices, Subsites and Top-level Sites': [135, 6]
+  sites: ['Site 4: Duplication of Devices, Subsites and Top-level Sites']
   subtype: ''
   type: site
   vendor: ''

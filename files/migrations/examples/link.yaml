@@ -345,3 +345,10 @@
   destination: Subsite 2 - G2, last_modified: '2022-01-01 10:35:19.556241', location: '',
   model: '', name: Subsite 2 - L1, source: Subsite 2 - G1, subtype: '', type: link,
   vendor: ''}
+- {access_groups: admin, color: '', creator: admin, custom_property: CP, description: '',
+  destination: Duplication - R1, last_modified: '2022-01-01 11:55:19.587244', location: '',
+  model: '', name: G1 - R1, source: Duplication - G1, speed: '22', standard: 10BASE2,
+  subtype: '', type: ethernet_link, vendor: ''}
+- {access_groups: admin, color: '#000000', creator: '', custom_property: CP, description: '',
+  last_modified: '', location: '', model: '', name: Duplicate 1 - 2, source: Duplicate
+    me 1, subtype: '', type: link, vendor: ''}

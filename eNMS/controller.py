@@ -93,25 +93,25 @@ class Controller:
 
     def add_objects_to_site(self, site_id, **kwargs):
         site = db.fetch("site", id=site_id)
+        result = {"nodes": [], "links": []}
         nodes = set(db.objectify("node", kwargs["nodes"]))
         links = set(db.objectify("link", kwargs["links"]))
         for pool in db.objectify("pool", kwargs["pools"]):
             nodes |= set(pool.devices) | set(pool.sites)
             links |= set(pool.links)
         for node in nodes:
-            if node in site.nodes:
+            if node in site.nodes or node == site:
                 continue
+            result["nodes"].append(node.serialized)
             site.nodes.append(node)
         for link in links:
             if link in site.links:
                 continue
             if link.source not in site.nodes or link.destination not in site.nodes:
                 continue
+            result["links"].append(link.serialized)
             site.links.append(link)
-        return {
-            "nodes": [node.serialized for node in nodes],
-            "links": [link.serialized for link in links],
-        }
+        return result
 
     def bulk_deletion(self, table, **kwargs):
         instances = self.filtering(table, bulk="id", form=kwargs)

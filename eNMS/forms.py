@@ -292,7 +292,9 @@ class AddToSiteForm(BaseForm):
     action = "eNMS.siteBuilder.addObjectsToSite"
     form_type = HiddenField(default="add_to_site")
     nodes = MultipleInstanceField("Nodes", model="node")
+    add_connected_links = BooleanField("Add connected links", default=False)
     links = MultipleInstanceField("Links", model="link")
+    add_connected_nodes = BooleanField("Add connected nodes", default=False)
     pools = MultipleInstanceField("Pools", model="pool")
 
 

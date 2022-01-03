@@ -151,6 +151,9 @@ function filterSiteTable(tableId, path) {
 }
 
 function saveLink(edge) {
+  if (nodes.get(edge.from).type == "site" || nodes.get(edge.to).type == "site") {
+    return notify("Cannot draw a link from or to a site", "error", 5);
+  }
   showInstancePanel($("#edge-type-list").val(), null, null, null, edge);
 }
 

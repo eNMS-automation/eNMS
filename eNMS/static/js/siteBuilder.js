@@ -210,6 +210,7 @@ function addObjectsToSite() {
       result.nodes.map((node) => nodes.update(drawSiteNode(node)));
       result.links.map((link) => edges.update(drawSiteEdge(link)));
       $("#add_to_site").remove();
+      notify("Objects added to the site.", "success", 5);
     },
   });
 }

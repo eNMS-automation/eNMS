@@ -105,6 +105,8 @@ class Controller:
         for link in links:
             if link in site.links:
                 continue
+            if link.source not in site.nodes or link.destination not in site.nodes:
+                continue
             site.links.append(link)
         return {
             "nodes": [node.serialized for node in nodes],

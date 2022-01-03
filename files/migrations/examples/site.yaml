@@ -224,8 +224,14 @@
   creator: admin
   description: ''
   icon: site
-  labels: {}
-  last_modified: '2022-01-02 12:46:05.616066'
+  labels:
+    df3da1e5-33a3-46e4-baed-ee59a432c773:
+      alignment: left
+      content: "Tests multiple levels of nested subsites, in particular:\r\n- The\
+        \ upward navigation button\r\n- The Tree View to switch between levels\r\n\
+        - The Duplication: all subsites down to the last should be duplicated."
+      positions: [40, -173]
+  last_modified: '2022-01-03 03:26:54.919735'
   latitude: '0.0'
   links: []
   location: ''
@@ -233,7 +239,7 @@
   model: ''
   name: 'Site 6: Subsubsite and Subsubsubsite'
   nodes: [L1 Site]
-  pools: []
+  pools: [Everything, All Sites]
   positions: {}
   sites: []
   subtype: ''
@@ -252,7 +258,7 @@
   model: ''
   name: L1 Site
   nodes: [L2 Site]
-  pools: []
+  pools: [Everything, All Sites]
   positions:
     'Site 6: Subsubsite and Subsubsubsite': [-27, -55]
   sites: ['Site 6: Subsubsite and Subsubsubsite']
@@ -272,7 +278,7 @@
   model: ''
   name: L2 Site
   nodes: [L3 Site]
-  pools: []
+  pools: [Everything, All Sites]
   positions: {}
   sites: [L1 Site]
   subtype: ''
@@ -291,7 +297,7 @@
   model: ''
   name: L3 Site
   nodes: [S6 L3 R1, S6 L3 R2]
-  pools: []
+  pools: [Everything, All Sites]
   positions: {}
   sites: [L2 Site]
   subtype: ''

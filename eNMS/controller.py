@@ -99,6 +99,9 @@ class Controller:
         for pool in db.objectify("pool", kwargs["pools"]):
             nodes |= set(pool.devices) | set(pool.sites)
             links |= set(pool.links)
+        if kwargs["add_connected_nodes"]:
+            for link in links:
+                nodes |= {link.source, link.destination}
         for node in nodes:
             if node in site.nodes or node == site:
                 continue

@@ -195,6 +195,7 @@ function drawNetwork() {
       enabled: !enabled,
       barnesHut: {
         gravitationalConstant: -100000,
+        centralGravity: 0.5,
         springLength: 250,
         springConstant: 0.05,
         damping: 0.09,

@@ -35,16 +35,17 @@
         \ expected content.\r\n- Test the backward, forward and upward navigation\
         \ buttons.\r\n- Test the Site Tree to select any node, including a node that\
         \ is in a different site:\r\nthe view should immediately switch to the site\
-        \ of the selected node."
-      positions: [-337, -211]
-  last_modified: '2022-01-02 03:15:20.152655'
+        \ of the selected node.\r\n- Test using site as a teleport: Subsite 1 contains\
+        \ Subsite 2 and vice-versa,\r\nto switch from one to the other and back."
+      positions: [-310, -212]
+  last_modified: '2022-01-03 12:55:02.492046'
   latitude: '0.0'
   links: []
   location: ''
   longitude: '0.0'
   model: ''
   name: 'Site 2: Subsite'
-  nodes: [Subsite 2, Subsite 1]
+  nodes: [Subsite 1, Subsite 2]
   pools: [Everything, All Sites]
   positions: {}
   sites: []
@@ -60,19 +61,20 @@
       alignment: left
       content: "This subsite should contain\r\n- three routers, \"Subsite 1 - R1-3\"\
         \r\n- three links between each pair of routers, \"Subsite 1 - L1-3\""
-      positions: [69, -210]
-  last_modified: '2022-01-02 03:17:24.630619'
+      positions: [51, -231]
+  last_modified: '2022-01-03 12:55:19.074280'
   latitude: '0.0'
   links: [Subsite 1 - L1, Subsite 1 - L2, Subsite 1 - L3]
   location: ''
   longitude: '0.0'
   model: ''
   name: Subsite 1
-  nodes: [Subsite 1 - R1, Subsite 1 - R2, Subsite 1 - R3]
+  nodes: [Subsite 1 - R1, Subsite 1 - R2, Subsite 1 - R3, Subsite 2]
   pools: [Everything, All Sites]
   positions:
     'Site 2: Subsite': [-558, -27]
-  sites: ['Site 2: Subsite']
+    Subsite 2: [-15, 43]
+  sites: ['Site 2: Subsite', Subsite 2]
   subtype: ''
   type: site
   vendor: ''
@@ -120,19 +122,20 @@
       alignment: left
       content: "This subsite should contain\r\n- two gateways, \"Subsite 2 - G1-2\"\
         \r\n- one link between them, \"Subsite 2 - L1\""
-      positions: [-1, -160]
-  last_modified: '2022-01-02 03:18:09.429309'
+      positions: [4, -181]
+  last_modified: '2022-01-03 12:55:37.570662'
   latitude: '0.0'
   links: [Subsite 2 - L1]
   location: ''
   longitude: '0.0'
   model: ''
   name: Subsite 2
-  nodes: [Subsite 2 - G1, Subsite 2 - G2]
+  nodes: [Subsite 2 - G1, Subsite 2 - G2, Subsite 1]
   pools: [Everything, All Sites]
   positions:
     'Site 2: Subsite': [-144, -36]
-  sites: ['Site 2: Subsite']
+    Subsite 1: [-2, -48]
+  sites: ['Site 2: Subsite', Subsite 1]
   subtype: ''
   type: site
   vendor: ''

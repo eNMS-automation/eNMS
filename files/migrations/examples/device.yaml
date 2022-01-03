@@ -3807,7 +3807,7 @@
   os_version: ''
   port: 22
   positions:
-    Subsite 1: [-181, -92]
+    Subsite 1: [-284, -105]
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -3856,7 +3856,7 @@
   os_version: ''
   port: 22
   positions:
-    Subsite 1: [257, -85]
+    Subsite 1: [298, -122]
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -3906,7 +3906,7 @@
   os_version: ''
   port: 22
   positions:
-    Subsite 2: [-187, -4]
+    Subsite 2: [-213, -57]
   priority: 1
   property1: 10.145.14.1
   property2: CP
@@ -3956,7 +3956,7 @@
   os_version: ''
   port: 22
   positions:
-    Subsite 2: [166, -11]
+    Subsite 2: [202, -63]
   priority: 1
   property1: 10.145.14.1
   property2: CP
@@ -4152,7 +4152,7 @@
   os_version: ''
   port: 22
   positions:
-    Subsite 1: [18, 55]
+    Subsite 1: [-8, 136]
   property1: 10.145.14.1
   property2: CP
   property3: password

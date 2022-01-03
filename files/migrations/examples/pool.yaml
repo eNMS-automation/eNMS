@@ -180,10 +180,10 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: ['Site 6: Subsubsite and Subsubsubsite', Subsite 2, 'Site 3: Creation, Edit
-      and Deletion', 'Site 4: Duplication of Devices, Subsites and Top-level Sites',
-    Subsite 1, Duplicate me 2, 'Site 5: Loopback and Parallel Links', L3 Site, 'Site
-      1: Top-level Devices and Links', L1 Site, L2 Site, 'Site 2: Subsite']
+  sites: [Subsite 1, Duplicate me 2, 'Site 4: Duplication of Devices, Subsites and
+      Top-level Sites', 'Site 2: Subsite', L3 Site, 'Site 1: Top-level Devices and
+      Links', 'Site 5: Loopback and Parallel Links', 'Site 6: Subsubsite and Subsubsubsite',
+    Subsite 2, L1 Site, 'Site 3: Creation, Edit and Deletion', L2 Site]
   target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
@@ -3454,10 +3454,10 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: ['Site 6: Subsubsite and Subsubsubsite', Subsite 2, 'Site 3: Creation, Edit
-      and Deletion', 'Site 4: Duplication of Devices, Subsites and Top-level Sites',
-    Subsite 1, Duplicate me 2, 'Site 5: Loopback and Parallel Links', L3 Site, 'Site
-      1: Top-level Devices and Links', L1 Site, L2 Site, 'Site 2: Subsite']
+  sites: [Subsite 1, Duplicate me 2, 'Site 4: Duplication of Devices, Subsites and
+      Top-level Sites', 'Site 2: Subsite', L3 Site, 'Site 1: Top-level Devices and
+      Links', 'Site 5: Loopback and Parallel Links', 'Site 6: Subsubsite and Subsubsubsite',
+    Subsite 2, L1 Site, 'Site 3: Creation, Edit and Deletion', L2 Site]
   target_services: []
   tasks: []
   type: pool

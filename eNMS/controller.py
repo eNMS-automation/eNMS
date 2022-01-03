@@ -102,6 +102,10 @@ class Controller:
         if kwargs["add_connected_nodes"]:
             for link in links:
                 nodes |= {link.source, link.destination}
+        if kwargs["add_connected_links"]:
+            for node in nodes:
+                print(node, node.get_neighbors("link"))
+                links |= set(node.get_neighbors("link"))
         for node in nodes:
             if node in site.nodes or node == site:
                 continue

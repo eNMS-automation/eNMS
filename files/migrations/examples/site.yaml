@@ -38,14 +38,14 @@
         \ of the selected node.\r\n- Test using site as a teleport: Subsite 1 contains\
         \ Subsite 2 and vice-versa,\r\nto switch from one to the other and back."
       positions: [-310, -212]
-  last_modified: '2022-01-03 12:55:02.492046'
+  last_modified: '2022-01-04 01:44:52.125534'
   latitude: '0.0'
   links: []
   location: ''
   longitude: '0.0'
   model: ''
-  name: 'Site 2: Subsite'
-  nodes: [Subsite 1, Subsite 2]
+  name: 'Site 2: Subsite and Teleport Mechanism'
+  nodes: [Subsite 2, Subsite 1]
   pools: [Everything, All Sites]
   positions: {}
   sites: []
@@ -69,12 +69,13 @@
   longitude: '0.0'
   model: ''
   name: Subsite 1
-  nodes: [Subsite 1 - R1, Subsite 1 - R2, Subsite 1 - R3, Subsite 2]
+  nodes: [Subsite 2, Subsite 1 - R1, Subsite 1 - R2, Subsite 1 - R3]
   pools: [Everything, All Sites]
   positions:
-    'Site 2: Subsite': [-558, -27]
+    'Site 2: Subsite': &id001 [-558, -27]
+    'Site 2: Subsite and Teleport Mechanism': *id001
     Subsite 2: [-15, 43]
-  sites: ['Site 2: Subsite', Subsite 2]
+  sites: ['Site 2: Subsite and Teleport Mechanism', Subsite 2]
   subtype: ''
   type: site
   vendor: ''
@@ -130,12 +131,13 @@
   longitude: '0.0'
   model: ''
   name: Subsite 2
-  nodes: [Subsite 2 - G1, Subsite 2 - G2, Subsite 1]
+  nodes: [Subsite 1, Subsite 2 - G1, Subsite 2 - G2]
   pools: [Everything, All Sites]
   positions:
-    'Site 2: Subsite': [-144, -36]
+    'Site 2: Subsite': &id002 [-144, -36]
+    'Site 2: Subsite and Teleport Mechanism': *id002
     Subsite 1: [-2, -48]
-  sites: ['Site 2: Subsite', Subsite 1]
+  sites: ['Site 2: Subsite and Teleport Mechanism', Subsite 1]
   subtype: ''
   type: site
   vendor: ''
@@ -303,6 +305,32 @@
   pools: [Everything, All Sites]
   positions: {}
   sites: [L2 Site]
+  subtype: ''
+  type: site
+  vendor: ''
+- access_groups: ''
+  creator: admin
+  description: ''
+  icon: site
+  labels:
+    40db70f9-22d1-4497-8834-52ef5b1bf369:
+      alignment: left
+      content: "- Import the pool \"All routers in Europe\" with the option \"Add\
+        \ connected links\"\r\n- Click on the \"Automatic Layout\" button: the network\
+        \ should be displayed in a near-optimal layout almost instantly.\r\n- Select\
+        \ everything and delete it."
+      positions: [63, -168]
+  last_modified: '2022-01-04 01:46:34.380620'
+  latitude: '0.0'
+  links: []
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: 'Site 7: Automatic Layout of Large Graph'
+  nodes: []
+  pools: []
+  positions: {}
+  sites: []
   subtype: ''
   type: site
   vendor: ''

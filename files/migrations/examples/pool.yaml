@@ -180,11 +180,12 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: ['Site 5: Loopback and Parallel Links', Subsite 1, 'Site 4: Duplication of
-      Devices, Subsites and Top-level Sites', Duplicate me 2, 'Site 1: Top-level Devices
-      and Links', 'Site 3: Creation, Edit and Deletion', L1 Site, 'Site 2: Subsite
-      and Teleport Mechanism', L2 Site, 'Site 6: Subsubsite and Subsubsubsite', Subsite
-      2, L3 Site, 'Site 7: Automatic Layout of Large Graph']
+  sites: ['Site 3: Creation, Edit and Deletion', Subsite 1, Subsite 2, L3 Site, Duplicate
+      me 2, 'Site 7: Automatic Layout of Large Graph', L2 Site, 'Site 4: Duplication
+      of Devices, Subsites and Top-level Sites', 'Site 1: Top-level Devices and Links',
+    L1 Site, 'Site 5: Loopback and Parallel Links', 'Site 6: Subsubsite and Subsubsubsite',
+    'Site 2: Subsite and Teleport Mechanism', 'Site 8: Import with Add Connected Nodes
+      and Links']
   target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
@@ -3455,11 +3456,12 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: ['Site 5: Loopback and Parallel Links', Subsite 1, 'Site 4: Duplication of
-      Devices, Subsites and Top-level Sites', Duplicate me 2, 'Site 1: Top-level Devices
-      and Links', 'Site 3: Creation, Edit and Deletion', L1 Site, 'Site 2: Subsite
-      and Teleport Mechanism', L2 Site, 'Site 6: Subsubsite and Subsubsubsite', Subsite
-      2, L3 Site, 'Site 7: Automatic Layout of Large Graph']
+  sites: ['Site 3: Creation, Edit and Deletion', Subsite 1, Subsite 2, L3 Site, Duplicate
+      me 2, 'Site 7: Automatic Layout of Large Graph', L2 Site, 'Site 4: Duplication
+      of Devices, Subsites and Top-level Sites', 'Site 1: Top-level Devices and Links',
+    L1 Site, 'Site 5: Loopback and Parallel Links', 'Site 6: Subsubsite and Subsubsubsite',
+    'Site 2: Subsite and Teleport Mechanism', 'Site 8: Import with Add Connected Nodes
+      and Links']
   target_services: []
   tasks: []
   type: pool

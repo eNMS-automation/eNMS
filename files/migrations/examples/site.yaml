@@ -354,9 +354,10 @@
         \ end nodes).\r\n- Add \"link25\" with the \"Add Connected Nodes\" option:\
         \ \"Dallas\" and \"Atlanta\" should be added along with \"link25\".\r\n- Add\
         \ \"link25-2\" with the \"Add Connected Nodes\" option: the link should be\
-        \ added but the two ends are already here."
-      positions: [36, -14]
-  last_modified: '2022-01-04 02:11:09.030815'
+        \ added but the two ends are already here.\r\n- Add \"link25-3\" without any\
+        \ option: the link should be added between \"Dallas\" and \"Atlanta\"."
+      positions: [110, -18]
+  last_modified: '2022-01-04 02:21:05.036701'
   latitude: '0.0'
   links: []
   location: ''
@@ -364,7 +365,7 @@
   model: ''
   name: 'Site 8: Import with Add Connected Nodes and Links'
   nodes: []
-  pools: []
+  pools: [All Sites, Everything]
   positions: {}
   sites: []
   subtype: ''

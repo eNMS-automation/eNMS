@@ -677,7 +677,7 @@ export function getWorkflowState(periodic, first) {
         if (!Object.keys(result).length || result.service.id != workflow.id) return;
         currentRun = result.run;
         currentRuntime = result.runtime;
-        if (result.service.last_modified !== workflow.last_modified) {
+        if (result.service.last_modified > workflow.last_modified) {
           displayWorkflow(result);
         } else {
           displayWorkflowState(result);

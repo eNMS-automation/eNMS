@@ -137,7 +137,7 @@
     'Site 2: Subsite': &id002 [-144, -36]
     'Site 2: Subsite and Teleport Mechanism': *id002
     Subsite 1: [-2, -48]
-  sites: [Subsite 1, 'Site 2: Subsite and Teleport Mechanism']
+  sites: ['Site 2: Subsite and Teleport Mechanism', Subsite 1]
   subtype: ''
   type: site
   vendor: ''
@@ -366,6 +366,32 @@
   name: 'Site 8: Import with Add Connected Nodes and Links'
   nodes: []
   pools: [All Sites, Everything]
+  positions: {}
+  sites: []
+  subtype: ''
+  type: site
+  vendor: ''
+- access_groups: ''
+  creator: admin
+  description: ''
+  icon: site
+  labels: {}
+  last_modified: '2022-01-04 02:28:25.941232'
+  latitude: '0.0'
+  links: [link22, link13, link20, link0, link5, link23, link19, link21, link7, link18,
+    link15, link3, link4, link17, link10, link27, link25-3, link14, link16, link25-reversed,
+    link9, link25-reversed-2, link25-dallas2, link8, link1, link26, link25, link24,
+    link2, link13-2, link25-2, link11, link12, link6]
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: 'Site 9: Large Network Display'
+  nodes: [Oakland-2, Oakland, Columbus, Austin, Houston, Austin-2, Washington, Orange,
+    Dallas-3, Baltimore, Dallas-4, PaloAlto, SanJose, Cleveland, Jackson, Richmond,
+    Cambridge, Chicago, Philadelphia, Cincinnati, NewYork, Austin-3, Minneapolis,
+    SanFrancisco, Atlanta, Detroit, Denver, Sacramento, SanDiego, LosAngeles, Boston,
+    Dallas-2, Jackson-2, Dallas]
+  pools: []
   positions: {}
   sites: []
   subtype: ''

@@ -38,7 +38,8 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [528, 942]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -87,7 +88,8 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [-95, -197]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -136,7 +138,8 @@
   operating_system: eos
   os_version: 15.5(3)M
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [333, 342]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -185,7 +188,8 @@
   operating_system: eos
   os_version: 15.5(3)M
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [125, 128]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -234,7 +238,8 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [-846, -30]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -283,7 +288,8 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [262, -306]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -332,7 +338,8 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [900, -599]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -381,7 +388,8 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [727, 230]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -430,7 +438,8 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [-610, 357]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -479,7 +488,8 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [721, -226]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -528,7 +538,8 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [-958, -689]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -577,7 +588,8 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [405, -150]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -626,7 +638,8 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [472, 519]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -675,7 +688,8 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [-1075, 316]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -724,7 +738,8 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [757, 651]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -773,7 +788,8 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [509, 81]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -822,7 +838,8 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [-692, -360]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -871,7 +888,8 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [-653, -773]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -920,7 +938,8 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [-1105, -412]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -969,7 +988,8 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [-309, 439]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -1018,7 +1038,8 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [-1260, 1]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -1067,7 +1088,8 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [-356, 31]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -1116,7 +1138,8 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [175, -900]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -1165,7 +1188,8 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [-174, -983]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -1214,7 +1238,8 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [1133, -274]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -1263,7 +1288,8 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [-85, -578]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -1312,7 +1338,8 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [-456, -306]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -3076,7 +3103,8 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [208, 817]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -3125,7 +3153,8 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [944, 553]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -3174,7 +3203,8 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [1505, -2076]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -3223,7 +3253,8 @@
   operating_system: eos
   os_version: 15.5(3)M
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [1333, 679]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -3272,7 +3303,8 @@
   operating_system: eos
   os_version: 15.5(3)M
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [272, 2538]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -3321,7 +3353,8 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [2753, -63]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -3370,7 +3403,8 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
-  positions: {}
+  positions:
+    'Site 9: Large Network Display': [-1288, 1977]
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -3579,7 +3613,7 @@
   custom_multiselect: []
   custom_select: b
   description: ''
-  devices: ['Router behind Gateway 1, 2 and 3', Router behind Gateway 1]
+  devices: [Router behind Gateway 1, 'Router behind Gateway 1, 2 and 3']
   down: false
   gateways: []
   icon: antenna

@@ -180,12 +180,12 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [L3 Site, L2 Site, 'Site 5: Loopback and Parallel Links', Subsite 2, 'Site
-      4: Duplication of Devices, Subsites and Top-level Sites', Duplicate me 2, 'Site
-      2: Subsite and Teleport Mechanism', 'Site 1: Top-level Devices and Links', Subsite
-      1, 'Site 3: Creation, Edit and Deletion', 'Site 8: Import with Add Connected
-      Nodes and Links', 'Site 6: Subsubsite and Subsubsubsite', 'Site 7: Automatic
-      Layout of Large Graph', L1 Site]
+  sites: ['Site 8: Import with Add Connected Nodes and Links', Duplicate me 2, L3
+      Site, Subsite 2, 'Site 1: Top-level Devices and Links', 'Site 3: Creation, Edit
+      and Deletion', 'Site 6: Subsubsite and Subsubsubsite', Subsite 1, L2 Site, 'Site
+      4: Duplication of Devices, Subsites and Top-level Sites', 'Site 7: Automatic
+      Layout of Large Graph', 'Site 2: Subsite and Teleport Mechanism', L1 Site, 'Site
+      5: Loopback and Parallel Links', 'Site 9: Large Network Display']
   target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
@@ -3456,12 +3456,12 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [L3 Site, L2 Site, 'Site 5: Loopback and Parallel Links', Subsite 2, 'Site
-      4: Duplication of Devices, Subsites and Top-level Sites', Duplicate me 2, 'Site
-      2: Subsite and Teleport Mechanism', 'Site 1: Top-level Devices and Links', Subsite
-      1, 'Site 3: Creation, Edit and Deletion', 'Site 8: Import with Add Connected
-      Nodes and Links', 'Site 6: Subsubsite and Subsubsubsite', 'Site 7: Automatic
-      Layout of Large Graph', L1 Site]
+  sites: ['Site 8: Import with Add Connected Nodes and Links', Duplicate me 2, L3
+      Site, Subsite 2, 'Site 1: Top-level Devices and Links', 'Site 3: Creation, Edit
+      and Deletion', 'Site 6: Subsubsite and Subsubsubsite', Subsite 1, L2 Site, 'Site
+      4: Duplication of Devices, Subsites and Top-level Sites', 'Site 7: Automatic
+      Layout of Large Graph', 'Site 2: Subsite and Teleport Mechanism', L1 Site, 'Site
+      5: Loopback and Parallel Links', 'Site 9: Large Network Display']
   target_services: []
   tasks: []
   type: pool

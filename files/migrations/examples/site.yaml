@@ -376,7 +376,7 @@
   description: ''
   icon: site
   labels: {}
-  last_modified: '2022-01-04 02:28:25.941232'
+  last_modified: '2022-01-04 02:30:47.036350'
   latitude: '0.0'
   links: [link22, link13, link20, link0, link5, link23, link19, link21, link7, link18,
     link15, link3, link4, link17, link10, link27, link25-3, link14, link16, link25-reversed,
@@ -386,12 +386,11 @@
   longitude: '0.0'
   model: ''
   name: 'Site 9: Large Network Display'
-  nodes: [Oakland-2, Oakland, Columbus, Austin, Houston, Austin-2, Washington, Orange,
-    Dallas-3, Baltimore, Dallas-4, PaloAlto, SanJose, Cleveland, Jackson, Richmond,
-    Cambridge, Chicago, Philadelphia, Cincinnati, NewYork, Austin-3, Minneapolis,
-    SanFrancisco, Atlanta, Detroit, Denver, Sacramento, SanDiego, LosAngeles, Boston,
-    Dallas-2, Jackson-2, Dallas]
-  pools: []
+  nodes: [Oakland, Columbus, Austin, Houston, Austin-2, Washington, Orange, Dallas-3,
+    Baltimore, PaloAlto, SanJose, Cleveland, Jackson, Richmond, Cambridge, Chicago,
+    Philadelphia, Cincinnati, NewYork, Minneapolis, SanFrancisco, Atlanta, Detroit,
+    Denver, Sacramento, SanDiego, LosAngeles, Boston, Dallas-2, Dallas]
+  pools: [Everything, All Sites]
   positions: {}
   sites: []
   subtype: ''

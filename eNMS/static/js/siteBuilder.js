@@ -103,15 +103,19 @@ export function displaySite(site) {
   );
   graph.on("doubleClick", function (event) {
     event.event.preventDefault();
-    let node = nodes.get(this.getNodeAt(event.pointer.DOM));
-    if (!node || !node.id) {
+    const node = nodes.get(this.getNodeAt(event.pointer.DOM));
+    const linkId = this.getEdgeAt(event.pointer.DOM);
+    if ((!node || !node.id) && !linkId) {
       return;
     } else if (node.type == "label") {
       showLabelPanel({ label: node, usePosition: true });
     } else if (node.type == "site") {
       switchToSite(`${currentPath}>${node.id}`);
-    } else {
+    } else if (node && node.id) {
       showInstancePanel(node.type, node.id);
+    } else if (linkId) {
+      const link = edges.get(linkId);
+      showInstancePanel(link.type, link.id);
     }
   });
 }

@@ -75,7 +75,7 @@
     'Site 2: Subsite': &id001 [-558, -27]
     'Site 2: Subsite and Teleport Mechanism': *id001
     Subsite 2: [-15, 43]
-  sites: ['Site 2: Subsite and Teleport Mechanism', Subsite 2]
+  sites: [Subsite 2, 'Site 2: Subsite and Teleport Mechanism']
   subtype: ''
   type: site
   vendor: ''
@@ -137,7 +137,7 @@
     'Site 2: Subsite': &id002 [-144, -36]
     'Site 2: Subsite and Teleport Mechanism': *id002
     Subsite 1: [-2, -48]
-  sites: ['Site 2: Subsite and Teleport Mechanism', Subsite 1]
+  sites: [Subsite 1, 'Site 2: Subsite and Teleport Mechanism']
   subtype: ''
   type: site
   vendor: ''
@@ -327,6 +327,42 @@
   longitude: '0.0'
   model: ''
   name: 'Site 7: Automatic Layout of Large Graph'
+  nodes: []
+  pools: [Everything, All Sites]
+  positions: {}
+  sites: []
+  subtype: ''
+  type: site
+  vendor: ''
+- access_groups: ''
+  creator: admin
+  description: ''
+  icon: site
+  labels:
+    9d96833e-cf92-45e4-8c54-f2b145b5e542:
+      alignment: left
+      content: "- Add nodes \"Dallas\" and \"Atlanta\" without option: the nodes should\
+        \ be added without any links.\r\n- Delete them\r\n- Add \"Washington\" and\
+        \ \"Austin\" with the \"Add Connected Links\" option: no link should be created.\r\
+        \n- Add \"Dallas\" and \"Atlanta\" with the \"Add Connected Links\" option:\r\
+        \nit should create one link between \"Washington\" and \"Atlanta\" (link16),\r\
+        \none link between \"Dallas\" and \"Austin\" (link13),\r\nand three links\
+        \ between \"Dallas\" and \"Atlanta\" (link25, 25-2 and 25-3)\r\n- Add \"Dallas-2\"\
+        \ with the \"Add Connected Links\" option:\r\nit should add \"Dallas-2\" along\
+        \ with two links:\r\n\"link25-reversed\" and \"link25-dallas2\"\r\n- Delete\
+        \ everything\r\n- Add \"link25\" with no option: nothing should be added (missing\
+        \ end nodes).\r\n- Add \"link25\" with the \"Add Connected Nodes\" option:\
+        \ \"Dallas\" and \"Atlanta\" should be added along with \"link25\".\r\n- Add\
+        \ \"link25-2\" with the \"Add Connected Nodes\" option: the link should be\
+        \ added but the two ends are already here."
+      positions: [36, -14]
+  last_modified: '2022-01-04 02:11:09.030815'
+  latitude: '0.0'
+  links: []
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: 'Site 8: Import with Add Connected Nodes and Links'
   nodes: []
   pools: []
   positions: {}

@@ -4,14 +4,14 @@ Uses Netmiko to send a list of commands to be configured on the devices.
 
 Configuration parameters for creating this service instance:
 
--   All Common Netmiko Parameters (see above)
--   `Content` Paste a configuration block of text here for applying to
+- All [Netmiko Service Common Parameters](netmiko_common.md)
+- `Content` Paste a configuration block of text here for applying to
     the target device(s)
--   `Commit Configuration` Calls netmiko `commit` function after applying
+- `Commit Configuration` Calls netmiko `commit` function after applying
     the configuration
--   `Exit config mode` Determines whether or not to exit config mode
+- `Exit config mode` Determines whether or not to exit config mode
     after completion
--   `Config Mode Command` The command that will be used to enter config
+- `Config Mode Command` The command that will be used to enter config
     mode
 
 ## Advanced Netmiko Parameters
@@ -25,7 +25,6 @@ Configuration parameters for creating this service instance:
 
 !!! note
 
-    This Service supports variable substitution (as mentioned in the
-    previous section) in the `Content` input field of its
-    configuration form.
+    This Service supports variable substitution in the `Content` input field
+    of its configuration form.
 

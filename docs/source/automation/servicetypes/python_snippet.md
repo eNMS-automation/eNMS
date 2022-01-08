@@ -2,15 +2,10 @@ Runs any python code.
 
 ![Python Snippet Service](../../_static/automation/builtin_service_types/python_snippet.png)
 
-In the code, you can use the following variables / functions: 
-
-- `log`: function to add a string to the service logs. 
-- `parent`: the workflow that the python snippet service is called from. 
-- `save_result`: the results of the service.
-
-Additionally, you can use all the variables and functions described in
-the \"Advanced / Python code\" section of the docs.
+All variables and functions described in the
+[Using python code in the Service Editor Panel](../services.md#using-python-code-in-the-service-editor-panel)
+section of the docs are also available for use in the Python Snippet code.
 
 Configuration parameters for creating this service instance: 
 
-- `Source code`: source code of the python script to run.
+- `Source code`: Source code of the python script to run.

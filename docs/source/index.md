@@ -1,7 +1,3 @@
----
-title: What is eMNS
----
-
 ## What is eNMS
 
 eNMS is a vendor-agnostic Network Management System (NMS) designed for building

@@ -3,9 +3,9 @@ This service uses Napalm to pull data from devices and store it in
 
 ![Napalm Data Backup Service](../../_static/automation/builtin_service_types/napalm_databackup.png)
 
-- All Napalm Common Parameters (See Above)
+- All [Napalm Service Common Parameters](napalm_common.md) 
 
-- `Configuration Getters` - Choose the configuration getter named \'Configuration\'
+- `Configuration Getters` - Choose the configuration getter named 'Configuration'
 
 !!! note
  

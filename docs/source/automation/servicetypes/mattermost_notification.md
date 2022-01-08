@@ -9,6 +9,5 @@ configured in the eNMS settings.
 
 !!! note
 
-    This Service supports variable substitution (as mentioned in the
-    previous section) in the `Channel` and `Body` input fields of
-    its configuration form.
+    This Service supports variable substitution in the `Channel` and `Body`
+    input fields of its configuration form.

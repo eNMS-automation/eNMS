@@ -17,14 +17,14 @@ Configuration parameters for creating this service instance:
     - `Apply TextFSM Template`
     
 - `Regular Expression/ TestFSM Template Text`: regular expression or
-  TextFSM template, depending on the value of the \"Post Processing\". 
+  TextFSM template, depending on the value of the "Post Processing". 
 
 - `Operation` Choose the operation type: 
 
-    - `Set/Replace`
-    - `Append to a list`
-    - `Extend List`
-    - `Update dictionary`
+    - `Set/Replace`: Set the variable value
+    - `Append to a list`: Append the value to an existing list
+    - `Extend List`: Append each value to an existing list
+    - `Update dictionary`: Update each key/value into an existing dictionary
     
 !!! note
     The above list and dictionary operations allow for accumulated results

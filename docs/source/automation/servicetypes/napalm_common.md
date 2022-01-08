@@ -34,7 +34,7 @@ These parameters are common to all Napalm Services.
     
 - `Connection Name`: If changed to something other than `default`, the
   connection will be cached as a separate connection to that same device.
-  This allows for multiple simultaneous \"named\" connections to a single
+  This allows for multiple simultaneous "named" connections to a single
   device, as in this example:
     
 - `Close Connection`: once the service is done running, the current

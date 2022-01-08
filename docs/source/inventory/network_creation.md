@@ -8,7 +8,7 @@ important to device security and automation accuracy.
 
 ## From the UI Manually (One at a Time)
 
-The user can manually create each Device and Link in the inventory by
+Users can manually create each Device and Link in the inventory by
 filling a form in `Inventory / Devices` and `Inventory / Links` using the
  `+` button in the top menu.
 
@@ -26,8 +26,8 @@ filling a form in `Inventory / Devices` and `Inventory / Links` using the
 ## From an Excel Spreadsheet
 
 The inventory can be imported-from and exported-to an Excel spreadsheet in
-the `Inventory` section of the Administration (Admin) panel. The user can
-find examples of such spreadsheets in `files/spreadsheets`. It is important
+the `Inventory` section of the Administration (Admin) panel. 
+Examples of such spreadsheets can be found in `files/spreadsheets`. It is important
 that the proper column heading names match the examples in order to import
 properly.
 
@@ -35,13 +35,13 @@ properly.
 
 !!! note
 
-    If you import an object that has already been created, its properties
-    will be updated.
+    Importing an object that has already been created updates its properties.
 
 ## Querying an external API
 
 Another way to create the network topology is to query an external API. The
 following are supported:
+
 - OpenNMS
 - Netbox
 - LibreNMS
@@ -55,8 +55,8 @@ corresponding section of the form.
 
 ## Externally driving the Tool's own REST API
 
-The inventory can be created by using an external script or program to call the
-tool's own REST API to add Devices and Links to the inventory. This is 
+Inventory can also be created by using an external script or program to call the
+tool's own REST API to add Devices and Links. This is 
 particularly useful if another system is used to maintain the network source
 of truth.  It can audit and add/delete Devices and Links on demand from the
 tool's inventory. See the documentation section on the REST API for more 

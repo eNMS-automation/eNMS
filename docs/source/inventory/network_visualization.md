@@ -7,8 +7,8 @@ title: Network Visualization
 
 If network data has been created, it can be displayed on a geographical
 map or in a logical view. All devices with longitude and latitude data can be 
-displayed on a map at their exact location and links connecting devices can be 
-drawn. There are two rendering options available for network visualization, 2D
+displayed on a map at their exact location along with links connecting devices.
+There are two rendering options available for network visualization, 2D
 or 3D.  The rendering type is set in the `visualization.json` file.  For more
 information about setting this configuration option please refer to the 
 `Installation` documentation.
@@ -17,27 +17,27 @@ There are several components at the top center of the display that
 can be used to customize what data is shown.  These components are common to 
 all network visualization options.
 
-![Main Controls](../_static/inventory/network_visualization/controls_1.png)
+![Main Controls](/_static/inventory/network_visualization/controls_1.png)
 
-- Dropdown list - Contains all pools containing devices and links, all devices
-and links defined in a selected pool will be displayed
+- Dropdown list - Displays all pools containing devices and links, all devices
+and links defined in a selected pool are displayed
 - Buttons (From left to right)
-	- Edit Pool: Change criteria for what entities will be included in the
+    - Edit Pool: Change criteria for what entities will be included in the
 defined pool.  Refer to `Inventory / Pools` section of documentation for 
 information on pool creation.
-	- Device Filtering: Opens a dialog to provide criteria to select a subset
+    - Device Filtering: Opens a dialog to provide criteria to select a subset
 of pool devices currently displayed.  Enter criteria, close dialog and hit 
 Refresh button to update display
-	- Link Filtering: Opens a dialog to provide criteria to select a subset of
+    - Link Filtering: Opens a dialog to provide criteria to select a subset of
 links currently displayed.  Enter criteria, close dialog and hit Refresh button
 to update display
-	- Refresh: This button is used to refresh the display.  This button must be
-clicked to apply any filtering that has been configured
-	- Clear Search - Removes all filtering criteria and refreshes the map
-	- Run Service: Opens a dialog box to select and run a service on all devices
+    - Refresh: This button is used to refresh the display and is required 
+      to apply any filtering changes
+    - Clear Search - Removes all filtering criteria and refreshes the map
+    - Run Service: Opens a dialog box to select and run a service on all devices
 currently displayed on the map
-	- Previous View: View previously selected pool/filtering data on map
-	- Next View: View pool/filtering data on map that is more recent than data
+    - Previous View: View previously selected pool/filtering data on map
+    - Next View: View pool/filtering data on map that is more recent than data
 currently being displayed. This option is only available if you have clicked the
 Previous View button.
 
@@ -47,14 +47,11 @@ Previous View button.
 
 ### 3D Visualization
 
-When the 3D rendering option is set, there will be several icons in the upper 
+When the 3D rendering option is set, additional icons in the upper 
 right corner of the Geographic View display.  These control how the network data
 is displayed.
 
-In the upper right corner of the Geographic View display are icons that affect 
-how the data is displayed.
-
-![Secondary Controls](../_static/inventory/network_visualization/controls_2.png)
+![Secondary Controls](/_static/inventory/network_visualization/controls_2.png)
 
 From left to right:
 
@@ -77,12 +74,12 @@ to exit full-screen mode.
 
 #### 3D Visualization - 3D Mode - Satellite Imagery
 
-![3D Network Map](../_static/inventory/network_visualization/network_view_3d.png)
+![3D Network Map](/_static/inventory/network_visualization/network_view_3d.png)
 
 
 ### Network Data 
 
-Network devices are drawn on the map based on the image defined in the `Icon` 
+Network device images are controlled by the `Icon` 
 property of a device. The image type can be set by editing a device in 
 `Inventory / Devices` or by clicking on a device in the display to open the 
 `Edit Device` dialog and setting the `Icon` property to the desired image type. 
@@ -105,7 +102,7 @@ multiple devices are at the same location.  All colocated devices can be viewed
 by clicking on this image on the map. A dialog will open showing all devices 
 that are at the selected location.
 
-![Colcated Devices](../_static/inventory/network_visualization/
+![Colcated Devices](/_static/inventory/network_visualization/
 colocated_devices.png)
 
 
@@ -125,7 +122,7 @@ Marker`. The options are:
 
 - Image - (**Default**) The images associated with the `Icon` property of a
 device.  See Network Data section above for how to set this property.
-- Circle - A small blue dot.
+- Circle - A small blue dot. Recommended for large inventory.
 - Circle Marker - A circle with a bold border and translucent fill centered on
 the location of the device. 
 
@@ -134,7 +131,7 @@ the location of the device.
 
 There are two types of tiles available in 2D mode:
 
-- Open Street Map - The imagery used to draw the map are from the Open Street
+- Open Street Map - The imagery used to draw the map is from the Open Street
 Map project
 - Google Maps - The imagery is from Google Maps
 
@@ -144,15 +141,15 @@ then click the desired option.
 
 #### Clustered View
 
-In this view services will be grouped together on the map based on their 
-proximity to each other. To access the clustered view you can right-click on the
-map and select `Type of View > Clustered`. Zooming in or out will cause 
-recalculation of clusters. Hovering over a cluster indicator will show which 
+In this view services are be grouped together on the map based on their 
+proximity to each other. To access the clustered view, right-click on the
+map and select `Type of View > Clustered`. Zooming in or out triggers a 
+recalculation of clusters. Hovering over a cluster indicator shows which 
 locations are included in the cluster by drawing a polygon connecting the outer
-sites of those included in cluster total. The below image uses the Circle Marker
+sites of those included in cluster total. The image below uses the Circle Marker
 to indicate device locations on the Open Street Map tile layer.
 
-![Colcated Devices](../_static/inventory/network_visualization/
+![Colcated Devices](/_static/inventory/network_visualization/
 enms_clustered_view.png)
 
 
@@ -165,10 +162,10 @@ The logical view of the network is a representation of the devices and links for
 the selected pool in 3D space. Use this view if GPS data is not available for 
 the network devices.  This view is also useful for viewing network data that is 
 colocated at the same site (i.e. a datacenter). Clicking a device in the display
-will zoom in on that device and open the `Edit Device` dialog.  Clicking a link 
-in the display will open the `Edit Link` dialog.  Both edit dialogs can be used 
+zooms in on that device and opens the `Edit Device` dialog.  Clicking a link 
+in the display opens the `Edit Link` dialog.  Both edit dialogs can be used 
 to view/edit data for the selected object type. If there are multiple links 
-associated with the line clicked, the dialog that opens will display all links 
+associated with the line clicked, the dialog that opens displays all links 
 between two devices.
 
 ![Logical View](/_static/inventory/network_visualization/logical_view.png)

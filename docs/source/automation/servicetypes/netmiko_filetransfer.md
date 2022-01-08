@@ -6,9 +6,9 @@ time for SCP file transfer.
 
 Configuration parameters for creating this service instance:
 
--   All Common Netmiko Parameters (see above)
+- All [Netmiko Service Common Parameters](netmiko_common.md)
 -   `Source file` Source absolute path and filename of the file to send
--   `Destination file` Destination file; absolute path and filename to
+-   `Destination file` Destination absolute path and filename to
     send the file to
 -   `File system` Mounted filesystem for storage on the default. For
     example, disk1:

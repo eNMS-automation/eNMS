@@ -3,6 +3,7 @@ from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from importlib.util import module_from_spec, spec_from_file_location
+from traceback import format_exc
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
 from wtforms.validators import InputRequired
@@ -272,6 +273,26 @@ class FormFactory:
         for file in (vs.path / "eNMS" / "forms").glob("**/*.py"):
             spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
             spec.loader.exec_module(module_from_spec(spec))
+
+    def register_parameterized_form(self, service_id):
+        global_variables = {"form": None, "BaseForm": BaseForm, **vs.form_context}
+        indented_form = "\n".join(
+            " " * 4 + line
+            for line in (
+                f"form_type = HiddenField(default='initial-{service_id}')",
+                *db.fetch("service", id=service_id).parameterized_form.splitlines(),
+            )
+        )
+        full_form = f"class Form(BaseForm):\n{indented_form}\nform = Form"
+        try:
+            exec(full_form, global_variables)
+            return global_variables["form"]
+        except Exception:
+            return (
+                "<div style='margin: 8px'>The parameterized form could not be  "
+                "loaded because of the following error:"
+                f"<br><pre>{format_exc()}</pre></div>"
+            )
 
 
 class AddServiceForm(BaseForm):

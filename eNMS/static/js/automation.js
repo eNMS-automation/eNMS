@@ -584,7 +584,7 @@ export const runService = function ({ id, type, parametrization }) {
       checkRbac: false,
       callback: function () {
         call({
-          url: `/get_form_properties/initial-${id}`,
+          url: `/get_form_properties/${id}`,
           callback: function (properties) {
             formProperties[`initial-${id}`] = properties;
             configureForm(`initial-${id}`, id);

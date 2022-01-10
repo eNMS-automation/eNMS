@@ -220,12 +220,13 @@ function openDeletionPanel() {
   } else if (nodeSelection == 1 || (!nodeSelection && edgeSelection == 1)) {
     deleteSelection();
   } else {
+    const edgeType = type == "site" ? "link" : "edge";
     showConfirmationPanel({
       id: "builder_deletion",
       title: `Deletion from ${type}`,
       message: `Are you sure you want to permanently remove the current selection
       (<b>${nodeSelection} node${nodeSelection > 1 ? "s" : ""}
-      and ${edgeSelection} link${edgeSelection > 1 ? "s" : ""}</b>) ?`,
+      and ${edgeSelection} ${edgeType}${edgeSelection > 1 ? "s" : ""}</b>) ?`,
       confirmButton: "Delete",
       onConfirm: deleteSelection,
     });

@@ -29,7 +29,7 @@ from werkzeug.exceptions import Forbidden, NotFound
 from eNMS import controller
 from eNMS.database import db
 from eNMS.environment import env
-from eNMS.forms import BaseForm
+from eNMS.forms import form_factory
 from eNMS.rest_api import RestApi
 from eNMS.variables import vs
 
@@ -296,23 +296,9 @@ class Server(Flask):
         @blueprint.route("/parameterized_form/<service_id>")
         @self.process_requests
         def parameterized_form(service_id):
-            global_variables = {"form": None, "BaseForm": BaseForm, **vs.form_context}
-            indented_form = "\n".join(
-                " " * 4 + line
-                for line in (
-                    f"form_type = HiddenField(default='initial-{service_id}')",
-                    *db.fetch("service", id=service_id).parameterized_form.splitlines(),
-                )
-            )
-            full_form = f"class Form(BaseForm):\n{indented_form}\nform = Form"
-            try:
-                exec(full_form, global_variables)
-            except Exception:
-                return (
-                    "<div style='margin: 8px'>The parameterized form could not be  "
-                    "loaded because of the following error:"
-                    f"<br><pre>{format_exc()}</pre></div>"
-                )
+            result = form_factory.register_parameterized_form(service_id)
+            if isinstance(result, str):
+                return result
             return render_template(
                 "forms/base.html",
                 **{
@@ -320,7 +306,7 @@ class Server(Flask):
                     "action": "eNMS.automation.submitInitialForm",
                     "button_label": "Run Service",
                     "button_class": "primary",
-                    "form": global_variables["form"](request.form),
+                    "form": result(request.form),
                 },
             )
 
@@ -386,6 +372,8 @@ class Server(Flask):
             if request.json:
                 kwargs = request.json
             elif form_type:
+                if form_type.startswith("initial-") and form_type not in vs.form_class:
+                    form_factory.register_parameterized_form(form_type.split("-")[1])
                 form = vs.form_class[form_type](request.form)
                 if not form.validate_on_submit():
                     return jsonify({"invalid_form": True, "errors": form.errors})

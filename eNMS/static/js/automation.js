@@ -809,10 +809,24 @@ function showImportServicesPanel() {
           const element = document.getElementById(`dropzone-services`);
           new Dropzone(element, {
             url: "/import_services",
+            timeout: 180000,
+            error: function(file, message) {
+                notify(`File ${file.name} was not uploaded - ${message}`, "error", 5, true);
+                if (file.previewElement) {
+                    return file.previewElement.classList.add("dz-error");
+                }
+            },
+            success: function(file, message, e) {
+                notify(`File ${file.name} uploaded with response ${message}`, "success", 5, true);
+                if (file.previewElement) {
+                    return file.previewElement.classList.add("dz-success");
+                }
+            },
             accept: function (file, done) {
-              if (!file.name.includes(".tgz")) {
-                notify("The file must be a .tgz archive", "error", 5);
+              if (!file.name.toLowerCase().endsWith(".tgz")) {
+                done("The file must be a .tgz archive");
               } else {
+                notify(`File ${file.name} accepted for upload.`, "success", 5, true);
                 done();
               }
             },

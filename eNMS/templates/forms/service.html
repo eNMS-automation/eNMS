@@ -70,7 +70,7 @@
             <a
               class="doc-link"
               style="position: absolute; top: 10px; right: 10px;"
-              href="automation/services.html#main-parameters"
+              href="automation/services/#main-parameters"
               target="_blank"
               ><i
                 class="glyphicon glyphicon-info-sign fa-2x"
@@ -243,7 +243,7 @@
             <a
               class="doc-link"
               style="position: absolute; top: 10px; right: 10px;"
-              href="automation/services.html#workflow-parameters"
+              href="automation/services/#workflow-parameters"
               target="_blank"
               ><i
                 class="glyphicon glyphicon-info-sign fa-2x"
@@ -300,7 +300,7 @@
             <a
               class="doc-link"
               style="position: absolute; top: 10px; right: 10px;"
-              href="automation/services.html#workflow-parameters"
+              href="automation/services/#workflow-parameters"
               target="_blank"
               ><i
                 class="glyphicon glyphicon-info-sign fa-2x"
@@ -365,7 +365,7 @@
             <a
               class="doc-link"
               style="position: absolute; top: 10px; right: 10px;"
-              href="automation/services.html#section-specific"
+              href="automation/services/#section-specific"
               target="_blank"
               ><i
                 class="glyphicon glyphicon-info-sign fa-2x"
@@ -393,7 +393,10 @@
                 <div id="{{ form_type }}-{{ field_name }}-div" class="add-id">
                   {% set label %} {% if form[field_name].render_kw and "help" in
                   form[field_name].render_kw %}
-                  <label help="{{ form[field_name].render_kw['help'] }}">
+                  <label
+                    help="{{ form[field_name].render_kw['help'] }}"
+                    property="{{ field_name }}"
+                  >
                     {{ form[field_name].label }}
                   </label>
                   {% else %}
@@ -449,7 +452,7 @@
             <a
               class="doc-link"
               style="position: absolute; top: 10px; right: 10px;"
-              href="automation/services.html#devices"
+              href="automation/services/#devices"
               target="_blank"
               ><i
                 class="glyphicon glyphicon-info-sign fa-2x"
@@ -533,7 +536,7 @@
             <a
               class="doc-link"
               style="position: absolute; top: 10px; right: 10px;"
-              href="automation/services.html#iteration"
+              href="automation/services/#iteration"
               target="_blank"
               ><i
                 class="glyphicon glyphicon-info-sign fa-2x"
@@ -593,7 +596,7 @@
             <a
               class="doc-link"
               style="position: absolute; top: 10px; right: 10px;"
-              href="automation/services.html#python-postprocessing"
+              href="automation/services/#conversion-and-postprocessing"
               target="_blank"
               ><i
                 class="glyphicon glyphicon-info-sign fa-2x"
@@ -639,7 +642,7 @@
             <a
               class="doc-link"
               style="position: absolute; top: 10px; right: 10px;"
-              href="automation/services.html#validation"
+              href="automation/services/#validation"
               target="_blank"
               ><i
                 class="glyphicon glyphicon-info-sign fa-2x"
@@ -731,7 +734,7 @@
             <a
               class="doc-link"
               style="position: absolute; top: 10px; right: 10px;"
-              href="automation/services.html#notification"
+              href="automation/services/#notifications"
               target="_blank"
               ><i
                 class="glyphicon glyphicon-info-sign fa-2x"

@@ -320,7 +320,7 @@ exported from Unix and include:
     Importing the `files/migrations/examples` migration files requires that
     the `FERNET_KEY` environment variable be unset (not defined) and that the
     `hash_user_passwords` parameter in `setup/settings.json` be set to `True`
-    because of how the sample passwords are store in the examples. The
+    because of how the sample passwords are stored in the examples. The
     `files/migrations/default` migration files that most production
     deployments start with do not contain passwords, so loading them does not
     impose the same requirements.

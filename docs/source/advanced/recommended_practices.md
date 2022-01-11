@@ -110,7 +110,7 @@ key within an existing dictionary prevents unintentional data overwrites.
 
 ### Postprocessing Tips 
 
-The Postprocessing Mode is determines whether the script is:
+The Postprocessing Mode determines whether the script is:
 
 - Always run
 - Run on success only 

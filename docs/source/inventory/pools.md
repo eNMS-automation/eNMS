@@ -97,7 +97,7 @@ filtering or advanced search criteria:
 This pool enforces the intersection of the following conditions:
 
 -   name: `sto` - Match is Inclusion; all devices whose name includes
-    the `sto`.  `Boston` and `Houston` both match.
+    `sto`.  `Boston` and `Houston` both match.
 -   subtype: `GATEWAY|PEER` - Match is Regular Expression; all devices having
     subtype `GATEWAY` or `PEER` will be selected
 -   vendor: `Cisco` - Match is Equality; all devices whose vendor is `Cisco`

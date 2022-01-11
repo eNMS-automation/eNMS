@@ -155,12 +155,6 @@ and match the full (`show ip route`) or abbreviated (`sh ip r`) command text.
 cisco_ios_show_ip_route.textfsm, .*, cisco_ios, sh[[ow]] ip r[[oute]]
 ``` 
 
-### Future support - Scrapli with TextFSM
-
-While not supported today, the Scrapli Commands Service could support TextFSM in
-the future.
-
-
 ## NETCONF 
 
 There are two different options if the target device supports the NETCONF 
@@ -168,8 +162,8 @@ protocol - using the NETCONF Service (ncclient) or the Scrapli NETCONF Service.
 
 ### NETCONF Service (ncclient)
 
-Since NETCONF is XML based, retrieving configuration data using NETCONF will be 
-can easily be converted to structured data by converting the response to a XML 
+Since NETCONF is XML based, retrieving configuration data using NETCONF can
+easily be converted to structured data by converting the response to an XML 
 dictionary:
 
 ![Netconf Get Full Config](../_static/automation/builtin_service_types/netconf_getfullconfig.png)
@@ -269,17 +263,17 @@ This can use any parsing technique - including functions like `str.split()` or
 #              Name       State       State               Type (byte)    (Kbps)
 #--------------------------------------------------------------------------------
 #    interface_name       down        down               ARPA  1500      10000000
-results['initial'] = results['result']
-headers = ['name', 'intf state', 'linep state']
-results['result'] = {
-  line.split()[0]: {
-    headers[idx]: value
-  for idx, value in enumerate(line.strip().split(maxsplit=4)[0:3])
-  }  for line in results['initial'].strip().splitlines()
-  if "down" in line  # filter to look for 'down' or 'admin-down' lines
+results["initial"] = results["result"]
+headers = ["name", "intf state", "linep state"]
+results["result"] = {
+    line.split()[0]: {
+        headers[idx]: value
+        for idx, value in enumerate(line.strip().split(maxsplit=4)[0:3])
+    }
+    for line in results["initial"].strip().splitlines()
+    if "down" in line  # filter to look for 'down' or 'admin-down' lines
 }
 ```
-
 
 ## More information: TextFSM 
 
@@ -338,10 +332,10 @@ templates to parse command output to produce structured data.
 ### Example TTP 
 
 Refer to the TTP documentation and the Network-to-Code examples for information 
-on how to build a command.
+on how to build a command parser.
 
 When a template does not exist for your device/operating system/command, you can write
-one.   This is an example TextFSM template for the Junos `show system process summary`
+one.   This is an example TTP template for the Junos `show system process summary`
 Junos - show system process summary
 
 ![Example TTP template](../_static/advanced/service_selection/ttp_example.png)

@@ -13,7 +13,7 @@ Initiate execution of a service passing in values to control its operation.
  -   `pools` (default: `[]`) Same as devices but for pools.
  -   `ip_addresses` (default: `[]`) Same as devices but using ip_addresses.
  -   `payload` (default: `{}`) Payload passed into the service.
- -   `async` (default: `false`) JSON boolean.
+ -   `async` (default: `false`) boolean.
      -   `false` eNMS runs the service and responds to your request
          when the service completes. The response contains
          the result of the service, but the connection might time out
@@ -37,9 +37,10 @@ Initiate execution of a service passing in values to control its operation.
 ```
 
 !!! Note
-    - If no value is provided for `devices` the service runs with
-    the devices configured on the service, even if you provide a value
-    in `pools` or `ip_address`.
+    - All targets are taken in aggregate; either those defined on the service
+    or those passed to run_service endpoint are used. If any of `devices`,
+    `pools`, or `ip_addresses` are specified no targets are used from the
+    service.
     - For Postman, use the type `raw` for entering key/value pairs into
     the body. Body must also be formatted as application/JSON.
     - Extra form data passed in the body of the POST is

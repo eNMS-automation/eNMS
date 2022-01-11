@@ -1,16 +1,16 @@
 <div class="modal-body">
   <div>
-    The <b>skip query</b> parameter allows you to define python expression to determine
-    if the service should be skipped.
+    The <b>skip query</b> parameter is a python expression that skips the
+    service if the boolean result is True.  Skip is evaluated on a per
+    device basis.
     <p></p>
     <p>
-      This expression is evaluated to determine what to SKIP - if you happen to use an
-      expression that identifies what you WANT - then you will likely have to negate
-      that expression.
+      This expression is evaluated to determine what to SKIP.  If the
+      expression identifies what to RUN, then negate the result.
     </p>
     <p>
       If a service is skipped, the <b>Skip Value</b> determines the workflow result
-      (success = True, False). The default value is True.
+      (success = True, False). The default value is True (success on skip).
     </p>
     <p>
       <a

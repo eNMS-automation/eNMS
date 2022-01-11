@@ -1,16 +1,19 @@
 # Create or Update an Instance
 Used to create a new instance or modify an existing instance.
 
-**Method:** PUT (update) or Post (create) <br />
+**Method:** POST (update or create) <br />
 **Address:** /rest/instance/`instance_type`<br/>
 **Parameters:** None <br />
-**Payload:** Pending
+**Payload:** JSON representation of the dictionary data needed to create the 
+  object instance and depends on the object type.
 
 #
-# Example
+# Examples
 
 Schedule a task from the REST API: This payload will create the task `test`or
-update if it already exists.
+update it if it already exists.
+
+POST /rest/instance/task
 ```json
 {
   "name": "test",
@@ -23,3 +26,14 @@ update if it already exists.
 !!! Note
      This task schedules the service `netmiko_check_vrf_test` to run at
     `20/06/2019 23:15:15` on the device whose name is `Baltimore`.
+
+Update a device called DALLAS and change its IP address:
+
+POST /rest/instance/device
+```json
+{
+  "name": "DALLAS",
+  "ip_address": "10.1.1.1",
+}
+```
+

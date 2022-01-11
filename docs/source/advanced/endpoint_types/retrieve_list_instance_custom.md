@@ -26,7 +26,7 @@ interface on each table.
           the desired search criteria as the value
         - `<columns-name>_filter:<filter_type>`: Use the column name with 
           '_filter' appended as the key.  The value specifies one of the 
-          following filter types `regex`, `inclusion`, `equality`.
+          following filter types `regex`, `inclusion`, `equality`, `empty`.
         - Use multiple key key_filter pairs to filter on more than one
           column.
 
@@ -64,7 +64,7 @@ interface on each table.
 }
 ```
 !!! Note
-     Special columns “matches” is derived from a RegEX match object which returns the line where a regex was found
+     Special columns “matches” is derived from a regex match object which returns the line where a regex was found
 
 #
 ## Search Links

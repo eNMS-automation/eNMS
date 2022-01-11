@@ -3,7 +3,7 @@
 Services provide the smallest unit of automation in eNMS. Each service
 type provides unique functionality that is easily configured to perform
 complex operations in the network. Examples: remote command execution,
-ReST API calls, Ansible playbook execution, and many more.
+REST API calls, Ansible playbook execution, and many more.
 
 Services can be powerful on their own, (e.g. ping all devices in the
 network and send a status email). They can also be combined within
@@ -739,7 +739,7 @@ are made available to the user.
 
     The payload (including all set_var variables) is rendered as JSON and saved
     in the database as part of the result.  JSON does not support recursive
-    data structures, i.e. data structures with loops.  Saveing a reference
+    data structures, i.e. data structures with loops.  Saving a reference
     within the payload (or set_var variable) to a value from a higher level
     in the payload will result in a `Recursion Error`.  For example,
     `payload['mydict']['another_dict'] = payload` or

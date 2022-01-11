@@ -4,7 +4,7 @@ title: Debugging
 
 # Debugging
 
-The eNMS application provides a means for the `admin` user to execute
+The eNMS application provides a means for any admin user to execute
 Python code in the back end, from the web interface. 
 
 On a Windows device this

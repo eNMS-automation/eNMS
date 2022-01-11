@@ -17,7 +17,7 @@ There are several components at the top center of the display that
 can be used to customize what data is shown.  These components are common to 
 all network visualization options.
 
-![Main Controls](/_static/inventory/network_visualization/controls_1.png)
+![Main Controls](../_static/inventory/network_visualization/controls_1.png)
 
 - Dropdown list - Displays all pools containing devices and links, all devices
 and links defined in a selected pool are displayed
@@ -47,11 +47,11 @@ Previous View button.
 
 ### 3D Visualization
 
-When the 3D rendering option is set, additional icons in the upper 
-right corner of the Geographic View display.  These control how the network data
+When the 3D rendering option is set, additional icons appear in the upper 
+right corner of the Geographic View panel.  These control how the network data
 is displayed.
 
-![Secondary Controls](/_static/inventory/network_visualization/controls_2.png)
+![Secondary Controls](../_static/inventory/network_visualization/controls_2.png)
 
 From left to right:
 
@@ -74,7 +74,7 @@ to exit full-screen mode.
 
 #### 3D Visualization - 3D Mode - Satellite Imagery
 
-![3D Network Map](/_static/inventory/network_visualization/network_view_3d.png)
+![3D Network Map](../_static/inventory/network_visualization/network_view_3d.png)
 
 
 ### Network Data 
@@ -96,14 +96,12 @@ value for green level, and BB is hex value for blue level.
 
 The geographical view displays all devices at their GPS coordinates. If
 several devices are colocated (i.e. in the same building), they are grouped
-together on the map. The ![Colocated Devices Image](/_static/inventory/
-network_visualization/colo_devices_image.png) image is used to identify when 
-multiple devices are at the same location.  All colocated devices can be viewed 
-by clicking on this image on the map. A dialog will open showing all devices 
-that are at the selected location.
+together on the map. The ![Colocated Devices Image](../_static/inventory/network_visualization/colo_devices_image.png)
+image is used to identify when multiple devices are at the same location.
+All colocated devices can be viewed by clicking on this image on the map.
+A dialog will open showing all devices that are at the selected location.
 
-![Colcated Devices](/_static/inventory/network_visualization/
-colocated_devices.png)
+![Colocated Devices](../_static/inventory/network_visualization/colocated_devices.png)
 
 
 ### 2D Visualization
@@ -141,16 +139,15 @@ then click the desired option.
 
 #### Clustered View
 
-In this view services are be grouped together on the map based on their 
+In this view services are grouped together on the map based on their 
 proximity to each other. To access the clustered view, right-click on the
 map and select `Type of View > Clustered`. Zooming in or out triggers a 
 recalculation of clusters. Hovering over a cluster indicator shows which 
 locations are included in the cluster by drawing a polygon connecting the outer
-sites of those included in cluster total. The image below uses the Circle Marker
-to indicate device locations on the Open Street Map tile layer.
+sites of those included in the entire cluster. The image below uses the Circle
+Marker to indicate device locations on the Open Street Map tile layer.
 
-![Colcated Devices](/_static/inventory/network_visualization/
-enms_clustered_view.png)
+![Clustered View](../_static/inventory/network_visualization/clustered_view.png)
 
 
 
@@ -168,4 +165,4 @@ to view/edit data for the selected object type. If there are multiple links
 associated with the line clicked, the dialog that opens displays all links 
 between two devices.
 
-![Logical View](/_static/inventory/network_visualization/logical_view.png)
+![Logical View](../_static/inventory/network_visualization/logical_view.png)

@@ -4,46 +4,49 @@
 Table of users. Depending on application configuration, the `Groups` column can be used to enhance Role Based Access 
 (RBAC).
 
-**Username**: Identifies the user within the application
+- **Username**: Identifies the user within the application
 
-**Description**: Display-only information regarding the user
+- **Description**: Display-only information regarding the user
 
-**Groups**: A comma separated list of arbitrary names available for matching
-a Pool.
+- **Groups**: A comma separated list of arbitrary names available for matching
+  a Pool.
 
-RBAC manages collections of users using `Pools`.  User membership in a pool is
-based on filters and available for any User property, including `Groups`
-(See [Pools](../inventory/pools.md) for more information).
+    - RBAC manages collections of users using `Pools`.  User membership in a pool is
+      based on filters and available for any User property, including `Groups`
+      (See [Pools](../inventory/pools.md) for more information).
 
-Pools are also used to determine levels of `Access` and available `Credentials`.
+    - Pools are also used to determine levels of `Access` and available `Credentials`.
 
-When a user creates a service, that user's `Groups` supply the default `Groups`
-assigned to the service; meaning users in their group also get access. 
+    - When a user creates a service, that user's `Groups` supply the default `Groups`
+      assigned to the service; meaning users in their group also get access. 
 
-**Email Address**: The user's email address
+- **Email Address**: The user's email address
 
-**Pools**: Clicking this provides a table of all the `Pools` in which this user
-is a member.
+- **Pools**: Clicking this provides a table of all the `Pools` in which this user
+  is a member.
 
 
 ## Servers
 This feature is under development as part of a clustered solution.
 
 ## Access
-An `Access` defines the access type for a `Pool` of users to:
+An `Access` defines the access type for an object, such as a `Pool` of users, links,
+or services to:
 
 - Pools of devices
 - User interface menus, pages, and buttons
-- ReST endpoints (both internal and external)
+- HTTP endpoints, including REST
 
-**Name**: The name of the `Access`
+Configurable parameters for an Access Object:
 
-**Description**: Additional documentation on the purpose of the `Access` 
+- **Name**: The name of the `Access`
+
+- **Description**: Additional documentation on the purpose of the `Access` 
 
 ![Access](../_static/advanced/administration/access.png)
 
-**User Pools**: One or more `Pool`s defining the users for which this `Access`
-applies.
+- **User Pools**: One or more `Pool`s defining the users for which this `Access`
+  applies.
 
 **Model Access**
 
@@ -62,7 +65,7 @@ but not a device.
 
 **Endpoint Access**
 
-Endpoints refer to both the public ReST API and internal endpoints that
+Endpoints refer to both the public REST API and internal endpoints that
 implement specific pages or operations.  Endpoints are controlled separately
 based on their HTTP request type:
 

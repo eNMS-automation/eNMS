@@ -42,7 +42,7 @@ from eNMS.variables import vs
 class Runner:
     def __init__(self, run, **kwargs):
         self.parameterized_run = False
-        self.is_main_run = False
+        self.is_main_run = kwargs.pop("is_main_run", False)
         self.iteration_run = False
         self.workflow = None
         self.workflow_run_method = None
@@ -51,7 +51,7 @@ class Runner:
         self.creator = self.run.creator
         self.start_services = []
         self.parent_runtime = kwargs.get("parent_runtime")
-        self.runtime = vs.get_time()
+        self.runtime = self.parent_runtime if self.is_main_run else vs.get_time()
         self.has_result = False
         vs.run_instances[self.runtime] = self
         for key, value in kwargs.items():
@@ -109,13 +109,6 @@ class Runner:
             return self.__dict__.get(property, [])
         else:
             return getattr(self.main_run.placeholder or self.service, property)
-
-    def result(self, device=None, main=False):
-        for result in self.results:
-            if result.device_name == device:
-                return result
-        if main and len(self.results) == 1:
-            return self.results[0]
 
     @property
     def stop(self):

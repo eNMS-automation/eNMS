@@ -15,6 +15,7 @@ Version 4.2.0
 - Set trigger variable to "Regular Run" or "Parameterized Run" when service is triggered from the UI instead of "UI".
 - Add SSH Proxy mechanism (multiple jump server in gateways property, gateway device subtype, priority
   tie-break mechanism)
+- Consider runtime limiting user / all toggle mechanism in the restart service window.
 - Remove pytest, coverage, and travis dependencies.
 
 Tests:
@@ -24,6 +25,7 @@ Tests:
 
 Migration:
 - Rename endpoint "delete_workflow_selection" to "delete_builder_selection"
+- Update all access with new GET / POST endpoints
 - Redis config in settings.json
 
 Documentation update:

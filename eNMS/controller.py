@@ -525,10 +525,12 @@ class Controller:
     def get_result(self, id):
         return db.fetch("result", id=id).result
 
-    def get_runtimes(self, id):
-        results = db.fetch("result", allow_none=True, all_matches=True, service_id=id)
+    def get_runtimes(self, id, display=None):
+        kwargs = {"allow_none": True, "all_matches": True, "service_id": id}
+        if display == "user":
+            kwargs["creator"] = current_user.name
+        results, runs = db.fetch("result", **kwargs), db.fetch("run", **kwargs)
         results_runtimes = set((r.parent_runtime, r.run.name) for r in results)
-        runs = db.fetch("run", allow_none=True, all_matches=True, service_id=id)
         run_runtimes = set((run.runtime, run.name) for run in runs)
         return sorted(results_runtimes | run_runtimes, reverse=True)
 

@@ -222,7 +222,7 @@ class Result(AbstractBase):
     runtime = db.Column(db.TinyString)
     duration = db.Column(db.TinyString)
     result = db.Column(db.Dict)
-    user = db.Column(db.SmallString)
+    creator = db.Column(db.SmallString)
     run_id = db.Column(Integer, ForeignKey("run.id", ondelete="cascade"))
     run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
     parent_runtime = db.Column(db.TinyString)

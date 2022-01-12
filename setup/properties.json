@@ -732,7 +732,7 @@
         "search": "text"
       },
       {
-        "data": "user",
+        "data": "creator",
         "title": "User",
         "search": "text",
         "visible": false

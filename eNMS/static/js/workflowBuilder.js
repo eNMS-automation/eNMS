@@ -69,10 +69,10 @@ export let currentRuntime;
 
 let currentRun;
 let graph;
-let runtimeDisplay;
 let currentPlaceholder;
 let placeholder;
 let isSuperworkflow;
+let runtimeDisplay;
 let runtimeDisplayFlip;
 let startId;
 let endId;
@@ -520,6 +520,7 @@ function showRestartWorkflowPanel() {
       );
       call({
         url: `/get_runtimes/${workflow.id}`,
+        data: { display: runtimeDisplay },
         callback: function (runtimes) {
           const id = `#restart_workflow-restart_runtime-${workflow.id}`;
           let currentIndex = 0;

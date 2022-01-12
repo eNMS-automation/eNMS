@@ -180,12 +180,12 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: ['Site 8: Import with Add Connected Nodes and Links', Duplicate me 2, L3
-      Site, Subsite 2, 'Site 1: Top-level Devices and Links', 'Site 3: Creation, Edit
-      and Deletion', 'Site 6: Subsubsite and Subsubsubsite', Subsite 1, L2 Site, 'Site
-      4: Duplication of Devices, Subsites and Top-level Sites', 'Site 7: Automatic
-      Layout of Large Graph', 'Site 2: Subsite and Teleport Mechanism', L1 Site, 'Site
-      5: Loopback and Parallel Links', 'Site 9: Large Network Display']
+  sites: [Subsite 1, 'Site 6: Subsubsite and Subsubsubsite', 'Site 9: Large Network
+      Display', 'Site 4: Duplication of Devices, Subsites and Top-level Sites', 'Site
+      2: Subsite and Teleport Mechanism', L1 Site, Duplicate me 2, L3 Site, 'Site
+      3: Creation, Edit and Deletion', L2 Site, 'Site 8: Import with Add Connected
+      Nodes and Links', 'Site 5: Loopback and Parallel Links', Subsite 2, 'Site 7:
+      Automatic Layout of Large Graph', 'Site 1: Top-level Devices and Links']
   target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
@@ -363,8 +363,8 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: ['[SxS Service Targets with Run Once + Skip] Run Once with Pool',
-    Scalability Test (large workflow)]
+  target_services: [Scalability Test (large workflow), '[SxS Service Targets with
+      Run Once + Skip] Run Once with Pool']
   tasks: []
   type: pool
   user_description: ''
@@ -1296,8 +1296,8 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: [Scalability Test (large workflow), '[Operational Data Backup (admin)]
-      Retrieve Operational Data', Parameterized Superworkflow Run]
+  target_services: ['[Operational Data Backup (admin)] Retrieve Operational Data',
+    Scalability Test (large workflow), Parameterized Superworkflow Run]
   tasks: []
   type: pool
   user_description: ''
@@ -3456,12 +3456,12 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: ['Site 8: Import with Add Connected Nodes and Links', Duplicate me 2, L3
-      Site, Subsite 2, 'Site 1: Top-level Devices and Links', 'Site 3: Creation, Edit
-      and Deletion', 'Site 6: Subsubsite and Subsubsubsite', Subsite 1, L2 Site, 'Site
-      4: Duplication of Devices, Subsites and Top-level Sites', 'Site 7: Automatic
-      Layout of Large Graph', 'Site 2: Subsite and Teleport Mechanism', L1 Site, 'Site
-      5: Loopback and Parallel Links', 'Site 9: Large Network Display']
+  sites: [Subsite 1, 'Site 6: Subsubsite and Subsubsubsite', 'Site 9: Large Network
+      Display', 'Site 4: Duplication of Devices, Subsites and Top-level Sites', 'Site
+      2: Subsite and Teleport Mechanism', L1 Site, Duplicate me 2, L3 Site, 'Site
+      3: Creation, Edit and Deletion', L2 Site, 'Site 8: Import with Add Connected
+      Nodes and Links', 'Site 5: Loopback and Parallel Links', Subsite 2, 'Site 7:
+      Automatic Layout of Large Graph', 'Site 1: Top-level Devices and Links']
   target_services: []
   tasks: []
   type: pool

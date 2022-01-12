@@ -1,11 +1,11 @@
 Uses Napalm to connect to the selected target devices and performs a
-traceroute to a designated target.
+traceroute to another designated target.
 
 ![Napalm Traceroute Service](../../_static/automation/builtin_service_types/napalm_traceroute.png)
 
 Configuration parameters for creating this service instance:
 
-- All Napalm Common Parameters (See Above)
+- All [Napalm Service Common Parameters](napalm_common.md) 
 - `Source IP address` Override the source ip address of the ping
   packet with this provided IP
 - `Timeout` Seconds to wait before declaring timeout

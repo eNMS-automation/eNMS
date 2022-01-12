@@ -372,13 +372,6 @@ class Run(AbstractBase):
     def __repr__(self):
         return f"{self.runtime}: SERVICE '{self.service}'"
 
-    def result(self, device=None, main=False):
-        for result in self.results:
-            if result.device_name == device:
-                return result
-        if main and len(self.results) == 1:
-            return self.results[0]
-
     @property
     def service_properties(self):
         return self.service.base_properties

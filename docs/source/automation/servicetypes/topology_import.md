@@ -36,3 +36,9 @@ LibreNMS
 
 - `Librenms Address` Address for the LibreNMS Server 
 - `Librenms Token` API token for allowing interaction with LibreNMS.
+
+!!! Note
+    This service does not depend on the current device.  Always set
+    the `Step 3: Targets` page `Run Method` to `Run this service once` 
+    to prevent the service from running a duplicate import for each
+    target device.

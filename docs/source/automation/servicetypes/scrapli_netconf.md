@@ -51,13 +51,13 @@ Scrapli Project Documentation can be reviewed
 
 - `Custom Password` - User provided password
 
-- `Start New Connection`: **before the service runs**, the current
+- `Start New Connection`: **Before the service runs**, the current
   cached connection is discarded and a new one is started.
     
 - `Connection Name`: If changed to something other than `default`, the
   connection will be cached as a separate connection to that same device.
-  This allows for multiple simultaneous \"named\" connections to a single
+  This allows for multiple simultaneous "named" connections to a single
   device, as in this example:
     
-- `Close Connection`: once the service is done running, the current
+- `Close Connection`: Once the service is done running, the current
   connection will be closed.

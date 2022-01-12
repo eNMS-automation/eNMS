@@ -1,12 +1,13 @@
 <div class="modal-body">
   <div>
     <p>
-      <b>Priority</b> allows you to determine the order a service runs when two services
-      would otherwise be run at the same time. Formerly this was handled using
-      <b>Prerequisite Edges</b>. The typical use case is when a service has two edges
-      exiting from the right side and both edges are the same type. In this case you may
-      determine the order of the service execution using <b>Priority</b>. The lower
-      number gets run first.
+      <b>Priority</b> determines the order a service runs when multiple services
+      are ready to run. The service with a higher priority number is run first.
+
+      Formerly this was handled using <b>Prerequisite Edges</b>. The typical
+      use case is when a service has two outgoing edges of the same type.
+      In this case you can determine the order of service execution using
+      <b>Priority</b>.
     </p>
   </div>
 </div>

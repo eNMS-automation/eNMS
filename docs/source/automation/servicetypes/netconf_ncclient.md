@@ -1,4 +1,4 @@
-This service sends an XML payload to the selected devices' netconf interface
+This service sends an XML payload to the selected device's netconf interface
 using the ncclient Netconf library, which is based on RFC 6241 Netconf.
 
 ## Netconf Parameters
@@ -24,7 +24,7 @@ is selected:
     - `Candidate`
     - `Startup`
 
-- `Convert XML result to dictionary`: converts the Netconf xml response to dict
+- `Convert XML result to dictionary`: Converts the Netconf xml response to dict
   using `xml2dict`
 
 ### Get Operation
@@ -112,7 +112,7 @@ is selected:
 
 - `XML Filter`: XML content to send as a filter to the device
 
-- `Convert XML result to dictionary`: converts the Netconf xml response to dict
+- `Convert XML result to dictionary`: Converts the Netconf xml response to dict
   using `xml2dict`
 
 ## Connection Parameters
@@ -128,7 +128,7 @@ is selected:
     
 - `Connection Name`: If changed to something other than `default`, the
   connection will be cached as a separate connection to that same device.
-  This allows for multiple simultaneous \"named\" connections to a single
+  This allows for multiple simultaneous "named" connections to a single
   device, as in this example:
     
 - `Close Connection`: once the service is done running, the current

@@ -6,7 +6,7 @@ Uses Napalm to configure a device.
 
 Configuration parameters for creating this service instance:
 
-- All Napalm parameters (see above)
+- All [Napalm Service Common Parameters](napalm_common.md) 
 
 - `Action` There are two types of operations:
 
@@ -23,6 +23,5 @@ Configuration parameters for creating this service instance:
 
     This service is supported by a limited set of devices.
 
-    This Service supports variable substitution (as mentioned in the
-    previous section) in the [content] input field of its
+    This Service supports variable substitution in the `content` input field of its
     configuration form.

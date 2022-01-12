@@ -67,7 +67,7 @@ class RestApi:
             )
             return {"error": error_message}
         else:
-            result = run.result()
+            result = db.fetch("result", runtime=runtime, allow_none=True)
             return {
                 "status": run.status,
                 "result": result.result if result else "No results yet.",

@@ -1,13 +1,15 @@
 <div class="modal-body">
   <div>
     <p>
-      The <b>Parameterized Form</b> parameter provides a means for the user to define a
-      form that will pop up before running the service. It lets the user define custom
-      Parameters that will be used when this service is running.
+      The <b>Parameterized Form</b> is a user defined input form that pops up
+      before a Parameterized Run of the service. Values entered to this form at
+      runtime are available within running services and can override properties
+      of the "Run" class. Forms defined on nested services or subworkflows are
+      not displayed.
     </p>
     <p>
       When a parameter from the form corresponds to a property of the "Run" class, it
-      will override the run parameter.
+      overrides the existing parameter.
     </p>
   </div>
   <div>

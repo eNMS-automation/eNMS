@@ -5,7 +5,7 @@ either SFTP or SCP.
 
 Configuration parameters for creating this service instance:
 
-- `Direction` Get or Put the file from/to the target device\'s
+- `Direction` Get or Put the file from/to the target device's
   filesystem
 - `Protocol` Use SCP or SFTP to perform the transfer
 - `Source file` For Get, source file is the path-plus-filename on the

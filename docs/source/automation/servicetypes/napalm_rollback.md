@@ -4,6 +4,6 @@ Use Napalm to rollback a configuration.
 
 Configuration parameters for creating this service instance:
 
-- All Napalm Common Parameters (See Above)
+- All [Napalm Service Common Parameters](napalm_common.md) 
 
 There are no specific parameters for rollback.

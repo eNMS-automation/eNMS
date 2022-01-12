@@ -11,7 +11,7 @@ be a regular expression.
 
 Configuration parameters for creating this service instance:
 
-- All Common Netmiko Parameters (see above)
+- All [Netmiko Service Common Parameters](netmiko_common.md)
 - `Command` CLI command to send to the device
 
 Also included in Netmiko Advanced Parameters: 

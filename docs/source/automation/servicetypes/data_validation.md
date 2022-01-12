@@ -1,6 +1,6 @@
 Extract some data from anywhere, such as the payload, a result, or a variable,
 and validate it against a string or a dictionary. This is used for conducting
-extra validations of a prior service\'s result later in a workflow.
+extra validations of a prior service's result later in a workflow.
 
 ![Data Validation Service](../../_static/automation/builtin_service_types/data_validation.png)
 

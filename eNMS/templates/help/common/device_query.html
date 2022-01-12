@@ -1,15 +1,16 @@
 <div class="modal-body">
   <div>
     <p>
-      The <b>device_query</b> parameter allows for selecting the target device list from
-      a previous service's result or from variables set by a previous service. This
-      parameter is a list of either Device Names or IP Addresses that come from the
-      inventory. The user must select Name or IP Address from the Query Property Type to
-      let the system know whether to expect to match Device Name or IP Addresses.
+      The <b>device_query</b> parameter is a python expression that evaluates
+      to an iterable containing either Device names or IP addresses.  This
+      allows dynamic section of target devices based on
+      a previous service's result or from variables set by a previous service. The
+      Device names or IP Addresses must correspond to existing inventory devices.
+      The Query Property field specifies how to match values against inventory.
     </p>
     <p>
-      Important note: the <b>device_query</b> field is cumulative/summed with the
-      Devices and Pools fields in the target selection form. This means that if the user
+      Important note: The set of targets for the service is the union or devices
+      from Devices, Pools, and the <b>device_query</b>.  If the user
       selects devices, pools, and a device_query, the service will run on the
       combination of all devices from the selected devices, pools and device_query.
     </p>
@@ -24,8 +25,8 @@ get_result('Previous_Service_Name')['result']</textarea
       >
     </div>
     <p style="margin-top: 10px;">Notes:</p>
-    Select whether the previous service result contained Device Names or IP Addresses in
-    the Query Property Type field
+    Specify that the previous service result contained Device Names or IP
+    Addresses in the Query Property Type field
   </div>
   <div>
     <h2>Example 2</h2>
@@ -54,7 +55,7 @@ get_var('variable_name')</textarea
       >
     </div>
     <p style="margin-top: 10px;">Notes:</p>
-    Select whether the previous service result contained Device Names or IP Addresses in
-    the Query Property Type field
+    Specify that the previous service result contained Device Names or IP
+    Addresses in the Query Property Type field
   </div>
 </div>

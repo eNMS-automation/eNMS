@@ -431,7 +431,7 @@ class Runner:
             "run_id": self.main_run.id,
             "service": self.service.id,
             "labels": self.main_run.labels,
-            "user": self.main_run.creator,
+            "creator": self.main_run.creator,
         }
         if self.workflow:
             result_kw["workflow"] = self.workflow.id
@@ -1261,4 +1261,3 @@ class Runner:
         }
         with open(path / "timestamps.json", "w") as file:
             dump(data, file, indent=4)
-   

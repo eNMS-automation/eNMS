@@ -24,7 +24,6 @@ Tests:
 - SSH Proxy / Jump Server mechanism (+ tie-breaker priority mechanism)
 
 Migration:
-- Rename endpoint "delete_workflow_selection" to "delete_builder_selection"
 - Update all access with new GET / POST endpoints
 - Redis config in settings.json
 

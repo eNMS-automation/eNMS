@@ -19,27 +19,27 @@ to do with a scheduled task, the user may need to provide data for several param
 Below are all of the input fields that can be filled, with brief descriptions of 
 what they do:
 
-| field | required? | description |
+| Field | Required? | Description |
 | - | - | - |
-| Name | yes | the name by which eNMS will refer to the task |
-| Default Access | yes | used to determine which users can make changes to the task; defaults to "Creator Only" |
-| Scheduling Mode | yes | either "Standard" or "Crontab"; see [Scheduling Modes](#scheduling-modes) for more |
-| Description | no | a brief description of what the task does |
-| Start Date | only in [Standard Mode](#standard-scheduling) | the calendar date on which the task will begin running at the specified interval |
-| End Date | no | the calendar date on which eNMS will stop running the task | 
-| Frequency | no | a numerical value used to determine how often the task will repeat after its initial trigger is met |
-| Frequency Unit | yes | assigns a unit of time to the Frequency field. Can be "Seconds", "Minutes", "Hours", or "Days", and defaults to "Seconds" |
-| Crontab Expression | only in [Crontab Mode](#crontab-scheduling) | the expression used to calculate the frequency of the task |
-| Payload | no | the initial payload to be supplied to the scheduled service at runtime; more information can be found [in the Services documentation.](./services.md) |
-| Devices | no | a selection of individual devices the Service will be called on each time the task is triggered |
-| Pools | no | a group (or groups) of devices the Service will be called on each time the task is triggered - useful for large selections of devices |  
-| Service | yes | the Service that the task will call at its specified time or frequency |
+| Name | Yes | The name by which eNMS will refer to the task |
+| Default Access | Yes | Used to determine which users can make changes to the task; defaults to "Creator Only" |
+| Scheduling Mode | Yes | Either "Standard" or "Crontab"; see [Scheduling Modes](#scheduling-modes) for more |
+| Description | No | A brief description of what the task does |
+| Start Date | Only in [Standard Mode](#standard-scheduling) | the calendar date on which the task will begin running at the specified interval |
+| End Date | No | The calendar date on which eNMS will stop running the task | 
+| Frequency | No | A numerical value used to determine how often the task will repeat after its initial trigger is met |
+| Frequency Unit | Yes | Assigns a unit of time to the Frequency field. Can be "Seconds", "Minutes", "Hours", or "Days", and defaults to "Seconds" |
+| Crontab Expression | Only in [Crontab Mode](#crontab-scheduling) | the expression used to calculate the frequency of the task |
+| Payload | No | The initial payload to be supplied to the scheduled service at runtime; more information can be found [in the Services documentation.](./services.md) |
+| Devices | No | A selection of individual devices the Service will be called on each time the task is triggered |
+| Pools | No | A group (or groups) of devices the Service will be called on each time the task is triggered - useful for large selections of devices |  
+| Service | Yes | The Service that the task will call at its specified time or frequency |
 
 !!! note
 
-    If both the Devices and Pools fields are left empty, the service will run on its own 
+    If both the Devices and Pools fields are left empty, the service will run using its own 
     default targets. Otherwise, the task targets (all selected devices, plus all devices
-    of all selected pools) will override the service targets when the service runs.
+    of all selected pools) override the service targets when the service runs.
 
 ## Scheduling Modes
 

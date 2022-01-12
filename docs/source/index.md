@@ -1,5 +1,5 @@
 ---
-title: What is eMNS
+title: What is eNMS
 ---
 
 ## What is eNMS

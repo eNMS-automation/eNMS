@@ -55,10 +55,24 @@ nav:
   - Advanced:
       Search System: advanced/search_system.md
       Service Selection: advanced/service_selection.md
-      REST API: advanced/rest_api.md
+      REST API:
+        Start here: advanced/endpoint_type_index.md
+        Retrieve an instance: advanced/endpoint_types/retrieve_instance.md
+        Delete an instance: advanced/endpoint_types/delete_instance.md
+        Create or update an instance: advanced/endpoint_types/create_update_instance.md
+        Retrieve a list of instances - simple: advanced/endpoint_types/retrieve_list_instance_simple.md
+        Retrieve a list of instances - custom: advanced/endpoint_types/retrieve_list_instance_custom.md
+        Run a service: advanced/endpoint_types/run_service.md
+        Get status or results of service: advanced/endpoint_types/results_service.md
+        Retrieve device configuration: advanced/endpoint_types/device_config.md
+        Migrate between applications: advanced/endpoint_types/migrate.md
+        Ping application: advanced/endpoint_types/ping.md
+        Administrative: advanced/endpoint_types/admin.md
+      Recommended Practices: advanced/recommended_practices.md
       Administration: advanced/administration.md
       Contributing: advanced/contributing.md
       Developer Notes: advanced/developer_notes.md
+      Debugging: advanced/debug.md
 theme:
   name: material
   features:

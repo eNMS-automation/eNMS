@@ -16,7 +16,7 @@ post-process the result with a regular expression or a TextFSM template:
 
 Extract some data from the payload, and validate it against a string or
 a dictionary. This is used for conducting extra validations of a prior
-service\'s result later in a workflow:
+service's result later in a workflow:
 
 - [Data Validation Service](servicetypes/data_validation.md)
 

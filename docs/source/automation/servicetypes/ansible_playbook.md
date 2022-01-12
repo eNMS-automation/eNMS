@@ -11,13 +11,13 @@ Configuration parameters for creating this service instance:
 - `Arguments` ansible-playbook command line options, which are
   documented **[here](https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html)**.
 - `Pass device properties to the playbook` Pass inventory properties
-  using \--extra-vars to the playbook if checked (along with the
+  using --extra-vars to the playbook if checked (along with the
   options dictionary provided below). All device properties are passed
   such as `device.name` or `device.ip_address`
-- `options` Additional \--extra-vars to be passed to the playbook
-  using the syntax `{\'key1\':value1, \'key2\': value2}`. All inventory
+- `options` Additional --extra-vars to be passed to the playbook
+  using the syntax `{'key1':value1, 'key2': value2}`. All inventory
   properties are automatically passed to the playbook using
-  \--extra-vars (if pass_device_properties is selected above). These
+  --extra-vars (if pass_device_properties is selected above). These
   options are appended.
 - Ansible itself supports a number of standard return codes; these are
   returned in the results of the service and include:
@@ -32,7 +32,6 @@ Configuration parameters for creating this service instance:
 
 !!! note
 
-    This Service supports variable substitution (as mentioned in the
-    previous section) in the `arguments` and `options` input fields of
-    its configuration form.
+    This Service supports variable substitution in the `arguments` and
+    `options` input fields of its configuration form.
 

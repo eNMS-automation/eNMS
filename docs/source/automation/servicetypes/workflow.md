@@ -5,7 +5,7 @@ workflow as a service.
 
 Configuration parameters include:
 
-`Close Connection`: once the subworkflow is done running, the current
+`Close Connection`: Once the subworkflow is done running, the current
   connection will be closed.
   
 `Superworkflow`:  Select from a workflow from the list that will act as a 

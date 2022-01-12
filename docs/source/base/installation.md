@@ -60,7 +60,7 @@ Provide a secret key used by Flask to sign sessions:
 A WSGI HTTP server such as gunicorn is required to run eNMS in production, 
 instead of the Flask development server.
 
-A recommended configuration file for gunicorn is the main folder: `gunicorn.py`;
+A recommended configuration file for gunicorn is in the main folder: `gunicorn.py`;
 it is recommended to run the application with the following command:
 
     # start the application with gunicorn
@@ -70,7 +70,7 @@ it is recommended to run the application with the following command:
 
 All credentials should be stored in a Hashicorp Vault: the settings
 variable `use_vault : true` under the `vault` section of the
-`setup/settings.json` file tells eNMS that a Vault has been setup.
+`setup/settings.json` file tells eNMS that a vault has been setup.
 Follow the manufacturer instructions and options for how to setup a
 [Hashicorp Vault](https://www.vaultproject.io/)
 
@@ -128,6 +128,9 @@ exported from Unix and include:
     WorkingDirectory=/home/centos/enms
     ExecStartPre=/bin/mkdir -p /run/gunicorn/
     ExecStartPre=/bin/chown -R centos:centos /run/gunicorn/
+    Environment="http_proxy=http://proxy.company.com:80/"
+    Environment="https_proxy=http://proxy.company.com:80/"
+    Environment="NO_PROXY=localhost,127.0.0.1,169.254.169.254,.company.com,W.X.Y.Z/8,A.B.C.D/16"
     Environment="HOSTNAME=HOSTNAME_CHANGEME"
     Environment="SECRET_KEY=SECRET_KEY_CHANGEME"
     Environment="VAULT_ADDR=http://127.0.0.1:8200"
@@ -140,6 +143,9 @@ exported from Unix and include:
     # To indicate which server a service was run from in Automation/Run table
     Environment="SERVER_NAME=CHANGE_ME"
     Environment="SERVER_ADDR=CHANGE_ME"
+    # Use Fernet Key additional encryption for stored passwords - not compatible with loading
+    # eNMS example migration files (comment out for examples)
+    Environment="FERNET_KEY=SOME_FERNET_VALID_KEY"
     Environment="ENMS_ADDR=https://127.0.0.1"
     Environment="ENMS_PASSWORD=ENMS_PASSWORD_CHANGEME"
     Environment="REDIS_ADDR=127.0.0.1"
@@ -309,18 +315,35 @@ exported from Unix and include:
         }
     }
 
+!!! note
+ 
+    Importing the `files/migrations/examples` migration files requires that
+    the `FERNET_KEY` environment variable be unset (not defined) and that the
+    `hash_user_passwords` parameter in `setup/settings.json` be set to `True`
+    because of how the sample passwords are stored in the examples. The
+    `files/migrations/default` migration files that most production
+    deployments start with do not contain passwords, so loading them does not
+    impose the same requirements.
+    
+!!! note
+
+    Deploying eNMS into an environment that uses proxy url redirection 
+    requires that the `http_proxy=`, `https_proxy=`, and `NO_PROXY=`
+    environment variables be set if that is needed to reach certain endpoints,
+    such as the network_data repository for device configuration data.
+
 ## Settings Files
-The application's setup files are located in `/setup/`, and the following
+The application's setup files are located in `setup/`, and the following
 section describe their contents:
 
 ### `automation.json`
-The `/setup/automation.json` file allows for the customization of some
+The `setup/automation.json` file allows for the customization of some
 automation library options, such as Napalm Getters, the default contents
 of the parameterized run form for workflows, and the models that one can
 access or create from the workflow builder global variables.
 
 ### `database.json`
-The `/setup/database.json` file contains database and schema configuration
+The `setup/database.json` file contains database and schema configuration
 parameters.  Make sure to include a new database engine section here if
 switching to another SQLAlchemy supported database variant.
 
@@ -338,7 +361,7 @@ Key parameters to be aware of:
 
 
 ### `logging.json`
-Logging settings exist in the file `/setup/logging.json`. This
+Logging settings exist in the file `setup/logging.json`. This
 file is directly passed into the Python Logging library, so it uses the
 Python3 logger file configuration syntax for the user's version of Python3.
 Using this file, the administrator can configure additional loggers and
@@ -437,7 +460,7 @@ workflow's post-processing section or via python snippet service:
 
 ### `properties.json`
 
-The `/setup/properties.json` file includes:
+The `setup/properties.json` file includes:
 
 1. Allowing for additional custom properties to be defined in eNMS for
 devices and links. In this way, eNMS device inventory can be extended to
@@ -456,20 +479,20 @@ properties.json custom device addition example:
 
   - Keys/Value pairs under the newly added custom device attribute device_status.
   
-    - \"pretty_name\":\"Default Username\", *device attribute name to be
+    - "pretty_name":"Default Username", *device attribute name to be
       displayed in UI*
-    - \"type\":\"string\", *data type of attribute*
-    - \"default\":\"None\", *default value of attribute*
-    - \"private\": true *optional - is attribute hidden from user*
-    - \"configuration\": true *optional* - creates a custom 
+    - "type":"string", *data type of attribute*
+    - "default":"None", *default value of attribute*
+    - "private": true *optional - is attribute hidden from user*
+    - "configuration": true *optional* - creates a custom 
       \'Inventory/Configurations\' attribute
-    - \"log_change\" false *optional* - disables logging when a changes is
+    - "log_change": false *optional* - disables logging when a changes is
       made to attribute
-    - \"form\": false *optional* - disables option to edit attribute in
+    - "form": false *optional* - disables option to edit attribute in
       Device User Interface
-    - \"migrate\": false *optional* - choose if attribute should be considered
+    - "migrate": false *optional* - choose if attribute should be considered
        for migration
-    - \"serialize\": false *optional* - whether it is passed to the front-end
+    - "serialize": false *optional* - whether it is passed to the front-end
       when the object itself is
 
 - Keys under `"tables" : { "device" : [ {  & "tables" : { "configuration" : [ {`
@@ -477,13 +500,13 @@ properties.json custom device addition example:
   
   - Keys/Value pairs for tables
   
-    - \"data\":\"device_status\", *attribute created in custom device above*
-    - \"title\":\"Device Status\", *name to display in table*
-    - \"search\":\"text\", *search type*
-    - \"width\":\"80%\", *optional - text alignment, other example 
-      \"width\":\"130px\",*
-    - \"visible\":false, *default display option*
-    - \"orderable\": false *allow user to order by this attribute*
+    - "data":"device_status", *attribute created in custom device above*
+    - "title":"Device Status", *name to display in table*
+    - "search":"text", *search type*
+    - "width":"80%", *optional - text alignment, other example 
+      "width":"130px",*
+    - "visible":false, *default display option*
+    - "orderable": false *allow user to order by this attribute*
 
     - Values under `"filtering" : { "device" : [`
       Details which attributes to use for filtering. The user will need to add any
@@ -491,12 +514,12 @@ properties.json custom device addition example:
 
 ### `rbac.json`
 
-The `/setup/rbac.json` file allows configuration of which user roles have
+The `setup/rbac.json` file allows configuration of which user roles have
 access to each of the controls in the UI, which user roles have access to
 each of the REST API endpoints.
 
 ### `settings.json`
-The `/setup/settings.json` file includes the following public variables which
+The `setup/settings.json` file includes the following public variables which
 are also modifiable from the administration panel. Changing settings from the
 administration panel will cause settings.json to be rewritten if `Write changes
 back to  settings.json file` is selected.
@@ -512,7 +535,7 @@ back to  settings.json file` is selected.
     `"production"`.
 -   `documentation_url` (default:
     `"https://enms.readthedocs.io/en/latest/"`) Can be changed if one
-    want to host one's own version of the documentation locally. Points
+    wants to host one's own version of the documentation locally. Points
     to the online documentation by default.
 -   `git_repository` (default: `""`) Git is used as a version control
     system for device configurations: this variable is the address of
@@ -543,7 +566,7 @@ ldap active directory system, etc.
 Section used for detecting other running instances of eNMS.
 - `active` (default: `false`)
 - `id` (default: `true`)
-- `can_subnet` (default: `"192.168.105.0/24"`)
+- `scan_subnet` (default: `"192.168.105.0/24"`)
 - `scan_protocol` (default: `"http"`)
 - `scan_timeout` (default: `0.05`)
 
@@ -641,11 +664,11 @@ The keys must be exported as environment variables:
 - `UNSEAL_VAULT_KEY5`
 
 ### `themes.json`
-The `/setup/themes.json` file exposes some configurable parameters for the
+The `setup/themes.json` file exposes some configurable parameters for the
 default and dark appearance themes of the application.
 
 ### `visualization.json`
-The `/setup/visualization.json` file controls the visualization map portion
+The `setup/visualization.json` file controls the visualization map portion
 of the application.  The user can specify whether the visualization defaults
 to '2D' mode (recommended for large inventories) or '3D' mode. Also, the
 default latitude and longitude of the map can be set here.
@@ -661,7 +684,7 @@ Key parameters to note:
 
 ## Scheduler
 
-The scheduler used for running tasks at a later time is a web
+The scheduler, used for running tasks at a later time, is a web
 application that is distinct from eNMS. It can be installed on the same
 server as eNMS, or a remote server.
 
@@ -674,7 +697,7 @@ credentials to authenticate with:
 -   `ENMS_USER`: eNMS login
 -   `ENMS_PASSWORD`: eNMS password
 
-The scheduler is a asynchronous application that must be deployed with
+The scheduler is an asynchronous application that must be deployed with
 uvicorn :
 
     cd scheduler
@@ -731,7 +754,7 @@ Above nginx.conf sample has a section for eNMS Scheduler
     
 ### `scheduler.json`
 
-The `/setup/scheduler.json` file controls the behavior of the eNMS Scheduler
+The `setup/scheduler.json` file controls the behavior of the eNMS Scheduler
 application.
 
 ## Network Data Merge Driver
@@ -740,14 +763,14 @@ eNMS features easy access to up-to-date device configurations and
 network data. A service can be configured to periodically collect the latest
 configurations direct from devices in a network, after which a backend 
 process can leverage Git to synchronize data between all instances of the 
-application. These files can be found in the `/network_data/` repository of 
+application. These files can be found in the `network_data/` repository of 
 each VM, organized by device name.
 
 Services can also be configured to update only *their instance's* local
 repository. This intended functionality has been known to cause merge conflicts
 during automatic synchronizations with the shared remote repository.
 
-To prevent this, a merge driver can be used to programmatically
+To prevent this, a git merge driver can be used to programmatically
 resolve merge conflicts. Such drivers typically utilize a combination of git
 attributes, configuration instructions, and custom scripts to function.
 Below are all of the components of a proposed driver for the Network Data

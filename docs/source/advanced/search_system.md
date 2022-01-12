@@ -23,13 +23,13 @@ the characters entered will be shown in the table.  This option is not
 case-sensitive.
 - `Equality`: This option will display records where the column data is an exact 
 match for the characters entered.  This option is not case sensitive.
-- `Regular Expression`: The records displayed will be those where the column 
-data meets the regular expression entered.
-- `Empty`: The records displayed will be those where the column data is empty or 
+- `Regular Expression`: The records displayed are those where the column 
+data matches the regular expression entered.
+- `Empty`: The records displayed are those where the column data is empty or 
 null.
 
 The options also include an `Invert` check box.  When this box is checked, the
-records displayed will include records where the column data does **not** match
+records displayed include records where the column data does **not** match
 the characters or expression entered and the filter type selected.
 
 

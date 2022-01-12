@@ -13,7 +13,7 @@ Configuration parameters for creating this service instance:
   bytes that are sent in the body of the request.
 - `Headers` Dictionary of HTTP Header information to send with the
   request, such as the type of data to be passed. For example,
-  {\"accept\":\"application/json\",\"content-type\":\"application/json\"}
+  {"accept":"application/json", "content-type":"application/json"}
 - `Verify SSL Certificate` If checked, the SSL certificate is
   verified. Default is to not verify the SSL certificate.
 - `Timeout` Requests library timeout, which is the number of seconds
@@ -23,6 +23,5 @@ Configuration parameters for creating this service instance:
 
 !!! note
 
-    This service supports variable substitution (as mentioned in the
-    previous section) in several of the input fields of its
-    configuration form.
+    This service supports variable substitution in several of the input fields
+    of its configuration form.

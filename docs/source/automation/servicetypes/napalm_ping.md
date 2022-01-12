@@ -4,13 +4,14 @@ statistics.
 
 ![Napalm Ping Service](../../_static/automation/builtin_service_types/napalm_ping.png)
 
-Note that the iosxr driver does not support ping, but
+!!! note
+The iosxr driver does not support ping, but
 the ios driver can be selected in its place by deselecting
 `Use_device_driver`.
 
 Configuration parameters for creating this service instance:
 
-- All Napalm Common Parameters (See Above)
+- All [Napalm Service Common Parameters](napalm_common.md) 
 - `Count`: Number of ping packets to send
 - `Size` Size of the ping packet payload to send in bytes
 - `Source IP address` Override the source ip address of the ping

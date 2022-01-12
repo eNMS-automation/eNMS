@@ -82,7 +82,7 @@ The Workflow Builder's panel is organized into 3 blocks of controls:
       the workflow editor.
     - `Stop the Workflow`:  the workflow will stop once the devices-in-progress
       finish their current service. This feature is also available from a button
-      in the `Automation -> Services` table along side each result status.
+      in the `Automation -> Results` table along side each result status.
 
 !!! note
 
@@ -123,7 +123,7 @@ the edit panel. There are three run methods for a workflow:
 | ---------------                   | -----------------------------                      |  
 | Services                          | Each service runs for all devices before moving to the next service. |
 | A Service set to `Run Per Device` | Service executes for each workflow device that flowed to it.  |
-| A Service set to `Run Once`       | Service executes one time.  `devices` contains the full list of devices.  The variable device is not defined. |
+| A Service set to `Run Once`       | Service executes one time.  `devices` contains the full list of devices.  The variable `device` is not defined. |
 | Devices                           | Workflow targets are used.  Service targets are ignored. |
 | Multiprocessing                   | Allows multiple workflow devices to be run concurrently. |  
 
@@ -140,9 +140,9 @@ the edit panel. There are three run methods for a workflow:
 | ---------------                   | -----------------------------                      |  
 | Services                          | Each service runs for all devices before moving to the next service. |
 | A Service set to `Run Per Device` | Service runs for each service device that is selected as a target.  |
-| A Service set to `Run Once`       | Service executes one time. `devices` contains the full list of service devices.  The variable device is not defined. |
+| A Service set to `Run Once`       | Service executes one time. `devices` contains the full list of service devices.  The variable `device` is not defined. |
 | Devices                           | Service targets are used.  Workflow targets are ignored. |
-| Multiprocessing                   | Has no effect with service targets.  Depends on the multiprocessing setting on the service. |
+| Multiprocessing                   | Setting on workflow has no effect with service targets.  Depends on the multiprocessing setting on the service. |
 
 ### Decision matrix for Designing a Workflow
 
@@ -204,19 +204,19 @@ The `get_result()` function works everywhere that python code is accepted.
 ### Saving and Retrieving Values in a Workflow: `get_var(),set_var()`
 
 The user can define variables in the payload with the `set_var()` function,
-and retrieve those variables\' data from the payload with the `get_var()`
+and retrieve those variables' data from the payload with the `get_var()`
 function using the first positional argument (the variable name) and the
 same optional arguments defined in `set_var`. If neither of the optional
-arguments are used the variable will be global.
+arguments are used the variable is global.
 
 - The first argument for set_var is positional and names the variable
   being set.
 - The second argument for set_var is positional and assigns the value
   for the variable.
-- An optional argument for set_var uses keyword \"device\", which can
+- An optional argument for set_var uses keyword "device", which can
   scope the variable to the device the service is using when the
   variable is set.
-- An optional argument for set_var uses keyword \"section\", which can
+- An optional argument for set_var uses keyword "section", which can
   scope the variable to a user provided custom scope.
 
 Examples:
@@ -276,18 +276,18 @@ execution using Priority. The higher number gets run first.
 ### Restart Workflow From Here
 
 Using the right-mouse-click menu, a workflow can be restarted from any
-service as the \"Entry point\" and using the runtime payload from a
+service as the "Entry point" and using the runtime payload from a
 previous run. This is useful if:
 
 - the user is testing a workflow with a lot of services
 - device targets fail unreliably and automation must be restarted at 
   unpredictable locations in the workflow and:
   
-  a) services are not idempotent, meaning that it is not possible to
-     re-run the same services on the devices without breaking, or:
+    a) services are not idempotent, meaning that it is not possible to
+       re-run the same services on the devices without breaking, or:
 
-  b) there is simply not enough time to re-run all the previous
-     services.
+    b) there is simply not enough time to re-run all the previous
+       services.
   
 Selecting `Restart Workflow from Here` by right clicking on a service 
 presents the user with a form to select:
@@ -307,7 +307,7 @@ presents the user with a form to select:
 
 !!! note
 
-    Variables set to values, that cannot be streamed as JSON, will not be
+    Variables, set to values that cannot be streamed as JSON, are not
     available to subsequent services after restarting the workflow. For
     example, if the user performed a set_var on a python function to allow
     it to be used in a subsequent service, this will not work after using
@@ -325,7 +325,7 @@ change this behavior :
     
 - `Connection Name`: If changed to something other than `default`, the
   connection will be cached as a separate connection to that same device.
-  This allows for multiple simultaneous \"named\" connections to a single
+  This allows for multiple simultaneous "named" connections to a single
   device, as in this example:
   
 ![Service Dependency](../_static/automation/workflows/multiple_connection_workflow.png)  
@@ -369,7 +369,7 @@ be run before and after the main workflow and using a potentially
 different workflow traversal mode (service by service or device by
 device). 
 
-Superworkflow functions like a document template so that
+Superworkflows function like a document template so that
 activities common to all workflows can be performed. When the same
 superworkflow is used by multiple main workflows, it behaves like a
 shared service: a change to the superworkflow affects all workflows that

@@ -18,7 +18,7 @@ eNMS can be used as a device configuration backup tool, like oxidized/rancid, wi
 
 Configurations are retrieved by "Netmiko Data Backup" service, which then:
 
-- Fetches the device configuration or operational using Netmiko or Napalm 
+- Fetches the device configuration or operational data using Netmiko or Napalm 
 - Updates the device `Configuration`, `Operational Data`, or `Specialized
   Data` property, depending on which one is selected in the service.
 
@@ -38,24 +38,24 @@ be used to collect and store additional data sets.
 ## Push configurations to git
 
 Collected configurations and operational data are written to local text files,
-located in `/network_data/`, which are mapped in the `settings.json` to a git
+located in `network_data/`, which are mapped in the `settings.json` to a git
 repository. Upon retrieving the current configuration from a device, the
 config is added to the database, as well to the local text file. Git is
 used for storing historical revisions of the data, and each additional
 instance of eNMS can retrieve the Git history using the
 `Admin Button -> Fetch Git Configurations Button`. Git fetch can also be
-configured in the cron to periodically get triggered through the CLI to
+configured in cron to periodically get triggered through the CLI to
 update the Configurations that were pushed into Git by another instance
 of eNMS.
 
 !!! attention
 
-    Multiple instances of eNMS pushing to the same `/network_data/` repository
+    Multiple instances of eNMS pushing to the same `network_data/` repository
     may result in merge conflicts on some or all instances which will halt
     further updates. 
 
     To prevent this, the user can install a custom merge driver in the
-    `/network_data/` repo that allows git to automatically merge based on the
+    `network_data/` repo that allows git to automatically merge based on the
     most recent commit, as detailed in the [Installation docs](../base/installation.md#network-data-merge-driver).
 
 # Search and display the configuration
@@ -68,12 +68,12 @@ current configuration of the device contains the search criteria. Select
 the "Lines of Context" slider at the top of the UI to see, up to 5
 lines, before and after, the specified word that was searched.
 
-By clicking on the `Network Data` button on the right of the screen, one
-can display the device Configuration (or select Operational Data).
+Click on the `Network Data` button on the right of the screen to
+display the device Configuration (or select Operational Data).
 
 ![Configuration Search.](../_static/base/configuration_search.png)
 
-By clicking on the `Historic` button on the right of the screen, one can
+Click on the `Historic` button on the right of the screen to
 view the differences between various revisions of the device
 configuration.
 

@@ -9,8 +9,8 @@ Scrapli Project Documentation can be reviewed
 
 ## Main Parameters
 
-- `Commands`: commands to be send to the device
-- `Is Configuration`:  should the device be put in config mode before
+- `Commands`: Commands to be send to the device
+- `Is Configuration`:  Should the device be put in config mode before
   issuing the commands?
 - `Driver`: Scrapli driver to use. Currently, it supports:
     
@@ -20,11 +20,11 @@ Scrapli Project Documentation can be reviewed
     - `cisco_nxos`
     - `juniper_junos`
     
-- `Transport`: supports using the following transport plugins:
+- `Transport`: Supports using the following transport plugins:
 
-    - `system`: wrapper around OpenSSH/System available SSH binary
-    - `paramiko`: wrapper around paramiko library
-    - `ssh2`: wrapper around ssh2-python library
+    - `system`: Wrapper around OpenSSH/System available SSH binary
+    - `paramiko`: Wrapper around paramiko library
+    - `ssh2`: Wrapper around ssh2-python library
     
 ## Connection Parameters
 
@@ -41,13 +41,13 @@ Scrapli Project Documentation can be reviewed
 
 - `Custom Password` - User provided password
 
-- `Start New Connection`: **before the service runs**, the current
+- `Start New Connection`: **Before the service runs**, the current
   cached connection is discarded and a new one is started.
     
 - `Connection Name`: If changed to something other than `default`, the
   connection will be cached as a separate connection to that same device.
-  This allows for multiple simultaneous \"named\" connections to a single
+  This allows for multiple simultaneous "named" connections to a single
   device, as in this example:
     
-- `Close Connection`: once the service is done running, the current
+- `Close Connection`: Once the service is done running, the current
   connection will be closed.

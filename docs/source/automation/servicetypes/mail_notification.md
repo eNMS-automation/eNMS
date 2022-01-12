@@ -14,6 +14,5 @@ of recipients.
 
 !!! note
 
-    This Service supports variable substitution (as mentioned in the
-    previous section) in the `Title` and `Body` input fields of its
-    configuration form.
+    This Service supports variable substitution in the `Title` and `Body`
+    input fields of its configuration form.

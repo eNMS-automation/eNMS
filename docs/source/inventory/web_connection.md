@@ -2,8 +2,8 @@
 title: WebSSH Connection
 ---
 # WebSSH Connection
-WebSSH allows a connection to a device where eNMS handles the establishment 
-of a Telnet or SSH session to the device using the information stored in the
+WebSSH provides terminal access to a device where eNMS establishes 
+a Telnet or SSH session to the device using the information stored in the
 network inventory.  There are multiple ways to establish a WebSSH connection.
 
 
@@ -26,11 +26,11 @@ of the following options:
 	- `Name`: This is the name property of the selected device.
 	- `Console 1`: The value stored in the Console 1 property for the device.
 	- `Console 2`: The value stored in the Console 2 property for the device.
-- `Automatically authenticate`: (SSH only) eNMS will use the credentials stored
+- `Automatically authenticate`: (SSH only) eNMS uses the credentials stored
 in the Vault (production mode) or the database (test mode) to automatically
 authenticate to the network device. By default, `device credentials` are
-selected but you can choose `user credentials` or `custom credentials` instead.
-Custom credentials are those that you can specify when creating a new device.
+selected but `user credentials` or `custom credentials` options are also available.
+Custom credentials are specified in the connection dialog directly.
 - `Protocol`: `SSH` or `Telnet`.
 
 When the session parameters are configured as desired, click the `Web Session`
@@ -38,7 +38,7 @@ button to connect to the device.
 
 ## From Network Views
 
-You can also connect to a device from one of the views presented by 
+Connections can also be initiated to a device from views 
 `Visualization / Geographical View` or `Visualization / Logical View`.
-Right-click on any device and select `Connect`.  You will be presented the same
-dialog detailed above.
+Right-click on any device and select `Connect`.  The same dialog detailed
+above is used to complete the connection process.

@@ -388,6 +388,7 @@ export function switchMode(mode, noNotification) {
 }
 
 export function processBuilderData(newInstance) {
+  instance.last_modified = newInstance.last_modified;
   if (newInstance.id == instance?.id) {
     instance = newInstance;
     $(`#current-${type} option:selected`).text(newInstance.name).trigger("change");

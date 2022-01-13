@@ -1202,9 +1202,10 @@ class Controller:
 
     def update(self, type, **kwargs):
         try:
+            current_time = vs.get_time()
             kwargs.update(
                 {
-                    "last_modified": vs.get_time(),
+                    "last_modified": current_time,
                     "update_pools": True,
                     "must_be_new": kwargs.get("id") == "",
                 }
@@ -1214,15 +1215,17 @@ class Controller:
                     kwargs[arg] = kwargs[arg].strip()
             if kwargs["must_be_new"]:
                 kwargs["creator"] = kwargs["user"] = getattr(current_user, "name", "")
-                if kwargs.get("workflows"):
-                    workflow_id = kwargs["workflows"][0]
-                    workflow = db.fetch("workflow", id=workflow_id, rbac="edit")
-                    workflow.last_modified = vs.get_time()
+                for builder_type in ("workflow", "site"):
+                    if not kwargs.get(f"{builder_type}s"):
+                        continue
+                    builder_id = kwargs[f"{builder_type}s"][0]
+                    builder = db.fetch(builder_type, id=builder_id, rbac="edit")
+                    builder.last_modified = current_time
             instance = db.factory(type, **kwargs)
             if kwargs.get("copy"):
                 db.fetch(type, id=kwargs["copy"]).duplicate(clone=instance)
             db.session.flush()
-            return instance.serialized
+            return {**instance.serialized, "last_modified": current_time}
         except db.rbac_error:
             return {"alert": "Error 403 - Operation not allowed."}
         except Exception as exc:

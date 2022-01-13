@@ -21,6 +21,7 @@ import {
   currentMode,
   currentPath,
   edges,
+  instance,
   nodes,
   setPath,
   savePositions,
@@ -264,8 +265,8 @@ export function getSiteState(periodic, first) {
       url: `/get_site_state/${currentPath}`,
       data: { runtime: site.runtime },
       callback: function (result) {
-        if (result.site.last_modified > site.last_modified) {
-          site.last_modified = result.site.last_modified;
+        if (result.site.last_modified > instance.last_modified) {
+          instance.last_modified = result.site.last_modified;
           displaySite(result.site);
         }
         if (result.device_results) displaySiteState(result.device_results);

@@ -26,6 +26,7 @@ import {
   ctrlKeyPressed,
   currentPath,
   edges,
+  instance,
   nodes,
   setPath,
   showLabelPanel,
@@ -240,7 +241,7 @@ function addServicesToWorkflow() {
     url: `/copy_service_in_workflow/${workflow.id}`,
     form: "add-services-form",
     callback: function (result) {
-      workflow.last_modified = result.update_time;
+      instance.last_modified = result.update_time;
       $("#add_services_to_workflow").remove();
       result.services.map(updateWorkflowService);
     },
@@ -252,7 +253,7 @@ function saveEdge(edge) {
   call({
     url: `/add_edge/${param}`,
     callback: function (result) {
-      workflow.last_modified = result.update_time;
+      instance.last_modified = result.update_time;
       const newEdge = drawWorkflowEdge(result);
       edges.add(newEdge);
       workflow.edges.push(newEdge);
@@ -294,7 +295,7 @@ function skipServices() {
   call({
     url: `/skip_services/${workflow.id}/${selectedNodes.join("-")}`,
     callback: (result) => {
-      workflow.last_modified = result.update_time;
+      instance.last_modified = result.update_time;
       workflow.services.forEach((service) => {
         if (selectedNodes.includes(service.id)) {
           service.skip[workflow.name] = result.skip === "skip";
@@ -678,7 +679,7 @@ export function getWorkflowState(periodic, first) {
         if (!Object.keys(result).length || result.service.id != workflow.id) return;
         currentRun = result.run;
         currentRuntime = result.runtime;
-        if (result.service.last_modified > workflow.last_modified) {
+        if (result.service.last_modified > instance.last_modified) {
           displayWorkflow(result);
         } else {
           displayWorkflowState(result);

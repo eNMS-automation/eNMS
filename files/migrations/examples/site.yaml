@@ -1,5 +1,5 @@
 - access_groups: ''
-  category: ''
+  category: Display
   creator: admin
   description: ''
   icon: site
@@ -11,13 +11,13 @@
         Router 1 should be displayed as a router, Router 2 as a host and Router 3\
         \ as an optical switch.\r\nThe icon of a device is decoupled from its type."
       positions: [19, -70]
-  last_modified: '2022-01-01 11:49:31.237079'
+  last_modified: '2022-01-13 14:58:18.207435'
   latitude: '0.0'
   links: [R1 - R2, R2 - R3, R1 - R3]
   location: ''
   longitude: '1.0'
   model: ''
-  name: 'Site 1: Top-level Devices and Links'
+  name: Top-level Devices and Links
   nodes: [Router 1, Router 2, Router 3]
   pools: [Everything, All Sites]
   positions: {}
@@ -26,7 +26,7 @@
   type: site
   vendor: ''
 - access_groups: ''
-  category: ''
+  category: Subsite
   creator: admin
   description: ''
   icon: site
@@ -40,13 +40,13 @@
         \ of the selected node.\r\n- Test using site as a teleport: Subsite 1 contains\
         \ Subsite 2 and vice-versa,\r\nto switch from one to the other and back."
       positions: [-310, -212]
-  last_modified: '2022-01-04 01:44:52.125534'
+  last_modified: '2022-01-13 14:59:24.690428'
   latitude: '0.0'
   links: []
   location: ''
   longitude: '0.0'
   model: ''
-  name: 'Site 2: Subsite and Teleport Mechanism'
+  name: Subsite and Teleport Mechanism
   nodes: [Subsite 1, Subsite 2]
   pools: [Everything, All Sites]
   positions: {}
@@ -78,12 +78,13 @@
     'Site 2: Subsite': &id001 [-558, -27]
     'Site 2: Subsite and Teleport Mechanism': *id001
     Subsite 2: [-15, 43]
-  sites: [Subsite 2, 'Site 2: Subsite and Teleport Mechanism']
+    Subsite and Teleport Mechanism: *id001
+  sites: [Subsite 2, Subsite and Teleport Mechanism]
   subtype: ''
   type: site
   vendor: ''
 - access_groups: ''
-  category: ''
+  category: Editing
   creator: admin
   description: ''
   icon: site
@@ -104,13 +105,13 @@
         \ rectangle to delete the remaining objects.\r\n- Delete the site itself from\
         \ the Site table."
       positions: [227, -507]
-  last_modified: '2022-01-01 10:33:29.627883'
+  last_modified: '2022-01-13 14:59:33.685691'
   latitude: '0.0'
   links: []
   location: ''
   longitude: '0.0'
   model: ''
-  name: 'Site 3: Creation, Edit and Deletion'
+  name: Creation, Edit and Deletion
   nodes: []
   pools: [All Sites, Everything]
   positions: {}
@@ -142,12 +143,13 @@
     'Site 2: Subsite': &id002 [-144, -36]
     'Site 2: Subsite and Teleport Mechanism': *id002
     Subsite 1: [-2, -48]
-  sites: ['Site 2: Subsite and Teleport Mechanism', Subsite 1]
+    Subsite and Teleport Mechanism: *id002
+  sites: [Subsite and Teleport Mechanism, Subsite 1]
   subtype: ''
   type: site
   vendor: ''
 - access_groups: ''
-  category: ''
+  category: Editing
   creator: admin
   description: ''
   icon: site
@@ -165,13 +167,13 @@
         \nCheck that the content of the subsites is the same as that of the original\
         \ top-level site."
       positions: [-47, -187]
-  last_modified: '2022-01-02 02:48:13.708604'
+  last_modified: '2022-01-13 14:59:46.234188'
   latitude: '0.0'
   links: [Duplicate 1 - 2]
   location: ''
   longitude: '0.0'
   model: ''
-  name: 'Site 4: Duplication of Devices, Subsites and Top-level Sites'
+  name: Duplication of Devices, Subsites and Top-level Sites
   nodes: [Duplicate me 2, Duplicate me 1]
   pools: [All Sites, Everything]
   positions: {}
@@ -195,13 +197,14 @@
   nodes: [Duplication - G1, Duplication - R1]
   pools: [All Sites, Everything]
   positions:
-    'Site 4: Duplication of Devices, Subsites and Top-level Sites': [135, 6]
-  sites: ['Site 4: Duplication of Devices, Subsites and Top-level Sites']
+    Duplication of Devices, Subsites and Top-level Sites: &id003 [135, 6]
+    'Site 4: Duplication of Devices, Subsites and Top-level Sites': *id003
+  sites: ['Duplication of Devices, Subsites and Top-level Sites']
   subtype: ''
   type: site
   vendor: ''
 - access_groups: ''
-  category: ''
+  category: Display
   creator: admin
   description: ''
   icon: site
@@ -215,7 +218,7 @@
         \ R2 and R4\r\n- Even number (8) of different direction links (4 / 4) between\
         \ R3 and R4\r\n- One link between R1 and R4"
       positions: [-499, 98]
-  last_modified: '2022-01-02 12:41:17.767672'
+  last_modified: '2022-01-13 14:59:54.526299'
   latitude: '0.0'
   links: [R3 -> R2 L1, R3 -> R2 L2, R3 -> R2 L3, R3 -> R2 L4, R3 Loopback 1, R1 Loopback
       1, R1 -> R2 L1, R1 -> R2 L2, R1 -> R2 L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1
@@ -225,7 +228,7 @@
   location: ''
   longitude: '0.0'
   model: ''
-  name: 'Site 5: Loopback and Parallel Links'
+  name: Loopback and Parallel Links
   nodes: [S5 R1, S5 R2, S5 R3, S5 R4]
   pools: [Everything, All Sites]
   positions: {}
@@ -234,7 +237,7 @@
   type: site
   vendor: ''
 - access_groups: ''
-  category: ''
+  category: Subsite
   creator: admin
   description: ''
   icon: site
@@ -245,13 +248,13 @@
         \ upward navigation button\r\n- The Tree View to switch between levels\r\n\
         - The Duplication: all subsites down to the last should be duplicated."
       positions: [40, -173]
-  last_modified: '2022-01-03 03:26:54.919735'
+  last_modified: '2022-01-13 15:00:11.686882'
   latitude: '0.0'
   links: []
   location: ''
   longitude: '0.0'
   model: ''
-  name: 'Site 6: Subsubsite and Subsubsubsite'
+  name: Subsubsite and Subsubsubsite
   nodes: [L1 Site]
   pools: [Everything, All Sites]
   positions: {}
@@ -275,8 +278,9 @@
   nodes: [L2 Site]
   pools: [Everything, All Sites]
   positions:
-    'Site 6: Subsubsite and Subsubsubsite': [-27, -55]
-  sites: ['Site 6: Subsubsite and Subsubsubsite']
+    'Site 6: Subsubsite and Subsubsubsite': &id004 [-27, -55]
+    Subsubsite and Subsubsubsite: *id004
+  sites: [Subsubsite and Subsubsubsite]
   subtype: ''
   type: site
   vendor: ''
@@ -321,7 +325,7 @@
   type: site
   vendor: ''
 - access_groups: ''
-  category: ''
+  category: Display
   creator: admin
   description: ''
   icon: site
@@ -333,13 +337,13 @@
         \ should be displayed in a near-optimal layout almost instantly.\r\n- Select\
         \ everything and delete it."
       positions: [63, -168]
-  last_modified: '2022-01-04 01:46:34.380620'
+  last_modified: '2022-01-13 15:01:16.843061'
   latitude: '0.0'
   links: []
   location: ''
   longitude: '0.0'
   model: ''
-  name: 'Site 7: Automatic Layout of Large Graph'
+  name: Layout of Large Graph
   nodes: []
   pools: [Everything, All Sites]
   positions: {}
@@ -348,7 +352,7 @@
   type: site
   vendor: ''
 - access_groups: ''
-  category: ''
+  category: Editing
   creator: admin
   description: ''
   icon: site
@@ -371,13 +375,13 @@
         \ added but the two ends are already here.\r\n- Add \"link25-3\" without any\
         \ option: the link should be added between \"Dallas\" and \"Atlanta\"."
       positions: [110, -18]
-  last_modified: '2022-01-04 02:21:05.036701'
+  last_modified: '2022-01-13 15:00:20.775721'
   latitude: '0.0'
   links: []
   location: ''
   longitude: '0.0'
   model: ''
-  name: 'Site 8: Import with Add Connected Nodes and Links'
+  name: Import with Add Connected Nodes and Links
   nodes: []
   pools: [All Sites, Everything]
   positions: {}
@@ -386,12 +390,12 @@
   type: site
   vendor: ''
 - access_groups: ''
-  category: ''
+  category: Display
   creator: admin
   description: ''
   icon: site
   labels: {}
-  last_modified: '2022-01-04 02:30:47.036350'
+  last_modified: '2022-01-13 15:00:37.344648'
   latitude: '0.0'
   links: [link22, link13, link20, link0, link5, link23, link19, link21, link7, link18,
     link15, link3, link4, link17, link10, link27, link25-3, link14, link16, link25-reversed,
@@ -400,7 +404,7 @@
   location: ''
   longitude: '0.0'
   model: ''
-  name: 'Site 9: Large Network Display'
+  name: Large Network Display
   nodes: [Oakland, Columbus, Austin, Houston, Austin-2, Washington, Orange, Dallas-3,
     Baltimore, PaloAlto, SanJose, Cleveland, Jackson, Richmond, Cambridge, Chicago,
     Philadelphia, Cincinnati, NewYork, Minneapolis, SanFrancisco, Atlanta, Detroit,

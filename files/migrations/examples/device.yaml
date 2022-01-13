@@ -39,7 +39,8 @@
   os_version: 15.5(3)M
   port: 22
   positions:
-    'Site 9: Large Network Display': [621, 908]
+    Large Network Display: &id001 [621, 908]
+    'Site 9: Large Network Display': *id001
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -89,7 +90,8 @@
   os_version: 15.5(3)M
   port: 22
   positions:
-    'Site 9: Large Network Display': [-387, 104]
+    Large Network Display: &id002 [-387, 104]
+    'Site 9: Large Network Display': *id002
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -139,7 +141,8 @@
   os_version: 15.5(3)M
   port: 22
   positions:
-    'Site 9: Large Network Display': [253, 413]
+    Large Network Display: &id003 [253, 413]
+    'Site 9: Large Network Display': *id003
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -189,7 +192,8 @@
   os_version: 15.5(3)M
   port: 22
   positions:
-    'Site 9: Large Network Display': [-47, 331]
+    Large Network Display: &id004 [-47, 331]
+    'Site 9: Large Network Display': *id004
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -239,7 +243,8 @@
   os_version: 15.5(3)M
   port: 22
   positions:
-    'Site 9: Large Network Display': [-1073, 540]
+    Large Network Display: &id005 [-1073, 540]
+    'Site 9: Large Network Display': *id005
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -289,7 +294,8 @@
   os_version: 15.5(3)M
   port: 22
   positions:
-    'Site 9: Large Network Display': [-92, -121]
+    Large Network Display: &id006 [-92, -121]
+    'Site 9: Large Network Display': *id006
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -339,7 +345,8 @@
   os_version: 15.5(3)M
   port: 22
   positions:
-    'Site 9: Large Network Display': [333, -657]
+    Large Network Display: &id007 [333, -657]
+    'Site 9: Large Network Display': *id007
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -389,7 +396,8 @@
   os_version: 5.1.X
   port: 22
   positions:
-    'Site 9: Large Network Display': [562, 157]
+    Large Network Display: &id008 [562, 157]
+    'Site 9: Large Network Display': *id008
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -439,7 +447,8 @@
   os_version: 5.1.X
   port: 22
   positions:
-    'Site 9: Large Network Display': [-686, 820]
+    Large Network Display: &id009 [-686, 820]
+    'Site 9: Large Network Display': *id009
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -489,7 +498,8 @@
   os_version: 5.1.X
   port: 22
   positions:
-    'Site 9: Large Network Display': [351, -244]
+    Large Network Display: &id010 [351, -244]
+    'Site 9: Large Network Display': *id010
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -539,7 +549,8 @@
   os_version: 5.1.X
   port: 22
   positions:
-    'Site 9: Large Network Display': [-1351, -44]
+    Large Network Display: &id011 [-1351, -44]
+    'Site 9: Large Network Display': *id011
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -589,7 +600,8 @@
   os_version: 5.1.X
   port: 22
   positions:
-    'Site 9: Large Network Display': [93, -32]
+    Large Network Display: &id012 [93, -32]
+    'Site 9: Large Network Display': *id012
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -639,7 +651,8 @@
   os_version: 5.1.X
   port: 22
   positions:
-    'Site 9: Large Network Display': [427, 535]
+    Large Network Display: &id013 [427, 535]
+    'Site 9: Large Network Display': *id013
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -689,7 +702,8 @@
   os_version: 5.1.X
   port: 22
   positions:
-    'Site 9: Large Network Display': [-1213, 935]
+    Large Network Display: &id014 [-1213, 935]
+    'Site 9: Large Network Display': *id014
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -739,7 +753,8 @@
   os_version: 5.1.X
   port: 22
   positions:
-    'Site 9: Large Network Display': [951, 21]
+    Large Network Display: &id015 [951, 21]
+    'Site 9: Large Network Display': *id015
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -789,7 +804,8 @@
   os_version: 17.2R1.13
   port: 22
   positions:
-    'Site 9: Large Network Display': [289, 127]
+    Large Network Display: &id016 [289, 127]
+    'Site 9: Large Network Display': *id016
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -839,7 +855,8 @@
   os_version: 17.2R1.13
   port: 22
   positions:
-    'Site 9: Large Network Display': [-993, 184]
+    Large Network Display: &id017 [-993, 184]
+    'Site 9: Large Network Display': *id017
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -889,7 +906,8 @@
   os_version: 17.2R1.13
   port: 22
   positions:
-    'Site 9: Large Network Display': [-1099, -216]
+    Large Network Display: &id018 [-1099, -216]
+    'Site 9: Large Network Display': *id018
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -939,7 +957,8 @@
   os_version: 17.2R1.13
   port: 22
   positions:
-    'Site 9: Large Network Display': [-1404, 258]
+    Large Network Display: &id019 [-1404, 258]
+    'Site 9: Large Network Display': *id019
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -989,7 +1008,8 @@
   os_version: 17.2R1.13
   port: 22
   positions:
-    'Site 9: Large Network Display': [-367, 811]
+    Large Network Display: &id020 [-367, 811]
+    'Site 9: Large Network Display': *id020
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -1039,7 +1059,8 @@
   os_version: 17.2R1.13
   port: 22
   positions:
-    'Site 9: Large Network Display': [-1467, 680]
+    Large Network Display: &id021 [-1467, 680]
+    'Site 9: Large Network Display': *id021
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -1089,7 +1110,8 @@
   os_version: 17.2R1.13
   port: 22
   positions:
-    'Site 9: Large Network Display': [-537, 433]
+    Large Network Display: &id022 [-537, 433]
+    'Site 9: Large Network Display': *id022
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -1139,7 +1161,8 @@
   os_version: 17.2R1.13
   port: 22
   positions:
-    'Site 9: Large Network Display': [-382, -610]
+    Large Network Display: &id023 [-382, -610]
+    'Site 9: Large Network Display': *id023
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -1189,7 +1212,8 @@
   os_version: 17.2R1.13
   port: 22
   positions:
-    'Site 9: Large Network Display': [-740, -568]
+    Large Network Display: &id024 [-740, -568]
+    'Site 9: Large Network Display': *id024
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -1239,7 +1263,8 @@
   os_version: 17.2R1.13
   port: 22
   positions:
-    'Site 9: Large Network Display': [686, -483]
+    Large Network Display: &id025 [686, -483]
+    'Site 9: Large Network Display': *id025
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -1289,7 +1314,8 @@
   os_version: '3.6.5E '
   port: 22
   positions:
-    'Site 9: Large Network Display': [-519, -222]
+    Large Network Display: &id026 [-519, -222]
+    'Site 9: Large Network Display': *id026
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -1339,7 +1365,8 @@
   os_version: '3.6.5E '
   port: 22
   positions:
-    'Site 9: Large Network Display': [-770, 169]
+    Large Network Display: &id027 [-770, 169]
+    'Site 9: Large Network Display': *id027
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -3104,7 +3131,8 @@
   os_version: 5.1.X
   port: 22
   positions:
-    'Site 9: Large Network Display': [285, 905]
+    Large Network Display: &id028 [285, 905]
+    'Site 9: Large Network Display': *id028
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -3154,7 +3182,8 @@
   os_version: 5.1.X
   port: 22
   positions:
-    'Site 9: Large Network Display': [851, 631]
+    Large Network Display: &id029 [851, 631]
+    'Site 9: Large Network Display': *id029
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -3254,7 +3283,8 @@
   os_version: 15.5(3)M
   port: 22
   positions:
-    'Site 9: Large Network Display': [1231, 770]
+    Large Network Display: &id030 [1231, 770]
+    'Site 9: Large Network Display': *id030
   property1: 10.145.14.1
   property2: CP
   property3: ''
@@ -3452,7 +3482,8 @@
   os_version: ''
   port: 22
   positions:
-    'Site 1: Top-level Devices and Links': [-314, 42]
+    'Site 1: Top-level Devices and Links': &id031 [-314, 42]
+    Top-level Devices and Links: *id031
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -3500,7 +3531,8 @@
   os_version: ''
   port: 22
   positions:
-    'Site 1: Top-level Devices and Links': [-59, 267]
+    'Site 1: Top-level Devices and Links': &id032 [-59, 267]
+    Top-level Devices and Links: *id032
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -3549,7 +3581,8 @@
   os_version: ''
   port: 22
   positions:
-    'Site 1: Top-level Devices and Links': [310, 56]
+    'Site 1: Top-level Devices and Links': &id033 [310, 56]
+    Top-level Devices and Links: *id033
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -3761,7 +3794,7 @@
   custom_select: b
   description: ''
   down: false
-  gateways: [Gateway 2, Gateway 3, Gateway 1]
+  gateways: [Gateway 1, Gateway 3, Gateway 2]
   icon: antenna
   icon_3d: juniper_ex3300
   ip_address: "192.168.56.50\t"
@@ -4039,7 +4072,8 @@
   os_version: ''
   port: 22
   positions:
-    'Site 4: Duplication of Devices, Subsites and Top-level Sites': [-356, 0]
+    Duplication of Devices, Subsites and Top-level Sites: &id034 [-356, 0]
+    'Site 4: Duplication of Devices, Subsites and Top-level Sites': *id034
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -4235,7 +4269,8 @@
   os_version: ''
   port: 22
   positions:
-    'Site 5: Loopback and Parallel Links': [-765, 312]
+    Loopback and Parallel Links: &id035 [-765, 312]
+    'Site 5: Loopback and Parallel Links': *id035
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -4283,7 +4318,8 @@
   os_version: ''
   port: 22
   positions:
-    'Site 5: Loopback and Parallel Links': [-345, 194]
+    Loopback and Parallel Links: &id036 [-345, 194]
+    'Site 5: Loopback and Parallel Links': *id036
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -4331,7 +4367,8 @@
   os_version: ''
   port: 22
   positions:
-    'Site 5: Loopback and Parallel Links': [-325, 426]
+    Loopback and Parallel Links: &id037 [-325, 426]
+    'Site 5: Loopback and Parallel Links': *id037
   property1: 10.145.14.1
   property2: CP
   property3: password
@@ -4379,7 +4416,8 @@
   os_version: ''
   port: 22
   positions:
-    'Site 5: Loopback and Parallel Links': [243, 271]
+    Loopback and Parallel Links: &id038 [243, 271]
+    'Site 5: Loopback and Parallel Links': *id038
   property1: 10.145.14.1
   property2: CP
   property3: password

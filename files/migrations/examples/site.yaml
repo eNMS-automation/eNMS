@@ -1,4 +1,5 @@
 - access_groups: ''
+  category: ''
   creator: admin
   description: ''
   icon: site
@@ -25,6 +26,7 @@
   type: site
   vendor: ''
 - access_groups: ''
+  category: ''
   creator: admin
   description: ''
   icon: site
@@ -53,6 +55,7 @@
   type: site
   vendor: ''
 - access_groups: ''
+  category: ''
   creator: admin
   description: ''
   icon: site
@@ -80,6 +83,7 @@
   type: site
   vendor: ''
 - access_groups: ''
+  category: ''
   creator: admin
   description: ''
   icon: site
@@ -115,6 +119,7 @@
   type: site
   vendor: ''
 - access_groups: ''
+  category: ''
   creator: admin
   description: ''
   icon: site
@@ -142,6 +147,7 @@
   type: site
   vendor: ''
 - access_groups: ''
+  category: ''
   creator: admin
   description: ''
   icon: site
@@ -174,6 +180,7 @@
   type: site
   vendor: ''
 - access_groups: ''
+  category: ''
   creator: admin
   description: ''
   icon: site
@@ -194,6 +201,7 @@
   type: site
   vendor: ''
 - access_groups: ''
+  category: ''
   creator: admin
   description: ''
   icon: site
@@ -226,6 +234,7 @@
   type: site
   vendor: ''
 - access_groups: ''
+  category: ''
   creator: admin
   description: ''
   icon: site
@@ -251,6 +260,7 @@
   type: site
   vendor: ''
 - access_groups: ''
+  category: ''
   creator: admin
   description: ''
   icon: site
@@ -271,6 +281,7 @@
   type: site
   vendor: ''
 - access_groups: ''
+  category: ''
   creator: admin
   description: ''
   icon: site
@@ -290,6 +301,7 @@
   type: site
   vendor: ''
 - access_groups: ''
+  category: ''
   creator: admin
   description: ''
   icon: site
@@ -309,6 +321,7 @@
   type: site
   vendor: ''
 - access_groups: ''
+  category: ''
   creator: admin
   description: ''
   icon: site
@@ -335,6 +348,7 @@
   type: site
   vendor: ''
 - access_groups: ''
+  category: ''
   creator: admin
   description: ''
   icon: site
@@ -372,6 +386,7 @@
   type: site
   vendor: ''
 - access_groups: ''
+  category: ''
   creator: admin
   description: ''
   icon: site

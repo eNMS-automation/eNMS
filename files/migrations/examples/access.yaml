@@ -38,9 +38,9 @@
     /add_links_form, /add_users_form, /add_services_form, /access_form]
   menu: [Inventory, Visualization, Automation, Template]
   name: Full Access to Everything
-  pages: [Pools, Changelog, Sessions, Devices, Configurations, Links, Geographical
-      View, Logical View, Services, Workflow Builder, Scheduling, Results, Page, Subpage,
-    Devices]
+  pages: [Pools, Changelog, Sessions, Devices, Configurations, Links, Sites, Geographical
+      View, Logical View, Site Builder, Services, Workflow Builder, Scheduling, Results,
+    Page, Subpage, Devices]
   post_requests: [/add_edge, /add_instances_in_bulk, /add_objects_to_site, /bulk_deletion,
     /bulk_edit, /bulk_removal, /copy_service_in_workflow, /clear_results, /clear_configurations,
     /compare, /create_label, /delete_instance, /delete_builder_selection, /desktop_connection,
@@ -171,9 +171,9 @@
     /add_links_form, /add_users_form, /add_services_form, /access_form]
   menu: [Inventory, Visualization, Automation, Template]
   name: Full UI + HTTP access
-  pages: [Pools, Changelog, Sessions, Devices, Configurations, Links, Geographical
-      View, Logical View, Services, Workflow Builder, Scheduling, Results, Page, Subpage,
-    Devices]
+  pages: [Pools, Changelog, Sessions, Devices, Configurations, Links, Sites, Geographical
+      View, Logical View, Site Builder, Services, Workflow Builder, Scheduling, Results,
+    Page, Subpage, Devices]
   post_requests: [/add_edge, /add_instances_in_bulk, /add_objects_to_site, /bulk_deletion,
     /bulk_edit, /bulk_removal, /copy_service_in_workflow, /clear_results, /clear_configurations,
     /compare, /create_label, /delete_instance, /delete_builder_selection, /desktop_connection,

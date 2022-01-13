@@ -478,8 +478,8 @@ export function initBuilder() {
             a.name.localeCompare(b.name)
           );
           sortedInstances.forEach((instance) => {
-            instanceIds.add(instance.id);
-            $(`#current-${type} optgroup`).append(
+            instanceIds.add(instance.id.toString());
+            $(`#current-${type} optgroup[label="${category}"]`).append(
               `<option value="${instance.id}">${instance.name}</option>`
             );
           });

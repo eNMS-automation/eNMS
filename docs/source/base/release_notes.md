@@ -16,6 +16,7 @@ Version 4.2.0
 - Add SSH Proxy mechanism (multiple jump server in gateways property, gateway device subtype, priority
   tie-break mechanism)
 - Consider runtime limiting user / all toggle mechanism in the restart service window.
+- Move doc link to settings.json to allow custom doc links for plugins.
 - Remove pytest, coverage, and travis dependencies.
 
 Tests:
@@ -25,6 +26,7 @@ Tests:
 
 Migration:
 - Update all access with new GET / POST endpoints
+- Doc link in settings.json to be updated with custom doc links.
 - Redis config in settings.json
 
 Documentation update:

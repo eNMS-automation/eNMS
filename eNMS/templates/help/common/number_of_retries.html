@@ -1,24 +1,22 @@
 <div class="modal-body">
   <div>
     <p>
-      <b>Number of retries</b> specifies the number of additioanl times to run
-      the service after it completes with <b>Failure</b> result.
+      <b>Number of retries</b> specifies the number of additioanl times to run the
+      service after it completes with <b>Failure</b> result.
     </p>
   </div>
   <div>
     <p>
-      Tip: Retries can work along with the <b>Validation</b> section of
-      <b>Step 4</b> to create an active polling loop. For example, imagine the
-      case where running a slow asynchronous commandX on a device, the device
-      raises an alarm until commandX completes, and once completed, the alarm
-      clears. If the
-      workflow wait until commandX is complete, this can be
-      accomplished with 2 services: a) service 1 issues commandX, b) service 2
-      issues a command to show alarms with <b>Step 4</b> <b>Validation</b> set to
-      text match the Alarm Text -and- with <b>Negative Logic</b> enabled -and-
-      <b>Number of retries</b> set to a high number.  This will cause service 2 to fail
-      and retry showing alarms until the alarm clears, indicating that commandX is complete.
-      Then the workflow will continue.
+      Tip: Retries can work along with the <b>Validation</b> section of <b>Step 4</b> to
+      create an active polling loop. For example, imagine the case where running a slow
+      asynchronous commandX on a device, the device raises an alarm until commandX
+      completes, and once completed, the alarm clears. If the workflow wait until
+      commandX is complete, this can be accomplished with 2 services: a) service 1
+      issues commandX, b) service 2 issues a command to show alarms with <b>Step 4</b>
+      <b>Validation</b> set to text match the Alarm Text -and- with
+      <b>Negative Logic</b> enabled -and- <b>Number of retries</b> set to a high number.
+      This will cause service 2 to fail and retry showing alarms until the alarm clears,
+      indicating that commandX is complete. Then the workflow will continue.
     </p>
   </div>
 </div>

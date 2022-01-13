@@ -6,3 +6,9 @@
 *:focus {
   outline: none;
 }
+
+/* Color and size of optgroup in the drop-down list of top-level site / worklows */
+li.dropdown-header {
+  color: #050404;
+  font-weight: 550;
+}

@@ -474,7 +474,9 @@ export function initBuilder() {
       } else {
         for (const [category, instances] of Object.entries(result)) {
           $(`#current-${type}`).append(`<optgroup label="${category}">`);
-          const sortedInstances = instances.sort((a, b) => a.name.localeCompare(b.name));
+          const sortedInstances = instances.sort((a, b) =>
+            a.name.localeCompare(b.name)
+          );
           sortedInstances.forEach((instance) => {
             instanceIds.add(instance.id);
             $(`#current-${type} optgroup`).append(

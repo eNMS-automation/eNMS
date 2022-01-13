@@ -597,8 +597,10 @@ class Controller:
         }
 
     def get_top_level_instances(self, type):
-        constraint = {"constraints": {f"{type}s_filter": "empty"}}
-        return self.filtering(type, bulk="base_properties", **constraint)
+        result, constraints = defaultdict(list), {f"{type}s_filter": "empty"}
+        for instance in self.filtering(type, bulk="object", constraints=constraints):
+            result[instance.category or "Other"].append(instance.base_properties)
+        return result
 
     def get_tree_files(self, path):
         if path == "root":

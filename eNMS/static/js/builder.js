@@ -461,14 +461,18 @@ export function initBuilder() {
   $("#left-arrow,#right-arrow").addClass("disabled");
   call({
     url: `/get_top_level_instances/${type}`,
-    callback: function (instances) {
-      instances.sort((a, b) => a.name.localeCompare(b.name));
-      for (let i = 0; i < instances.length; i++) {
-        $(`#current-${type}`).append(
-          `<option value="${instances[i].id}">${instances[i].name}</option>`
-        );
+    callback: function (result) {
+      const instanceIds = new Set();
+      if (result.Other && Object.keys(result).length == 1) {
+        const instances = result.Other.sort((a, b) => a.name.localeCompare(b.name));
+        for (let i = 0; i < instances.length; i++) {
+          instanceIds.add(instances[i].id.toString());
+          $(`#current-${type}`).append(
+            `<option value="${instances[i].id}">${instances[i].name}</option>`
+          );
+        }
       }
-      if (currentPath && instances.some((w) => w.id == currentPath.split(">")[0])) {
+      if (currentPath && instanceIds.has(currentPath.split(">")[0])) {
         $(`#current-${type}`).val(currentPath.split(">")[0]);
         switchTo(currentPath);
       } else {

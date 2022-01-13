@@ -19,6 +19,7 @@ class Workflow(Service):
     pretty_name = "Workflow"
     parent_type = "service"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
+    category = db.Column(db.SmallString)
     close_connection = db.Column(Boolean, default=False)
     labels = db.Column(db.Dict, info={"log_change": False})
     services = relationship(

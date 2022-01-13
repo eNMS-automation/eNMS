@@ -175,9 +175,8 @@ export class Table {
     if (["changelog", "run", "result"].includes(this.type)) {
       this.table.order([0, "desc"]).draw();
     }
-    if (["run", "service", "task", "workflow"].includes(this.type)) {
-      refreshTablePeriodically(this.id, 3000, true);
-    }
+    const refreshRate = settings.tables.refresh[this.type];
+    if (refreshRate) refreshTablePeriodically(this.id, refreshRate, true);
   }
 
   exportTable(result) {

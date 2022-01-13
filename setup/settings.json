@@ -135,6 +135,13 @@
     "port_redirection": false,
     "start_port": 9000
   },
+  "tables": {
+    "refresh": {
+      "run": 5000,
+      "service": 3000,
+      "task": 3000
+    }
+  },
   "vault": {
     "unseal_vault": false,
     "use_vault": false

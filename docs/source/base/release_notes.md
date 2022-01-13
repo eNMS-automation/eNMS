@@ -17,6 +17,7 @@ Version 4.2.0
   tie-break mechanism)
 - Consider runtime limiting user / all toggle mechanism in the restart service window.
 - Move doc link to settings.json to allow custom doc links for plugins.
+- Move tables refresh rate to settings.json to allow for custom refresh rates.
 - Remove pytest, coverage, and travis dependencies.
 
 Tests:
@@ -27,6 +28,7 @@ Tests:
 Migration:
 - Update all access with new GET / POST endpoints
 - Doc link in settings.json to be updated with custom doc links.
+- Refresh rates in settings.json to be udpated (e.g 10s instead of 3 if RBAC is used)
 - Redis config in settings.json
 
 Documentation update:

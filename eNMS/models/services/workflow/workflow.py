@@ -7,7 +7,13 @@ from sqlalchemy.schema import UniqueConstraint
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
 from eNMS.forms import ServiceForm
-from eNMS.fields import BooleanField, HiddenField, InstanceField, SelectField
+from eNMS.fields import (
+    BooleanField,
+    HiddenField,
+    InstanceField,
+    SelectField,
+    StringField,
+)
 from eNMS.models.automation import Service
 from eNMS.runner import Runner
 from eNMS.variables import vs
@@ -187,6 +193,7 @@ class Workflow(Service):
 
 class WorkflowForm(ServiceForm):
     form_type = HiddenField(default="workflow")
+    category = StringField("Category")
     close_connection = BooleanField(default=False)
     run_method = SelectField(
         "Run Method",

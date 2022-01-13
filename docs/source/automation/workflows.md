@@ -38,10 +38,14 @@ The Workflow Builder's panel is organized into 3 blocks of controls:
     - `Create` (a new) top level workflow
     - `Add existing services` to the current workflow, which supports:
     
-        - Deep Copy: creates a new copy of an existing service in this workflow
-        - Shallow Copy: references an existing service in the current workflow
-          (Note: changing a referenced or shared service causes the change to
-          impact all workflows that use that service.)
+        - Deep Copy: creates a new localized copy of an existing service (or 
+          workflow) within the scope of the current workflow
+        - Shallow Copy: adds a reference to an existing shared service (or 
+          workflow) into the current workflow. Shallow copy only works on
+          shared services; attempting to shallow copy a non-shared service will
+          result in an error alert in the UI. Note that changing a shared
+          service causes the change to impact all workflows that use that
+          service.)
    
     - `Create a text label`
     - `Skip (or Unskip)` selected service(s) such that they do not run during

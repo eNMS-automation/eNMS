@@ -1116,7 +1116,7 @@
       "user_number"
     ],
     "run": ["service_properties"],
-    "service": ["scoped_name"],
+    "service": ["scoped_name", "mandatory_parametrization"],
     "site": ["scoped_name"],
     "task": ["frequency", "frequency_unit", "crontab_expression", "is_active"]
   },

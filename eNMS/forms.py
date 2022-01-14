@@ -547,9 +547,9 @@ class RestartWorkflowForm(BaseForm):
     targets = SelectField(
         "Targets",
         choices=(
-            ("Manually defined", "Use the devices manually defined below."),
-            ("Restart run", "Use the targets from the restart run."),
-            ("Workflow", "Use the targets defined at workflow level."),
+            ("Manually defined", "Use the Devices and Pools manually defined below."),
+            ("Restart run", "Use the Targets from the Restart Runtime selected above."),
+            ("Workflow", "Use the Targets selected in the parent Workflow"),
         ),
     )
     restart_devices = MultipleInstanceField("Devices", model="device")

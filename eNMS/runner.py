@@ -81,7 +81,13 @@ class Runner:
         else:
             raise AttributeError
 
-    def run_parameter(self, property):
+    def get(self, property):
+        if self.parameterized_run and property in self.payload["form"]:
+            return self.payload["form"][property]
+        else:
+            return getattr(self, property)
+
+    def get_target_property(self, property):
         if (
             self.is_main_run
             and self.restart_run
@@ -148,12 +154,12 @@ class Runner:
         return devices
 
     def compute_devices(self):
-        devices = set(self.run_parameter("target_devices"))
-        pools = self.run_parameter("target_pools")
-        if self.run_parameter("device_query"):
+        devices = set(self.get_target_property("target_devices"))
+        pools = self.get_target_property("target_pools")
+        if self.get_target_property("device_query"):
             devices |= self.compute_devices_from_query(
-                self.run_parameter("device_query"),
-                self.run_parameter("device_query_property"),
+                self.get_target_property("device_query"),
+                self.get_target_property("device_query_property"),
             )
         if self.is_main_run:
             self.main_run.target_devices = list(devices)

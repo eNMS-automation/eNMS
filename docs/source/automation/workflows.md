@@ -98,7 +98,7 @@ The Workflow Builder's panel is organized into 3 blocks of controls:
     
     To select one or multiple services:
     
-    - Ctrl + left-click
+    - Left-click to select one service, Ctrl + left-click to add to the selection
     - Keep right-click pressed and draw a rectangle.  Upon release, everything
       inside is selected
     - Right-click on a service will select the service and popup the 

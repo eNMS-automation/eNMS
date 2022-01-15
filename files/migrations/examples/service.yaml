@@ -47,6 +47,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
+    (R) Labels and Custom Property: [-256, -78]
     Advanced Iteration Targets: &id014 [-131, -24]
     Advanced Multiprocessing (admin): &id003 [-492, -39]
     Ansible with Validation: [-634, -20]
@@ -245,6 +246,7 @@
     Subworkflow 2: !!python/tuple [0, 0]
     Superworkflow in SxS w WT with Run Once service: *id051
     SxS Service Targets with Run Once + Skip: *id052
+    Target Restriction Mechanism: *id037
     Topology Import Service (netbox, librenms, opennms): *id045
     Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id046
     Using get_var, set_var, and get_result Functions: *id047
@@ -431,6 +433,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
+    (R) Labels and Custom Property: [669, -84]
     Advanced Iteration Targets: &id081 [350, -6]
     Advanced Multiprocessing (admin): &id070 [505, -10]
     Ansible with Validation: [468, 147]
@@ -632,6 +635,7 @@
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
+    Target Restriction Mechanism: *id104
     Topology Import Service (netbox, librenms, opennms): *id112
     Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id113
     Using get_var, set_var, and get_result Functions: *id114
@@ -14948,7 +14952,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
-  category: ''
+  category: RBAC
   close_connection: false
   completion_time: 1
   content_match: ''
@@ -15002,7 +15006,7 @@
         \ \"authentication (keyboard-interactive)\".\r\nThe logs also indicate which\
         \ credentials were used."
       positions: ['-71', '-110']
-  last_modified: '2021-10-09 03:25:58.349160'
+  last_modified: '2022-01-15 07:51:27.989861'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -15016,7 +15020,7 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
+  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -16254,7 +16258,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
-  category: ''
+  category: RBAC
   close_connection: false
   completion_time: 1
   content_match: ''
@@ -16294,7 +16298,7 @@
         \ must apply to direct targets as well as\r\niteration and device targets.\r\
         \nMust be run both in DxD and SxS w/ WF targets mode."
       positions: [279, -88]
-  last_modified: '2021-10-09 03:25:58.591255'
+  last_modified: '2022-01-15 07:51:11.373697'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -16302,13 +16306,13 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: RBAC Target Restriction
+  name: Target Restriction Mechanism
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
+  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -16326,12 +16330,12 @@
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
-  scoped_name: RBAC Target Restriction
+  scoped_name: Target Restriction Mechanism
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[RBAC Target Restriction] Direct Target',
-    '[RBAC Target Restriction] Device Targets', '[RBAC Target Restriction] Iteration
-      Targets']
+  services: ['[Shared] Start', '[Shared] End', '[Target Restriction Mechanism] Direct
+      Target', '[Target Restriction Mechanism] Device Targets', '[Target Restriction
+      Mechanism] Iteration Targets']
   shared: false
   skip: {}
   skip_query: ''
@@ -16381,7 +16385,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[RBAC Target Restriction] Direct Target'
+  name: '[Target Restriction Mechanism] Direct Target'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -16400,6 +16404,7 @@
   positions:
     RBAC Target Restriction: &id293 [-162, 99]
     'Regression Workflow: RBAC Target Restriction': *id293
+    Target Restriction Mechanism: *id293
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -16460,7 +16465,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[RBAC Target Restriction] Device Targets'
+  name: '[Target Restriction Mechanism] Device Targets'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -16479,6 +16484,7 @@
   positions:
     RBAC Target Restriction: &id294 [181, 119]
     'Regression Workflow: RBAC Target Restriction': *id294
+    Target Restriction Mechanism: *id294
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -16539,7 +16545,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[RBAC Target Restriction] Iteration Targets'
+  name: '[Target Restriction Mechanism] Iteration Targets'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -16558,6 +16564,7 @@
   positions:
     RBAC Target Restriction: &id295 [590, 138]
     'Regression Workflow: RBAC Target Restriction': *id295
+    Target Restriction Mechanism: *id295
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -17057,7 +17064,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
-  category: ''
+  category: Parameterized Form
   close_connection: false
   completion_time: 1
   content_match: ''
@@ -17085,23 +17092,23 @@
   labels:
     19c40c2f-b0c6-4c33-b1b7-22085dcb07e3:
       alignment: left
-      content: "Uses a parameterized form to define the value of an interface.\r\n\
-        Services use netmiko to show the description of the interface.\r\nThe parameterized\
-        \ run uses the \"labels\" property to add labels\r\nto the run object.\r\n\
-        The workflow has \"device query\" set to \"Atlanta\". Since the\r\ndevice\
-        \ query is not part of the paramterized form, it should be\r\nconsidered when\
-        \ running the workflow and Atlanta should be\r\na target."
-      positions: [234, -86]
+      content: "Runs on two devices: San Diego and Dallas.\r\nUses a parameterized\
+        \ form to define the value of an interface.\r\nBoth services use netmiko to\
+        \ show the description of the interface:\r\n* the first service access the\
+        \ interface from the payload, with payload[\"form\"].\r\n* the second service\
+        \ access the interface as a global variable.\r\nThe parameterized run uses\
+        \ the \"labels\" property to add labels\r\nto the run object."
+      positions: [225, -24]
     46e3d026-f4f9-4d74-9ba9-2807c97ffe18:
       alignment: left
       content: 'Access the interface as a global variable: "interface"'
-      positions: [438, 187]
+      positions: [449, 186]
     fded87ef-2b4a-4cdb-9f21-5c81981bde15:
       alignment: left
       content: "Access the interface property directly from the payload :\r\n\"payload[\"\
         form\"][\"interface\"]\"\r\n"
-      positions: [-82, 204]
-  last_modified: '2021-10-09 03:25:58.694778'
+      positions: [-88, 196]
+  last_modified: '2022-01-15 07:58:36.303716'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -17109,19 +17116,17 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: Parameterized Form (override labels & targets, add payload)
+  name: (R) Labels and Custom Property
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
-  parameterized_form: "target_devices = MultipleInstanceField(\"Devices\", model=\"\
-    device\")\r\ntarget_pools = MultipleInstanceField(\"Pools\", model=\"pool\")\r\
-    \nlabels = SelectMultipleStringField(\r\n  \"Labels\",\r\n  choices=(\r\n    (\"\
-    tag1\", \"Tag 1\"),\r\n    (\"tag2\", \"Tag 2\"),\r\n    (\"precheck\", \"Pre-checks\"\
-    ),\r\n    (\"postcheck\", \"Post-checks\"))\r\n)\r\ninterface = StringField(\"\
-    Interface\", default=\"Lo1\")\r\n"
+  owners_access: '[]'
+  parameterized_form: "labels = SelectMultipleStringField(\r\n  \"Labels\",\r\n  choices=(\r\
+    \n    (\"tag1\", \"Tag 1\"),\r\n    (\"tag2\", \"Tag 2\"),\r\n    (\"precheck\"\
+    , \"Pre-checks\"),\r\n    (\"postcheck\", \"Post-checks\"))\r\n)\r\ninterface\
+    \ = StringField(\"Interface\", default=\"Lo1\")\r\n"
   pools: [Everything]
   positions: {}
   postprocessing: ''
@@ -17131,12 +17136,12 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: Parameterized Form (override labels & targets, add payload)
+  scoped_name: (R) Labels and Custom Property
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Parameterized Form (override labels
-      & targets, add payload)] Show interface from initial form (default: Lo1)', '[Parameterized
-      Form (override labels & targets, add payload)] Show inteface as global variable']
+  services: ['[Shared] Start', '[Shared] End', '[(R) Labels and Custom Property] Show
+      interface from initial form (default: Lo1)', '[(R) Labels and Custom Property]
+      Show inteface as global variable']
   shared: false
   skip: {}
   skip_query: ''
@@ -17209,8 +17214,8 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Parameterized Form (override labels & targets, add payload)] Show interface
-    from initial form (default: Lo1)'
+  name: '[(R) Labels and Custom Property] Show interface from initial form (default:
+    Lo1)'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -17227,6 +17232,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
+    (R) Labels and Custom Property: [-78, 122]
     Parameterized Form (override labels & targets, add payload): &id300 [-78, 122]
     'Regression Workflow: Parameterized Form (override labels & targets, add payload)': *id300
   postprocessing: ''
@@ -21734,8 +21740,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Parameterized Form (override labels & targets, add payload)] Show inteface
-    as global variable'
+  name: '[(R) Labels and Custom Property] Show inteface as global variable'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -21752,6 +21757,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
+    (R) Labels and Custom Property: [435, 130]
     Parameterized Form (override labels & targets, add payload): &id332 [435, 118]
     'Regression Workflow: Parameterized Form (override labels & targets, add payload)': *id332
   postprocessing: ''

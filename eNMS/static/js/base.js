@@ -1063,7 +1063,7 @@ function doc(page) {
     workflow_builder_table: "automation/workflows/",
     workflow_builder: "automation/workflows/",
     geographical_view: "inventory/network_visualization/#geographic-view",
-    logical_view: "inventory/network_visualization/#logical-view"
+    logical_view: "inventory/network_visualization/#logical-view",
   }[page];
   $("#doc-link").attr("href", `${settings.app.documentation_url}${endpoint || ""}`);
 }

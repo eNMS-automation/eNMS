@@ -1462,95 +1462,87 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2021-12-29 02:00:40.390281',
   source: '[Basic: Deletion (Device, Link, Service, Task)] Service2', subtype: success,
   type: workflow_edge, workflow: 'Basic: Deletion (Device, Link, Service, Task)'}
-- {color: green, destination: '[REST API: GET Endpoints is_alive, configuration and
-    instance] is_alive', label: success, name: '2021-12-30 04:58:50.635488', source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints
-    is_alive, configuration and instance'}
-- {color: green, destination: '[REST API: GET Endpoints is_alive, configuration and
-    instance] configuration', label: success, name: '2021-12-30 04:58:52.034555',
-  source: '[REST API: GET Endpoints is_alive, configuration and instance] is_alive',
-  subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints is_alive,
+- {color: green, destination: '[GET Endpoints is_alive, configuration and instance]
+    is_alive', label: success, name: '2021-12-30 04:58:50.635488', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'GET Endpoints is_alive,
     configuration and instance'}
-- {color: green, destination: '[REST API: GET Endpoints is_alive, configuration and
-    instance] operational_data', label: success, name: '2021-12-30 05:24:35.948532',
-  source: '[REST API: GET Endpoints is_alive, configuration and instance] configuration',
-  subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints is_alive,
-    configuration and instance'}
-- {color: green, destination: '[REST API: GET Endpoints is_alive, configuration and
-    instance] instance - device', label: success, name: '2021-12-30 09:21:27.437082',
-  source: '[REST API: GET Endpoints is_alive, configuration and instance] operational_data',
-  subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints is_alive,
-    configuration and instance'}
-- {color: green, destination: '[REST API: GET Endpoints is_alive, configuration and
-    instance] instance - user', label: success, name: '2021-12-30 09:32:09.462081',
-  source: '[REST API: GET Endpoints is_alive, configuration and instance] instance
-    - device', subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints
-    is_alive, configuration and instance'}
+- {color: green, destination: '[GET Endpoints is_alive, configuration and instance]
+    configuration', label: success, name: '2021-12-30 04:58:52.034555', source: '[GET
+    Endpoints is_alive, configuration and instance] is_alive', subtype: success, type: workflow_edge,
+  workflow: 'GET Endpoints is_alive, configuration and instance'}
+- {color: green, destination: '[GET Endpoints is_alive, configuration and instance]
+    operational_data', label: success, name: '2021-12-30 05:24:35.948532', source: '[GET
+    Endpoints is_alive, configuration and instance] configuration', subtype: success,
+  type: workflow_edge, workflow: 'GET Endpoints is_alive, configuration and instance'}
+- {color: green, destination: '[GET Endpoints is_alive, configuration and instance]
+    instance - device', label: success, name: '2021-12-30 09:21:27.437082', source: '[GET
+    Endpoints is_alive, configuration and instance] operational_data', subtype: success,
+  type: workflow_edge, workflow: 'GET Endpoints is_alive, configuration and instance'}
+- {color: green, destination: '[GET Endpoints is_alive, configuration and instance]
+    instance - user', label: success, name: '2021-12-30 09:32:09.462081', source: '[GET
+    Endpoints is_alive, configuration and instance] instance - device', subtype: success,
+  type: workflow_edge, workflow: 'GET Endpoints is_alive, configuration and instance'}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-12-30 09:32:10.672966',
-  source: '[REST API: GET Endpoints is_alive, configuration and instance] instance
-    - user', subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints
-    is_alive, configuration and instance'}
-- {color: green, destination: '[REST API: GET Endpoints query and token] Query Device
-    - Washington', label: success, name: '2021-12-30 10:20:33.363327', source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'REST API: GET Endpoints
-    query and token'}
-- {color: green, destination: '[REST API: GET Endpoints query and token] Query Device
-    - NonExisting', label: success, name: '2021-12-30 10:30:11.496504', source: '[REST
-    API: GET Endpoints query and token] Query Device - Washington', subtype: success,
-  type: workflow_edge, workflow: 'REST API: GET Endpoints query and token'}
-- {color: green, destination: '[REST API: GET Endpoints query and token] Query Device
-    - OS eos', label: success, name: '2021-12-30 10:51:49.275620', source: '[REST
-    API: GET Endpoints query and token] Query Device - NonExisting', subtype: success,
-  type: workflow_edge, workflow: 'REST API: GET Endpoints query and token'}
-- {color: green, destination: '[REST API: GET Endpoints query and token] Get Token',
-  label: success, name: '2021-12-30 10:56:24.181911', source: '[REST API: GET Endpoints
-    query and token] Query Device - OS eos', subtype: success, type: workflow_edge,
-  workflow: 'REST API: GET Endpoints query and token'}
+  source: '[GET Endpoints is_alive, configuration and instance] instance - user',
+  subtype: success, type: workflow_edge, workflow: 'GET Endpoints is_alive, configuration
+    and instance'}
+- {color: green, destination: '[GET Endpoints query and token] Query Device - Washington',
+  label: success, name: '2021-12-30 10:20:33.363327', source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: GET Endpoints query and token}
+- {color: green, destination: '[GET Endpoints query and token] Query Device - NonExisting',
+  label: success, name: '2021-12-30 10:30:11.496504', source: '[GET Endpoints query
+    and token] Query Device - Washington', subtype: success, type: workflow_edge,
+  workflow: GET Endpoints query and token}
+- {color: green, destination: '[GET Endpoints query and token] Query Device - OS eos',
+  label: success, name: '2021-12-30 10:51:49.275620', source: '[GET Endpoints query
+    and token] Query Device - NonExisting', subtype: success, type: workflow_edge,
+  workflow: GET Endpoints query and token}
+- {color: green, destination: '[GET Endpoints query and token] Get Token', label: success,
+  name: '2021-12-30 10:56:24.181911', source: '[GET Endpoints query and token] Query
+    Device - OS eos', subtype: success, type: workflow_edge, workflow: GET Endpoints
+    query and token}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-12-30 10:56:25.486031',
-  source: '[REST API: GET Endpoints query and token] Get Token', subtype: success,
-  type: workflow_edge, workflow: 'REST API: GET Endpoints query and token'}
-- {color: green, destination: '[REST API: POST Endpoint search] First 5 devices',
-  label: success, name: '2021-12-30 11:08:32.597472', source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: 'REST API: POST Endpoint search'}
-- {color: green, destination: '[REST API: POST Endpoint search] Devices with i', label: success,
-  name: '2021-12-30 11:39:38.851253', source: '[REST API: POST Endpoint search] First
-    5 devices', subtype: success, type: workflow_edge, workflow: 'REST API: POST Endpoint
-    search'}
-- {color: green, destination: '[REST API: POST Endpoint search] Configuration with
-    regex TRAFFIC-dd', label: success, name: '2021-12-30 12:25:03.239301', source: '[REST
-    API: POST Endpoint search] Devices with i', subtype: success, type: workflow_edge,
-  workflow: 'REST API: POST Endpoint search'}
+  source: '[GET Endpoints query and token] Get Token', subtype: success, type: workflow_edge,
+  workflow: GET Endpoints query and token}
+- {color: green, destination: '[POST Endpoint search] First 5 devices', label: success,
+  name: '2021-12-30 11:08:32.597472', source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: POST Endpoint search}
+- {color: green, destination: '[POST Endpoint search] Devices with i', label: success,
+  name: '2021-12-30 11:39:38.851253', source: '[POST Endpoint search] First 5 devices',
+  subtype: success, type: workflow_edge, workflow: POST Endpoint search}
+- {color: green, destination: '[POST Endpoint search] Configuration with regex TRAFFIC-dd',
+  label: success, name: '2021-12-30 12:25:03.239301', source: '[POST Endpoint search]
+    Devices with i', subtype: success, type: workflow_edge, workflow: POST Endpoint
+    search}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-12-30 12:29:13.526131',
-  source: '[REST API: POST Endpoint search] Configuration with regex TRAFFIC-dd',
-  subtype: success, type: workflow_edge, workflow: 'REST API: POST Endpoint search'}
-- {color: green, destination: '[REST API: POST update, DELETE delete and GET & POST
-    results] POST Create NewDevice', label: success, name: '2021-12-31 03:20:01.023676',
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'REST
-    API: POST update, DELETE delete and GET & POST results'}
-- {color: green, destination: '[REST API: POST update, DELETE delete and GET & POST
-    results] POST Update NewDevice property1', label: success, name: '2021-12-31 03:20:01.894998',
-  source: '[REST API: POST update, DELETE delete and GET & POST results] POST Create
-    NewDevice', subtype: success, type: workflow_edge, workflow: 'REST API: POST update,
-    DELETE delete and GET & POST results'}
-- {color: green, destination: '[REST API: POST update, DELETE delete and GET & POST
-    results] DELETE NewDevice', label: success, name: '2021-12-31 03:25:07.815735',
-  source: '[REST API: POST update, DELETE delete and GET & POST results] POST Update
-    NewDevice property1', subtype: success, type: workflow_edge, workflow: 'REST API:
-    POST update, DELETE delete and GET & POST results'}
-- {color: green, destination: '[REST API: POST update, DELETE delete and GET & POST
-    results] GET result', label: success, name: '2021-12-31 03:33:31.545144', source: '[REST
-    API: POST update, DELETE delete and GET & POST results] DELETE NewDevice', subtype: success,
-  type: workflow_edge, workflow: 'REST API: POST update, DELETE delete and GET & POST
-    results'}
-- {color: green, destination: '[REST API: POST update, DELETE delete and GET & POST
-    results] POST Search Result', label: success, name: '2021-12-31 03:48:10.355955',
-  source: '[REST API: POST update, DELETE delete and GET & POST results] GET result',
-  subtype: success, type: workflow_edge, workflow: 'REST API: POST update, DELETE
+  source: '[POST Endpoint search] Configuration with regex TRAFFIC-dd', subtype: success,
+  type: workflow_edge, workflow: POST Endpoint search}
+- {color: green, destination: '[POST update, DELETE delete and GET & POST results]
+    POST Create NewDevice', label: success, name: '2021-12-31 03:20:01.023676', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'POST update, DELETE
     delete and GET & POST results'}
+- {color: green, destination: '[POST update, DELETE delete and GET & POST results]
+    POST Update NewDevice property1', label: success, name: '2021-12-31 03:20:01.894998',
+  source: '[POST update, DELETE delete and GET & POST results] POST Create NewDevice',
+  subtype: success, type: workflow_edge, workflow: 'POST update, DELETE delete and
+    GET & POST results'}
+- {color: green, destination: '[POST update, DELETE delete and GET & POST results]
+    DELETE NewDevice', label: success, name: '2021-12-31 03:25:07.815735', source: '[POST
+    update, DELETE delete and GET & POST results] POST Update NewDevice property1',
+  subtype: success, type: workflow_edge, workflow: 'POST update, DELETE delete and
+    GET & POST results'}
+- {color: green, destination: '[POST update, DELETE delete and GET & POST results]
+    GET result', label: success, name: '2021-12-31 03:33:31.545144', source: '[POST
+    update, DELETE delete and GET & POST results] DELETE NewDevice', subtype: success,
+  type: workflow_edge, workflow: 'POST update, DELETE delete and GET & POST results'}
+- {color: green, destination: '[POST update, DELETE delete and GET & POST results]
+    POST Search Result', label: success, name: '2021-12-31 03:48:10.355955', source: '[POST
+    update, DELETE delete and GET & POST results] GET result', subtype: success, type: workflow_edge,
+  workflow: 'POST update, DELETE delete and GET & POST results'}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-12-31 03:48:11.763703',
-  source: '[REST API: POST update, DELETE delete and GET & POST results] POST Search
-    Result', subtype: success, type: workflow_edge, workflow: 'REST API: POST update,
-    DELETE delete and GET & POST results'}
+  source: '[POST update, DELETE delete and GET & POST results] POST Search Result',
+  subtype: success, type: workflow_edge, workflow: 'POST update, DELETE delete and
+    GET & POST results'}
 - {color: green, destination: '[Gateway Mechanism (SSH Proxy with Paramiko)] Gateway
     1', label: success, name: '2022-01-01 03:00:48.411449', source: '[Shared] Start',
   subtype: success, type: workflow_edge, workflow: Gateway Mechanism (SSH Proxy with

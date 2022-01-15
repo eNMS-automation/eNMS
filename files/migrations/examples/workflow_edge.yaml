@@ -1561,3 +1561,9 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2022-01-15 06:13:19.512912',
   source: '[Parameterized Multiprocessing] Empty Service', subtype: success, type: workflow_edge,
   workflow: Parameterized Multiprocessing}
+- {color: green, destination: '[Parameterized Targets] Empty Service', label: success,
+  name: '2022-01-15 08:09:25.768244', source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: Parameterized Targets}
+- {color: green, destination: '[Shared] End', label: success, name: '2022-01-15 08:09:27.158275',
+  source: '[Parameterized Targets] Empty Service', subtype: success, type: workflow_edge,
+  workflow: Parameterized Targets}

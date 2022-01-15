@@ -1,15 +1,11 @@
 <div class="modal-body">
   <div>
     <p>
-      <b>Groups</b> is a comma separated list of arbitrary names available for
-      matching pools.  RBAC manages collections of services using pools.
-      Service membership in a pool is based on filters available for many
-      properties of a service.
-    <p/>
-    <p>
-      When a user creates a service, that user's <b>Groups</b> supply the
-      default <b>Groups</b> assigned to the service; meaning users in their
-      group also get access.
+      <b>Groups</b> are a pool of users that can access objects such as services and
+      devices, which help define the role based access structure. Adding a group string
+      to this field will allow the specified group access to this service object.
+      Likewise, removing a string will remove that groups access. This is a comma
+      separated field.
     </p>
   </div>
 </div>

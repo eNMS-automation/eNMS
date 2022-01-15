@@ -192,7 +192,6 @@
     "/get_git_history": "access",
     "/get_device_network_data": "access",
     "/get_device_logs": "access",
-    "/get_exported_services": "access",
     "/get_form_properties": "all",
     "/get_git_network_data": "access",
     "/get_git_content": "admin",

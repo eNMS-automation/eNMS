@@ -478,10 +478,6 @@ class Controller:
             for property in vs.configuration_properties
         }
 
-    def get_exported_services(self):
-        files = listdir(vs.path / "files" / "services")
-        return [file for file in files if ".tgz" in file]
-
     def get_form_properties(self, service_id):
         form_factory.register_parameterized_form(service_id)
         return vs.form_properties[f"initial-{service_id}"]

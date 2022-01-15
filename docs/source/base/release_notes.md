@@ -19,6 +19,7 @@ Version 4.2.0
 - Move doc link to settings.json to allow custom doc links for plugins.
 - Move tables refresh rate to settings.json to allow for custom refresh rates.
 - New "Category" property / mechanism for the drop-down list of the site and workflow builder.
+- Reinstate service selection with single left click (Ctrl no longer needed)
 - Remove pytest, coverage, and travis dependencies.
 
 Tests:

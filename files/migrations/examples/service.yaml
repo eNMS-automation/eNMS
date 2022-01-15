@@ -98,7 +98,7 @@
     Parameterized Form (override labels & targets, add payload): &id034 [-262, -163]
     Parameterized Multiprocessing: [-169, 101]
     Parameterized Superworkflow Run: &id035 [-293, -76]
-    Parameterized Targets: [-180, 60]
+    Parameterized Targets: [-54, -115]
     Payload Extraction & Validation: [-308, -170]
     Payload Extraction with Operations: &id036 [-661, -226]
     Preprocessing and Postprocessing Mechanism: &id015 [-197, -37]
@@ -484,7 +484,7 @@
     Parameterized Form (override labels & targets, add payload): &id101 [692, -112]
     Parameterized Multiprocessing: [615, 109]
     Parameterized Superworkflow Run: &id102 [565, -70]
-    Parameterized Targets: [651, 78]
+    Parameterized Targets: [-41, 252]
     Payload Extraction & Validation: [279, 262]
     Payload Extraction with Operations: &id103 [-688, -153]
     Preprocessing and Postprocessing Mechanism: &id082 [619, 353]
@@ -29535,6 +29535,21 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    4a30f572-f837-428f-9f47-52f012b79779:
+      alignment: left
+      content: "Step 2: \r\n- Edit the workflow to remove the device query from the\
+        \ parameterized form.\r\nNow that it is no longer defined in the form, the\
+        \ value of device query should\r\ncome from the workflow, where it is set\
+        \ to [\"Atlanta\"].\r\n- Run the workflow with empty parameterized form and\
+        \ check that the\r\nworkflow now runs on Atlanta.\r\n- Run the workflow with\
+        \ devices set to \"Jackson\", \"PaloAlto\" and chekc that\r\nthe workflow\
+        \ runs on Atlanta, PaloAlto and Jackson.\r\n- Edit the workflow to remove\
+        \ the \"devices\" property\r\n- Run the workflow with empty parameterized\
+        \ form and check that it now\r\nruns on Austin and Atlanta.\r\n- Edit the\
+        \ workflow to have no parameterized properties.\r\n- Run the workflow with\
+        \ parameterized form, and check that it runs on the\r\noriginal workflow targets:\
+        \ Austin, Washington and Atlanta."
+      positions: [329, 91]
     4eaef783-740b-4b1a-973b-657d2fe0b42a:
       alignment: left
       content: "The parameterized form contains all target related properties:\r\n\
@@ -29550,8 +29565,8 @@
         \n- Run the workflow with \"Washington\" as parameterized pool and\r\n\"Boston\"\
         \ as parameterized device query: check that only these two\r\ndevices are\
         \ used as targets."
-      positions: [256, -52]
-  last_modified: '2022-01-15 08:09:53.522178'
+      positions: [-388, 95]
+  last_modified: '2022-01-15 08:19:50.665518'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -29650,7 +29665,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    Parameterized Targets: [208, 179]
+    Parameterized Targets: [-49, 79]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''

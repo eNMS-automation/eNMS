@@ -231,9 +231,8 @@
                 </li>
                 <li class="nav-item">
                   <a
-                    id="doc-link"
                     target="_blank"
-                    href="https://enms.readthedocs.io/en/latest"
+                    href="{{ settings['app']['documentation_url'] }}/{{ settings['docs'][endpoint] }}"
                   >
                     <img
                       src="{{ url_for('static', filename='img/readthedocs.png') }}"

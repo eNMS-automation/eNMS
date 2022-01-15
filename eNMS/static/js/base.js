@@ -1024,11 +1024,6 @@ function fullScreen() {
   }
 }
 
-function doc(page) {
-  const endpoint = settings.docs[page] || "";
-  $("#doc-link").attr("href", `${settings.app.documentation_url}${endpoint}`);
-}
-
 function switchTheme(theme) {
   $(`link[href="/static/css/themes/${currentTheme}.css"]`).remove();
   currentTheme = theme;
@@ -1131,7 +1126,6 @@ $(document).ready(function () {
   } else if (page == "dashboard") {
     initDashboard();
   }
-  doc(page);
   detectUserInactivity();
   createTooltips();
 });

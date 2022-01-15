@@ -935,24 +935,10 @@ table.dataTable thead > tr > th.sorting_desc {
 
 /* Override Dropzone animation to slides-in instead of passing-through. */
 /* Override Dropzone position to be slightly lower. */
-.dropzone .dz-preview.dz-success .dz-success-mark {
-  opacity: 1;
-  margin-top: 5px;
-  align: left,
-  width: 100%;
-  -webkit-animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
-  -moz-animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
-  -ms-animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
-  -o-animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
-  animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
-}
-
-/* Override Dropzone position to be slightly lower. */
+.dropzone .dz-preview.dz-success .dz-success-mark,
 .dropzone .dz-preview.dz-error .dz-error-mark {
   opacity: 1;
   margin-top: 5px;
-  align: left,
-  width: 100%;
   -webkit-animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
   -moz-animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
   -ms-animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);

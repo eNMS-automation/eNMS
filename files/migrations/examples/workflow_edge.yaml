@@ -1566,3 +1566,9 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2022-01-01 03:02:06.375942',
   source: '[Automation: gateways (SSH Proxy with Paramiko)] Both', subtype: success,
   type: workflow_edge, workflow: 'Automation: gateways (SSH Proxy with Paramiko)'}
+- {color: green, destination: '[Parameterized Multiprocessing] Empty Service', label: success,
+  name: '2022-01-15 06:13:18.168148', source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: Parameterized Multiprocessing}
+- {color: green, destination: '[Shared] End', label: success, name: '2022-01-15 06:13:19.512912',
+  source: '[Parameterized Multiprocessing] Empty Service', subtype: success, type: workflow_edge,
+  workflow: Parameterized Multiprocessing}

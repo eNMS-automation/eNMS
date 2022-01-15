@@ -180,11 +180,11 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [Layout of Large Graph, Duplicate me 2, L1 Site, Subsubsite and Subsubsubsite,
-    'Duplication of Devices, Subsites and Top-level Sites', Subsite and Teleport Mechanism,
-    Subsite 1, Large Network Display, L3 Site, Loopback and Parallel Links, Top-level
-      Devices and Links, 'Creation, Edit and Deletion', Import with Add Connected
-      Nodes and Links, L2 Site, Subsite 2]
+  sites: ['Duplication of Devices, Subsites and Top-level Sites', Import with Add
+      Connected Nodes and Links, Subsite 2, Subsite and Teleport Mechanism, L2 Site,
+    Layout of Large Graph, L1 Site, Subsubsite and Subsubsubsite, Top-level Devices
+      and Links, Loopback and Parallel Links, Subsite 1, 'Creation, Edit and Deletion',
+    Duplicate me 2, L3 Site, Large Network Display]
   target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
@@ -746,7 +746,7 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: [Scalability Test (large workflow)]
+  target_services: [Scalability Test (large workflow), Parameterized Multiprocessing]
   tasks: []
   type: pool
   user_description: ''
@@ -3455,11 +3455,11 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [Layout of Large Graph, Duplicate me 2, L1 Site, Subsubsite and Subsubsubsite,
-    'Duplication of Devices, Subsites and Top-level Sites', Subsite and Teleport Mechanism,
-    Subsite 1, Large Network Display, L3 Site, Loopback and Parallel Links, Top-level
-      Devices and Links, 'Creation, Edit and Deletion', Import with Add Connected
-      Nodes and Links, L2 Site, Subsite 2]
+  sites: ['Duplication of Devices, Subsites and Top-level Sites', Import with Add
+      Connected Nodes and Links, Subsite 2, Subsite and Teleport Mechanism, L2 Site,
+    Layout of Large Graph, L1 Site, Subsubsite and Subsubsubsite, Top-level Devices
+      and Links, Loopback and Parallel Links, Subsite 1, 'Creation, Edit and Deletion',
+    Duplicate me 2, L3 Site, Large Network Display]
   target_services: []
   tasks: []
   type: pool

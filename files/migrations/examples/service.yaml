@@ -90,6 +90,7 @@
     Operational Data Backup (admin): &id007 [-648, 121]
     Optional Prerequisite Services: &id030 [-356, 121]
     Parameterized Form (override labels & targets, add payload): &id031 [-262, -163]
+    Parameterized Multiprocessing: [-169, 101]
     Parameterized Superworkflow Run: &id032 [-293, -76]
     Payload Extraction & Validation: [-308, -170]
     Payload Extraction with Operations: &id033 [-661, -226]
@@ -467,6 +468,7 @@
     Operational Data Backup (admin): &id071 [290, 314]
     Optional Prerequisite Services: &id094 [734, 171]
     Parameterized Form (override labels & targets, add payload): &id095 [692, -112]
+    Parameterized Multiprocessing: [615, 109]
     Parameterized Superworkflow Run: &id096 [565, -70]
     Payload Extraction & Validation: [279, 262]
     Payload Extraction with Operations: &id097 [-688, -153]
@@ -29301,6 +29303,172 @@
   update_target_pools: false
   use_device_driver: true
   use_textfsm: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  visualization_target: false
+  waiting_time: 0
+- access_groups: admin
+  category: Parameterized Form
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    66f7ccdc-b1bd-421d-acb4-3af6ca3e39eb:
+      alignment: left
+      content: "This workflow tests that multiprocessing can be used as part of a\r\
+        \nparameterized form.\r\nIt tests the \"Runner.get\" function that returns\
+        \ the property of the\r\nparameterized form if it exists, and the property\
+        \ of the Run otherwise.\r\nThe workflow must be run :\r\n- without parameterized\
+        \ form, in which case the multiprocessing configuration\r\ncomes from the\
+        \ workflow itself: it is enabled and should use 2 processes.\r\n- with paramterized\
+        \ form, in which case the multiprocessing configuration\r\ncomes from the\
+        \ form. By default, it is configured to use 5 processes.\r\nTo be tested with\
+        \ paramterized form :\r\n* default configuration\r\n* different number of\
+        \ process\r\n* multiprocessing disabled"
+      positions: [287, -66]
+  last_modified: '2022-01-15 06:14:22.375612'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 2
+  maximum_runs: 1
+  multiprocessing: true
+  name: Parameterized Multiprocessing
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "multiprocessing = BooleanField('Multiprocessing', default=True)\r\
+    \nmax_processes = IntegerField('Maximum number of processes', default=5)"
+  pools: [Everything]
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Parameterized Multiprocessing
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Parameterized Multiprocessing] Empty
+      Service']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: [Datacenter San Francisco]
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  visualization_target: false
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2022-01-15 06:13:13.584906'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Parameterized Multiprocessing] Empty Service'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    Parameterized Multiprocessing: [216, 129]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Empty Service
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
   validation_condition: none
   validation_method: text
   validation_section: results['result']

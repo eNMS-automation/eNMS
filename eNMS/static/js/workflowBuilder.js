@@ -95,7 +95,6 @@ export function displayWorkflow(workflowData) {
   graph.on("click", function (event) {
     const node = this.getNodeAt(event.pointer.DOM);
     if (currentMode != "motion" && !node) switchMode("motion", true);
-    if (!ctrlKeyPressed) graph.selectNodes([]);
   });
   graph.on("doubleClick", function (event) {
     event.event.preventDefault();

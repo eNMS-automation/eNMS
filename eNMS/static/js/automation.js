@@ -793,20 +793,26 @@ function showImportServicesPanel() {
     title: "Import Services",
     size: "600 350",
     callback: () => {
-      call({
-        url: "/get_exported_services",
-        callback: function (services) {
-          const element = document.getElementById(`dropzone-services`);
-          new Dropzone(element, {
-            url: "/import_services",
-            accept: function (file, done) {
-              if (!file.name.includes(".tgz")) {
-                notify("The file must be a .tgz archive", "error", 5);
-              } else {
-                done();
-              }
-            },
-          });
+      new Dropzone(document.getElementById(`dropzone-services`), {
+        url: "/import_services",
+        timeout: 180000,
+        error: function (file, message) {
+          const log = `File ${file.name} was not uploaded - ${message}`;
+          notify(log, "error", 5, true);
+          file.previewElement.classList.add("dz-error");
+        },
+        success: function (file, message) {
+          const log = `File ${file.name} uploaded with response ${message}`;
+          notify(log, "success", 5, true);
+          file.previewElement.classList.add("dz-success");
+        },
+        accept: function (file, done) {
+          if (!file.name.toLowerCase().endsWith(".tgz")) {
+            done("The file must be a .tgz archive");
+          } else {
+            notify(`File ${file.name} accepted for upload.`, "success", 5, true);
+            done();
+          }
         },
       });
     },

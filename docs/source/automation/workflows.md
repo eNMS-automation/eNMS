@@ -90,9 +90,19 @@ The Workflow Builder's panel is organized into 3 blocks of controls:
 
 !!! note
 
-    Some of these actions are also available from right-click mouse menus.
+    **Mouse Control**
+    
+    Many of the above actions are also available from right-click mouse menus.
     Clicking on the background, on a service or on an edge generate
     different menus.
+    
+    To select one or multiple services:
+    
+    - Ctrl + left-click
+    - Keep right-click pressed and draw a rectangle.  Upon release, everything
+      inside is selected
+    - Right-click on a service will select the service and popup the 
+      right-click menu for that service
     
 ![Workflow builder](../_static/automation/workflows/right_mouse_click_menu.png)
 

@@ -16,7 +16,8 @@ Version 4.2.0
 - Add SSH Proxy mechanism (multiple jump server in gateways property, gateway device subtype, priority
   tie-break mechanism)
 - Consider runtime limiting user / all toggle mechanism in the restart service window.
-- Move doc link to settings.json to allow custom doc links for plugins.
+- Move doc link to settings.json to allow custom doc links for plugins. Generate doc link in the jinja2 template
+  instead of javascript (otherwise, wrong doc link until updated in js)
 - Move tables refresh rate to settings.json to allow for custom refresh rates.
 - New "Category" property / mechanism for the drop-down list of the site and workflow builder.
 - Reinstate service selection with single left click (Ctrl no longer needed)

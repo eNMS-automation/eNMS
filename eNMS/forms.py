@@ -684,7 +684,7 @@ class ServiceForm(BaseForm):
         choices=(
             ("creator", "Role Based (Creator)"),
             ("public", "Public (All users)"),
-            ("admin", "Admin (Admins only"),
+            ("admin", "Admin (Admin users only)"),
         )
     )
     log_level = SelectField(

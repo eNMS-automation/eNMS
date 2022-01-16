@@ -134,30 +134,10 @@
   name: '[Regression Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195970',
   source: '[Shared] NAPALM: Get interfaces', subtype: failure, type: workflow_edge,
   workflow: 'Miscellaneous: Fork based on Result with Success & Failure Edges'}
-- {color: green, destination: '[Miscellaneous: DxD Multiprocessing, RBAC Admin Only,
-    Skip Mechanism] Show version with multiprocessing', label: success, name: '[Regression
-    Workflow: Advanced Multiprocessing (admin)] 2021-04-24 08:58:40.195986', source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'Miscellaneous: DxD Multiprocessing,
-    RBAC Admin Only, Skip Mechanism'}
-- {color: green, destination: '[Miscellaneous: DxD Multiprocessing, RBAC Admin Only,
-    Skip Mechanism] napalm_configure_bgp_1', label: success, name: '[Regression Workflow:
-    Advanced Multiprocessing (admin)] 2021-04-24 08:58:40.196002', source: '[Shared]
-    Example Service (does nothing)', subtype: success, type: workflow_edge, workflow: 'Miscellaneous:
-    DxD Multiprocessing, RBAC Admin Only, Skip Mechanism'}
-- {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
-  name: '[Regression Workflow: Advanced Multiprocessing (admin)] 2021-04-24 08:58:40.196016',
-  source: '[Miscellaneous: DxD Multiprocessing, RBAC Admin Only, Skip Mechanism] napalm_configure_bgp_1',
-  subtype: success, type: workflow_edge, workflow: 'Miscellaneous: DxD Multiprocessing,
-    RBAC Admin Only, Skip Mechanism'}
-- {color: red, destination: '[Shared] REST API: call *is_alive* endpoint', label: failure,
-  name: '[Regression Workflow: Advanced Multiprocessing (admin)] 2021-04-24 08:58:40.196031',
-  source: '[Miscellaneous: DxD Multiprocessing, RBAC Admin Only, Skip Mechanism] Show
-    version with multiprocessing', subtype: failure, type: workflow_edge, workflow: 'Miscellaneous:
-    DxD Multiprocessing, RBAC Admin Only, Skip Mechanism'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     Advanced Multiprocessing (admin)] 2021-04-24 08:58:40.196046', source: '[Shared]
-    REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Miscellaneous:
-    DxD Multiprocessing, RBAC Admin Only, Skip Mechanism'}
+    REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: Multiprocessing
+    in DxD mode}
 - {color: green, destination: '[Shared] Modify Payload for Iteration', label: success,
   name: '[Regression Workflow: Iteration Targets Mechanism] 2021-04-24 08:58:40.196062',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: Combined
@@ -197,8 +177,8 @@
   type: workflow_edge, workflow: (R) Operational Data Backup Service}
 - {color: green, destination: '[Shared] Example Service (does nothing)', label: success,
   name: '[Regression Workflow: Advanced Multiprocessing (admin)] 2021-04-24 08:58:40.196549',
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Miscellaneous:
-    DxD Multiprocessing, RBAC Admin Only, Skip Mechanism'}
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: Multiprocessing
+    in DxD mode}
 - {color: green, destination: '[DxD and SxS Run Methods] Workflow  in device by device
     mode', label: success, name: '[Regression Workflow: DxD and SxS Run Methods] 2021-04-24
     08:58:40.196596', source: '[Shared] Start', subtype: success, type: workflow_edge,
@@ -1092,24 +1072,20 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2021-07-05 05:28:17.315359',
   source: '[Netmiko File Transfer] Check netmiko_file is deleted', subtype: success,
   type: workflow_edge, workflow: Netmiko File Transfer}
-- {color: green, destination: '[Global get_credential Function and Log Obfuscation]
-    Show interface via get_credential', label: success, name: '2021-07-05 23:51:18.198534',
-  source: '[Global get_credential Function and Log Obfuscation] Get device credential',
-  subtype: success, type: workflow_edge, workflow: Global get_credential Function
-    and Log Obfuscation}
-- {color: green, destination: '[Global get_credential Function and Log Obfuscation]
-    Rest Call with get_credential', label: success, name: '2021-07-06 00:44:16.816912',
-  source: '[Global get_credential Function and Log Obfuscation] Show interface via
-    get_credential', subtype: success, type: workflow_edge, workflow: Global get_credential
-    Function and Log Obfuscation}
+- {color: green, destination: '[get_credential Function] Show interface via get_credential',
+  label: success, name: '2021-07-05 23:51:18.198534', source: '[get_credential Function]
+    Get device credential', subtype: success, type: workflow_edge, workflow: get_credential
+    Function}
+- {color: green, destination: '[get_credential Function] Rest Call with get_credential',
+  label: success, name: '2021-07-06 00:44:16.816912', source: '[get_credential Function]
+    Show interface via get_credential', subtype: success, type: workflow_edge, workflow: get_credential
+    Function}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-07-06 00:44:17.647413',
-  source: '[Global get_credential Function and Log Obfuscation] Rest Call with get_credential',
-  subtype: success, type: workflow_edge, workflow: Global get_credential Function
-    and Log Obfuscation}
-- {color: green, destination: '[Global get_credential Function and Log Obfuscation]
-    Get device credential', label: success, name: '2021-07-06 01:05:21.203122', source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: Global get_credential
-    Function and Log Obfuscation}
+  source: '[get_credential Function] Rest Call with get_credential', subtype: success,
+  type: workflow_edge, workflow: get_credential Function}
+- {color: green, destination: '[get_credential Function] Get device credential', label: success,
+  name: '2021-07-06 01:05:21.203122', source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: get_credential Function}
 - {color: green, destination: '[SxS Service Targets with Run Once + Skip] Once per
     device', label: success, name: '2021-07-08 00:48:49.407758', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: SxS Service Targets with
@@ -1423,32 +1399,31 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2021-11-21 00:50:28.581310',
   source: '[[Global variables: get_result and get_var] Subworkflow] Subservice', subtype: success,
   type: workflow_edge, workflow: '[Global variables: get_result and get_var] Subworkflow'}
-- {color: green, destination: '[Basic: Deletion (Device, Link, Service, Task)] Service1',
-  label: success, name: '2021-12-28 11:54:12.771950', source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: 'Basic: Deletion (Device, Link, Service, Task)'}
-- {color: green, destination: '[Basic: Deletion (Device, Link, Service, Task)] Service2',
-  label: success, name: '2021-12-28 11:54:13.830611', source: '[Basic: Deletion (Device,
-    Link, Service, Task)] Service1', subtype: success, type: workflow_edge, workflow: 'Basic:
-    Deletion (Device, Link, Service, Task)'}
-- {color: green, destination: '[Basic: Deletion (Device, Link, Service, Task)] Deletion
-    of Service2', label: success, name: '2021-12-28 11:55:38.276023', source: '[Basic:
-    Deletion (Device, Link, Service, Task)] Deletion of SanJose', subtype: success,
-  type: workflow_edge, workflow: 'Basic: Deletion (Device, Link, Service, Task)'}
-- {color: green, destination: '[Basic: Deletion (Device, Link, Service, Task)] Link
-    Deletion', label: success, name: '2021-12-28 12:12:52.924954', source: '[Basic:
-    Deletion (Device, Link, Service, Task)] Deletion of Service2', subtype: success,
-  type: workflow_edge, workflow: 'Basic: Deletion (Device, Link, Service, Task)'}
-- {color: green, destination: '[Basic: Deletion (Device, Link, Service, Task)] Task
-    Deletion', label: success, name: '2021-12-28 12:24:50.636317', source: '[Basic:
-    Deletion (Device, Link, Service, Task)] Link Deletion', subtype: success, type: workflow_edge,
-  workflow: 'Basic: Deletion (Device, Link, Service, Task)'}
+- {color: green, destination: '[Deletion and Cascade Deletion] Service1', label: success,
+  name: '2021-12-28 11:54:12.771950', source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: Deletion and Cascade Deletion}
+- {color: green, destination: '[Deletion and Cascade Deletion] Service2', label: success,
+  name: '2021-12-28 11:54:13.830611', source: '[Deletion and Cascade Deletion] Service1',
+  subtype: success, type: workflow_edge, workflow: Deletion and Cascade Deletion}
+- {color: green, destination: '[Deletion and Cascade Deletion] Deletion of Service2',
+  label: success, name: '2021-12-28 11:55:38.276023', source: '[Deletion and Cascade
+    Deletion] Deletion of SanJose', subtype: success, type: workflow_edge, workflow: Deletion
+    and Cascade Deletion}
+- {color: green, destination: '[Deletion and Cascade Deletion] Link Deletion', label: success,
+  name: '2021-12-28 12:12:52.924954', source: '[Deletion and Cascade Deletion] Deletion
+    of Service2', subtype: success, type: workflow_edge, workflow: Deletion and Cascade
+    Deletion}
+- {color: green, destination: '[Deletion and Cascade Deletion] Task Deletion', label: success,
+  name: '2021-12-28 12:24:50.636317', source: '[Deletion and Cascade Deletion] Link
+    Deletion', subtype: success, type: workflow_edge, workflow: Deletion and Cascade
+    Deletion}
 - {color: red, destination: '[Shared] End', label: failure, name: '[Basic: Deletion
-    (Device, Link, Service, Task)] 2021-12-29 02:11:37.943873', source: '[Basic: Deletion
-    (Device, Link, Service, Task)] Task Deletion', subtype: motion, type: workflow_edge,
-  workflow: 'Basic: Deletion (Device, Link, Service, Task)'}
+    (Device, Link, Service, Task)] 2021-12-29 02:11:37.943873', source: '[Deletion
+    and Cascade Deletion] Task Deletion', subtype: motion, type: workflow_edge, workflow: Deletion
+    and Cascade Deletion}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-12-29 02:00:40.390281',
-  source: '[Basic: Deletion (Device, Link, Service, Task)] Service2', subtype: success,
-  type: workflow_edge, workflow: 'Basic: Deletion (Device, Link, Service, Task)'}
+  source: '[Deletion and Cascade Deletion] Service2', subtype: success, type: workflow_edge,
+  workflow: Deletion and Cascade Deletion}
 - {color: green, destination: '[GET Endpoints is_alive, configuration and instance]
     is_alive', label: success, name: '2021-12-30 04:58:50.635488', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: 'GET Endpoints is_alive,
@@ -1557,3 +1532,6 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2022-01-15 08:09:27.158275',
   source: '[Parameterized Targets] Empty Service', subtype: success, type: workflow_edge,
   workflow: Parameterized Targets}
+- {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
+  name: '2022-01-16 05:30:50.798714', source: '[Shared] Example Service (does nothing)',
+  subtype: success, type: workflow_edge, workflow: Multiprocessing in DxD mode}

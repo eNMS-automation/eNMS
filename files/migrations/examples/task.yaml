@@ -43,6 +43,6 @@
   name: Scrapli RBAC scheduling (public)
   pools: []
   scheduling_mode: standard
-  service: Scrapli Service
+  service: (R) Scrapli Service
   start_date: 30/06/2020 09:15:18
   type: task

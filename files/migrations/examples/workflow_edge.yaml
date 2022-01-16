@@ -104,20 +104,20 @@
     get_var, set_var, and get_result Functions] show runtime with get_result helper',
   subtype: success, type: workflow_edge, workflow: 'Using get_var, set_var, and get_result
     Functions'}
-- {color: green, destination: '[Services: Ansible Playbook Service] Ansible Workflow:
-    Arista show configuration (regex match)', label: success, name: '[Regression Workflow:
-    Ansible with Validation] 2021-04-24 08:58:40.195881', source: '[Services: Ansible
-    Playbook Service] Ansible Workflow: Arista show version', subtype: success, type: workflow_edge,
-  workflow: 'Services: Ansible Playbook Service'}
-- {color: green, destination: '[Services: Ansible Playbook Service] Ansible Workflow:
-    Arista show configuration (dict match)', label: success, name: '[Regression Workflow:
-    Ansible with Validation] 2021-04-24 08:58:40.195896', source: '[Services: Ansible
-    Playbook Service] Ansible Workflow: Arista show configuration (regex match)',
-  subtype: success, type: workflow_edge, workflow: 'Services: Ansible Playbook Service'}
+- {color: green, destination: '[(R) Ansible Playbook Service] Ansible Workflow: Arista
+    show configuration (regex match)', label: success, name: '[Regression Workflow:
+    Ansible with Validation] 2021-04-24 08:58:40.195881', source: '[(R) Ansible Playbook
+    Service] Ansible Workflow: Arista show version', subtype: success, type: workflow_edge,
+  workflow: (R) Ansible Playbook Service}
+- {color: green, destination: '[(R) Ansible Playbook Service] Ansible Workflow: Arista
+    show configuration (dict match)', label: success, name: '[Regression Workflow:
+    Ansible with Validation] 2021-04-24 08:58:40.195896', source: '[(R) Ansible Playbook
+    Service] Ansible Workflow: Arista show configuration (regex match)', subtype: success,
+  type: workflow_edge, workflow: (R) Ansible Playbook Service}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Ansible with Validation] 2021-04-24 08:58:40.195911', source: '[Services: Ansible
-    Playbook Service] Ansible Workflow: Arista show configuration (dict match)', subtype: success,
-  type: workflow_edge, workflow: 'Services: Ansible Playbook Service'}
+    Ansible with Validation] 2021-04-24 08:58:40.195911', source: '[(R) Ansible Playbook
+    Service] Ansible Workflow: Arista show configuration (dict match)', subtype: success,
+  type: workflow_edge, workflow: (R) Ansible Playbook Service}
 - {color: green, destination: '[Shared] NAPALM: Get interfaces', label: success, name: '[Regression
     Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195925', source: '[Shared]
     REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Miscellaneous:
@@ -303,10 +303,10 @@
     Shared Service in Multiple Subworkflows] 2021-04-24 08:58:40.197334', source: '[Shared
     Service in Multiple Subworkflows] Subworkflow 2', subtype: failure, type: workflow_edge,
   workflow: Shared Service in Multiple Subworkflows}
-- {color: green, destination: '[Services: Ansible Playbook Service] Simple Playbook',
-  label: success, name: '[Regression Workflow: Ansible with Validation] 2021-04-24
-    08:58:40.197355', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: 'Services: Ansible Playbook Service'}
+- {color: green, destination: '[(R) Ansible Playbook Service] Simple Playbook', label: success,
+  name: '[Regression Workflow: Ansible with Validation] 2021-04-24 08:58:40.197355',
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: (R) Ansible
+    Playbook Service}
 - {color: green, destination: '[Iteration Mechanism: Dictionary as Iteration Target
     Variable] Set Variables for Iteration', label: success, name: '[Regression Workflow:
     Advanced Iteration Targets] 2021-04-24 08:58:40.197373', source: '[Shared] Start',
@@ -377,15 +377,14 @@
   source: '[Unix Command & Chell, Ping Service, Jump on Connect mechanism] Unix shell:
     ping eNMS server from remote server', subtype: success, type: workflow_edge, workflow: 'Unix
     Command & Chell, Ping Service, Jump on Connect mechanism'}
-- {color: green, destination: '[Topology Import Service (netbox, librenms, opennms)]
-    OpenNMS Import', label: success, name: '[Regression Workflow: Topology Import
-    (netbox, librenms, opennms)] 2021-04-24 08:58:40.197770', source: '[Shared] Start',
-  subtype: success, type: workflow_edge, workflow: 'Topology Import Service (netbox,
-    librenms, opennms)'}
+- {color: green, destination: '[Topology Import Services] OpenNMS Import', label: success,
+  name: '[Regression Workflow: Topology Import (netbox, librenms, opennms)] 2021-04-24
+    08:58:40.197770', source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: Topology Import Services}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     Topology Import (netbox, librenms, opennms)] 2021-04-24 08:58:40.197786', source: '[Topology
-    Import Service (netbox, librenms, opennms)] OpenNMS Import', subtype: success,
-  type: workflow_edge, workflow: 'Topology Import Service (netbox, librenms, opennms)'}
+    Import Services] OpenNMS Import', subtype: success, type: workflow_edge, workflow: Topology
+    Import Services}
 - {color: green, destination: '[Unix Command & Chell, Ping Service, Jump on Connect
     mechanism] Validation: jump on server 2 from Washington', label: success, name: '[Regression
     Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism] 2021-04-24
@@ -397,11 +396,10 @@
   source: '[Unix Command & Chell, Ping Service, Jump on Connect mechanism] Validation:
     jump on server 2 from Washington', subtype: success, type: workflow_edge, workflow: 'Unix
     Command & Chell, Ping Service, Jump on Connect mechanism'}
-- {color: green, destination: '[Services: Ansible Playbook Service] Ansible Workflow:
-    Arista show version', label: success, name: '[Regression Workflow: Ansible with
-    Validation] 2021-04-24 08:58:40.197830', source: '[Services: Ansible Playbook
-    Service] Simple Playbook', subtype: success, type: workflow_edge, workflow: 'Services:
-    Ansible Playbook Service'}
+- {color: green, destination: '[(R) Ansible Playbook Service] Ansible Workflow: Arista
+    show version', label: success, name: '[Regression Workflow: Ansible with Validation]
+    2021-04-24 08:58:40.197830', source: '[(R) Ansible Playbook Service] Simple Playbook',
+  subtype: success, type: workflow_edge, workflow: (R) Ansible Playbook Service}
 - {color: green, destination: '[Iteration Mechanism: Combined Device & Target Iteration]
     Iteration Target Workflow - Test 3', label: success, name: '[Regression Workflow:
     Iteration Targets Mechanism] 2021-04-24 08:58:40.197847', source: '[Iteration
@@ -457,24 +455,25 @@
     Superworkflow] 2021-04-24 08:58:40.198022', source: '[Specific Superworkflow]
     Post Placeholder Processing', subtype: success, type: workflow_edge, workflow: Specific
     Superworkflow}
-- {color: green, destination: '[Scrapli Service] Check running configuration', label: success,
-  name: '[Regression Workflow: Scrapli] 2021-04-24 08:58:40.198038', source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: Scrapli Service}
-- {color: green, destination: '[Scrapli Service] Configure VRF TEST-VRF', label: success,
-  name: '[Regression Workflow: Scrapli] 2021-04-24 08:58:40.198055', source: '[Scrapli
-    Service] Check running configuration', subtype: success, type: workflow_edge,
-  workflow: Scrapli Service}
-- {color: green, destination: '[Scrapli Service] Check that TEST-VRF is configured',
+- {color: green, destination: '[(R) Scrapli Service] Check running configuration',
+  label: success, name: '[Regression Workflow: Scrapli] 2021-04-24 08:58:40.198038',
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: (R) Scrapli
+    Service}
+- {color: green, destination: '[(R) Scrapli Service] Configure VRF TEST-VRF', label: success,
+  name: '[Regression Workflow: Scrapli] 2021-04-24 08:58:40.198055', source: '[(R)
+    Scrapli Service] Check running configuration', subtype: success, type: workflow_edge,
+  workflow: (R) Scrapli Service}
+- {color: green, destination: '[(R) Scrapli Service] Check that TEST-VRF is configured',
   label: success, name: '[Regression Workflow: Scrapli] 2021-04-24 08:58:40.198070',
-  source: '[Scrapli Service] Configure VRF TEST-VRF', subtype: success, type: workflow_edge,
-  workflow: Scrapli Service}
-- {color: green, destination: '[Scrapli Service] Decommission VRF TEST-VRF', label: success,
-  name: '[Regression Workflow: Scrapli] 2021-04-24 08:58:40.198085', source: '[Scrapli
-    Service] Check that TEST-VRF is configured', subtype: success, type: workflow_edge,
-  workflow: Scrapli Service}
+  source: '[(R) Scrapli Service] Configure VRF TEST-VRF', subtype: success, type: workflow_edge,
+  workflow: (R) Scrapli Service}
+- {color: green, destination: '[(R) Scrapli Service] Decommission VRF TEST-VRF', label: success,
+  name: '[Regression Workflow: Scrapli] 2021-04-24 08:58:40.198085', source: '[(R)
+    Scrapli Service] Check that TEST-VRF is configured', subtype: success, type: workflow_edge,
+  workflow: (R) Scrapli Service}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Scrapli] 2021-04-24 08:58:40.198100', source: '[Scrapli Service] Decommission
-    VRF TEST-VRF', subtype: success, type: workflow_edge, workflow: Scrapli Service}
+    Scrapli] 2021-04-24 08:58:40.198100', source: '[(R) Scrapli Service] Decommission
+    VRF TEST-VRF', subtype: success, type: workflow_edge, workflow: (R) Scrapli Service}
 - {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
   name: '[Regression Workflow: Scalability Test (large workflow)] 2021-04-24 08:58:40.198116',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: Scalability
@@ -578,35 +577,39 @@
     Scalability Test (large workflow)] 2021-04-24 08:58:40.198538', source: '[Scalability
     Test (large workflow)] Sleep with python 8', subtype: success, type: workflow_edge,
   workflow: Scalability Test (large workflow)}
-- {color: green, destination: '[Generic File Transfer] Transfer a.bin', label: success,
-  name: '[Regression Workflow: File Transfer Mechanism] 2021-04-24 08:58:40.198554',
-  source: '[Generic File Transfer] Check that test file does not exist', subtype: success,
-  type: workflow_edge, workflow: Generic File Transfer}
-- {color: green, destination: '[Generic File Transfer] Transfer bc.bin and bd.bin
-    with glob option', label: success, name: '[Regression Workflow: File Transfer
-    Mechanism] 2021-04-24 08:58:40.198571', source: '[Generic File Transfer] Transfer
-    a.bin', subtype: success, type: workflow_edge, workflow: Generic File Transfer}
-- {color: green, destination: '[Generic File Transfer] Check that test file does exist',
+- {color: green, destination: '[(R) Generic File Transfer Service] Transfer a.bin',
   label: success, name: '[Regression Workflow: File Transfer Mechanism] 2021-04-24
-    08:58:40.198586', source: '[Generic File Transfer] Transfer bc.bin and bd.bin
-    with glob option', subtype: success, type: workflow_edge, workflow: Generic File
-    Transfer}
-- {color: green, destination: '[Generic File Transfer] Delete all transferred files',
-  label: success, name: '[Regression Workflow: File Transfer Mechanism] 2021-04-24
-    08:58:40.198601', source: '[Generic File Transfer] Check that test file does exist',
-  subtype: success, type: workflow_edge, workflow: Generic File Transfer}
+    08:58:40.198554', source: '[(R) Generic File Transfer Service] Check that test
+    file does not exist', subtype: success, type: workflow_edge, workflow: (R) Generic
+    File Transfer Service}
+- {color: green, destination: '[(R) Generic File Transfer Service] Transfer bc.bin
+    and bd.bin with glob option', label: success, name: '[Regression Workflow: File
+    Transfer Mechanism] 2021-04-24 08:58:40.198571', source: '[(R) Generic File Transfer
+    Service] Transfer a.bin', subtype: success, type: workflow_edge, workflow: (R)
+    Generic File Transfer Service}
+- {color: green, destination: '[(R) Generic File Transfer Service] Check that test
+    file does exist', label: success, name: '[Regression Workflow: File Transfer Mechanism]
+    2021-04-24 08:58:40.198586', source: '[(R) Generic File Transfer Service] Transfer
+    bc.bin and bd.bin with glob option', subtype: success, type: workflow_edge, workflow: (R)
+    Generic File Transfer Service}
+- {color: green, destination: '[(R) Generic File Transfer Service] Delete all transferred
+    files', label: success, name: '[Regression Workflow: File Transfer Mechanism]
+    2021-04-24 08:58:40.198601', source: '[(R) Generic File Transfer Service] Check
+    that test file does exist', subtype: success, type: workflow_edge, workflow: (R)
+    Generic File Transfer Service}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    File Transfer Mechanism] 2021-04-24 08:58:40.198616', source: '[Generic File Transfer]
-    Delete all transferred files', subtype: success, type: workflow_edge, workflow: Generic
-    File Transfer}
-- {color: green, destination: '[Generic File Transfer] Transfer non-existing file',
-  label: success, name: '[Regression Workflow: File Transfer Mechanism] 2021-04-24
+    File Transfer Mechanism] 2021-04-24 08:58:40.198616', source: '[(R) Generic File
+    Transfer Service] Delete all transferred files', subtype: success, type: workflow_edge,
+  workflow: (R) Generic File Transfer Service}
+- {color: green, destination: '[(R) Generic File Transfer Service] Transfer non-existing
+    file', label: success, name: '[Regression Workflow: File Transfer Mechanism] 2021-04-24
     08:58:40.198632', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: Generic File Transfer}
-- {color: green, destination: '[Generic File Transfer] Check that test file does not
-    exist', label: success, name: '[Regression Workflow: File Transfer Mechanism]
-    2021-04-24 08:58:40.198648', source: '[Generic File Transfer] Transfer non-existing
-    file', subtype: success, type: workflow_edge, workflow: Generic File Transfer}
+  workflow: (R) Generic File Transfer Service}
+- {color: green, destination: '[(R) Generic File Transfer Service] Check that test
+    file does not exist', label: success, name: '[Regression Workflow: File Transfer
+    Mechanism] 2021-04-24 08:58:40.198648', source: '[(R) Generic File Transfer Service]
+    Transfer non-existing file', subtype: success, type: workflow_edge, workflow: (R)
+    Generic File Transfer Service}
 - {color: green, destination: '[Skip Mechanism: Skip in SxS with WF targets mode]
     Partial failure (Washington)', label: success, name: '[Regression Workflow: Skip
     Services in SxS mode] 2021-04-24 08:58:40.198664', source: '[Shared] Start', subtype: success,
@@ -987,24 +990,24 @@
     RBAC Target Restriction] 2021-04-24 08:58:40.199976', source: '[Target Restriction
     Mechanism] Iteration Targets', subtype: success, type: workflow_edge, workflow: Target
     Restriction Mechanism}
-- {color: green, destination: '[Scrapli Netconf Service] Edit Interface Loopback 5',
-  label: success, name: '2021-05-01 04:35:20.029861', source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: Scrapli Netconf Service}
-- {color: green, destination: '[Scrapli Netconf Service] Get Running Configuration',
-  label: success, name: '2021-05-01 04:54:21.358634', source: '[Scrapli Netconf Service]
-    Edit Interface Loopback 5', subtype: success, type: workflow_edge, workflow: Scrapli
-    Netconf Service}
+- {color: green, destination: '[(R) Scrapli Netconf Service] Edit Interface Loopback
+    5', label: success, name: '2021-05-01 04:35:20.029861', source: '[Shared] Start',
+  subtype: success, type: workflow_edge, workflow: (R) Scrapli Netconf Service}
+- {color: green, destination: '[(R) Scrapli Netconf Service] Get Running Configuration',
+  label: success, name: '2021-05-01 04:54:21.358634', source: '[(R) Scrapli Netconf
+    Service] Edit Interface Loopback 5', subtype: success, type: workflow_edge, workflow: (R)
+    Scrapli Netconf Service}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-05-01 04:54:26.508627',
-  source: '[Scrapli Netconf Service] Get State', subtype: success, type: workflow_edge,
-  workflow: Scrapli Netconf Service}
-- {color: green, destination: '[Scrapli Netconf Service] Delete Loopback 5 description',
-  label: success, name: '2021-05-02 03:58:06.389762', source: '[Scrapli Netconf Service]
-    Get Running Configuration', subtype: success, type: workflow_edge, workflow: Scrapli
-    Netconf Service}
-- {color: green, destination: '[Scrapli Netconf Service] Get State', label: success,
-  name: '2021-05-02 03:58:07.428143', source: '[Scrapli Netconf Service] Delete Loopback
-    5 description', subtype: success, type: workflow_edge, workflow: Scrapli Netconf
-    Service}
+  source: '[(R) Scrapli Netconf Service] Get State', subtype: success, type: workflow_edge,
+  workflow: (R) Scrapli Netconf Service}
+- {color: green, destination: '[(R) Scrapli Netconf Service] Delete Loopback 5 description',
+  label: success, name: '2021-05-02 03:58:06.389762', source: '[(R) Scrapli Netconf
+    Service] Get Running Configuration', subtype: success, type: workflow_edge, workflow: (R)
+    Scrapli Netconf Service}
+- {color: green, destination: '[(R) Scrapli Netconf Service] Get State', label: success,
+  name: '2021-05-02 03:58:07.428143', source: '[(R) Scrapli Netconf Service] Delete
+    Loopback 5 description', subtype: success, type: workflow_edge, workflow: (R)
+    Scrapli Netconf Service}
 - {color: green, destination: '[(R) Labels and Custom Property] Show interface from
     initial form (default: Lo1)', label: success, name: '2021-06-07 01:39:02.877827',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: (R) Labels
@@ -1049,23 +1052,23 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2021-06-23 06:28:57.297497',
   source: '[NCClient Netconf Service] Check ZZZZ is not in Config', subtype: success,
   type: workflow_edge, workflow: NCClient Netconf Service}
-- {color: green, destination: '[Multiple parallel connections to same device] Show
-    VRF with default connection', label: success, name: '2021-06-27 21:08:53.125999',
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: Multiple
+- {color: green, destination: '[(R) Multiple parallel connections to same device]
+    Show VRF with default connection', label: success, name: '2021-06-27 21:08:53.125999',
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: (R) Multiple
     parallel connections to same device}
-- {color: green, destination: '[Multiple parallel connections to same device] Show
-    VRF with connection connection2', label: success, name: '2021-06-27 21:09:08.187397',
-  source: '[Multiple parallel connections to same device] Show VRF with default connection',
-  subtype: success, type: workflow_edge, workflow: Multiple parallel connections to
-    same device}
-- {color: green, destination: '[Multiple parallel connections to same device] Show
-    users with connection2 and close', label: success, name: '2021-06-27 21:09:09.135010',
-  source: '[Multiple parallel connections to same device] Show VRF with connection
-    connection2', subtype: success, type: workflow_edge, workflow: Multiple parallel
+- {color: green, destination: '[(R) Multiple parallel connections to same device]
+    Show VRF with connection connection2', label: success, name: '2021-06-27 21:09:08.187397',
+  source: '[(R) Multiple parallel connections to same device] Show VRF with default
+    connection', subtype: success, type: workflow_edge, workflow: (R) Multiple parallel
+    connections to same device}
+- {color: green, destination: '[(R) Multiple parallel connections to same device]
+    Show users with connection2 and close', label: success, name: '2021-06-27 21:09:09.135010',
+  source: '[(R) Multiple parallel connections to same device] Show VRF with connection
+    connection2', subtype: success, type: workflow_edge, workflow: (R) Multiple parallel
     connections to same device}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-06-27 21:09:10.321702',
-  source: '[Multiple parallel connections to same device] Show users with connection2
-    and close', subtype: success, type: workflow_edge, workflow: Multiple parallel
+  source: '[(R) Multiple parallel connections to same device] Show users with connection2
+    and close', subtype: success, type: workflow_edge, workflow: (R) Multiple parallel
     connections to same device}
 - {color: green, destination: '[Notifications] Notification 1', label: success, name: '2021-06-27
     21:54:27.276769', source: '[Shared] Start', subtype: success, type: workflow_edge,
@@ -1214,54 +1217,58 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2021-07-30 10:17:13.851356',
   source: '[Netmiko TextFSM Option] show arp', subtype: success, type: workflow_edge,
   workflow: Netmiko TextFSM Option}
-- {color: green, destination: '[VRF Creation and Deletion with Napalm] Create a VRF
-    with NAPALM', label: success, name: '[Regression Workflow: VRF Creation and Deletion
-    with Napalm] 2021-08-07 08:40:09.267010', source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: VRF Creation and Deletion with Napalm}
-- {color: green, destination: '[VRF Creation and Deletion with Napalm] Check VRF exists
-    with Netmiko', label: success, name: '[Regression Workflow: VRF Creation and Deletion
-    with Napalm] 2021-08-07 08:40:09.303780', source: '[VRF Creation and Deletion
-    with Napalm] Create a VRF with NAPALM', subtype: success, type: workflow_edge,
-  workflow: VRF Creation and Deletion with Napalm}
-- {color: green, destination: '[VRF Creation and Deletion with Napalm] Rollback Configuration
-    with NAPALM', label: success, name: '[Regression Workflow: VRF Creation and Deletion
-    with Napalm] 2021-08-07 08:40:09.337604', source: '[VRF Creation and Deletion
-    with Napalm] Check VRF exists with Netmiko', subtype: success, type: workflow_edge,
-  workflow: VRF Creation and Deletion with Napalm}
-- {color: green, destination: '[VRF Creation and Deletion with Napalm] Check VRF is
-    not configured with Netmiko', label: success, name: '[Regression Workflow: VRF
-    Creation and Deletion with Napalm] 2021-08-07 08:40:09.376108', source: '[VRF
-    Creation and Deletion with Napalm] Rollback Configuration with NAPALM', subtype: success,
-  type: workflow_edge, workflow: VRF Creation and Deletion with Napalm}
+- {color: green, destination: '[(R) NAPALM Configuration and Rollback Services] Create
+    a VRF with NAPALM', label: success, name: '[Regression Workflow: VRF Creation
+    and Deletion with Napalm] 2021-08-07 08:40:09.267010', source: '[Shared] Start',
+  subtype: success, type: workflow_edge, workflow: (R) NAPALM Configuration and Rollback
+    Services}
+- {color: green, destination: '[(R) NAPALM Configuration and Rollback Services] Check
+    VRF exists with Netmiko', label: success, name: '[Regression Workflow: VRF Creation
+    and Deletion with Napalm] 2021-08-07 08:40:09.303780', source: '[(R) NAPALM Configuration
+    and Rollback Services] Create a VRF with NAPALM', subtype: success, type: workflow_edge,
+  workflow: (R) NAPALM Configuration and Rollback Services}
+- {color: green, destination: '[(R) NAPALM Configuration and Rollback Services] Rollback
+    Configuration with NAPALM', label: success, name: '[Regression Workflow: VRF Creation
+    and Deletion with Napalm] 2021-08-07 08:40:09.337604', source: '[(R) NAPALM Configuration
+    and Rollback Services] Check VRF exists with Netmiko', subtype: success, type: workflow_edge,
+  workflow: (R) NAPALM Configuration and Rollback Services}
+- {color: green, destination: '[(R) NAPALM Configuration and Rollback Services] Check
+    VRF is not configured with Netmiko', label: success, name: '[Regression Workflow:
+    VRF Creation and Deletion with Napalm] 2021-08-07 08:40:09.376108', source: '[(R)
+    NAPALM Configuration and Rollback Services] Rollback Configuration with NAPALM',
+  subtype: success, type: workflow_edge, workflow: (R) NAPALM Configuration and Rollback
+    Services}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    VRF Creation and Deletion with Napalm] 2021-08-07 08:40:09.410863', source: '[VRF
-    Creation and Deletion with Napalm] Check VRF is not configured with Netmiko',
-  subtype: success, type: workflow_edge, workflow: VRF Creation and Deletion with
-    Napalm}
-- {color: green, destination: '[Napalm Getters Validation] Getters Workflow: is alive',
+    VRF Creation and Deletion with Napalm] 2021-08-07 08:40:09.410863', source: '[(R)
+    NAPALM Configuration and Rollback Services] Check VRF is not configured with Netmiko',
+  subtype: success, type: workflow_edge, workflow: (R) NAPALM Configuration and Rollback
+    Services}
+- {color: green, destination: '[(R) Napalm Getters Service] Getters Workflow: is alive',
   label: success, name: '[Regression Workflow: Napalm Getters Validation] 2021-08-07
     08:40:31.302068', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: Napalm Getters Validation}
-- {color: green, destination: '[Napalm Getters Validation] Getters Workflow: get facts',
-  label: success, name: '[Regression Workflow: Napalm Getters Validation] 2021-08-07
-    08:40:31.340665', source: '[Napalm Getters Validation] Getters Workflow: is alive',
-  subtype: success, type: workflow_edge, workflow: Napalm Getters Validation}
-- {color: green, destination: '[Napalm Getters Validation] Getters Workflow: MAC address',
-  label: success, name: '[Regression Workflow: Napalm Getters Validation] 2021-08-07
-    08:40:31.376993', source: '[Shared] Getters Workflow: Interface IP', subtype: success,
-  type: workflow_edge, workflow: Napalm Getters Validation}
+  workflow: (R) Napalm Getters Service}
+- {color: green, destination: '[(R) Napalm Getters Service] Getters Workflow: get
+    facts', label: success, name: '[Regression Workflow: Napalm Getters Validation]
+    2021-08-07 08:40:31.340665', source: '[(R) Napalm Getters Service] Getters Workflow:
+    is alive', subtype: success, type: workflow_edge, workflow: (R) Napalm Getters
+    Service}
+- {color: green, destination: '[(R) Napalm Getters Service] Getters Workflow: MAC
+    address', label: success, name: '[Regression Workflow: Napalm Getters Validation]
+    2021-08-07 08:40:31.376993', source: '[Shared] Getters Workflow: Interface IP',
+  subtype: success, type: workflow_edge, workflow: (R) Napalm Getters Service}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Napalm Getters Validation] 2021-08-07 08:40:31.418354', source: '[Napalm Getters
-    Validation] Getters Workflow: MAC address', subtype: success, type: workflow_edge,
-  workflow: Napalm Getters Validation}
-- {color: green, destination: '[Napalm Getters Validation] Getters Workflow: get facts
-    failed match', label: success, name: '[Regression Workflow: Napalm Getters Validation]
-    2021-08-07 08:40:31.455251', source: '[Napalm Getters Validation] Getters Workflow:
-    get facts', subtype: success, type: workflow_edge, workflow: Napalm Getters Validation}
+    Napalm Getters Validation] 2021-08-07 08:40:31.418354', source: '[(R) Napalm Getters
+    Service] Getters Workflow: MAC address', subtype: success, type: workflow_edge,
+  workflow: (R) Napalm Getters Service}
+- {color: green, destination: '[(R) Napalm Getters Service] Getters Workflow: get
+    facts failed match', label: success, name: '[Regression Workflow: Napalm Getters
+    Validation] 2021-08-07 08:40:31.455251', source: '[(R) Napalm Getters Service]
+    Getters Workflow: get facts', subtype: success, type: workflow_edge, workflow: (R)
+    Napalm Getters Service}
 - {color: red, destination: '[Shared] Getters Workflow: Interface IP', label: failure,
   name: '[Regression Workflow: Napalm Getters Validation] 2021-08-07 08:40:31.504800',
-  source: '[Napalm Getters Validation] Getters Workflow: get facts failed match',
-  subtype: failure, type: workflow_edge, workflow: Napalm Getters Validation}
+  source: '[(R) Napalm Getters Service] Getters Workflow: get facts failed match',
+  subtype: failure, type: workflow_edge, workflow: (R) Napalm Getters Service}
 - {color: green, destination: '[Payload Extraction & Validation] netmiko_show_ip_route',
   label: success, name: '[Regression Workflow: Payload Extraction & Validation] 2021-08-07
     08:40:45.275246', source: '[Shared] Start', subtype: success, type: workflow_edge,
@@ -1540,21 +1547,21 @@
   source: '[POST update, DELETE delete and GET & POST results] POST Search Result',
   subtype: success, type: workflow_edge, workflow: 'POST update, DELETE delete and
     GET & POST results'}
-- {color: green, destination: '[Gateway Mechanism (SSH Proxy with Paramiko)] Gateway
+- {color: green, destination: '[(R) Gateway Mechanism (SSH Proxy with Paramiko)] Gateway
     1', label: success, name: '2022-01-01 03:00:48.411449', source: '[Shared] Start',
-  subtype: success, type: workflow_edge, workflow: Gateway Mechanism (SSH Proxy with
-    Paramiko)}
-- {color: green, destination: '[Gateway Mechanism (SSH Proxy with Paramiko)] Gateway
-    3, 2 then 1', label: success, name: '2022-01-01 03:01:38.437052', source: '[Gateway
-    Mechanism (SSH Proxy with Paramiko)] Gateway 1', subtype: success, type: workflow_edge,
-  workflow: Gateway Mechanism (SSH Proxy with Paramiko)}
-- {color: green, destination: '[Gateway Mechanism (SSH Proxy with Paramiko)] Both',
-  label: success, name: '2022-01-01 03:02:05.260789', source: '[Gateway Mechanism
+  subtype: success, type: workflow_edge, workflow: (R) Gateway Mechanism (SSH Proxy
+    with Paramiko)}
+- {color: green, destination: '[(R) Gateway Mechanism (SSH Proxy with Paramiko)] Gateway
+    3, 2 then 1', label: success, name: '2022-01-01 03:01:38.437052', source: '[(R)
+    Gateway Mechanism (SSH Proxy with Paramiko)] Gateway 1', subtype: success, type: workflow_edge,
+  workflow: (R) Gateway Mechanism (SSH Proxy with Paramiko)}
+- {color: green, destination: '[(R) Gateway Mechanism (SSH Proxy with Paramiko)] Both',
+  label: success, name: '2022-01-01 03:02:05.260789', source: '[(R) Gateway Mechanism
     (SSH Proxy with Paramiko)] Gateway 3, 2 then 1', subtype: success, type: workflow_edge,
-  workflow: Gateway Mechanism (SSH Proxy with Paramiko)}
+  workflow: (R) Gateway Mechanism (SSH Proxy with Paramiko)}
 - {color: green, destination: '[Shared] End', label: success, name: '2022-01-01 03:02:06.375942',
-  source: '[Gateway Mechanism (SSH Proxy with Paramiko)] Both', subtype: success,
-  type: workflow_edge, workflow: Gateway Mechanism (SSH Proxy with Paramiko)}
+  source: '[(R) Gateway Mechanism (SSH Proxy with Paramiko)] Both', subtype: success,
+  type: workflow_edge, workflow: (R) Gateway Mechanism (SSH Proxy with Paramiko)}
 - {color: green, destination: '[Parameterized Multiprocessing] Empty Service', label: success,
   name: '2022-01-15 06:13:18.168148', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: Parameterized Multiprocessing}

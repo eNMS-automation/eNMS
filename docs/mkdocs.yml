@@ -10,69 +10,69 @@ nav:
     - Installation: base/installation.md
     - Release Notes: base/release_notes.md
   - Inventory:
-      Network Creation: inventory/network_creation.md
-      Configuration Management: inventory/configuration_management.md
-      Pools: inventory/pools.md
-      WebSSH Connection: inventory/web_connection.md
-      Network Visualization: inventory/network_visualization.md
+    - Network Creation: inventory/network_creation.md
+    - Configuration Management: inventory/configuration_management.md
+    - Pools: inventory/pools.md
+    - WebSSH Connection: inventory/web_connection.md
+    - Network Visualization: inventory/network_visualization.md
   - Automation:
-    -  Services: automation/services.md
-    -  Workflows: automation/workflows.md
-    -  Builtin Service Types:
-          Service Type Index: automation/builtin_services.md
-          Ansible Playbook Service: automation/servicetypes/ansible_playbook.md
-          Data Extraction Service: automation/servicetypes/data_extraction.md
-          Data Validation Service: automation/servicetypes/data_validation.md
-          Generic File Transfer Service: automation/servicetypes/generic_filetransfer.md
-          Git Action Service: automation/servicetypes/git_action.md
-          ICMP TCP Ping Service: automation/servicetypes/icmptcp_ping.md
-          Mail Notification Service: automation/servicetypes/mail_notification.md
-          MatterMost Notificatoin Service: automation/servicetypes/mattermost_notification.md
-          Napalm Service Common Parameters: automation/servicetypes/napalm_common.md
-          Napalm Configuration Service: automation/servicetypes/napalm_configuration.md
-          Napalm Data Backup Service: automation/servicetypes/napalm_databackup.md
-          Napalm Getters Service: automation/servicetypes/napalm_getters.md
-          Napalm Ping Service: automation/servicetypes/napalm_ping.md
-          Napalm Rollback Service: automation/servicetypes/napalm_rollback.md
-          Napalm Traceroute Service: automation/servicetypes/napalm_traceroute.md
-          Netconf (ncclient) Service: automation/servicetypes/netconf_ncclient.md
-          Netmiko Service Common Parameters: automation/servicetypes/netmiko_common.md
-          Netmiko Configuration Service: automation/servicetypes/netmiko_configuration.md
-          Netmiko Data Backup Service: automation/servicetypes/netmiko_databackup.md
-          Netmiko Filetransfer Service: automation/servicetypes/netmiko_filetransfer.md
-          Netmiko Prompts Service: automation/servicetypes/netmiko_prompts.md
-          Netmiko Validation Service: automation/servicetypes/netmiko_validation.md
-          Python Snippet Service: automation/servicetypes/python_snippet.md
-          REST Call Service: automation/servicetypes/rest_call.md
-          Scrapli Command Service: automation/servicetypes/scrapli_command.md
-          Scrapli Netconf Service: automation/servicetypes/scrapli_netconf.md
-          Slack Notification Service: automation/servicetypes/slack_notification.md
-          Topology Import Service: automation/servicetypes/topology_import.md
-          UNIX Command Service: automation/servicetypes/unix_command.md
-          UNIX Shell Script Service: automation/servicetypes/unix_shell.md
-          Workflow (subworkflow) Service: automation/servicetypes/workflow.md
-    -  Scheduling: automation/scheduling.md
+    - Services: automation/services.md
+    - Workflows: automation/workflows.md
+    - Builtin Service Types:
+      - Service Type Index: automation/builtin_services.md
+      - Ansible Playbook Service: automation/servicetypes/ansible_playbook.md
+      - Data Extraction Service: automation/servicetypes/data_extraction.md
+      - Data Validation Service: automation/servicetypes/data_validation.md
+      - Generic File Transfer Service: automation/servicetypes/generic_filetransfer.md
+      - Git Action Service: automation/servicetypes/git_action.md
+      - ICMP TCP Ping Service: automation/servicetypes/icmptcp_ping.md
+      - Mail Notification Service: automation/servicetypes/mail_notification.md
+      - MatterMost Notificatoin Service: automation/servicetypes/mattermost_notification.md
+      - Napalm Service Common Parameters: automation/servicetypes/napalm_common.md
+      - Napalm Configuration Service: automation/servicetypes/napalm_configuration.md
+      - Napalm Data Backup Service: automation/servicetypes/napalm_databackup.md
+      - Napalm Getters Service: automation/servicetypes/napalm_getters.md
+      - Napalm Ping Service: automation/servicetypes/napalm_ping.md
+      - Napalm Rollback Service: automation/servicetypes/napalm_rollback.md
+      - Napalm Traceroute Service: automation/servicetypes/napalm_traceroute.md
+      - Netconf (ncclient) Service: automation/servicetypes/netconf_ncclient.md
+      - Netmiko Service Common Parameters: automation/servicetypes/netmiko_common.md
+      - Netmiko Configuration Service: automation/servicetypes/netmiko_configuration.md
+      - Netmiko Data Backup Service: automation/servicetypes/netmiko_databackup.md
+      - Netmiko Filetransfer Service: automation/servicetypes/netmiko_filetransfer.md
+      - Netmiko Prompts Service: automation/servicetypes/netmiko_prompts.md
+      - Netmiko Validation Service: automation/servicetypes/netmiko_validation.md
+      - Python Snippet Service: automation/servicetypes/python_snippet.md
+      - REST Call Service: automation/servicetypes/rest_call.md
+      - Scrapli Command Service: automation/servicetypes/scrapli_command.md
+      - Scrapli Netconf Service: automation/servicetypes/scrapli_netconf.md
+      - Slack Notification Service: automation/servicetypes/slack_notification.md
+      - Topology Import Service: automation/servicetypes/topology_import.md
+      - UNIX Command Service: automation/servicetypes/unix_command.md
+      - UNIX Shell Script Service: automation/servicetypes/unix_shell.md
+      - Workflow (subworkflow) Service: automation/servicetypes/workflow.md
+    - Scheduling: automation/scheduling.md
   - Advanced:
-      Search System: advanced/search_system.md
-      Service Selection: advanced/service_selection.md
-      REST API:
-        Start here: advanced/endpoint_type_index.md
-        Retrieve an instance: advanced/endpoint_types/retrieve_instance.md
-        Delete an instance: advanced/endpoint_types/delete_instance.md
-        Create or update an instance: advanced/endpoint_types/create_update_instance.md
-        Retrieve a list of instances - simple: advanced/endpoint_types/retrieve_list_instance_simple.md
-        Retrieve a list of instances - custom: advanced/endpoint_types/retrieve_list_instance_custom.md
-        Run a service: advanced/endpoint_types/run_service.md
-        Get status or results of service: advanced/endpoint_types/results_service.md
-        Retrieve device configuration: advanced/endpoint_types/device_config.md
-        Migrate between applications: advanced/endpoint_types/migrate.md
-        Ping application: advanced/endpoint_types/ping.md
-        Administrative: advanced/endpoint_types/admin.md
-      Recommended Practices: advanced/recommended_practices.md
-      Administration: advanced/administration.md
-      Contributing: advanced/contributing.md
-      Developer Notes: advanced/developer_notes.md
-      Debugging: advanced/debug.md
+    - Search System: advanced/search_system.md
+    - Service Selection: advanced/service_selection.md
+    - REST API:
+      - Start here: advanced/endpoint_type_index.md
+      - Retrieve an instance: advanced/endpoint_types/retrieve_instance.md
+      - Delete an instance: advanced/endpoint_types/delete_instance.md
+      - Create or update an instance: advanced/endpoint_types/create_update_instance.md
+      - Retrieve a list of instances - simple: advanced/endpoint_types/retrieve_list_instance_simple.md
+      - Retrieve a list of instances - custom: advanced/endpoint_types/retrieve_list_instance_custom.md
+      - Run a service: advanced/endpoint_types/run_service.md
+      - Get status or results of service: advanced/endpoint_types/results_service.md
+      - Retrieve device configuration: advanced/endpoint_types/device_config.md
+      - Migrate between applications: advanced/endpoint_types/migrate.md
+      - Ping application: advanced/endpoint_types/ping.md
+      - Administrative: advanced/endpoint_types/admin.md
+    - Recommended Practices: advanced/recommended_practices.md
+    - Administration: advanced/administration.md
+    - Contributing: advanced/contributing.md
+    - Developer Notes: advanced/developer_notes.md
+    - Debugging: advanced/debug.md
 theme:
   name: material
   features:

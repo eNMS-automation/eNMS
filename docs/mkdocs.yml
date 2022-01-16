@@ -16,9 +16,9 @@ nav:
       WebSSH Connection: inventory/web_connection.md
       Network Visualization: inventory/network_visualization.md
   - Automation:
-      Services: automation/services.md
-      Workflows: automation/workflows.md
-      Builtin Service Types:
+    -  Services: automation/services.md
+    -  Workflows: automation/workflows.md
+    -  Builtin Service Types:
           Service Type Index: automation/builtin_services.md
           Ansible Playbook Service: automation/servicetypes/ansible_playbook.md
           Data Extraction Service: automation/servicetypes/data_extraction.md
@@ -51,7 +51,7 @@ nav:
           UNIX Command Service: automation/servicetypes/unix_command.md
           UNIX Shell Script Service: automation/servicetypes/unix_shell.md
           Workflow (subworkflow) Service: automation/servicetypes/workflow.md
-      Scheduling: automation/scheduling.md
+    -  Scheduling: automation/scheduling.md
   - Advanced:
       Search System: advanced/search_system.md
       Service Selection: advanced/service_selection.md

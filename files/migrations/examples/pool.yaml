@@ -180,11 +180,11 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [Duplicate me 2, Loopback and Parallel Links, L1 Site, L3 Site, L2 Site,
-    Subsite 1, Top-level Devices and Links, Import with Add Connected Nodes and Links,
-    Large Network Display, 'Creation, Edit and Deletion', Subsubsite and Subsubsubsite,
-    Subsite and Teleport Mechanism, 'Duplication of Devices, Subsites and Top-level
-      Sites', Layout of Large Graph, Subsite 2]
+  sites: ['Duplication of Devices, Subsites and Top-level Sites', Layout of Large
+      Graph, Subsite 1, Subsubsite and Subsubsubsite, Top-level Devices and Links,
+    Large Network Display, L3 Site, 'Creation, Edit and Deletion', L2 Site, Import
+      with Add Connected Nodes and Links, Subsite 2, Duplicate me 2, Subsite and Teleport
+      Mechanism, L1 Site, Loopback and Parallel Links]
   target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
@@ -746,7 +746,7 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: [Parameterized Multiprocessing, Scalability Test (large workflow)]
+  target_services: [Scalability Test (large workflow), Parameterized Multiprocessing]
   tasks: []
   type: pool
   user_description: ''
@@ -3456,11 +3456,11 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [Duplicate me 2, Loopback and Parallel Links, L1 Site, L3 Site, L2 Site,
-    Subsite 1, Top-level Devices and Links, Import with Add Connected Nodes and Links,
-    Large Network Display, 'Creation, Edit and Deletion', Subsubsite and Subsubsubsite,
-    Subsite and Teleport Mechanism, 'Duplication of Devices, Subsites and Top-level
-      Sites', Layout of Large Graph, Subsite 2]
+  sites: ['Duplication of Devices, Subsites and Top-level Sites', Layout of Large
+      Graph, Subsite 1, Subsubsite and Subsubsubsite, Top-level Devices and Links,
+    Large Network Display, L3 Site, 'Creation, Edit and Deletion', L2 Site, Import
+      with Add Connected Nodes and Links, Subsite 2, Duplicate me 2, Subsite and Teleport
+      Mechanism, L1 Site, Loopback and Parallel Links]
   target_services: []
   tasks: []
   type: pool

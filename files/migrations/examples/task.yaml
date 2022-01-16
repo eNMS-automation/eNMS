@@ -11,7 +11,7 @@
   name: Configuration Poller
   pools: []
   scheduling_mode: standard
-  service: Operational Data Backup (admin)
+  service: (R) Operational Data Backup Service
   start_date: 09/10/2019 21:17:13
   type: task
 - creator: ''

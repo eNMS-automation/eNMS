@@ -160,24 +160,21 @@
     DxD Multiprocessing, RBAC Admin Only, Skip Mechanism'}
 - {color: green, destination: '[Shared] Modify Payload for Iteration', label: success,
   name: '[Regression Workflow: Iteration Targets Mechanism] 2021-04-24 08:58:40.196062',
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Iteration
-    Mechanism: Combined Device & Target Iteration'}
-- {color: green, destination: '[Iteration Mechanism: Combined Device & Target Iteration]
-    Iteration Target Workflow - Test 2', label: success, name: '[Regression Workflow:
-    Iteration Targets Mechanism] 2021-04-24 08:58:40.196078', source: '[Iteration
-    Mechanism: Combined Device & Target Iteration] Iteration Targets Workflow - Test
-    1', subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism: Combined
-    Device & Target Iteration'}
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: Combined
+    Device & Target Iteration}
+- {color: green, destination: '[Combined Device & Target Iteration] Iteration Target
+    Workflow - Test 2', label: success, name: '[Regression Workflow: Iteration Targets
+    Mechanism] 2021-04-24 08:58:40.196078', source: '[Combined Device & Target Iteration]
+    Iteration Targets Workflow - Test 1', subtype: success, type: workflow_edge, workflow: Combined
+    Device & Target Iteration}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Iteration Targets Mechanism] 2021-04-24 08:58:40.196164', source: '[Iteration
-    Mechanism: Combined Device & Target Iteration] Iteration Targets Workflow - Test
-    4', subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism: Combined
-    Device & Target Iteration'}
-- {color: green, destination: '[Iteration Mechanism: Combined Device & Target Iteration]
-    Iteration Targets Workflow - Test 1', label: success, name: '[Regression Workflow:
-    Iteration Targets Mechanism] 2021-04-24 08:58:40.196341', source: '[Shared] Modify
-    Payload for Iteration', subtype: success, type: workflow_edge, workflow: 'Iteration
-    Mechanism: Combined Device & Target Iteration'}
+    Iteration Targets Mechanism] 2021-04-24 08:58:40.196164', source: '[Combined Device
+    & Target Iteration] Iteration Targets Workflow - Test 4', subtype: success, type: workflow_edge,
+  workflow: Combined Device & Target Iteration}
+- {color: green, destination: '[Combined Device & Target Iteration] Iteration Targets
+    Workflow - Test 1', label: success, name: '[Regression Workflow: Iteration Targets
+    Mechanism] 2021-04-24 08:58:40.196341', source: '[Shared] Modify Payload for Iteration',
+  subtype: success, type: workflow_edge, workflow: Combined Device & Target Iteration}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     Netmiko Prompts] 2021-04-24 08:58:40.196356', source: '[Netmiko Prompts] Test
     netmiko prompts pass', subtype: success, type: workflow_edge, workflow: Netmiko
@@ -194,10 +191,10 @@
     Separate Failure - Success Paths] 2021-04-24 08:58:40.196401', source: '[Shared]
     Example Service (does nothing)', subtype: success, type: workflow_edge, workflow: 'Miscellaneous:
     Fork based on Result with Success & Failure Edges'}
-- {color: green, destination: '[Operational Data Backup (admin)] Configuration Backup
-    (NAPALM)', label: success, name: '[Regression Workflow: Operational Data Backup
-    (admin)] 2021-04-24 08:58:40.196417', source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: Operational Data Backup (admin)}
+- {color: green, destination: '[(R) Operational Data Backup Service] Configuration
+    Backup (NAPALM)', label: success, name: '[Regression Workflow: Operational Data
+    Backup (admin)] 2021-04-24 08:58:40.196417', source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: (R) Operational Data Backup Service}
 - {color: green, destination: '[Shared] Example Service (does nothing)', label: success,
   name: '[Regression Workflow: Advanced Multiprocessing (admin)] 2021-04-24 08:58:40.196549',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Miscellaneous:
@@ -307,43 +304,38 @@
   name: '[Regression Workflow: Ansible with Validation] 2021-04-24 08:58:40.197355',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: (R) Ansible
     Playbook Service}
-- {color: green, destination: '[Iteration Mechanism: Dictionary as Iteration Target
-    Variable] Set Variables for Iteration', label: success, name: '[Regression Workflow:
-    Advanced Iteration Targets] 2021-04-24 08:58:40.197373', source: '[Shared] Start',
-  subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism: Dictionary
-    as Iteration Target Variable'}
-- {color: green, destination: '[Iteration Mechanism: Dictionary as Iteration Target
-    Variable] Show VRF with iteration', label: success, name: '[Regression Workflow:
-    Advanced Iteration Targets] 2021-04-24 08:58:40.197390', source: '[Iteration Mechanism:
-    Dictionary as Iteration Target Variable] Set Variables for Iteration', subtype: success,
-  type: workflow_edge, workflow: 'Iteration Mechanism: Dictionary as Iteration Target
-    Variable'}
+- {color: green, destination: '[Dictionary as Iteration Target Variable] Set Variables
+    for Iteration', label: success, name: '[Regression Workflow: Advanced Iteration
+    Targets] 2021-04-24 08:58:40.197373', source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: Dictionary as Iteration Target Variable}
+- {color: green, destination: '[Dictionary as Iteration Target Variable] Show VRF
+    with iteration', label: success, name: '[Regression Workflow: Advanced Iteration
+    Targets] 2021-04-24 08:58:40.197390', source: '[Dictionary as Iteration Target
+    Variable] Set Variables for Iteration', subtype: success, type: workflow_edge,
+  workflow: Dictionary as Iteration Target Variable}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Advanced Iteration Targets] 2021-04-24 08:58:40.197405', source: '[Iteration Mechanism:
-    Dictionary as Iteration Target Variable] Show VRF with iteration', subtype: success,
-  type: workflow_edge, workflow: 'Iteration Mechanism: Dictionary as Iteration Target
-    Variable'}
-- {color: green, destination: '[Iteration Mechanism: Workflow and Subworkflow Iteration]
-    Test Iteration', label: success, name: '[Regression Workflow: Workflow and Subworkflow
-    Iteration] 2021-04-24 08:58:40.197446', source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: 'Iteration Mechanism: Workflow and Subworkflow Iteration'}
-- {color: green, destination: '[Iteration Mechanism: Workflow and Subworkflow Iteration]
-    Subworkflow Value Iteration', label: success, name: '[Regression Workflow: Workflow
-    and Subworkflow Iteration] 2021-04-24 08:58:40.197465', source: '[Iteration Mechanism:
-    Workflow and Subworkflow Iteration] Test Iteration', subtype: success, type: workflow_edge,
-  workflow: 'Iteration Mechanism: Workflow and Subworkflow Iteration'}
-- {color: green, destination: '[[Iteration Mechanism: Workflow and Subworkflow Iteration]
-    Subworkflow Value Iteration] Test Iteration', label: success, name: '[[Regression
-    Workflow: Workflow and Subworkflow Iteration] Subworkflow Value Iteration] 2021-04-24
-    08:58:40.197481', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow
-    Value Iteration'}
+    Advanced Iteration Targets] 2021-04-24 08:58:40.197405', source: '[Dictionary
+    as Iteration Target Variable] Show VRF with iteration', subtype: success, type: workflow_edge,
+  workflow: Dictionary as Iteration Target Variable}
+- {color: green, destination: '[Workflow and Subworkflow Iteration] Test Iteration',
+  label: success, name: '[Regression Workflow: Workflow and Subworkflow Iteration]
+    2021-04-24 08:58:40.197446', source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: Workflow and Subworkflow Iteration}
+- {color: green, destination: '[Workflow and Subworkflow Iteration] Subworkflow Value
+    Iteration', label: success, name: '[Regression Workflow: Workflow and Subworkflow
+    Iteration] 2021-04-24 08:58:40.197465', source: '[Workflow and Subworkflow Iteration]
+    Test Iteration', subtype: success, type: workflow_edge, workflow: Workflow and
+    Subworkflow Iteration}
+- {color: green, destination: '[[Workflow and Subworkflow Iteration] Subworkflow Value
+    Iteration] Test Iteration', label: success, name: '[[Regression Workflow: Workflow
+    and Subworkflow Iteration] Subworkflow Value Iteration] 2021-04-24 08:58:40.197481',
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: '[Workflow
+    and Subworkflow Iteration] Subworkflow Value Iteration'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
     Workflow: Workflow and Subworkflow Iteration] Subworkflow Value Iteration] 2021-04-24
-    08:58:40.197497', source: '[[Iteration Mechanism: Workflow and Subworkflow Iteration]
-    Subworkflow Value Iteration] Test Iteration', subtype: success, type: workflow_edge,
-  workflow: '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow
-    Value Iteration'}
+    08:58:40.197497', source: '[[Workflow and Subworkflow Iteration] Subworkflow Value
+    Iteration] Test Iteration', subtype: success, type: workflow_edge, workflow: '[Workflow
+    and Subworkflow Iteration] Subworkflow Value Iteration'}
 - {color: green, destination: '[Preprocessing and Postprocessing Mechanism] Preprocessing',
   label: success, name: '[Regression Workflow: Preprocessing and Postprocessing] 2021-04-24
     08:58:40.197661', source: '[Shared] Start', subtype: success, type: workflow_edge,
@@ -400,18 +392,16 @@
     show version', label: success, name: '[Regression Workflow: Ansible with Validation]
     2021-04-24 08:58:40.197830', source: '[(R) Ansible Playbook Service] Simple Playbook',
   subtype: success, type: workflow_edge, workflow: (R) Ansible Playbook Service}
-- {color: green, destination: '[Iteration Mechanism: Combined Device & Target Iteration]
-    Iteration Target Workflow - Test 3', label: success, name: '[Regression Workflow:
-    Iteration Targets Mechanism] 2021-04-24 08:58:40.197847', source: '[Iteration
-    Mechanism: Combined Device & Target Iteration] Iteration Target Workflow - Test
-    2', subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism: Combined
-    Device & Target Iteration'}
-- {color: green, destination: '[Iteration Mechanism: Combined Device & Target Iteration]
-    Iteration Targets Workflow - Test 4', label: success, name: '[Regression Workflow:
-    Iteration Targets Mechanism] 2021-04-24 08:58:40.197863', source: '[Iteration
-    Mechanism: Combined Device & Target Iteration] Iteration Target Workflow - Test
-    3', subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism: Combined
-    Device & Target Iteration'}
+- {color: green, destination: '[Combined Device & Target Iteration] Iteration Target
+    Workflow - Test 3', label: success, name: '[Regression Workflow: Iteration Targets
+    Mechanism] 2021-04-24 08:58:40.197847', source: '[Combined Device & Target Iteration]
+    Iteration Target Workflow - Test 2', subtype: success, type: workflow_edge, workflow: Combined
+    Device & Target Iteration}
+- {color: green, destination: '[Combined Device & Target Iteration] Iteration Targets
+    Workflow - Test 4', label: success, name: '[Regression Workflow: Iteration Targets
+    Mechanism] 2021-04-24 08:58:40.197863', source: '[Combined Device & Target Iteration]
+    Iteration Target Workflow - Test 3', subtype: success, type: workflow_edge, workflow: Combined
+    Device & Target Iteration}
 - {color: green, destination: '[Specific Superworkflow] REST API: call to placeholder
     property', label: success, name: '[Regression Workflow: Superworkflow] 2021-04-24
     08:58:40.197878', source: '[Shared] REST API: call *is_alive* endpoint', subtype: success,
@@ -425,28 +415,29 @@
     get_var, set_var, get_result functions] 2021-04-24 08:58:40.197909', source: '[Using
     get_var, set_var, and get_result Functions] Show vrf with payload helper', subtype: success,
   type: workflow_edge, workflow: 'Using get_var, set_var, and get_result Functions'}
-- {color: green, destination: '[Operational Data Backup (admin)] Get Configuration',
+- {color: green, destination: '[(R) Operational Data Backup Service] Get Configuration',
   label: success, name: '[Regression Workflow: Operational Data Backup (admin)] 2021-04-24
     08:58:40.197930', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: Operational Data Backup (admin)}
-- {color: green, destination: '[Operational Data Backup (admin)] Retrieve Operational
+  workflow: (R) Operational Data Backup Service}
+- {color: green, destination: '[(R) Operational Data Backup Service] Retrieve Operational
     Data', label: success, name: '[Regression Workflow: Operational Data Backup (admin)]
-    2021-04-24 08:58:40.197947', source: '[Operational Data Backup (admin)] Get Configuration',
-  subtype: success, type: workflow_edge, workflow: Operational Data Backup (admin)}
-- {color: green, destination: '[Operational Data Backup (admin)] Push Configurations
+    2021-04-24 08:58:40.197947', source: '[(R) Operational Data Backup Service] Get
+    Configuration', subtype: success, type: workflow_edge, workflow: (R) Operational
+    Data Backup Service}
+- {color: green, destination: '[(R) Operational Data Backup Service] Push Configurations
     to Git', label: success, name: '[Regression Workflow: Operational Data Backup
-    (admin)] 2021-04-24 08:58:40.197962', source: '[Operational Data Backup (admin)]
-    Retrieve Operational Data', subtype: success, type: workflow_edge, workflow: Operational
-    Data Backup (admin)}
-- {color: green, destination: '[Operational Data Backup (admin)] Push Configurations
+    (admin)] 2021-04-24 08:58:40.197962', source: '[(R) Operational Data Backup Service]
+    Retrieve Operational Data', subtype: success, type: workflow_edge, workflow: (R)
+    Operational Data Backup Service}
+- {color: green, destination: '[(R) Operational Data Backup Service] Push Configurations
     to Git', label: success, name: '[Regression Workflow: Operational Data Backup
-    (admin)] 2021-04-24 08:58:40.197978', source: '[Operational Data Backup (admin)]
-    Configuration Backup (NAPALM)', subtype: success, type: workflow_edge, workflow: Operational
-    Data Backup (admin)}
+    (admin)] 2021-04-24 08:58:40.197978', source: '[(R) Operational Data Backup Service]
+    Configuration Backup (NAPALM)', subtype: success, type: workflow_edge, workflow: (R)
+    Operational Data Backup Service}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Operational Data Backup (admin)] 2021-04-24 08:58:40.197993', source: '[Operational
-    Data Backup (admin)] Push Configurations to Git', subtype: success, type: workflow_edge,
-  workflow: Operational Data Backup (admin)}
+    Operational Data Backup (admin)] 2021-04-24 08:58:40.197993', source: '[(R) Operational
+    Data Backup Service] Push Configurations to Git', subtype: success, type: workflow_edge,
+  workflow: (R) Operational Data Backup Service}
 - {color: green, destination: '[Specific Superworkflow] Post Placeholder Processing',
   label: success, name: '[Regression Workflow: Superworkflow] 2021-04-24 08:58:40.198008',
   source: '[Shared] Placeholder', subtype: success, type: workflow_edge, workflow: Specific
@@ -907,50 +898,43 @@
     Optional Prerequisite Services] 2021-04-24 08:58:40.199695', source: '[Optional
     Prerequisite Services] Last Service', subtype: success, type: workflow_edge, workflow: Optional
     Prerequisite Services}
-- {color: green, destination: '[Iteration Mechanism: Device Iteration] Hard-coded
-    iteration devices', label: success, name: '[Regression Workflow: Device Iteration]
-    2021-04-24 08:58:40.199710', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: 'Iteration Mechanism: Device Iteration'}
-- {color: green, destination: '[Iteration Mechanism: Workflow and Subworkflow Iteration]
-    Subworkflow Device Iteration', label: success, name: '[Regression Workflow: Workflow
-    and Subworkflow Iteration] 2021-04-24 08:58:40.199741', source: '[Iteration Mechanism:
-    Workflow and Subworkflow Iteration] Subworkflow Value Iteration', subtype: success,
-  type: workflow_edge, workflow: 'Iteration Mechanism: Workflow and Subworkflow Iteration'}
-- {color: green, destination: '[Iteration Mechanism: Workflow and Subworkflow Iteration]
-    Subworkflow Device Iteration 2', label: success, name: '[Regression Workflow:
-    Workflow and Subworkflow Iteration] 2021-04-24 08:58:40.199756', source: '[Iteration
-    Mechanism: Workflow and Subworkflow Iteration] Subworkflow Device Iteration',
-  subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism: Workflow
-    and Subworkflow Iteration'}
+- {color: green, destination: '[Device Iteration] Hard-coded iteration devices', label: success,
+  name: '[Regression Workflow: Device Iteration] 2021-04-24 08:58:40.199710', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: Device Iteration}
+- {color: green, destination: '[Workflow and Subworkflow Iteration] Subworkflow Device
+    Iteration', label: success, name: '[Regression Workflow: Workflow and Subworkflow
+    Iteration] 2021-04-24 08:58:40.199741', source: '[Workflow and Subworkflow Iteration]
+    Subworkflow Value Iteration', subtype: success, type: workflow_edge, workflow: Workflow
+    and Subworkflow Iteration}
+- {color: green, destination: '[Workflow and Subworkflow Iteration] Subworkflow Device
+    Iteration 2', label: success, name: '[Regression Workflow: Workflow and Subworkflow
+    Iteration] 2021-04-24 08:58:40.199756', source: '[Workflow and Subworkflow Iteration]
+    Subworkflow Device Iteration', subtype: success, type: workflow_edge, workflow: Workflow
+    and Subworkflow Iteration}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Workflow and Subworkflow Iteration] 2021-04-24 08:58:40.199770', source: '[Iteration
-    Mechanism: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2',
-  subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism: Workflow
-    and Subworkflow Iteration'}
-- {color: green, destination: '[[Iteration Mechanism: Workflow and Subworkflow Iteration]
-    Subworkflow Device Iteration 2] Service that does nothing', label: success, name: '[[Regression
-    Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2]
-    2021-04-24 08:58:40.199787', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow
-    Device Iteration 2'}
+    Workflow and Subworkflow Iteration] 2021-04-24 08:58:40.199770', source: '[Workflow
+    and Subworkflow Iteration] Subworkflow Device Iteration 2', subtype: success,
+  type: workflow_edge, workflow: Workflow and Subworkflow Iteration}
+- {color: green, destination: '[[Workflow and Subworkflow Iteration] Subworkflow Device
+    Iteration 2] Service that does nothing', label: success, name: '[[Regression Workflow:
+    Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2] 2021-04-24
+    08:58:40.199787', source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: '[Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
     Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2]
-    2021-04-24 08:58:40.199802', source: '[[Iteration Mechanism: Workflow and Subworkflow
-    Iteration] Subworkflow Device Iteration 2] Service that does nothing', subtype: success,
-  type: workflow_edge, workflow: '[Iteration Mechanism: Workflow and Subworkflow Iteration]
-    Subworkflow Device Iteration 2'}
-- {color: green, destination: '[[Iteration Mechanism: Workflow and Subworkflow Iteration]
-    Subworkflow Device Iteration] Service that does nothing', label: success, name: '[[Regression
-    Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration] 2021-04-24
-    08:58:40.199817', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow
-    Device Iteration'}
+    2021-04-24 08:58:40.199802', source: '[[Workflow and Subworkflow Iteration] Subworkflow
+    Device Iteration 2] Service that does nothing', subtype: success, type: workflow_edge,
+  workflow: '[Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2'}
+- {color: green, destination: '[[Workflow and Subworkflow Iteration] Subworkflow Device
+    Iteration] Service that does nothing', label: success, name: '[[Regression Workflow:
+    Workflow and Subworkflow Iteration] Subworkflow Device Iteration] 2021-04-24 08:58:40.199817',
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: '[Workflow
+    and Subworkflow Iteration] Subworkflow Device Iteration'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
     Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration] 2021-04-24
-    08:58:40.199831', source: '[[Iteration Mechanism: Workflow and Subworkflow Iteration]
-    Subworkflow Device Iteration] Service that does nothing', subtype: success, type: workflow_edge,
-  workflow: '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow
-    Device Iteration'}
+    08:58:40.199831', source: '[[Workflow and Subworkflow Iteration] Subworkflow Device
+    Iteration] Service that does nothing', subtype: success, type: workflow_edge,
+  workflow: '[Workflow and Subworkflow Iteration] Subworkflow Device Iteration'}
 - {color: green, destination: '[Global Variables and post-run Pool Update Mechanism]
     Factory function: Create new device', label: success, name: '[Regression Workflow:
     Global Variables and post-run Pool Update Mechanism] 2021-04-24 08:58:40.199846',
@@ -1030,28 +1014,28 @@
   source: '[Validation Mechanism: Section to Validate Property] Nested Result String
     Validation', subtype: success, type: workflow_edge, workflow: 'Validation Mechanism:
     Section to Validate Property'}
-- {color: green, destination: '[NCClient Netconf Service] Set Description of Lo4 to
-    ZZZZ', label: success, name: '2021-06-23 01:44:36.780081', source: '[NCClient
-    Netconf Service] Get Full Config', subtype: success, type: workflow_edge, workflow: NCClient
-    Netconf Service}
-- {color: green, destination: '[NCClient Netconf Service] Check for ZZZZ in Config',
-  label: success, name: '2021-06-23 06:23:42.801005', source: '[NCClient Netconf Service]
-    Set Description of Lo4 to ZZZZ', subtype: success, type: workflow_edge, workflow: NCClient
-    Netconf Service}
-- {color: green, destination: '[NCClient Netconf Service] Erase Lo4 Description',
-  label: success, name: '2021-06-23 06:27:11.527112', source: '[NCClient Netconf Service]
-    Check for ZZZZ in Config', subtype: success, type: workflow_edge, workflow: NCClient
-    Netconf Service}
-- {color: green, destination: '[NCClient Netconf Service] Get Full Config', label: success,
+- {color: green, destination: '[(R) NCClient Netconf Service] Set Description of Lo4
+    to ZZZZ', label: success, name: '2021-06-23 01:44:36.780081', source: '[(R) NCClient
+    Netconf Service] Get Full Config', subtype: success, type: workflow_edge, workflow: (R)
+    NCClient Netconf Service}
+- {color: green, destination: '[(R) NCClient Netconf Service] Check for ZZZZ in Config',
+  label: success, name: '2021-06-23 06:23:42.801005', source: '[(R) NCClient Netconf
+    Service] Set Description of Lo4 to ZZZZ', subtype: success, type: workflow_edge,
+  workflow: (R) NCClient Netconf Service}
+- {color: green, destination: '[(R) NCClient Netconf Service] Erase Lo4 Description',
+  label: success, name: '2021-06-23 06:27:11.527112', source: '[(R) NCClient Netconf
+    Service] Check for ZZZZ in Config', subtype: success, type: workflow_edge, workflow: (R)
+    NCClient Netconf Service}
+- {color: green, destination: '[(R) NCClient Netconf Service] Get Full Config', label: success,
   name: '2021-06-23 06:28:32.023444', source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: NCClient Netconf Service}
-- {color: green, destination: '[NCClient Netconf Service] Check ZZZZ is not in Config',
-  label: success, name: '2021-06-23 06:28:56.442642', source: '[NCClient Netconf Service]
-    Erase Lo4 Description', subtype: success, type: workflow_edge, workflow: NCClient
-    Netconf Service}
+  type: workflow_edge, workflow: (R) NCClient Netconf Service}
+- {color: green, destination: '[(R) NCClient Netconf Service] Check ZZZZ is not in
+    Config', label: success, name: '2021-06-23 06:28:56.442642', source: '[(R) NCClient
+    Netconf Service] Erase Lo4 Description', subtype: success, type: workflow_edge,
+  workflow: (R) NCClient Netconf Service}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-06-23 06:28:57.297497',
-  source: '[NCClient Netconf Service] Check ZZZZ is not in Config', subtype: success,
-  type: workflow_edge, workflow: NCClient Netconf Service}
+  source: '[(R) NCClient Netconf Service] Check ZZZZ is not in Config', subtype: success,
+  type: workflow_edge, workflow: (R) NCClient Netconf Service}
 - {color: green, destination: '[(R) Multiple parallel connections to same device]
     Show VRF with default connection', label: success, name: '2021-06-27 21:08:53.125999',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: (R) Multiple
@@ -1178,12 +1162,12 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2021-07-10 10:22:45.194232',
   source: '[Data Extraction Service] Operation via set_var', subtype: success, type: workflow_edge,
   workflow: Data Extraction Service}
-- {color: green, destination: '[Parameterized Superworkflow Run] Service', label: success,
-  name: '2021-07-11 01:00:21.571232', source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: Parameterized Superworkflow Run}
+- {color: green, destination: '[Parameterized Run with a Superworkflow] Service',
+  label: success, name: '2021-07-11 01:00:21.571232', source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: Parameterized Run with a Superworkflow}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-07-11 01:00:22.562122',
-  source: '[Parameterized Superworkflow Run] Service', subtype: success, type: workflow_edge,
-  workflow: Parameterized Superworkflow Run}
+  source: '[Parameterized Run with a Superworkflow] Service', subtype: success, type: workflow_edge,
+  workflow: Parameterized Run with a Superworkflow}
 - {color: green, destination: '[Superworkflow in SxS w WT with Run Once service] Call
     to is_alive, Run Once', label: success, name: '2021-07-11 01:06:38.027786', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: Superworkflow in SxS
@@ -1371,14 +1355,13 @@
   source: '[Skip Mechanism: Fork based on value with Skip Discard Mechanism] Arista
     devices', subtype: failure, type: workflow_edge, workflow: 'Skip Mechanism: Fork
     based on value with Skip Discard Mechanism'}
-- {color: green, destination: '[Iteration Mechanism: Device Iteration] Iteration Devices
-    from Predefined Variable', label: success, name: '2021-08-21 05:57:42.092762',
-  source: '[Iteration Mechanism: Device Iteration] Hard-coded iteration devices',
-  subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism: Device Iteration'}
+- {color: green, destination: '[Device Iteration] Iteration Devices from Predefined
+    Variable', label: success, name: '2021-08-21 05:57:42.092762', source: '[Device
+    Iteration] Hard-coded iteration devices', subtype: success, type: workflow_edge,
+  workflow: Device Iteration}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-08-21 05:57:42.896445',
-  source: '[Iteration Mechanism: Device Iteration] Iteration Devices from Predefined
-    Variable', subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism:
-    Device Iteration'}
+  source: '[Device Iteration] Iteration Devices from Predefined Variable', subtype: success,
+  type: workflow_edge, workflow: Device Iteration}
 - {color: red, destination: '[Shared] End', label: failure, name: '2021-09-21 06:31:50.623195',
   source: '[Skip Mechanism: Skip in SxS with WF targets mode] Query Skipped Service',
   subtype: failure, type: workflow_edge, workflow: 'Skip Mechanism: Skip in SxS with

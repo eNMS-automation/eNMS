@@ -73,6 +73,12 @@ class AbstractBase(db.base):
                     value = db.fetch(relation[property]["model"], id=value, rbac=rbac)
             if property_type == "bool":
                 value = value not in (False, "false")
+            elif property_type == "dict":
+                table_properties = vs.properties["custom"].get(self.__tablename__, {})
+                if table_properties.get(property, {}).get("update"):
+                    current_value = getattr(self, property)
+                    if current_value:
+                        value = vs.dictionary_recursive_merge(value, current_value)
             setattr(self, property, value)
         if not kwargs.get("update_pools") or not self.pool_model:
             return

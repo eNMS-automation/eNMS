@@ -44,7 +44,6 @@
     "task",
     "access",
     "credential",
-    "view_object",
     "pool"
   ],
   "dont_migrate": {

@@ -147,17 +147,17 @@
   down: false
   icon: router
   ip_address: 192.168.56.50
-  last_configuration_duration: 2.376184s
+  last_configuration_duration: 6.308002s
   last_configuration_failure: Never
-  last_configuration_runtime: '2021-03-17 08:46:08.180643'
+  last_configuration_runtime: '2020-10-02 11:16:49.363284'
   last_configuration_status: Success
-  last_configuration_update: '2021-03-17 08:46:08.180643'
+  last_configuration_update: '2020-10-02 11:16:49.363284'
   last_modified: ''
-  last_operational_data_duration: 0.129928s
-  last_operational_data_failure: '2021-10-15 08:17:14.025988'
-  last_operational_data_runtime: '2021-10-15 08:17:14.025988'
-  last_operational_data_status: Failure
-  last_operational_data_update: '2021-03-17 09:33:55.715730'
+  last_operational_data_duration: 3.509847s
+  last_operational_data_failure: Never
+  last_operational_data_runtime: '2020-10-02 11:16:55.905709'
+  last_operational_data_status: Success
+  last_operational_data_update: '2020-10-02 11:16:55.905709'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -2224,9 +2224,9 @@
   last_configuration_update: Never
   last_modified: ''
   last_operational_data_duration: Never
-  last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
+  last_operational_data_failure: '2021-12-22 15:24:38.592728'
+  last_operational_data_runtime: '2021-12-22 15:24:38.592728'
+  last_operational_data_status: Failure
   last_operational_data_update: Never
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never

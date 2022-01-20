@@ -75,7 +75,7 @@ class AbstractBase(db.base):
                 value = value not in (False, "false")
             elif property_type == "dict":
                 table_properties = vs.properties["custom"].get(self.__tablename__, {})
-                if table_properties.get(property, {}).get("update"):
+                if table_properties.get(property, {}).get("merge_update"):
                     current_value = getattr(self, property)
                     if current_value:
                         value = vs.dictionary_recursive_merge(value, current_value)

@@ -22,39 +22,6 @@
     VRF Creation and Deletion with Netmiko] 2021-04-24 08:58:40.195424', source: '[Shared]
     Netmiko: Check VRF (Telecom1) does not exist', subtype: success, type: workflow_edge,
   workflow: (R) Netmiko Configuration and Validation Services}
-- {color: green, destination: '[Service Priorities, Napalm Getters, Postprocessing]
-    get_interfaces_ip', label: success, name: '[Regression Workflow: Service Priorities,
-    Napalm Getters, Postprocessing] 2021-04-24 08:58:40.195466', source: '[Shared]
-    NAPALM: Get Facts', subtype: success, type: workflow_edge, workflow: 'Service
-    Priorities, Napalm Getters, Postprocessing'}
-- {color: green, destination: '[Service Priorities, Napalm Getters, Postprocessing]
-    get_config', label: success, name: '[Regression Workflow: Service Priorities,
-    Napalm Getters, Postprocessing] 2021-04-24 08:58:40.195481', source: '[Service
-    Priorities, Napalm Getters, Postprocessing] get_interfaces_ip', subtype: success,
-  type: workflow_edge, workflow: 'Service Priorities, Napalm Getters, Postprocessing'}
-- {color: green, destination: '[Service Priorities, Napalm Getters, Postprocessing]
-    process_payload1', label: success, name: '[Regression Workflow: Service Priorities,
-    Napalm Getters, Postprocessing] 2021-04-24 08:58:40.195496', source: '[Service
-    Priorities, Napalm Getters, Postprocessing] get_config', subtype: success, type: workflow_edge,
-  workflow: 'Service Priorities, Napalm Getters, Postprocessing'}
-- {color: green, destination: '[Service Priorities, Napalm Getters, Postprocessing]
-    process_payload1', label: success, name: '[Regression Workflow: Service Priorities,
-    Napalm Getters, Postprocessing] 2021-04-24 08:58:40.195510', source: '[Shared]
-    NAPALM: Get interfaces', subtype: success, type: workflow_edge, workflow: 'Service
-    Priorities, Napalm Getters, Postprocessing'}
-- {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Service Priorities, Napalm Getters, Postprocessing] 2021-04-24 08:58:40.195525',
-  source: '[Service Priorities, Napalm Getters, Postprocessing] process_payload1',
-  subtype: success, type: workflow_edge, workflow: 'Service Priorities, Napalm Getters,
-    Postprocessing'}
-- {color: green, destination: '[Shared] NAPALM: Get Facts', label: success, name: '[Regression
-    Workflow: Service Priorities, Napalm Getters, Postprocessing] 2021-04-24 08:58:40.195613',
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Service
-    Priorities, Napalm Getters, Postprocessing'}
-- {color: green, destination: '[Shared] NAPALM: Get interfaces', label: success, name: '[Regression
-    Workflow: Service Priorities, Napalm Getters, Postprocessing] 2021-04-24 08:58:40.195629',
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Service
-    Priorities, Napalm Getters, Postprocessing'}
 - {color: red, destination: '[Shared] REST API: call *is_alive* endpoint', label: failure,
   name: '[Regression Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195644',
   source: '[Shared] Netmiko: Check VRF (Telecom1) does not exist', subtype: failure,

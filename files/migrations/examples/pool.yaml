@@ -180,11 +180,11 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [L2 Site, Top-level Devices and Links, Import with Add Connected Nodes and
-      Links, Layout of Large Graph, L1 Site, Subsite 2, Large Network Display, Loopback
-      and Parallel Links, 'Duplication of Devices, Subsites and Top-level Sites',
-    Duplicate me 2, L3 Site, Subsubsite and Subsubsubsite, Subsite and Teleport Mechanism,
-    Subsite 1, 'Creation, Edit and Deletion']
+  sites: [Subsite 2, Import with Add Connected Nodes and Links, L1 Site, Subsubsite
+      and Subsubsubsite, L3 Site, Subsite and Teleport Mechanism, Duplicate me 2,
+    Large Network Display, 'Creation, Edit and Deletion', Layout of Large Graph, Subsite
+      1, Loopback and Parallel Links, L2 Site, 'Duplication of Devices, Subsites and
+      Top-level Sites', Top-level Devices and Links]
   target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
@@ -746,7 +746,7 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: [Scalability Test (large workflow), Parameterized Multiprocessing]
+  target_services: [Parameterized Multiprocessing, Scalability Test (large workflow)]
   tasks: []
   type: pool
   user_description: ''
@@ -3456,11 +3456,11 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [L2 Site, Top-level Devices and Links, Import with Add Connected Nodes and
-      Links, Layout of Large Graph, L1 Site, Subsite 2, Large Network Display, Loopback
-      and Parallel Links, 'Duplication of Devices, Subsites and Top-level Sites',
-    Duplicate me 2, L3 Site, Subsubsite and Subsubsubsite, Subsite and Teleport Mechanism,
-    Subsite 1, 'Creation, Edit and Deletion']
+  sites: [Subsite 2, Import with Add Connected Nodes and Links, L1 Site, Subsubsite
+      and Subsubsubsite, L3 Site, Subsite and Teleport Mechanism, Duplicate me 2,
+    Large Network Display, 'Creation, Edit and Deletion', Layout of Large Graph, Subsite
+      1, Loopback and Parallel Links, L2 Site, 'Duplication of Devices, Subsites and
+      Top-level Sites', Top-level Devices and Links]
   target_services: []
   tasks: []
   type: pool

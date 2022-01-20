@@ -71,36 +71,35 @@
   label: failure, name: '[Regression Workflow: Netmiko Prompts] 2021-04-24 08:58:40.195689',
   source: '[(R) Netmiko Prompts Service] Test Netmiko Prompt Service', subtype: failure,
   type: workflow_edge, workflow: (R) Netmiko Prompts Service}
-- {color: green, destination: '[Using get_var, set_var, and get_result Functions]
-    Modify payload (no device)', label: success, name: '[Regression Workflow: Using
-    get_var, set_var, get_result functions] 2021-04-24 08:58:40.195705', source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'Using get_var, set_var,
-    and get_result Functions'}
-- {color: green, destination: '[Using get_var, set_var, and get_result Functions]
-    Modify payload (per device)', label: success, name: '[Regression Workflow: Using
-    get_var, set_var, get_result functions] 2021-04-24 08:58:40.195720', source: '[Using
-    get_var, set_var, and get_result Functions] Modify payload (no device)', subtype: success,
-  type: workflow_edge, workflow: 'Using get_var, set_var, and get_result Functions'}
-- {color: green, destination: '[Using get_var, set_var, and get_result Functions]
-    Show vrf with payload helper', label: success, name: '[Regression Workflow: Using
-    get_var, set_var, get_result functions] 2021-04-24 08:58:40.195734', source: '[Using
-    get_var, set_var, and get_result Functions] Modify payload (per device)', subtype: success,
-  type: workflow_edge, workflow: 'Using get_var, set_var, and get_result Functions'}
+- {color: green, destination: '[Functions: get_var, set_var, and get_result] Modify
+    payload (no device)', label: success, name: '[Regression Workflow: Using get_var,
+    set_var, get_result functions] 2021-04-24 08:58:40.195705', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Functions: get_var,
+    set_var, and get_result'}
+- {color: green, destination: '[Functions: get_var, set_var, and get_result] Modify
+    payload (per device)', label: success, name: '[Regression Workflow: Using get_var,
+    set_var, get_result functions] 2021-04-24 08:58:40.195720', source: '[Functions:
+    get_var, set_var, and get_result] Modify payload (no device)', subtype: success,
+  type: workflow_edge, workflow: 'Functions: get_var, set_var, and get_result'}
+- {color: green, destination: '[Functions: get_var, set_var, and get_result] Show
+    vrf with payload helper', label: success, name: '[Regression Workflow: Using get_var,
+    set_var, get_result functions] 2021-04-24 08:58:40.195734', source: '[Functions:
+    get_var, set_var, and get_result] Modify payload (per device)', subtype: success,
+  type: workflow_edge, workflow: 'Functions: get_var, set_var, and get_result'}
 - {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
   name: '[Regression Workflow: Using get_var, set_var, get_result functions] 2021-04-24
-    08:58:40.195749', source: '[Using get_var, set_var, and get_result Functions]
-    Show vrf with python query', subtype: success, type: workflow_edge, workflow: 'Using
-    get_var, set_var, and get_result Functions'}
-- {color: green, destination: '[Using get_var, set_var, and get_result Functions]
-    show runtime with get_result helper', label: success, name: '[Regression Workflow:
+    08:58:40.195749', source: '[Functions: get_var, set_var, and get_result] Show
+    vrf with python query', subtype: success, type: workflow_edge, workflow: 'Functions:
+    get_var, set_var, and get_result'}
+- {color: green, destination: '[Functions: get_var, set_var, and get_result] show
+    runtime with get_result helper', label: success, name: '[Regression Workflow:
     Using get_var, set_var, get_result functions] 2021-04-24 08:58:40.195764', source: '[Shared]
-    REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Using
-    get_var, set_var, and get_result Functions'}
+    REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Functions:
+    get_var, set_var, and get_result'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Using get_var, set_var, get_result functions] 2021-04-24 08:58:40.195778', source: '[Using
-    get_var, set_var, and get_result Functions] show runtime with get_result helper',
-  subtype: success, type: workflow_edge, workflow: 'Using get_var, set_var, and get_result
-    Functions'}
+    Using get_var, set_var, get_result functions] 2021-04-24 08:58:40.195778', source: '[Functions:
+    get_var, set_var, and get_result] show runtime with get_result helper', subtype: success,
+  type: workflow_edge, workflow: 'Functions: get_var, set_var, and get_result'}
 - {color: green, destination: '[(R) Ansible Playbook Service] Ansible Workflow: Arista
     show configuration (regex match)', label: success, name: '[Regression Workflow:
     Ansible with Validation] 2021-04-24 08:58:40.195881', source: '[(R) Ansible Playbook
@@ -313,19 +312,19 @@
     08:58:40.197497', source: '[[Workflow and Subworkflow Iteration] Subworkflow Value
     Iteration] Test Iteration', subtype: success, type: workflow_edge, workflow: '[Workflow
     and Subworkflow Iteration] Subworkflow Value Iteration'}
-- {color: green, destination: '[Preprocessing and Postprocessing Mechanism] Preprocessing',
+- {color: green, destination: '[Preprocessing and Postprocessing Mechanisms] Preprocessing',
   label: success, name: '[Regression Workflow: Preprocessing and Postprocessing] 2021-04-24
     08:58:40.197661', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: Preprocessing and Postprocessing Mechanism}
-- {color: green, destination: '[Preprocessing and Postprocessing Mechanism] Service
+  workflow: Preprocessing and Postprocessing Mechanisms}
+- {color: green, destination: '[Preprocessing and Postprocessing Mechanisms] Service
     preprocessing and postprocessing', label: success, name: '[Regression Workflow:
     Preprocessing and Postprocessing] 2021-04-24 08:58:40.197676', source: '[Preprocessing
-    and Postprocessing Mechanism] Preprocessing', subtype: success, type: workflow_edge,
-  workflow: Preprocessing and Postprocessing Mechanism}
+    and Postprocessing Mechanisms] Preprocessing', subtype: success, type: workflow_edge,
+  workflow: Preprocessing and Postprocessing Mechanisms}
 - {color: red, destination: '[Shared] End', label: failure, name: '[Regression Workflow:
     Preprocessing and Postprocessing] 2021-04-24 08:58:40.197691', source: '[Preprocessing
-    and Postprocessing Mechanism] Service preprocessing and postprocessing', subtype: failure,
-  type: workflow_edge, workflow: Preprocessing and Postprocessing Mechanism}
+    and Postprocessing Mechanisms] Service preprocessing and postprocessing', subtype: failure,
+  type: workflow_edge, workflow: Preprocessing and Postprocessing Mechanisms}
 - {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
   name: '[Regression Workflow: Superworkflow] 2021-04-24 08:58:40.197708', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: Specific Superworkflow}
@@ -387,11 +386,11 @@
     Workflow: Superworkflow] 2021-04-24 08:58:40.197893', source: '[Specific Superworkflow]
     REST API: call to placeholder property', subtype: success, type: workflow_edge,
   workflow: Specific Superworkflow}
-- {color: green, destination: '[Using get_var, set_var, and get_result Functions]
-    Show vrf with python query', label: success, name: '[Regression Workflow: Using
-    get_var, set_var, get_result functions] 2021-04-24 08:58:40.197909', source: '[Using
-    get_var, set_var, and get_result Functions] Show vrf with payload helper', subtype: success,
-  type: workflow_edge, workflow: 'Using get_var, set_var, and get_result Functions'}
+- {color: green, destination: '[Functions: get_var, set_var, and get_result] Show
+    vrf with python query', label: success, name: '[Regression Workflow: Using get_var,
+    set_var, get_result functions] 2021-04-24 08:58:40.197909', source: '[Functions:
+    get_var, set_var, and get_result] Show vrf with payload helper', subtype: success,
+  type: workflow_edge, workflow: 'Functions: get_var, set_var, and get_result'}
 - {color: green, destination: '[(R) Operational Data Backup Service] Get Configuration',
   label: success, name: '[Regression Workflow: Operational Data Backup (admin)] 2021-04-24
     08:58:40.197930', source: '[Shared] Start', subtype: success, type: workflow_edge,
@@ -964,24 +963,20 @@
     initial form (default: Lo1)', label: success, name: '2021-06-07 01:39:02.877827',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: (R) Labels
     and Custom Property}
-- {color: green, destination: '[Validation Mechanism: Section to Validate Property]
-    Dict Equality Validation of default path', label: success, name: '2021-06-22 02:53:59.369448',
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Validation
-    Mechanism: Section to Validate Property'}
-- {color: green, destination: '[Validation Mechanism: Section to Validate Property]
-    Dict Inclusion Validation of new key', label: success, name: '2021-06-22 02:57:03.974262',
-  source: '[Validation Mechanism: Section to Validate Property] Dict Equality Validation
-    of default path', subtype: success, type: workflow_edge, workflow: 'Validation
-    Mechanism: Section to Validate Property'}
-- {color: green, destination: '[Validation Mechanism: Section to Validate Property]
-    Nested Result String Validation', label: success, name: '2021-06-22 08:15:57.434165',
-  source: '[Validation Mechanism: Section to Validate Property] Dict Inclusion Validation
-    of new key', subtype: success, type: workflow_edge, workflow: 'Validation Mechanism:
-    Section to Validate Property'}
+- {color: green, destination: '[Validation Mechanism] Dict Equality Validation of
+    default path', label: success, name: '2021-06-22 02:53:59.369448', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: Validation Mechanism}
+- {color: green, destination: '[Validation Mechanism] Dict Inclusion Validation of
+    new key', label: success, name: '2021-06-22 02:57:03.974262', source: '[Validation
+    Mechanism] Dict Equality Validation of default path', subtype: success, type: workflow_edge,
+  workflow: Validation Mechanism}
+- {color: green, destination: '[Validation Mechanism] Nested Result String Validation',
+  label: success, name: '2021-06-22 08:15:57.434165', source: '[Validation Mechanism]
+    Dict Inclusion Validation of new key', subtype: success, type: workflow_edge,
+  workflow: Validation Mechanism}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-06-22 08:15:59.744208',
-  source: '[Validation Mechanism: Section to Validate Property] Nested Result String
-    Validation', subtype: success, type: workflow_edge, workflow: 'Validation Mechanism:
-    Section to Validate Property'}
+  source: '[Validation Mechanism] Nested Result String Validation', subtype: success,
+  type: workflow_edge, workflow: Validation Mechanism}
 - {color: green, destination: '[(R) NCClient Netconf Service] Set Description of Lo4
     to ZZZZ', label: success, name: '2021-06-23 01:44:36.780081', source: '[(R) NCClient
     Netconf Service] Get Full Config', subtype: success, type: workflow_edge, workflow: (R)

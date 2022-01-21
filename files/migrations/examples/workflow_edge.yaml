@@ -1486,3 +1486,90 @@
 - {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
   name: '2022-01-16 05:30:50.798714', source: '[Shared] Example Service (does nothing)',
   subtype: success, type: workflow_edge, workflow: Multiprocessing in DxD mode}
+- {color: green, destination: '[[Shared] Large Subworkflow] S1', label: success, name: '2022-01-21
+    10:56:53.975898', source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S2', label: success, name: '2022-01-21
+    10:56:54.991346', source: '[[Shared] Large Subworkflow] S1', subtype: success,
+  type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S3', label: success, name: '2022-01-21
+    10:56:55.746313', source: '[[Shared] Large Subworkflow] S2', subtype: success,
+  type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S4', label: success, name: '2022-01-21
+    10:56:56.378997', source: '[[Shared] Large Subworkflow] S3', subtype: success,
+  type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S5', label: success, name: '2022-01-21
+    10:56:57.093602', source: '[[Shared] Large Subworkflow] S4', subtype: success,
+  type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S6', label: success, name: '2022-01-21
+    10:56:58.013628', source: '[[Shared] Large Subworkflow] S5', subtype: success,
+  type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S7', label: success, name: '2022-01-21
+    10:56:58.544860', source: '[[Shared] Large Subworkflow] S6', subtype: success,
+  type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S8', label: success, name: '2022-01-21
+    10:56:59.207176', source: '[[Shared] Large Subworkflow] S7', subtype: success,
+  type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S9', label: success, name: '2022-01-21
+    10:56:59.902297', source: '[[Shared] Large Subworkflow] S8', subtype: success,
+  type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S10', label: success,
+  name: '2022-01-21 10:57:01.451836', source: '[[Shared] Large Subworkflow] S9', subtype: success,
+  type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S11', label: success,
+  name: '2022-01-21 10:57:01.959133', source: '[[Shared] Large Subworkflow] S10',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S12', label: success,
+  name: '2022-01-21 10:57:02.537440', source: '[[Shared] Large Subworkflow] S11',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S13', label: success,
+  name: '2022-01-21 10:57:03.312149', source: '[[Shared] Large Subworkflow] S12',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S14', label: success,
+  name: '2022-01-21 10:57:03.919987', source: '[[Shared] Large Subworkflow] S13',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S15', label: success,
+  name: '2022-01-21 10:57:04.608905', source: '[[Shared] Large Subworkflow] S14',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S16', label: success,
+  name: '2022-01-21 10:57:05.172368', source: '[[Shared] Large Subworkflow] S15',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S17', label: success,
+  name: '2022-01-21 10:57:05.894016', source: '[[Shared] Large Subworkflow] S16',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S18', label: success,
+  name: '2022-01-21 10:57:06.622650', source: '[[Shared] Large Subworkflow] S17',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S19', label: success,
+  name: '2022-01-21 10:57:07.314307', source: '[[Shared] Large Subworkflow] S18',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S20', label: success,
+  name: '2022-01-21 10:57:07.957464', source: '[[Shared] Large Subworkflow] S19',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S21', label: success,
+  name: '2022-01-21 10:57:08.575605', source: '[[Shared] Large Subworkflow] S20',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S22', label: success,
+  name: '2022-01-21 10:57:09.232613', source: '[[Shared] Large Subworkflow] S21',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S23', label: success,
+  name: '2022-01-21 10:57:10.091115', source: '[[Shared] Large Subworkflow] S22',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S24', label: success,
+  name: '2022-01-21 10:57:10.835240', source: '[[Shared] Large Subworkflow] S23',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S25', label: success,
+  name: '2022-01-21 10:57:11.510203', source: '[[Shared] Large Subworkflow] S24',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S26', label: success,
+  name: '2022-01-21 10:57:12.119897', source: '[[Shared] Large Subworkflow] S25',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S27', label: success,
+  name: '2022-01-21 10:57:12.753405', source: '[[Shared] Large Subworkflow] S26',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[[Shared] Large Subworkflow] S28', label: success,
+  name: '2022-01-21 10:57:13.417870', source: '[[Shared] Large Subworkflow] S27',
+  subtype: success, type: workflow_edge, workflow: '[Shared] Large Subworkflow'}
+- {color: green, destination: '[Shared] End', label: success, name: '2022-01-21 10:57:14.260838',
+  source: '[[Shared] Large Subworkflow] S28', subtype: success, type: workflow_edge,
+  workflow: '[Shared] Large Subworkflow'}

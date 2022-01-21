@@ -164,11 +164,11 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
-  last_configuration_duration: 6.308002s
+  last_configuration_duration: 2.569025s
   last_configuration_failure: Never
-  last_configuration_runtime: '2020-10-02 11:16:49.363284'
+  last_configuration_runtime: '2022-01-21 05:28:02.803452'
   last_configuration_status: Success
-  last_configuration_update: '2020-10-02 11:16:49.363284'
+  last_configuration_update: '2022-01-21 05:28:02.803452'
   last_modified: ''
   last_operational_data_duration: 3.509847s
   last_operational_data_failure: Never
@@ -776,11 +776,11 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
-  last_configuration_duration: Never
+  last_configuration_duration: 2.06051s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-01-21 05:28:07.900073'
+  last_configuration_status: Success
+  last_configuration_update: '2022-01-21 05:28:07.900073'
   last_modified: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never

@@ -27,6 +27,15 @@ Performance improvement with potential impact:
 - Use deferred column loading for the Run Payload
   commit bd1d1c7b52d55d67b5f9b5063555ce92cbca29f7 (HEAD -> develop)
   Date:   Sat Jan 22 05:10:30 2022 -0500
+- Remove unnecesasry call to result for skipped services
+  commit 0d1634851e55e9d991e83261f937a3aee09b92da
+  Date:   Sat Jan 22 06:59:58 2022 -0500
+- Defer load of Result.result
+  commit a3d691c028a52037c25eff5bd486608c0ad57027
+  Date:   Sat Jan 22 07:00:25 2022 -0500
+- Improve speed get workflow services functions with controller.filtering
+  commit c415e894490f15d8b239a2a1df3ba2705110c799 (HEAD -> develop)
+  Date:   Sat Jan 22 09:39:35 2022 -0500
 
 Tests:
 - Performances (SQL Column function init)

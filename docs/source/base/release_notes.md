@@ -23,6 +23,11 @@ Version 4.2.0
 - Reinstate service selection with single left click (Ctrl no longer needed)
 - Remove pytest, coverage, and travis dependencies.
 
+Performance improvement with potential impact:
+- Use deferred column loading for the Run Payload
+  commit bd1d1c7b52d55d67b5f9b5063555ce92cbca29f7 (HEAD -> develop)
+  Date:   Sat Jan 22 05:10:30 2022 -0500
+
 Tests:
 - Performances (SQL Column function init)
 - Export and re-import of workflows and top-level services

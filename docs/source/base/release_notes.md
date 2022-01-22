@@ -50,6 +50,9 @@ Performance improvement with potential impact:
 - Speed up get top level instances functions with properties filtering argument
   commit eb328892ddcc111160d7e7690a50d57f1f93f720 (HEAD -> develop)
   Date:   Sat Jan 22 10:51:46 2022 -0500
+- Speed up non-admin service access by removing union subquery in rbac access
+  commit 6a3199a459c9225cb55ca30f22e145ce35ffe6f0
+  Date:   Sat Jan 22 12:01:35 2022 -0500
 
 
 Tests:

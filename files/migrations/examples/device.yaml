@@ -3794,7 +3794,7 @@
   custom_select: b
   description: ''
   down: false
-  gateways: [Gateway 2, Gateway 3, Gateway 1]
+  gateways: [Gateway 1, Gateway 2, Gateway 3]
   icon: antenna
   icon_3d: juniper_ex3300
   ip_address: "192.168.56.50\t"

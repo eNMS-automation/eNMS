@@ -39,6 +39,10 @@ Performance improvement with potential impact:
 - Speed up search mechanism in add service to workflow tree
   commit 7214291f766a2e013f6d537f1c4f451b1c594622 (HEAD -> develop)
   Date:   Sat Jan 22 10:18:21 2022 -0500
+- Speed up get top level instances functions with properties filtering argument
+  commit eb328892ddcc111160d7e7690a50d57f1f93f720 (HEAD -> develop)
+  Date:   Sat Jan 22 10:51:46 2022 -0500
+
 
 Tests:
 - Performances (SQL Column function init)

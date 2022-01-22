@@ -36,6 +36,9 @@ Performance improvement with potential impact:
 - Improve speed get workflow services functions with controller.filtering
   commit c415e894490f15d8b239a2a1df3ba2705110c799 (HEAD -> develop)
   Date:   Sat Jan 22 09:39:35 2022 -0500
+- Speed up search mechanism in add service to workflow tree
+  commit 7214291f766a2e013f6d537f1c4f451b1c594622 (HEAD -> develop)
+  Date:   Sat Jan 22 10:18:21 2022 -0500
 
 Tests:
 - Performances (SQL Column function init)

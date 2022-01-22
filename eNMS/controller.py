@@ -672,6 +672,9 @@ class Controller:
     def get_workflow_services(self, id, node):
         parents = db.fetch("workflow", id=id).originals
         if node == "all":
+            workflows = self.filtering(
+                "workflow", bulk="object", constraints={"workflows_filter": "empty"}
+            )
             return (
                 [
                     {
@@ -715,13 +718,14 @@ class Controller:
                                 "style": "color: #6666FF; width: 100%",
                             },
                         }
-                        for workflow in db.fetch_all("workflow")
-                        if not workflow.workflows
+                        for workflow in workflows
                     ),
                     key=itemgetter("text"),
                 )
             )
         elif node == "standalone":
+            constraints = {"workflows_filter": "empty", "type": "service"}
+            services = self.filtering("service", bulk="object", constraints=constraints)
             return sorted(
                 (
                     {
@@ -729,12 +733,13 @@ class Controller:
                         "text": service.scoped_name,
                         "a_attr": {"style": ("color: #6666FF;" "width: 100%")},
                     }
-                    for service in db.fetch_all("service")
-                    if not service.workflows and service.type != "workflow"
+                    for service in services
                 ),
                 key=itemgetter("text"),
             )
         elif node == "shared":
+            constraints = {"shared": "bool-true"}
+            services = self.filtering("service", bulk="object", constraints=constraints)
             return sorted(
                 (
                     {
@@ -742,8 +747,8 @@ class Controller:
                         "text": service.scoped_name,
                         "a_attr": {"style": ("color: #FF1694;" "width: 100%")},
                     }
-                    for service in db.fetch_all("service")
-                    if service.shared and service.scoped_name not in ("Start", "End")
+                    for service in services
+                    if service.scoped_name not in ("Start", "End")
                 ),
                 key=itemgetter("text"),
             )

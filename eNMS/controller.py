@@ -257,7 +257,7 @@ class Controller:
         }
 
     def counters(self, property, model):
-        return Counter(v for v, in db.query(model, property=property, rbac=None))
+        return Counter(v for v, in db.query(model, properties=[property], rbac=None))
 
     def create_label(self, type, id, x, y, label_id, **kwargs):
         workflow = db.fetch(type, id=id, rbac="edit")
@@ -389,8 +389,11 @@ class Controller:
             ).filter(intersect_table.id == constraint_dict["intersect"]["id"])
         return query
 
-    def filtering(self, model, bulk=False, rbac="read", username=None, **kwargs):
-        table, query = vs.models[model], db.query(model, rbac, username)
+    def filtering(
+        self, model, bulk=False, rbac="read", username=None, properties=None, **kwargs
+    ):
+        table = vs.models[model]
+        query = db.query(model, rbac, username, properties=properties)
         total_records = query.with_entities(table.id).count()
         try:
             constraints = self.filtering_base_constraints(model, **kwargs)
@@ -400,9 +403,9 @@ class Controller:
         query = self.filtering_relationship_constraints(query, model, **kwargs)
         query = query.filter(and_(*constraints))
         filtered_records = query.with_entities(table.id).count()
-        if bulk:
+        if bulk or properties:
             instances = query.all()
-            if bulk == "object":
+            if bulk == "object" or properties:
                 return instances
             else:
                 return [getattr(instance, bulk) for instance in instances]
@@ -593,9 +596,13 @@ class Controller:
         }
 
     def get_top_level_instances(self, type):
-        result, constraints = defaultdict(list), {f"{type}s_filter": "empty"}
-        for instance in self.filtering(type, bulk="object", constraints=constraints):
-            result[instance.category or "Other"].append(instance.base_properties)
+        result = defaultdict(list)
+        for instance in self.filtering(
+            type,
+            properties=["id", "category", "name"],
+            constraints={f"{type}s_filter": "empty"},
+        ):
+            result[instance.category or "Other"].append(dict(instance))
         return result
 
     def get_tree_files(self, path):
@@ -1112,7 +1119,7 @@ class Controller:
         service_alias = aliased(vs.models["service"])
         workflows = [
             workflow.name
-            for workflow in db.query("workflow", property="name")
+            for workflow in db.query("workflow", properties=["name"])
             .join(service_alias, vs.models["workflow"].services)
             .filter(service_alias.scoped_name.contains(kwargs["str"].lower()))
             .distinct()

@@ -299,9 +299,12 @@ class Database:
                 ),
             )
 
-    def query(self, model, rbac="read", username=None, property=None):
-        entity = getattr(vs.models[model], property) if property else vs.models[model]
-        query = self.session.query(entity)
+    def query(self, model, rbac="read", username=None, properties=None):
+        if properties:
+            entity = [getattr(vs.models[model], property) for property in properties]
+        else:
+            entity = [vs.models[model]]
+        query = self.session.query(*entity)
         if rbac and model != "user":
             user = current_user or self.fetch("user", name=username or "admin")
             if user.is_authenticated and not user.is_admin:

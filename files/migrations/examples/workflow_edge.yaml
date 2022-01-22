@@ -2324,3 +2324,9 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2022-01-21 11:03:37.936783',
   source: '[Large Workflow with Large Subworkflows] Large Subworkflow 3', subtype: success,
   type: workflow_edge, workflow: Large Workflow with Large Subworkflows}
+- {color: green, destination: '[Workflow with Large Payload] create large payload',
+  label: success, name: '2022-01-22 03:48:38.532232', source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: Workflow with Large Payload}
+- {color: green, destination: '[Shared] End', label: success, name: '2022-01-22 03:48:39.480012',
+  source: '[Workflow with Large Payload] create large payload', subtype: success,
+  type: workflow_edge, workflow: Workflow with Large Payload}

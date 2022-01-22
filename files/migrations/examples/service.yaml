@@ -309,6 +309,7 @@
     Workflow and Subworkflow Iteration: *id070
     Workflow in service by service mode (workflow targets): !!python/tuple [0, 0]
     Workflow in service targets mode: !!python/tuple [0, 0]
+    Workflow with Large Payload: [-102, 94]
     Workflow with device and value iteration: [0, 0]
     Workflow with iteration target subworkflows: [-118, 4]
     Workflow with iteration targets: [0, 0]
@@ -754,6 +755,7 @@
     Workflow and Subworkflow Iteration: *id156
     Workflow in service by service mode (workflow targets): !!python/tuple [0, 0]
     Workflow in service targets mode: !!python/tuple [0, 0]
+    Workflow with Large Payload: [605, 99]
     Workflow with device and value iteration: [500, 0]
     Workflow with iteration target subworkflows: [617, 0]
     Workflow with iteration targets: [500, 0]
@@ -31827,7 +31829,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2022-01-21 11:03:37.936783'
+  last_modified: '2022-01-22 03:42:55.989338'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -34281,7 +34283,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    Large Workflow with Large Subworkflows: [-37, 168]
+    Large Workflow with Large Subworkflows: [-37, 184]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -41316,7 +41318,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    Large Workflow with Large Subworkflows: [306, 175]
+    Large Workflow with Large Subworkflows: [316, 184]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -43597,6 +43599,177 @@
   skip_value: success
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  visualization_target: false
+  waiting_time: 0
+- access_groups: admin
+  category: Scalability
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    0e40b23e-b930-425f-907c-7060bd12a8d2:
+      alignment: left
+      content: "The payload of a run is saved in the Run.payload row.\r\nA large payload\
+        \ can impact the performances of various endpoints,\r\nincluding the workflow\
+        \ builder refresh mechanism (via the\r\ncontroller.get_service_state function)\
+        \ and the \"Results\" page in the\r\nmenu, because the payload is loaded when\
+        \ runs are fetched from the\r\ndatabase.\r\nTo avoid these issues, deferred\
+        \ column loading is used.\r\nThis workflow artificially creates a very large\
+        \ payload to assess the\r\nimpact on the performances. It must be run at least\
+        \ 10 times before\r\ntesting the UI."
+      positions: [287, -99]
+  last_modified: '2022-01-22 03:48:39.480012'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: Workflow with Large Payload
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Workflow with Large Payload
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Workflow with Large Payload] create
+      large payload']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  visualization_target: false
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2022-01-22 03:48:33.486202'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Workflow with Large Payload] create large payload'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    Workflow with Large Payload: [235, 103]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: create large payload
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "set_var(\"data\", \"1\" * 1_000_000)\r\n# Click on \"i\" to right\
+    \ of \"Source Code\" for examples.\r\n\r\nresult = {}\r\nresults[\"success\"]\
+    \ = True\r\nresults[\"result\"] = result"
   target_devices: []
   target_pools: []
   time_between_retries: 10

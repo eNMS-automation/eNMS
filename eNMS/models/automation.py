@@ -171,7 +171,7 @@ class Service(AbstractBase):
         )
         originals_alias = aliased(vs.models["service"])
         owners_alias = aliased(vs.models["user"])
-        if mode in ("edit", "run"):
+        if False and mode in ("edit", "run"):
             query = (
                 query.filter(~cls.originals.any(cls.owners_access.contains(mode)))
             ).union(
@@ -344,30 +344,19 @@ class Run(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
-        query = query.join(cls.service).filter(
-            vs.models["service"].default_access != "admin"
-        )
         service_alias = aliased(vs.models["service"])
         pool_alias = aliased(vs.models["pool"])
-        subquery = (
-            db.session.query(vs.models["user"])
+        return (
+            query
+            .join(cls.service)
             .join(pool_alias, vs.models["user"].pools)
             .join(vs.models["access"], pool_alias.access_users)
             .join(vs.models["pool"], vs.models["access"].access_pools)
             .join(service_alias, vs.models["pool"].services)
             .filter(vs.models["user"].name == user.name)
             .filter(vs.models["access"].access_type.contains(mode))
-            .with_entities(service_alias.id)
-            .subquery()
+            .filter(vs.models["service"].default_access != "admin")
         )
-        query = query.filter(
-            or_(
-                vs.models["service"].default_access == "public",
-                cls.creator == user.name,
-                vs.models["run"].service_id.in_(subquery),
-            )
-        )
-        return query
 
     def __repr__(self):
         return f"{self.runtime}: SERVICE '{self.service}'"

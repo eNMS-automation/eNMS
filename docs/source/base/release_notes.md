@@ -31,6 +31,12 @@ TODO:
   Remove public in the UI and DB model as well.
   Fix services rbac access for the edit / run lock access.
 
+Principle of RBAC access:
+- no subquery, only admin lock and pool access. No public access.
+- instead of starting from the class, start from the users. Compute with with_entities the ID to which
+  a user has access. Then, simply filter the class instances based on whether or not the ID belongs to
+  the precomputed list.
+
 Performance improvement with potential impact:
 - Use deferred column loading for the Run Payload
   commit bd1d1c7b52d55d67b5f9b5063555ce92cbca29f7 (HEAD -> develop)

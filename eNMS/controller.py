@@ -643,12 +643,8 @@ class Controller:
             progress = state.get(path, {}).get("progress")
             track_progress = progress and progress["device"]["total"]
             data = {"progress": progress["device"]} if track_progress else {}
-            success_or_skipped_only = all(
-                result.success
-                for result in results
-                if result.result.get("result") != "skipped"
-            )
-            color = "32CD32" if success_or_skipped_only else "FF6666"
+            success = all(result.success for result in results)
+            color = "32CD32" if success else "FF6666"
             result = {
                 "runtime": min(result.runtime for result in results),
                 "data": {"properties": service.base_properties, **data},

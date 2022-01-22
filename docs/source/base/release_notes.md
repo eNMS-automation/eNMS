@@ -62,7 +62,9 @@ Performance improvement with potential impact:
 - Speed up non-admin service access by removing union subquery in rbac access
   commit 6a3199a459c9225cb55ca30f22e145ce35ffe6f0
   Date:   Sat Jan 22 12:01:35 2022 -0500
-
+- Defer loading of device configuration column
+  commit 80aeda1c128e9606d46485ee32a41c88cfee3fa0 (HEAD -> develop)
+  Date:   Sat Jan 22 13:29:33 2022 -0500
 
 Tests:
 - Performances (SQL Column function init)

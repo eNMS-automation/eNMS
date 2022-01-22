@@ -29,6 +29,7 @@ TODO:
   not compatible with using with_entites (via filtering properties kw).
   Try to remove union subquery for all rbac_access.
   Remove public in the UI and DB model as well.
+  Fix services rbac access for the edit / run lock access.
 
 Performance improvement with potential impact:
 - Use deferred column loading for the Run Payload

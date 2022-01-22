@@ -180,11 +180,11 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [Layout of Large Graph, Subsite 1, 'Duplication of Devices, Subsites and
-      Top-level Sites', Subsite and Teleport Mechanism, 'Creation, Edit and Deletion',
-    Duplicate me 2, L1 Site, Subsubsite and Subsubsubsite, Large Network Display,
-    Subsite 2, Top-level Devices and Links, Loopback and Parallel Links, L3 Site,
-    L2 Site, Import with Add Connected Nodes and Links]
+  sites: [Layout of Large Graph, Import with Add Connected Nodes and Links, L2 Site,
+    Subsite 1, Duplicate me 2, 'Duplication of Devices, Subsites and Top-level Sites',
+    'Creation, Edit and Deletion', L1 Site, Loopback and Parallel Links, Top-level
+      Devices and Links, Subsite 2, Large Network Display, Subsubsite and Subsubsubsite,
+    L3 Site, Subsite and Teleport Mechanism]
   target_services: [Large Workflow (20 services)]
   tasks: []
   type: pool
@@ -363,7 +363,8 @@
   site_name_match: inclusion
   sites: []
   target_services: ['[Skip in SxS with service targets and Run Once services] Run
-      Once with Pool', Large Workflow (20 services)]
+      Once with Pool', Large Workflow (20 services), Large Device Configuration and
+      Operational Data]
   tasks: []
   type: pool
   user_description: ''
@@ -746,7 +747,7 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: [Parameterized Multiprocessing, Large Workflow (20 services)]
+  target_services: [Large Workflow (20 services), Parameterized Multiprocessing]
   tasks: []
   type: pool
   user_description: ''
@@ -1295,8 +1296,9 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: [Large Workflow (20 services), Parameterized Targets, '[(R) Operational
-      Data Backup Service] Retrieve Operational Data', Parameterized Run with a Superworkflow]
+  target_services: ['[(R) Operational Data Backup Service] Retrieve Operational Data',
+    Parameterized Targets, Large Workflow (20 services), Parameterized Run with a
+      Superworkflow]
   tasks: []
   type: pool
   user_description: ''
@@ -3455,11 +3457,11 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [Layout of Large Graph, Subsite 1, 'Duplication of Devices, Subsites and
-      Top-level Sites', Subsite and Teleport Mechanism, 'Creation, Edit and Deletion',
-    Duplicate me 2, L1 Site, Subsubsite and Subsubsubsite, Large Network Display,
-    Subsite 2, Top-level Devices and Links, Loopback and Parallel Links, L3 Site,
-    L2 Site, Import with Add Connected Nodes and Links]
+  sites: [Layout of Large Graph, Import with Add Connected Nodes and Links, L2 Site,
+    Subsite 1, Duplicate me 2, 'Duplication of Devices, Subsites and Top-level Sites',
+    'Creation, Edit and Deletion', L1 Site, Loopback and Parallel Links, Top-level
+      Devices and Links, Subsite 2, Large Network Display, Subsubsite and Subsubsubsite,
+    L3 Site, Subsite and Teleport Mechanism]
   target_services: []
   tasks: []
   type: pool

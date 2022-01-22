@@ -47,7 +47,7 @@
   longitude: '0.0'
   model: ''
   name: Subsite and Teleport Mechanism
-  nodes: [Subsite 2, Subsite 1]
+  nodes: [Subsite 1, Subsite 2]
   pools: [Everything, All Sites]
   positions: {}
   sites: []

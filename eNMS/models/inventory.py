@@ -1,7 +1,7 @@
 from re import search, sub
 from sqlalchemy import and_, Boolean, event, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.orm import aliased, backref, relationship
+from sqlalchemy.orm import aliased, backref, deferred, relationship
 from sqlalchemy.schema import UniqueConstraint
 from sqlalchemy.sql.expression import false
 
@@ -83,7 +83,7 @@ class Device(Node):
     napalm_driver = db.Column(db.TinyString, default="ios")
     scrapli_driver = db.Column(db.TinyString, default="cisco_iosxe")
     netconf_driver = db.Column(db.TinyString, default="default")
-    configuration = db.Column(db.LargeString, info={"log_change": False})
+    configuration = deferred(db.Column(db.LargeString, info={"log_change": False}))
     gateways = relationship(
         "Gateway", secondary=db.device_gateway_table, back_populates="devices"
     )

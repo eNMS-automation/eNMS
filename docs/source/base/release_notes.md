@@ -30,6 +30,9 @@ TODO:
   Try to remove union subquery for all rbac_access.
   Remove public in the UI and DB model as well.
   Fix services rbac access for the edit / run lock access.
+- fix run_targets to use query with properties
+- add deferred to custom properties, apply to oper and specialized data
+- update regression workflow scalability of conf to also update oper data.
 
 Principle of RBAC access:
 - no subquery, only admin lock and pool access. No public access.

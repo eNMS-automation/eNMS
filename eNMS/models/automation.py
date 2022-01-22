@@ -1,3 +1,4 @@
+from copy import deepcopy
 from flask_login import current_user
 from functools import wraps
 from requests import get, post
@@ -5,7 +6,7 @@ from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout
 from sqlalchemy import Boolean, case, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.orm import aliased, relationship
+from sqlalchemy.orm import aliased, deferred, relationship
 from sqlalchemy.sql.expression import true
 
 from eNMS.controller import controller
@@ -299,7 +300,7 @@ class Run(AbstractBase):
     creator = db.Column(db.SmallString, default="")
     server = db.Column(db.SmallString)
     properties = db.Column(db.Dict)
-    payload = db.Column(db.Dict)
+    payload = deferred(db.Column(db.Dict))
     success = db.Column(Boolean, default=False)
     labels = db.Column(db.LargeString)
     status = db.Column(db.TinyString, default="Running")
@@ -419,7 +420,7 @@ class Run(AbstractBase):
             self.trigger = f"{run_type} Run"
         self.service_run = Runner(
             self,
-            payload=self.payload,
+            payload=deepcopy(self.payload),
             service=self.service,
             is_main_run=True,
             restart_run=self.restart_run,

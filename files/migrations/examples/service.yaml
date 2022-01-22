@@ -43989,21 +43989,21 @@
     929b8720-5f52-4eae-9808-550a93557efc:
       alignment: left
       content: "This workflows sets the configuration and operational data of\r\n\
-        all devices to a large string (10M characters)\r\nAfter running it, various\
+        all devices to a large string (1M characters)\r\nAfter running it, various\
         \ endpoints involving fetching devices\r\nfrom the database must be tested,\
         \ including the Inventory\r\nand Visualization pages.\r\nBoth properties should\
         \ be lazy loaded, so having large configuration\r\nand operational data should\
         \ not significantly impact the performances.\r\nThe workflow runs in DxD on\
-        \ all devices."
-      positions: [265, -86]
-  last_modified: '2022-01-22 07:24:16.673864'
+        \ all devices, with multiprocessing set to 10."
+      positions: [246, -101]
+  last_modified: '2022-01-22 07:44:03.566378'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
   max_number_of_retries: 100
-  max_processes: 15
+  max_processes: 10
   maximum_runs: 1
-  multiprocessing: false
+  multiprocessing: true
   name: Large Device Configuration and Operational Data
   negative_logic: false
   notification_header: ''
@@ -44074,7 +44074,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-01-22 07:23:59.640048'
+  last_modified: '2022-01-22 07:44:12.407151'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -44115,7 +44115,7 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  source_code: "device.configuration = \"*\" * 10_000_000\r\nresult = {}\r\nresults[\"\
+  source_code: "device.configuration = \"*\" * 1_000_000\r\nresult = {}\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
   target_devices: []
   target_pools: []

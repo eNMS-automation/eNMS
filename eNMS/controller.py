@@ -122,9 +122,9 @@ class Controller:
         return result
 
     def bulk_deletion(self, table, **kwargs):
-        instances = self.filtering(table, bulk="id", form=kwargs)
-        for instance_id in instances:
-            db.delete(table, id=instance_id)
+        instances = self.filtering(table, properties=["id"], form=kwargs)
+        for instance in instances:
+            db.delete(table, id=instance.id)
         return len(instances)
 
     def bulk_edit(self, table, **kwargs):
@@ -329,8 +329,8 @@ class Controller:
         return path
 
     def export_services(self, **kwargs):
-        for service_id in self.filtering("service", bulk="id", form=kwargs):
-            self.export_service(service_id)
+        for service in self.filtering("service", properties=["id"], form=kwargs):
+            self.export_service(service.id)
 
     def filtering_base_constraints(self, model, **kwargs):
         table, constraints = vs.models[model], []
@@ -394,7 +394,8 @@ class Controller:
     ):
         table = vs.models[model]
         query = db.query(model, rbac, username, properties=properties)
-        total_records = query.with_entities(table.id).count()
+        if not bulk and not properties:
+            total_records = query.with_entities(table.id).count()
         try:
             constraints = self.filtering_base_constraints(model, **kwargs)
         except regex_error:
@@ -402,13 +403,13 @@ class Controller:
         constraints.extend(table.filtering_constraints(**kwargs))
         query = self.filtering_relationship_constraints(query, model, **kwargs)
         query = query.filter(and_(*constraints))
-        filtered_records = query.with_entities(table.id).count()
         if bulk or properties:
             instances = query.all()
             if bulk == "object" or properties:
                 return instances
             else:
                 return [getattr(instance, bulk) for instance in instances]
+        filtered_records = query.with_entities(table.id).count()
         data = kwargs["columns"][int(kwargs["order"][0]["column"])]["data"]
         ordering = getattr(getattr(table, data, None), kwargs["order"][0]["dir"], None)
         if ordering:
@@ -1112,8 +1113,8 @@ class Controller:
         return sorted(sum(playbooks, []))
 
     def scheduler_action(self, mode, **kwargs):
-        for task_id in self.filtering("task", bulk="id", form=kwargs):
-            self.task_action(mode, task_id)
+        for task in self.filtering("task", properties=["id"], form=kwargs):
+            self.task_action(mode, task.id)
 
     def search_workflow_services(self, **kwargs):
         service_alias = aliased(vs.models["service"])

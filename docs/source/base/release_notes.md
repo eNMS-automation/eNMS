@@ -23,6 +23,13 @@ Version 4.2.0
 - Reinstate service selection with single left click (Ctrl no longer needed)
 - Remove pytest, coverage, and travis dependencies.
 
+TODO:
+- union subquery removed for services rbac_access by REMOVING the "public" access
+  because a union of query yields a CompoundSelect SQLAlchemy object, and this is
+  not compatible with using with_entites (via filtering properties kw).
+  Try to remove union subquery for all rbac_access.
+  Remove public in the UI and DB model as well.
+
 Performance improvement with potential impact:
 - Use deferred column loading for the Run Payload
   commit bd1d1c7b52d55d67b5f9b5063555ce92cbca29f7 (HEAD -> develop)

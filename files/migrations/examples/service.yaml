@@ -43651,7 +43651,7 @@
         \ in the payload,\r\nfor each device.\r\nIt must be run at least 10 times\
         \ before testing the UI."
       positions: ['265.2530517578125', '-85.75']
-  last_modified: '2022-01-22 03:48:39.480012'
+  last_modified: '2022-01-22 03:57:31.573170'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -43692,7 +43692,8 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  target_devices: []
+  target_devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego,
+    Dallas, Philadelphia, LosAngeles]
   target_pools: []
   time_between_retries: 10
   type: workflow

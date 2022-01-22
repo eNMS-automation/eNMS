@@ -144,7 +144,7 @@
     'Site 2: Subsite and Teleport Mechanism': *id002
     Subsite 1: [-2, -48]
     Subsite and Teleport Mechanism: *id002
-  sites: [Subsite 1, Subsite and Teleport Mechanism]
+  sites: [Subsite and Teleport Mechanism, Subsite 1]
   subtype: ''
   type: site
   vendor: ''

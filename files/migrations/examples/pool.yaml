@@ -180,11 +180,11 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [Top-level Devices and Links, Subsubsite and Subsubsubsite, Layout of Large
-      Graph, 'Creation, Edit and Deletion', Duplicate me 2, Subsite 1, Large Network
-      Display, L3 Site, L2 Site, 'Duplication of Devices, Subsites and Top-level Sites',
-    Import with Add Connected Nodes and Links, Loopback and Parallel Links, Subsite
-      and Teleport Mechanism, Subsite 2, L1 Site]
+  sites: [L2 Site, 'Duplication of Devices, Subsites and Top-level Sites', L1 Site,
+    'Creation, Edit and Deletion', Subsite 1, Subsubsite and Subsubsubsite, L3 Site,
+    Import with Add Connected Nodes and Links, Top-level Devices and Links, Subsite
+      and Teleport Mechanism, Loopback and Parallel Links, Large Network Display,
+    Layout of Large Graph, Duplicate me 2, Subsite 2]
   target_services: [Large Workflow (20 services)]
   tasks: []
   type: pool
@@ -3455,11 +3455,11 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [Top-level Devices and Links, Subsubsite and Subsubsubsite, Layout of Large
-      Graph, 'Creation, Edit and Deletion', Duplicate me 2, Subsite 1, Large Network
-      Display, L3 Site, L2 Site, 'Duplication of Devices, Subsites and Top-level Sites',
-    Import with Add Connected Nodes and Links, Loopback and Parallel Links, Subsite
-      and Teleport Mechanism, Subsite 2, L1 Site]
+  sites: [L2 Site, 'Duplication of Devices, Subsites and Top-level Sites', L1 Site,
+    'Creation, Edit and Deletion', Subsite 1, Subsubsite and Subsubsubsite, L3 Site,
+    Import with Add Connected Nodes and Links, Top-level Devices and Links, Subsite
+      and Teleport Mechanism, Loopback and Parallel Links, Large Network Display,
+    Layout of Large Graph, Duplicate me 2, Subsite 2]
   target_services: []
   tasks: []
   type: pool

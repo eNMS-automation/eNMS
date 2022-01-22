@@ -1108,19 +1108,17 @@ class Controller:
         for task_id in self.filtering("task", bulk="id", form=kwargs):
             self.task_action(mode, task_id)
 
-    def search_workflow_services(self, *args, **kwargs):
-        return [
-            "standalone",
-            "shared",
-            *[
-                workflow.name
-                for workflow in db.fetch_all("workflow")
-                if any(
-                    kwargs["str"].lower() in service.scoped_name.lower()
-                    for service in workflow.services
-                )
-            ],
+    def search_workflow_services(self, **kwargs):
+        service_alias = aliased(vs.models["service"])
+        workflows = [
+            workflow.name
+            for workflow in db.query("workflow", property="name")
+            .join(service_alias, vs.models["workflow"].services)
+            .filter(service_alias.scoped_name.contains(kwargs["str"].lower()))
+            .distinct()
+            .all()
         ]
+        return ["standalone", "shared", *workflows]
 
     def skip_services(self, workflow_id, service_ids):
         services = [db.fetch("service", id=id) for id in service_ids.split("-")]

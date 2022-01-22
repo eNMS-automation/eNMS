@@ -43646,9 +43646,11 @@
         \ and the \"Results\" page in the\r\nmenu, because the payload is loaded when\
         \ runs are fetched from the\r\ndatabase.\r\nTo avoid these issues, deferred\
         \ column loading is used.\r\nThis workflow artificially creates a very large\
-        \ payload to assess the\r\nimpact on the performances. It must be run at least\
-        \ 10 times before\r\ntesting the UI."
-      positions: [287, -99]
+        \ payload to assess the\r\nimpact on the performances.\r\nThe workflow runs\
+        \ in DxD mode on 10 devices.\r\nThe \"Create Large Payload\" saves 1M characters\
+        \ in the payload,\r\nfor each device.\r\nIt must be run at least 10 times\
+        \ before testing the UI."
+      positions: ['265.2530517578125', '-85.75']
   last_modified: '2022-01-22 03:48:39.480012'
   log_level: 1
   mail_recipient: ''
@@ -43684,8 +43686,8 @@
   scoped_name: Workflow with Large Payload
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Workflow with Large Payload] create
-      large payload']
+  services: ['[Shared] Start', '[Shared] End', '[Workflow with Large Payload] Create
+      Large Payload']
   shared: false
   skip: {}
   skip_query: ''
@@ -43727,7 +43729,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-01-22 03:48:33.486202'
+  last_modified: '2022-01-22 03:55:35.679131'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -43735,7 +43737,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Workflow with Large Payload] create large payload'
+  name: '[Workflow with Large Payload] Create Large Payload'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -43760,16 +43762,16 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: create large payload
+  scoped_name: Create Large Payload
   send_notification: false
   send_notification_method: mail
   shared: false
   skip: {}
   skip_query: ''
   skip_value: success
-  source_code: "set_var(\"data\", \"1\" * 1_000_000)\r\n# Click on \"i\" to right\
-    \ of \"Source Code\" for examples.\r\n\r\nresult = {}\r\nresults[\"success\"]\
-    \ = True\r\nresults[\"result\"] = result"
+  source_code: "set_var(\"data\", \"1\" * 1_000_000, device=device.name)\r\n# Click\
+    \ on \"i\" to right of \"Source Code\" for examples.\r\n\r\nresult = {}\r\nresults[\"\
+    success\"] = True\r\nresults[\"result\"] = result"
   target_devices: []
   target_pools: []
   time_between_retries: 10

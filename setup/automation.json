@@ -40,6 +40,20 @@
       "fetch": ["device", "link", "pool", "service"],
       "fetch_all": ["device", "link", "pool", "service"],
       "factory": ["device", "link", "pool"]
+    },
+    "state_properties": {
+      "run": ["id", "creator", "runtime", "status"],
+      "service": [
+        "id",
+        "name",
+        "scoped_name",
+        "type",
+        "shared",
+        "skip",
+        "iteration_values",
+        "iteration_devices",
+        "iteration_variable_name"
+      ]
     }
   }
 }

@@ -31,38 +31,6 @@ TODO:
   Remove public in the UI and DB model as well.
 - fix run_targets to use query with properties
 
-Principle of RBAC access:
-- no subquery, only admin lock and pool access. No public access.
-- instead of starting from the class, start from the users. Compute with with_entities the ID to which
-  a user has access. Then, simply filter the class instances based on whether or not the ID belongs to
-  the precomputed list.
-
-Performance improvement with potential impact:
-- Use deferred column loading for the Run Payload
-  commit bd1d1c7b52d55d67b5f9b5063555ce92cbca29f7 (HEAD -> develop)
-  Date:   Sat Jan 22 05:10:30 2022 -0500
-- Remove unnecesasry call to result for skipped services
-  commit 0d1634851e55e9d991e83261f937a3aee09b92da
-  Date:   Sat Jan 22 06:59:58 2022 -0500
-- Defer load of Result.result
-  commit a3d691c028a52037c25eff5bd486608c0ad57027
-  Date:   Sat Jan 22 07:00:25 2022 -0500
-- Improve speed get workflow services functions with controller.filtering
-  commit c415e894490f15d8b239a2a1df3ba2705110c799 (HEAD -> develop)
-  Date:   Sat Jan 22 09:39:35 2022 -0500
-- Speed up search mechanism in add service to workflow tree
-  commit 7214291f766a2e013f6d537f1c4f451b1c594622 (HEAD -> develop)
-  Date:   Sat Jan 22 10:18:21 2022 -0500
-- Speed up get top level instances functions with properties filtering argument
-  commit eb328892ddcc111160d7e7690a50d57f1f93f720 (HEAD -> develop)
-  Date:   Sat Jan 22 10:51:46 2022 -0500
-- Speed up non-admin service access by removing union subquery in rbac access
-  commit 6a3199a459c9225cb55ca30f22e145ce35ffe6f0
-  Date:   Sat Jan 22 12:01:35 2022 -0500
-- Defer loading of device configuration column
-  commit 80aeda1c128e9606d46485ee32a41c88cfee3fa0 (HEAD -> develop)
-  Date:   Sat Jan 22 13:29:33 2022 -0500
-
 Tests:
 - Performances (SQL Column function init)
 - Export and re-import of workflows and top-level services

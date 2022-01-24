@@ -360,8 +360,8 @@ export function drawWorkflowNode(service) {
     label: getServiceLabel(service),
     name: service.scoped_name,
     type: service.type,
-    x: service.positions[workflow.name] ? service.positions[workflow.name][0] : 0,
-    y: service.positions[workflow.name] ? service.positions[workflow.name][1] : 0,
+    x: service.x,
+    y: service.y,
   };
 }
 

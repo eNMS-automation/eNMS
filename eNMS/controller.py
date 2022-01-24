@@ -569,9 +569,29 @@ class Controller:
             else:
                 run = db.fetch("run", allow_none=True, runtime=runtime)
             state = run.get_state() if run else None
+        serialized_service = service.to_dict(include=["edges", "superworkflow"])
         run_properties = ["id", "creator", "runtime", "status"]
+        if service.type == "workflow":
+            serialized_service["services"] = []
+            for subservice in service.services:
+                properties = subservice.get_properties(
+                    include=[
+                        "id",
+                        "name",
+                        "scoped_name",
+                        "type",
+                        "shared",
+                        "skip",
+                        "iteration_values",
+                        "iteration_devices",
+                        "iteration_variable_name",
+                    ]
+                )
+                subservice_positions = subservice.positions.get(service.name, [0, 0])
+                properties["x"], properties["y"] = subservice_positions
+                serialized_service["services"].append(properties)
         return {
-            "service": service.to_dict(include=["services", "edges", "superworkflow"]),
+            "service": serialized_service,
             "runtimes": sorted(
                 set((run.runtime, run.name) for run in runs), reverse=True
             ),

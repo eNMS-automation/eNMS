@@ -683,7 +683,6 @@ class ServiceForm(BaseForm):
     default_access = SelectField(
         choices=(
             ("creator", "Role Based (Creator)"),
-            ("public", "Public (All users)"),
             ("admin", "Admin (Admin users only)"),
         )
     )
@@ -811,7 +810,6 @@ class TaskForm(BaseForm):
     default_access = SelectField(
         choices=(
             ("creator", "Creator only"),
-            ("public", "Public (all users)"),
             ("admin", "Admin Users only"),
         )
     )

@@ -559,7 +559,9 @@ class Controller:
         service = db.fetch("service", id=path_id[-1], allow_none=True)
         if not service:
             raise db.rbac_error
-        runs = db.query("run").filter(vs.models["run"].service_id.in_(path_id))
+        runs = db.query("run", rbac=None).filter(
+            vs.models["run"].service_id.in_(path_id)
+        )
         if display == "user":
             runs = runs.filter(vs.models["run"].creator == current_user.name)
         runs = runs.all()

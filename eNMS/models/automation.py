@@ -495,20 +495,16 @@ class Task(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
-        query = query.filter(cls.default_access != "admin")
-        public_tasks = query.join(cls.service).filter(
-            vs.models["service"].default_access == "public"
-        )
         pool_alias = aliased(vs.models["pool"])
-        return public_tasks.union(
+        return (
             query.join(cls.service)
             .join(vs.models["pool"], vs.models["service"].pools)
             .join(vs.models["access"], vs.models["pool"].access)
             .join(pool_alias, vs.models["access"].user_pools)
             .join(vs.models["user"], pool_alias.users)
             .filter(vs.models["access"].access_type.contains(mode))
-            .filter(vs.models["user"].name == user.name),
-            query.filter(cls.creator == user.name),
+            .filter(vs.models["user"].name == user.name)
+            .filter(cls.default_access != "admin")
         )
 
     def _catch_request_exceptions(func):  # noqa: N805

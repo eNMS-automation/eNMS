@@ -73,3 +73,15 @@
   type: access
   upper_menu: []
   user_pools: [All users]
+- access_pools: [All services]
+  access_type: "['Read']"
+  delete_requests: []
+  description: ''
+  get_requests: []
+  menu: []
+  name: Read Access to All Services
+  pages: []
+  post_requests: []
+  type: access
+  upper_menu: []
+  user_pools: [All users]

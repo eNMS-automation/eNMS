@@ -417,7 +417,7 @@ class Session(AbstractBase):
     name = db.Column(db.SmallString, unique=True)
     timestamp = db.Column(db.TinyString)
     user = db.Column(db.SmallString)
-    content = db.Column(db.LargeString, info={"log_change": False})
+    content = deferred(db.Column(db.LargeString, info={"log_change": False}))
     device_id = db.Column(Integer, ForeignKey("device.id"))
     device = relationship(
         "Device", back_populates="sessions", foreign_keys="Session.device_id"

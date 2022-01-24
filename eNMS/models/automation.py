@@ -347,8 +347,7 @@ class Run(AbstractBase):
         service_alias = aliased(vs.models["service"])
         pool_alias = aliased(vs.models["pool"])
         return (
-            query
-            .join(cls.service)
+            query.join(cls.service)
             .join(pool_alias, vs.models["user"].pools)
             .join(vs.models["access"], pool_alias.access_users)
             .join(vs.models["pool"], vs.models["access"].access_pools)

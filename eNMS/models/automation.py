@@ -171,14 +171,30 @@ class Service(AbstractBase):
         )
         originals_alias = aliased(vs.models["service"])
         owners_alias = aliased(vs.models["user"])
-        if False and mode in ("edit", "run"):
-            query = (
-                query.filter(~cls.originals.any(cls.owners_access.contains(mode)))
-            ).union(
-                query.join(originals_alias, cls.originals)
+        if mode in ("edit", "run"):
+            services_with_no_access_configured = {
+                service.id
+                for service in db.session.query(cls.id).filter(
+                    ~cls.originals.any(cls.owners_access.contains(mode))
+                )
+            }
+            services_allowed_for_user = {
+                service.id
+                for service in db.session.query(cls.id)
+                .join(originals_alias, cls.originals)
                 .join(owners_alias, originals_alias.owners)
-                .filter(owners_alias.name == user.name),
-                query.filter(cls.shared == true),
+                .filter(owners_alias.name == user.name)
+            }
+            shared_services = {
+                service.id
+                for service in db.session.query(cls.id).filter(cls.shared == true())
+            }
+            query = query.filter(
+                cls.id.in_(
+                    services_with_no_access_configured
+                    | services_allowed_for_user
+                    | shared_services
+                )
             )
         return query
 

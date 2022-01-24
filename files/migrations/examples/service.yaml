@@ -44074,7 +44074,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-01-22 07:44:12.407151'
+  last_modified: '2022-01-24 07:30:55.371123'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -44115,8 +44115,9 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  source_code: "device.configuration = \"*\" * 1_000_000\r\nresult = {}\r\nresults[\"\
-    success\"] = True\r\nresults[\"result\"] = result"
+  source_code: "device.configuration = \"*\" * 1_000_000\r\ndevice.operational_data\
+    \ = \"*\" * 1_000_000\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
+    result\"] = result"
   target_devices: []
   target_pools: []
   time_between_retries: 10

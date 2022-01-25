@@ -23,13 +23,10 @@ Version 4.2.0
 - Reinstate service selection with single left click (Ctrl no longer needed)
 - Remove pytest, coverage, and travis dependencies.
 - Reinstate single left click for node selection in workflow & site builder.
+- Remove most union subquery in rbac_filter because a union of query yields a CompoundSelect
+  SQLAlchemy object, and this is not compatible with using with_entites (via filtering properties kw).
 
-TODO:
-- union subquery removed for services rbac_access by REMOVING the "public" access
-  because a union of query yields a CompoundSelect SQLAlchemy object, and this is
-  not compatible with using with_entites (via filtering properties kw).
-  Try to remove union subquery for all rbac_access.
-  Remove public in the UI and DB model as well.
+TODO
 - fix run_targets to use query with properties
 
 Tests:

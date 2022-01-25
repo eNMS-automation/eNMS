@@ -22,6 +22,7 @@ Version 4.2.0
 - New "Category" property / mechanism for the drop-down list of the site and workflow builder.
 - Reinstate service selection with single left click (Ctrl no longer needed)
 - Remove pytest, coverage, and travis dependencies.
+- Reinstate single left click for node selection in workflow & site builder.
 
 TODO:
 - union subquery removed for services rbac_access by REMOVING the "public" access

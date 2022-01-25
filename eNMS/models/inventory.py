@@ -35,6 +35,8 @@ class Object(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
+        if cls.__tablename__ == "node":
+            return query
         pool_alias = aliased(vs.models["pool"])
         return (
             query.join(cls.pools)

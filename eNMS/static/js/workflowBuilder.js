@@ -23,7 +23,6 @@ import {
 import {
   configureGraph,
   currentMode,
-  ctrlKeyPressed,
   currentPath,
   edges,
   instance,

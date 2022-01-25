@@ -1,5 +1,6 @@
 /*
 global
+settings: false
 tableProperties: false
 */
 

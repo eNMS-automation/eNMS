@@ -38,7 +38,6 @@ import {
 const container = document.getElementById("network");
 const type = page.includes("site") ? "site" : "workflow";
 const nodeType = type == "site" ? "node" : "service";
-export let ctrlKeyPressed;
 let currentLabel;
 let mousePosition;
 let network;
@@ -430,12 +429,6 @@ function updateRightClickBindings() {
 }
 
 export function initBuilder() {
-  window.onkeydown = () => {
-    ctrlKeyPressed = true;
-  };
-  window.onkeyup = () => {
-    ctrlKeyPressed = false;
-  };
   vis.Network.prototype.zoom = function (scale) {
     const animationOptions = {
       scale: this.getScale() + scale,

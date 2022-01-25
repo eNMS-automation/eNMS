@@ -103,7 +103,7 @@ export function cantorPairing(x, y) {
 
 function processResults(callback, results) {
   if (results === false) {
-    notify("HTTP Error 403 – Forbidden", "error", 5);
+    notify("Error 403 - Operation not allowed.", "error", 5);
   } else if (results && results.alert) {
     if (Array.isArray(results.alert)) {
       results.alert.map((e) => notify(e, "error", 5, true));
@@ -140,6 +140,8 @@ export const call = function ({ url, data, form, callback }) {
       let message = `Error HTTP ${error.status}: ${error.statusText}.`;
       if (error.status == 400) {
         message += " Your session might have expired, try refreshing the page.";
+      } else if (error.status == 403) {
+        message = "Error 403 - Operation not allowed.";
       }
       notify(message, "error", 5);
     },

@@ -22,7 +22,6 @@ from itsdangerous import (
 )
 from logging import info
 from os import getenv
-from sys import modules
 from traceback import format_exc
 from werkzeug.exceptions import Forbidden, NotFound
 

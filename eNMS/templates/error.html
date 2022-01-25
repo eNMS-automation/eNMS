@@ -19,7 +19,7 @@
       {% if error in [401,403] %}
       <h2>Access Denied</h2>
       {% if not current_user.is_authenticated %}
-      <p>Full authentication is required to access this resource.</p>
+      <p>Full authentication is required to access this resource.</p><br><br>
       <a href="{{ login_url }}"
         ><button role="button" class="btn btn-secondary">Return to Login</button></a
       >

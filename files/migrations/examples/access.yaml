@@ -205,3 +205,17 @@
   type: access
   upper_menu: []
   user_pools: [Users with UI access]
+- access_pools: [Services for access by user ny]
+  access_type: "['Read']"
+  delete_requests: []
+  description: "Uses a manually defined pool containing the workflow \"Target Restriction\"\
+    .\r\nThis workflow is designed to be run by \"ny\" to check the target restriction\
+    \ mechanism works as intended."
+  get_requests: []
+  menu: []
+  name: Service Access for user ny
+  pages: []
+  post_requests: []
+  type: access
+  upper_menu: []
+  user_pools: [User ny]

@@ -15971,7 +15971,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: [Everything]
+  pools: [Everything, Services for access by user ny]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always

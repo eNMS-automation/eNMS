@@ -418,8 +418,9 @@ class Run(AbstractBase):
 
     def run(self):
         vs.run_targets[self.runtime] = set(
-            controller.filtering(
-                "device", bulk="id", rbac="target", username=self.creator
+            device.id
+            for device in controller.filtering(
+                "device", properties=["id"], rbac="target", username=self.creator
             )
         )
         if not self.trigger:

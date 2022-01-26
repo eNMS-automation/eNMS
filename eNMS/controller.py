@@ -328,6 +328,8 @@ class Controller:
         return path
 
     def export_services(self, **kwargs):
+        if kwargs["parent-filtering"] == "true":
+            kwargs["workflows_filter"] = "empty" 
         for service in self.filtering("service", properties=["id"], form=kwargs):
             self.export_service(service.id)
 

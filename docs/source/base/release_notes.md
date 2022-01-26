@@ -25,6 +25,8 @@ Version 4.2.0
 - Reinstate single left click for node selection in workflow & site builder.
 - Remove most union subquery in rbac_filter because a union of query yields a CompoundSelect
   SQLAlchemy object, and this is not compatible with using with_entites (via filtering properties kw).
+- Fix export in bulk (the hierarchical display mode was not considered, all services inside a workflow
+  were exported even when "hierarchical display" was selected)
 
 TODO
 - fix run_targets to use query with properties

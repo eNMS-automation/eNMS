@@ -28,9 +28,6 @@ Version 4.2.0
 - Fix export in bulk (the hierarchical display mode was not considered, all services inside a workflow
   were exported even when "hierarchical display" was selected)
 
-TODO
-- fix run_targets to use query with properties
-
 Tests:
 - Performances (SQL Column function init)
 - Export and re-import of workflows and top-level services

@@ -9,6 +9,19 @@
     "session_timeout_minutes": 30,
     "startup_migration": "examples"
   },
+  "notification_banner": {
+    "active": true,
+    "deactivate_on_restart": true,
+    "properties": {
+      "autoclose": "30s",
+      "opacity": 0.85,
+      "position": "center-bottom 0 -10 up",
+      "contentSize": "600 auto",
+      "content": "<center>The Server is <b>restarting at 3:30 UTC.</b><br>Contact <b>adress@domain.com</b> for more information.</center>",
+      "theme": "danger filleddark",
+      "header": false
+    }
+  },
   "authentication": {
     "default": "database",
     "methods": {

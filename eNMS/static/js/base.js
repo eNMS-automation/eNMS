@@ -269,16 +269,8 @@ export function loadTypes(model) {
 }
 
 function createNotificationBanner() {
-  jsPanel.hint.create({
-    autoclose: "30s",
-    opacity: 0.85,
-    position: "center-bottom 0 -10 up",
-    contentSize: "600 auto",
-    content: `<center>The Server is <b>restarting at 3:30 UTC.</b><br>
-      Contact <b>adress@domain.com</b> for more information.</center>`,
-    theme: "danger filleddark",
-    header: false,
-  });
+  if (!settings.notification_banner) return;
+  jsPanel.hint.create(settings.notification_banner.properties);
 }
 
 export function openPanel({

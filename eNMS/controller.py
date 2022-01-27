@@ -1097,7 +1097,7 @@ class Controller:
         return now
 
     def save_settings(self, **kwargs):
-        vs.settings = kwargs["settings"]
+        vs.settings = vs.template_context["settings"] = kwargs["settings"]
         if kwargs["save"]:
             with open(vs.path / "setup" / "settings.json", "w") as file:
                 dump(kwargs["settings"], file, indent=2)

@@ -27,6 +27,7 @@ Version 4.2.0
   SQLAlchemy object, and this is not compatible with using with_entites (via filtering properties kw).
 - Fix export in bulk (the hierarchical display mode was not considered, all services inside a workflow
   were exported even when "hierarchical display" was selected)
+- Add notification banner mechanism
 
 Tests:
 - Performances (SQL Column function init)

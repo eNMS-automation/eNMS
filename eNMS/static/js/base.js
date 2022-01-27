@@ -268,6 +268,19 @@ export function loadTypes(model) {
   $(`#${model}-type-list`).selectpicker("refresh");
 }
 
+function createNotificationBanner() {
+  jsPanel.hint.create({
+    autoclose: "30s",
+    opacity: 0.85,
+    position: "center-bottom 0 -10 up",
+    contentSize: "600 auto",
+    content: `<center>The Server is <b>restarting at 3:30 UTC.</b><br>
+      Contact <b>adress@domain.com</b> for more information.</center>`,
+    theme: "danger filleddark",
+    header: false,
+  });
+}
+
 export function openPanel({
   name,
   title,
@@ -1130,6 +1143,7 @@ $(document).ready(function () {
   }
   detectUserInactivity();
   createTooltips();
+  createNotificationBanner();
 });
 
 $(window).load(function () {

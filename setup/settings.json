@@ -9,19 +9,6 @@
     "session_timeout_minutes": 30,
     "startup_migration": "examples"
   },
-  "notification_banner": {
-    "active": true,
-    "deactivate_on_restart": true,
-    "properties": {
-      "autoclose": "30s",
-      "opacity": 0.85,
-      "position": "center-bottom 0 -10 up",
-      "contentSize": "600 auto",
-      "content": "<center>The Server is <b>restarting at 3:30 UTC.</b><br>Contact <b>adress@domain.com</b> for more information.</center>",
-      "theme": "danger filleddark",
-      "header": false
-    }
-  },
   "authentication": {
     "default": "database",
     "methods": {
@@ -50,38 +37,38 @@
     "scan_timeout": 0.05
   },
   "dashboard": {
-    "tooltip": {
-      "formatter": "{b} : {c} ({d}%)"
+    "label": {
+      "normal": {
+        "formatter": "{b} ({c})"
+      }
     },
     "series": [
       {
         "type": "pie"
       }
     ],
-    "label": {
-      "normal": {
-        "formatter": "{b} ({c})"
-      }
+    "tooltip": {
+      "formatter": "{b} : {c} ({d}%)"
     }
   },
   "docs": {
-    "dashboard": "",
     "administration": "base/installation/",
+    "changelog_table": "advanced/administration/",
     "configuration_table": "inventory/configuration_management/",
+    "dashboard": "",
     "device_table": "inventory/network_creation/",
     "event_table": "automation/scheduling/",
+    "geographical_view": "inventory/network_visualization/#geographic-view",
     "link_table": "inventory/network_creation/",
-    "changelog_table": "advanced/administration/",
+    "logical_view": "inventory/network_visualization/#logical-view",
     "pool_table": "inventory/pools/",
     "run_table": "automation/services/",
     "service_table": "automation/services/",
     "task_table": "automation/scheduling/",
     "user_table": "advanced/administration/",
     "view_table": "inventory/network_visualization/",
-    "workflow_builder_table": "automation/workflows/",
     "workflow_builder": "automation/workflows/",
-    "geographical_view": "inventory/network_visualization/#geographic-view",
-    "logical_view": "inventory/network_visualization/#logical-view"
+    "workflow_builder_table": "automation/workflows/"
   },
   "mail": {
     "port": 587,
@@ -95,6 +82,19 @@
     "channel": "",
     "url": "https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w",
     "verify_certificate": true
+  },
+  "notification_banner": {
+    "active": false,
+    "deactivate_on_restart": true,
+    "properties": {
+      "autoclose": "30s",
+      "content": "<center>The Server is <b>restarting at 3:30 UTC.</b><br>Contact <b>adress@domain.com</b> for more information.</center>",
+      "contentSize": "600 auto",
+      "header": false,
+      "opacity": 0.85,
+      "position": "center-bottom 0 -10 up",
+      "theme": "danger filleddark"
+    }
   },
   "paths": {
     "custom_code": "",
@@ -125,28 +125,33 @@
     }
   },
   "security": {
-    "forbidden_python_libraries": ["eNMS", "os", "subprocess", "sys"],
+    "forbidden_python_libraries": [
+      "eNMS",
+      "os",
+      "subprocess",
+      "sys"
+    ],
     "hash_user_passwords": true
   },
   "slack": {
     "channel": ""
   },
   "ssh": {
-    "web": {
-      "LC_ALL": "en_US.utf-8",
-      "CORS_ALLOWED_ORIGINS": "*",
-      "VERIFY_CERTIFICATE": false
-    },
     "bypass_key_prompt": true,
     "credentials": {
+      "custom": true,
       "device": true,
-      "user": true,
-      "custom": true
+      "user": true
     },
     "end_port": 9100,
     "port": -1,
     "port_redirection": false,
-    "start_port": 9000
+    "start_port": 9000,
+    "web": {
+      "CORS_ALLOWED_ORIGINS": "*",
+      "LC_ALL": "en_US.utf-8",
+      "VERIFY_CERTIFICATE": false
+    }
   },
   "tables": {
     "refresh": {

@@ -494,6 +494,8 @@ properties.json custom device addition example:
        for migration
     - "serialize": false *optional* - whether it is passed to the front-end
       when the object itself is
+    - "merge_update": false *optional* - *only for JSON property* - whether the
+      JSON value is overriden or updated when setting a new value from the REST API.
 
 - Keys under `"tables" : { "device" : [ {  & "tables" : { "configuration" : [ {`
   Details which attributes to display in these table, add custom attributes here

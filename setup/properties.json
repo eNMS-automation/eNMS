@@ -70,6 +70,7 @@
       "custom_json": {
         "pretty_name": "Custom Json",
         "default": { "a": "c", "b": [1, 2, "3"] },
+        "merge_update": true,
         "type": "json"
       }
     },

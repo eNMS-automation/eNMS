@@ -1140,6 +1140,7 @@ class Runner:
 
     def get_or_close_connection(self, library, device):
         connection = self.get_connection(library, device)
+        print(connection)
         if not connection:
             return
         if self.start_new_connection:

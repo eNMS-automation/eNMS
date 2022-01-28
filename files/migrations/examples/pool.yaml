@@ -180,12 +180,12 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [Top-level Devices and Links, 'Duplication of Devices, Subsites and Top-level
-      Sites', Layout of Large Graph, Subsite 2, L2 Site, L1 Site, 'Creation, Edit
-      and Deletion', Subsite and Teleport Mechanism, L3 Site, Import with Add Connected
-      Nodes and Links, Loopback and Parallel Links, Subsubsite and Subsubsubsite,
-    Large Network Display, Duplicate me 2, Subsite 1]
-  target_services: [Large Workflow (20 services)]
+  sites: [L1 Site, L2 Site, 'Creation, Edit and Deletion', Subsite 1, Duplicate me
+      2, Subsite and Teleport Mechanism, Layout of Large Graph, L3 Site, Loopback
+      and Parallel Links, 'Duplication of Devices, Subsites and Top-level Sites',
+    Subsubsite and Subsubsubsite, Import with Add Connected Nodes and Links, Top-level
+      Devices and Links, Subsite 2, Large Network Display]
+  target_services: []
   tasks: []
   type: pool
   user_description: ''
@@ -363,8 +363,7 @@
   site_name_match: inclusion
   sites: []
   target_services: ['[Skip in SxS with service targets and Run Once services] Run
-      Once with Pool', Large Device Configuration and Operational Data, Large Workflow
-      (20 services)]
+      Once with Pool', Large Device Configuration and Operational Data]
   tasks: []
   type: pool
   user_description: ''
@@ -551,7 +550,7 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: [Large Workflow (20 services)]
+  target_services: []
   tasks: []
   type: pool
   user_description: ''
@@ -747,7 +746,7 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: [Parameterized Multiprocessing, Large Workflow (20 services)]
+  target_services: [Parameterized Multiprocessing]
   tasks: []
   type: pool
   user_description: ''
@@ -939,7 +938,7 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: [Large Workflow (20 services)]
+  target_services: []
   tasks: []
   type: pool
   user_description: ''
@@ -1131,7 +1130,7 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: [Large Workflow (20 services)]
+  target_services: []
   tasks: []
   type: pool
   user_description: ''
@@ -1296,8 +1295,8 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: [Parameterized Targets, Large Workflow (20 services), '[(R) Operational
-      Data Backup Service] Retrieve Operational Data', Parameterized Run with a Superworkflow]
+  target_services: [Parameterized Targets, '[(R) Operational Data Backup Service]
+      Retrieve Operational Data', Parameterized Run with a Superworkflow]
   tasks: []
   type: pool
   user_description: ''
@@ -1462,7 +1461,7 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: [Large Workflow (20 services)]
+  target_services: []
   tasks: []
   type: pool
   user_description: ''
@@ -1627,7 +1626,7 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: [Large Workflow (20 services)]
+  target_services: []
   tasks: []
   type: pool
   user_description: ''
@@ -3456,11 +3455,11 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [Top-level Devices and Links, 'Duplication of Devices, Subsites and Top-level
-      Sites', Layout of Large Graph, Subsite 2, L2 Site, L1 Site, 'Creation, Edit
-      and Deletion', Subsite and Teleport Mechanism, L3 Site, Import with Add Connected
-      Nodes and Links, Loopback and Parallel Links, Subsubsite and Subsubsubsite,
-    Large Network Display, Duplicate me 2, Subsite 1]
+  sites: [L1 Site, L2 Site, 'Creation, Edit and Deletion', Subsite 1, Duplicate me
+      2, Subsite and Teleport Mechanism, Layout of Large Graph, L3 Site, Loopback
+      and Parallel Links, 'Duplication of Devices, Subsites and Top-level Sites',
+    Subsubsite and Subsubsubsite, Import with Add Connected Nodes and Links, Top-level
+      Devices and Links, Subsite 2, Large Network Display]
   target_services: []
   tasks: []
   type: pool

@@ -321,15 +321,18 @@ class Database:
 
     def fetch(
         self,
-        model,
+        instance_type,
         allow_none=False,
         all_matches=False,
         rbac="read",
         username=None,
         **kwargs,
     ):
-        query = self.query(model, rbac, username=username).filter(
-            *(getattr(vs.models[model], key) == value for key, value in kwargs.items())
+        query = self.query(instance_type, rbac, username=username).filter(
+            *(
+                getattr(vs.models[instance_type], key) == value
+                for key, value in kwargs.items()
+            )
         )
         for index in range(self.retry_fetch_number):
             try:
@@ -345,7 +348,7 @@ class Database:
             return result
         else:
             raise self.rbac_error(
-                f"There is no {model} in the database "
+                f"There is no {instance_type} in the database "
                 f"with the following characteristics: {kwargs}"
             )
 

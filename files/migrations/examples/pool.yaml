@@ -180,11 +180,11 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [L1 Site, L2 Site, 'Creation, Edit and Deletion', Subsite 1, Duplicate me
-      2, Subsite and Teleport Mechanism, Layout of Large Graph, L3 Site, Loopback
-      and Parallel Links, 'Duplication of Devices, Subsites and Top-level Sites',
-    Subsubsite and Subsubsubsite, Import with Add Connected Nodes and Links, Top-level
-      Devices and Links, Subsite 2, Large Network Display]
+  sites: [Subsite and Teleport Mechanism, 'Duplication of Devices, Subsites and Top-level
+      Sites', Subsite 2, L1 Site, Subsubsite and Subsubsubsite, Duplicate me 2, L2
+      Site, L3 Site, 'Creation, Edit and Deletion', Large Network Display, Top-level
+      Devices and Links, Loopback and Parallel Links, Import with Add Connected Nodes
+      and Links, Subsite 1, Layout of Large Graph]
   target_services: []
   tasks: []
   type: pool
@@ -362,8 +362,8 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: ['[Skip in SxS with service targets and Run Once services] Run
-      Once with Pool', Large Device Configuration and Operational Data]
+  target_services: [Large Device Configuration and Operational Data, '[Skip in SxS
+      with service targets and Run Once services] Run Once with Pool']
   tasks: []
   type: pool
   user_description: ''
@@ -1295,8 +1295,8 @@
   site_name_invert: false
   site_name_match: inclusion
   sites: []
-  target_services: [Parameterized Targets, '[(R) Operational Data Backup Service]
-      Retrieve Operational Data', Parameterized Run with a Superworkflow]
+  target_services: ['[(R) Operational Data Backup Service] Retrieve Operational Data',
+    Parameterized Targets, Parameterized Run with a Superworkflow]
   tasks: []
   type: pool
   user_description: ''
@@ -3455,11 +3455,11 @@
   site_name: .*
   site_name_invert: false
   site_name_match: regex
-  sites: [L1 Site, L2 Site, 'Creation, Edit and Deletion', Subsite 1, Duplicate me
-      2, Subsite and Teleport Mechanism, Layout of Large Graph, L3 Site, Loopback
-      and Parallel Links, 'Duplication of Devices, Subsites and Top-level Sites',
-    Subsubsite and Subsubsubsite, Import with Add Connected Nodes and Links, Top-level
-      Devices and Links, Subsite 2, Large Network Display]
+  sites: [Subsite and Teleport Mechanism, 'Duplication of Devices, Subsites and Top-level
+      Sites', Subsite 2, L1 Site, Subsubsite and Subsubsubsite, Duplicate me 2, L2
+      Site, L3 Site, 'Creation, Edit and Deletion', Large Network Display, Top-level
+      Devices and Links, Loopback and Parallel Links, Import with Add Connected Nodes
+      and Links, Subsite 1, Layout of Large Graph]
   target_services: []
   tasks: []
   type: pool

@@ -1,11 +1,11 @@
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: Start point of a workflow
@@ -450,13 +450,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: End point of a workflow
@@ -911,13 +911,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: Monitor eNMS cluster
@@ -989,6 +989,7 @@
   a_float: 5.0
   a_list: []
   access_groups: ''
+  admin_only: false
   an_integer: 10
   boolean1: true
   boolean2: false
@@ -999,7 +1000,6 @@
   creator: admin
   credential_type: any
   custom_integer: 0
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: Example
@@ -1090,6 +1090,7 @@
   visualization_target: true
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -1101,7 +1102,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: Configuration Backup using NAPALM
@@ -1186,6 +1186,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   close_connection: false
   commit_configuration: false
   completion_time: 1
@@ -1201,7 +1202,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1290,6 +1290,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: true
   command: show vrf
@@ -1305,7 +1306,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1408,6 +1408,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   close_connection: false
   commit_configuration: false
   completion_time: 1
@@ -1423,7 +1424,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1513,6 +1513,7 @@
   visualization_target: false
   waiting_time: 1
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show vrf
@@ -1528,7 +1529,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1634,6 +1634,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -1641,7 +1642,6 @@
   conversion_method: text
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -1751,6 +1751,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -1762,7 +1763,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: 'Getter: get_facts'
@@ -1850,6 +1850,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -1861,7 +1862,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: 'Getter: get_interfaces'
@@ -1949,13 +1949,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: Add devices to the payload
@@ -2039,6 +2039,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   close_connection: false
   command: show vrf a
   completion_time: 1
@@ -2055,7 +2056,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -2148,6 +2148,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -2164,7 +2165,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -2257,13 +2257,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -2338,13 +2338,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -2422,6 +2422,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show vrf {{iteration_simple}}
@@ -2437,7 +2438,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -2530,6 +2530,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show vrf test
@@ -2545,7 +2546,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -2638,6 +2638,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show vrf {{get_result("Modify payload (per device)", device=device.name)["duration"]}}
@@ -2653,7 +2654,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -2747,6 +2747,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -2758,7 +2759,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -2863,6 +2863,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   arguments: ''
   completion_time: 1
   content_match: ''
@@ -2871,7 +2872,6 @@
   creator: admin
   credential_type: any
   credentials: device
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -2950,6 +2950,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   arguments: ''
   completion_time: 1
   content_match: ip address\s.*/24
@@ -2958,7 +2959,6 @@
   creator: admin
   credential_type: any
   credentials: device
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -3037,6 +3037,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   arguments: ''
   completion_time: 1
   content_match: ''
@@ -3045,7 +3046,6 @@
   creator: admin
   credential_type: any
   credentials: device
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -3124,6 +3124,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show interface {{non_default_iteration_value_name}}
@@ -3139,7 +3140,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -3233,6 +3233,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show interface {{iteration_value}}
@@ -3248,7 +3249,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -3342,6 +3342,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show interface {{iteration_value}}
@@ -3357,7 +3358,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -3451,6 +3451,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -3458,7 +3459,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -3540,6 +3540,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -3548,7 +3549,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: Poll configuration and push to gitlab
@@ -3628,6 +3628,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -3636,7 +3637,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: is_alive
   delete_spaces_before_matching: false
   description: Create and delete a VRF with Netmiko
@@ -3747,6 +3747,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   category: Basics
   close_connection: false
   completion_time: 1
@@ -3755,7 +3756,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: Workflow with separate failure - success path
@@ -3861,6 +3861,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -3869,7 +3870,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -3955,6 +3955,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   category: Global Variables
   close_connection: false
   completion_time: 1
@@ -3963,7 +3964,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4062,6 +4062,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -4070,7 +4071,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4181,6 +4181,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   category: Run Methods
   close_connection: false
   completion_time: 1
@@ -4189,7 +4190,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4273,6 +4273,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   category: Iteration Mechanism
   close_connection: false
   completion_time: 1
@@ -4281,7 +4282,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4409,6 +4409,7 @@
   workflow_category: Example workflow(s)
 - access_groups: ''
   add_header: true
+  admin_only: false
   close_connection: true
   commands:
   - {prefix: shusers, value: show run}
@@ -4434,7 +4435,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4537,6 +4537,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Run Methods
   close_connection: false
   completion_time: 1
@@ -4545,7 +4546,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4621,6 +4621,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -4629,7 +4630,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4705,6 +4705,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -4712,7 +4713,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4792,6 +4792,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -4800,7 +4801,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4876,6 +4876,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -4883,7 +4884,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4963,6 +4963,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -4971,7 +4972,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5047,6 +5047,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: ''
@@ -5062,7 +5063,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -5155,6 +5155,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: ''
@@ -5170,7 +5171,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -5264,6 +5264,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: ''
@@ -5279,7 +5280,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -5372,6 +5372,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Basics
   close_connection: false
   completion_time: 1
@@ -5380,7 +5381,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5475,6 +5475,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -5483,7 +5484,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5560,6 +5560,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -5568,7 +5569,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5645,6 +5645,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show vrf
@@ -5660,7 +5661,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -5757,6 +5757,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   arguments: ''
   completion_time: 1
   content_match: ''
@@ -5765,7 +5766,6 @@
   creator: admin
   credential_type: any
   credentials: device
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5843,6 +5843,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Iteration Mechanism
   close_connection: false
   completion_time: 1
@@ -5851,7 +5852,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5946,13 +5946,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6031,6 +6031,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show vrf {{command_dict["command"]}}
@@ -6046,7 +6047,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -6142,6 +6142,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Iteration Mechanism
   close_connection: false
   completion_time: 1
@@ -6150,7 +6151,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6262,13 +6262,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6343,6 +6343,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -6351,7 +6352,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6428,13 +6428,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6511,6 +6511,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Basics
   close_connection: false
   completion_time: 1
@@ -6519,7 +6520,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: is_alive
   delete_spaces_before_matching: false
   description: ''
@@ -6612,13 +6612,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6696,13 +6696,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6777,13 +6777,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6860,6 +6860,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Superworkflows
   close_connection: false
   completion_time: 1
@@ -6868,7 +6869,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6942,6 +6942,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -6950,7 +6951,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7032,6 +7032,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   command: ps -ef
   completion_time: 1
   content_match: python\d
@@ -7039,7 +7040,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7115,6 +7115,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: false
   close_connection: false
   completion_time: 1
@@ -7128,7 +7129,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -7219,6 +7219,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -7226,7 +7227,6 @@
   count: 5
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7307,6 +7307,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -7315,7 +7316,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7388,13 +7388,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7477,6 +7477,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: ps -ef
@@ -7492,7 +7493,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -7588,6 +7588,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -7595,7 +7596,6 @@
   conversion_method: text
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -7678,6 +7678,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show version
@@ -7693,7 +7694,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: public
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -7783,6 +7783,7 @@
   waiting_time: 0
 - access_groups: ''
   add_header: true
+  admin_only: false
   close_connection: false
   commands:
   - {prefix: '', value: show run}
@@ -7808,7 +7809,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7912,6 +7912,7 @@
   waiting_time: 0
 - access_groups: ''
   add_commit: true
+  admin_only: false
   commit_message: Automatic commit (configurations)
   completion_time: 1
   content_match: ''
@@ -7919,7 +7920,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7997,13 +7997,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8078,6 +8078,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -8086,7 +8087,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8161,6 +8161,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   close_connection: false
   commands: "show run\r\nshow vrf"
   completion_time: 1
@@ -8173,7 +8174,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8251,6 +8251,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   close_connection: false
   commands: vrf instance TEST-VRF
   completion_time: 1
@@ -8263,7 +8264,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8341,6 +8341,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   close_connection: false
   commands: "show run\r\nshow vrf"
   completion_time: 1
@@ -8353,7 +8354,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8431,6 +8431,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   close_connection: false
   commands: no vrf instance TEST-VRF
   completion_time: 1
@@ -8443,7 +8444,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8521,6 +8521,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -8529,7 +8530,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8613,6 +8613,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: dir enms_files
@@ -8628,7 +8629,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -8722,6 +8722,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -8731,7 +8732,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8815,6 +8815,7 @@
   waiting_time: 0
   window_size: 1073741824
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: dir enms_files
@@ -8830,7 +8831,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -8926,6 +8926,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -8935,7 +8936,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9020,6 +9020,7 @@
   waiting_time: 0
   window_size: 1073741824
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: delete flash:/enms_files/*.bin
@@ -9035,7 +9036,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -9129,6 +9129,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: No such file or directory
   content_match_regex: false
@@ -9138,7 +9139,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9222,6 +9222,7 @@
   waiting_time: 0
   window_size: 1073741824
 - access_groups: ''
+  admin_only: false
   category: Skip Mechanism
   close_connection: false
   completion_time: 1
@@ -9230,7 +9231,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9322,13 +9322,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9411,13 +9411,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9500,13 +9500,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9590,6 +9590,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Skip Mechanism
   close_connection: false
   completion_time: 1
@@ -9598,7 +9599,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9708,13 +9708,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9798,13 +9798,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9887,13 +9887,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9976,13 +9976,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10065,6 +10065,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Global Variables
   close_connection: false
   completion_time: 1
@@ -10073,7 +10074,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10176,13 +10176,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10288,6 +10288,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -10295,7 +10296,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10383,6 +10383,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show vrf
@@ -10398,7 +10399,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -10492,6 +10492,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Global Variables
   close_connection: false
   completion_time: 1
@@ -10500,7 +10501,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10605,13 +10605,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10696,13 +10696,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10780,6 +10780,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show vrf
@@ -10796,7 +10797,6 @@
   custom_password: ''
   custom_username: '{{ get_result("Credentials encryption", device=device.name)["username"]
     }}'
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -10891,13 +10891,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10979,6 +10979,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Skip Mechanism
   close_connection: false
   completion_time: 1
@@ -10987,7 +10988,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11089,6 +11089,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -11096,7 +11097,6 @@
   conversion_method: text
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -11189,13 +11189,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11275,13 +11275,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11361,6 +11361,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show vrf
@@ -11376,7 +11377,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -11470,6 +11470,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -11477,7 +11478,6 @@
   conversion_method: text
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -11561,6 +11561,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Skip Mechanism
   close_connection: false
   completion_time: 1
@@ -11569,7 +11570,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11667,6 +11667,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -11675,7 +11676,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11753,13 +11753,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11835,6 +11835,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -11843,7 +11844,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11920,13 +11920,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12006,6 +12006,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Skip Mechanism
   close_connection: false
   completion_time: 1
@@ -12014,7 +12015,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12110,13 +12110,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12193,6 +12193,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -12201,7 +12202,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12279,6 +12279,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -12287,7 +12288,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12365,13 +12365,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12448,13 +12448,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12531,13 +12531,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12613,6 +12613,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show run
@@ -12628,7 +12629,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -12717,6 +12717,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: RBAC
   close_connection: false
   completion_time: 1
@@ -12725,7 +12726,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12826,6 +12826,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show interfaces
@@ -12841,7 +12842,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -12933,6 +12933,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Basics
   close_connection: false
   completion_time: 1
@@ -12941,7 +12942,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13027,13 +13027,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13107,13 +13107,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13187,13 +13187,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13268,13 +13268,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13348,6 +13348,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Iteration Mechanism
   close_connection: false
   completion_time: 1
@@ -13356,7 +13357,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13452,13 +13452,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13532,6 +13532,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -13540,7 +13541,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13616,6 +13616,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -13624,7 +13625,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13700,13 +13700,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13782,13 +13782,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13864,13 +13864,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13946,13 +13946,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14027,6 +14027,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: RBAC
   close_connection: false
   completion_time: 1
@@ -14035,7 +14036,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: public
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14123,13 +14123,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14203,13 +14203,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14283,13 +14283,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14363,6 +14363,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -14371,7 +14372,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14468,6 +14468,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   close_connection: false
   command: get_config
   commit_config: false
@@ -14482,7 +14483,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14559,6 +14559,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   close_connection: false
   command: get
   commit_config: false
@@ -14575,7 +14576,6 @@
   credentials: device
   custom_password: YWRtaW4=
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14654,6 +14654,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   close_connection: false
   command: rpc
   commit_config: true
@@ -14671,7 +14672,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14746,6 +14746,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   close_connection: false
   command: rpc
   commit_config: false
@@ -14763,7 +14764,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14838,6 +14838,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Parameterized Form
   close_connection: false
   completion_time: 1
@@ -14846,7 +14847,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14934,6 +14934,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show interface {{payload["form"]["interface"]}}
@@ -14949,7 +14950,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -15042,6 +15042,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Basics
   close_connection: false
   completion_time: 1
@@ -15050,7 +15051,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -15153,13 +15153,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -15235,13 +15235,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -15320,13 +15320,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: OL
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -15402,6 +15402,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -15410,7 +15411,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -15501,6 +15501,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   close_connection: false
   commit_conf: false
   completion_time: 1
@@ -15515,7 +15516,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   default_operation: merge
   definition: Definition
   delete_spaces_before_matching: false
@@ -15600,6 +15600,7 @@
   xml_conversion: true
   xml_filter: ''
 - access_groups: admin
+  admin_only: false
   close_connection: false
   commit_conf: false
   completion_time: 1
@@ -15614,7 +15615,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   default_operation: merge
   definition: Definition
   delete_spaces_before_matching: false
@@ -15704,6 +15704,7 @@
     \n        </if:config>\r\n      </if:interface>\r\n    </if:interfaces>\r\n  \
     \  </nc:config>"
 - access_groups: admin
+  admin_only: false
   close_connection: false
   commit_conf: false
   completion_time: 1
@@ -15718,7 +15719,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   default_operation: merge
   definition: Definition
   delete_spaces_before_matching: false
@@ -15803,6 +15803,7 @@
   xml_conversion: true
   xml_filter: ''
 - access_groups: admin
+  admin_only: false
   close_connection: false
   commit_conf: false
   completion_time: 1
@@ -15817,7 +15818,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   default_operation: merge
   definition: Definition
   delete_spaces_before_matching: false
@@ -15907,6 +15907,7 @@
     \n        </if:config>\r\n      </if:interface>\r\n    </if:interfaces>\r\n  \
     \  </nc:config>"
 - access_groups: admin
+  admin_only: false
   close_connection: false
   commit_conf: false
   completion_time: 1
@@ -15921,7 +15922,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   default_operation: merge
   definition: Definition
   delete_spaces_before_matching: false
@@ -16006,6 +16006,7 @@
   xml_conversion: true
   xml_filter: ''
 - access_groups: admin
+  admin_only: false
   category: SSH Connection
   close_connection: false
   completion_time: 1
@@ -16014,7 +16015,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -16113,6 +16113,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show vrf
@@ -16128,7 +16129,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -16221,6 +16221,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show vrf
@@ -16236,7 +16237,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -16329,6 +16329,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: true
   command: show vrf
@@ -16344,7 +16345,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -16437,6 +16437,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Basics
   close_connection: false
   completion_time: 1
@@ -16445,7 +16446,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -16542,13 +16542,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -16623,13 +16623,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -16705,13 +16705,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -16787,6 +16787,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -16795,7 +16796,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -16888,6 +16888,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: dir enms_files
@@ -16903,7 +16904,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -16995,6 +16995,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   close_connection: false
   completion_time: 1
   config_mode: false
@@ -17007,7 +17008,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -17093,6 +17093,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: dir enms_files
@@ -17108,7 +17109,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -17200,6 +17200,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: delete enms_files/netmiko_file
@@ -17215,7 +17216,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -17307,6 +17307,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: dir enms_files
@@ -17322,7 +17323,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -17414,6 +17414,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Global Variables
   close_connection: false
   completion_time: 1
@@ -17422,7 +17423,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -17525,13 +17525,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -17607,6 +17607,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show {{get_credential(name="Non Device Credential")["password"]}}
@@ -17622,7 +17623,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -17715,6 +17715,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -17722,7 +17723,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -17804,6 +17804,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Skip Mechanism
   close_connection: false
   completion_time: 1
@@ -17812,7 +17813,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -17911,13 +17911,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -17993,13 +17993,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18074,13 +18074,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18155,13 +18155,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18237,6 +18237,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -18245,7 +18246,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18322,13 +18322,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18405,13 +18405,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18497,13 +18497,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18589,13 +18589,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18681,13 +18681,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18773,13 +18773,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18865,13 +18865,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18957,13 +18957,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -19049,13 +19049,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -19135,6 +19135,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Superworkflows
   close_connection: false
   completion_time: 1
@@ -19143,7 +19144,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -19237,13 +19237,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -19317,6 +19317,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Superworkflows
   close_connection: false
   completion_time: 1
@@ -19325,7 +19326,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -19404,6 +19404,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -19411,7 +19412,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -19491,6 +19491,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show interface {{interface}}
@@ -19506,7 +19507,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -19598,6 +19598,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -19606,7 +19607,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -19694,6 +19694,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show ip int brief
@@ -19709,7 +19710,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -19801,6 +19801,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show version
@@ -19816,7 +19817,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -19908,6 +19908,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show arp
@@ -19923,7 +19924,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -20015,6 +20015,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show lldp neighbor
@@ -20030,7 +20031,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -20122,6 +20122,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -20130,7 +20131,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: Create and delete a VRF with Napalm
@@ -20213,6 +20213,7 @@
   workflow_category: Example workflow(s)
 - access_groups: ''
   action: load_merge_candidate
+  admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -20225,7 +20226,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: Create a VRF "test" with Napalm
@@ -20306,6 +20306,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -20317,7 +20318,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -20399,6 +20399,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show vrf
@@ -20414,7 +20415,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -20512,6 +20512,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: show vrf
@@ -20527,7 +20528,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -20625,6 +20625,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -20633,7 +20634,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -20744,6 +20744,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -20755,7 +20756,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -20846,6 +20846,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -20857,7 +20858,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -20947,6 +20947,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -20958,7 +20959,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -21048,6 +21048,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -21059,7 +21060,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -21149,6 +21149,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Payload
   close_connection: false
   completion_time: 1
@@ -21157,7 +21158,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: Test the payload extraction and validation mechanisms
@@ -21273,6 +21273,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   auto_find_prompt: true
   close_connection: true
   command: show ip route
@@ -21288,7 +21289,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -21391,13 +21391,13 @@
   visualization_target: true
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: Payload Variables Extraction with Regex/TextFSM
@@ -21500,13 +21500,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -21593,13 +21593,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: (\d\.){3}\d
   content_match_regex: true
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -21685,13 +21685,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -21777,13 +21777,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: (\d\.){3}\d
   content_match_regex: true
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -21868,6 +21868,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   category: Payload
   close_connection: false
   completion_time: 1
@@ -21876,7 +21877,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -21953,13 +21953,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22045,13 +22045,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22149,13 +22149,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22253,13 +22253,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: \[1,2,False,1.*\]
   content_match_regex: true
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: true
   description: ''
@@ -22344,13 +22344,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
+  admin_only: false
   completion_time: 1
   content_match: '{"a": ["o", True, 4], "prefix_length": 24, "failed": 0}'
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22435,6 +22435,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Payload
   close_connection: false
   completion_time: 1
@@ -22443,7 +22444,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22520,13 +22520,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22600,13 +22600,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22679,13 +22679,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22758,13 +22758,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22837,13 +22837,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22916,13 +22916,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22995,6 +22995,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Superworkflows
   close_connection: false
   completion_time: 1
@@ -23003,7 +23004,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23078,6 +23078,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   category: Superworkflows
   close_connection: false
   completion_time: 1
@@ -23086,7 +23087,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23159,13 +23159,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23237,13 +23237,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23315,13 +23315,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23394,13 +23394,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23473,13 +23473,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23552,6 +23552,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Global Variables
   close_connection: false
   completion_time: 1
@@ -23560,7 +23561,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23645,13 +23645,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23724,13 +23724,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23804,6 +23804,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -23812,7 +23813,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23887,13 +23887,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23969,13 +23969,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24051,13 +24051,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24135,6 +24135,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Basics
   close_connection: false
   completion_time: 1
@@ -24143,7 +24144,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24250,13 +24250,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24330,13 +24330,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24410,13 +24410,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24490,13 +24490,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24570,13 +24570,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24650,13 +24650,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24730,6 +24730,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -24737,7 +24738,6 @@
   count: 5
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24811,6 +24811,7 @@
   visualization_target: true
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: REST API
   close_connection: false
   completion_time: 1
@@ -24819,7 +24820,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24916,6 +24916,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -24923,7 +24924,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25004,6 +25004,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: 'Command: show running-config'
@@ -25011,7 +25012,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25091,6 +25091,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ipv4,ipv6
@@ -25098,7 +25099,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25178,6 +25178,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -25185,7 +25186,6 @@
   conversion_method: json
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25264,6 +25264,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -25271,7 +25272,6 @@
   conversion_method: json
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25350,6 +25350,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: REST API
   close_connection: false
   completion_time: 1
@@ -25358,7 +25359,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25457,6 +25457,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -25464,7 +25465,6 @@
   conversion_method: json
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25546,6 +25546,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -25553,7 +25554,6 @@
   conversion_method: json
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25633,6 +25633,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -25640,7 +25641,6 @@
   conversion_method: json
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25721,6 +25721,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -25728,7 +25729,6 @@
   conversion_method: json
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25808,6 +25808,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: REST API
   close_connection: false
   completion_time: 1
@@ -25816,7 +25817,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25916,6 +25916,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   call_type: POST
   completion_time: 1
   content_match: ''
@@ -25923,7 +25924,6 @@
   conversion_method: json
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26010,6 +26010,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   call_type: POST
   completion_time: 1
   content_match: ''
@@ -26017,7 +26018,6 @@
   conversion_method: json
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26102,6 +26102,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   call_type: POST
   completion_time: 1
   content_match: ''
@@ -26109,7 +26110,6 @@
   conversion_method: json
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26196,6 +26196,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: REST API
   close_connection: false
   completion_time: 1
@@ -26204,7 +26205,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26310,6 +26310,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   call_type: POST
   completion_time: 1
   content_match: ''
@@ -26317,7 +26318,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26398,6 +26398,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   call_type: POST
   completion_time: 1
   content_match: ''
@@ -26405,7 +26406,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26484,6 +26484,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   call_type: DELETE
   completion_time: 1
   content_match: ''
@@ -26491,7 +26492,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26571,6 +26571,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -26578,7 +26579,6 @@
   conversion_method: json
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26658,6 +26658,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   call_type: POST
   completion_time: 1
   content_match: ''
@@ -26665,7 +26666,6 @@
   conversion_method: json
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26748,6 +26748,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: SSH Connection
   close_connection: false
   completion_time: 1
@@ -26756,7 +26757,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26866,6 +26866,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: sh ip int br
@@ -26881,7 +26882,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -26973,6 +26973,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: sh ip int br
@@ -26988,7 +26989,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -27080,6 +27080,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   auto_find_prompt: true
   close_connection: false
   command: sh ip int br
@@ -27095,7 +27096,6 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: creator
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -27187,6 +27187,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Parameterized Form
   close_connection: false
   completion_time: 1
@@ -27195,7 +27196,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27275,13 +27275,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27353,6 +27353,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Parameterized Form
   close_connection: false
   completion_time: 1
@@ -27361,7 +27362,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27463,13 +27463,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27541,6 +27541,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Basics
   close_connection: false
   completion_time: 1
@@ -27549,7 +27550,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27625,6 +27625,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   category: Scalability
   close_connection: false
   completion_time: 1
@@ -27633,7 +27634,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27720,13 +27720,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27802,13 +27802,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27884,13 +27884,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27966,13 +27966,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28048,13 +28048,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28130,13 +28130,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28212,13 +28212,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28294,13 +28294,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28376,13 +28376,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28458,13 +28458,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28540,13 +28540,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28622,13 +28622,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28704,13 +28704,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28786,13 +28786,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28868,13 +28868,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28950,13 +28950,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29032,13 +29032,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29114,13 +29114,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29196,13 +29196,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29278,13 +29278,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29360,13 +29360,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29442,13 +29442,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29524,13 +29524,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29606,13 +29606,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29688,13 +29688,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29770,13 +29770,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29852,13 +29852,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29934,13 +29934,13 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -30016,6 +30016,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Scalability
   close_connection: false
   completion_time: 1
@@ -30024,7 +30025,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -30110,13 +30110,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -30190,6 +30190,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Scalability
   close_connection: false
   completion_time: 1
@@ -30198,7 +30199,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -30278,13 +30278,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -30356,6 +30356,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: admin
+  admin_only: false
   category: Scalability
   close_connection: false
   completion_time: 1
@@ -30364,7 +30365,6 @@
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -30447,13 +30447,13 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - access_groups: admin
+  admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
-  default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
   description: ''

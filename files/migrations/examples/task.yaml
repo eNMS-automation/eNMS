@@ -16,7 +16,7 @@
   type: task
 - creator: ''
   crontab_expression: ''
-  default_access: admin
+  admin_only: true
   description: Monitor eNMS cluster
   devices: []
   end_date: ''

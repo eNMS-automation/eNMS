@@ -103,11 +103,18 @@
                   {{ form.name(id=form_type + '-name', class="form-control add-id
                   required") }}
                 </div>
-                {{ form.default_access.label(help="common/default_access") }}
-                <div class="form-group">
-                  {{ form.default_access(id=form_type + '-default_access',
-                  class="form-control add-id required") }}
-                </div>
+                <fieldset>
+                  <div class="item">
+                    <input
+                      id="{{ form_type }}-admin_only"
+                      name="admin_only"
+                      class="add-id"
+                      type="checkbox"
+                      value="y"
+                    />
+                    {{ form.admin_only.label(help="common/admin_only") }}
+                  </div>
+                </fieldset>
                 {{ form.access_groups.label(help="common/access_groups") }}
                 <div class="form-group">
                   {{ form.access_groups(id=form_type + '-access_groups',

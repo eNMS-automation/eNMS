@@ -585,9 +585,9 @@
         "visible": false
       },
       {
-        "data": "default_access",
-        "title": "Default Access",
-        "search": "text",
+        "data": "admin_only",
+        "title": "Admin Only",
+        "search": "bool",
         "visible": false
       },
       {
@@ -896,9 +896,9 @@
         "orderable": false
       },
       {
-        "data": "default_access",
-        "title": "Default Access",
-        "search": "text",
+        "data": "admin_only",
+        "title": "Admin Only",
+        "search": "bool",
         "visible": false
       },
       {
@@ -1199,7 +1199,7 @@
       "description",
       "creator",
       "scheduling_mode",
-      "default_access",
+      "admin_only",
       "last_scheduled_by",
       "service_name",
       "status"

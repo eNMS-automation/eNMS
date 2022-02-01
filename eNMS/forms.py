@@ -680,12 +680,7 @@ class ServiceForm(BaseForm):
             ("always", "Always run"),
         )
     )
-    default_access = SelectField(
-        choices=(
-            ("creator", "Role Based (Creator)"),
-            ("admin", "Admin (Admin users only)"),
-        )
-    )
+    admin_only = BooleanField("Admin Only")
     log_level = SelectField(
         "Logging",
         choices=((0, "Disable logging"), *enumerate(vs.log_levels, 1)),
@@ -807,12 +802,7 @@ class TaskForm(BaseForm):
     form_type = HiddenField(default="task")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
-    default_access = SelectField(
-        choices=(
-            ("creator", "Creator only"),
-            ("admin", "Admin Users only"),
-        )
-    )
+    admin_only = BooleanField("Admin Only")
     scheduling_mode = SelectField(
         "Scheduling Mode",
         choices=(("cron", "Crontab Scheduling"), ("standard", "Standard Scheduling")),

@@ -7,7 +7,7 @@ from sqlalchemy import Boolean, case, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import aliased, deferred, relationship
-from sqlalchemy.sql.expression import true
+from sqlalchemy.sql.expression import false, true
 
 from eNMS.controller import controller
 from eNMS.database import db
@@ -29,7 +29,7 @@ class Service(AbstractBase):
     name = db.Column(db.SmallString, unique=True)
     creator = db.Column(db.SmallString)
     access_groups = db.Column(db.LargeString)
-    default_access = db.Column(db.SmallString)
+    admin_only = db.Column(Boolean, default=False)
     owners_access = db.Column(db.SmallString)
     shared = db.Column(Boolean, default=False)
     scoped_name = db.Column(db.SmallString, index=True)
@@ -167,7 +167,7 @@ class Service(AbstractBase):
             .join(vs.models["user"], pool_alias.users)
             .filter(vs.models["access"].access_type.contains(mode))
             .filter(vs.models["user"].name == user.name)
-            .filter(cls.default_access != "admin")
+            .filter(cls.admin_only == false())
         )
         originals_alias = aliased(vs.models["service"])
         owners_alias = aliased(vs.models["user"])
@@ -371,7 +371,7 @@ class Run(AbstractBase):
             .join(service_alias, vs.models["pool"].services)
             .filter(vs.models["user"].name == user.name)
             .filter(vs.models["access"].access_type.contains(mode))
-            .filter(service_alias.default_access != "admin")
+            .filter(service_alias.admin_only == false())
             .with_entities(service_alias.id)
             .all()
         )
@@ -452,7 +452,7 @@ class Task(AbstractBase):
     __tablename__ = type = "task"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    default_access = db.Column(db.SmallString)
+    admin_only = db.Column(Boolean, default=False)
     description = db.Column(db.LargeString)
     creator = db.Column(db.SmallString)
     last_scheduled_by = db.Column(db.SmallString)
@@ -505,7 +505,7 @@ class Task(AbstractBase):
             .join(vs.models["user"], pool_alias.users)
             .filter(vs.models["access"].access_type.contains(mode))
             .filter(vs.models["user"].name == user.name)
-            .filter(cls.default_access != "admin")
+            .filter(cls.admin_only == false())
         )
 
     def _catch_request_exceptions(func):  # noqa: N805

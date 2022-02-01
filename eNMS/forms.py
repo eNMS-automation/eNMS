@@ -802,7 +802,7 @@ class TaskForm(BaseForm):
     form_type = HiddenField(default="task")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
-    admin_only = BooleanField("Admin Only")
+    admin_only = BooleanField("Admin Only", default=False)
     scheduling_mode = SelectField(
         "Scheduling Mode",
         choices=(("cron", "Crontab Scheduling"), ("standard", "Standard Scheduling")),

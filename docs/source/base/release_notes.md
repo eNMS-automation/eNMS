@@ -29,6 +29,7 @@ Version 4.2.0
   were exported even when "hierarchical display" was selected)
 - Add notification banner mechanism
 - Remove default_access property, replace with "admin_only" boolean. Impact on migration.
+- Make "run_service" rest api endpoint default to async True
 
 Tests:
 - Performances (SQL Column function init)
@@ -41,6 +42,7 @@ Migration:
 - Refresh rates in settings.json to be udpated (e.g 10s instead of 3 if RBAC is used)
 - Redis config in settings.json
 - In migration files, replace "default_access: admin" with "admin_only: true"
+- Warn user about REST API run service endpoint new default (True)
 
 Documentation update:
 - Redis config in settings.json

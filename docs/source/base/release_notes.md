@@ -28,6 +28,7 @@ Version 4.2.0
 - Fix export in bulk (the hierarchical display mode was not considered, all services inside a workflow
   were exported even when "hierarchical display" was selected)
 - Add notification banner mechanism
+- Remove default_access property, replace with "admin_only" boolean. Impact on migration.
 
 Tests:
 - Performances (SQL Column function init)
@@ -39,6 +40,7 @@ Migration:
 - Doc link in settings.json to be updated with custom doc links.
 - Refresh rates in settings.json to be udpated (e.g 10s instead of 3 if RBAC is used)
 - Redis config in settings.json
+- In migration files, replace "default_access: admin" with "admin_only: true"
 
 Documentation update:
 - Redis config in settings.json

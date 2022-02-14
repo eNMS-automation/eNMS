@@ -3,6 +3,7 @@ from flask_wtf import FlaskForm
 from pathlib import Path
 from re import M, sub
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
+from sqlalchemy.orm import load_only
 from wtforms import FormField
 
 from eNMS.database import db
@@ -76,7 +77,13 @@ class NetmikoBackupService(ConnectionService):
                 result = sub(
                     replacement["pattern"], replacement["replace_with"], result, flags=M
                 )
-            setattr(device, self.property, result)
+            device_with_deferred_data = (
+                db.query("device")
+                .options(load_only(self.property))
+                .filter_by(id=device.id)
+                .one()
+            )
+            setattr(device_with_deferred_data, self.property, result)
             with open(path / self.property, "w") as file:
                 file.write(result)
             setattr(device, f"last_{self.property}_status", "Success")

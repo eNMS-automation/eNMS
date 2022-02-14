@@ -86,6 +86,8 @@ class Device(Node):
     scrapli_driver = db.Column(db.TinyString, default="cisco_iosxe")
     netconf_driver = db.Column(db.TinyString, default="default")
     configuration = deferred(db.Column(db.LargeString, info={"log_change": False}))
+    operational_data = deferred(db.Column(db.LargeString, info={"log_change": False}))
+    specialized_data = deferred(db.Column(db.LargeString, info={"log_change": False}))
     gateways = relationship(
         "Gateway", secondary=db.device_gateway_table, back_populates="devices"
     )

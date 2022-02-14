@@ -54,6 +54,8 @@
       "access",
       "id",
       "configuration",
+      "operational_data",
+      "specialized_data",
       "services",
       "source_id",
       "source",
@@ -380,5 +382,5 @@
     "credential": ["enable_password", "password", "private_key"],
     "user": ["password"]
   },
-  "dont_serialize": { "device": ["configuration"] }
+  "dont_serialize": { "device": ["configuration", "operational_data", "specialized_data"] }
 }

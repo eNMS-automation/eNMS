@@ -498,8 +498,6 @@ class Database:
                 }[values.get("type", "str")],
                 **kwargs,
             )
-            if values.get("deferred", False):
-                column = deferred(column)
             if not values.get("serialize", True):
                 self.dont_serialize[model].append(property)
             if not values.get("migrate", True):

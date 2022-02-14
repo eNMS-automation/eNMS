@@ -52,7 +52,7 @@ class VariableStore:
         self.netconf_drivers = sorted(self.dualize(supported_devices_cfg))
         self.scrapli_drivers = CORE_PLATFORM_MAP
         self.timestamps = ("status", "update", "failure", "runtime", "duration")
-        self.configuration_properties = {"configuration": "Configuration"}
+        self.configuration_properties = {"configuration": "Configuration", "operational_data": "Operational Data", "specialized_data": "Specialized Data"}
 
     def _set_general_variables(self):
         self.field_class = {}

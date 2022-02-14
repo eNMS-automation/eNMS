@@ -30,11 +30,14 @@ Version 4.2.0
 - Add notification banner mechanism
 - Remove default_access property, replace with "admin_only" boolean. Impact on migration.
 - Make "run_service" rest api endpoint default to async True
+- Update netmiko and napalm Backup services to load deferred row before updating. Impact on both services.
 
 Tests:
 - Performances (SQL Column function init)
 - Export and re-import of workflows and top-level services
 - SSH Proxy / Jump Server mechanism (+ tie-breaker priority mechanism)
+- Netmiko and Napalm Backup Services, both with built-in properties (configuration, operational_data) and
+  custom properties coming from properties.json (such that "configuration" key is set to True)
 
 Migration:
 - Update all access with new GET / POST endpoints

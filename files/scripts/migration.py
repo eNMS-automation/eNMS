@@ -14,7 +14,7 @@ def update_property(project, value=None, types=None):
             objects = yaml.load(migration_file)
         for obj in objects:
             if instance_type == "service":
-                obj["priority"] += 10
+                obj["priority"] += 9
             else:
                 obj["scoped_name"] = obj["name"]
         with open(path / f"{instance_type}.yaml", "w") as migration_file:

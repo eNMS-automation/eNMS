@@ -615,7 +615,7 @@ class ServiceForm(BaseForm):
     waiting_time = IntegerField(
         "Time to Wait before next service is started (in seconds)", default=0
     )
-    priority = IntegerField("Priority", default=1)
+    priority = IntegerField("Priority", default=10)
     send_notification = BooleanField("Send a notification")
     send_notification_method = SelectField(
         "Notification Method",

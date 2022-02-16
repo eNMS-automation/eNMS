@@ -35,7 +35,7 @@ class Service(AbstractBase):
     scoped_name = db.Column(db.SmallString, index=True)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     description = db.Column(db.LargeString)
-    priority = db.Column(Integer, default=1)
+    priority = db.Column(Integer, default=10)
     number_of_retries = db.Column(Integer, default=0)
     time_between_retries = db.Column(Integer, default=10)
     max_number_of_retries = db.Column(Integer, default=100)

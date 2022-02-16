@@ -35,11 +35,14 @@ Version 4.2.0
 - Remove pathlib from requirements.txt
 - Update workflow algorithm to not add services to priority queue in DxD mode if all are discarded.
   Associated mail exchange: "Wrong number of devices execute"
-  Associated commit:
+  Associated commit: c957356afb1ea6044c58627be06b7d9cae448a10
     +++ b/eNMS/services/workflow/workflow.py
     @@ -164,7 +164,7 @@ class Workflow(Service):
     -                if tracking_bfs and not summary[edge_type]:
     +                if (tracking_bfs or device) and not summary[edge_type]:
+- Update Ansible Service to use custom path in cwd argument of subprocess.check_output.
+  Associated commit: 0257279b9b6ea51d247ca0e653362e6d8f65a075
+  Associated mail thread: "bug in ansible_playbook.py?"
 
 Tests:
 - Performances (SQL Column function init)
@@ -50,6 +53,7 @@ Tests:
 - Test the workflow traversal mechanism for all modes. In particular, tests the case discussed in
   mail thread "Wrong number of devices execute": all devices discarded. Using priorities to force order should
   no longer be required in such a case.
+- Tests ansible playbook service with custom path in settings.
 
 Migration:
 - Update all access with new GET / POST endpoints

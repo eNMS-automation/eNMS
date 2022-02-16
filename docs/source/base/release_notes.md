@@ -31,6 +31,7 @@ Version 4.2.0
 - Remove default_access property, replace with "admin_only" boolean. Impact on migration.
 - Make "run_service" rest api endpoint default to async True
 - Update netmiko and napalm Backup services to load deferred row before updating. Impact on both services.
+  Related commit: d00be21c971ce5251a608b2d436694a9c3427140 (new SQL query with load only in service run function)
 
 Tests:
 - Performances (SQL Column function init)

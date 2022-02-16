@@ -43,6 +43,7 @@ Version 4.2.0
 - Update Ansible Service to use custom path in cwd argument of subprocess.check_output.
   Associated commit: 0257279b9b6ea51d247ca0e653362e6d8f65a075
   Associated mail thread: "bug in ansible_playbook.py?"
+- Change default priority to 10 for services. Update of migration files required.
 
 Tests:
 - Performances (SQL Column function init)
@@ -62,6 +63,7 @@ Migration:
 - Redis config in settings.json
 - In migration files, replace "default_access: admin" with "admin_only: true"
 - Warn user about REST API run service endpoint new default (True)
+- Update service priority to "current priority + 10"
 
 Documentation update:
 - Redis config in settings.json

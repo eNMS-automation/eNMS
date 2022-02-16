@@ -63,7 +63,7 @@ Migration:
 - Redis config in settings.json
 - In migration files, replace "default_access: admin" with "admin_only: true"
 - Warn user about REST API run service endpoint new default (True)
-- Update service priority to "current priority + 10"
+- Update service priority to "current priority + 10" (see migration script in files / script)
 
 Documentation update:
 - Redis config in settings.json

@@ -2,7 +2,7 @@ from pathlib import Path
 from ruamel import yaml
 
 
-import_classes = ["service"]
+import_classes = ["device", "link", "service"]
 
 
 def update_property(project, value=None, types=None):

@@ -163,7 +163,7 @@ class Workflow(Service):
             for edge_type in ("success", "failure"):
                 if not tracking_bfs and edge_type != status:
                     continue
-                if tracking_bfs and not summary[edge_type]:
+                if (tracking_bfs or device) and not summary[edge_type]:
                     continue
                 for successor, edge in service.neighbors(
                     self, "destination", edge_type

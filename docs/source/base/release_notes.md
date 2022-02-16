@@ -33,6 +33,13 @@ Version 4.2.0
 - Update netmiko and napalm Backup services to load deferred row before updating. Impact on both services.
   Related commit: d00be21c971ce5251a608b2d436694a9c3427140 (new SQL query with load only in service run function)
 - Remove pathlib from requirements.txt
+- Update workflow algorithm to not add services to priority queue in DxD mode if all are discarded.
+  Associated mail exchange: "Wrong number of devices execute"
+  Associated commit:
+    +++ b/eNMS/services/workflow/workflow.py
+    @@ -164,7 +164,7 @@ class Workflow(Service):
+    -                if tracking_bfs and not summary[edge_type]:
+    +                if (tracking_bfs or device) and not summary[edge_type]:
 
 Tests:
 - Performances (SQL Column function init)
@@ -40,6 +47,9 @@ Tests:
 - SSH Proxy / Jump Server mechanism (+ tie-breaker priority mechanism)
 - Netmiko and Napalm Backup Services, both with built-in properties (configuration, operational_data) and
   custom properties coming from properties.json (such that "configuration" key is set to True)
+- Test the workflow traversal mechanism for all modes. In particular, tests the case discussed in
+  mail thread "Wrong number of devices execute": all devices discarded. Using priorities to force order should
+  no longer be required in such a case.
 
 Migration:
 - Update all access with new GET / POST endpoints

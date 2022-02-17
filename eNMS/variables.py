@@ -151,7 +151,7 @@ class VariableStore:
             "themes": self.themes,
             "table_properties": self.properties["tables"],
             "version": self.version,
-            "version_path": f"{self.version_path}/" if invalidate_cache else "",
+            "version_path": self.version_path if invalidate_cache else "version",
             "visualization": self.visualization,
         }
         self.form_context = {

@@ -16,7 +16,7 @@
 />
 {% endif %} {% endif %}
 <link
-  href="{{ url_for('static', filename='css/{}visualization.css'.format(version_path)) }}"
+  href="{{ url_for('static', filename='css/{}/visualization.css'.format(version_path)) }}"
   rel="stylesheet"
 />
 {% endblock stylesheets %} {% block content %}

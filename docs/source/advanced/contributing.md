@@ -11,11 +11,9 @@ eNMS uses:
 
 -   Black for python code formatting
 -   Flake8 to make sure that the python code is PEP8-compliant
--   Mypy for python static type hinting
 -   Prettier for javascript code formatting
 -   Eslint to make sure the javascript code is compliant with google
     standards for javascript
--   Pytest for the test suite.
 
 There is a dedicated `requirements_dev.txt` file to install these python
 libraries:

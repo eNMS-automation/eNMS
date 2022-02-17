@@ -150,6 +150,7 @@ class VariableStore:
             "themes": self.themes,
             "table_properties": self.properties["tables"],
             "version": self.version,
+            "version_path": self.version_path,
             "visualization": self.visualization,
         }
         self.form_context = {
@@ -167,6 +168,7 @@ class VariableStore:
     def _set_version(self):
         with open(self.path / "package.json") as package_file:
             self.version = load(package_file)["version"]
+            self.version_path = self.strip_all(self.version)
 
     def _set_plugins_settings(self):
         self.plugins_settings = {}

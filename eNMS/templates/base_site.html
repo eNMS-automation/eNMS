@@ -79,7 +79,10 @@
       href="{{ url_for('static', filename='lib/dropzone/dropzone.min.css') }}"
       rel="stylesheet"
     />
-    <link href="{{ url_for('static', filename='css/{}/main.css'.format(version_path)) }}" rel="stylesheet" />
+    <link
+      href="{{ url_for('static', filename='css/{}/main.css'.format(version_path)) }}"
+      rel="stylesheet"
+    />
     <link
       href="{{ url_for('static', filename='css/{}/themes/{}.css'.format(version_path, current_user.theme)) }}"
       rel="stylesheet"
@@ -339,7 +342,10 @@
     <script src="{{ url_for('static', filename='lib/select2/select2.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/jstree/jstree.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/dropzone/dropzone.min.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='js/{}/base.js'.format(version_path)) }}"></script>
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/{}/base.js'.format(version_path)) }}"
+    ></script>
     <script
       type="module"
       src="{{ url_for('static', filename='js/{}/administration.js'.format(version_path)) }}"

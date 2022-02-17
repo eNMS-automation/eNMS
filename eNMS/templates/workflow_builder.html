@@ -1,7 +1,10 @@
 {% extends "base_site.html" %} {% block title %} Workflow Builder {% endblock title %}
 {% block stylesheets %} {{ super() }}
 <link href="{{ url_for('static', filename='lib/vis/vis.min.css') }}" rel="stylesheet" />
-<link href="{{ url_for('static', filename='css/{}/builder.css'.format(version_path)) }}" rel="stylesheet" />
+<link
+  href="{{ url_for('static', filename='css/{}/builder.css'.format(version_path)) }}"
+  rel="stylesheet"
+/>
 {% endblock stylesheets %} {% block content %}
 <div class="controls">
   <div class="controls_mode navbar navbar-default navbar-color">

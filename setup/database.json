@@ -382,5 +382,7 @@
     "credential": ["enable_password", "password", "private_key"],
     "user": ["password"]
   },
-  "dont_serialize": { "device": ["configuration", "operational_data", "specialized_data"] }
+  "dont_serialize": {
+    "device": ["configuration", "operational_data", "specialized_data"]
+  }
 }

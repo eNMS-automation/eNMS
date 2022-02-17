@@ -3,7 +3,10 @@
   <head>
     <title>{{ error }}</title>
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
-    <link href="{{ url_for('static', filename='css/{}/error.css'.format(version_path)) }}" rel="stylesheet" />
+    <link
+      href="{{ url_for('static', filename='css/{}/error.css'.format(version_path)) }}"
+      rel="stylesheet"
+    />
     <link
       href="{{ url_for('static', filename='lib/bootstrap/css/bootstrap.min.css') }}"
       rel="stylesheet"

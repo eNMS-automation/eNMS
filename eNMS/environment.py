@@ -54,7 +54,8 @@ class Environment:
         self.init_logs()
         self.init_redis()
         self.init_connection_pools()
-        self.init_cache_invalidation()
+        if vs.settings["app"]["invalidate_cache"]:
+            self.init_cache_invalidation()
         self.ssh_port = -1
 
     def authenticate_user(self, **kwargs):

@@ -131,6 +131,7 @@ class VariableStore:
         self.service_run_count = defaultdict(int)
 
     def set_template_context(self):
+        invalidate_cache = self.settings["app"]["invalidate_cache"]
         self.template_context = {
             "configuration_properties": self.configuration_properties,
             "form_properties": self.form_properties,
@@ -150,7 +151,7 @@ class VariableStore:
             "themes": self.themes,
             "table_properties": self.properties["tables"],
             "version": self.version,
-            "version_path": self.version_path,
+            "version_path": f"{self.version_path}/" if invalidate_cache else "",
             "visualization": self.visualization,
         }
         self.form_context = {

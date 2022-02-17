@@ -1,7 +1,7 @@
 {% extends "base_site.html" %} {% block title %} Site Builder {% endblock title %} {%
 block stylesheets %} {{ super() }}
 <link href="{{ url_for('static', filename='lib/vis/vis.min.css') }}" rel="stylesheet" />
-<link href="{{ url_for('static', filename='css/{}/builder.css'.format(version_path)) }}" rel="stylesheet" />
+<link href="{{ url_for('static', filename='css/{}builder.css'.format(version_path)) }}" rel="stylesheet" />
 {% endblock stylesheets %} {% block content %}
 <div class="controls">
   <div class="controls_mode navbar navbar-default navbar-color">
@@ -223,6 +223,6 @@ block stylesheets %} {{ super() }}
 <script src="{{ url_for('static', filename='lib/vis/vis.min.js') }}"></script>
 <script
   type="module"
-  src="{{ url_for('static', filename='js/{}/siteBuilder.js'.format(version_path)) }}"
+  src="{{ url_for('static', filename='js/{}siteBuilder.js'.format(version_path)) }}"
 ></script>
 {% endblock javascripts %}

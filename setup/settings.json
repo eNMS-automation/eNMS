@@ -4,6 +4,7 @@
     "config_mode": "debug",
     "documentation_url": "https://enms.readthedocs.io/en/latest/",
     "git_repository": "git@github.com:afourmy/gitpython-test.git",
+    "invalidate_cache": false,
     "ip_address": "192.168.56.102",
     "plugin_path": "eNMS/plugins",
     "session_timeout_minutes": 30,

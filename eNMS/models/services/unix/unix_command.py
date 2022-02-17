@@ -39,7 +39,7 @@ class UnixCommandForm(ServiceForm):
         if admin_approved_error:
             self.admin_approved.errors.append(
                 (
-                    "You must untick the 'Approved by an Admin user'" 
+                    "You must untick the 'Approved by an Admin user'"
                     " box to be allowed to save that service."
                 )
             )

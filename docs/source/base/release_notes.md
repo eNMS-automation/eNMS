@@ -35,15 +35,15 @@ Version 4.2.0
   Related commit: d00be21c971ce5251a608b2d436694a9c3427140 (new SQL query with load only in service run function)
 - Remove pathlib from requirements.txt
 - Update workflow algorithm to not add services to priority queue in DxD mode if all are discarded.
-  Associated mail exchange: "Wrong number of devices execute"
-  Associated commit: c957356afb1ea6044c58627be06b7d9cae448a10
+  Related mail exchange: "Wrong number of devices execute"
+  Related commit: c957356afb1ea6044c58627be06b7d9cae448a10
     +++ b/eNMS/services/workflow/workflow.py
     @@ -164,7 +164,7 @@ class Workflow(Service):
     -                if tracking_bfs and not summary[edge_type]:
     +                if (tracking_bfs or device) and not summary[edge_type]:
 - Update Ansible Service to use custom path in cwd argument of subprocess.check_output.
-  Associated commit: 0257279b9b6ea51d247ca0e653362e6d8f65a075
-  Associated mail thread: "bug in ansible_playbook.py?"
+  Related commit: 0257279b9b6ea51d247ca0e653362e6d8f65a075
+  Related mail thread: "bug in ansible_playbook.py?"
 - Change default priority to 10 for services. Update of migration files required.
 - Implement Cache Invalidation mechanism so that javascript/css files are reloaded at each release.
   Cache invalidation is activatated by setting "invalidate_cache" to true in settings.json.
@@ -78,7 +78,11 @@ Migration:
 
 Documentation update:
 - Redis config in settings.json
-- Site Builder mechanism and 3D visualization of .dae files
+- New option in settings.json: invalidate_cache
+- New options in settings.json: refresh rates
+- New default for Run Service endpoint: asynchronous
+- Default access replaced by "Admin only"
+- Priority default value update
 
 Version 4.1.0
 -------------

@@ -41,12 +41,6 @@ that:
     
         `flake8 --config tests/linting/.flake8`
 
-    - mypy compliant
-
-        [Mypy](http://mypy-lang.org) adds static type hinting to Python for the whole project. 
-
-        `mypy --config-file tests/linting/mypy.ini`
-
 2. Candidate Javascript code is:
 
     - Prettier compliant

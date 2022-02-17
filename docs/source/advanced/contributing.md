@@ -39,7 +39,7 @@ that:
 
     - PEP8 (flake8) compliant
     
-        `flake8 --config tests/linting/.flake8`
+        `flake8 --config build/linting/.flake8`
 
 2. Candidate Javascript code is:
 

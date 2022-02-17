@@ -28,13 +28,7 @@ from sqlalchemy.exc import InvalidRequestError, OperationalError
 from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.ext.mutable import MutableDict, MutableList
-from sqlalchemy.orm import (
-    aliased,
-    configure_mappers,
-    deferred,
-    scoped_session,
-    sessionmaker,
-)
+from sqlalchemy.orm import aliased, configure_mappers, scoped_session, sessionmaker
 from sqlalchemy.orm.collections import InstrumentedList
 from sqlalchemy.types import JSON
 from time import sleep

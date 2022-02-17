@@ -48,6 +48,9 @@ Version 4.2.0
   Cache invalidation is activatated by setting "invalidate_cache" to true in settings.json.
   eNMS automatically renames the version folder in static / js and static / css to the version number
   stripped from its punctuation.
+- Add new check box "Approved by an Admin user" in the Unix Command service. That box must be ticked by
+  an admin user for the service to be allowed to run. A non-admin user cannot save a service if it is
+  ticked, meaning that each time a Unix Command service is edited, it must be re-appproved.
 
 Tests:
 - Performances (SQL Column function init)
@@ -61,6 +64,7 @@ Tests:
 - Tests ansible playbook service with custom path in settings.
 - Tests that static files are cached when settings / invalidate_cache is set to false, and that they are
   reloaded when it is set to true and the version is updated.
+- Test Unix Command Service admin approval restriction mechanism
 
 Migration:
 - Update all access with new GET / POST endpoints

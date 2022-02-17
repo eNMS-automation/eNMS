@@ -44,6 +44,10 @@ Version 4.2.0
   Associated commit: 0257279b9b6ea51d247ca0e653362e6d8f65a075
   Associated mail thread: "bug in ansible_playbook.py?"
 - Change default priority to 10 for services. Update of migration files required.
+- Implement Cache Invalidation mechanism so that javascript/css files are reloaded at each release.
+  Cache invalidation is activatated by setting "invalidate_cache" to true in settings.json.
+  eNMS automatically renames the version folder in static / js and static / css to the version number
+  stripped from its punctuation.
 
 Tests:
 - Performances (SQL Column function init)
@@ -55,6 +59,8 @@ Tests:
   mail thread "Wrong number of devices execute": all devices discarded. Using priorities to force order should
   no longer be required in such a case.
 - Tests ansible playbook service with custom path in settings.
+- Tests that static files are cached when settings / invalidate_cache is set to false, and that they are
+  reloaded when it is set to true and the version is updated.
 
 Migration:
 - Update all access with new GET / POST endpoints

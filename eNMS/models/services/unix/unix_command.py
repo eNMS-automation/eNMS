@@ -1,3 +1,4 @@
+from flask_login import current_user
 from subprocess import check_output
 from sqlalchemy import Boolean, ForeignKey, Integer
 
@@ -31,3 +32,15 @@ class UnixCommandForm(ServiceForm):
     form_type = HiddenField(default="unix_command_service")
     command = StringField(substitution=True)
     admin_approved = BooleanField("Approved by an Admin user", default=False)
+
+    def validate(self):
+        valid_form = super().validate()
+        admin_approved_error = not current_user.is_admin and self.admin_approved.data
+        if admin_approved_error:
+            self.admin_approved.errors.append(
+                (
+                    "You must untick the 'Approved by an Admin user'" 
+                    " box to be allowed to save that service."
+                )
+            )
+        return valid_form and not admin_approved_error

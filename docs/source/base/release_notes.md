@@ -6,6 +6,7 @@ Version 4.2.0
 
 - Add Site builder mechanism
 - Add 3D visualization of network devices
+- Extend Devices and Links with subclass / custom properties and a separate tab in the UI, the same way services work.
 - Remove deep_services function used for export, use service.children relationship instead.
 - Dont subclass SQLAlchemy Column following advice of SQLAlchemy creator.
 - Make corrupted edges deletion mechanism a troublehooting snippet instead of a button in the admin panel.

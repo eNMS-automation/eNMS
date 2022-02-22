@@ -1061,7 +1061,13 @@ class Runner:
             kwargs["strip_namespaces"] = self.strip_namespaces
         else:
             platform = device.scrapli_driver if self.use_device_driver else self.driver
-            kwargs.update({"transport": self.transport, "platform": platform})
+            kwargs.update({
+                "transport": self.transport,
+                "platform": platform,
+                "timeout_socket": self.timeout_socket,
+                "timeout_transport": self.timeout_transport,
+                "timeout_ops": self.timeout_ops,
+           })
         connection = connection_class(
             host=device.ip_address,
             auth_username=credentials["username"],

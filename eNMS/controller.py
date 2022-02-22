@@ -146,8 +146,8 @@ class Controller:
         constraint_property,
         **kwargs,
     ):
-        kwargs[constraint_property] = [target_id]
         target = db.fetch(target_type, id=target_id)
+        kwargs[constraint_property] = [target.name]
         if target.type == "pool" and not target.manually_defined:
             return {"alert": "Removing objects from a dynamic pool is an allowed."}
         instances = self.filtering(table, bulk="object", form=kwargs)

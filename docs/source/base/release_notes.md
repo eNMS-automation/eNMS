@@ -22,6 +22,7 @@ Version 4.2.0
 - Move tables refresh rate to settings.json to allow for custom refresh rates.
 - New "Category" property / mechanism for the drop-down list of the site and workflow builder.
 - Reinstate service selection with single left click (Ctrl no longer needed)
+- Visualization target mechanism (new property)
 - Remove pytest, coverage, and travis dependencies.
 - Reinstate single left click for node selection in workflow & site builder.
 - Remove most union subquery in rbac_filter because a union of query yields a CompoundSelect
@@ -76,7 +77,7 @@ Migration:
 - Warn user about REST API run service endpoint new default (True)
 - Update service priority to "current priority + 9" (see migration script in files / script)
 
-Documentation update:
+Documentation update needed for everything, in particular:
 - Redis config in settings.json
 - New option in settings.json: invalidate_cache
 - New options in settings.json: refresh rates

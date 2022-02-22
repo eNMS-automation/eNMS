@@ -53,6 +53,7 @@ Version 4.2.0
 - Add new check box "Approved by an Admin user" in the Unix Command service. That box must be ticked by
   an admin user for the service to be allowed to run. A non-admin user cannot save a service if it is
   ticked, meaning that each time a Unix Command service is edited, it must be re-appproved.
+- Add new timeout parameters for Scrapli service
 
 Tests:
 - Performances (SQL Column function init)

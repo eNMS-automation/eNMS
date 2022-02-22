@@ -9,7 +9,7 @@ Scrapli Project Documentation can be reviewed
 
 ## Main Parameters
 
-- `Commands`: Commands to be send to the device
+- `Commands`: Commands to be send to the device, each command on a separate line.
 - `Is Configuration`:  Should the device be put in config mode before
   issuing the commands?
 - `Driver`: Scrapli driver to use. Currently, it supports:
@@ -25,6 +25,13 @@ Scrapli Project Documentation can be reviewed
     - `system`: Wrapper around OpenSSH/System available SSH binary
     - `paramiko`: Wrapper around paramiko library
     - `ssh2`: Wrapper around ssh2-python library
+
+- `Socket Timeout`: When socket is created it is initially set with this timeout
+    
+- `Transport Timeout`: When system transport is selected, this is the timeout used.
+If ssh2 or paramiko are the selected the timeouts for each respective library is used.
+    
+- `Ops Timeout`: This timeout is used for individual operations (commands)
     
 ## Connection Parameters
 

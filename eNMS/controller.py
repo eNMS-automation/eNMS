@@ -107,7 +107,7 @@ class Controller:
             for node in nodes:
                 links |= set(node.get_neighbors("link"))
         for node in nodes:
-            if node in site.nodes or node == site:
+            if not node or node in site.nodes or node == site:
                 continue
             result["nodes"].append(node.serialized)
             site.nodes.append(node)

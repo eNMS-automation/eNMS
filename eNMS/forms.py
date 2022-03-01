@@ -533,7 +533,9 @@ class RestartWorkflowForm(BaseForm):
     action = "eNMS.workflowBuilder.restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
     start_services = HiddenField()
-    restart_runtime = SelectField("Restart Runtime", validate_choice=False)
+    restart_runtime = SelectField(
+        "Restart Runtime", [InputRequired()], validate_choice=False
+    )
     targets = SelectField(
         "Targets",
         choices=(

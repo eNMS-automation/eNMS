@@ -606,12 +606,17 @@ class Runner:
         change_log=False,
         logger=None,
         service_log=True,
+        allow_disable=True,
     ):
         try:
             log_level = int(self.main_run.service.log_level)
         except Exception:
             log_level = 1
-        if not log_level or severity not in vs.log_levels[log_level - 1 :]:
+        if (
+            logger != "security"
+            and allow_disable
+            and (not log_level or severity not in vs.log_levels[log_level - 1 :])
+        ):
             return
         if device:
             device_name = device if isinstance(device, str) else device.name

@@ -54,6 +54,8 @@ Version 4.2.0
   an admin user for the service to be allowed to run. A non-admin user cannot save a service if it is
   ticked, meaning that each time a Unix Command service is edited, it must be re-appproved.
 - Add new timeout parameters for Scrapli service
+- Always show security logs, even when logging is disabled. Add "allow_disable" (default: True) keyword argument
+  to log function to prevent logs from being disabled if necessary.
 
 Tests:
 - Performances (SQL Column function init)

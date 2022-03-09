@@ -42,8 +42,6 @@ class VariableStore:
         for setup_file in (self.path / "setup").iterdir():
             with open(setup_file, "r") as file:
                 setattr(self, setup_file.stem, load(file))
-        if self.settings["notification_banner"]["deactivate_on_restart"]:
-            self.settings["notification_banner"]["active"] = False
 
     def _set_automation_variables(self):
         self.ssh_sessions = {}

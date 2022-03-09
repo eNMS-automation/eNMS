@@ -270,8 +270,8 @@ export function loadTypes(model) {
 }
 
 function createNotificationBanner() {
-  if (!settings.notification_banner.active) return;
-  jsPanel.hint.create(settings.notification_banner.properties);
+  if (!parameters.banner_active) return;
+  jsPanel.hint.create(parameters.banner_properties);
 }
 
 export function openPanel({

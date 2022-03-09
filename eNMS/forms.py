@@ -984,6 +984,15 @@ class NapalmForm(ConnectionForm):
     }
 
 
+class ParametersForm(BaseForm):
+    form_type = HiddenField(default="parameters")
+    action = "eNMS.base.processData"
+    id = HiddenField()
+    banner_active = BooleanField()
+    banner_deactivate_on_restart = BooleanField()
+    banner_properties = JsonField()
+
+
 class NetmikoForm(ConnectionForm):
     form_type = HiddenField(default="netmiko")
     abstract_service = True

@@ -147,3 +147,12 @@ class Changelog(AbstractBase):
 
     def update(self, **kwargs):
         super().update(**{"time": vs.get_time(), **kwargs})
+
+
+class Parameters(AbstractBase):
+
+    __tablename__ = type = "parameters"
+    id = db.Column(Integer, primary_key=True)
+    banner_active = db.Column(Boolean)
+    banner_deactivate_on_restart = db.Column(Boolean)
+    banner_properties = db.Column(db.Dict)

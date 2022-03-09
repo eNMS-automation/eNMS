@@ -81,7 +81,7 @@ class Database:
         self.configure_model_events(env)
         if env.detect_cli():
             return
-        first_init = not db.fetch("user", allow_none=True, name="admin")
+        first_init = not self.fetch("user", allow_none=True, name="admin")
         if first_init:
             admin_user = vs.models["user"](name="admin", is_admin=True)
             self.session.add(admin_user)
@@ -98,11 +98,23 @@ class Database:
                     "status": "Up",
                 },
             )
+            parameters = self.factory(
+                "parameters",
+                **{
+                    f"banner_{property}": vs.settings["notification_banner"][property]
+                    for property in ("active", "deactivate_on_restart", "properties")
+                },
+            )
+        self.session.commit()
         for run in self.fetch(
             "run", all_matches=True, allow_none=True, status="Running"
         ):
             run.status = "Aborted (RELOAD)"
             run.service.status = "Idle"
+        parameters = self.fetch("parameters")
+        if parameters.banner_deactivate_on_restart:
+            parameters.banner_active = False
+        self.session.commit()
         return first_init
 
     def create_metabase(self):

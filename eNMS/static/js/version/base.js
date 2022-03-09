@@ -12,6 +12,7 @@ JSONEditor: false
 moment: false
 NProgress: false
 page: false
+parameters: false
 rbac: false
 relationships: false
 subtypes: false

@@ -56,6 +56,8 @@ Version 4.2.0
 - Add new timeout parameters for Scrapli service
 - Always show security logs, even when logging is disabled. Add "allow_disable" (default: True) keyword argument
   to log function to prevent logs from being disabled if necessary.
+- Add new 'deactivate_rbac_on_read' property in rbac.json, under 'advanced' key. Set to true by default.
+  When true, eNMS no longers applies rbac for reading from the database. (=> better performances)
 
 Tests:
 - Performances (SQL Column function init)

@@ -58,6 +58,8 @@ Version 4.2.0
   to log function to prevent logs from being disabled if necessary.
 - Add new 'deactivate_rbac_on_read' property in rbac.json, under 'advanced' key. Set to true by default.
   When true, eNMS no longers applies rbac for reading from the database. (=> better performances)
+- Make the vendor, operating_system and model properties a custom list for devices and links, and category for
+  sites and workflows. The drop-down list choices can be configured in properties.json > property_list key.
 
 Tests:
 - Performances (SQL Column function init)

@@ -29,7 +29,7 @@ class CustomApp:
     def parse_configuration_property(self, device, property, value=None):
         if not value:
             value = getattr(device, property)
-        if device.operating_system == "eos" and property == "configuration":
+        if device.operating_system == "EOS" and property == "configuration":
             value = sub(r"(username.*secret) (.*)", "\g<1> ********", value)
         return value
 

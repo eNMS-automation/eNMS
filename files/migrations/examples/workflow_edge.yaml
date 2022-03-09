@@ -1304,13 +1304,13 @@
   label: success, name: '2021-12-30 10:30:11.496504', source: '[GET Endpoints query
     and token] Query Device - Washington', subtype: success, type: workflow_edge,
   workflow: GET Endpoints query and token}
-- {color: green, destination: '[GET Endpoints query and token] Query Device - OS eos',
+- {color: green, destination: '[GET Endpoints query and token] Query Device - OS EOS',
   label: success, name: '2021-12-30 10:51:49.275620', source: '[GET Endpoints query
     and token] Query Device - NonExisting', subtype: success, type: workflow_edge,
   workflow: GET Endpoints query and token}
 - {color: green, destination: '[GET Endpoints query and token] Get Token', label: success,
   name: '2021-12-30 10:56:24.181911', source: '[GET Endpoints query and token] Query
-    Device - OS eos', subtype: success, type: workflow_edge, workflow: GET Endpoints
+    Device - OS EOS', subtype: success, type: workflow_edge, workflow: GET Endpoints
     query and token}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-12-30 10:56:25.486031',
   source: '[GET Endpoints query and token] Get Token', subtype: success, type: workflow_edge,

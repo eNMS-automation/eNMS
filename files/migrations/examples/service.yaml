@@ -1236,7 +1236,7 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  operating_system: eos
+  operating_system: EOS
   owners: []
   owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
@@ -1348,7 +1348,7 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  operating_system: eos
+  operating_system: EOS
   owners: []
   owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
@@ -1458,7 +1458,7 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  operating_system: eos
+  operating_system: EOS
   owners: []
   owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
@@ -1571,7 +1571,7 @@
   negative_logic: true
   notification_header: ''
   number_of_retries: 2
-  operating_system: eos
+  operating_system: EOS
   owners: []
   owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
@@ -3182,7 +3182,7 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  operating_system: eos
+  operating_system: EOS
   owners: []
   owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
@@ -3291,7 +3291,7 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  operating_system: eos
+  operating_system: EOS
   owners: []
   owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
@@ -3400,7 +3400,7 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  operating_system: eos
+  operating_system: EOS
   owners: []
   owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
@@ -3699,7 +3699,7 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  operating_system: eos
+  operating_system: EOS
   owners: []
   owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
@@ -6542,7 +6542,7 @@
       content: "Test \"Run on failure\" post-processing\r\nby setting success to False.\r\
         \nPostprocessing set the variables \"should be there\":\r\nthis variable should\
         \ be in the results.\r\n\r\nBesides, the results should contain:\r\n- func_result\
-        \ set to eos (Washington) / IOS (Chicago)\r\n- cls_result set to Washington\
+        \ set to EOS (Washington) / IOS (Chicago)\r\n- cls_result set to Washington\
         \ / Chicago"
       positions: [559, 16]
     15b463f1-e8ba-4d61-a84f-cf39d1434533:
@@ -20166,7 +20166,7 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  operating_system: eos
+  operating_system: EOS
   owners: []
   owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
@@ -20255,7 +20255,7 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  operating_system: eos
+  operating_system: EOS
   optional_args: {}
   owners: []
   owners_access: ''
@@ -21331,7 +21331,7 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  operating_system: eos
+  operating_system: EOS
   owners: []
   owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
@@ -25383,10 +25383,10 @@
       positions: [367, -95]
     2cd79427-3e98-4039-9417-dcd0dd5a3d1c:
       alignment: left
-      content: "Query to query/device?operating_system=eos\r\nReturns a list of all\
-        \ devices as dictionaries\r\nwhere the operating system is set to \"eos\"\
+      content: "Query to query/device?operating_system=EOS\r\nReturns a list of all\
+        \ devices as dictionaries\r\nwhere the operating system is set to \"EOS\"\
         .\r\nUses post-processing to check all results have\r\nthe operating system\
-        \ set to \"eos\"."
+        \ set to \"EOS\"."
       positions: [225, 251]
     6ac4682f-9fd2-496a-b95f-73f8c14d158b:
       alignment: left
@@ -25437,7 +25437,7 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[GET Endpoints query and token] Query
       Device - Washington', '[GET Endpoints query and token] Query Device - NonExisting',
-    '[GET Endpoints query and token] Query Device - OS eos', '[GET Endpoints query
+    '[GET Endpoints query and token] Query Device - OS EOS', '[GET Endpoints query
       and token] Get Token']
   shared: false
   skip: {}
@@ -25666,7 +25666,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[GET Endpoints query and token] Query Device - OS eos'
+  name: '[GET Endpoints query and token] Query Device - OS EOS'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -25690,15 +25690,15 @@
     'REST API: GET Endpoints query and token': *id444
     'REST API: GET Endpoints query, result and token': *id444
   postprocessing: "results[\"success\"] = all(\r\n  device[\"operating_system\"] ==\
-    \ \"eos\"\r\n  for device in results[\"result\"]\r\n)"
+    \ \"EOS\"\r\n  for device in results[\"result\"]\r\n)"
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
   reply_to: ''
   reserved: false
-  rest_url: http://192.168.56.102/rest/query/device?operating_system=eos
+  rest_url: http://192.168.56.102/rest/query/device?operating_system=EOS
   run_method: per_device
-  scoped_name: Query Device - OS eos
+  scoped_name: Query Device - OS EOS
   send_notification: false
   send_notification_method: mail
   shared: false

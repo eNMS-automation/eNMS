@@ -1090,6 +1090,29 @@
       }
     ]
   },
+  "property_list": {
+    "device": {
+      "model": [
+        "Arista",
+        "Cisco",
+        "EOS",
+        "Linux",
+        "Juniper"
+      ],
+      "operating_system": [
+        "IOS",
+        "IOS-XE",
+        "IOS-XR",
+        "Junos",
+        "EOS",
+        "Linux"
+      ]
+    },
+    "workflow": {
+      "category": [
+      ]
+    }
+  },
   "tables_additional": {
     "pool": [
       "device_number",

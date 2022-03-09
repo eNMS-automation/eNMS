@@ -305,6 +305,7 @@
     <script>
       window.eNMS = {};
       const page = "{{ endpoint }}";
+      const versionPath = "{{ version_path }}";
       const user = {{ user|tojson|safe }};
       const configurationProperties = {{ configuration_properties|tojson|safe }};
       const formProperties = {{ form_properties|tojson|safe }};

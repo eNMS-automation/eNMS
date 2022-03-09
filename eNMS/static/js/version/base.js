@@ -16,6 +16,7 @@ rbac: false
 relationships: false
 subtypes: false
 user: false
+versionPath: false
 */
 
 import { openDebugPanel, showCredentialPanel } from "./administration.js";
@@ -1032,12 +1033,12 @@ function fullScreen() {
 }
 
 function switchTheme(theme) {
-  $(`link[href="/static/css/themes/${currentTheme}.css"]`).remove();
+  $(`link[href="/static/css/${versionPath}/themes/${currentTheme}.css"]`).remove();
   currentTheme = theme;
   let cssLink = document.createElement("link");
   cssLink.rel = "stylesheet";
   cssLink.type = "text/css";
-  cssLink.href = `/static/css/themes/${theme}.css`;
+  cssLink.href = `/static/css/${versionPath}/themes/${theme}.css`;
   document.getElementsByTagName("head")[0].appendChild(cssLink);
   call({ url: `/switch_theme/${user.id}/${theme}` });
 }

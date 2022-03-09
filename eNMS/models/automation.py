@@ -168,6 +168,7 @@ class Service(AbstractBase):
             .filter(vs.models["access"].access_type.contains(mode))
             .filter(vs.models["user"].name == user.name)
             .filter(cls.admin_only == false())
+            .group_by(cls.id)
         )
         originals_alias = aliased(vs.models["service"])
         owners_alias = aliased(vs.models["user"])

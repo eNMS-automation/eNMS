@@ -7,13 +7,7 @@ from sqlalchemy.schema import UniqueConstraint
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
 from eNMS.forms import ServiceForm
-from eNMS.fields import (
-    BooleanField,
-    HiddenField,
-    InstanceField,
-    SelectField,
-    StringField,
-)
+from eNMS.fields import BooleanField, HiddenField, InstanceField, SelectField
 from eNMS.models.automation import Service
 from eNMS.runner import Runner
 from eNMS.variables import vs

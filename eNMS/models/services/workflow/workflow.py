@@ -193,7 +193,10 @@ class Workflow(Service):
 
 class WorkflowForm(ServiceForm):
     form_type = HiddenField(default="workflow")
-    category = StringField("Category")
+    category = SelectField(
+        "Category",
+        choices=vs.dualize(vs.properties["property_list"]["workflow"]["category"]),
+    )
     close_connection = BooleanField(default=False)
     run_method = SelectField(
         "Run Method",

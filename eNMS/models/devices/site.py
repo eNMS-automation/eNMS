@@ -2,11 +2,12 @@ from sqlalchemy import ForeignKey, Integer
 from sqlalchemy.orm import relationship
 from wtforms.widgets import TextArea
 
-from eNMS.database import db
+from eNMS.database import db, vs
 from eNMS.forms import BaseForm
 from eNMS.fields import (
     HiddenField,
     MultipleInstanceField,
+    SelectField,
     StringField,
 )
 from eNMS.models.inventory import Node
@@ -50,7 +51,10 @@ class SiteForm(BaseForm):
     form_type = HiddenField(default="site")
     id = HiddenField()
     name = StringField("Name")
-    category = StringField("Category")
+    category = SelectField(
+        "Category",
+        choices=vs.dualize(vs.properties["property_list"]["site"]["category"]),
+    )
     longitude = StringField("Longitude", default=0.0)
     latitude = StringField("Latitude", default=0.0)
     sites = MultipleInstanceField("Sites", model="site")

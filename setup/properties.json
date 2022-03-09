@@ -1125,8 +1125,28 @@
         "Cisco"
       ]
     },
+    "site": {
+      "category": [
+        "Display",
+        "Editing",
+        "Subsite"
+      ]
+    },
     "workflow": {
       "category": [
+        "Basics",
+        "Global Variables",
+        "Iteration Mechanism",
+        "Parameterized Form",
+        "Payload",
+        "RBAC",
+        "REST API",
+        "Run Methods",
+        "SSH Connection",
+        "Scalability",
+        "Services",
+        "Skip Mechanism",
+        "Superworkflows"
       ]
     }
   },

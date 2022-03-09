@@ -3622,7 +3622,7 @@
   latitude: '0.0'
   location: ''
   longitude: '0.0'
-  model: EOS
+  model: Arista
   name: Router behind Gateway 1
   napalm_driver: eos
   netconf_driver: default
@@ -3817,7 +3817,7 @@
   latitude: '0.0'
   location: ''
   longitude: '0.0'
-  model: EOS
+  model: Arista
   name: Router behind Gateway 1, 2 and 3
   napalm_driver: eos
   netconf_driver: default

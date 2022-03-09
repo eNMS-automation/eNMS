@@ -1095,7 +1095,6 @@
       "model": [
         "Arista",
         "Cisco",
-        "EOS",
         "Linux",
         "Juniper"
       ],
@@ -1112,6 +1111,18 @@
         "Cisco",
         "Juniper",
         "Linux"
+      ]
+    },
+    "link": {
+      "model": [
+        "10G",
+        "40G",
+        "100G",
+        "400G"
+      ],
+      "vendor": [
+        "Ciena",
+        "Cisco"
       ]
     },
     "workflow": {

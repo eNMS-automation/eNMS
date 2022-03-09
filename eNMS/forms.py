@@ -477,8 +477,6 @@ class ObjectForm(BaseForm):
     description = StringField("Description")
     subtype = StringField("Subtype")
     location = StringField("Location")
-    vendor = StringField("Vendor")
-    model = StringField("Model")
 
 
 class PoolForm(BaseForm):
@@ -916,12 +914,19 @@ class DeviceForm(ObjectForm):
     )
     ip_address = StringField("IP address")
     port = IntegerField("Port", default=22)
+    vendor = SelectField(
+        "Vendor",
+        choices=vs.dualize(vs.properties["property_list"]["device"]["vendor"]),
+    )
+    model = SelectField(
+        "Model",
+        choices=vs.dualize(vs.properties["property_list"]["device"]["model"]),
+    )
     operating_system = SelectField(
         "Operating System",
         choices=vs.dualize(
             vs.properties["property_list"]["device"]["operating_system"]
         ),
-        default="IOS",
     )
     os_version = StringField("OS Version")
     longitude = StringField("Longitude", default=0.0)
@@ -946,6 +951,14 @@ class DeviceForm(ObjectForm):
 class LinkForm(ObjectForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="link")
+    vendor = SelectField(
+        "Vendor",
+        choices=vs.dualize(vs.properties["property_list"]["link"]["vendor"]),
+    )
+    model = SelectField(
+        "Model",
+        choices=vs.dualize(vs.properties["property_list"]["link"]["model"]),
+    )
     source = InstanceField("Source", model="device")
     destination = InstanceField("Destination", model="device")
     color = StringField("Color")

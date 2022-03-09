@@ -1106,6 +1106,12 @@
         "Junos",
         "EOS",
         "Linux"
+      ],
+      "vendor": [
+        "Arista",
+        "Cisco",
+        "Juniper",
+        "Linux"
       ]
     },
     "workflow": {

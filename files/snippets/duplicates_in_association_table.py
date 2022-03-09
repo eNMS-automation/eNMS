@@ -7,8 +7,5 @@
 # flake8: noqa
 
 pool = db.factory("pool", name="A pool")
-pool.devices = [
-    db.fetch("device", name="Washington")
-    for _ in range(5)
-]
+pool.devices = [db.fetch("device", name="Washington") for _ in range(5)]
 db.session.commit()

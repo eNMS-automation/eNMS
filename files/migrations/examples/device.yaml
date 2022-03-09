@@ -3040,7 +3040,7 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  vendor: linux
+  vendor: Linux
 - access_groups: ''
   creator: ''
   custom_json:

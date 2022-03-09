@@ -54,6 +54,7 @@ class SiteForm(BaseForm):
     category = SelectField(
         "Category",
         choices=vs.dualize(vs.properties["property_list"]["site"]["category"]),
+        validate_choice=False,
     )
     longitude = StringField("Longitude", default=0.0)
     latitude = StringField("Latitude", default=0.0)

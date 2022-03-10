@@ -80,10 +80,13 @@ class AbstractBase(db.base):
                     if current_value:
                         value = vs.dictionary_recursive_merge(value, current_value)
             setattr(self, property, value)
-        if not kwargs.get("update_pools") or not self.pool_model:
+        if not kwargs.get("update_pools"):
             return
-        for pool in db.fetch_all("pool", rbac=None):
-            if pool.manually_defined:
+        if getattr(self, "class_type") not in ("user", "service"):
+            return
+        rbac_pools_kwargs = {"rbac": None, "manually_defined": False, "admin_only": True}
+        for pool in db.fetch_all("pool", **rbac_pools_kwargs):
+            if pool.manually_defined or not pool.admin_only:
                 continue
             match = pool.match_instance(self)
             if match and self not in getattr(pool, f"{self.class_type}s"):

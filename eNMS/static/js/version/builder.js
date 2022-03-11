@@ -74,7 +74,7 @@ export function configureGraph(newInstance, graph, options) {
       const node = this.getNodeAt(properties.pointer.DOM);
       const edge = this.getEdgeAt(properties.pointer.DOM);
       if (typeof node !== "undefined" && !ends.has(node)) {
-        network.selectNodes([node, ...network.getSelectedNodes()]);
+        if (!network.getSelectedNodes().includes(node)) network.selectNodes([node]);
         $(".menu-entry ").hide();
         $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
         selectedObject = nodes.get(node);

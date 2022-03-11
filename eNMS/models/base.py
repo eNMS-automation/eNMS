@@ -82,7 +82,7 @@ class AbstractBase(db.base):
             setattr(self, property, value)
         if not kwargs.get("update_pools"):
             return
-        if getattr(self, "class_type") not in ("user", "service"):
+        if getattr(self, "class_type", None) not in ("user", "service"):
             return
         rbac_pools_kwargs = {"rbac": None, "manually_defined": False, "admin_only": True}
         for pool in db.fetch_all("pool", **rbac_pools_kwargs):

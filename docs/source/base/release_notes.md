@@ -60,6 +60,7 @@ Version 4.2.0
   When true, eNMS no longers applies rbac for reading from the database. (=> better performances)
 - Make the vendor, operating_system and model properties a custom list for devices and links, and category for
   sites and workflows. The drop-down list choices can be configured in properties.json > property_list key.
+- Add support for renaming objects from the REST API (with key "new_name")
 
 Tests:
 - Performances (SQL Column function init)

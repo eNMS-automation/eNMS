@@ -174,9 +174,12 @@ class RestApi:
                 result["failure"].append((instance, "Name is missing"))
                 continue
             try:
+                new_name = instance.pop("new_name", None)
                 object_data = controller.objectify(instance_type, instance)
                 object_data["update_pools"] = instance.get("update_pools", True)
                 instance = db.factory(instance_type, **object_data)
+                if new_name:
+                    instance.name = new_name
                 result["success"].append(instance.name)
             except Exception:
                 result["failure"].append((instance, format_exc()))

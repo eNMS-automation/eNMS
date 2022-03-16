@@ -50,8 +50,8 @@ class TopologyImportService(Service):
                     "location": str(device.site),
                     "vendor": str(device.device_type.manufacturer),
                     "operating_system": str(device.platform),
-                    "longitude": str(nb.dcim.sites.get(name=device.site).longitude),
                     "latitude": str(nb.dcim.sites.get(name=device.site).latitude),
+                    "longitude": str(nb.dcim.sites.get(name=device.site).longitude),
                 },
             )
 
@@ -101,8 +101,8 @@ class TopologyImportService(Service):
                     "operating_system": device["os"],
                     "os_version": device["version"],
                     "location": device["location"],
-                    "longitude": device["lng"],
                     "latitude": device["lat"],
+                    "longitude": device["lng"],
                 },
             )
 

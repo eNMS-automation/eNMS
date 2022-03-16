@@ -57,8 +57,8 @@ class Node(Object):
     id = db.Column(Integer, ForeignKey(Object.id), primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     positions = db.Column(db.Dict, info={"log_change": False})
-    longitude = db.Column(db.TinyString, default="0.0")
     latitude = db.Column(db.TinyString, default="0.0")
+    longitude = db.Column(db.TinyString, default="0.0")
     sites = relationship("Site", secondary=db.node_site_table, back_populates="nodes")
 
     def update(self, **kwargs):

@@ -929,8 +929,8 @@ class DeviceForm(ObjectForm):
         ),
     )
     os_version = StringField("OS Version")
-    longitude = StringField("Longitude", default=0.0)
     latitude = StringField("Latitude", default=0.0)
+    longitude = StringField("Longitude", default=0.0)
     napalm_driver = SelectField(
         "NAPALM Driver", choices=vs.napalm_drivers, default="ios"
     )

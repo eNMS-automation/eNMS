@@ -56,7 +56,7 @@ class SiteForm(BaseForm):
         choices=vs.dualize(vs.properties["property_list"]["site"]["category"]),
         validate_choice=False,
     )
-    longitude = StringField("Longitude", default=0.0)
     latitude = StringField("Latitude", default=0.0)
+    longitude = StringField("Longitude", default=0.0)
     sites = MultipleInstanceField("Sites", model="site")
     description = StringField(widget=TextArea(), render_kw={"rows": 6})

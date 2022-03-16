@@ -61,6 +61,8 @@ Version 4.2.0
 - Make the vendor, operating_system and model properties a custom list for devices and links, and category for
   sites and workflows. The drop-down list choices can be configured in properties.json > property_list key.
 - Add support for renaming objects from the REST API (with key "new_name")
+- Add limit to maximum number of nodes that can be displayed in site builder". Configurable via
+  visualization.json > Site Builder > max_allowed_nodes
 
 Tests:
 - Performances (SQL Column function init)

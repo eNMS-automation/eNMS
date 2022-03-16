@@ -93,7 +93,6 @@ export function switchToSite(path, direction) {
 }
 
 export function displaySite(site) {
-  console.log(visualization["Site Builder"].max_allowed_nodes)
   if (site.nodes.length > visualization["Site Builder"].max_allowed_nodes) {
     return notify("The site contains too many nodes to be displayed.", "error", 5);
   }

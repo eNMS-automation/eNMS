@@ -1156,8 +1156,8 @@
       "netconf_driver",
       "ip_address",
       "port",
-      "longitude",
       "latitude",
+      "longitude",
       "property1"
     ],
     "link": [

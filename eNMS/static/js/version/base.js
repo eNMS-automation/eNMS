@@ -265,6 +265,7 @@ export function loadTypes(model) {
   const subtypeModel = model == "edge" ? "link" : model;
   $(`#${model}-type-list`).selectpicker({ liveSearch: true });
   for (const [subtype, name] of Object.entries(subtypes[subtypeModel])) {
+    if (page == "device_table" && subtype == "site") continue;
     $(`#${model}-type-list`).append(new Option(name, subtype));
   }
   $(`#${model}-type-list`).selectpicker("refresh");

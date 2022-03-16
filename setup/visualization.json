@@ -190,6 +190,7 @@
       "router": "Router",
       "server": "Server",
       "switch": "Switch"
-    }
+    },
+    "max_allowed_nodes": 500
   }
 }

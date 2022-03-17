@@ -80,11 +80,15 @@ class AbstractBase(db.base):
                     if current_value:
                         value = vs.dictionary_recursive_merge(value, current_value)
             setattr(self, property, value)
-        if not kwargs.get("update_pools"):
+        if getattr(self, "class_type", None) != "user" and (
+            not kwargs.get("update_pools") or not kwargs.get("must_be_new", False)
+        ):
             return
-        if getattr(self, "class_type", None) not in ("user", "service"):
-            return
-        rbac_pools_kwargs = {"rbac": None, "manually_defined": False, "admin_only": True}
+        rbac_pools_kwargs = {
+            "rbac": None,
+            "manually_defined": False,
+            "admin_only": True,
+        }
         for pool in db.fetch_all("pool", **rbac_pools_kwargs):
             if pool.manually_defined or not pool.admin_only:
                 continue

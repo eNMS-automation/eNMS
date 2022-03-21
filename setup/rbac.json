@@ -60,8 +60,8 @@
           "endpoint": "/link_table",
           "rbac": "access"
         },
-        "Sites": {
-          "endpoint": "/site_table",
+        "Networks": {
+          "endpoint": "/network_table",
           "rbac": "access"
         }
       }
@@ -78,14 +78,14 @@
           "endpoint": "/logical_view",
           "rbac": "access"
         },
-        "Site Builder": {
-          "endpoint": "/site_builder",
+        "Network Builder": {
+          "endpoint": "/network_builder",
           "rbac": "access"
         }
       }
     },
     "Automation": {
-      "icon": "sitemap",
+      "icon": "networkmap",
       "rbac": "access",
       "pages": {
         "Services": {
@@ -139,7 +139,7 @@
     "/parameterized_form": "all",
     "/instance_deletion_form": "access",
     "/link_table": "access",
-    "/site_builder": "access",
+    "/network_builder": "access",
     "/login": "none",
     "/logout": "all",
     "/logs_form": "access",
@@ -157,7 +157,7 @@
     "/service_table": "access",
     "/session_log_form": "access",
     "/session_table": "access",
-    "/site_table": "access",
+    "/network_table": "access",
     "/table_form": "access",
     "/task_table": "access",
     "/terminal": "access",
@@ -170,7 +170,7 @@
   "post_requests": {
     "/add_edge": "access",
     "/add_instances_in_bulk": "access",
-    "/add_objects_to_site": "access",
+    "/add_objects_to_network": "access",
     "/bulk_deletion": "access",
     "/bulk_edit": "access",
     "/bulk_removal": "access",
@@ -209,7 +209,7 @@
     "/get_view_topology": "access",
     "/get_service_state": "access",
     "/get_session_log": "access",
-    "/get_site_state": "access",
+    "/get_network_state": "access",
     "/get_top_level_instances": "access",
     "/get_tree_files": "access",
     "/get_visualization_pools": "access",

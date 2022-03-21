@@ -18,12 +18,12 @@ import {
   showInstancePanel,
 } from "./base.js";
 import {
-  drawSiteEdge,
-  drawSiteNode,
-  getSiteState,
-  switchToSite,
-  updateSiteRightClickBindings,
-} from "./siteBuilder.js";
+  drawNetworkEdge,
+  drawNetworkNode,
+  getNetworkState,
+  switchToNetwork,
+  updateNetworkRightClickBindings,
+} from "./networkBuilder.js";
 import {
   drawIterationEdge,
   drawWorkflowEdge,
@@ -36,8 +36,8 @@ import {
 } from "./workflowBuilder.js";
 
 const container = document.getElementById("network");
-const type = page.includes("site") ? "site" : "workflow";
-const nodeType = type == "site" ? "node" : "service";
+const type = page.includes("network") ? "network" : "workflow";
+const nodeType = type == "network" ? "node" : "service";
 let currentLabel;
 let mousePosition;
 let network;
@@ -193,7 +193,7 @@ function deleteSelection() {
     data: selection,
     callback: function (updateTime) {
       network.deleteSelected();
-      const edgeType = type == "site" ? "links" : "edges";
+      const edgeType = type == "network" ? "links" : "edges";
       instance[`${nodeType}s`] = instance[`${nodeType}s`].filter(
         (n) => !selection.nodes.includes(n.id)
       );
@@ -216,7 +216,7 @@ function openDeletionPanel() {
   } else if (nodeSelection == 1 || (!nodeSelection && edgeSelection == 1)) {
     deleteSelection();
   } else {
-    const edgeType = type == "site" ? "link" : "edge";
+    const edgeType = type == "network" ? "link" : "edge";
     showConfirmationPanel({
       id: "builder_deletion",
       title: `Deletion from ${type}`,
@@ -356,16 +356,16 @@ export function createNewNode(mode) {
 }
 
 function drawNode(node) {
-  return type == "site" ? drawSiteNode(node) : drawWorkflowNode(node);
+  return type == "network" ? drawNetworkNode(node) : drawWorkflowNode(node);
 }
 
 function drawEdge(edge) {
-  return type == "site" ? drawSiteEdge(edge) : drawWorkflowEdge(edge);
+  return type == "network" ? drawNetworkEdge(edge) : drawWorkflowEdge(edge);
 }
 
 export function switchMode(mode, noNotification) {
   const oldMode = currentMode;
-  const newLinkMode = type == "site" ? "create_link" : $("#edge-type-list").val();
+  const newLinkMode = type == "network" ? "create_link" : $("#edge-type-list").val();
   currentMode = mode || (currentMode == "motion" ? newLinkMode : "motion");
   if ((oldMode == "motion" || currentMode == "motion") && oldMode != currentMode) {
     $("#mode-icon").toggleClass("glyphicon-move").toggleClass("glyphicon-random");
@@ -377,7 +377,7 @@ export function switchMode(mode, noNotification) {
   } else {
     network.setSelection({ nodes: [], edges: [] });
     network.addEdgeMode();
-    const linkLog = type == "site" ? "link" : `'${currentMode}' Edge.`;
+    const linkLog = type == "network" ? "link" : `'${currentMode}' Edge.`;
     notification = `Mode: Creation of ${linkLog}.`;
   }
   if (!noNotification) notify(notification, "success", 5);
@@ -398,16 +398,16 @@ export function processBuilderData(newInstance) {
     switchTo(`${newInstance.id}`);
   } else if (
     (type == "workflow" && !instance.type) ||
-    (type == "site" && newInstance.type in subtypes.link)
+    (type == "network" && newInstance.type in subtypes.link)
   ) {
     edges.update(drawEdge(newInstance));
     network.addEdgeMode();
   } else if (
     (type == "workflow" && newInstance.type in subtypes.service) ||
-    (type == "site" && newInstance.type in subtypes.node)
+    (type == "network" && newInstance.type in subtypes.node)
   ) {
     if (!newInstance[`${type}s`].some((w) => w.id == instance.id)) return;
-    const property = type == "site" ? "nodes" : "services";
+    const property = type == "network" ? "nodes" : "services";
     let index = instance[property].findIndex((s) => s.id == newInstance.id);
     nodes.update(drawNode(newInstance));
     if (index == -1) {
@@ -421,11 +421,11 @@ export function processBuilderData(newInstance) {
 }
 
 function switchTo(...args) {
-  (type == "site" ? switchToSite : switchToWorkflow)(...args);
+  (type == "network" ? switchToNetwork : switchToWorkflow)(...args);
 }
 
 function updateRightClickBindings() {
-  (type == "site" ? updateSiteRightClickBindings : updateWorkflowRightClickBindings)();
+  (type == "network" ? updateNetworkRightClickBindings : updateWorkflowRightClickBindings)();
 }
 
 export function initBuilder() {
@@ -441,7 +441,7 @@ export function initBuilder() {
     .on("change", function () {
       switchMode(this.value);
     });
-  if (type == "site") {
+  if (type == "network") {
     loadTypes("node");
     loadTypes("edge");
   } else {
@@ -493,7 +493,7 @@ export function initBuilder() {
         });
         getWorkflowState(true, true);
       } else {
-        getSiteState(true, true);
+        getNetworkState(true, true);
       }
     },
   });
@@ -571,7 +571,7 @@ function getTree() {
                   icon: "glyphicon glyphicon-file",
                 },
                 workflow: {
-                  icon: "fa fa-sitemap",
+                  icon: "fa fa-networkmap",
                 },
               },
             });

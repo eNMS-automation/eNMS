@@ -1,4 +1,4 @@
-{% extends "base_site.html" %} {% block title %} Site Builder {% endblock title %} {%
+{% extends "base_site.html" %} {% block title %} Network Builder {% endblock title %} {%
 block stylesheets %} {{ super() }}
 <link href="{{ url_for('static', filename='lib/vis/vis.min.css') }}" rel="stylesheet" />
 <link
@@ -60,7 +60,7 @@ block stylesheets %} {{ super() }}
   >
     <div style="width: 100%; margin: 0px;">
       <select
-        id="current-site"
+        id="current-network"
         class="form-control"
         data-dropdown-align-right="true"
         data-size="20"
@@ -69,32 +69,32 @@ block stylesheets %} {{ super() }}
     <ul class="pagination" style="margin: 0px; padding-top: 10px;">
       <li>
         <a
-          onclick="action['Edit site']()"
-          data-tooltip="Edit Site"
+          onclick="action['Edit network']()"
+          data-tooltip="Edit Network"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-edit cursor"></span
         ></a>
       </li>
       <li>
         <a
-          onclick="action['Duplicate site']()"
-          data-tooltip="Duplicate Site"
+          onclick="action['Duplicate network']()"
+          data-tooltip="Duplicate Network"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-duplicate"></span
         ></a>
       </li>
       <li>
         <a
-          onclick="action['Create site']()"
-          data-tooltip="Create Top Level Site"
+          onclick="action['Create network']()"
+          data-tooltip="Create Top Level Network"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-plus"></span
         ></a>
       </li>
       <li>
         <a
-          onclick="action['Add to Site']()"
-          data-tooltip="Add to Site"
+          onclick="action['Add to Network']()"
+          data-tooltip="Add to Network"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-book"></span
         ></a>
@@ -115,7 +115,7 @@ block stylesheets %} {{ super() }}
       <li>
         <a
           onclick="eNMS.builder.getTree()"
-          data-tooltip="Site Tree"
+          data-tooltip="Network Tree"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-tree-conifer"></span
         ></a>
@@ -152,7 +152,7 @@ block stylesheets %} {{ super() }}
       <li id="left-arrow">
         <a
           onclick="action['Backward']()"
-          data-tooltip="Previous Site"
+          data-tooltip="Previous Network"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-chevron-left"></span
         ></a>
@@ -160,7 +160,7 @@ block stylesheets %} {{ super() }}
       <li id="up-arrow">
         <a
           onclick="action['Upward']()"
-          data-tooltip="Switch to Parent Site"
+          data-tooltip="Switch to Parent Network"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-chevron-up"></span
         ></a>
@@ -168,7 +168,7 @@ block stylesheets %} {{ super() }}
       <li id="right-arrow">
         <a
           onclick="action['Forward']()"
-          data-tooltip="Next Site"
+          data-tooltip="Next Network"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-chevron-right"></span
         ></a>
@@ -199,8 +199,8 @@ block stylesheets %} {{ super() }}
   <li class="menu-entry node-selection">
     <a tabindex="-1" href="#">Run Service</a>
   </li>
-  <li class="menu-entry node-selection site-selection">
-    <a tabindex="-1" href="#">Enter site</a>
+  <li class="menu-entry node-selection network-selection">
+    <a tabindex="-1" href="#">Enter network</a>
   </li>
   <li class="menu-entry divider node-selection">&nbsp</li>
   <li class="menu-entry node-selection edge-selection">
@@ -226,6 +226,6 @@ block stylesheets %} {{ super() }}
 <script src="{{ url_for('static', filename='lib/vis/vis.min.js') }}"></script>
 <script
   type="module"
-  src="{{ url_for('static', filename='js/{}/siteBuilder.js'.format(version_path)) }}"
+  src="{{ url_for('static', filename='js/{}/networkBuilder.js'.format(version_path)) }}"
 ></script>
 {% endblock javascripts %}

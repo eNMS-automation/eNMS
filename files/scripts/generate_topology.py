@@ -13,7 +13,7 @@ DEVICE_TYPES = (
     "regenerator",
     "router",
     "server",
-    "site",
+    "network",
     "switch",
 )
 

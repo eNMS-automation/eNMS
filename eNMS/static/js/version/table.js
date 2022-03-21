@@ -19,7 +19,7 @@ import {
   userIsActive,
 } from "./base.js";
 import { exportServices } from "./automation.js";
-import { updateSiteRightClickBindings } from "./siteBuilder.js";
+import { updateNetworkRightClickBindings } from "./networkBuilder.js";
 
 export let tables = {};
 export let tableInstances = {};
@@ -558,18 +558,18 @@ tables.device = class DeviceTable extends Table {
   }
 };
 
-tables.site = class SiteTable extends Table {
+tables.network = class NetworkTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
     row.name =
-      row.type == "site"
-        ? `<b><a href="#" onclick="eNMS.siteBuilder.filterSiteTable(
+      row.type == "network"
+        ? `<b><a href="#" onclick="eNMS.networkBuilder.filterNetworkTable(
       '${this.id}', ${row.id})">${row.name}</a></b>`
         : row.name;
     row.links =
-      row.type == "site"
+      row.type == "network"
         ? `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-      'link', ${row.instance}, {parent: '${this.id}', from: 'sites',
+      'link', ${row.instance}, {parent: '${this.id}', from: 'networks',
       to: 'links'})">Links</a></b>`
         : "No links";
     return row;
@@ -581,13 +581,13 @@ tables.site = class SiteTable extends Table {
 
   postProcessing(...args) {
     super.postProcessing(...args);
-    updateSiteRightClickBindings();
+    updateNetworkRightClickBindings();
   }
 
   get controls() {
     return [
       this.columnDisplay(),
-      `<input type="hidden" id="site-filtering" name="site-filtering"></input>`,
+      `<input type="hidden" id="network-filtering" name="network-filtering"></input>`,
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
@@ -638,11 +638,11 @@ tables.site = class SiteTable extends Table {
   }
 
   get filteringConstraints() {
-    const siteFiltering = $("#site-filtering").val();
-    if (siteFiltering?.length) {
-      return { sites: [siteFiltering] };
+    const networkFiltering = $("#network-filtering").val();
+    if (networkFiltering?.length) {
+      return { networks: [networkFiltering] };
     } else {
-      return { sites_filter: "empty", type: "site" };
+      return { networks_filter: "empty", type: "network" };
     }
   }
 };
@@ -790,7 +790,7 @@ tables.pool = class PoolTable extends Table {
   addRow(properties) {
     let row = super.addRow(properties);
     row.objectNumber = "";
-    for (const model of ["device", "link", "service", "site", "user"]) {
+    for (const model of ["device", "link", "service", "network", "user"]) {
       row.objectNumber += `${row[`${model}_number`]} ${model}s`;
       if (model !== "user") row.objectNumber += " - ";
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(

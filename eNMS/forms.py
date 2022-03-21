@@ -309,9 +309,9 @@ class AddServiceForm(BaseForm):
     search = StringField()
 
 
-class AddToSiteForm(BaseForm):
-    action = "eNMS.siteBuilder.addObjectsToSite"
-    form_type = HiddenField(default="add_to_site")
+class AddToNetworkForm(BaseForm):
+    action = "eNMS.networkBuilder.addObjectsToNetwork"
+    form_type = HiddenField(default="add_to_network")
     nodes = MultipleInstanceField("Nodes", model="node")
     add_connected_links = BooleanField("Add connected links", default=False)
     links = MultipleInstanceField("Links", model="link")
@@ -472,7 +472,7 @@ class ObjectForm(BaseForm):
     id = HiddenField()
     name = StringField("Name")
     type = StringField("Type")
-    sites = MultipleInstanceField("Sites", model="site")
+    networks = MultipleInstanceField("Networks", model="network")
     access_groups = StringField("Groups")
     description = StringField("Description")
     subtype = StringField("Subtype")
@@ -491,7 +491,7 @@ class PoolForm(BaseForm):
 
     @classmethod
     def form_init(cls):
-        cls.models = ("device", "link", "service", "user", "site")
+        cls.models = ("device", "link", "service", "user", "network")
         for model in cls.models:
             setattr(cls, f"{model}_properties", vs.properties["filtering"][model])
             for property in vs.properties["filtering"][model]:

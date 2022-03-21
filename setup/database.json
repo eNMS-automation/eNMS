@@ -40,7 +40,7 @@
     "device",
     "link",
     "service",
-    "site",
+    "network",
     "workflow_edge",
     "task",
     "access",
@@ -62,7 +62,7 @@
       "destination",
       "destination_id",
       "pools",
-      "sites",
+      "networks",
       "target_services",
       "tasks",
       "users"
@@ -71,7 +71,7 @@
       "access",
       "id",
       "pools",
-      "sites",
+      "networks",
       "users",
       "destination_id",
       "destination_name",
@@ -88,7 +88,7 @@
       "link_number",
       "service_number",
       "services",
-      "site_number",
+      "network_number",
       "user_number"
     ],
     "service": [
@@ -105,7 +105,7 @@
       "tasks",
       "edges"
     ],
-    "site": ["id"],
+    "network": ["id"],
     "task": [
       "access",
       "id",
@@ -144,24 +144,24 @@
           "foreign_key": "gateway"
         }
       },
-      "link_site": {
+      "link_network": {
         "model1": {
           "column": "link_id",
           "foreign_key": "link"
         },
         "model2": {
-          "column": "site_id",
-          "foreign_key": "site"
+          "column": "network_id",
+          "foreign_key": "network"
         }
       },
-      "node_site": {
+      "node_network": {
         "model1": {
           "column": "node_id",
           "foreign_key": "node"
         },
         "model2": {
-          "column": "site_id",
-          "foreign_key": "site"
+          "column": "network_id",
+          "foreign_key": "network"
         }
       },
       "pool_device": {
@@ -196,14 +196,14 @@
           "foreign_key": "service"
         }
       },
-      "pool_site": {
+      "pool_network": {
         "model1": {
           "column": "pool_id",
           "foreign_key": "pool"
         },
         "model2": {
-          "column": "site_id",
-          "foreign_key": "site"
+          "column": "network_id",
+          "foreign_key": "network"
         }
       },
       "pool_user": {

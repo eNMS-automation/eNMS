@@ -28,7 +28,7 @@ class Object(AbstractBase):
 
     def delete(self):
         number = f"{self.class_type}_number"
-        if self.class_type == "site":
+        if self.class_type == "network":
             return
         for pool in self.pools:
             setattr(pool, number, getattr(pool, number) - 1)
@@ -59,7 +59,7 @@ class Node(Object):
     positions = db.Column(db.Dict, info={"log_change": False})
     latitude = db.Column(db.TinyString, default="0.0")
     longitude = db.Column(db.TinyString, default="0.0")
-    sites = relationship("Site", secondary=db.node_site_table, back_populates="nodes")
+    networks = relationship("Network", secondary=db.node_network_table, back_populates="nodes")
 
     def update(self, **kwargs):
         if self.positions and "positions" in kwargs:
@@ -245,7 +245,7 @@ class Link(Object):
     )
     destination_name = association_proxy("destination", "name")
     pools = relationship("Pool", secondary=db.pool_link_table, back_populates="links")
-    sites = relationship("Site", secondary=db.link_site_table, back_populates="links")
+    networks = relationship("Network", secondary=db.link_network_table, back_populates="links")
     __table_args__ = (UniqueConstraint(name, source_id, destination_id),)
 
     @property
@@ -282,7 +282,7 @@ class Link(Object):
 class Pool(AbstractBase):
 
     __tablename__ = type = "pool"
-    models = ("device", "link", "service", "site", "user")
+    models = ("device", "link", "service", "network", "user")
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     manually_defined = db.Column(Boolean, default=False)

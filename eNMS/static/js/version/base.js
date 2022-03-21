@@ -25,12 +25,12 @@ import { creationMode, initBuilder, instance, processBuilderData } from "./build
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
 import { initVisualization } from "./visualization.js";
-import { showLinkPanel, showNodePanel, updateSitePanel } from "./siteBuilder.js";
+import { showLinkPanel, showNodePanel, updateNetworkPanel } from "./networkBuilder.js";
 import { showServicePanel } from "./workflowBuilder.js";
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 export let editors = {};
-const pageHistory = ["workflow_builder", "service_table", "site_table"];
+const pageHistory = ["workflow_builder", "service_table", "network_table"];
 export let history = pageHistory.includes(page) ? [""] : [];
 export let historyPosition = page.includes("table") ? 0 : -1;
 export let jsonEditors = {};
@@ -265,7 +265,7 @@ export function loadTypes(model) {
   const subtypeModel = model == "edge" ? "link" : model;
   $(`#${model}-type-list`).selectpicker({ liveSearch: true });
   for (const [subtype, name] of Object.entries(subtypes[subtypeModel])) {
-    if (page == "device_table" && subtype == "site") continue;
+    if (page == "device_table" && subtype == "network") continue;
     $(`#${model}-type-list`).append(new Option(name, subtype));
   }
   $(`#${model}-type-list`).selectpicker("refresh");
@@ -698,7 +698,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
           $(`#${type}-workflows`).append(new Option(instance.name, instance.name));
           $(`#${type}-workflows`).val(instance.name).trigger("change");
         }
-        if (page == "site_builder") updateSitePanel(type);
+        if (page == "network_builder") updateNetworkPanel(type);
       }
       if (isService) loadScript(`../static/js/services/${type}.js`, id);
       const property = isService ? "scoped_name" : "name";
@@ -766,7 +766,7 @@ function processInstance(type, instance) {
 
 function processData(type, id) {
   if (type in subtypes.service || type in subtypes.node || type in subtypes.link) {
-    const relation = type in subtypes.service ? "workflow" : "site";
+    const relation = type in subtypes.service ? "workflow" : "network";
     const property = id ? `#${type}-${relation}s-${id}` : `#${type}-${relation}s`;
     $(property).prop("disabled", false);
   }

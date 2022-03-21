@@ -92,13 +92,13 @@ class Controller:
         self.update_rbac(*instances)
         return {"number": len(instances), "target": target.base_properties}
 
-    def add_objects_to_site(self, site_id, **kwargs):
-        site = db.fetch("site", id=site_id)
+    def add_objects_to_network(self, network_id, **kwargs):
+        network = db.fetch("network", id=network_id)
         result = {"nodes": [], "links": []}
         nodes = set(db.objectify("node", kwargs["nodes"]))
         links = set(db.objectify("link", kwargs["links"]))
         for pool in db.objectify("pool", kwargs["pools"]):
-            nodes |= set(pool.devices) | set(pool.sites)
+            nodes |= set(pool.devices) | set(pool.networks)
             links |= set(pool.links)
         if kwargs["add_connected_nodes"]:
             for link in links:
@@ -107,17 +107,17 @@ class Controller:
             for node in nodes:
                 links |= set(node.get_neighbors("link"))
         for node in nodes:
-            if not node or node in site.nodes or node == site:
+            if not node or node in network.nodes or node == network:
                 continue
             result["nodes"].append(node.serialized)
-            site.nodes.append(node)
+            network.nodes.append(node)
         for link in links:
-            if link in site.links:
+            if link in network.links:
                 continue
-            if link.source not in site.nodes or link.destination not in site.nodes:
+            if link.source not in network.nodes or link.destination not in network.nodes:
                 continue
             result["links"].append(link.serialized)
-            site.links.append(link)
+            network.links.append(link)
         return result
 
     def bulk_deletion(self, table, **kwargs):
@@ -289,7 +289,7 @@ class Controller:
         for node_id in selection["nodes"]:
             if isinstance(node_id, str):
                 instance.labels.pop(node_id)
-            elif type == "site":
+            elif type == "network":
                 instance.nodes.remove(db.fetch("node", id=node_id))
             else:
                 service = db.fetch("service", id=node_id)
@@ -595,12 +595,12 @@ class Controller:
     def get_session_log(self, session_id):
         return db.fetch("session", id=session_id).content
 
-    def get_site_state(self, path, runtime=None):
-        site = db.fetch("site", id=path.split(">")[-1], allow_none=True)
-        if not site:
+    def get_network_state(self, path, runtime=None):
+        network = db.fetch("network", id=path.split(">")[-1], allow_none=True)
+        if not network:
             raise db.rbac_error
         return {
-            "site": site.to_dict(include=["nodes", "links"]),
+            "network": network.to_dict(include=["nodes", "links"]),
             "device_results": {
                 result.device_id: result.success
                 for result in db.fetch_all("result", parent_runtime=runtime)
@@ -805,7 +805,7 @@ class Controller:
                     return
                 elif instance.scoped_name == "Placeholder" and len(path_id) > 1:
                     instance = db.fetch(type, id=path_id[1])
-            child_property = "nodes" if type == "site" else "services"
+            child_property = "nodes" if type == "network" else "services"
             color = "FF1694" if getattr(instance, "shared", False) else "6666FF"
             return {
                 "data": {"path": path, **instance.base_properties},
@@ -1082,7 +1082,7 @@ class Controller:
         instance = db.fetch(type, allow_none=True, id=id, rbac="edit")
         if not instance:
             return
-        relation_type = "node" if type == "site" else "service"
+        relation_type = "node" if type == "network" else "service"
         for id, position in kwargs.items():
             new_position = [position["x"], position["y"]]
             if "-" not in id:
@@ -1232,7 +1232,7 @@ class Controller:
                     kwargs[arg] = kwargs[arg].strip()
             if kwargs["must_be_new"]:
                 kwargs["creator"] = kwargs["user"] = getattr(current_user, "name", "")
-                for builder_type in ("workflow", "site"):
+                for builder_type in ("workflow", "network"):
                     if not kwargs.get(f"{builder_type}s"):
                         continue
                     builder_id = kwargs[f"{builder_type}s"][0]

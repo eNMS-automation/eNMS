@@ -16,7 +16,7 @@
         "router": [18, 12],
         "server": [18, 12],
         "switch": [18, 12],
-        "site": [22, 22]
+        "network": [22, 22]
       },
       "layers": {
         "osm": "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
@@ -180,7 +180,7 @@
       }
     }
   },
-  "Site Builder": {
+  "Network Builder": {
     "display_nodes_as_images": false,
     "max_allowed_nodes": 500,
     "nodes": {

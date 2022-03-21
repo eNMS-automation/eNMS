@@ -13,19 +13,19 @@ from eNMS.fields import (
 from eNMS.models.inventory import Node
 
 
-class Site(Node):
+class Network(Node):
 
-    __tablename__ = class_type = "site"
-    __mapper_args__ = {"polymorphic_identity": "site"}
-    pretty_name = "Site"
+    __tablename__ = class_type = "network"
+    __mapper_args__ = {"polymorphic_identity": "network"}
+    pretty_name = "Network"
     parent_type = "node"
     category = db.Column(db.SmallString)
-    icon = db.Column(db.TinyString, default="site")
+    icon = db.Column(db.TinyString, default="network")
     id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
     labels = db.Column(db.Dict, info={"log_change": False})
-    nodes = relationship("Node", secondary=db.node_site_table, back_populates="sites")
-    links = relationship("Link", secondary=db.link_site_table, back_populates="sites")
-    pools = relationship("Pool", secondary=db.pool_site_table, back_populates="sites")
+    nodes = relationship("Node", secondary=db.node_network_table, back_populates="networks")
+    links = relationship("Link", secondary=db.link_network_table, back_populates="networks")
+    pools = relationship("Pool", secondary=db.pool_network_table, back_populates="networks")
 
     def duplicate(self, clone=None):
         for property in ("labels", "nodes", "links"):
@@ -46,17 +46,17 @@ class Site(Node):
             node.positions[self.name] = node.positions[old_name]
 
 
-class SiteForm(BaseForm):
+class NetworkForm(BaseForm):
     action = "eNMS.base.processData"
-    form_type = HiddenField(default="site")
+    form_type = HiddenField(default="network")
     id = HiddenField()
     name = StringField("Name")
     category = SelectField(
         "Category",
-        choices=vs.dualize(vs.properties["property_list"]["site"]["category"]),
+        choices=vs.dualize(vs.properties["property_list"]["network"]["category"]),
         validate_choice=False,
     )
     latitude = StringField("Latitude", default=0.0)
     longitude = StringField("Longitude", default=0.0)
-    sites = MultipleInstanceField("Sites", model="site")
+    networks = MultipleInstanceField("Networks", model="network")
     description = StringField(widget=TextArea(), render_kw={"rows": 6})

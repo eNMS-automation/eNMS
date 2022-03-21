@@ -24,7 +24,7 @@ import {
   serializeForm,
   showInstancePanel,
 } from "./base.js";
-import { site } from "./siteBuilder.js";
+import { network } from "./networkBuilder.js";
 import { refreshTable, tableInstances, tables } from "./table.js";
 import {
   currentRuntime,
@@ -619,8 +619,8 @@ export function runLogic(result) {
       const option = `<option value='${result.runtime}'>${result.runtime}</option>`;
       $("#current-runtime").append(option).val(result.runtime).selectpicker("refresh");
     }
-  } else if (page == "site_builder") {
-    site.runtime = result.runtime;
+  } else if (page == "network_builder") {
+    network.runtime = result.runtime;
   }
   $(`#${result.service.type}-${result.service.id}`).remove();
 }

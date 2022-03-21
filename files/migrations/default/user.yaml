@@ -24,7 +24,7 @@
   name: admin
   pages: [Network, Events, Configurations, Tasks, Servers, Services, Plugin 1, Links,
     Devices, Groups, Dashboard, Workflow Builder, Plugin 2, Pools, Sessions, Changelog,
-    Sites, Results, Users, Submenu]
+    Networks, Results, Users, Submenu]
   post_requests: [/get_tree_files, /get_device_network_data, /update, /update_pool,
     /delete_corrupted_edges, /get_all, /get_cluster_status, /import_service, /task_action,
     /calendar_init, /topology_import, /run_service, /copy_service_in_workflow, /get_top_level_workflows,

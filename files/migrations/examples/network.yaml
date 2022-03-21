@@ -19,26 +19,26 @@
   model: ''
   name: Top-level Devices and Links
   nodes: [Router 1, Router 2, Router 3]
-  pools: [Everything, All Sites]
+  pools: [Everything, All Networks]
   positions: {}
-  sites: []
+  networks: []
   subtype: ''
-  type: site
+  type: network
   vendor: ''
 - access_groups: ''
-  category: Subsite
+  category: Subnetwork
   creator: admin
   description: ''
-  icon: site
+  icon: network
   labels:
     ebac22df-1242-4dcd-90b0-fbeeee517991:
       alignment: left
-      content: "- Enter subsite 1 and subsite 2 and make sure all of them have the\
+      content: "- Enter subnetwork 1 and subnetwork 2 and make sure all of them have the\
         \ expected content.\r\n- Test the backward, forward and upward navigation\
-        \ buttons.\r\n- Test the Site Tree to select any node, including a node that\
-        \ is in a different site:\r\nthe view should immediately switch to the site\
-        \ of the selected node.\r\n- Test using site as a teleport: Subsite 1 contains\
-        \ Subsite 2 and vice-versa,\r\nto switch from one to the other and back."
+        \ buttons.\r\n- Test the Network Tree to select any node, including a node that\
+        \ is in a different network:\r\nthe view should immediately switch to the network\
+        \ of the selected node.\r\n- Test using network as a teleport: Subnetwork 1 contains\
+        \ Subnetwork 2 and vice-versa,\r\nto switch from one to the other and back."
       positions: [-310, -212]
   last_modified: '2022-01-13 14:59:24.690428'
   latitude: '0.0'
@@ -46,64 +46,64 @@
   location: ''
   longitude: '0.0'
   model: ''
-  name: Subsite and Teleport Mechanism
-  nodes: [Subsite 2, Subsite 1]
-  pools: [Everything, All Sites]
+  name: Subnetwork and Teleport Mechanism
+  nodes: [Subnetwork 2, Subnetwork 1]
+  pools: [Everything, All Networks]
   positions: {}
-  sites: []
+  networks: []
   subtype: ''
-  type: site
+  type: network
   vendor: ''
 - access_groups: ''
   category: ''
   creator: admin
   description: ''
-  icon: site
+  icon: network
   labels:
     6eb6d97f-31c8-4a2a-8142-8c1427cea64d:
       alignment: left
-      content: "This subsite should contain\r\n- three routers, \"Subsite 1 - R1-3\"\
-        \r\n- three links between each pair of routers, \"Subsite 1 - L1-3\""
+      content: "This subnetwork should contain\r\n- three routers, \"Subnetwork 1 - R1-3\"\
+        \r\n- three links between each pair of routers, \"Subnetwork 1 - L1-3\""
       positions: [51, -231]
   last_modified: '2022-01-03 12:55:19.074280'
   latitude: '0.0'
-  links: [Subsite 1 - L1, Subsite 1 - L2, Subsite 1 - L3]
+  links: [Subnetwork 1 - L1, Subnetwork 1 - L2, Subnetwork 1 - L3]
   location: ''
   longitude: '0.0'
   model: ''
-  name: Subsite 1
-  nodes: [Subsite 2, Subsite 1 - R1, Subsite 1 - R2, Subsite 1 - R3]
-  pools: [Everything, All Sites]
+  name: Subnetwork 1
+  nodes: [Subnetwork 2, Subnetwork 1 - R1, Subnetwork 1 - R2, Subnetwork 1 - R3]
+  pools: [Everything, All Networks]
   positions:
-    'Site 2: Subsite': &id001 [-558, -27]
-    'Site 2: Subsite and Teleport Mechanism': *id001
-    Subsite 2: [-15, 43]
-    Subsite and Teleport Mechanism: *id001
-  sites: [Subsite and Teleport Mechanism, Subsite 2]
+    'Network 2: Subnetwork': &id001 [-558, -27]
+    'Network 2: Subnetwork and Teleport Mechanism': *id001
+    Subnetwork 2: [-15, 43]
+    Subnetwork and Teleport Mechanism: *id001
+  networks: [Subnetwork and Teleport Mechanism, Subnetwork 2]
   subtype: ''
-  type: site
+  type: network
   vendor: ''
 - access_groups: ''
   category: Editing
   creator: admin
   description: ''
-  icon: site
+  icon: network
   labels:
     6bc3e996-eb39-4d52-9294-15cdd7d10f92:
       alignment: left
-      content: "Tests the creation, editing and deletion of sites and the nodes inside\
+      content: "Tests the creation, editing and deletion of networks and the nodes inside\
         \ it.\r\n- Create three devices: 1 Device, 1 Router and 1 Gateway. The default\
         \ icon for the Device and Router should be a router,\r\nbut it should a host\
         \ (computer) for the Gateway.\r\n- Create links between them, including Ethernet\
         \ Link and Link.\r\n- Edit the name of a node and the name of a link: the\
-        \ name must be instantly\r\nupdated.\r\n- Edit the name of the site and refresh:\
-        \ check that the positions are the same (the \"update\" position of the Site\
+        \ name must be instantly\r\nupdated.\r\n- Edit the name of the network and refresh:\
+        \ check that the positions are the same (the \"update\" position of the Network\
         \ class is replacing old with new positions).\r\n- Delete a device: check\
-        \ that the two connected links are also deleted from the site.\r\nCheck that\
-        \ these objects still exist in the inventory: deleting from a site should\
+        \ that the two connected links are also deleted from the network.\r\nCheck that\
+        \ these objects still exist in the inventory: deleting from a network should\
         \ not delete the original objects.\r\n- Use the right-click multiple selection\
-        \ rectangle to delete the remaining objects.\r\n- Delete the site itself from\
-        \ the Site table."
+        \ rectangle to delete the remaining objects.\r\n- Delete the network itself from\
+        \ the Network table."
       positions: [227, -507]
   last_modified: '2022-01-13 14:59:33.685691'
   latitude: '0.0'
@@ -113,59 +113,59 @@
   model: ''
   name: Creation, Edit and Deletion
   nodes: []
-  pools: [All Sites, Everything]
+  pools: [All Networks, Everything]
   positions: {}
-  sites: []
+  networks: []
   subtype: ''
-  type: site
+  type: network
   vendor: ''
 - access_groups: ''
   category: ''
   creator: admin
   description: ''
-  icon: site
+  icon: network
   labels:
     56c77f3e-481c-476d-a045-1120b3cb0cc2:
       alignment: left
-      content: "This subsite should contain\r\n- two gateways, \"Subsite 2 - G1-2\"\
-        \r\n- one link between them, \"Subsite 2 - L1\""
+      content: "This subnetwork should contain\r\n- two gateways, \"Subnetwork 2 - G1-2\"\
+        \r\n- one link between them, \"Subnetwork 2 - L1\""
       positions: [4, -181]
   last_modified: '2022-01-03 12:55:37.570662'
   latitude: '0.0'
-  links: [Subsite 2 - L1]
+  links: [Subnetwork 2 - L1]
   location: ''
   longitude: '0.0'
   model: ''
-  name: Subsite 2
-  nodes: [Subsite 1, Subsite 2 - G1, Subsite 2 - G2]
-  pools: [Everything, All Sites]
+  name: Subnetwork 2
+  nodes: [Subnetwork 1, Subnetwork 2 - G1, Subnetwork 2 - G2]
+  pools: [Everything, All Networks]
   positions:
-    'Site 2: Subsite': &id002 [-144, -36]
-    'Site 2: Subsite and Teleport Mechanism': *id002
-    Subsite 1: [-2, -48]
-    Subsite and Teleport Mechanism: *id002
-  sites: [Subsite 1, Subsite and Teleport Mechanism]
+    'Network 2: Subnetwork': &id002 [-144, -36]
+    'Network 2: Subnetwork and Teleport Mechanism': *id002
+    Subnetwork 1: [-2, -48]
+    Subnetwork and Teleport Mechanism: *id002
+  networks: [Subnetwork 1, Subnetwork and Teleport Mechanism]
   subtype: ''
-  type: site
+  type: network
   vendor: ''
 - access_groups: ''
   category: Editing
   creator: admin
   description: ''
-  icon: site
+  icon: network
   labels:
     0a8dc15c-8f31-4fe2-b84d-1b2e9680876e:
       alignment: left
-      content: "Tests the duplication of devices, subsites and top-level sites.\r\n\
+      content: "Tests the duplication of devices, subnetworks and top-level networks.\r\n\
         - Duplicate \"Duplicate me 1\": the duplicated device should be immediately\
-        \ added to the site.\r\nRefresh and check that it is still displayed at the\
-        \ same position.\r\n- Duplicate \"Duplicate me 2\": the duplicate subsite\
-        \ should be immediately added to the site.\r\nDouble-click on it to check\
+        \ added to the network.\r\nRefresh and check that it is still displayed at the\
+        \ same position.\r\n- Duplicate \"Duplicate me 2\": the duplicate subnetwork\
+        \ should be immediately added to the network.\r\nDouble-click on it to check\
         \ that the content is the same as \"Duplicate me 2\".\r\n- Create a link between\
-        \ the two devices.\r\n- Duplicate the top-level site: check that it contains\
-        \ the two devices and the link between them,\r\nas well as the two subsites,\r\
-        \nCheck that the content of the subsites is the same as that of the original\
-        \ top-level site."
+        \ the two devices.\r\n- Duplicate the top-level network: check that it contains\
+        \ the two devices and the link between them,\r\nas well as the two subnetworks,\r\
+        \nCheck that the content of the subnetworks is the same as that of the original\
+        \ top-level network."
       positions: [-47, -187]
   last_modified: '2022-01-13 14:59:46.234188'
   latitude: '0.0'
@@ -173,19 +173,19 @@
   location: ''
   longitude: '0.0'
   model: ''
-  name: Duplication of Devices, Subsites and Top-level Sites
+  name: Duplication of Devices, Subnetworks and Top-level Networks
   nodes: [Duplicate me 2, Duplicate me 1]
-  pools: [All Sites, Everything]
+  pools: [All Networks, Everything]
   positions: {}
-  sites: []
+  networks: []
   subtype: ''
-  type: site
+  type: network
   vendor: ''
 - access_groups: ''
   category: ''
   creator: admin
   description: ''
-  icon: site
+  icon: network
   labels: {}
   last_modified: '2022-01-01 11:55:14.172281'
   latitude: '0.0'
@@ -195,19 +195,19 @@
   model: ''
   name: Duplicate me 2
   nodes: [Duplication - G1, Duplication - R1]
-  pools: [All Sites, Everything]
+  pools: [All Networks, Everything]
   positions:
-    Duplication of Devices, Subsites and Top-level Sites: &id003 [135, 6]
-    'Site 4: Duplication of Devices, Subsites and Top-level Sites': *id003
-  sites: ['Duplication of Devices, Subsites and Top-level Sites']
+    Duplication of Devices, Subnetworks and Top-level Networks: &id003 [135, 6]
+    'Network 4: Duplication of Devices, Subnetworks and Top-level Networks': *id003
+  networks: ['Duplication of Devices, Subnetworks and Top-level Networks']
   subtype: ''
-  type: site
+  type: network
   vendor: ''
 - access_groups: ''
   category: Display
   creator: admin
   description: ''
-  icon: site
+  icon: network
   labels:
     65702104-28b9-4392-9472-727f6f3bf273:
       alignment: left
@@ -230,23 +230,23 @@
   model: ''
   name: Loopback and Parallel Links
   nodes: [S5 R1, S5 R2, S5 R3, S5 R4]
-  pools: [Everything, All Sites]
+  pools: [Everything, All Networks]
   positions: {}
-  sites: []
+  networks: []
   subtype: ''
-  type: site
+  type: network
   vendor: ''
 - access_groups: ''
-  category: Subsite
+  category: Subnetwork
   creator: admin
   description: ''
-  icon: site
+  icon: network
   labels:
     df3da1e5-33a3-46e4-baed-ee59a432c773:
       alignment: left
-      content: "Tests multiple levels of nested subsites, in particular:\r\n- The\
+      content: "Tests multiple levels of nested subnetworks, in particular:\r\n- The\
         \ upward navigation button\r\n- The Tree View to switch between levels\r\n\
-        - The Duplication: all subsites down to the last should be duplicated."
+        - The Duplication: all subnetworks down to the last should be duplicated."
       positions: [40, -173]
   last_modified: '2022-01-13 15:00:11.686882'
   latitude: '0.0'
@@ -254,19 +254,19 @@
   location: ''
   longitude: '0.0'
   model: ''
-  name: Subsubsite and Subsubsubsite
-  nodes: [L1 Site]
-  pools: [Everything, All Sites]
+  name: Subsubnetwork and Subsubsubnetwork
+  nodes: [L1 Network]
+  pools: [Everything, All Networks]
   positions: {}
-  sites: []
+  networks: []
   subtype: ''
-  type: site
+  type: network
   vendor: ''
 - access_groups: ''
   category: ''
   creator: admin
   description: ''
-  icon: site
+  icon: network
   labels: {}
   last_modified: '2022-01-02 12:46:03.753457'
   latitude: '0.0'
@@ -274,21 +274,21 @@
   location: ''
   longitude: '0.0'
   model: ''
-  name: L1 Site
-  nodes: [L2 Site]
-  pools: [Everything, All Sites]
+  name: L1 Network
+  nodes: [L2 Network]
+  pools: [Everything, All Networks]
   positions:
-    'Site 6: Subsubsite and Subsubsubsite': &id004 [-27, -55]
-    Subsubsite and Subsubsubsite: *id004
-  sites: [Subsubsite and Subsubsubsite]
+    'Network 6: Subsubnetwork and Subsubsubnetwork': &id004 [-27, -55]
+    Subsubnetwork and Subsubsubnetwork: *id004
+  networks: [Subsubnetwork and Subsubsubnetwork]
   subtype: ''
-  type: site
+  type: network
   vendor: ''
 - access_groups: ''
   category: ''
   creator: admin
   description: ''
-  icon: site
+  icon: network
   labels: {}
   last_modified: '2022-01-02 12:46:14.439473'
   latitude: '0.0'
@@ -296,19 +296,19 @@
   location: ''
   longitude: '0.0'
   model: ''
-  name: L2 Site
-  nodes: [L3 Site]
-  pools: [Everything, All Sites]
+  name: L2 Network
+  nodes: [L3 Network]
+  pools: [Everything, All Networks]
   positions: {}
-  sites: [L1 Site]
+  networks: [L1 Network]
   subtype: ''
-  type: site
+  type: network
   vendor: ''
 - access_groups: ''
   category: ''
   creator: admin
   description: ''
-  icon: site
+  icon: network
   labels: {}
   last_modified: '2022-01-02 12:47:02.746851'
   latitude: '0.0'
@@ -316,19 +316,19 @@
   location: ''
   longitude: '0.0'
   model: ''
-  name: L3 Site
+  name: L3 Network
   nodes: [S6 L3 R1, S6 L3 R2]
-  pools: [Everything, All Sites]
+  pools: [Everything, All Networks]
   positions: {}
-  sites: [L2 Site]
+  networks: [L2 Network]
   subtype: ''
-  type: site
+  type: network
   vendor: ''
 - access_groups: ''
   category: Display
   creator: admin
   description: ''
-  icon: site
+  icon: network
   labels:
     40db70f9-22d1-4497-8834-52ef5b1bf369:
       alignment: left
@@ -345,17 +345,17 @@
   model: ''
   name: Layout of Large Graph
   nodes: []
-  pools: [Everything, All Sites]
+  pools: [Everything, All Networks]
   positions: {}
-  sites: []
+  networks: []
   subtype: ''
-  type: site
+  type: network
   vendor: ''
 - access_groups: ''
   category: Editing
   creator: admin
   description: ''
-  icon: site
+  icon: network
   labels:
     9d96833e-cf92-45e4-8c54-f2b145b5e542:
       alignment: left
@@ -383,17 +383,17 @@
   model: ''
   name: Import with Add Connected Nodes and Links
   nodes: []
-  pools: [All Sites, Everything]
+  pools: [All Networks, Everything]
   positions: {}
-  sites: []
+  networks: []
   subtype: ''
-  type: site
+  type: network
   vendor: ''
 - access_groups: ''
   category: Display
   creator: admin
   description: ''
-  icon: site
+  icon: network
   labels: {}
   last_modified: '2022-01-13 15:00:37.344648'
   latitude: '0.0'
@@ -409,9 +409,9 @@
     Baltimore, PaloAlto, SanJose, Cleveland, Jackson, Richmond, Cambridge, Chicago,
     Philadelphia, Cincinnati, NewYork, Minneapolis, SanFrancisco, Atlanta, Detroit,
     Denver, Sacramento, SanDiego, LosAngeles, Boston, Dallas-2, Dallas]
-  pools: [Everything, All Sites]
+  pools: [Everything, All Networks]
   positions: {}
-  sites: []
+  networks: []
   subtype: ''
-  type: site
+  type: network
   vendor: ''

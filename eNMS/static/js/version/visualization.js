@@ -162,7 +162,7 @@ function createNode(node) {
 }
 
 function createNode3d(node) {
-  const icon = node.type === "device" ? node.icon || "router" : "site";
+  const icon = node.type === "device" ? node.icon || "router" : "network";
   let entity = {
     properties: node,
     position: Cesium.Cartesian3.fromDegrees(node.longitude, node.latitude),
@@ -199,14 +199,14 @@ function createNode2d(node) {
     marker.icon =
       node.type === "device"
         ? (marker.icon = window[`icon_${node.icon}`] || routerIcon)
-        : (marker.icon = window["icon_site"]);
+        : (marker.icon = window["icon_network"]);
     marker.setIcon(marker.icon);
   }
   marker.bindTooltip(node["name"], { permanent: false });
   marker.node_id = node.id;
   markersArray.push(marker);
   marker.on("click", function (e) {
-    leftClickBinding("device", node.id, node.type == "site");
+    leftClickBinding("device", node.id, node.type == "network");
   });
   marker.on("contextmenu", function (e) {
     $(".menu").hide();
@@ -343,9 +343,9 @@ function processNetwork(network) {
       ids.forEach(colocatedDevices.add, colocatedDevices);
       const [longitude, latitude] = coords.split("/");
       network.devices.push({
-        type: "site",
-        name: `Site (${latitude},${longitude})`,
-        icon: "site",
+        type: "network",
+        name: `Network (${latitude},${longitude})`,
+        icon: "network",
         id: ids.join("-"),
         longitude: longitude,
         latitude: latitude,
@@ -462,7 +462,7 @@ function onRightClick3d(click) {
     const isLink = typeof instance.id == "number";
     const id = isLink ? instance.id : instance.id._properties._id._value;
     selectedObject = (isLink ? linksProperties : devicesProperties)[id];
-    const menu = isLink ? "link" : selectedObject.type == "pool" ? "site" : "device";
+    const menu = isLink ? "link" : selectedObject.type == "pool" ? "network" : "device";
     $(".menu").hide();
     $(`.rc-${menu}-menu`).show();
   } else {
@@ -486,7 +486,7 @@ function onClick3d(click) {
     const isLink = ["number", "string"].includes(typeof instance.id);
     const id = isLink ? instance.id : instance.id._properties._id._value;
     const type = isLink ? "link" : instance.id._properties._type._value;
-    const bundle = type == "site" || (typeof id === "string" && id.includes("-"));
+    const bundle = type == "network" || (typeof id === "string" && id.includes("-"));
     leftClickBinding(isLink ? "link" : "device", id, bundle);
   }
 }

@@ -38,11 +38,11 @@ import {
 import { clearSearch, tableInstances } from "./table.js";
 import { showDeviceModel } from "./visualization.js";
 
-const displayImage = visualization["Site Builder"].display_nodes_as_images;
+const displayImage = visualization["Network Builder"].display_nodes_as_images;
 
 let graph;
 let parallelLinks = {};
-export let site = JSON.parse(localStorage.getItem("site"));
+export let network = JSON.parse(localStorage.getItem("network"));
 
 const options = {
   interaction: {
@@ -62,7 +62,7 @@ const options = {
   },
 };
 
-export function switchToSite(path, direction) {
+export function switchToNetwork(path, direction) {
   if (typeof path === "undefined") return;
   setPath(path.toString());
   if (currentPath.includes(">")) {
@@ -71,40 +71,40 @@ export function switchToSite(path, direction) {
     $("#up-arrow").addClass("disabled");
   }
   moveHistory(path, direction);
-  if (!path && page == "site_table") {
-    $("#site-filtering").val("");
-    tableInstances["site"].table.page(0).ajax.reload(null, false);
+  if (!path && page == "network_table") {
+    $("#network-filtering").val("");
+    tableInstances["network"].table.page(0).ajax.reload(null, false);
     return;
   }
   $("#automatic-layout-btn").removeClass("active");
-  const [siteId] = currentPath.split(">").slice(-1);
+  const [networkId] = currentPath.split(">").slice(-1);
   call({
-    url: `/get/site/${siteId}`,
-    callback: function (newSite) {
-      site = newSite;
-      if (page == "site_builder") {
+    url: `/get/network/${networkId}`,
+    callback: function (newNetwork) {
+      network = newNetwork;
+      if (page == "network_builder") {
         localStorage.setItem("path", path);
-        if (site) localStorage.setItem("site", JSON.stringify(site));
-        displaySite(site);
+        if (network) localStorage.setItem("network", JSON.stringify(network));
+        displayNetwork(network);
         switchMode(currentMode, true);
       } else {
-        $("#site-filtering").val(path ? site.name : "");
-        tableInstances["site"].table.page(0).ajax.reload(null, false);
+        $("#network-filtering").val(path ? network.name : "");
+        tableInstances["network"].table.page(0).ajax.reload(null, false);
       }
     },
   });
 }
 
-export function displaySite(site) {
-  if (site.nodes.length > visualization["Site Builder"].max_allowed_nodes) {
-    return notify("The site contains too many nodes to be displayed.", "error", 5);
+export function displayNetwork(network) {
+  if (network.nodes.length > visualization["Network Builder"].max_allowed_nodes) {
+    return notify("The network contains too many nodes to be displayed.", "error", 5);
   }
   parallelLinks = {};
   graph = configureGraph(
-    site,
+    network,
     {
-      nodes: site.nodes.map(drawSiteNode),
-      edges: site.links.map(drawSiteEdge),
+      nodes: network.nodes.map(drawNetworkNode),
+      edges: network.links.map(drawNetworkEdge),
       inactive: new Set(),
     },
     options
@@ -117,8 +117,8 @@ export function displaySite(site) {
       return;
     } else if (node.type == "label") {
       showLabelPanel({ label: node, usePosition: true });
-    } else if (node.type == "site") {
-      switchToSite(`${currentPath}>${node.id}`);
+    } else if (node.type == "network") {
+      switchToNetwork(`${currentPath}>${node.id}`);
     } else if (node && node.id) {
       showInstancePanel(node.type, node.id);
     } else if (linkId) {
@@ -128,7 +128,7 @@ export function displaySite(site) {
   });
 }
 
-export function drawSiteNode(node) {
+export function drawNetworkNode(node) {
   return {
     id: node.id,
     icon: node.icon,
@@ -145,26 +145,26 @@ export function drawSiteNode(node) {
     type: node.type,
     image: displayImage ? `/static/img/view/2D/default/${node.icon}.gif` : undefined,
     shape: displayImage ? "image" : "ellipse",
-    x: node.positions[site.name] ? node.positions[site.name][0] : 0,
-    y: node.positions[site.name] ? node.positions[site.name][1] : 0,
+    x: node.positions[network.name] ? node.positions[network.name][0] : 0,
+    y: node.positions[network.name] ? node.positions[network.name][1] : 0,
   };
 }
 
-export function updateSitePanel(type) {
+export function updateNetworkPanel(type) {
   if (currentMode == "motion" && creationMode == "create_node") {
-    $(`#${type}-sites`).append(new Option(site.name, site.name));
-    $(`#${type}-sites`).val(site.name).trigger("change");
+    $(`#${type}-networks`).append(new Option(network.name, network.name));
+    $(`#${type}-networks`).val(network.name).trigger("change");
   }
 }
 
-function filterSiteTable(tableId, path) {
+function filterNetworkTable(tableId, path) {
   clearSearch(tableId);
-  switchToSite(path);
+  switchToNetwork(path);
 }
 
 function saveLink(edge) {
-  if (nodes.get(edge.from).type == "site" || nodes.get(edge.to).type == "site") {
-    return notify("Cannot draw a link from or to a site", "error", 5);
+  if (nodes.get(edge.from).type == "network" || nodes.get(edge.to).type == "network") {
+    return notify("Cannot draw a link from or to a network", "error", 5);
   }
   showInstancePanel($("#edge-type-list").val(), null, null, null, edge);
 }
@@ -173,13 +173,13 @@ export function showLinkPanel(type, id, edge) {
   $(id ? `#${type}-type-${id}` : `#${type}-type`)
     .val(type)
     .prop("disabled", true);
-  $(id ? `#${type}-sites-${id}` : `#${type}-sites`).prop("disabled", true);
+  $(id ? `#${type}-networks-${id}` : `#${type}-networks`).prop("disabled", true);
   if (edge) {
     const sourceName = nodes.get(edge.from).name;
     const destinationName = nodes.get(edge.to).name;
-    $(`#${type}-sites`)
-      .append(new Option(site.name, site.name))
-      .val([site.name])
+    $(`#${type}-networks`)
+      .append(new Option(network.name, network.name))
+      .val([network.name])
       .trigger("change");
     $(`#${type}-source`)
       .append(new Option(sourceName, edge.from))
@@ -196,8 +196,8 @@ export function showNodePanel(type, id, mode) {
   $(id ? `#${type}-type-${id}` : `#${type}-type`)
     .val(type)
     .prop("disabled", true);
-  if (id && mode == "duplicate" && type == "site") $(`#copy-${id}`).val(id);
-  $(id ? `#${type}-sites-${id}` : `#${type}-sites`).prop("disabled", true);
+  if (id && mode == "duplicate" && type == "network") $(`#copy-${id}`).val(id);
+  $(id ? `#${type}-networks-${id}` : `#${type}-networks`).prop("disabled", true);
 }
 
 function drawNetwork() {
@@ -220,33 +220,33 @@ function drawNetwork() {
   notify(`Automatic Display ${status}.`, "success", 5);
 }
 
-function addObjectsToSite() {
+function addObjectsToNetwork() {
   call({
-    url: `/add_objects_to_site/${site.id}`,
-    form: "add_to_site-form",
+    url: `/add_objects_to_network/${network.id}`,
+    form: "add_to_network-form",
     callback: function (result) {
       document.body.style.cursor = "progress";
-      result.nodes.map((node) => nodes.update(drawSiteNode(node)));
-      result.links.map((link) => edges.update(drawSiteEdge(link)));
-      $("#add_to_site").remove();
-      notify("Objects added to the site.", "success", 5);
+      result.nodes.map((node) => nodes.update(drawNetworkNode(node)));
+      result.links.map((link) => edges.update(drawNetworkEdge(link)));
+      $("#add_to_network").remove();
+      notify("Objects added to the network.", "success", 5);
       document.body.style.cursor = "default";
     },
   });
 }
 
-function openAddToSitePanel() {
+function openAddToNetworkPanel() {
   openPanel({
-    name: "add_to_site",
-    title: `Add objects to site '${site.name}'`,
+    name: "add_to_network",
+    title: `Add objects to network '${network.name}'`,
     size: "800 350",
   });
 }
 
-export function updateSiteRightClickBindings() {
+export function updateNetworkRightClickBindings() {
   updateBuilderBindings(action);
   Object.assign(action, {
-    "Add to Site": openAddToSitePanel,
+    "Add to Network": openAddToNetworkPanel,
     "Automatic Layout": () => drawNetwork(),
     Connect: (node) => showConnectionPanel(node),
     Configuration: (node) => showDeviceData(node),
@@ -258,7 +258,7 @@ export function updateSiteRightClickBindings() {
   });
 }
 
-function displaySiteState(results) {
+function displayNetworkState(results) {
   nodes.update(
     Object.entries(results).map(([nodeId, success]) => {
       const color = success ? "green" : "red";
@@ -269,24 +269,24 @@ function displaySiteState(results) {
   );
 }
 
-export function getSiteState(periodic, first) {
-  if (userIsActive && site?.id && !first) {
+export function getNetworkState(periodic, first) {
+  if (userIsActive && network?.id && !first) {
     call({
-      url: `/get_site_state/${currentPath}`,
-      data: { runtime: site.runtime },
+      url: `/get_network_state/${currentPath}`,
+      data: { runtime: network.runtime },
       callback: function (result) {
-        if (result.site.last_modified > instance.last_modified) {
-          instance.last_modified = result.site.last_modified;
-          displaySite(result.site);
+        if (result.network.last_modified > instance.last_modified) {
+          instance.last_modified = result.network.last_modified;
+          displayNetwork(result.network);
         }
-        if (result.device_results) displaySiteState(result.device_results);
+        if (result.device_results) displayNetworkState(result.device_results);
       },
     });
   }
-  if (periodic) setTimeout(() => getSiteState(true, false), 4000);
+  if (periodic) setTimeout(() => getNetworkState(true, false), 4000);
 }
 
-export function drawSiteEdge(link) {
+export function drawNetworkEdge(link) {
   const key = cantorPairing(link.source_id, link.destination_id);
   const flip = link.source_id > link.destination_id;
   parallelLinks[key] = (parallelLinks[key] || 0) + 1;
@@ -304,4 +304,4 @@ export function drawSiteEdge(link) {
   };
 }
 
-configureNamespace("siteBuilder", [addObjectsToSite, filterSiteTable]);
+configureNamespace("networkBuilder", [addObjectsToNetwork, filterNetworkTable]);

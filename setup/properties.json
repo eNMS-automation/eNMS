@@ -497,8 +497,8 @@
         "visible": false
       },
       {
-        "data": "sites",
-        "title": "Sites",
+        "data": "networks",
+        "title": "Networks",
         "width": "80px",
         "visible": false
       },
@@ -589,7 +589,7 @@
         "export": false
       }
     ],
-    "site": [
+    "network": [
       {
         "data": "name",
         "width": "200px",
@@ -1100,8 +1100,8 @@
       "model": ["10G", "40G", "100G", "400G"],
       "vendor": ["Ciena", "Cisco"]
     },
-    "site": {
-      "category": ["Display", "Editing", "Subsite"]
+    "network": {
+      "category": ["Display", "Editing", "Subnetwork"]
     },
     "workflow": {
       "category": [
@@ -1126,12 +1126,12 @@
       "device_number",
       "link_number",
       "service_number",
-      "site_number",
+      "network_number",
       "user_number"
     ],
     "run": ["service_properties"],
     "service": ["scoped_name", "mandatory_parametrization"],
-    "site": ["scoped_name"],
+    "network": ["scoped_name"],
     "task": ["frequency", "frequency_unit", "crontab_expression", "is_active"]
   },
   "filtering": {
@@ -1192,7 +1192,7 @@
       "status"
     ],
     "server": ["name", "description", "ip_address", "weight", "status"],
-    "site": ["name", "description", "creator", "location"],
+    "network": ["name", "description", "creator", "location"],
     "service": [
       "name",
       "type",

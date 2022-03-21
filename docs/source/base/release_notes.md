@@ -4,7 +4,7 @@
 Version 4.2.0
 -------------
 
-- Add Site builder mechanism
+- Add Network builder mechanism
 - Add 3D visualization of network devices
 - Extend Devices and Links with subclass / custom properties and a separate tab in the UI, the same way services work.
 - Remove deep_services function used for export, use service.children relationship instead.
@@ -62,9 +62,9 @@ Version 4.2.0
   sites and workflows. The drop-down list choices can be configured in properties.json > property_list key.
 - Add support for renaming objects from the REST API (with key "new_name")
 - Add limit to maximum number of nodes that can be displayed in site builder". Configurable via
-  visualization.json > Site Builder > max_allowed_nodes
+  visualization.json > Network Builder > max_allowed_nodes
 - Add new option to display site nodes as ellipses instead of images for better performances. Configurable via
-  visualization.json > Site Builder > display_nodes_as_images
+  visualization.json > Network Builder > display_nodes_as_images
 
 Tests:
 - Performances (SQL Column function init)

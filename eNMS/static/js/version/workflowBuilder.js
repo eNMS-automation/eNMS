@@ -165,6 +165,10 @@ export function showServicePanel(type, id, mode, tableId) {
     const value = page == "workflow_builder" ? [workflow.name] : [];
     $(workflowId).val(value).trigger("change");
   }
+  if (!id && workflow && page == "workflow_builder") {
+    $(`#${type}-vendor`).val(workflow.vendor).trigger("change");
+    $(`#${type}-operating_system`).val(workflow.operating_system).trigger("change");
+  }
   $(workflowId).prop("disabled", true);
   const wizardId = id ? `#${type}-wizard-${id}` : `#${type}-wizard${postfix}`;
   $(wizardId).smartWizard({

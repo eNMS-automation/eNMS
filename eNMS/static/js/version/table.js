@@ -144,6 +144,7 @@ export class Table {
           Object.assign(data, {
             form: form,
             constraints: { ...constraints, ...this.filteringConstraints },
+            order: self.tableOrdering,
             columns: this.columns,
             type: this.type,
             export: self.csvExport,
@@ -178,6 +179,10 @@ export class Table {
     }
     const refreshRate = settings.tables.refresh[this.type];
     if (refreshRate) refreshTablePeriodically(this.id, refreshRate, true);
+  }
+
+  get tableOrdering() {
+    return [{'column': 0, 'dir': 'asc'}];
   }
 
   exportTable(result) {

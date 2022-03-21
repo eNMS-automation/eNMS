@@ -65,6 +65,8 @@ Version 4.2.0
   visualization.json > Network Builder > max_allowed_nodes
 - Add new option to display site nodes as ellipses instead of images for better performances. Configurable via
   visualization.json > Network Builder > display_nodes_as_images
+- Auto-update Vendor and Operating System property value of a new service in the workflow builder
+  based on the values of these properties in the parent workflow.
 
 Tests:
 - Performances (SQL Column function init)

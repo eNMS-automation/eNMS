@@ -85,7 +85,7 @@
       }
     },
     "Automation": {
-      "icon": "networkmap",
+      "icon": "sitemap",
       "rbac": "access",
       "pages": {
         "Services": {

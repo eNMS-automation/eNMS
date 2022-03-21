@@ -571,7 +571,7 @@ function getTree() {
                   icon: "glyphicon glyphicon-file",
                 },
                 workflow: {
-                  icon: "fa fa-networkmap",
+                  icon: "fa fa-sitemap",
                 },
               },
             });

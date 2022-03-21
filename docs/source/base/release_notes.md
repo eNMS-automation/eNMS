@@ -63,6 +63,8 @@ Version 4.2.0
 - Add support for renaming objects from the REST API (with key "new_name")
 - Add limit to maximum number of nodes that can be displayed in site builder". Configurable via
   visualization.json > Site Builder > max_allowed_nodes
+- Add new option to display site nodes as ellipses instead of images for better performances. Configurable via
+  visualization.json > Site Builder > display_nodes_as_images
 
 Tests:
 - Performances (SQL Column function init)

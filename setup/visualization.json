@@ -181,7 +181,7 @@
     }
   },
   "Network Builder": {
-    "display_nodes_as_images": false,
+    "display_nodes_as_images": true,
     "max_allowed_nodes": 500,
     "nodes": {
       "antenna": "Antenna",

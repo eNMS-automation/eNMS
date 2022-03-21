@@ -181,6 +181,8 @@
     }
   },
   "Site Builder": {
+    "display_nodes_as_images": false,
+    "max_allowed_nodes": 500,
     "nodes": {
       "antenna": "Antenna",
       "firewall": "Firewall",
@@ -190,7 +192,6 @@
       "router": "Router",
       "server": "Server",
       "switch": "Switch"
-    },
-    "max_allowed_nodes": 500
+    }
   }
 }

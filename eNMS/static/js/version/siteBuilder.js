@@ -38,6 +38,8 @@ import {
 import { clearSearch, tableInstances } from "./table.js";
 import { showDeviceModel } from "./visualization.js";
 
+const displayImage = visualization["Site Builder"].display_nodes_as_images;
+
 let graph;
 let parallelLinks = {};
 export let site = JSON.parse(localStorage.getItem("site"));
@@ -141,8 +143,8 @@ export function drawSiteNode(node) {
     label: node.name,
     name: node.name,
     type: node.type,
-    image: `/static/img/view/2D/default/${node.icon}.gif`,
-    shape: "image",
+    image: displayImage ? `/static/img/view/2D/default/${node.icon}.gif` : undefined,
+    shape: displayImage ? "image" : "ellipse",
     x: node.positions[site.name] ? node.positions[site.name][0] : 0,
     y: node.positions[site.name] ? node.positions[site.name][1] : 0,
   };

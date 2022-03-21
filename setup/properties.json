@@ -1103,6 +1103,10 @@
     "network": {
       "category": ["Display", "Editing", "Subnetwork"]
     },
+    "service": {
+      "operating_system": ["IOS", "IOS-XE", "IOS-XR", "Junos", "EOS", "Linux"],
+      "vendor": ["Arista", "Cisco", "Juniper", "Linux"]
+    },
     "workflow": {
       "category": [
         "Basics",

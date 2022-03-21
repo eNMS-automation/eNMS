@@ -652,8 +652,18 @@ class ServiceForm(BaseForm):
             ("discard", "Discard"),
         ),
     )
-    vendor = StringField("Vendor")
-    operating_system = StringField("Operating System")
+    vendor = SelectField(
+        "Vendor",
+        choices=vs.dualize(vs.properties["property_list"]["service"]["vendor"]),
+        validate_choice=False,
+    )
+    operating_system = SelectField(
+        "Operating System",
+        choices=vs.dualize(
+            vs.properties["property_list"]["service"]["operating_system"]
+        ),
+        validate_choice=False,
+    )
     iteration_values = StringField("Iteration Values", python=True)
     initial_payload = DictField()
     mandatory_parametrization = BooleanField("Parameterized Form is Mandatory")

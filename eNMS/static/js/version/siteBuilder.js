@@ -74,6 +74,7 @@ export function switchToSite(path, direction) {
     tableInstances["site"].table.page(0).ajax.reload(null, false);
     return;
   }
+  $("#automatic-layout-btn").removeClass("active");
   const [siteId] = currentPath.split(">").slice(-1);
   call({
     url: `/get/site/${siteId}`,
@@ -211,6 +212,7 @@ function drawNetwork() {
       },
     },
   });
+  $("#automatic-layout-btn").toggleClass("active");
   const status = enabled ? "disabled" : "enabled";
   if (enabled) savePositions();
   notify(`Automatic Display ${status}.`, "success", 5);

@@ -162,7 +162,7 @@ function createNode(node) {
 }
 
 function createNode3d(node) {
-  const icon = node.type === "device" ? node.icon || "router" : "network";
+  const icon = node.type === "device" ? node.icon || "router" : "site";
   let entity = {
     properties: node,
     position: Cesium.Cartesian3.fromDegrees(node.longitude, node.latitude),
@@ -199,14 +199,14 @@ function createNode2d(node) {
     marker.icon =
       node.type === "device"
         ? (marker.icon = window[`icon_${node.icon}`] || routerIcon)
-        : (marker.icon = window["icon_network"]);
+        : (marker.icon = window["icon_site"]);
     marker.setIcon(marker.icon);
   }
   marker.bindTooltip(node["name"], { permanent: false });
   marker.node_id = node.id;
   markersArray.push(marker);
   marker.on("click", function (e) {
-    leftClickBinding("device", node.id, node.type == "network");
+    leftClickBinding("device", node.id, node.type == "site");
   });
   marker.on("contextmenu", function (e) {
     $(".menu").hide();
@@ -343,9 +343,9 @@ function processNetwork(network) {
       ids.forEach(colocatedDevices.add, colocatedDevices);
       const [longitude, latitude] = coords.split("/");
       network.devices.push({
-        type: "network",
-        name: `Network (${latitude},${longitude})`,
-        icon: "network",
+        type: "site",
+        name: `Site (${latitude},${longitude})`,
+        icon: "site",
         id: ids.join("-"),
         longitude: longitude,
         latitude: latitude,

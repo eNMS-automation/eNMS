@@ -67,6 +67,8 @@ Version 4.2.0
   visualization.json > Network Builder > display_nodes_as_images
 - Auto-update Vendor and Operating System property value of a new service in the workflow builder
   based on the values of these properties in the parent workflow.
+- Add support for custom ordering in plugin tables (configurable by overriding the tableOrdering function in the
+  table JS class)
 
 Tests:
 - Performances (SQL Column function init)

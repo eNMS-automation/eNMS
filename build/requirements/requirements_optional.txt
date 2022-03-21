@@ -4,5 +4,6 @@ ldap3
 pynetbox
 scrapli
 scrapli-netconf
+ssh2-python
 slackclient>=1.3,<2
 tacacs_plus

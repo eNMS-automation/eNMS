@@ -114,7 +114,10 @@ class Controller:
         for link in links:
             if link in network.links:
                 continue
-            if link.source not in network.nodes or link.destination not in network.nodes:
+            if (
+                link.source not in network.nodes
+                or link.destination not in network.nodes
+            ):
                 continue
             result["links"].append(link.serialized)
             network.links.append(link)

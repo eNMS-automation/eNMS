@@ -59,7 +59,9 @@ class Node(Object):
     positions = db.Column(db.Dict, info={"log_change": False})
     latitude = db.Column(db.TinyString, default="0.0")
     longitude = db.Column(db.TinyString, default="0.0")
-    networks = relationship("Network", secondary=db.node_network_table, back_populates="nodes")
+    networks = relationship(
+        "Network", secondary=db.node_network_table, back_populates="nodes"
+    )
 
     def update(self, **kwargs):
         if self.positions and "positions" in kwargs:
@@ -245,7 +247,9 @@ class Link(Object):
     )
     destination_name = association_proxy("destination", "name")
     pools = relationship("Pool", secondary=db.pool_link_table, back_populates="links")
-    networks = relationship("Network", secondary=db.link_network_table, back_populates="links")
+    networks = relationship(
+        "Network", secondary=db.link_network_table, back_populates="links"
+    )
     __table_args__ = (UniqueConstraint(name, source_id, destination_id),)
 
     @property

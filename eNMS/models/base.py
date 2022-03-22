@@ -88,7 +88,6 @@ class AbstractBase(db.base):
             "admin_only": True,
         }
         for pool in db.fetch_all("pool", **rbac_pools_kwargs):
-            print(pool)
             match = pool.match_instance(self)
             if match and self not in getattr(pool, f"{self.class_type}s"):
                 getattr(pool, f"{self.class_type}s").append(self)

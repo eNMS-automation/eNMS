@@ -23,9 +23,15 @@ class Network(Node):
     icon = db.Column(db.TinyString, default="network")
     id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
     labels = db.Column(db.Dict, info={"log_change": False})
-    nodes = relationship("Node", secondary=db.node_network_table, back_populates="networks")
-    links = relationship("Link", secondary=db.link_network_table, back_populates="networks")
-    pools = relationship("Pool", secondary=db.pool_network_table, back_populates="networks")
+    nodes = relationship(
+        "Node", secondary=db.node_network_table, back_populates="networks"
+    )
+    links = relationship(
+        "Link", secondary=db.link_network_table, back_populates="networks"
+    )
+    pools = relationship(
+        "Pool", secondary=db.pool_network_table, back_populates="networks"
+    )
 
     def duplicate(self, clone=None):
         for property in ("labels", "nodes", "links"):

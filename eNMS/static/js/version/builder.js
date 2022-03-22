@@ -425,7 +425,9 @@ function switchTo(...args) {
 }
 
 function updateRightClickBindings() {
-  (type == "network" ? updateNetworkRightClickBindings : updateWorkflowRightClickBindings)();
+  (type == "network"
+    ? updateNetworkRightClickBindings
+    : updateWorkflowRightClickBindings)();
 }
 
 export function initBuilder() {

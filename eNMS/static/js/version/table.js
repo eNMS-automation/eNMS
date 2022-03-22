@@ -182,7 +182,7 @@ export class Table {
   }
 
   get tableOrdering() {
-    return [{'column': 0, 'dir': 'asc'}];
+    return [{ column: 0, dir: "asc" }];
   }
 
   exportTable(result) {

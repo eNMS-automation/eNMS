@@ -791,7 +791,7 @@ function showImportServicesPanel() {
   openPanel({
     name: "import_services",
     title: "Import Services",
-    size: "600 350",
+    size: "600 500",
     callback: () => {
       new Dropzone(document.getElementById(`dropzone-services`), {
         url: "/import_services",

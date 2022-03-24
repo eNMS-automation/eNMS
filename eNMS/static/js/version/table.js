@@ -144,7 +144,6 @@ export class Table {
           Object.assign(data, {
             form: form,
             constraints: { ...constraints, ...this.filteringConstraints },
-            order: self.tableOrdering,
             columns: this.columns,
             type: this.type,
             export: self.csvExport,
@@ -174,15 +173,13 @@ export class Table {
     });
     $(window).resize(this.table.columns.adjust);
     $(`[name=table-${this.id}_length]`).selectpicker("refresh");
-    if (["changelog", "run", "result"].includes(this.type)) {
-      this.table.order([0, "desc"]).draw();
-    }
+    this.table.order(this.tableOrdering).draw();
     const refreshRate = settings.tables.refresh[this.type];
     if (refreshRate) refreshTablePeriodically(this.id, refreshRate, true);
   }
 
   get tableOrdering() {
-    return [{ column: 0, dir: "asc" }];
+    return [0, "asc"];
   }
 
   exportTable(result) {
@@ -1075,6 +1072,10 @@ tables.run = class RunTable extends Table {
     ];
   }
 
+  get tableOrdering() {
+    return [0, "desc"];
+  }
+
   buttons(row) {
     return [
       `<ul class="pagination pagination-lg" style="margin: 0px; width: 120px">
@@ -1142,6 +1143,10 @@ tables.result = class ResultTable extends Table {
       this.refreshTableButton(),
       this.clearSearchButton(),
     ];
+  }
+
+  get tableOrdering() {
+    return [0, "desc"];
   }
 
   buttons(row) {
@@ -1439,6 +1444,11 @@ tables.changelog = class ChangelogTable extends Table {
       this.exportTableButton(),
     ];
   }
+
+  get tableOrdering() {
+    return [0, "desc"];
+  }
+
 };
 
 tables.session = class SessionTable extends Table {

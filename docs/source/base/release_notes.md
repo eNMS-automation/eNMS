@@ -69,6 +69,8 @@ Version 4.2.0
   based on the values of these properties in the parent workflow.
 - Add support for custom ordering in plugin tables (configurable by overriding the tableOrdering function in the
   table JS class)
+- Add support for using device credentials in the Rest Call Service (impact on migration files:
+  "username" / "password" => "custom_username" / "custom_password")
 
 Tests:
 - Performances (SQL Column function init)
@@ -92,6 +94,7 @@ Migration:
 - In migration files, replace "default_access: admin" with "admin_only: true"
 - Warn user about REST API run service endpoint new default (True)
 - Update service priority to "current priority + 9" (see migration script in files / script)
+- Update credentials of REST Call services (custom_username, custom_password)
 
 Documentation update needed for everything, in particular:
 - Redis config in settings.json

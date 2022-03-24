@@ -29,8 +29,9 @@ class RestCallService(Service):
     headers = db.Column(JSON, default={})
     verify_ssl_certificate = db.Column(Boolean, default=True)
     timeout = db.Column(Integer, default=15)
-    username = db.Column(db.SmallString)
-    password = db.Column(db.SmallString)
+    credentials = db.Column(db.SmallString, default="custom")
+    custom_username = db.Column(db.SmallString)
+    custom_password = db.Column(db.SmallString)
 
     __mapper_args__ = {"polymorphic_identity": "rest_call_service"}
 
@@ -44,9 +45,10 @@ class RestCallService(Service):
             for parameter in ("headers", "params", "timeout")
         }
         kwargs["verify"] = run.verify_ssl_certificate
-        if self.username:
+        credentials = self.get_credentials(device)
+        if self.credentials != "custom" or credentials["username"]:
             kwargs["auth"] = HTTPBasicAuth(
-                self.username, env.get_password(self.password)
+                credentials["username"], credentials["password"]
             )
         if run.call_type in ("POST", "PUT", "PATCH"):
             kwargs["json"] = run.sub(self.payload, local_variables)
@@ -80,5 +82,13 @@ class RestCallForm(ServiceForm):
     headers = DictField(substitution=True)
     verify_ssl_certificate = BooleanField("Verify SSL Certificate")
     timeout = IntegerField(default=15)
-    username = StringField()
-    password = PasswordField()
+    credentials = SelectField(
+        "Credentials",
+        choices=(
+            ("device", "Device Credentials"),
+            ("user", "User Credentials"),
+            ("custom", "Custom Credentials"),
+        ),
+    )
+    custom_username = StringField("Custom Username", substitution=True)
+    custom_password = PasswordField("Custom Password", substitution=True)

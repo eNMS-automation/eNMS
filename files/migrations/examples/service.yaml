@@ -1642,6 +1642,8 @@
   conversion_method: text
   creator: admin
   credential_type: any
+  custom_password: ''
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -1683,7 +1685,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {verify: 'false'}
-  password: ''
   payload:
     a: b
     c: ['1', '2', '3']
@@ -1742,7 +1743,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -3459,6 +3459,8 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -3500,7 +3502,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload: {}
   pools: [Everything]
   positions:
@@ -3531,7 +3532,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -4713,6 +4713,8 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  custom_password: ''
+  custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4754,7 +4756,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: ''
   payload: {}
   pools: [Everything]
   positions:
@@ -4783,7 +4784,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: ''
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -4884,6 +4884,8 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  custom_password: ''
+  custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4925,7 +4927,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: ''
   payload: {}
   pools: [Everything]
   positions:
@@ -4954,7 +4955,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: ''
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -7596,6 +7596,8 @@
   conversion_method: text
   creator: admin
   credential_type: any
+  custom_password: ''
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -7637,7 +7639,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {verify: 'false'}
-  password: ''
   payload:
     a: b
     c: ['1', '2', '3']
@@ -7669,7 +7670,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -10296,6 +10296,8 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  custom_password: ''
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10338,7 +10340,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: ''
   payload: {}
   pools: [Everything]
   positions:
@@ -10374,7 +10375,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -11097,6 +11097,8 @@
   conversion_method: text
   creator: admin
   credential_type: any
+  custom_password: ''
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -11139,7 +11141,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {verify: 'false'}
-  password: ''
   payload:
     a: b
     c: ['1', '2', '3']
@@ -11180,7 +11181,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -11478,6 +11478,8 @@
   conversion_method: text
   creator: admin
   credential_type: any
+  custom_password: ''
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -11519,7 +11521,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {verify: 'false'}
-  password: ''
   payload:
     a: b
     c: ['1', '2', '3']
@@ -11552,7 +11553,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -17723,6 +17723,8 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -17764,7 +17766,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload: {}
   pools: [Everything]
   positions:
@@ -17795,7 +17796,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -19412,6 +19412,8 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -19453,7 +19455,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {verify: 'false'}
-  password: YWRtaW4=
   payload: {}
   pools: [Everything]
   positions:
@@ -19482,7 +19483,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -24924,6 +24924,8 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  custom_password: ''
+  custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24965,7 +24967,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: ''
   payload: {}
   pools: [Everything]
   positions:
@@ -24995,7 +24996,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: ''
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -25012,6 +25012,8 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25053,7 +25055,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload: {}
   pools: [Everything]
   positions:
@@ -25082,7 +25083,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -25099,6 +25099,8 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25140,7 +25142,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload: {}
   pools: [Everything]
   positions:
@@ -25169,7 +25170,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -25186,6 +25186,8 @@
   conversion_method: json
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25227,7 +25229,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload: {}
   pools: [Everything]
   positions:
@@ -25255,7 +25256,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: success
   validation_method: dict_included
   validation_section: results['result']
@@ -25272,6 +25272,8 @@
   conversion_method: json
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25313,7 +25315,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload: {}
   pools: [Everything]
   positions:
@@ -25341,7 +25342,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: success
   validation_method: dict_included
   validation_section: results['result']
@@ -25465,6 +25465,8 @@
   conversion_method: json
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25506,7 +25508,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload: {}
   pools: [Everything]
   positions:
@@ -25537,7 +25538,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -25554,6 +25554,8 @@
   conversion_method: json
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25595,7 +25597,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload: {}
   pools: [Everything]
   positions:
@@ -25624,7 +25625,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -25641,6 +25641,8 @@
   conversion_method: json
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25682,7 +25684,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload: {}
   pools: [Everything]
   positions:
@@ -25712,7 +25713,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -25729,6 +25729,8 @@
   conversion_method: json
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25770,7 +25772,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload: {}
   pools: [Everything]
   positions:
@@ -25799,7 +25800,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -25924,6 +25924,8 @@
   conversion_method: json
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25965,7 +25967,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload:
     columns: [name, configuration, ip_address]
     maximum_return_records: 5
@@ -26001,7 +26002,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -26018,6 +26018,8 @@
   conversion_method: json
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26059,7 +26061,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload:
     columns: [name, operating_system, ip_address]
     maximum_return_records: 100
@@ -26093,7 +26094,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -26110,6 +26110,8 @@
   conversion_method: json
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26151,7 +26153,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload:
     columns: [name, configuration_matches, ip_address]
     maximum_return_records: 50
@@ -26187,7 +26188,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -26318,6 +26318,8 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26360,7 +26362,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload: {name: NewDevice, property1: UPDATED}
   pools: [Everything]
   positions:
@@ -26389,7 +26390,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -26406,6 +26406,8 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26447,7 +26449,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload: {name: NewDevice}
   pools: [Everything]
   positions:
@@ -26475,7 +26476,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -26492,6 +26492,8 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26533,7 +26535,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload: {}
   pools: [Everything]
   positions:
@@ -26562,7 +26563,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -26579,6 +26579,8 @@
   conversion_method: json
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26620,7 +26622,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload: {}
   pools: [Everything]
   positions:
@@ -26649,7 +26650,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -26666,6 +26666,8 @@
   conversion_method: json
   creator: admin
   credential_type: any
+  custom_password: YWRtaW4=
+  custom_username: admin
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26707,7 +26709,6 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: YWRtaW4=
   payload:
     columns: [result, parent_runtime, service_name]
     maximum_return_records: 1000
@@ -26739,7 +26740,6 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']

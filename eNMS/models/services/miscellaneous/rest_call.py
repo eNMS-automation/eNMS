@@ -45,7 +45,7 @@ class RestCallService(Service):
             for parameter in ("headers", "params", "timeout")
         }
         kwargs["verify"] = run.verify_ssl_certificate
-        credentials = self.get_credentials(device)
+        credentials = run.get_credentials(device)
         if self.credentials != "custom" or credentials["username"]:
             kwargs["auth"] = HTTPBasicAuth(
                 credentials["username"], credentials["password"]

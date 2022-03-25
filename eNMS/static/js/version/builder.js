@@ -35,7 +35,7 @@ import {
   updateWorkflowRightClickBindings,
 } from "./workflowBuilder.js";
 
-const container = document.getElementById("network");
+const container = document.getElementById("builder");
 const type = page.includes("network") ? "network" : "workflow";
 const nodeType = type == "network" ? "node" : "service";
 let currentLabel;
@@ -106,7 +106,7 @@ export function configureGraph(newInstance, graph, options) {
   network.on("dragEnd", (event) => {
     if (network.getNodeAt(event.pointer.DOM)) savePositions();
   });
-  rectangleSelection($("#network"), network, nodes);
+  rectangleSelection($("#builder"), network, nodes);
   return network;
 }
 
@@ -249,7 +249,7 @@ export function updateBuilderBindings(action) {
       if (parentPath) switchTo(parentPath);
     },
   });
-  $("#network").contextMenu({
+  $("#builder").contextMenu({
     menuSelector: "#contextMenu",
     menuSelected: function (selectedMenu) {
       const row = selectedMenu.text();

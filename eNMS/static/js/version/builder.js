@@ -149,6 +149,7 @@ export function showLabelPanel({ label, usePosition }) {
 }
 
 function createLabel() {
+  if (!instance) notify(`No ${type} has been created yet.`, "error", 5);
   const pos = mousePosition ? [mousePosition.x, mousePosition.y] : [0, 0];
   const labelUrl = `${instance.type}/${instance.id}`;
   call({
@@ -384,7 +385,7 @@ export function switchMode(mode, noNotification) {
 }
 
 export function processBuilderData(newInstance) {
-  instance.last_modified = newInstance.last_modified;
+  if (instance) instance.last_modified = newInstance.last_modified;
   if (newInstance.id == instance?.id) {
     instance = newInstance;
     $(`#current-${type} option:selected`).text(newInstance.name).trigger("change");

@@ -149,7 +149,7 @@ export function showLabelPanel({ label, usePosition }) {
 }
 
 function createLabel() {
-  if (!instance) notify(`No ${type} has been created yet.`, "error", 5);
+  if (!instance) return notify(`No ${type} has been created yet.`, "error", 5);
   const pos = mousePosition ? [mousePosition.x, mousePosition.y] : [0, 0];
   const labelUrl = `${instance.type}/${instance.id}`;
   call({
@@ -210,6 +210,7 @@ function deleteSelection() {
 }
 
 function openDeletionPanel() {
+  if (!instance) return notify(`No ${type} has been created yet.`, "error", 5);
   const nodeSelection = network.getSelectedNodes().length;
   const edgeSelection = network.getSelectedEdges().length;
   if (!nodeSelection && !edgeSelection) {

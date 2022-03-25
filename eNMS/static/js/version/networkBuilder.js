@@ -251,8 +251,10 @@ export function updateNetworkRightClickBindings() {
     Connect: (node) => showConnectionPanel(node),
     Configuration: (node) => showDeviceData(node),
     Results: (node) => showDeviceResultsPanel(node),
-    "Run Service": () =>
-      showRunServicePanel({ type: "device", targets: graph.getSelectedNodes() }),
+    "Run Service": () => {
+      if (!graph) return;
+      showRunServicePanel({ type: "device", targets: graph.getSelectedNodes() })
+    },
     "3D Visualization": (node) => showDeviceModel(node),
     "Edit Edge": (edge) => showInstancePanel(edge.type, edge.id),
   });

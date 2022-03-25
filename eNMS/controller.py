@@ -873,9 +873,11 @@ class Controller:
                     type, relation_dict = instance.pop("type", model), {}
                     for related_model, relation in vs.relationships[type].items():
                         relation_dict[related_model] = instance.pop(related_model, [])
-                    for property, value in instance.items():
-                        if property in vs.private_properties_set:
-                            instance[property] = env.get_password(value)
+                    instance_private_properties = {
+                        property: env.get_password(instance.pop(property))
+                        for property in list(instance)
+                        if property in vs.private_properties_set
+                    }
                     try:
                         instance = db.factory(
                             type,
@@ -888,6 +890,8 @@ class Controller:
                         if kwargs.get("service_import") and instance.type == "workflow":
                             instance.edges = []
                         relations[type][instance.name] = relation_dict
+                        for property in instance_private_properties.items():
+                            setattr(instance, *property)
                     except Exception:
                         info(f"{str(instance)} could not be imported:\n{format_exc()}")
                         status = "Partial import (see logs)."

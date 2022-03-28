@@ -700,7 +700,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
         }
         if (page == "network_builder") updateNetworkPanel(type);
       }
-      if (isService) loadScript(`../static/js/services/${type}.js`, id);
+      if (isService) loadScript(`../static/js/${versionPath}/services/${type}.js`, id);
       const property = isService ? "scoped_name" : "name";
       $(`#${type}-${property}`).focus();
     },

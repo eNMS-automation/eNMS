@@ -491,7 +491,10 @@ class Controller:
                 Repo.clone_from(repo, local_path)
         except Exception as exc:
             env.log("error", f"Git pull failed ({str(exc)})")
-        self.update_database_configurations_from_git()
+        try:
+            self.update_database_configurations_from_git()
+        except Exception as exc:
+            env.log("error", f"Update of device configurations failed ({str(exc)})")
 
     def get_git_history(self, device_id):
         device = db.fetch("device", id=device_id)

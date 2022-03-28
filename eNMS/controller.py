@@ -19,7 +19,7 @@ from ruamel import yaml
 from shutil import rmtree
 from sqlalchemy import and_, or_
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import aliased, load_only
+from sqlalchemy.orm import aliased
 from subprocess import Popen
 from tarfile import open as open_tar
 from threading import Thread
@@ -1268,13 +1268,10 @@ class Controller:
             pool.compute_pool()
 
     def update_database_configurations_from_git(self):
-        for dir in scandir(vs.path / "network_data"):
-            device = (
-                db.query("device")
-                .options(load_only(*vs.configuration_properties))
-                .filter_by(name=dir.name)
-                .first()
-            )
+        path = vs.path / "network_data"
+        env.log("info", f"Updating device configurations with data from {path}")
+        for dir in scandir(path):
+            device = db.fetch("device", allow_none=True, name=dir.name)
             timestamp_path = Path(dir.path) / "timestamps.json"
             if not device:
                 continue

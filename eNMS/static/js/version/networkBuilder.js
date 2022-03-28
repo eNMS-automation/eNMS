@@ -228,9 +228,9 @@ function addObjectsToNetwork() {
       document.body.style.cursor = "progress";
       result.nodes.map((node) => nodes.update(drawNetworkNode(node)));
       result.links.map((link) => edges.update(drawNetworkEdge(link)));
+      document.body.style.cursor = "default";
       $("#add_to_network").remove();
       notify("Objects added to the network.", "success", 5);
-      document.body.style.cursor = "default";
     },
   });
 }

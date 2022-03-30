@@ -91,10 +91,10 @@
       }
     },
     "workflow": {
-      "workflow_category": {
-        "pretty_name": "Workflow Category",
+      "custom_property": {
+        "pretty_name": "Custom Property",
         "type": "str",
-        "default": "Example workflow(s)"
+        "default": "Default Value"
       }
     }
   },

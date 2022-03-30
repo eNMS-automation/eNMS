@@ -70,7 +70,8 @@ Version 4.2.0
 - Add support for custom ordering in plugin tables (configurable by overriding the tableOrdering function in the
   table JS class)
 - Add support for using device credentials in the Rest Call Service (impact on migration files:
-  "username" / "password" => "custom_username" / "custom_password")
+  "username" / "password" => "custom_username" / "custom_password"). Don't allow using device credentials
+  if the run method is set to "Run Once".
 
 Tests:
 - Performances (SQL Column function init)

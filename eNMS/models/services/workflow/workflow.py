@@ -191,6 +191,7 @@ class WorkflowForm(ServiceForm):
         "Category",
         choices=vs.dualize(vs.properties["property_list"]["workflow"]["category"]),
         validate_choice=False,
+        default="Other",
     )
     close_connection = BooleanField(default=False)
     run_method = SelectField(

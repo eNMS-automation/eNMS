@@ -61,6 +61,7 @@ class NetworkForm(BaseForm):
         "Category",
         choices=vs.dualize(vs.properties["property_list"]["network"]["category"]),
         validate_choice=False,
+        default="Other",
     )
     latitude = StringField("Latitude", default=0.0)
     longitude = StringField("Longitude", default=0.0)

@@ -92,3 +92,15 @@ class RestCallForm(ServiceForm):
     )
     custom_username = StringField("Custom Username", substitution=True)
     custom_password = PasswordField("Custom Password", substitution=True)
+
+    def validate(self):
+        valid_form = super().validate()
+        device_credentials_error = (
+            self.credentials.data == "device" and self.run_method.data == "once"
+        )
+        if device_credentials_error:
+            self.credentials.errors.append(
+                "Device credentials cannot be selected because the service "
+                "'Run Method' is not set to 'Run Once per Device'"
+            )
+        return valid_form and not device_credentials_error

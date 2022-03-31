@@ -19,7 +19,6 @@ class RestApi:
             "is_alive": "is_alive",
             "query": "query",
             "result": "get_result",
-            "token": "get_token",
         },
         "POST": {
             "instance": "update_instance",

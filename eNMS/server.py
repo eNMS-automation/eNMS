@@ -126,18 +126,7 @@ class Server(Flask):
             endpoint_rbac = vs.rbac[request_property].get(endpoint)
             if rest_request:
                 user = None
-                auth, token = request.headers.get("Authorization", ". .").split()
-                if False and auth == "Bearer":
-                    serializer = Serializer(getenv("SECRET_KEY", "secret_key"))
-                    try:
-                        user = db.fetch("user", id=serializer.loads(token)["id"])
-                    except (SignatureExpired, BadSignature) as exc:
-                        is_expired = isinstance(exc, SignatureExpired)
-                        status = "Expired" if is_expired else "Invalid"
-                        log = f"{request.method} {request.path} - {status} Token (403)"
-                        env.log("error", log, change_log=False)
-                        return jsonify({"alert": f"{status} Token"}), 403
-                elif request.authorization:
+                if request.authorization:
                     user = env.authenticate_user(**request.authorization)
                 if user:
                     login_user(user)

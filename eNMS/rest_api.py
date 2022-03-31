@@ -72,17 +72,6 @@ class RestApi:
                 "result": result.result if result else "No results yet.",
             }
 
-    def get_token(self):
-        return
-        return (
-            Serializer(
-                getenv("SECRET_KEY", "secret_key"),
-                expires_in=vs.settings["app"]["session_timeout_minutes"] * 60,
-            )
-            .dumps({"id": current_user.id})
-            .decode("ascii")
-        )
-
     def is_alive(self, **_):
         return {"name": getnode(), "cluster_id": vs.settings["cluster"]["id"]}
 

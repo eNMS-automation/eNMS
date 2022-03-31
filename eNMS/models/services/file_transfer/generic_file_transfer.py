@@ -31,8 +31,8 @@ class GenericFileTransferService(Service):
     missing_host_key_policy = db.Column(Boolean, default=False)
     load_known_host_keys = db.Column(Boolean, default=False)
     source_file_includes_globbing = db.Column(Boolean, default=False)
-    max_transfer_size = db.Column(Integer, default=2 ** 30)
-    window_size = db.Column(Integer, default=2 ** 30)
+    max_transfer_size = db.Column(Integer, default=2**30)
+    window_size = db.Column(Integer, default=2**30)
     timeout = db.Column(Float, default=10.0)
     credentials = db.Column(db.SmallString, default="device")
     custom_username = db.Column(db.SmallString)
@@ -86,8 +86,8 @@ class GenericFileTransferForm(ServiceForm):
     missing_host_key_policy = BooleanField()
     load_known_host_keys = BooleanField()
     source_file_includes_globbing = BooleanField("Source file includes glob pattern")
-    max_transfer_size = IntegerField(default=2 ** 30)
-    window_size = IntegerField(default=2 ** 30)
+    max_transfer_size = IntegerField(default=2**30)
+    window_size = IntegerField(default=2**30)
     timeout = FloatField(default=10.0)
     credentials = SelectField(
         "Credentials",

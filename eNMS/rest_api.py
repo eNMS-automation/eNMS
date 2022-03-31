@@ -1,6 +1,5 @@
 from collections import defaultdict
 from flask_login import current_user
-from itsdangerous import TimedJSONWebSignatureSerializer
 from os import getenv
 from threading import Thread
 from traceback import format_exc
@@ -74,8 +73,9 @@ class RestApi:
             }
 
     def get_token(self):
+        return
         return (
-            TimedJSONWebSignatureSerializer(
+            Serializer(
                 getenv("SECRET_KEY", "secret_key"),
                 expires_in=vs.settings["app"]["session_timeout_minutes"] * 60,
             )

@@ -15,11 +15,6 @@ from flask_login import current_user, LoginManager, login_user, logout_user, log
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
 from importlib import import_module
-from itsdangerous import (
-    TimedJSONWebSignatureSerializer as Serializer,
-    BadSignature,
-    SignatureExpired,
-)
 from logging import info
 from os import getenv
 from traceback import format_exc
@@ -132,7 +127,7 @@ class Server(Flask):
             if rest_request:
                 user = None
                 auth, token = request.headers.get("Authorization", ". .").split()
-                if auth == "Bearer":
+                if False and auth == "Bearer":
                     serializer = Serializer(getenv("SECRET_KEY", "secret_key"))
                     try:
                         user = db.fetch("user", id=serializer.loads(token)["id"])
@@ -373,7 +368,7 @@ class Server(Flask):
         def route(page):
             form_type = request.form.get("form_type")
             endpoint, *args = page.split("/")
-            if request.json:
+            if request.is_json:
                 kwargs = request.json
             elif form_type:
                 if form_type.startswith("initial-") and form_type not in vs.form_class:

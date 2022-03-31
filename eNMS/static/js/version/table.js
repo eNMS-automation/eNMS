@@ -1448,7 +1448,6 @@ tables.changelog = class ChangelogTable extends Table {
   get tableOrdering() {
     return [0, "desc"];
   }
-
 };
 
 tables.session = class SessionTable extends Table {

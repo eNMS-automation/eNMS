@@ -242,7 +242,10 @@ function showResult(id) {
           };
           const content = document.getElementById(`content-${id}`);
           observeMutations(content, ".jsoneditor-string", function (element) {
-            element.innerText = element.innerText.replace(/ /g, '\u00a0').replace(/(?:\\n)/g, "\n");
+            if (!element.mutated) {
+              element.innerText = element.innerText.replace(/ /g, '\u00a0').replace(/(?:\\n)/g, "\n");
+              element.mutated = true;
+            }
           });
           let editor = new JSONEditor(content, options, jsonResult);
         },

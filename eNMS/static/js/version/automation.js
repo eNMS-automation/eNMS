@@ -242,7 +242,7 @@ function showResult(id) {
           };
           const content = document.getElementById(`content-${id}`);
           observeMutations(content, ".jsoneditor-string", function (element) {
-            element.innerText = element.innerText.replace(/(?:\\n)/g, "\n");
+            element.innerText = element.innerText.replace(/ /g, '\u00a0').replace(/(?:\\n)/g, "\n");
           });
           let editor = new JSONEditor(content, options, jsonResult);
         },

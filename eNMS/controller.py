@@ -1324,7 +1324,7 @@ class Controller:
             return {"alert": "Unauthorized authentication method."}
         device = db.fetch("device", id=device_id, rbac="connect")
         port, endpoint = env.get_ssh_port(), str(uuid4())
-        command = f"python3 -m flask run -h 0.0.0.0 -p {port}"
+        command = f"{vs.settings['ssh']['command']} -p {port}"
         if vs.settings["ssh"]["bypass_key_prompt"]:
             options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
         else:

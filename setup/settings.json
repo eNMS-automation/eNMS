@@ -133,6 +133,7 @@
     "channel": ""
   },
   "ssh": {
+    "command": "python3 -m flask run -h 0.0.0.0",
     "bypass_key_prompt": true,
     "credentials": {
       "custom": true,

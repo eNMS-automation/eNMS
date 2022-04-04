@@ -72,6 +72,7 @@ Version 4.2.0
 - Add support for using device credentials in the Rest Call Service (impact on migration files:
   "username" / "password" => "custom_username" / "custom_password"). Don't allow using device credentials
   if the run method is set to "Run Once".
+- Make webssh command configurable from settings / ssh section
 
 Tests:
 - Performances (SQL Column function init)
@@ -96,6 +97,7 @@ Migration:
 - Warn user about REST API run service endpoint new default (True)
 - Update service priority to "current priority + 9" (see migration script in files / script)
 - Update credentials of REST Call services (custom_username, custom_password)
+- Add SSH command in settings.json / ssh section
 
 Documentation update needed for everything, in particular:
 - Redis config in settings.json

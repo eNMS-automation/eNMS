@@ -37,7 +37,6 @@ class Server(Flask):
 
         @self.route("/shutdown", methods=["POST"])
         def shutdown():
-            request.environ.get("werkzeug.server.shutdown")()
             post(
                 f"{getenv('APP_ADDRESS')}/rest/instance/session",
                 json={

@@ -322,7 +322,11 @@ class Database:
             if user.is_authenticated and not user.is_admin:
                 if model in vs.rbac["advanced"]["admin_models"].get(rbac, []):
                     raise self.rbac_error
-                if rbac == "read" and vs.rbac["advanced"]["deactivate_rbac_on_read"]:
+                if (
+                    rbac == "read"
+                    and vs.rbac["advanced"]["deactivate_rbac_on_read"]
+                    and model != "pool"
+                ):
                     return query
                 query = vs.models[model].rbac_filter(query, rbac, user)
         return query

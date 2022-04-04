@@ -18,10 +18,10 @@
   longitude: '1.0'
   model: ''
   name: Top-level Devices and Links
+  networks: []
   nodes: [Router 1, Router 2, Router 3]
   pools: [Everything, All Networks]
   positions: {}
-  networks: []
   subtype: ''
   type: network
   vendor: ''
@@ -33,12 +33,13 @@
   labels:
     ebac22df-1242-4dcd-90b0-fbeeee517991:
       alignment: left
-      content: "- Enter subnetwork 1 and subnetwork 2 and make sure all of them have the\
-        \ expected content.\r\n- Test the backward, forward and upward navigation\
-        \ buttons.\r\n- Test the Network Tree to select any node, including a node that\
-        \ is in a different network:\r\nthe view should immediately switch to the network\
-        \ of the selected node.\r\n- Test using network as a teleport: Subnetwork 1 contains\
-        \ Subnetwork 2 and vice-versa,\r\nto switch from one to the other and back."
+      content: "- Enter subnetwork 1 and subnetwork 2 and make sure all of them have\
+        \ the expected content.\r\n- Test the backward, forward and upward navigation\
+        \ buttons.\r\n- Test the Network Tree to select any node, including a node\
+        \ that is in a different network:\r\nthe view should immediately switch to\
+        \ the network of the selected node.\r\n- Test using network as a teleport:\
+        \ Subnetwork 1 contains Subnetwork 2 and vice-versa,\r\nto switch from one\
+        \ to the other and back."
       positions: [-310, -212]
   last_modified: '2022-01-13 14:59:24.690428'
   latitude: '0.0'
@@ -47,10 +48,10 @@
   longitude: '0.0'
   model: ''
   name: Subnetwork and Teleport Mechanism
+  networks: []
   nodes: [Subnetwork 2, Subnetwork 1]
   pools: [Everything, All Networks]
   positions: {}
-  networks: []
   subtype: ''
   type: network
   vendor: ''
@@ -62,8 +63,9 @@
   labels:
     6eb6d97f-31c8-4a2a-8142-8c1427cea64d:
       alignment: left
-      content: "This subnetwork should contain\r\n- three routers, \"Subnetwork 1 - R1-3\"\
-        \r\n- three links between each pair of routers, \"Subnetwork 1 - L1-3\""
+      content: "This subnetwork should contain\r\n- three routers, \"Subnetwork 1\
+        \ - R1-3\"\r\n- three links between each pair of routers, \"Subnetwork 1 -\
+        \ L1-3\""
       positions: [51, -231]
   last_modified: '2022-01-03 12:55:19.074280'
   latitude: '0.0'
@@ -72,6 +74,7 @@
   longitude: '0.0'
   model: ''
   name: Subnetwork 1
+  networks: [Subnetwork and Teleport Mechanism, Subnetwork 2]
   nodes: [Subnetwork 2, Subnetwork 1 - R1, Subnetwork 1 - R2, Subnetwork 1 - R3]
   pools: [Everything, All Networks]
   positions:
@@ -79,7 +82,6 @@
     'Network 2: Subnetwork and Teleport Mechanism': *id001
     Subnetwork 2: [-15, 43]
     Subnetwork and Teleport Mechanism: *id001
-  networks: [Subnetwork and Teleport Mechanism, Subnetwork 2]
   subtype: ''
   type: network
   vendor: ''
@@ -91,19 +93,19 @@
   labels:
     6bc3e996-eb39-4d52-9294-15cdd7d10f92:
       alignment: left
-      content: "Tests the creation, editing and deletion of networks and the nodes inside\
-        \ it.\r\n- Create three devices: 1 Device, 1 Router and 1 Gateway. The default\
-        \ icon for the Device and Router should be a router,\r\nbut it should a host\
-        \ (computer) for the Gateway.\r\n- Create links between them, including Ethernet\
-        \ Link and Link.\r\n- Edit the name of a node and the name of a link: the\
-        \ name must be instantly\r\nupdated.\r\n- Edit the name of the network and refresh:\
-        \ check that the positions are the same (the \"update\" position of the Network\
-        \ class is replacing old with new positions).\r\n- Delete a device: check\
-        \ that the two connected links are also deleted from the network.\r\nCheck that\
-        \ these objects still exist in the inventory: deleting from a network should\
-        \ not delete the original objects.\r\n- Use the right-click multiple selection\
-        \ rectangle to delete the remaining objects.\r\n- Delete the network itself from\
-        \ the Network table."
+      content: "Tests the creation, editing and deletion of networks and the nodes\
+        \ inside it.\r\n- Create three devices: 1 Device, 1 Router and 1 Gateway.\
+        \ The default icon for the Device and Router should be a router,\r\nbut it\
+        \ should a host (computer) for the Gateway.\r\n- Create links between them,\
+        \ including Ethernet Link and Link.\r\n- Edit the name of a node and the name\
+        \ of a link: the name must be instantly\r\nupdated.\r\n- Edit the name of\
+        \ the network and refresh: check that the positions are the same (the \"update\"\
+        \ position of the Network class is replacing old with new positions).\r\n\
+        - Delete a device: check that the two connected links are also deleted from\
+        \ the network.\r\nCheck that these objects still exist in the inventory: deleting\
+        \ from a network should not delete the original objects.\r\n- Use the right-click\
+        \ multiple selection rectangle to delete the remaining objects.\r\n- Delete\
+        \ the network itself from the Network table."
       positions: [227, -507]
   last_modified: '2022-01-13 14:59:33.685691'
   latitude: '0.0'
@@ -112,10 +114,10 @@
   longitude: '0.0'
   model: ''
   name: Creation, Edit and Deletion
+  networks: []
   nodes: []
   pools: [All Networks, Everything]
   positions: {}
-  networks: []
   subtype: ''
   type: network
   vendor: ''
@@ -127,8 +129,8 @@
   labels:
     56c77f3e-481c-476d-a045-1120b3cb0cc2:
       alignment: left
-      content: "This subnetwork should contain\r\n- two gateways, \"Subnetwork 2 - G1-2\"\
-        \r\n- one link between them, \"Subnetwork 2 - L1\""
+      content: "This subnetwork should contain\r\n- two gateways, \"Subnetwork 2 -\
+        \ G1-2\"\r\n- one link between them, \"Subnetwork 2 - L1\""
       positions: [4, -181]
   last_modified: '2022-01-03 12:55:37.570662'
   latitude: '0.0'
@@ -137,6 +139,7 @@
   longitude: '0.0'
   model: ''
   name: Subnetwork 2
+  networks: [Subnetwork 1, Subnetwork and Teleport Mechanism]
   nodes: [Subnetwork 1, Subnetwork 2 - G1, Subnetwork 2 - G2]
   pools: [Everything, All Networks]
   positions:
@@ -144,7 +147,6 @@
     'Network 2: Subnetwork and Teleport Mechanism': *id002
     Subnetwork 1: [-2, -48]
     Subnetwork and Teleport Mechanism: *id002
-  networks: [Subnetwork 1, Subnetwork and Teleport Mechanism]
   subtype: ''
   type: network
   vendor: ''
@@ -156,10 +158,10 @@
   labels:
     0a8dc15c-8f31-4fe2-b84d-1b2e9680876e:
       alignment: left
-      content: "Tests the duplication of devices, subnetworks and top-level networks.\r\n\
-        - Duplicate \"Duplicate me 1\": the duplicated device should be immediately\
-        \ added to the network.\r\nRefresh and check that it is still displayed at the\
-        \ same position.\r\n- Duplicate \"Duplicate me 2\": the duplicate subnetwork\
+      content: "Tests the duplication of devices, subnetworks and top-level networks.\r\
+        \n- Duplicate \"Duplicate me 1\": the duplicated device should be immediately\
+        \ added to the network.\r\nRefresh and check that it is still displayed at\
+        \ the same position.\r\n- Duplicate \"Duplicate me 2\": the duplicate subnetwork\
         \ should be immediately added to the network.\r\nDouble-click on it to check\
         \ that the content is the same as \"Duplicate me 2\".\r\n- Create a link between\
         \ the two devices.\r\n- Duplicate the top-level network: check that it contains\
@@ -174,10 +176,10 @@
   longitude: '0.0'
   model: ''
   name: Duplication of Devices, Subnetworks and Top-level Networks
+  networks: []
   nodes: [Duplicate me 2, Duplicate me 1]
   pools: [All Networks, Everything]
   positions: {}
-  networks: []
   subtype: ''
   type: network
   vendor: ''
@@ -194,12 +196,12 @@
   longitude: '0.0'
   model: ''
   name: Duplicate me 2
+  networks: ['Duplication of Devices, Subnetworks and Top-level Networks']
   nodes: [Duplication - G1, Duplication - R1]
   pools: [All Networks, Everything]
   positions:
     Duplication of Devices, Subnetworks and Top-level Networks: &id003 [135, 6]
     'Network 4: Duplication of Devices, Subnetworks and Top-level Networks': *id003
-  networks: ['Duplication of Devices, Subnetworks and Top-level Networks']
   subtype: ''
   type: network
   vendor: ''
@@ -229,10 +231,10 @@
   longitude: '0.0'
   model: ''
   name: Loopback and Parallel Links
+  networks: []
   nodes: [S5 R1, S5 R2, S5 R3, S5 R4]
   pools: [Everything, All Networks]
   positions: {}
-  networks: []
   subtype: ''
   type: network
   vendor: ''
@@ -255,10 +257,10 @@
   longitude: '0.0'
   model: ''
   name: Subsubnetwork and Subsubsubnetwork
+  networks: []
   nodes: [L1 Network]
   pools: [Everything, All Networks]
   positions: {}
-  networks: []
   subtype: ''
   type: network
   vendor: ''
@@ -275,12 +277,12 @@
   longitude: '0.0'
   model: ''
   name: L1 Network
+  networks: [Subsubnetwork and Subsubsubnetwork]
   nodes: [L2 Network]
   pools: [Everything, All Networks]
   positions:
     'Network 6: Subsubnetwork and Subsubsubnetwork': &id004 [-27, -55]
     Subsubnetwork and Subsubsubnetwork: *id004
-  networks: [Subsubnetwork and Subsubsubnetwork]
   subtype: ''
   type: network
   vendor: ''
@@ -297,10 +299,10 @@
   longitude: '0.0'
   model: ''
   name: L2 Network
+  networks: [L1 Network]
   nodes: [L3 Network]
   pools: [Everything, All Networks]
   positions: {}
-  networks: [L1 Network]
   subtype: ''
   type: network
   vendor: ''
@@ -317,10 +319,10 @@
   longitude: '0.0'
   model: ''
   name: L3 Network
+  networks: [L2 Network]
   nodes: [S6 L3 R1, S6 L3 R2]
   pools: [Everything, All Networks]
   positions: {}
-  networks: [L2 Network]
   subtype: ''
   type: network
   vendor: ''
@@ -344,10 +346,10 @@
   longitude: '0.0'
   model: ''
   name: Layout of Large Graph
+  networks: []
   nodes: []
   pools: [Everything, All Networks]
   positions: {}
-  networks: []
   subtype: ''
   type: network
   vendor: ''
@@ -382,10 +384,10 @@
   longitude: '0.0'
   model: ''
   name: Import with Add Connected Nodes and Links
+  networks: []
   nodes: []
   pools: [All Networks, Everything]
   positions: {}
-  networks: []
   subtype: ''
   type: network
   vendor: ''
@@ -405,13 +407,13 @@
   longitude: '0.0'
   model: ''
   name: Large Network Display
+  networks: []
   nodes: [Oakland, Columbus, Austin, Houston, Austin-2, Washington, Orange, Dallas-3,
     Baltimore, PaloAlto, SanJose, Cleveland, Jackson, Richmond, Cambridge, Chicago,
     Philadelphia, Cincinnati, NewYork, Minneapolis, SanFrancisco, Atlanta, Detroit,
     Denver, Sacramento, SanDiego, LosAngeles, Boston, Dallas-2, Dallas]
   pools: [Everything, All Networks]
   positions: {}
-  networks: []
   subtype: ''
   type: network
   vendor: ''

@@ -194,6 +194,7 @@ function deleteSelection() {
     data: selection,
     callback: function (updateTime) {
       network.deleteSelected();
+      network.setSelection({ nodes: [], edges: [] });
       const edgeType = type == "network" ? "links" : "edges";
       instance[`${nodeType}s`] = instance[`${nodeType}s`].filter(
         (n) => !selection.nodes.includes(n.id)

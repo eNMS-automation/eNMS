@@ -7917,8 +7917,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
-  pull: true
-  add_commit: true
+  actions: [add_commit, pull, push]
   admin_only: false
   commit_message: Automatic commit (configurations)
   completion_time: 1
@@ -7978,7 +7977,6 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  push: true
   relative_path: true
   reply_to: ''
   reserved: false

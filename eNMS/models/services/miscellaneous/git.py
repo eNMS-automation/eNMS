@@ -49,7 +49,7 @@ class GitForm(ServiceForm):
         choices=(
             ("clone", "Clone"),
             ("shallow_clone", "Shallow Clone"),
-            ("add_commit", "Do 'git add' and commit")
+            ("add_commit", "Do 'git add' and commit"),
             ("pull", "Pull"),
             ("push", "Push"),
         )

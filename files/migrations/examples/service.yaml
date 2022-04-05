@@ -7917,7 +7917,7 @@
   visualization_target: false
   waiting_time: 0
 - access_groups: ''
-  action: pull
+  pull: true
   add_commit: true
   admin_only: false
   commit_message: Automatic commit (configurations)

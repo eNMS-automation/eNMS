@@ -14,7 +14,7 @@ class GitService(Service):
     pretty_name = "Git Action"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
     action = db.Column(db.SmallString, default="none")
-    git_repository = db.Column(db.SmallString)
+    local_repository = db.Column(db.SmallString)
     relative_path = db.Column(Boolean, default=False)
     remote_repository = db.Column(db.SmallString)
     add_commit = db.Column(Boolean, default=False)
@@ -24,7 +24,7 @@ class GitService(Service):
     __mapper_args__ = {"polymorphic_identity": "git_service"}
 
     def job(self, run, device=None):
-        local_path = run.sub(run.git_repository, locals())
+        local_path = run.sub(run.local_repository, locals())
         if self.action in ("clone", "shallow_clone"):
             remote_path, kwargs = run.sub(run.remote_repository, locals()), {}
             if self.action == "shallow_clone":
@@ -52,7 +52,7 @@ class GitForm(ServiceForm):
             ("shallow_clone", "Shallow Clone"),
         )
     )
-    git_repository = StringField("Path to Local Git Repository")
+    local_repository = StringField("Path to Local Git Repository")
     relative_path = BooleanField("Path is relative to eNMS folder")
     remote_repository = StringField("Path to Remote Git Repository")
     add_commit = BooleanField("Do 'git add' and commit")

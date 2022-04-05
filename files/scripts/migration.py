@@ -19,6 +19,7 @@ def update_property(project, value=None, types=None):
                 obj["custom_password"] = obj.pop("password", "")
             if obj["type"] == "git_service":
                 obj["action"] = "pull" if obj.pop("pull", False) else "none"
+                obj["local_repository"] = obj.pop("git_repository", "")
         with open(path / f"{instance_type}.yaml", "w") as migration_file:
             yaml.dump(objects, migration_file)
 

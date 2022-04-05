@@ -7935,7 +7935,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  git_repository: network_data
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7945,6 +7944,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2020-07-20 04:43:07.649203'
+  local_repository: network_data
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false

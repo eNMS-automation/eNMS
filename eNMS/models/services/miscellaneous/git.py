@@ -4,7 +4,7 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 
 from eNMS.database import db
 from eNMS.forms import ServiceForm
-from eNMS.fields import BooleanField, HiddenField, StringField
+from eNMS.fields import BooleanField, HiddenField, SelectField, StringField
 from eNMS.models.automation import Service
 
 
@@ -15,7 +15,7 @@ class GitService(Service):
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
     git_repository = db.Column(db.SmallString)
     relative_path = db.Column(Boolean, default=False)
-    pull = db.Column(Boolean, default=False)
+    action = db.Column(db.SmallString, default="none")
     add_commit = db.Column(Boolean, default=False)
     commit_message = db.Column(db.LargeString)
     push = db.Column(Boolean, default=False)
@@ -42,7 +42,14 @@ class GitForm(ServiceForm):
     form_type = HiddenField(default="git_service")
     git_repository = StringField("Path to Local Git Repository")
     relative_path = BooleanField("Path is relative to eNMS folder")
-    pull = BooleanField("Git Pull")
+    action = SelectField(
+        choices=(
+            ("none", "None"),
+            ("pull", "Pull"),
+            ("clone", "Clone"),
+            ("shallow_clone", "Shallow Clone"),
+        )
+    )
     add_commit = BooleanField("Do 'git add' and commit")
     commit_message = StringField("Commit Message")
     push = BooleanField("Git Push")

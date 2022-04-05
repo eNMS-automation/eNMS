@@ -42,9 +42,6 @@ class GitService(Service):
 
 class GitForm(ServiceForm):
     form_type = HiddenField(default="git_service")
-    local_repository = StringField("Path to Local Git Repository")
-    relative_path = BooleanField("Path is relative to eNMS folder")
-    remote_repository = StringField("Path to Remote Git Repository")
     actions = SelectMultipleField(
         choices=(
             ("clone", "Clone"),
@@ -54,4 +51,7 @@ class GitForm(ServiceForm):
             ("push", "Push"),
         )
     )
+    local_repository = StringField("Path to Local Git Repository")
+    relative_path = BooleanField("Path is relative to eNMS folder")
+    remote_repository = StringField("Path to Remote Git Repository")
     commit_message = StringField("Commit Message")

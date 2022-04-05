@@ -23,7 +23,7 @@ class GitService(Service):
 
     def job(self, run, device=None):
         local_path = run.sub(run.local_repository, locals())
-        if self.actions & {"clone", "shallow_clone"}:
+        if set(self.actions) & {"clone", "shallow_clone"}:
             remote_path, kwargs = run.sub(run.remote_repository, locals()), {}
             if "shallow_clone" in self.actions:
                 kwargs.udpate({"filter": "{tree:0,blob:none}", "sparse": True})
@@ -51,7 +51,7 @@ class GitForm(ServiceForm):
             ("push", "Push"),
         )
     )
-    local_repository = StringField("Path to Local Git Repository")
+    local_repository = StringField("Path to Local Git Repository", substitution=True)
     relative_path = BooleanField("Path is relative to eNMS folder")
-    remote_repository = StringField("Path to Remote Git Repository")
+    remote_repository = StringField("Path to Remote Git Repository", substitution=True)
     commit_message = StringField("Commit Message")

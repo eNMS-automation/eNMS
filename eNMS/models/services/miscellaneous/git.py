@@ -23,16 +23,18 @@ class GitService(Service):
 
     def job(self, run, device=None):
         local_path = run.sub(run.local_repository, locals())
+        if self.relative_path:
+            local_path = Path.cwd() / local_path
         if set(self.actions) & {"clone", "shallow_clone"}:
             remote_path, kwargs = run.sub(run.remote_repository, locals()), {}
             if "shallow_clone" in self.actions:
-                kwargs.udpate({"filter": "{tree:0,blob:none}", "sparse": True})
+                kwargs.update({"filter": "combine:tree:1+blob:none", "sparse": True})
             repo = Repo.clone_from(remote_path, local_path, **kwargs)
         else:
-            repo = Repo(Path.cwd() / local_path if self.relative_path else local_path)
+            repo = Repo(local_path)
         if "add_commit" in self.actions:
             repo.git.add(A=True)
-            repo.git.commit(m=self.commit_message)
+            repo.git.commit(m=f'"{self.commit_message}"')
         if "pull" in self.actions:
             repo.remotes.origin.pull()
         if "push" in self.actions:

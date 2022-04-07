@@ -32,6 +32,7 @@ class NetmikoBackupService(ConnectionService):
     fast_cli = db.Column(Boolean, default=False)
     timeout = db.Column(Integer, default=10.0)
     global_delay_factor = db.Column(Float, default=1.0)
+    local_path = db.Column(db.SmallString, default="network_data")
     property = db.Column(db.SmallString)
     commands = db.Column(db.List)
     replacements = db.Column(db.List)
@@ -48,7 +49,8 @@ class NetmikoBackupService(ConnectionService):
     __mapper_args__ = {"polymorphic_identity": "netmiko_backup_service"}
 
     def job(self, run, device):
-        path = Path.cwd() / "network_data" / device.name
+        local_path = run.sub(run.local_path, locals())
+        path = Path.cwd() / local_path / device.name
         path.mkdir(parents=True, exist_ok=True)
         try:
             runtime = datetime.now()
@@ -114,12 +116,13 @@ class DataBackupForm(NetmikoForm):
         "Configuration Property to Update",
         choices=list(vs.configuration_properties.items()),
     )
+    local_path = StringField("Local Path", default="network_data")
     commands = FieldList(FormField(CommandsForm), min_entries=12)
     replacements = FieldList(FormField(ReplacementForm), min_entries=12)
     add_header = BooleanField("Add header for each ommand", default=True)
     groups = {
         "Target property and commands": {
-            "commands": ["property", "add_header", "commands"],
+            "commands": ["property", "local_path", "add_header", "commands"],
             "default": "expanded",
         },
         "Search Response & Replace": {

@@ -29,6 +29,7 @@ class NapalmBackupService(ConnectionService):
     use_device_driver = db.Column(Boolean, default=True)
     timeout = db.Column(Integer, default=60)
     optional_args = db.Column(db.Dict)
+    local_path = db.Column(db.SmallString, default="network_data")
     property = db.Column(db.SmallString)
     getters = db.Column(db.List)
     replacements = db.Column(db.List)
@@ -36,7 +37,8 @@ class NapalmBackupService(ConnectionService):
     __mapper_args__ = {"polymorphic_identity": "napalm_backup_service"}
 
     def job(self, run, device):
-        path = Path.cwd() / "network_data" / device.name
+        local_path = run.sub(run.local_path, locals())
+        path = Path.cwd() / local_path / device.name
         path.mkdir(parents=True, exist_ok=True)
         try:
             runtime = datetime.now()
@@ -91,6 +93,7 @@ class NapalmBackupForm(NapalmForm):
         "Configuration Property to Update",
         choices=list(vs.configuration_properties.items()),
     )
+    local_path = StringField("Local Path", default="network_data")
     getters = SelectMultipleField(choices=vs.automation["napalm"]["getters"])
     replacements = FieldList(FormField(ReplacementForm), min_entries=3)
     groups = {

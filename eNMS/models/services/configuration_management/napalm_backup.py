@@ -98,7 +98,7 @@ class NapalmBackupForm(NapalmForm):
     replacements = FieldList(FormField(ReplacementForm), min_entries=3)
     groups = {
         "Target Property and Getters": {
-            "commands": ["property", "getters"],
+            "commands": ["property", "local_path", "getters"],
             "default": "expanded",
         },
         "Search Response & Replace": {

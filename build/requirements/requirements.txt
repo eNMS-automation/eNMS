@@ -10,7 +10,7 @@ gunicorn
 itsdangerous==2.0.1
 napalm
 ncclient
-netmiko
+netmiko==3.4.0
 passlib
 redis
 ruamel.yaml

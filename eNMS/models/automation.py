@@ -67,7 +67,6 @@ class Service(AbstractBase):
     )
     update_target_pools = db.Column(Boolean, default=False)
     update_pools_after_running = db.Column(Boolean, default=False)
-    visualization_target = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.TinyString, default="mail")
     notification_header = db.Column(db.LargeString)

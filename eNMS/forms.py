@@ -563,14 +563,7 @@ class RunServiceForm(BaseForm):
     form_type = HiddenField(default="run_service")
     targets = HiddenField()
     type = HiddenField()
-    service = InstanceField(
-        "Services",
-        model="service",
-        constraints={
-            "visualization_target": True,
-            "visualization_target_filter": "equality",
-        },
-    )
+    service = InstanceField("Services", model="service")
 
 
 class ServerForm(BaseForm):
@@ -605,7 +598,6 @@ class ServiceForm(BaseForm):
     target_pools = MultipleInstanceField("Pools", model="pool")
     update_target_pools = BooleanField("Update target pools before running")
     update_pools_after_running = BooleanField("Update pools after running")
-    visualization_target = BooleanField("Visualization Target")
     workflows = MultipleInstanceField("Workflows", model="workflow")
     owners = MultipleInstanceField("Owners", model="user")
     owners_access = SelectMultipleStringField(

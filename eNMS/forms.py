@@ -229,7 +229,7 @@ class FormFactory:
             access_type = SelectMultipleStringField(
                 "Access Type",
                 choices=vs.dualize(
-                    ["Read", "Edit", "Run", "Schedule", "Connect", "Use as target"]
+                    ["Read", "Inspect", "Edit", "Run", "Schedule", "Connect", "Use as target"]
                 ),
             )
             relations = ["pools", "services"]

@@ -394,10 +394,18 @@ class Controller:
             ).filter(intersect_table.id == constraint_dict["intersect"]["id"])
         return query
 
+    def filtering_rbac(self, **kwargs):
+        type = kwargs.get("type")
+        form, constraints = kwargs.get("form", {}), kwargs.get("constraints", {})
+        if type == "configuration" and set(form) & set(vs.configuration_properties):
+            return "inspect"
+
     def filtering(
         self, model, bulk=False, rbac="read", username=None, properties=None, **kwargs
     ):
         table = vs.models[model]
+        if rbac == "read":
+            rbac = self.filtering_rbac(**kwargs) or "read"
         query = db.query(model, rbac, username, properties=properties)
         if not bulk and not properties:
             total_records = query.with_entities(table.id).count()
@@ -469,7 +477,7 @@ class Controller:
         return "\n".join(device_logs)
 
     def get_device_network_data(self, device_id):
-        device = db.fetch("device", id=device_id)
+        device = db.fetch("device", id=device_id, rbac="inspect")
         return {
             property: vs.custom.parse_configuration_property(device, property)
             for property in vs.configuration_properties

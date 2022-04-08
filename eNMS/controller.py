@@ -545,6 +545,7 @@ class Controller:
         return db.fetch("result", id=id).result
 
     def get_runtimes(self, id, display=None):
+        db.fetch("service", id=id, rbac="inspect")
         kwargs = {"allow_none": True, "all_matches": True, "service_id": id}
         if display == "user":
             kwargs["creator"] = current_user.name

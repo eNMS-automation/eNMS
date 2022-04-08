@@ -478,7 +478,7 @@ export function showDeviceResultsPanel(device) {
           });
         },
       });
-    }
+    },
   });
 }
 

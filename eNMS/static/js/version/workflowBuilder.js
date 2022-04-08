@@ -738,7 +738,7 @@ function compareWorkflowResults() {
           new tables["full_result"](mainId, constraints);
         },
       });
-    }
+    },
   });
 }
 

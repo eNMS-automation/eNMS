@@ -403,7 +403,7 @@ class Controller:
             and kwargs.get("type") == "configuration"
             and set(kwargs.get("form", {})) & set(vs.configuration_properties)
         ):
-            rbac = "inspect"
+            rbac = "configuration"
         query = db.query(model, rbac, username, properties=properties)
         if not bulk and not properties:
             total_records = query.with_entities(table.id).count()
@@ -475,7 +475,7 @@ class Controller:
         return "\n".join(device_logs)
 
     def get_device_network_data(self, device_id):
-        device = db.fetch("device", id=device_id, rbac="inspect")
+        device = db.fetch("device", id=device_id, rbac="configuration")
         return {
             property: vs.custom.parse_configuration_property(device, property)
             for property in vs.configuration_properties
@@ -504,7 +504,7 @@ class Controller:
             env.log("error", f"Update of device configurations failed ({str(exc)})")
 
     def get_git_history(self, device_id):
-        device = db.fetch("device", id=device_id, rbac="inspect")
+        device = db.fetch("device", id=device_id, rbac="configuration")
         repo = Repo(vs.path / "network_data")
         path = vs.path / "network_data" / device.name
         return {
@@ -517,7 +517,7 @@ class Controller:
 
     def get_git_network_data(self, device_name, hash):
         commit, result = Repo(vs.path / "network_data").commit(hash), {}
-        device = db.fetch("device", name=device_name, rbac="inspect")
+        device = db.fetch("device", name=device_name, rbac="configuration")
         for property in vs.configuration_properties:
             try:
                 file = commit.tree / device_name / property
@@ -536,14 +536,10 @@ class Controller:
     def get_properties(self, model, id):
         return db.fetch(model, id=id).get_properties()
 
-    def get_rbac(self, model, rbac, id):
-        db.fetch(model, id=id, rbac=rbac)
-
     def get_result(self, id):
         return db.fetch("result", id=id).result
 
     def get_runtimes(self, id, display=None):
-        db.fetch("service", id=id, rbac="inspect")
         kwargs = {"allow_none": True, "all_matches": True, "service_id": id}
         if display == "user":
             kwargs["creator"] = current_user.name

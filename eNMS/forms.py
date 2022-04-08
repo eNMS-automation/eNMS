@@ -231,7 +231,7 @@ class FormFactory:
                 choices=vs.dualize(
                     [
                         "Read",
-                        "Inspect",
+                        "Configuration",
                         "Edit",
                         "Run",
                         "Schedule",

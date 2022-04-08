@@ -225,7 +225,7 @@
 - access_pools: [Everything]
   access_type: "['Read', 'Edit', 'Run', 'Schedule', 'Connect', 'Use as target']"
   delete_requests: [/rest/instance]
-  description: Full Access except "Inspect" to Everything
+  description: Full Access except "Configuration" to Everything
   get_requests: [/changelog_table, /compare_form, /configuration_table, /confirmation_form,
     /device_data_form, /device_table, /download_file, /event_table, /export_service,
     /files_form, /logical_view, /geographical_view, /git_history_form, /instance_deletion_form,

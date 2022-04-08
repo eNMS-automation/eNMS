@@ -18,7 +18,7 @@
         },
         "Sessions": {
           "endpoint": "/session_table",
-          "rbac": "access"
+          "rbac": "admin"
         }
       }
     },
@@ -155,8 +155,8 @@
     "/run_table": "access",
     "/server_table": "admin",
     "/service_table": "access",
-    "/session_log_form": "access",
-    "/session_table": "access",
+    "/session_log_form": "admin",
+    "/session_table": "admin",
     "/network_table": "access",
     "/table_form": "access",
     "/task_table": "access",
@@ -209,7 +209,7 @@
     "/get_runtimes": "all",
     "/get_view_topology": "access",
     "/get_service_state": "access",
-    "/get_session_log": "access",
+    "/get_session_log": "admin",
     "/get_network_state": "access",
     "/get_top_level_instances": "access",
     "/get_tree_files": "access",

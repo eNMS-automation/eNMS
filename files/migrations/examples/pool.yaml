@@ -155,11 +155,11 @@
   network_name: .*
   network_name_invert: false
   network_name_match: regex
-  networks: [L3 Network, Large Network Display, 'Creation, Edit and Deletion', Layout
-      of Large Graph, Subnetwork 1, Import with Add Connected Nodes and Links, 'Duplication
-      of Devices, Subnetworks and Top-level Networks', Duplicate me 2, Subnetwork
-      2, L2 Network, L1 Network, Subnetwork and Teleport Mechanism, Top-level Devices
-      and Links, Loopback and Parallel Links, Subsubnetwork and Subsubsubnetwork]
+  networks: [Import with Add Connected Nodes and Links, Duplicate me 2, L1 Network,
+    Subnetwork 2, Loopback and Parallel Links, Top-level Devices and Links, Subnetwork
+      1, Large Network Display, Subnetwork and Teleport Mechanism, Subsubnetwork and
+      Subsubsubnetwork, L3 Network, 'Duplication of Devices, Subnetworks and Top-level
+      Networks', 'Creation, Edit and Deletion', L2 Network, Layout of Large Graph]
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -2481,7 +2481,7 @@
   user_name: .*
   user_name_invert: false
   user_name_match: regex
-  users: [admin, readonly, chicago, sf, ny, nadmin, ui, demo]
+  users: [admin, readonly, chicago, sf, ny, nadmin, ui, demo, ninspect]
 - access_groups: ''
   admin_only: true
   creator: admin
@@ -3430,11 +3430,11 @@
   network_name: .*
   network_name_invert: false
   network_name_match: regex
-  networks: [L3 Network, Large Network Display, 'Creation, Edit and Deletion', Layout
-      of Large Graph, Subnetwork 1, Import with Add Connected Nodes and Links, 'Duplication
-      of Devices, Subnetworks and Top-level Networks', Duplicate me 2, Subnetwork
-      2, L2 Network, L1 Network, Subnetwork and Teleport Mechanism, Top-level Devices
-      and Links, Loopback and Parallel Links, Subsubnetwork and Subsubsubnetwork]
+  networks: [Import with Add Connected Nodes and Links, Duplicate me 2, L1 Network,
+    Subnetwork 2, Loopback and Parallel Links, Top-level Devices and Links, Subnetwork
+      1, Large Network Display, Subnetwork and Teleport Mechanism, Subsubnetwork and
+      Subsubsubnetwork, L3 Network, 'Duplication of Devices, Subnetworks and Top-level
+      Networks', 'Creation, Edit and Deletion', L2 Network, Layout of Large Graph]
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false

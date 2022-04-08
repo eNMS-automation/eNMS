@@ -34,3 +34,6 @@
 - {authentication: database, description: Read Only user, email: demo@enms.io, groups: '',
   is_admin: false, name: demo, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQwM3FQc1pieTNwdnpmZytCOEw1M3JnJHVPYjJ0RGdjUU45MUI2TEdPYkhOaVE=,
   small_menu: true, theme: default, type: user}
+- {authentication: database, description: User that has access to everything without
+    inspection, email: '', groups: '', is_admin: false, name: ninspect, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRqakZHeURtSE1FWUk0UndqSkFRZ0JBJDcxS3hNQjJtRCtvaCs5cHpvWm9SQ0E=,
+  small_menu: false, theme: default, type: user}

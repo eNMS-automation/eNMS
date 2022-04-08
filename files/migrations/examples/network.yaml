@@ -49,7 +49,7 @@
   model: ''
   name: Subnetwork and Teleport Mechanism
   networks: []
-  nodes: [Subnetwork 2, Subnetwork 1]
+  nodes: [Subnetwork 1, Subnetwork 2]
   pools: [Everything, All Networks]
   positions: {}
   subtype: ''
@@ -396,8 +396,13 @@
   creator: admin
   description: ''
   icon: network
-  labels: {}
-  last_modified: '2022-01-13 15:00:37.344648'
+  labels:
+    dd9f97d0-c3ed-4535-b217-86dc1371fd09:
+      alignment: left
+      content: rgthyju
+      positions: [-144, -368]
+      size: 55
+  last_modified: '2022-04-08 07:23:32.302700'
   latitude: '0.0'
   links: [link22, link13, link20, link0, link5, link23, link19, link21, link7, link18,
     link15, link3, link4, link17, link10, link27, link25-3, link14, link16, link25-reversed,

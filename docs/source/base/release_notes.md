@@ -72,6 +72,9 @@ Version 4.2.0
   "username" / "password" => "custom_username" / "custom_password"). Don't allow using device credentials
   if the run method is set to "Run Once".
 - Make webssh command configurable from settings / ssh section
+- Add new label size property to configure label size in workflow and network builder
+- Add new "inspect" RBAC mode
+- Make "sessions" an admin model (visible only to admin users)
 
 Tests:
 - Performances (SQL Column function init)

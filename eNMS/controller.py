@@ -538,6 +538,9 @@ class Controller:
     def get_properties(self, model, id):
         return db.fetch(model, id=id).get_properties()
 
+    def get_rbac(self, model, rbac, id):
+        db.fetch(model, id=id, rbac=rbac)
+
     def get_result(self, id):
         return db.fetch("result", id=id).result
 

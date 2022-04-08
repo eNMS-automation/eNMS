@@ -268,6 +268,7 @@ class Controller:
             "positions": [x, y],
             "content": kwargs["text"],
             "alignment": kwargs["alignment"],
+            "size": kwargs["size"],
         }
         workflow.labels[label_id] = label
         return {"id": label_id, **label}

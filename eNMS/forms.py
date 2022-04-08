@@ -856,6 +856,7 @@ class WorkflowLabelForm(BaseForm):
     form_type = HiddenField(default="label")
     action = "eNMS.builder.createLabel"
     text = StringField(widget=TextArea(), render_kw={"rows": 15})
+    size = IntegerField("Font Size", default=14)
     alignment = SelectField(
         "Text Alignment",
         choices=(("left", "Left"), ("center", "Center"), ("right", "Right")),

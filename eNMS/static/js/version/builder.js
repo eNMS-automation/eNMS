@@ -139,6 +139,7 @@ export function showLabelPanel({ label, usePosition }) {
     callback: () => {
       if (label) {
         $("#label-text").val(label.label);
+        $("#label-size").val(label.font.size);
         $("#label-alignment").val(label.font.align).selectpicker("refresh");
         currentLabel = label;
       } else {
@@ -168,7 +169,7 @@ export function drawLabel(id, label) {
     id: id,
     shape: "box",
     type: "label",
-    font: { align: label.alignment || "center" },
+    font: { align: label.alignment || "center", size: label.size },
     label: label.content,
     borderWidth: 0,
     color: "#FFFFFF",

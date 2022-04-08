@@ -35,5 +35,5 @@
   is_admin: false, name: demo, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQwM3FQc1pieTNwdnpmZytCOEw1M3JnJHVPYjJ0RGdjUU45MUI2TEdPYkhOaVE=,
   small_menu: true, theme: default, type: user}
 - {authentication: database, description: User that has access to everything without
-    configuration, email: '', groups: '', is_admin: false, name: nconfig, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRqakZHeURtSE1FWUk0UndqSkFRZ0JBJDcxS3hNQjJtRCtvaCs5cHpvWm9SQ0E=,
+    configuration, email: '', groups: '', is_admin: false, name: nconfig, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCR5NW5UMnZzL0J5QkV5QmxEeUZucnZRJE9ueWc0QXkvUW4yaGdpL0xTc1VNeHc=,
   small_menu: false, theme: default, type: user}

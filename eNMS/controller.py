@@ -506,7 +506,7 @@ class Controller:
             env.log("error", f"Update of device configurations failed ({str(exc)})")
 
     def get_git_history(self, device_id):
-        device = db.fetch("device", id=device_id)
+        device = db.fetch("device", id=device_id, rbac="inspect")
         repo = Repo(vs.path / "network_data")
         path = vs.path / "network_data" / device.name
         return {
@@ -519,7 +519,7 @@ class Controller:
 
     def get_git_network_data(self, device_name, hash):
         commit, result = Repo(vs.path / "network_data").commit(hash), {}
-        device = db.fetch("device", name=device_name)
+        device = db.fetch("device", name=device_name, rbac="inspect")
         for property in vs.configuration_properties:
             try:
                 file = commit.tree / device_name / property

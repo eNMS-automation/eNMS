@@ -694,46 +694,51 @@ export function getWorkflowState(periodic, first) {
 
 function compareWorkflowResults() {
   const mainId = parseInt(currentPath.split(">")[0]);
-  openPanel({
-    content: `
-      <div class="modal-body">
-        <div id="tooltip-overlay" class="overlay"></div>
-        <form
-          id="search-form-full_result-${mainId}"
-          class="form-horizontal form-label-left"
-          method="post"
-        >
-          <nav
-            id="controls-full_result-${mainId}"
-            class="navbar navbar-default nav-controls"
-            role="navigation"
-          >
-            <button
-              style="background:transparent; border:none; color:transparent;"
-              type="button"
-            ></button>
-          </nav>
-          <table
-            id="table-full_result-${mainId}"
-            class="table table-striped table-bordered table-hover"
-            cellspacing="0"
-            width="100%"
-          ></table>
-        </form>
-      </div>`,
-    size: "1000 600",
-    name: "result_comparison",
-    type: "full_result",
-    title: "Result Comparison",
-    id: mainId,
-    callback: function () {
-      let constraints = {
-        parent_service_id: currentPath.split(">")[0],
-        parent_service_id_filter: "equality",
-      };
-      // eslint-disable-next-line new-cap
-      new tables["full_result"](mainId, constraints);
-    },
+  call({
+    url: `/get_rbac/service/inspect/${mainId}`,
+    callback: () => {
+      openPanel({
+        content: `
+          <div class="modal-body">
+            <div id="tooltip-overlay" class="overlay"></div>
+            <form
+              id="search-form-full_result-${mainId}"
+              class="form-horizontal form-label-left"
+              method="post"
+            >
+              <nav
+                id="controls-full_result-${mainId}"
+                class="navbar navbar-default nav-controls"
+                role="navigation"
+              >
+                <button
+                  style="background:transparent; border:none; color:transparent;"
+                  type="button"
+                ></button>
+              </nav>
+              <table
+                id="table-full_result-${mainId}"
+                class="table table-striped table-bordered table-hover"
+                cellspacing="0"
+                width="100%"
+              ></table>
+            </form>
+          </div>`,
+        size: "1000 600",
+        name: "result_comparison",
+        type: "full_result",
+        title: "Result Comparison",
+        id: mainId,
+        callback: function () {
+          let constraints = {
+            parent_service_id: currentPath.split(">")[0],
+            parent_service_id_filter: "equality",
+          };
+          // eslint-disable-next-line new-cap
+          new tables["full_result"](mainId, constraints);
+        },
+      });
+    }
   });
 }
 

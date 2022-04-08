@@ -263,8 +263,8 @@
   },
   "advanced": {
     "admin_models": {
-      "read": ["access", "credential", "server"],
-      "edit": ["access", "credential", "server", "user"]
+      "read": ["access", "credential", "server", "session"],
+      "edit": ["access", "credential", "server", "user", "session"]
     },
     "deactivate_rbac_on_read": true
   }

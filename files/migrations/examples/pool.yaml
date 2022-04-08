@@ -155,11 +155,12 @@
   network_name: .*
   network_name_invert: false
   network_name_match: regex
-  networks: [Subnetwork 2, L1 Network, L3 Network, 'Creation, Edit and Deletion',
-    Top-level Devices and Links, Loopback and Parallel Links, Import with Add Connected
-      Nodes and Links, Subnetwork and Teleport Mechanism, L2 Network, Subsubnetwork
-      and Subsubsubnetwork, Subnetwork 1, Duplicate me 2, Layout of Large Graph, Large
-      Network Display, 'Duplication of Devices, Subnetworks and Top-level Networks']
+  networks: ['Duplication of Devices, Subnetworks and Top-level Networks', Subnetwork
+      and Teleport Mechanism, Subsubnetwork and Subsubsubnetwork, Import with Add
+      Connected Nodes and Links, L2 Network, Subnetwork 1, L3 Network, Duplicate me
+      2, Loopback and Parallel Links, Top-level Devices and Links, 'Creation, Edit
+      and Deletion', Subnetwork 2, Layout of Large Graph, Large Network Display, L1
+      Network]
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -362,8 +363,8 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['[Skip in SxS with service targets and Run Once services] Run
-      Once with Pool', Large Device Configuration and Operational Data]
+  target_services: [Large Device Configuration and Operational Data, '[Skip in SxS
+      with service targets and Run Once services] Run Once with Pool']
   tasks: []
   type: pool
   user_description: ''
@@ -1294,8 +1295,8 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: [Parameterized Targets, '[(R) Operational Data Backup Service]
-      Retrieve Operational Data', Parameterized Run with a Superworkflow]
+  target_services: ['[(R) Operational Data Backup Service] Retrieve Operational Data',
+    Parameterized Targets, Parameterized Run with a Superworkflow]
   tasks: []
   type: pool
   user_description: ''
@@ -3430,11 +3431,12 @@
   network_name: .*
   network_name_invert: false
   network_name_match: regex
-  networks: [Subnetwork 2, L1 Network, L3 Network, 'Creation, Edit and Deletion',
-    Top-level Devices and Links, Loopback and Parallel Links, Import with Add Connected
-      Nodes and Links, Subnetwork and Teleport Mechanism, L2 Network, Subsubnetwork
-      and Subsubsubnetwork, Subnetwork 1, Duplicate me 2, Layout of Large Graph, Large
-      Network Display, 'Duplication of Devices, Subnetworks and Top-level Networks']
+  networks: ['Duplication of Devices, Subnetworks and Top-level Networks', Subnetwork
+      and Teleport Mechanism, Subsubnetwork and Subsubsubnetwork, Import with Add
+      Connected Nodes and Links, L2 Network, Subnetwork 1, L3 Network, Duplicate me
+      2, Loopback and Parallel Links, Top-level Devices and Links, 'Creation, Edit
+      and Deletion', Subnetwork 2, Layout of Large Graph, Large Network Display, L1
+      Network]
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -3974,4 +3976,4 @@
   user_name: nconfig
   user_name_invert: false
   user_name_match: equality
-  users: []
+  users: [nconfig]

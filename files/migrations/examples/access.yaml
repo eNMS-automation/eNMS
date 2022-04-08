@@ -1,6 +1,6 @@
 - access_pools: [Everything]
-  access_type: "['Read', 'Inspect', 'Edit', 'Run', 'Schedule', 'Connect', 'Use as\
-    \ target']"
+  access_type: "['Read', 'Configuration', 'Edit', 'Run', 'Schedule', 'Connect', 'Use\
+    \ as target']"
   delete_requests: [/rest/instance]
   description: Full Access to Everything
   get_requests: [/changelog_table, /compare_form, /configuration_table, /confirmation_form,
@@ -223,8 +223,7 @@
   upper_menu: []
   user_pools: [User ny]
 - access_pools: [Everything]
-  access_type: "['Read', 'Configuration', 'Edit', 'Run', 'Schedule', 'Connect', 'Use\
-    \ as target']"
+  access_type: "['Read', 'Edit', 'Run', 'Schedule', 'Connect', 'Use as target']"
   delete_requests: [/rest/instance]
   description: Full Access without Configuration
   get_requests: [/changelog_table, /compare_form, /configuration_table, /confirmation_form,

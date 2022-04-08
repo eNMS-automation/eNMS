@@ -155,11 +155,11 @@
   network_name: .*
   network_name_invert: false
   network_name_match: regex
-  networks: [Import with Add Connected Nodes and Links, Duplicate me 2, L1 Network,
-    Subnetwork 2, Loopback and Parallel Links, Top-level Devices and Links, Subnetwork
-      1, Large Network Display, Subnetwork and Teleport Mechanism, Subsubnetwork and
-      Subsubsubnetwork, L3 Network, 'Duplication of Devices, Subnetworks and Top-level
-      Networks', 'Creation, Edit and Deletion', L2 Network, Layout of Large Graph]
+  networks: [Subnetwork 2, L1 Network, L3 Network, 'Creation, Edit and Deletion',
+    Top-level Devices and Links, Loopback and Parallel Links, Import with Add Connected
+      Nodes and Links, Subnetwork and Teleport Mechanism, L2 Network, Subsubnetwork
+      and Subsubsubnetwork, Subnetwork 1, Duplicate me 2, Layout of Large Graph, Large
+      Network Display, 'Duplication of Devices, Subnetworks and Top-level Networks']
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -200,7 +200,7 @@
   user_name: .*
   user_name_invert: false
   user_name_match: regex
-  users: [admin, readonly, chicago, sf, ny, nadmin, ui, demo, ninspect]
+  users: [admin, readonly, chicago, sf, ny, nadmin, ui, demo, nconfig]
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -2481,7 +2481,7 @@
   user_name: .*
   user_name_invert: false
   user_name_match: regex
-  users: [admin, readonly, chicago, sf, ny, nadmin, ui, demo, ninspect]
+  users: [admin, readonly, chicago, sf, ny, nadmin, ui, demo, nconfig]
 - access_groups: ''
   admin_only: true
   creator: admin
@@ -3430,11 +3430,11 @@
   network_name: .*
   network_name_invert: false
   network_name_match: regex
-  networks: [Import with Add Connected Nodes and Links, Duplicate me 2, L1 Network,
-    Subnetwork 2, Loopback and Parallel Links, Top-level Devices and Links, Subnetwork
-      1, Large Network Display, Subnetwork and Teleport Mechanism, Subsubnetwork and
-      Subsubsubnetwork, L3 Network, 'Duplication of Devices, Subnetworks and Top-level
-      Networks', 'Creation, Edit and Deletion', L2 Network, Layout of Large Graph]
+  networks: [Subnetwork 2, L1 Network, L3 Network, 'Creation, Edit and Deletion',
+    Top-level Devices and Links, Loopback and Parallel Links, Import with Add Connected
+      Nodes and Links, Subnetwork and Teleport Mechanism, L2 Network, Subsubnetwork
+      and Subsubsubnetwork, Subnetwork 1, Duplicate me 2, Layout of Large Graph, Large
+      Network Display, 'Duplication of Devices, Subnetworks and Top-level Networks']
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -3884,7 +3884,7 @@
   device_vendor_invert: false
   device_vendor_match: inclusion
   devices: []
-  last_modified: '2022-04-08 07:41:23.602903'
+  last_modified: '2022-04-08 17:22:24.079058'
   link_access_groups: ''
   link_access_groups_invert: false
   link_access_groups_match: inclusion
@@ -3920,7 +3920,7 @@
   link_vendor_match: inclusion
   links: []
   manually_defined: false
-  name: Ninspect user
+  name: Nconfig user
   network_creator: ''
   network_creator_invert: false
   network_creator_match: inclusion
@@ -3971,7 +3971,7 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
-  user_name: ninspect
+  user_name: nconfig
   user_name_invert: false
   user_name_match: equality
-  users: [ninspect]
+  users: []

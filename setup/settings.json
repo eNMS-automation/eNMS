@@ -130,7 +130,7 @@
     "hash_user_passwords": true
   },
   "slack": {
-    "channel": ""
+    "channel": "random"
   },
   "ssh": {
     "command": "python3 -m flask run -h 0.0.0.0",

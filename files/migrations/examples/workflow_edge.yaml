@@ -1491,3 +1491,14 @@
   source: '[Large Device Configuration and Operational Data] Set Large Configuration
     and Operational Data', subtype: success, type: workflow_edge, workflow: Large
     Device Configuration and Operational Data}
+- {color: green, destination: '[Slack and Mattermost notifications] Slack in random,
+    per device', label: success, name: '2022-04-12 04:24:05.279619', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: Slack and Mattermost
+    notifications}
+- {color: green, destination: '[Slack and Mattermost notifications] Notification in
+    general, once', label: success, name: '2022-04-12 04:27:12.025242', source: '[Slack
+    and Mattermost notifications] Slack in random, per device', subtype: success,
+  type: workflow_edge, workflow: Slack and Mattermost notifications}
+- {color: green, destination: '[Shared] End', label: success, name: '2022-04-12 04:27:12.835433',
+  source: '[Slack and Mattermost notifications] Notification in general, once', subtype: success,
+  type: workflow_edge, workflow: Slack and Mattermost notifications}

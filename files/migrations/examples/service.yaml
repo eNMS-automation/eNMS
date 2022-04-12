@@ -291,6 +291,7 @@
     Skip in SxS with WF targets mode: *id065
     Skip in SxS with service targets and Run Once services: *id066
     Skip, Discard and Disable Result Creation Mechanism: *id056
+    Slack and Mattermost notifications: [-143, 42]
     Specific Superworkflow: *id057
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -741,6 +742,7 @@
     Skip in SxS with WF targets mode: *id152
     Skip in SxS with service targets and Run Once services: *id153
     Skip, Discard and Disable Result Creation Mechanism: *id143
+    Slack and Mattermost notifications: [588, 19]
     Specific Superworkflow: *id144
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -30322,6 +30324,244 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  category: Other
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  custom_property: Default Value
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2022-04-12 04:27:54.708676'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: Slack and Mattermost notifications
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  reply_to: ''
+  reserved: false
+  run_method: per_service_with_workflow_targets
+  scoped_name: Slack and Mattermost notifications
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Slack and Mattermost notifications]
+      Slack in random, per device', '[Slack and Mattermost notifications] Notification
+      in general, once']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: [PaloAlto, Jackson]
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  body: "Per device notification in default channel (random):\r\ndevice name: {{ device.name\
+    \ }}"
+  channel: ''
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2022-04-12 04:27:44.216271'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Slack and Mattermost notifications] Slack in random, per device'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    Slack and Mattermost notifications: [236, -114]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Slack in random, per device
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  token: ''
+  type: slack_notification_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  body: One notification in general
+  channel: general
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2022-04-12 04:27:25.013194'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Slack and Mattermost notifications] Notification in general, once'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    Slack and Mattermost notifications: [240, 143]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  reply_to: ''
+  reserved: false
+  run_method: once
+  scoped_name: Notification in general, once
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  token: ''
+  type: slack_notification_service
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none

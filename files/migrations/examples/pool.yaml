@@ -155,11 +155,11 @@
   network_name: .*
   network_name_invert: false
   network_name_match: regex
-  networks: ['Duplication of Devices, Subnetworks and Top-level Networks', Layout
-      of Large Graph, L2 Network, Loopback and Parallel Links, Subnetwork 1, Duplicate
-      me 2, L1 Network, Import with Add Connected Nodes and Links, Top-level Devices
-      and Links, Large Network Display, Subnetwork 2, Subsubnetwork and Subsubsubnetwork,
-    L3 Network, 'Creation, Edit and Deletion', Subnetwork and Teleport Mechanism]
+  networks: [L1 Network, Subnetwork 1, L3 Network, Layout of Large Graph, 'Duplication
+      of Devices, Subnetworks and Top-level Networks', 'Creation, Edit and Deletion',
+    Duplicate me 2, Subnetwork 2, Import with Add Connected Nodes and Links, Top-level
+      Devices and Links, Large Network Display, Loopback and Parallel Links, L2 Network,
+    Subsubnetwork and Subsubsubnetwork, Subnetwork and Teleport Mechanism]
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -3430,11 +3430,11 @@
   network_name: .*
   network_name_invert: false
   network_name_match: regex
-  networks: ['Duplication of Devices, Subnetworks and Top-level Networks', Layout
-      of Large Graph, L2 Network, Loopback and Parallel Links, Subnetwork 1, Duplicate
-      me 2, L1 Network, Import with Add Connected Nodes and Links, Top-level Devices
-      and Links, Large Network Display, Subnetwork 2, Subsubnetwork and Subsubsubnetwork,
-    L3 Network, 'Creation, Edit and Deletion', Subnetwork and Teleport Mechanism]
+  networks: [L1 Network, Subnetwork 1, L3 Network, Layout of Large Graph, 'Duplication
+      of Devices, Subnetworks and Top-level Networks', 'Creation, Edit and Deletion',
+    Duplicate me 2, Subnetwork 2, Import with Add Connected Nodes and Links, Top-level
+      Devices and Links, Large Network Display, Loopback and Parallel Links, L2 Network,
+    Subsubnetwork and Subsubsubnetwork, Subnetwork and Teleport Mechanism]
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false

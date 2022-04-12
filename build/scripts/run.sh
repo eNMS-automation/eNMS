@@ -33,6 +33,7 @@ function run() {
   export LDAP_ADDR="192.168.56.104"
   export TACACS_ADDR="192.168.56.104"
   export TACACS_PASSWORD="testing123"
+  export SLACK_TOKEN="xoxb-3363714037463-3375475639189-Z3p5pezp3X4N3QKLHkxX3pzu"
   export FLASK_APP="app.py"
   export FLASK_DEBUG=1
   if [ "$database" = "mysql" ]; then

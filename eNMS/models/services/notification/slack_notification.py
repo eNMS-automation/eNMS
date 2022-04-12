@@ -4,7 +4,8 @@ from warnings import warn
 from wtforms.widgets import TextArea
 
 try:
-    from slackclient import SlackClient
+    from slack_sdk import WebClient
+    from slack_sdk.errors import SlackApiError
 except ImportError as exc:
     warn(f"Couldn't import slackclient module ({exc})")
 
@@ -27,13 +28,15 @@ class SlackNotificationService(Service):
     __mapper_args__ = {"polymorphic_identity": "slack_notification_service"}
 
     def job(self, run, device=None):
-        slack_client = SlackClient(run.token or getenv("SLACK_TOKEN"))
+        client = WebClient(token=run.token or getenv("SLACK_TOKEN"))
         channel = run.sub(run.channel, locals()) or vs.settings["slack"]["channel"]
+        message = run.sub(run.body, locals())
         run.log("info", f"Sending SLACK notification on {channel}", device)
-        result = slack_client.api_call(
-            "chat.postMessage", channel=channel, text=run.sub(run.body, locals())
-        )
-        return {"success": True, "result": str(result)}
+        try:
+            result = client.chat_postMessage(channel=f"#{channel}", text=message)
+            return {"success": True, "result": str(result)}
+        except SlackApiError as exc:
+            return {"success": False, "result": exc.response}
 
 
 class SlackNotificationForm(ServiceForm):

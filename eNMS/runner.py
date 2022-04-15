@@ -1079,8 +1079,7 @@ class Runner:
             host=device.ip_address,
             auth_username=credentials["username"],
             auth_password=credentials["password"],
-            auth_private_key=False,
-            auth_strict_key=False,
+            **vs.automation["scrapli"]["connection_args"],
             **kwargs,
         )
         connection.open()

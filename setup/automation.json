@@ -34,6 +34,12 @@
     "multiprocessing = BooleanField('Multiprocessing', default=False)",
     "max_processes = IntegerField('Maximum number of processes', default=15)"
   ],
+  "scrapli": {
+    "connection_args": {
+      "auth_private_key": false,
+      "auth_strict_key": false
+    }
+  },
   "workflow": {
     "allowed_models": {
       "delete": ["device", "link", "pool", "service"],

@@ -78,6 +78,7 @@ Version 4.2.0
 - Update git service to support git clone, shallow clone and custom path to local folder (instead of hardcoded path to
   "network_data" folder)
 - Update slack notification service to use newest slack_sdk library (instead of slackclient<2)
+- Make scrapli connection arguments configurable from automation.json / scrapli / connection_args
 
 Tests:
 - Performances (SQL Column function init)

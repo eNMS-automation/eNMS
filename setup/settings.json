@@ -28,7 +28,7 @@
     }
   },
   "automation": {
-    "max_process": 25
+    "max_process": 15
   },
   "cluster": {
     "active": false,

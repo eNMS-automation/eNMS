@@ -4,7 +4,7 @@ from contextlib import contextmanager
 from flask_login import current_user
 from importlib.util import module_from_spec, spec_from_file_location
 from json import loads
-from logging import error, info
+from logging import error, info, warning
 from operator import attrgetter
 from os import getenv, getpid
 from pathlib import Path
@@ -351,10 +351,13 @@ class Database:
                 result = query.all() if all_matches else query.first()
                 break
             except Exception as exc:
-                error(f"Fetch n°{index} failed ({exc})")
+                
                 self.session.rollback()
                 if index == self.retry_fetch_number - 1:
+                    error(f"Fetch n°{index} failed ({format_exc()})")
                     raise exc
+                else:
+                    warning(f"Fetch n°{index} failed ({str(exc)})")
                 sleep(self.retry_fetch_time * (index + 1))
         if result or allow_none:
             return result
@@ -423,10 +426,12 @@ class Database:
                     self.session.commit()
                     break
                 except Exception as exc:
-                    error(f"Commit n°{index} failed ({format_exc()})")
                     self.session.rollback()
                     if index == self.retry_commit_number - 1:
+                        error(f"Commit n°{index} failed ({format_exc()})")
                         raise exc
+                    else:
+                        warning(f"Commit n°{index} failed ({str(exc)})")
                     sleep(self.retry_commit_time * (index + 1))
         return instance
 

@@ -24,6 +24,7 @@ import {
   serializeForm,
   showInstancePanel,
 } from "./base.js";
+import { currentPath } from "./builder.js";
 import { network } from "./networkBuilder.js";
 import { refreshTable, tableInstances, tables } from "./table.js";
 import {
@@ -434,7 +435,7 @@ function displayLogs(service, runtime, change) {
 
 function displayResultsTree(service, runtime) {
   call({
-    url: `/get_workflow_results/${service.id}/${runtime}`,
+    url: `/get_workflow_results/${currentPath || service.id}/${runtime}`,
     callback: function (data) {
       $(`#result-tree-${service.id}`).jstree("destroy").empty();
       if (!data) return notify("No results to display.", "error", 5);

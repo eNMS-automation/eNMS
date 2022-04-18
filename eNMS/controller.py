@@ -658,12 +658,12 @@ class Controller:
         pools = db.query("pool").filter(operator(has_device, has_link)).all()
         return [pool.base_properties for pool in pools]
 
-    def get_workflow_results(self, service, runtime):
+    def get_workflow_results(self, path, runtime):
         run = db.fetch("run", runtime=runtime)
-        service = db.fetch("service", id=service)
+        service = db.fetch("service", id=path.split(">")[-1])
         state = run.state
 
-        def rec(service, path=str(run.service_id)):
+        def rec(service, path):
             results = db.fetch(
                 "result",
                 parent_runtime=runtime,
@@ -700,7 +700,7 @@ class Controller:
             else:
                 return result
 
-        return rec(service)
+        return rec(service, path)
 
     def get_workflow_services(self, id, node):
         parents = db.fetch("workflow", id=id).originals

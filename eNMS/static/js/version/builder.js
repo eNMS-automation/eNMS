@@ -44,7 +44,7 @@ let network;
 let selectedObject;
 export let creationMode;
 export let currentMode = "motion";
-export let currentPath = localStorage.getItem("path");
+export let currentPath = page.includes("builder") && localStorage.getItem("path");
 export let instance;
 export let edges;
 export let nodes;

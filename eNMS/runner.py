@@ -681,7 +681,8 @@ class Runner:
             )
         elif self.send_notification_method == "slack":
             result = WebClient(token=getenv("SLACK_TOKEN")).chat_postMessage(
-                channel=f"#{vs.settings['slack']['channel']}", text=notification
+                channel=f"#{vs.settings['slack']['channel']}",
+                text=vs.dict_to_string(notification),
             )
         else:
             result = post(

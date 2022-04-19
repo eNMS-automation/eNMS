@@ -7,7 +7,7 @@ try:
     from slack_sdk import WebClient
     from slack_sdk.errors import SlackApiError
 except ImportError as exc:
-    warn(f"Couldn't import slackclient module ({exc})")
+    warn(f"Couldn't import slack_sdk module ({exc})")
 
 from eNMS.database import db
 from eNMS.forms import ServiceForm

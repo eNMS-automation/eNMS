@@ -31,9 +31,9 @@ except ImportError as exc:
     warn(f"Couldn't import scrapli module ({exc})")
 
 try:
-    from slackclient import SlackClient
+    from slack_sdk import WebClient
 except ImportError as exc:
-    warn(f"Couldn't import slackclient module ({exc})")
+    warn(f"Couldn't import slack_sdk module ({exc})")
 
 from eNMS.database import db
 from eNMS.environment import env
@@ -680,10 +680,8 @@ class Runner:
                 file_content=vs.dict_to_string(file_content),
             )
         elif self.send_notification_method == "slack":
-            result = SlackClient(getenv("SLACK_TOKEN")).api_call(
-                "chat.postMessage",
-                channel=vs.settings["slack"]["channel"],
-                text=notification,
+            result = WebClient(token=getenv("SLACK_TOKEN")).chat_postMessage(
+                channel=f"#{vs.settings['slack']['channel']}", text=notification
             )
         else:
             result = post(

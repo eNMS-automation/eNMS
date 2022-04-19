@@ -508,7 +508,6 @@ class Task(AbstractBase):
             .filter(cls.admin_only == false())
         )
 
-
     def _catch_request_exceptions(func):  # noqa: N805
         @wraps(func)
         def wrapper(*args, **kwargs):

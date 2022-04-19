@@ -351,7 +351,6 @@ class Database:
                 result = query.all() if all_matches else query.first()
                 break
             except Exception as exc:
-                
                 self.session.rollback()
                 if index == self.retry_fetch_number - 1:
                     error(f"Fetch n°{index} failed ({format_exc()})")

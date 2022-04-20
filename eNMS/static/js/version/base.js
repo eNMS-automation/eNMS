@@ -735,7 +735,9 @@ function updateProperty(instance, el, property, value, type) {
     value.forEach((o) => el.append(new Option(o.name, o.name)));
     el.val(value.map((p) => p.name)).trigger("change");
   } else if (propertyType == "object") {
-    el.append(new Option(value.ui_name || value.name, value.id)).val(value.id).trigger("change");
+    el.append(new Option(value.ui_name || value.name, value.id))
+      .val(value.id)
+      .trigger("change");
   } else if (propertyType == "json") {
     el.val(JSON.stringify(value));
     const editor = jsonEditors[instance.id][property];

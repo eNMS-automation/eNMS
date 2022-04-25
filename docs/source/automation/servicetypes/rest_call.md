@@ -18,8 +18,18 @@ Configuration parameters for creating this service instance:
   verified. Default is to not verify the SSL certificate.
 - `Timeout` Requests library timeout, which is the number of seconds
   to wait on a response before giving up
-- `Username` Username to use for authenticating with the REST server
-- `Password` Password to use for authenticating with the REST server
+- `Credentials`: Select between:
+    - `Device Credentials` - eNMS will select the most appropriate credential
+      object for each device. If there are multiple credentials available, eNMS
+      will use the `Type of Credential` and `Priority` properties as a tie
+      breaker.
+    - `User Credentials` - Use the user's currently logged in credentials to
+      access the device.
+    - `Custom Credentials` - The user provides the credentials below:
+
+- `Custom Username` - User provided username
+
+- `Custom Password` - User provided password
 
 !!! note
 

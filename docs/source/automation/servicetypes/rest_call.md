@@ -26,9 +26,7 @@ Configuration parameters for creating this service instance:
     - `User Credentials` - Use the user's currently logged in credentials to
       access the device.
     - `Custom Credentials` - The user provides the credentials below:
-
 - `Custom Username` - User provided username
-
 - `Custom Password` - User provided password
 
 !!! note

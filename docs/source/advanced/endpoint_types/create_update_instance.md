@@ -7,7 +7,10 @@ Used to create a new instance or modify an existing instance.
 **Payload:** JSON representation of the dictionary data needed to create the 
   object instance and depends on the object type.
 
-#
+!!! Note
+     An object can be renamed by setting the `name` key to the current name,
+     and the `new_name` key to the new name.
+
 # Examples
 
 Schedule a task from the REST API: This payload will create the task `test`or

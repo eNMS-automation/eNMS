@@ -690,6 +690,7 @@ The `setup/themes.json` file exposes some configurable parameters for the
 default and dark appearance themes of the application.
 
 ### `visualization.json`
+
 The `setup/visualization.json` file controls the visualization map portion
 of the application.  The user can specify whether the visualization defaults
 to '2D' mode (recommended for large inventories) or '3D' mode. Also, the
@@ -703,6 +704,11 @@ Key parameters to note:
 - `zoom_level` (default: `5`)
 - `tile_layer` (default: `"osm"`)
 - `marker` (default: `"Circle"`)
+
+Key parameters for the network builder:
+
+- `display_nodes_as_images` (`true`): displaying nodes as images can be slower if there are too many nodes.
+- `max_allowed_nodes` (`500`): threshold above which eNMS will not try to display a network (too much data).
 
 ## Scheduler
 

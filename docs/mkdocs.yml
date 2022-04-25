@@ -14,7 +14,9 @@ nav:
     - Configuration Management: inventory/configuration_management.md
     - Pools: inventory/pools.md
     - WebSSH Connection: inventory/web_connection.md
+    - SSH Gateways: inventory/ssh_gateways.md
     - Network Visualization: inventory/network_visualization.md
+    - Network Builder: inventory/network_builder.md
   - Automation:
     - Services: automation/services.md
     - Workflows: automation/workflows.md

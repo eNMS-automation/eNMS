@@ -602,14 +602,6 @@ Section used for detecting other running instances of eNMS.
 - `playbooks` (default: `""`) Path to where Ansible playbooks are
   stored so that they are selectable in the Ansible Playbook service.
 
-    "redis": {
-    "charset": "utf-8",
-    "db": 0,
-    "decode_responses": true,
-    "port": 6379,
-    "socket_timeout": 0.1
-  },
-
 #### `redis` section
 
 This section allows configuration of the Redis queue.
@@ -660,6 +652,14 @@ load on eNMS.
 - `port` (default: `-1`)
 - `start_port` (default: `9000`)
 - `end_port` (default: `91000`)
+
+#### `tables` section
+
+Configure the refresh rates of a table in the UI in milliseconds. By default, the "Results" page (`run` table) will be refreshed every 5 seconds, and the "Services" and "Tasks" pages every 3 seconds.
+
+- `run` (default: `5000`)
+- `service` (default: `3000`)
+- `task` (default: `3000`)
 
 #### `tacacs` section
 

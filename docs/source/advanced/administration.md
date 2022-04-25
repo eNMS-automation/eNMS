@@ -53,8 +53,8 @@ Configurable parameters for an Access Object:
 - **Model Pools**: Zero or more `Pool`s of application objects (ex: services,
 devices, links) for which to manage access.
 - **Access Type**: The level of access allowed to application objects defined in
-`Model Pools` (ex: Read, Edit, Run, Schedule, Connect, Use as target). Not all
-access types apply to all object types, for example Run applies to a service
+`Model Pools` (ex: Read, Edit, Run, Schedule, Configuration, Connect, Use as target).
+Not all access types apply to all object types, for example Run applies to a service
 but not a device. 
 
 **User Interface Access** 

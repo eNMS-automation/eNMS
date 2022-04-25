@@ -339,8 +339,9 @@ section describe their contents:
 ### `automation.json`
 The `setup/automation.json` file allows for the customization of some
 automation library options, such as Napalm Getters, the default contents
-of the parameterized run form for workflows, and the models that one can
-access or create from the workflow builder global variables.
+of the parameterized run form for workflows, the default arguments used to
+open a Scrapli connection, and the models that one can access or create
+from the workflow builder global variables.
 
 ### `database.json`
 The `setup/database.json` file contains database and schema configuration

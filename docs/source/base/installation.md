@@ -521,6 +521,7 @@ access to each of the controls in the UI, which user roles have access to
 each of the REST API endpoints.
 
 ### `settings.json`
+
 The `setup/settings.json` file includes the following public variables which
 are also modifiable from the administration panel. Changing settings from the
 administration panel will cause settings.json to be rewritten if `Write changes
@@ -557,6 +558,7 @@ back to  settings.json file` is selected.
         function properly.
 
 #### `authentication` section
+
 Lists the methods available for users to login (in order of which they
 are shown in the login screen pulldown list).  Default authentication is
 specified here.  Because authentication can be custom for many
@@ -599,6 +601,24 @@ Section used for detecting other running instances of eNMS.
   services in the Automation Panel when building services and workflows.
 - `playbooks` (default: `""`) Path to where Ansible playbooks are
   stored so that they are selectable in the Ansible Playbook service.
+
+    "redis": {
+    "charset": "utf-8",
+    "db": 0,
+    "decode_responses": true,
+    "port": 6379,
+    "socket_timeout": 0.1
+  },
+
+#### `redis` section
+
+This section allows configuration of the Redis queue.
+
+- `charset` (default:`"utf-8"`)
+- `db` (default:`0`)
+- `decode_responses` (default:`true`)
+- `port` (default:`6379`)
+- `socket_timeout` (default:`0.1`)
 
 #### `requests` section
 

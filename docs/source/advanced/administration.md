@@ -116,6 +116,10 @@ the credential with the highest priority is chosen.
 selected and a password is required.  This is not related to device
 connection, but is included on the credential for Vault storage.
 
+## Notification Banner
+
+TODO
+
 ## Changelog
 
 The eNMS changelog is found under `Home / Changelog`

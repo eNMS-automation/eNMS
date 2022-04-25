@@ -7,7 +7,7 @@ To build the docs:
 To serve the docs locally (http://127.0.0.1:8000) 
 
 - `cd docs` 
-- `mkdocs serve`  
+- `mkdocs serve --dev-addr 0.0.0.0:8000`  
 - Note: You can change your `setup/settings.json` (`documentation_url": "http://localhost:8000/"`) if desired.
 
 For more information on mkdocs, refer to: 

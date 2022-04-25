@@ -647,6 +647,7 @@ load on eNMS.
 
 #### `ssh` section
 
+- `command` (default: `python3 -m flask run -h 0.0.0.0`): command used to start the SSH server.
 - `port_redirection` (default: `false`)
 - `bypass_key_prompt` (default: `true`)
 - `port` (default: `-1`)

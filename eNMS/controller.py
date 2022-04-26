@@ -212,13 +212,14 @@ class Controller:
         service_sets = list(set(kwargs["services"].split(",")))
         service_instances = db.objectify("service", service_sets)
         workflow = db.fetch("workflow", id=workflow_id, rbac="edit")
-        services, errors = [], []
-        if kwargs["mode"] == "shallow":
-            for service in service_instances:
-                if not service.shared:
-                    errors.append(f"'{service.name}' is not a shared service.")
-                elif service in workflow.services:
-                    errors.append(f"This workflow already contains '{service.name}'.")
+        services, errors, shallow_copy = [], [], kwargs["mode"] == "shallow"
+        for service in service_instances:
+            if shallow_copy and not service.shared:
+                errors.append(f"'{service.name}' is not a shared service.")
+            elif shallow_copy and service in workflow.services:
+                errors.append(f"This workflow already contains '{service.name}'.")
+            elif service.scoped_name == "Placeholder" and not shallow_copy:
+                errors.append("Deep Copy cannot be used for the placeholder service.")
         if errors:
             return {"alert": errors}
         for service in service_instances:

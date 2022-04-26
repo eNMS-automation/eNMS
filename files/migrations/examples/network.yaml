@@ -74,7 +74,7 @@
   longitude: '0.0'
   model: ''
   name: Subnetwork 1
-  networks: [Subnetwork and Teleport Mechanism, Subnetwork 2]
+  networks: [Subnetwork 2, Subnetwork and Teleport Mechanism]
   nodes: [Subnetwork 2, Subnetwork 1 - R1, Subnetwork 1 - R2, Subnetwork 1 - R3]
   pools: [Everything, All Networks]
   positions:
@@ -139,7 +139,7 @@
   longitude: '0.0'
   model: ''
   name: Subnetwork 2
-  networks: [Subnetwork and Teleport Mechanism, Subnetwork 1]
+  networks: [Subnetwork 1, Subnetwork and Teleport Mechanism]
   nodes: [Subnetwork 1, Subnetwork 2 - G1, Subnetwork 2 - G2]
   pools: [Everything, All Networks]
   positions:

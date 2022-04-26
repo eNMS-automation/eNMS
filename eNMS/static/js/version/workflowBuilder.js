@@ -419,7 +419,7 @@ export function drawWorkflowEdge(edge) {
 function addServicePanel() {
   openPanel({
     name: "add_services_to_workflow",
-    title: "Add Services to Worfklow",
+    title: "Add Services to Workflow",
     callback: function () {
       $("#service-tree").jstree({
         core: {

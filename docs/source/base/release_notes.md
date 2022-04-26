@@ -610,7 +610,7 @@ Version 3.18.1
 - Improve display of filtering forms
 - Reduce size of the service and workflow edit panel for low-resolution screens
 - Add "success" key before result postprocessing
-- Remove "Enter subworfklow" button in toolbar and add the same button in right-click menu
+- Remove "Enter subworkflow" button in toolbar and add the same button in right-click menu
 - Add button to switch to parent workflow
 
 Version 3.18

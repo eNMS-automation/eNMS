@@ -26,10 +26,6 @@
       "icon": "users",
       "rbac": "admin",
       "pages": {
-        "Users": {
-          "endpoint": "/user_table",
-          "rbac": "admin"
-        },
         "Servers": {
           "endpoint": "/server_table",
           "rbac": "admin"
@@ -162,7 +158,6 @@
     "/task_table": "access",
     "/terminal": "access",
     "/tree_form": "access",
-    "/user_table": "admin",
     "/view_service_results": "access",
     "/workflow_builder": "access",
     "/instance_tree_form": "access"

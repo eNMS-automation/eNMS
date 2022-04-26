@@ -2850,18 +2850,18 @@
   admin_only: false
   arguments: ''
   completion_time: 1
-  content_match: ''
-  content_match_regex: false
-  conversion_method: json
+  content_match: '{{ device.ip_address }}.*"ok":2'
+  content_match_regex: true
+  conversion_method: none
   creator: admin
   credential_type: any
   credentials: device
   definition: Definition
-  delete_spaces_before_matching: false
+  delete_spaces_before_matching: true
   description: ''
   device_query: ''
   device_query_property: ip_address
-  dict_match: {host: '{{device.ip_address}}', unreachable: 0, use_ssl: true}
+  dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
   impacting: true
@@ -2872,7 +2872,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-02-27 05:38:03.655550'
+  last_modified: '2022-04-26 12:28:30.948770'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -2887,7 +2887,7 @@
   operating_system: ''
   options: {}
   owners: []
-  owners_access: ''
+  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -2928,7 +2928,7 @@
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: success
-  validation_method: dict_included
+  validation_method: text
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
@@ -4097,7 +4097,7 @@
         \ conversion)\r\n- uses the \"Text with regular expression\" and \"dictionary\
         \ inclusion\" mechanisms to validate the result."
       positions: [-240, 69]
-  last_modified: '2022-01-16 05:08:51.416058'
+  last_modified: '2022-04-26 12:31:46.260456'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -4141,7 +4141,7 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  target_devices: [Austin, Washington]
+  target_devices: [Washington, Chicago]
   target_pools: []
   time_between_retries: 10
   type: workflow

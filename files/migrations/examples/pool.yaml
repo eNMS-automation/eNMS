@@ -155,11 +155,11 @@
   network_name: .*
   network_name_invert: false
   network_name_match: regex
-  networks: [L1 Network, Subnetwork 1, L3 Network, Layout of Large Graph, 'Duplication
-      of Devices, Subnetworks and Top-level Networks', 'Creation, Edit and Deletion',
-    Duplicate me 2, Subnetwork 2, Import with Add Connected Nodes and Links, Top-level
-      Devices and Links, Large Network Display, Loopback and Parallel Links, L2 Network,
-    Subsubnetwork and Subsubsubnetwork, Subnetwork and Teleport Mechanism]
+  networks: [Duplicate me 2, Loopback and Parallel Links, L2 Network, 'Duplication
+      of Devices, Subnetworks and Top-level Networks', Subnetwork 1, L1 Network, Top-level
+      Devices and Links, Subnetwork 2, 'Creation, Edit and Deletion', Subsubnetwork
+      and Subsubsubnetwork, Layout of Large Graph, Subnetwork and Teleport Mechanism,
+    L3 Network, Large Network Display, Import with Add Connected Nodes and Links]
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -362,8 +362,8 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['[Skip in SxS with service targets and Run Once services] Run
-      Once with Pool', Large Device Configuration and Operational Data]
+  target_services: [Large Device Configuration and Operational Data, '[Skip in SxS
+      with service targets and Run Once services] Run Once with Pool']
   tasks: []
   type: pool
   user_description: ''
@@ -3430,11 +3430,11 @@
   network_name: .*
   network_name_invert: false
   network_name_match: regex
-  networks: [L1 Network, Subnetwork 1, L3 Network, Layout of Large Graph, 'Duplication
-      of Devices, Subnetworks and Top-level Networks', 'Creation, Edit and Deletion',
-    Duplicate me 2, Subnetwork 2, Import with Add Connected Nodes and Links, Top-level
-      Devices and Links, Large Network Display, Loopback and Parallel Links, L2 Network,
-    Subsubnetwork and Subsubsubnetwork, Subnetwork and Teleport Mechanism]
+  networks: [Duplicate me 2, Loopback and Parallel Links, L2 Network, 'Duplication
+      of Devices, Subnetworks and Top-level Networks', Subnetwork 1, L1 Network, Top-level
+      Devices and Links, Subnetwork 2, 'Creation, Edit and Deletion', Subsubnetwork
+      and Subsubsubnetwork, Layout of Large Graph, Subnetwork and Teleport Mechanism,
+    L3 Network, Large Network Display, Import with Add Connected Nodes and Links]
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false

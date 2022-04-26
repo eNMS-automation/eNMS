@@ -11,17 +11,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.51
-  last_configuration_duration: Never
-  last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_duration: 2.077593s
+  last_configuration_failure: '2022-04-18 09:22:24.879569'
+  last_configuration_runtime: '2022-04-18 09:24:51.560542'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:24:51.560542'
   last_modified: ''
-  last_operational_data_duration: Never
+  last_operational_data_duration: 5.654736s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:26:36.380951'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:26:36.380951'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -62,17 +62,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.1.86
-  last_configuration_duration: Never
+  last_configuration_duration: 2.28239s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-04-18 09:22:10.788763'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:22:10.788763'
   last_modified: ''
-  last_operational_data_duration: Never
+  last_operational_data_duration: 5.459427s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:23:44.174033'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:23:44.174033'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -113,17 +113,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
-  last_configuration_duration: Never
-  last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_duration: 3.559713s
+  last_configuration_failure: '2022-04-18 09:22:25.797813'
+  last_configuration_runtime: '2022-04-18 09:28:00.381174'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:28:00.381174'
   last_modified: '2020-11-17 09:30:44.618796'
-  last_operational_data_duration: 3.422292s
+  last_operational_data_duration: 5.426904s
   last_operational_data_failure: Never
-  last_operational_data_runtime: '2022-02-08 09:20:32.098841'
+  last_operational_data_runtime: '2022-04-18 09:25:54.483147'
   last_operational_data_status: Success
-  last_operational_data_update: '2022-02-08 09:20:32.098841'
+  last_operational_data_update: '2022-04-18 09:25:54.483147'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -164,17 +164,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
-  last_configuration_duration: 2.205105s
-  last_configuration_failure: '2022-04-05 08:18:38.456585'
-  last_configuration_runtime: '2022-04-05 08:22:39.428019'
+  last_configuration_duration: 2.556811s
+  last_configuration_failure: '2022-04-13 15:59:28.944444'
+  last_configuration_runtime: '2022-04-13 16:03:45.097013'
   last_configuration_status: Success
-  last_configuration_update: '2022-04-05 08:22:39.428019'
+  last_configuration_update: '2022-04-13 16:03:45.097013'
   last_modified: ''
-  last_operational_data_duration: 5.436868s
-  last_operational_data_failure: '2022-04-05 08:18:41.740469'
-  last_operational_data_runtime: '2022-04-05 08:22:41.710376'
+  last_operational_data_duration: 0.109135s
+  last_operational_data_failure: '2022-04-13 15:59:32.307044'
+  last_operational_data_runtime: '2022-04-13 16:03:59.249201'
   last_operational_data_status: Success
-  last_operational_data_update: '2022-04-05 08:22:41.710376'
+  last_operational_data_update: '2022-04-13 16:03:59.249201'
   last_specialized_data_duration: 3.775398s
   last_specialized_data_failure: Never
   last_specialized_data_runtime: '2022-02-14 10:13:39.034416'
@@ -317,17 +317,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.12
-  last_configuration_duration: Never
-  last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_duration: 3.556486s
+  last_configuration_failure: '2022-04-18 09:22:23.714879'
+  last_configuration_runtime: '2022-04-18 09:28:19.332441'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:28:19.332441'
   last_modified: ''
-  last_operational_data_duration: Never
+  last_operational_data_duration: 5.404194s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:26:28.749577'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:26:28.749577'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -368,17 +368,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.100
-  last_configuration_duration: Never
-  last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_duration: 3.777961s
+  last_configuration_failure: '2022-04-18 09:22:23.790350'
+  last_configuration_runtime: '2022-04-18 09:28:05.343361'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:28:05.343361'
   last_modified: ''
-  last_operational_data_duration: Never
+  last_operational_data_duration: 5.483296s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:26:02.136986'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:26:02.136986'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -470,11 +470,11 @@
   icon: optical_switch
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.13
-  last_configuration_duration: Never
+  last_configuration_duration: 1.974735s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-04-18 09:22:21.472097'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:22:21.472097'
   last_modified: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
@@ -980,17 +980,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
-  last_configuration_duration: Never
+  last_configuration_duration: 2.025575s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-04-18 09:21:50.573740'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:21:50.573740'
   last_modified: ''
-  last_operational_data_duration: Never
+  last_operational_data_duration: 5.436114s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:22:33.273974'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:22:33.273974'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -1031,17 +1031,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.110
-  last_configuration_duration: Never
+  last_configuration_duration: 2.076096s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-04-18 09:22:00.040454'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:22:00.040454'
   last_modified: ''
-  last_operational_data_duration: Never
+  last_operational_data_duration: 5.558267s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:23:01.854054'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:23:01.854054'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -1082,17 +1082,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.1.88
-  last_configuration_duration: Never
+  last_configuration_duration: 2.279618s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-04-18 09:22:08.371152'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:22:08.371152'
   last_modified: ''
-  last_operational_data_duration: Never
+  last_operational_data_duration: 5.421781s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:23:30.985479'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:23:30.985479'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -1133,17 +1133,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.111
-  last_configuration_duration: Never
+  last_configuration_duration: 3.553896s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-04-18 09:28:15.763323'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:28:15.763323'
   last_modified: ''
-  last_operational_data_duration: Never
+  last_operational_data_duration: 5.788923s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:25:04.103280'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:25:04.103280'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -1184,17 +1184,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.1.89
-  last_configuration_duration: Never
-  last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_duration: 3.565648s
+  last_configuration_failure: '2022-04-18 09:22:23.636862'
+  last_configuration_runtime: '2022-04-18 09:27:51.846707'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:27:51.846707'
   last_modified: ''
-  last_operational_data_duration: Never
+  last_operational_data_duration: 5.386003s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:25:41.066658'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:25:41.066658'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -1235,17 +1235,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.114
-  last_configuration_duration: Never
-  last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_duration: 3.587525s
+  last_configuration_failure: '2022-04-18 09:22:23.926943'
+  last_configuration_runtime: '2022-04-18 09:28:24.264047'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:28:24.264047'
   last_modified: ''
-  last_operational_data_duration: Never
+  last_operational_data_duration: 5.568083s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:26:15.431125'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:26:15.431125'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -2025,17 +2025,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.19
-  last_configuration_duration: Never
+  last_configuration_duration: 1.804429s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-04-18 09:21:46.585524'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:21:46.585524'
   last_modified: '2020-11-16 05:46:58.341050'
-  last_operational_data_duration: Never
+  last_operational_data_duration: 3.204787s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:22:27.838586'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:22:27.838586'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -2074,17 +2074,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.20
-  last_configuration_duration: Never
+  last_configuration_duration: 1.872709s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-04-18 09:21:56.060676'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:21:56.060676'
   last_modified: ''
-  last_operational_data_duration: Never
+  last_operational_data_duration: 3.369878s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:22:56.237709'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:22:56.237709'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -2123,17 +2123,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.21
-  last_configuration_duration: Never
+  last_configuration_duration: 1.975994s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-04-18 09:22:06.373762'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:22:06.373762'
   last_modified: '2020-11-16 06:00:06.539207'
-  last_operational_data_duration: Never
+  last_operational_data_duration: 3.261867s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:23:38.665996'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:23:38.665996'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -2172,17 +2172,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.22
-  last_configuration_duration: Never
+  last_configuration_duration: 1.34334s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-04-18 09:28:10.714080'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:28:10.714080'
   last_modified: ''
-  last_operational_data_duration: Never
+  last_operational_data_duration: 3.263038s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:24:58.589660'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:24:58.589660'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -2221,17 +2221,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.23
-  last_configuration_duration: Never
-  last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_duration: 1.357055s
+  last_configuration_failure: '2022-04-18 09:22:23.526204'
+  last_configuration_runtime: '2022-04-18 09:27:55.433679'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:27:55.433679'
   last_modified: ''
-  last_operational_data_duration: Never
+  last_operational_data_duration: 3.536934s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:25:48.683744'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:25:48.683744'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -2270,17 +2270,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.24
-  last_configuration_duration: Never
-  last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_duration: 1.368328s
+  last_configuration_failure: '2022-04-18 09:22:23.866493'
+  last_configuration_runtime: '2022-04-18 09:28:03.957961'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:28:03.957961'
   last_modified: '2020-11-16 06:00:11.599550'
-  last_operational_data_duration: Never
+  last_operational_data_duration: 3.238552s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:26:23.275721'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:26:23.275721'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -3054,17 +3054,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 127.0.0.1
-  last_configuration_duration: Never
+  last_configuration_duration: 2.153091s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-04-18 09:21:48.407633'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:21:48.407633'
   last_modified: ''
-  last_operational_data_duration: Never
+  last_operational_data_duration: 5.395513s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:22:40.932981'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:22:40.932981'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -3103,17 +3103,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.100
-  last_configuration_duration: Never
+  last_configuration_duration: 2.093703s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-04-18 09:22:02.126645'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:22:02.126645'
   last_modified: '2020-11-06 04:49:26.367303'
-  last_operational_data_duration: Never
+  last_operational_data_duration: 5.543365s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:23:15.122604'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:23:15.122604'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -3154,17 +3154,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.100
-  last_configuration_duration: Never
+  last_configuration_duration: 2.105325s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-04-18 09:22:04.258899'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:22:04.258899'
   last_modified: '2020-11-06 04:49:32.451857'
-  last_operational_data_duration: Never
+  last_operational_data_duration: 5.809166s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:23:22.945405'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:23:22.945405'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -3205,17 +3205,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 10.0.0.100
-  last_configuration_duration: Never
+  last_configuration_duration: 3.668885s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-04-18 09:28:12.074747'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:28:12.074747'
   last_modified: '2020-11-06 04:49:37.427351'
-  last_operational_data_duration: Never
+  last_operational_data_duration: 5.5754s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:25:17.867791'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:25:17.867791'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -3255,17 +3255,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
-  last_configuration_duration: Never
-  last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_duration: 3.541619s
+  last_configuration_failure: '2022-04-18 09:22:23.564784'
+  last_configuration_runtime: '2022-04-18 09:27:48.294962'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:27:48.294962'
   last_modified: '2020-11-17 09:18:39.830009'
-  last_operational_data_duration: Never
+  last_operational_data_duration: 5.502484s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:25:25.673711'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:25:25.673711'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -3356,17 +3356,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.51
-  last_configuration_duration: Never
-  last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_duration: 2.155573s
+  last_configuration_failure: '2022-04-18 09:22:24.067631'
+  last_configuration_runtime: '2022-04-18 09:24:53.652023'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:24:53.652023'
   last_modified: '2020-11-06 04:49:59.322806'
-  last_operational_data_duration: Never
+  last_operational_data_duration: 5.487372s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:26:49.958700'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:26:49.958700'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -3646,7 +3646,7 @@
   custom_multiselect: []
   custom_select: b
   description: ''
-  devices: ['Router behind Gateway 1, 2 and 3', Router behind Gateway 1]
+  devices: [Router behind Gateway 1, 'Router behind Gateway 1, 2 and 3']
   down: false
   gateways: []
   icon: antenna
@@ -3750,17 +3750,17 @@
   icon: antenna
   icon_3d: juniper_ex3300
   ip_address: 192.168.56.201
-  last_configuration_duration: Never
-  last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_duration: 1.348949s
+  last_configuration_failure: '2022-04-18 09:22:26.872995'
+  last_configuration_runtime: '2022-04-18 09:28:22.904639'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:28:22.904639'
   last_modified: '2022-01-01 03:11:10.036270'
-  last_operational_data_duration: Never
+  last_operational_data_duration: 3.43952s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:25:12.151286'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:25:12.151286'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -3798,17 +3798,17 @@
   icon: antenna
   icon_3d: juniper_ex3300
   ip_address: "192.168.56.50\t"
-  last_configuration_duration: Never
+  last_configuration_duration: 3.561001s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-04-18 09:27:56.805455'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:27:56.805455'
   last_modified: '2022-01-01 02:48:16.568443'
-  last_operational_data_duration: Never
+  last_operational_data_duration: 5.393015s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:25:33.411352'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:25:33.411352'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -3846,17 +3846,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: ''
-  last_configuration_duration: Never
+  last_configuration_duration: 1.39299s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-04-18 09:28:09.308434'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:28:09.308434'
   last_modified: '2022-01-01 10:34:12.609346'
-  last_operational_data_duration: Never
+  last_operational_data_duration: 3.309849s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:26:09.888036'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:26:09.888036'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never
@@ -3895,17 +3895,17 @@
   icon: router
   icon_3d: juniper_ex3300
   ip_address: ''
-  last_configuration_duration: Never
+  last_configuration_duration: 2.095845s
   last_configuration_failure: Never
-  last_configuration_runtime: Never
-  last_configuration_status: Never
-  last_configuration_update: Never
+  last_configuration_runtime: '2022-04-18 09:24:49.444219'
+  last_configuration_status: Success
+  last_configuration_update: '2022-04-18 09:24:49.444219'
   last_modified: '2022-01-01 10:34:21.544114'
-  last_operational_data_duration: Never
+  last_operational_data_duration: 3.454503s
   last_operational_data_failure: Never
-  last_operational_data_runtime: Never
-  last_operational_data_status: Never
-  last_operational_data_update: Never
+  last_operational_data_runtime: '2022-04-18 09:26:44.276171'
+  last_operational_data_status: Success
+  last_operational_data_update: '2022-04-18 09:26:44.276171'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never

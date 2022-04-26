@@ -7,8 +7,8 @@
   vars:
     cli:
       host: "{{ ip_address }}"
-      username: "admin"
-      password: "admin"
+      username: "{{ username }}"
+      password: "{{ password }}"
       authorize: true
       transport: cli
 

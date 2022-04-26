@@ -2850,18 +2850,18 @@
   admin_only: false
   arguments: ''
   completion_time: 1
-  content_match: '{{ device.ip_address }}.*"ok":2'
-  content_match_regex: true
-  conversion_method: none
+  content_match: ''
+  content_match_regex: false
+  conversion_method: json
   creator: admin
   credential_type: any
   credentials: device
   definition: Definition
-  delete_spaces_before_matching: true
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
-  dict_match: {}
+  dict_match: {ok: 2}
   disable_result_creation: false
   display_only_failed_nodes: false
   impacting: true
@@ -2872,7 +2872,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-04-26 12:28:30.948770'
+  last_modified: '2022-04-26 12:51:19.802312'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -2928,7 +2928,7 @@
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: success
-  validation_method: text
+  validation_method: dict_included
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
@@ -4081,9 +4081,9 @@
       content: "Uses Ansible to do a \"show version\":\r\n  tasks:\r\n    - name:\
         \ eos show commands\r\n      eos_command:\r\n        commands:\r\n       \
         \   - show version\r\n        provider: \"{{ cli }}\"\r\n      register: output\r\
-        \nCheck that the results contains the following regex:\r\n{{ device.ip_address\
-        \ }}.*\"ok\":2\r\n"
-      positions: [-236, 313]
+        \nConverts the results to a dictionary.\r\nCheck that the results contains\
+        \ the following dictionary:\r\n{\"ok\": 2} (via dictionary inclusion)\r\n"
+      positions: ['-281.11001252948114', '328.74855358195754']
       size: 14
     af753a72-ccd8-43fd-87c2-fde82348f798:
       alignment: left

@@ -25,7 +25,8 @@ class UnixCommandService(Service):
             return {"success": False, "result": log}
         command = run.sub(run.command, locals())
         run.log("info", f"Running UNIX command: {command}", device)
-        return {"command": command, "result": check_output(command.split()).decode()}
+        result = check_output(command, shell=True).decode()
+        return {"command": command, "result": result}
 
 
 class UnixCommandForm(ServiceForm):

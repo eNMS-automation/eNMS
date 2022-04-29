@@ -300,6 +300,7 @@ class Database:
                         ForeignKey(
                             f"{model1['foreign_key']}.id", **model1.get("kwargs", {})
                         ),
+                        primary_key=True,
                     ),
                     Column(
                         model2["column"],
@@ -307,6 +308,7 @@ class Database:
                         ForeignKey(
                             f"{model2['foreign_key']}.id", **model2.get("kwargs", {})
                         ),
+                        primary_key=True,
                     ),
                 ),
             )

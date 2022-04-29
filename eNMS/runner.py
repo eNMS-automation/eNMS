@@ -782,7 +782,7 @@ class Runner:
                                 pass
                         pop_key = not copy[k]
                     else:
-                        pop_key = copy.get(k) == v
+                        pop_key = k in copy and copy[k] == v
                     copy.pop(k) if pop_key else self.match_dictionary(v, copy, False)
             elif isinstance(result, list):
                 for item in result:

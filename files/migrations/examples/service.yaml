@@ -53,19 +53,18 @@
     (R) Labels and Custom Property: [-256, -78]
     (R) Multiple parallel connections to same device: &id015 [-339, -168]
     (R) NAPALM Configuration and Rollback Services: &id016 [-684, -34]
-    (R) NCClient Netconf Service: &id017 [-448, -185]
-    (R) Napalm Getters Service: &id018 [-604, 9]
+    (R) NCClient Netconf Service: [-448, -185]
+    (R) Napalm Getters Service: &id017 [-604, 9]
     (R) Netmiko Configuration and Validation Services: &id014 [-435, -39]
-    (R) Netmiko File Transfer Service: &id019 [-380, -131]
-    (R) Netmiko Prompts Service: &id020 [-397, 136]
-    (R) Netmiko Validation with TextFSM Option: &id021 [-366, 74]
-    (R) Operational Data Backup Service: &id023 [-689, 207]
+    (R) Netmiko File Transfer Service: &id018 [-380, -131]
+    (R) Netmiko Prompts Service: &id019 [-397, 136]
+    (R) Netmiko Validation with TextFSM Option: &id020 [-366, 74]
+    (R) Operational Data Backup Service: &id022 [-689, 207]
     (R) Scalability: &id011 [-437, -191]
-    (R) Scrapli Netconf Service: &id052 [-298, -101]
-    (R) Scrapli Service: &id038 [-192, 31]
-    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: &id037 [-382,
-      39]
-    Advanced Iteration Targets: &id036 [-131, -24]
+    (R) Scrapli Netconf Service: &id051 [-298, -101]
+    (R) Scrapli Service: &id035 [-192, 31]
+    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [-382, 39]
+    Advanced Iteration Targets: &id034 [-131, -24]
     Advanced Multiprocessing (admin): [-492, -39]
     Ansible Playbook Service: *id001
     Ansible with Validation: [-634, -20]
@@ -75,13 +74,13 @@
     'Basic: Deletion (Device, Link, Service, Task)': &id003 [-335, 173]
     Combined Device & Target Iteration: &id008 [-458, -30]
     Conditional Skip Query in Failed and Discard Modes: &id063 [-322, 98]
-    Credentials (Password & Key, Priority Mechanism): &id042 [-157, 96]
-    Data Extraction Service: &id043 [-421, 129]
+    Credentials (Password & Key, Priority Mechanism): &id039 [-157, 96]
+    Data Extraction Service: &id040 [-421, 129]
     Deletion and Cascade Deletion: *id003
     Deletion of Devices, Links, Services, Tasks and associated Cascade Deletion: *id003
     Device Iteration: &id009 [-354, -121]
     Dictionary as Iteration Target Variable: &id010 [-308, -231]
-    DxD and SxS Run Methods: &id035 [-404, 147]
+    DxD and SxS Run Methods: &id033 [-404, 147]
     Fork based on Result with Success & Failure Edges: &id004 [-327, -20]
     Fork based on Success Value: *id004
     Fork based on value with Skip Discard Mechanism: &id064 [-563, 184]
@@ -89,9 +88,9 @@
     'Functions: factory, fetch, fetch_all, encrypt and get_result': &id006 [-228,
       7]
     'Functions: get_result and get_var': [-368, 44]
-    'Functions: get_var, set_var, and get_result': &id033 [-506, -55]
-    GET Endpoints is_alive, configuration and instance: &id026 [-477, 22]
-    GET Endpoints query and token: &id027 [-423, -76]
+    'Functions: get_var, set_var, and get_result': &id031 [-506, -55]
+    GET Endpoints is_alive, configuration and instance: &id024 [-477, 22]
+    GET Endpoints query and token: &id025 [-423, -76]
     Gateway Mechanism (SSH Proxy with Paramiko): *id002
     Generic File Transfer: *id005
     Global Variables and post-run Pool Update Mechanism: *id006
@@ -124,149 +123,150 @@
     Multiple parallel connections to same device: *id015
     Multiprocessing in DxD mode: [-492, -39]
     NAPALM Configuration and Rollback: *id016
-    NCClient Netconf Service: *id017
-    Napalm Getters Validation: *id018
+    NCClient Netconf Service: &id044 [-448, -185]
+    Napalm Getters Validation: *id017
     Netmiko Configuration and Validation Services: *id014
-    Netmiko File Transfer: *id019
-    Netmiko Prompts: *id020
-    Netmiko TextFSM Option: *id021
-    Notification Mechanism: &id022 [-391, -77]
-    Notifications: *id022
-    Operational Data Backup (admin): *id023
-    Optional Prerequisite Services: &id048 [-356, 121]
+    Netmiko File Transfer: *id018
+    Netmiko Prompts: *id019
+    Netmiko TextFSM Option: *id020
+    Notification Mechanism: &id021 [-391, -77]
+    Notifications: *id021
+    Operational Data Backup (admin): *id022
+    Optional Prerequisite Services: &id046 [-356, 121]
     Optional Remediation Branch: [-356, 121]
-    POST Endpoint search: &id028 [-374, 42]
-    POST update, DELETE delete and GET & POST results: &id029 [-359, 245]
-    Parameterized Form (override labels & targets, add payload): &id049 [-262, -163]
+    POST Endpoint search: &id026 [-374, 42]
+    POST update, DELETE delete and GET & POST results: &id027 [-359, 245]
+    Parameterized Form (override labels & targets, add payload): &id047 [-262, -163]
     Parameterized Multiprocessing: [-169, 101]
-    Parameterized Run with a Superworkflow: &id024 [-293, -76]
-    Parameterized Superworkflow Run: *id024
+    Parameterized Run with a Superworkflow: [-293, -76]
+    Parameterized Superworkflow Run: &id048 [-293, -76]
     Parameterized Targets: [-54, -115]
     Payload Extraction & Validation: [-308, -170]
-    Payload Extraction with Operations: &id050 [-661, -226]
+    Payload Extraction with Operations: &id049 [-661, -226]
     Payload Recursive Conservation with Restart Mechanism: &id061 [-238, -178]
-    Preprocessing and Postprocessing Mechanism: &id025 [-197, -37]
-    Preprocessing and Postprocessing Mechanisms: *id025
-    RBAC Target Restriction: &id051 [-176, -144]
+    Preprocessing and Postprocessing Mechanism: &id023 [-197, -37]
+    Preprocessing and Postprocessing Mechanisms: *id023
+    RBAC Target Restriction: &id050 [-176, -144]
     'REST API: GET Endpoints': [-425, -25]
-    'REST API: GET Endpoints is_alive, configuration and instance': *id026
-    'REST API: GET Endpoints query and token': *id027
-    'REST API: GET Endpoints query, result and token': *id027
+    'REST API: GET Endpoints is_alive, configuration and instance': *id024
+    'REST API: GET Endpoints query and token': *id025
+    'REST API: GET Endpoints query, result and token': *id025
     'REST API: Main Endpoints': [0, 0]
-    'REST API: POST Endpoint search': *id028
-    'REST API: POST Endpoints update and search': *id028
-    'REST API: POST update, DELETE delete and GET & POST results': *id029
+    'REST API: POST Endpoint search': *id026
+    'REST API: POST Endpoints update and search': *id026
+    'REST API: POST update, DELETE delete and GET & POST results': *id027
     'Regression Workflow 1: Netmiko with validation and retries': [-385, 11]
-    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id031 [-383,
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id029 [-383,
       -95]
-    'Regression Workflow 1: link neighbors mechanism': &id030 [-273, -126]
-    'Regression Workflow 2: Separate Failure - Success paths': &id053 [-327, -20]
-    'Regression Workflow 3: Napalm getters (postprocessing)': &id047 [-316, 80]
-    'Regression Workflow 4: Link Neighbors Mechanism (public)': *id030
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id031
-    'Regression Workflow 4: link neighbors mechanism': *id030
-    'Regression Workflow 4: link neighbors mechanism (public)': *id030
+    'Regression Workflow 1: link neighbors mechanism': &id028 [-273, -126]
+    'Regression Workflow 2: Separate Failure - Success paths': &id052 [-327, -20]
+    'Regression Workflow 3: Napalm getters (postprocessing)': &id045 [-316, 80]
+    'Regression Workflow 4: Link Neighbors Mechanism (public)': *id028
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id029
+    'Regression Workflow 4: link neighbors mechanism': *id028
+    'Regression Workflow 4: link neighbors mechanism (public)': *id028
     'Regression Workflow 5: VRF creation and deletion with Napalm': !!python/tuple [
       0, 0]
-    'Regression Workflow 6: Ansible with Validation': &id041 [-557, -5]
+    'Regression Workflow 6: Ansible with Validation': &id038 [-557, -5]
     'Regression Workflow 7: Payload Extraction & Validation': !!python/tuple [0, 0]
     'Regression Workflow 8: Payload Extraction with Operations': !!python/tuple [
       0, 0]
-    'Regression Workflow 9: Operational Data Backup': &id032 [-648, 121]
-    'Regression Workflow 9: Operational Data Backup (admin)': *id032
-    'Regression Workflow A: get_var, set_var, get_result': *id033
+    'Regression Workflow 9: Operational Data Backup': &id030 [-648, 121]
+    'Regression Workflow 9: Operational Data Backup (admin)': *id030
+    'Regression Workflow A: get_var, set_var, get_result': *id031
     'Regression Workflow B: Napalm getters validation': !!python/tuple [0, 0]
-    'Regression Workflow C: Advanced multiprocessing': &id034 [-492, -39]
-    'Regression Workflow C: Advanced multiprocessing (admin)': *id034
-    'Regression Workflow D: Prompts': *id020
-    'Regression Workflow E: Iteration Targets': &id046 [-342, -252]
+    'Regression Workflow C: Advanced multiprocessing': &id032 [-492, -39]
+    'Regression Workflow C: Advanced multiprocessing (admin)': *id032
+    'Regression Workflow D: Prompts': *id019
+    'Regression Workflow E: Iteration Targets': &id043 [-342, -252]
     'Regression Workflow F S1: Subworkflow of Workflow': !!python/tuple [0, 0]
     'Regression Workflow F S2: Access Variables from Parent Workflow': !!python/tuple [
       0, 0]
     'Regression Workflow F: Workflow of Workflows': &id059 [-965, 194]
-    'Regression Workflow G: run methods (BFS)': *id035
-    'Regression Workflow H: shared service in multiple subworkflows': &id054 [55,
+    'Regression Workflow G: run methods (BFS)': *id033
+    'Regression Workflow H: shared service in multiple subworkflows': &id053 [55,
       266]
-    'Regression Workflow I: Iteration Targets Advanced': *id036
+    'Regression Workflow I: Iteration Targets Advanced': *id034
     'Regression Workflow J: Workflow and Subworkflow Iteration': [0, 0]
-    'Regression Workflow K: preprocessing and postprocessing': *id025
-    'Regression Workflow L: superworkflow': &id057 [-179, 6]
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': *id037
+    'Regression Workflow K: preprocessing and postprocessing': *id023
+    'Regression Workflow L: superworkflow': &id056 [-179, 6]
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id058 [
+      -382, 39]
     'Regression Workflow M: Unix command & shell, ping, jump server': [-341, 17]
-    'Regression Workflow N: Topology Import (netbox, librenms, opennms)': &id058 [
+    'Regression Workflow N: Topology Import (netbox, librenms, opennms)': &id057 [
       -141, 21]
-    'Regression Workflow O: Scrapli': *id038
+    'Regression Workflow O: Scrapli': *id035
     'Regression Workflow P: large workflow (scalability)': *id011
-    'Regression Workflow Q: File transfer': &id044 [-479, -89]
-    'Regression Workflow R: Skip Services in SxS mode': &id039 [-336, -35]
-    'Regression Workflow R: skip services in service by service mode': *id039
-    'Regression Workflow S: conditional skip query in failed and discard mode': &id040 [
+    'Regression Workflow Q: File transfer': &id041 [-479, -89]
+    'Regression Workflow R: Skip Services in SxS mode': &id036 [-336, -35]
+    'Regression Workflow R: skip services in service by service mode': *id036
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id037 [
       -205, -81]
-    'Regression Workflow S: conditional skip query with skip value set to False': *id040
+    'Regression Workflow S: conditional skip query with skip value set to False': *id037
     'Regression Workflow T: global variables': [-277, -147]
     'Regression Workflow T: global variables and post-run pool update': [-277, -147]
-    'Regression Workflow T: link neighbors mechanism': *id030
-    'Regression Workflow U: fork based on value with skip discard mode': &id045 [
+    'Regression Workflow T: link neighbors mechanism': *id028
+    'Regression Workflow U: fork based on value with skip discard mode': &id042 [
       -477, 154]
-    'Regression Workflow V: skip query with device in run once mode': &id055 [-412,
+    'Regression Workflow V: skip query with device in run once mode': &id054 [-412,
       -72]
     'Regression Workflow V: skip query with device in subworkflow SxS': [-71, -2]
     'Regression Workflow W: disable result creation mode': [-295, -141]
-    'Regression Workflow W: skip, discard and disable result creation mechanism': &id056 [
+    'Regression Workflow W: skip, discard and disable result creation mechanism': &id055 [
       -295, -141]
     'Regression Workflow X: Credentials (password & key, priority)': [-157, 96]
-    'Regression Workflow: Advanced Iteration Targets': *id036
-    'Regression Workflow: Advanced Multiprocessing (admin)': *id034
-    'Regression Workflow: Ansible with Validation': *id041
-    'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id040
-    'Regression Workflow: Credentials (Password & Key, Priority Mechanism)': *id042
-    'Regression Workflow: Data Extraction Service': *id043
+    'Regression Workflow: Advanced Iteration Targets': *id034
+    'Regression Workflow: Advanced Multiprocessing (admin)': *id032
+    'Regression Workflow: Ansible with Validation': *id038
+    'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id037
+    'Regression Workflow: Credentials (Password & Key, Priority Mechanism)': *id039
+    'Regression Workflow: Data Extraction Service': *id040
     'Regression Workflow: Device Iteration': [-235, -81]
-    'Regression Workflow: DxD and SxS Run Methods': *id035
-    'Regression Workflow: File Transfer Mechanism': *id044
-    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id045
+    'Regression Workflow: DxD and SxS Run Methods': *id033
+    'Regression Workflow: File Transfer Mechanism': *id041
+    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id042
     'Regression Workflow: Generic File Transfer': *id005
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': *id006
     'Regression Workflow: Global get_credential Function and Log Obfuscation': *id007
-    'Regression Workflow: Iteration Targets Mechanism': *id046
-    'Regression Workflow: Link Neighbors Mechanism (public)': *id030
-    'Regression Workflow: NCClient Netconf Service': *id017
-    'Regression Workflow: Napalm Getters Validation': *id018
-    'Regression Workflow: Napalm Getters and Postprocessing': *id047
-    'Regression Workflow: Netmiko File Transfer': *id019
-    'Regression Workflow: Netmiko Prompts': *id020
-    'Regression Workflow: Netmiko TextFSM Option': *id021
-    'Regression Workflow: Notifications': *id022
-    'Regression Workflow: Operational Data Backup (admin)': *id032
-    'Regression Workflow: Optional Prerequisite Services': *id048
-    'Regression Workflow: Parameterized Form (override labels & targets, add payload)': *id049
-    'Regression Workflow: Parameterized Superworkflow Run': *id024
+    'Regression Workflow: Iteration Targets Mechanism': *id043
+    'Regression Workflow: Link Neighbors Mechanism (public)': *id028
+    'Regression Workflow: NCClient Netconf Service': *id044
+    'Regression Workflow: Napalm Getters Validation': *id017
+    'Regression Workflow: Napalm Getters and Postprocessing': *id045
+    'Regression Workflow: Netmiko File Transfer': *id018
+    'Regression Workflow: Netmiko Prompts': *id019
+    'Regression Workflow: Netmiko TextFSM Option': *id020
+    'Regression Workflow: Notifications': *id021
+    'Regression Workflow: Operational Data Backup (admin)': *id030
+    'Regression Workflow: Optional Prerequisite Services': *id046
+    'Regression Workflow: Parameterized Form (override labels & targets, add payload)': *id047
+    'Regression Workflow: Parameterized Superworkflow Run': *id048
     'Regression Workflow: Payload Extraction & Validation': &id087 [-115, -305]
-    'Regression Workflow: Payload Extraction with Operations': *id050
-    'Regression Workflow: Preprocessing and Postprocessing': *id025
-    'Regression Workflow: RBAC Target Restriction': *id051
+    'Regression Workflow: Payload Extraction with Operations': *id049
+    'Regression Workflow: Preprocessing and Postprocessing': *id023
+    'Regression Workflow: RBAC Target Restriction': *id050
     'Regression Workflow: Result content in memory (scalability)': [0, 0]
     'Regression Workflow: Scalability Test (large workflow)': *id011
-    'Regression Workflow: Scrapli': *id038
-    'Regression Workflow: Scrapli Netconf Service': *id052
-    'Regression Workflow: Separate Failure - Success Paths': *id053
+    'Regression Workflow: Scrapli': *id035
+    'Regression Workflow: Scrapli Netconf Service': *id051
+    'Regression Workflow: Separate Failure - Success Paths': *id052
     'Regression Workflow: Service Priorities, Napalm Getters, Postprocessing': &id062 [
       -316, 80]
-    'Regression Workflow: Shared Service in Multiple Subworkflows': *id054
-    'Regression Workflow: Skip Query with device in Run Once Mode': *id055
-    'Regression Workflow: Skip Services in SxS mode': *id039
-    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id056
-    'Regression Workflow: Specific Superworkflow': *id057
-    'Regression Workflow: Superworkflow': *id057
+    'Regression Workflow: Shared Service in Multiple Subworkflows': *id053
+    'Regression Workflow: Skip Query with device in Run Once Mode': *id054
+    'Regression Workflow: Skip Services in SxS mode': *id036
+    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id055
+    'Regression Workflow: Specific Superworkflow': *id056
+    'Regression Workflow: Superworkflow': *id056
     'Regression Workflow: Superworkflow in SxS w WT with Run Once service': &id067 [
       -197, -103]
     'Regression Workflow: SxS Service Targets with Run Once + Skip': &id066 [-436,
       94]
-    'Regression Workflow: Topology Import (netbox, librenms, opennms)': *id058
-    'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id037
-    'Regression Workflow: Using get_var, set_var, get_result functions': *id033
+    'Regression Workflow: Topology Import (netbox, librenms, opennms)': *id057
+    'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id058
+    'Regression Workflow: Using get_var, set_var, get_result functions': *id031
     'Regression Workflow: VRF Creation and Deletion with Napalm': *id016
-    'Regression Workflow: VRF Creation and Deletion with Netmiko': *id031
+    'Regression Workflow: VRF Creation and Deletion with Netmiko': *id029
     'Regression Workflow: Validation Section Mechanism': [-413, -265]
     'Regression Workflow: Workflow and Subworkflow Iteration': [-313, 364]
     'Regression Workflow: Workflow of Workflows': *id059
@@ -275,40 +275,40 @@
     Restart From Feature and Superworkflow Interaction: *id060
     Restart Mechanism, payload + results recursive conservation: *id061
     Scalability Test (large workflow): *id011
-    Scrapli Netconf Service: *id052
-    Scrapli Service: *id038
+    Scrapli Netconf Service: *id051
+    Scrapli Service: *id035
     Separate Failure - Success Paths: [-327, -20]
     Service Priorities: [0, 0]
     Service Priorities, Napalm Getters, Postprocessing: *id062
     'Services: Ansible Playbook Service': *id001
-    Shared Service in Multiple Subworkflows: *id054
+    Shared Service in Multiple Subworkflows: *id053
     'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': *id063
     'Skip Mechanism: Fork based on value with Skip Discard Mechanism': *id064
     'Skip Mechanism: Skip in SxS mode': [-426, -49]
     'Skip Mechanism: Skip in SxS with WF targets mode': &id065 [-605, -49]
-    Skip Query with device in Run Once Mode: *id055
+    Skip Query with device in Run Once Mode: *id054
     Skip Services in SxS mode: [-347, -44]
     Skip in SxS with WF targets mode: *id065
     Skip in SxS with service targets and Run Once services: *id066
-    Skip, Discard and Disable Result Creation Mechanism: *id056
+    Skip, Discard and Disable Result Creation Mechanism: *id055
     Slack and Mattermost notifications: [-143, 42]
-    Specific Superworkflow: *id057
+    Specific Superworkflow: *id056
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     Superworkflow in SxS w WT with Run Once service: *id067
     SxS Service Targets with Run Once + Skip: *id066
-    Target Restriction Mechanism: *id051
+    Target Restriction Mechanism: *id050
     Topology Import Service (netbox, librenms, opennms): &id068 [-141, 21]
     Topology Import Services: *id068
-    Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id037
-    Using get_var, set_var, and get_result Functions: *id033
+    Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id058
+    Using get_var, set_var, and get_result Functions: *id031
     VRF Creation and Deletion with Napalm: *id016
-    VRF Creation and Deletion with Netmiko: *id031
+    VRF Creation and Deletion with Netmiko: *id029
     Validation Mechanism: &id069 [-478, -72]
     'Validation Mechanism: Section to Validate Property': *id069
     Validation Section Mechanism: [-540, -145]
     Workflow  in device by device mode: !!python/tuple [0, 0]
-    'Workflow Regression R: skip services in service by service mode': *id039
+    'Workflow Regression R: skip services in service by service mode': *id036
     'Workflow Regression S: conditional skip query with skip value set to False': [
       -183, -152]
     Workflow and Subworkflow Iteration: *id070
@@ -391,37 +391,37 @@
     : *id087
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
-    : *id050
+    : *id049
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
-    : *id018
+    : *id017
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 7: Payload Extraction & Validation'
     : *id087
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 8: Payload Extraction with Operations'
-    : *id050
+    : *id049
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow B: Napalm getters validation'
-    : *id018
+    : *id017
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id018
+    : *id017
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
     : *id087
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id050
+    : *id049
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id018
+    : *id017
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
     : *id087
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id050
+    : *id049
     get_credential Function: *id007
     iteration_devices_workflow: ['-164', '15']
   postprocessing: ''
@@ -504,20 +504,19 @@
     (R) Labels and Custom Property: [669, -84]
     (R) Multiple parallel connections to same device: &id102 [689, 58]
     (R) NAPALM Configuration and Rollback Services: &id103 [-696, 47]
-    (R) NCClient Netconf Service: &id104 [556, 119]
-    (R) Napalm Getters Service: &id105 [-600, 63]
+    (R) NCClient Netconf Service: [556, 119]
+    (R) Napalm Getters Service: &id104 [-600, 63]
     (R) Netmiko Configuration and Validation Services: &id101 [-418, 177]
-    (R) Netmiko File Transfer Service: &id106 [499, -103]
-    (R) Netmiko Prompts Service: &id107 [608, 90]
-    (R) Netmiko Validation with TextFSM Option: &id108 [522, 4]
-    (R) Operational Data Backup Service: &id110 [282, 396]
+    (R) Netmiko File Transfer Service: &id105 [499, -103]
+    (R) Netmiko Prompts Service: &id106 [608, 90]
+    (R) Netmiko Validation with TextFSM Option: &id107 [522, 4]
+    (R) Operational Data Backup Service: &id109 [282, 396]
     (R) Scalability: &id098 [483, -268]
-    (R) Scrapli Netconf Service: &id139 [-293, 114]
-    (R) Scrapli Service: &id125 [628, 113]
-    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: &id124 [560,
-      9]
+    (R) Scrapli Netconf Service: &id138 [-293, 114]
+    (R) Scrapli Service: &id122 [628, 113]
+    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [560, 9]
     AAA: !!python/tuple [500, 0]
-    Advanced Iteration Targets: &id123 [350, -6]
+    Advanced Iteration Targets: &id121 [350, -6]
     Advanced Multiprocessing (admin): [505, -10]
     Ansible Playbook Service: *id088
     Ansible with Validation: [468, 147]
@@ -527,22 +526,22 @@
     'Basic: Deletion (Device, Link, Service, Task)': &id090 [664, 197]
     Combined Device & Target Iteration: &id095 [-437, 191]
     Conditional Skip Query in Failed and Discard Modes: &id150 [599, 331]
-    Credentials (Password & Key, Priority Mechanism): &id129 [590, 124]
-    Data Extraction Service: &id130 [365, 216]
+    Credentials (Password & Key, Priority Mechanism): &id126 [590, 124]
+    Data Extraction Service: &id127 [365, 216]
     Deletion and Cascade Deletion: *id090
     Deletion of Devices, Links, Services, Tasks and associated Cascade Deletion: *id090
     Device Iteration: &id096 [549, -155]
     Dictionary as Iteration Target Variable: &id097 [596, -221]
-    DxD and SxS Run Methods: &id122 [638, 130]
+    DxD and SxS Run Methods: &id120 [638, 130]
     Fork based on Result with Success & Failure Edges: &id091 [553, 357]
     Fork based on Success Value: *id091
     Fork based on value with Skip Discard Mechanism: &id151 [388, 363]
     'Function: get_credential': &id094 [591, -45]
     'Functions: factory, fetch, fetch_all, encrypt and get_result': &id093 [749, 100]
     'Functions: get_result and get_var': [697, -62]
-    'Functions: get_var, set_var, and get_result': &id120 [-528, 25]
-    GET Endpoints is_alive, configuration and instance: &id113 [460, 246]
-    GET Endpoints query and token: &id114 [604, 81]
+    'Functions: get_var, set_var, and get_result': &id118 [-528, 25]
+    GET Endpoints is_alive, configuration and instance: &id111 [460, 246]
+    GET Endpoints query and token: &id112 [604, 81]
     Gateway Mechanism (SSH Proxy with Paramiko): *id089
     Generic File Transfer: *id092
     Global Variables and post-run Pool Update Mechanism: *id093
@@ -574,150 +573,151 @@
     Multiple parallel connections to same device: *id102
     Multiprocessing in DxD mode: [505, -10]
     NAPALM Configuration and Rollback: *id103
-    NCClient Netconf Service: *id104
-    Napalm Getters Validation: *id105
+    NCClient Netconf Service: &id131 [556, 119]
+    Napalm Getters Validation: *id104
     Netmiko Configuration and Validation Services: *id101
-    Netmiko File Transfer: *id106
-    Netmiko Prompts: *id107
-    Netmiko TextFSM Option: *id108
-    Notification Mechanism: &id109 [530, 32]
-    Notifications: *id109
-    Operational Data Backup (admin): *id110
-    Optional Prerequisite Services: &id135 [734, 171]
+    Netmiko File Transfer: *id105
+    Netmiko Prompts: *id106
+    Netmiko TextFSM Option: *id107
+    Notification Mechanism: &id108 [530, 32]
+    Notifications: *id108
+    Operational Data Backup (admin): *id109
+    Optional Prerequisite Services: &id133 [734, 171]
     Optional Remediation Branch: [734, 171]
-    POST Endpoint search: &id115 [576, 170]
-    POST update, DELETE delete and GET & POST results: &id116 [503, 145]
-    Parameterized Form (override labels & targets, add payload): &id136 [692, -112]
+    POST Endpoint search: &id113 [576, 170]
+    POST update, DELETE delete and GET & POST results: &id114 [503, 145]
+    Parameterized Form (override labels & targets, add payload): &id134 [692, -112]
     Parameterized Multiprocessing: [615, 109]
-    Parameterized Run with a Superworkflow: &id111 [565, -70]
-    Parameterized Superworkflow Run: *id111
+    Parameterized Run with a Superworkflow: [565, -70]
+    Parameterized Superworkflow Run: &id135 [565, -70]
     Parameterized Targets: [-41, 252]
     Payload Extraction & Validation: [279, 262]
-    Payload Extraction with Operations: &id137 [-688, -153]
+    Payload Extraction with Operations: &id136 [-688, -153]
     Payload Recursive Conservation with Restart Mechanism: &id148 [663, 12]
-    Preprocessing and Postprocessing Mechanism: &id112 [619, 353]
-    Preprocessing and Postprocessing Mechanisms: *id112
-    RBAC Target Restriction: &id138 [654, -133]
+    Preprocessing and Postprocessing Mechanism: &id110 [619, 353]
+    Preprocessing and Postprocessing Mechanisms: *id110
+    RBAC Target Restriction: &id137 [654, -133]
     'REST API: GET Endpoints': [500, 0]
-    'REST API: GET Endpoints is_alive, configuration and instance': *id113
-    'REST API: GET Endpoints query and token': *id114
-    'REST API: GET Endpoints query, result and token': *id114
+    'REST API: GET Endpoints is_alive, configuration and instance': *id111
+    'REST API: GET Endpoints query and token': *id112
+    'REST API: GET Endpoints query, result and token': *id112
     'REST API: Main Endpoints': [500, 0]
-    'REST API: POST Endpoint search': *id115
-    'REST API: POST Endpoints update and search': *id115
-    'REST API: POST update, DELETE delete and GET & POST results': *id116
+    'REST API: POST Endpoint search': *id113
+    'REST API: POST Endpoints update and search': *id113
+    'REST API: POST update, DELETE delete and GET & POST results': *id114
     'Regression Workflow 1: Netmiko with validation and retries': [115, 3]
-    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id118 [-383,
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id116 [-383,
       167]
-    'Regression Workflow 1: link neighbors mechanism': &id117 [713, 86]
-    'Regression Workflow 2: Separate Failure - Success paths': &id140 [737, 276]
-    'Regression Workflow 3: Napalm getters (postprocessing)': &id134 [703, 150]
-    'Regression Workflow 4: Link Neighbors Mechanism (public)': *id117
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id118
-    'Regression Workflow 4: link neighbors mechanism': *id117
-    'Regression Workflow 4: link neighbors mechanism (public)': *id117
+    'Regression Workflow 1: link neighbors mechanism': &id115 [713, 86]
+    'Regression Workflow 2: Separate Failure - Success paths': &id139 [737, 276]
+    'Regression Workflow 3: Napalm getters (postprocessing)': &id132 [703, 150]
+    'Regression Workflow 4: Link Neighbors Mechanism (public)': *id115
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id116
+    'Regression Workflow 4: link neighbors mechanism': *id115
+    'Regression Workflow 4: link neighbors mechanism (public)': *id115
     'Regression Workflow 5: VRF creation and deletion with Napalm': !!python/tuple [
       0, 0]
-    'Regression Workflow 6: Ansible with Validation': &id128 [567, -24]
+    'Regression Workflow 6: Ansible with Validation': &id125 [567, -24]
     'Regression Workflow 7: Payload Extraction & Validation': !!python/tuple [0, 0]
     'Regression Workflow 8: Payload Extraction with Operations': !!python/tuple [
       0, 0]
-    'Regression Workflow 9: Operational Data Backup': &id119 [290, 314]
-    'Regression Workflow 9: Operational Data Backup (admin)': *id119
-    'Regression Workflow A: get_var, set_var, get_result': *id120
+    'Regression Workflow 9: Operational Data Backup': &id117 [290, 314]
+    'Regression Workflow 9: Operational Data Backup (admin)': *id117
+    'Regression Workflow A: get_var, set_var, get_result': *id118
     'Regression Workflow B: Napalm getters validation': !!python/tuple [0, 0]
-    'Regression Workflow C: Advanced multiprocessing': &id121 [505, -10]
-    'Regression Workflow C: Advanced multiprocessing (admin)': *id121
-    'Regression Workflow D: Prompts': *id107
-    'Regression Workflow E: Iteration Targets': &id133 [-334, 29]
+    'Regression Workflow C: Advanced multiprocessing': &id119 [505, -10]
+    'Regression Workflow C: Advanced multiprocessing (admin)': *id119
+    'Regression Workflow D: Prompts': *id106
+    'Regression Workflow E: Iteration Targets': &id130 [-334, 29]
     'Regression Workflow F S1: Subworkflow of Workflow': !!python/tuple [0, 0]
     'Regression Workflow F S2: Access Variables from Parent Workflow': !!python/tuple [
       0, 0]
     'Regression Workflow F: Workflow of Workflows': &id146 [-934, 289]
-    'Regression Workflow G: run methods (BFS)': *id122
-    'Regression Workflow H: shared service in multiple subworkflows': &id141 [688,
+    'Regression Workflow G: run methods (BFS)': *id120
+    'Regression Workflow H: shared service in multiple subworkflows': &id140 [688,
       -88]
-    'Regression Workflow I: Iteration Targets Advanced': *id123
+    'Regression Workflow I: Iteration Targets Advanced': *id121
     'Regression Workflow J: Workflow and Subworkflow Iteration': [500, 0]
-    'Regression Workflow K: preprocessing and postprocessing': *id112
-    'Regression Workflow L: superworkflow': &id144 [730, 218]
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': *id124
+    'Regression Workflow K: preprocessing and postprocessing': *id110
+    'Regression Workflow L: superworkflow': &id143 [730, 218]
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id145 [
+      560, 9]
     'Regression Workflow M: Unix command & shell, ping, jump server': [560, 9]
-    'Regression Workflow N: Topology Import (netbox, librenms, opennms)': &id145 [
+    'Regression Workflow N: Topology Import (netbox, librenms, opennms)': &id144 [
       636, 24]
-    'Regression Workflow O: Scrapli': *id125
+    'Regression Workflow O: Scrapli': *id122
     'Regression Workflow P: large workflow (scalability)': *id098
-    'Regression Workflow Q: File transfer': &id131 [576, 135]
-    'Regression Workflow R: Skip Services in SxS mode': &id126 [500, 0]
-    'Regression Workflow R: skip services in service by service mode': *id126
-    'Regression Workflow S: conditional skip query in failed and discard mode': &id127 [
+    'Regression Workflow Q: File transfer': &id128 [576, 135]
+    'Regression Workflow R: Skip Services in SxS mode': &id123 [500, 0]
+    'Regression Workflow R: skip services in service by service mode': *id123
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id124 [
       640, -155]
-    'Regression Workflow S: conditional skip query with skip value set to False': *id127
+    'Regression Workflow S: conditional skip query with skip value set to False': *id124
     'Regression Workflow T: global variables': [569, -66]
     'Regression Workflow T: global variables and post-run pool update': [569, -66]
-    'Regression Workflow T: link neighbors mechanism': *id117
-    'Regression Workflow U: fork based on value with skip discard mode': &id132 [
+    'Regression Workflow T: link neighbors mechanism': *id115
+    'Regression Workflow U: fork based on value with skip discard mode': &id129 [
       645, 270]
-    'Regression Workflow V: skip query with device in run once mode': &id142 [670,
+    'Regression Workflow V: skip query with device in run once mode': &id141 [670,
       159]
     'Regression Workflow V: skip query with device in subworkflow SxS': [572, -3]
     'Regression Workflow W: disable result creation mode': [529, -52]
-    'Regression Workflow W: skip, discard and disable result creation mechanism': &id143 [
+    'Regression Workflow W: skip, discard and disable result creation mechanism': &id142 [
       547, -96]
     'Regression Workflow X: Credentials (password & key, priority)': [590, 124]
-    'Regression Workflow: Advanced Iteration Targets': *id123
-    'Regression Workflow: Advanced Multiprocessing (admin)': *id121
-    'Regression Workflow: Ansible with Validation': *id128
-    'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id127
-    'Regression Workflow: Credentials (Password & Key, Priority Mechanism)': *id129
-    'Regression Workflow: Data Extraction Service': *id130
+    'Regression Workflow: Advanced Iteration Targets': *id121
+    'Regression Workflow: Advanced Multiprocessing (admin)': *id119
+    'Regression Workflow: Ansible with Validation': *id125
+    'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id124
+    'Regression Workflow: Credentials (Password & Key, Priority Mechanism)': *id126
+    'Regression Workflow: Data Extraction Service': *id127
     'Regression Workflow: Device Iteration': [699, 125]
-    'Regression Workflow: DxD and SxS Run Methods': *id122
-    'Regression Workflow: File Transfer Mechanism': *id131
-    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id132
+    'Regression Workflow: DxD and SxS Run Methods': *id120
+    'Regression Workflow: File Transfer Mechanism': *id128
+    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id129
     'Regression Workflow: Generic File Transfer': *id092
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': *id093
     'Regression Workflow: Global get_credential Function and Log Obfuscation': *id094
-    'Regression Workflow: Iteration Targets Mechanism': *id133
-    'Regression Workflow: Link Neighbors Mechanism (public)': *id117
-    'Regression Workflow: NCClient Netconf Service': *id104
-    'Regression Workflow: Napalm Getters Validation': *id105
-    'Regression Workflow: Napalm Getters and Postprocessing': *id134
-    'Regression Workflow: Netmiko File Transfer': *id106
-    'Regression Workflow: Netmiko Prompts': *id107
-    'Regression Workflow: Netmiko TextFSM Option': *id108
-    'Regression Workflow: Notifications': *id109
-    'Regression Workflow: Operational Data Backup (admin)': *id119
-    'Regression Workflow: Optional Prerequisite Services': *id135
-    'Regression Workflow: Parameterized Form (override labels & targets, add payload)': *id136
-    'Regression Workflow: Parameterized Superworkflow Run': *id111
+    'Regression Workflow: Iteration Targets Mechanism': *id130
+    'Regression Workflow: Link Neighbors Mechanism (public)': *id115
+    'Regression Workflow: NCClient Netconf Service': *id131
+    'Regression Workflow: Napalm Getters Validation': *id104
+    'Regression Workflow: Napalm Getters and Postprocessing': *id132
+    'Regression Workflow: Netmiko File Transfer': *id105
+    'Regression Workflow: Netmiko Prompts': *id106
+    'Regression Workflow: Netmiko TextFSM Option': *id107
+    'Regression Workflow: Notifications': *id108
+    'Regression Workflow: Operational Data Backup (admin)': *id117
+    'Regression Workflow: Optional Prerequisite Services': *id133
+    'Regression Workflow: Parameterized Form (override labels & targets, add payload)': *id134
+    'Regression Workflow: Parameterized Superworkflow Run': *id135
     'Regression Workflow: Payload Extraction & Validation': &id175 [279, 262]
-    'Regression Workflow: Payload Extraction with Operations': *id137
-    'Regression Workflow: Preprocessing and Postprocessing': *id112
-    'Regression Workflow: RBAC Target Restriction': *id138
+    'Regression Workflow: Payload Extraction with Operations': *id136
+    'Regression Workflow: Preprocessing and Postprocessing': *id110
+    'Regression Workflow: RBAC Target Restriction': *id137
     'Regression Workflow: Scalability Test (large workflow)': *id098
-    'Regression Workflow: Scrapli': *id125
-    'Regression Workflow: Scrapli Netconf Service': *id139
-    'Regression Workflow: Separate Failure - Success Paths': *id140
+    'Regression Workflow: Scrapli': *id122
+    'Regression Workflow: Scrapli Netconf Service': *id138
+    'Regression Workflow: Separate Failure - Success Paths': *id139
     'Regression Workflow: Service Priorities, Napalm Getters, Postprocessing': &id149 [
       703, 150]
-    'Regression Workflow: Shared Service in Multiple Subworkflows': *id141
-    'Regression Workflow: Skip Query with device in Run Once Mode': *id142
-    'Regression Workflow: Skip Services in SxS mode': *id126
-    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id143
-    'Regression Workflow: Specific Superworkflow': *id144
-    'Regression Workflow: Superworkflow': *id144
+    'Regression Workflow: Shared Service in Multiple Subworkflows': *id140
+    'Regression Workflow: Skip Query with device in Run Once Mode': *id141
+    'Regression Workflow: Skip Services in SxS mode': *id123
+    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id142
+    'Regression Workflow: Specific Superworkflow': *id143
+    'Regression Workflow: Superworkflow': *id143
     'Regression Workflow: Superworkflow in SxS w WT with Run Once service': &id154 [
       514, -109]
     'Regression Workflow: SxS Service Targets with Run Once + Skip': &id153 [605,
       380]
     'Regression Workflow: SxS Service Targets with Skip Global + Query': !!python/tuple [
       500, 0]
-    'Regression Workflow: Topology Import (netbox, librenms, opennms)': *id145
-    'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id124
-    'Regression Workflow: Using get_var, set_var, get_result functions': *id120
+    'Regression Workflow: Topology Import (netbox, librenms, opennms)': *id144
+    'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id145
+    'Regression Workflow: Using get_var, set_var, get_result functions': *id118
     'Regression Workflow: VRF Creation and Deletion with Napalm': *id103
-    'Regression Workflow: VRF Creation and Deletion with Netmiko': *id118
+    'Regression Workflow: VRF Creation and Deletion with Netmiko': *id116
     'Regression Workflow: Validation Section Mechanism': [392, 138]
     'Regression Workflow: Workflow and Subworkflow Iteration': [644, 233]
     'Regression Workflow: Workflow of Workflows': *id146
@@ -726,24 +726,24 @@
     Restart From Feature and Superworkflow Interaction: *id147
     Restart Mechanism, payload + results recursive conservation: *id148
     Scalability Test (large workflow): *id098
-    Scrapli Netconf Service: *id139
-    Scrapli Service: *id125
+    Scrapli Netconf Service: *id138
+    Scrapli Service: *id122
     Separate Failure - Success Paths: [737, 276]
     Service Priorities: [500, 0]
     Service Priorities, Napalm Getters, Postprocessing: *id149
     'Services: Ansible Playbook Service': *id088
-    Shared Service in Multiple Subworkflows: *id141
+    Shared Service in Multiple Subworkflows: *id140
     'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': *id150
     'Skip Mechanism: Fork based on value with Skip Discard Mechanism': *id151
     'Skip Mechanism: Skip in SxS mode': [407, -39]
     'Skip Mechanism: Skip in SxS with WF targets mode': &id152 [210, -67]
-    Skip Query with device in Run Once Mode: *id142
+    Skip Query with device in Run Once Mode: *id141
     Skip Services in SxS mode: [387, -76]
     Skip in SxS with WF targets mode: *id152
     Skip in SxS with service targets and Run Once services: *id153
-    Skip, Discard and Disable Result Creation Mechanism: *id143
+    Skip, Discard and Disable Result Creation Mechanism: *id142
     Slack and Mattermost notifications: [588, 19]
-    Specific Superworkflow: *id144
+    Specific Superworkflow: *id143
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     Superworkflow in SxS w WT with Run Once service: *id154
@@ -751,18 +751,18 @@
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
-    Target Restriction Mechanism: *id138
+    Target Restriction Mechanism: *id137
     Topology Import Service (netbox, librenms, opennms): &id155 [636, 24]
     Topology Import Services: *id155
-    Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id124
-    Using get_var, set_var, and get_result Functions: *id120
+    Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id145
+    Using get_var, set_var, and get_result Functions: *id118
     VRF Creation and Deletion with Napalm: *id103
-    VRF Creation and Deletion with Netmiko: *id118
+    VRF Creation and Deletion with Netmiko: *id116
     Validation Mechanism: &id156 [310, -55]
     'Validation Mechanism: Section to Validate Property': *id156
     Validation Section Mechanism: [470, 106]
     Workflow  in device by device mode: !!python/tuple [0, 0]
-    'Workflow Regression R: skip services in service by service mode': *id126
+    'Workflow Regression R: skip services in service by service mode': *id123
     'Workflow Regression S: conditional skip query with skip value set to False': [
       640, -155]
     Workflow and Subworkflow Iteration: *id157
@@ -853,37 +853,37 @@
     : *id175
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
-    : *id137
+    : *id136
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
-    : *id105
+    : *id104
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 7: Payload Extraction & Validation'
     : *id175
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 8: Payload Extraction with Operations'
-    : *id137
+    : *id136
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow B: Napalm getters validation'
-    : *id105
+    : *id104
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id105
+    : *id104
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
     : *id175
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id137
+    : *id136
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id105
+    : *id104
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
     : *id175
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id137
+    : *id136
     get_credential Function: *id094
     iteration_devices_workflow: ['651', '20']
   postprocessing: ''
@@ -6920,7 +6920,7 @@
       content: "This service uses the password admin in the \"Jump on Connect\" section\
         \ :\r\nthis password must be set to \"admin\" after database reload."
       positions: [392, 270]
-  last_modified: '2022-01-20 07:29:13.174233'
+  last_modified: '2022-04-29 11:49:43.165638'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -7028,9 +7028,9 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: &id260 [-177,
-      -94]
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': *id260
+    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [-125, -23]
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id260 [
+      -177, -94]
     'Regression Workflow M: Unix command & shell, ping, jump server': [-148, -126]
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id260
     Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id260
@@ -7122,9 +7122,9 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: &id261 [-113,
-      220]
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': *id261
+    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [-113, 220]
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id261 [
+      -113, 220]
     'Regression Workflow M: Unix command & shell, ping, jump server': [-76, 172]
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id261
     Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id261
@@ -7215,9 +7215,9 @@
   pools: [Everything]
   ports: '22'
   positions:
-    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: &id262 [200,
-      -71]
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': *id262
+    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [269, -40]
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id262 [
+      200, -71]
     'Regression Workflow M: Unix command & shell, ping, jump server': [182, -134]
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id262
     Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id262
@@ -7490,9 +7490,9 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: &id265 [358,
-      190]
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': *id265
+    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [358, 190]
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id265 [
+      358, 190]
     'Regression Workflow M: Unix command & shell, ping, jump server': [338, 138]
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id265
     Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id265
@@ -15312,12 +15312,12 @@
       alignment: left
       content: "Use NCClient \"Edit Config\" Operation to set\r\nthe description of\
         \ Loopback4 to \"ZZZZ\"."
-      positions: [-126, -203]
+      positions: [-100, -142]
     5e734ae2-a1a9-422d-b21e-ea980e881f0a:
       alignment: left
       content: "Same as the first service, but\r\nwith negative logic disabled."
       positions: [33, 187]
-  last_modified: '2022-01-16 05:18:59.636624'
+  last_modified: '2022-04-29 11:49:34.793081'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -15434,8 +15434,8 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) NCClient Netconf Service: &id356 [-414, 116]
-    NCClient Netconf Service: *id356
+    (R) NCClient Netconf Service: [-414, 116]
+    NCClient Netconf Service: &id356 [-414, 116]
     'Regression Workflow: NCClient Netconf Service': *id356
   postprocessing: ''
   postprocessing_mode: success
@@ -15532,8 +15532,8 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) NCClient Netconf Service: &id357 [-132, -139]
-    NCClient Netconf Service: *id357
+    (R) NCClient Netconf Service: [-137, -75]
+    NCClient Netconf Service: &id357 [-132, -139]
     'Regression Workflow: NCClient Netconf Service': *id357
   postprocessing: ''
   postprocessing_mode: success
@@ -15635,8 +15635,8 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) NCClient Netconf Service: &id358 [30, 126]
-    NCClient Netconf Service: *id358
+    (R) NCClient Netconf Service: [30, 126]
+    NCClient Netconf Service: &id358 [30, 126]
     'Regression Workflow: NCClient Netconf Service': *id358
   postprocessing: ''
   postprocessing_mode: success
@@ -15733,8 +15733,8 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) NCClient Netconf Service: &id359 [249, -136]
-    NCClient Netconf Service: *id359
+    (R) NCClient Netconf Service: [262, -73]
+    NCClient Netconf Service: &id359 [249, -136]
     'Regression Workflow: NCClient Netconf Service': *id359
   postprocessing: ''
   postprocessing_mode: success
@@ -15836,8 +15836,8 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) NCClient Netconf Service: &id360 [388, 123]
-    NCClient Netconf Service: *id360
+    (R) NCClient Netconf Service: [388, 123]
+    NCClient Netconf Service: &id360 [388, 123]
     'Regression Workflow: NCClient Netconf Service': *id360
   postprocessing: ''
   postprocessing_mode: success
@@ -19009,7 +19009,7 @@
       content: "The service targets are set to:\r\n- PaloAlto, Austin for devices\
         \ field\r\n- Washington Pool\r\n- [\"NewYork\", \"Atlanta\"] for device query\
         \ field\r\n=> Should run on 5 devices without parameterized run"
-      positions: [183, 77]
+      positions: [151, 83]
     cd8dd28f-bb19-4951-b208-b39a3c0f0571:
       alignment: left
       content: "The parameterized also contains a variable \"endpoint\" that\r\nis\
@@ -19017,7 +19017,7 @@
         \ parameterized form variables can be accessed as\r\nglobal variable in a\
         \ superworkflow."
       positions: [374, -186]
-  last_modified: '2022-01-20 07:30:44.284827'
+  last_modified: '2022-04-29 11:50:06.241587'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: true
@@ -19119,8 +19119,8 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    Parameterized Run with a Superworkflow: &id388 [142, -32]
-    Parameterized Superworkflow Run: *id388
+    Parameterized Run with a Superworkflow: [142, -32]
+    Parameterized Superworkflow Run: &id388 [142, -32]
     'Regression Workflow: Parameterized Superworkflow Run': *id388
   postprocessing: ''
   postprocessing_mode: success

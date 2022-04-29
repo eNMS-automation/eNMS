@@ -30,10 +30,6 @@
           "endpoint": "/server_table",
           "rbac": "admin"
         },
-        "Access": {
-          "endpoint": "/access_table",
-          "rbac": "admin"
-        },
         "Credentials": {
           "endpoint": "/credential_table",
           "rbac": "admin"

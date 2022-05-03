@@ -237,7 +237,7 @@ class Runner:
             if self.update_pools_after_running:
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
-            if self.send_notification:
+            if self.get("send_notification"):
                 try:
                     results = self.notify(results)
                 except Exception:
@@ -674,7 +674,7 @@ class Runner:
             result = env.send_email(
                 f"{status}: {self.service.name}",
                 vs.dict_to_string(notification),
-                recipients=self.mail_recipient,
+                recipients=self.get("mail_recipient"),
                 reply_to=self.reply_to,
                 filename=f"results-{filename}.txt",
                 file_content=vs.dict_to_string(file_content),

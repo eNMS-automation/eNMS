@@ -8,10 +8,6 @@
           "endpoint": "/dashboard",
           "rbac": "all"
         },
-        "Pools": {
-          "endpoint": "/pool_table",
-          "rbac": "access"
-        },
         "Changelog": {
           "endpoint": "/changelog_table",
           "rbac": "access"
@@ -58,6 +54,10 @@
         },
         "Links": {
           "endpoint": "/link_table",
+          "rbac": "access"
+        },
+        "Pools": {
+          "endpoint": "/pool_table",
           "rbac": "access"
         },
         "Networks": {

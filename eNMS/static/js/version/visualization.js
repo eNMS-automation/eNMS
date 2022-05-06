@@ -5,7 +5,6 @@ L: false
 page: false
 SpriteText: false
 theme: false
-THREE: false
 visualization: false
 */
 

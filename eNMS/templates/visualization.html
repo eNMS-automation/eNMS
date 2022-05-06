@@ -147,12 +147,6 @@
   </nav>
 </div>
 {% endblock content %} {% block javascripts %} {{ super()}}
-<script src="{{ url_for('static', filename='lib/three/three.min.js') }}"></script>
-<script src="{{ url_for('static', filename='lib/three/orbitControls.min.js') }}"></script>
-<script src="{{ url_for('static', filename='lib/three/ColladaLoader.min.js') }}"></script>
-{% if endpoint == "logical_view" %}
-<script src="{{ url_for('static', filename='lib/three/three-spritetext.min.js') }}"></script>
-{% else %} {% if endpoint == "geographical_view" %}
 <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
-{% endif %} {% endif %} {% endblock javascripts %}
+{% endblock javascripts %}

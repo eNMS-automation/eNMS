@@ -1,27 +1,24 @@
 {
   "geographical": {
-    "default": "2D",
-    "_2D": {
-      "latitude": 33,
-      "longitude": -96,
-      "marker": "Image",
-      "tile_layer": "osm",
-      "zoom_level": 5,
-      "icons": {
-        "antenna": [18, 12],
-        "firewall": [18, 12],
-        "host": [18, 12],
-        "optical_switch": [18, 12],
-        "regenerator": [18, 12],
-        "router": [18, 12],
-        "server": [18, 12],
-        "switch": [18, 12],
-        "network": [22, 22]
-      },
-      "layers": {
-        "osm": "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
-        "gm": "https://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga"
-      }
+    "latitude": 33,
+    "longitude": -96,
+    "marker": "Image",
+    "tile_layer": "osm",
+    "zoom_level": 5,
+    "icons": {
+      "antenna": [18, 12],
+      "firewall": [18, 12],
+      "host": [18, 12],
+      "optical_switch": [18, 12],
+      "regenerator": [18, 12],
+      "router": [18, 12],
+      "server": [18, 12],
+      "switch": [18, 12],
+      "network": [22, 22]
+    },
+    "layers": {
+      "osm": "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
+      "gm": "https://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga"
     }
   },
   "icons": {

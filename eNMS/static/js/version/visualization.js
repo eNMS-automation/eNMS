@@ -62,7 +62,7 @@ function updateRightClickBindings(controls) {
 }
 
 function initGeographicalFramework() {
-  const settings2d = visualization.geographical._2D;
+  const settings2d = visualization.geographical;
   markerType = settings2d.marker;
   markerGroup = L.markerClusterGroup();
   map = L.map("map", { preferCanvas: true }).setView(
@@ -94,7 +94,7 @@ function initGeographicalFramework() {
 
 function switchLayer(layerType) {
   map.removeLayer(layer);
-  layer = L.tileLayer(visualization.geographical._2D.layers[layerType]);
+  layer = L.tileLayer(visualization.geographical.layers[layerType]);
   map.addLayer(layer);
 }
 

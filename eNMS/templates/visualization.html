@@ -1,6 +1,6 @@
 {% extends "base_site.html" %} {% block title %} Geographical View {% endblock title %}
 {% set dimension = visualization["geographical"]["default"] %} {% block stylesheets %}
-{{ super() }} {% if endpoint == "geographical_view" %} {% if dimension == "2D" %}
+{{ super() }} {% if endpoint == "geographical_view" %}
 <link
   href="{{ url_for('static', filename='lib/leaflet/leaflet.min.css') }}"
   rel="stylesheet"
@@ -9,12 +9,7 @@
   href="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.css') }}"
   rel="stylesheet"
 />
-{% else %}
-<link
-  href="{{ url_for('static', filename='lib/cesium/Widgets/widgets.css') }}"
-  rel="stylesheet"
-/>
-{% endif %} {% endif %}
+{% endif %}
 <link
   href="{{ url_for('static', filename='css/{}/visualization.css'.format(version_path)) }}"
   rel="stylesheet"
@@ -28,7 +23,6 @@
 <div id="map"></div>
 {% endif %}
 <ul id="contextMenu" oncontextmenu="return false;" class="dropdown-menu" role="menu">
-  {% if dimension == "2D" %}
   <li class="menu dropdown-submenu geo-menu">
     <a class="menu-submenu" tabindex="-1" href="#"
       >Type of View<span class="caret-right"></span
@@ -57,7 +51,6 @@
       <li><a tabindex="-1" href="#">Circle Marker</a></li>
     </ul>
   </li>
-  {% endif %}
   <li class="menu rc-object-menu rc-plan-menu rc-device-menu rc-link-menu rc-site-menu">
     <a tabindex="-1" href="#">Properties</a>
   </li>
@@ -160,9 +153,7 @@
 {% if endpoint == "logical_view" %}
 <script src="{{ url_for('static', filename='lib/three/three-spritetext.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.min.js') }}"></script>
-{% else %} {% if endpoint == "geographical_view" %} {% if dimension == "2D" %}
+{% else %} {% if endpoint == "geographical_view" %}
 <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
-{% else %}
-<script src="{{ url_for('static', filename='lib/cesium/Cesium.js') }}"></script>
-{% endif %} {% endif %} {% endif %} {% endblock javascripts %}
+{% endif %} {% endif %} {% endblock javascripts %}

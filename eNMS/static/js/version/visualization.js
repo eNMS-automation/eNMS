@@ -161,23 +161,6 @@ function createLink(link) {
   createLink2d(link);
 }
 
-function computeLinkMiddle(link) {
-  const [φ1, φ2, λ1, λ2] = [
-    link.source_latitude,
-    link.destination_latitude,
-    link.source_longitude,
-    link.destination_longitude,
-  ].map((coordinate) => (coordinate * Math.PI) / 180);
-  const Bx = Math.cos(φ2) * Math.cos(λ2 - λ1);
-  const By = Math.cos(φ2) * Math.sin(λ2 - λ1);
-  const φ3 = Math.atan2(
-    Math.sin(φ1) + Math.sin(φ2),
-    Math.sqrt((Math.cos(φ1) + Bx) * (Math.cos(φ1) + Bx) + By * By)
-  );
-  const λ3 = λ1 + Math.atan2(By, Math.cos(φ1) + Bx);
-  return [λ3 * (180 / Math.PI), φ3 * (180 / Math.PI)];
-}
-
 function createLink2d(link) {
   if (clustered) return;
   let pointA = new L.LatLng(link.source_latitude, link.source_longitude);

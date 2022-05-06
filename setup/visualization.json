@@ -24,22 +24,6 @@
       }
     }
   },
-  "logical": {
-    "config": {
-      "controlType": "trackball",
-      "rendererConfig": { "antialias": true, "alpha": true }
-    },
-    "display_icons": true,
-    "display_link_label": false,
-    "display_link_traffic": true,
-    "traffic_speed": 0.001,
-    "link_width": 2,
-    "link_opacity": 0.5,
-    "maximum_size": {
-      "node": 2000,
-      "link": 1000
-    }
-  },
   "icons": {
     "2D": {
       "antenna": "Antenna",

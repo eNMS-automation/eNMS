@@ -17,11 +17,7 @@
 {% endblock stylesheets %} {% block content %}
 <form id="search-form-device" class="overlay"></form>
 <form id="search-form-link" class="overlay"></form>
-{% if endpoint == "logical_view" %}
-<div id="network"></div>
-{% else %}
 <div id="map"></div>
-{% endif %}
 <ul id="contextMenu" oncontextmenu="return false;" class="dropdown-menu" role="menu">
   <li class="menu dropdown-submenu geo-menu">
     <a class="menu-submenu" tabindex="-1" href="#"

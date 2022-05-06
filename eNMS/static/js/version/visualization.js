@@ -156,13 +156,8 @@ function createNode2d(node) {
 }
 
 function createLink(link) {
-  if (!link.destination_id || !link.source_id) return;
+  if (clustered || !link.destination_id || !link.source_id) return;
   linksProperties[link.id] = link;
-  createLink2d(link);
-}
-
-function createLink2d(link) {
-  if (clustered) return;
   let pointA = new L.LatLng(link.source_latitude, link.source_longitude);
   let pointB = new L.LatLng(link.destination_latitude, link.destination_longitude);
   const pointList = [pointA, pointB];

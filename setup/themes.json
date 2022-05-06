@@ -22,12 +22,6 @@
           "orient": "horizontal"
         }
       },
-      "view": {
-        "logical": {
-          "background": "#FFFFFF",
-          "sphere": "#FFFFFF"
-        }
-      },
       "workflow": {
         "edges": {
           "font": {

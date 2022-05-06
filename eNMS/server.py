@@ -254,7 +254,6 @@ class Server(Flask):
                 "table.html", **{"endpoint": f"{table_type}_table", "type": table_type}
             )
 
-        @blueprint.route("/logical_view")
         @blueprint.route("/geographical_view")
         @self.process_requests
         def visualization():

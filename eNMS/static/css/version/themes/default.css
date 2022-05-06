@@ -98,11 +98,6 @@ body {
   color: #fff;
 }
 
-/* Label color in Logical View */
-.scene-tooltip {
-  color: #000 !important;
-}
-
 /* Error pages */
 .error-theme {
   background: #002240;

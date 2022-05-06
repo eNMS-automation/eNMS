@@ -123,28 +123,6 @@ function createNode(node) {
   (dimension == "2D" ? createNode2d : createNode3d)(node);
 }
 
-function createNode3d(node) {
-  const icon = node.type === "device" ? node.icon || "router" : "site";
-  let entity = {
-    properties: node,
-    position: Cesium.Cartesian3.fromDegrees(node.longitude, node.latitude),
-    billboard: {
-      image: `../static/img/view/3D/${icon}.gif`,
-      scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
-    },
-  };
-  if (visualization.geographical._3D.labels.node) {
-    entity.label = {
-      fillColor: Cesium.Color.BLACK,
-      text: node.name,
-      scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.5, 8.0e6, 0.0),
-      pixelOffset: new Cesium.Cartesian2(0.0, 20.0),
-      font: "20px sans-serif",
-    };
-  }
-  markersArray.push(viewer.entities.add(entity));
-}
-
 function createNode2d(node) {
   let marker;
   try {

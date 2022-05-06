@@ -142,7 +142,7 @@ export function drawNetworkNode(node) {
     label: node.name,
     name: node.name,
     type: node.type,
-    image: displayImage ? `/static/img/view/2D/default/${node.icon}.gif` : undefined,
+    image: displayImage ? `/static/img/network/default/${node.icon}.gif` : undefined,
     shape: displayImage ? "image" : "ellipse",
     x: node.positions[network.name] ? node.positions[network.name][0] : 0,
     y: node.positions[network.name] ? node.positions[network.name][1] : 0,
@@ -263,7 +263,7 @@ function displayNetworkState(results) {
     Object.entries(results).map(([nodeId, success]) => {
       const color = success ? "green" : "red";
       const icon = nodes.get(parseInt(nodeId)).icon;
-      const image = `/static/img/view/2D/${color}/${icon}.gif`;
+      const image = `/static/img/network/${color}/${icon}.gif`;
       return { id: parseInt(nodeId), image: image };
     })
   );

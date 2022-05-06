@@ -82,7 +82,7 @@ function initGeographicalFramework() {
     });
   for (const [key, value] of Object.entries(settings.icons)) {
     window[`icon_${key}`] = L.icon({
-      iconUrl: `../static/img/view/2D/default/${key}.gif`,
+      iconUrl: `../static/img/network/default/${key}.gif`,
       iconSize: value,
       iconAnchor: [9, 6],
       popupAnchor: [8, -5],

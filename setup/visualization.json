@@ -1,6 +1,6 @@
 {
   "geographical": {
-    "default": "3D",
+    "default": "2D",
     "_2D": {
       "latitude": 33,
       "longitude": -96,

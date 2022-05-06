@@ -356,17 +356,6 @@ function leftClickBinding(type, id, bundle) {
   }
 }
 
-function onClick3d(click) {
-  const instance = viewer.scene.pick(click.position);
-  if (instance) {
-    const isLink = ["number", "string"].includes(typeof instance.id);
-    const id = isLink ? instance.id : instance.id._properties._id._value;
-    const type = isLink ? "link" : instance.id._properties._type._value;
-    const bundle = type == "network" || (typeof id === "string" && id.includes("-"));
-    leftClickBinding(isLink ? "link" : "device", id, bundle);
-  }
-}
-
 function showFilteredTable(id, type, constraints) {
   openPanel({
     name: "table",

@@ -392,7 +392,6 @@ function processNetwork(network) {
 
 function displayNetwork({ direction, noAlert, withCluster } = {}) {
   if (page == "view_builder") return;
-  const maximumSize = visualization.logical.maximum_size;
   let data = {};
   currentPath =
     direction == "left"
@@ -421,24 +420,10 @@ function displayNetwork({ direction, noAlert, withCluster } = {}) {
     data: data,
     callback: function (network) {
       processNetwork(network);
-      if (page == "logical_view") {
-        if (
-          network.devices.length > maximumSize.node ||
-          network.links.length > maximumSize.link
-        ) {
-          return notify(
-            `Too many objects to display. Use the device and link
-            filtering mechanism to reduce the size of the network`,
-            "error",
-            5
-          );
-        }
-      } else {
-        network.devices.map(createNode);
-        network.links.map(createLink);
-        if (dimension == "2D") {
-          map[clustered ? "addLayer" : "removeLayer"](markerGroup);
-        }
+      network.devices.map(createNode);
+      network.links.map(createLink);
+      if (dimension == "2D") {
+        map[clustered ? "addLayer" : "removeLayer"](markerGroup);
       }
       if (!noAlert) notify("Filter applied.", "success", 5);
     },

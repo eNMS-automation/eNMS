@@ -61,14 +61,14 @@ function updateRightClickBindings(controls) {
 }
 
 function initGeographicalFramework() {
-  const settings2d = visualization.geographical;
-  markerType = settings2d.marker;
+  const settings = visualization.geographical;
+  markerType = settings.marker;
   markerGroup = L.markerClusterGroup();
   map = L.map("map", { preferCanvas: true }).setView(
-    [settings2d.latitude, settings2d.longitude],
-    settings2d.zoom_level
+    [settings.latitude, settings.longitude],
+    settings.zoom_level
   );
-  layer = L.tileLayer(settings2d.layers[settings2d.tile_layer]);
+  layer = L.tileLayer(settings.layers[settings.tile_layer]);
   map
     .addLayer(layer)
     .on("click", function (e) {
@@ -80,7 +80,7 @@ function initGeographicalFramework() {
         $(".geo-menu").show();
       }
     });
-  for (const [key, value] of Object.entries(settings2d.icons)) {
+  for (const [key, value] of Object.entries(settings.icons)) {
     window[`icon_${key}`] = L.icon({
       iconUrl: `../static/img/view/2D/default/${key}.gif`,
       iconSize: value,

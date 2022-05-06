@@ -257,7 +257,7 @@ class Server(Flask):
         @blueprint.route("/geographical_view")
         @self.process_requests
         def visualization():
-            return render_template("visualization.html", endpoint=request.path[1:])
+            return render_template("visualization.html", endpoint="geographical_view")
 
         @blueprint.route("/<type>_builder")
         @self.process_requests

@@ -358,15 +358,10 @@ function processNetwork(network) {
   let links = {};
   let bundleCoordinates = {};
   for (const link of network.links) {
-    const key = (page == "logical_view"
-      ? [link.source_id, link.destination_id]
-      : [
+    const key = [
           `${link.source_latitude}/${link.source_longitude}`,
           `${link.destination_latitude}/${link.destination_longitude}`,
-        ]
-    )
-      .sort()
-      .join("/");
+        ].sort().join("/");
     links[key] = links[key] ? [...links[key], link.id] : [link.id];
     if (!bundleCoordinates[key]) {
       bundleCoordinates[key] = {
@@ -700,12 +695,7 @@ export function initVisualization() {
     },
   });
   initFiltering();
-  if (page == "logical_view") {
-    create3dGraphNetwork("network");
-    notify("Loading network...", "success", 5);
-  } else if (page == "geographical_view") {
-    initGeographicalFramework();
-  }
+  initGeographicalFramework();
 }
 
 function displayFilteringPanel(type) {

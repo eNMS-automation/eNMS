@@ -3,7 +3,6 @@ global
 action: false
 L: false
 page: false
-SpriteText: false
 theme: false
 visualization: false
 */

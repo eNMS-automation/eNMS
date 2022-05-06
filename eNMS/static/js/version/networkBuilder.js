@@ -131,7 +131,6 @@ export function drawNetworkNode(node) {
   return {
     id: node.id,
     icon: node.icon,
-    icon_3d: node.icon_3d,
     color: "#D2E5FF",
     font: {
       size: 15,

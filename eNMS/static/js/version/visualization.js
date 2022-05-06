@@ -29,7 +29,6 @@ import {
 } from "./inventory.js";
 import { tables } from "./table.js";
 
-let graph;
 let dimension;
 let selectedObject;
 let markersArray = [];
@@ -43,9 +42,7 @@ let devicesProperties = {};
 let linksProperties = {};
 let routerIcon;
 let viewer;
-let handler;
 let polylines;
-let labels;
 
 let currentPath = localStorage.getItem(page);
 let controls;

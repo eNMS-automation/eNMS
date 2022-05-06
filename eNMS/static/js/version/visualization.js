@@ -1,7 +1,6 @@
 /*
 global
 action: false
-Cesium: false
 L: false
 page: false
 SpriteText: false

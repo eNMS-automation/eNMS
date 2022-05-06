@@ -36,7 +36,6 @@ import {
   showDeviceResultsPanel,
 } from "./inventory.js";
 import { clearSearch, tableInstances } from "./table.js";
-import { showDeviceModel } from "./visualization.js";
 
 const displayImage = visualization["Network Builder"].display_nodes_as_images;
 
@@ -255,7 +254,6 @@ export function updateNetworkRightClickBindings() {
       if (!graph) return;
       showRunServicePanel({ type: "device", targets: graph.getSelectedNodes() });
     },
-    "3D Visualization": (node) => showDeviceModel(node),
     "Edit Edge": (edge) => showInstancePanel(edge.type, edge.id),
   });
 }

@@ -92,7 +92,7 @@ function init2dGeographicalFramework() {
     });
   for (const [key, value] of Object.entries(settings2d.icons)) {
     window[`icon_${key}`] = L.icon({
-      iconUrl: `../static/img/view/3D/${key}.gif`,
+      iconUrl: `../static/img/view/2D/default/${key}.gif`,
       iconSize: value,
       iconAnchor: [9, 6],
       popupAnchor: [8, -5],

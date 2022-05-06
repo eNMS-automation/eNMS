@@ -31,20 +31,6 @@
       "router": "Router",
       "server": "Server",
       "switch": "Switch"
-    },
-    "3D": {
-      "juniper_ex3300": {
-        "name": "Juniper EX3300",
-        "position": [2406, 28, 169]
-      },
-      "juniper-9204": {
-        "name": "Juniper EX9204",
-        "position": [1795, 215, -465]
-      },
-      "cisco_catalyst_me4924": {
-        "name": "Cisco Catalyst ME",
-        "position": [745, 135, 125]
-      }
     }
   },
   "Network Builder": {

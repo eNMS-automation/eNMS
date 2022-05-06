@@ -62,10 +62,6 @@ function updateRightClickBindings(controls) {
 }
 
 function initGeographicalFramework() {
-  init2dGeographicalFramework();
-}
-
-function init2dGeographicalFramework() {
   const settings2d = visualization.geographical._2D;
   markerType = settings2d.marker;
   markerGroup = L.markerClusterGroup();

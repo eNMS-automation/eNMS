@@ -105,10 +105,6 @@ function changeMarker(type) {
 function createNode(node) {
   if (!node.latitude && !node.longitude) return;
   devicesProperties[node.id] = node;
-  createNode2d(node);
-}
-
-function createNode2d(node) {
   let marker;
   try {
     marker =

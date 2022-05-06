@@ -255,7 +255,6 @@ export function updateNetworkRightClickBindings() {
       if (!graph) return;
       showRunServicePanel({ type: "device", targets: graph.getSelectedNodes() });
     },
-    "3D Visualization": (node) => showDeviceModel(node),
     "Edit Edge": (edge) => showInstancePanel(edge.type, edge.id),
   });
 }

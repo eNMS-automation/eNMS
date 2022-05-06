@@ -118,7 +118,7 @@ function createNode(node) {
     marker.icon =
       node.type === "device"
         ? (marker.icon = window[`icon_${node.icon}`] || routerIcon)
-        : (marker.icon = window["icon_site"]);
+        : (marker.icon = window["icon_network"]);
     marker.setIcon(marker.icon);
   }
   marker.bindTooltip(node["name"], { permanent: false });
@@ -209,7 +209,7 @@ function processNetwork(network) {
     network.devices.push({
       type: "site",
       name: `Site (${latitude},${longitude})`,
-      icon: "site",
+      icon: "network",
       id: ids.join("-"),
       longitude: longitude,
       latitude: latitude,

@@ -36,7 +36,6 @@ import {
   showDeviceResultsPanel,
 } from "./inventory.js";
 import { clearSearch, tableInstances } from "./table.js";
-import { showDeviceModel } from "./visualization.js";
 
 const displayImage = visualization["Network Builder"].display_nodes_as_images;
 

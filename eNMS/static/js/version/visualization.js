@@ -166,32 +166,6 @@ function createLink(link) {
   (dimension == "2D" ? createLink2d : createLink3d)(link);
 }
 
-function createLink3d(link) {
-  const color = Cesium.Color.fromCssColorString(link.color.trim()) || "#000000";
-  polylinesObjects[link.id] = polylines.add({
-    id: link.id,
-    positions: Cesium.Cartesian3.fromDegreesArray([
-      link.source_longitude,
-      link.source_latitude,
-      link.destination_longitude,
-      link.destination_latitude,
-    ]),
-    material: Cesium.Material.fromType("Color", {
-      color: color,
-    }),
-    width: 1,
-  });
-  if (visualization.geographical._3D.labels.link) {
-    labels.add({
-      // eslint-disable-next-line new-cap
-      position: new Cesium.Cartesian3.fromDegrees(...computeLinkMiddle(link), 0.0),
-      scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.5, 8.0e6, 0.0),
-      fillColor: Cesium.Color.BLACK,
-      text: link.name,
-    });
-  }
-}
-
 function computeLinkMiddle(link) {
   const [φ1, φ2, λ1, λ2] = [
     link.source_latitude,

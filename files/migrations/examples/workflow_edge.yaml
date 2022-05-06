@@ -881,24 +881,24 @@
   source: '[(R) Multiple parallel connections to same device] Show users with connection2
     and close', subtype: success, type: workflow_edge, workflow: (R) Multiple parallel
     connections to same device}
-- {color: green, destination: '[Notification Mechanism] Notification 1', label: success,
+- {color: green, destination: '[Mail Notifications] Notification 1', label: success,
   name: '2021-06-27 21:54:27.276769', source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: Notification Mechanism}
-- {color: green, destination: '[Notification Mechanism] Notification 2', label: success,
-  name: '2021-06-27 21:54:27.967252', source: '[Notification Mechanism] Notification
-    1', subtype: success, type: workflow_edge, workflow: Notification Mechanism}
-- {color: green, destination: '[Notification Mechanism] Notification 3', label: success,
-  name: '2021-06-28 02:35:22.690275', source: '[Notification Mechanism] Notification
-    2', subtype: success, type: workflow_edge, workflow: Notification Mechanism}
+  type: workflow_edge, workflow: Mail Notifications}
+- {color: green, destination: '[Mail Notifications] Notification 2', label: success,
+  name: '2021-06-27 21:54:27.967252', source: '[Mail Notifications] Notification 1',
+  subtype: success, type: workflow_edge, workflow: Mail Notifications}
+- {color: green, destination: '[Mail Notifications] Notification 3', label: success,
+  name: '2021-06-28 02:35:22.690275', source: '[Mail Notifications] Notification 2',
+  subtype: success, type: workflow_edge, workflow: Mail Notifications}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-06-28 02:35:23.844799',
-  source: '[Notification Mechanism] Notification 3', subtype: success, type: workflow_edge,
-  workflow: Notification Mechanism}
-- {color: red, destination: '[Notification Mechanism] Notification 3', label: failure,
-  name: '2021-06-28 02:44:27.451649', source: '[Notification Mechanism] Notification
-    2', subtype: failure, type: workflow_edge, workflow: Notification Mechanism}
+  source: '[Mail Notifications] Notification 3', subtype: success, type: workflow_edge,
+  workflow: Mail Notifications}
+- {color: red, destination: '[Mail Notifications] Notification 3', label: failure,
+  name: '2021-06-28 02:44:27.451649', source: '[Mail Notifications] Notification 2',
+  subtype: failure, type: workflow_edge, workflow: Mail Notifications}
 - {color: red, destination: '[Shared] End', label: failure, name: '2021-06-28 02:44:28.670110',
-  source: '[Notification Mechanism] Notification 3', subtype: failure, type: workflow_edge,
-  workflow: Notification Mechanism}
+  source: '[Mail Notifications] Notification 3', subtype: failure, type: workflow_edge,
+  workflow: Mail Notifications}
 - {color: green, destination: '[(R) Netmiko File Transfer Service] Check no file in
     enms_files directory', label: success, name: '2021-07-05 04:40:26.340471', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: (R) Netmiko File Transfer
@@ -1491,14 +1491,14 @@
   source: '[Large Device Configuration and Operational Data] Set Large Configuration
     and Operational Data', subtype: success, type: workflow_edge, workflow: Large
     Device Configuration and Operational Data}
-- {color: green, destination: '[Slack and Mattermost notifications] Slack in random,
+- {color: green, destination: '[Slack and Mattermost Notifications] Slack in random,
     per device', label: success, name: '2022-04-12 04:24:05.279619', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: Slack and Mattermost
-    notifications}
-- {color: green, destination: '[Slack and Mattermost notifications] Notification in
+    Notifications}
+- {color: green, destination: '[Slack and Mattermost Notifications] Notification in
     general, once', label: success, name: '2022-04-12 04:27:12.025242', source: '[Slack
-    and Mattermost notifications] Slack in random, per device', subtype: success,
-  type: workflow_edge, workflow: Slack and Mattermost notifications}
+    and Mattermost Notifications] Slack in random, per device', subtype: success,
+  type: workflow_edge, workflow: Slack and Mattermost Notifications}
 - {color: green, destination: '[Shared] End', label: success, name: '2022-04-12 04:27:12.835433',
-  source: '[Slack and Mattermost notifications] Notification in general, once', subtype: success,
-  type: workflow_edge, workflow: Slack and Mattermost notifications}
+  source: '[Slack and Mattermost Notifications] Notification in general, once', subtype: success,
+  type: workflow_edge, workflow: Slack and Mattermost Notifications}

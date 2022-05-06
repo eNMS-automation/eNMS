@@ -155,11 +155,11 @@
   network_name: .*
   network_name_invert: false
   network_name_match: regex
-  networks: [Subnetwork 2, L3 Network, Large Network Display, Import with Add Connected
-      Nodes and Links, Subsubnetwork and Subsubsubnetwork, L1 Network, Loopback and
-      Parallel Links, Duplicate me 2, Layout of Large Graph, 'Duplication of Devices,
-      Subnetworks and Top-level Networks', Subnetwork and Teleport Mechanism, Top-level
-      Devices and Links, L2 Network, Subnetwork 1, 'Creation, Edit and Deletion']
+  networks: [Top-level Devices and Links, Subnetwork and Teleport Mechanism, Subnetwork
+      1, 'Creation, Edit and Deletion', Subnetwork 2, 'Duplication of Devices, Subnetworks
+      and Top-level Networks', Duplicate me 2, Loopback and Parallel Links, Subsubnetwork
+      and Subsubsubnetwork, L1 Network, L2 Network, L3 Network, Layout of Large Graph,
+    Import with Add Connected Nodes and Links, Large Network Display]
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -835,12 +835,12 @@
   device_vendor: ''
   device_vendor_invert: false
   device_vendor_match: inclusion
-  devices: [Jackson, PaloAlto, Washington, Chicago, SanJose, SanDiego, Dallas, Philadelphia,
-    Atlanta, Baltimore, Cleveland, Cincinnati, Cambridge, Minneapolis, Sacramento,
-    SanFrancisco, Orange, Oakland, router20 (admin), router23 (admin), Dallas-2, Dallas-3,
-    Dallas-4, Jackson-2, Oakland-2, Austin, LosAngeles, Aserver, Austin-2, Austin-3,
-    Router behind Gateway 1, Gateway 1, Gateway 2, Gateway 3, 'Router behind Gateway
-      1, 2 and 3', Duplicate me 1, Duplication - G1, Duplication - R1]
+  devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
+    Philadelphia, LosAngeles, Atlanta, Baltimore, Cleveland, Cincinnati, Cambridge,
+    Minneapolis, Sacramento, SanFrancisco, Orange, Oakland, router20 (admin), router23
+      (admin), Aserver, Dallas-2, Dallas-3, Dallas-4, Austin-2, Austin-3, Jackson-2,
+    Oakland-2, Router behind Gateway 1, Gateway 1, Gateway 2, Gateway 3, 'Router behind
+      Gateway 1, 2 and 3', Duplicate me 1, Duplication - G1, Duplication - R1]
   last_modified: '2022-04-04 11:10:40.576415'
   link_access_groups: ''
   link_access_groups_invert: false
@@ -3430,11 +3430,11 @@
   network_name: .*
   network_name_invert: false
   network_name_match: regex
-  networks: [Subnetwork 2, L3 Network, Large Network Display, Import with Add Connected
-      Nodes and Links, Subsubnetwork and Subsubsubnetwork, L1 Network, Loopback and
-      Parallel Links, Duplicate me 2, Layout of Large Graph, 'Duplication of Devices,
-      Subnetworks and Top-level Networks', Subnetwork and Teleport Mechanism, Top-level
-      Devices and Links, L2 Network, Subnetwork 1, 'Creation, Edit and Deletion']
+  networks: [Top-level Devices and Links, Subnetwork and Teleport Mechanism, Subnetwork
+      1, 'Creation, Edit and Deletion', Subnetwork 2, 'Duplication of Devices, Subnetworks
+      and Top-level Networks', Duplicate me 2, Loopback and Parallel Links, Subsubnetwork
+      and Subsubsubnetwork, L1 Network, L2 Network, L3 Network, Layout of Large Graph,
+    Import with Add Connected Nodes and Links, Large Network Display]
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false

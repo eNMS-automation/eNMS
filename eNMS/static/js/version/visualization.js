@@ -2,7 +2,6 @@
 global
 action: false
 Cesium: false
-ForceGraph3D: false
 L: false
 page: false
 SpriteText: false
@@ -68,11 +67,7 @@ function updateRightClickBindings(controls) {
 
 function initGeographicalFramework() {
   dimension = visualization.geographical.default;
-  if (dimension == "2D") {
-    init2dGeographicalFramework();
-  } else {
-    init3dGeographicalFramework();
-  }
+  init2dGeographicalFramework();
 }
 
 function init2dGeographicalFramework() {
@@ -415,7 +410,6 @@ export function initVisualization() {
     Configuration: (d) => showDeviceData(d),
     Results: (d) => showDeviceResultsPanel(d),
     "Run Service": (d) => showRunServicePanel({ instance: d }),
-    "3D Visualization": (d) => showDeviceModel(d),
   });
   call({
     url: `/get_visualization_pools/${page}`,

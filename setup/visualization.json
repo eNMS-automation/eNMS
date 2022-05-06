@@ -22,16 +22,14 @@
     }
   },
   "icons": {
-    "2D": {
-      "antenna": "Antenna",
-      "firewall": "Firewall",
-      "host": "Host",
-      "optical_switch": "Optical switch",
-      "regenerator": "Regenerator",
-      "router": "Router",
-      "server": "Server",
-      "switch": "Switch"
-    }
+    "antenna": "Antenna",
+    "firewall": "Firewall",
+    "host": "Host",
+    "optical_switch": "Optical switch",
+    "regenerator": "Regenerator",
+    "router": "Router",
+    "server": "Server",
+    "switch": "Switch"
   },
   "Network Builder": {
     "display_nodes_as_images": true,

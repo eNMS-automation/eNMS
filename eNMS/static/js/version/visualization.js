@@ -58,7 +58,7 @@ function updateRightClickBindings(controls) {
   });
 }
 
-function initGeographicalFramework() {
+function initLeaflet() {
   const settings = visualization.geographical;
   markerType = settings.marker;
   markerGroup = L.markerClusterGroup();
@@ -196,30 +196,28 @@ function deleteAll() {
 }
 
 function processNetwork(network) {
-  if (page == "geographical_view") {
-    let devices = {};
-    for (const device of network.devices) {
-      const key = `${device.longitude}/${device.latitude}`;
-      devices[key] = devices[key] ? [...devices[key], device.id] : [device.id];
-    }
-    let colocatedDevices = new Set();
-    for (const [coords, ids] of Object.entries(devices)) {
-      if (ids.length == 1) continue;
-      ids.forEach(colocatedDevices.add, colocatedDevices);
-      const [longitude, latitude] = coords.split("/");
-      network.devices.push({
-        type: "site",
-        name: `Site (${latitude},${longitude})`,
-        icon: "site",
-        id: ids.join("-"),
-        longitude: longitude,
-        latitude: latitude,
-      });
-    }
-    network.devices = network.devices.filter(
-      (device) => !colocatedDevices.has(device.id)
-    );
+  let devices = {};
+  for (const device of network.devices) {
+    const key = `${device.longitude}/${device.latitude}`;
+    devices[key] = devices[key] ? [...devices[key], device.id] : [device.id];
   }
+  let colocatedDevices = new Set();
+  for (const [coords, ids] of Object.entries(devices)) {
+    if (ids.length == 1) continue;
+    ids.forEach(colocatedDevices.add, colocatedDevices);
+    const [longitude, latitude] = coords.split("/");
+    network.devices.push({
+      type: "site",
+      name: `Site (${latitude},${longitude})`,
+      icon: "site",
+      id: ids.join("-"),
+      longitude: longitude,
+      latitude: latitude,
+    });
+  }
+  network.devices = network.devices.filter(
+    (device) => !colocatedDevices.has(device.id)
+  );
   let links = {};
   let bundleCoordinates = {};
   for (const link of network.links) {
@@ -397,7 +395,7 @@ export function initVisualization() {
     },
   });
   initFiltering();
-  initGeographicalFramework();
+  initLeaflet();
 }
 
 function displayFilteringPanel(type) {

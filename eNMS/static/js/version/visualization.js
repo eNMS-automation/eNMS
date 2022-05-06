@@ -115,7 +115,7 @@ function changeMarker(type) {
 function createNode(node) {
   if (!node.latitude && !node.longitude) return;
   devicesProperties[node.id] = node;
-  (dimension == "2D" ? createNode2d : createNode3d)(node);
+  createNode2d(node);
 }
 
 function createNode2d(node) {
@@ -158,7 +158,7 @@ function createNode2d(node) {
 function createLink(link) {
   if (!link.destination_id || !link.source_id) return;
   linksProperties[link.id] = link;
-  (dimension == "2D" ? createLink2d : createLink3d)(link);
+  createLink2d(link);
 }
 
 function computeLinkMiddle(link) {

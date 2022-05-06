@@ -347,21 +347,6 @@ function changeCursor(click) {
   document.body.style.cursor = instance ? "pointer" : "default";
 }
 
-function onRightClick3d(click) {
-  const instance = viewer.scene.pick(click.position);
-  if (instance) {
-    const isLink = typeof instance.id == "number";
-    const id = isLink ? instance.id : instance.id._properties._id._value;
-    selectedObject = (isLink ? linksProperties : devicesProperties)[id];
-    const menu = isLink ? "link" : selectedObject.type == "pool" ? "network" : "device";
-    $(".menu").hide();
-    $(`.rc-${menu}-menu`).show();
-  } else {
-    selectedObject = null;
-    $(".menu").hide();
-  }
-}
-
 function leftClickBinding(type, id, bundle) {
   if (bundle) {
     const constraints = { id: `^(${id.split("-").join("|")})$`, id_filter: "regex" };

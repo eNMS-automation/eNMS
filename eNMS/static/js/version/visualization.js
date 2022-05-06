@@ -38,7 +38,6 @@ let devicesProperties = {};
 let linksProperties = {};
 let routerIcon;
 let viewer;
-let polylines;
 
 let currentPath = localStorage.getItem(page);
 let controls;
@@ -276,8 +275,8 @@ function displayNetwork({ direction, noAlert, withCluster } = {}) {
     if (currentPath) form.intersect = { type: "pool", id: currentPath };
     data[type] = { form: form };
   }
-  clustered = withCluster;
   deleteAll();
+  clustered = withCluster;
   call({
     url: "/view_filtering",
     data: data,

@@ -1,6 +1,6 @@
 {% extends "base_site.html" %} {% block title %} Geographical View {% endblock title %}
-{% set dimension = visualization["geographical"]["default"] %} {% block stylesheets %}
-{{ super() }} {% if endpoint == "geographical_view" %}
+{% block stylesheets %}
+{{ super() }}
 <link
   href="{{ url_for('static', filename='lib/leaflet/leaflet.min.css') }}"
   rel="stylesheet"
@@ -9,7 +9,6 @@
   href="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.css') }}"
   rel="stylesheet"
 />
-{% endif %}
 <link
   href="{{ url_for('static', filename='css/{}/visualization.css'.format(version_path)) }}"
   rel="stylesheet"

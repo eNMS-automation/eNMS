@@ -216,9 +216,7 @@ function linkRightClickBinding(link) {
 
 function deleteAllDevices() {
   for (let i = 0; i < markersArray.length; i++) {
-    if (dimension == "3D") {
-      viewer.entities.remove(markersArray[i]);
-    } else if (clustered) {
+    if (clustered) {
       markerGroup.removeLayer(markersArray[i]);
     } else {
       markersArray[i].removeFrom(map);

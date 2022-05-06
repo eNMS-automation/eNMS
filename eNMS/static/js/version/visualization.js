@@ -29,7 +29,6 @@ import {
 } from "./inventory.js";
 import { tables } from "./table.js";
 
-let dimension;
 let selectedObject;
 let markersArray = [];
 let polylinesObjects = {};
@@ -63,7 +62,6 @@ function updateRightClickBindings(controls) {
 }
 
 function initGeographicalFramework() {
-  dimension = visualization.geographical.default;
   init2dGeographicalFramework();
 }
 
@@ -197,11 +195,7 @@ function deleteAllDevices() {
 
 function deleteAllLinks() {
   for (const polyline of Object.values(polylinesObjects)) {
-    if (dimension == "2D") {
-      polyline.removeFrom(map);
-    } else {
-      polylines.remove(polyline);
-    }
+    polyline.removeFrom(map);
   }
   polylinesObjects = {};
   linksProperties = {};
@@ -304,9 +298,7 @@ function displayNetwork({ direction, noAlert, withCluster } = {}) {
       processNetwork(network);
       network.devices.map(createNode);
       network.links.map(createLink);
-      if (dimension == "2D") {
-        map[clustered ? "addLayer" : "removeLayer"](markerGroup);
-      }
+      map[clustered ? "addLayer" : "removeLayer"](markerGroup);
       if (!noAlert) notify("Filter applied.", "success", 5);
     },
   });

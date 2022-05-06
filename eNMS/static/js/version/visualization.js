@@ -106,44 +106,6 @@ function init2dGeographicalFramework() {
   routerIcon = window["icon_router"];
 }
 
-function init3dGeographicalFramework() {
-  polylines = new Cesium.PolylineCollection();
-  let providerViewModels = Object.entries(visualization.geographical._3D.layers).map(
-    function ([name, properties]) {
-      const iconUrl = `Widgets/Images/ImageryProviders/${properties.icon}.png`;
-      return new Cesium.ProviderViewModel({
-        category: properties.category,
-        creationFunction: () =>
-          new Cesium[properties.type](
-            properties.type == "TileMapServiceImageryProvider"
-              ? { url: Cesium.buildModuleUrl(properties.args.url) }
-              : properties.type == "createWorldImagery"
-              ? { style: Cesium.IonWorldImageryStyle[properties.arg] }
-              : properties.args
-          ),
-        name: name,
-        iconUrl: Cesium.buildModuleUrl(iconUrl),
-        tooltip: properties.tooltip,
-      });
-    }
-  );
-  viewer = new Cesium.Viewer("map", {
-    timeline: false,
-    geocoder: false,
-    animation: false,
-    selectionIndicator: false,
-    imageryProviderViewModels: providerViewModels,
-  });
-  viewer.scene.primitives.add(polylines);
-  viewer.scene.postProcessStages.fxaa.enabled = true;
-  $(".cesium-baseLayerPicker-dropDown > div").slice(2, 4).hide();
-  labels = viewer.scene.primitives.add(new Cesium.LabelCollection());
-  handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
-  handler.setInputAction(onClick3d, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-  handler.setInputAction(onRightClick3d, Cesium.ScreenSpaceEventType.RIGHT_CLICK);
-  handler.setInputAction(changeCursor, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-}
-
 function switchLayer(layerType) {
   map.removeLayer(layer);
   layer = L.tileLayer(visualization.geographical._2D.layers[layerType]);

@@ -61,7 +61,6 @@
     "event_table": "automation/scheduling/",
     "geographical_view": "inventory/network_visualization/#geographic-view",
     "link_table": "inventory/network_creation/",
-    "logical_view": "inventory/network_visualization/#logical-view",
     "pool_table": "inventory/pools/",
     "run_table": "automation/services/",
     "service_table": "automation/services/",

@@ -217,9 +217,6 @@ block stylesheets %} {{ super() }}
   </li>
 </ul>
 {% endblock content %} {% block javascripts %} {{ super()}}
-<script src="{{ url_for('static', filename='lib/three/three.min.js') }}"></script>
-<script src="{{ url_for('static', filename='lib/three/orbitControls.min.js') }}"></script>
-<script src="{{ url_for('static', filename='lib/three/ColladaLoader.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/vis/vis.min.js') }}"></script>
 <script
   type="module"

@@ -1,6 +1,6 @@
 {% extends "base_site.html" %} {% block title %} Geographical View {% endblock title %}
-{% set dimension = visualization["geographical"]["default"] %} {% block stylesheets %}
-{{ super() }} {% if endpoint == "geographical_view" %} {% if dimension == "2D" %}
+{% block stylesheets %}
+{{ super() }}
 <link
   href="{{ url_for('static', filename='lib/leaflet/leaflet.min.css') }}"
   rel="stylesheet"
@@ -9,12 +9,6 @@
   href="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.css') }}"
   rel="stylesheet"
 />
-{% else %}
-<link
-  href="{{ url_for('static', filename='lib/cesium/Widgets/widgets.css') }}"
-  rel="stylesheet"
-/>
-{% endif %} {% endif %}
 <link
   href="{{ url_for('static', filename='css/{}/visualization.css'.format(version_path)) }}"
   rel="stylesheet"
@@ -22,13 +16,8 @@
 {% endblock stylesheets %} {% block content %}
 <form id="search-form-device" class="overlay"></form>
 <form id="search-form-link" class="overlay"></form>
-{% if endpoint == "logical_view" %}
-<div id="network"></div>
-{% else %}
 <div id="map"></div>
-{% endif %}
 <ul id="contextMenu" oncontextmenu="return false;" class="dropdown-menu" role="menu">
-  {% if dimension == "2D" %}
   <li class="menu dropdown-submenu geo-menu">
     <a class="menu-submenu" tabindex="-1" href="#"
       >Type of View<span class="caret-right"></span
@@ -57,7 +46,6 @@
       <li><a tabindex="-1" href="#">Circle Marker</a></li>
     </ul>
   </li>
-  {% endif %}
   <li class="menu rc-object-menu rc-plan-menu rc-device-menu rc-link-menu rc-site-menu">
     <a tabindex="-1" href="#">Properties</a>
   </li>
@@ -154,15 +142,6 @@
   </nav>
 </div>
 {% endblock content %} {% block javascripts %} {{ super()}}
-<script src="{{ url_for('static', filename='lib/three/three.min.js') }}"></script>
-<script src="{{ url_for('static', filename='lib/three/orbitControls.min.js') }}"></script>
-<script src="{{ url_for('static', filename='lib/three/ColladaLoader.min.js') }}"></script>
-{% if endpoint == "logical_view" %}
-<script src="{{ url_for('static', filename='lib/three/three-spritetext.min.js') }}"></script>
-<script src="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.min.js') }}"></script>
-{% else %} {% if endpoint == "geographical_view" %} {% if dimension == "2D" %}
 <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
-{% else %}
-<script src="{{ url_for('static', filename='lib/cesium/Cesium.js') }}"></script>
-{% endif %} {% endif %} {% endif %} {% endblock javascripts %}
+{% endblock javascripts %}

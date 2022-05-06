@@ -23,7 +23,7 @@ class Gateway(Device):
 class GatewayForm(DeviceForm):
     form_type = HiddenField(default="gateway")
     icon = SelectField(
-        "Icon", choices=list(vs.visualization["icons"]["2D"].items()), default="host"
+        "Icon", choices=list(vs.visualization["icons"].items()), default="host"
     )
     priority = IntegerField("Priority", default=1)
     devices = MultipleInstanceField("Devices", model="device")

@@ -400,46 +400,6 @@ function initFiltering() {
   }
 }
 
-export function showDeviceModel(device) {
-  openPanel({
-    name: "device_view",
-    title: `3D Visualization of '${device.name}'`,
-    size: "700 500",
-    id: device.id,
-    content: `<div id="3D-${device.id}" style="height:100%; width:100%"></div>`,
-    callback: () => {
-      const aspect = $(".main_frame").width() / $(".main_frame").height();
-      let camera = new THREE.PerspectiveCamera(45, aspect, 1, 100000);
-      camera.position.set(...visualization.icons["3D"][device.icon_3d].position);
-      let scene = new THREE.Scene();
-      scene.background = new THREE.Color(0xffffff);
-      const container = document.getElementById(`3D-${device.id}`);
-      const renderer = new THREE.WebGLRenderer({ antialias: true });
-      renderer.setSize(700, 485);
-      container.appendChild(renderer.domElement);
-      const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
-      scene.add(ambientLight);
-      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-      directionalLight.position.set(1, 1, 0).normalize();
-      scene.add(directionalLight);
-      new THREE.OrbitControls(camera, renderer.domElement);
-      new THREE.ColladaLoader().load(
-        `/static/img/view/models/${device.icon_3d}.dae`,
-        function (collada) {
-          collada.scene.scale.set(20, 20, 20);
-          collada.scene.rotation.set(-Math.PI / 2, 0, Math.PI / 2);
-          collada.scene.position.set(2300, 0, 800);
-          scene.add(collada.scene);
-        }
-      );
-      (function render() {
-        requestAnimationFrame(render);
-        renderer.render(scene, camera);
-      })();
-    },
-  });
-}
-
 export function initVisualization() {
   $("body").contextMenu({
     menuSelector: "#contextMenu",

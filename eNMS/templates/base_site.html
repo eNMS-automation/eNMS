@@ -235,7 +235,7 @@
                 <li class="nav-item">
                   <a
                     target="_blank"
-                    href="{{ settings['app']['documentation_url'] }}/{{ settings['docs'][endpoint] }}"
+                    href="{{ settings['app']['documentation_url'] }}{{ settings['docs'][endpoint] }}"
                   >
                     <img
                       src="{{ url_for('static', filename='img/readthedocs.png') }}"

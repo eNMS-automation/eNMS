@@ -1,3 +1,6 @@
+---
+title: Network Creation
+---
 # Network Creation
 
 The network topology within the tool originates from the Device and Link
@@ -9,7 +12,7 @@ important to device security and automation accuracy.
 ## From the UI Manually (One at a Time)
 
 Users can manually create each Device and Link in the inventory by
-filling a form in `Inventory / Devices` and `Inventory / Links` using the
+filling a form in `Inventory -> Devices` and `Inventory -> Links` using the
  `+` button in the top menu.
 
 ![Network Creation](../_static/inventory/creation/creation_form.png)
@@ -22,6 +25,13 @@ filling a form in `Inventory / Devices` and `Inventory / Links` using the
       be created.
     - In order to visualize the network topology on a map, devices must have
       geographical coordinates (longitude and latitude).
+      
+      
+!!! note
+
+    Manual topology changes (editing a Device or Link) might be *overwritten* by any 
+    topology import.  If topology information is updated from an external source of 
+    truth, make sure to edit the external source system first.  
 
 ## From an Excel Spreadsheet
 

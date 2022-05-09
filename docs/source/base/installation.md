@@ -5,6 +5,10 @@ with Python **3.6+**. The first section below describes how to get eNMS up
 and running quickly in demo mode to help in understanding what it is.  The
 following sections give details for setting up a production environment.
 
+!!! note 
+
+    While Python 3.6+ is supported, using Python 3.9 or above is recommended. 
+    
 ## First steps
 
 The first step is to download the application. The user can download the
@@ -89,6 +93,12 @@ environment variables :
     export UNSEAL_VAULT_KEY2=key2
     etc
 
+
+### Plugin Installation 
+
+Any initial eNMS Plugins - like the sample eNMS CLI Plugin - can also be installed here. 
+See [Plugins](/advanced/customization/#example-plugins) for more details.
+
 ## Environment variables
 Environment variables for all sensitive data (passwords, tokens, keys) are
 exported from Unix and include:
@@ -116,9 +126,11 @@ exported from Unix and include:
     [Unit]
     Description=Gunicorn instance to serve enms
     Requires=enms.gunicorn.socket
+    Requires=vault.service
     After=network.target
-    After=mariadb.service
+    After=mysqld.service
     After=enms.gunicorn_scheduler.service
+    After=vault.service
 
     [Service]
     PermissionsStartOnly=true
@@ -128,6 +140,9 @@ exported from Unix and include:
     WorkingDirectory=/home/centos/enms
     ExecStartPre=/bin/mkdir -p /run/gunicorn/
     ExecStartPre=/bin/chown -R centos:centos /run/gunicorn/
+    # Add the virtualenv to the PATH
+    Environment="PATH=/opt/python3-virtualenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:."
+    ExecStartPre=/bin/echo Setting application PATH to $PATH
     Environment="http_proxy=http://proxy.company.com:80/"
     Environment="https_proxy=http://proxy.company.com:80/"
     Environment="NO_PROXY=localhost,127.0.0.1,169.254.169.254,.company.com,W.X.Y.Z/8,A.B.C.D/16"
@@ -158,11 +173,11 @@ exported from Unix and include:
     Environment="FLASK_APP=app.py"
     Environment="FLASK_DEBUG=1"
     # PATH to TextFSM repo for Netmiko: https://pynet.twb-tech.com/blog/automation/netmiko-textfsm.html
-    Environment="TEXTFSM_PATH=/home/centos/ntc_textfsm/"
+    Environment="NET_TEXTFSM=/home/centos/ntc_textfsm/"
     Environment="GUNICORN_ACCESS_LOG=logs/access.log"
     Environment="GUNICORN_LOG_LEVEL=debug"
     Environment="DATABASE_URL=mariadb+mysqldb://root:PASSWORD@localhost/enms?charset=utf8mb4"
-    ExecStart=/usr/local/bin/gunicorn --pid /run/gunicorn/enms.gunicorn.pid --worker-tmp-dir /tmpfs-gunicorn --bind unix:/run/gunicorn/enms.gunicorn.socket --chdir /home/centos/enms --config /home/centos/enms/gunicorn.py app:app
+    ExecStart=/opt/python3-virtualenv/bin/bin/gunicorn --pid /run/gunicorn/enms.gunicorn.pid --worker-tmp-dir /tmpfs-gunicorn --bind unix:/run/gunicorn/enms.gunicorn.socket --chdir /home/centos/enms --config /home/centos/enms/gunicorn.py app:app
     ExecReload=/bin/kill -s HUP $MAINPID
     ExecStop=/bin/kill -s TERM $MAINPID
     TimeoutStopSec=60
@@ -233,8 +248,7 @@ exported from Unix and include:
             ssl_session_tickets off;
             ssl_stapling off;
             ssl_stapling_verify off;
-            resolver CHANGEME valid=300s;
-            resolver_timeout 5s;
+            
             # Disable preloading HSTS for now.  One can use the commented out header line that includes
             # the "preload" directive if one understands the implications.
             #add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload";
@@ -293,7 +307,7 @@ exported from Unix and include:
                 proxy_set_header X-Real-IP $remote_addr;
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                 proxy_set_header X-Forwarded-Proto $scheme;
-                alias /home/centos/enms/docs/_build/html/;
+                alias /home/centos/ien-ap/docs/build/;
             }
         }
         # Added to expose access to the separate/remote scheduler.
@@ -334,7 +348,7 @@ exported from Unix and include:
 
 ## Settings Files
 The application's setup files are located in `setup/`, and the following
-section describe their contents:
+section describes their contents:
 
 ### `automation.json`
 The `setup/automation.json` file allows for the customization of some
@@ -473,60 +487,23 @@ include additional columns/fields
 4. Controlling which column/field properties are visible in the
  tables for device and link inventory, configuration, pools, as
  well as the service, results, and task browsers
+5. Pull-down choices for `Category`, `Model`, `Operating System`, and `Vendor`. 
 
-properties.json custom device addition example:
-
-- Keys under `{"custom": { "device": {` name the custom attribute being added.
-
-  - Keys/Value pairs under the newly added custom device attribute device_status.
-  
-    - "pretty_name":"Default Username", *device attribute name to be
-      displayed in UI*
-    - "type":"string", *data type of attribute*
-    - "default":"None", *default value of attribute*
-    - "private": true *optional - is attribute hidden from user*
-    - "configuration": true *optional* - creates a custom 
-      \'Inventory/Configurations\' attribute
-    - "log_change": false *optional* - disables logging when a changes is
-      made to attribute
-    - "form": false *optional* - disables option to edit attribute in
-      Device User Interface
-    - "migrate": false *optional* - choose if attribute should be considered
-       for migration
-    - "serialize": false *optional* - whether it is passed to the front-end
-      when the object itself is
-    - "merge_update": false *optional* - *only for JSON property* - whether the
-      JSON value is overriden or updated when setting a new value from the REST API.
-
-- Keys under `"tables" : { "device" : [ {  & "tables" : { "configuration" : [ {`
-  Details which attributes to display in these table, add custom attributes here
-  
-  - Keys/Value pairs for tables
-  
-    - "data":"device_status", *attribute created in custom device above*
-    - "title":"Device Status", *name to display in table*
-    - "search":"text", *search type*
-    - "width":"80%", *optional - text alignment, other example 
-      "width":"130px",*
-    - "visible":false, *default display option*
-    - "orderable": false *allow user to order by this attribute*
-
-    - Values under `"filtering" : { "device" : [`
-      Details which attributes to use for filtering. The user will need to add any
-      custom device attributes name to this list for filtering
+For examples, please see [Custom Properties](../advanced/customization/#custom-properties)
+for more information 
 
 ### `rbac.json`
 
 The `setup/rbac.json` file allows configuration of which user roles have
-access to each of the controls in the UI, which user roles have access to
-each of the REST API endpoints.
+access to each of the controls in the UI, as well as which user roles have
+access to each of the REST API endpoints.
 
 ### `settings.json`
 
 The `setup/settings.json` file includes the following public variables which
 are also modifiable from the administration panel. Changing settings from the
 administration panel will cause settings.json to be rewritten if `Write changes
-back to  settings.json file` is selected.
+back to settings.json file` is selected.
 
 #### `app` section
 
@@ -567,6 +544,10 @@ environments, `eNMS/custom.py` allows the user to customize how the
 authentication needs to occur. It can be modified to fit a company's
 ldap active directory system, etc.
 
+#### `automation` section
+
+- `max_process` limit on multiprocessing (default: 15)
+
 #### `cluster` section
 Section used for detecting other running instances of eNMS.
 - `active` (default: `false`)
@@ -574,6 +555,12 @@ Section used for detecting other running instances of eNMS.
 - `scan_subnet` (default: `"192.168.105.0/24"`)
 - `scan_protocol` (default: `"http"`)
 - `scan_timeout` (default: `0.05`)
+
+#### `docs` section
+
+This section is used to configure which pages in the documentation to open
+for some of the embedded information (help) links.  This should not need to be 
+changed.
 
 #### `mail` section
 
@@ -649,11 +636,17 @@ load on eNMS.
 #### `ssh` section
 
 - `command` (default: `python3 -m flask run -h 0.0.0.0`): command used to start the SSH server.
+- `credentials` - which credential types to enable for the WebSSH connection feature.
+   
+    - `custom` (default: `true`)
+    - `device` (default: `true`)
+    - `user` (default: `true`)
+ 
 - `port_redirection` (default: `false`)
 - `bypass_key_prompt` (default: `true`)
 - `port` (default: `-1`)
 - `start_port` (default: `9000`)
-- `end_port` (default: `91000`)
+- `end_port` (default: `9100`)
 
 #### `tables` section
 
@@ -662,11 +655,6 @@ Configure the refresh rates of a table in the UI in milliseconds. By default, th
 - `run` (default: `5000`)
 - `service` (default: `3000`)
 - `task` (default: `3000`)
-
-#### `tacacs` section
-
-- `active` (default: `false`)
-- `address` (default: `""`)
 
 #### `vault` section
 
@@ -754,7 +742,7 @@ Above nginx.conf sample has a section for eNMS Scheduler
     Description=Start eNMS Scheduler service using Gunicorn/Uvicorn
     Requires=enms.gunicorn_scheduler.socket
     After=network.target
-    After=mariadb.service
+    After=mysqld.service
     
     [Service]
     PermissionsStartOnly=true
@@ -773,7 +761,7 @@ Above nginx.conf sample has a section for eNMS Scheduler
     Environment="GUNICORN_ACCESS_LOG=/home/centos/enms/logs/access_scheduler.log"
     Environment="GUNICORN_LOG_LEVEL=info"
     Environment="DATABASE_URL=mysql://root:PASSWORD@localhost/enms?charset=utf8"
-    ExecStart=/usr/local/bin/gunicorn --pid /run/gunicorn/enms.gunicorn_scheduler.pid --worker-tmp-dir /tmpfs-gunicorn --bind unix:/run/gunicorn/enms.gunicorn_scheduler.socket --chdir /home/centos/enms/scheduler --config /home/centos/enms/scheduler/gunicorn.py scheduler:scheduler
+    ExecStart=/opt/python3-virtualenv/bin/gunicorn --pid /run/gunicorn/enms.gunicorn_scheduler.pid --worker-tmp-dir /tmpfs-gunicorn --bind unix:/run/gunicorn/enms.gunicorn_scheduler.socket --chdir /home/centos/enms/scheduler --config /home/centos/enms/scheduler/gunicorn.py scheduler:scheduler
     ExecReload=/bin/kill -s HUP $MAINPID
     ExecStop=/bin/kill -s TERM $MAINPID
     TimeoutStopSec=60

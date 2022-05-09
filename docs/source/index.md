@@ -18,20 +18,20 @@ For an overview, [see this diagram](#system-overview), below.
 
 The following aspects of network automation are addressed:
 
--   **Configuration Management Service**: Backup with Git, change and
+- **Configuration Management Service**: Backup with Git, change and
     rollback of configurations.
--   **Validation Services**: Validate data about the state of a device
-    with Netmiko and NAPALM.
--   **Ansible Service**: Store and run Ansible playbooks.
--   **REST Service**: Send REST calls with variable URL and payload.
--   **Python Script Service**: Any python script can be integrated
+- **Validation Services**: Validate data about the state of a device
+    with Netmiko, NETCONF, NAPALM, or Scrapli.
+- **Ansible Service**: Store and run Ansible playbooks.
+- **REST Service**: Send REST calls with variable URL and payload.
+- **Python Script Service**: Any python script can be integrated
     into the web UI. eNMS will automatically generate a form in the UI
     for the script input parameters.
--   **Workflows**: Services can be combined together graphically in a
-    workflow.
--   **Scheduling**: Services and workflows can be scheduled to start
-    at a later time, or run periodically with CRON.
--   **Event-driven automation**: Services and workflows can be
+- **Workflows**: Services can be combined graphically in a workflow.
+- **Scheduling**: Services and workflows can be scheduled to start
+    at a later time, or run periodically with CRON, as well as run on
+    demand.
+- **Event-driven automation**: Services and workflows can be
     triggered from the REST API.
 
 ## System Overview

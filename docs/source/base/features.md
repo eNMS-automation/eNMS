@@ -15,7 +15,7 @@ inventory table panel to that group of data.
 
 ![Dashboard](../_static/base/dashboard.png)
 
-Once device and circuit network data has been created, related data can be
+Once device and circuit network data have been created, related data can be
 grouped into pools.
 
 ## Network Visualization
@@ -24,12 +24,12 @@ eNMS can display network data on a world map (Google Map or Open Street Map).
 Each device is displayed at its GPS coordinates. Click on a device to display 
 its properties, configuration, or start an SSH terminal session.
 
-![Geographical View](../_static/inventory/network_visualization/network_view_2d.png)
+![Geographical View](../_static/visualization/network_view_2d.png)
 
-Colocated devices can be grouped into geographical sites (campus, datacenter, 
-\...), and displayed logically with a force-directed layout.
+Network topology diagrams can be created in the Network Builder view, using
+devices and links from inventory, and adding labels for clarity.
 
-![Logical View](../_static/inventory/network_visualization/logical_view.png)
+![Network Builder](../_static/visualization/network_builder.png)
 
 ## Services and Workflows
 
@@ -38,11 +38,20 @@ encapsulate a single unit of work or device interaction. Workflows are made up
 of one or more services (or sub-workflows) that represent a series of distinct
 steps to accomplish a complex task. They are a visual representation of a
 network automation activity. When a workflow is executed, its status is updated
-in real-time on the web UI, each service will be continually updated with
-current status information. Security features include activity logging,
-role-based access control, and credentials management.
+in real-time on the web UI; each service will be continually updated with
+current status information. 
 
 ![Workflow Builder](../_static/base/workflow.png)
+
+## Device and Link Management  
+
+Devices provide one or more interfaces to allow remote management from eNMS. 
+Through the services and workflows that facilitate that device interaction, they become 
+units of automation. Links establish relationships between devices and can be used by
+services and workflows to control traversal through the automation. 
+
+Additionally, eNMS provides a Web-based SSH session feature to facilitate manual device 
+interactions and includes security and logging features.
 
 ## Configuration Management
 
@@ -66,13 +75,27 @@ platforms such as Oxidized/Rancid.  It supports the following features:
 
 While services can be run directly and immediately from the display, they can 
 also be scheduled to run at a later time, or periodically by defining a
-frequency or a CRON expression. All scheduled tasks are displayed in a calendar
-or in tabular form.
+frequency or a CRON expression. Active scheduled tasks are displayed in the
+Task Calendar. All tasks are displayed in the Scheduling Tasks table,
+regardless of active status.
 
 ![Calendar](../_static/base/calendar.png)
+*Task Calendar*
+
+!!! note
+
+    Scheduled events are displayed in UTC on the calendar. The current time in
+    UTC is always visible at the bottom of the application's left-side navigation
+    panel.
 
 ![Calendar](../_static/base/sched_tasks_tabular.png)
+*Scheduling Task Table* 
 
-Services can also be executed programmatically, eNMS has a REST API and a CLI 
-interface that can be used to create, update and delete any type of objects, 
+Services can also be executed programmatically. eNMS has a REST API and a CLI 
+interface that can be used to create, update and delete managed objects, 
 but also to trigger the execution of a service.
+
+## Security features 
+
+Security features include activity logging, role-based access control, credentials 
+management, and WebSSH session logging.

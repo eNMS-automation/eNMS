@@ -13,7 +13,7 @@ the application name in the upper left of the web interface. On a Mac device,
 perform `Option+Shift` and click the application name. The following dialog will
 open:
 
-![Filtering System.](../_static/advanced/debug/debug_panel.png)
+![Filtering System.](../_static/administration/debug/debug_panel.png)
 
 The components that are displayed are a dropdown list at the top center of the
 dialog, a `Python Code` text box, an `Output` text box, and a `Run Code` button
@@ -22,6 +22,8 @@ at the bottom, center of the panel.
 The dropdown list has entries that are Python code files located on the server
 running the application. The options are:
 
+- `delete_corrupted_edges.py` - This code looks for any duplicate edges in Workflows
+and removes any that it finds.
 - `empty.py` - This file is empty and allows custom python code to be entered
 and executed.
 - `functions.py` - The code in this file tests the ability to create a device,
@@ -37,6 +39,9 @@ dictionary objects.
 number of devices (200 by default) one at a time, fetch those devices one at a
 time and delete each of those devices one at a time.  The results are displayed
 in the `Output` panel.
+
+
+
 
 Select the desired option in the dropdown list to view and/or edit the code of
 the selected file.  Execute the code by clicking the `Run Code` button.  Any

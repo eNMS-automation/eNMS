@@ -1,4 +1,7 @@
-# Built-in Service Type Index
+# Built-in Service Types
+
+eNMS provides a rich, built-in suite of Service Types for managing and interacting 
+with network equipment. 
 
 ## Ansible Playbook Service
 

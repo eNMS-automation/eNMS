@@ -10,7 +10,7 @@ network inventory.  There are multiple ways to establish a WebSSH connection.
 ## From Devices Inventory Table
 
 You can connect to a device by clicking on the `Connect` button of a device
-entry in the `Inventory / Devices` table as shown below.
+entry in the `Inventory -> Devices` table as shown below.
 
 ![Connect buttons](../_static/inventory/web_connection/devices_table.png)
 
@@ -39,6 +39,6 @@ button to connect to the device.
 ## From Network Views
 
 Connections can also be initiated to a device from views 
-`Visualization / Geographical View` or `Visualization / Logical View`.
+`Visualization / Geographical View` or `Visualization / Network Builder`.
 Right-click on any device and select `Connect`.  The same dialog detailed
 above is used to complete the connection process.

@@ -12,7 +12,6 @@ Initiate execution of a service passing in values to control its operation.
      service will run on the devices configured on the service.
  -   `pools` (default: `[]`) Same as devices but for pools.
  -   `ip_addresses` (default: `[]`) Same as devices but using ip_addresses.
- -   `payload` (default: `{}`) Payload passed into the service.
  -   `async` (default: `false`) boolean.
      -   `false` eNMS runs the service and responds to your request
          when the service completes. The response contains
@@ -20,7 +19,7 @@ Initiate execution of a service passing in values to control its operation.
          if the service takes too long to run.
      -   `true` eNMS runs the service in a different thread and
          immediately responds with the service ID. (Recommended)
-
+ -   user_created (optional) this could be list, dictionary, or string as desired. pass in as many as needed. (see user_identified_key & aid in example)
 
 #
 # Examples
@@ -32,7 +31,8 @@ Initiate execution of a service passing in values to control its operation.
   "pools": ["Pool1", "Pool2"],
   "ip_addresses": ["127.0.0.1"],
   "async": true,
-  "payload": {"aid": "1-2-3", "user_identified_key": "user_identified_value"}
+  "user_identified_key": "user_identified_value",
+  "aid": "1-2-3"
 }
 ```
 
@@ -43,8 +43,8 @@ Initiate execution of a service passing in values to control its operation.
     service.
     - For Postman, use the type `raw` for entering key/value pairs into
     the body. Body must also be formatted as application/JSON.
-    - Extra form data passed in the body of the POST is
-    available to the running service as `payload["rest_data"][user_identified_key]`.
+    - The optional user_created values can be accessed within the serivce by referencing `payload["your_variable_name"]`.
+    - Try `log('info', payload)` in pre-processing to view the objects the service knows about. 
 
 #
 ## Run Service Response - Synchronous

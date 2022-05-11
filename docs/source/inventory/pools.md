@@ -1,4 +1,7 @@
+
 # Pools
+
+## Overview 
 
 A Pool is a collection of objects of the following types:
 
@@ -6,6 +9,7 @@ A Pool is a collection of objects of the following types:
 - Links
 - Users
 - Services
+- Networks
 
 Pools can contain a single type of object or a mix of objects types.  For each
 object type, a set of selection properties is used to determine which objects
@@ -29,14 +33,17 @@ automation to run on.
     the Scheduled Task's pool overrides which devices the
     automation executes against.
     
-- Visualization Scope:  For both the Geographical and Logical Visualization 
+- Visualization Scope:  For both the Geographical and Network Builder Visualization 
 panels, a pool is used to filter which objects are presented on the map. For
     - Geographical Visualization, the pool list only shows pools with devices
     and links. Pools of only Users and Services are omitted since these don't
     make sense to show on a map.
-    - Logical Visualization, the pool list only shows pools with at least 1
+    - Network Builder, the pool list only shows pools with at least 1
     device and 1 link because the force-directed graph algorithm shows the
     interconnected relationships of the objects.
+
+- Advanced Search / Relationship Based Filtering:  Pools can be targets for the 
+union, intersection, or empty match in order to filter a table in the application.
     
 - RBAC (Role Based Access Controls): Pools are used in the 
   `Administration -> Access` menu to define which objects a user can access:
@@ -59,8 +66,7 @@ listed in the Pools table:
 - Duplicate: Copy this pool's properties to a new pool and make some
   slight modification for different criteria
 
-- Run Service: Run a service or workflow against this pool's device and links
-  as the target of execution.
+- Run Service: Run a service or workflow against this pool's devices
   
 - Delete: Delete this pool
 
@@ -167,7 +173,7 @@ In `Service Edit Panel -> Step 3`, select Device(s) and/or Pool(s) as target(s).
 ## Use a Pool to restrict User Access or Credential Use
 
 In `Administration -> Access` and `Administration -> Credentials`, the
-administrator has the ability to restrict users. See [Administration](../advanced/administration.md) 
+administrator has the ability to restrict users. See [Credentials](../administration/credentials.md) 
 
 ## Pool Recalculation
 
@@ -219,3 +225,10 @@ have 2 pools: one with the criteria specified, and another with the manually
 selected devices. When running a service, multiple pools and multiple devices can
 be specified, and the service will run against all specified objects.
 
+!!! note 
+    
+    Tip: the `Bulk Delete` button will clear a manually defined pool.
+    
+![Clearing a manuallly defined pool](../_static/inventory/pools/manual_clear.png)    
+     
+      

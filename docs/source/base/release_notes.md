@@ -82,14 +82,6 @@ Migration:
 - Update credentials of REST Call services (custom_username, custom_password)
 - Add SSH command in settings.json / ssh section
 
-Documentation update needed for everything, in particular:
-- Redis config in settings.json
-- New option in settings.json: invalidate_cache
-- New options in settings.json: refresh rates
-- New default for Run Service endpoint: asynchronous
-- Default access replaced by "Admin only"
-- Priority default value update
-
 Version 4.1.0
 -------------
 

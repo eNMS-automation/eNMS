@@ -72,15 +72,15 @@ Version 4.2.0
 - Make scrapli connection arguments configurable from automation.json / scrapli / connection_args
 
 Migration:
-- Update all access with new GET / POST endpoints
-- Doc link in settings.json to be updated with custom doc links.
-- Refresh rates in settings.json to be udpated (e.g 10s instead of 3 if RBAC is used)
-- Redis config in settings.json
-- In migration files, replace "default_access: admin" with "admin_only: true"
-- Warn user about REST API run service endpoint new default (True)
-- Update service priority to "current priority + 9" (see migration script in files / script)
-- Update credentials of REST Call services (custom_username, custom_password)
-- Add SSH command in settings.json / ssh section
+  - Update all access with new GET / POST endpoints
+  - Doc link in settings.json to be updated with custom doc links.
+  - Refresh rates in settings.json to be udpated (e.g 10s instead of 3 if RBAC is used)
+  - Redis config in settings.json
+  - In migration files, replace "default_access: admin" with "admin_only: true"
+  - Warn user about REST API run service endpoint new default (True)
+  - Update service priority to "current priority + 9" (see migration script in files / script)
+  - Update credentials of REST Call services (custom_username, custom_password)
+  - Add SSH command in settings.json / ssh section
 
 Version 4.1.0
 -------------

@@ -72,6 +72,7 @@ Version 4.2.0
 - Make scrapli connection arguments configurable from automation.json / scrapli / connection_args
 
 Migration:
+
   - Update all access with new GET / POST endpoints
   - Doc link in settings.json to be updated with custom doc links.
   - Refresh rates in settings.json to be udpated (e.g 10s instead of 3 if RBAC is used)

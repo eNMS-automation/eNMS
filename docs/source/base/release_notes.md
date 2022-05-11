@@ -71,20 +71,6 @@ Version 4.2.0
 - Update slack notification service to use newest slack_sdk library (instead of slackclient<2)
 - Make scrapli connection arguments configurable from automation.json / scrapli / connection_args
 
-Tests:
-- Performances (SQL Column function init)
-- Export and re-import of workflows and top-level services
-- SSH Proxy / Jump Server mechanism (+ tie-breaker priority mechanism)
-- Netmiko and Napalm Backup Services, both with built-in properties (configuration, operational_data) and
-  custom properties coming from properties.json (such that "configuration" key is set to True)
-- Test the workflow traversal mechanism for all modes. In particular, tests the case discussed in
-  mail thread "Wrong number of devices execute": all devices discarded. Using priorities to force order should
-  no longer be required in such a case.
-- Tests ansible playbook service with custom path in settings.
-- Tests that static files are cached when settings / invalidate_cache is set to false, and that they are
-  reloaded when it is set to true and the version is updated.
-- Test Unix Command Service admin approval restriction mechanism
-
 Migration:
 - Update all access with new GET / POST endpoints
 - Doc link in settings.json to be updated with custom doc links.

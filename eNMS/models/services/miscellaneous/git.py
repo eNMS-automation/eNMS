@@ -28,7 +28,9 @@ class GitService(Service):
         if set(self.actions) & {"clone", "shallow_clone"}:
             remote_path, kwargs = run.sub(run.remote_repository, locals()), {}
             if "shallow_clone" in self.actions:
-                kwargs.update({"filter": "combine:tree:1+blob:none", "sparse": True})
+                kwargs.update(
+                    {"filter": "blob:none", "depth": 1, "single-branch": True}
+                )
             repo = Repo.clone_from(remote_path, local_path, **kwargs)
         else:
             repo = Repo(local_path)
@@ -54,6 +56,6 @@ class GitForm(ServiceForm):
         )
     )
     local_repository = StringField("Path to Local Git Repository", substitution=True)
-    relative_path = BooleanField("Path is relative to eNMS folder")
+    relative_path = BooleanField("Path is relative to the main application directory")
     remote_repository = StringField("Path to Remote Git Repository", substitution=True)
     commit_message = StringField("Commit Message")

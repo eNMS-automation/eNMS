@@ -1107,6 +1107,33 @@ class NetmikoForm(ConnectionForm):
     }
 
 
+class ScrapliForm(ConnectionForm):
+    form_type = HiddenField(default="scrapli")
+    abstract_service = True
+    use_device_driver = BooleanField(default=True)
+    driver = SelectField(choices=vs.dualize(vs.scrapli_drivers))
+    is_configuration = BooleanField()
+    transport = SelectField(choices=vs.dualize(("system", "paramiko", "ssh2")))
+    timeout_socket = FloatField("Socket Timeout", default=15.0)
+    timeout_transport = FloatField("Transport Timeout", default=30.0)
+    timeout_ops = FloatField("Ops Timeout", default=30.0)
+    groups = {
+        "Scrapli Parameters": {
+            "commands": [
+                "use_device_driver",
+                "driver",
+                "is_configuration",
+                "transport",
+                "timeout_socket",
+                "timeout_transport",
+                "timeout_ops",
+            ],
+            "default": "expanded",
+        },
+        **ConnectionForm.groups,
+    }
+
+
 class UserForm(RbacForm):
     form_type = HiddenField(default="user")
     groups = StringField("Groups")
@@ -1125,6 +1152,16 @@ class UserForm(RbacForm):
     )
     password = PasswordField("Password")
     is_admin = BooleanField(default=False)
+
+
+class ReplacementForm(FlaskForm):
+    pattern = StringField("Pattern")
+    replace_with = StringField("Replace With")
+
+
+class CommandsForm(FlaskForm):
+    value = StringField("Command")
+    prefix = StringField("Label")
 
 
 form_factory = FormFactory()

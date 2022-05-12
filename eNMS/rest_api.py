@@ -1,6 +1,5 @@
 from collections import defaultdict
 from flask_login import current_user
-from os import getenv
 from threading import Thread
 from traceback import format_exc
 from uuid import getnode

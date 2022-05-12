@@ -7,7 +7,7 @@ from sqlalchemy.orm import load_only
 from wtforms import FormField
 
 from eNMS.database import db
-from eNMS.forms import NetmikoForm
+from eNMS.forms import NetmikoForm, CommandsForm, ReplacementForm
 from eNMS.fields import (
     BooleanField,
     FieldList,

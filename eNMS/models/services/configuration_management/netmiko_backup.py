@@ -100,17 +100,8 @@ class NetmikoBackupService(ConnectionService):
         return {"success": True}
 
 
-class ReplacementForm(FlaskForm):
-    pattern = StringField("Pattern")
-    replace_with = StringField("Replace With")
 
-
-class CommandsForm(FlaskForm):
-    value = StringField("Command")
-    prefix = StringField("Label")
-
-
-class DataBackupForm(NetmikoForm):
+class NetmikoBackupForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_backup_service")
     property = SelectField(
         "Configuration Property to Update",
@@ -119,7 +110,7 @@ class DataBackupForm(NetmikoForm):
     local_path = StringField("Local Path", default="network_data", substitution=True)
     commands = FieldList(FormField(CommandsForm), min_entries=12)
     replacements = FieldList(FormField(ReplacementForm), min_entries=12)
-    add_header = BooleanField("Add header for each ommand", default=True)
+    add_header = BooleanField("Add header for each command", default=True)
     groups = {
         "Target property and commands": {
             "commands": ["property", "local_path", "add_header", "commands"],

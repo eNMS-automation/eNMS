@@ -1,5 +1,4 @@
 from datetime import datetime
-from flask_wtf import FlaskForm
 from pathlib import Path
 from re import M, sub
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
@@ -98,7 +97,6 @@ class NetmikoBackupService(ConnectionService):
             return {"success": False, "result": str(exc)}
         run.update_configuration_properties(path, self.property, device)
         return {"success": True}
-
 
 
 class NetmikoBackupForm(NetmikoForm):

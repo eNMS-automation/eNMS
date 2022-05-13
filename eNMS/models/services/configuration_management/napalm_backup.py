@@ -93,7 +93,7 @@ class NapalmBackupForm(NapalmForm):
         "Configuration Property to Update",
         choices=list(vs.configuration_properties.items()),
     )
-    local_path = StringField("Local Path", default="network_data")
+    local_path = StringField("Local Path", default="network_data", substitution=True)
     getters = SelectMultipleField(choices=vs.automation["napalm"]["getters"])
     replacements = FieldList(FormField(ReplacementForm), min_entries=3)
     groups = {

@@ -11,7 +11,7 @@ These are the Netmiko Common Parameters for all Netmiko Services.
 -   `Enable mode` If checked, Netmiko should enter enable/privileged
     mode on the device before running the command or applying the
     configuration block. For the Linux driver, this means root/sudo.
--   `Config mode` If checked, Netmiko should enter config mode
+-   `Config mode` If checked, Netmiko should enter config mode.
 -   `Fast CLI` If checked, Netmiko will disable internal wait states and
     delays in order to execute the service as fast as possible.
 -   `Timeout` Netmiko internal timeout in seconds to wait for a
@@ -37,9 +37,9 @@ These are the Netmiko Common Parameters for all Netmiko Services.
       access the device.
     - `Custom Credentials` - The user provides the credentials below:
 
-- `Custom Username` - User provided username
+- `Custom Username` - User provided username.
 
-- `Custom Password` - User provided password
+- `Custom Password` - User provided password.
 
 - `Start New Connection`: **before the service runs**, the current
   cached connection is discarded and a new one is started.
@@ -62,19 +62,19 @@ connecting to the original device.
 -   `Jump to remote device on connect` If checked, the config items
     below will be used to connect to the secondary device.
 -   `Command that jumps to device` Command to initiate secondary
-    connection
+    connection.
 -   `Expected username prompt` Prompt expected when connecting secondary
-    connection
+    connection.
 -   `Device username` The username to send when the expected username
-    prompt is detected
+    prompt is detected.
 -   `Expected password prompt` Prompt expected when connecting secondary
-    connection
+    connection.
 -   `Device password` The password to send when the expected password
-    prompt is detected
+    prompt is detected.
 -   `Expected prompt after login` Prompt expected after successfully
-    negotiating a connection
+    negotiating a connection.
 -   `Command to exit device back to original device` Command required to
-    exit the secondary connection
+    exit the secondary connection.
 
 !!! note
 

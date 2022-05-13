@@ -5,7 +5,7 @@ This service uses Napalm to pull data from devices and store it in
 
 - All [Napalm Service Common Parameters](napalm_common.md) 
 
-- `Configuration Getters` - Choose the configuration getter named 'Configuration'
+- `Configuration Getters` - Choose the configuration getter named 'Configuration'.
 
 !!! note
  

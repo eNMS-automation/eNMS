@@ -11,8 +11,8 @@ be a regular expression.
 
 Configuration parameters for creating this service instance:
 
-- All [Netmiko Service Common Parameters](netmiko_common.md)
-- `Command` CLI command to send to the device
+- All [Netmiko Service Common Parameters](netmiko_common.md).
+- `Command` CLI command to send to the device.
 
 Also included in Netmiko Advanced Parameters: 
 
@@ -21,15 +21,15 @@ Also included in Netmiko Advanced Parameters:
 - `Use TextFSM` Causes Netmiko to try and match the command to a TextFSM
   template pointed to in the system by the `NET_TEXTFSM` environment
   variable. The Network to Code project maintains a repository of TextFSM
-  templates for popular network devices [here](https://github.com/networktocode/ntc-templates)
+  templates for popular network devices [here](https://github.com/networktocode/ntc-templates).
 - `Expect String` This is the string that signifies the end of output.
 - `Config Mode Command` The command that will be used to enter config
-  mode 
+  mode. 
 - `Auto Find Prompt` Tries to detect the prompt automatically.
 - `Strip command` Remove the echo of the command from the output
-  (default: True)
+  (default: True).
 - `Strip prompt` Remove the trailing router prompt from the output
-  (default: True)
+  (default: True).
 
 !!! note
 

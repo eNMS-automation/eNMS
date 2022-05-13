@@ -4,7 +4,7 @@ eNMS is a Flask web application designed to run on a **Unix server**
 with Python **3.6+**. The first section below describes how to get eNMS up
 and running quickly in demo mode to help in understanding what it is.  The
 following sections give details for setting up a production environment.
-
+    
 ## First steps
 
 The first step is to download the application. The user can download the
@@ -89,6 +89,12 @@ environment variables :
     export UNSEAL_VAULT_KEY2=key2
     etc
 
+
+### Plugin Installation 
+
+Any initial eNMS Plugins - like the sample eNMS CLI Plugin - can also be installed here. 
+See [Plugins](/advanced/customization/#example-plugins) for more details.
+
 ## Environment variables
 Environment variables for all sensitive data (passwords, tokens, keys) are
 exported from Unix and include:
@@ -116,9 +122,11 @@ exported from Unix and include:
     [Unit]
     Description=Gunicorn instance to serve enms
     Requires=enms.gunicorn.socket
+    Requires=vault.service
     After=network.target
-    After=mariadb.service
+    After=mysqld.service
     After=enms.gunicorn_scheduler.service
+    After=vault.service
 
     [Service]
     PermissionsStartOnly=true
@@ -128,6 +136,9 @@ exported from Unix and include:
     WorkingDirectory=/home/centos/enms
     ExecStartPre=/bin/mkdir -p /run/gunicorn/
     ExecStartPre=/bin/chown -R centos:centos /run/gunicorn/
+    # Add the virtualenv to the PATH
+    Environment="PATH=/opt/python3-virtualenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:."
+    ExecStartPre=/bin/echo Setting application PATH to $PATH
     Environment="http_proxy=http://proxy.company.com:80/"
     Environment="https_proxy=http://proxy.company.com:80/"
     Environment="NO_PROXY=localhost,127.0.0.1,169.254.169.254,.company.com,W.X.Y.Z/8,A.B.C.D/16"
@@ -158,11 +169,11 @@ exported from Unix and include:
     Environment="FLASK_APP=app.py"
     Environment="FLASK_DEBUG=1"
     # PATH to TextFSM repo for Netmiko: https://pynet.twb-tech.com/blog/automation/netmiko-textfsm.html
-    Environment="TEXTFSM_PATH=/home/centos/ntc_textfsm/"
+    Environment="NET_TEXTFSM=/home/centos/ntc_textfsm/"
     Environment="GUNICORN_ACCESS_LOG=logs/access.log"
     Environment="GUNICORN_LOG_LEVEL=debug"
     Environment="DATABASE_URL=mariadb+mysqldb://root:PASSWORD@localhost/enms?charset=utf8mb4"
-    ExecStart=/usr/local/bin/gunicorn --pid /run/gunicorn/enms.gunicorn.pid --worker-tmp-dir /tmpfs-gunicorn --bind unix:/run/gunicorn/enms.gunicorn.socket --chdir /home/centos/enms --config /home/centos/enms/gunicorn.py app:app
+    ExecStart=/opt/python3-virtualenv/bin/bin/gunicorn --pid /run/gunicorn/enms.gunicorn.pid --worker-tmp-dir /tmpfs-gunicorn --bind unix:/run/gunicorn/enms.gunicorn.socket --chdir /home/centos/enms --config /home/centos/enms/gunicorn.py app:app
     ExecReload=/bin/kill -s HUP $MAINPID
     ExecStop=/bin/kill -s TERM $MAINPID
     TimeoutStopSec=60
@@ -233,8 +244,7 @@ exported from Unix and include:
             ssl_session_tickets off;
             ssl_stapling off;
             ssl_stapling_verify off;
-            resolver CHANGEME valid=300s;
-            resolver_timeout 5s;
+            
             # Disable preloading HSTS for now.  One can use the commented out header line that includes
             # the "preload" directive if one understands the implications.
             #add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload";
@@ -293,7 +303,7 @@ exported from Unix and include:
                 proxy_set_header X-Real-IP $remote_addr;
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                 proxy_set_header X-Forwarded-Proto $scheme;
-                alias /home/centos/enms/docs/_build/html/;
+                alias /home/centos/ien-ap/docs/build/;
             }
         }
         # Added to expose access to the separate/remote scheduler.
@@ -334,7 +344,7 @@ exported from Unix and include:
 
 ## Settings Files
 The application's setup files are located in `setup/`, and the following
-section describe their contents:
+section describes their contents:
 
 ### `automation.json`
 The `setup/automation.json` file allows for the customization of some
@@ -371,9 +381,9 @@ logger destinations as needed for workflows.
 By default, the two loggers are configured:
 
 -   The default logger has handlers for sending logs to the stdout
-    console as well as a rotating log file `logs/enms.log`
+    console as well as a rotating log file `logs/enms.log`.
 -   A security logger captures logs for: User A ran Service/Workflow
-    B on Devices \[C,D,E\...\] to log file `logs/security.log`
+    B on Devices \[C,D,E\...\] to log file `logs/security.log`.
 
 And these can be reconfigured here to forward through syslog to remote
 collection if desired. This can also be used as a means to send workflow
@@ -385,9 +395,9 @@ levels for the various libraries used by eNMS.
 
 With multiple gunicorn workers, please consider:
 
-- Using `Python WatchedFileHandler` instead of the `RotatingFileHandler`
+- Using `Python WatchedFileHandler` instead of the `RotatingFileHandler`.
 - Configuring the LINUX `logrotate` utility to perform the desired log
-  rotation
+  rotation.
 
 Example logging.json that allows for logging to a time series database in the
 workflow's post-processing section or via python snippet service:
@@ -465,68 +475,31 @@ The `setup/properties.json` file includes:
 
 1. Allowing for additional custom properties to be defined in eNMS for
 devices and links. In this way, eNMS device inventory can be extended to
-include additional columns/fields
+include additional columns/fields.
 2. Allowing for additional custom parameters to be added to services
- and workflows
+ and workflows.
 3. Controlling which parameters and widgets can be seen from the
- Dashboard
+ Dashboard.
 4. Controlling which column/field properties are visible in the
  tables for device and link inventory, configuration, pools, as
- well as the service, results, and task browsers
+ well as the service, results, and task browsers.
+5. Pull-down choices for `Category`, `Model`, `Operating System`, and `Vendor`. 
 
-properties.json custom device addition example:
-
-- Keys under `{"custom": { "device": {` name the custom attribute being added.
-
-  - Keys/Value pairs under the newly added custom device attribute device_status.
-  
-    - "pretty_name":"Default Username", *device attribute name to be
-      displayed in UI*
-    - "type":"string", *data type of attribute*
-    - "default":"None", *default value of attribute*
-    - "private": true *optional - is attribute hidden from user*
-    - "configuration": true *optional* - creates a custom 
-      \'Inventory/Configurations\' attribute
-    - "log_change": false *optional* - disables logging when a changes is
-      made to attribute
-    - "form": false *optional* - disables option to edit attribute in
-      Device User Interface
-    - "migrate": false *optional* - choose if attribute should be considered
-       for migration
-    - "serialize": false *optional* - whether it is passed to the front-end
-      when the object itself is
-    - "merge_update": false *optional* - *only for JSON property* - whether the
-      JSON value is overriden or updated when setting a new value from the REST API.
-
-- Keys under `"tables" : { "device" : [ {  & "tables" : { "configuration" : [ {`
-  Details which attributes to display in these table, add custom attributes here
-  
-  - Keys/Value pairs for tables
-  
-    - "data":"device_status", *attribute created in custom device above*
-    - "title":"Device Status", *name to display in table*
-    - "search":"text", *search type*
-    - "width":"80%", *optional - text alignment, other example 
-      "width":"130px",*
-    - "visible":false, *default display option*
-    - "orderable": false *allow user to order by this attribute*
-
-    - Values under `"filtering" : { "device" : [`
-      Details which attributes to use for filtering. The user will need to add any
-      custom device attributes name to this list for filtering
+For examples, please see [Custom Properties](../advanced/customization/#custom-properties)
+for more information 
 
 ### `rbac.json`
 
 The `setup/rbac.json` file allows configuration of which user roles have
-access to each of the controls in the UI, which user roles have access to
-each of the REST API endpoints.
+access to each of the controls in the UI, as well as which user roles have
+access to each of the REST API endpoints.
 
 ### `settings.json`
 
 The `setup/settings.json` file includes the following public variables which
 are also modifiable from the administration panel. Changing settings from the
 administration panel will cause settings.json to be rewritten if `Write changes
-back to  settings.json file` is selected.
+back to settings.json file` is selected.
 
 #### `app` section
 
@@ -534,7 +507,7 @@ back to  settings.json file` is selected.
     provide a link back to the application, which is the case with webssh
     and mail notifications. When left empty, eNMS will try to guess the
     URL. This might not work consistently depending on the user's environment
-    (nginx configuration, proxy, ...)
+    (nginx configuration, proxy, ...).
 -   `config_mode` (default: `"debug"`) Must be set to `"debug"` or
     `"production"`.
 -   `documentation_url` (default:
@@ -545,10 +518,10 @@ back to  settings.json file` is selected.
     system for device configurations: this variable is the address of
     the remote git repository where eNMS will push all device
     configurations.
--   `ip_address`: IP address of this instance of the server
+-   `ip_address`: IP address of this instance of the server.
 -   `plugin_path`: (default: `"eNMS/plugins"`) location of eNMS plugin
-    extensions and customizations
--   `session_timeout_minutes`: (default: `90`)
+    extensions and customizations.
+-   `session_timeout_minutes`: (default: `90`).
 -   `startup_migration` (default: `"examples"`) Name of the migration to
     load when eNMS starts for the first time.
     -   By default, when eNMS loads for the first time, it will create a
@@ -567,36 +540,46 @@ environments, `eNMS/custom.py` allows the user to customize how the
 authentication needs to occur. It can be modified to fit a company's
 ldap active directory system, etc.
 
+#### `automation` section
+
+- `max_process` limit on multiprocessing (default: 15).
+
 #### `cluster` section
 Section used for detecting other running instances of eNMS.
-- `active` (default: `false`)
-- `id` (default: `true`)
-- `scan_subnet` (default: `"192.168.105.0/24"`)
-- `scan_protocol` (default: `"http"`)
-- `scan_timeout` (default: `0.05`)
+- `active` (default: `false`).
+- `id` (default: `true`).
+- `scan_subnet` (default: `"192.168.105.0/24"`).
+- `scan_protocol` (default: `"http"`).
+- `scan_timeout` (default: `0.05`).
+
+#### `docs` section
+
+This section is used to configure which pages in the documentation to open
+for some of the embedded information (help) links.  This should not need to be 
+changed.
 
 #### `mail` section
 
-- `reply_to` (default: `"no_replies@company.com"`)
-- `server` (default: `"smtp.googlemail.com"`)
-- `port` (default: `587`)
-- `use_tls` (default: `true`)
-- `username` (default: `"eNMS-user"`)
-- `sender` (default: `"eNMS@company.com"`)
+- `reply_to` (default: `"no_replies@company.com"`).
+- `server` (default: `"smtp.googlemail.com"`).
+- `port` (default: `587`).
+- `use_tls` (default: `true`).
+- `username` (default: `"eNMS-user"`).
+- `sender` (default: `"eNMS@company.com"`).
 
 #### `mattermost` section
 
 - `url` (default:
-  `"https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w"`)
-- `channel` (default: `""`)
-- `verify_certificate` (default: `true`)
+  `"https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w"`).
+- `channel` (default: `""`).
+- `verify_certificate` (default: `true`).
 
 #### `paths` section
 
 - `files` (default:`""`) Path to eNMS managed files needed by services
   and workflows. For example, files to upload to devices.
 - `custom_code` (default: `""`) Path to custom libraries that can be
-  utilized within services and workflows
+  utilized within services and workflows.
 - `custom_services` (default: `""`) Path to a folder that contains
   `Custom Services`. These services are added to the list of existing
   services in the Automation Panel when building services and workflows.
@@ -607,11 +590,11 @@ Section used for detecting other running instances of eNMS.
 
 This section allows configuration of the Redis queue.
 
-- `charset` (default:`"utf-8"`)
-- `db` (default:`0`)
-- `decode_responses` (default:`true`)
-- `port` (default:`6379`)
-- `socket_timeout` (default:`0.1`)
+- `charset` (default:`"utf-8"`).
+- `db` (default:`0`).
+- `decode_responses` (default:`true`).
+- `port` (default:`6379`).
+- `socket_timeout` (default:`0.1`).
 
 #### `requests` section
 
@@ -621,16 +604,16 @@ load on eNMS.
 
 - Pool
 
-  - `pool_maxsize` (default: `10`)
-  - `pool_connections` (default: `100`)
-  - `pool_block` (default: `false`)
+  - `pool_maxsize` (default: `10`).
+  - `pool_connections` (default: `100`).
+  - `pool_block` (default: `false`).
 
 - Retries
 
-  - `total` (default: `2`)
-  - `read` (default: `2`)
-  - `connect` (default: `2`)
-  - `backoff_factor` (default: `0.5`)
+  - `total` (default: `2`).
+  - `read` (default: `2`).
+  - `connect` (default: `2`).
+  - `backoff_factor` (default: `0.5`).
 
 #### `security` section
 
@@ -644,29 +627,30 @@ load on eNMS.
 
 #### `slack` section
 
-- `channel` (default: `""`)
+- `channel` (default: `""`).
 
 #### `ssh` section
 
 - `command` (default: `python3 -m flask run -h 0.0.0.0`): command used to start the SSH server.
-- `port_redirection` (default: `false`)
-- `bypass_key_prompt` (default: `true`)
-- `port` (default: `-1`)
-- `start_port` (default: `9000`)
-- `end_port` (default: `91000`)
+- `credentials` - which credential types to enable for the WebSSH connection feature.
+   
+    - `custom` (default: `true`).
+    - `device` (default: `true`).
+    - `user` (default: `true`).
+ 
+- `port_redirection` (default: `false`).
+- `bypass_key_prompt` (default: `true`).
+- `port` (default: `-1`).
+- `start_port` (default: `9000`).
+- `end_port` (default: `9100`).
 
 #### `tables` section
 
 Configure the refresh rates of a table in the UI in milliseconds. By default, the "Results" page (`run` table) will be refreshed every 5 seconds, and the "Services" and "Tasks" pages every 3 seconds.
 
-- `run` (default: `5000`)
-- `service` (default: `3000`)
-- `task` (default: `3000`)
-
-#### `tacacs` section
-
-- `active` (default: `false`)
-- `address` (default: `""`)
+- `run` (default: `5000`).
+- `service` (default: `3000`).
+- `task` (default: `3000`).
 
 #### `vault` section
 
@@ -674,8 +658,8 @@ For eNMS to use a Vault to store all sensitive data (user and network
 credentials), one must set the `active` variable to `true`, provide an
 address and export:
 
-- `active` (default: `false`)
-- `unseal` (default: `false`) Automatically unseal the Vault
+- `active` (default: `false`).
+- `unseal` (default: `false`) Automatically unseal the Vault.
 
 The keys must be exported as environment variables:
 
@@ -700,12 +684,12 @@ default latitude and longitude of the map can be set here.
 
 Key parameters to note:
 
-- `default` (`"2D"` or `"3D"`)
-- `longitude` (default: `-96.0`)
-- `latitude` (default: `33.0`)
-- `zoom_level` (default: `5`)
-- `tile_layer` (default: `"osm"`)
-- `marker` (default: `"Circle"`)
+- `default` (`"2D"` or `"3D"`).
+- `longitude` (default: `-96.0`).
+- `latitude` (default: `33.0`).
+- `zoom_level` (default: `5`).
+- `tile_layer` (default: `"osm"`).
+- `marker` (default: `"Circle"`).
 
 Key parameters for the network builder:
 
@@ -723,12 +707,12 @@ environment variables so it knows where eNMS is located and what
 credentials to authenticate with:
 
 -   `ENMS_ADDR`: URL of the remote server (example:
-    `"http://192.168.56.102"`)
--   `ENMS_USER`: eNMS login
--   `ENMS_PASSWORD`: eNMS password
+    `"http://192.168.56.102"`).
+-   `ENMS_USER`: eNMS login.
+-   `ENMS_PASSWORD`: eNMS password.
 
 The scheduler is an asynchronous application that must be deployed with
-uvicorn :
+gunicorn :
 
     cd scheduler
     gunicorn scheduler:scheduler --host 0.0.0.0
@@ -740,7 +724,7 @@ Above nginx.conf sample has a section for eNMS Scheduler
 ### enms.gunicorn_scheduler.socket
 
     [Unit]
-    Description=Gunicorn/uvicorn socket for eNMS scheduler
+    Description=Gunicorn socket for eNMS scheduler
     
     [Socket]
     ListenStream=/run/gunicorn/enms.gunicorn_scheduler.socket
@@ -751,10 +735,10 @@ Above nginx.conf sample has a section for eNMS Scheduler
 ### enms.gunicorn_scheduler.service
 
     [Unit]
-    Description=Start eNMS Scheduler service using Gunicorn/Uvicorn
+    Description=Start eNMS Scheduler service using Gunicorn
     Requires=enms.gunicorn_scheduler.socket
     After=network.target
-    After=mariadb.service
+    After=mysqld.service
     
     [Service]
     PermissionsStartOnly=true
@@ -773,7 +757,7 @@ Above nginx.conf sample has a section for eNMS Scheduler
     Environment="GUNICORN_ACCESS_LOG=/home/centos/enms/logs/access_scheduler.log"
     Environment="GUNICORN_LOG_LEVEL=info"
     Environment="DATABASE_URL=mysql://root:PASSWORD@localhost/enms?charset=utf8"
-    ExecStart=/usr/local/bin/gunicorn --pid /run/gunicorn/enms.gunicorn_scheduler.pid --worker-tmp-dir /tmpfs-gunicorn --bind unix:/run/gunicorn/enms.gunicorn_scheduler.socket --chdir /home/centos/enms/scheduler --config /home/centos/enms/scheduler/gunicorn.py scheduler:scheduler
+    ExecStart=/opt/python3-virtualenv/bin/gunicorn --pid /run/gunicorn/enms.gunicorn_scheduler.pid --worker-tmp-dir /tmpfs-gunicorn --bind unix:/run/gunicorn/enms.gunicorn_scheduler.socket --chdir /home/centos/enms/scheduler --config /home/centos/enms/scheduler/gunicorn.py scheduler:scheduler
     ExecReload=/bin/kill -s HUP $MAINPID
     ExecStop=/bin/kill -s TERM $MAINPID
     TimeoutStopSec=60

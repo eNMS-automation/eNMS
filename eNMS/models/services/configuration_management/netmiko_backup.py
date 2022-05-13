@@ -1,5 +1,4 @@
 from datetime import datetime
-from flask_wtf import FlaskForm
 from pathlib import Path
 from re import M, sub
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
@@ -7,7 +6,7 @@ from sqlalchemy.orm import load_only
 from wtforms import FormField
 
 from eNMS.database import db
-from eNMS.forms import NetmikoForm
+from eNMS.forms import NetmikoForm, CommandsForm, ReplacementForm
 from eNMS.fields import (
     BooleanField,
     FieldList,
@@ -100,26 +99,16 @@ class NetmikoBackupService(ConnectionService):
         return {"success": True}
 
 
-class ReplacementForm(FlaskForm):
-    pattern = StringField("Pattern")
-    replace_with = StringField("Replace With")
-
-
-class CommandsForm(FlaskForm):
-    value = StringField("Command")
-    prefix = StringField("Label")
-
-
-class DataBackupForm(NetmikoForm):
+class NetmikoBackupForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_backup_service")
     property = SelectField(
         "Configuration Property to Update",
         choices=list(vs.configuration_properties.items()),
     )
-    local_path = StringField("Local Path", default="network_data")
+    local_path = StringField("Local Path", default="network_data", substitution=True)
     commands = FieldList(FormField(CommandsForm), min_entries=12)
     replacements = FieldList(FormField(ReplacementForm), min_entries=12)
-    add_header = BooleanField("Add header for each ommand", default=True)
+    add_header = BooleanField("Add header for each command", default=True)
     groups = {
         "Target property and commands": {
             "commands": ["property", "local_path", "add_header", "commands"],

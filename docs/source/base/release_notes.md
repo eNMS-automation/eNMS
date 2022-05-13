@@ -32,18 +32,9 @@ Version 4.2.0
 - Remove default_access property, replace with "admin_only" boolean. Impact on migration.
 - Make "run_service" rest api endpoint default to async True
 - Update netmiko and napalm Backup services to load deferred row before updating. Impact on both services.
-  Related commit: d00be21c971ce5251a608b2d436694a9c3427140 (new SQL query with load only in service run function)
 - Remove pathlib from requirements.txt
 - Update workflow algorithm to not add services to priority queue in DxD mode if all are discarded.
-  Related mail exchange: "Wrong number of devices execute"
-  Related commit: c957356afb1ea6044c58627be06b7d9cae448a10
-    +++ b/eNMS/services/workflow/workflow.py
-    @@ -164,7 +164,7 @@ class Workflow(Service):
-    -                if tracking_bfs and not summary[edge_type]:
-    +                if (tracking_bfs or device) and not summary[edge_type]:
 - Update Ansible Service to use custom path in cwd argument of subprocess.check_output.
-  Related commit: 0257279b9b6ea51d247ca0e653362e6d8f65a075
-  Related mail thread: "bug in ansible_playbook.py?"
 - Change default priority to 10 for services. Update of migration files required.
 - Implement Cache Invalidation mechanism so that javascript/css files are reloaded at each release.
   Cache invalidation is activatated by setting "invalidate_cache" to true in settings.json.
@@ -80,38 +71,17 @@ Version 4.2.0
 - Update slack notification service to use newest slack_sdk library (instead of slackclient<2)
 - Make scrapli connection arguments configurable from automation.json / scrapli / connection_args
 
-Tests:
-- Performances (SQL Column function init)
-- Export and re-import of workflows and top-level services
-- SSH Proxy / Jump Server mechanism (+ tie-breaker priority mechanism)
-- Netmiko and Napalm Backup Services, both with built-in properties (configuration, operational_data) and
-  custom properties coming from properties.json (such that "configuration" key is set to True)
-- Test the workflow traversal mechanism for all modes. In particular, tests the case discussed in
-  mail thread "Wrong number of devices execute": all devices discarded. Using priorities to force order should
-  no longer be required in such a case.
-- Tests ansible playbook service with custom path in settings.
-- Tests that static files are cached when settings / invalidate_cache is set to false, and that they are
-  reloaded when it is set to true and the version is updated.
-- Test Unix Command Service admin approval restriction mechanism
-
 Migration:
-- Update all access with new GET / POST endpoints
-- Doc link in settings.json to be updated with custom doc links.
-- Refresh rates in settings.json to be udpated (e.g 10s instead of 3 if RBAC is used)
-- Redis config in settings.json
-- In migration files, replace "default_access: admin" with "admin_only: true"
-- Warn user about REST API run service endpoint new default (True)
-- Update service priority to "current priority + 9" (see migration script in files / script)
-- Update credentials of REST Call services (custom_username, custom_password)
-- Add SSH command in settings.json / ssh section
 
-Documentation update needed for everything, in particular:
-- Redis config in settings.json
-- New option in settings.json: invalidate_cache
-- New options in settings.json: refresh rates
-- New default for Run Service endpoint: asynchronous
-- Default access replaced by "Admin only"
-- Priority default value update
+  - Update all access with new GET / POST endpoints
+  - Doc link in settings.json to be updated with custom doc links.
+  - Refresh rates in settings.json to be udpated (e.g 10s instead of 3 if RBAC is used)
+  - Redis config in settings.json
+  - In migration files, replace "default_access: admin" with "admin_only: true"
+  - Warn user about REST API run service endpoint new default (True)
+  - Update service priority to "current priority + 9" (see migration script in files / script)
+  - Update credentials of REST Call services (custom_username, custom_password)
+  - Add SSH command in settings.json / ssh section
 
 Version 4.1.0
 -------------

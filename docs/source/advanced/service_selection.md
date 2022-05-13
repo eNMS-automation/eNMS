@@ -7,14 +7,13 @@ weaknesses that should be known.
 
 ## Structured Data
 
-In network automation, often we are tasked with interacting with devices
-or device components through interfaces that do not return structured
-data.  Structured data refers to data obtained from the device that is
-easily index-able to its individual elements. In other words, structured
-data is data that does not need to be parsed, whereas unstructured data
-must be parsed to isolate an individual data element. There also exists
-semi-structured data which is structured but still needs some amount of
-parsing to isolate data elements.
+In network automation, devices or device components may have interfaces
+that do not return structured data.  Structured data refers to data obtained
+from the device that is easily index-able to its individual elements. In other
+words, structured data is data that does not need to be parsed, whereas
+unstructured data must be parsed to isolate an individual data element. There
+also exists semi-structured data which is structured but still needs some
+amount of parsing to isolate data elements.
 
 Note that eNMS uses structured data dictionaries internally to pass data
 along the workflow from service to service. So, using eNMS, the user will
@@ -27,7 +26,7 @@ considering which service to use for a particular action in the workflow.
 
 ## Structured Data - Options 
 
-The following image highlights some of the options we have for getting structured data 
+The following image highlights some of the options for getting structured data 
 from services that interact with devices.  In many cases, there is a conversion from 
 the device command output (text) into something that a service or workflow can use 
 to make decisions, generate a report, or send additional device commands.    
@@ -76,8 +75,8 @@ the specific command(s) used.
 For example, Juniper devices can support a pipe operator to convert output to JSON 
 or XML:
 
-- `show interfaces | display json` 
-- `show interfaces | display xml` 
+- `show interfaces | display json`. 
+- `show interfaces | display xml`.
 
 !!! note
 
@@ -122,11 +121,11 @@ Writing a Custom Service that runs several commands and operates on their result
 device type: 
 
 - can reduce the number of duplicated service and/or custom parsing/filtering logic 
-  for complex device interactions
-- can also be a great deal of work to get started
+  for complex device interactions.
+- can also be a great deal of work to get started.
 
 This option is listed for completeness - and internally, it may use things like 
-TextFSM (or TTP)
+TextFSM (or TTP).
 
 ## Using TextFSM 
 
@@ -187,7 +186,7 @@ If you write your own TextFSM templates (i.e., without installing them per above
 the Data Extraction Service is another option to consider.  You can use TextFSM 
 to parse previous command results and extract desired information.
 
-In this example, we have a simple TextFSM template (from the Network-to-Code repository)
+In this example is a simple TextFSM template (from the Network-to-Code repository)
 that shows how the Data Extraction Service works:
 
 ![Data Extraction with TextFSM](../_static/advanced/service_selection/data_extraction_service_textfsm.png)
@@ -279,12 +278,12 @@ results["result"] = {
 
 ### Links 
 
-- [Python package](https://pypi.org/project/textfsm/) 
-- [Python documentation](https://pyneng.readthedocs.io/en/latest/book/21_textfsm/README.html)
-- [TextFSM source code](https://github.com/google/textfsm) 
+- [Python package](https://pypi.org/project/textfsm/). 
+- [Python documentation](https://pyneng.readthedocs.io/en/latest/book/21_textfsm/README.html).
+- [TextFSM source code](https://github.com/google/textfsm). 
 - Network-to-Code TextFSM templates:
-  - [GitHub Repository](https://github.com/networktocode/ntc-templates) 	
-  - [Index (template list)](https://github.com/networktocode/ntc-templates/blob/master/ntc_templates/templates/index)
+  - [GitHub Repository](https://github.com/networktocode/ntc-templates). 	
+  - [Index (template list)](https://github.com/networktocode/ntc-templates/blob/master/ntc_templates/templates/index).
 
 ### Example TextFSM template 
 
@@ -310,12 +309,12 @@ parser.py your_textfsm_template.txt command_output_to_parse.txt
 
 ### Links 
 
-- [Main documentation](https://napalm.readthedocs.io/en/latest/) 
+- [Main documentation](https://napalm.readthedocs.io/en/latest/).
 - [Supported Core drivers](https://napalm.readthedocs.io/en/latest/index.html#supported-network-operating-systems)
-  (Arista EOS; Cisco IOS, IOS-XR, NX-OS, Juniper JunOS)
-- [Getters support matrix](https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix)
-- [NAPALM optional arguments](https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
-- [NAPALM Community drivers](https://github.com/orgs/napalm-automation-community)
+  (Arista EOS; Cisco IOS, IOS-XR, NX-OS, Juniper JunOS).
+- [Getters support matrix](https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix).
+- [NAPALM optional arguments](https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments).
+- [NAPALM Community drivers](https://github.com/orgs/napalm-automation-community).
 
 ## More information: TTP 
 
@@ -324,10 +323,10 @@ templates to parse command output to produce structured data.
 
 ### Links 
 
-- [Python package](https://pypi.org/project/ttp/) 
-- [Documentation](https://ttp.readthedocs.io/en/latest/) 
-- [Samples](https://github.com/dmulyalin/ttp_templates) (just a few)
-- [Slack channel](https://networktocode.slack.com/archives/C018HMJQECB)
+- [Python package](https://pypi.org/project/ttp/). 
+- [Documentation](https://ttp.readthedocs.io/en/latest/). 
+- [Samples](https://github.com/dmulyalin/ttp_templates). (just a few)
+- [Slack channel](https://networktocode.slack.com/archives/C018HMJQECB).
 
 ### Example TTP 
 
@@ -351,22 +350,22 @@ ttp --data ./show_system_processes_summary.txt --template ttp_test.txt --logging
 
 Links 
 
-- [ncclient Documentation](https://ncclient.readthedocs.io/en/latest/) 
-- [ncclient GitHub](https://github.com/ncclient/ncclient)  
+- [ncclient Documentation](https://ncclient.readthedocs.io/en/latest/). 
+- [ncclient GitHub](https://github.com/ncclient/ncclient).  
  
 ## More information: Scrapli
 
 Links 
 
-- [Scrapli documentation](https://carlmontanari.github.io/scrapli/)
+- [Scrapli documentation](https://carlmontanari.github.io/scrapli/).
 
 
 ## More information: Netmiko 
 
 Links
 
-- [Documentation](https://ktbyers.github.io/netmiko/#api-documentation)
-- [Supported Platforms](https://ktbyers.github.io/netmiko/PLATFORMS.html) 
-- [GitHub](https://ktbyers.github.io/netmiko)
+- [Documentation](https://ktbyers.github.io/netmiko/#api-documentation).
+- [Supported Platforms](https://ktbyers.github.io/netmiko/PLATFORMS.html). 
+- [GitHub](https://ktbyers.github.io/netmiko).
 
 

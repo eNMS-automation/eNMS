@@ -1,8 +1,3 @@
----
-subtitle: Tasks
-title: Scheduling
----
-
 # Scheduling
 
 The ability to schedule eNMS services to run without user input
@@ -16,7 +11,7 @@ the task is repeated.
 Instead of having to run services on-demand, they can be scheduled by
 creating a task from `Automation / Scheduling`. Depending on what one would like 
 to do with a scheduled task, the user may need to provide data for several parameters.
-Below are all of the input fields that can be filled, with brief descriptions of 
+Below are all the input fields that can be filled, with brief descriptions of 
 what they do:
 
 | Field | Required? | Description |
@@ -87,27 +82,15 @@ of time left until then.
 ### Timezone Considerations
 
 When specifying a start time, one must take into account the server's
-time zone configuration. Normally, this is in UTC (Coordinated Universal
-Time), but for ease of use the current server time will always be displayed in 
-the bottom-left corner of eNMS in the navigation panel:
+time zone configuration, as it may not match the user's local time zone. 
+Often in network administration, the server will be set to UTC (Coordinated
+Universal Time), but for verification, the current server time will always be
+displayed in the bottom-left corner of eNMS in the navigation panel:
 
 ![](../_static/automation/scheduling/nav_panel_time.png)
 
-To run a scheduled task at a specific local time, the start time
-OR crontab expression will need to be adjusted depending on the local
-time zone - and Daylight Savings Time if applicable:
-
-Time zone conversion - CST/CDT
-
-* Central Standard Time (CST) is UTC-6 (Fall back)
-* Central Daylight Time (CDT) is UTC-5 (Spring forward)
-
-Example
-
-* Reporting service: every 8:00 AM on Monday/Wednesday/Friday
-* Crontab - hour value is either **13:00 or 14:00** depending on the time of the year!
-
-    `0 13 * * 1,3,5`
+To run a scheduled task at a specific local time, ensure that the start time
+or crontab expression is adjusted to the server time.
 
 ## Task Calendar
 

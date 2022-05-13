@@ -1,19 +1,14 @@
----
-subtitle: For developers
-title: Contributing
----
-
 # Contributing
 
 ## Environment
 
 eNMS uses:
 
--   Black for python code formatting
--   Flake8 to make sure that the python code is PEP8-compliant
--   Prettier for javascript code formatting
+-   Black for python code formatting.
+-   Flake8 to make sure that the python code is PEP8-compliant.
+-   Prettier for javascript code formatting.
 -   Eslint to make sure the javascript code is compliant with google
-    standards for javascript
+    standards for javascript.
 
 There is a dedicated `requirements_dev.txt` file to install these python
 libraries:
@@ -58,12 +53,12 @@ the docs like so:
 mkdocs html
 ```
 
-If mkdocs is already initialized in one's environment, the following command will 
-launch a local documentation server:
+If mkdocs is already initialized in one's environment, the following command
+will launch a local documentation server:
 
 ```
 mkdocs serve
 ```
 
-This server will automatically update & refresh whenever any filesystem changes
-are made in the `enms/docs` folder or `mkdocs.yml`
+This server will automatically update & refresh whenever any filesystem
+changes are made in the `enms/docs` folder or `mkdocs.yml`

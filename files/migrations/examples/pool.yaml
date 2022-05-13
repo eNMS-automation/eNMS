@@ -1294,8 +1294,7 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: [Parameterized Targets, '[(R) Operational Data Backup Service]
-      Retrieve Operational Data', Parameterized Run with a Superworkflow]
+  target_services: [Parameterized Targets, Parameterized Run with a Superworkflow]
   tasks: []
   type: pool
   user_description: ''

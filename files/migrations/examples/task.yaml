@@ -11,7 +11,7 @@
   name: Configuration Poller
   pools: []
   scheduling_mode: standard
-  service: (R) Operational Data Backup Service
+  service: (R) Configuration Properties Backup Services
   start_date: 09/10/2019 21:17:13
   type: task
 - admin_only: true

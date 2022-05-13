@@ -134,10 +134,10 @@
     Separate Failure - Success Paths] 2021-04-24 08:58:40.196401', source: '[Shared]
     Example Service (does nothing)', subtype: success, type: workflow_edge, workflow: Fork
     based on Success Value}
-- {color: green, destination: '[(R) Operational Data Backup Service] Configuration
+- {color: green, destination: '[(R) Configuration Properties Backup Services] Configuration
     Backup (NAPALM)', label: success, name: '[Regression Workflow: Operational Data
     Backup (admin)] 2021-04-24 08:58:40.196417', source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: (R) Operational Data Backup Service}
+  type: workflow_edge, workflow: (R) Configuration Properties Backup Services}
 - {color: green, destination: '[Shared] Example Service (does nothing)', label: success,
   name: '[Regression Workflow: Advanced Multiprocessing (admin)] 2021-04-24 08:58:40.196549',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: Multiprocessing
@@ -358,29 +358,29 @@
     set_var, get_result functions] 2021-04-24 08:58:40.197909', source: '[Functions:
     get_var, set_var, and get_result] Show vrf with payload helper', subtype: success,
   type: workflow_edge, workflow: 'Functions: get_var, set_var, and get_result'}
-- {color: green, destination: '[(R) Operational Data Backup Service] Get Configuration',
-  label: success, name: '[Regression Workflow: Operational Data Backup (admin)] 2021-04-24
-    08:58:40.197930', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: (R) Operational Data Backup Service}
-- {color: green, destination: '[(R) Operational Data Backup Service] Retrieve Operational
-    Data', label: success, name: '[Regression Workflow: Operational Data Backup (admin)]
-    2021-04-24 08:58:40.197947', source: '[(R) Operational Data Backup Service] Get
-    Configuration', subtype: success, type: workflow_edge, workflow: (R) Operational
-    Data Backup Service}
-- {color: green, destination: '[(R) Operational Data Backup Service] Push Configurations
-    to Git', label: success, name: '[Regression Workflow: Operational Data Backup
-    (admin)] 2021-04-24 08:58:40.197962', source: '[(R) Operational Data Backup Service]
-    Retrieve Operational Data', subtype: success, type: workflow_edge, workflow: (R)
-    Operational Data Backup Service}
-- {color: green, destination: '[(R) Operational Data Backup Service] Push Configurations
-    to Git', label: success, name: '[Regression Workflow: Operational Data Backup
-    (admin)] 2021-04-24 08:58:40.197978', source: '[(R) Operational Data Backup Service]
-    Configuration Backup (NAPALM)', subtype: success, type: workflow_edge, workflow: (R)
-    Operational Data Backup Service}
+- {color: green, destination: '[(R) Configuration Properties Backup Services] Get
+    Configuration with Netmiko', label: success, name: '[Regression Workflow: Operational
+    Data Backup (admin)] 2021-04-24 08:58:40.197930', source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: (R) Configuration Properties Backup Services}
+- {color: green, destination: '[(R) Configuration Properties Backup Services] Get
+    Operational Data with Netmiko', label: success, name: '[Regression Workflow: Operational
+    Data Backup (admin)] 2021-04-24 08:58:40.197947', source: '[(R) Configuration
+    Properties Backup Services] Get Configuration with Netmiko', subtype: success,
+  type: workflow_edge, workflow: (R) Configuration Properties Backup Services}
+- {color: green, destination: '[(R) Configuration Properties Backup Services] Push
+    Configurations to Git', label: success, name: '[Regression Workflow: Operational
+    Data Backup (admin)] 2021-04-24 08:58:40.197962', source: '[(R) Configuration
+    Properties Backup Services] Get Operational Data with Netmiko', subtype: success,
+  type: workflow_edge, workflow: (R) Configuration Properties Backup Services}
+- {color: green, destination: '[(R) Configuration Properties Backup Services] Push
+    Configurations to Git', label: success, name: '[Regression Workflow: Operational
+    Data Backup (admin)] 2021-04-24 08:58:40.197978', source: '[(R) Configuration
+    Properties Backup Services] Configuration Backup (NAPALM)', subtype: success,
+  type: workflow_edge, workflow: (R) Configuration Properties Backup Services}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Operational Data Backup (admin)] 2021-04-24 08:58:40.197993', source: '[(R) Operational
-    Data Backup Service] Push Configurations to Git', subtype: success, type: workflow_edge,
-  workflow: (R) Operational Data Backup Service}
+    Operational Data Backup (admin)] 2021-04-24 08:58:40.197993', source: '[(R) Configuration
+    Properties Backup Services] Push Configurations to Git', subtype: success, type: workflow_edge,
+  workflow: (R) Configuration Properties Backup Services}
 - {color: green, destination: '[Specific Superworkflow] Post Placeholder Processing',
   label: success, name: '[Regression Workflow: Superworkflow] 2021-04-24 08:58:40.198008',
   source: '[Shared] Placeholder', subtype: success, type: workflow_edge, workflow: Specific
@@ -1502,3 +1502,17 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2022-04-12 04:27:12.835433',
   source: '[Slack and Mattermost Notifications] Notification in general, once', subtype: success,
   type: workflow_edge, workflow: Slack and Mattermost Notifications}
+- {color: green, destination: '[(R) Configuration Properties Backup Services] Get
+    Configuration with Scrapli', label: success, name: '2022-05-13 09:44:08.426538',
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: (R) Configuration
+    Properties Backup Services}
+- {color: green, destination: '[(R) Configuration Properties Backup Services] Get
+    Operational Data with Scrapli', label: success, name: '2022-05-13 09:44:09.299605',
+  source: '[(R) Configuration Properties Backup Services] Get Configuration with Scrapli',
+  subtype: success, type: workflow_edge, workflow: (R) Configuration Properties Backup
+    Services}
+- {color: green, destination: '[(R) Configuration Properties Backup Services] Push
+    Configurations to Git', label: success, name: '2022-05-13 09:44:10.372252', source: '[(R)
+    Configuration Properties Backup Services] Get Operational Data with Scrapli',
+  subtype: success, type: workflow_edge, workflow: (R) Configuration Properties Backup
+    Services}

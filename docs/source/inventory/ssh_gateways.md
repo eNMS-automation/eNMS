@@ -17,7 +17,8 @@ device types.
 ![create_gateway](../_static/inventory/ssh_gateway/gateway_create.png)
 
 In the case where multiple gateways are needed a priority mechanism may be used to 
-control the order in which the gateways should be accessed.
+control the order in which the gateways should be accessed. The highest priority
+number wins precedence. 
 
 ![gateway_priorty](../_static/inventory/ssh_gateway/gateway_priority.png)
 

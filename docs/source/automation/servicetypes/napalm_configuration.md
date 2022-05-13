@@ -6,18 +6,18 @@ Uses Napalm to configure a device.
 
 Configuration parameters for creating this service instance:
 
-- All [Napalm Service Common Parameters](napalm_common.md) 
+- All [Napalm Service Common Parameters](napalm_common.md). 
 
 - `Action` There are two types of operations:
 
     - `Load merge`: add the service configuration to the existing configuration
-       of the target
+       of the target.
 
     - `Load replace`: replace the configuration of the target with the service
-       configuration
+       configuration.
 
 - `Content` Paste a configuration block of text here for applying to
-  the target device(s)
+  the target device(s).
 
 !!! note
 

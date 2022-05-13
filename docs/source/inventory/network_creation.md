@@ -3,7 +3,7 @@ title: Network Creation
 ---
 # Network Creation
 
-The network topology within the tool originates from the Device and Link
+The network topology within eNMS originates from the Device and Link
 inventory that gets loaded. There are several ways below to add this
 information into eNMS. Having accurate device and link inventory data
 available to the various processing features of eNMS is critically
@@ -52,9 +52,9 @@ properly.
 Another way to create the network topology is to query an external API. The
 following are supported:
 
-- OpenNMS
-- Netbox
-- LibreNMS
+- OpenNMS.
+- Netbox.
+- LibreNMS.
 
 This is accomplished by creating and running a `Topology Import` service from
 the `Automation -> Services` page. Step 2 of the service allows you to select
@@ -63,11 +63,10 @@ corresponding section of the form.
 
 ![Network Creation via Topology Import](../_static/inventory/creation/topology_import.png)
 
-## Externally driving the Tool's own REST API
+## Externally driving the REST API
 
-Inventory can also be created by using an external script or program to call the
-tool's own REST API to add Devices and Links. This is 
-particularly useful if another system is used to maintain the network source
-of truth.  It can audit and add/delete Devices and Links on demand from the
-tool's inventory. See the documentation section on the REST API for more 
-information.
+Inventory can also be created by using an external script or program to call
+the REST API to add Devices and Links. This is particularly useful if another
+system is used to maintain the network source of truth.  It can audit and
+add/delete Devices and Links on demand from the inventory. See the documentation
+section on the REST API for more information.

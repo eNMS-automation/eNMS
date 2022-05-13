@@ -46,9 +46,8 @@ current status information.
 ## Device and Link Management  
 
 Devices provide one or more interfaces to allow remote management from eNMS. 
-Through the services and workflows that facilitate that device interaction, they become 
-units of automation. Links establish relationships between devices and can be used by
-services and workflows to control traversal through the automation. 
+Services and workflows orchestrate the device interactions, and links control 
+the traversal of interactions through the automation.
 
 Additionally, eNMS provides a Web-based SSH session feature to facilitate manual device 
 interactions and includes security and logging features.
@@ -58,13 +57,13 @@ interactions and includes security and logging features.
 eNMS can be used as a network device configuration backup tool and replace 
 platforms such as Oxidized/Rancid.  It supports the following features:
 
--   Communication over standard protocols like SSH, REST, or NETCONF
+-   Communication over standard protocols like SSH, REST, or NETCONF.
 -   Poll network elements and store the latest configuration in the database.
 -   Search for any text or regular-expression in all configurations.
 -   Download device configuration to a local text file.
 -   Use the REST API support to return a specified device's configuration.
--   Export all configurations to a remote Git repository (e.g. Gitlab)
--   View git-style differences between various revisions of a configuration
+-   Export all configurations to a remote Git repository (e.g. Gitlab).
+-   View git-style differences between various revisions of a configuration.
 
 
 ![Configuration Search](../_static/base/configuration_search.png)
@@ -81,12 +80,6 @@ regardless of active status.
 
 ![Calendar](../_static/base/calendar.png)
 *Task Calendar*
-
-!!! note
-
-    Scheduled events are displayed in UTC on the calendar. The current time in
-    UTC is always visible at the bottom of the application's left-side navigation
-    panel.
 
 ![Calendar](../_static/base/sched_tasks_tabular.png)
 *Scheduling Task Table* 

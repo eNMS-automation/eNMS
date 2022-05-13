@@ -17,16 +17,15 @@ accessed using the dropdown button on the right side of the text box.
 The different search/filter options are available through the `Filter`
 dropdown list.  The options available are:
 
-- `Inclusion`: (**default**) The records displayed are based on alpha-numeric
-characters entered into the text box.  Records where the column data includes 
-the characters entered will be shown in the table.  This option is not 
-case-sensitive.
+- `Inclusion`: (**default**) Records where the column data includes 
+  the characters entered will be shown in the table.  This option is not 
+  case-sensitive.
 - `Equality`: This option will display records where the column data is an exact 
-match for the characters entered.  This option is not case sensitive.
+  match for the characters entered.  This option is not case-sensitive.
 - `Regular Expression`: The records displayed are those where the column 
-data matches the regular expression entered.
+  data matches the regular expression entered.
 - `Empty`: The records displayed are those where the column data is empty or 
-null.
+  null.
 
 The options also include an `Invert` check box.  When this box is checked, the
 records displayed include records where the column data does **not** match
@@ -64,16 +63,12 @@ Based on the `Property` identified in the first column, enter an appropriate
 show:
 
 - `Union`: Includes results where one or more of the criteria is met.  If two
-device names are provide this selection will display results where either device
-is present.
-- `Intersection`: Includes results where all criteria is met.  If two link names
-are provided it will return results that contain both links.
+  device names are provide this selection will display results where either 
+  device is present.
+- `Intersection`: Includes results where all criteria is met.  If two device
+  names are provided it will return results that contain both devices.
 - `Empty`: Includes results where none of the criteria is met.  If two device
-names are provided and this option is selected, the results will be where 
-neither of the devices are present.
+  names are provided and this option is selected, the results will be where 
+  neither of the devices are present.
 
-!!! Note
-	Searches based on regular expressions only works if the database used in the
-	back end has support for them. For example, PostgreSQL and MySQL support 
-	regular expressions, but SQLite does not.
 

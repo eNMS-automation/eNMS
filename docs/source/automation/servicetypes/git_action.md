@@ -4,19 +4,19 @@ Perform a GIT action on a set of files used or created by a workflow.
 
 - `Actions`: Select between:
 
-    - `Clone`
-    - `Shallow Clone`
-    - `Do 'git add' and commit`
-    - `Pull`
-    - `Push`
+    - `Clone`.
+    - `Shallow Clone`.
+    - `Do 'git add' and commit`.
+    - `Pull`.
+    - `Push`.
 
-- `Path to Local Git Repository`
+- `Path to Local Git Repository`.
 
-- `Path is relative to eNMS folder`
+- `Path is relative to eNMS folder`.
 
-- `Path to Remote Git Repository`
+- `Path to Remote Git Repository`.
 
-- `Commit Message`
+- `Commit Message`.
 
 !!! note
     

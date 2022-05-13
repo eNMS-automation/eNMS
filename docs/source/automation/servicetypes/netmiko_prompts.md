@@ -7,20 +7,20 @@ send for it.
 
 Configuration parameters for creating this service instance:
 
-- All [Netmiko Service Common Parameters](netmiko_common.md)
--   `Command` CLI command to send to the device
+- All [Netmiko Service Common Parameters](netmiko_common.md).
+-   `Command` CLI command to send to the device.
 -   `Confirmation1` Regular expression to match first expected
-    confirmation question prompted by the device
+    confirmation question prompted by the device.
 -   `Response1` Response to first confirmation question prompted by the
-    device
+    device.
 -   `Confirmation2` Regular expression to match second expected
-    confirmation question prompted by the device
+    confirmation question prompted by the device.
 -   `Response2` Response to second confirmation question prompted by the
-    device
+    device.
 -   `Confirmation3` Regular expression to match third expected
-    confirmation question prompted by the device
+    confirmation question prompted by the device.
 -   `Response3` Response to third confirmation question prompted by the
-    device
+    device.
 
 !!! note
 

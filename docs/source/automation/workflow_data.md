@@ -1,32 +1,6 @@
 
 ## Transfer of Data between Services
 
-### Retrieving Links and neighboring Devices: `get_neighbors()`
-
-The user can retrieve the list of links to and from the target device
-as well as the neighboring devices at the ends of those links with the
-`device.get_neighbors()` function. The function requires a mandatory
-parameter `device` or `link` and optional parameters for the 
-`direction=source` or `direction=destionation` as well as any of the parameters
-of the Link object.
-
-Examples:
-
-- `device.get_neighbors("device")`
-- `device.get_neighbors("link")`
-- `device.get_neighbors("device", direction="source"))`
-- `device.get_neighbors("link", direction="source"))`
-- `device.get_neighbors("device", direction="destination"))`
-- `device.get_neighbors("link", direction="destination"))`
-- `device.get_neighbors("device", model="10G"))`
-- `device.get_neighbors("link", model="400G"))`
-- `device.get_neighbors("device", direction="source", model="40G"))`
-- `device.get_neighbors("link", direction="destination", model="10G"))`
-
-The `device.get_neighbors()` function works everywhere that the target device
-is defined and is dependent on the run method selected (see `Run Method` above
-and in the Services section.
-
 ### Using the Result of a Previous Service: `get_result()`
 
 During a service's execution, the user can have access to the results of
@@ -42,7 +16,7 @@ the service used during execution.
 Examples:
 
 - `get_result("get_facts")` Get the top-level result for the service
-  `get_facts`
+  `get_facts`.
 - `get_result("get_interfaces", device="Austin")` Get the result of
   the device `Austin` for the `get_interfaces` service.
 - `get_result("get_interfaces", device=device.name)` Get the result of
@@ -84,6 +58,32 @@ Examples:
     get_var("iteration_simple", section="pools")
     set_var("iteration_device", devices, section="pools", device=device.name)
     get_var("iteration_device", section="pools", device=device.name)
+
+### Retrieving Links and neighboring Devices: `get_neighbors()`
+
+The user can retrieve the list of links to and from the target device
+as well as the neighboring devices at the ends of those links with the
+`device.get_neighbors()` function. The function requires a mandatory
+parameter `device` or `link` and optional parameters for the 
+`direction=source` or `direction=destionation` as well as any of the parameters
+of the Link object.
+
+Examples:
+
+- `device.get_neighbors("device")`.
+- `device.get_neighbors("link")`.
+- `device.get_neighbors("device", direction="source"))`.
+- `device.get_neighbors("link", direction="source"))`.
+- `device.get_neighbors("device", direction="destination"))`.
+- `device.get_neighbors("link", direction="destination"))`.
+- `device.get_neighbors("device", model="10G"))`.
+- `device.get_neighbors("link", model="400G"))`.
+- `device.get_neighbors("device", direction="source", model="40G"))`.
+- `device.get_neighbors("link", direction="destination", model="10G"))`.
+
+The `device.get_neighbors()` function works everywhere that the target device
+is defined and is dependent on the run method selected (see `Run Method` above
+and in the Services section.
 
 ### Retrieve a Credential from the Vault: `get_credential()`
 

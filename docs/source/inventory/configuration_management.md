@@ -2,20 +2,20 @@
 
 ## Overview 
 
-eNMS can be used as a device configuration backup tool, like Oxidized/RANCID, with the 
-following features:
+eNMS can be used as a device configuration backup utility, like Oxidized/RANCID,
+with the following features:
 
 -   Poll network devices and store the latest configuration in the
-    database
+    database.
 -   Store any operational data that can be retrieved from the device
-    CLI (e.g `show version`, `get facts` etc.)
--   Search for any text or regular-expression in all configurations
--   Download device configuration to a local text file
+    CLI (e.g `show version`, `get facts` etc.).
+-   Search for any text or regular-expression in all configurations.
+-   Download device configuration to a local text file.
 -   Use the REST API support to return a specified device's
-    configuration
--   Export all configurations to a remote Git repository (e.g. Gitlab)
+    configuration.
+-   Export all configurations to a remote Git repository (e.g. Gitlab).
 -   View git-style differences between various revisions of a
-    configuration
+    configuration.
 
 ## Search and display the configuration
 

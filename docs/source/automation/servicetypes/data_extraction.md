@@ -12,19 +12,19 @@ Configuration parameters for creating this service instance:
 
 - `Post Processing`: choose the type of post-processing: 
 
-    - `Use Value as Extracted`
-    - `Apply Regular Expression (findall)`
-    - `Apply TextFSM Template`
+    - `Use Value as Extracted`.
+    - `Apply Regular Expression (findall)`.
+    - `Apply TextFSM Template`.
     
 - `Regular Expression/ TestFSM Template Text`: regular expression or
   TextFSM template, depending on the value of the "Post Processing". 
 
 - `Operation` Choose the operation type: 
 
-    - `Set/Replace`: Set the variable value
-    - `Append to a list`: Append the value to an existing list
-    - `Extend List`: Append each value to an existing list
-    - `Update dictionary`: Update each key/value into an existing dictionary
+    - `Set/Replace`: Set the variable value.
+    - `Append to a list`: Append the value to an existing list.
+    - `Extend List`: Append each value to an existing list.
+    - `Update dictionary`: Update each key/value into an existing dictionary.
     
 !!! note
     The above list and dictionary operations allow for accumulated results

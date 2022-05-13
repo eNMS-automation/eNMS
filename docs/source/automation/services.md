@@ -32,16 +32,16 @@ duplicated, deleted, and existing services run.
 The Service Management Panel has a number of controls at the top for
 Filtering and Bulk operations:
 
--  `Columns` Selector - Choose which columns to display in the table
+-  `Columns` Selector - Choose which columns to display in the table.
 -  `Display Services hierarchically` (using hyperlinks in the scope of
-   the workflow that they are contained in) or Display All Services
--  `Refresh` the Table
--  `Advanced Search:` for complex filtering of the table
--  `Clear Search` criteria
--  `Copy the Selection` of currently displayed Services to the clipboard
+   the workflow that they are contained in) or Display All Services.
+-  `Refresh` the Table.
+-  `Advanced Search:` for complex filtering of the table.
+-  `Clear Search` criteria.
+-  `Copy the Selection` of currently displayed Services to the clipboard.
 -  `Back navigation and Forward navigation`: For drilling into nested
    workflows with subworkflows and back out.
--  `New` / Create Service with Service Type pull-down Selector: This opens
+-  `New`: Create Service with Service Type pull-down Selector: This opens
    the Service Editor Panel discussed below with a new instance of the 
    selected Service Type.
 -  `Import Service`: Opens a panel to allow drag and drop of service
@@ -50,11 +50,9 @@ Filtering and Bulk operations:
    
 !!! note
     When importing a workflow .tgz file from another instance of eNMS, and
-    that workflow already exists on this instance, first remove all of the
-    services and edges from the existing (destination) workflow. Or, delete
-    the existing workflow altogether.  This will prevent eNMS from merging
-    the services and edges from the two workflows, which could result in an
-    unintended workflow graph.
+    that workflow already exists on this instance, first delete the existing
+    workflow.  This will prevent eNMS from merging the services and edges from
+    the two workflows, which could result in an unintended workflow graph.
 
 !!! note
     Do not attempt to import a workflow .tgz file from an instance of eNMS
@@ -78,8 +76,8 @@ Below the top button bar are the Quick Filter controls for filtering the table.
 Each Service listed in the table has its own button bar on the right that
 includes:
 
--  `View Logs`: Opens the Logs Viewer
--  `View Results`: Opens the Results Viewer
+-  `View Logs`: View the service logs.
+-  `View Results`: View the service results.
 -  `Edit Service`: Opens the Service Editor Panel with default parameters when
    creating a new service and with saved service parameters when editing an
    existing service.
@@ -87,7 +85,7 @@ includes:
    duplicated to the original service; create a new Service Name to complete.
 -  `Export Service`: Downloads that Service to the browser in a .tgz file
    containing a YAML file representation of the service profile. 
--  `Run Service`: with the saved parameters inside the Service
+-  `Run Service`: with the saved parameters inside the Service.
 -  `Parameterized Run`: Run the service after soliciting input fields from the
    user. Input field selection is controlled by the selection of parameters
    in the Step 1 Service Panel Editor.
@@ -118,13 +116,13 @@ includes:
 
 Services can be run from the following locations:
 
-- `Automation -> Services` table `Run` button beside each service
+- `Automation -> Services` table `Run` button beside each service.
 - `Automation -> Workflow Builder` button bar to `Run` or `Parameterized Run` 
   the entire workflow, or right mouse click menu `Run` or `Parameterized Run`.
 - `Automation -> Scheduling`: Activated services will run when their scheduled
   time arrives.
 - `Visualization`:  A service can be selected to run on the filtered
-  list of devices shown - for both the `Geographic View` and the `Network Builder`
+  list of devices shown - for both the `Geographic View` and the `Network Builder`.
 - `Inventory` Devices and Pools tables: A service can be selected to run
   on a device, all filtered devices, a pool, or the filtered pools in the table.
 - Using the `REST API`: the same flexibility provided by the UI is also available 
@@ -136,7 +134,7 @@ There are two types of runs:
 - Parameterized run: A window is displayed with select properties to be 
   provided by the user without saving those properties inside the service.
   Properties selected for display in the parameterized run form are controlled
-  in the `Step 1: Main Parameters` section of the `Service Editor Panel` 
+  in the `Step 1: Main Parameters` section of the `Service Editor Panel`. 
 
 ## Inspecting Results
 
@@ -150,14 +148,14 @@ subsequent sections starting with attempt2.
 
 Results can be viewed in the following locations:
 
-- `Automation -> Results`: Shows the list of all results for the current user
-- `Automation -> Services`: See the `Results` button on the button bar
+- `Automation -> Results`: Shows the list of all results.
+- `Automation -> Services`: See the `Results` button on the button bar.
 - `Automation -> Workflow Builder`:
 
     - See the `Results` button on the button bar. 
     - The right mouse click menu has a `Results` option for the entire workflow
       or for a particular service depending on click location.
-    - The `Result Tree` button opens a tree viewer panel of service results,
+    - The `Result Tree` button opens a tree view panel of service results,
       each with a `Results` button, as well as an `All Results` button that 
       opens the results view table for all runtime results.
     - The `Result Comparison` button opens a filterable list of service
@@ -190,13 +188,13 @@ Results can be viewed in the following locations:
 ## Inspecting Logs
 
 Viewing device and service Logs is available at all the above 
-same results locations. The Log Viewer automatically pops up when a service
+same results locations. The Log view panel automatically pops up when a service
 or workflow is manually initiated via the Services Management table or via
 Workflow Builder, and the log window automatically scroll as logs occur.
 Logs for scheduled tasks or REST API initiated automation
-jobs produce logs, they but do not cause the Log Viewer panel to open.
+jobs produce logs, they but do not cause the Log view panel to open.
 
-The Log Viewer allows for the selection of a historical runtime to view logs
+The Log view panel allows for the selection of a historical runtime to view logs
 for, and the panel has a `Download Logs` button to download the text logs to
 the user's browser.
 

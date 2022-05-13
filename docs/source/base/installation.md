@@ -4,10 +4,6 @@ eNMS is a Flask web application designed to run on a **Unix server**
 with Python **3.6+**. The first section below describes how to get eNMS up
 and running quickly in demo mode to help in understanding what it is.  The
 following sections give details for setting up a production environment.
-
-!!! note 
-
-    While Python 3.6+ is supported, using Python 3.9 or above is recommended. 
     
 ## First steps
 
@@ -385,9 +381,9 @@ logger destinations as needed for workflows.
 By default, the two loggers are configured:
 
 -   The default logger has handlers for sending logs to the stdout
-    console as well as a rotating log file `logs/enms.log`
+    console as well as a rotating log file `logs/enms.log`.
 -   A security logger captures logs for: User A ran Service/Workflow
-    B on Devices \[C,D,E\...\] to log file `logs/security.log`
+    B on Devices \[C,D,E\...\] to log file `logs/security.log`.
 
 And these can be reconfigured here to forward through syslog to remote
 collection if desired. This can also be used as a means to send workflow
@@ -399,9 +395,9 @@ levels for the various libraries used by eNMS.
 
 With multiple gunicorn workers, please consider:
 
-- Using `Python WatchedFileHandler` instead of the `RotatingFileHandler`
+- Using `Python WatchedFileHandler` instead of the `RotatingFileHandler`.
 - Configuring the LINUX `logrotate` utility to perform the desired log
-  rotation
+  rotation.
 
 Example logging.json that allows for logging to a time series database in the
 workflow's post-processing section or via python snippet service:
@@ -479,14 +475,14 @@ The `setup/properties.json` file includes:
 
 1. Allowing for additional custom properties to be defined in eNMS for
 devices and links. In this way, eNMS device inventory can be extended to
-include additional columns/fields
+include additional columns/fields.
 2. Allowing for additional custom parameters to be added to services
- and workflows
+ and workflows.
 3. Controlling which parameters and widgets can be seen from the
- Dashboard
+ Dashboard.
 4. Controlling which column/field properties are visible in the
  tables for device and link inventory, configuration, pools, as
- well as the service, results, and task browsers
+ well as the service, results, and task browsers.
 5. Pull-down choices for `Category`, `Model`, `Operating System`, and `Vendor`. 
 
 For examples, please see [Custom Properties](../advanced/customization/#custom-properties)
@@ -511,7 +507,7 @@ back to settings.json file` is selected.
     provide a link back to the application, which is the case with webssh
     and mail notifications. When left empty, eNMS will try to guess the
     URL. This might not work consistently depending on the user's environment
-    (nginx configuration, proxy, ...)
+    (nginx configuration, proxy, ...).
 -   `config_mode` (default: `"debug"`) Must be set to `"debug"` or
     `"production"`.
 -   `documentation_url` (default:
@@ -522,10 +518,10 @@ back to settings.json file` is selected.
     system for device configurations: this variable is the address of
     the remote git repository where eNMS will push all device
     configurations.
--   `ip_address`: IP address of this instance of the server
+-   `ip_address`: IP address of this instance of the server.
 -   `plugin_path`: (default: `"eNMS/plugins"`) location of eNMS plugin
-    extensions and customizations
--   `session_timeout_minutes`: (default: `90`)
+    extensions and customizations.
+-   `session_timeout_minutes`: (default: `90`).
 -   `startup_migration` (default: `"examples"`) Name of the migration to
     load when eNMS starts for the first time.
     -   By default, when eNMS loads for the first time, it will create a
@@ -546,15 +542,15 @@ ldap active directory system, etc.
 
 #### `automation` section
 
-- `max_process` limit on multiprocessing (default: 15)
+- `max_process` limit on multiprocessing (default: 15).
 
 #### `cluster` section
 Section used for detecting other running instances of eNMS.
-- `active` (default: `false`)
-- `id` (default: `true`)
-- `scan_subnet` (default: `"192.168.105.0/24"`)
-- `scan_protocol` (default: `"http"`)
-- `scan_timeout` (default: `0.05`)
+- `active` (default: `false`).
+- `id` (default: `true`).
+- `scan_subnet` (default: `"192.168.105.0/24"`).
+- `scan_protocol` (default: `"http"`).
+- `scan_timeout` (default: `0.05`).
 
 #### `docs` section
 
@@ -564,26 +560,26 @@ changed.
 
 #### `mail` section
 
-- `reply_to` (default: `"no_replies@company.com"`)
-- `server` (default: `"smtp.googlemail.com"`)
-- `port` (default: `587`)
-- `use_tls` (default: `true`)
-- `username` (default: `"eNMS-user"`)
-- `sender` (default: `"eNMS@company.com"`)
+- `reply_to` (default: `"no_replies@company.com"`).
+- `server` (default: `"smtp.googlemail.com"`).
+- `port` (default: `587`).
+- `use_tls` (default: `true`).
+- `username` (default: `"eNMS-user"`).
+- `sender` (default: `"eNMS@company.com"`).
 
 #### `mattermost` section
 
 - `url` (default:
-  `"https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w"`)
-- `channel` (default: `""`)
-- `verify_certificate` (default: `true`)
+  `"https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w"`).
+- `channel` (default: `""`).
+- `verify_certificate` (default: `true`).
 
 #### `paths` section
 
 - `files` (default:`""`) Path to eNMS managed files needed by services
   and workflows. For example, files to upload to devices.
 - `custom_code` (default: `""`) Path to custom libraries that can be
-  utilized within services and workflows
+  utilized within services and workflows.
 - `custom_services` (default: `""`) Path to a folder that contains
   `Custom Services`. These services are added to the list of existing
   services in the Automation Panel when building services and workflows.
@@ -594,11 +590,11 @@ changed.
 
 This section allows configuration of the Redis queue.
 
-- `charset` (default:`"utf-8"`)
-- `db` (default:`0`)
-- `decode_responses` (default:`true`)
-- `port` (default:`6379`)
-- `socket_timeout` (default:`0.1`)
+- `charset` (default:`"utf-8"`).
+- `db` (default:`0`).
+- `decode_responses` (default:`true`).
+- `port` (default:`6379`).
+- `socket_timeout` (default:`0.1`).
 
 #### `requests` section
 
@@ -608,16 +604,16 @@ load on eNMS.
 
 - Pool
 
-  - `pool_maxsize` (default: `10`)
-  - `pool_connections` (default: `100`)
-  - `pool_block` (default: `false`)
+  - `pool_maxsize` (default: `10`).
+  - `pool_connections` (default: `100`).
+  - `pool_block` (default: `false`).
 
 - Retries
 
-  - `total` (default: `2`)
-  - `read` (default: `2`)
-  - `connect` (default: `2`)
-  - `backoff_factor` (default: `0.5`)
+  - `total` (default: `2`).
+  - `read` (default: `2`).
+  - `connect` (default: `2`).
+  - `backoff_factor` (default: `0.5`).
 
 #### `security` section
 
@@ -631,30 +627,30 @@ load on eNMS.
 
 #### `slack` section
 
-- `channel` (default: `""`)
+- `channel` (default: `""`).
 
 #### `ssh` section
 
 - `command` (default: `python3 -m flask run -h 0.0.0.0`): command used to start the SSH server.
 - `credentials` - which credential types to enable for the WebSSH connection feature.
    
-    - `custom` (default: `true`)
-    - `device` (default: `true`)
-    - `user` (default: `true`)
+    - `custom` (default: `true`).
+    - `device` (default: `true`).
+    - `user` (default: `true`).
  
-- `port_redirection` (default: `false`)
-- `bypass_key_prompt` (default: `true`)
-- `port` (default: `-1`)
-- `start_port` (default: `9000`)
-- `end_port` (default: `9100`)
+- `port_redirection` (default: `false`).
+- `bypass_key_prompt` (default: `true`).
+- `port` (default: `-1`).
+- `start_port` (default: `9000`).
+- `end_port` (default: `9100`).
 
 #### `tables` section
 
 Configure the refresh rates of a table in the UI in milliseconds. By default, the "Results" page (`run` table) will be refreshed every 5 seconds, and the "Services" and "Tasks" pages every 3 seconds.
 
-- `run` (default: `5000`)
-- `service` (default: `3000`)
-- `task` (default: `3000`)
+- `run` (default: `5000`).
+- `service` (default: `3000`).
+- `task` (default: `3000`).
 
 #### `vault` section
 
@@ -662,8 +658,8 @@ For eNMS to use a Vault to store all sensitive data (user and network
 credentials), one must set the `active` variable to `true`, provide an
 address and export:
 
-- `active` (default: `false`)
-- `unseal` (default: `false`) Automatically unseal the Vault
+- `active` (default: `false`).
+- `unseal` (default: `false`) Automatically unseal the Vault.
 
 The keys must be exported as environment variables:
 
@@ -688,12 +684,12 @@ default latitude and longitude of the map can be set here.
 
 Key parameters to note:
 
-- `default` (`"2D"` or `"3D"`)
-- `longitude` (default: `-96.0`)
-- `latitude` (default: `33.0`)
-- `zoom_level` (default: `5`)
-- `tile_layer` (default: `"osm"`)
-- `marker` (default: `"Circle"`)
+- `default` (`"2D"` or `"3D"`).
+- `longitude` (default: `-96.0`).
+- `latitude` (default: `33.0`).
+- `zoom_level` (default: `5`).
+- `tile_layer` (default: `"osm"`).
+- `marker` (default: `"Circle"`).
 
 Key parameters for the network builder:
 
@@ -711,12 +707,12 @@ environment variables so it knows where eNMS is located and what
 credentials to authenticate with:
 
 -   `ENMS_ADDR`: URL of the remote server (example:
-    `"http://192.168.56.102"`)
--   `ENMS_USER`: eNMS login
--   `ENMS_PASSWORD`: eNMS password
+    `"http://192.168.56.102"`).
+-   `ENMS_USER`: eNMS login.
+-   `ENMS_PASSWORD`: eNMS password.
 
 The scheduler is an asynchronous application that must be deployed with
-uvicorn :
+gunicorn :
 
     cd scheduler
     gunicorn scheduler:scheduler --host 0.0.0.0
@@ -728,7 +724,7 @@ Above nginx.conf sample has a section for eNMS Scheduler
 ### enms.gunicorn_scheduler.socket
 
     [Unit]
-    Description=Gunicorn/uvicorn socket for eNMS scheduler
+    Description=Gunicorn socket for eNMS scheduler
     
     [Socket]
     ListenStream=/run/gunicorn/enms.gunicorn_scheduler.socket
@@ -739,7 +735,7 @@ Above nginx.conf sample has a section for eNMS Scheduler
 ### enms.gunicorn_scheduler.service
 
     [Unit]
-    Description=Start eNMS Scheduler service using Gunicorn/Uvicorn
+    Description=Start eNMS Scheduler service using Gunicorn
     Requires=enms.gunicorn_scheduler.socket
     After=network.target
     After=mysqld.service

@@ -14,13 +14,13 @@ if no Vault is configured. For a production environment, a Hashicorp Vault is re
 
 **Description**: Credential documentation.
 
-**Role**: Read and write, or read only
+**Role**: Read and write, or read only.
 
 **Subtype**: Choose between `Username / Password` or `SSH Key`.
 
-**Devices**: Pool of devices which will have access to these credentials
+**Devices**: Pool of devices which will have access to these credentials.
 
-**Users**: Pool of users which will have access to these credentials
+**Users**: Pool of users which will have access to these credentials.
 
 **Priority**: When a user has access to multiple credentials for a device,
 the credential with the highest priority is chosen.

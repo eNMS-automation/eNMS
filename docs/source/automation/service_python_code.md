@@ -16,9 +16,9 @@ are made available to the user.
         object type; otherwise it will fail.
         **Type**: Function.
         **Available**: Always.
-    -   **Return Type**: Object that was created or None
+    -   **Return Type**: Object that was created or None.
     -   **Parameters**:
-        -   `model`: (**mandatory string**) `device`, `link`, `pool`, or `service`
+        -   `model`: (**mandatory string**) `device`, `link`, `pool`, or `service`.
 
 - `device`
     -   **Meaning**: This is the current device on which the service is
@@ -31,30 +31,30 @@ are made available to the user.
         `{{device.ip_address}}`, inside of forms. The following base
         properties are supported:
 
-        - device.name
-        - device.subtype
-        - device.description
-        - device.model
-        - device.location
-        - device.vendor
-        - device.operating_system
-        - device.os_version
-        - device.ip_address
-        - device.latitude
-        - device.longitude
-        - device.port
-        - device.configuration
-        - device.last_failure (last failure timestamp fo
-          configuration collection)
+        - device.name.
+        - device.subtype.
+        - device.description.
+        - device.model.
+        - device.location.
+        - device.vendor.
+        - device.operating_system.
+        - device.os_version.
+        - device.ip_address.
+        - device.latitude.
+        - device.longitude.
+        - device.port.
+        - device.configuration.
+        - device.last_failure (last failure timestamp for
+          configuration collection).
         - device.last_status (last status timestamp for configuration
-          collection)
+          collection).
         - device.last_update (last update timestamp for configuration
-          collection)
-        - device.last_runtime (last runtime timestamp fo
-          configuration collection)
+          collection).
+        - device.last_runtime (last runtime timestamp for
+          configuration collection).
         - device.last_duration (last time duration for configuration
-          collection)
-        - [Custom device properties, if implemented](custom_device_properties.md)
+          collection).
+        - [Custom device properties, if implemented](custom_device_properties.md).
 
 - `devices`
     - **Meaning**: The set of target devices for the service or workflow,
@@ -71,10 +71,10 @@ are made available to the user.
         object type; otherwise it will fail.
         **Type**: Function.
         **Available**: Always.
-    -   **Return Type**: Object that was created or None
+    -   **Return Type**: Object that was created or None.
     -   **Parameters**:
-        - `model`: (**mandatory**) `device`, `link`, `pool`, or `service`
-        - `commit`: (**optional**) `True` or `False`(Default)
+        - `model`: (**mandatory**) `device`, `link`, `pool`, or `service`.
+        - `commit`: (**optional**) `True` or `False`(Default).
         - Model properties: Specify values for the new instance: 
           ip_address="1.2.3.4" when creating a new device. 
            
@@ -85,12 +85,12 @@ are made available to the user.
         object; otherwise it will fail.
         **Type**: Function.
         **Available**: Always.
-    -   **Return Type**: Database Object or List of Database Objects
+    -   **Return Type**: Database Object or List of Database Objects.
     -   **Parameters**:
-        - `model`: (**mandatory**) `device`, `link`, `pool`, or `service`
-        - `allow_none`: (**optional**) `True` or `False`(Default)
-        - `allow_matches`: (**optional**) `True` or `False`(Default)
-        - Model propertes: (**mandatory**) Property values to identify
+        - `model`: (**mandatory**) `device`, `link`, `pool`, or `service`.
+        - `allow_none`: (**optional**) `True` or `False`(Default).
+        - `allow_matches`: (**optional**) `True` or `False`(Default).
+        - Model properties: (**mandatory**) Property values to identify
           the desired object: ip_address="1.2.3.4".
   
 - `fetch_all()`
@@ -100,41 +100,41 @@ are made available to the user.
         edit access to the object; otherwise it will fail.
         **Type**: Function.
         **Available**: Always.
-    -   **Return Type**: Database Object or List of Database Objects
+    -   **Return Type**: Database Object or List of Database Objects.
     -   **Parameters**:
-        - `model`: (**mandatory**) `device`, `link`, `pool`, or `service`
-        - `allow_none`: (**optional**) `True`(Default) or `False`
-        - `allow_matches`: (**optional**) `True`(Default) or `False`
+        - `model`: (**mandatory**) `device`, `link`, `pool`, or `service`.
+        - `allow_none`: (**optional**) `True`(Default) or `False`.
+        - `allow_matches`: (**optional**) `True`(Default) or `False`.
         - Model properties: (**optional**) Filter values to limit the set of
           returned objects: vendor="Cisco".
             
 - `get_neighbors()`
     -   **Meaning**: Used to return links or devices connected to the target
-        device
+        device.
     -   **Type**: Function.
     -   **Available**: When the service is running on a device, this function
-        must be called on a `device` object
+        must be called on a `device` object.
     -   **Parameters**:
-        -   `object`: (**mandatory**) `device` or `link`
-        -   `direction`: (**optional**) `source` or `destination`
+        -   `object`: (**mandatory**) `device` or `link`.
+        -   `direction`: (**optional**) `source` or `destination`.
         And optionally, any number of the Link **properties** can be passed as
         parameters as well. The following base properties are supported:
-        -   `name`
-        -   `description`
-        -   `subtype`
-        -   `model`
-        -   `source_name` (source device name)
-        -   `destination_name` (destination device name)
-        -   [Custom link properties, if implemented](custom_link_properties.md)
+        -   `name`.
+        -   `description`.
+        -   `subtype`.
+        -   `model`.
+        -   `source_name` (source device name).
+        -   `destination_name` (destination device name).
+        -   [Custom link properties, if implemented](custom_link_properties.md).
         
 - `get_result()`
     -   **Meaning**: Fetch the result of a service in the workflow that
         has already been executed.
     -   **Type**: Function.
-    -   **Return Type**: Dictionary
+    -   **Return Type**: Dictionary.
     -   **Available**: When the service runs inside a workflow.
     -   **Parameters**:
-        -   `service`: (**mandatory**) Name of the service
+        -   `service`: (**mandatory**) Name of the service.
         -   `device`: (**optional**) Name of the device, when you want to
             get the result of the service for a specific device.
         -   `workflow`: (**optional**) If the workflow has multiple
@@ -147,19 +147,19 @@ are made available to the user.
         the same `device` and/or `section` values with `get_var()` that
         were used with the original `set_var()`.
     -   **Type**: Function.
-    -   **Return Type**: None
+    -   **Return Type**: None.
     -   **Available**: Always.
     -   **Parameters**:
-        -   `name`: Name of the variable
+        -   `name`: Name of the variable.
         -   `device`: (**optional**) The value is stored for a specific
             device.
         -   `section`: (**optional**) The value is stored in a specific
             "section".
 
 - `log()`
-    -   **Meaning**: Write an entry to a log file
-    -   **Type**: Function
-    -   **Return Type**: None
+    -   **Meaning**: Write an entry to a log file.
+    -   **Type**: Function.
+    -   **Return Type**: None.
     -   **Available**: Always.
     -   **Parameters**:
         -   **severity**: (**string**) Valid values in escalating
@@ -213,7 +213,7 @@ are made available to the user.
     -   **Return Type**: None
     -   **Available**: Always.
     -   **Parameters**:
-        -   `name`: Name of the variable
+        -   `name`: Name of the variable.
         -   `device`: (**optional**) The value is stored for a specific
             device.
         -   `section`: (**optional**) The value is stored in a specific
@@ -259,15 +259,15 @@ are made available to the user.
 -   `send_email` allows for sending an email with optional attached file. It
     takes the following parameters:
 
-    -   `title`: (**string, mandatory**)
-    -   `content`: (**string, mandatory**)
+    -   `title`: (**string, mandatory**).
+    -   `content`: (**string, mandatory**).
     -   `sender`: (**string, optional**) Email address of the sender.
         Defaults to the sender address in eNMS settings.
     -   `recipients`: (**string, optional**) Mail addresses of the
         recipients, separated by comma. Defaults to the recipients'
         addresses in eNMS settings.
     -   `reply_to`: (**string, optional**) Single mail address for
-        replies to notifications
+        replies to notifications.
     -   `filename`: (**string, optional**) Name of the attached file.
     -   `file_content`: (**string, optional**) Content of the attached
         file.

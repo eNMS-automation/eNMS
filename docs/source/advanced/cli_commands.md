@@ -1,11 +1,7 @@
 # Local Server CLI interface
 
 The local instance terminal can be used as a CLI interface that interacts
-with the eNMS application. The prerequisite is to ensure that you are in
-the correct application directory and to deactivate any specific proxy
-settings. The proxy settings are company specified and will prevent
-commands from running. The user can now "ssh" into the instance and perform
-the following operations:
+with the eNMS application and supports the following operations:
 
 ## Run a service
 
@@ -53,7 +49,7 @@ Examples:
 
 The Network Configuration data can be gathered and then stored in a
 central location, namely the git repository. eNMS can be used to fetch
-the Network Configuration from git and have it stored locally in  `network_data/`
+the Network Configuration from git and have it stored locally in `network_data/`
 
 General syntax:
 
@@ -62,3 +58,12 @@ General syntax:
 Options:
 
     None
+
+!!! note
+
+    If trouble is experienced, ensure that
+
+    - flask is being run from the correct directory, such as, is it installed
+      inside a python virtualenv?
+    - http_proxy, https_proxy, and NO_PROXY are set appropriately for your
+      environment to allow the connection.

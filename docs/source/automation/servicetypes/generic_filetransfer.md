@@ -6,8 +6,8 @@ either SFTP or SCP.
 Configuration parameters for creating this service instance:
 
 - `Direction` Get or Put the file from/to the target device's
-  filesystem
-- `Protocol` Use SCP or SFTP to perform the transfer
+  filesystem.
+- `Protocol` Use SCP or SFTP to perform the transfer.
 - `Source file` For Get, source file is the path-plus-filename on the
   device to retrieve from the eNMS server. For Put, source file is the
   path-plus-filename on the eNMS server to send to the device.
@@ -16,9 +16,9 @@ Configuration parameters for creating this service instance:
   destination file is the path-plus-filename on the device to store
   the file to.
 - `Missing Host Key Policy` If checked, auto-add the host key policy
-  on the ssh connection
+  on the ssh connection.
 - `Load Known Host Keys` If checked, load host keys on the eNMS serve
-  before attempting the connection
+  before attempting the connection.
 - `Source file includes glob pattern (Put Direction only)` Flag
   indicates that for Put Direction transfers only, the above Source
   file field contains a [Glob pattern match](https://en.wikipedia.org/wiki/Glob_(programming))
@@ -37,8 +37,8 @@ Configuration parameters for creating this service instance:
     - `User Credentials` - Use the user's currently logged in credentials to
       access the device.
     - `Custom Credentials` - The user provides the credentials below:
-- `Custom Username` - User provided username
-- `Custom Password` - User provided password
+- `Custom Username` - User provided username.
+- `Custom Password` - User provided password.
 
 !!! note
 

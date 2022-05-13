@@ -2,10 +2,10 @@
 Used to create a new instance or modify an existing instance.
 
 **Method:** POST (update or create) <br />
-**Address:** /rest/instance/`instance_type`<br/>
+**Address:** /rest/instance/`instance_type` <br />
 **Parameters:** None <br />
 **Payload:** JSON representation of the dictionary data needed to create the 
-  object instance and depends on the object type.
+  object instance and depends on the object type <br />
 
 !!! Note
      An object can be renamed by setting the `name` key to the current name,
@@ -13,7 +13,7 @@ Used to create a new instance or modify an existing instance.
 
 # Examples
 
-Schedule a task from the REST API: This payload will create the task `test`or
+Schedule a task from the REST API: This payload will create the task `test` or
 update it if it already exists.
 
 POST /rest/instance/task

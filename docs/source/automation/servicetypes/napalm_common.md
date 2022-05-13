@@ -4,14 +4,14 @@ These parameters are common to all Napalm Services.
 
 ## Napalm Parameters
 
-- `Driver` Which Napalm driver to use when connecting to the device
+- `Driver` Which Napalm driver to use when connecting to the device.
 - `Use driver from device` If set to True, the driver defined at
    device level (`napalm_driver` inventory property of the device) is used,
    otherwise the driver defined at service level (`Driver` property of
    the service) is used.
 - `Optional arguments` Napalm supports a number of optional arguments
    that are documented 
-   [here](https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
+   [here](https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments).
      
 ## Connection Parameters
 
@@ -25,9 +25,9 @@ These parameters are common to all Napalm Services.
       access the device.
     - `Custom Credentials` - The user provides the credentials below:
 
-- `Custom Username` - User provided username
+- `Custom Username` - User provided username.
 
-- `Custom Password` - User provided password
+- `Custom Password` - User provided password.
 
 - `Start New Connection`: **before the service runs**, the current
   cached connection is discarded and a new one is started.

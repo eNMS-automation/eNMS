@@ -21,7 +21,6 @@ nav:
     - Pools: inventory/pools.md
     - Networks: inventory/networks.md
   - Visualization:
-    - Overview: visualization/overview.md
     - Geographic View: visualization/geographic_view.md
     - Network Builder: visualization/network_builder.md
   - Automation:
@@ -60,7 +59,9 @@ nav:
       - Netmiko Validation Service: automation/servicetypes/netmiko_validation.md
       - Python Snippet Service: automation/servicetypes/python_snippet.md
       - REST Call Service: automation/servicetypes/rest_call.md
-      - Scrapli Command Service: automation/servicetypes/scrapli_command.md
+      - Scrapli Common Parameters: automation/servicetypes/scrapli_common.md
+      - Scrapli Commands Service: automation/servicetypes/scrapli_command.md
+      - Scrapli Data Backup Service: automation/servicetypes/scrapli_databackup.md
       - Scrapli Netconf Service: automation/servicetypes/scrapli_netconf.md
       - Slack Notification Service: automation/servicetypes/slack_notification.md
       - Topology Import Service: automation/servicetypes/topology_import.md
@@ -125,6 +126,9 @@ extra:
   no_auto_expand:
     - 'Built-in Service Types'
     - 'REST API'
+extra_javascript:
+  - https://code.jquery.com/jquery-2.2.4.min.js
+  - _static/js/hover_patch.js
 markdown_extensions:
   - meta
   - toc

@@ -7,7 +7,7 @@ Configuration parameters include:
 
 `Category`: used for the display of the drop-down list of workflows in the Workflow Builder.
   Each workflow is displayed under its own category. The list of categories can be configured
-  in `properties.json` under the key `"property_list" / "workflow" / "category"`
+  in `properties.json` under the key `"property_list" / "workflow" / "category"`.
 
 `Close Connection`: Once the subworkflow is done running, the current
   connection will be closed.

@@ -2,7 +2,7 @@
 global
 action: true
 page: false
-settings: false
+visualization: false
 */
 
 import { showRunServicePanel } from "./automation.js";

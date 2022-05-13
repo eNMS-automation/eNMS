@@ -4,7 +4,7 @@ The Service Editor Panel is accessible from the following locations:
 
 ![Service Editor Panel](../_static/automation/services/service_editor.png)
 
-- `Automation -> Services` button bar for existing services 
+- `Automation -> Services` button bar for existing services.
 - `Automation -> Workflow Builder` by double clicking an existing service
   or using the `Edit` button to edit a workflow (Workflows are services too).
   Also right mouse click on an existing Service, and then select `Edit`.
@@ -25,8 +25,8 @@ The Service Editor Panel is accessible from the following locations:
 -   `Default Access`: Role Based (Creator) Allows access by the user that
     created the service and follows RBAC access using the Groups field.
     `Public` Allows access to anyone. `Admin` Limits access to admin users.
--   `Groups` Specifies which user groups have access to this service
--   `Owners` Further restricts service access to a list of owners
+-   `Groups` Specifies which user groups have access to this service.
+-   `Owners` Further restricts service access to a list of owners.
 -   `Owners Access` Restrict what owners can do: Run and/or Edit the service.
 -   `Service Type`: (**display only**) The service type of the current
     service instance.
@@ -59,6 +59,21 @@ The Service Editor Panel is accessible from the following locations:
     to this form at runtime are available within running services and can
     override properties of the "Run" class.  Forms defined on nested
     services or subworkflows are not displayed.
+    
+    The following properties can be overridden using Parameterized Form:
+    
+    | Property | Description |
+    | - | - |
+    | target_devices | list of target devices names. |
+    | target_pools | list of target pool names. |
+    | device_query | string; Python expression for which devices to select. |
+    | device_query_property | string; either `"name"` or `"ip_address"`. |
+    | max_processes | integer; how many threads to run, cannot exceed recommended max. |
+    | multiprocessing | boolean; turn multiprocessing on/off. |
+    | mail_recipient | string; comma-separated list of email addresses. |
+    | send_notification | boolean; turn notification on/off. |
+    | custom | Example:<br>`custom_field = StringField('Custom Field', default='def')`<br><br>This field can be referenced via:<br> `payload["form"]["custom_field"]`<br><br>Other WTForm components can be used to define a variety of properties. |
+    
 - `Parameterized Form is Mandatory`: Force display of the 
     Parameterized Form before execution whenever the service is run
     interactively.
@@ -99,16 +114,16 @@ The Service Editor Panel is accessible from the following locations:
 - `Update pools after running`: (default: False) Update all pools after
     this service runs. Note that updating all pools is performance intensive.
 
-#### Workflow Parameters
+#### Advanced Parameters 
 
-This section contains the parameters that apply **when the service runs
-inside a workflow only**.
+While the parameters in this section can be used by stand-alone Services, they 
+generally provide more benefits for Service(s) that run inside of a Workflow. 
 
 -   `Preprocessing`: A python script that
     runs before the service is executed. If the service has device
     targets, the code will be executed for each device independently,
     and a `device` global variable is available. Preprocessing is
-    executed for standalone services and those within a workflow. This
+    executed for standalone services and for those within a workflow. This
     feature is useful for setting initial condition variables using
     `set_var()` that can be used for conditional processing within the
     service or workflow elsewhere; for example using the same workflow
@@ -124,7 +139,7 @@ inside a workflow only**.
     the workflow might still generate a result for the device if discarded
     in one path (when parallel paths are used in the workflow).
 -   `Maximum number of runs`: (default: `1`) Number of times a service is
-    allowed to run in a workflow
+    allowed to run in a workflow.
 -   `Time to Wait before next service is started (in seconds)`: (default:
     `0`) Number of seconds to wait after the service is done running.
 
@@ -133,7 +148,7 @@ inside a workflow only**.
 The eNMS administrator can add extra properties to the service form that
 are saved on the service instance.  These Custom Property definitions are added
 in `setup/properties.json`.  A field for entry of Custom Property values is
-included in the Custom Properties section.
+included in the [Custom Properties section](../../advanced/customization/#custom-properties).
 
 Additional information for these fields
 may be available using the help icon next to the field label.
@@ -172,7 +187,7 @@ run once per device.
 The run method, targets, and multiprocessing defined on a workflow and nested
 services work together in a complex way.  The table below describes each combination:
 
-<table>
+<table href="doctable.css" rel="stylesheet" type="text/css">
 <thead>
   <tr>
     <th>Enclosing Workflow<br> Run Method</th>
@@ -182,45 +197,45 @@ services work together in a complex way.  The table below describes each combina
 </thead>
 <tbody>
   <!-- Standalone Service -->
-  <tr>
-    <td rowspan="2">Standalone Service<br>(No enclosing workflow)</td>
+  <tr class="tr-doctable" rowname="standalone">
+    <td rowspan="2" rowname="standalone">Standalone Service<br>(No enclosing workflow)</td>
       <td>Run the service once per device</td>
       <td>The service runs once for each device.<br>  Devices come from the service.<br>  Multiprocessing allows multiple instances of the service to run concurrently, each for a different device. </td>
   </tr>
-  <tr>
+  <tr class="tr-doctable" rowname="standalone">
       <td>Run the service once</td>
       <td>The service runs exactly once.<br> Devices come from the service.<br> Multiprocessing has no effect.</td>
   </tr>
 
   <!-- Device by Device -->
-  <tr>
-    <td rowspan="2">Run the workflow device by device</td>
+  <tr class="tr-doctable" rowname="devicebydevice">
+    <td rowspan="2" rowname="devicebydevice">Run the workflow device by device</td>
       <td>Run the service once per device</td>
       <td>Each device flows through the workflow independently.<br> Run Method on nested services is irrelevant because the workflow is run for a single device at a time.<br>Devices come from the workflow.<br> Multiprocessing on the workflow allows multiple devices to run the entire workflow concurrently and is ignored on nested services.</td>
   </tr>
-  <tr>
+  <tr class="tr-doctable" rowname="devicebydevice">
       <td>Run the service once</td>
       <td>This combination is misleading because each device runs the workflow independently.<br> Do not use this combination of Run Methods.</td>
   </tr>
 
   <!-- Service by Service with Workflow Targets -->
-  <tr>
-    <td rowspan="2">Run the workflow service by service using workflow targets</td>
-      <td>Run the service once per device</td>
-      <td>Each service runs for all devices before moving to the next service.<br>  Devices come from the workflow and are ignored on the service.<br>  Multiprocessing on the service allows multiple devices to run the service concurrently.  Multiprocessing on the workflow is ignored.</td>
+  <tr class="tr-doctable" rowname="sxs_wftargets">
+    <td rowspan="2" rowname="sxs_wftargets">Run the workflow service by service using workflow targets</td>
+      <td rowname="sxs_wftargets">Run the service once per device</td>
+      <td rowname="sxs_wftargets">Each service runs for all devices before moving to the next service.<br>  Devices come from the workflow and are ignored on the service.<br>  Multiprocessing on the service allows multiple devices to run the service concurrently.  Multiprocessing on the workflow is ignored.</td>
   </tr>
-  <tr>
+  <tr class="tr-doctable" rowname="sxs_wftargets">
       <td>Run the service once</td>
       <td>The service runs exactly once.<br> Devices come from the workflow and are ignored on the service.<br> Multiprocessing on the workflow or service has no effect as the service runs once.</td>
   </tr>
 
   <!-- Service by Service with Service Targets -->
-  <tr>
-    <td rowspan="2">Run the workflow service by service using service targets</td>
+  <tr class="tr-doctable" rowname="sxs_stargets">
+    <td rowspan="2" rowname="sxs_stargets">Run the workflow service by service using service targets</td>
       <td>Run the service once per device</td>
       <td>Each service runs for all devices before moving to the next service.<br>  Devices come from the service and are ignored on the workflow.<br>  Multiprocessing on the service allows multiple devices to run the service concurrently.  Multiprocessing on the workflow is ignored.</td>
   </tr>
-  <tr>
+  <tr class="tr-doctable" rowname="sxs_stargets">
       <td>Run the service once</td>
       <td>The service runs exactly once.<br> Devices come from the service and are ignored on the workflow.<br> Multiprocessing on the workflow or service has no effect as the service runs once.</td>
   </tr>
@@ -289,24 +304,26 @@ typically used to perform complex validation or to extract values from
 the result for use in subsequent services.
 
 -   `Postprocessing Mode`: Control whether or not the `Postprocessing`
-    script is executed
+    script is executed.
     -   `Always run`: The `Postprocessing` script will
-        execute for each device
-    -   `Run on success only` (**default**) 
-    -   `Run on failure only`
+        execute for each device.
+    -   `Run on success only` (**default**). 
+    -   `Run on failure only`.
 -   `PostProcessing`: A python script to inspect or update the current
     result.
-    -   Variable **results**
+    -   Variable **results**.
         -   Contains the full results dictionary for the current device,
             exactly as seen in the results view.
-            -   Changes to this dictionary are reflected in the final
+            - Changes to this dictionary are reflected in the final
                 result of the service.
+            - The user can use python code to even change the value of the
+                `success` key.
         -   **results["success"]** The overall service status.
         -   **results["result"]** The resulting data from running
             the service.
     -   See [Using Python in the Service Editor](../service_python_code/) for the full
         list of variables and functions.
-    -   Note that a log is generated any time postprocessing is skipped
+    -   Note that a log is generated any time postprocessing is skipped.
 
 #### Validation
 
@@ -318,31 +335,27 @@ the result against a regular expression.
 **Dictionary matching**: Check that a dictionary is included or
 equal to the result.
 
-**Anything else**: The user can use python code to change the result,
-including the value of the `success` key.
-
-
 - `Validation Condition`: When to run Validation on the result:
-    -   `No validation`: No validation is performed
-    -   `Run on success only`
-    -   `Run on failure only`
-    -   `Always run`
+    -   `No validation`: No validation is performed.
+    -   `Run on success only`.
+    -   `Run on failure only`.
+    -   `Always run`.
 - `Validation Method`: The validation method depends on whether the
     result is a string or a dictionary.
     -   `Validation by text match`: Matches the result against `Content Match`
         (string inclusion, or regular expression if
-        `Match content against Regular expression` is selected)
+        `Match content against Regular expression` is selected).
     -   `Validation by dictionary inclusion`: Check that all `key` : `value`
         pairs from the dictionary provided in `Dictionary Match` can be found
         in the result.
     -   `Validation by dictionary equality`: Check for equality against the
-        dictionary provided in `Dictionary to Match Against`
+        dictionary provided in `Dictionary to Match Against`.
 - `Section to Validate` : (default: `results['result']`) Which part of the
-    payload dictionary to perform validation on
+    payload dictionary to perform validation on.
 - `Content Match` : Text to Match against when `Validation by text match`
     is selected above.
-- `Content Match is a regular expression`: Instructs eNMS to treat the
-    match text as a regular expression for `Validation by text match`.
+- `Content Match is a regular expression`: Treat the match text as a regular
+    expression for `Validation by text match`.
 - `Dictionary to Match Against`: Provide a dictionary in `{}` for performing
     dictionary inclusion and equality matches.
 - `Delete spaces before matching`: (`Text` match only) All whitespace
@@ -368,11 +381,11 @@ channel
 
 Configure the following parameters:
 
--   `Send Notification`: Enable sending results notification
+-   `Send Notification`: Enable sending results notification.
 -   `Notification Method`: Mail, Slack or Mattermost.
 -   `Notification Header`: A header displayed at the beginning of the
     notification.
--   `Include Device Results`: for service (not workflow) level notifications
+-   `Include Device Results`: for service (not workflow) level notifications.
 -   `Include Result Link in summary`: Whether the notification contains
     a link to the results.
 -   `Mail Recipients`: Must be a list of email addresses, separated by

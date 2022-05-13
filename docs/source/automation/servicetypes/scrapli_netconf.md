@@ -9,28 +9,28 @@ Scrapli Project Documentation can be reviewed
 
 ## Main Parameters
 
-- `Command`: Netconf operation to send to the device netconf interface
+- `Command`: Netconf operation to send to the device netconf interface.
 
-    - `Get`
-    - `RPC`
-    - `Get Configuration`
-    - `Edit Configuration`
-    - `Delete Configuration`
-    - `Commit Configuration`
-    - `Discard Configuration`
-    - `Lock`
-    - `Unlock`
+    - `Get`.
+    - `RPC`.
+    - `Get Configuration`.
+    - `Edit Configuration`.
+    - `Delete Configuration`.
+    - `Commit Configuration`.
+    - `Discard Configuration`.
+    - `Lock`.
+    - `Unlock`.
 
 - `Target`: Which device config to impact (only displayed for Get,Edit,Delete
-  Configurations, Lock and Unlock)
+  Configurations, Lock and Unlock).
 
-    - `Running Configuration`
-    - `Startup Configuration`
-    - `Candidate Configuration`
+    - `Running Configuration`.
+    - `Startup Configuration`.
+    - `Candidate Configuration`.
 
-- `Content`: XML content to send as a filter to the device
+- `Content`: XML content to send as a filter to the device.
 
-- `Commit After Editing Configuration`: Go ahead and commit or we have more 
+- `Commit After Editing Configuration`: Go ahead and commit, or we have more 
   edits and changes to make?
 
 - `Strip Namespaces from returned XML`: Some device's adherence to namespaces
@@ -47,9 +47,9 @@ Scrapli Project Documentation can be reviewed
       access the device.
     - `Custom Credentials` - The user provides the credentials below:
 
-- `Custom Username` - User provided username
+- `Custom Username` - User provided username.
 
-- `Custom Password` - User provided password
+- `Custom Password` - User provided password.
 
 - `Start New Connection`: **Before the service runs**, the current
   cached connection is discarded and a new one is started.

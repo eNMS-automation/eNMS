@@ -1,6 +1,6 @@
 # Recommended Practices
 
-This section includes useful tips or techniques dervived from common support
+This section includes useful tips or techniques derived from common support
 questions.  Some topics are covered elsewhere as well.  
 
 ## Adding your own Logging 
@@ -12,8 +12,8 @@ understand what is happening in a workflow.
 log("info", f"Your custom message with {some_variable} goes here.")
 ```
 
-See for the [Variables section](../../automation/services/#variables) a full description of the 
-`log()` function.
+See for the [Variables section](../../automation/services/#variables) a full
+description of the `log()` function.
 
 !!! note
 
@@ -84,9 +84,9 @@ server(s).
 
 ## Preprocessing and Postprocessing 
 
-Please refer to this description of the different Run methods for a Service or Workflow. 
-This section will help share service/workflow design considerations for pre- and post-
-processing Python code. 
+Please refer to this description of the different Run methods for a Service
+or Workflow. This section will help share service/workflow design
+considerations for pre- and post-processing Python code. 
 
 Please check the **Preprocessing** description in 
 [Workflow parameters](../../automation/services/#workflow-parameters) and the 
@@ -112,9 +112,9 @@ key within an existing dictionary prevents unintentional data overwrites.
 
 The Postprocessing Mode determines whether the script is:
 
-- Always run
-- Run on success only 
-- Run on failure only
+- Always run.
+- Run on success only.
+- Run on failure only.
 
 If the Postprocessing logic expects a successful result (e.g., a text result from 
 Netmiko Validation Service command) then the Postprocessing Mode should be set to 
@@ -159,8 +159,8 @@ results['result'] = revised
 In workflow design, there are two ways to retrieve the results of work done by 
 previous Services:
 
-- `get_var()` - Retrieve a variable previously stored using `set_var()` 
-- `get_result()` - Retrieve the result of a previous Service
+- `get_var()` - Retrieve a variable previously stored using `set_var()`.
+- `get_result()` - Retrieve the result of a previous Service.
     
 For full descriptions of these functions, see the 
 [Variables section](../../automation/services/#variables).
@@ -206,5 +206,5 @@ escape some characters in the command string.
 
 Examples:  
 
-- Cisco NX OS - `run bash <command>`
-- F5 BIG-IP - `run /util bash -c "<command>"`
+- Cisco NX OS - `run bash <command>`.
+- F5 BIG-IP - `run /util bash -c "<command>"`.

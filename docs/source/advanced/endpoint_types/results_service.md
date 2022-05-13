@@ -10,7 +10,7 @@ Return results of a completed service, or the status of a service if currently r
 !!! Note
     - The `service_name` must be URL encoded.  This replaces spaces and
       special characters with %<number>.  For example a space becomes '%20'.
-    - The status property in the result will show either "Running" or "Completed"
+    - The status property in the result will show either "Running" or "Completed".
     - Before the service has started the request fails with the HTTP 404 error
       indicating that the service run is not found.
 

@@ -5,11 +5,11 @@
 
 A Pool is a collection of objects of the following types:
 
-- Devices
-- Links
-- Users
-- Services
-- Networks
+- Devices.
+- Links.
+- Users.
+- Services.
+- Networks.
 
 Pools can contain a single type of object or a mix of objects types.  For each
 object type, a set of selection properties is used to determine which objects
@@ -33,14 +33,15 @@ automation to run on.
     the Scheduled Task's pool overrides which devices the
     automation executes against.
     
-- Visualization Scope:  For both the Geographical and Network Builder Visualization 
-panels, a pool is used to filter which objects are presented on the map. For
-    - Geographical Visualization, the pool list only shows pools with devices
+- Visualization Scope:
+    - Geographical Visualization: pool selection is used to filter which objects 
+    are presented on the map. The pool list only shows pools with devices
     and links. Pools of only Users and Services are omitted since these don't
     make sense to show on a map.
-    - Network Builder, the pool list only shows pools with at least 1
-    device and 1 link because the force-directed graph algorithm shows the
-    interconnected relationships of the objects.
+    - Network Builder: displays existing Network objects (from 
+    `Inventory -> Networks`) on the graph.  The `Add to Network` button allows
+    pools of devices and links (as well as individual devices and links) to be
+    added to the currently displayed Network. 
 
 - Advanced Search / Relationship Based Filtering:  Pools can be targets for the 
 union, intersection, or empty match in order to filter a table in the application.
@@ -59,22 +60,22 @@ The `Inventory -> Pools` menu supports the following operations on each pool
 listed in the Pools table:
 
 - Update: Recalculate membership in the pool based on the current pool properties
-  and object properties to determine are now included in the pool
+  and object properties to determine are now included in the pool.
   
-- Edit: Modify the properties for matching this pool
+- Edit: Modify the properties for matching this pool.
 
 - Duplicate: Copy this pool's properties to a new pool and make some
-  slight modification for different criteria
+  slight modification for different criteria.
 
-- Run Service: Run a service or workflow against this pool's devices
+- Run Service: Run a service or workflow against this pool's devices.
   
-- Delete: Delete this pool
+- Delete: Delete this pool.
 
 The following operations are supported from the menu bar above the table.
 Note that bulk operations apply to all currently displayed pools based on
 filtering or advanced search criteria:
 
-- Refresh: Refresh the table
+- Refresh: Refresh the table.
 
 - Advanced Search: Apply an advanced filter against the table to select which
   pools are displayed.
@@ -84,7 +85,7 @@ filtering or advanced search criteria:
 - Copy Selection to the Clipboard: Copy the list of Pools to the clipboard as
   a comma-separated list.
   
-- New: Create a new Pool of objects
+- New: Create a new Pool of objects.
 
 - Export:  Export the list of Pools as a .csv file that is downloaded to the 
   user's browser.
@@ -92,7 +93,7 @@ filtering or advanced search criteria:
 - Update All Pools: Recalculate pool membership.
   
 - Run Service on All Pools in the Table: Run a Service or Workflow using all
-  of the pools in the table as the combined set of execution targets. 
+  the pools in the table as the combined set of execution targets. 
   
 - Bulk Deletion:  Delete all pools currently displayed in the table.
 
@@ -105,25 +106,26 @@ This pool enforces the intersection of the following conditions:
 -   name: `sto` - Match is Inclusion; all devices whose name includes
     `sto`.  `Boston` and `Houston` both match.
 -   subtype: `GATEWAY|PEER` - Match is Regular Expression; all devices having
-    subtype `GATEWAY` or `PEER` will be selected
+    subtype `GATEWAY` or `PEER` will be selected.
 -   vendor: `Cisco` - Match is Equality; all devices whose vendor is `Cisco`
-    will be selected
+    will be selected.
 
 In summary, all `Cisco` devices with subtype `GATEWAY` or `PEER` whose name includes
 `sto` will match these conditions and be included as members of the pool.
 
 !!! note
 
-
-    - All empty properties ignored unless the `Empty` match option is selected. This
-      option matches objects where the property is empty, e.g. not defined.
+    - All empty properties are ignored unless the `Empty` match option is
+      selected. This option matches objects where the property is empty, e.g.
+      not defined.
 
     - The `Invert` checkbox reverses the logic for that parameter. So if 
-      `Cisco` is specified in the vendor field, `Invert` will cause all devices to 
-      match whose vendor is NOT `Cisco`.
+      `Cisco` is specified in the vendor field, `Invert` will cause all
+      devices to match whose vendor is NOT `Cisco`.
 
-    - Along with all properties of a device, you can use the device's collected
-      `Configuration` and `Operational Data` as a constraint for the pool. 
+    - Along with all properties of a device, you can use the device's
+      collected `Configuration` and `Operational Data` as a constraint for
+      the pool. 
 
 ## Links Pool Creation Example
 
@@ -132,9 +134,9 @@ In summary, all `Cisco` devices with subtype `GATEWAY` or `PEER` whose name incl
 This pool enforces the intersection of the following conditions:
 
 - subtype: `Ethernet link` - Match is Equality; all Ethernet links will be
-  selected
+  selected.
 - source name: `sto` - Match is Inclusion; all links whose source
-  name includes the string `sto` are matched, e.g. `Boston` and `Houston`
+  name includes the string `sto` are matched, e.g. `Boston` and `Houston`.
 
 In summary, all `Ethernet Link`s starting with source devices whose name includes
 `sto` will be members of the pool.
@@ -181,10 +183,10 @@ All Pools are subject to automatic updates by eNMS (contingent upon the
 fact that its `Manually Defined` flag is NOT set). Pool recalculations occur
 after creation in the following cases:
 
-- When the eNMS starts up or restarts
+- When the eNMS starts up or restarts.
 - When a device is manually added to the inventory (only for applicable
-  pools)
-- When a device is modified
+  pools).
+- When a device is modified.
 - After pulling or cloning the content from the git configuration
   repository, and the applicable pool relies on `configuration` and/or 
   `operational data` parameter fields.
@@ -197,8 +199,8 @@ after creation in the following cases:
 To manually update a Pool:
 
 - Click on the `Update` button of a desired pool in the 
-  `Inventory -> Pool Management` table listing
-- Click on the `Update all pools` button at the top of Pool Management panel
+  `Inventory -> Pool Management` table listing.
+- Click on the `Update all pools` button at the top of Pool Management panel.
 
 ## Manual definition and `Manually Defined` option
 

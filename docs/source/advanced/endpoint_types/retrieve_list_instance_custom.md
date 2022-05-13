@@ -12,18 +12,20 @@ interface on each table.
 
  - `type` - Instance type of objects to search
 
-      -   'device', 'link', 'user', 'service', 'task', 'pool', 'result'
+      -   'device', 'link', 'user', 'service', 'task', 'pool', 'result'.
 
  - `columns` - List of attributes desired or used for filtering
 
       -   Possible values can be found in `setup/properties.json`,
-          but generally correspond to user interface table headings
+          but generally correspond to user interface table headings.
 
- - `search_criteria` - OPTIONAL -  Similar to what is found in the user interface for filtering instance tables. The first bullet is for all instances, and the second bullet is for services only
+ - `search_criteria` - OPTIONAL -  Similar to what is found in the user
+   interface for filtering instance tables. The first bullet is for all
+   instances, and the second bullet is for services only.
 
      1. Dictionary with column search criteria and search type info.
         - `<column-name>:<search-criteria>`: Column name as the key and
-          the desired search criteria as the value
+          the desired search criteria as the value.
         - `<columns-name>_filter:<filter_type>`: Use the column name with 
           '_filter' appended as the key.  The value specifies one of the 
           following filter types `regex`, `inclusion`, `equality`, `empty`.
@@ -31,21 +33,21 @@ interface on each table.
           column.
 
      2. Retrieve all results of a workflow including all sub-workflows
-        (only for `result` instances)
-        - `parent_service_name` Name of top-level service
-        - `parent_runtime` Time of service run
+        (only for `result` instances).
+        - `parent_service_name` Name of top-level service.
+        - `parent_runtime` Time of service run.
 
  - `order` - OPTIONAL -  Allows sorting based on one of the values
-     provided column
+     provided column.
 
-      -   The expected format is `[{"column": 0, "dir": "asc"}]`
+      -   The expected format is `[{"column": 0, "dir": "asc"}]`.
       -   The value of `column` is the integer index of the
-          `columns` list
+          `columns` list.
       -   The value for `dir` can be either "desc" for descending
           or the default "asc" for ascending.
 
  - `maximum_return_records` - OPTIONAL - Integer indicating the
-     maximum number of records to return
+     maximum number of records to return.
  - `start` - OPTIONAL - Integer indicating the first record to be
      returned, which can be used with `maximum_return_records` to implement
      paging. 
@@ -64,7 +66,8 @@ interface on each table.
 }
 ```
 !!! Note
-     Special columns “matches” is derived from a regex match object which returns the line where a regex was found
+     Special columns “matches” is derived from a regex match object which
+     returns the line where a regex was found.
 
 #
 ## Search Links

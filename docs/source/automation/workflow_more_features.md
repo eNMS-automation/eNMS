@@ -19,7 +19,7 @@ Using the right-mouse-click menu, a workflow can be restarted from any
 service as the "Entry point" and using the runtime payload from a
 previous run. This is useful if:
 
-- the user is testing a workflow with a lot of services
+- the user is testing a workflow with a lot of services.
 - device targets fail unreliably and automation must be restarted at 
   unpredictable locations in the workflow and:
   
@@ -38,12 +38,12 @@ presents the user with a form to select:
 - `Targets` gives several options for where to obtain device targets for
   the new run:
    
-      - Manually defined:  Use the targets manually defined below
-      - Restart run: Use the targets from the selected restart runtime
-      - Workflow:  Use the targets that are currently defined at workflow level
+      - Manually defined:  Use the targets manually defined below.
+      - Restart run: Use the targets from the selected restart runtime.
+      - Workflow:  Use the targets that are currently defined at workflow level.
         
-- `Devices`: for use with the `Manually defined` option above
-- `Pools`: for use with the `Manually defined` option above
+- `Devices`: for use with the `Manually defined` option above.
+- `Pools`: for use with the `Manually defined` option above.
 
 !!! note
 

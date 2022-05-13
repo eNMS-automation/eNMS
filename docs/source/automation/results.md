@@ -1,8 +1,4 @@
----
-title: Results
----
-
-## Overview 
+# Overview 
 
 Results represent an automation outcome from running a Service (or Workflow) against
 one or more Device targets.
@@ -32,15 +28,16 @@ how to filter this table.
 
 These actions apply to all results selected by the current Result filter: 
 
-- *Calendar* - view the results by runtime 
+- *Calendar* - view the results by runtime.
 
 ![Results Table](../_static/automation/results/results_calendar.png)
 
 These actions apply to single result: 
 
-- *Logs* - show the logs for the service or workflow 
-- *Results* - view of results
-- *Stop* - view the service or workflow running
+- *Logs* - show the logs for the service or workflow. 
+- *Results* - view of results.
+- *Stop* - stop the service or workflow after the current device completes
+  the current service.
 
 ## Result Viewer(s) - Example
 
@@ -49,12 +46,12 @@ individual Services with summary information.
 
 ![Results Table](../_static/automation/results/results_viewer_1.png)
 
-Clicking on the the `Results` button here will show next level of Results details - 
+Clicking on the `Results` button here will show next level of Results details - 
 this typically is the outcomes for all Devices for a single service.
 
 ![Results Table](../_static/automation/results/results_viewer_2.png)
 
-Clicking on the the `Results` button will show the detailed, specific result data for a
+Clicking on the `Results` button will show the detailed, specific result data for a
 single Service and Device.
 
 ![Results Table](../_static/automation/results/results_viewer_3.png)
@@ -63,7 +60,7 @@ single Service and Device.
 
 Results can be also be viewed from: 
 
-- Inside the [Workflow Builder](../../automation/workflow_builder/) 
+- Inside the [Workflow Builder](../../automation/workflow_builder/). 
 - From the [Inventory => Devices](../../inventory/devices/) table.
 
 

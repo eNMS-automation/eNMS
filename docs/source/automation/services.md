@@ -122,7 +122,7 @@ Services can be run from the following locations:
 - `Automation -> Scheduling`: Activated services will run when their scheduled
   time arrives.
 - `Visualization`:  A service can be selected to run on the filtered
-  list of devices shown - for both the `Geographic View` and the `Network Builder`.
+  list of devices shown - for both the `Geographical View` and the `Network Builder`.
 - `Inventory` Devices and Pools tables: A service can be selected to run
   on a device, all filtered devices, a pool, or the filtered pools in the table.
 - Using the `REST API`: the same flexibility provided by the UI is also available 

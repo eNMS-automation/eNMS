@@ -1,5 +1,5 @@
 
-# Geographic View
+# Geographical View
 
 ## Visualization Controls
 
@@ -30,7 +30,7 @@ one causes all devices and links defined in the selected pool to be displayed.
 ## 3D Visualization
 
 When the 3D rendering option is set, additional icons appear in the upper 
-right corner of the Geographic View panel.  These control how the network data
+right corner of the Geographical View panel.  These control how the network data
 is displayed.
 
 ![Secondary Controls](../_static/visualization/controls_2.png)

@@ -1,6 +1,8 @@
 
 # Geographical View
 
+All data in this visualization mode is rendered on a 2D map .
+
 ## Visualization Controls
 
 ![Main Controls](../_static/visualization/controls_1.png)
@@ -26,11 +28,6 @@ one causes all devices and links defined in the selected pool to be displayed.
     - Next View: View pool/filtering data on map that is more recent than data
       currently being displayed. This option is only available if you have
       clicked the Previous View button.
-
-### 3D Visualization - 3D Mode - Satellite Imagery
-
-![3D Network Map](../_static/visualization/network_view_3d.png)
-
 
 ### Network Data 
 
@@ -58,19 +55,9 @@ A dialog will open showing all devices that are at the selected location.
 
 ![Colocated Devices](../_static/visualization/colocated_devices.png)
 
-
-## 2D Visualization
-
-All data in this visualization mode is rendered in 2D in the display. There are
-options that are only available in the 2D visualization setting.  For example, 
-there are `+` and `-` icons in the upper left that can be used to zoom
-in or out respectively.
-
-
 ### Device Markers
 
-In 2D mode, there are additional markers available for showing devices on the 
-map.  Marker type is selected by right-clicking the map and selecting `Type of 
+Marker type is selected by right-clicking the map and selecting `Type of 
 Marker`. The options are:
 
 - Image - (**Default**) The images associated with the `Icon` property of a
@@ -79,10 +66,9 @@ Marker`. The options are:
 - Circle Marker - A circle with a bold border and translucent fill centered on
   the location of the device. 
 
-
 ### Tile Layers
 
-There are two types of tiles available in 2D mode:
+There are two types of tiles available:
 
 - Open Street Map - The imagery used to draw the map is from the Open Street
   Map project.

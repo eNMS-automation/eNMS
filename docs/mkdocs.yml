@@ -21,7 +21,7 @@ nav:
     - Pools: inventory/pools.md
     - Networks: inventory/networks.md
   - Visualization:
-    - Geographic View: visualization/geographic_view.md
+    - Geographical View: visualization/geographical_view.md
     - Network Builder: visualization/network_builder.md
   - Automation:
     - Services:

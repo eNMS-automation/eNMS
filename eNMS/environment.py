@@ -54,8 +54,6 @@ class Environment:
         self.init_logs()
         self.init_redis()
         self.init_connection_pools()
-        if vs.settings["app"]["invalidate_cache"]:
-            self.init_cache_invalidation()
         self.ssh_port = -1
 
     def authenticate_user(self, **kwargs):
@@ -124,11 +122,6 @@ class Environment:
                 )
         except NameError as exc:
             warn(f"Module missing ({exc})")
-
-    def init_cache_invalidation(self):
-        for file_type in ("js", "css"):
-            folder = next((vs.path / "eNMS" / "static" / file_type).iterdir())
-            folder.rename(folder.parent / vs.version_path)
 
     def init_connection_pools(self):
         self.request_session = RequestSession()

@@ -36,10 +36,6 @@ Version 4.2.0
 - Update workflow algorithm to not add services to priority queue in DxD mode if all are discarded.
 - Update Ansible Service to use custom path in cwd argument of subprocess.check_output.
 - Change default priority to 10 for services. Update of migration files required.
-- Implement Cache Invalidation mechanism so that javascript/css files are reloaded at each release.
-  Cache invalidation is activatated by setting "invalidate_cache" to true in settings.json.
-  eNMS automatically renames the version folder in static / js and static / css to the version number
-  stripped from its punctuation.
 - Add new check box "Approved by an Admin user" in the Unix Command service. That box must be ticked by
   an admin user for the service to be allowed to run. A non-admin user cannot save a service if it is
   ticked, meaning that each time a Unix Command service is edited, it must be re-appproved.

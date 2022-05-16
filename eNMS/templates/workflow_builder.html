@@ -2,7 +2,7 @@
 {% block stylesheets %} {{ super() }}
 <link href="{{ url_for('static', filename='lib/vis/vis.min.css') }}" rel="stylesheet" />
 <link
-  href="{{ url_for('static', filename='css/{}/builder.css'.format(version_path)) }}"
+  href="{{ url_for('static', filename='css/builder.css') }}"
   rel="stylesheet"
 />
 {% endblock stylesheets %} {% block content %}
@@ -318,6 +318,6 @@
 <script src="{{ url_for('static', filename='lib/vis/vis.min.js') }}"></script>
 <script
   type="module"
-  src="{{ url_for('static', filename='js/{}/workflowBuilder.js'.format(version_path)) }}"
+  src="{{ url_for('static', filename='js/workflowBuilder.js') }}"
 ></script>
 {% endblock javascripts %}

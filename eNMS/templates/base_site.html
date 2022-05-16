@@ -80,11 +80,11 @@
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='css/{}/main.css'.format(version_path)) }}"
+      href="{{ url_for('static', filename='css/main.css') }}"
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='css/{}/themes/{}.css'.format(version_path, current_user.theme)) }}"
+      href="{{ url_for('static', filename='css/themes/{}.css'.format(current_user.theme)) }}"
       rel="stylesheet"
     />
     {% endblock stylesheets %} {% endblock head %}
@@ -305,7 +305,6 @@
     <script>
       window.eNMS = {};
       const page = "{{ endpoint }}";
-      const versionPath = "{{ version_path }}";
       const user = {{ user|tojson|safe }};
       const configurationProperties = {{ configuration_properties|tojson|safe }};
       const formProperties = {{ form_properties|tojson|safe }};
@@ -346,19 +345,19 @@
     <script src="{{ url_for('static', filename='lib/dropzone/dropzone.min.js') }}"></script>
     <script
       type="module"
-      src="{{ url_for('static', filename='js/{}/base.js'.format(version_path)) }}"
+      src="{{ url_for('static', filename='js/base.js') }}"
     ></script>
     <script
       type="module"
-      src="{{ url_for('static', filename='js/{}/administration.js'.format(version_path)) }}"
+      src="{{ url_for('static', filename='js/administration.js') }}"
     ></script>
     <script
       type="module"
-      src="{{ url_for('static', filename='js/{}/inventory.js'.format(version_path)) }}"
+      src="{{ url_for('static', filename='js/inventory.js') }}"
     ></script>
     <script
       type="module"
-      src="{{ url_for('static', filename='js/{}/automation.js'.format(version_path)) }}"
+      src="{{ url_for('static', filename='js/automation.js') }}"
     ></script>
     {% endblock %}
   </body>

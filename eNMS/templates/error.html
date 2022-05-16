@@ -4,7 +4,7 @@
     <title>{{ error }}</title>
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
     <link
-      href="{{ url_for('static', filename='css/{}/error.css'.format(version_path)) }}"
+      href="{{ url_for('static', filename='css/error.css') }}"
       rel="stylesheet"
     />
     <link
@@ -12,7 +12,7 @@
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='css/{}/themes/{}.css'.format(version_path, current_user.theme or 'default')) }}"
+      href="{{ url_for('static', filename='css/themes/{}.css'.format(current_user.theme or 'default')) }}"
       rel="stylesheet"
     />
   </head>

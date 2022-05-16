@@ -1,7 +1,7 @@
 {% extends "base_site.html" %} {% block title %} Dashboard {% endblock title %} {% block
 stylesheets %} {{ super() }}
 <link
-  href="{{ url_for('static', filename='css/{}/dashboard.css'.format(version_path)) }}"
+  href="{{ url_for('static', filename='css/dashboard.css') }}"
   rel="stylesheet"
 />
 {% endblock stylesheets %} {% block content %}

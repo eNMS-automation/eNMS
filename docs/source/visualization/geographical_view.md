@@ -89,8 +89,3 @@ sites of those included in the entire cluster. The image below uses the Circle
 Marker to indicate device locations on the Open Street Map tile layer.
 
 ![Clustered View](../_static/visualization/clustered_view.png)
-
-
-
-
-

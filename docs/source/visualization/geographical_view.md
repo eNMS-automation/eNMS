@@ -27,33 +27,6 @@ one causes all devices and links defined in the selected pool to be displayed.
       currently being displayed. This option is only available if you have
       clicked the Previous View button.
 
-## 3D Visualization
-
-When the 3D rendering option is set, additional icons appear in the upper 
-right corner of the Geographical View panel.  These control how the network data
-is displayed.
-
-![Secondary Controls](../_static/visualization/controls_2.png)
-
-From left to right:
-
-- View Home: Returns the view to a default view based on the mode (See below)
-- Mode: Select from the three viewing modes
-    - 2D: Data is presented on a flat scrollable image.
-    - 3D: Data is presented on a three dimensional model of a globe.
-    - Columbus View: Data is presented in 3D as a flat surface that slants away
-      as if displayed on a table. The image can be scrolled left/right and
-      up/down but cannot be rotated like the 3D image.
-- Map Type: A selection of satellite and street map imagery that can be selected
-  for the display.
-- Navigation Instructions: Displays instructions for how to use the mouse for
-  navigating the map display (Zoom, Pan, etc).
-
-Also in the 3D mode, the bottom right corner of the display will have an icon
-with 4 arrows.  Click it to put the application into full-screen mode.  Hit Esc
-to exit full-screen mode.
-
-
 ### 3D Visualization - 3D Mode - Satellite Imagery
 
 ![3D Network Map](../_static/visualization/network_view_3d.png)

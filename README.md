@@ -49,7 +49,7 @@ and displayed logically with a force-directed layout.
 
 Network View                                  |  Sites View
 :--------------------------------------------:|:-------------------------------:
-[![Geographical](docs/source/_static/inventory/network_visualization/network_view_3d.png)](https://www.demo.enms.io/visualization/geographical_view) |  [![Logical](docs/source/_static/base/site_view.png)](https://www.demo.enms.io/visualization/logical_view)
+[![Geographical](docs/source/_static/inventory/visualization/network_view_2d.png)](https://www.demo.enms.io/visualization/geographical_view) |  [![Logical](docs/source/_static/base/site_view.png)](https://www.demo.enms.io/visualization/logical_view)
 
 - Docs: _[Network Visualization](https://enms.readthedocs.io/en/latest/inventory/network_visualization/)_
 

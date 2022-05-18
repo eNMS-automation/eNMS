@@ -145,6 +145,7 @@ class VariableStore:
                 }
                 for model in ("link", "node", "service")
             },
+            "server_url": self.server_url,
             "settings": self.settings,
             "themes": self.themes,
             "table_properties": self.properties["tables"],

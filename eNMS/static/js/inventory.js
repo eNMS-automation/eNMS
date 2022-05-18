@@ -3,6 +3,7 @@ global
 CodeMirror: false
 configurationProperties: false
 formProperties: false
+serverUrl: false
 settings: true
 echarts: false
 theme: false
@@ -163,7 +164,7 @@ function webConnection(id) {
     form: `connection-parameters-form-${id}`,
     callback: function (result) {
       const url =
-        settings.app.address ||
+        serverUrl ||
         `${window.location.protocol}//${window.location.hostname}`;
       const link = result.redirection
         ? `${url}/terminal${result.port}`

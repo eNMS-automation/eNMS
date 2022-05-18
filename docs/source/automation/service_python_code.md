@@ -64,6 +64,32 @@ are made available to the user.
     - **Type**: Set of Database Objects.
     - **Available**: In service by service workflows.
 
+-   `dict_to_string` - convert a dictionary to a string form with
+    indentation.
+        **Type**: Function.
+        **Available**: Always.
+    -   **Return Type**: string
+    -   **Parameters**:
+        - `input`: (**`dict` or `any`, mandatory**)
+        - `depth`: (**optional**) tab characters used to indent the output (Default=0)
+
+    ``` 
+    # Variable substitution example
+    {{dict_to_string(get_var("the_variable_name"))}}
+    ```
+
+    ``` 
+    # General example
+    test = {'key': 'value', 'key2': [45, 1135, 544]}
+    print(dict_to_string(test))
+    # output:
+    key: value
+    key2:
+            - 45
+            - 1135
+            - 544
+    ```
+    
 - `factory()`
     -   **Meaning**: Allows for creating one of the following object types
         in the database: `device`, `link`, `pool`, `service`. Calling
@@ -284,28 +310,11 @@ are made available to the user.
     )
     ```
 
--   `dict_to_string` - convert a dictionary to a string form with
-    indentation. It takes the following parameter:
-
-    -   `input`: (**`dict` or `any`, mandatory**)
-
-    ``` 
-    # Variable substitution example
-    {{dict_to_string(get_var("the_variable_name"))}}
-    ```
-
-    ``` 
-    # General example
-    test = {'key': 'value', 'key2': [45, 1135, 544]}
-    print(dict_to_string(test))
-    # output:
-    key: value
-    key2:
-            - 45
-            - 1135
-            - 544
-    ```
-    
+- `username`
+    -   **Meaning**: The username that created the run
+    -   **Type**: string
+    -   **Available**: Always
+            
 -   `workflow`
 
     -   **Meaning**: current workflow.

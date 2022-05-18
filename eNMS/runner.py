@@ -917,6 +917,7 @@ class Runner:
                 "send_email": env.send_email,
                 "set_var": _self.payload_helper,
                 "settings": vs.settings,
+                "username": _self.main_run.creator,
                 "workflow": _self.workflow,
             }
         )

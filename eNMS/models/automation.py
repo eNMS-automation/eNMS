@@ -1,4 +1,5 @@
 from copy import deepcopy
+from this import d
 from flask_login import current_user
 from functools import wraps
 from requests import get, post
@@ -120,6 +121,10 @@ class Service(AbstractBase):
     def __init__(self, **kwargs):
         kwargs.pop("status", None)
         super().__init__(**kwargs)
+
+    def delete(self):
+        if self.name in ("[Shared] Start", "[Shared] End", "[Shared] Placeholder"):
+            raise db.rbac_error(f"It is not allowed to delete '{self.name}'")
 
     def update(self, **kwargs):
         if self.positions and "positions" in kwargs:

@@ -55,6 +55,13 @@ Provide a secret key used by Flask to sign sessions:
     # set the SECRET_KEY environment variable
     export SECRET_KEY=value-of-user-secret-key
 
+### Server Address
+
+The address is needed when eNMS needs to provide a link back to the application, which is the case with webssh and mail notifications. When left empty, eNMS will try to guess the
+URL. This might not work consistently depending on the user's environment (nginx configuration, proxy, ...).
+
+    export SERVER_ADDR="http://192.168.56.102"
+
 ### WSGI server
 
 A WSGI HTTP server such as gunicorn is required to run eNMS in production, 
@@ -503,11 +510,6 @@ back to settings.json file` is selected.
 
 #### `app` section
 
--   `address` (default: `""`) The address is needed when eNMS needs to
-    provide a link back to the application, which is the case with webssh
-    and mail notifications. When left empty, eNMS will try to guess the
-    URL. This might not work consistently depending on the user's environment
-    (nginx configuration, proxy, ...).
 -   `config_mode` (default: `"debug"`) Must be set to `"debug"` or
     `"production"`.
 -   `documentation_url` (default:
@@ -518,7 +520,6 @@ back to settings.json file` is selected.
     system for device configurations: this variable is the address of
     the remote git repository where eNMS will push all device
     configurations.
--   `ip_address`: IP address of this instance of the server.
 -   `plugin_path`: (default: `"eNMS/plugins"`) location of eNMS plugin
     extensions and customizations.
 -   `session_timeout_minutes`: (default: `90`).

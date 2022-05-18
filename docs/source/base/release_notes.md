@@ -7,6 +7,7 @@ Version 4.2.1
 - Remove 3D Geographical Visualization
 - Default to "info" for services log level. Move "Disable logging" at the end of the list.
 - Add "username" variable in workflow global space set to the user that runs the workflow.
+- Forbid deletion of Start, End and Placeholder services.
 
 Version 4.2.0
 -------------

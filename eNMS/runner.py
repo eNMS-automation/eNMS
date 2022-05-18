@@ -642,9 +642,8 @@ class Runner:
         if self.notification_header:
             notification["Header"] = self.sub(self.notification_header, locals())
         if self.include_link_in_summary:
-            address = getenv("SERVER_ADDR", "https://0.0.0.0")
             run = f"{self.main_run.id}/{self.service.id}"
-            notification["Link"] = f"{address}/view_service_results/{run}"
+            notification["Link"] = f"{vs.server_url}/view_service_results/{run}"
         if "summary" in results:
             if results["summary"]["failure"]:
                 notification["FAILED"] = results["summary"]["failure"]

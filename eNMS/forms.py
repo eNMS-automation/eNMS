@@ -693,7 +693,7 @@ class ServiceForm(BaseForm):
     admin_only = BooleanField("Admin Only")
     log_level = SelectField(
         "Logging",
-        choices=((0, "Disable logging"), *enumerate(vs.log_levels, 1)),
+        choices=(*enumerate(vs.log_levels), (-1, "Disable logging")),
         default=1,
     )
     multiprocessing = BooleanField("Multiprocessing")

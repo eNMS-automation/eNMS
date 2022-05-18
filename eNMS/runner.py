@@ -615,7 +615,7 @@ class Runner:
         if (
             logger != "security"
             and allow_disable
-            and (not log_level or severity not in vs.log_levels[log_level - 1 :])
+            and (log_level == -1 or severity not in vs.log_levels[log_level:])
         ):
             return
         if device:

@@ -78,7 +78,7 @@ class AbstractBase(db.base):
                 if table_properties.get(property, {}).get("merge_update"):
                     current_value = getattr(self, property)
                     if current_value:
-                        value = vs.dictionary_recursive_merge(value, current_value)
+                        value = {**current_value, **value}
             setattr(self, property, value)
         if not kwargs.get("update_pools") or not self.pool_model:
             return

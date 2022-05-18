@@ -8,6 +8,7 @@ Version 4.2.1
 - Default to "info" for services log level. Move "Disable logging" at the end of the list.
 - Add "username" variable in workflow global space set to the user that runs the workflow.
 - Forbid deletion of Start, End and Placeholder services.
+- Fix merge_update behavior to not extend list every time an object is edited.
 
 Version 4.2.0
 -------------

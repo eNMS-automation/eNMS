@@ -642,7 +642,7 @@ class Runner:
         if self.notification_header:
             notification["Header"] = self.sub(self.notification_header, locals())
         if self.include_link_in_summary:
-            address = vs.settings["app"]["address"]
+            address = getenv("SERVER_ADDR", "https://0.0.0.0")
             run = f"{self.main_run.id}/{self.service.id}"
             notification["Link"] = f"{address}/view_service_results/{run}"
         if "summary" in results:

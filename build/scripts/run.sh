@@ -29,6 +29,7 @@ function run() {
   if [ "$redis" = true ]; then
     export REDIS_ADDR="192.168.56.103"
   fi
+  export SERVER_ADDR="http://192.168.56.102"
   export SCHEDULER_ADDR="http://192.168.56.103:5000"
   export LDAP_ADDR="192.168.56.104"
   export TACACS_ADDR="192.168.56.104"

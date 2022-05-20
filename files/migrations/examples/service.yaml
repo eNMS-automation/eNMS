@@ -49,7 +49,9 @@
   positions:
     (R) Ansible Playbook Service: [-638, 93]
     (R) Configuration Properties Backup Services: [-826, 220]
-    (R) Gateway Mechanism (SSH Proxy with Paramiko): &id001 [-208, -125]
+    (R) Gateway Mechanism (SSH Proxy with Netmiko): &id001 [-208, -125]
+    (R) Gateway Mechanism (SSH Proxy with Paramiko): *id001
+    (R) Gateway Mechanism (SSH Proxy with Scrapli): [-208, -125]
     (R) Generic File Transfer Service: &id004 [-479, -89]
     (R) Labels and Custom Property: [-256, -78]
     (R) Multiple parallel connections to same device: &id014 [-339, -168]
@@ -438,7 +440,7 @@
   send_notification: false
   send_notification_method: mail
   shared: true
-  skip: {'[Large Workflow with Large Subworkflows] Large Subworkflow': false}
+  skip: {(R) Gateway Mechanism (SSH Proxy with Scrapli): false, '[Large Workflow with Large Subworkflows] Large Subworkflow': false}
   skip_query: ''
   skip_value: success
   target_devices: []
@@ -503,7 +505,9 @@
   positions:
     (R) Ansible Playbook Service: [512, 246]
     (R) Configuration Properties Backup Services: [328, 372]
-    (R) Gateway Mechanism (SSH Proxy with Paramiko): &id088 [795, -51]
+    (R) Gateway Mechanism (SSH Proxy with Netmiko): &id088 [795, -51]
+    (R) Gateway Mechanism (SSH Proxy with Paramiko): *id088
+    (R) Gateway Mechanism (SSH Proxy with Scrapli): [795, -51]
     (R) Generic File Transfer Service: &id091 [476, 156]
     (R) Labels and Custom Property: [669, -84]
     (R) Multiple parallel connections to same device: &id101 [689, 58]
@@ -903,7 +907,7 @@
   send_notification: false
   send_notification_method: mail
   shared: true
-  skip: {'[Large Workflow with Large Subworkflows] Large Subworkflow': false}
+  skip: {(R) Gateway Mechanism (SSH Proxy with Scrapli): false, '[Large Workflow with Large Subworkflows] Large Subworkflow': false}
   skip_query: ''
   skip_value: success
   target_devices: []
@@ -26604,7 +26608,7 @@
         \ connecting to Gateway 3,\r\nthen Gateway 2, and finally succeed connecting\r\
         \nto Gateway 1.\r\nTwo stacktraces expected in the logs."
       positions: [311, 132]
-  last_modified: '2022-01-16 05:06:50.876985'
+  last_modified: '2022-05-20 13:46:04.332704'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -26612,7 +26616,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: (R) Gateway Mechanism (SSH Proxy with Paramiko)
+  name: (R) Gateway Mechanism (SSH Proxy with Netmiko)
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -26636,12 +26640,12 @@
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
-  scoped_name: (R) Gateway Mechanism (SSH Proxy with Paramiko)
+  scoped_name: (R) Gateway Mechanism (SSH Proxy with Netmiko)
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[(R) Gateway Mechanism (SSH Proxy
-      with Paramiko)] Gateway 1', '[(R) Gateway Mechanism (SSH Proxy with Paramiko)]
-      Gateway 3, 2 then 1', '[(R) Gateway Mechanism (SSH Proxy with Paramiko)] Both']
+      with Netmiko)] Gateway 1', '[(R) Gateway Mechanism (SSH Proxy with Netmiko)]
+      Gateway 3, 2 then 1', '[(R) Gateway Mechanism (SSH Proxy with Netmiko)] Both']
   shared: false
   skip: {}
   skip_query: ''
@@ -26712,7 +26716,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[(R) Gateway Mechanism (SSH Proxy with Paramiko)] Gateway 1'
+  name: '[(R) Gateway Mechanism (SSH Proxy with Netmiko)] Gateway 1'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -26729,7 +26733,9 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) Gateway Mechanism (SSH Proxy with Paramiko): &id443 [-39, 41]
+    (R) Gateway Mechanism (SSH Proxy with Netmiko): &id443 [-39, 41]
+    (R) Gateway Mechanism (SSH Proxy with Paramiko): *id443
+    (R) Gateway Mechanism (SSH Proxy with Scrapli): *id443
     'Automation: gateways (SSH Proxy with Paramiko)': *id443
     Gateway Mechanism (SSH Proxy with Paramiko): *id443
   postprocessing: ''
@@ -26743,7 +26749,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: {}
+  skip: {(R) Gateway Mechanism (SSH Proxy with Scrapli): false}
   skip_query: ''
   skip_value: success
   start_new_connection: false
@@ -26818,7 +26824,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[(R) Gateway Mechanism (SSH Proxy with Paramiko)] Gateway 3, 2 then 1'
+  name: '[(R) Gateway Mechanism (SSH Proxy with Netmiko)] Gateway 3, 2 then 1'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -26835,7 +26841,9 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) Gateway Mechanism (SSH Proxy with Paramiko): &id444 [301, 39]
+    (R) Gateway Mechanism (SSH Proxy with Netmiko): &id444 [301, 39]
+    (R) Gateway Mechanism (SSH Proxy with Paramiko): *id444
+    (R) Gateway Mechanism (SSH Proxy with Scrapli): *id444
     'Automation: gateways (SSH Proxy with Paramiko)': *id444
     Gateway Mechanism (SSH Proxy with Paramiko): *id444
   postprocessing: ''
@@ -26849,7 +26857,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: {}
+  skip: {(R) Gateway Mechanism (SSH Proxy with Scrapli): false}
   skip_query: ''
   skip_value: success
   start_new_connection: false
@@ -26924,7 +26932,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[(R) Gateway Mechanism (SSH Proxy with Paramiko)] Both'
+  name: '[(R) Gateway Mechanism (SSH Proxy with Netmiko)] Both'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -26941,7 +26949,9 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) Gateway Mechanism (SSH Proxy with Paramiko): &id445 [660, 34]
+    (R) Gateway Mechanism (SSH Proxy with Netmiko): &id445 [660, 34]
+    (R) Gateway Mechanism (SSH Proxy with Paramiko): *id445
+    (R) Gateway Mechanism (SSH Proxy with Scrapli): *id445
     'Automation: gateways (SSH Proxy with Paramiko)': *id445
     Gateway Mechanism (SSH Proxy with Paramiko): *id445
   postprocessing: ''
@@ -26955,7 +26965,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: {}
+  skip: {(R) Gateway Mechanism (SSH Proxy with Scrapli): false}
   skip_query: ''
   skip_value: success
   start_new_connection: false
@@ -30744,6 +30754,393 @@
   timeout_transport: 30.0
   transport: system
   type: scrapli_backup_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_device_driver: true
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  category: SSH Connection
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  custom_property: Default Value
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    4a139d74-317c-4623-ae5d-b4715b9ae95b:
+      alignment: left
+      content: "Runs on \"Router behind Gateway 1\".\r\nShould try and succeed connecting\r\
+        \nto \"Gateway 1\"."
+      positions: [-49, 127]
+    bfee4cbb-eaef-446f-ae5c-4aee02381dc4:
+      alignment: left
+      content: "Should re-use cached proxy connections\r\nfor both \"Router behind\
+        \ Gateway 1\" and\r\n\"Router behind Gateway 1, 2 and 3\".\r\nNo stacktrace\
+        \ expected."
+      positions: [712, 128]
+    c23ca0ee-235d-404a-bc08-fe900792803a:
+      alignment: left
+      content: "This workflows tests the Gateway feature: we connect to a remote network\
+        \ device via a Gateway device, called \"Gateway\".\r\nThe workflow runs in\
+        \ Service Targets mode, with two Netmiko Validation services :\r\n- the first\
+        \ tests the gateway mechanism in case there is one, reachable gateway. It\
+        \ has one target, \"Router behind Gateway 1\"\r\nwhose \"gateways\" field\
+        \ is set to \"Gateway 1\". \r\n- the second service tests the priority tie\
+        \ break mechanism: eNMS tries the gateways,\r\nfrom the highest to the lowest\
+        \ priority until one is reachable.\r\nIt has one target: \"Router behind Gateway\
+        \ 1, 2 and 3\".\r\nGateway 3 has the highest priority, it should be selected\
+        \ but is unreachable (wrong IP).\r\nIt should then try Gateway 2 (higher priority\
+        \ than Gateway 1, also unreachable) and finally fall back on Gateway 1.\r\n\
+        - the last service runs on both \"Router behind Gateway 1\" and \"Router behind\
+        \ Gateway 1, 2 and 3\".\r\nThe behavior should be the same as that of the\
+        \ first and second services:\r\n* Gateway 1 should be used right away \"Router\
+        \ behind Gateway 1\"\r\n* Gateway 1 should be used as a fall back after trying\
+        \ Gateway 2 and 3 for \"Router behind Gateway 1, 2 and 3\""
+      positions: [367, -135]
+    dd3e4d77-8a48-4292-8f3c-fe8aaf0bc273:
+      alignment: left
+      content: "Runs on \"Router behind Gateway 1, 2 and 3\".\r\nShould try and fail\
+        \ connecting to Gateway 3,\r\nthen Gateway 2, and finally succeed connecting\r\
+        \nto Gateway 1.\r\nTwo stacktraces expected in the logs."
+      positions: [311, 132]
+  last_modified: '2022-05-20 13:49:39.803015'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: (R) Gateway Mechanism (SSH Proxy with Scrapli)
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 11
+  reply_to: ''
+  reserved: false
+  run_method: per_service_with_service_targets
+  scoped_name: (R) Gateway Mechanism (SSH Proxy with Scrapli)
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[(R) Gateway Mechanism (SSH Proxy
+      with Scrapli)] Gateway 1b', '[(R) Gateway Mechanism (SSH Proxy with Scrapli)]
+      Gateway 3, 2 then 1b', '[(R) Gateway Mechanism (SSH Proxy with Scrapli)] Bothb']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  close_connection: false
+  commands: sh ip int br
+  completion_time: 1
+  connection_name: default
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: arista_eos
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  is_configuration: false
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2022-05-20 13:48:33.884046'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[(R) Gateway Mechanism (SSH Proxy with Scrapli)] Gateway 1b'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    (R) Gateway Mechanism (SSH Proxy with Scrapli): [-43, 52]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  reply_to: ''
+  reserved: false
+  results_as_list: true
+  run_method: per_device
+  scoped_name: Gateway 1b
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  target_devices: [Router behind Gateway 1]
+  target_pools: []
+  time_between_retries: 10
+  timeout_ops: 30.0
+  timeout_socket: 15.0
+  timeout_transport: 30.0
+  transport: system
+  type: scrapli_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_device_driver: true
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  close_connection: false
+  commands: sh ip int br
+  completion_time: 1
+  connection_name: default
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: arista_eos
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  is_configuration: false
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2022-05-20 13:48:52.944951'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[(R) Gateway Mechanism (SSH Proxy with Scrapli)] Gateway 3, 2 then 1b'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    (R) Gateway Mechanism (SSH Proxy with Scrapli): [288, 43]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  reply_to: ''
+  reserved: false
+  results_as_list: true
+  run_method: per_device
+  scoped_name: Gateway 3, 2 then 1b
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  target_devices: ['Router behind Gateway 1, 2 and 3']
+  target_pools: []
+  time_between_retries: 10
+  timeout_ops: 30.0
+  timeout_socket: 15.0
+  timeout_transport: 30.0
+  transport: system
+  type: scrapli_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_device_driver: true
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  close_connection: false
+  commands: sh ip int br
+  completion_time: 1
+  connection_name: default
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: arista_eos
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  is_configuration: false
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2022-05-20 13:49:22.702319'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[(R) Gateway Mechanism (SSH Proxy with Scrapli)] Bothb'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    (R) Gateway Mechanism (SSH Proxy with Scrapli): [669, 48]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  reply_to: ''
+  reserved: false
+  results_as_list: true
+  run_method: per_device
+  scoped_name: Bothb
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  target_devices: [Router behind Gateway 1, 'Router behind Gateway 1, 2 and 3']
+  target_pools: []
+  time_between_retries: 10
+  timeout_ops: 30.0
+  timeout_socket: 15.0
+  timeout_transport: 30.0
+  transport: system
+  type: scrapli_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true

@@ -1354,21 +1354,21 @@
   source: '[POST update, DELETE delete and GET & POST results] POST Search Result',
   subtype: success, type: workflow_edge, workflow: 'POST update, DELETE delete and
     GET & POST results'}
-- {color: green, destination: '[(R) Gateway Mechanism (SSH Proxy with Paramiko)] Gateway
+- {color: green, destination: '[(R) Gateway Mechanism (SSH Proxy with Netmiko)] Gateway
     1', label: success, name: '2022-01-01 03:00:48.411449', source: '[Shared] Start',
   subtype: success, type: workflow_edge, workflow: (R) Gateway Mechanism (SSH Proxy
-    with Paramiko)}
-- {color: green, destination: '[(R) Gateway Mechanism (SSH Proxy with Paramiko)] Gateway
+    with Netmiko)}
+- {color: green, destination: '[(R) Gateway Mechanism (SSH Proxy with Netmiko)] Gateway
     3, 2 then 1', label: success, name: '2022-01-01 03:01:38.437052', source: '[(R)
-    Gateway Mechanism (SSH Proxy with Paramiko)] Gateway 1', subtype: success, type: workflow_edge,
-  workflow: (R) Gateway Mechanism (SSH Proxy with Paramiko)}
-- {color: green, destination: '[(R) Gateway Mechanism (SSH Proxy with Paramiko)] Both',
+    Gateway Mechanism (SSH Proxy with Netmiko)] Gateway 1', subtype: success, type: workflow_edge,
+  workflow: (R) Gateway Mechanism (SSH Proxy with Netmiko)}
+- {color: green, destination: '[(R) Gateway Mechanism (SSH Proxy with Netmiko)] Both',
   label: success, name: '2022-01-01 03:02:05.260789', source: '[(R) Gateway Mechanism
-    (SSH Proxy with Paramiko)] Gateway 3, 2 then 1', subtype: success, type: workflow_edge,
-  workflow: (R) Gateway Mechanism (SSH Proxy with Paramiko)}
+    (SSH Proxy with Netmiko)] Gateway 3, 2 then 1', subtype: success, type: workflow_edge,
+  workflow: (R) Gateway Mechanism (SSH Proxy with Netmiko)}
 - {color: green, destination: '[Shared] End', label: success, name: '2022-01-01 03:02:06.375942',
-  source: '[(R) Gateway Mechanism (SSH Proxy with Paramiko)] Both', subtype: success,
-  type: workflow_edge, workflow: (R) Gateway Mechanism (SSH Proxy with Paramiko)}
+  source: '[(R) Gateway Mechanism (SSH Proxy with Netmiko)] Both', subtype: success,
+  type: workflow_edge, workflow: (R) Gateway Mechanism (SSH Proxy with Netmiko)}
 - {color: green, destination: '[Parameterized Multiprocessing] Empty Service', label: success,
   name: '2022-01-15 06:13:18.168148', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: Parameterized Multiprocessing}

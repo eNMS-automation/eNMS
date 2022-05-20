@@ -9,7 +9,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.51
   last_configuration_duration: 2.077593s
   last_configuration_failure: '2022-04-18 09:22:24.879569'
@@ -60,7 +59,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.1.86
   last_configuration_duration: 2.28239s
   last_configuration_failure: Never
@@ -111,7 +109,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: 3.559713s
   last_configuration_failure: '2022-04-18 09:22:25.797813'
@@ -162,19 +159,18 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
-  last_configuration_duration: 2.556811s
+  last_configuration_duration: 1.294466s
   last_configuration_failure: '2022-04-13 15:59:28.944444'
-  last_configuration_runtime: '2022-04-13 16:03:45.097013'
+  last_configuration_runtime: '2022-05-13 09:52:42.728901'
   last_configuration_status: Success
-  last_configuration_update: '2022-04-13 16:03:45.097013'
+  last_configuration_update: '2022-05-13 09:52:42.728901'
   last_modified: ''
-  last_operational_data_duration: 0.109135s
+  last_operational_data_duration: 0.750234s
   last_operational_data_failure: '2022-04-13 15:59:32.307044'
-  last_operational_data_runtime: '2022-04-13 16:03:59.249201'
+  last_operational_data_runtime: '2022-05-13 09:52:44.096911'
   last_operational_data_status: Success
-  last_operational_data_update: '2022-04-13 16:03:59.249201'
+  last_operational_data_update: '2022-05-13 09:52:44.096911'
   last_specialized_data_duration: 3.775398s
   last_specialized_data_failure: Never
   last_specialized_data_runtime: '2022-02-14 10:13:39.034416'
@@ -213,7 +209,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -264,7 +259,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.1.187
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -315,7 +309,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.12
   last_configuration_duration: 3.556486s
   last_configuration_failure: '2022-04-18 09:22:23.714879'
@@ -366,7 +359,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.100
   last_configuration_duration: 3.777961s
   last_configuration_failure: '2022-04-18 09:22:23.790350'
@@ -417,7 +409,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.101
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -468,7 +459,6 @@
   down: false
   gateways: []
   icon: optical_switch
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.13
   last_configuration_duration: 1.974735s
   last_configuration_failure: Never
@@ -519,7 +509,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.14
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -570,7 +559,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.15
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -621,7 +609,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.102
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -672,7 +659,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -723,7 +709,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.104
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -774,7 +759,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: 2.06051s
   last_configuration_failure: Never
@@ -825,7 +809,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -876,7 +859,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -927,7 +909,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -978,7 +959,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: 2.025575s
   last_configuration_failure: Never
@@ -1029,7 +1009,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.110
   last_configuration_duration: 2.076096s
   last_configuration_failure: Never
@@ -1080,7 +1059,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.1.88
   last_configuration_duration: 2.279618s
   last_configuration_failure: Never
@@ -1131,7 +1109,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.111
   last_configuration_duration: 3.553896s
   last_configuration_failure: Never
@@ -1182,7 +1159,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.1.89
   last_configuration_duration: 3.565648s
   last_configuration_failure: '2022-04-18 09:22:23.636862'
@@ -1233,7 +1209,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.114
   last_configuration_duration: 3.587525s
   last_configuration_failure: '2022-04-18 09:22:23.926943'
@@ -1284,7 +1259,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.112
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1335,7 +1309,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.113
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1386,7 +1359,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.1.85
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1435,7 +1407,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.1.86
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1484,7 +1455,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.1.87
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1533,7 +1503,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.1.88
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1582,7 +1551,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.1.188
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1631,7 +1599,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.1.187
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1680,7 +1647,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.12
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1729,7 +1695,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.13
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1778,7 +1743,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.14
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1827,7 +1791,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.15
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1876,7 +1839,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.16
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1925,7 +1887,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.17
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -1974,7 +1935,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.18
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2023,7 +1983,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.19
   last_configuration_duration: 1.804429s
   last_configuration_failure: Never
@@ -2072,7 +2031,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.20
   last_configuration_duration: 1.872709s
   last_configuration_failure: Never
@@ -2121,7 +2079,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.21
   last_configuration_duration: 1.975994s
   last_configuration_failure: Never
@@ -2170,7 +2127,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.22
   last_configuration_duration: 1.34334s
   last_configuration_failure: Never
@@ -2219,7 +2175,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.23
   last_configuration_duration: 1.357055s
   last_configuration_failure: '2022-04-18 09:22:23.526204'
@@ -2268,7 +2223,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.24
   last_configuration_duration: 1.368328s
   last_configuration_failure: '2022-04-18 09:22:23.866493'
@@ -2317,7 +2271,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.25
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2366,7 +2319,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.26
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2415,7 +2367,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.27
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2464,7 +2415,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.28
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2513,7 +2463,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.29
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2562,7 +2511,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.30
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2611,7 +2559,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.31
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2660,7 +2607,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.32
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2709,7 +2655,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.33
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2758,7 +2703,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.34
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2807,7 +2751,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.35
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2856,7 +2799,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.36
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2905,7 +2847,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.37
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -2954,7 +2895,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.38
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -3003,7 +2943,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.103
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -3052,7 +2991,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 127.0.0.1
   last_configuration_duration: 2.153091s
   last_configuration_failure: Never
@@ -3101,7 +3039,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.100
   last_configuration_duration: 2.093703s
   last_configuration_failure: Never
@@ -3152,7 +3089,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.100
   last_configuration_duration: 2.105325s
   last_configuration_failure: Never
@@ -3203,7 +3139,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.100
   last_configuration_duration: 3.668885s
   last_configuration_failure: Never
@@ -3253,7 +3188,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: 3.541619s
   last_configuration_failure: '2022-04-18 09:22:23.564784'
@@ -3304,7 +3238,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -3354,7 +3287,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.51
   last_configuration_duration: 2.155573s
   last_configuration_failure: '2022-04-18 09:22:24.067631'
@@ -3404,7 +3336,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: 10.0.0.112
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -3452,7 +3383,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -3501,7 +3431,6 @@
   down: false
   gateways: []
   icon: server
-  icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -3551,7 +3480,6 @@
   down: false
   gateways: []
   icon: optical_switch
-  icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -3601,7 +3529,6 @@
   down: false
   gateways: [Gateway 1]
   icon: antenna
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -3650,7 +3577,6 @@
   down: false
   gateways: []
   icon: antenna
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.104
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -3699,7 +3625,6 @@
   down: false
   gateways: []
   icon: antenna
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.199
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -3748,7 +3673,6 @@
   down: false
   gateways: []
   icon: antenna
-  icon_3d: juniper_ex3300
   ip_address: 192.168.56.201
   last_configuration_duration: 1.348949s
   last_configuration_failure: '2022-04-18 09:22:26.872995'
@@ -3796,7 +3720,6 @@
   down: false
   gateways: [Gateway 1, Gateway 2, Gateway 3]
   icon: antenna
-  icon_3d: juniper_ex3300
   ip_address: "192.168.56.50\t"
   last_configuration_duration: 3.561001s
   last_configuration_failure: Never
@@ -3844,7 +3767,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: 1.39299s
   last_configuration_failure: Never
@@ -3893,7 +3815,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: 2.095845s
   last_configuration_failure: Never
@@ -3943,7 +3864,6 @@
   down: false
   gateways: []
   icon: host
-  icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -3993,7 +3913,6 @@
   down: false
   gateways: []
   icon: host
-  icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -4042,7 +3961,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -4092,7 +4010,6 @@
   down: false
   gateways: []
   icon: host
-  icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -4141,7 +4058,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -4190,7 +4106,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -4239,7 +4154,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -4288,7 +4202,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -4337,7 +4250,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -4386,7 +4298,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -4435,7 +4346,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
   last_configuration_failure: Never
@@ -4483,7 +4393,6 @@
   down: false
   gateways: []
   icon: router
-  icon_3d: juniper_ex3300
   ip_address: ''
   last_configuration_duration: Never
   last_configuration_failure: Never

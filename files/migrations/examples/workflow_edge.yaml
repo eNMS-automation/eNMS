@@ -1516,3 +1516,18 @@
     Configuration Properties Backup Services] Get Operational Data with Scrapli',
   subtype: success, type: workflow_edge, workflow: (R) Configuration Properties Backup
     Services}
+- {color: green, destination: '[(R) Gateway Mechanism (SSH Proxy with Scrapli)] Gateway
+    1', label: success, name: '2022-05-20 13:52:34.815993', source: '[Shared] Start',
+  subtype: success, type: workflow_edge, workflow: (R) Gateway Mechanism (SSH Proxy
+    with Scrapli)}
+- {color: green, destination: '[(R) Gateway Mechanism (SSH Proxy with Scrapli)] Gateway
+    3, 2 then 1', label: success, name: '2022-05-20 13:52:35.921080', source: '[(R)
+    Gateway Mechanism (SSH Proxy with Scrapli)] Gateway 1', subtype: success, type: workflow_edge,
+  workflow: (R) Gateway Mechanism (SSH Proxy with Scrapli)}
+- {color: green, destination: '[(R) Gateway Mechanism (SSH Proxy with Scrapli)] Both',
+  label: success, name: '2022-05-20 13:52:37.130050', source: '[(R) Gateway Mechanism
+    (SSH Proxy with Scrapli)] Gateway 3, 2 then 1', subtype: success, type: workflow_edge,
+  workflow: (R) Gateway Mechanism (SSH Proxy with Scrapli)}
+- {color: green, destination: '[Shared] End', label: success, name: '2022-05-20 13:52:38.085027',
+  source: '[(R) Gateway Mechanism (SSH Proxy with Scrapli)] Both', subtype: success,
+  type: workflow_edge, workflow: (R) Gateway Mechanism (SSH Proxy with Scrapli)}

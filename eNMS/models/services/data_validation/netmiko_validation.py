@@ -1,5 +1,6 @@
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from traceback import format_exc
+from wtforms.widgets import TextArea
 
 from eNMS.database import db
 from eNMS.fields import BooleanField, HiddenField, StringField
@@ -16,6 +17,7 @@ class NetmikoValidationService(ConnectionService):
     enable_mode = db.Column(Boolean, default=True)
     config_mode = db.Column(Boolean, default=False)
     command = db.Column(db.LargeString)
+    results_as_list = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
     use_device_driver = db.Column(Boolean, default=True)
     use_textfsm = db.Column(Boolean, default=False)
@@ -75,7 +77,8 @@ class NetmikoValidationService(ConnectionService):
 
 class NetmikoValidationForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_validation_service")
-    command = StringField(substitution=True)
+    command = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
+    results_as_list = BooleanField("Results As List")
     use_textfsm = BooleanField("Use TextFSM", default=False)
     expect_string = StringField(substitution=True, help="netmiko/expect_string")
     config_mode_command = StringField(help="netmiko/config_mode_command")
@@ -83,7 +86,7 @@ class NetmikoValidationForm(NetmikoForm):
     strip_prompt = BooleanField(default=True, help="netmiko/strip_prompt")
     strip_command = BooleanField(default=True, help="netmiko/strip_command")
     groups = {
-        "Main Parameters": {"commands": ["command"], "default": "expanded"},
+        "Main Parameters": {"commands": ["command", "results_as_list"], "default": "expanded"},
         **NetmikoForm.groups,
         "Advanced Netmiko Parameters": {
             "commands": [

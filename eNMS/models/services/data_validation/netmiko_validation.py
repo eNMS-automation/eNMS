@@ -42,8 +42,8 @@ class NetmikoValidationService(ConnectionService):
     __mapper_args__ = {"polymorphic_identity": "netmiko_validation_service"}
 
     def job(self, run, device):
-        command = run.sub(run.command, locals())
-        log_command = run.command if "get_credential" in run.command else command
+        commands = run.sub(run.command, locals())
+        log_command = run.command if "get_credential" in run.command else commands
         netmiko_connection = run.netmiko_connection(device)
         try:
             prompt = run.enter_remote_device(netmiko_connection, device)
@@ -54,15 +54,20 @@ class NetmikoValidationService(ConnectionService):
                 device,
                 logger="security",
             )
-            result = netmiko_connection.send_command(
-                command,
-                use_textfsm=run.use_textfsm,
-                delay_factor=run.delay_factor,
-                expect_string=run.sub(run.expect_string, locals()) or None,
-                auto_find_prompt=run.auto_find_prompt,
-                strip_prompt=run.strip_prompt,
-                strip_command=run.strip_command,
-            )
+            result = [
+                netmiko_connection.send_command(
+                    command,
+                    use_textfsm=run.use_textfsm,
+                    delay_factor=run.delay_factor,
+                    expect_string=run.sub(run.expect_string, locals()) or None,
+                    auto_find_prompt=run.auto_find_prompt,
+                    strip_prompt=run.strip_prompt,
+                    strip_command=run.strip_command,
+                )
+                for command in commands.splitlines()
+            ]
+            if not run.results_as_list:
+                result = "\n".join(result)
             run.exit_remote_device(netmiko_connection, prompt, device)
         except Exception:
             result = netmiko_connection.session_log.getvalue().decode().lstrip("\u0000")
@@ -86,7 +91,10 @@ class NetmikoValidationForm(NetmikoForm):
     strip_prompt = BooleanField(default=True, help="netmiko/strip_prompt")
     strip_command = BooleanField(default=True, help="netmiko/strip_command")
     groups = {
-        "Main Parameters": {"commands": ["command", "results_as_list"], "default": "expanded"},
+        "Main Parameters": {
+            "commands": ["command", "results_as_list"],
+            "default": "expanded",
+        },
         **NetmikoForm.groups,
         "Advanced Netmiko Parameters": {
             "commands": [

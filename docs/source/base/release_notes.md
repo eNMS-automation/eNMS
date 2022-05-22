@@ -10,6 +10,8 @@ Version 4.2.1
 - Forbid deletion of Start, End and Placeholder services.
 - Fix merge_update behavior to not extend list every time an object is edited.
 - Define Server IP address and URL with the `SERVER_ADDR` (default `0.0.0.0`) and `SERVER_URL` (default `http://192.168.56.102`) environment variable instead of `settings.json` / `app` section (as VM settings, they don't belong in the application settings and shouldn't be checked in the code).
+- Make "Results as List" False by default for scrapli (consistency with netmiko + not useful when only
+  one command, which is most of the time)
 
 To be tested:
 - mail notification

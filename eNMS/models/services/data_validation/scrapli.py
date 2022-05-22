@@ -46,7 +46,7 @@ class ScrapliService(ConnectionService):
 class ScrapliCommandsForm(ScrapliForm):
     form_type = HiddenField(default="scrapli_service")
     commands = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
-    results_as_list = BooleanField("Results As List", default=True)
+    results_as_list = BooleanField("Results As List")
     groups = {
         "Main Parameters": {
             "commands": ["commands", "results_as_list"],

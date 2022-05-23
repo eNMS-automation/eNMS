@@ -72,17 +72,17 @@ class NetmikoValidationService(ConnectionService):
         except Exception:
             result = netmiko_connection.session_log.getvalue().decode().lstrip("\u0000")
             return {
-                "command": log_command,
+                "commands": log_command,
                 "error": format_exc(),
                 "result": result,
                 "success": False,
             }
-        return {"command": log_command, "result": result}
+        return {"commands": log_command, "result": result}
 
 
 class NetmikoValidationForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_commands_service")
-    command = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
+    commands = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
     results_as_list = BooleanField("Results As List")
     use_textfsm = BooleanField("Use TextFSM", default=False)
     expect_string = StringField(substitution=True, help="netmiko/expect_string")
@@ -92,7 +92,7 @@ class NetmikoValidationForm(NetmikoForm):
     strip_command = BooleanField(default=True, help="netmiko/strip_command")
     groups = {
         "Main Parameters": {
-            "commands": ["command", "results_as_list"],
+            "commands": ["commands", "results_as_list"],
             "default": "expanded",
         },
         **NetmikoForm.groups,

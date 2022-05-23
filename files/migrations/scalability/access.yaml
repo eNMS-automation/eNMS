@@ -18,7 +18,7 @@
     /link_form, /netmiko_form, /user_form, /custom_form, /gateway_form, /router_form,
     /network_form, /ethernet_link_form, /napalm_configuration_service_form, /napalm_rollback_service_form,
     /netmiko_configuration_service_form, /napalm_backup_service_form, /netmiko_backup_service_form,
-    /napalm_getters_service_form, /netmiko_prompts_service_form, /netmiko_validation_service_form,
+    /napalm_getters_service_form, /netmiko_prompts_service_form, /netmiko_commands_service_form,
     /scrapli_service_form, /configure_bgp_service_form, /example_service_form, /generic_file_transfer_service_form,
     /netmiko_file_transfer_service_form, /ansible_playbook_service_form, /git_service_form,
     /rest_call_service_form, /swiss_army_knife_service_form, /topology_import_service_form,

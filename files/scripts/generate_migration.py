@@ -6,7 +6,7 @@ service_type = [
     "swiss_army_knife_service",
     "napalm_backup_service",
     "netmiko_configuration_service",
-    "netmiko_validation_service",
+    "netmiko_commands_service",
 ]
 
 

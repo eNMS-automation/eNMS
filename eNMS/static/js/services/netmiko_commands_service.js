@@ -5,7 +5,7 @@ eNMS: false
 
 // eslint-disable-next-line
 function job(id) {
-  const serviceClass = "netmiko_validation_service";
+  const serviceClass = "netmiko_commands_service";
   eNMS.automation
     .field("auto_find_prompt", serviceClass, id)
     .on("change", function () {

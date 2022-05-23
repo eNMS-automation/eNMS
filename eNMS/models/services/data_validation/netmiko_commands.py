@@ -10,8 +10,8 @@ from eNMS.models.automation import ConnectionService
 
 class NetmikoValidationService(ConnectionService):
 
-    __tablename__ = "netmiko_validation_service"
-    pretty_name = "Netmiko Validation"
+    __tablename__ = "netmiko_commands_service"
+    pretty_name = "Netmiko Commands"
     parent_type = "connection_service"
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     enable_mode = db.Column(Boolean, default=True)
@@ -39,7 +39,7 @@ class NetmikoValidationService(ConnectionService):
     expect_password_prompt = db.Column(db.SmallString)
     expect_prompt = db.Column(db.SmallString)
 
-    __mapper_args__ = {"polymorphic_identity": "netmiko_validation_service"}
+    __mapper_args__ = {"polymorphic_identity": "netmiko_commands_service"}
 
     def job(self, run, device):
         commands = run.sub(run.command, locals())
@@ -81,7 +81,7 @@ class NetmikoValidationService(ConnectionService):
 
 
 class NetmikoValidationForm(NetmikoForm):
-    form_type = HiddenField(default="netmiko_validation_service")
+    form_type = HiddenField(default="netmiko_commands_service")
     command = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
     results_as_list = BooleanField("Results As List")
     use_textfsm = BooleanField("Use TextFSM", default=False)

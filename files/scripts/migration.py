@@ -2,11 +2,12 @@ from pathlib import Path
 from ruamel import yaml
 
 
+FILENAME = "examples"
 PATH = Path.cwd().parent.parent.parent / "eNMS" / "files" / "migrations"
 
 
-def migrate_from_4_1_to_4_2(project):
-    with open(PATH / project / "service.yaml", "r") as migration_file:
+def migrate_from_4_to_4_2():
+    with open(PATH / FILENAME / "service.yaml", "r") as migration_file:
         services = yaml.load(migration_file)
     for service in services:
         service["priority"] += 9
@@ -21,15 +22,17 @@ def migrate_from_4_1_to_4_2(project):
                 if service.pop(action, False):
                     actions.append(action)
             service["actions"] = actions
-    with open(PATH / project / "service.yaml", "w") as migration_file:
+    with open(PATH / FILENAME / "service.yaml", "w") as migration_file:
         yaml.dump(services, migration_file)
 
 
-def migrate_from_4_2_to_4_3(project):
-    with open(PATH / project / "service.yaml", "r") as migration_file:
+def migrate_from_4_2_to_4_3():
+    with open(PATH / FILENAME / "service.yaml", "r") as migration_file:
         services = yaml.load(migration_file)
     for service in services:
         if service["type"] == "netmiko_validation_service":
-            service["type"] = "netmiko_commands_service
-    with open(PATH / project / "service.yaml", "w") as migration_file:
+            service["type"] = "netmiko_commands_service"
+    with open(PATH / FILENAME / "service.yaml", "w") as migration_file:
         yaml.dump(services, migration_file)
+
+migrate_from_4_2_to_4_3()

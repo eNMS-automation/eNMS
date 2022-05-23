@@ -95,7 +95,7 @@ And the specifics for each Netmiko service are in their own sections:
 - [Netmiko File Transfer Service](servicetypes/netmiko_filetransfer.md).
 - [Netmiko Data Backup Service](servicetypes/netmiko_databackup.md).
 - [Netmiko Prompts Service](servicetypes/netmiko_prompts.md).
-- [Netmiko Validation Service](servicetypes/netmiko_validation.md).
+- [Netmiko Commands Service](servicetypes/netmiko_commands.md).
 
 ## Python Snippet Service
 
@@ -107,7 +107,7 @@ Runs any python code:
 
 Send a REST call (GET, POST, PUT or DELETE) to a URL with optional
 payload. The output can be validated with a command / pattern mechanism,
-like the `Netmiko Validation Service`:
+like the `Netmiko Commands Service`:
 
 - [REST Call Service](servicetypes/rest_call.md).
 

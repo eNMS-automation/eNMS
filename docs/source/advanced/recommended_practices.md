@@ -117,7 +117,7 @@ The Postprocessing Mode determines whether the script is:
 - Run on failure only.
 
 If the Postprocessing logic expects a successful result (e.g., a text result from 
-Netmiko Validation Service command) then the Postprocessing Mode should be set to 
+Netmiko Commands Service command) then the Postprocessing Mode should be set to 
 **Run on success only**.
 
 When using mode **Always run**, add a guard condition around a failure result:
@@ -136,7 +136,7 @@ log("info", f"Device {device.name} had an good result: {results['result']}")
 
 There is a size limit of what an individual service can store in the database.
 
-For example, if you are running a Netmiko Validation service that returns a result 
+For example, if you are running a Netmiko Commands service that returns a result 
 of more than 16 MB, you should:
 
 - Try to adjust that command to so that it produces a smaller result, or 
@@ -193,14 +193,14 @@ While this has little to do with how the eNMS system operates, it is something t
 larger workflow developers have used to help organize Shared services that are reused
 across multiple Workflows.  
 
-## Netmiko Validation 
+## Netmiko Commands 
 
 ### BASH shell commands 
 
 Some systems support multiple types of shells, including a BASH command shell. 
 Usually, the management shell also provides a way to invoke the BASH shell commands.
 
-This option is simpler than running a series of Netmiko Validation services to run 
+This option is simpler than running a series of Netmiko Commands services to run 
 commands to enter/exit the bash shell.  However, you may have to figure out how to 
 escape some characters in the command string. 
 

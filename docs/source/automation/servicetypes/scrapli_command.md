@@ -1,4 +1,4 @@
-The Scrapli Commands service works similar to Netmiko Validation; but it allows
+The Scrapli Commands service works similar to Netmiko Commands; but it allows
 one or multiple commands to be sent to the device via Scrapli library, and
 it allows for the validation of the returned result.
 

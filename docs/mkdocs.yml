@@ -56,7 +56,7 @@ nav:
       - Netmiko Data Backup Service: automation/servicetypes/netmiko_databackup.md
       - Netmiko Filetransfer Service: automation/servicetypes/netmiko_filetransfer.md
       - Netmiko Prompts Service: automation/servicetypes/netmiko_prompts.md
-      - Netmiko Validation Service: automation/servicetypes/netmiko_validation.md
+      - Netmiko Commands Service: automation/servicetypes/netmiko_commands.md
       - Python Snippet Service: automation/servicetypes/python_snippet.md
       - REST Call Service: automation/servicetypes/rest_call.md
       - Scrapli Common Parameters: automation/servicetypes/scrapli_common.md

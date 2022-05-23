@@ -68,7 +68,7 @@ response, there is no additional parsing needed. This is often the best solution
 possible - and is available when the target device command supports JSON or XML output.
 
 This is most often possible with the 
-[Netmiko Validation Service](../automation/servicetypes/netmiko_validation/) - and 
+[Netmiko Commands Service](../automation/servicetypes/netmiko_commands/) - and 
 the availability of this option depends on the device operating system and
 the specific command(s) used.
  
@@ -129,7 +129,7 @@ TextFSM (or TTP).
 
 ## Using TextFSM 
 
-### Using TextFSM with a Netmiko Validation Service 
+### Using TextFSM with a Netmiko Commands Service 
 
 This should use the TextFSM templates installed from the Network-to-Code repository 
 listed below with the following environment variable set: 
@@ -140,11 +140,11 @@ export NET_TEXTFSM=/path/to/ntc-templates/templates/
 In this case, one only has to **check** the `Use TextFSM` option with the Netmiko 
 Validation Service:
 
-![Netmiko Validation Service - Use TextFSM](../_static/automation/builtin_service_types/netmiko_validation_advanced.png)
+![Netmiko Commands Service - Use TextFSM](../_static/automation/builtin_service_types/netmiko_validation_advanced.png)
 
 !!! note 
     
-    The Netmiko Validation command is matched against the contents of the 
+    The command is matched against the contents of the 
     Network-to-Code 'index' file basd on the platform (netmiko driver) and the 
     command.
     
@@ -227,7 +227,7 @@ results["result"] = parsed_data
 
 ### TextFSM Example - using programmatically    
 
-This is an alternative to automatically using TextFSM with the Netmiko Validation Service
+This is an alternative to automatically using TextFSM with the Netmiko Commands Service
 or to using a Data Extraction Service.  
 
 The other approaches are likely better; this is included for completeness.
@@ -250,7 +250,7 @@ results["headers"] = parser.header  # just for documentation
 ## Manual Parsing 
 
 Any manual decoding/parsing of the text results of a previous command (e.g., from 
-a [Netmiko Validation Service](../automation/servicetypes/netmiko_validation/))
+a [Netmiko Commands Service](../automation/servicetypes/netmiko_commands/))
 falls into this category.
 
 This can use any parsing technique - including functions like `str.split()` or

@@ -13,7 +13,7 @@ Version 4.2.1
 - Make "Results as List" False by default for scrapli (not useful when only
   one command, which is most of the time)
 - For consistency with Scrapli
-  * Rename Netmiko Validation to Netmiko Commands
+  * Rename "Netmiko Validation" to "Netmiko Commands"
   * Allow sending multiple commands via Netmiko Commands
   * Add "Results as List" to Netmiko Commands Service
 

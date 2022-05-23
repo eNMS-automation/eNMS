@@ -1405,7 +1405,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 3.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -1629,7 +1629,7 @@
   target_pools: []
   time_between_retries: 1
   timeout: 3.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -2517,7 +2517,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 1.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -2624,7 +2624,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -2732,7 +2732,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -3213,7 +3213,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 3.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -3321,7 +3321,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 3.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -3429,7 +3429,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 3.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -5127,7 +5127,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -5235,7 +5235,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -5342,7 +5342,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -5723,7 +5723,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -6104,7 +6104,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -7535,7 +7535,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -7728,7 +7728,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -8676,7 +8676,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -8878,7 +8878,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -9079,7 +9079,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -10429,7 +10429,7 @@
   target_pools: []
   time_between_retries: 2
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -10824,7 +10824,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -11398,7 +11398,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -12632,7 +12632,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -12846,7 +12846,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -14932,7 +14932,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -16099,7 +16099,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -16206,7 +16206,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -16313,7 +16313,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -16868,7 +16868,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -17071,7 +17071,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -17177,7 +17177,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -17283,7 +17283,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -17581,7 +17581,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -19445,7 +19445,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -19646,7 +19646,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -19752,7 +19752,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -19858,7 +19858,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -19964,7 +19964,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -20350,7 +20350,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -20462,7 +20462,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -21221,7 +21221,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 3.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -26759,7 +26759,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -26867,7 +26867,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
@@ -26975,7 +26975,7 @@
   target_pools: []
   time_between_retries: 10
   timeout: 10.0
-  type: netmiko_validation_service
+  type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true

@@ -43,11 +43,9 @@ Inventory                           |  Dashboard
 
 eNMS can display your network on a world map (Google Map or Open Street Map).
 Each device is displayed at its GPS coordinates.
-You can click on a device to display its properties, configuration, or start an SSH terminal session.
-Colocated devices can be grouped into geographical sites (campus, dacacenter, ...),
-and displayed logically with a force-directed layout.
+Network topology diagrams can be created using devices and links from inventory, and adding labels for clarity.
 
-Network View                                  |  Sites View
+Geographical View                                  |  Network Builder
 :--------------------------------------------:|:-------------------------------:
 [![Geographical](docs/source/_static/visualization/network_view_2d.png)](https://www.demo.enms.io/visualization/geographical_view) |  [![Logical](docs/source/_static/base/site_view.png)](https://www.demo.enms.io/visualization/logical_view)
 

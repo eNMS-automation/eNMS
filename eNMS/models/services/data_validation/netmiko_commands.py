@@ -16,7 +16,7 @@ class NetmikoValidationService(ConnectionService):
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     enable_mode = db.Column(Boolean, default=True)
     config_mode = db.Column(Boolean, default=False)
-    command = db.Column(db.LargeString)
+    commands = db.Column(db.LargeString)
     results_as_list = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
     use_device_driver = db.Column(Boolean, default=True)
@@ -42,8 +42,8 @@ class NetmikoValidationService(ConnectionService):
     __mapper_args__ = {"polymorphic_identity": "netmiko_commands_service"}
 
     def job(self, run, device):
-        commands = run.sub(run.command, locals())
-        log_command = run.command if "get_credential" in run.command else commands
+        commands = run.sub(run.commands, locals())
+        log_command = run.commands if "get_credential" in run.commands else commands
         netmiko_connection = run.netmiko_connection(device)
         try:
             prompt = run.enter_remote_device(netmiko_connection, device)

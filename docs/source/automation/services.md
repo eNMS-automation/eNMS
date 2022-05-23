@@ -103,13 +103,13 @@ includes:
 !!! tip
 
     When using the Bulk Edit to edit `Step 2, Specific` properties, one should use the 
-    Service Type pull-down to select the Service Type (e.g., Netmiko Validation Service)
-    and provide some appropriate filtering (e.g., `type -> netmiko_validation`).
+    Service Type pull-down to select the Service Type (e.g., Netmiko Commands Service)
+    and provide some appropriate filtering (e.g., `type -> netmiko_commands`).
     
-    See the example below for changing the Timeout for several Netmiko Validation 
+    See the example below for changing the Timeout for several Netmiko Commands 
     services.
     
-![Bulk Edit Netmiko Validation Service](../_static/automation/services/bulk_edit_netmiko_validation.png)      
+![Bulk Edit Netmiko Commands Service](../_static/automation/services/bulk_edit_netmiko_validation.png)      
     
 
 ## Running a Service

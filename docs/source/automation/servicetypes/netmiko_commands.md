@@ -12,7 +12,11 @@ be a regular expression.
 Configuration parameters for creating this service instance:
 
 - All [Netmiko Service Common Parameters](netmiko_common.md).
-- `Command` CLI command to send to the device.
+
+- `Commands`: Commands to be send to the device, each command on a separate line.
+
+- `Results as List`: if checked, store the results of the commands as a list of 
+   individual string results. If not checked, this is a single string.
 
 Also included in Netmiko Advanced Parameters: 
 

@@ -1,4 +1,4 @@
-Similar to Netmiko Validation Service, but expects up to 3 interactive
+Similar to Netmiko Commands Service, but expects up to 3 interactive
 prompts for your remote command, such as 'Are you sure? Y/N'. This
 service allows the user to specify the expected prompt and response to
 send for it.

@@ -1302,7 +1302,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: true
-  command: show vrf
+  commands: show vrf
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -1523,7 +1523,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show vrf
+  commands: show vrf
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -2424,7 +2424,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show vrf {{iteration_simple}}
+  commands: show vrf {{iteration_simple}}
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -2531,7 +2531,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show vrf test
+  commands: show vrf test
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -2638,7 +2638,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show vrf {{get_result("Modify payload (per device)", device=device.name)["duration"]}}
+  commands: show vrf {{get_result("Modify payload (per device)", device=device.name)["duration"]}}
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -3119,7 +3119,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show interface {{non_default_iteration_value_name}}
+  commands: show interface {{non_default_iteration_value_name}}
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -3227,7 +3227,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show interface {{iteration_value}}
+  commands: show interface {{iteration_value}}
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -3335,7 +3335,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show interface {{iteration_value}}
+  commands: show interface {{iteration_value}}
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -5034,7 +5034,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: ''
+  commands: ''
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -5141,7 +5141,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: ''
+  commands: ''
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -5249,7 +5249,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: ''
+  commands: ''
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -5626,7 +5626,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show vrf
+  commands: show vrf
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -6008,7 +6008,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show vrf {{command_dict["command"]}}
+  commands: show vrf {{command_dict["command"]}}
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -7439,7 +7439,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: ps -ef
+  commands: ps -ef
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -7639,7 +7639,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show version
+  commands: show version
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -8582,7 +8582,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: dir enms_files
+  commands: dir enms_files
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -8782,7 +8782,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: dir enms_files
+  commands: dir enms_files
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -8985,7 +8985,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: delete flash:/enms_files/*.bin
+  commands: delete flash:/enms_files/*.bin
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -10335,7 +10335,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show vrf
+  commands: show vrf
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -10728,7 +10728,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show vrf
+  commands: show vrf
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -11304,7 +11304,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show vrf
+  commands: show vrf
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -12543,7 +12543,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show run
+  commands: show run
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -12754,7 +12754,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show interfaces
+  commands: show interfaces
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -14839,7 +14839,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show interface {{payload["form"]["interface"]}}
+  commands: show interface {{payload["form"]["interface"]}}
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -16006,7 +16006,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show vrf
+  commands: show vrf
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -16113,7 +16113,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show vrf
+  commands: show vrf
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -16220,7 +16220,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: true
-  command: show vrf
+  commands: show vrf
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -16776,7 +16776,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: dir enms_files
+  commands: dir enms_files
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -16979,7 +16979,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: dir enms_files
+  commands: dir enms_files
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -17085,7 +17085,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: delete enms_files/netmiko_file
+  commands: delete enms_files/netmiko_file
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -17191,7 +17191,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: dir enms_files
+  commands: dir enms_files
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -17488,7 +17488,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show {{get_credential(name="Non Device Credential")["password"]}}
+  commands: show {{get_credential(name="Non Device Credential")["password"]}}
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -19353,7 +19353,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show interface {{interface}}
+  commands: show interface {{interface}}
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -19554,7 +19554,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show ip int brief
+  commands: show ip int brief
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -19660,7 +19660,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show version
+  commands: show version
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -19766,7 +19766,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show arp
+  commands: show arp
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -19872,7 +19872,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show lldp neighbor
+  commands: show lldp neighbor
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -20252,7 +20252,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show vrf
+  commands: show vrf
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -20364,7 +20364,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: show vrf
+  commands: show vrf
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -21118,7 +21118,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: true
-  command: show ip route
+  commands: show ip route
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -26665,7 +26665,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: sh ip int br
+  commands: sh ip int br
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -26773,7 +26773,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: sh ip int br
+  commands: sh ip int br
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -26881,7 +26881,7 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  command: sh ip int br
+  commands: sh ip int br
   completion_time: 1
   config_mode: false
   config_mode_command: ''

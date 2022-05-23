@@ -24,7 +24,7 @@ eNMS can display network data on a world map (Google Map or Open Street Map).
 Each device is displayed at its GPS coordinates. Click on a device to display 
 its properties, configuration, or start an SSH terminal session.
 
-![Geographical View](../_static/visualization/network_view_2d.png)
+![Geographical View](../_static/visualization/network_view.png)
 
 Network topology diagrams can be created in the Network Builder view, using
 devices and links from inventory, and adding labels for clarity.

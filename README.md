@@ -47,7 +47,7 @@ Network topology diagrams can be created using devices and links from inventory,
 
 Geographical View                                  |  Network Builder
 :--------------------------------------------:|:-------------------------------:
-[![Geographical](docs/source/_static/visualization/network_view_2d.png)](https://www.demo.enms.io/visualization/geographical_view) |  [![Logical](docs/source/_static/base/site_view.png)](https://www.demo.enms.io/visualization/logical_view)
+[![Geographical View](docs/source/_static/visualization/network_view.png)](https://www.demo.enms.io/visualization/geographical_view) |  [![Network Builder](docs/source/_static/base/network_builder.png)](https://www.demo.enms.io/visualization/logical_view)
 
 - Docs: _[Network Visualization](https://enms.readthedocs.io/en/latest/inventory/network_visualization/)_
 

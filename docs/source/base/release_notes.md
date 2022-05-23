@@ -21,7 +21,7 @@ To be tested:
 - mail notification
 - web ssh
 - service logging mechanism, including disable logging
-- netmiko commands service
+- netmiko commands service: test old services still work + new multi commands / results as list option
 
 Version 4.2.0
 -------------

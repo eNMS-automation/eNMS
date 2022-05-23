@@ -1390,6 +1390,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: netmiko_check_vrf_test
   send_notification: false
@@ -1614,6 +1615,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: 'Netmiko: Check VRF (Telecom1) does not exist'
   send_notification: false
@@ -2502,6 +2504,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Show vrf with payload helper
   send_notification: false
@@ -2609,6 +2612,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Show vrf with python query
   send_notification: false
@@ -2717,6 +2721,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: show runtime with get_result helper
   send_notification: false
@@ -3198,6 +3203,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Iteration Targets Workflow - Test 1
   send_notification: false
@@ -3306,6 +3312,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Iteration Target Workflow - Test 2
   send_notification: false
@@ -3414,6 +3421,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Iteration Target Workflow - Test 3
   send_notification: false
@@ -5112,6 +5120,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Validation show VRF
   send_notification: false
@@ -5220,6 +5229,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Validation show VRF
   send_notification: false
@@ -5327,6 +5337,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Validation show VRF
   send_notification: false
@@ -5708,6 +5719,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Shared Service for Regression Workflow H
   send_notification: false
@@ -6089,6 +6101,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Show VRF with iteration
   send_notification: false
@@ -7520,6 +7533,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: 'Validation: jump on server 2 from Washington'
   send_notification: false
@@ -7713,6 +7727,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Open File Descriptors Leak (public)
   send_notification: false
@@ -8661,6 +8676,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Check that test file does not exist
   send_notification: false
@@ -8863,6 +8879,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Check that test file does exist
   send_notification: false
@@ -9064,6 +9081,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Delete all transferred files
   send_notification: false
@@ -10414,6 +10432,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Check VRF (NOVRF) exists
   send_notification: false
@@ -10809,6 +10828,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Show vrf with custom encrypted credentials
   send_notification: false
@@ -11383,6 +11403,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Show VRF
   send_notification: false
@@ -12617,6 +12638,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Connect to Router with Device Credentials
   send_notification: false
@@ -12831,6 +12853,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Show interfaces with netmiko
   send_notification: false
@@ -14917,6 +14940,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: 'Show interface from initial form (default: Lo1)'
   send_notification: false
@@ -16084,6 +16108,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Show VRF with default connection
   send_notification: false
@@ -16191,6 +16216,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Show VRF with connection connection2
   send_notification: false
@@ -16298,6 +16324,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Show users with connection2 and close
   send_notification: false
@@ -16853,6 +16880,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Check no file in enms_files directory
   send_notification: false
@@ -17056,6 +17084,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Check file in directory
   send_notification: false
@@ -17162,6 +17191,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Delete netmiko_file
   send_notification: false
@@ -17268,6 +17298,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Check netmiko_file is deleted
   send_notification: false
@@ -17566,6 +17597,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Show interface via get_credential
   send_notification: false
@@ -19430,6 +19462,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Show inteface as global variable
   send_notification: false
@@ -19631,6 +19664,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: show ip int brief
   send_notification: false
@@ -19737,6 +19771,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: show version
   send_notification: false
@@ -19843,6 +19878,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: show arp
   send_notification: false
@@ -19949,6 +19985,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: show lldp neighbor
   send_notification: false
@@ -20335,6 +20372,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Check VRF exists with Netmiko
   send_notification: false
@@ -20447,6 +20485,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Check VRF is not configured with Netmiko
   send_notification: false
@@ -21206,6 +21245,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: netmiko_show_ip_route
   send_notification: true
@@ -26744,6 +26784,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Gateway 1
   send_notification: false
@@ -26852,6 +26893,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Gateway 3, 2 then 1
   send_notification: false
@@ -26960,6 +27002,7 @@
   priority: 11
   reply_to: ''
   reserved: false
+  results_as_list: false
   run_method: per_device
   scoped_name: Both
   send_notification: false

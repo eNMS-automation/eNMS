@@ -66,7 +66,9 @@ class NetmikoValidationService(ConnectionService):
                 )
                 for command in commands.splitlines()
             ]
-            if not run.results_as_list:
+            if run.use_textfsm:
+                result = result[0]
+            elif not run.results_as_list:
                 result = "\n".join(result)
             run.exit_remote_device(netmiko_connection, prompt, device)
         except Exception:

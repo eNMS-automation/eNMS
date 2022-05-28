@@ -233,6 +233,10 @@ function openDeletionPanel() {
   }
 }
 
+function positionNodes(mode, direction) {
+
+}
+
 export function updateBuilderBindings(action) {
   Object.assign(action, {
     [`Create ${type}`]: () => createNewNode(`create_${type}`),
@@ -244,6 +248,10 @@ export function updateBuilderBindings(action) {
     "Create Label Button": () => showLabelPanel({ usePosition: false }),
     "Edit Label": (label) => showLabelPanel({ label: label, usePosition: true }),
     Delete: openDeletionPanel,
+    "Horizontal Alignment": () => positionNodes("align", "horizontal"),
+    "Vertical Alignment": () => positionNodes("align", "vertical"),
+    "Horizontal Distribution": () => positionNodes("distribute", "horizontal"),
+    "Vertical Distribution": () => positionNodes("distribute", "vertical"),
     "Zoom In": () => network.zoom(0.2),
     "Zoom Out": () => network.zoom(-0.2),
     Backward: () => switchTo(history[historyPosition - 1], "left"),

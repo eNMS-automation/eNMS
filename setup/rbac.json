@@ -22,16 +22,8 @@
       "icon": "users",
       "rbac": "admin",
       "pages": {
-        "Users": {
-          "endpoint": "/user_table",
-          "rbac": "admin"
-        },
         "Servers": {
           "endpoint": "/server_table",
-          "rbac": "admin"
-        },
-        "Access": {
-          "endpoint": "/access_table",
           "rbac": "admin"
         },
         "Credentials": {

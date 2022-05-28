@@ -510,6 +510,7 @@ function initSelect(el, model, parentId, single, constraints) {
     closeOnSelect: single ? true : false,
     dropdownParent: parentId ? $(`#${parentId}`) : $(document.body),
     tags: !single,
+    escapeMarkup: (markup) => markup,
     tokenSeparators: [","],
     ajax: {
       url: `/multiselect_filtering/${model}`,
@@ -732,7 +733,13 @@ function updateProperty(instance, el, property, value, type) {
     el.selectpicker("val", value).trigger("change");
     el.selectpicker("render");
   } else if (propertyType == "object-list") {
-    value.forEach((o) => el.append(new Option(o.name, o.name)));
+    value.forEach((o) => {
+      const uiLink = `
+      <button type="button" class="btn btn-link btn-select2" onclick="
+      eNMS.base.showInstancePanel('${o.type}', '${o.id}')">
+      ${o.ui_name || o.name}</button>`;
+      el.append(new Option(uiLink, o.name));
+    });
     el.val(value.map((p) => p.name)).trigger("change");
   } else if (propertyType == "object") {
     el.append(new Option(value.ui_name || value.name, value.id))

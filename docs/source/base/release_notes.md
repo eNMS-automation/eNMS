@@ -1,6 +1,13 @@
 
 # Release Notes
 
+Version 4.3.0
+-------------
+
+- New feature to align nodes in Network Builder and Workflow Builder:
+  - Horizontal and vertical alignemnt
+  - Horizontal and vertical distribution
+
 Version 4.2.1
 -------------
 

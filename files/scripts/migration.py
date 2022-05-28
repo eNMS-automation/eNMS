@@ -26,7 +26,7 @@ def migrate_from_4_to_4_2():
         yaml.dump(services, migration_file)
 
 
-def migrate_from_4_2_to_4_3():
+def migrate_from_4_2_to_4_2_1():
     with open(PATH / FILENAME / "service.yaml", "r") as migration_file:
         services = yaml.load(migration_file)
     for service in services:
@@ -36,4 +36,4 @@ def migrate_from_4_2_to_4_3():
     with open(PATH / FILENAME / "service.yaml", "w") as migration_file:
         yaml.dump(services, migration_file)
 
-migrate_from_4_2_to_4_3()
+migrate_from_4_2_to_4_2_1()

@@ -234,7 +234,25 @@ function openDeletionPanel() {
 }
 
 function positionNodes(mode, direction) {
-
+  const selectedNodes = network.getSelectedNodes()
+  const property = direction == "horizontal" ? "y" : "x";
+  const length = selectedNodes.length;
+  if (mode == "align") {
+    const value = nodes.get(selectedNodes[0])[property];
+    selectedNodes.forEach((nodeId) => {
+      nodes.update({id: nodeId, [`${property}`]: value});
+    });
+  } else if (selectedNodes.length > 2) {
+    const visNodes = selectedNodes.map((id) => nodes.get(id));
+    visNodes.sort((n, m) => n[property] - m[property]);
+    const start = visNodes[0][property]
+    const increment = (visNodes[length - 1][property] - start) / (length - 1);
+    for (let index = 1; index < length; index++) {
+      visNodes[index][property] = start + index * increment;
+    }
+    nodes.update(visNodes);
+  }
+  savePositions();
 }
 
 export function updateBuilderBindings(action) {

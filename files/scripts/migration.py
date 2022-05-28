@@ -36,4 +36,5 @@ def migrate_from_4_2_to_4_2_1():
     with open(PATH / FILENAME / "service.yaml", "w") as migration_file:
         yaml.dump(services, migration_file)
 
+
 migrate_from_4_2_to_4_2_1()

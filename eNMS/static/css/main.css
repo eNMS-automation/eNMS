@@ -515,6 +515,7 @@ button {
   margin-right: -8px;
   margin-left: -8px;
   font-size: 12px;
+  outline: none !important;
   text-decoration: none !important;
 }
 

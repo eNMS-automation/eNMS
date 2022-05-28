@@ -732,7 +732,8 @@ function updateProperty(instance, el, property, value, type) {
     }
     el.selectpicker("val", value).trigger("change");
     el.selectpicker("render");
-  } else if (propertyType == "object-list") {
+  } else if (["object-list", "object"].includes(propertyType)) {
+    if (propertyType == "object") value = [value];
     value.forEach((o) => {
       const uiLink = `
       <button type="button" class="btn btn-link btn-select2" onclick="

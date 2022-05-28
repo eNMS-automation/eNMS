@@ -944,9 +944,13 @@ class Controller:
         query = self.filtering_relationship_constraints(query, model, **params)
         query = query.filter(and_(*self.filtering_base_constraints(model, **params)))
         property = "name" if params["multiple"] else "id"
+        button_html = "type='button' class='btn btn-link btn-select2'"
         return {
             "items": [
-                {"text": result.ui_name, "id": getattr(result, property)}
+                {
+                    "text": f"<button {button_html}>{result.ui_name}</button>",
+                    "id": getattr(result, property),
+                }
                 for result in query.limit(10)
                 .offset((int(params["page"]) - 1) * 10)
                 .all()

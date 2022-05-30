@@ -592,7 +592,7 @@
     "network": [
       {
         "data": "name",
-        "width": "200px",
+        "width": "400px",
         "title": "Name",
         "search": "text",
         "className": "dt-body-left"
@@ -600,9 +600,7 @@
       {
         "data": "description",
         "title": "Description",
-        "search": "text",
-        "visible": false,
-        "orderable": false
+        "search": "text"
       },
       {
         "data": "creator",

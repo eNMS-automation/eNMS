@@ -95,9 +95,10 @@ class Server(Flask):
     def configure_context_processor(self):
         @self.context_processor
         def inject_properties():
-            user = current_user.serialized if current_user.is_authenticated else None
             return {
-                "user": user,
+                "user": current_user.get_properties()
+                if current_user.is_authenticated
+                else None,
                 "time": str(vs.get_time()),
                 "parameters": db.fetch("parameters").serialized,
                 **vs.template_context,

@@ -305,7 +305,7 @@
     <script>
       window.eNMS = {};
       const page = "{{ endpoint }}";
-      const linkId = "{{ link_id or '' }}";
+      const linkId = "{{ link_id }}";
       const user = {{ user|tojson|safe }};
       const configurationProperties = {{ configuration_properties|tojson|safe }};
       const formProperties = {{ form_properties|tojson|safe }};

@@ -1,5 +1,6 @@
 /*
 global
+pathId: false
 page: false
 subtypes: false
 vis: false
@@ -38,13 +39,14 @@ import {
 const container = document.getElementById("builder");
 const type = page.includes("network") ? "network" : "workflow";
 const nodeType = type == "network" ? "node" : "service";
+const currentId = pathId || localStorage.getItem("path");
 let currentLabel;
 let mousePosition;
 let network;
 let selectedObject;
 export let creationMode;
 export let currentMode = "motion";
-export let currentPath = page.includes("builder") && localStorage.getItem("path");
+export let currentPath = page.includes("builder") && currentId;
 export let instance;
 export let edges;
 export let nodes;

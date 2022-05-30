@@ -218,8 +218,4 @@ block stylesheets %} {{ super() }}
 </ul>
 {% endblock content %} {% block javascripts %} {{ super()}}
 <script src="{{ url_for('static', filename='lib/vis/vis.min.js') }}"></script>
-<script
-  type="module"
-  src="{{ url_for('static', filename='js/networkBuilder.js') }}"
-></script>
 {% endblock javascripts %}

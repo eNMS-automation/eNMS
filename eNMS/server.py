@@ -262,10 +262,14 @@ class Server(Flask):
 
         @blueprint.route("/<type>_builder")
         @blueprint.route("/<type>_builder/<id>")
+        @blueprint.route("/<type>_builder/<id>/<runtime>")
         @self.process_requests
-        def builder(type, id=None):
+        def builder(type, id=None, runtime=None):
             return render_template(
-                f"{type}_builder.html", endpoint=f"{type}_builder", link_id=id
+                f"{type}_builder.html",
+                endpoint=f"{type}_builder",
+                link_id=id,
+                link_runtime=runtime,
             )
 
         @blueprint.route("/<form_type>_form")

@@ -65,7 +65,7 @@ const options = {
 
 export let ends = new Set();
 export let workflow = JSON.parse(localStorage.getItem("workflow"));
-export let currentRuntime;
+export let currentRuntime = linkRuntime;
 
 let currentRun;
 let graph;
@@ -114,7 +114,7 @@ export function displayWorkflow(workflowData) {
 
 function updateRuntimes(result) {
   currentPlaceholder = result.state?.[currentPath]?.placeholder;
-  let currentRuntime = $("#current-runtime").val();
+  if (!currentRuntime) currentRuntime = $("#current-runtime").val();
   const displayedRuntimes = result.runtimes.map((runtime) => runtime[0]);
   if (
     runtimeDisplayFlip &&

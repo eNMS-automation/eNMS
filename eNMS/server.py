@@ -261,11 +261,11 @@ class Server(Flask):
             return render_template("visualization.html", endpoint="geographical_view")
 
         @blueprint.route("/<type>_builder")
-        @blueprint.route("/<type>_builder/<path_id>")
+        @blueprint.route("/<type>_builder/<id>")
         @self.process_requests
-        def builder(type, path_id=None):
+        def builder(type, id=None):
             return render_template(
-                f"{type}_builder.html", endpoint=f"{type}_builder", path_id=path_id
+                f"{type}_builder.html", endpoint=f"{type}_builder", link_id=id
             )
 
         @blueprint.route("/<form_type>_form")

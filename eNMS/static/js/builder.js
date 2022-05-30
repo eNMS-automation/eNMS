@@ -1,6 +1,6 @@
 /*
 global
-pathId: false
+linkId: false
 page: false
 subtypes: false
 vis: false
@@ -39,7 +39,7 @@ import {
 const container = document.getElementById("builder");
 const type = page.includes("network") ? "network" : "workflow";
 const nodeType = type == "network" ? "node" : "service";
-const currentId = pathId || localStorage.getItem("path");
+const currentId = linkId || localStorage.getItem("path");
 let currentLabel;
 let mousePosition;
 let network;

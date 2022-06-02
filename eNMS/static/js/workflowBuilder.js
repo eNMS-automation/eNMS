@@ -213,7 +213,7 @@ export const switchToWorkflow = function (path, direction, runtime, selection) {
           }
           $("#up-arrow").removeClass("disabled");
         }
-        localStorage.setItem("path", path);
+        localStorage.setItem("workflow_path", path);
         if (workflow) {
           localStorage.setItem("workflow", JSON.stringify(workflow));
         }
@@ -565,7 +565,7 @@ export function getServiceState(id, first) {
       if (first || result.state?.status == "Running") {
         colorService(id, "#89CFF0");
         if (result.service && result.service.type === "workflow") {
-          localStorage.setItem("path", id);
+          localStorage.setItem("workflow_path", id);
           localStorage.setItem("workflow", JSON.stringify(result.service));
         }
         setTimeout(() => getServiceState(id), 300);

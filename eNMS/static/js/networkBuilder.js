@@ -82,7 +82,7 @@ export function switchToNetwork(path, direction) {
     callback: function (newNetwork) {
       network = newNetwork;
       if (page == "network_builder") {
-        localStorage.setItem("path", path);
+        localStorage.setItem("network_path", path);
         if (network) localStorage.setItem("network", JSON.stringify(network));
         displayNetwork(network);
         switchMode(currentMode, true);

@@ -17,7 +17,6 @@ rbac: false
 relationships: false
 subtypes: false
 user: false
-versionPath: false
 */
 
 import { openDebugPanel, showCredentialPanel } from "./administration.js";
@@ -701,7 +700,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
         }
         if (page == "network_builder") updateNetworkPanel(type);
       }
-      if (isService) loadScript(`../static/js/${versionPath}/services/${type}.js`, id);
+      if (isService) loadScript(`../static/js/services/${type}.js`, id);
       const property = isService ? "scoped_name" : "name";
       $(`#${type}-${property}`).focus();
     },
@@ -1042,12 +1041,12 @@ function fullScreen() {
 }
 
 function switchTheme(theme) {
-  $(`link[href="/static/css/${versionPath}/themes/${currentTheme}.css"]`).remove();
+  $(`link[href="/static/css/themes/${currentTheme}.css"]`).remove();
   currentTheme = theme;
   let cssLink = document.createElement("link");
   cssLink.rel = "stylesheet";
   cssLink.type = "text/css";
-  cssLink.href = `/static/css/${versionPath}/themes/${theme}.css`;
+  cssLink.href = `/static/css/themes/${theme}.css`;
   document.getElementsByTagName("head")[0].appendChild(cssLink);
   call({ url: `/switch_theme/${user.id}/${theme}` });
 }

@@ -8,6 +8,9 @@ Version 4.3.0
   - Horizontal and vertical alignemnt
   - Horizontal and vertical distribution
 - Make all objects in object select list (both single and multiple entries) hyperlink to the edit panel.
+- Make it possible to share link to a specific workflow / runtime (optional) to the workflow builder, with the
+  following syntax: workflow_builder/{workflow_id}/{runtime}
+- Make all results in the Results table link to the workflow builder.
 
 Version 4.2.1
 -------------

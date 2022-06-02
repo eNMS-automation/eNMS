@@ -167,9 +167,8 @@ class Workflow(Service):
                     continue
                 if (tracking_bfs or device) and not summary[edge_type]:
                     continue
-                for successor, edge in service.neighbors(
-                    self, "destination", edge_type
-                ):
+                for edge in service.neighbors(self, edge_type):
+                    successor = edge.destination
                     if tracking_bfs or device:
                         targets[successor.name] |= set(summary[edge_type])
                     heappush(services, ((1 / successor.priority, successor)))

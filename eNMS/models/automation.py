@@ -212,10 +212,10 @@ class Service(AbstractBase):
             workflow = f"[{self.workflows[0].name}] "
         self.name = f"{workflow}{name or self.scoped_name}"
 
-    def neighbors(self, workflow, direction, subtype):
-        for edge in getattr(self, f"{direction}s"):
+    def neighbors(self, workflow, subtype):
+        for edge in self.destinations:
             if edge.subtype == subtype and edge.workflow.name == workflow.name:
-                yield getattr(edge, direction), edge
+                yield edge
 
 
 class ConnectionService(Service):

@@ -799,7 +799,7 @@
       {
         "data": "success",
         "title": "Status",
-        "search": "text",
+        "search": "bool",
         "width": "80px",
         "orderable": false
       },

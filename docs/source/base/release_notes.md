@@ -14,6 +14,8 @@ Version 4.3.0
 - Add "shared" property to the service table.
 - Add shared subworkflow to the list of top-level workflows in the workflow builder to provide the ability to
   view all runtimes (including when it was run as standalone workflow)
+- Remove "Approved by admin" mechanism for Unix Command Service. Instead, check if the new command is
+  different from the old command: if it is and the user is not an admin, an error is raised.
 
 Version 4.2.1
 -------------

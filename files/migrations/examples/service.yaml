@@ -7008,7 +7008,6 @@
   vendor: ''
   waiting_time: 0
 - access_groups: ''
-  admin_approved: false
   admin_only: false
   command: ps -ef
   completion_time: 1

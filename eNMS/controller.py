@@ -625,12 +625,13 @@ class Controller:
 
     def get_top_level_instances(self, type):
         result = defaultdict(list)
-        for instance in self.filtering(
-            type,
-            properties=["id", "category", "name"],
-            constraints={f"{type}s_filter": "empty"},
-        ):
-            result[instance.category or "Other"].append(dict(instance))
+        for constraints in ({f"{type}s_filter": "empty"}, {"shared": "bool-true"}):
+            for instance in self.filtering(
+                type,
+                properties=["id", "category", "name"],
+                constraints=constraints,
+            ):
+                result[instance.category or "Other"].append(dict(instance))
         return result
 
     def get_tree_files(self, path):

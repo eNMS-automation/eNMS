@@ -12,6 +12,8 @@ Version 4.3.0
   following syntax: workflow_builder/{workflow_id}/{runtime}
 - Make all results in the Results table link to the workflow builder.
 - Add "shared" property to the service table.
+- Add shared subworkflow to the list of top-level workflows in the workflow builder to provide the ability to
+  view all runtimes (including when it was run as standalone workflow)
 
 Version 4.2.1
 -------------

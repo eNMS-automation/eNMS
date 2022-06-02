@@ -629,7 +629,7 @@
         "data": "name",
         "title": "Name",
         "search": "text",
-        "width": "200px"
+        "width": "250px"
       },
       {
         "data": "runtime",

@@ -535,6 +535,12 @@
         "search": "text"
       },
       {
+        "data": "shared",
+        "title": "Shared",
+        "search": "bool",
+        "visible": false
+      },
+      {
         "data": "vendor",
         "title": "Vendor",
         "search": "text",

@@ -625,13 +625,11 @@ class Controller:
 
     def get_top_level_instances(self, type):
         result = defaultdict(list)
-        for constraints in ({f"{type}s_filter": "empty"}, {"shared": "bool-true"}):
-            for instance in self.filtering(
-                type,
-                properties=["id", "category", "name"],
-                constraints=constraints,
-            ):
-                result[instance.category or "Other"].append(dict(instance))
+        constraints = [~getattr(vs.models[type], f"{type}s").any()]
+        if type == "workflow":
+            constraints.append(vs.models[type].shared == True)
+        for instance in db.query(type, properties=["id", "category", "name"]).filter(or_(*constraints)).all():
+            result[instance.category or "Other"].append(dict(instance))
         return result
 
     def get_tree_files(self, path):

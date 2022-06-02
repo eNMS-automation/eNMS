@@ -628,7 +628,11 @@ class Controller:
         constraints = [~getattr(vs.models[type], f"{type}s").any()]
         if type == "workflow":
             constraints.append(vs.models[type].shared == True)
-        for instance in db.query(type, properties=["id", "category", "name"]).filter(or_(*constraints)).all():
+        for instance in (
+            db.query(type, properties=["id", "category", "name"])
+            .filter(or_(*constraints))
+            .all()
+        ):
             result[instance.category or "Other"].append(dict(instance))
         return result
 

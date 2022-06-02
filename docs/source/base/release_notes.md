@@ -11,6 +11,7 @@ Version 4.3.0
 - Make it possible to share link to a specific workflow / runtime (optional) to the workflow builder, with the
   following syntax: workflow_builder/{workflow_id}/{runtime}
 - Make all results in the Results table link to the workflow builder.
+- Add "shared" property to the service table.
 
 Version 4.2.1
 -------------

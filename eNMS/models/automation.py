@@ -439,7 +439,7 @@ class Run(AbstractBase):
             restart_run=self.restart_run,
             parameterized_run=self.parameterized_run,
             parent_runtime=self.runtime,
-            path=str(self.service.id),
+            path=self.path,
             placeholder=self.placeholder,
             properties=self.properties,
             start_services=self.start_services,

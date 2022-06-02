@@ -62,9 +62,7 @@ class Runner:
         self.progress_key = f"progress/{device_progress}"
         self.is_admin_run = db.fetch("user", name=self.creator).is_admin
         self.main_run = db.fetch("run", runtime=self.parent_runtime)
-        if self.is_main_run:
-            self.path = str(self.service.id)
-        else:
+        if not self.is_main_run:
             self.path = f"{run.path}>{self.service.id}"
         db.session.commit()
         self.start_run()

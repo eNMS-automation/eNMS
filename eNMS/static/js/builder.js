@@ -1,6 +1,6 @@
 /*
 global
-linkId: false
+linkPath: false
 page: false
 subtypes: false
 vis: false
@@ -39,14 +39,14 @@ import {
 const container = document.getElementById("builder");
 const type = page.includes("network") ? "network" : "workflow";
 const nodeType = type == "network" ? "node" : "service";
-const currentId = linkId || localStorage.getItem("path");
+const savedPath = linkPath || localStorage.getItem("path");
 let currentLabel;
 let mousePosition;
 let network;
 let selectedObject;
 export let creationMode;
 export let currentMode = "motion";
-export let currentPath = page.includes("builder") && currentId;
+export let currentPath = page.includes("builder") && savedPath;
 export let instance;
 export let edges;
 export let nodes;

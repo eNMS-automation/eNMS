@@ -579,7 +579,7 @@ function submitInitialForm(serviceId) {
   });
 }
 
-export const runService = function ({ id, type, parametrization }) {
+export const runService = function ({ id, path, type, parametrization }) {
   if (parametrization) {
     openPanel({
       name: "parameterized_form",
@@ -600,7 +600,7 @@ export const runService = function ({ id, type, parametrization }) {
     });
   } else {
     call({
-      url: `/run_service/${id}`,
+      url: `/run_service/${path || id}`,
       form: type ? `${type}-form-${id}` : null,
       callback: function (result) {
         if (type) $(`#${type}-${id}`).remove();

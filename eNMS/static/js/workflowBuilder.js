@@ -506,6 +506,7 @@ function runWorkflow(parametrization) {
   resetDisplay();
   runService({
     id: workflow.id,
+    path: currentPath,
     parametrization: parametrization || workflow.mandatory_parametrization,
   });
 }

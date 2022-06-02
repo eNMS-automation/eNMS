@@ -1071,7 +1071,7 @@ class Controller:
             kwargs.pop(property, None)
         if kwargs.get("form_type", "").startswith("initial-"):
             kwargs = {"form": kwargs, "parameterized_run": True}
-        kwargs["creator"] = getattr(current_user, "name", "")
+        kwargs.update({"creator": getattr(current_user, "name", ""), "path": path})
         service = db.fetch("service", id=service_id, rbac="run")
         kwargs["runtime"] = runtime = vs.get_time()
         run_name = kwargs.get("form", {}).get("name")

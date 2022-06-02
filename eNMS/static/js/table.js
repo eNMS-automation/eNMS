@@ -1051,7 +1051,7 @@ tables.run = class RunTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
     if (row.service_properties.type == "workflow") {
-      const rowLink = `/workflow_builder/${row.service_properties.id}/${row.runtime}`;
+      const rowLink = `/workflow_builder/${row.path}/${row.runtime}`;
       row.name = `<b><a href="${rowLink}">${row.name}</a></b>`
     }
     row.service = JSON.stringify(row.service_properties).replace(/"/g, "'");

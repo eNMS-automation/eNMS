@@ -564,12 +564,12 @@ tables.network = class NetworkTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
     row.name = `<b><a href="/network_builder/${row.path}">${row.name}</a></b>`;
-    row.links =
-      row.type == "network"
-        ? `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+    row.links = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
       'link', ${row.instance}, {parent: '${this.id}', from: 'networks',
-      to: 'links'})">Links</a></b>`
-        : "No links";
+      to: 'links'})">Links</a></b>`;
+    row.devices = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+      'device', ${row.instance}, {parent: '${this.id}', from: 'networks',
+      to: 'devices'})">Devices</a></b>`;
     return row;
   }
 

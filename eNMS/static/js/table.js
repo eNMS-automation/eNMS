@@ -622,12 +622,7 @@ tables.network = class NetworkTable extends Table {
   }
 
   get filteringConstraints() {
-    const networkFiltering = $("#network-filtering").val();
-    if (networkFiltering?.length) {
-      return { networks: [networkFiltering] };
-    } else {
-      return { networks_filter: "empty", type: "network" };
-    }
+    return { networks_filter: "empty", type: "network" };
   }
 };
 

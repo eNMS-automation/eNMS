@@ -51,13 +51,13 @@ class DataExtractionService(Service):
             match_type = getattr(run, f"match_type{index}")
             match = getattr(run, f"match{index}")
             operation = getattr(run, f"operation{index}")
-            value = (
-                value
-                if match_type == "none"
-                else findall(match, value)
-                if match_type == "regex"
-                else TextFSM(StringIO(match)).ParseText(value)
-            )
+            if match_type == "regex":
+                value = findall(match, value)
+            elif "textfsm" in match_type:
+                template = TextFSM(StringIO(match))
+                value = template.ParseText(value)
+                if match_type == "textfsm_dict":
+                    value = [dict(zip(template.header, row)) for row in value]
             run.payload_helper(variable, value, device=device.name, operation=operation)
             result[variable] = {
                 "query": query,
@@ -71,7 +71,8 @@ class DataExtractionService(Service):
 match_choices = (
     ("none", "Use Value as Extracted"),
     ("regex", "Apply Regular Expression (findall)"),
-    ("textfsm", "Apply TextFSM Template"),
+    ("textfsm", "Apply TextFSM Template (list output)"),
+    ("textfsm_dict", "Apply TextFSM Template (JSON output)"),
 )
 
 operation_choices = (

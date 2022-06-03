@@ -638,7 +638,8 @@ tables.network = class NetworkTable extends Table {
   }
 
   get filteringConstraints() {
-    return { networks_filter: "empty", type: "network" };
+    const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
+    return { networks_filter: parentFiltering ? "empty" : "union", type: "network" };
   }
 };
 

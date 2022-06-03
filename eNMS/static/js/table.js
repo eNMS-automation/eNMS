@@ -866,7 +866,7 @@ tables.service = class ServiceTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
     if (row.type == "workflow") {
-      row.name = `<b><a href="/workflow_builder/${row.id}">${row.name}</a></b>`;
+      row.name = `<b><a href="/workflow_builder/${row.path}">${row.name}</a></b>`;
     }
     for (const model of ["device", "pool"]) {
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(

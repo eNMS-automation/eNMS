@@ -28,6 +28,7 @@ class Service(AbstractBase):
     __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    path = db.Column(db.TinyString)
     creator = db.Column(db.SmallString)
     access_groups = db.Column(db.LargeString)
     admin_only = db.Column(Boolean, default=False)
@@ -129,8 +130,11 @@ class Service(AbstractBase):
     def update(self, **kwargs):
         if self.positions and "positions" in kwargs:
             kwargs["positions"] = {**self.positions, **kwargs["positions"]}
+        self.path = str(self.id)
         super().update(**kwargs)
         self.update_originals()
+        if len(self.workflows) == 1:
+            self.path = f"{self.workflows[0].path}>{self.id}"
         if not kwargs.get("migration_import"):
             self.set_name()
 

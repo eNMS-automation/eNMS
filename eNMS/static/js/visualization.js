@@ -221,9 +221,11 @@ function processNetwork(network) {
   let bundleCoordinates = {};
   for (const link of network.links) {
     const key = [
-          `${link.source_latitude}/${link.source_longitude}`,
-          `${link.destination_latitude}/${link.destination_longitude}`,
-        ].sort().join("/");
+      `${link.source_latitude}/${link.source_longitude}`,
+      `${link.destination_latitude}/${link.destination_longitude}`,
+    ]
+      .sort()
+      .join("/");
     links[key] = links[key] ? [...links[key], link.id] : [link.id];
     if (!bundleCoordinates[key]) {
       bundleCoordinates[key] = {

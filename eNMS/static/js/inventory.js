@@ -164,8 +164,7 @@ function webConnection(id) {
     form: `connection-parameters-form-${id}`,
     callback: function (result) {
       const url =
-        serverUrl ||
-        `${window.location.protocol}//${window.location.hostname}`;
+        serverUrl || `${window.location.protocol}//${window.location.hostname}`;
       const link = result.redirection
         ? `${url}/terminal${result.port}`
         : `${url}:${result.port}`;

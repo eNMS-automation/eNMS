@@ -589,28 +589,10 @@ tables.network = class NetworkTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      `<input type="hidden" id="network-filtering" name="network-filtering"></input>`,
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
-      `
-      <a
-        id="left-arrow"
-        class="btn btn-info disabled"
-        onclick="action['Backward']()"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-chevron-left"></span>
-      </a>
-      <a
-        id="right-arrow"
-        class="btn btn-info disabled"
-        onclick="action['Forward']()"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-chevron-right"></span>
-      </a>`,
       this.createNewButton(),
       this.bulkEditButton(),
       this.bulkDeletionButton(),

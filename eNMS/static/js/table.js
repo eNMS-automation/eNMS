@@ -865,12 +865,7 @@ tables.service = class ServiceTable extends Table {
 
   get filteringConstraints() {
     const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
-    const workflowFiltering = $("#workflow-filtering").val();
-    if (workflowFiltering?.length) {
-      return { workflows: [workflowFiltering] };
-    } else {
-      return { workflows_filter: parentFiltering ? "empty" : "union" };
-    }
+    return { workflows_filter: parentFiltering ? "empty" : "union" };
   }
 
   get controls() {
@@ -902,23 +897,6 @@ tables.service = class ServiceTable extends Table {
       this.searchTableButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
-      `
-      <a
-        id="left-arrow"
-        class="btn btn-info disabled"
-        onclick="action['Backward']()"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-chevron-left"></span>
-      </a>
-      <a
-        id="right-arrow"
-        class="btn btn-info disabled"
-        onclick="action['Forward']()"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-chevron-right"></span>
-      </a>`,
       this.createNewButton(),
       `
       <button

@@ -900,22 +900,20 @@ tables.service = class ServiceTable extends Table {
     return [
       this.columnDisplay(),
       `
-      <input type="hidden" id="workflow-filtering" name="workflow-filtering">
-        <button
-          style="background:transparent; border:none; 
-          color:transparent; width: 240px;"
-          type="button"
+      <button
+        style="background:transparent; border:none; 
+        color:transparent; width: 240px;"
+        type="button"
+      >
+        <select
+          id="parent-filtering"
+          name="parent-filtering"
+          class="form-control"
         >
-          <select
-            id="parent-filtering"
-            name="parent-filtering"
-            class="form-control"
-          >
-            <option value="true">Display services hierarchically</option>
-            <option value="false">Display all services</option>
-          </select>
-        </button>
-      </input>
+          <option value="true">Display top-level services</option>
+          <option value="false">Display all services</option>
+        </select>
+      </button>
       <button
         class="btn btn-info"
         onclick="eNMS.table.refreshTable('service', true)"

@@ -16,6 +16,8 @@ Version 4.3.0
   view all runtimes (including when it was run as standalone workflow)
 - Remove "Approved by admin" mechanism for Unix Command Service. Instead, check if the new command is
   different from the old command: if it is and the user is not an admin, an error is raised.
+- Remove backward / forward mechanism in the network and service table. Make networks / workflows links to
+  the network / workflow builder for consistency with results page.
 
 Version 4.2.1
 -------------

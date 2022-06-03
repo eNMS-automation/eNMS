@@ -18,6 +18,7 @@ Version 4.3.0
   different from the old command: if it is and the user is not an admin, an error is raised.
 - Remove backward / forward mechanism in the network and service table. Make networks / workflows links to
   the network / workflow builder for consistency with results page.
+- Add new option in data extraction service to parse TextFSM as JSON object.
 
 Version 4.2.1
 -------------

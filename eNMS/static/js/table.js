@@ -578,6 +578,7 @@ tables.network = class NetworkTable extends Table {
   }
 
   postProcessing(...args) {
+    let self = this;
     super.postProcessing(...args);
     updateNetworkRightClickBindings();
     $("#parent-filtering")

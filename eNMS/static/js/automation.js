@@ -740,8 +740,6 @@ Object.assign(action, {
     runService({ id: service.id, parametrization: true }),
   Logs: (service) => showRuntimePanel("logs", service, currentRuntime),
   Results: (service) => showRuntimePanel("results", service, currentRuntime, "result"),
-  Backward: () => switchToWorkflow(history[historyPosition - 1], "left"),
-  Forward: () => switchToWorkflow(history[historyPosition + 1], "right"),
 });
 
 export function showRunServicePanel({ instance, tableId, targets, type }) {

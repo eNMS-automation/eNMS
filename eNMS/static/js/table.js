@@ -865,13 +865,9 @@ tables.pool = class PoolTable extends Table {
 tables.service = class ServiceTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
-    row.name =
-      row.type === "workflow"
-        ? `<b><a href="#" onclick="eNMS.workflowBuilder.filterWorkflowTable(
-      '${this.id}', ${row.id})">${row.scoped_name}</a></b>`
-        : $("#parent-filtering").val() == "true"
-        ? row.scoped_name
-        : row.name;
+    if (row.type == "workflow") {
+      row.name = `<b><a href="/workflow_builder/${row.id}">${row.name}</a></b>`;
+    }
     for (const model of ["device", "pool"]) {
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
         '${model}', ${row.instance}, {parent: '${this.id}', from: 'target_services',

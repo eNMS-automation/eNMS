@@ -195,35 +195,25 @@ export const switchToWorkflow = function (path, direction, runtime, selection) {
   }
   setPath(path);
   moveHistory(path, direction);
-  if (!path && page == "service_table") {
-    $("#workflow-filtering").val("");
-    tableInstances["service"].table.page(0).ajax.reload(null, false);
-    return;
-  }
   call({
     url: `/get_service_state/${path}`,
     data: { display: runtimeDisplay, runtime: runtime || "latest" },
     callback: function (result) {
       workflow = result.service;
       currentRun = result.run;
-      if (page == "workflow_builder") {
-        if (workflow?.superworkflow) {
-          if (!currentPath.includes(workflow.superworkflow.id)) {
-            setPath(`${workflow.superworkflow.id}>${path}`);
-          }
-          $("#up-arrow").removeClass("disabled");
+      if (workflow?.superworkflow) {
+        if (!currentPath.includes(workflow.superworkflow.id)) {
+          setPath(`${workflow.superworkflow.id}>${path}`);
         }
-        localStorage.setItem("workflow_path", path);
-        if (workflow) {
-          localStorage.setItem("workflow", JSON.stringify(workflow));
-        }
-        displayWorkflow(result);
-        if (selection) graph.setSelection(selection);
-        switchMode(currentMode, true);
-      } else {
-        $("#workflow-filtering").val(path ? workflow.name : "");
-        tableInstances["service"].table.page(0).ajax.reload(null, false);
+        $("#up-arrow").removeClass("disabled");
       }
+      localStorage.setItem("workflow_path", path);
+      if (workflow) {
+        localStorage.setItem("workflow", JSON.stringify(workflow));
+      }
+      displayWorkflow(result);
+      if (selection) graph.setSelection(selection);
+      switchMode(currentMode, true);
     },
   });
 };

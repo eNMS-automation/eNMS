@@ -580,11 +580,31 @@ tables.network = class NetworkTable extends Table {
   postProcessing(...args) {
     super.postProcessing(...args);
     updateNetworkRightClickBindings();
+    $("#parent-filtering")
+      .selectpicker()
+      .on("change", function () {
+        self.table.page(0).ajax.reload(null, false);
+      });
   }
 
   get controls() {
     return [
       this.columnDisplay(),
+      `
+      <button
+        style="background:transparent; border:none; 
+        color:transparent; width: 240px;"
+        type="button"
+      >
+        <select
+          id="parent-filtering"
+          name="parent-filtering"
+          class="form-control"
+        >
+          <option value="true">Display top-level networks</option>
+          <option value="false">Display all networks</option>
+        </select>
+      </button>`,
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),

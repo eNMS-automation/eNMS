@@ -290,11 +290,6 @@ function displayNetwork({ direction, noAlert, withCluster } = {}) {
   });
 }
 
-function changeCursor(click) {
-  const instance = viewer.scene.pick(click.endPosition);
-  document.body.style.cursor = instance ? "pointer" : "default";
-}
-
 function leftClickBinding(type, id, bundle) {
   if (bundle) {
     const constraints = { id: `^(${id.split("-").join("|")})$`, id_filter: "regex" };

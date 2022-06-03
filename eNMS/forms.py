@@ -860,6 +860,19 @@ class UploadFilesForm(BaseForm):
     form_type = HiddenField(default="upload_files")
 
 
+class UserProfileForm(BaseForm):
+    form_type = HiddenField(default="profile")
+    name = StringField("Name")
+    email = StringField("Email")
+    theme = SelectField(
+        "Theme",
+        choices=[
+            (theme, values["name"]) for theme, values in vs.themes["themes"].items()
+        ],
+    )
+    password = PasswordField("Password")
+
+
 class WorkflowLabelForm(BaseForm):
     form_type = HiddenField(default="label")
     action = "eNMS.builder.createLabel"

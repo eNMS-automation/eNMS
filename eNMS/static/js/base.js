@@ -761,7 +761,7 @@ function updateProperty(instance, el, property, value, type) {
   }
 }
 
-function processInstance(type, instance) {
+export function processInstance(type, instance) {
   for (const [property, value] of Object.entries(instance)) {
     const el = $(
       instance ? `#${type}-${property}-${instance.id}` : `#${type}-${property}`

@@ -12,6 +12,7 @@ import {
   jsonEditors,
   notify,
   openPanel,
+  processInstance,
 } from "./base.js";
 import { tables } from "./table.js";
 
@@ -347,6 +348,22 @@ function displayFiles() {
   });
 }
 
+function showProfile() {
+  openPanel({
+    name: "profile",
+    title: "Profile",
+    id: user.id,
+    callback: () => {
+      call({
+        url: `/get_properties/user/${user.id}`,
+        callback: function (user) {
+          processInstance("profile", user);
+        },
+      });
+    },
+  });
+}
+
 export function showCredentialPanel(id) {
   const postfix = id ? `-${id}` : "";
   $(`#credential-subtype${postfix}`)
@@ -380,4 +397,5 @@ configureNamespace("administration", [
   showSettings,
   showFileUploadPanel,
   showMigrationPanel,
+  showProfile,
 ]);

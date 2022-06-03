@@ -563,11 +563,7 @@ tables.device = class DeviceTable extends Table {
 tables.network = class NetworkTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
-    row.name =
-      row.type == "network"
-        ? `<b><a href="#" onclick="eNMS.networkBuilder.filterNetworkTable(
-      '${this.id}', ${row.id})">${row.name}</a></b>`
-        : row.name;
+    row.name = `<b><a href="/network_builder/${row.id}">${row.name}</a></b>`;
     row.links =
       row.type == "network"
         ? `<b><a href="#" onclick="eNMS.table.displayRelationTable(

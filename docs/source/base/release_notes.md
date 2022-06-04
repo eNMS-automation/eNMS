@@ -21,7 +21,7 @@ Version 4.3.0
 - Add new option in data extraction service to parse TextFSM as JSON object.
 - Add User Profile window to change username, password, user email, etc.
 - Add User landing page to decide which page to display after logging in (editable in profile).
-- Add mechanism to show a single device status in workflow builder UI.
+- Add mechanism to show a single device status in workflow builder UI (logs filtering + service display)
 
 Migration
 - dashboard is now controlled by RBAC: dashboard access must be explicitly granted via access pages, GET and

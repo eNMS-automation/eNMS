@@ -641,7 +641,7 @@ function displayTextSearchField() {
 function searchText() {
   const searchValue = $("#workflow-search").val();
   call({
-    url: `/search_builder_text/${searchValue}`,
+    url: `/search_builder/${type}/${instance.id}/${searchValue}`,
     callback: function (result) {
       console.log(result)
     },

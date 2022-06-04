@@ -862,6 +862,7 @@ class UploadFilesForm(BaseForm):
 
 class UserProfileForm(BaseForm):
     form_type = HiddenField(default="profile")
+    action = "eNMS.administration.saveProfile"
     name = StringField("Name")
     email = StringField("Email")
     theme = SelectField(

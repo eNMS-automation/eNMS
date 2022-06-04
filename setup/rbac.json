@@ -237,6 +237,7 @@
     "/run_service_on_targets": "access",
     "/save_file": "access",
     "/save_positions": "access",
+    "/save_profile": "access",
     "/save_settings": "admin",
     "/scan_cluster": "access",
     "/scan_playbook_folder": "access",

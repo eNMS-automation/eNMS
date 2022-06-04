@@ -364,6 +364,17 @@ function showProfile() {
   });
 }
 
+function saveProfile() {
+  call({
+    url: "/save_profile",
+    form: `profile-form-${user.id}`,
+    callback: function () {
+      notify("Profile saved.", "success", 5, true);
+      $(`#profile-${user.id}`).remove();
+    },
+  });
+}
+
 export function showCredentialPanel(id) {
   const postfix = id ? `-${id}` : "";
   $(`#credential-subtype${postfix}`)
@@ -393,6 +404,7 @@ configureNamespace("administration", [
   runDebugCode,
   saveSettings,
   saveFile,
+  saveProfile,
   scanCluster,
   showSettings,
   showFileUploadPanel,

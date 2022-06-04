@@ -1121,6 +1121,9 @@ class Controller:
                 instance.last_modified = now
         return now
 
+    def save_profile(self, **kwargs):
+        current_user.update(**kwargs)
+
     def save_settings(self, **kwargs):
         vs.settings = vs.template_context["settings"] = kwargs["settings"]
         if kwargs["save"]:

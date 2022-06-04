@@ -559,8 +559,7 @@ class Controller:
             lines = log_instance.content.splitlines()
         else:
             lines = (
-                env.log_queue(runtime, service, start_line=int(line), mode="get")
-                or []
+                env.log_queue(runtime, service, start_line=int(line), mode="get") or []
             )
             number_of_lines = len(lines)
         if device:

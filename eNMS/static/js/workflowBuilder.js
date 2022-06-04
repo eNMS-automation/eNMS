@@ -668,7 +668,11 @@ export function getWorkflowState(periodic, first) {
   if (userIsActive && workflow?.id && !first) {
     call({
       url: `/get_service_state/${currentPath}`,
-      data: { display: runtimeDisplay, runtime: runtime },
+      data: {
+        display: runtimeDisplay,
+        runtime: runtime,
+        device: $("#device-filter").val(),
+      },
       callback: function (result) {
         if (!Object.keys(result).length || result.service.id != workflow.id) return;
         currentRun = result.run;

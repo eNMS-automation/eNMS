@@ -587,6 +587,8 @@ class Controller:
             else:
                 run = db.fetch("run", allow_none=True, runtime=runtime)
             state = run.get_state() if run else None
+        if kwargs.get("device"):
+            pass
         serialized_service = service.to_dict(include=["edges", "superworkflow"])
         run_properties = vs.automation["workflow"]["state_properties"]["run"]
         service_properties = vs.automation["workflow"]["state_properties"]["service"]

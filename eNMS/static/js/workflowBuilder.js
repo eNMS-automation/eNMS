@@ -642,7 +642,7 @@ function displayWorkflowState(result) {
   }
 }
 
-function resetDisplay() {
+export function resetDisplay() {
   let nodeUpdates = [];
   let edgeUpdates = [];
   workflow.services.forEach((service) => {

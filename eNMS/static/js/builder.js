@@ -34,6 +34,7 @@ import {
   ends,
   getWorkflowState,
   flipRuntimeDisplay,
+  resetDisplay,
   switchToWorkflow,
   updateWorkflowRightClickBindings,
 } from "./workflowBuilder.js";
@@ -644,9 +645,11 @@ function displayTextSearchField() {
 
 function searchText() {
   const searchValue = $("#workflow-search").val();
+  if (!searchValue) return;
   call({
     url: `/search_builder/${type}/${instance.id}/${searchValue}`,
     callback: function (nodes) {
+      resetDisplay();
       nodes.forEach((node) => colorService(node, "#EFFD5F"));
     },
   });

@@ -633,4 +633,10 @@ function searchText() {
   }
 }
 
-configureNamespace("builder", [createLabel, getTree, highlightNode, searchText, switchMode]);
+configureNamespace("builder", [
+  createLabel,
+  getTree,
+  highlightNode,
+  searchText,
+  switchMode,
+]);

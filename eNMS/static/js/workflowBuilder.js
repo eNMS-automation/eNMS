@@ -542,7 +542,7 @@ function restartWorkflow() {
 }
 
 function colorService(id, color) {
-  if (!ends.has(id) && nodes) {
+  if (!ends.has(id) && nodes && nodes.get(id)) {
     nodes.update({ id: id, color: color });
   }
 }
@@ -571,6 +571,12 @@ function displayWorkflowState(result) {
   updateRuntimes(result);
   if (currentRuntime == "normal") return;
   if (!nodes || !edges || !result.state) return;
+  if (result.device_state) {
+    for (const [serviceId, status] of Object.entries(result.device_state)) {
+      colorService(parseInt(serviceId), status ? "#32cd32" : "#FF6666");
+    }
+    return;
+  }
   let nodeUpdates = [];
   let edgeUpdates = [];
   const serviceIds = workflow.services.map((s) => s.id);

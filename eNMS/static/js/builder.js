@@ -523,6 +523,11 @@ export function initBuilder() {
         }
       }
       $(`#current-${type},#current-runtimes`).selectpicker({ liveSearch: true });
+      let searchTimer = false;
+      $("#workflow-search").keyup(function () {
+        if (searchTimer) clearTimeout(searchTimer);
+        searchTimer = setTimeout(searchText, 500);
+      });
       if (type == "workflow") {
         initSelect($(`#device-filter`), "device", null, true);
         $("#current-runtime,#device-filter").on("change", function () {
@@ -626,17 +631,27 @@ function getTree() {
   });
 }
 
-function searchText() {
+function displayTextSearchField() {
   $("#workflow-search-div").toggle();
   if ($("#workflow-search-div").is(":visible")) {
     $("#workflow-search").focus();
   }
 }
 
+function searchText() {
+  const searchValue = $("#workflow-search").val();
+  call({
+    url: `/search_builder_text/${searchValue}`,
+    callback: function (result) {
+      console.log(result)
+    },
+  });
+}
+
 configureNamespace("builder", [
   createLabel,
   getTree,
   highlightNode,
-  searchText,
+  displayTextSearchField,
   switchMode,
 ]);

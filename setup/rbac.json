@@ -6,7 +6,7 @@
       "pages": {
         "Dashboard": {
           "endpoint": "/dashboard",
-          "rbac": "all"
+          "rbac": "access"
         },
         "Changelog": {
           "endpoint": "/changelog_table",
@@ -121,7 +121,7 @@
     "/configuration_table": "access",
     "/confirmation_form": "access",
     "/credential_table": "admin",
-    "/dashboard": "all",
+    "/dashboard": "access",
     "/device_data_form": "access",
     "/device_table": "access",
     "/download_file": "access",
@@ -174,8 +174,8 @@
     "/clear_results": "access",
     "/clear_configurations": "access",
     "/compare": "access",
-    "/counters": "all",
-    "/count_models": "all",
+    "/counters": "access",
+    "/count_models": "access",
     "/create_label": "access",
     "/database_deletion": "admin",
     "/delete_instance": "access",

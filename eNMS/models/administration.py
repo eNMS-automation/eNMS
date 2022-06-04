@@ -74,7 +74,7 @@ class User(AbstractBase, UserMixin):
             .all()
         )
         for property in vs.rbac:
-            if property == "advanced":
+            if property in ("advanced", "all_pages"):
                 continue
             access_value = (getattr(access, property) for access in user_access)
             setattr(self, property, list(set(chain.from_iterable(access_value))))

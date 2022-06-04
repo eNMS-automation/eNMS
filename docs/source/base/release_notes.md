@@ -19,6 +19,7 @@ Version 4.3.0
 - Remove backward / forward mechanism in the network and service table. Make networks / workflows links to
   the network / workflow builder for consistency with results page.
 - Add new option in data extraction service to parse TextFSM as JSON object.
+- Add User Profile window to change username, password, user email, etc.
 
 Version 4.2.1
 -------------

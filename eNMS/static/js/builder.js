@@ -27,6 +27,7 @@ import {
   updateNetworkRightClickBindings,
 } from "./networkBuilder.js";
 import {
+  colorService,
   drawIterationEdge,
   drawWorkflowEdge,
   drawWorkflowNode,
@@ -526,7 +527,7 @@ export function initBuilder() {
       let searchTimer = false;
       $("#workflow-search").keyup(function () {
         if (searchTimer) clearTimeout(searchTimer);
-        searchTimer = setTimeout(searchText, 500);
+        searchTimer = setTimeout(searchText, 300);
       });
       if (type == "workflow") {
         initSelect($(`#device-filter`), "device", null, true);
@@ -635,6 +636,9 @@ function displayTextSearchField() {
   $("#workflow-search-div").toggle();
   if ($("#workflow-search-div").is(":visible")) {
     $("#workflow-search").focus();
+  } else {
+    $("#workflow-search").val("");
+    getWorkflowState();
   }
 }
 
@@ -642,8 +646,8 @@ function searchText() {
   const searchValue = $("#workflow-search").val();
   call({
     url: `/search_builder/${type}/${instance.id}/${searchValue}`,
-    callback: function (result) {
-      console.log(result)
+    callback: function (nodes) {
+      nodes.forEach((node) => colorService(node, "#EFFD5F"));
     },
   });
 }

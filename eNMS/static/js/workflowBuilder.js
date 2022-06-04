@@ -541,7 +541,7 @@ function restartWorkflow() {
   });
 }
 
-function colorService(id, color) {
+export function colorService(id, color) {
   if (!ends.has(id) && nodes && nodes.get(id)) {
     nodes.update({ id: id, color: color });
   }
@@ -567,6 +567,7 @@ export function getServiceState(id, first) {
 }
 
 function displayWorkflowState(result) {
+  if ($("#workflow-search").val()) return;
   resetDisplay();
   updateRuntimes(result);
   if (currentRuntime == "normal") return;

@@ -871,6 +871,7 @@ class UserProfileForm(BaseForm):
             (theme, values["name"]) for theme, values in vs.themes["themes"].items()
         ],
     )
+    landing_page = SelectField("Landing Page", validate_choice=False)
     password = PasswordField("Password")
 
 

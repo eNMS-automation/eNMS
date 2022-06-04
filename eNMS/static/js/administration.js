@@ -357,6 +357,12 @@ function showProfile() {
       call({
         url: `/get_properties/user/${user.id}`,
         callback: function (user) {
+          for (const [page, endpoint] of Object.entries(rbac.pages)) {
+            if (!user.is_admin && !user.pages.includes(page)) continue;
+            const option = `<option value='${endpoint}'>${page}</option>`;
+            $(`#profile-landing_page-${user.id}`).append(option);
+          }
+          $(`#profile-landing_page-${user.id}`).val(user.landing_page).selectpicker("refresh");
           processInstance("profile", user);
         },
       });

@@ -743,6 +743,7 @@ function filterDevice() {
   $("#device-filter-div").toggle();
   if (!$("#device-filter-div").is(":visible")) {
     $("#device-filter").val(null).trigger('change');
+    getWorkflowState();
   }
 }
 

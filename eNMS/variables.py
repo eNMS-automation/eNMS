@@ -110,14 +110,16 @@ class VariableStore:
                 )
 
     def _update_rbac_variables(self):
-        self.rbac = {"pages": {}, **self.rbac}
+        self.rbac = {"pages": [], "all_pages": {}, **self.rbac}
         for category in self.rbac["menu"].values():
             for page, page_values in category["pages"].items():
+                self.rbac["all_pages"][page] = page_values["endpoint"]
                 if page_values["rbac"] == "access":
-                    self.rbac["pages"][page] = page_values["endpoint"]
+                    self.rbac["pages"].append(page)
                 for subpage, subpage_values in page_values.get("subpages", {}).items():
+                    self.rbac["all_pages"][subpage] = subpage_values["endpoint"]
                     if subpage_values["rbac"] == "access":
-                        self.rbac["pages"][subpage] = subpage_values["endpoint"]
+                        self.rbac["pages"].append(subpage)
 
     def _set_run_variables(self):
         self.run_targets = {}

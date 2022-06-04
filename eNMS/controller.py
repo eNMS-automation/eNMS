@@ -550,23 +550,26 @@ class Controller:
         run_runtimes = set((run.runtime, run.name) for run in runs)
         return sorted(results_runtimes | run_runtimes, reverse=True)
 
-    def get_service_logs(self, service, runtime, start_line):
+    def get_service_logs(self, service, runtime, line=0, device=None):
         log_instance = db.fetch(
             "service_log", allow_none=True, runtime=runtime, service_id=service
         )
         number_of_lines = 0
         if log_instance:
-            logs = log_instance.content
+            lines = log_instance.content.splitlines()
         else:
             lines = (
-                env.log_queue(runtime, service, start_line=int(start_line), mode="get")
+                env.log_queue(runtime, service, start_line=int(line), mode="get")
                 or []
             )
-            number_of_lines, logs = len(lines), "\n".join(lines)
+            number_of_lines = len(lines)
+        if device:
+            device_name = db.fetch("device", id=device).name
+            lines = [line for line in lines if f"DEVICE {device_name}" in line]
         return {
-            "logs": logs,
+            "logs": "\n".join(lines),
             "refresh": not log_instance,
-            "line": int(start_line) + number_of_lines,
+            "line": int(line) + number_of_lines,
         }
 
     def get_service_state(self, path, **kwargs):

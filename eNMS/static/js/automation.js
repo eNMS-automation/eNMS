@@ -537,7 +537,8 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
   if (!$(`#service-logs-${service.id}`).length) return;
   if (runtime != $(`#runtimes-logs-${service.id}`).val()) return;
   call({
-    url: `/get_service_logs/${service.id}/${runtime}/${line || 0}`,
+    url: `/get_service_logs/${service.id}/${runtime}`,
+    data: { line: line || 0, device: $("#device-filter").val() },
     callback: function (result) {
       if (!first && result.refresh && result.logs.length) {
         // eslint-disable-next-line new-cap

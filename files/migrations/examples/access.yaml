@@ -4,7 +4,7 @@
   delete_requests: [/rest/instance]
   description: Full Access to Everything
   get_requests: [/changelog_table, /compare_form, /configuration_table, /confirmation_form,
-    /device_data_form, /device_table, /download_file, /event_table, /export_service,
+    /dashboard, /device_data_form, /device_table, /download_file, /event_table, /export_service,
     /files_form, /geographical_view, /git_history_form, /instance_deletion_form, /link_table,
     /network_builder, /logs_form, /pool_table, /rest/configuration, /rest/instance,
     /rest/query, /rest/result, /rest/token, /result_comparison_form, /result_form,
@@ -40,13 +40,13 @@
     /access_form]
   menu: [Inventory, Visualization, Automation]
   name: Full Access to Everything
-  pages: [Changelog, Devices, Configurations, Links, Pools, Networks, Geographical
+  pages: [Dashboard, Changelog, Devices, Configurations, Links, Pools, Networks, Geographical
       View, Network Builder, Services, Workflow Builder, Scheduling, Results]
   post_requests: [/add_edge, /add_instances_in_bulk, /add_objects_to_network, /bulk_deletion,
     /bulk_edit, /bulk_removal, /copy_service_in_workflow, /clear_results, /clear_configurations,
-    /compare, /create_label, /delete_instance, /delete_builder_selection, /desktop_connection,
-    /export_service, /export_services, /topology_export, /delete_file, /edit_file,
-    /get, /get_all, /get_cluster_status, /get_git_history, /get_device_network_data,
+    /compare, /counters, /count_models, /create_label, /delete_instance, /delete_builder_selection,
+    /desktop_connection, /export_service, /export_services, /topology_export, /delete_file,
+    /edit_file, /get, /get_all, /get_cluster_status, /get_git_history, /get_device_network_data,
     /get_device_logs, /get_git_network_data, /get_migration_folders, /get_service_logs,
     /get_properties, /get_result, /get_view_topology, /get_service_state, /get_network_state,
     /get_top_level_instances, /get_tree_files, /get_visualization_pools, /get_workflow_results,
@@ -77,48 +77,21 @@
   access_type: "['Read']"
   delete_requests: []
   description: All menu entries and GET requests, all non-editing POST requests.
-  get_requests: [/dashboard, /download_file, /form/access, /form/access_relation_filtering,
-    /form/add_services_to_workflow, /form/administration, /form/alerts_table, /form/ansible_playbook_service,
-    /form/calendar, /form/changelog, /form/compare, /form/configure_bgp_service, /form/credential,
-    /form/netmiko_backup_service, /form/database_deletion, /form/database_migration,
-    /form/device, /form/device_connection, /form/device_data, /form/device_filtering,
-    /form/device_relation_filtering, /form/event, /form/event_filtering, /form/event_relation_filtering,
-    /form/example_service, /form/excel_export, /form/excel_import, /form/file, /form/files,
-    /form/generic_file_transfer_service, /form/git_history, /form/import_service,
-    /form/instance_deletion, /form/link, /form/link_filtering, /form/link_relation_filtering,
-    /form/logs, /form/mail_notification_service, /form/mattermost_notification_service,
-    /form/napalm_backup_service, /form/napalm_configuration_service, /form/napalm_getters_service,
-    /form/napalm_ping_service, /form/napalm_rollback_service, /form/napalm_traceroute_service,
-    /form/netmiko_configuration_service, /form/netmiko_file_transfer_service, /form/netmiko_prompts_service,
-    /form/netmiko_commands_service, /form/data_extraction_service, /form/ping_service,
-    /form/pool, /form/pool_filtering, /form/pool_relation_filtering, /form/python_snippet_service,
-    /form/rest_call_service, /form/restart_workflow, /form/result, /form/result_log_deletion,
-    /form/run_relation_filtering, /form/run_service, /form/scrapli_service, /form/server,
-    /form/service_filtering, /form/service_relation_filtering, /form/session_log,
-    /form/settings_panel, /form/slack_notification_service, /form/swiss_army_knife_service,
-    /form/table, /form/task, /form/task_filtering, /form/task_relation_filtering,
-    /form/topology_import_service, /form/tree, /form/unix_command_service, /form/unix_shell_script_service,
-    /form/upload_files, /form/user, /form/user_relation_filtering, /form/workflow,
-    /form/workflow_edge, /form/workflow_label, /form/instance_tree, /login, /logout,
-    /rest/configuration, /rest/instance, /rest/query, /rest/result, /rest/search,
-    /access_table, /changelog_table, /configuration_table, /credential_table, /device_table,
-    /event_table, /pool_table, /link_table, /run_table, /server_table, /service_table,
-    /session_table, /task_table, /user_table, /view_service_results, /geographical_view,
-    /view_builder, /workflow_builder, /form/panel, /template/form, /template/devices]
-  menu: [Home, Administration, Inventory, Visualization, Automation, Scheduling]
+  get_requests: [/changelog_table, /configuration_table, /dashboard, /device_table,
+    /download_file, /event_table, /geographical_view, /link_table, /pool_table, /rest/configuration,
+    /rest/instance, /rest/query, /rest/result, /run_table, /service_table, /task_table,
+    /view_service_results, /workflow_builder]
+  menu: [Inventory, Visualization, Automation]
   name: Read-Only Profile
-  pages: [Access, Credentials, Dashboard, Changelog, Sessions, Users, Servers, Devices,
-    Configurations, Links, Pools, Geographical View, Logical View, Services, Workflow
-      Builder, Results, Tasks, Events]
-  post_requests: [/calendar_init, /compare, /counters, /count_models, /edit_file,
-    /get, /get_all, /get_cluster_status, /get_git_history, /get_device_network_data,
-    /get_device_logs, /get_exported_services, /get_git_network_data, /get_migration_folders,
-    /get_service_logs, /get_properties, /get_result, /get_runtimes, /get_view_topology,
-    /get_service_state, /get_session_log, /get_top_level_workflows, /get_tree_files,
-    /get_workflow_results, /get_workflow_services, /get_instance_tree, /multiselect_filtering,
-    /search_workflow_services, /switch_menu, /switch_theme, /filtering, /view_filtering]
+  pages: [Dashboard, Changelog, Devices, Configurations, Links, Pools, Networks, Geographical
+      View, Network Builder, Services, Workflow Builder, Scheduling, Results]
+  post_requests: [/compare, /counters, /count_models, /edit_file, /get, /get_all,
+    /get_cluster_status, /get_git_history, /get_device_network_data, /get_device_logs,
+    /get_git_network_data, /get_migration_folders, /get_service_logs, /get_properties,
+    /get_result, /get_view_topology, /get_service_state, /get_tree_files, /get_workflow_results,
+    /get_workflow_services, /get_instance_tree, /search_workflow_services, /view_filtering]
   type: access
-  upper_menu: [Admin, Settings, Files]
+  upper_menu: [Files]
   user_pools: [Read-only users]
 - access_pools: [Datacenter New York]
   access_type: "['Read', 'Connect', 'Use as target']"
@@ -137,7 +110,7 @@
   delete_requests: [/rest/instance]
   description: Access to all menu pages and HTTP requests
   get_requests: [/changelog_table, /compare_form, /configuration_table, /confirmation_form,
-    /device_data_form, /device_table, /download_file, /event_table, /export_service,
+    /dashboard, /device_data_form, /device_table, /download_file, /event_table, /export_service,
     /files_form, /geographical_view, /git_history_form, /instance_deletion_form, /link_table,
     /network_builder, /logs_form, /pool_table, /rest/configuration, /rest/instance,
     /rest/query, /rest/result, /rest/token, /result_comparison_form, /result_form,
@@ -173,13 +146,13 @@
     /access_form]
   menu: [Inventory, Visualization, Automation]
   name: Full UI + HTTP access
-  pages: [Changelog, Devices, Configurations, Links, Pools, Networks, Geographical
+  pages: [Dashboard, Changelog, Devices, Configurations, Links, Pools, Networks, Geographical
       View, Network Builder, Services, Workflow Builder, Scheduling, Results]
   post_requests: [/add_edge, /add_instances_in_bulk, /add_objects_to_network, /bulk_deletion,
     /bulk_edit, /bulk_removal, /copy_service_in_workflow, /clear_results, /clear_configurations,
-    /compare, /create_label, /delete_instance, /delete_builder_selection, /desktop_connection,
-    /export_service, /export_services, /topology_export, /delete_file, /edit_file,
-    /get, /get_all, /get_cluster_status, /get_git_history, /get_device_network_data,
+    /compare, /counters, /count_models, /create_label, /delete_instance, /delete_builder_selection,
+    /desktop_connection, /export_service, /export_services, /topology_export, /delete_file,
+    /edit_file, /get, /get_all, /get_cluster_status, /get_git_history, /get_device_network_data,
     /get_device_logs, /get_git_network_data, /get_migration_folders, /get_service_logs,
     /get_properties, /get_result, /get_view_topology, /get_service_state, /get_network_state,
     /get_top_level_instances, /get_tree_files, /get_visualization_pools, /get_workflow_results,

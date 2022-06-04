@@ -572,6 +572,7 @@ class Controller:
     def get_service_state(self, path, **kwargs):
         state, run, path_id = None, None, path.split(">")
         runtime, display = kwargs.get("runtime"), kwargs.get("display")
+        output = {"runtime": runtime}
         service = db.fetch("service", id=path_id[-1], allow_none=True)
         if not service:
             raise db.rbac_error
@@ -587,8 +588,13 @@ class Controller:
             else:
                 run = db.fetch("run", allow_none=True, runtime=runtime)
             state = run.get_state() if run else None
-        if kwargs.get("device"):
-            pass
+        if kwargs.get("device") and run:
+            output["device_state"] = {
+                result.service_id: result.success
+                for result in db.fetch_all(
+                    "result", parent_runtime=run.runtime, device_id=kwargs.get("device")
+                )
+            }
         serialized_service = service.to_dict(include=["edges", "superworkflow"])
         run_properties = vs.automation["workflow"]["state_properties"]["run"]
         service_properties = vs.automation["workflow"]["state_properties"]["service"]
@@ -606,7 +612,7 @@ class Controller:
             ),
             "state": state,
             "run": run.get_properties(include=run_properties) if run else None,
-            "runtime": runtime,
+            **output,
         }
 
     def get_session_log(self, session_id):

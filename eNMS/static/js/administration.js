@@ -362,7 +362,9 @@ function showProfile() {
             const option = `<option value='${endpoint}'>${page}</option>`;
             $(`#profile-landing_page-${user.id}`).append(option);
           }
-          $(`#profile-landing_page-${user.id}`).val(user.landing_page).selectpicker("refresh");
+          $(`#profile-landing_page-${user.id}`)
+            .val(user.landing_page)
+            .selectpicker("refresh");
           processInstance("profile", user);
         },
       });

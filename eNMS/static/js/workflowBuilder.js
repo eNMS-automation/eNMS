@@ -112,6 +112,16 @@ export function displayWorkflow(workflowData) {
   displayWorkflowState(workflowData);
 }
 
+function displayTextSearchField() {
+  $("#workflow-search-div").toggle();
+  if ($("#workflow-search-div").is(":visible")) {
+    $("#workflow-search").focus();
+  } else {
+    $("#workflow-search").val("");
+    getWorkflowState();
+  }
+}
+
 function updateRuntimes(result) {
   currentPlaceholder = result.state?.[currentPath]?.placeholder;
   if (!currentRuntime) currentRuntime = $("#current-runtime").val();
@@ -750,6 +760,7 @@ function filterDevice() {
 
 configureNamespace("workflowBuilder", [
   addServicesToWorkflow,
+  displayTextSearchField,
   filterDevice,
   filterWorkflowTable,
   getWorkflowState,

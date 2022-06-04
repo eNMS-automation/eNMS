@@ -633,16 +633,6 @@ function getTree() {
   });
 }
 
-function displayTextSearchField() {
-  $("#workflow-search-div").toggle();
-  if ($("#workflow-search-div").is(":visible")) {
-    $("#workflow-search").focus();
-  } else {
-    $("#workflow-search").val("");
-    getWorkflowState();
-  }
-}
-
 function searchText() {
   const searchValue = $("#workflow-search").val();
   if (!searchValue) return;
@@ -659,6 +649,5 @@ configureNamespace("builder", [
   createLabel,
   getTree,
   highlightNode,
-  displayTextSearchField,
   switchMode,
 ]);

@@ -1166,11 +1166,10 @@ class Controller:
         for task in self.filtering("task", properties=["id"], form=kwargs):
             self.task_action(mode, task.id)
 
-    def search_builder(self, type, builder_id, text):
-        property = "services" if type == "workflow" else "nodes"
+    def search_builder(self, workflow_id, text):
         return [
             node.id
-            for node in getattr(db.fetch(type, id=builder_id), property)
+            for node in db.fetch("workflow", id=workflow_id).services
             if text.lower() in str(node.serialized).lower()
         ]
 

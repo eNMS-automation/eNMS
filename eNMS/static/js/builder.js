@@ -27,14 +27,13 @@ import {
   updateNetworkRightClickBindings,
 } from "./networkBuilder.js";
 import {
-  colorService,
   drawIterationEdge,
   drawWorkflowEdge,
   drawWorkflowNode,
   ends,
   getWorkflowState,
   flipRuntimeDisplay,
-  resetDisplay,
+  searchWorkflowText,
   switchToWorkflow,
   updateWorkflowRightClickBindings,
 } from "./workflowBuilder.js";
@@ -525,15 +524,15 @@ export function initBuilder() {
         }
       }
       $(`#current-${type},#current-runtimes`).selectpicker({ liveSearch: true });
-      let searchTimer = false;
-      $("#workflow-search").keyup(function () {
-        if (searchTimer) clearTimeout(searchTimer);
-        searchTimer = setTimeout(searchText, 300);
-      });
       if (type == "workflow") {
         initSelect($(`#device-filter`), "device", null, true);
         $("#current-runtime,#device-filter").on("change", function () {
           getWorkflowState();
+        });
+        let searchTimer = false;
+        $("#workflow-search").keyup(function () {
+          if (searchTimer) clearTimeout(searchTimer);
+          searchTimer = setTimeout(searchWorkflowText, 300);
         });
         getWorkflowState(true, true);
       } else {
@@ -629,18 +628,6 @@ function getTree() {
           });
         },
       });
-    },
-  });
-}
-
-function searchText() {
-  const searchValue = $("#workflow-search").val();
-  if (!searchValue) return;
-  call({
-    url: `/search_builder/${type}/${instance.id}/${searchValue}`,
-    callback: function (nodes) {
-      resetDisplay();
-      nodes.forEach((node) => colorService(node, "#EFFD5F"));
     },
   });
 }

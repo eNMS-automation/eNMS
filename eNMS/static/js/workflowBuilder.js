@@ -551,7 +551,7 @@ function restartWorkflow() {
   });
 }
 
-export function colorService(id, color) {
+function colorService(id, color) {
   if (!ends.has(id) && nodes && nodes.get(id)) {
     nodes.update({ id: id, color: color });
   }
@@ -652,7 +652,7 @@ function displayWorkflowState(result) {
   }
 }
 
-export function resetDisplay() {
+function resetDisplay() {
   let nodeUpdates = [];
   let edgeUpdates = [];
   workflow.services.forEach((service) => {
@@ -756,6 +756,18 @@ function filterDevice() {
     $("#device-filter").val(null).trigger("change");
     getWorkflowState();
   }
+}
+
+export function searchWorkflowText() {
+  const searchValue = $("#workflow-search").val();
+  if (!searchValue) return;
+  call({
+    url: `/search_builder/${instance.id}/${searchValue}`,
+    callback: function (nodes) {
+      resetDisplay();
+      nodes.forEach((node) => colorService(node, "#EFFD5F"));
+    },
+  });
 }
 
 configureNamespace("workflowBuilder", [

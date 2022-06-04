@@ -32,7 +32,7 @@ import {
   switchMode,
   updateBuilderBindings,
 } from "./builder.js";
-import { clearSearch, tables, tableInstances } from "./table.js";
+import { clearSearch, tables } from "./table.js";
 
 const options = {
   interaction: {
@@ -729,8 +729,13 @@ function compareWorkflowResults() {
   });
 }
 
+function filterDevice() {
+  $("#device-filter-div").toggle();
+}
+
 configureNamespace("workflowBuilder", [
   addServicesToWorkflow,
+  filterDevice,
   filterWorkflowTable,
   getWorkflowState,
   restartWorkflow,

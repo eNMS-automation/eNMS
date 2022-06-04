@@ -12,6 +12,7 @@ import {
   createTooltips,
   history,
   historyPosition,
+  initSelect,
   loadTypes,
   notify,
   openPanel,
@@ -523,6 +524,7 @@ export function initBuilder() {
       }
       $(`#current-${type},#current-runtimes`).selectpicker({ liveSearch: true });
       if (type == "workflow") {
+        initSelect($(`#device-filter`), "device", null, true);
         $("#current-runtime").on("change", function () {
           getWorkflowState();
         });
@@ -624,4 +626,11 @@ function getTree() {
   });
 }
 
-configureNamespace("builder", [createLabel, getTree, highlightNode, switchMode]);
+function searchText() {
+  $("#workflow-search-div").toggle();
+  if ($("#workflow-search-div").is(":visible")) {
+    $("#workflow-search").focus();
+  }
+}
+
+configureNamespace("builder", [createLabel, getTree, highlightNode, searchText, switchMode]);

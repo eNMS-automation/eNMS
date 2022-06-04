@@ -501,7 +501,7 @@ export function preprocessForm(panel, id, type, duplicate) {
   });
 }
 
-function initSelect(el, model, parentId, single, constraints) {
+export function initSelect(el, model, parentId, single, constraints) {
   el.select2({
     multiple: !single,
     allowClear: true,

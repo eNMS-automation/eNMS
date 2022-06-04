@@ -20,6 +20,11 @@ Version 4.3.0
   the network / workflow builder for consistency with results page.
 - Add new option in data extraction service to parse TextFSM as JSON object.
 - Add User Profile window to change username, password, user email, etc.
+- Add User landing page to decide which page to display after logging in (editable in profile)
+
+Migration
+- dashboard is now controlled by RBAC: dashboard access must be explicitly granted via access pages, GET and
+  POST requests.
 
 Version 4.2.1
 -------------

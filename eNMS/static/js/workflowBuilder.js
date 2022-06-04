@@ -17,8 +17,8 @@ import {
   notify,
   openPanel,
   showInstancePanel,
-  userIsActive,
   showConfirmationPanel,
+  userIsActive,
 } from "./base.js";
 import {
   configureGraph,

@@ -223,14 +223,14 @@ class Server(Flask):
                 finally:
                     env.log("info" if success else "warning", log, logger="security")
                     if success:
-                        url = url_for("blueprint.route", page="dashboard")
+                        url = url_for("blueprint.route", page=current_user.landing_page)
                         return redirect(request.args.get("next_url", url))
                     else:
                         abort(403)
             if not current_user.is_authenticated:
                 login_form = vs.form_class["login"](request.form)
                 return render_template("login.html", login_form=login_form)
-            return redirect(url_for("blueprint.route", page="dashboard"))
+            return redirect(url_for("blueprint.route", page=current_user.landing_page))
 
         @blueprint.route("/dashboard")
         @self.process_requests

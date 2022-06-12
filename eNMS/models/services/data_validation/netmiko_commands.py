@@ -71,7 +71,7 @@ class NetmikoValidationService(ConnectionService):
             if len(result) == 1:
                 result, = result
             elif not run.results_as_list:
-                result = "\n".join(result)
+                result = "\n".join(map(str, result))
             run.exit_remote_device(netmiko_connection, prompt, device)
         except Exception:
             result = netmiko_connection.session_log.getvalue().decode().lstrip("\u0000")

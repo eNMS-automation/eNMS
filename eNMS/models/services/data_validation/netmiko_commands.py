@@ -69,7 +69,7 @@ class NetmikoValidationService(ConnectionService):
                 for command in commands.splitlines()
             ]
             if len(result) == 1:
-                result, = result
+                (result,) = result
             elif not run.results_as_list:
                 result = "\n".join(map(str, result))
             run.exit_remote_device(netmiko_connection, prompt, device)

@@ -80,7 +80,7 @@ from uuid import uuid4
 
 class CustomApp
   def gererate_uuid(self):
-    return lambda: str(uuid4())
+    return str(uuid4())
 ```
 
 ```json

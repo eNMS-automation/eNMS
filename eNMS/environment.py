@@ -1,5 +1,6 @@
 from base64 import b64decode, b64encode
 from click import get_current_context
+from collections import defaultdict
 from cryptography.fernet import Fernet
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
@@ -10,7 +11,7 @@ from importlib import import_module
 from json import load
 from logging.config import dictConfig
 from logging import getLogger, info
-from os import getenv
+from os import getenv, getpid
 from passlib.hash import argon2
 from redis import Redis
 from redis.exceptions import ConnectionError, TimeoutError
@@ -54,6 +55,7 @@ class Environment:
         self.init_logs()
         self.init_redis()
         self.init_connection_pools()
+        self.workers = defaultdict(lambda: {"jobs": defaultdict(int)})
         self.ssh_port = -1
 
     def authenticate_user(self, **kwargs):
@@ -161,6 +163,28 @@ class Environment:
         if self.vault_client.sys.is_sealed() and vs.settings["vault"]["unseal_vault"]:
             keys = [getenv(f"UNSEAL_VAULT_KEY{index}") for index in range(1, 6)]
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
+
+    def get_workers(self):
+        if self.redis_queue:
+            self.workers = defaultdict(lambda: {"jobs": defaultdict(int)})
+            keys = env.redis("keys", f"workers/*")
+            if not keys:
+                return {}
+            data = dict(zip(keys, env.redis("mget", *keys)))
+            for key, value in data.items():
+                if not int(value):
+                    continue
+                process_id, job_name = key.split("/")[1:]
+                self.workers[process_id]["jobs"][job_name] = int(value)
+        return self.workers
+
+    def update_worker_job(self, job, mode="incr"):
+        if self.redis_queue:
+            self.redis(mode, f"workers/{getpid()}/{job}", 1)
+        else:
+            self.workers[getpid()]["jobs"][job] += 1 if mode == "incr" else -1
+            if not self.workers[getpid()]["jobs"][job]:
+                self.workers[getpid()]["jobs"].pop(job)
 
     def log(self, severity, content, user=None, change_log=True, logger="root"):
         logger_settings = vs.logging["loggers"].get(logger, {})

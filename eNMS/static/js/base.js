@@ -510,6 +510,7 @@ export function initSelect(el, model, parentId, single, constraints) {
     dropdownParent: parentId ? $(`#${parentId}`) : $(document.body),
     tags: !single,
     escapeMarkup: (markup) => markup,
+    width: "100%",
     tokenSeparators: [","],
     ajax: {
       url: `/multiselect_filtering/${model}`,

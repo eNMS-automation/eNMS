@@ -42,7 +42,8 @@ Version 4.2.1
 - For consistency with Scrapli
   * Rename "Netmiko Validation" to "Netmiko Commands"
   * Allow sending multiple commands via Netmiko Commands
-  * Add "Results as List" to Netmiko Commands Service
+  * Add "Results as List" to Netmiko Commands 
+- Add "use genie" option in netmiko commands service for Genie / PyATS support
 
 To be tested:
 - mail notification

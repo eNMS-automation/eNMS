@@ -6,6 +6,7 @@ from uuid import getnode
 
 from eNMS.controller import controller
 from eNMS.database import db
+from eNMS.environment import env
 from eNMS.variables import vs
 
 
@@ -18,6 +19,7 @@ class RestApi:
             "is_alive": "is_alive",
             "query": "query",
             "result": "get_result",
+            "workers": "get_workers",
         },
         "POST": {
             "instance": "update_instance",
@@ -69,6 +71,9 @@ class RestApi:
                 "status": run.status,
                 "result": result.result if result else "No results yet.",
             }
+
+    def get_workers(self):
+        return env.get_workers()
 
     def is_alive(self, **_):
         return {"name": getnode(), "cluster_id": vs.settings["cluster"]["id"]}

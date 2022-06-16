@@ -426,6 +426,7 @@ class Run(AbstractBase):
             return "N/A"
 
     def run(self):
+        env.update_worker_job(self.service.name)
         vs.run_targets[self.runtime] = set(
             device.id
             for device in controller.filtering(
@@ -453,6 +454,7 @@ class Run(AbstractBase):
         self.payload = self.service_run.payload
         db.session.commit()
         vs.run_targets.pop(self.runtime)
+        env.update_worker_job(self.service.name, mode="decr")
         return self.service_run.results
 
 

@@ -1070,8 +1070,16 @@ class Controller:
         result = StringIO()
         with redirect_stdout(result):
             try:
-                environment = {"env": self, "db": db, "models": vs.models, "vs": vs}
-                exec(kwargs["code"], environment)
+                exec(
+                    kwargs["code"],
+                    {
+                        "controller": self,
+                        "env": env,
+                        "db": db,
+                        "models": vs.models,
+                        "vs": vs,
+                    },
+                )
             except Exception:
                 return format_exc()
         return result.getvalue()

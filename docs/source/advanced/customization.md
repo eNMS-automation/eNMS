@@ -85,8 +85,8 @@ class CustomApp
 
 ```json
 "service": {
-   "ref": {
-     "pretty_name": "Reference ID",
+   "uuid": {
+     "pretty_name": "UUID",
      "type": "str",
      "default_function": "generate_uuid"
    }

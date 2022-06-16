@@ -499,6 +499,8 @@ class Database:
             if values.get("private", False):
                 kwargs = {}
             else:
+                if "default_function" in values and hasattr(vs.custom, values['default_function']):
+                    values["default"] = getattr(vs.custom, values['default_function'])()
                 kwargs = {
                     "default": values["default"],
                     "info": {"log_change": values.get("log_change", True)},

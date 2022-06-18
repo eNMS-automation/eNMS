@@ -18,7 +18,7 @@ Version 4.2.1
   * Add "Results as List" to Netmiko Commands 
 - Add "use genie" option in netmiko commands service for Genie / PyATS support
 - Add new `default_function` (sqlalchemy parameter) and `render_kw` (wtforms parameters) for custom fields in properties.json.
-- Add new `rest/workers` endpoint to get service count for each WSGI worker
+- Add new `rest/workers` GET endpoint to get service count for each WSGI worker
 
 To be tested:
 - mail notification

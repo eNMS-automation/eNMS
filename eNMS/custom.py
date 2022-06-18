@@ -34,7 +34,7 @@ class CustomApp:
             value = sub(r"(username.*secret) (.*)", "\g<1> ********", value)
         return value
 
-    def gererate_uuid(self):
+    def generate_uuid(self):
         return str(uuid4())
 
 

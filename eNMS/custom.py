@@ -1,4 +1,5 @@
 from re import sub
+from uuid import uuid4
 from warnings import warn
 
 try:
@@ -32,6 +33,9 @@ class CustomApp:
         if device.operating_system == "EOS" and property == "configuration":
             value = sub(r"(username.*secret) (.*)", "\g<1> ********", value)
         return value
+
+  def gererate_uuid(self):
+    return str(uuid4())
 
 
 vs.custom = CustomApp()

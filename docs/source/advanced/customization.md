@@ -17,6 +17,8 @@ Custom properties accept these configuration elements:
 - `type` (**mandatory**): `string`, `integer`, `float`, `boolean`, `dict`,
   `json`, `select`, and `multiselect`.
 - `default` (**optional**): Default value.
+- `default_function` (**optional**): Function returning the default value. 
+   This function **must** be an attribute of CustomApp in custom.py.
 - `help` (**optional**): the path to a context-sensitive HTML help file for
    this property.
 - `log_change` (**optional**): false  - disables logging when a change is
@@ -37,6 +39,8 @@ Custom properties accept these configuration elements:
 - `merge_update` (**optional**): `false` - *only for JSON property* - whether
    the JSON value is overridden or updated when setting a new value from the
    REST API.
+-  `render_kw` (**optional**): dictionary which provides default keywords 
+    to the WTForm widget at render time.
 
 Example for a Device property:
 
@@ -67,6 +71,26 @@ Example for a Service property:
         "help": "custom/impacting"
       },
   }
+```
+
+Example of a default_function attribute:
+```python
+# eNMS/custom.py
+from uuid import uuid4
+
+class CustomApp
+  def gererate_uuid(self):
+    return str(uuid4())
+```
+
+```json
+"service": {
+   "uuid": {
+     "pretty_name": "UUID",
+     "type": "str",
+     "default_function": "generate_uuid"
+   }
+}
 ```
 
       

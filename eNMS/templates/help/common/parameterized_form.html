@@ -19,21 +19,25 @@
       targets.
 
       <textarea class="help-snippet" style="height: fit-content;">
-# Setting the name field helps identify and filter the runtime in the results table:
-# name = StringField('Name')
-# Allow the user to provide initial_payload variables
-# initial_payload = DictField()
-# Prompt the user for target devices and pools
-target_devices = MultipleInstanceField('Devices', model='device')
-target_pools = MultipleInstanceField('Pools', model='pool')
-# Alternatively prompt the user for a device_query to derive the device targets
-# device_query = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows': 2})
-#  as well as indicate of those derived targets are names or ip addresses
-# device_query_property = SelectField('Query Property Type', choices=(('name', 'Name'), ('ip_address', 'IP address')))
-# Prompt the user for multiprocessing enabled or not
-# multiprocessing = BooleanField('Multiprocessing', default=False)
-#  as well as set the max number of processes when multiprocessing is enabled
-# max_processes = IntegerField('Maximum number of processes', default=15)</textarea
+# assigns a name to the runtime for filtering results
+name = StringField('Name')      
+# create variale for workflow reference (e.g. port or device_interface)
+custom_field = StringField('Custom Field', default='default_value')
+# like Main Parameters/Initial Payload
+initial_payload = DictField()  
+# like Targets/Devices/Devices 
+target_devices = MultipleInstanceField('Devices', model='device')  
+# like Targets/Devices/Pools
+target_pools = MultipleInstanceField('Pools', model='pool') 
+# like Targets/Devices/Device Query, use with device_query_property
+device_query = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows': 2}) 
+# like Targets/Devices/Query Property Type, use with device_query
+device_query_property = SelectField('Query Property Type', choices=(('name', 'Name'), ('ip_address', 'IP address')))  
+# like Targets/Devices/Multiprocessing, use with max_processes
+multiprocessing = BooleanField('Multiprocessing', default=False) 
+# like Targets/Devices/Multiprocessing, use with multiprocessing
+max_processes = IntegerField('Maximum number of processes', default=15)
+</textarea
       >
     </p>
   </div>

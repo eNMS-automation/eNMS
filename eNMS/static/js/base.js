@@ -509,6 +509,7 @@ function initSelect(el, model, parentId, single, constraints) {
     closeOnSelect: single ? true : false,
     dropdownParent: parentId ? $(`#${parentId}`) : $(document.body),
     tags: !single,
+    width: "100%",
     tokenSeparators: [","],
     ajax: {
       url: `/multiselect_filtering/${model}`,

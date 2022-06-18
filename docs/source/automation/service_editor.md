@@ -72,7 +72,7 @@ The Service Editor Panel is accessible from the following locations:
     | multiprocessing | boolean; turn multiprocessing on/off. |
     | mail_recipient | string; comma-separated list of email addresses. |
     | send_notification | boolean; turn notification on/off. |
-    | custom | Example:<br>`custom_field = StringField('Custom Field', default='def')`<br><br>This field can be referenced via:<br> `payload["form"]["custom_field"]`<br><br>Other WTForm components can be used to define a variety of properties. |
+    | custom | Example:<br>`custom_field = StringField('Custom Field', default='desired_default_value')`<br><br>This field can be referenced via:<br> `payload["form"]["custom_field"]`<br> OR <br>you may refer directly to the variable name `custom_field` <br><br>Other WTForm components can be used to define a variety of properties. |
     
 - `Parameterized Form is Mandatory`: Force display of the 
     Parameterized Form before execution whenever the service is run
@@ -128,9 +128,15 @@ generally provide more benefits for Service(s) that run inside of a Workflow.
     `set_var()` that can be used for conditional processing within the
     service or workflow elsewhere; for example using the same workflow
     to perform pre- and post- check tests on a device.
+    -	NOTE: When using `Iteration Devices` each of those target devices 
+    	will run a copy of `Preprocessing`.
 -   `Skip Query`: This field expects a python expression that evaluates
     to either `True` or `False`. The service will be skipped if `True`
-    and will run otherwise.
+    and will run otherwise. 
+    -	NOTE: When using `Iteration Devices`, this 
+    skip query will evaluate both the service's targets from Targets/Devices
+    and Targets/Iteration, if either is not skipped the workflow will
+    attempt to follow the appropriate success or failure edge. 
 -   `Skip Value`: Defines the success value of the service when skipped
     (in a workflow, the success value defines whether to follow the
     success path (success edge), the failure path (failure edge), or be
@@ -265,6 +271,12 @@ target device.
     -   `Iteration Devices Property` Indicates whether iterable
         `Iteration Devices` contains IP addresses or names, for eNMS to
         look up actual devices from the inventory.
+    -   NOTE: When using `Iteration Devices` and  `Skip Query` the skip query
+        will evaluate both the service's targets from Targets/Devices and 
+	Targets/Iteration, if either is not skipped the workflow will
+    	attempt to follow the appropriate success or failure edge.
+    -   NOTE: When using either `Preprocessing` or `Postprocessing` each
+    	will be run using each of the `Iteration Devices` targets.	
 -   `Iteration Values`: Query that returns an **iterable** (e.g. Python
     list) of **strings**.
     -   The service is run for each value.
@@ -323,7 +335,9 @@ the result for use in subsequent services.
             the service.
     -   See [Using Python in the Service Editor](../service_python_code/) for the full
         list of variables and functions.
-    -   Note that a log is generated any time postprocessing is skipped.
+    -   A log is generated any time postprocessing is skipped.
+    -   NOTE: When using `Iteration Devices` each of those target devices 
+    	will run a copy of `Postprocessing`.
 
 #### Validation
 

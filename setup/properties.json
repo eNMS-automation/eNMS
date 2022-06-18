@@ -88,6 +88,13 @@
         "pretty_name": "Completion time",
         "type": "integer",
         "default": 1
+      },
+      "default_uuid": {
+        "pretty_name": "Default UUID",
+        "type": "str",
+        "default": "",
+        "default_function": "generate_uuid",
+        "render_kw": {"readonly": true}
       }
     },
     "workflow": {

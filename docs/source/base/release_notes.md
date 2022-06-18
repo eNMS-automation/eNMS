@@ -44,6 +44,7 @@ Version 4.2.1
   * Allow sending multiple commands via Netmiko Commands
   * Add "Results as List" to Netmiko Commands 
 - Add "use genie" option in netmiko commands service for Genie / PyATS support
+- Add new `default_function` (sqlalchemy parameter) and `render_kw` (wtforms parameters) for custom fields in properties.json.
 
 To be tested:
 - mail notification

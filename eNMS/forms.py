@@ -62,6 +62,8 @@ class MetaForm(FormMeta):
             form_kw = {"default": values["default"]} if "default" in values else {}
             if field in (SelectField, SelectMultipleField):
                 form_kw["choices"] = values["choices"]
+            if "render_kw" in values:
+               form_kw["render_kw"] = values["render_kw"]
             field = field(values["pretty_name"], **form_kw)
             setattr(form, property, field)
             attrs[property] = field

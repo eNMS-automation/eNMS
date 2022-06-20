@@ -12,6 +12,7 @@ napalm
 ncclient
 netmiko==3.4.0
 passlib
+psutil
 redis
 ruamel.yaml
 sqlalchemy

@@ -13,6 +13,7 @@ from logging.config import dictConfig
 from logging import getLogger, info
 from os import getenv, getpid
 from passlib.hash import argon2
+from psutil import cpu_percent, virtual_memory
 from redis import Redis
 from redis.exceptions import ConnectionError, TimeoutError
 from requests import Session as RequestSession
@@ -55,7 +56,6 @@ class Environment:
         self.init_logs()
         self.init_redis()
         self.init_connection_pools()
-        self.workers = defaultdict(lambda: {"jobs": defaultdict(int)})
         self.ssh_port = -1
 
     def authenticate_user(self, **kwargs):
@@ -165,26 +165,27 @@ class Environment:
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 
     def get_workers(self):
-        if self.redis_queue:
-            self.workers = defaultdict(lambda: {"jobs": defaultdict(int)})
-            keys = env.redis("keys", f"workers/*")
-            if not keys:
-                return {}
-            data = dict(zip(keys, env.redis("mget", *keys)))
-            for key, value in data.items():
-                if not int(value):
-                    continue
-                process_id, job_name = key.split("/")[1:]
-                self.workers[process_id]["jobs"][job_name] = int(value)
-        return self.workers
+        if not self.redis_queue:
+            return {"error": "This endpoint requires the use of a Redis queue."}
+        workers = defaultdict(lambda: {"jobs": {}, "info": {}})
+        keys = env.redis("keys", f"workers/*")
+        if not keys:
+            return {"error": "No data available in the Redis queue."}
+        data = dict(zip(keys, env.redis("mget", *keys)))
+        for key, value in data.items():
+            if not value or value == "0":
+                continue
+            process_id, category, inner_key = key.split("/")[1:]
+            workers[process_id][category][inner_key] = value
+        return workers
 
     def update_worker_job(self, job, mode="incr"):
-        if self.redis_queue:
-            self.redis(mode, f"workers/{getpid()}/{job}", 1)
-        else:
-            self.workers[getpid()]["jobs"][job] += 1 if mode == "incr" else -1
-            if not self.workers[getpid()]["jobs"][job]:
-                self.workers[getpid()]["jobs"].pop(job)
+        if not self.redis_queue:
+            return
+        key = f"workers/{getpid()}"
+        self.redis("set", f"{key}/info/memory", f"{virtual_memory().percent}%")
+        self.redis("set", f"{key}/info/cpu", f"{cpu_percent()}%")
+        self.redis(mode, f"{key}/jobs/{job}", 1)
 
     def log(self, severity, content, user=None, change_log=True, logger="root"):
         logger_settings = vs.logging["loggers"].get(logger, {})

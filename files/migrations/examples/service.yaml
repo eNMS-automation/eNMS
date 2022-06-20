@@ -539,7 +539,7 @@
     Combined Device & Target Iteration: &id094 [-437, 191]
     Conditional Skip Query in Failed and Discard Modes: &id149 [599, 331]
     Credentials (Password & Key, Priority Mechanism): &id127 [590, 124]
-    Data Extraction Jinja2 Template: [576, 112]
+    Data Extraction Jinja2 Template: [556, 158]
     Data Extraction Service: &id128 [365, 216]
     Deletion and Cascade Deletion: *id089
     Deletion of Devices, Links, Services, Tasks and associated Cascade Deletion: *id089
@@ -31595,7 +31595,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2022-06-20 05:14:16.895886'
+  last_modified: '2022-06-20 05:18:50.587375'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -31631,7 +31631,7 @@
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Data Extraction Jinja2 Template]
-      Apply inja2 Template', '[Data Extraction Jinja2 Template] Define Python Dictionary']
+      Apply jinja2 Template', '[Data Extraction Jinja2 Template] Define Python Dictionary']
   shared: false
   skip: {}
   skip_query: ''
@@ -31672,11 +31672,13 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-06-20 05:14:11.312755'
+  last_modified: '2022-06-20 05:20:47.478931'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
-  match1: ''
+  match1: "hostname {{ hostname }}\r\n\r\nno ip domain lookup\r\nip domain name local.lab\r\
+    \nip name-server {{ name_server_pri }}\r\nip name-server {{ name_server_sec }}\r\
+    \n\r\nntp server {{ ntp_server_pri }} prefer\r\nntp server {{ ntp_server_sec }}"
   match2: ''
   match3: ''
   match_type1: none
@@ -31686,7 +31688,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Data Extraction Jinja2 Template] Apply inja2 Template'
+  name: '[Data Extraction Jinja2 Template] Apply jinja2 Template'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -31711,13 +31713,13 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
-  query1: ''
+  query1: get_result("Define Python Dictionary")["result"]
   query2: ''
   query3: ''
   reply_to: ''
   reserved: false
   run_method: once
-  scoped_name: Apply inja2 Template
+  scoped_name: Apply jinja2 Template
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -31733,7 +31735,7 @@
   validation_condition: none
   validation_method: text
   validation_section: results['result']
-  variable1: ''
+  variable1: rendered_template
   variable2: ''
   variable3: ''
   vendor: ''
@@ -31763,7 +31765,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-06-20 05:14:07.188815'
+  last_modified: '2022-06-20 05:19:51.566981'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -31804,7 +31806,10 @@
   skip_query: ''
   skip_value: success
   source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
-    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+    \r\nresult = {\r\n    \"hostname\": \"core-sw-waw-01\",\r\n    \"name_server_pri\"\
+    : \"1.1.1.1\",\r\n    \"name_server_sec\": \"8.8.8.8\",\r\n    \"ntp_server_pri\"\
+    : \"0.pool.ntp.org\",\r\n    \"ntp_server_sec\": \"1.pool.ntp.org\",\r\n}\r\n\
+    results[\"success\"] = True\r\nresults[\"result\"] = result"
   target_devices: []
   target_pools: []
   time_between_retries: 10

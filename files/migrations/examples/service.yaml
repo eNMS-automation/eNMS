@@ -6,6 +6,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: b1bebdc2-77c3-48f6-9fb6-c175360c5d32
   definition: Definition
   delete_spaces_before_matching: false
   description: Start point of a workflow
@@ -79,6 +80,7 @@
     Combined Device & Target Iteration: &id007 [-458, -30]
     Conditional Skip Query in Failed and Discard Modes: &id062 [-322, 98]
     Credentials (Password & Key, Priority Mechanism): &id040 [-157, 96]
+    Data Extraction Jinja2 Template: [-176, 136]
     Data Extraction Service: &id041 [-421, 129]
     Deletion and Cascade Deletion: *id002
     Deletion of Devices, Links, Services, Tasks and associated Cascade Deletion: *id002
@@ -462,6 +464,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 5ead95a2-fc8b-4821-b503-d64def93d98d
   definition: Definition
   delete_spaces_before_matching: false
   description: End point of a workflow
@@ -536,6 +539,7 @@
     Combined Device & Target Iteration: &id094 [-437, 191]
     Conditional Skip Query in Failed and Discard Modes: &id149 [599, 331]
     Credentials (Password & Key, Priority Mechanism): &id127 [590, 124]
+    Data Extraction Jinja2 Template: [576, 112]
     Data Extraction Service: &id128 [365, 216]
     Deletion and Cascade Deletion: *id089
     Deletion of Devices, Links, Services, Tasks and associated Cascade Deletion: *id089
@@ -929,6 +933,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 74eee826-e9e4-499e-9742-9ec6bf2818bb
   definition: Definition
   delete_spaces_before_matching: false
   description: Monitor eNMS cluster
@@ -1010,6 +1015,7 @@
   creator: admin
   credential_type: any
   custom_integer: 0
+  default_uuid: b3c7daf0-ac5d-4a63-beb3-5ffe3bd9b411
   definition: Definition
   delete_spaces_before_matching: false
   description: Example
@@ -1111,6 +1117,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 2a444b5b-7dcb-46d3-9386-f6aa1b0ae76d
   definition: Definition
   delete_spaces_before_matching: false
   description: Configuration Backup using NAPALM
@@ -1212,6 +1219,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 0e7de6bf-a6c5-49d6-b45b-567ef335815b
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1315,6 +1323,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 80ad614c-8f49-4328-af54-b920697aabbb
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1410,6 +1419,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: success
   validation_method: text
@@ -1433,6 +1443,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 21f33a2c-b2ce-453d-9adc-60c09c68ae53
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1537,6 +1548,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: d4461d18-e869-438b-9e59-f7da32ba7a33
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1635,6 +1647,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: success
   validation_method: text
@@ -1653,6 +1666,7 @@
   credentials: custom
   custom_password: ''
   custom_username: admin
+  default_uuid: 34bc8665-9360-4de0-b4d5-8007d06b60f7
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -1771,6 +1785,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 4225d229-6c01-41fd-941b-cfd2b4bafa83
   definition: Definition
   delete_spaces_before_matching: false
   description: 'Getter: get_facts'
@@ -1869,6 +1884,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: e50a9c76-acde-4d94-8aee-24ccbb9a53e1
   definition: Definition
   delete_spaces_before_matching: false
   description: 'Getter: get_interfaces'
@@ -1962,6 +1978,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: ac33b08e-e253-4285-ac34-72acc02a788b
   definition: Definition
   delete_spaces_before_matching: false
   description: Add devices to the payload
@@ -2061,6 +2078,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: e9c246f3-6be1-4ce5-abff-f3c121b984c0
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -2169,6 +2187,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 8c92c8ea-6a16-416c-9a76-b761a1bfbc5e
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -2267,6 +2286,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: cedb995d-6f78-4635-9be5-2b4d2b5d57d9
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -2347,6 +2367,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: aba9d28f-2932-444d-899d-c65e2e007bbc
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -2439,6 +2460,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 101f2f66-3a8e-43fb-a911-236a07654e6d
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -2524,6 +2546,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -2547,6 +2570,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 369c7240-61c1-489d-83c6-6b5a0715cfac
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -2632,6 +2656,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -2655,6 +2680,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: b1ad55ee-05df-408f-803c-69b99542c9a4
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -2741,6 +2767,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -2760,6 +2787,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 6a021610-58fb-46a4-b444-46c4a179ce8e
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -2872,6 +2900,7 @@
   creator: admin
   credential_type: any
   credentials: device
+  default_uuid: 3b32d993-fb2d-404e-9cf5-d6380b76518c
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -2958,6 +2987,7 @@
   creator: admin
   credential_type: any
   credentials: device
+  default_uuid: 0e0f6eea-3705-46d0-abb9-83013e0a43bf
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -3044,6 +3074,7 @@
   creator: admin
   credential_type: any
   credentials: device
+  default_uuid: 92029c79-84a0-4081-82bd-976f9f8037d6
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -3137,6 +3168,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 471d0603-85ba-43a4-b84e-7200c3e85650
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -3223,6 +3255,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: success
   validation_method: text
@@ -3246,6 +3279,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: f4f6dd23-2fab-4b7d-ad9c-0fc348915e63
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -3332,6 +3366,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: success
   validation_method: text
@@ -3355,6 +3390,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: bdad80c5-6861-4dcc-b446-6de2435ab08d
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -3441,6 +3477,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: success
   validation_method: text
@@ -3459,6 +3496,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: a0ba1c4c-1789-4665-9725-dc782c700406
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -3547,6 +3585,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 87135703-c855-42d2-99e5-76e5223560e5
   definition: Definition
   delete_spaces_before_matching: false
   description: Poll configuration and push to gitlab
@@ -3639,6 +3678,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 16f875b4-9e2e-4536-9594-5884a931b7a1
   definition: is_alive
   delete_spaces_before_matching: false
   description: Create and delete a VRF with Netmiko
@@ -3757,6 +3797,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 03d5d1b6-4d53-4ddd-ab60-ea2eb9d8b358
   definition: Definition
   delete_spaces_before_matching: false
   description: Workflow with separate failure - success path
@@ -3870,6 +3911,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 1b1a7e6c-eab8-42a4-89b8-dd07309a6124
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -3963,6 +4005,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: cb0e1346-60c0-42f9-9677-6c189b2bcc9e
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4069,6 +4112,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 4f1976cc-d27c-4273-950c-fe4bbb2b7a35
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4187,6 +4231,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 0c5928bd-ee55-4535-ba36-e240cce0fbeb
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4278,6 +4323,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 6a95c637-7892-4738-8871-f96ea74f85e5
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4429,6 +4475,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 7b2d3e3f-1444-4317-9ae8-cb9dd65c21f3
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4543,6 +4590,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: bc289981-50e8-46bd-8526-ac69fe48a905
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4626,6 +4674,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: ae21f693-563c-4c37-83b7-2a70fe521dcb
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4710,6 +4759,7 @@
   credentials: custom
   custom_password: ''
   custom_username: ''
+  default_uuid: e4e43439-9e24-469e-b36b-bc3b6906483e
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4796,6 +4846,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 285f8bcc-5b0a-4f68-8457-fa914bcca43c
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4880,6 +4931,7 @@
   credentials: custom
   custom_password: ''
   custom_username: ''
+  default_uuid: e10751fb-4e75-4cc6-b340-297faffa0940
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4966,6 +5018,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: fe3f8eef-dd06-4847-84f9-053a6dee7cd6
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5055,6 +5108,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 73862812-df82-4ac4-8318-88b6234ab115
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -5140,6 +5194,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -5163,6 +5218,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: ae0e2167-e441-413f-94ef-f4973b0d80dd
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -5249,6 +5305,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -5272,6 +5329,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 137503f6-65b0-4a77-8b0e-fd4b4b234c8a
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -5357,6 +5415,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -5374,6 +5433,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: f6d0000b-2396-47b8-916e-15fe3b6c49f8
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5476,6 +5536,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: c4c000fa-e7e6-4922-8515-e70fc275341c
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5560,6 +5621,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 4fc3a49b-3498-48a4-9aa6-725b1f26d635
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5650,6 +5712,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 285e7d00-beb9-4208-8dfe-8296c861816d
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -5739,6 +5802,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: success
   validation_method: text
@@ -5755,6 +5819,7 @@
   creator: admin
   credential_type: any
   credentials: device
+  default_uuid: 7469be25-8e54-4116-813e-9029bd2f9098
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5841,6 +5906,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 9c3d5316-c765-4aeb-b715-aa719b2927b5
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5940,6 +6006,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 6b263634-df29-46bd-9088-6d0f4641aff1
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6033,6 +6100,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 3a9da36d-9c15-4233-ad27-eff0e91e4b71
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -6121,6 +6189,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -6138,6 +6207,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 0b73e38f-b5e1-4526-aa8b-1762c12f7f97
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6254,6 +6324,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 8b33a170-7d3a-41d3-8f6a-065622e7e178
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6337,6 +6408,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 6cf20c0b-36af-4ad8-8f3b-36cc118216d0
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6418,6 +6490,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 4518d849-937a-4426-8da9-83c811a62188
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6503,6 +6576,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 4b635150-b9b5-4299-92ee-bdb5018234ae
   definition: is_alive
   delete_spaces_before_matching: false
   description: ''
@@ -6600,6 +6674,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 9ed6e0ac-9bb7-4ca9-b3c0-760843389670
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6683,6 +6758,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 83c21c66-5a56-4589-a4d9-6d66dbd053c5
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6763,6 +6839,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 66191423-8279-4a6c-8d1a-15e38dbe635e
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6848,6 +6925,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 5171eb9c-8fd6-4007-bedf-be6372c8c5fd
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6929,6 +7007,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: b0734a4a-b378-49e8-a070-b5caa8b9ad88
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7017,6 +7096,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 6be1d210-137f-43cb-b4e1-547dcd651ba4
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7105,6 +7185,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 0313cb6c-9439-4735-817f-54a8be49fbc0
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -7202,6 +7283,7 @@
   count: 5
   creator: admin
   credential_type: any
+  default_uuid: 2caab1c2-7ef6-4977-ba4a-4cb6eef438ec
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7291,6 +7373,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: dcd9de16-7b3f-4db4-adba-110e1ccca736
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7368,6 +7451,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: c6a21c03-9a1a-4471-b86e-8e70a71f96c6
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7465,6 +7549,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 1c56e96a-8795-418c-8046-55092e008676
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -7553,6 +7638,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: success
   validation_method: text
@@ -7571,6 +7657,7 @@
   credentials: custom
   custom_password: ''
   custom_username: admin
+  default_uuid: 6cdc65cd-3731-45de-a9ec-a7cbbd7e4546
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -7666,6 +7753,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: b553111e-c447-4b33-8456-c6d7feb735d3
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -7747,6 +7835,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -7781,6 +7870,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 88af9ac4-7eb7-451e-869f-bf60eac5c9b1
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7893,6 +7983,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 51245a79-e075-4747-8026-0d33c1eb826e
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7976,6 +8067,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: fcf543d6-b2a3-408d-aa81-24d43a76f281
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8059,6 +8151,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 02230219-84b5-4cbc-bc11-9e2e94f9f0a2
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8144,6 +8237,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 5b0610f8-cb7c-410d-8d08-74902f20e3a4
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8237,6 +8331,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 672fad45-36b2-450c-a051-7d73b80b88ad
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8330,6 +8425,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 82ba4852-de33-4c58-91fb-0e317c9692f8
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8423,6 +8519,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 2f9aab65-86db-44cd-972d-1d6cfe0348d4
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8513,6 +8610,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: b5f15ce6-c698-4bfc-86a3-3bba5cfa5b2c
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8610,6 +8708,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 1859c746-68ae-48bb-b1d2-61af82ba883d
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -8696,6 +8795,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -8713,6 +8813,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 3841b151-6fd6-449e-84fa-07fe43e13ff1
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8811,6 +8912,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 6bd66b7f-a015-40d4-b49e-8234abee21dd
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -8899,6 +9001,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -8916,6 +9019,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 4798a35a-3639-401c-ba70-a0eefffd9924
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9015,6 +9119,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: f801cf7b-ecd9-47af-a65b-d9d42222ab88
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -9101,6 +9206,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -9118,6 +9224,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 116a4c63-30e2-4a54-9485-92f3c9d9c57a
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9210,6 +9317,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: b98c828e-273c-4b1a-ad0f-e135d0796b21
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9306,6 +9414,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 086ada64-4528-43b2-9737-4a8ab97dcb27
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9394,6 +9503,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 1ed2ad4f-772e-40b6-ac4a-f1b5fed5718e
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9482,6 +9592,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: e18eed89-d195-4147-8d3a-89a6fa944ee2
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9574,6 +9685,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: a35063d0-a397-40dd-812e-329aba3dab79
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9688,6 +9800,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: b874a3ce-0ffb-43ef-b634-a3f2658909e2
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9777,6 +9890,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 1af4657d-0bc2-4444-b3e1-bb61e2468f39
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9865,6 +9979,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 19354dd6-ab18-4c6f-b643-7b1a1bdea04f
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9953,6 +10068,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 33466e13-1012-4fbb-b64f-31dcb84d2fea
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10044,6 +10160,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: f0289347-42fd-40b0-81e5-07ac8a92b2e6
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10151,6 +10268,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: a2ab6333-039c-4474-820d-a63f5c53f088
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10266,6 +10384,7 @@
   credentials: custom
   custom_password: ''
   custom_username: admin
+  default_uuid: a2459a9d-c2ec-4541-9112-5f162faeecc2
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10366,6 +10485,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 9e1c4ee2-6f0d-4450-80b8-3843e484bf6d
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -10452,6 +10572,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: success
   validation_method: text
@@ -10469,6 +10590,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: f1026f36-9d14-44b6-acb0-b84eead698b8
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10578,6 +10700,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: fb598472-46a5-4e1f-a6de-a38d7745467c
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10668,6 +10791,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 58ad8ed6-c274-4f61-ad52-b5c41b219409
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10761,6 +10885,7 @@
   custom_password: ''
   custom_username: '{{ get_result("Credentials encryption", device=device.name)["username"]
     }}'
+  default_uuid: 76a56fbc-64f8-4ad7-a51b-8883e32dcd14
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -10848,6 +10973,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -10862,6 +10988,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: a2d73459-dd25-452a-86f3-5e4e171e579e
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10952,6 +11079,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 3ed02118-236d-4237-af85-b082d25dedad
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11062,6 +11190,7 @@
   credentials: custom
   custom_password: ''
   custom_username: admin
+  default_uuid: 2e9c05ff-46d2-4217-8ef0-612f5763c92e
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -11158,6 +11287,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 47f5f9d1-5c46-41e0-8f6c-f4bb0bf8fc48
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11243,6 +11373,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: acc8fc18-57d8-4387-95e1-796464779e54
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11337,6 +11468,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 989a75aa-6888-44aa-a72b-038c1ef9a928
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -11423,6 +11555,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -11441,6 +11574,7 @@
   credentials: custom
   custom_password: ''
   custom_username: admin
+  default_uuid: f4aad9a2-2258-41c5-b8de-60b11a0519ff
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -11531,6 +11665,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: ab3cb7ec-09fb-405c-8053-3fbfd325af3d
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11636,6 +11771,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 1d7fdb58-67cc-4cc5-908d-1a88f1cf5c7d
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11718,6 +11854,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 08d04cb6-2ba1-4fc1-a0b0-494e2eb12f91
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11802,6 +11939,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: bab8f138-376a-498e-a590-c2e669a1d4b8
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11883,6 +12021,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 6a00022d-0c9e-44aa-8c66-567c92928711
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11971,6 +12110,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 92058bcd-1493-44ea-9fd2-0191ad756165
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12071,6 +12211,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 1d544fd2-397c-4172-842a-53738a3565ee
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12156,6 +12297,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: cd583d9a-afa9-41fe-ae34-4cce9b6f5770
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12241,6 +12383,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: d63edb20-6909-499d-a331-107364fe630a
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12323,6 +12466,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 5219e4e9-906d-4769-b6e1-ae0a1e696bff
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12405,6 +12549,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 3b2a4b5e-640a-4198-aeb6-7d4baf5f686b
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12487,6 +12632,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 7ea19dce-d212-4ae3-81b7-aaa9acaa9f2a
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12577,6 +12723,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 6d816a51-3740-498a-a5f6-3382d9adb0df
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -12658,6 +12805,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -12675,6 +12823,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: fc635092-168f-4c10-afd3-8cd2fd6fe2c5
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12789,6 +12938,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 59fce2e6-4092-4ab8-8ff1-cb6435bfc977
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -12873,6 +13023,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -12890,6 +13041,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: f2234600-a663-43f5-a49a-9e3b431c89ed
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12980,6 +13132,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 08b43c19-fdef-4bfc-b3b2-bfbc87356273
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13059,6 +13212,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 4ea13d34-7aa9-4755-996d-e2f7e88b65c8
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13138,6 +13292,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: ae3368aa-c384-4133-aaab-f78ccfc53f82
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13218,6 +13373,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: e1348690-aaab-4395-a90e-4816ea686970
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13300,6 +13456,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 297cede9-bd2d-40d7-8bfa-ebd7e0d9660b
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13400,6 +13557,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 821559b1-10f0-44be-88b5-29fd4f4e31fd
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13482,6 +13640,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 313c7480-b3c2-4ec0-8cf4-a67096d73075
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13565,6 +13724,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 038f592f-5850-4839-8fa9-6db51170eb1d
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13645,6 +13805,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 59ae170e-d0df-4c4b-a986-f661b1215722
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13726,6 +13887,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 5c6bd006-cad4-4559-8863-a5c5cbdd0f2f
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13807,6 +13969,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 12da927d-04d3-45eb-a2aa-46e2906e4dc3
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13888,6 +14051,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 0ae7cac0-fd1b-4d99-b21b-7e1e66d33cc3
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13971,6 +14135,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 53cbb106-1d3a-40fe-af30-3a5193c054d6
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14063,6 +14228,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 50b64b97-c0ce-4eb8-9c05-5432ffdbc4a9
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14142,6 +14308,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: f4f43dd8-bdfb-4dd3-a5b3-0d2f4a92d787
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14221,6 +14388,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: e301f99f-d7c6-4856-939c-bd0e387bb44f
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14303,6 +14471,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: f3900441-4222-4fd1-98a3-5fa628e9f338
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14413,6 +14582,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 0a16e25b-b601-4add-af44-199cfd3d3230
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14505,6 +14675,7 @@
   credentials: device
   custom_password: YWRtaW4=
   custom_username: ''
+  default_uuid: c20d818f-5dc0-48ca-84f9-8b8b95f71de0
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14600,6 +14771,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: f87f62a6-3a38-4eac-a16e-01cb5ff7d692
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14691,6 +14863,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: d1de71a9-1ba1-4ec4-94cc-34e2e2b54553
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14774,6 +14947,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 1d25efda-bfbe-4d57-9052-b39beb4a64ad
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -14875,6 +15049,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 746e4cf7-74e6-498f-ae2b-6bdfce04a59b
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -14960,6 +15135,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -14977,6 +15153,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 8e244d91-ff47-466a-9ea1-1ce797009772
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -15084,6 +15261,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 85d7b111-2ec1-45b2-818e-65f39dc003bf
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -15165,6 +15343,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: c074f10a-0cef-48f7-b729-e2d17f25a016
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -15249,6 +15428,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 2eafcfe5-aa3c-4d33-ac34-63f96dbf8094
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -15333,6 +15513,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: b93d0faf-d528-4fe2-87ba-3ec5f7d591a8
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -15437,6 +15618,7 @@
   custom_password: ''
   custom_username: ''
   default_operation: merge
+  default_uuid: 390d5cdb-b7dc-4e89-996f-1cc853be90ce
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -15535,6 +15717,7 @@
   custom_password: ''
   custom_username: ''
   default_operation: merge
+  default_uuid: 95a227bd-6ec1-456f-9fea-7913fcdbcb96
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -15638,6 +15821,7 @@
   custom_password: ''
   custom_username: ''
   default_operation: merge
+  default_uuid: 94fe140d-b0e8-447b-bda7-a1ccb4a7f31c
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -15736,6 +15920,7 @@
   custom_password: ''
   custom_username: ''
   default_operation: merge
+  default_uuid: 3282cc8e-0555-42c1-8e91-ff74c76c3d01
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -15839,6 +16024,7 @@
   custom_password: ''
   custom_username: ''
   default_operation: merge
+  default_uuid: 9ff6c8ae-ea0c-4d2d-8bfa-c4b463596db3
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -15931,6 +16117,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 7dbc755c-0f71-4f3a-8c25-a70b4c1d45e8
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -16043,6 +16230,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 5f18826d-2fc7-4398-9323-a48821d6791d
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -16128,6 +16316,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -16151,6 +16340,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 389983a9-1e6f-4e1e-9dec-67a37d5eebf8
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -16236,6 +16426,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -16259,6 +16450,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 2478ee9e-fafc-43e2-80aa-a117c99c9167
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -16344,6 +16536,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -16361,6 +16554,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 804d819b-b74c-4ddd-9d93-305c661c778e
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -16462,6 +16656,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 49b8c6a9-356d-45c5-a4dd-22350c23a1e7
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -16543,6 +16738,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: e2d0e0d6-f0bc-4c9f-bfe9-2ca9b5165163
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -16625,6 +16821,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 154f3237-0b26-473f-aa1f-989ad80c38d8
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -16710,6 +16907,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: d160d365-c782-4f16-8bba-cc256886a52d
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -16816,6 +17014,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: a3c540d0-9816-49bb-a2d9-75978ba89fb3
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -16900,6 +17099,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: success
   validation_method: text
@@ -16920,6 +17120,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 6051d502-e0d6-407e-a6f2-46d02f342983
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -17020,6 +17221,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 72f3b7dd-fe02-4157-bd7f-e28577578dc5
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -17104,6 +17306,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: success
   validation_method: text
@@ -17127,6 +17330,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: f3c9afdc-408c-4d56-bf8a-d394eee58c02
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -17211,6 +17415,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -17234,6 +17439,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 18c4131f-f1b7-44f3-8a4a-c1d5d1526dfb
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -17318,6 +17524,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: success
   validation_method: text
@@ -17335,6 +17542,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: e009591c-3991-48eb-a62a-b76a7314893f
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -17442,6 +17650,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 062317e1-3001-42c9-8eac-f9d9ed27b438
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -17532,6 +17741,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: f8081a06-d639-43fb-b12e-b5c73e36fc37
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -17617,6 +17827,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -17635,6 +17846,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: 288f9aa0-5fc8-460b-9f4b-d525593ddf40
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -17723,6 +17935,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: ebf92d5c-3791-4b2c-8c0f-3c395e75a1ae
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -17826,6 +18039,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 1cd5d8ec-28f0-494b-a5bf-ae9674c423cd
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -17907,6 +18121,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: cdee2c89-f355-4408-9037-e497382d204f
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -17987,6 +18202,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 95fc2cb6-8002-44cc-b5e3-9a8cb21b217b
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18067,6 +18283,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 81503948-913e-4f39-96bf-031ab06fdf05
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18151,6 +18368,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 86105a06-2aa8-405e-b5dc-4d9a9a37ff7d
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18232,6 +18450,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 0b629ea2-9629-4a17-8b0e-1e2d0e4af061
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18314,6 +18533,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: e8d199ec-f2fa-4b60-bceb-2d908156aa6b
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18405,6 +18625,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 113c3aff-9413-49ab-aee3-e4cb06614a22
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18496,6 +18717,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 3b6f3b2d-d165-4b7e-bb98-c4715c614a77
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18587,6 +18809,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 0752cae2-ce34-49f2-b7d6-032592e53f27
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18678,6 +18901,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: a95ffb54-f277-4827-8d8d-995eb40e1c75
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18769,6 +18993,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: adb983e7-e211-4136-9974-5c6200c31ebb
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18860,6 +19085,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 84deb523-bae4-4208-850c-50ddded3af6e
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -18951,6 +19177,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: de6c8bac-6b3c-46ae-aa09-ebfeba55bc6b
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -19039,6 +19266,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 0d0eae12-1c08-4caa-965b-c2e92476e65d
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -19137,6 +19365,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 37bdd30a-ce24-47cb-ad06-b7c8a75db44b
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -19219,6 +19448,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 57405649-e3ea-4c11-9016-28ab4e6391d4
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -19306,6 +19536,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: d304cf9b-d467-43a7-9f19-018c80ef1ca6
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -19398,6 +19629,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 0f65ced9-2cfa-468f-8298-13098dcdab0a
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -19482,6 +19714,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -19499,6 +19732,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 81cb7c54-6fd4-4b41-9536-f7503dfcf277
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -19600,6 +19834,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 86475764-3320-4806-bc29-93dc164b86ee
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -19684,6 +19919,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: true
   validation_condition: none
   validation_method: text
@@ -19707,6 +19943,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: fc8c63e8-c3f7-47dc-b150-18b6b9971bb5
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -19791,6 +20028,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: true
   validation_condition: none
   validation_method: text
@@ -19814,6 +20052,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: b4b3b95b-34c5-4279-a6c7-d416989bc97f
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -19898,6 +20137,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: true
   validation_condition: none
   validation_method: text
@@ -19921,6 +20161,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 1088b834-3df5-43e9-b351-08ecd7d39ace
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -20005,6 +20246,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: true
   validation_condition: none
   validation_method: text
@@ -20022,6 +20264,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: d8fc159d-46b4-4f54-9362-a9cb7ec97db5
   definition: Definition
   delete_spaces_before_matching: false
   description: Create and delete a VRF with Napalm
@@ -20115,6 +20358,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 1ca6fb82-5f8e-49db-9fcc-3c0e32bc7fed
   definition: Definition
   delete_spaces_before_matching: false
   description: Create a VRF "test" with Napalm
@@ -20206,6 +20450,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 62d71c5d-76b3-44d2-8993-8f3acd5abed4
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -20302,6 +20547,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 78799b0d-208c-4dba-b1d6-35facc0f053f
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -20392,6 +20638,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: success
   validation_method: text
@@ -20415,6 +20662,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: ce74aa50-a3ce-4f0d-aa7a-a74146d75333
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -20505,6 +20753,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: success
   validation_method: text
@@ -20522,6 +20771,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: e70f7bfc-d489-45d6-9f53-908d03f1e905
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -20642,6 +20892,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 8b8c3feb-8e37-4d83-b644-61f3f779b57d
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -20743,6 +20994,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 00227f4d-e2a3-407b-aa6b-59ae8f1cdfc3
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -20843,6 +21095,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 136120e6-ebc7-432c-95c0-d757db0779a7
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -20943,6 +21196,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 4683e551-971c-465b-b145-d82080827384
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -21041,6 +21295,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: c2765d15-ce64-4ea9-99da-8091208a200c
   definition: Definition
   delete_spaces_before_matching: false
   description: Test the payload extraction and validation mechanisms
@@ -21170,6 +21425,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 3983764b-b4e5-4ad1-a552-a7e46efc50aa
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -21265,6 +21521,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -21279,6 +21536,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 8b5c581a-9e6a-4b40-a78d-096d7e363901
   definition: Definition
   delete_spaces_before_matching: false
   description: Payload Variables Extraction with Regex/TextFSM
@@ -21387,6 +21645,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 04cb9770-71d0-4a9c-8521-f1730ebcc94a
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -21479,6 +21738,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: b8722986-bbc0-4479-96c2-9e15af9d2891
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -21570,6 +21830,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 28b7ea42-1ec6-4555-9f9b-07a010a04a1e
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -21661,6 +21922,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 4116aeed-19a7-4c81-a165-0781c6fda789
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -21754,6 +22016,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: dfafdf42-16f2-4040-aadc-24aa34acc0ac
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -21835,6 +22098,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: c35a1925-6893-4f16-907a-731c1bbb61d6
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -21926,6 +22190,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: f6eca74e-1e95-4be2-bd90-de96112134f0
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22029,6 +22294,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 6df3991c-14eb-439a-a0c6-4d230e68b830
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22132,6 +22398,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 1d19d210-3431-456d-801a-c3df2c629e01
   definition: Definition
   delete_spaces_before_matching: true
   description: ''
@@ -22222,6 +22489,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: f9eb49cc-79a0-491d-bfec-bccc80829e4d
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22315,6 +22583,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 4cd4e805-fa20-4b17-99a0-982435c2e75d
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22396,6 +22665,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 48b42965-7b8a-47e3-8718-7abd78875350
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22475,6 +22745,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: ce17753a-8c75-41ef-b445-1e098fd2a814
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22553,6 +22824,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: d031f158-b694-4982-9590-e11fc5768025
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22631,6 +22903,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 389675e2-ec59-43e2-a17f-379406cd7f46
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22709,6 +22982,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 491322d6-1413-46bb-8a4d-85d8c503c052
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22787,6 +23061,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 5e99fae5-d8ec-4570-8cc2-e3c82d4a4e08
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22868,6 +23143,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 07c45fe2-d259-4a7c-a673-d46d17b0c1db
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -22950,6 +23226,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 6647c1be-7862-4524-85a1-7d2eba1e1342
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23027,6 +23304,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: ae609cd1-323c-4167-a645-27f013b6447d
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23104,6 +23382,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: db81962f-cc2b-4d1c-93aa-dd072add9ddb
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23181,6 +23460,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 2a3820a3-350a-48d2-a06f-fa8384338502
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23259,6 +23539,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 26d19773-3ce1-4b4c-a46e-f2d72aaa1d97
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23337,6 +23618,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: dcf59481-2dfd-416f-870b-c2a3746e8e73
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23418,6 +23700,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 21055caa-f57d-4dd7-b496-4552429ef322
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23507,6 +23790,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 45bc867c-7365-45a8-aa54-f57c89d0c95e
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23585,6 +23869,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 53e443cc-f0f1-46c3-b575-e4f97a10136a
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23667,6 +23952,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: cb159a71-5290-4ff2-9e03-f0d76efd0c22
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23746,6 +24032,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 280388ba-3546-4573-a476-16dfe63475f9
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23827,6 +24114,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: ad002d5b-65c8-46c5-bc90-9e647ed9aeb3
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23908,6 +24196,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 96b8234b-46ed-4618-a811-cda2a6aee525
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -23994,6 +24283,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 8a30dabc-0a1a-4e82-854c-567ccd41fcc8
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24105,6 +24395,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 1de1f5e0-dff8-4b86-8af6-13cc1a877f93
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24184,6 +24475,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 4cdcaef3-a0be-4e09-b708-0e09cff2a1f2
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24263,6 +24555,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 19587d45-0425-418a-944e-572bb27daf52
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24342,6 +24635,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: c35f3269-7e9c-483b-b1ca-0906245d272e
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24421,6 +24715,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: cb50aff5-4f90-4425-9672-d0b12eee5096
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24500,6 +24795,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 931ff916-1285-43d3-aa5c-50cba88ea348
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24580,6 +24876,7 @@
   count: 5
   creator: admin
   credential_type: any
+  default_uuid: 5fec5fe6-f280-4def-ab58-16c7a580d8a8
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24662,6 +24959,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 22a894ff-820f-408c-b08a-c7757a558d17
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24767,6 +25065,7 @@
   credentials: custom
   custom_password: ''
   custom_username: ''
+  default_uuid: dc1831b1-84b3-4279-8459-d89125f7f653
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24855,6 +25154,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: 717a34b2-b0c2-4aab-847f-01ca2fcf41f6
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -24942,6 +25242,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: 08048972-7ff2-4e2d-a2e8-2835819728bd
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25029,6 +25330,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: 1a4fa29f-503a-4263-94a9-edea5be0cc87
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25115,6 +25417,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: 3552c8f6-b0f2-4c71-ba3c-92d9d6362d01
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25200,6 +25503,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: e288d029-1434-4908-8d0a-70848e11166b
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25307,6 +25611,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: f17ae124-63c8-4fb7-8286-3ca02ce17f74
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25396,6 +25701,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: 9a945c6b-d2fc-42e3-af88-d9f3f826880f
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25483,6 +25789,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: d2a7bfa4-b531-44c4-8339-ea713693ceb4
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25571,6 +25878,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: 07cd4ca8-f031-4c2d-8bbb-4ef7d818c619
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25657,6 +25965,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: d42726fd-6c57-496c-8b85-f9b496b9883c
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25765,6 +26074,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: 24c2e4cc-e50a-471b-9c57-b83b0b2134dc
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25859,6 +26169,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: 23312fd6-a032-4b58-b597-e650531675ba
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -25951,6 +26262,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: 179ed04f-e222-4b2d-b5eb-11021ee68be9
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26044,6 +26356,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: c6cde597-3f6e-4a70-a556-ff1a3b2b3cb7
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26158,6 +26471,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: d0d35b79-7f11-4bba-adc6-1aaa53b6b141
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26246,6 +26560,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: 7459b59e-a232-4a0f-ad1b-1fcb515011cb
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26332,6 +26647,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: d940e81f-7815-4a6e-a3af-efb38aae24b6
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26419,6 +26735,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: 90f6a266-aee6-4e16-8dbe-f304ff076b93
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26506,6 +26823,7 @@
   credentials: custom
   custom_password: YWRtaW4=
   custom_username: admin
+  default_uuid: 3bc2906c-359d-48c8-ab14-4db92353a50f
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26595,6 +26913,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 8b0c9a93-86ea-4630-9043-eeef27881704
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -26718,6 +27037,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 60691a93-16ad-4b40-a55c-7216ed064000
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -26804,6 +27124,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -26827,6 +27148,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 310e7b38-235f-4a82-96fc-64befbb2b0b5
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -26913,6 +27235,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -26936,6 +27259,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 5613e3e0-79e5-4eaf-acd6-59e3e9543bd7
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -27022,6 +27346,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  use_genie: false
   use_textfsm: false
   validation_condition: none
   validation_method: text
@@ -27039,6 +27364,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 1fcf96d3-5549-43a9-9383-9a9f63b55094
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27123,6 +27449,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 16bc9738-b27b-4e05-aaec-6bc07d465729
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27203,6 +27530,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 59ad14b9-e92b-4595-82a6-66eb74903990
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27309,6 +27637,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 5275cbc9-a0b4-4ef9-aa94-d310bb3971c4
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27389,6 +27718,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 7adc02b4-ee9a-4db6-86fd-8a1e615263dc
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27472,6 +27802,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: ab1f9f19-d629-4997-b22c-9d47b14f5532
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27563,6 +27894,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: b817c56d-c033-458c-ae83-993cd055823f
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27644,6 +27976,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: e1dcad6e-3e8a-4dd5-a80a-7eabcab91ec5
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27725,6 +28058,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 2bd3e3a0-8250-475a-b6ac-1d07653455ef
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27806,6 +28140,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: f8a24aac-b406-4c33-9f05-ddfc4ff238af
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27887,6 +28222,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 5bdbe799-df70-4023-a409-2d897e56742c
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -27968,6 +28304,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: deaa5403-8784-4e9a-b54c-79769fba9a8c
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28049,6 +28386,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 9a75c03f-f997-41cf-b142-49821342548b
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28130,6 +28468,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 2a82ec2a-db4a-4b47-884e-e9a8435e71aa
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28211,6 +28550,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: abd6f5ef-00fd-4bae-b2fd-0ecb6f95eeac
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28292,6 +28632,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: f04f0b3d-f942-4ead-9556-f01d7f41088f
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28373,6 +28714,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: fcde294c-9506-4d8b-9393-34812ba2e017
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28454,6 +28796,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: c8d591de-1afb-4210-aee3-0fc42e3e11c1
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28535,6 +28878,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: aaf44944-cc43-474c-b698-be87e6375568
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28616,6 +28960,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 92825990-c10e-4191-ae49-972b11d11716
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28697,6 +29042,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 44280df4-1f49-4f99-9715-6d21ab18079b
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28778,6 +29124,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 8d26e5a0-9560-4fc0-b907-2a5ae3d46b17
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28859,6 +29206,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 5d14a746-5d97-4437-8c5b-120fa71271ec
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -28940,6 +29288,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 287f15d5-56c1-42c5-a89d-dd0f525b31ce
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29021,6 +29370,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: daf223c4-0c5d-4590-b38a-ec4d6b2ea38a
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29102,6 +29452,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: c02fcf6c-ba1a-42ef-9384-d757103034ed
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29183,6 +29534,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 4774bf4f-7829-49e2-8e0a-7f6ec673e217
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29264,6 +29616,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: b05b6417-a0c0-4c3b-a4c7-d2695468de66
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29345,6 +29698,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 90f1b0cb-a581-4e12-8149-796990f7b4ef
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29426,6 +29780,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 3c1f7cd9-841f-4d9c-b61c-a279437d87be
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29507,6 +29862,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 089d9728-eed4-434d-a133-9d6ec1cb7508
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29588,6 +29944,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 97fbe681-27c2-4794-9444-b2d944091cb1
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29669,6 +30026,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 0c4acbf8-bbe7-42f8-9fc3-54d0759f29b2
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29750,6 +30108,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 4769968c-5f3a-4bbc-979c-dae21bcdf116
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29834,6 +30193,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: fedda0d5-4523-471f-a915-15fd70297fbd
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -29924,6 +30284,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 34c8748c-4ca8-4fe8-ae2e-a9f58eb3f482
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -30006,6 +30367,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 200427f2-975c-4374-a935-116140ee4873
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -30090,6 +30452,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: 8228dbce-5112-4b6d-b9cd-a5ae3057a4ce
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -30170,6 +30533,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: c750b087-dd3d-4a29-a322-80907409352b
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -30257,6 +30621,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: cf09b6d4-cf28-47b1-8e51-d449312adc60
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -30339,6 +30704,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: 9145ad90-67d2-4318-a9c8-0aeee55a8e89
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -30420,6 +30786,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: c9fbaae4-a80d-40f0-bb78-162a40c5183b
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -30499,6 +30866,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  default_uuid: d7fedaa5-b46e-4508-840a-91922f528de2
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -30595,6 +30963,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 4de20190-9371-47a0-a25f-eacf7c8b4f70
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -30713,6 +31082,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 1bfe82cc-e465-419e-96c1-1405332bc8d2
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -30816,6 +31186,7 @@
   creator: admin
   credential_type: any
   custom_property: Default Value
+  default_uuid: febc905d-208e-4479-9e49-4233b58420db
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -30936,6 +31307,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 948700f1-d633-4cfb-a979-ddedc3db25d8
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -31026,6 +31398,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: 6ddaf5b0-f77b-44a9-9679-f3cb2df9ad04
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -31116,6 +31489,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
+  default_uuid: a4f74454-0f27-4040-b935-1cf65817fbb4
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -31187,6 +31561,256 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  category: Services
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  custom_property: Default Value
+  default_uuid: d3ddc910-29ff-4af7-80b0-079c88a20be0
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2022-06-20 05:14:16.895886'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: Data Extraction Jinja2 Template
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Data Extraction Jinja2 Template
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Data Extraction Jinja2 Template]
+      Apply inja2 Template', '[Data Extraction Jinja2 Template] Define Python Dictionary']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_uuid: 479273ac-164c-46fd-a720-1775f95cb5da
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2022-06-20 05:14:11.312755'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  match1: ''
+  match2: ''
+  match3: ''
+  match_type1: none
+  match_type2: none
+  match_type3: none
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Data Extraction Jinja2 Template] Apply inja2 Template'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  operation1: __setitem__
+  operation2: __setitem__
+  operation3: __setitem__
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    Data Extraction Jinja2 Template: [400, -64]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  query1: ''
+  query2: ''
+  query3: ''
+  reply_to: ''
+  reserved: false
+  run_method: once
+  scoped_name: Apply inja2 Template
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: data_extraction_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  variable1: ''
+  variable2: ''
+  variable3: ''
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_uuid: 57d6700c-a22b-4f23-b9a8-eeb7931d5f7e
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2022-06-20 05:14:07.188815'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Data Extraction Jinja2 Template] Define Python Dictionary'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    Data Extraction Jinja2 Template: [-3, -58]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  reply_to: ''
+  reserved: false
+  run_method: once
+  scoped_name: Define Python Dictionary
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
   validation_condition: none
   validation_method: text
   validation_section: results['result']

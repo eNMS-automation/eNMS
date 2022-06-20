@@ -1531,3 +1531,13 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2022-05-20 13:52:38.085027',
   source: '[(R) Gateway Mechanism (SSH Proxy with Scrapli)] Both', subtype: success,
   type: workflow_edge, workflow: (R) Gateway Mechanism (SSH Proxy with Scrapli)}
+- {color: green, destination: '[Data Extraction Jinja2 Template] Define Python Dictionary',
+  label: success, name: '2022-06-20 05:14:02.229905', source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: Data Extraction Jinja2 Template}
+- {color: green, destination: '[Data Extraction Jinja2 Template] Apply inja2 Template',
+  label: success, name: '2022-06-20 05:14:02.950731', source: '[Data Extraction Jinja2
+    Template] Define Python Dictionary', subtype: success, type: workflow_edge, workflow: Data
+    Extraction Jinja2 Template}
+- {color: green, destination: '[Shared] End', label: success, name: '2022-06-20 05:14:03.785889',
+  source: '[Data Extraction Jinja2 Template] Apply inja2 Template', subtype: success,
+  type: workflow_edge, workflow: Data Extraction Jinja2 Template}

@@ -1,4 +1,5 @@
 from io import StringIO
+from jinja2 import Template
 from re import findall
 from sqlalchemy import ForeignKey, Integer
 from textfsm import TextFSM
@@ -58,6 +59,9 @@ class DataExtractionService(Service):
                 value = template.ParseText(value)
                 if match_type == "textfsm_dict":
                     value = [dict(zip(template.header, row)) for row in value]
+            elif "jinja2" in match_type:
+                template = Template(match)
+                value = template.render(value)
             run.payload_helper(variable, value, device=device.name, operation=operation)
             result[variable] = {
                 "query": query,
@@ -71,6 +75,7 @@ class DataExtractionService(Service):
 match_choices = (
     ("none", "Use Value as Extracted"),
     ("regex", "Apply Regular Expression (findall)"),
+    ("jinja2", "Apply Jinja2 Template (text output)"),
     ("textfsm", "Apply TextFSM Template (list output)"),
     ("textfsm_dict", "Apply TextFSM Template (JSON output)"),
 )
@@ -89,7 +94,7 @@ class DataExtractionForm(ServiceForm):
     query1 = StringField("Python Extraction Query", python=True)
     match_type1 = SelectField("Post Processing", choices=match_choices)
     match1 = StringField(
-        "Regular Expression / TextFSM Template Text",
+        "Regular Expression / TextFSM Template Text / Jinja2 Template",
         widget=TextArea(),
         render_kw={"rows": 5},
     )
@@ -98,7 +103,7 @@ class DataExtractionForm(ServiceForm):
     query2 = StringField("Python Extraction Query", python=True)
     match_type2 = SelectField("Post Processing", choices=match_choices)
     match2 = StringField(
-        "Regular Expression / TextFSM Template Text",
+        "Regular Expression / TextFSM Template Text / Jinja2 Template",
         widget=TextArea(),
         render_kw={"rows": 5},
     )
@@ -107,7 +112,7 @@ class DataExtractionForm(ServiceForm):
     query3 = StringField("Python Extraction Query", python=True)
     match_type3 = SelectField("Post Processing", choices=match_choices)
     match3 = StringField(
-        "Regular Expression / TextFSM Template Text",
+        "Regular Expression / TextFSM Template Text / Jinja2 Template",
         widget=TextArea(),
         render_kw={"rows": 5},
     )

@@ -80,7 +80,7 @@
     Combined Device & Target Iteration: &id007 [-458, -30]
     Conditional Skip Query in Failed and Discard Modes: &id062 [-322, 98]
     Credentials (Password & Key, Priority Mechanism): &id040 [-157, 96]
-    Data Extraction Jinja2 Template: [-176, 136]
+    Data Extraction Jinja2 Template: [-240, 238]
     Data Extraction Service: &id041 [-421, 129]
     Deletion and Cascade Deletion: *id002
     Deletion of Devices, Links, Services, Tasks and associated Cascade Deletion: *id002
@@ -539,7 +539,7 @@
     Combined Device & Target Iteration: &id094 [-437, 191]
     Conditional Skip Query in Failed and Discard Modes: &id149 [599, 331]
     Credentials (Password & Key, Priority Mechanism): &id127 [590, 124]
-    Data Extraction Jinja2 Template: [556, 158]
+    Data Extraction Jinja2 Template: [602, 221]
     Data Extraction Service: &id128 [365, 216]
     Deletion and Cascade Deletion: *id089
     Deletion of Devices, Links, Services, Tasks and associated Cascade Deletion: *id089
@@ -31594,8 +31594,18 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2022-06-20 05:18:50.587375'
+  labels:
+    ca124e82-1fdb-4e4c-9bd1-b8adc9c1d8fd:
+      alignment: left
+      content: "This workflow tests the Jinja2 conversion mode of the Data Extraction\
+        \ Service.\r\nThe workflow runs in SxS with service targets, both service\
+        \ are configured to\r\nrun in Run Once mode.\r\nThe first service defines\
+        \ the dictionary that is applied to the Jinja2 template.\r\nThe second service\
+        \ does the Jinja2 conversion, and uses the validation \r\nmechanism to check\
+        \ that the rendered template is correct."
+      positions: [206, -64]
+      size: 14
+  last_modified: '2022-06-20 05:38:53.434918'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -31626,7 +31636,7 @@
   priority: 10
   reply_to: ''
   reserved: false
-  run_method: per_device
+  run_method: per_service_with_service_targets
   scoped_name: Data Extraction Jinja2 Template
   send_notification: false
   send_notification_method: mail
@@ -31650,14 +31660,16 @@
 - access_groups: admin
   admin_only: false
   completion_time: 1
-  content_match: ''
+  content_match: "hostname core-sw-waw-01\r\n\r\nno ip domain lookup\r\nip domain\
+    \ name local.lab\r\nip name-server 1.1.1.1\r\nip name-server 8.8.8.8\r\n\r\nntp\
+    \ server 0.pool.ntp.org prefer\r\nntp server 1.pool.ntp.org"
   content_match_regex: false
   conversion_method: none
   creator: admin
   credential_type: any
   default_uuid: 479273ac-164c-46fd-a720-1775f95cb5da
   definition: Definition
-  delete_spaces_before_matching: false
+  delete_spaces_before_matching: true
   description: ''
   device_query: ''
   device_query_property: name
@@ -31672,7 +31684,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-06-20 05:25:34.481420'
+  last_modified: '2022-06-20 05:38:15.611725'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -31708,7 +31720,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    Data Extraction Jinja2 Template: [400, -64]
+    Data Extraction Jinja2 Template: [372, 47]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -31732,9 +31744,9 @@
   type: data_extraction_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: none
+  validation_condition: success
   validation_method: text
-  validation_section: results['result']
+  validation_section: results["result"]["rendered_template"]["value"]
   variable1: rendered_template
   variable2: ''
   variable3: ''
@@ -31790,7 +31802,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    Data Extraction Jinja2 Template: [-3, -58]
+    Data Extraction Jinja2 Template: [-15, 41]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''

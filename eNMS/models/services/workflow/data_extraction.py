@@ -62,7 +62,8 @@ class DataExtractionService(Service):
             elif "jinja2" in match_type:
                 template = Template(match)
                 value = template.render(value)
-            run.payload_helper(variable, value, device=device.name, operation=operation)
+            kwargs = {"device": getattr(device, "name", None), "operation": operation}
+            run.payload_helper(variable, value, **kwargs)
             result[variable] = {
                 "query": query,
                 "match_type": match_type,

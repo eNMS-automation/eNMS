@@ -31672,7 +31672,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-06-20 05:20:47.478931'
+  last_modified: '2022-06-20 05:25:34.481420'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -31681,7 +31681,7 @@
     \n\r\nntp server {{ ntp_server_pri }} prefer\r\nntp server {{ ntp_server_sec }}"
   match2: ''
   match3: ''
-  match_type1: none
+  match_type1: jinja2
   match_type2: none
   match_type3: none
   max_number_of_retries: 100
@@ -31765,7 +31765,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-06-20 05:19:51.566981'
+  last_modified: '2022-06-20 05:25:43.965804'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -31805,8 +31805,7 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
-    \r\nresult = {\r\n    \"hostname\": \"core-sw-waw-01\",\r\n    \"name_server_pri\"\
+  source_code: "result = {\r\n    \"hostname\": \"core-sw-waw-01\",\r\n    \"name_server_pri\"\
     : \"1.1.1.1\",\r\n    \"name_server_sec\": \"8.8.8.8\",\r\n    \"ntp_server_pri\"\
     : \"0.pool.ntp.org\",\r\n    \"ntp_server_sec\": \"1.pool.ntp.org\",\r\n}\r\n\
     results[\"success\"] = True\r\nresults[\"result\"] = result"

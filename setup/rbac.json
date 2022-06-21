@@ -8,6 +8,10 @@
           "endpoint": "/dashboard",
           "rbac": "access"
         },
+        "Files": {
+          "endpoint": "/file_table",
+          "rbac": "access"
+        },
         "Changelog": {
           "endpoint": "/changelog_table",
           "rbac": "access"

@@ -171,7 +171,9 @@ class File(AbstractBase):
     last_modified = db.Column(db.TinyString)
     content = deferred(db.Column(db.LargeString, info={"log_change": False}))
     folder_id = db.Column(Integer, ForeignKey("folder.id"))
-    folder = relationship("Folder", foreign_keys="Folder.id", back_populates="files")
+    folder = relationship(
+        "Folder", foreign_keys="Folder.folder_id", back_populates="files"
+    )
 
 
 class Folder(File):
@@ -183,7 +185,6 @@ class Folder(File):
     files = relationship(
         "File",
         back_populates="folder",
-        remote_side=[id],
         foreign_keys="File.folder_id",
         cascade="all,delete",
     )

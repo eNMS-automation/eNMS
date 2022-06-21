@@ -650,6 +650,7 @@ class Controller:
         folders = {Path(path.replace(">", "/"))}
         while folders:
             folder = folders.pop()
+            folder_object = db.fetch("folder", allow_none=True, path=str(folder))
             for file in folder.iterdir():
                 if file.is_dir():
                     folders.add(file)
@@ -659,6 +660,7 @@ class Controller:
                     last_modified=ctime(getmtime(str(file))),
                     name=str(file).replace("/", ">"),
                     path=str(file),
+                    folder_id=getattr(folder_object, "id", None),
                 )
 
     def get_tree_files(self, path):

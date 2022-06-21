@@ -18,6 +18,7 @@ import {
   showConfirmationPanel,
   userIsActive,
 } from "./base.js";
+import { filePath } from "./administration.js";
 import { exportServices } from "./automation.js";
 import { updateNetworkRightClickBindings } from "./networkBuilder.js";
 
@@ -1493,7 +1494,7 @@ tables.file = class FileTable extends Table {
 
   get filteringConstraints() {
     const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
-    if (parentFiltering) return { top_level: "bool-true" };
+    if (parentFiltering) return { folder_path: filePath, folder_path_filter: "equality" };
   }
 
   postProcessing(...args) {

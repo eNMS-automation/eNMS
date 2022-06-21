@@ -16,7 +16,7 @@ import {
 } from "./base.js";
 import { refreshTable } from "./table.js";
 
-let filePath = settings.paths.file || `${applicationPath}/files`;
+export let filePath = settings.paths.file || `${applicationPath}/files`;
 
 function saveSettings() {
   const newSettings = jsonEditors.settings.get();

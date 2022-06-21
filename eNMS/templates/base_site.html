@@ -306,6 +306,7 @@
     <script src="{{ url_for('static', filename='lib/jquery/jquery.min.js') }}"></script>
     <script>
       window.eNMS = {};
+      const applicationPath = {{ application_path|d("")|tojson|safe }};
       const page = "{{ endpoint }}";
       const linkPath = {{ link_path|d("")|tojson|safe }};
       const linkRuntime = {{ link_runtime|d("")|tojson|safe }};

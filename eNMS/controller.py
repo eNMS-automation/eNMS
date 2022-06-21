@@ -646,8 +646,9 @@ class Controller:
             result[instance.category or "Other"].append(dict(instance))
         return result
 
-    def scan_folder(self):
-        return 1
+    def scan_folder(self, path):
+        for file in Path(path.replace(">", "/")).iterdir():
+            print(file)
 
     def get_tree_files(self, path):
         if path == "root":

@@ -16,6 +16,8 @@ import {
 } from "./base.js";
 import { tables } from "./table.js";
 
+let filePath = settings.paths.file || `${applicationPath}/files`;
+
 function saveSettings() {
   const newSettings = jsonEditors.settings.get();
   call({
@@ -102,7 +104,7 @@ function migrationsExport() {
 
 function scanFolder() {
   call({
-    url: "/scan_folder",
+    url: `/scan_folder/${filePath.replace(/\//g, ">")}`,
     callback: function (result) {
       notify(`${result} new files created.`, "success", 5, true);
     },

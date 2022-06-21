@@ -179,5 +179,14 @@ class Folder(File):
     pretty_name = "Folder"
     parent_type = "file"
     id = db.Column(Integer, ForeignKey("file.id"), primary_key=True)
-    files = relationship("File", back_populates="folder", remote_side=[id], foreign_keys="File.folder_id", cascade="all,delete")
-    __mapper_args__ = {"polymorphic_identity": "folder", "inherit_condition": id == File.id}
+    files = relationship(
+        "File",
+        back_populates="folder",
+        remote_side=[id],
+        foreign_keys="File.folder_id",
+        cascade="all,delete",
+    )
+    __mapper_args__ = {
+        "polymorphic_identity": "folder",
+        "inherit_condition": id == File.id,
+    }

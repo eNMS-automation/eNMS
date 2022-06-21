@@ -632,9 +632,4 @@ function getTree() {
   });
 }
 
-configureNamespace("builder", [
-  createLabel,
-  getTree,
-  highlightNode,
-  switchMode,
-]);
+configureNamespace("builder", [createLabel, getTree, highlightNode, switchMode]);

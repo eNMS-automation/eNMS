@@ -94,7 +94,7 @@
         "type": "str",
         "default": "",
         "default_function": "generate_uuid",
-        "render_kw": {"readonly": true}
+        "render_kw": { "readonly": true }
       }
     },
     "workflow": {

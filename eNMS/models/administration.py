@@ -1,7 +1,7 @@
 from flask_login import UserMixin
 from itertools import chain
 from passlib.hash import argon2
-from sqlalchemy import Boolean, Integer
+from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import deferred, relationship
 
 from eNMS.database import db
@@ -162,8 +162,22 @@ class Parameters(AbstractBase):
 class File(AbstractBase):
 
     __tablename__ = type = "file"
+    type = db.Column(db.SmallString)
+    __mapper_args__ = {"polymorphic_identity": "file", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     path = db.Column(db.SmallString, unique=True)
     timestamp = db.Column(db.TinyString)
     content = deferred(db.Column(db.LargeString, info={"log_change": False}))
+    folder_id = db.Column(Integer, ForeignKey("folder.id"))
+    folder = relationship("Folder", foreign_keys="Folder.id", back_populates="files")
+
+
+class Folder(File):
+
+    __tablename__ = "folder"
+    pretty_name = "Folder"
+    parent_type = "file"
+    id = db.Column(Integer, ForeignKey("file.id"), primary_key=True)
+    files = relationship("File", back_populates="folder", remote_side=[id], foreign_keys="File.folder_id", cascade="all,delete")
+    __mapper_args__ = {"polymorphic_identity": "folder", "inherit_condition": id == File.id}

@@ -100,6 +100,15 @@ function migrationsExport() {
   });
 }
 
+function scanFolder() {
+  call({
+    url: "/scan_folder",
+    callback: function (result) {
+      notify(`${result} new files created.`, "success", 5, true);
+    },
+  });
+}
+
 function showMigrationPanel() {
   openPanel({
     name: "database_migration",
@@ -414,6 +423,7 @@ configureNamespace("administration", [
   saveFile,
   saveProfile,
   scanCluster,
+  scanFolder,
   showSettings,
   showFileUploadPanel,
   showMigrationPanel,

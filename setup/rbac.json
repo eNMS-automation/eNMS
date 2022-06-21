@@ -246,6 +246,7 @@
     "/save_profile": "access",
     "/save_settings": "admin",
     "/scan_cluster": "access",
+    "/scan_folder": "access",
     "/scan_playbook_folder": "access",
     "/search_builder": "access",
     "/search_workflow_services": "access",

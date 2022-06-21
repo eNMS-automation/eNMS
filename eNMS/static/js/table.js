@@ -1450,6 +1450,14 @@ tables.file = class FileTable extends Table {
     return [
       this.columnDisplay(),
       this.refreshTableButton("file"),
+      ` <button
+        class="btn btn-primary"
+        onclick="eNMS.administration.scanFolder()"
+        data-tooltip="Scan Folder"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-flash"></span>
+      </button>`,
       this.bulkDeletionButton(),
     ];
   }

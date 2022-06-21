@@ -166,8 +166,9 @@ class File(AbstractBase):
     __mapper_args__ = {"polymorphic_identity": "file", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    filename = db.Column(db.SmallString)
     path = db.Column(db.SmallString, unique=True)
-    timestamp = db.Column(db.TinyString)
+    last_modified = db.Column(db.TinyString)
     content = deferred(db.Column(db.LargeString, info={"log_change": False}))
     folder_id = db.Column(Integer, ForeignKey("folder.id"))
     folder = relationship("Folder", foreign_keys="Folder.id", back_populates="files")

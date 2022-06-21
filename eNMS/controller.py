@@ -655,6 +655,8 @@ class Controller:
                     folders.add(file)
                 db.factory(
                     "folder" if file.is_dir() else "file",
+                    filename=file.name,
+                    last_modified=ctime(getmtime(str(file))),
                     name=str(file).replace("/", ">"),
                     path=str(file),
                 )

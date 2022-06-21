@@ -1072,10 +1072,25 @@
     ],
     "file": [
       {
+        "data": "filename",
+        "title": "Filename",
+        "search": "text"
+      },
+      {
+        "data": "path",
+        "title": "Path",
+        "search": "text"
+      },
+      {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text"
+      },
+      {
         "data": "name",
         "title": "Name",
         "search": "text",
-        "width": "200px"
+        "visible": false
       },
       {
         "data": "buttons",

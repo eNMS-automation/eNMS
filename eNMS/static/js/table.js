@@ -1445,6 +1445,30 @@ tables.session = class SessionTable extends Table {
   }
 };
 
+tables.file = class FileTable extends Table {
+  get controls() {
+    return [
+      this.columnDisplay(),
+      this.refreshTableButton("file"),
+      this.bulkDeletionButton(),
+    ];
+  }
+
+  buttons(row) {
+    return [
+      `
+      <ul class="pagination pagination-lg" style="margin: 0px;">
+        <li>
+          <button type="button" class="btn btn-sm btn-info"
+          onclick="eNMS.inventory.showFileContent(${row.id})" data-tooltip="File Content"
+            ><span class="glyphicon glyphicon-list"></span
+          ></button>
+        </li>
+      </ul>`,
+    ];
+  }
+};
+
 tables.event = class EventTable extends Table {
   get controls() {
     return [

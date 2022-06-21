@@ -1070,6 +1070,20 @@
         "orderable": false
       }
     ],
+    "file": [
+      {
+        "data": "name",
+        "title": "Name",
+        "search": "text",
+        "width": "200px"
+      },
+      {
+        "data": "buttons",
+        "width": "40px",
+        "orderable": false,
+        "export": false
+      }
+    ],
     "session": [
       {
         "data": "timestamp",

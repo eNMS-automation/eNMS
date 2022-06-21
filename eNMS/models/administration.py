@@ -2,7 +2,7 @@ from flask_login import UserMixin
 from itertools import chain
 from passlib.hash import argon2
 from sqlalchemy import Boolean, Integer
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import deferred, relationship
 
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
@@ -157,3 +157,13 @@ class Parameters(AbstractBase):
     banner_active = db.Column(Boolean)
     banner_deactivate_on_restart = db.Column(Boolean)
     banner_properties = db.Column(db.Dict)
+
+
+class File(AbstractBase):
+
+    __tablename__ = type = "file"
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    path = db.Column(db.SmallString, unique=True)
+    timestamp = db.Column(db.TinyString)
+    content = deferred(db.Column(db.LargeString, info={"log_change": False}))

@@ -131,6 +131,7 @@
     "/download_file": "access",
     "/event_table": "access",
     "/export_service": "access",
+    "/file_table": "access",
     "/files_form": "access",
     "/geographical_view": "access",
     "/git_history_form": "access",

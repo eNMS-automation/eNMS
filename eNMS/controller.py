@@ -647,8 +647,17 @@ class Controller:
         return result
 
     def scan_folder(self, path):
-        for file in Path(path.replace(">", "/")).iterdir():
-            print(file)
+        folders = {Path(path.replace(">", "/"))}
+        while folders:
+            folder = folders.pop()
+            for file in folder.iterdir():
+                if file.is_dir():
+                    folders.add(file)
+                db.factory(
+                    "folder" if file.is_dir() else "file",
+                    name=str(file).replace("/", ">"),
+                    path=str(file),
+                )
 
     def get_tree_files(self, path):
         if path == "root":

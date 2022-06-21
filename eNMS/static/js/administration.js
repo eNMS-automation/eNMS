@@ -14,7 +14,7 @@ import {
   openPanel,
   processInstance,
 } from "./base.js";
-import { tables } from "./table.js";
+import { refreshTable } from "./table.js";
 
 let filePath = settings.paths.file || `${applicationPath}/files`;
 
@@ -85,7 +85,7 @@ function getClusterStatus() {
   call({
     url: "/get_cluster_status",
     callback: function () {
-      tables.server.table.ajax.reload(null, false);
+      refreshTable("server");
       setTimeout(getClusterStatus, 15000);
     },
   });
@@ -105,8 +105,9 @@ function migrationsExport() {
 function scanFolder() {
   call({
     url: `/scan_folder/${filePath.replace(/\//g, ">")}`,
-    callback: function (result) {
-      notify(`${result} new files created.`, "success", 5, true);
+    callback: function () {
+      refreshTable("file");
+      notify("Scan successful.", "success", 5, true);
     },
   });
 }

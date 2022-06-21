@@ -662,6 +662,7 @@ class Controller:
                     path=str(file),
                     folder_id=getattr(folder_object, "id", None),
                 )
+            db.session.commit()
 
     def get_tree_files(self, path):
         if path == "root":

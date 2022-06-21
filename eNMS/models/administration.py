@@ -170,6 +170,7 @@ class File(AbstractBase):
     path = db.Column(db.SmallString, unique=True)
     last_modified = db.Column(db.TinyString)
     content = deferred(db.Column(db.LargeString, info={"log_change": False}))
+    top_level = db.Column(Boolean, default=False)
     folder_id = db.Column(Integer, ForeignKey("folder.id"))
     folder = relationship(
         "Folder", foreign_keys="Folder.folder_id", back_populates="files"

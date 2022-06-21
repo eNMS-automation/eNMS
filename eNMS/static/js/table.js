@@ -1449,6 +1449,21 @@ tables.file = class FileTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
+      `
+      <button
+        style="background:transparent; border:none; 
+        color:transparent; width: 240px;"
+        type="button"
+      >
+        <select
+          id="parent-filtering"
+          name="parent-filtering"
+          class="form-control"
+        >
+          <option value="true">Hierarchical Display</option>
+          <option value="false">Flat Display</option>
+        </select>
+      </button>`,
       this.refreshTableButton("file"),
       ` <button
         class="btn btn-primary"
@@ -1474,6 +1489,21 @@ tables.file = class FileTable extends Table {
         </li>
       </ul>`,
     ];
+  }
+
+  get filteringConstraints() {
+    const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
+    if (parentFiltering) return { top_level: "bool-true" };
+  }
+
+  postProcessing(...args) {
+    let self = this;
+    super.postProcessing(...args);
+    $("#parent-filtering")
+      .selectpicker()
+      .on("change", function () {
+        self.table.page(0).ajax.reload(null, false);
+      });
   }
 };
 

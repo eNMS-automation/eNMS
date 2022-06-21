@@ -661,6 +661,7 @@ class Controller:
                     name=str(file).replace("/", ">"),
                     path=str(file),
                     folder_id=getattr(folder_object, "id", None),
+                    top_level=not bool(folder_object),
                 )
             db.session.commit()
 

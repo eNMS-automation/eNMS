@@ -45,6 +45,11 @@ function showSettings() {
   });
 }
 
+function enterFolder(folder) {
+  filePath = `${filePath}/${folder}`;
+  refreshTable("file");
+}
+
 export function openDebugPanel() {
   openPanel({
     name: "debug",
@@ -416,6 +421,7 @@ configureNamespace("administration", [
   deleteFile,
   displayFiles,
   editFile,
+  enterFolder,
   getClusterStatus,
   getGitContent,
   migrationsExport,

@@ -17,7 +17,7 @@ import {
 import { refreshTable } from "./table.js";
 
 export const defaultFolder = settings.paths.file || `${applicationPath}/files`;
-export let filePath = defaultFolder;
+export let folderPath = defaultFolder;
 
 function saveSettings() {
   const newSettings = jsonEditors.settings.get();
@@ -47,15 +47,15 @@ function showSettings() {
 }
 
 function enterFolder(folder) {
-  filePath = `${filePath}/${folder}`;
+  folderPath = `${folderPath}/${folder}`;
   refreshTable("file");
   $("#upward-folder-btn").removeClass("disabled");
 }
 
 function enterUpwardFolder() {
-  filePath = filePath.split( '/' ).slice( 0, -1 ).join( '/' );
+  folderPath = folderPath.split( '/' ).slice( 0, -1 ).join( '/' );
   refreshTable("file");
-  if (filePath == defaultFolder) $("#upward-folder-btn").addClass("disabled");
+  if (folderPath == defaultFolder) $("#upward-folder-btn").addClass("disabled");
 }
 
 export function openDebugPanel() {
@@ -117,7 +117,7 @@ function migrationsExport() {
 
 function scanFolder() {
   call({
-    url: `/scan_folder/${filePath.replace(/\//g, ">")}`,
+    url: `/scan_folder/${folderPath.replace(/\//g, ">")}`,
     callback: function () {
       refreshTable("file");
       notify("Scan successful.", "success", 5, true);

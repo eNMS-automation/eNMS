@@ -18,7 +18,7 @@ import {
   showConfirmationPanel,
   userIsActive,
 } from "./base.js";
-import { defaultFolder, filePath } from "./administration.js";
+import { defaultFolder, folderPath } from "./administration.js";
 import { exportServices } from "./automation.js";
 import { updateNetworkRightClickBindings } from "./networkBuilder.js";
 
@@ -1457,7 +1457,7 @@ tables.file = class FileTable extends Table {
   }
 
   get controls() {
-    const status = filePath == defaultFolder ? "disabled" : ""
+    const status = folderPath == defaultFolder ? "disabled" : ""
     return [
       this.columnDisplay(),
       `
@@ -1519,7 +1519,7 @@ tables.file = class FileTable extends Table {
   get filteringConstraints() {
     const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
     if (parentFiltering)
-      return { folder_path: filePath, folder_path_filter: "equality" };
+      return { folder_path: folderPath, folder_path_filter: "equality" };
   }
 
   postProcessing(...args) {

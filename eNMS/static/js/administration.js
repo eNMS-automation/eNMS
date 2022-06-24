@@ -16,7 +16,8 @@ import {
 } from "./base.js";
 import { refreshTable } from "./table.js";
 
-export let filePath = settings.paths.file || `${applicationPath}/files`;
+export const defaultFolder = settings.paths.file || `${applicationPath}/files`;
+export let filePath = defaultFolder;
 
 function saveSettings() {
   const newSettings = jsonEditors.settings.get();
@@ -48,6 +49,13 @@ function showSettings() {
 function enterFolder(folder) {
   filePath = `${filePath}/${folder}`;
   refreshTable("file");
+  $("#upward-folder-btn").removeClass("disabled");
+}
+
+function enterUpwardFolder() {
+  filePath = filePath.split( '/' ).slice( 0, -1 ).join( '/' );
+  refreshTable("file");
+  if (filePath == defaultFolder) $("#upward-folder-btn").addClass("disabled");
 }
 
 export function openDebugPanel() {
@@ -422,6 +430,7 @@ configureNamespace("administration", [
   displayFiles,
   editFile,
   enterFolder,
+  enterUpwardFolder,
   getClusterStatus,
   getGitContent,
   migrationsExport,

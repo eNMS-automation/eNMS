@@ -18,7 +18,7 @@ import {
   showConfirmationPanel,
   userIsActive,
 } from "./base.js";
-import { filePath } from "./administration.js";
+import { defaultFolder, filePath } from "./administration.js";
 import { exportServices } from "./automation.js";
 import { updateNetworkRightClickBindings } from "./networkBuilder.js";
 
@@ -1457,6 +1457,7 @@ tables.file = class FileTable extends Table {
   }
 
   get controls() {
+    const status = filePath == defaultFolder ? "disabled" : ""
     return [
       this.columnDisplay(),
       `
@@ -1475,6 +1476,15 @@ tables.file = class FileTable extends Table {
         </select>
       </button>`,
       this.refreshTableButton("file"),
+      `
+      <a
+        id="upward-folder-btn"
+        class="btn btn-info ${status}"
+        onclick="eNMS.administration.enterUpwardFolder()"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-chevron-up"></span>
+      </a>`,
       ` <button
         class="btn btn-primary"
         onclick="eNMS.administration.scanFolder()"

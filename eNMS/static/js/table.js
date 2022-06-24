@@ -1498,17 +1498,22 @@ tables.file = class FileTable extends Table {
   }
 
   buttons(row) {
-    return [
-      `
-      <ul class="pagination pagination-lg" style="margin: 0px;">
-        <li>
-          <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.inventory.showFileContent(${row.id})" data-tooltip="File Content"
-            ><span class="glyphicon glyphicon-list"></span
-          ></button>
-        </li>
-      </ul>`,
-    ];
+    if (row.type == "folder") {
+      return [];
+    } else {
+      return [
+        `
+        <ul class="pagination pagination-lg" style="margin: 0px;">
+          <li>
+            <button type="button" class="btn btn-sm btn-info"
+            onclick="eNMS.administration.editFile('${row.name}', '${row.path}')"
+            data-tooltip="File Content">
+              <span class="glyphicon glyphicon-list"></span>
+            </button>
+          </li>
+        </ul>`,
+      ];
+    }
   }
 
   get filteringConstraints() {

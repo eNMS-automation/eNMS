@@ -211,19 +211,18 @@ function deleteFile(file) {
   });
 }
 
-function editFile(file) {
-  const filepath = file.data.path.replace(/\//g, ">");
+function editFile(filename, filepath) {
   call({
-    url: `/edit_file/${filepath}`,
+    url: `/edit_file/${filename}`,
     callback: function (content) {
       openPanel({
         name: "file",
-        title: `Edit ${file.data.path}`,
-        id: filepath,
+        title: `Edit ${filepath}`,
+        id: filename,
         callback: () => {
-          const display = document.getElementById(`file_content-${filepath}`);
+          const display = document.getElementById(`file_content-${filename}`);
           // eslint-disable-next-line new-cap
-          let fileEditor = (editors[filepath] = CodeMirror.fromTextArea(display, {
+          let fileEditor = (editors[filename] = CodeMirror.fromTextArea(display, {
             lineWrapping: true,
             lineNumbers: true,
             theme: "cobalt",

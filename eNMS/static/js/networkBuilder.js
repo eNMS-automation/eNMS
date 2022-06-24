@@ -293,4 +293,15 @@ export function drawNetworkEdge(link) {
   };
 }
 
+export function resetNetworkDisplay() {
+  let nodeUpdates = [];
+  network.nodes.forEach((node) => {
+    nodeUpdates.push({
+      id: node.id,
+      image: `/static/img/network/default/${node.icon}.gif`,
+    });
+  });
+  if (nodes) nodes.update(nodeUpdates);
+}
+
 configureNamespace("networkBuilder", [addObjectsToNetwork, filterNetworkTable]);

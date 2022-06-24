@@ -493,7 +493,7 @@ function runWorkflow(parametrization) {
   if (isSuperworkflow) {
     return notify("A superworkflow cannot be run directly.", "error", 5);
   }
-  resetDisplay();
+  resetWorkflowDisplay();
   runService({
     id: workflow.id,
     path: currentPath,
@@ -541,7 +541,7 @@ function restartWorkflow() {
   });
 }
 
-function colorService(id, color) {
+export function colorService(id, color) {
   if (!ends.has(id) && nodes && nodes.get(id)) {
     nodes.update({ id: id, color: color });
   }
@@ -568,7 +568,7 @@ export function getServiceState(id, first) {
 
 function displayWorkflowState(result) {
   if ($("#workflow-search").val()) return;
-  resetDisplay();
+  resetWorkflowDisplay();
   updateRuntimes(result);
   if (currentRuntime == "normal") return;
   if (!nodes || !edges || !result.state) return;
@@ -642,7 +642,7 @@ function displayWorkflowState(result) {
   }
 }
 
-function resetDisplay() {
+export function resetWorkflowDisplay() {
   let nodeUpdates = [];
   let edgeUpdates = [];
   workflow.services.forEach((service) => {
@@ -746,18 +746,6 @@ function filterDevice() {
     $("#device-filter").val(null).trigger("change");
     getWorkflowState();
   }
-}
-
-export function searchWorkflowText() {
-  const searchValue = $("#workflow-search").val();
-  if (!searchValue) return;
-  call({
-    url: `/search_builder/${instance.id}/${searchValue}`,
-    callback: function (nodes) {
-      resetDisplay();
-      nodes.forEach((node) => colorService(node, "#EFFD5F"));
-    },
-  });
 }
 
 configureNamespace("workflowBuilder", [

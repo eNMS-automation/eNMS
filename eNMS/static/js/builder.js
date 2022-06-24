@@ -23,17 +23,19 @@ import {
   drawNetworkEdge,
   drawNetworkNode,
   getNetworkState,
+  resetNetworkDisplay,
   switchToNetwork,
   updateNetworkRightClickBindings,
 } from "./networkBuilder.js";
 import {
+  colorService,
   drawIterationEdge,
   drawWorkflowEdge,
   drawWorkflowNode,
   ends,
   flipRuntimeDisplay,
   getWorkflowState,
-  searchWorkflowText,
+  resetWorkflowDisplay,
   switchToWorkflow,
   updateWorkflowRightClickBindings,
 } from "./workflowBuilder.js";
@@ -399,6 +401,7 @@ function displayTextSearchField() {
     if (type == "workflow") {
       getWorkflowState();
     } else {
+      resetNetworkDisplay();
       getNetworkState();
     }
   }
@@ -538,15 +541,15 @@ export function initBuilder() {
         }
       }
       $(`#current-${type},#current-runtimes`).selectpicker({ liveSearch: true });
+      let searchTimer = false;
+      $(`#${type}-search`).keyup(function () {
+        if (searchTimer) clearTimeout(searchTimer);
+        searchTimer = setTimeout(searchBuilderText, 300);
+      });
       if (type == "workflow") {
         initSelect($(`#device-filter`), "device", null, true);
         $("#current-runtime,#device-filter").on("change", function () {
           getWorkflowState();
-        });
-        let searchTimer = false;
-        $("#workflow-search").keyup(function () {
-          if (searchTimer) clearTimeout(searchTimer);
-          searchTimer = setTimeout(searchWorkflowText, 300);
         });
         getWorkflowState(true, true);
       } else {
@@ -558,6 +561,27 @@ export function initBuilder() {
     if (!instance || this.value != instance.id) switchTo(this.value);
   });
   updateRightClickBindings();
+}
+
+export function searchBuilderText() {
+  const searchValue = $(`#${type}-search`).val();
+  if (!searchValue) return;
+  call({
+    url: `/search_builder/${type}/${instance.id}/${searchValue}`,
+    callback: function (selectedNodes) {
+      if (type == "workflow") {
+        resetWorkflowDisplay();
+        selectedNodes.forEach((node) => colorService(node, "#EFFD5F"));
+      } else {
+        resetNetworkDisplay();
+        selectedNodes.forEach((nodeId) => {
+          const icon = nodes.get(parseInt(nodeId)).icon;
+          const image = `/static/img/network/red/${icon}.gif`;
+          nodes.update({ id: parseInt(nodeId), image: image });
+        });
+      }
+    },
+  });
 }
 
 function getTree() {

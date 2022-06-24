@@ -646,4 +646,10 @@ function getTree() {
   });
 }
 
-configureNamespace("builder", [createLabel, displayTextSearchField, getTree, highlightNode, switchMode]);
+configureNamespace("builder", [
+  createLabel,
+  displayTextSearchField,
+  getTree,
+  highlightNode,
+  switchMode,
+]);

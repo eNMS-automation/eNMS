@@ -22,7 +22,8 @@ Version 4.3.0
 - Add User Profile window to change username, password, user email, etc.
 - Add User landing page to decide which page to display after logging in (editable in profile).
 - Add mechanism to show a single device status in workflow builder UI (logs filtering + service display)
-- Add mechanism to search for a string accross all services of a workflow in the workflow builder.
+- Add mechanism to search for a string accross all services of a workflow in the workflow builder, and
+  accross all nodes in the network builder.
 
 Migration
 - dashboard is now controlled by RBAC: dashboard access must be explicitly granted via access pages, GET and

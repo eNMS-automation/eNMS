@@ -1447,6 +1447,13 @@ tables.session = class SessionTable extends Table {
 };
 
 tables.file = class FileTable extends Table {
+  addRow(properties) {
+    let row = super.addRow(properties);
+    row["filename"] = `<b><a href="#" onclick="eNMS.administration.enterFolder()">
+      ${row.filename}</a></b>`;
+    return row;
+  }
+
   get controls() {
     return [
       this.columnDisplay(),

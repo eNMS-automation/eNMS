@@ -390,6 +390,20 @@ export function createNewNode(mode) {
   }
 }
 
+function displayTextSearchField() {
+  $(`#${type}-search-div`).toggle();
+  if ($(`#${type}-search-div`).is(":visible")) {
+    $(`#${type}-search`).focus();
+  } else {
+    $(`#${type}-search`).val("");
+    if (type == "workflow") {
+      getWorkflowState();
+    } else {
+      getNetworkState();
+    }
+  }
+}
+
 function drawNode(node) {
   return type == "network" ? drawNetworkNode(node) : drawWorkflowNode(node);
 }
@@ -632,4 +646,4 @@ function getTree() {
   });
 }
 
-configureNamespace("builder", [createLabel, getTree, highlightNode, switchMode]);
+configureNamespace("builder", [createLabel, displayTextSearchField, getTree, highlightNode, switchMode]);

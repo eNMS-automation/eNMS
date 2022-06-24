@@ -1505,7 +1505,7 @@ tables.file = class FileTable extends Table {
         `
         <ul class="pagination pagination-lg" style="margin: 0px;">
           <li>
-            <button type="button" class="btn btn-sm btn-info"
+            <button type="button" class="btn btn-sm btn-primary"
             onclick="eNMS.administration.editFile('${row.name}', '${row.path}')"
             data-tooltip="File Content">
               <span class="glyphicon glyphicon-list"></span>

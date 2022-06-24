@@ -327,13 +327,6 @@ function displayFiles() {
                 <div style="position: absolute; top: 0px; right: 50px">
                   <button
                     type="button"
-                    class="btn btn-xs btn-primary"
-                    onclick='eNMS.administration.editFile(${data})'
-                  >
-                    <span class="glyphicon glyphicon-edit"></span>
-                  </button>
-                  <button
-                    type="button"
                     class="btn btn-xs btn-info"
                     onclick="location.href='/download_file/${node.data.path}'"
                   >

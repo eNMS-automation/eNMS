@@ -882,6 +882,10 @@ td span {
   line-height: 18px;
 }
 
+table.dataTable tbody td {
+  vertical-align: middle;
+}
+
 /* Set the table pages in the middle */
 .dataTables_length {
   width: 30%;

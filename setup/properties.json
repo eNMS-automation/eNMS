@@ -1074,7 +1074,8 @@
       {
         "data": "filename",
         "title": "Filename",
-        "search": "text"
+        "search": "text",
+        "className": "dt-body-left"
       },
       {
         "data": "path",

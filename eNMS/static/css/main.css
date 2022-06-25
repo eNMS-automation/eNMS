@@ -882,6 +882,7 @@ td span {
   line-height: 18px;
 }
 
+/* Align Datatables cell content on y-axis */
 table.dataTable tbody td {
   vertical-align: middle;
 }

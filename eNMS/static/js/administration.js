@@ -17,7 +17,7 @@ import {
 import { refreshTable } from "./table.js";
 
 export const defaultFolder = settings.paths.file || `${applicationPath}/files`;
-export let folderPath = defaultFolder;
+export let folderPath = localStorage.getItem("folderPath") || defaultFolder;
 
 function saveSettings() {
   const newSettings = jsonEditors.settings.get();
@@ -48,12 +48,14 @@ function showSettings() {
 
 function enterFolder(folder) {
   folderPath = `${folderPath}/${folder}`;
+  localStorage.setItem("folderPath", folderPath);
   refreshTable("file");
   $("#upward-folder-btn").removeClass("disabled");
 }
 
 function enterUpwardFolder() {
   folderPath = folderPath.split( '/' ).slice( 0, -1 ).join( '/' );
+  localStorage.setItem("folderPath", folderPath);
   refreshTable("file");
   if (folderPath == defaultFolder) $("#upward-folder-btn").addClass("disabled");
 }

@@ -1451,10 +1451,14 @@ tables.file = class FileTable extends Table {
     let row = super.addRow(properties);
     if (row.type == "folder") {
       row.filename = `<a href="#" onclick="eNMS.administration.enterFolder
-        ('${row.filename}')" style="margin-left: 5px">
-          <span class="glyphicon glyphicon-folder-open"></span>
-          <b style="margin-left: 5px">${row.filename}</b>
+        ('${row.filename}')">
+          <span class="glyphicon glyphicon-folder-open" style="margin-left: 8px"></span>
+          <b style="margin-left: 6px">${row.filename}</b>
         </a>`;
+    } else {
+      row.filename = `
+        <span class="glyphicon glyphicon-file" style="margin-left: 8px"></span>
+        <span style="margin-left: 3px">${row.filename}</span>`;
     }
     return row;
   }

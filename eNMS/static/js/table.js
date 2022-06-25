@@ -1500,21 +1500,31 @@ tables.file = class FileTable extends Table {
     ];
   }
 
+  copyClipboardButton(row) {
+    return `
+      <li>
+        <button type="button" class="btn btn-sm btn-info"
+          onclick="eNMS.base.copyToClipboard({text: '${row.path}' })"
+          data-tooltip="Copy Path to clipboard"
+        >
+          <span class="glyphicon glyphicon-copy"></span>
+        </button>
+      </li>`;
+  }
+
   buttons(row) {
     if (row.type == "folder") {
-      return [];
+      return [
+        `
+        <ul class="pagination pagination-lg" style="margin: 0px;">
+          ${this.copyClipboardButton(row)}
+        </ul>`,
+      ];
     } else {
       return [
         `
         <ul class="pagination pagination-lg" style="margin: 0px;">
-          <li>
-            <button type="button" class="btn btn-sm btn-info"
-              onclick="eNMS.base.copyToClipboard({text: '${row.path}' })"
-              data-tooltip="Copy Path to clipboard"
-            >
-              <span class="glyphicon glyphicon-copy"></span>
-            </button>
-          </li>
+          ${this.copyClipboardButton(row)}
           <li>
             <button type="button" class="btn btn-sm btn-primary"
             onclick="eNMS.administration.editFile('${row.name}', '${row.path}')"

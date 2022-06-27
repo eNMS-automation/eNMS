@@ -1516,19 +1516,35 @@ tables.file = class FileTable extends Table {
       </li>`;
   }
 
+  downloadButton(row) {
+    return `
+      <li>
+        <button
+          type="button"
+          class="btn btn-sm btn-info"
+          onclick="location.href='/download_${row.type}/${row.path}'"
+        >
+          <span class="glyphicon glyphicon-download"></span>
+        </button>
+      </li>`;
+  }
+
   buttons(row) {
     if (row.type == "folder") {
       return [
         `
         <ul class="pagination pagination-lg" style="margin: 0px;">
           ${this.copyClipboardButton(row)}
-        </ul>`,
+          ${this.downloadButton(row)}
+        </ul>
+        `,
       ];
     } else {
       return [
         `
         <ul class="pagination pagination-lg" style="margin: 0px;">
           ${this.copyClipboardButton(row)}
+          ${this.downloadButton(row)}
           <li>
             <button type="button" class="btn btn-sm btn-primary"
             onclick="eNMS.administration.editFile('${row.name}', '${row.path}')"

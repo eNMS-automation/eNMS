@@ -653,6 +653,7 @@ class Controller:
             for file in folder.iterdir():
                 if file.suffix in vs.settings["files"]["ignored_types"]:
                     continue
+                folder_object = db.fetch("folder", path=str(folder), allow_none=True)
                 if file.is_dir():
                     folders.add(file)
                 db.factory(
@@ -661,6 +662,7 @@ class Controller:
                     last_modified=ctime(getmtime(str(file))),
                     name=str(file).replace("/", ">"),
                     path=str(file),
+                    folder_id=getattr(folder_object, "id", None),
                     folder_path=str(folder),
                 )
             db.session.commit()

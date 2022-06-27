@@ -128,7 +128,7 @@
     "/dashboard": "access",
     "/device_data_form": "access",
     "/device_table": "access",
-    "/download_file": "access",
+    "/download": "access",
     "/event_table": "access",
     "/export_service": "access",
     "/file_table": "access",

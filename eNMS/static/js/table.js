@@ -1522,7 +1522,7 @@ tables.file = class FileTable extends Table {
         <button
           type="button"
           class="btn btn-sm btn-info"
-          onclick="location.href='/download_${row.type}/${row.path}'"
+          onclick="location.href='/download/${row.type}/${row.path}'"
         >
           <span class="glyphicon glyphicon-download"></span>
         </button>

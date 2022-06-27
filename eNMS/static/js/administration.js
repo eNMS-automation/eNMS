@@ -330,7 +330,7 @@ function displayFiles() {
                   <button
                     type="button"
                     class="btn btn-xs btn-info"
-                    onclick="location.href='/download_file/${node.data.path}'"
+                    onclick="location.href='/download/file/${node.data.path}'"
                   >
                     <span class="glyphicon glyphicon-download"></span>
                   </button>

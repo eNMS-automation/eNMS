@@ -315,10 +315,11 @@ class Server(Flask):
                 return "No Results Found"
             return f"<pre>{vs.dict_to_string(results_dict)}</pre>"
 
-        @blueprint.route("/download_file/<path:path>")
+        @blueprint.route("/download/<type>/<path:path>")
         @self.process_requests
-        def download_file(path):
-            return send_file(f"/{path}", as_attachment=True)
+        def download(type, path):
+            if type == "file":
+                return send_file(f"/{path}", as_attachment=True)
 
         @blueprint.route("/export_service/<int:id>")
         @self.process_requests

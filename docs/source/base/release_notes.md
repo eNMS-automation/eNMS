@@ -30,6 +30,7 @@ Version 4.3.0
 Migration
 - dashboard is now controlled by RBAC: dashboard access must be explicitly granted via access pages, GET and
   POST requests.
+- "download_file" endpoint -> "download" (add support for downloading folders)
 
 Version 4.2.1
 -------------

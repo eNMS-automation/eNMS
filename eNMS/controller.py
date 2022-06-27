@@ -1367,7 +1367,18 @@ class Controller:
 
     def upload_files(self, **kwargs):
         file = kwargs["file"]
-        file.save(f"{kwargs['folder']}/{file.filename}")
+        folder = db.fetch("folder", path=kwargs['folder'], allow_none=True)
+        filepath = f"{kwargs['folder']}/{file.filename}"
+        db.factory(
+            "file",
+            filename=file.filename,
+            last_modified=ctime(),
+            name=filepath.replace("/", ">"),
+            path=filepath,
+            folder_id=getattr(folder, "id", None),
+            folder_path=kwargs['folder'],
+        )
+        file.save(filepath)
 
     def update_pool(self, pool_id):
         db.fetch("pool", id=int(pool_id), rbac="edit").compute_pool()

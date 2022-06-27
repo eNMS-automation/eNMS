@@ -1,6 +1,7 @@
 from flask_login import UserMixin
 from itertools import chain
 from passlib.hash import argon2
+from pathlib import Path
 from shutil import rmtree
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import deferred, relationship
@@ -178,7 +179,7 @@ class File(AbstractBase):
     folder_path = db.Column(db.SmallString)
 
     def delete(self):
-        rmtree(self.path, ignore_errors=True)
+        Path(self.path).unlink()
 
 
 class Folder(File):
@@ -197,3 +198,6 @@ class Folder(File):
         "polymorphic_identity": "folder",
         "inherit_condition": id == File.id,
     }
+
+    def delete(self):
+        rmtree(self.path, ignore_errors=True)

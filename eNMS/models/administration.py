@@ -192,7 +192,7 @@ class Folder(File):
         "File",
         back_populates="folder",
         foreign_keys="File.folder_id",
-        cascade="all,delete",
+        cascade="all,delete-orphan",
     )
     __mapper_args__ = {
         "polymorphic_identity": "folder",

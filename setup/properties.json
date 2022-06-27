@@ -1095,7 +1095,7 @@
       },
       {
         "data": "buttons",
-        "width": "80px",
+        "width": "160px",
         "orderable": false,
         "export": false
       }

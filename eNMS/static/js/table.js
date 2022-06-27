@@ -1536,6 +1536,7 @@ tables.file = class FileTable extends Table {
         <ul class="pagination pagination-lg" style="margin: 0px;">
           ${this.copyClipboardButton(row)}
           ${this.downloadButton(row)}
+          ${this.deleteInstanceButton(row)}
         </ul>
         `,
       ];
@@ -1552,6 +1553,7 @@ tables.file = class FileTable extends Table {
               <span class="glyphicon glyphicon-list"></span>
             </button>
           </li>
+          ${this.deleteInstanceButton(row)}
         </ul>`,
       ];
     }

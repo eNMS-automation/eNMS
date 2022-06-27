@@ -651,6 +651,8 @@ class Controller:
         while folders:
             folder = folders.pop()
             for file in folder.iterdir():
+                if file.suffix in vs.settings["files"]["ignored_types"]:
+                    continue
                 if file.is_dir():
                     folders.add(file)
                 db.factory(

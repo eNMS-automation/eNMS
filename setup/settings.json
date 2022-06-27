@@ -67,6 +67,9 @@
     "workflow_builder": "automation/workflows/",
     "workflow_builder_table": "automation/workflows/"
   },
+  "files": {
+    "ignored_types": [".tgz"]
+  },
   "mail": {
     "port": 587,
     "reply_to": "antoine.fourmy@gmail.com",

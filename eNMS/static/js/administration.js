@@ -218,7 +218,7 @@ function editFile(filename, filepath) {
     url: `/edit_file/${filename}`,
     callback: function (content) {
       openPanel({
-        name: "file",
+        name: "file_editor",
         title: `Edit ${filepath}`,
         id: filename,
         callback: () => {

@@ -63,7 +63,7 @@ export function detectUserInactivity() {
 const panelThemes = {
   logs: { bgContent: "#1B1B1B" },
   device_data: { bgContent: "#1B1B1B" },
-  file: { bgContent: "#1B1B1B" },
+  file_editor: { bgContent: "#1B1B1B" },
 };
 
 $.ajaxSetup({

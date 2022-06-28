@@ -448,8 +448,8 @@ class ExcelImportForm(BaseForm):
 
 
 class FileForm(BaseForm):
-    template = "file"
-    form_type = HiddenField(default="file")
+    template = "file_editor"
+    form_type = HiddenField(default="file_editor")
     file_content = StringField(widget=TextArea(), render_kw={"rows": 8})
 
 

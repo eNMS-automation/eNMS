@@ -1499,6 +1499,14 @@ tables.file = class FileTable extends Table {
       </a>`,
       ` <button
         class="btn btn-primary"
+        onclick="eNMS.administration.showFileUploadPanel()"
+        data-tooltip="Upload Files"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-upload"></span>
+      </button>`,
+      ` <button
+        class="btn btn-primary"
         onclick="eNMS.administration.scanFolder()"
         data-tooltip="Scan Folder"
         type="button"

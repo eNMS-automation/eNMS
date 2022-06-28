@@ -135,20 +135,10 @@ export class Table {
         type: "POST",
         contentType: "application/json",
         data: (data) => {
-          let form = serializeForm(
-            `#search-form-${this.id}`,
-            `${this.model}_filtering`
-          );
-          for (const [key, value] of Object.entries(form)) {
-            if (key.includes("_invert")) form[key] = value == "y";
-          }
           Object.assign(data, {
-            form: form,
-            constraints: { ...constraints, ...this.filteringConstraints },
-            columns: this.columns,
-            type: this.type,
             export: self.csvExport,
             clipboard: self.copyClipboard,
+            ...this.getFilteringData(),
           });
           Object.assign(data, self.filteringData);
           return JSON.stringify(data);
@@ -202,6 +192,24 @@ export class Table {
       [visibleColumns, ...result].map((e) => e.join(",")).join("\n"),
       "csv"
     );
+  }
+
+  getFilteringData() {
+    let data = {};
+    let form = serializeForm(
+      `#search-form-${this.id}`,
+      `${this.model}_filtering`
+    );
+    for (const [key, value] of Object.entries(form)) {
+      if (key.includes("_invert")) form[key] = value == "y";
+    }
+    Object.assign(data, {
+      form: form,
+      constraints: { ...this.constraints, ...this.filteringConstraints },
+      columns: this.columns,
+      type: this.type,
+    });
+    return data;
   }
 
   postProcessing() {
@@ -1687,7 +1695,7 @@ function showBulkEditPanel(formId, model, tableId, number) {
 function bulkDeletion(tableId, model) {
   call({
     url: `/bulk_deletion/${model}`,
-    form: `search-form-${tableId}`,
+    data: tableInstances[tableId].getFilteringData(),
     callback: function (number) {
       refreshTable(tableId, false, true);
       notify(`${number} items deleted.`, "success", 5, true);
@@ -1696,10 +1704,10 @@ function bulkDeletion(tableId, model) {
 }
 
 function bulkRemoval(tableId, model, instance) {
-  const relation = `${instance.relation.to}/${instance.relation.from}`;
+  const relation = `${instance.type}/${instance.id}/${instance.relation.to}`;
   call({
-    url: `/bulk_removal/${model}/${instance.type}/${instance.id}/${relation}`,
-    form: `search-form-${tableId}`,
+    url: `/bulk_removal/${model}/${relation}`,
+    data: tableInstances[tableId].getFilteringData(),
     callback: function (number) {
       refreshTable(tableId, false, true);
       notify(

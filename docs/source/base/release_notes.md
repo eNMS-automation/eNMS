@@ -56,6 +56,7 @@ Version 4.2.1
   not just the objects displayed in the table)
 
 To be tested:
+- bulk deletion and bulk removal (from dashboard and other tables too)
 - mail notification
 - web ssh
 - service logging mechanism, including disable logging
@@ -823,4 +824,4 @@ Version 3.15
 - Change in the LDAP authentication: LDAP users that are not admin should now longer be allowed to log in (403 error).
 - The "dictionary match" mechanism now supports lists.
 - New "Logs" window to see the different logs of a service/workflow for each runtime.
-- Show the user that initiated the job, along with the runtime when selecting a run                                                                       
+- Show the user that initiated the job, along with the runtime when selecting a run

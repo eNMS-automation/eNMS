@@ -1088,6 +1088,16 @@
         "search": "text"
       },
       {
+        "data": "last_updated",
+        "title": "Last Updated",
+        "search": "text"
+      },
+      {
+        "data": "status",
+        "title": "Status",
+        "search": "text"
+      },
+      {
         "data": "name",
         "title": "Name",
         "search": "text",

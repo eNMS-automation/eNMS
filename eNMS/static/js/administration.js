@@ -257,6 +257,7 @@ function createNewFolder() {
 }
 
 function showFileUploadPanel(folder) {
+  if (!folder) folder = folderPath;
   const path = folder.replace(/\//g, ">");
   openPanel({
     name: "upload_files",

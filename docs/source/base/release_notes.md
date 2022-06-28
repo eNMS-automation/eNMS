@@ -21,6 +21,8 @@ Version 4.2.1
 - Add new `rest/workers` GET endpoint to get service count for each WSGI worker
 - Fix Data Extraction service bug if no device (service in run once mode)
 - Add new Jinja2 Template Conversion in Data Extraction Service
+- Fix bulk deletion and bulk removal from a filtered table (e.g dashboard bulk deletion deletes everything,
+  not just the objects displayed in the table)
 
 To be tested:
 - mail notification

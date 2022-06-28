@@ -1542,6 +1542,17 @@ tables.file = class FileTable extends Table {
       </li>`;
   }
 
+  editButton(row) {
+    return `
+      <li>
+        <button type="button" class="btn btn-sm btn-primary"
+        onclick="eNMS.base.showInstancePanel(
+          '${row.type}', '${row.id}')" data-tooltip="Edit"
+          ><span class="glyphicon glyphicon-edit"></span
+        ></button>
+      </li>`;
+  }
+
   buttons(row) {
     if (row.type == "folder") {
       return [
@@ -1549,6 +1560,7 @@ tables.file = class FileTable extends Table {
         <ul class="pagination pagination-lg" style="margin: 0px;">
           ${this.copyClipboardButton(row)}
           ${this.downloadButton(row)}
+          ${this.editButton(row)}
           <button type="button"
             class="btn btn-sm btn-primary"
             onclick="eNMS.administration.showFileUploadPanel('${row.path}')"
@@ -1565,6 +1577,7 @@ tables.file = class FileTable extends Table {
         <ul class="pagination pagination-lg" style="margin: 0px;">
           ${this.copyClipboardButton(row)}
           ${this.downloadButton(row)}
+          ${this.editButton(row)}
           <li>
             <button type="button" class="btn btn-sm btn-primary"
             onclick="eNMS.administration.editFile('${row.name}', '${row.path}')"

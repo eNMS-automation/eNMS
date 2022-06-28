@@ -448,6 +448,16 @@ class ExcelImportForm(BaseForm):
 
 
 class FileForm(BaseForm):
+    template = "object"
+    name = StringField("Name")
+    filename = StringField("Filename", render_kw={'readonly': True})
+    path = StringField("Path", render_kw={'readonly': True})
+    last_modified = StringField("Last Modified", render_kw={'readonly': True})
+    last_updated = StringField("Last Updated", render_kw={'readonly': True})
+    status = StringField("Status", render_kw={'readonly': True})
+
+
+class FileEditorForm(BaseForm):
     template = "file_editor"
     form_type = HiddenField(default="file_editor")
     file_content = StringField(widget=TextArea(), render_kw={"rows": 8})

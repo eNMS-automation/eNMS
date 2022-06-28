@@ -1078,6 +1078,12 @@
         "className": "dt-body-left"
       },
       {
+        "data": "name",
+        "title": "Name",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "path",
         "title": "Path",
         "search": "text"
@@ -1096,12 +1102,6 @@
         "data": "status",
         "title": "Status",
         "search": "text"
-      },
-      {
-        "data": "name",
-        "title": "Name",
-        "search": "text",
-        "visible": false
       },
       {
         "data": "buttons",

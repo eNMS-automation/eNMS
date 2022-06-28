@@ -1595,41 +1595,6 @@ tables.file = class FileTable extends Table {
   }
 };
 
-tables.event = class EventTable extends Table {
-  get controls() {
-    return [
-      this.columnDisplay(),
-      this.refreshTableButton(),
-      this.clearSearchButton(),
-      this.createNewButton(),
-      this.exportTableButton(),
-      this.bulkDeletionButton(),
-    ];
-  }
-
-  buttons(row) {
-    return [
-      `
-      <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
-        <li>
-          <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showInstancePanel('event', '${row.id}')"
-          data-tooltip="Edit"><span class="glyphicon glyphicon-edit">
-          </span></button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showInstancePanel('event', '${row.id}', 'duplicate')"
-          data-tooltip="Duplicate">
-          <span class="glyphicon glyphicon-duplicate"></span></button>
-        </li>
-        ${this.deleteInstanceButton(row)}
-      </ul>
-    `,
-    ];
-  }
-};
-
 export const clearSearch = function (tableId, notification) {
   $(`.search-input-${tableId},.search-list-${tableId}`).val("");
   $(".search-relation-dd").val("any").selectpicker("refresh");

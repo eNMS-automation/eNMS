@@ -196,10 +196,7 @@ export class Table {
 
   getFilteringData() {
     let data = {};
-    let form = serializeForm(
-      `#search-form-${this.id}`,
-      `${this.model}_filtering`
-    );
+    let form = serializeForm(`#search-form-${this.id}`, `${this.model}_filtering`);
     for (const [key, value] of Object.entries(form)) {
       if (key.includes("_invert")) form[key] = value == "y";
     }
@@ -1472,7 +1469,7 @@ tables.file = class FileTable extends Table {
   }
 
   get controls() {
-    const status = folderPath == defaultFolder ? "disabled" : ""
+    const status = folderPath == defaultFolder ? "disabled" : "";
     return [
       this.columnDisplay(),
       `

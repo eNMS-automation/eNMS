@@ -54,7 +54,7 @@ function enterFolder(folder) {
 }
 
 function enterUpwardFolder() {
-  folderPath = folderPath.split( '/' ).slice( 0, -1 ).join( '/' );
+  folderPath = folderPath.split("/").slice(0, -1).join("/");
   localStorage.setItem("folderPath", folderPath);
   refreshTable("file");
   if (folderPath == defaultFolder) $("#upward-folder-btn").addClass("disabled");

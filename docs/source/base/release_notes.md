@@ -5,7 +5,7 @@ Version 4.3.0
 -------------
 
 - New feature to align nodes in Network Builder and Workflow Builder:
-  - Horizontal and vertical alignemnt
+  - Horizontal and vertical alignment
   - Horizontal and vertical distribution
 - Make all objects in object select list (both single and multiple entries) hyperlink to the edit panel.
 - Make it possible to share link to a specific workflow / runtime (optional) to the workflow builder, with the

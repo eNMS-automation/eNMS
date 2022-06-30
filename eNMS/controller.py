@@ -665,7 +665,7 @@ class Controller:
                     filename=file.name,
                     last_modified=ctime(getmtime(str(file))),
                     last_updated=ctime(),
-                    status="Scan OK",
+                    status="OK",
                     name=str(file).replace("/", ">"),
                     path=str(file),
                     folder_id=getattr(folder_object, "id", None),
@@ -1145,9 +1145,12 @@ class Controller:
         )
 
     def save_file(self, filepath, **kwargs):
+        filepath, content = filepath.replace(">", "/"), None
         if kwargs.get("file_content"):
-            with open(Path(filepath.replace(">", "/")), "w") as file:
-                return file.write(kwargs["file_content"])
+            with open(Path(filepath), "w") as file:
+                content = file.write(kwargs["file_content"])
+        db.fetch("file", path=filepath).refresh()
+        return content
 
     def save_positions(self, type, id, **kwargs):
         now, old_position = vs.get_time(), None
@@ -1375,19 +1378,17 @@ class Controller:
 
     def upload_files(self, **kwargs):
         file = kwargs["file"]
-        folder = db.fetch("folder", path=kwargs['folder'], allow_none=True)
+        folder = db.fetch("folder", path=kwargs["folder"], allow_none=True)
         filepath = f"{kwargs['folder']}/{file.filename}"
-        db.factory(
+        file_object = db.factory(
             "file",
             filename=file.filename,
-            last_modified=ctime(),
-            last_updated=ctime(),
-            status="Scan OK",
             name=filepath.replace("/", ">"),
             path=filepath,
             folder_id=getattr(folder, "id", None),
-            folder_path=kwargs['folder'],
+            folder_path=kwargs["folder"],
         )
+        file_object.refresh()
         file.save(filepath)
 
     def update_pool(self, pool_id):

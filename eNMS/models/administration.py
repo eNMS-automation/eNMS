@@ -5,6 +5,7 @@ from pathlib import Path
 from shutil import rmtree
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import deferred, relationship
+from time import ctime
 
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
@@ -181,6 +182,10 @@ class File(AbstractBase):
 
     def delete(self):
         Path(self.path).unlink()
+
+    def refresh(self):
+        self.last_modified = self.last_updated = ctime()
+        self.status = "OK"
 
 
 class Folder(File):

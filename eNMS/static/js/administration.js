@@ -247,7 +247,8 @@ function saveFile(file) {
     form: `file-content-form-${file}`,
     callback: function () {
       notify(`File ${file} successfully saved.`, "success", 5, true);
-      $(`[id="file-${file}"`).remove();
+      $(`[id="file_editor-${file}"`).remove();
+      refreshTable("file");
     },
   });
 }

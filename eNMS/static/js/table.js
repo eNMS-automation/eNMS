@@ -1560,13 +1560,13 @@ tables.file = class FileTable extends Table {
         <ul class="pagination pagination-lg" style="margin: 0px;">
           ${this.copyClipboardButton(row)}
           ${this.downloadButton(row)}
-          ${this.editButton(row)}
           <button type="button"
             class="btn btn-sm btn-primary"
             onclick="eNMS.administration.showFileUploadPanel('${row.path}')"
           >
             <span class="glyphicon glyphicon-upload"></span>
           </button>
+          ${this.editButton(row)}
           ${this.deleteInstanceButton(row)}
         </ul>
         `,

@@ -27,6 +27,15 @@ Version 4.3.0
 - Fix vertical aligment in all tables (cell content was not centered on y axis because of buttons height in
   the last column).
 - Add export service button in Workflow Builder.
+- New Files Management System
+  * defined via settings / paths / files (default: eNMS / files folder)
+  * files are automatically scanned when starting the application, and can be rescanned via the UI
+  * files have a "Status" property showing whether they exist on the filesystem (updated when scanned)
+  * last_modified is the unix last modified timestamp
+  * last_updated shows the last time the file was scanned by eNMS
+  * files can be displayed hierarchically or flat in the table (default: hierarchical display)
+  * both files and folder can be exported to browser; folders are compressed as tgz before export
+  * new files can be uploaded to any folder from the UI
 
 Migration
 - dashboard is now controlled by RBAC: dashboard access must be explicitly granted via access pages, GET and

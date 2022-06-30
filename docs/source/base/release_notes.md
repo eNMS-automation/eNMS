@@ -26,6 +26,7 @@ Version 4.3.0
   accross all nodes in the network builder.
 - Fix vertical aligment in all tables (cell content was not centered on y axis because of buttons height in
   the last column).
+- Add export service button in Workflow Builder.
 
 Migration
 - dashboard is now controlled by RBAC: dashboard access must be explicitly granted via access pages, GET and

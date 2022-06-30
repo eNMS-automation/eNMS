@@ -45,6 +45,7 @@ class Controller:
             import_export_types=db.import_export_models,
         )
         self.get_git_content()
+        self.scan_folder()
 
     def _register_endpoint(self, func):
         setattr(self, func.__name__, func)
@@ -486,6 +487,7 @@ class Controller:
         return vs.form_properties[f"initial-{service_id}"]
 
     def get_git_content(self):
+        env.log("info", "Starting Git Content Update")
         repo = vs.settings["app"]["git_repository"]
         if not repo:
             return
@@ -502,6 +504,7 @@ class Controller:
             self.update_database_configurations_from_git()
         except Exception as exc:
             env.log("error", f"Update of device configurations failed ({str(exc)})")
+        env.log("info", "Git Content Update Successful")
 
     def get_git_history(self, device_id):
         device = db.fetch("device", id=device_id, rbac="configuration")
@@ -644,7 +647,10 @@ class Controller:
             result[instance.category or "Other"].append(dict(instance))
         return result
 
-    def scan_folder(self, path):
+    def scan_folder(self, path=None):
+        env.log("info", "Starting Scan of Files")
+        if not path:
+            path = vs.settings["paths"]["files"] or str(vs.path / "files")
         folders = {Path(path.replace(">", "/"))}
         while folders:
             folder = folders.pop()
@@ -666,6 +672,7 @@ class Controller:
                     folder_path=str(folder),
                 )
             db.session.commit()
+        env.log("info", "Scan of Files Successful")
 
     def get_tree_files(self, path):
         if path == "root":
@@ -903,6 +910,7 @@ class Controller:
                 )
 
     def migration_import(self, folder="migrations", **kwargs):
+        env.log("info", "Starting Migration Import")
         status, models = "Import successful.", kwargs["import_export_types"]
         empty_database = kwargs.get("empty_database_before_import", False)
         if empty_database:

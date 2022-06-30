@@ -984,7 +984,7 @@ tables.service = class ServiceTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="location.href='/export_service/${row.id}'"*
+          onclick="location.href='/export_service/${row.id}'"
           data-tooltip="Export Service as .tgz"
             ><span class="glyphicon glyphicon-export"></span
           ></button>

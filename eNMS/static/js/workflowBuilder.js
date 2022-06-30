@@ -109,6 +109,8 @@ export function displayWorkflow(workflowData) {
       showInstancePanel(node.type, node.id);
     }
   });
+  const exportLocation = `location.href='/export_service/${workflow.id}'`
+  $("#export-workflow-btn").attr("onclick", exportLocation);
   displayWorkflowState(workflowData);
 }
 

@@ -54,6 +54,13 @@
         "type": "json"
       }
     },
+    "file": {
+      "custom_property": {
+        "pretty_name": "Custom Property",
+        "type": "str",
+        "default": "Custom"
+      }
+    },
     "link": {
       "custom_property": {
         "pretty_name": "Custom Property",

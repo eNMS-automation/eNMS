@@ -72,9 +72,11 @@ class Environment:
                 if event.event_type == 'deleted':
                     file = db.fetch(filetype, path=event.src_path)
                     file.status = "Deleted"
+                    db.session.commit()
                 elif event.event_type == 'created':
                     file = db.factory(filetype, path=event.src_path)
-                self.log("info", f"File {file} {event.event_type}")
+                log = f"File {event.src_path} {event.event_type} (watchdog)."
+                env.log("info", log, change_log=True)
         event_handler = Handler()
         observer = Observer()
         observer.schedule(event_handler, path=self.file_path, recursive=True)

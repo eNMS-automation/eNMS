@@ -183,9 +183,9 @@ class File(AbstractBase):
     def delete(self):
         Path(self.path).unlink()
 
-    def refresh(self, status="OK"):
+    def refresh(self):
         self.last_modified = self.last_updated = ctime()
-        self.status = status
+        self.status = "OK"
 
 
 class Folder(File):

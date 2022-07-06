@@ -649,18 +649,7 @@ class Controller:
 
     def scan_folder(self, path=None):
         env.log("info", "Starting Scan of Files")
-        root_path = vs.settings["paths"]["files"] or str(vs.path / "files")
-        path = root_path if not path else path.replace(">", "/")
-        if path == root_path:
-            files = set(db.fetch_all("file", type="file"))
-        else:
-            files, folder_set = set(), {db.fetch("folder", path=path)}
-            while folder_set:
-                file = folder_set.pop()
-                if file.type == "folder":
-                    folder_set |= set(file.files)
-                else:
-                    files.add(file)
+        path = env.file_path if not path else path.replace(">", "/")
         folders = {Path(path)}
         while folders:
             folder = folders.pop()
@@ -670,7 +659,7 @@ class Controller:
                 folder_object = db.fetch("folder", path=str(folder), allow_none=True)
                 if file.is_dir():
                     folders.add(file)
-                files.discard(db.factory(
+                db.factory(
                     "folder" if file.is_dir() else "file",
                     filename=file.name,
                     last_modified=ctime(getmtime(str(file))),
@@ -680,10 +669,8 @@ class Controller:
                     path=str(file),
                     folder_id=getattr(folder_object, "id", None),
                     folder_path=str(folder),
-                ))
+                )
             db.session.commit()
-        for file in files:
-            file.refresh(status="Not Found")
         env.log("info", "Scan of Files Successful")
 
     def get_tree_files(self, path):

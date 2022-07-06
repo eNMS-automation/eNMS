@@ -21,8 +21,11 @@ from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from smtplib import SMTP
 from sys import path as sys_path
+from threading import Thread
 from traceback import format_exc
 from warnings import warn
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
 
 try:
     from hvac import Client as VaultClient
@@ -56,7 +59,26 @@ class Environment:
         self.init_logs()
         self.init_redis()
         self.init_connection_pools()
+        self.file_path = vs.settings["paths"]["files"] or str(vs.path / "files")
+        main_thread = Thread(target=self.monitor_filesystem)
+        main_thread.daemon = True
+        main_thread.start()
         self.ssh_port = -1
+
+    def monitor_filesystem(self):
+        class Handler(FileSystemEventHandler):
+            def on_any_event(self, event):
+                filetype = "folder" if event.is_directory else "file"
+                if event.event_type == 'deleted':
+                    file = db.fetch(filetype, path=event.src_path)
+                    file.status = "Deleted"
+                elif event.event_type == 'created':
+                    file = db.factory(filetype, path=event.src_path)
+                self.log("info", f"File {file} {event.event_type}")
+        event_handler = Handler()
+        observer = Observer()
+        observer.schedule(event_handler, path=self.file_path, recursive=True)
+        observer.start()
 
     def authenticate_user(self, **kwargs):
         name, password = kwargs["username"], kwargs["password"]

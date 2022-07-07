@@ -179,8 +179,11 @@ class Environment:
 
     def init_redis(self):
         host = getenv("REDIS_ADDR")
-        self.redis_queue = Redis(host=host, **vs.settings["redis"]) if host else None
-        self.redis_queue.flushdb()
+        if not host:
+            self.redis_queue = None
+        else:
+            self.redis_queue = Redis(host=host, **vs.settings["redis"])
+            self.redis_queue.flushdb()
 
     def init_vault_client(self):
         url = getenv("VAULT_ADDR", "http://127.0.0.1:8200")

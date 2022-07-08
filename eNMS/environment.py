@@ -69,14 +69,17 @@ class Environment:
         class Handler(FileSystemEventHandler):
             def on_any_event(self, event):
                 filetype = "folder" if event.is_directory else "file"
-                if event.event_type == 'deleted':
+                if event.event_type in ("deleted", "modified"):
                     file = db.fetch(filetype, path=event.src_path)
-                    file.status = "Deleted"
-                    db.session.commit()
                 elif event.event_type == 'created':
-                    file = db.factory(filetype, path=event.src_path)
+                    file = db.factory(filetype, name=event.src_path.replace("/", ">"), path=event.src_path)
+                else:
+                    return
+                file.refresh()
+                file.status = event.event_type.capitalize()
                 log = f"File {event.src_path} {event.event_type} (watchdog)."
                 env.log("info", log, change_log=True)
+                db.session.commit()
         event_handler = Handler()
         observer = Observer()
         observer.schedule(event_handler, path=self.file_path, recursive=True)

@@ -71,8 +71,12 @@ class Environment:
                 filetype = "folder" if event.is_directory else "file"
                 if event.event_type in ("deleted", "modified"):
                     file = db.fetch(filetype, path=event.src_path)
-                elif event.event_type == 'created':
-                    file = db.factory(filetype, name=event.src_path.replace("/", ">"), path=event.src_path)
+                elif event.event_type == "created":
+                    file = db.factory(
+                        filetype,
+                        name=event.src_path.replace("/", ">"),
+                        path=event.src_path,
+                    )
                 else:
                     return
                 file.refresh()
@@ -80,6 +84,7 @@ class Environment:
                 log = f"File {event.src_path} {event.event_type} (watchdog)."
                 env.log("info", log, change_log=True)
                 db.session.commit()
+
         event_handler = Handler()
         observer = Observer()
         observer.schedule(event_handler, path=self.file_path, recursive=True)

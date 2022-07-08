@@ -13,6 +13,7 @@ from logging.config import dictConfig
 from logging import getLogger, info
 from os import getenv, getpid
 from passlib.hash import argon2
+from pathlib import Path
 from psutil import cpu_percent, virtual_memory
 from redis import Redis
 from redis.exceptions import ConnectionError, TimeoutError
@@ -72,10 +73,18 @@ class Environment:
                 if event.event_type in ("deleted", "modified"):
                     file = db.fetch(filetype, path=event.src_path)
                 elif event.event_type == "created":
+                    parent_folder = db.fetch(
+                        "folder",
+                        path=str(Path(event.src_path).parent),
+                        allow_none=True,
+                    )
                     file = db.factory(
                         filetype,
+                        filename=event.src_path.split("/")[-1],
                         name=event.src_path.replace("/", ">"),
                         path=event.src_path,
+                        folder=parent_folder.id,
+                        folder_path=parent_folder.path,
                     )
                 else:
                     return

@@ -32,7 +32,7 @@ function install() {
     sudo mysql -u root --password=password -e 'set global max_connections = 2000;'
     # to change auth_plugin to mysql_native_password and set password to root:
     # sudo mysql
-    # ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+    # ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
   elif [ "$install" = "postgresql" ]; then
     sudo apt-get install -y postgresql libpq-dev postgresql-client
     sudo pip3 install psycopg2

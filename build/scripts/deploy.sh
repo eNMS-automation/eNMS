@@ -26,10 +26,13 @@ function install() {
     # export VAULT_TOKEN=token
     # vault secrets enable -version=1 -path=secret kv
   elif [ "$install" = "mysql" ]; then
-    sudo apt install -y $install-server python3-mysqldb
+    sudo apt install -y mysql-server libmysqlclient-dev python3-mysqldb
     sudo pip3 install mysqlclient
-    sudo $install -u root --password=password -e 'CREATE DATABASE enms;'
-    sudo $install -u root --password=password -e 'set global max_connections = 2000;'
+    sudo mysql -u root --password=password -e 'CREATE DATABASE enms;'
+    sudo mysql -u root --password=password -e 'set global max_connections = 2000;'
+    # to change auth_plugin to mysql_native_password and set password to root:
+    # sudo mysql
+    # ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
   elif [ "$install" = "postgresql" ]; then
     sudo apt-get install -y postgresql libpq-dev postgresql-client
     sudo pip3 install psycopg2

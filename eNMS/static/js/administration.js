@@ -217,6 +217,10 @@ function editFile(filename, filepath) {
   call({
     url: `/edit_file/${filename}`,
     callback: function (content) {
+      if (content.error) {
+        refreshTable("file");
+        return notify(content.error, "error", 5);
+      }
       openPanel({
         name: "file_editor",
         title: `Edit ${filepath}`,

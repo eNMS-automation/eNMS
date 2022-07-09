@@ -308,6 +308,11 @@ class Controller:
         try:
             with open(Path(filepath.replace(">", "/"))) as file:
                 return file.read()
+        except FileNotFoundError:
+            file = db.fetch("file", path=filepath.replace(">", "/"), allow_none=True)
+            if file:
+                file.status = "Not Found"
+            return {"error": "File not found on disk."}
         except UnicodeDecodeError:
             return {"error": "Cannot read file (unsupported type)."}
 

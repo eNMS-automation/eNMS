@@ -80,11 +80,8 @@ class Environment:
                     )
                     file = db.factory(
                         filetype,
-                        filename=event.src_path.split("/")[-1],
-                        name=event.src_path.replace("/", ">"),
                         path=event.src_path,
                         folder=parent_folder.id,
-                        folder_path=parent_folder.path,
                     )
                 else:
                     return

@@ -183,6 +183,12 @@ class File(AbstractBase):
     def delete(self):
         Path(self.path).unlink()
 
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        self.name = self.path.replace("/", ">")
+        *split_folder_path, self.filename = self.path.split("/")
+        self.folder_path = "/".join(split_folder_path)
+
     def refresh(self):
         self.last_modified = self.last_updated = ctime()
         self.status = "OK"

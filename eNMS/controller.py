@@ -661,14 +661,11 @@ class Controller:
                     folders.add(file)
                 db.factory(
                     "folder" if file.is_dir() else "file",
-                    filename=file.name,
                     last_modified=ctime(getmtime(str(file))),
                     last_updated=ctime(),
                     status="OK",
-                    name=str(file).replace("/", ">"),
                     path=str(file),
                     folder_id=getattr(folder_object, "id", None),
-                    folder_path=str(folder),
                 )
             db.session.commit()
         env.log("info", "Scan of Files Successful")
@@ -1381,11 +1378,8 @@ class Controller:
         filepath = f"{kwargs['folder']}/{file.filename}"
         file_object = db.factory(
             "file",
-            filename=file.filename,
-            name=filepath.replace("/", ">"),
             path=filepath,
             folder_id=getattr(folder, "id", None),
-            folder_path=kwargs["folder"],
         )
         file_object.refresh()
         file.save(filepath)

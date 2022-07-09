@@ -72,10 +72,12 @@ class Environment:
             def on_any_event(self, event):
                 filetype = "folder" if event.is_directory else "file"
                 if event.event_type in ("deleted", "modified"):
-                    file = db.fetch(filetype, path=event.src_path)
+                    file = db.fetch(filetype, path=event.src_path, allow_none=True)
                 elif event.event_type == "created":
                     file = db.factory(filetype, path=event.src_path)
                 else:
+                    return
+                if not file:
                     return
                 file.status = event.event_type.capitalize()
                 log = f"File {event.src_path} {event.event_type} (watchdog)."

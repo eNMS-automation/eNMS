@@ -1,5 +1,6 @@
 from flask_login import UserMixin
 from itertools import chain
+from os.path import getmtime
 from passlib.hash import argon2
 from pathlib import Path
 from shutil import rmtree
@@ -188,10 +189,9 @@ class File(AbstractBase):
         self.name = self.path.replace("/", ">")
         *split_folder_path, self.filename = self.path.split("/")
         self.folder_path = "/".join(split_folder_path)
-
-    def refresh(self):
-        self.last_modified = self.last_updated = ctime()
-        self.status = "OK"
+        self.last_modified = ctime(getmtime(self.path))
+        self.last_updated = ctime()
+        self.status = "Updated"
 
 
 class Folder(File):

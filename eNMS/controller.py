@@ -661,9 +661,6 @@ class Controller:
                     folders.add(file)
                 db.factory(
                     "folder" if file.is_dir() else "file",
-                    last_modified=ctime(getmtime(str(file))),
-                    last_updated=ctime(),
-                    status="OK",
                     path=str(file),
                     folder_id=getattr(folder_object, "id", None),
                 )
@@ -1377,8 +1374,7 @@ class Controller:
         folder = db.fetch("folder", path=kwargs["folder"], allow_none=True)
         folder_id = getattr(folder, "id", None)
         filepath = f"{kwargs['folder']}/{file.filename}"
-        file_object = db.factory("file", path=filepath, folder_id=folder_id)
-        file_object.refresh()
+        db.factory("file", path=filepath, folder_id=folder_id)
         file.save(filepath)
 
     def update_pool(self, pool_id):

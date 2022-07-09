@@ -1375,12 +1375,9 @@ class Controller:
     def upload_files(self, **kwargs):
         file = kwargs["file"]
         folder = db.fetch("folder", path=kwargs["folder"], allow_none=True)
+        folder_id = getattr(folder, "id", None)
         filepath = f"{kwargs['folder']}/{file.filename}"
-        file_object = db.factory(
-            "file",
-            path=filepath,
-            folder_id=getattr(folder, "id", None),
-        )
+        file_object = db.factory("file", path=filepath, folder_id=folder_id)
         file_object.refresh()
         file.save(filepath)
 

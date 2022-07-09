@@ -78,11 +78,8 @@ class Environment:
                         path=str(Path(event.src_path).parent),
                         allow_none=True,
                     )
-                    file = db.factory(
-                        filetype,
-                        path=event.src_path,
-                        folder=parent_folder.id,
-                    )
+                    folder_id = getattr(parent_folder, "id", None)
+                    file = db.factory(filetype, path=event.src_path, folder=folder_id)
                 else:
                     return
                 file.refresh()

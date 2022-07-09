@@ -21,6 +21,7 @@ from requests import Session as RequestSession
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from smtplib import SMTP
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import StaleDataError
 from sys import path as sys_path
 from threading import Thread
@@ -86,7 +87,7 @@ class Environment:
                 env.log("info", log, change_log=True)
                 try:
                     db.session.commit()
-                except StaleDataError:
+                except (StaleDataError, IntegrityError):
                     db.session.rollback()
 
         event_handler = Handler()

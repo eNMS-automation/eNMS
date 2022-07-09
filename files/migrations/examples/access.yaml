@@ -59,7 +59,6 @@
     /stop_run, /scheduler_action, /task_action, /topology_import, /update, /update_pool,
     /update_all_pools, /upload_files, /view_filtering, /web_connection]
   type: access
-  upper_menu: [Files]
   user_pools: [Non-admin user pool (admin)]
 - access_pools: [Links 0 through 5 - Non-public pool - Access set up]
   access_type: "['Read', 'Edit']"
@@ -71,7 +70,6 @@
   pages: []
   post_requests: []
   type: access
-  upper_menu: []
   user_pools: [User ny]
 - access_pools: [Everything]
   access_type: "['Read']"
@@ -91,7 +89,6 @@
     /get_result, /get_view_topology, /get_service_state, /get_tree_files, /get_workflow_results,
     /get_workflow_services, /get_instance_tree, /search_workflow_services, /view_filtering]
   type: access
-  upper_menu: [Files]
   user_pools: [Read-only users]
 - access_pools: [Datacenter New York]
   access_type: "['Read', 'Connect', 'Use as target']"
@@ -103,7 +100,6 @@
   pages: []
   post_requests: []
   type: access
-  upper_menu: []
   user_pools: [User ny]
 - access_pools: []
   access_type: '[]'
@@ -165,7 +161,6 @@
     /stop_run, /scheduler_action, /task_action, /topology_import, /update, /update_pool,
     /update_all_pools, /upload_files, /view_filtering, /web_connection]
   type: access
-  upper_menu: [Files]
   user_pools: [Users with UI access]
 - access_pools: [USA services]
   access_type: "['Read', 'Edit', 'Run', 'Schedule', 'Connect', 'Use as target']"
@@ -177,7 +172,6 @@
   pages: []
   post_requests: []
   type: access
-  upper_menu: []
   user_pools: [Users with UI access]
 - access_pools: [Services for access by user ny]
   access_type: "['Read', 'Run']"
@@ -191,7 +185,6 @@
   pages: []
   post_requests: []
   type: access
-  upper_menu: []
   user_pools: [User ny]
 - access_pools: [Everything]
   access_type: "['Read', 'Edit', 'Run', 'Schedule', 'Connect', 'Use as target']"
@@ -254,5 +247,4 @@
     /task_action, /topology_import, /update, /update_pool, /update_all_pools, /upload_files,
     /view_filtering, /web_connection, /process_form_data]
   type: access
-  upper_menu: [Files]
   user_pools: [Nconfig user]

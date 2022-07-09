@@ -247,10 +247,6 @@ function saveFile(file) {
   });
 }
 
-function createNewFolder() {
-  notify("Not implemented yet.", "error", 5);
-}
-
 function showFileUploadPanel(folder) {
   if (!folder) folder = folderPath;
   const path = folder.replace(/\//g, ">");
@@ -280,19 +276,6 @@ function displayFiles() {
     name: "files",
     title: "Files",
     content: `
-      <nav
-        class="navbar navbar-default nav-controls"
-        role="navigation"
-        style="margin-top: 5px;"
-      >
-        <button
-          type="button"
-          class="btn btn-primary"
-          onclick="eNMS.administration.createNewFolder()"
-        >
-          <span class="glyphicon glyphicon-folder-open"></span>
-        </button>
-      </nav>
       <div id="files-tree" style="height: 500px;"></div>`,
     callback: function () {
       $("#files-tree").jstree({
@@ -340,19 +323,6 @@ function displayFiles() {
                   </button>
                 </div>
               `);
-            } else {
-              $(el).find("a").append(`
-                <div style="position: absolute; top: 0px; right: 50px">
-                  <button type="button"
-                    class="btn btn-xs btn-primary"
-                    onclick="eNMS.administration.showFileUploadPanel(
-                      '${node.data.path}'
-                    )"
-                  >
-                    <span class="glyphicon glyphicon-plus"></span>
-                  </button>
-                </div>
-                `);
             }
           },
         },
@@ -415,7 +385,6 @@ export function showCredentialPanel(id) {
 }
 
 configureNamespace("administration", [
-  createNewFolder,
   databaseDeletion,
   displayFiles,
   editFile,

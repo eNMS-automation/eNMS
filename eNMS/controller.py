@@ -658,6 +658,8 @@ class Controller:
                     continue
                 if file.is_dir():
                     folders.add(file)
+                if db.fetch("file", path=str(file), allow_none=True):
+                    continue
                 db.factory("folder" if file.is_dir() else "file", path=str(file))
             db.session.commit()
         env.log("info", "Scan of Files Successful")

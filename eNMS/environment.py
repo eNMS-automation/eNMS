@@ -71,8 +71,10 @@ class Environment:
         class Handler(FileSystemEventHandler):
             def on_any_event(self, event):
                 filetype = "folder" if event.is_directory else "file"
-                if event.event_type in ("deleted", "modified"):
+                if event.event_type in ("deleted", "modified", "moved"):
                     file = db.fetch(filetype, path=event.src_path, allow_none=True)
+                    if event.event_type == "moved":
+                        file.update(path=event.dest_path)
                 elif event.event_type == "created":
                     file = db.factory(filetype, path=event.src_path)
                 else:

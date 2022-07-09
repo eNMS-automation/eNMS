@@ -271,40 +271,6 @@ function showFileUploadPanel(folder) {
   });
 }
 
-function displayFiles() {
-  openPanel({
-    name: "files",
-    title: "Files",
-    content: `
-      <div id="files-tree" style="height: 500px;"></div>`,
-    callback: function () {
-      $("#files-tree").jstree({
-        core: {
-          animation: 200,
-          themes: { stripes: true, variant: "large" },
-          check_callback: true,
-          data: {
-            url: function (node) {
-              const path = node.id == "#" ? "root" : node.data.path;
-              return `/get_tree_files/${path.replace(/\//g, ">")}`;
-            },
-            type: "POST",
-          },
-        },
-        plugins: ["html_row", "state", "types", "wholerow"],
-        types: {
-          file: {
-            icon: "jstree-icon jstree-file",
-          },
-        },
-      });
-      $("#files-tree").on("ready.jstree", function () {
-        $(this).off("click.jstree", ".jstree-anchor");
-      });
-    },
-  });
-}
-
 function showProfile() {
   openPanel({
     name: "profile",
@@ -357,7 +323,6 @@ export function showCredentialPanel(id) {
 
 configureNamespace("administration", [
   databaseDeletion,
-  displayFiles,
   editFile,
   enterFolder,
   enterUpwardFolder,

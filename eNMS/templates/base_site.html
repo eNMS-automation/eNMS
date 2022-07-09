@@ -247,21 +247,7 @@
                     &nbsp;Docs
                   </a>
                 </li>
-                {% if user.is_admin or "Files" in user.upper_menu %}
-                <li class="nav-item">
-                  <a
-                    onclick="eNMS.administration.displayFiles()"
-                    style="cursor: pointer;"
-                  >
-                    <img
-                      src="{{ url_for('static', filename='img/files.png') }}"
-                      height="25"
-                      width="25"
-                    />
-                    &nbsp;Files
-                  </a>
-                </li>
-                {% endif %} {% if user.is_admin %}
+                {% if user.is_admin %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.administration.showSettings()"

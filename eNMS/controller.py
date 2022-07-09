@@ -1370,12 +1370,7 @@ class Controller:
         db.session.commit()
 
     def upload_files(self, **kwargs):
-        file = kwargs["file"]
-        folder = db.fetch("folder", path=kwargs["folder"], allow_none=True)
-        folder_id = getattr(folder, "id", None)
-        filepath = f"{kwargs['folder']}/{file.filename}"
-        db.factory("file", path=filepath, folder_id=folder_id)
-        file.save(filepath)
+        kwargs["file"].save(f"{kwargs['folder']}/{kwargs['file'].filename}")
 
     def update_pool(self, pool_id):
         db.fetch("pool", id=int(pool_id), rbac="edit").compute_pool()

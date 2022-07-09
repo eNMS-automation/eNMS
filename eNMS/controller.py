@@ -276,9 +276,6 @@ class Controller:
     def database_deletion(self, **kwargs):
         db.delete_all(*kwargs["deletion_types"])
 
-    def delete_file(self, filepath):
-        remove(Path(filepath.replace(">", "/")))
-
     def delete_instance(self, model, instance_id):
         return db.delete(model, id=instance_id)
 

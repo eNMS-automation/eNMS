@@ -249,8 +249,7 @@ class FormFactory:
                 keys = (
                     "get_requests",
                     "post_requests",
-                    "delete_requests",
-                    "upper_menu",
+                    "delete_requests"
                 )
                 for key in keys:
                     values = [(k, k) for k, v in vs.rbac[key].items() if v == "access"]

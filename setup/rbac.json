@@ -107,11 +107,6 @@
       }
     }
   },
-  "upper_menu": {
-    "Admin": "admin",
-    "Settings": "admin",
-    "Files": "access"
-  },
   "delete_requests": {
     "/rest/instance": "access"
   },

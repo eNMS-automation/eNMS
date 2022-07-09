@@ -21,6 +21,7 @@ from requests import Session as RequestSession
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from smtplib import SMTP
+from sqlalchemy.orm.exc import StaleDataError
 from sys import path as sys_path
 from threading import Thread
 from traceback import format_exc
@@ -79,7 +80,10 @@ class Environment:
                 file.status = event.event_type.capitalize()
                 log = f"File {event.src_path} {event.event_type} (watchdog)."
                 env.log("info", log, change_log=True)
-                db.session.commit()
+                try:
+                    db.session.commit()
+                except StaleDataError:
+                    db.session.rollback()
 
         event_handler = Handler()
         observer = Observer()

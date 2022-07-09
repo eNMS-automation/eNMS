@@ -275,6 +275,7 @@ function showFileUploadPanel(folder) {
         dropzone.processQueue();
         notify("Files successfully uploaded.", "success", 5, true);
         $(`[id="upload_files-${path}"]`).remove();
+        setTimeout(() => refreshTable("file"), 200);
       });
     },
   });

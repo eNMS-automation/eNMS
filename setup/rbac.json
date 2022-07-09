@@ -211,7 +211,6 @@
     "/get_session_log": "admin",
     "/get_network_state": "access",
     "/get_top_level_instances": "access",
-    "/get_tree_files": "access",
     "/get_visualization_pools": "access",
     "/get_workflow_results": "access",
     "/get_workflow_services": "access",

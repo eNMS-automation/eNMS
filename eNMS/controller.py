@@ -666,26 +666,6 @@ class Controller:
             db.session.commit()
         env.log("info", "Scan of Files Successful")
 
-    def get_tree_files(self, path):
-        if path == "root":
-            path = vs.settings["paths"]["files"] or vs.path / "files"
-        else:
-            path = path.replace(">", "/")
-        return [
-            {
-                "a_attr": {"style": "width: 100%"},
-                "data": {
-                    "modified": ctime(getmtime(str(file))),
-                    "path": str(file),
-                    "name": file.name,
-                },
-                "text": file.name,
-                "children": file.is_dir(),
-                "type": "folder" if file.is_dir() else "file",
-            }
-            for file in Path(path).iterdir()
-        ]
-
     def get_visualization_pools(self, view):
         has_device = vs.models["pool"].devices.any()
         has_link = vs.models["pool"].links.any()

@@ -189,11 +189,7 @@ class File(AbstractBase):
         self.name = self.path.replace("/", ">")
         *split_folder_path, self.filename = self.path.split("/")
         self.folder_path = "/".join(split_folder_path)
-        self.folder = db.fetch(
-            "folder",
-            path=self.folder_path,
-            allow_none=True,
-        )
+        self.folder = db.fetch("folder", path=self.folder_path, allow_none=True)
         self.last_modified = ctime(getmtime(self.path))
         self.last_updated = ctime()
         self.status = "Updated"

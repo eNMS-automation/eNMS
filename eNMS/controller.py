@@ -658,10 +658,7 @@ class Controller:
                     continue
                 if file.is_dir():
                     folders.add(file)
-                db.factory(
-                    "folder" if file.is_dir() else "file",
-                    path=str(file)
-                )
+                db.factory("folder" if file.is_dir() else "file", path=str(file))
             db.session.commit()
         env.log("info", "Scan of Files Successful")
 

@@ -203,16 +203,6 @@ function scanCluster() {
   });
 }
 
-function deleteFile(file) {
-  call({
-    url: `/delete_file/${file.data.path.replace(/\//g, ">")}`,
-    callback: function () {
-      $("#files-tree").jstree().delete_node(file.id);
-      notify(`File ${file.data.name} successfully deleted.`, "success", 5, true);
-    },
-  });
-}
-
 function editFile(filename, filepath) {
   call({
     url: `/edit_file/${filename}`,
@@ -427,7 +417,6 @@ export function showCredentialPanel(id) {
 configureNamespace("administration", [
   createNewFolder,
   databaseDeletion,
-  deleteFile,
   displayFiles,
   editFile,
   enterFolder,

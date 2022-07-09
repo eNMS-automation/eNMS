@@ -73,13 +73,7 @@ class Environment:
                 if event.event_type in ("deleted", "modified"):
                     file = db.fetch(filetype, path=event.src_path)
                 elif event.event_type == "created":
-                    parent_folder = db.fetch(
-                        "folder",
-                        path=str(Path(event.src_path).parent),
-                        allow_none=True,
-                    )
-                    folder_id = getattr(parent_folder, "id", None)
-                    file = db.factory(filetype, path=event.src_path, folder=folder_id)
+                    file = db.factory(filetype, path=event.src_path)
                 else:
                     return
                 file.status = event.event_type.capitalize()

@@ -656,13 +656,11 @@ class Controller:
             for file in folder.iterdir():
                 if file.suffix in vs.settings["files"]["ignored_types"]:
                     continue
-                folder_object = db.fetch("folder", path=str(folder), allow_none=True)
                 if file.is_dir():
                     folders.add(file)
                 db.factory(
                     "folder" if file.is_dir() else "file",
-                    path=str(file),
-                    folder_id=getattr(folder_object, "id", None),
+                    path=str(file)
                 )
             db.session.commit()
         env.log("info", "Scan of Files Successful")

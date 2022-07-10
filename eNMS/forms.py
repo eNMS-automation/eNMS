@@ -447,12 +447,12 @@ class ExcelImportForm(BaseForm):
 
 
 class FileForm(BaseForm):
-    action = "eNMS.base.processData"
+    action = "eNMS.administration.processFileData"
     template = "object"
     form_type = HiddenField(default="file")
     id = HiddenField()
-    name = StringField("Name")
-    filename = StringField("Filename", render_kw={"readonly": True})
+    filename = StringField("Filename")
+    name = StringField("Name", render_kw={"readonly": True})
     path = StringField("Path", render_kw={"readonly": True})
     last_modified = StringField("Last Modified", render_kw={"readonly": True})
     last_updated = StringField("Last Updated", render_kw={"readonly": True})

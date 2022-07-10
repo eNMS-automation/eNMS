@@ -321,6 +321,17 @@ export function showCredentialPanel(id) {
     .trigger("change");
 }
 
+function processFileData() {
+  $("#file-path").val(`${folderPath}/${$("#file-filename").val()}`);
+  call({
+    url: "/process_file_data",
+    form: "file-form",
+    callback: (instance) => {
+      notify(`File ${instance.filename} created`, "success", 5, true);
+    },
+  });
+}
+
 configureNamespace("administration", [
   databaseDeletion,
   editFile,
@@ -330,6 +341,7 @@ configureNamespace("administration", [
   getGitContent,
   migrationsExport,
   migrationsImport,
+  processFileData,
   resultLogDeletion,
   runDebugCode,
   saveSettings,

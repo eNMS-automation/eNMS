@@ -700,6 +700,9 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
           $(`#${type}-workflows`).val(instance.name).trigger("change");
         }
         if (page == "network_builder") updateNetworkPanel(type);
+        if (["file", "folder"].includes(type)) {
+          $(`#${type}-action-btn`).attr("onclick", `eNMS.administration.processFileData("${type}")`);
+        }
       }
       if (isService) loadScript(`../static/js/services/${type}.js`, id);
       const property = isService ? "scoped_name" : "name";

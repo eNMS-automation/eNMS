@@ -30,12 +30,15 @@ Version 4.3.0
 - New Files Management System
   * defined via settings / paths / files (default: eNMS / files folder)
   * files are automatically scanned when starting the application, and can be rescanned via the UI
-  * files have a "Status" property showing whether they exist on the filesystem (updated when scanned)
+  * files have a "Status" property showing the last action (updated, moved, deleted, etc)
   * last_modified is the unix last modified timestamp
-  * last_updated shows the last time the file was scanned by eNMS
   * files can be displayed hierarchically or flat in the table (default: hierarchical display)
   * both files and folder can be exported to browser; folders are compressed as tgz before export
   * new files can be uploaded to any folder from the UI
+  * watchdog is used to keep track of all files change done outside of the app
+- redis config in settings.json moved to the inner key "redis" > "config
+- redis new option in settings.json > "redis" > "flush_on_restart": flush redis queue when the app restarts.
+
 
 Migration
 - dashboard is now controlled by RBAC: dashboard access must be explicitly granted via access pages, GET and

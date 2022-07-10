@@ -321,11 +321,6 @@ export function showCredentialPanel(id) {
     .trigger("change");
 }
 
-export function showFilePanel(id) {
-  if (id) return;
-  $("#file-path").val(folderPath);
-}
-
 configureNamespace("administration", [
   databaseDeletion,
   editFile,

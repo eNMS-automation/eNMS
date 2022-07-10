@@ -3,6 +3,7 @@ from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from importlib.util import module_from_spec, spec_from_file_location
+from os.path import exists
 from traceback import format_exc
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
@@ -10,6 +11,7 @@ from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
+from eNMS.environment import env
 from eNMS.fields import (
     BooleanField,
     HiddenField,
@@ -458,6 +460,15 @@ class FileForm(BaseForm):
     last_updated = StringField("Last Updated", render_kw={"readonly": True})
     status = StringField("Status", render_kw={"readonly": True})
 
+    def validate(self):
+        valid_form = super().validate()
+        path_already_used = exists(self.path.data)
+        if path_already_used:
+            self.path.errors.append("There is already a file at the specified path.")
+        out_of_scope_path = not self.path.data.startswith(env.file_path)
+        if out_of_scope_path:
+            self.path.errors.append(f"The path must be in the {env.file_path} directory.")
+        return valid_form and not any([path_already_used, out_of_scope_path])
 
 class FolderForm(FileForm):
     form_type = HiddenField(default="folder")

@@ -1,6 +1,6 @@
 from flask_login import UserMixin
 from itertools import chain
-from os.path import getmtime
+from os.path import exists, getmtime
 from passlib.hash import argon2
 from pathlib import Path
 from shutil import move, rmtree
@@ -185,7 +185,7 @@ class File(AbstractBase):
     def update(self, move_file=True, **kwargs):
         old_path = self.path
         super().update(**kwargs)
-        if old_path and move_file:
+        if exists(str(old_path)) and not exists(self.path) and move_file:
             move(old_path, self.path)
         self.name = self.path.replace("/", ">")
         *split_folder_path, self.filename = self.path.split("/")

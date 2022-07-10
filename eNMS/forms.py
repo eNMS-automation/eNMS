@@ -459,6 +459,10 @@ class FileForm(BaseForm):
     status = StringField("Status", render_kw={"readonly": True})
 
 
+class FolderForm(FileForm):
+    form_type = HiddenField(default="folder")
+
+
 class FileEditorForm(BaseForm):
     template = "file_editor"
     form_type = HiddenField(default="file_editor")

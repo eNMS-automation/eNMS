@@ -10,7 +10,7 @@ from ipaddress import IPv4Network
 from json import dump, load
 from logging import info
 from operator import attrgetter, itemgetter
-from os import getenv, listdir, makedirs, remove, scandir
+from os import getenv, listdir, makedirs, scandir
 from os.path import exists, getmtime
 from pathlib import Path
 from re import compile, error as regex_error, search, sub
@@ -1011,6 +1011,12 @@ class Controller:
                     relation["model"], name=instance[property]
                 ).id
         return instance
+
+    def process_file_data(self, **kwargs):
+        if kwargs["form_type"] == "folder":
+            makedirs(kwargs["path"])
+        else:
+            open(kwargs["path"], "a").close()
 
     def remove_instance(self, **kwargs):
         instance = db.fetch(kwargs["instance"]["type"], id=kwargs["instance"]["id"])

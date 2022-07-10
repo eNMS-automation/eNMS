@@ -13,6 +13,7 @@ import {
   notify,
   openPanel,
   processInstance,
+  showInstancePanel,
 } from "./base.js";
 import { refreshTable } from "./table.js";
 
@@ -321,13 +322,20 @@ export function showCredentialPanel(id) {
     .trigger("change");
 }
 
+function openFilePanel() {
+  showInstancePanel($("#file-type-list").val());
+}
+
 function processFileData() {
-  $("#file-path").val(`${folderPath}/${$("#file-filename").val()}`);
+  const type = $("#file-type-list").val();
+  const filename = $(`#${type}-filename`).val();
+  $(`#${type}-path`).val(`${folderPath}/${filename}`);
   call({
     url: "/process_file_data",
-    form: "file-form",
-    callback: (instance) => {
-      notify(`File ${instance.filename} created`, "success", 5, true);
+    form: `${type}-form`,
+    callback: () => {
+      $(`#${type}`).remove();
+      notify(`${type.toUpperCase()} ${filename} created.`, "success", 5, true);
     },
   });
 }
@@ -341,6 +349,7 @@ configureNamespace("administration", [
   getGitContent,
   migrationsExport,
   migrationsImport,
+  openFilePanel,
   processFileData,
   resultLogDeletion,
   runDebugCode,

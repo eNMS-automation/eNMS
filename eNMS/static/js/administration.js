@@ -266,7 +266,7 @@ function showFileUploadPanel(folder) {
         dropzone.processQueue();
         notify("Files successfully uploaded.", "success", 5, true);
         $(`[id="upload_files-${path}"]`).remove();
-        setTimeout(() => refreshTable("file"), 200);
+        setTimeout(() => refreshTable("file"), 600);
       });
     },
   });
@@ -335,7 +335,8 @@ function processFileData() {
     form: `${type}-form`,
     callback: () => {
       $(`#${type}`).remove();
-      notify(`${type.toUpperCase()} ${filename} created.`, "success", 5, true);
+      setTimeout(() => refreshTable("file"), 600);
+      notify(`${type.toUpperCase()} '${filename}' created.`, "success", 5, true);
     },
   });
 }

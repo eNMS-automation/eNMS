@@ -39,7 +39,6 @@ Version 4.3.0
 - redis config in settings.json moved to the inner key "redis" > "config
 - redis new option in settings.json > "redis" > "flush_on_restart": flush redis queue when the app restarts.
 
-
 Migration
 - dashboard is now controlled by RBAC: dashboard access must be explicitly granted via access pages, GET and
   POST requests.

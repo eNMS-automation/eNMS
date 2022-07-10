@@ -1,5 +1,6 @@
 from flask_login import UserMixin
 from itertools import chain
+from os import mknod
 from os.path import getmtime
 from passlib.hash import argon2
 from pathlib import Path
@@ -163,7 +164,7 @@ class Parameters(AbstractBase):
 
 class File(AbstractBase):
 
-    __tablename__ = type = "file"
+    __tablename__ = type = class_type = "file"
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "file", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
@@ -179,11 +180,18 @@ class File(AbstractBase):
     )
     folder_path = db.Column(db.SmallString)
 
+    def create(self):
+        mknod(self.path)
+
     def delete(self):
         Path(self.path).unlink()
 
     def update(self, **kwargs):
+        if kwargs.get("must_be_new"):
+            kwargs["path"] += f"/{kwargs['name']}"
         super().update(**kwargs)
+        if kwargs.get("must_be_new"):
+            self.create()
         self.name = self.path.replace("/", ">")
         *split_folder_path, self.filename = self.path.split("/")
         self.folder_path = "/".join(split_folder_path)

@@ -1497,6 +1497,18 @@ tables.file = class FileTable extends Table {
       >
         <span class="glyphicon glyphicon-chevron-up"></span>
       </a>`,
+      this.createNewButton(),
+      `
+      <button
+        style="background:transparent; border:none; 
+        color:transparent; width: 200px;"
+        type="button"
+      >
+        <select id="file-type-list" class="form-control">
+          <option value="file">File</option>
+          <option value="folder">Folder</option>
+        </select>
+      </button>`,
       ` <button
         class="btn btn-primary"
         onclick="eNMS.administration.showFileUploadPanel()"
@@ -1600,6 +1612,7 @@ tables.file = class FileTable extends Table {
   postProcessing(...args) {
     let self = this;
     super.postProcessing(...args);
+    $("#file-type-list").selectpicker();
     $("#parent-filtering")
       .selectpicker()
       .on("change", function () {

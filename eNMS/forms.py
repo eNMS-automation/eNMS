@@ -451,9 +451,9 @@ class FileForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="file")
     id = HiddenField()
-    filename = StringField("Filename", [InputRequired()])
+    path = StringField("Path", [InputRequired()])
+    filename = StringField("Filename", render_kw={"readonly": True})
     name = StringField("Name", render_kw={"readonly": True})
-    path = StringField("Path", render_kw={"readonly": True})
     last_modified = StringField("Last Modified", render_kw={"readonly": True})
     last_updated = StringField("Last Updated", render_kw={"readonly": True})
     status = StringField("Status", render_kw={"readonly": True})

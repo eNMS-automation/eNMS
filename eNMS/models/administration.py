@@ -3,7 +3,7 @@ from itertools import chain
 from os.path import getmtime
 from passlib.hash import argon2
 from pathlib import Path
-from shutil import rmtree
+from shutil import move, rmtree
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import deferred, relationship
 from time import ctime
@@ -182,8 +182,11 @@ class File(AbstractBase):
     def delete(self):
         Path(self.path).unlink()
 
-    def update(self, **kwargs):
+    def update(self, move_file=True, **kwargs):
+        old_path = self.path
         super().update(**kwargs)
+        if old_path and move_file:
+            move(old_path, self.path)
         self.name = self.path.replace("/", ">")
         *split_folder_path, self.filename = self.path.split("/")
         self.folder_path = "/".join(split_folder_path)

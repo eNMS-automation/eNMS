@@ -247,6 +247,19 @@
                     &nbsp;Docs
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a
+                    onclick="eNMS.administration.displayFiles()"
+                    style="cursor: pointer;"
+                  >
+                    <img
+                      src="{{ url_for('static', filename='img/files.png') }}"
+                      height="25"
+                      width="25"
+                    />
+                    &nbsp;Files
+                  </a>
+                </li>
                 {% if user.is_admin %}
                 <li class="nav-item">
                   <a

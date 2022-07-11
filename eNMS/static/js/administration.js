@@ -15,25 +15,26 @@ import {
   processInstance,
   showInstancePanel,
 } from "./base.js";
-import { refreshTable, tables } from "./table.js";
+import { refreshTable, tables, tableInstances } from "./table.js";
 
 export const defaultFolder = settings.paths.file || `${applicationPath}/files`;
 export let folderPath = localStorage.getItem("folderPath") || defaultFolder;
 
 function displayFiles() {
+  if (tableInstances["file"]) return notify("The files table is already displayed.", "error", 5);
   openPanel({
     name: "files",
     size: "1000 600",
     content: `
-      <form id="search-form-file-${user.id}" style="margin: 15px">
+      <form id="search-form-file" style="margin: 15px">
         <div id="tooltip-overlay" class="overlay"></div>
         <nav
-          id="controls-file-${user.id}"
+          id="controls-file"
           class="navbar navbar-default nav-controls"
           role="navigation"
         ></nav>
         <table
-          id="table-file-${user.id}"
+          id="table-file"
           style="margin-top: 10px;"
           class="table table-striped table-bordered table-hover"
           cellspacing="0"
@@ -41,9 +42,8 @@ function displayFiles() {
         ></table>
       </form>`,
     title: "Files",
-    id: user.id,
     callback: function () {
-      new tables["file"](user.id);
+      new tables["file"]();
     },
   });
 }

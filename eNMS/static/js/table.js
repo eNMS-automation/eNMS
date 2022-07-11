@@ -1457,8 +1457,9 @@ tables.file = class FileTable extends Table {
   addRow(properties) {
     let row = super.addRow(properties);
     if (row.type == "folder") {
+      console.log(this.id)
       row.filename = `<a href="#" onclick="eNMS.administration.enterFolder
-        ('${row.filename}')">
+        ('${row.filename}', '${this.id}')">
           <span class="glyphicon glyphicon-folder-open" style="margin-left: 8px"></span>
           <b style="margin-left: 6px">${row.filename}</b>
         </a>`;

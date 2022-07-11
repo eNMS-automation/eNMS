@@ -21,7 +21,9 @@ export const defaultFolder = settings.paths.file || `${applicationPath}/files`;
 export let folderPath = localStorage.getItem("folderPath") || defaultFolder;
 
 function displayFiles() {
-  if (tableInstances["file"]) return notify("The files table is already displayed.", "error", 5);
+  if (tableInstances["file"]) {
+    return notify("The files table is already displayed.", "error", 5);
+  }
   openPanel({
     name: "files",
     size: "1000 600",

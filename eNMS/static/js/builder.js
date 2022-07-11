@@ -279,7 +279,7 @@ export function updateBuilderBindings(action) {
     "Vertical Distribution": () => positionNodes("distribute", "vertical"),
     "Zoom In": () => network.zoom(0.2),
     "Zoom Out": () => network.zoom(-0.2),
-    "Export": () => notify("No workflow found.", "error", 5),
+    Export: () => notify("No workflow found.", "error", 5),
     Backward: () => switchTo(history[historyPosition - 1], "left"),
     Forward: () => switchTo(history[historyPosition + 1], "right"),
     Upward: () => {

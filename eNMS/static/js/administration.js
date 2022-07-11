@@ -15,10 +15,37 @@ import {
   processInstance,
   showInstancePanel,
 } from "./base.js";
-import { refreshTable } from "./table.js";
+import { refreshTable, tables } from "./table.js";
 
 export const defaultFolder = settings.paths.file || `${applicationPath}/files`;
 export let folderPath = localStorage.getItem("folderPath") || defaultFolder;
+
+function displayFiles() {
+  openPanel({
+    name: "files",
+    content: `
+      <form id="search-form-file-${user.id}">
+        <div id="tooltip-overlay" class="overlay"></div>
+        <nav
+          id="controls-file-${user.id}"
+          class="navbar navbar-default nav-controls"
+          role="navigation"
+        ></nav>
+        <table
+          id="table-file-${user.id}"
+          style="margin-top: 10px;"
+          class="table table-striped table-bordered table-hover"
+          cellspacing="0"
+          width="100%"
+        ></table>
+      </form>`,
+    title: "Files",
+    id: user.id,
+    callback: function () {
+      new tables["file"](user.id);
+    },
+  });
+}
 
 function saveSettings() {
   const newSettings = jsonEditors.settings.get();
@@ -343,6 +370,7 @@ function processFileData() {
 
 configureNamespace("administration", [
   databaseDeletion,
+  displayFiles,
   editFile,
   enterFolder,
   enterUpwardFolder,

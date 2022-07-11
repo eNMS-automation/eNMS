@@ -23,8 +23,9 @@ export let folderPath = localStorage.getItem("folderPath") || defaultFolder;
 function displayFiles() {
   openPanel({
     name: "files",
+    size: "1000 600",
     content: `
-      <form id="search-form-file-${user.id}">
+      <form id="search-form-file-${user.id}" style="margin: 15px">
         <div id="tooltip-overlay" class="overlay"></div>
         <nav
           id="controls-file-${user.id}"

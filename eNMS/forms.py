@@ -248,11 +248,7 @@ class FormFactory:
 
             @classmethod
             def form_init(cls):
-                keys = (
-                    "get_requests",
-                    "post_requests",
-                    "delete_requests"
-                )
+                keys = ("get_requests", "post_requests", "delete_requests")
                 for key in keys:
                     values = [(k, k) for k, v in vs.rbac[key].items() if v == "access"]
                     field_name = " ".join(key.split("_")).capitalize()
@@ -467,8 +463,11 @@ class FileForm(BaseForm):
             self.path.errors.append("There is already a file at the specified path.")
         out_of_scope_path = not self.path.data.startswith(env.file_path)
         if out_of_scope_path:
-            self.path.errors.append(f"The path must be in the {env.file_path} directory.")
+            self.path.errors.append(
+                f"The path must be in the {env.file_path} directory."
+            )
         return valid_form and not any([path_already_used, out_of_scope_path])
+
 
 class FolderForm(FileForm):
     form_type = HiddenField(default="folder")

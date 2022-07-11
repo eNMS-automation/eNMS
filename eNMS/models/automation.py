@@ -1,5 +1,4 @@
 from copy import deepcopy
-from this import d
 from flask_login import current_user
 from functools import wraps
 from requests import get, post

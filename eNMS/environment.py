@@ -13,7 +13,6 @@ from logging.config import dictConfig
 from logging import getLogger, info
 from os import getenv, getpid
 from passlib.hash import argon2
-from pathlib import Path
 from psutil import cpu_percent, virtual_memory
 from redis import Redis
 from redis.exceptions import ConnectionError, TimeoutError
@@ -210,7 +209,7 @@ class Environment:
         if not self.redis_queue:
             return {"error": "This endpoint requires the use of a Redis queue."}
         workers = defaultdict(lambda: {"jobs": {}, "info": {}})
-        keys = env.redis("keys", f"workers/*")
+        keys = env.redis("keys", "workers/*")
         if not keys:
             return {"error": "No data available in the Redis queue."}
         data = dict(zip(keys, env.redis("mget", *keys)))

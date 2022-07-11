@@ -5,7 +5,7 @@ from passlib.hash import argon2
 from pathlib import Path
 from shutil import move, rmtree
 from sqlalchemy import Boolean, ForeignKey, Integer
-from sqlalchemy.orm import deferred, relationship
+from sqlalchemy.orm import relationship
 from time import ctime
 
 from eNMS.database import db

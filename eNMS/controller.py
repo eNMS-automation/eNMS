@@ -11,7 +11,7 @@ from json import dump, load
 from logging import info
 from operator import attrgetter, itemgetter
 from os import getenv, listdir, makedirs, scandir
-from os.path import exists, getmtime
+from os.path import exists
 from pathlib import Path
 from re import compile, error as regex_error, search, sub
 from requests import get as http_get
@@ -20,10 +20,10 @@ from shutil import rmtree
 from sqlalchemy import and_, or_
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import aliased
+from sqlalchemy.sql.expression import true
 from subprocess import Popen
 from tarfile import open as open_tar
 from threading import Thread
-from time import ctime
 from traceback import format_exc
 from uuid import uuid4
 from xlrd import open_workbook
@@ -640,7 +640,7 @@ class Controller:
         result = defaultdict(list)
         constraints = [~getattr(vs.models[type], f"{type}s").any()]
         if type == "workflow":
-            constraints.append(vs.models[type].shared == True)
+            constraints.append(vs.models[type].shared == true())
         for instance in (
             db.query(type, properties=["id", "category", "name"])
             .filter(or_(*constraints))

@@ -1351,6 +1351,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -1574,6 +1575,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -2481,6 +2483,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -2590,6 +2593,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -2699,6 +2703,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -3185,6 +3190,7 @@
   iteration_devices_property: name
   iteration_values: '["Loopback11","Loopback15"]'
   iteration_variable_name: non_default_iteration_value_name
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -3295,6 +3301,7 @@
   iteration_devices_property: ip_address
   iteration_values: get_var('Interfaces 1', device=device.name)
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -3405,6 +3412,7 @@
   iteration_devices_property: name
   iteration_values: get_var('Interfaces 2')
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -5121,6 +5129,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -5230,6 +5239,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -5340,6 +5350,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -5722,6 +5733,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -6109,6 +6121,7 @@
   iteration_devices_property: name
   iteration_values: get_result("Set Variables for Iteration", device=device.name)["result"]["dict_iteration"]
   iteration_variable_name: command_dict
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -7555,6 +7568,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh 192.168.56.103
   jump_on_connect: true
   jump_password: ''
@@ -7758,6 +7772,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -8232,6 +8247,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   last_modified: '2020-07-15 02:01:30.590001'
   log_level: 1
   mail_recipient: ''
@@ -8325,6 +8341,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   last_modified: '2020-07-19 03:57:12.933011'
   log_level: 1
   mail_recipient: ''
@@ -8418,6 +8435,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   last_modified: '2020-07-15 02:50:17.263309'
   log_level: 1
   mail_recipient: ''
@@ -8511,6 +8529,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   last_modified: '2020-07-19 03:57:21.922089'
   log_level: 1
   mail_recipient: ''
@@ -8707,6 +8726,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -8910,6 +8930,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -9116,6 +9137,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -10481,6 +10503,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -10880,6 +10903,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -11462,6 +11486,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -12716,6 +12741,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -12930,6 +12956,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -15040,6 +15067,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -16220,6 +16248,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -16329,6 +16358,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -16438,6 +16468,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -17001,6 +17032,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -17206,6 +17238,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -17314,6 +17347,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -17422,6 +17456,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -17723,6 +17758,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -19610,6 +19646,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -19814,6 +19851,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -19922,6 +19960,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -20030,6 +20069,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -20138,6 +20178,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -20521,6 +20562,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -20635,6 +20677,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -21393,6 +21436,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -27004,6 +27048,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -27114,6 +27159,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -27224,6 +27270,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -31261,6 +31308,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   last_modified: '2022-05-20 13:52:25.523932'
   log_level: 1
   mail_recipient: ''
@@ -31351,6 +31399,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   last_modified: '2022-05-20 13:52:29.395990'
   log_level: 1
   mail_recipient: ''
@@ -31441,6 +31490,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   last_modified: '2022-05-20 13:52:32.732435'
   log_level: 1
   mail_recipient: ''
@@ -31793,7 +31843,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2022-07-12 14:08:46.777494'
+  last_modified: '2022-07-12 14:17:51.899381'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -31838,7 +31888,7 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  target_devices: []
+  target_devices: [Washington]
   target_pools: []
   time_between_retries: 10
   type: workflow
@@ -31882,6 +31932,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   last_modified: '2022-07-12 13:21:42.260870'
   log_level: 1
   mail_recipient: ''
@@ -31973,6 +32024,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   last_modified: '2022-07-12 13:21:47.190250'
   log_level: 1
   mail_recipient: ''
@@ -32076,11 +32128,12 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: true
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
   jump_username: ''
-  last_modified: '2022-07-12 14:09:34.479427'
+  last_modified: '2022-07-12 14:17:33.873190'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -32184,11 +32237,12 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: true
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
   jump_username: ''
-  last_modified: '2022-07-12 14:09:38.306444'
+  last_modified: '2022-07-12 14:17:38.888655'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false

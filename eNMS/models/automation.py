@@ -315,7 +315,7 @@ class Run(AbstractBase):
     private = True
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    restart_run_id = db.Column(Integer, ForeignKey("run.id", ondelete="cascade"))
+    restart_run_id = db.Column(Integer, ForeignKey("run.id", ondelete="SET NULL"))
     restart_run = relationship(
         "Run", remote_side=[id], foreign_keys="Run.restart_run_id"
     )

@@ -1550,3 +1550,17 @@
   source: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Scrapli Multiple
     Commands (text)', subtype: success, type: workflow_edge, workflow: (R) Scrapli
     and Netmiko Multiple Commands and Jinja2}
+- {color: green, destination: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2]
+    Netmiko Jinja 2 conversion (text)', label: success, name: '2022-07-12 14:08:45.343464',
+  source: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Scrapli Multiple
+    Commands (list)', subtype: success, type: workflow_edge, workflow: (R) Scrapli
+    and Netmiko Multiple Commands and Jinja2}
+- {color: green, destination: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2]
+    Netmiko Jinja 2 conversion (list)', label: success, name: '2022-07-12 14:08:46.048719',
+  source: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Netmiko Jinja 2
+    conversion (text)', subtype: success, type: workflow_edge, workflow: (R) Scrapli
+    and Netmiko Multiple Commands and Jinja2}
+- {color: green, destination: '[Shared] End', label: success, name: '2022-07-12 14:08:46.777494',
+  source: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Netmiko Jinja 2
+    conversion (list)', subtype: success, type: workflow_edge, workflow: (R) Scrapli
+    and Netmiko Multiple Commands and Jinja2}

@@ -1126,7 +1126,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: eos
+  driver: device_driver
   getters: [get_arp_table, get_interfaces]
   impacting: true
   include_device_results: true
@@ -1196,7 +1196,6 @@
   type: napalm_backup_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -1229,7 +1228,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: arista_eos
+  driver: device_driver
   enable_mode: true
   exit_config_mode: true
   fast_cli: true
@@ -1300,7 +1299,6 @@
   type: netmiko_configuration_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -1333,7 +1331,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: arista_eos
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -1418,7 +1416,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -1453,7 +1450,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: arista_eos
+  driver: device_driver
   enable_mode: true
   exit_config_mode: true
   fast_cli: true
@@ -1525,7 +1522,6 @@
   type: netmiko_configuration_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -1558,7 +1554,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: arista_eos
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -1646,7 +1642,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -1794,7 +1789,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: eos
+  driver: device_driver
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -1865,7 +1860,6 @@
   type: napalm_getters_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: dict_included
   validation_section: results['result']
@@ -1893,7 +1887,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: eos
+  driver: device_driver
   getters: [get_interfaces]
   impacting: true
   include_device_results: true
@@ -1964,7 +1958,6 @@
   type: napalm_getters_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: dict_included
   validation_section: results['result']
@@ -2088,7 +2081,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2163,7 +2156,6 @@
   type: netmiko_prompts_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -2197,7 +2189,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2272,7 +2264,6 @@
   type: netmiko_prompts_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -2470,7 +2461,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2545,7 +2536,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -2580,7 +2570,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2655,7 +2645,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -2690,7 +2679,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2766,7 +2755,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -2797,7 +2785,7 @@
     '{{device.ip_address}}': {prefix_length: 24}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: eos
+  driver: device_driver
   getters: [get_interfaces_ip]
   impacting: true
   include_device_results: true
@@ -2884,7 +2872,6 @@
   type: napalm_getters_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: success
   validation_method: dict_included
   validation_section: results['result']
@@ -3178,7 +3165,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: arista_eos
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -3254,7 +3241,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -3289,7 +3275,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: arista_eos
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -3365,7 +3351,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -3400,7 +3385,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: arista_eos
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -3476,7 +3461,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -4484,7 +4468,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -4573,7 +4557,6 @@
   type: netmiko_backup_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -5118,7 +5101,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -5193,7 +5176,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -5228,7 +5210,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -5304,7 +5286,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -5339,7 +5320,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -5414,7 +5395,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -5722,7 +5702,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -5801,7 +5781,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -6110,7 +6089,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -6188,7 +6167,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -7267,7 +7245,6 @@
   type: unix_shell_script_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: false
   validation_condition: success
   validation_method: text
   validation_section: results['result']
@@ -7558,7 +7535,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: 'admin.*:'
@@ -7636,7 +7613,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -7762,7 +7738,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -7833,7 +7809,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -7878,7 +7853,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -7966,7 +7941,6 @@
   type: netmiko_backup_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -8245,7 +8219,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: cisco_iosxe
+  driver: device_driver
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8310,7 +8284,6 @@
   type: scrapli_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -8339,7 +8312,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device_driver
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8404,7 +8377,6 @@
   type: scrapli_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -8433,7 +8405,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: cisco_iosxe
+  driver: device_driver
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8498,7 +8470,6 @@
   type: scrapli_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -8527,7 +8498,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device_driver
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8592,7 +8563,6 @@
   type: scrapli_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -8717,7 +8687,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -8793,7 +8763,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -8921,7 +8890,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -8999,7 +8968,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -9128,7 +9096,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -9204,7 +9172,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -10494,7 +10461,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -10570,7 +10537,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -10894,7 +10860,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -10971,7 +10937,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -11477,7 +11442,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -11553,7 +11518,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -12732,7 +12696,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -12803,7 +12767,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -12947,7 +12910,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -13021,7 +12984,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -15058,7 +15020,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -15133,7 +15095,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -16239,7 +16200,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -16314,7 +16275,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -16349,7 +16309,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -16424,7 +16384,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -16459,7 +16418,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -16534,7 +16493,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -17023,7 +16981,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -17097,7 +17055,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -17131,7 +17088,7 @@
   disable_md5: false
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   fast_cli: false
   file_system: ''
@@ -17197,7 +17154,6 @@
   type: netmiko_file_transfer_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -17230,7 +17186,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -17304,7 +17260,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -17339,7 +17294,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -17413,7 +17368,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -17448,7 +17402,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -17522,7 +17476,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -17750,7 +17703,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -17825,7 +17778,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -19638,7 +19590,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -19712,7 +19664,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -19843,7 +19794,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -19917,7 +19868,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: true
   validation_condition: none
@@ -19952,7 +19902,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -20026,7 +19976,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: true
   validation_condition: none
@@ -20061,7 +20010,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -20135,7 +20084,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: true
   validation_condition: none
@@ -20170,7 +20118,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -20244,7 +20192,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: true
   validation_condition: none
@@ -20366,7 +20313,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: eos
+  driver: device_driver
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -20430,7 +20377,6 @@
   type: napalm_configuration_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -20458,7 +20404,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: eos
+  driver: device_driver
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -20523,7 +20469,6 @@
   type: napalm_rollback_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -20556,7 +20501,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -20636,7 +20581,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -20671,7 +20615,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -20751,7 +20695,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -20901,7 +20844,7 @@
     is_alive: {is_alive: true}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: eos
+  driver: device_driver
   getters: [is_alive]
   impacting: true
   include_device_results: true
@@ -20974,7 +20917,6 @@
   type: napalm_getters_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: success
   validation_method: dict_equal
   validation_section: results['result']
@@ -21002,7 +20944,7 @@
   dict_match: {fqdn: localhost, vendor: Arista}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: eos
+  driver: device_driver
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -21075,7 +21017,6 @@
   type: napalm_getters_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: success
   validation_method: dict_included
   validation_section: results['result']
@@ -21103,7 +21044,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: eos
+  driver: device_driver
   getters: [get_mac_address_table]
   impacting: true
   include_device_results: true
@@ -21176,7 +21117,6 @@
   type: napalm_getters_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: success
   validation_method: dict_equal
   validation_section: results['result']
@@ -21204,7 +21144,7 @@
   dict_match: {fqdn: localhost, uptime: '666', vendor: Arista}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: eos
+  driver: device_driver
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -21277,7 +21217,6 @@
   type: napalm_getters_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: success
   validation_method: dict_included
   validation_section: results['result']
@@ -21434,7 +21373,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: arista_eos
+  driver: device_driver
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -21519,7 +21458,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -27046,7 +26984,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -27122,7 +27060,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -27157,7 +27094,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -27233,7 +27170,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -27268,7 +27204,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device_driver
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -27344,7 +27280,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -30971,7 +30906,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device_driver
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31048,7 +30983,6 @@
   type: scrapli_backup_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -31090,7 +31024,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device_driver
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31168,7 +31102,6 @@
   type: scrapli_backup_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -31315,7 +31248,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device_driver
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31377,7 +31310,6 @@
   type: scrapli_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -31406,7 +31338,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device_driver
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31468,7 +31400,6 @@
   type: scrapli_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -31497,7 +31428,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device_driver
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31559,7 +31490,6 @@
   type: scrapli_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']

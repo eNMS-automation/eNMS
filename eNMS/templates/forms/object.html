@@ -10,9 +10,11 @@
       <li class="nav-item active">
         <a class="nav-link" data-toggle="tab" href="#common">Common Properties</a>
       </li>
+      {% if form.properties %}
       <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#specific">Specific Properties</a>
       </li>
+      {% endif %}
     </ul>
     <div class="form-group">
       <div class="tab-content">
@@ -32,10 +34,12 @@
             </button>
           </center>
         </div>
+        {% if form.properties %}
         <div class="tab-pane fade" id="specific">
           {% for property in form.properties %} {% set field = form[property] %} {{
           field_template(form_type, field) }} {% endfor %}
         </div>
+        {% endif %}
       </div>
     </div>
   </div>

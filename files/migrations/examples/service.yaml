@@ -32087,8 +32087,8 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  commands: "{% for vrf in (\"a\", \"b\", \"c\") %}\r\nshow {{ vrf }}\r\n{% endfor\
-    \ %}"
+  commands: "{%- for vrf in (\"a\", \"b\", \"c\") -%}\r\nshow vrf {{ vrf }}\r\n{%\
+    \ endfor %}"
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -32133,7 +32133,7 @@
   jump_on_connect: false
   jump_password: ''
   jump_username: ''
-  last_modified: '2022-07-12 14:17:33.873190'
+  last_modified: '2022-07-12 14:26:44.869692'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -32196,8 +32196,8 @@
   admin_only: false
   auto_find_prompt: true
   close_connection: false
-  commands: "{% for vrf in (\"a\", \"b\", \"c\") %}\r\nshow {{ vrf }}\r\n{% endfor\
-    \ %}"
+  commands: "{%- for vrf in (\"a\", \"b\", \"c\") -%}\r\nshow vrf {{ vrf }}\r\n{%\
+    \ endfor %}"
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -32242,7 +32242,7 @@
   jump_on_connect: false
   jump_password: ''
   jump_username: ''
-  last_modified: '2022-07-12 14:17:38.888655'
+  last_modified: '2022-07-12 14:27:25.956182'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false

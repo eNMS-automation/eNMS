@@ -1189,7 +1189,7 @@ class Controller:
         return [
             node.id
             for node in getattr(db.fetch(type, id=id), property)
-            if text.lower() in str(node.serialized).lower()
+            if text.lower() in str(node.get_properties().values()).lower()
         ]
 
     def search_workflow_services(self, **kwargs):

@@ -67,6 +67,7 @@
     (R) Scalability: &id010 [-437, -191]
     (R) Scrapli Netconf Service: &id050 [-298, -101]
     (R) Scrapli Service: &id036 [-192, 31]
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-276, 124]
     (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: &id035 [-382,
       39]
     Advanced Iteration Targets: &id034 [-131, -24]
@@ -525,6 +526,7 @@
     (R) Scalability: &id097 [483, -268]
     (R) Scrapli Netconf Service: &id137 [-293, 114]
     (R) Scrapli Service: &id123 [628, 113]
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [661, 103]
     (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: &id122 [560,
       9]
     AAA: !!python/tuple [500, 0]
@@ -741,6 +743,7 @@
     Scalability Test (large workflow): *id097
     Scrapli Netconf Service: *id137
     Scrapli Service: *id123
+    Scrapli and Netmiko Multiple Commands and Jinja2: !!python/tuple [500, 0]
     Separate Failure - Success Paths: [737, 276]
     Service Priorities: [500, 0]
     Service Priorities, Napalm Getters, Postprocessing: *id147
@@ -31754,6 +31757,270 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  category: Services
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  custom_property: Default Value
+  default_uuid: e1d27b95-ee07-44ab-9501-079bd14215fd
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2022-07-12 13:21:50.427263'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: (R) Scrapli and Netmiko Multiple Commands and Jinja2
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: (R) Scrapli and Netmiko Multiple Commands and Jinja2
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[(R) Scrapli and Netmiko Multiple
+      Commands and Jinja2] Scrapli Multiple Commands (text)', '[(R) Scrapli and Netmiko
+      Multiple Commands and Jinja2] Scrapli Multiple Commands (list)']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  close_connection: false
+  commands: "show vrf\r\nshow ip int br\r\nshow users"
+  completion_time: 1
+  connection_name: default
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_uuid: 8733ec48-f66a-4e3c-9a9c-5ac7ddea5bd4
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: device
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  is_configuration: false
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2022-07-12 13:21:42.260870'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Scrapli Multiple Commands
+    (text)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-6, -50]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  reply_to: ''
+  reserved: false
+  results_as_list: false
+  run_method: per_device
+  scoped_name: Scrapli Multiple Commands (text)
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout_ops: 30.0
+  timeout_socket: 15.0
+  timeout_transport: 30.0
+  transport: system
+  type: scrapli_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  close_connection: false
+  commands: "show vrf\r\nshow ip int br\r\nshow users"
+  completion_time: 1
+  connection_name: default
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_uuid: 8733ec48-f66a-4e3c-9a9c-5ac7ddea5bd4
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: device
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  is_configuration: false
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2022-07-12 13:21:47.190250'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Scrapli Multiple Commands
+    (list)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-13, 189]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  reply_to: ''
+  reserved: false
+  results_as_list: true
+  run_method: per_device
+  scoped_name: Scrapli Multiple Commands (list)
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout_ops: 30.0
+  timeout_socket: 15.0
+  timeout_transport: 30.0
+  transport: system
+  type: scrapli_service
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none

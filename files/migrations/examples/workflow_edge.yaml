@@ -1541,3 +1541,12 @@
   label: failure, name: '2022-07-12 05:30:46.993613', source: '[(R) Netmiko Prompts
     Service] Check VRF (NOVRF) exists', subtype: failure, type: workflow_edge, workflow: (R)
     Netmiko Prompts Service}
+- {color: green, destination: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2]
+    Scrapli Multiple Commands (text)', label: success, name: '2022-07-12 13:21:49.502987',
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: (R) Scrapli
+    and Netmiko Multiple Commands and Jinja2}
+- {color: green, destination: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2]
+    Scrapli Multiple Commands (list)', label: success, name: '2022-07-12 13:21:50.427263',
+  source: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Scrapli Multiple
+    Commands (text)', subtype: success, type: workflow_edge, workflow: (R) Scrapli
+    and Netmiko Multiple Commands and Jinja2}

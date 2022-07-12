@@ -985,9 +985,7 @@ class DeviceForm(ObjectForm):
         "Netmiko Driver", choices=vs.netmiko_drivers, default="cisco_ios"
     )
     scrapli_driver = SelectField(
-        "Scrapli Driver",
-        choices=vs.dualize(vs.scrapli_drivers),
-        default="cisco_iosxe",
+        "Scrapli Driver", choices=vs.scrapli_drivers, default="cisco_iosxe"
     )
     netconf_driver = SelectField(
         "Netconf Driver", choices=vs.netconf_drivers, default="default"

@@ -505,10 +505,6 @@
   label: success, name: '[Regression Workflow: Netmiko Prompts] 2021-04-24 08:58:40.198893',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: (R) Netmiko
     Prompts Service}
-- {color: green, destination: '[(R) Netmiko Prompts Service] Test Netmiko Prompt Service',
-  label: success, name: '[Regression Workflow: Netmiko Prompts] 2021-04-24 08:58:40.198918',
-  source: '[(R) Netmiko Prompts Service] Check VRF (NOVRF) exists', subtype: success,
-  type: workflow_edge, workflow: (R) Netmiko Prompts Service}
 - {color: green, destination: '[Functions: factory, fetch, fetch_all, encrypt and
     get_result] Show vrf with custom encrypted credentials', label: success, name: '[Regression
     Workflow: Global Variables and post-run Pool Update Mechanism] 2021-04-24 08:58:40.198945',
@@ -1541,3 +1537,7 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2022-06-20 05:38:27.696576',
   source: '[Data Extraction Jinja2 Template] Apply jinja2 Template', subtype: success,
   type: workflow_edge, workflow: Data Extraction Jinja2 Template}
+- {color: red, destination: '[(R) Netmiko Prompts Service] Test Netmiko Prompt Service',
+  label: failure, name: '2022-07-12 05:30:46.993613', source: '[(R) Netmiko Prompts
+    Service] Check VRF (NOVRF) exists', subtype: failure, type: workflow_edge, workflow: (R)
+    Netmiko Prompts Service}

@@ -1201,6 +1201,7 @@
     "run": ["path", "service_properties"],
     "service": ["path", "scoped_name", "mandatory_parametrization"],
     "network": ["path", "scoped_name"],
+    "result": ["service_name"],
     "task": ["frequency", "frequency_unit", "crontab_expression", "is_active"]
   },
   "filtering": {

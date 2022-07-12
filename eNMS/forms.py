@@ -1017,7 +1017,7 @@ class NapalmForm(ConnectionForm):
     abstract_service = True
     driver = SelectField(
         choices=[("device_driver", "Use Device Driver"), *vs.napalm_drivers],
-        help="common/use_device_driver",
+        help="common/driver",
     )
     timeout = IntegerField(default=10)
     optional_args = DictField()
@@ -1044,7 +1044,7 @@ class NetmikoForm(ConnectionForm):
     abstract_service = True
     driver = SelectField(
         choices=[("device_driver", "Use Device Driver"), *vs.netmiko_drivers],
-        help="common/use_device_driver",
+        help="common/driver",
     )
     enable_mode = BooleanField(
         "Enable mode (run in enable mode or as root)", default=True
@@ -1145,7 +1145,7 @@ class ScrapliForm(ConnectionForm):
     abstract_service = True
     driver = SelectField(
         choices=[("device_driver", "Use Device Driver"), *vs.scrapli_drivers],
-        help="common/use_device_driver",
+        help="common/driver",
     )
     is_configuration = BooleanField()
     transport = SelectField(choices=vs.dualize(("system", "paramiko", "ssh2")))

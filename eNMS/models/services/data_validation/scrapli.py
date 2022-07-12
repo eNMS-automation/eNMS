@@ -15,6 +15,7 @@ class ScrapliService(ConnectionService):
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     commands = db.Column(db.LargeString)
     is_configuration = db.Column(Boolean, default=False)
+    jinja2_template = db.Column(Boolean, default=False)
     results_as_list = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
     transport = db.Column(db.SmallString, default="system")
@@ -45,10 +46,11 @@ class ScrapliService(ConnectionService):
 class ScrapliCommandsForm(ScrapliForm):
     form_type = HiddenField(default="scrapli_service")
     commands = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
-    results_as_list = BooleanField("Results As List")
+    jinja2_template = BooleanField("Jinja2 Template", default=False)
+    results_as_list = BooleanField("Results As List", default=False)
     groups = {
         "Main Parameters": {
-            "commands": ["commands", "results_as_list"],
+            "commands": ["commands", "jinja2_template", "results_as_list"],
             "default": "expanded",
         },
         **ScrapliForm.groups,

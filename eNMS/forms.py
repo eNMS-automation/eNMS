@@ -1015,16 +1015,15 @@ class NapalmForm(ConnectionForm):
     form_type = HiddenField(default="napalm")
     get_request_allowed = False
     abstract_service = True
-    driver = SelectField(choices=vs.napalm_drivers)
-    use_device_driver = BooleanField(
-        default=True,
+    driver = SelectField(
+        choices=[("device_driver", "Use Device Driver"), *vs.napalm_drivers],
         help="common/use_device_driver",
     )
     timeout = IntegerField(default=10)
     optional_args = DictField()
     groups = {
         "Napalm Parameters": {
-            "commands": ["driver", "use_device_driver", "timeout", "optional_args"],
+            "commands": ["driver", "timeout", "optional_args"],
             "default": "expanded",
         },
         **ConnectionForm.groups,
@@ -1043,9 +1042,8 @@ class ParametersForm(BaseForm):
 class NetmikoForm(ConnectionForm):
     form_type = HiddenField(default="netmiko")
     abstract_service = True
-    driver = SelectField(choices=vs.netmiko_drivers)
-    use_device_driver = BooleanField(
-        default=True,
+    driver = SelectField(
+        choices=[("device_driver", "Use Device Driver"), *vs.netmiko_drivers],
         help="common/use_device_driver",
     )
     enable_mode = BooleanField(
@@ -1116,7 +1114,6 @@ class NetmikoForm(ConnectionForm):
         "Netmiko Parameters": {
             "commands": [
                 "driver",
-                "use_device_driver",
                 "enable_mode",
                 "config_mode",
                 "fast_cli",
@@ -1146,8 +1143,10 @@ class NetmikoForm(ConnectionForm):
 class ScrapliForm(ConnectionForm):
     form_type = HiddenField(default="scrapli")
     abstract_service = True
-    use_device_driver = BooleanField(default=True)
-    driver = SelectField(choices=vs.dualize(vs.scrapli_drivers))
+    driver = SelectField(
+        choices=[("device_driver", "Use Device Driver"), *vs.scrapli_drivers],
+        help="common/use_device_driver",
+    )
     is_configuration = BooleanField()
     transport = SelectField(choices=vs.dualize(("system", "paramiko", "ssh2")))
     timeout_socket = FloatField("Socket Timeout", default=15.0)
@@ -1156,7 +1155,6 @@ class ScrapliForm(ConnectionForm):
     groups = {
         "Scrapli Parameters": {
             "commands": [
-                "use_device_driver",
                 "driver",
                 "is_configuration",
                 "transport",

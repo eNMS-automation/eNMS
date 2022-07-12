@@ -14,7 +14,6 @@ class NapalmPingService(ConnectionService):
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     count = db.Column(Integer, default=0)
     driver = db.Column(db.SmallString)
-    use_device_driver = db.Column(Boolean, default=True)
     timeout = db.Column(Integer, default=60)
     optional_args = db.Column(db.Dict)
     packet_size = db.Column(Integer, default=0)

@@ -19,7 +19,6 @@ class NetmikoValidationService(ConnectionService):
     commands = db.Column(db.LargeString)
     results_as_list = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
-    use_device_driver = db.Column(Boolean, default=True)
     use_textfsm = db.Column(Boolean, default=False)
     use_genie = db.Column(Boolean, default=False)
     fast_cli = db.Column(Boolean, default=False)

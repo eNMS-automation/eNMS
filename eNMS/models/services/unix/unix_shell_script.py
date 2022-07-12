@@ -25,7 +25,6 @@ class UnixShellScriptService(ConnectionService):
     enable_mode = db.Column(Boolean, default=False)
     config_mode = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
-    use_device_driver = db.Column(Boolean, default=True)
     fast_cli = db.Column(Boolean, default=False)
     timeout = db.Column(Integer, default=10.0)
     delay_factor = db.Column(Float, default=1.0)
@@ -98,7 +97,6 @@ class UnixShellScriptForm(NetmikoForm):
         ),
     )
     driver = SelectField(choices=vs.netmiko_drivers, default="linux")
-    use_device_driver = BooleanField(default=True)
     fast_cli = BooleanField()
     timeout = IntegerField(default=10)
     delay_factor = FloatField(default=1.0)

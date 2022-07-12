@@ -16,7 +16,6 @@ class ScrapliService(ConnectionService):
     commands = db.Column(db.LargeString)
     is_configuration = db.Column(Boolean, default=False)
     results_as_list = db.Column(Boolean, default=False)
-    use_device_driver = db.Column(Boolean, default=True)
     driver = db.Column(db.SmallString)
     transport = db.Column(db.SmallString, default="system")
     timeout_socket = db.Column(Float, default=15.0)

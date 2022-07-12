@@ -16,7 +16,6 @@ class NapalmConfigurationService(ConnectionService):
     action = db.Column(db.SmallString)
     content = db.Column(db.LargeString)
     driver = db.Column(db.SmallString)
-    use_device_driver = db.Column(Boolean, default=True)
     timeout = db.Column(Integer, default=60)
     optional_args = db.Column(db.Dict)
 

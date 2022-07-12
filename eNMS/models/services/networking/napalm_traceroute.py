@@ -13,7 +13,6 @@ class NapalmTracerouteService(ConnectionService):
     parent_type = "connection_service"
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     driver = db.Column(db.SmallString)
-    use_device_driver = db.Column(Boolean, default=True)
     timeout = db.Column(Integer, default=60)
     optional_args = db.Column(db.Dict)
     destination_ip = db.Column(db.SmallString)

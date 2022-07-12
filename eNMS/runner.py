@@ -995,7 +995,7 @@ class Runner:
             change_log=False,
             logger="security",
         )
-        driver = device.netmiko_driver if self.use_device_driver else self.driver
+        driver = device.netmiko_driver if self.driver == "device" else self.driver
         sock = None
         if device.gateways:
             gateways = sorted(device.gateways, key=attrgetter("priority"), reverse=True)
@@ -1062,7 +1062,7 @@ class Runner:
         if is_netconf:
             kwargs["strip_namespaces"] = self.strip_namespaces
         else:
-            platform = device.scrapli_driver if self.use_device_driver else self.driver
+            platform = device.scrapli_driver if self.driver == "device" else self.driver
             kwargs.update(
                 {
                     "transport": self.transport,
@@ -1105,7 +1105,7 @@ class Runner:
         if "secret" not in optional_args:
             optional_args["secret"] = credentials.pop("secret", None)
         driver = get_network_driver(
-            device.napalm_driver if self.use_device_driver else self.driver
+            device.napalm_driver if self.driver == "device" else self.driver
         )
         napalm_connection = driver(
             hostname=device.ip_address,

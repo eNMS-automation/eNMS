@@ -1016,7 +1016,7 @@ class NapalmForm(ConnectionForm):
     get_request_allowed = False
     abstract_service = True
     driver = SelectField(
-        choices=[("device_driver", "Use Device Driver"), *vs.napalm_drivers],
+        choices=[("device", "Use Device Driver"), *vs.napalm_drivers],
         help="common/driver",
     )
     timeout = IntegerField(default=10)
@@ -1043,7 +1043,7 @@ class NetmikoForm(ConnectionForm):
     form_type = HiddenField(default="netmiko")
     abstract_service = True
     driver = SelectField(
-        choices=[("device_driver", "Use Device Driver"), *vs.netmiko_drivers],
+        choices=[("device", "Use Device Driver"), *vs.netmiko_drivers],
         help="common/driver",
     )
     enable_mode = BooleanField(
@@ -1144,7 +1144,7 @@ class ScrapliForm(ConnectionForm):
     form_type = HiddenField(default="scrapli")
     abstract_service = True
     driver = SelectField(
-        choices=[("device_driver", "Use Device Driver"), *vs.scrapli_drivers],
+        choices=[("device", "Use Device Driver"), *vs.scrapli_drivers],
         help="common/driver",
     )
     is_configuration = BooleanField()

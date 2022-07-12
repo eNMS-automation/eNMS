@@ -1126,7 +1126,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: device_driver
+  driver: device
   getters: [get_arp_table, get_interfaces]
   impacting: true
   include_device_results: true
@@ -1228,7 +1228,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_config_mode: true
   fast_cli: true
@@ -1331,7 +1331,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -1450,7 +1450,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_config_mode: true
   fast_cli: true
@@ -1554,7 +1554,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -1789,7 +1789,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: device_driver
+  driver: device
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -1887,7 +1887,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: device_driver
+  driver: device
   getters: [get_interfaces]
   impacting: true
   include_device_results: true
@@ -2081,7 +2081,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2189,7 +2189,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2461,7 +2461,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2570,7 +2570,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2679,7 +2679,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2785,7 +2785,7 @@
     '{{device.ip_address}}': {prefix_length: 24}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   getters: [get_interfaces_ip]
   impacting: true
   include_device_results: true
@@ -3165,7 +3165,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -3275,7 +3275,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -3385,7 +3385,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -4468,7 +4468,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -5101,7 +5101,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -5210,7 +5210,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -5320,7 +5320,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -5702,7 +5702,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -6089,7 +6089,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -7535,7 +7535,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: 'admin.*:'
@@ -7738,7 +7738,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -7853,7 +7853,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -8219,7 +8219,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8312,7 +8312,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8405,7 +8405,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8498,7 +8498,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8687,7 +8687,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -8890,7 +8890,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -9096,7 +9096,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -10461,7 +10461,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -10860,7 +10860,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -11442,7 +11442,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -12696,7 +12696,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -12910,7 +12910,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -15020,7 +15020,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -16200,7 +16200,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -16309,7 +16309,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -16418,7 +16418,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -16981,7 +16981,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -17088,7 +17088,7 @@
   disable_md5: false
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   fast_cli: false
   file_system: ''
@@ -17186,7 +17186,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -17294,7 +17294,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -17402,7 +17402,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -17703,7 +17703,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -19590,7 +19590,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -19794,7 +19794,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -19902,7 +19902,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -20010,7 +20010,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -20118,7 +20118,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -20313,7 +20313,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: device_driver
+  driver: device
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -20404,7 +20404,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -20501,7 +20501,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -20615,7 +20615,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -20844,7 +20844,7 @@
     is_alive: {is_alive: true}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   getters: [is_alive]
   impacting: true
   include_device_results: true
@@ -20944,7 +20944,7 @@
   dict_match: {fqdn: localhost, vendor: Arista}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -21044,7 +21044,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   getters: [get_mac_address_table]
   impacting: true
   include_device_results: true
@@ -21144,7 +21144,7 @@
   dict_match: {fqdn: localhost, uptime: '666', vendor: Arista}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -21373,7 +21373,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -26984,7 +26984,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -27094,7 +27094,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -27204,7 +27204,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -30906,7 +30906,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31024,7 +31024,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31248,7 +31248,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31338,7 +31338,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31428,7 +31428,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: device_driver
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false

@@ -34,7 +34,7 @@ def migrate_from_4_2_to_4_3():
             service["type"] = "netmiko_commands_service"
             service["commands"] = service.pop("command", "")
         if service.pop("use_device_driver", False):
-            service["driver"] = "device_driver"
+            service["driver"] = "device"
     with open(PATH / FILENAME / "service.yaml", "w") as migration_file:
         yaml.dump(services, migration_file)
 

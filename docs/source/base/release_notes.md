@@ -38,11 +38,13 @@ Version 4.3.0
   * watchdog is used to keep track of all files change done outside of the app
 - redis config in settings.json moved to the inner key "redis" > "config
 - redis new option in settings.json > "redis" > "flush_on_restart": flush redis queue when the app restarts.
+- Remove check box for "use device driver" add "use device driver" into drop down and make this the default.
 
 Migration
 - dashboard is now controlled by RBAC: dashboard access must be explicitly granted via access pages, GET and
   POST requests.
 - "download_file" endpoint -> "download" (add support for downloading folders)
+- the "driver" property must be updated for all netmiko, napalm and scrapli via the migration script
 
 Version 4.2.1
 -------------

@@ -96,11 +96,6 @@ class UnixShellScriptForm(NetmikoForm):
             "fi\n"
         ),
     )
-    driver = SelectField(choices=vs.netmiko_drivers, default="linux")
-    fast_cli = BooleanField()
-    timeout = IntegerField(default=10)
-    delay_factor = FloatField(default=1.0)
-    global_delay_factor = FloatField(default=1.0)
     expect_string = StringField(substitution=True)
     auto_find_prompt = BooleanField(default=True)
     strip_prompt = BooleanField(default=True)

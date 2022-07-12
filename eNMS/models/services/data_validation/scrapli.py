@@ -1,3 +1,4 @@
+from jinja2 import Template
 from sqlalchemy import Boolean, ForeignKey, Integer, Float
 from wtforms.widgets import TextArea
 
@@ -26,7 +27,10 @@ class ScrapliService(ConnectionService):
     __mapper_args__ = {"polymorphic_identity": "scrapli_service"}
 
     def job(self, run, device):
-        commands = run.sub(run.commands, locals()).splitlines()
+        if self.jinja2_template:
+            commands = Template(run.commands).render(locals()).splitlines()
+        else:
+            commands = run.sub(run.commands, locals()).splitlines()
         function = "send_configs" if run.is_configuration else "send_commands"
         run.log(
             "info",

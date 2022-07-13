@@ -499,12 +499,6 @@
         "width": "80px"
       },
       {
-        "data": "users",
-        "title": "Users",
-        "width": "80px",
-        "visible": false
-      },
-      {
         "data": "services",
         "title": "Services",
         "width": "80px",

@@ -188,19 +188,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: .*
-  user_name_invert: false
-  user_name_match: regex
-  users: [admin, readonly, chicago, sf, ny, nadmin, ui, demo, nconfig]
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -366,19 +353,6 @@
       Once with Pool', Large Device Configuration and Operational Data]
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: ''
-  user_name_invert: false
-  user_name_match: inclusion
-  users: []
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -553,19 +527,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: ''
-  user_name_invert: false
-  user_name_match: inclusion
-  users: []
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -749,19 +710,6 @@
   target_services: [Parameterized Multiprocessing]
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: ''
-  user_name_invert: false
-  user_name_match: inclusion
-  users: []
 - access_groups: ''
   admin_only: true
   creator: ''
@@ -941,19 +889,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: ''
-  user_name_invert: false
-  user_name_match: inclusion
-  users: []
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -1132,19 +1067,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: ''
-  user_name_invert: false
-  user_name_match: inclusion
-  users: []
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -1297,19 +1219,6 @@
   target_services: [Parameterized Targets, Parameterized Run with a Superworkflow]
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: ''
-  user_name_invert: false
-  user_name_match: inclusion
-  users: []
 - access_groups: ''
   admin_only: true
   creator: ''
@@ -1462,19 +1371,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: ''
-  user_name_invert: false
-  user_name_match: inclusion
-  users: []
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -1627,19 +1523,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: ''
-  user_name_invert: false
-  user_name_match: inclusion
-  users: []
 - access_groups: ''
   admin_only: true
   creator: ''
@@ -1792,19 +1675,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: nadmin
-  user_name_invert: false
-  user_name_match: inclusion
-  users: [nadmin]
 - access_groups: ''
   admin_only: true
   creator: ''
@@ -1957,19 +1827,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: ny
-  user_name_invert: false
-  user_name_match: inclusion
-  users: [ny]
 - access_groups: ''
   admin_only: true
   creator: ''
@@ -2122,19 +1979,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: Read Only
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: ''
-  user_name_invert: false
-  user_name_match: inclusion
-  users: [readonly, demo]
 - access_groups: ''
   admin_only: false
   creator: admin
@@ -2303,19 +2147,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: ''
-  user_name_invert: false
-  user_name_match: inclusion
-  users: []
 - access_groups: ''
   admin_only: false
   creator: admin
@@ -2468,19 +2299,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: .*
-  user_name_invert: false
-  user_name_match: regex
-  users: [admin, readonly, chicago, sf, ny, nadmin, ui, demo, nconfig]
 - access_groups: ''
   admin_only: true
   creator: admin
@@ -2633,19 +2451,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: ^ui|ny$
-  user_name_invert: false
-  user_name_match: regex
-  users: [ny, ui]
 - access_groups: ''
   admin_only: true
   creator: admin
@@ -2798,19 +2603,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: regex
-  user_name: ''
-  user_name_invert: false
-  user_name_match: inclusion
-  users: []
 - access_groups: admin
   admin_only: false
   creator: admin
@@ -2963,19 +2755,6 @@
   target_services: ['Credentials (Password & Key, Priority Mechanism)']
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: ''
-  user_name_invert: false
-  user_name_match: inclusion
-  users: []
 - access_groups: admin
   admin_only: false
   creator: admin
@@ -3128,19 +2907,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: ''
-  user_name_invert: false
-  user_name_match: inclusion
-  users: []
 - access_groups: admin
   admin_only: true
   creator: admin
@@ -3293,19 +3059,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: admin
-  user_name_invert: false
-  user_name_match: equality
-  users: [admin]
 - access_groups: ''
   admin_only: false
   creator: admin
@@ -3462,19 +3215,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: ''
-  user_name_invert: false
-  user_name_match: inclusion
-  users: []
 - access_groups: admin
   admin_only: false
   creator: admin
@@ -3631,19 +3371,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: ''
-  user_name_invert: false
-  user_name_match: inclusion
-  users: []
 - access_groups: admin
   admin_only: true
   creator: admin
@@ -3796,19 +3523,6 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: ''
-  user_name_invert: false
-  user_name_match: inclusion
-  users: []
 - access_groups: ''
   admin_only: false
   creator: admin
@@ -3961,16 +3675,3 @@
   target_services: []
   tasks: []
   type: pool
-  user_description: ''
-  user_description_invert: false
-  user_description_match: inclusion
-  user_email: ''
-  user_email_invert: false
-  user_email_match: inclusion
-  user_groups: ''
-  user_groups_invert: false
-  user_groups_match: inclusion
-  user_name: nconfig
-  user_name_invert: false
-  user_name_match: equality
-  users: [nconfig]

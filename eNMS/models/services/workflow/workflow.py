@@ -260,32 +260,5 @@ class WorkflowEdge(AbstractBase):
         super().update(**kwargs)
         self.set_name(kwargs.get("name"))
 
-    @classmethod
-    def rbac_filter(cls, query, mode, user):
-        if mode == "edit":
-            originals_alias = aliased(vs.models["service"])
-            pool_alias = aliased(vs.models["pool"])
-            user_alias = aliased(vs.models["user"])
-            query = (
-                query.join(cls.workflow)
-                .join(vs.models["pool"], vs.models["service"].pools)
-                .join(vs.models["access"], vs.models["pool"].access)
-                .join(pool_alias, vs.models["access"].user_pools)
-                .join(user_alias, pool_alias.users)
-                .filter(vs.models["access"].access_type.contains(mode))
-                .filter(user_alias.name == user.name)
-            )
-            query = (
-                query.join(cls.workflow)
-                .join(originals_alias, vs.models["service"].originals)
-                .filter(~originals_alias.owners_access.contains(mode))
-                .union(
-                    query.join(vs.models["user"], originals_alias.owners).filter(
-                        vs.models["user"].name == user.name
-                    )
-                )
-            )
-        return query
-
     def set_name(self, name=None):
         self.name = name or f"[{self.workflow}] {vs.get_time()}"

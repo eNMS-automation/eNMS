@@ -1,7 +1,7 @@
 - authentication: database
   description: ''
   email: admin@enms.io
-  groups: []
+  groups: [All users]
   is_admin: true
   landing_page: /dashboard
   name: admin
@@ -12,7 +12,7 @@
 - authentication: database
   description: Read Only user
   email: read-only@enms.io
-  groups: []
+  groups: [All users]
   is_admin: false
   landing_page: /dashboard
   name: readonly
@@ -23,7 +23,7 @@
 - authentication: database
   description: ''
   email: Non-admin user with full access rights
-  groups: []
+  groups: [All users]
   is_admin: false
   landing_page: /dashboard
   name: nadmin
@@ -34,7 +34,7 @@
 - authentication: database
   description: Read Only user
   email: demo@enms.io
-  groups: []
+  groups: [All users]
   is_admin: false
   landing_page: /dashboard
   name: demo

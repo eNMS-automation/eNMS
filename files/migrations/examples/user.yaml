@@ -22,24 +22,6 @@
   type: user
 - authentication: database
   description: ''
-  email: chicago@enms.io
-  groups: []
-  is_admin: false
-  landing_page: /dashboard
-  name: chicago
-  password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRuRFBHV0t2MXZwY3lwbFJxYlEyQjBBJDd4dDllRzRVT240Y3E4U0x6K3NLb0E=
-  small_menu: false
-  theme: default
-  type: user
-- authentication: database
-  description: "The 'nadmin' user is not an admin, but it has access to all menus,\
-    \ endpoints and instances (via the \"All objects\" pool).\r\nHowever, it should\
-    \ not have access to the instances whose default access is set to \"Admin users\
-    \ only\", namely:\r\n- router20 and router23\r\n- europe-link4 and europe-link40\r\
-    \n- \"Non-admin user pool\" which coincidentally is used to set up the access\
-    \ for nadmin itself (nadmin shouldn't be able to modify its own access rights\
-    \ by modifying this pool)\r\n- \"Operational Data Backup\" and \"Advanced Multiprocessing\"\
-    \ workflows\r\n- The \"Cluster Monitoring\" task"
   email: Non-admin user with full access rights
   groups: []
   is_admin: false
@@ -58,16 +40,5 @@
   name: demo
   password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQwM3FQc1pieTNwdnpmZytCOEw1M3JnJHVPYjJ0RGdjUU45MUI2TEdPYkhOaVE=
   small_menu: true
-  theme: default
-  type: user
-- authentication: database
-  description: User that has access to everything without configuration
-  email: ''
-  groups: []
-  is_admin: false
-  landing_page: /dashboard
-  name: nconfig
-  password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCR5NW5UMnZzL0J5QkV5QmxEeUZucnZRJE9ueWc0QXkvUW4yaGdpL0xTc1VNeHc=
-  small_menu: false
   theme: default
   type: user

@@ -45,7 +45,7 @@ class User(AbstractBase, UserMixin):
     delete_requests = db.Column(db.List)
     small_menu = db.Column(Boolean, default=False, info={"log_change": False})
     theme = db.Column(db.TinyString, default="default", info={"log_change": False})
-    pools = relationship("Pool", secondary=db.pool_user_table, back_populates="users")
+    groups = relationship("Group", secondary=db.user_group_table, back_populates="users")
     services = relationship(
         "Service", secondary=db.service_owner_table, back_populates="owners"
     )
@@ -62,6 +62,15 @@ class User(AbstractBase, UserMixin):
         ):
             kwargs["password"] = argon2.hash(kwargs["password"])
         super().update(**kwargs)
+
+
+class Group(AbstractBase):
+
+    __tablename__ = type = class_type = "group"
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    creator = db.Column(db.SmallString)
+    users = relationship("User", secondary=db.user_group_table, back_populates="groups")
 
 
 class Access(AbstractBase):

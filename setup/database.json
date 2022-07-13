@@ -206,10 +206,10 @@
           "foreign_key": "network"
         }
       },
-      "pool_user": {
+      "user_group": {
         "model1": {
-          "column": "pool_id",
-          "foreign_key": "pool"
+          "column": "group_id",
+          "foreign_key": "group"
         },
         "model2": {
           "column": "user_id",
@@ -322,26 +322,6 @@
         "model1": {
           "column": "service_id",
           "foreign_key": "service"
-        },
-        "model2": {
-          "column": "pool_id",
-          "foreign_key": "pool"
-        }
-      },
-      "access_user_pools": {
-        "model1": {
-          "column": "access_id",
-          "foreign_key": "access"
-        },
-        "model2": {
-          "column": "pool_id",
-          "foreign_key": "pool"
-        }
-      },
-      "access_model_pools": {
-        "model1": {
-          "column": "access_id",
-          "foreign_key": "access"
         },
         "model2": {
           "column": "pool_id",

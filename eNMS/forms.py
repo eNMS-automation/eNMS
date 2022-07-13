@@ -126,7 +126,12 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
         if request.files:
             data["file"] = request.files["file"]
         for property, field in vs.form_properties[form_data.get("form_type")].items():
-            if field["type"] in ("object-list", "object-string-list", "multiselect", "multiselect-string"):
+            if field["type"] in (
+                "object-list",
+                "object-string-list",
+                "multiselect",
+                "multiselect-string",
+            ):
                 value = form_data.getlist(property)
                 if field["type"] == "multiselect-string":
                     value = str(value)

@@ -18,6 +18,7 @@ from sqlalchemy import (
     Float,
     inspect,
     Integer,
+    or_,
     PickleType,
     String,
     Table,
@@ -319,7 +320,18 @@ class Database:
             entity = [getattr(vs.models[model], property) for property in properties]
         else:
             entity = [vs.models[model]]
-        return self.session.query(*entity)
+        query = self.session.query(*entity)
+        if rbac and model != "user":
+            user = current_user or self.fetch("user", name=username or "admin")
+            if user.is_authenticated and not user.is_admin:
+                if model in vs.rbac["advanced"]["admin_models"].get(rbac, []):
+                    raise self.rbac_error
+                property = getattr(vs.models[model], f"rbac_{rbac}", None)
+                if not property:
+                    return query
+                constraints = [property.contains(f",{group},") for group in user.groups]
+                query = query.filter(or_(*constraints))
+        return query
 
     def fetch(
         self,

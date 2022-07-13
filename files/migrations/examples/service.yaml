@@ -32139,7 +32139,7 @@
   jump_on_connect: false
   jump_password: ''
   jump_username: ''
-  last_modified: '2022-07-12 14:26:44.869692'
+  last_modified: '2022-07-13 03:21:34.458029'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -32166,7 +32166,11 @@
   pools: [Everything]
   positions:
     (R) Scrapli and Netmiko Multiple Commands and Jinja2: [331, -45]
-  postprocessing: ''
+  postprocessing: "is_string = isinstance(results[\"result\"], str)\r\nvalid_commands\
+    \ = True\r\nfor vrf in (\"a\", \"b\", \"c\"):\r\n  if f\"show vrf {vrf}\" not\
+    \ in results[\"commands\"]:\r\n    valid_commands = False\r\nvalid_content = results[\"\
+    result\"].count(\"Interfaces\") == 3\r\nresults[\"success\"] = is_string and valid_commands\
+    \ and valid_content\r\n"
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
@@ -32248,7 +32252,7 @@
   jump_on_connect: false
   jump_password: ''
   jump_username: ''
-  last_modified: '2022-07-12 14:27:25.956182'
+  last_modified: '2022-07-13 03:33:28.643596'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -32275,7 +32279,11 @@
   pools: [Everything]
   positions:
     (R) Scrapli and Netmiko Multiple Commands and Jinja2: [355, 186]
-  postprocessing: ''
+  postprocessing: "is_list = isinstance(results[\"result\"], list)\r\nvalid_result\
+    \ = True\r\nfor index, vrf in enumerate((\"a\", \"b\", \"c\")):\r\n  if (\r\n\
+    \    f\"show vrf {vrf}\" not in results[\"commands\"]\r\n    or \"Protocols\"\
+    \ not in results[\"result\"][index]\r\n  ):\r\n    valid_result = False\r\nresults[\"\
+    success\"] = is_list and valid_result"
   postprocessing_mode: success
   preprocessing: ''
   priority: 10

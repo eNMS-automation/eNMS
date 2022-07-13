@@ -291,11 +291,6 @@ class Pool(AbstractBase):
         secondary=db.credential_device_table,
         back_populates="device_pools",
     )
-    credential_users = relationship(
-        "Credential",
-        secondary=db.credential_user_table,
-        back_populates="user_pools",
-    )
 
     @classmethod
     def configure_events(cls):

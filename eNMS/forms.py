@@ -350,7 +350,7 @@ class CredentialForm(BaseForm):
         choices=(("password", "Username / Password"), ("key", "SSH Key")),
     )
     device_pools = MultipleInstanceField("Devices", model="pool")
-    user_pools = MultipleInstanceField("Users", model="pool")
+    groups = MultipleInstanceField("Groups", model="group")
     priority = IntegerField("Priority", default=1)
     username = StringField("Username")
     password = PasswordField("Password")

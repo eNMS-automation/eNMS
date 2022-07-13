@@ -72,6 +72,11 @@ class Group(AbstractBase):
     email = db.Column(db.SmallString)
     creator = db.Column(db.SmallString)
     users = relationship("User", secondary=db.user_group_table, back_populates="groups")
+    credentials = relationship(
+        "Credential",
+        secondary=db.credential_group_table,
+        back_populates="groups"
+    )
 
 
 class Access(AbstractBase):
@@ -105,10 +110,10 @@ class Credential(AbstractBase):
         secondary=db.credential_device_table,
         back_populates="credential_devices",
     )
-    user_pools = relationship(
-        "Pool",
-        secondary=db.credential_user_table,
-        back_populates="credential_users",
+    groups = relationship(
+        "Group",
+        secondary=db.credential_group_table,
+        back_populates="credentials",
     )
 
 

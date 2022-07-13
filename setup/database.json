@@ -318,14 +318,14 @@
           "foreign_key": "pool"
         }
       },
-      "credential_user": {
+      "credential_group": {
         "model1": {
           "column": "credential_id",
           "foreign_key": "credential"
         },
         "model2": {
-          "column": "pool_id",
-          "foreign_key": "pool"
+          "column": "group_id",
+          "foreign_key": "group"
         }
       }
     }

@@ -80,19 +80,6 @@ class AbstractBase(db.base):
                     if current_value:
                         value = {**current_value, **value}
             setattr(self, property, value)
-        if not kwargs.get("update_pools") or not self.pool_model:
-            return
-        rbac_pools_kwargs = {
-            "rbac": None,
-            "manually_defined": False,
-            "admin_only": True,
-        }
-        for pool in db.fetch_all("pool", **rbac_pools_kwargs):
-            match = pool.match_instance(self)
-            if match and self not in getattr(pool, f"{self.class_type}s"):
-                getattr(pool, f"{self.class_type}s").append(self)
-            if self in getattr(pool, f"{self.class_type}s") and not match:
-                getattr(pool, f"{self.class_type}s").remove(self)
 
     def delete(self):
         pass

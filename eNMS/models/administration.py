@@ -28,7 +28,6 @@ class Server(AbstractBase):
 class User(AbstractBase, UserMixin):
 
     __tablename__ = type = class_type = "user"
-    pool_model = True
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     description = db.Column(db.LargeString)

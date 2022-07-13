@@ -22,7 +22,6 @@ from eNMS.variables import vs
 class Service(AbstractBase):
 
     __tablename__ = class_type = export_type = "service"
-    pool_model = True
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)

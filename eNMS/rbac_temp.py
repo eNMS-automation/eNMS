@@ -188,3 +188,14 @@ def query(self, model, rbac="read", username=None, properties=None):
                 continue
             access_value = (getattr(access, property) for access in user_access)
             setattr(self, property, list(set(chain.from_iterable(access_value))))
+
+# controller.py
+
+# filtering function
+
+        if (
+            rbac == "read"
+            and kwargs.get("type") == "configuration"
+            and set(kwargs.get("form", {})) & set(vs.configuration_properties)
+        ):
+            rbac = "configuration"

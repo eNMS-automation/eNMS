@@ -399,12 +399,6 @@ class Controller:
         self, model, bulk=False, rbac="read", username=None, properties=None, **kwargs
     ):
         table = vs.models[model]
-        if (
-            rbac == "read"
-            and kwargs.get("type") == "configuration"
-            and set(kwargs.get("form", {})) & set(vs.configuration_properties)
-        ):
-            rbac = "configuration"
         query = db.query(model, rbac, username, properties=properties)
         if not bulk and not properties:
             total_records = query.with_entities(table.id).count()

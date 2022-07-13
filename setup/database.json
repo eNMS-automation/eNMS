@@ -186,26 +186,6 @@
           "foreign_key": "link"
         }
       },
-      "pool_service": {
-        "model1": {
-          "column": "pool_id",
-          "foreign_key": "pool"
-        },
-        "model2": {
-          "column": "service_id",
-          "foreign_key": "service"
-        }
-      },
-      "pool_network": {
-        "model1": {
-          "column": "pool_id",
-          "foreign_key": "pool"
-        },
-        "model2": {
-          "column": "network_id",
-          "foreign_key": "network"
-        }
-      },
       "user_group": {
         "model1": {
           "column": "group_id",

@@ -270,7 +270,7 @@ class Link(Object):
 class Pool(AbstractBase):
 
     __tablename__ = type = "pool"
-    models = ("device", "link", "service", "network")
+    models = ("device", "link")
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     manually_defined = db.Column(Boolean, default=False)

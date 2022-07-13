@@ -4,6 +4,25 @@
 Version 4.3.0
 -------------
 
+- Remove 3D Geographical Visualization
+- Default to "info" for services log level. Move "Disable logging" at the end of the list.
+- Add "username" variable in workflow global space set to the user that runs the workflow.
+- Forbid deletion of Start, End and Placeholder services.
+- Fix merge_update behavior to not extend list every time an object is edited.
+- Define Server IP address and URL with the `SERVER_ADDR` (default `0.0.0.0`) and `SERVER_URL` (default `http://192.168.56.102`) environment variable instead of `settings.json` / `app` section (as VM settings, they don't belong in the application settings and shouldn't be checked in the code).
+- Make "Results as List" False by default for scrapli (not useful when only
+  one command, which is most of the time)
+- For consistency with Scrapli
+  * Rename "Netmiko Validation" to "Netmiko Commands"
+  * Allow sending multiple commands via Netmiko Commands
+  * Add "Results as List" to Netmiko Commands 
+- Add "use genie" option in netmiko commands service for Genie / PyATS support
+- Add new `default_function` (sqlalchemy parameter) and `render_kw` (wtforms parameters) for custom fields in properties.json.
+- Add new `rest/workers` GET endpoint to get service count for each WSGI worker
+- Fix Data Extraction service bug if no device (service in run once mode)
+- Add new Jinja2 Template Conversion in Data Extraction Service
+- Fix bulk deletion and bulk removal from a filtered table (e.g dashboard bulk deletion deletes everything,
+  not just the objects displayed in the table)
 - New feature to align nodes in Network Builder and Workflow Builder:
   - Horizontal and vertical alignment
   - Horizontal and vertical distribution
@@ -46,29 +65,6 @@ Migration
   POST requests.
 - "download_file" endpoint -> "download" (add support for downloading folders)
 - the "driver" property must be updated for all netmiko, napalm and scrapli via the migration script
-
-Version 4.2.1
--------------
-
-- Remove 3D Geographical Visualization
-- Default to "info" for services log level. Move "Disable logging" at the end of the list.
-- Add "username" variable in workflow global space set to the user that runs the workflow.
-- Forbid deletion of Start, End and Placeholder services.
-- Fix merge_update behavior to not extend list every time an object is edited.
-- Define Server IP address and URL with the `SERVER_ADDR` (default `0.0.0.0`) and `SERVER_URL` (default `http://192.168.56.102`) environment variable instead of `settings.json` / `app` section (as VM settings, they don't belong in the application settings and shouldn't be checked in the code).
-- Make "Results as List" False by default for scrapli (not useful when only
-  one command, which is most of the time)
-- For consistency with Scrapli
-  * Rename "Netmiko Validation" to "Netmiko Commands"
-  * Allow sending multiple commands via Netmiko Commands
-  * Add "Results as List" to Netmiko Commands 
-- Add "use genie" option in netmiko commands service for Genie / PyATS support
-- Add new `default_function` (sqlalchemy parameter) and `render_kw` (wtforms parameters) for custom fields in properties.json.
-- Add new `rest/workers` GET endpoint to get service count for each WSGI worker
-- Fix Data Extraction service bug if no device (service in run once mode)
-- Add new Jinja2 Template Conversion in Data Extraction Service
-- Fix bulk deletion and bulk removal from a filtered table (e.g dashboard bulk deletion deletes everything,
-  not just the objects displayed in the table)
 
 To be tested:
 - bulk deletion and bulk removal (from dashboard and other tables too)

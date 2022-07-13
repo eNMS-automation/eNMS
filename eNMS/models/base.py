@@ -128,10 +128,6 @@ class AbstractBase(db.base):
             result[property] = value
         return result
 
-    @classmethod
-    def rbac_filter(cls, query, *_):
-        return query
-
     def table_properties(self, **kwargs):
         displayed = [column["data"] for column in kwargs["columns"]]
         table_type = getattr(self, "class_type", self.type)

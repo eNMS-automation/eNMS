@@ -511,8 +511,7 @@ class PoolForm(BaseForm):
 
     @classmethod
     def form_init(cls):
-        cls.models = ("device", "link", "service", "user", "network")
-        for model in cls.models:
+        for model in ("device", "link"):
             setattr(cls, f"{model}_properties", vs.properties["filtering"][model])
             for property in vs.properties["filtering"][model]:
                 setattr(cls, f"{model}_{property}", StringField(property))

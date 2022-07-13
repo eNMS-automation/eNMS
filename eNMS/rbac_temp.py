@@ -45,6 +45,14 @@ def query(self, model, rbac="read", username=None, properties=None):
     def rbac_filter(cls, query, *_):
         return query.filter(cls.admin_only == false())
 
+    def update(self, **kwargs):
+        old_users = set(self.users)
+        super().update(**kwargs)
+        if not kwargs.get("import_mechanism", False):
+            self.compute_pool()
+            for user in set(self.users) | old_users:
+                user.update_rbac()
+
 # automation.py
 
 # Service class
@@ -160,6 +168,9 @@ def query(self, model, rbac="read", username=None, properties=None):
 # administration.py
 
 # User class
+
+    if not kwargs.get("import_mechanism", False):
+        self.update_rbac()
 
     def update_rbac(self):
         if self.is_admin:

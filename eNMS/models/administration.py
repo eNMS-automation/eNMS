@@ -86,12 +86,6 @@ class Access(AbstractBase):
     def get_users(self):
         return set(chain.from_iterable(pool.users for pool in self.user_pools))
 
-    def update(self, **kwargs):
-        old_users = self.get_users()
-        super().update(**kwargs)
-        for user in old_users | self.get_users():
-            user.update_rbac()
-
 
 class Credential(AbstractBase):
 

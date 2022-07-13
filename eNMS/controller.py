@@ -90,7 +90,6 @@ class Controller:
         for instance in instances:
             getattr(target, property).append(instance)
         target.last_modified = vs.get_time()
-        self.update_rbac(*instances)
         return {"number": len(instances), "target": target.base_properties}
 
     def add_objects_to_network(self, network_id, **kwargs):
@@ -155,7 +154,6 @@ class Controller:
         instances = self.filtering(table, bulk="object", **kwargs)
         for instance in instances:
             getattr(target, target_property).remove(instance)
-        self.update_rbac(*instances)
         return len(instances)
 
     def calendar_init(self, type):
@@ -1028,7 +1026,6 @@ class Controller:
             relationship_property.remove(instance)
         else:
             return {"alert": f"{instance.name} is not associated with {target.name}."}
-        self.update_rbac(instance)
 
     def result_log_deletion(self, **kwargs):
         date_time_object = datetime.strptime(kwargs["date_time"], "%d/%m/%Y %H:%M:%S")
@@ -1359,12 +1356,6 @@ class Controller:
 
     def update_pool(self, pool_id):
         db.fetch("pool", id=int(pool_id), rbac="edit").compute_pool()
-
-    def update_rbac(self, *instances):
-        for instance in instances:
-            if instance.type != "user":
-                continue
-            instance.update_rbac()
 
     def view_filtering(self, **kwargs):
         return {

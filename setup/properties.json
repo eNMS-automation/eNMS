@@ -1193,10 +1193,7 @@
     }
   },
   "tables_additional": {
-    "pool": [
-      "device_number",
-      "link_number"
-    ],
+    "pool": ["device_number", "link_number"],
     "run": ["path", "service_properties"],
     "service": ["path", "scoped_name", "mandatory_parametrization"],
     "network": ["path", "scoped_name"],

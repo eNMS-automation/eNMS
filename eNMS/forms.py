@@ -1148,7 +1148,7 @@ class ScrapliForm(ConnectionForm):
 
 class UserForm(RbacForm):
     form_type = HiddenField(default="user")
-    groups = StringField("Groups")
+    groups = MultipleInstanceField("Groups", model="group")
     theme = SelectField(
         "Theme",
         choices=[
@@ -1164,6 +1164,11 @@ class UserForm(RbacForm):
     )
     password = PasswordField("Password")
     is_admin = BooleanField(default=False)
+
+
+class GroupForm(RbacForm):
+    form_type = HiddenField(default="group")
+    users = MultipleInstanceField("Users", model="user")
 
 
 class ReplacementForm(FlaskForm):

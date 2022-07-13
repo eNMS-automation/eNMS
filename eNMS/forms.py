@@ -69,6 +69,9 @@ class MetaForm(FormMeta):
             field = field(values["pretty_name"], **form_kw)
             setattr(form, property, field)
             attrs[property] = field
+        form.rbac_properties = vs.rbac["advanced"]["form_access"].get(form_type, {})
+        for property, property_name in form.rbac_properties.items():
+            setattr(form, f"rbac_{property}", StringField(property_name))
         vs.form_class[form_type] = form
         properties = {}
         for field_name, field in attrs.items():

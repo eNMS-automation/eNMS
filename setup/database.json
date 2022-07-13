@@ -51,7 +51,7 @@
   "dont_migrate": {
     "access": ["id"],
     "credential": ["id"],
-    "group": ["id"],
+    "group": ["id", "credentials"],
     "device": [
       "access",
       "id",
@@ -123,6 +123,7 @@
       "id",
       "devices",
       "pools",
+      "groups",
       "links",
       "menu",
       "delete_requests",

@@ -1,6 +1,4 @@
 - creator: admin
-  credentials: [Non Device Credential, Non Device Credential - 2, Router Credentials
-      - Password, Router Credentials - SSH Key, Router Credentials - Wrong Password]
   description: All users
   email: ''
   name: All users

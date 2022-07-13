@@ -37,6 +37,7 @@
   },
   "import_export_models": [
     "user",
+    "group",
     "device",
     "link",
     "service",
@@ -50,6 +51,7 @@
   "dont_migrate": {
     "access": ["id"],
     "credential": ["id"],
+    "group": ["id"],
     "device": [
       "access",
       "id",
@@ -82,7 +84,6 @@
       "access",
       "access_users",
       "credential_devices",
-      "credential_users",
       "device_number",
       "id",
       "link_number",

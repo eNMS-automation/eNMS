@@ -1,6 +1,9 @@
 
 # Release Notes
 
+Version 4.4.0: RBAC and Credentials
+-----------------------------------
+
 Version 4.3.0
 -------------
 

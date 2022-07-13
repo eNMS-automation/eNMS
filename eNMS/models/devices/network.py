@@ -31,9 +31,6 @@ class Network(Node):
     links = relationship(
         "Link", secondary=db.link_network_table, back_populates="networks"
     )
-    pools = relationship(
-        "Pool", secondary=db.pool_network_table, back_populates="networks"
-    )
 
     def duplicate(self, clone=None):
         for property in ("labels", "nodes", "links"):

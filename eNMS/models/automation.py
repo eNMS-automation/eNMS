@@ -60,9 +60,6 @@ class Service(AbstractBase):
     target_pools = relationship(
         "Pool", secondary=db.service_target_pool_table, back_populates="target_services"
     )
-    pools = relationship(
-        "Pool", secondary=db.pool_service_table, back_populates="services"
-    )
     owners = relationship(
         "User", secondary=db.service_owner_table, back_populates="services"
     )

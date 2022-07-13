@@ -499,18 +499,6 @@
         "width": "80px"
       },
       {
-        "data": "services",
-        "title": "Services",
-        "width": "80px",
-        "visible": false
-      },
-      {
-        "data": "networks",
-        "title": "Networks",
-        "width": "80px",
-        "visible": false
-      },
-      {
         "data": "objectNumber",
         "title": "Object Count",
         "width": "170px",
@@ -1187,10 +1175,7 @@
   "tables_additional": {
     "pool": [
       "device_number",
-      "link_number",
-      "service_number",
-      "network_number",
-      "user_number"
+      "link_number"
     ],
     "run": ["path", "service_properties"],
     "service": ["path", "scoped_name", "mandatory_parametrization"],

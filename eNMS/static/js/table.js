@@ -795,9 +795,9 @@ tables.pool = class PoolTable extends Table {
   addRow(properties) {
     let row = super.addRow(properties);
     row.objectNumber = "";
-    for (const model of ["device", "link", "service", "network", "user"]) {
+    for (const model of ["device", "link"]) {
       row.objectNumber += `${row[`${model}_number`]} ${model}s`;
-      if (model !== "user") row.objectNumber += " - ";
+      if (model !== "link") row.objectNumber += " - ";
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
         '${model}', ${row.instance}, {parent: '${this.id}', from: 'pools',
         to: '${model}s'})">${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;

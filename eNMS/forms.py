@@ -74,9 +74,8 @@ class MetaForm(FormMeta):
         for property, property_name in form.rbac_properties.items():
             field = MultipleInstanceStringField(property_name, model="group")
             setattr(form, property, field)
-            field_properties = {"type": "object-list", "model": "group"}
+            field_properties = {"type": "object-string-list", "model": "group"}
             vs.form_properties[form_type][property] = field_properties
-            vs.relationships[form_type][property] = {"list": True, "model": "group"}
         vs.form_class[form_type] = form
         properties = {}
         for field_name, field in attrs.items():
@@ -127,12 +126,14 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
         if request.files:
             data["file"] = request.files["file"]
         for property, field in vs.form_properties[form_data.get("form_type")].items():
-            if field["type"] in ("object-list", "multiselect", "multiselect-string"):
+            if field["type"] in ("object-list", "object-string-list", "multiselect", "multiselect-string"):
                 value = form_data.getlist(property)
                 if field["type"] == "multiselect-string":
                     value = str(value)
                 if field["type"] == "object-list":
                     value = [db.fetch(field["model"], name=name).id for name in value]
+                if field["type"] == "object-string-list":
+                    value = ",".join(value)
                 data[property] = value
             elif field["type"] == "object":
                 data[property] = form_data.get(property)

@@ -584,9 +584,9 @@ export function configureForm(form, id, panelId) {
       editor.on("change", () => editor.save());
       if (!editors[id]) editors[id] = {};
       editors[id][property] = editor;
-    } else if (["object", "object-list"].includes(field.type)) {
+    } else if (["object", "object-list", "object-string-list"].includes(field.type)) {
       let model;
-      if (relationships[form]) {
+      if (relationships[form] && field.type !== "object-string-list") {
         model = relationships[form][property].model;
       } else {
         model = field.model;
@@ -738,7 +738,11 @@ function updateProperty(instance, el, property, value, type) {
     }
     el.selectpicker("val", value).trigger("change");
     el.selectpicker("render");
-  } else if (["object-list", "object"].includes(propertyType)) {
+  } else if (propertyType == "object-string-list") {
+    const values = value.split(",").filter(Boolean);
+    values.forEach((instance) => el.append(new Option(instance, instance)));
+    el.val(values).trigger("change");
+  } else if (["object-list", "object", ].includes(propertyType)) {
     if (propertyType == "object") value = [value];
     const idProperty = propertyType == "object" ? "id" : "name";
     value.forEach((o) => {

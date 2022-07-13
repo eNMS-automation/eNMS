@@ -196,4 +196,4 @@ class MultipleInstanceField(FieldMixin, WtformsSelectMultipleField):
 
 
 class MultipleInstanceStringField(MultipleInstanceField):
-    pass
+    type = "object-string-list"

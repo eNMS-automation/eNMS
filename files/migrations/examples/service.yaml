@@ -67,7 +67,7 @@
     (R) Scalability: &id010 [-437, -191]
     (R) Scrapli Netconf Service: &id050 [-298, -101]
     (R) Scrapli Service: &id036 [-192, 31]
-    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-276, 124]
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-376, 194]
     (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: &id035 [-382,
       39]
     Advanced Iteration Targets: &id034 [-131, -24]
@@ -526,7 +526,7 @@
     (R) Scalability: &id097 [483, -268]
     (R) Scrapli Netconf Service: &id137 [-293, 114]
     (R) Scrapli Service: &id123 [628, 113]
-    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [661, 103]
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [601, 109]
     (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: &id122 [560,
       9]
     AAA: !!python/tuple [500, 0]
@@ -31842,8 +31842,42 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2022-07-12 14:17:51.899381'
+  labels:
+    854236db-efe1-47cd-8be6-7e18374a43f8:
+      alignment: left
+      content: "is_string = isinstance(results[\"result\"], str)\r\nvalid_content\
+        \ = (\r\n  \"VRF\" in results[\"result\"]\r\n  and \"Loopback\" in results[\"\
+        result\"]\r\n  and \"vty\" in results[\"result\"]\r\n)\r\nresults[\"success\"\
+        ] = is_string and valid_content\r\n"
+      positions: [-116, -16]
+      size: 14
+    8b146c75-48a1-42d0-88e1-97f8c9a88ae4:
+      alignment: left
+      content: "is_list = isinstance(results[\"result\"], list)\r\nvalid_result =\
+        \ True\r\nfor index, vrf in enumerate((\"a\", \"b\", \"c\")):\r\n  if (\r\n\
+        \    f\"show vrf {vrf}\" not in results[\"commands\"]\r\n    or \"Protocols\"\
+        \ not in results[\"result\"][index]\r\n  ):\r\n    valid_result = False\r\n\
+        results[\"success\"] = is_list and valid_result"
+      positions: [310, 327]
+      size: 14
+    c1b2632b-1f52-4a63-84e0-73b56e179f03:
+      alignment: left
+      content: "is_list = isinstance(results[\"result\"], list)\r\nvalid_content =\
+        \ (\r\n  \"VRF\" in results[\"result\"][0]\r\n  and \"Loopback\" in results[\"\
+        result\"][1]\r\n  and \"vty\" in results[\"result\"][2]\r\n)\r\nresults[\"\
+        success\"] = is_list and valid_content"
+      positions: [-115, 329]
+      size: 14
+    d04ed45e-d3e6-49ce-94a6-b882b3b2af44:
+      alignment: left
+      content: "is_string = isinstance(results[\"result\"], str)\r\nvalid_commands\
+        \ = True\r\nfor vrf in (\"a\", \"b\", \"c\"):\r\n  if f\"show vrf {vrf}\"\
+        \ not in results[\"commands\"]:\r\n    valid_commands = False\r\nvalid_content\
+        \ = results[\"result\"].count(\"Interfaces\") == 3\r\nresults[\"success\"\
+        ] = is_string and valid_commands and valid_content"
+      positions: [337, -13]
+      size: 14
+  last_modified: '2022-07-13 03:39:11.984525'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -31959,7 +31993,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-6, -50]
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-142, 93]
   postprocessing: "is_string = isinstance(results[\"result\"], str)\r\nvalid_content\
     \ = (\r\n  \"VRF\" in results[\"result\"]\r\n  and \"Loopback\" in results[\"\
     result\"]\r\n  and \"vty\" in results[\"result\"]\r\n)\r\nresults[\"success\"\
@@ -32054,7 +32088,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-13, 189]
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-147, 204]
   postprocessing: "is_list = isinstance(results[\"result\"], list)\r\nvalid_content\
     \ = (\r\n  \"VRF\" in results[\"result\"][0]\r\n  and \"Loopback\" in results[\"\
     result\"][1]\r\n  and \"vty\" in results[\"result\"][2]\r\n)\r\nresults[\"success\"\
@@ -32165,7 +32199,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [331, -45]
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [273, 88]
   postprocessing: "is_string = isinstance(results[\"result\"], str)\r\nvalid_commands\
     \ = True\r\nfor vrf in (\"a\", \"b\", \"c\"):\r\n  if f\"show vrf {vrf}\" not\
     \ in results[\"commands\"]:\r\n    valid_commands = False\r\nvalid_content = results[\"\
@@ -32278,7 +32312,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [355, 186]
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [273, 198]
   postprocessing: "is_list = isinstance(results[\"result\"], list)\r\nvalid_result\
     \ = True\r\nfor index, vrf in enumerate((\"a\", \"b\", \"c\")):\r\n  if (\r\n\
     \    f\"show vrf {vrf}\" not in results[\"commands\"]\r\n    or \"Protocols\"\

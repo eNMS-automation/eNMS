@@ -820,6 +820,31 @@
         "orderable": false
       }
     ],
+    "group": [
+      {
+        "data": "name",
+        "title": "Name",
+        "search": "text",
+        "width": "150px"
+      },
+      {
+        "data": "description",
+        "title": "Description",
+        "width": "400px",
+        "search": "text"
+      },
+      {
+        "data": "users",
+        "title": "Users",
+        "width": "80px"
+      },
+      {
+        "data": "buttons",
+        "width": "130px",
+        "orderable": false,
+        "export": false
+      }
+    ],
     "task": [
       {
         "data": "name",
@@ -919,18 +944,13 @@
         "search": "text"
       },
       {
-        "data": "groups",
-        "title": "Groups",
-        "search": "text"
-      },
-      {
         "data": "email",
         "title": "Email Address",
         "search": "text"
       },
       {
-        "data": "pools",
-        "title": "Pools",
+        "data": "groups",
+        "title": "Groups",
         "width": "80px"
       },
       {

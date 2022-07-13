@@ -30,6 +30,10 @@
           "endpoint": "/user_table",
           "rbac": "admin"
         },
+        "Groups": {
+          "endpoint": "/group_table",
+          "rbac": "admin"
+        },
         "Servers": {
           "endpoint": "/server_table",
           "rbac": "admin"
@@ -130,6 +134,7 @@
     "/files_form": "access",
     "/geographical_view": "access",
     "/git_history_form": "access",
+    "/group_table": "access",
     "/help": "all",
     "/parameterized_form": "all",
     "/instance_deletion_form": "access",

@@ -265,8 +265,8 @@
   },
   "advanced": {
     "admin_models": {
-      "read": ["access", "credential", "server", "session"],
-      "edit": ["access", "credential", "server", "user", "session"]
+      "read": ["access", "credential", "group", "server", "session"],
+      "edit": ["access", "credential", "group", "server", "user", "session"]
     },
     "form_access": {
       "device": {

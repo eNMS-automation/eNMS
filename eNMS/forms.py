@@ -228,22 +228,6 @@ class FormFactory:
         class AccessForm(RbacForm):
             template = "access"
             form_type = HiddenField(default="access")
-            user_pools = MultipleInstanceField("pool", model="pool")
-            access_pools = MultipleInstanceField("pool", model="pool")
-            access_type = SelectMultipleStringField(
-                "Access Type",
-                choices=vs.dualize(
-                    [
-                        "Read",
-                        "Configuration",
-                        "Edit",
-                        "Run",
-                        "Schedule",
-                        "Connect",
-                        "Use as target",
-                    ]
-                ),
-            )
             relations = ["pools", "services"]
 
             @classmethod

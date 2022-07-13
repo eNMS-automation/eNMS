@@ -17,27 +17,6 @@
         {{ form.description(id="access-description", class="form-control required
         add-id", placeholder="Description") }}
       </div>
-      <label>User Pools</label>
-      <div class="form-group">
-        {{ form.user_pools(id="access-user_pools", class="form-control add-id") }}
-      </div>
-      <fieldset class="section">
-        <legend align="center" class="section">
-          Model Access
-        </legend>
-        <div class="form-group">
-          <label>Model Pools</label>
-          <div class="form-group">
-            {{ form.access_pools(id="access-access_pools", class="form-control add-id",
-            style="width:100%") }}
-          </div>
-          <label>Access Type</label>
-          <div class="form-group">
-            {{ form.access_type(id="access-access_type", class="form-control add-id
-            no-search", **{"data-width": "100%"}) }}
-          </div>
-        </div>
-      </fieldset>
       <fieldset class="section">
         <legend align="center" class="section">
           User Interface Access

@@ -4,3 +4,9 @@
   name: All users
   type: group
   users: [admin, readonly, nadmin, demo]
+- creator: admin
+  description: Admin User
+  email: admin@enms.io
+  name: Admin User
+  type: group
+  users: [admin]

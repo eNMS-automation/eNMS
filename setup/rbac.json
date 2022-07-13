@@ -270,10 +270,10 @@
     },
     "form_access": {
       "device": {
-        "read": "Read",
-        "edit": "Edit",
-        "connect": "Connect via SSH",
-        "target": "Use as Target"
+        "rbac_read": "Read",
+        "rbac_edit": "Edit",
+        "rbac_connect": "Connect via SSH",
+        "rbac_target": "Use as Target"
       }
     }
   }

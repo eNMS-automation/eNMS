@@ -21,6 +21,7 @@ from eNMS.fields import (
     IntegerField,
     JsonField,
     MultipleInstanceField,
+    MultipleInstanceStringField,
     PasswordField,
     SelectField,
     SelectMultipleField,
@@ -71,7 +72,11 @@ class MetaForm(FormMeta):
             attrs[property] = field
         form.rbac_properties = vs.rbac["advanced"]["form_access"].get(form_type, {})
         for property, property_name in form.rbac_properties.items():
-            setattr(form, f"rbac_{property}", StringField(property_name))
+            field = MultipleInstanceStringField(property_name, model="group")
+            setattr(form, property, field)
+            field_properties = {"type": "object-list", "model": "group"}
+            vs.form_properties[form_type][property] = field_properties
+            vs.relationships[form_type][property] = {"list": True, "model": "group"}
         vs.form_class[form_type] = form
         properties = {}
         for field_name, field in attrs.items():

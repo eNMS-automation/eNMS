@@ -124,6 +124,7 @@ class Database:
                 if hasattr(cls, "database_init") and "database_init" in cls.__dict__:
                     cls.database_init()
                 self.set_custom_properties(cls)
+                self.set_rbac_properties(cls)
 
         return SubDeclarativeMeta
 
@@ -510,7 +511,14 @@ class Database:
             if not values.get("migrate", True):
                 self.dont_migrate[model].append(property)
             setattr(table, property, column)
-        return table
+
+    def set_rbac_properties(self, table):
+        model = getattr(table, "__tablename__", None)
+        properties = vs.rbac["advanced"]["form_access"].get(model, {})
+        if not model or not properties:
+            return
+        for property in properties:
+            setattr(table, property, self.Column(self.LargeString))
 
     def cleanup(self):
         self.engine.dispose()

@@ -44,7 +44,9 @@ class User(AbstractBase, UserMixin):
     delete_requests = db.Column(db.List)
     small_menu = db.Column(Boolean, default=False, info={"log_change": False})
     theme = db.Column(db.TinyString, default="default", info={"log_change": False})
-    groups = relationship("Group", secondary=db.user_group_table, back_populates="users")
+    groups = relationship(
+        "Group", secondary=db.user_group_table, back_populates="users"
+    )
     services = relationship(
         "Service", secondary=db.service_owner_table, back_populates="owners"
     )
@@ -73,9 +75,7 @@ class Group(AbstractBase):
     creator = db.Column(db.SmallString)
     users = relationship("User", secondary=db.user_group_table, back_populates="groups")
     credentials = relationship(
-        "Credential",
-        secondary=db.credential_group_table,
-        back_populates="groups"
+        "Credential", secondary=db.credential_group_table, back_populates="groups"
     )
 
 

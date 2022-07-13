@@ -1168,6 +1168,7 @@ class UserForm(RbacForm):
 
 class GroupForm(RbacForm):
     form_type = HiddenField(default="group")
+    creator = db.Column(db.SmallString)
     users = MultipleInstanceField("Users", model="user")
 
 

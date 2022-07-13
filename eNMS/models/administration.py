@@ -69,6 +69,8 @@ class Group(AbstractBase):
     __tablename__ = type = class_type = "group"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    description = db.Column(db.LargeString)
+    email = db.Column(db.SmallString)
     creator = db.Column(db.SmallString)
     users = relationship("User", secondary=db.user_group_table, back_populates="groups")
 

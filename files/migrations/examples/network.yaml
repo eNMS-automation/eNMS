@@ -20,7 +20,6 @@
   name: Top-level Devices and Links
   networks: []
   nodes: [Router 1, Router 2, Router 3]
-  pools: [Everything, All Networks]
   positions: {}
   subtype: ''
   type: network
@@ -50,7 +49,6 @@
   name: Subnetwork and Teleport Mechanism
   networks: []
   nodes: [Subnetwork 2, Subnetwork 1]
-  pools: [Everything, All Networks]
   positions: {}
   subtype: ''
   type: network
@@ -76,7 +74,6 @@
   name: Subnetwork 1
   networks: [Subnetwork and Teleport Mechanism, Subnetwork 2]
   nodes: [Subnetwork 2, Subnetwork 1 - R1, Subnetwork 1 - R2, Subnetwork 1 - R3]
-  pools: [Everything, All Networks]
   positions:
     'Network 2: Subnetwork': &id001 [-558, -27]
     'Network 2: Subnetwork and Teleport Mechanism': *id001
@@ -116,7 +113,6 @@
   name: Creation, Edit and Deletion
   networks: []
   nodes: []
-  pools: [All Networks, Everything]
   positions: {}
   subtype: ''
   type: network
@@ -141,7 +137,6 @@
   name: Subnetwork 2
   networks: [Subnetwork and Teleport Mechanism, Subnetwork 1]
   nodes: [Subnetwork 1, Subnetwork 2 - G1, Subnetwork 2 - G2]
-  pools: [Everything, All Networks]
   positions:
     'Network 2: Subnetwork': &id002 [-144, -36]
     'Network 2: Subnetwork and Teleport Mechanism': *id002
@@ -178,7 +173,6 @@
   name: Duplication of Devices, Subnetworks and Top-level Networks
   networks: []
   nodes: [Duplicate me 2, Duplicate me 1]
-  pools: [All Networks, Everything]
   positions: {}
   subtype: ''
   type: network
@@ -198,7 +192,6 @@
   name: Duplicate me 2
   networks: ['Duplication of Devices, Subnetworks and Top-level Networks']
   nodes: [Duplication - G1, Duplication - R1]
-  pools: [All Networks, Everything]
   positions:
     Duplication of Devices, Subnetworks and Top-level Networks: &id003 [135, 6]
     'Network 4: Duplication of Devices, Subnetworks and Top-level Networks': *id003
@@ -233,7 +226,6 @@
   name: Loopback and Parallel Links
   networks: []
   nodes: [S5 R1, S5 R2, S5 R3, S5 R4]
-  pools: [Everything, All Networks]
   positions: {}
   subtype: ''
   type: network
@@ -259,7 +251,6 @@
   name: Subsubnetwork and Subsubsubnetwork
   networks: []
   nodes: [L1 Network]
-  pools: [Everything, All Networks]
   positions: {}
   subtype: ''
   type: network
@@ -279,7 +270,6 @@
   name: L1 Network
   networks: [Subsubnetwork and Subsubsubnetwork]
   nodes: [L2 Network]
-  pools: [Everything, All Networks]
   positions:
     'Network 6: Subsubnetwork and Subsubsubnetwork': &id004 [-27, -55]
     Subsubnetwork and Subsubsubnetwork: *id004
@@ -301,7 +291,6 @@
   name: L2 Network
   networks: [L1 Network]
   nodes: [L3 Network]
-  pools: [Everything, All Networks]
   positions: {}
   subtype: ''
   type: network
@@ -321,7 +310,6 @@
   name: L3 Network
   networks: [L2 Network]
   nodes: [S6 L3 R1, S6 L3 R2]
-  pools: [Everything, All Networks]
   positions: {}
   subtype: ''
   type: network
@@ -348,7 +336,6 @@
   name: Layout of Large Graph
   networks: []
   nodes: []
-  pools: [Everything, All Networks]
   positions: {}
   subtype: ''
   type: network
@@ -386,7 +373,6 @@
   name: Import with Add Connected Nodes and Links
   networks: []
   nodes: []
-  pools: [All Networks, Everything]
   positions: {}
   subtype: ''
   type: network
@@ -412,7 +398,6 @@
     Baltimore, PaloAlto, SanJose, Cleveland, Jackson, Richmond, Cambridge, Chicago,
     Philadelphia, Cincinnati, NewYork, Minneapolis, SanFrancisco, Atlanta, Detroit,
     Denver, Sacramento, SanDiego, LosAngeles, Boston, Dallas-2, Dallas]
-  pools: [Everything, All Networks]
   positions: {}
   subtype: ''
   type: network

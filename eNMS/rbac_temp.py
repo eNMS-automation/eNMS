@@ -199,3 +199,8 @@ def query(self, model, rbac="read", username=None, properties=None):
             and set(kwargs.get("form", {})) & set(vs.configuration_properties)
         ):
             rbac = "configuration"
+
+# access types
+
+  access_type: "['Read', 'Configuration', 'Edit', 'Run', 'Schedule', 'Connect', 'Use\
+    \ as target']"

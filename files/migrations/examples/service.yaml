@@ -31933,7 +31933,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   jinja2_template: false
-  last_modified: '2022-07-12 13:21:42.260870'
+  last_modified: '2022-07-13 02:39:00.258456'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -31960,7 +31960,10 @@
   pools: [Everything]
   positions:
     (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-6, -50]
-  postprocessing: ''
+  postprocessing: "is_string = isinstance(results[\"result\"], str)\r\nvalid_content\
+    \ = (\r\n  \"VRF\" in results[\"result\"]\r\n  and \"Loopback\" in results[\"\
+    result\"]\r\n  and \"vty\" in results[\"result\"]\r\n)\r\nresults[\"success\"\
+    ] = is_string and valid_content\r\n"
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
@@ -32025,7 +32028,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   jinja2_template: false
-  last_modified: '2022-07-12 13:21:47.190250'
+  last_modified: '2022-07-13 02:39:38.241424'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -32052,7 +32055,10 @@
   pools: [Everything]
   positions:
     (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-13, 189]
-  postprocessing: ''
+  postprocessing: "is_list = isinstance(results[\"result\"], list)\r\nvalid_content\
+    \ = (\r\n  \"VRF\" in results[\"result\"][0]\r\n  and \"Loopback\" in results[\"\
+    result\"][1]\r\n  and \"vty\" in results[\"result\"][2]\r\n)\r\nresults[\"success\"\
+    ] = is_list and valid_content\r\n"
   postprocessing_mode: success
   preprocessing: ''
   priority: 10

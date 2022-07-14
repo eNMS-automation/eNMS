@@ -63,6 +63,15 @@ class User(AbstractBase, UserMixin):
         ):
             kwargs["password"] = argon2.hash(kwargs["password"])
         super().update(**kwargs)
+        if not kwargs.get("import_mechanism", False):
+            self.update_rbac()
+
+    def update_rbac(self):
+        if self.is_admin:
+            return
+        for property in ("menu", "pages", "get_requests", "post_requests", "delete_requests"):
+            group_value = (getattr(group, property) for group in self.groups)
+            setattr(self, property, list(set(chain.from_iterable(group_value))))
 
 
 class Group(AbstractBase):
@@ -82,6 +91,13 @@ class Group(AbstractBase):
     credentials = relationship(
         "Credential", secondary=db.credential_group_table, back_populates="groups"
     )
+
+    def update(self, **kwargs):
+        old_users = set(self.users)
+        super().update(**kwargs)
+        if not kwargs.get("import_mechanism", False):
+            for user in set(self.users) | old_users:
+                user.update_rbac()
 
 
 class Credential(AbstractBase):

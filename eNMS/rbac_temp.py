@@ -23,13 +23,6 @@
     def rbac_filter(cls, query, *_):
         return query.filter(cls.admin_only == false())
 
-    def update(self, **kwargs):
-        old_users = set(self.users)
-        super().update(**kwargs)
-        if not kwargs.get("import_mechanism", False):
-            self.compute_pool()
-            for user in set(self.users) | old_users:
-                user.update_rbac()
 
 # automation.py
 
@@ -142,30 +135,6 @@
                 )
             )
         return query
-
-# administration.py
-
-# User class
-
-    if not kwargs.get("import_mechanism", False):
-        self.update_rbac()
-
-    def update_rbac(self):
-        if self.is_admin:
-            return
-        db.session.commit()
-        user_access = (
-            db.session.query(vs.models["access"])
-            .join(vs.models["pool"], vs.models["access"].user_pools)
-            .join(vs.models["user"], vs.models["pool"].users)
-            .filter(vs.models["user"].name == self.name)
-            .all()
-        )
-        for property in vs.rbac:
-            if property in ("advanced", "all_pages"):
-                continue
-            access_value = (getattr(access, property) for access in user_access)
-            setattr(self, property, list(set(chain.from_iterable(access_value))))
 
 # controller.py
 

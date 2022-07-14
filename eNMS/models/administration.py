@@ -37,11 +37,6 @@ class User(AbstractBase, UserMixin):
     landing_page = db.Column(db.SmallString, default="/dashboard")
     password = db.Column(db.SmallString)
     authentication = db.Column(db.TinyString)
-    menu = db.Column(db.List)
-    pages = db.Column(db.List)
-    get_requests = db.Column(db.List)
-    post_requests = db.Column(db.List)
-    delete_requests = db.Column(db.List)
     small_menu = db.Column(Boolean, default=False, info={"log_change": False})
     theme = db.Column(db.TinyString, default="default", info={"log_change": False})
     groups = relationship(
@@ -51,6 +46,11 @@ class User(AbstractBase, UserMixin):
         "Service", secondary=db.service_owner_table, back_populates="owners"
     )
     is_admin = db.Column(Boolean, default=False)
+
+    @classmethod
+    def database_init(cls):
+        for property in vs.rbac["form_properties"]:
+            setattr(cls, property, db.Column(db.List))
 
     def get_id(self):
         return self.name
@@ -69,7 +69,7 @@ class User(AbstractBase, UserMixin):
     def update_rbac(self):
         if self.is_admin:
             return
-        for property in ("menu", "pages", "get_requests", "post_requests", "delete_requests"):
+        for property in vs.rbac["form_properties"]:
             group_value = (getattr(group, property) for group in self.groups)
             setattr(self, property, list(set(chain.from_iterable(group_value))))
 
@@ -82,15 +82,15 @@ class Group(AbstractBase):
     description = db.Column(db.LargeString)
     email = db.Column(db.SmallString)
     creator = db.Column(db.SmallString)
-    menu = db.Column(db.List)
-    pages = db.Column(db.List)
-    get_requests = db.Column(db.List)
-    post_requests = db.Column(db.List)
-    delete_requests = db.Column(db.List)
     users = relationship("User", secondary=db.user_group_table, back_populates="groups")
     credentials = relationship(
         "Credential", secondary=db.credential_group_table, back_populates="groups"
     )
+
+    @classmethod
+    def database_init(cls):
+        for property in vs.rbac["form_properties"]:
+            setattr(cls, property, db.Column(db.List))
 
     def update(self, **kwargs):
         old_users = set(self.users)

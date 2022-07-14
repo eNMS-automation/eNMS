@@ -1,4 +1,5 @@
 {
+  "form_properties": ["menu", "pages", "get_requests", "post_requests", "delete_requests"],
   "menu": {
     "Home": {
       "icon": "home",

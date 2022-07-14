@@ -42,10 +42,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -95,10 +95,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -148,10 +148,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: All users,Admin User
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -201,10 +201,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -254,10 +254,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -307,10 +307,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -360,10 +360,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -413,10 +413,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -466,10 +466,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -519,10 +519,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -572,10 +572,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -625,10 +625,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -678,10 +678,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -731,10 +731,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -784,10 +784,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -837,10 +837,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -890,10 +890,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -943,10 +943,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -996,10 +996,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1049,10 +1049,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1102,10 +1102,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1155,10 +1155,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1208,10 +1208,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1261,10 +1261,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1314,10 +1314,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1367,10 +1367,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1420,10 +1420,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1471,10 +1471,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1522,10 +1522,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1573,10 +1573,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1624,10 +1624,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1675,10 +1675,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1726,10 +1726,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1777,10 +1777,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1828,10 +1828,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1879,10 +1879,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1930,10 +1930,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1981,10 +1981,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2032,10 +2032,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2083,10 +2083,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2134,10 +2134,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2185,10 +2185,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2236,10 +2236,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2287,10 +2287,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2338,10 +2338,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2389,10 +2389,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2440,10 +2440,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2491,10 +2491,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2542,10 +2542,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2593,10 +2593,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2644,10 +2644,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2695,10 +2695,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2746,10 +2746,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2797,10 +2797,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2848,10 +2848,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2899,10 +2899,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2950,10 +2950,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -3001,10 +3001,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -3052,10 +3052,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -3103,10 +3103,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -3154,10 +3154,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -3205,10 +3205,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -3258,10 +3258,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -3311,10 +3311,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -3363,10 +3363,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -3416,10 +3416,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -3468,10 +3468,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -3520,10 +3520,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -3572,10 +3572,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -3623,10 +3623,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
@@ -3674,10 +3674,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   serial_number: ''
@@ -3726,10 +3726,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   serial_number: ''
@@ -3776,10 +3776,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   serial_number: ''
@@ -3828,10 +3828,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
@@ -3879,10 +3879,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
@@ -3930,10 +3930,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
@@ -3979,10 +3979,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: arista_eos
   serial_number: ''
@@ -4030,10 +4030,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   serial_number: ''
@@ -4081,10 +4081,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   serial_number: ''
@@ -4134,10 +4134,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
@@ -4186,10 +4186,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
@@ -4237,10 +4237,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
@@ -4289,10 +4289,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
@@ -4339,10 +4339,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   serial_number: ''
@@ -4390,10 +4390,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   serial_number: ''
@@ -4442,10 +4442,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
@@ -4493,10 +4493,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
@@ -4544,10 +4544,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
@@ -4595,10 +4595,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
@@ -4645,10 +4645,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
@@ -4695,10 +4695,10 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
-  rbac_connect: ''
-  rbac_edit: ''
-  rbac_read: ''
-  rbac_target: ''
+  rbac_connect: Full UI Read + Edit Access
+  rbac_edit: Full UI Read + Edit Access
+  rbac_read: Full UI Read + Edit Access
+  rbac_target: Full UI Read + Edit Access
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''

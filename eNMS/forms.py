@@ -138,7 +138,7 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
                 if field["type"] == "object-list":
                     value = [db.fetch(field["model"], name=name).id for name in value]
                 if field["type"] == "object-string-list":
-                    value = ",".join(value)
+                    value = f",{','.join(value)},"
                 data[property] = value
             elif field["type"] == "object":
                 data[property] = form_data.get(property)

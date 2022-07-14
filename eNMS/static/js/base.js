@@ -738,7 +738,7 @@ function updateProperty(instance, el, property, value, type) {
     el.selectpicker("val", value).trigger("change");
     el.selectpicker("render");
   } else if (propertyType == "object-string-list") {
-    const values = value.split(",").filter(Boolean);
+    const values = value.slice(1, -1).split(",").filter(Boolean);
     values.forEach((instance) => el.append(new Option(instance, instance)));
     el.val(values).trigger("change");
   } else if (["object-list", "object"].includes(propertyType)) {

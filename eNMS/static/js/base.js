@@ -741,7 +741,7 @@ function updateProperty(instance, el, property, value, type) {
     const values = value.split(",").filter(Boolean);
     values.forEach((instance) => el.append(new Option(instance, instance)));
     el.val(values).trigger("change");
-  } else if (["object-list", "object", ].includes(propertyType)) {
+  } else if (["object-list", "object"].includes(propertyType)) {
     if (propertyType == "object") value = [value];
     const idProperty = propertyType == "object" ? "id" : "name";
     value.forEach((o) => {

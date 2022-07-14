@@ -1,6 +1,6 @@
-- creator: ''
+- admin_only: false
+  creator: ''
   crontab_expression: ''
-  default_access: ''
   description: Monitor eNMS cluster
   devices: []
   end_date: ''
@@ -11,6 +11,5 @@
   name: Cluster Monitoring
   pools: []
   scheduling_mode: standard
-  service: cluster_monitoring
   start_date: ''
   type: task

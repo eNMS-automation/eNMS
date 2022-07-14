@@ -1,5 +1,4 @@
-- access_groups: ''
-  admin_only: true
+- admin_only: true
   creator: ''
   description: All objects
   device_access_groups: ''
@@ -147,8 +146,7 @@
   target_services: []
   tasks: []
   type: pool
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   creator: ''
   description: All devices
   device_access_groups: ''
@@ -275,8 +273,7 @@
       Once with Pool', Large Device Configuration and Operational Data]
   tasks: []
   type: pool
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   creator: ''
   description: All links
   device_access_groups: ''
@@ -412,8 +409,7 @@
   target_services: []
   tasks: []
   type: pool
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   creator: ''
   description: Datacenter San Francisco
   device_access_groups: ''
@@ -558,8 +554,7 @@
   target_services: [Parameterized Multiprocessing]
   tasks: []
   type: pool
-- access_groups: ''
-  admin_only: true
+- admin_only: true
   creator: ''
   description: Datacenter New York
   device_access_groups: ''
@@ -700,8 +695,7 @@
   target_services: []
   tasks: []
   type: pool
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   creator: ''
   description: Datacenter Chicago
   device_access_groups: ''
@@ -841,8 +835,7 @@
   target_services: []
   tasks: []
   type: pool
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   creator: ''
   description: ''
   device_access_groups: ''
@@ -956,8 +949,7 @@
   target_services: [Parameterized Targets, Parameterized Run with a Superworkflow]
   tasks: []
   type: pool
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   creator: admin
   description: Used for testing credentials
   device_access_groups: ''
@@ -1071,8 +1063,7 @@
   target_services: ['Credentials (Password & Key, Priority Mechanism)']
   tasks: []
   type: pool
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   creator: admin
   description: "Used for testing credentials\t"
   device_access_groups: ''
@@ -1186,8 +1177,7 @@
   target_services: []
   tasks: []
   type: pool
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   creator: admin
   description: ''
   device_access_groups: ''

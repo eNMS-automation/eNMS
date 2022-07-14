@@ -1,5 +1,4 @@
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -456,8 +455,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -926,8 +924,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -1003,7 +1000,6 @@
 - a_dict: {}
   a_float: 5.0
   a_list: []
-  access_groups: ''
   admin_only: false
   an_integer: 10
   boolean1: true
@@ -1103,8 +1099,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -1199,8 +1194,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   close_connection: false
   commit_configuration: false
   completion_time: 1
@@ -1301,8 +1295,7 @@
   validation_section: results['result']
   vendor: Arista
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: true
   commands: show vrf
@@ -1420,8 +1413,7 @@
   validation_section: results['result']
   vendor: Arista
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   close_connection: false
   commit_configuration: false
   completion_time: 1
@@ -1523,8 +1515,7 @@
   validation_section: results['result']
   vendor: Arista
   waiting_time: 1
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show vrf
@@ -1645,8 +1636,7 @@
   validation_section: results['result']
   vendor: Arista
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -1762,8 +1752,7 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -1859,8 +1848,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -1956,8 +1944,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2045,8 +2032,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   close_connection: false
   command: show vrf a
   completion_time: 1
@@ -2152,8 +2138,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -2259,8 +2244,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2339,8 +2323,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2422,8 +2405,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show vrf {{iteration_simple}}
@@ -2531,8 +2513,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show vrf test
@@ -2640,8 +2621,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show vrf {{get_result("Modify payload (per device)", device=device.name)["duration"]}}
@@ -2750,8 +2730,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -2864,8 +2843,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   arguments: ''
   completion_time: 1
   content_match: ''
@@ -2950,8 +2928,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   arguments: ''
   completion_time: 1
   content_match: ip address\s.*/24
@@ -3036,8 +3013,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   arguments: ''
   completion_time: 1
   content_match: ''
@@ -3122,8 +3098,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show interface {{non_default_iteration_value_name}}
@@ -3232,8 +3207,7 @@
   validation_section: results['result']
   vendor: Arista
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show interface {{iteration_value}}
@@ -3342,8 +3316,7 @@
   validation_section: results['result']
   vendor: Arista
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show interface {{iteration_value}}
@@ -3452,8 +3425,7 @@
   validation_section: results['result']
   vendor: Arista
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -3541,8 +3513,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -3633,8 +3604,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -3751,8 +3721,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Basics
   close_connection: false
   completion_time: 1
@@ -3864,8 +3833,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -3957,8 +3925,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Global Variables
   close_connection: false
   completion_time: 1
@@ -4063,8 +4030,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -4181,8 +4147,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Run Methods
   close_connection: false
   completion_time: 1
@@ -4272,8 +4237,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Iteration Mechanism
   close_connection: false
   completion_time: 1
@@ -4406,8 +4370,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  add_header: true
+- add_header: true
   admin_only: false
   close_connection: true
   commands:
@@ -4536,8 +4499,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Run Methods
   close_connection: false
   completion_time: 1
@@ -4619,8 +4581,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -4702,8 +4663,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -4789,8 +4749,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -4872,8 +4831,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -4959,8 +4917,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -5042,8 +4999,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: ''
@@ -5151,8 +5107,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: ''
@@ -5261,8 +5216,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: ''
@@ -5370,8 +5324,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Basics
   close_connection: false
   completion_time: 1
@@ -5472,8 +5425,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -5556,8 +5508,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -5640,8 +5591,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show vrf
@@ -5753,8 +5703,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   arguments: ''
   completion_time: 1
   content_match: ''
@@ -5838,8 +5787,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Iteration Mechanism
   close_connection: false
   completion_time: 1
@@ -5940,8 +5888,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6024,8 +5971,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show vrf {{command_dict["command"]}}
@@ -6136,8 +6082,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Iteration Mechanism
   close_connection: false
   completion_time: 1
@@ -6255,8 +6200,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6335,8 +6279,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -6419,8 +6362,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6501,8 +6443,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Basics
   close_connection: false
   completion_time: 1
@@ -6601,8 +6542,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6684,8 +6624,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6764,8 +6703,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6846,8 +6784,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Superworkflows
   close_connection: false
   completion_time: 1
@@ -6927,8 +6864,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -7016,8 +6952,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   command: ps -ef
   completion_time: 1
   content_match: python\d
@@ -7098,8 +7033,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: false
   close_connection: false
   completion_time: 1
@@ -7200,8 +7134,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -7287,8 +7220,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -7367,8 +7299,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -7455,8 +7386,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: ps -ef
@@ -7567,8 +7497,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -7657,8 +7586,7 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show version
@@ -7762,8 +7690,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  add_header: true
+- add_header: true
   admin_only: false
   close_connection: false
   commands:
@@ -7891,8 +7818,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  actions: [add_commit, pull, push]
+- actions: [add_commit, pull, push]
   admin_only: false
   commit_message: Automatic commit (configurations)
   completion_time: 1
@@ -7976,8 +7902,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -8056,8 +7981,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -8138,8 +8062,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   close_connection: false
   commands: "show run\r\nshow vrf"
   completion_time: 1
@@ -8231,8 +8154,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   close_connection: false
   commands: vrf instance TEST-VRF
   completion_time: 1
@@ -8324,8 +8246,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   close_connection: false
   commands: "show run\r\nshow vrf"
   completion_time: 1
@@ -8417,8 +8338,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   close_connection: false
   commands: no vrf instance TEST-VRF
   completion_time: 1
@@ -8510,8 +8430,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -8601,8 +8520,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: dir enms_files
@@ -8711,8 +8629,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -8803,8 +8720,7 @@
   vendor: ''
   waiting_time: 0
   window_size: 1073741824
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: dir enms_files
@@ -8915,8 +8831,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -9008,8 +8923,7 @@
   vendor: ''
   waiting_time: 0
   window_size: 1073741824
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: delete flash:/enms_files/*.bin
@@ -9118,8 +9032,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: No such file or directory
   content_match_regex: false
@@ -9210,8 +9123,7 @@
   vendor: ''
   waiting_time: 0
   window_size: 1073741824
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Skip Mechanism
   close_connection: false
   completion_time: 1
@@ -9309,8 +9221,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -9397,8 +9308,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -9485,8 +9395,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -9574,8 +9483,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Skip Mechanism
   close_connection: false
   completion_time: 1
@@ -9691,8 +9599,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -9780,8 +9687,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -9868,8 +9774,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -9956,8 +9861,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -10044,8 +9948,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Global Variables
   close_connection: false
   completion_time: 1
@@ -10154,8 +10057,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -10265,8 +10167,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -10360,8 +10261,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show vrf
@@ -10470,8 +10370,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Global Variables
   close_connection: false
   completion_time: 1
@@ -10582,8 +10481,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -10672,8 +10570,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -10755,8 +10652,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show vrf
@@ -10867,8 +10763,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -10954,8 +10849,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Skip Mechanism
   close_connection: false
   completion_time: 1
@@ -11063,8 +10957,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -11163,8 +11056,7 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -11248,8 +11140,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -11333,8 +11224,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show vrf
@@ -11443,8 +11333,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -11534,8 +11423,7 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Skip Mechanism
   close_connection: false
   completion_time: 1
@@ -11639,8 +11527,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -11724,8 +11611,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -11805,8 +11691,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -11889,8 +11774,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -11974,8 +11858,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Skip Mechanism
   close_connection: false
   completion_time: 1
@@ -12077,8 +11960,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -12159,8 +12041,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -12244,8 +12125,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -12329,8 +12209,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -12411,8 +12290,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -12493,8 +12371,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -12574,8 +12451,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show run
@@ -12679,8 +12555,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: RBAC
   close_connection: false
   completion_time: 1
@@ -12787,8 +12662,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show interfaces
@@ -12895,8 +12769,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Basics
   close_connection: false
   completion_time: 1
@@ -12988,8 +12861,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -13067,8 +12939,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -13146,8 +13017,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -13226,8 +13096,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -13305,8 +13174,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Iteration Mechanism
   close_connection: false
   completion_time: 1
@@ -13408,8 +13276,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -13487,8 +13354,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -13570,8 +13436,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -13653,8 +13518,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -13734,8 +13598,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -13815,8 +13678,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -13896,8 +13758,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -13976,8 +13837,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: RBAC
   close_connection: false
   completion_time: 1
@@ -14071,8 +13931,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -14150,8 +14009,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -14229,8 +14087,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -14308,8 +14165,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -14413,8 +14269,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   close_connection: false
   command: get_config
   commit_config: false
@@ -14503,8 +14358,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   close_connection: false
   command: get
   commit_config: false
@@ -14597,8 +14451,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   close_connection: false
   command: rpc
   commit_config: true
@@ -14688,8 +14541,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   close_connection: false
   command: rpc
   commit_config: false
@@ -14779,8 +14631,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Parameterized Form
   close_connection: false
   completion_time: 1
@@ -14874,8 +14725,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show interface {{payload["form"]["interface"]}}
@@ -14983,8 +14833,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Basics
   close_connection: false
   completion_time: 1
@@ -15093,8 +14942,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -15174,8 +15022,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -15258,8 +15105,7 @@
   validation_section: results['new_key']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: OL
   content_match_regex: false
@@ -15339,8 +15185,7 @@
   validation_section: results['result']["a"]["b"]
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -15437,8 +15282,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   close_connection: false
   commit_conf: false
   completion_time: 1
@@ -15535,8 +15379,7 @@
   waiting_time: 0
   xml_conversion: true
   xml_filter: ''
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   close_connection: false
   commit_conf: false
   completion_time: 1
@@ -15638,8 +15481,7 @@
     \n        <if:name>Loopback4</if:name>\r\n        <if:config>\r\n        <if:description>ZZZZ</if:description>\r\
     \n        </if:config>\r\n      </if:interface>\r\n    </if:interfaces>\r\n  \
     \  </nc:config>"
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   close_connection: false
   commit_conf: false
   completion_time: 1
@@ -15736,8 +15578,7 @@
   waiting_time: 0
   xml_conversion: true
   xml_filter: ''
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   close_connection: false
   commit_conf: false
   completion_time: 1
@@ -15839,8 +15680,7 @@
     \n        <if:name>Loopback4</if:name>\r\n        <if:config>\r\n        <if:description>None</if:description>\r\
     \n        </if:config>\r\n      </if:interface>\r\n    </if:interfaces>\r\n  \
     \  </nc:config>"
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   close_connection: false
   commit_conf: false
   completion_time: 1
@@ -15937,8 +15777,7 @@
   waiting_time: 0
   xml_conversion: true
   xml_filter: ''
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: SSH Connection
   close_connection: false
   completion_time: 1
@@ -16043,8 +15882,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show vrf
@@ -16152,8 +15990,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show vrf
@@ -16261,8 +16098,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: true
   commands: show vrf
@@ -16370,8 +16206,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Notification Mechanism
   close_connection: false
   completion_time: 1
@@ -16474,8 +16309,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -16555,8 +16389,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -16637,8 +16470,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -16719,8 +16551,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -16819,8 +16650,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: dir enms_files
@@ -16927,8 +16757,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   close_connection: false
   completion_time: 1
   config_mode: false
@@ -17023,8 +16852,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: dir enms_files
@@ -17131,8 +16959,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: delete enms_files/netmiko_file
@@ -17239,8 +17066,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: dir enms_files
@@ -17347,8 +17173,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Global Variables
   close_connection: false
   completion_time: 1
@@ -17457,8 +17282,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -17538,8 +17362,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show {{get_credential(name="Non Device Credential")["password"]}}
@@ -17647,8 +17470,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -17736,8 +17558,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Skip Mechanism
   close_connection: false
   completion_time: 1
@@ -17842,8 +17663,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -17923,8 +17743,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -18003,8 +17822,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -18083,8 +17901,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -18164,8 +17981,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -18248,8 +18064,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -18330,8 +18145,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -18421,8 +18235,7 @@
   variable3: ''
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -18512,8 +18325,7 @@
   variable3: ''
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -18603,8 +18415,7 @@
   variable3: ''
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -18694,8 +18505,7 @@
   variable3: ''
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -18785,8 +18595,7 @@
   variable3: ''
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -18876,8 +18685,7 @@
   variable3: ''
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -18967,8 +18775,7 @@
   variable3: ''
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -19052,8 +18859,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Superworkflows
   close_connection: false
   completion_time: 1
@@ -19153,8 +18959,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -19232,8 +19037,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Superworkflows
   close_connection: false
   completion_time: 1
@@ -19318,8 +19122,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -19405,8 +19208,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show interface {{interface}}
@@ -19513,8 +19315,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -19608,8 +19409,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show ip int brief
@@ -19716,8 +19516,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show version
@@ -19824,8 +19623,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show arp
@@ -19932,8 +19730,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show lldp neighbor
@@ -20040,8 +19837,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -20129,8 +19925,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  action: load_merge_candidate
+- action: load_merge_candidate
   admin_only: false
   close_connection: false
   completion_time: 1
@@ -20221,8 +20016,7 @@
   validation_section: results['result']
   vendor: Arista
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -20312,8 +20106,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show vrf
@@ -20426,8 +20219,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: show vrf
@@ -20540,8 +20332,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -20658,8 +20449,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -20758,8 +20548,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -20857,8 +20646,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -20956,8 +20744,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   close_connection: false
   completion_time: 1
   connection_name: default
@@ -21055,8 +20842,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Payload
   close_connection: false
   completion_time: 1
@@ -21178,8 +20964,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: true
   commands: show ip route
@@ -21297,8 +21082,7 @@
   validation_section: results['result']
   vendor: Arista
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -21405,8 +21189,7 @@
   variable3: textfsm_variable
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -21497,8 +21280,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: (\d\.){3}\d
   content_match_regex: true
@@ -21588,8 +21370,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -21679,8 +21460,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: (\d\.){3}\d
   content_match_regex: true
@@ -21769,8 +21549,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   category: Payload
   close_connection: false
   completion_time: 1
@@ -21853,8 +21632,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -21944,8 +21722,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -22047,8 +21824,7 @@
   variable3: dict
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -22150,8 +21926,7 @@
   variable3: dict
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: \[1,2,False,1.*\]
   content_match_regex: true
@@ -22240,8 +22015,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: '{"a": ["o", True, 4], "prefix_length": 24, "failed": 0}'
   content_match_regex: false
@@ -22330,8 +22104,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Payload
   close_connection: false
   completion_time: 1
@@ -22414,8 +22187,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -22493,8 +22265,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -22571,8 +22342,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -22649,8 +22419,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -22727,8 +22496,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -22805,8 +22573,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -22883,8 +22650,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Superworkflows
   close_connection: false
   completion_time: 1
@@ -22965,8 +22731,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Superworkflows
   close_connection: false
   completion_time: 1
@@ -23045,8 +22810,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -23122,8 +22886,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -23199,8 +22962,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -23277,8 +23039,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -23355,8 +23116,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -23433,8 +23193,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Global Variables
   close_connection: false
   completion_time: 1
@@ -23525,8 +23284,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -23603,8 +23361,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -23682,8 +23439,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: ''
   close_connection: false
   completion_time: 1
@@ -23764,8 +23520,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -23845,8 +23600,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -23926,8 +23680,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -24009,8 +23762,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Basics
   close_connection: false
   completion_time: 1
@@ -24123,8 +23875,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -24202,8 +23953,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -24281,8 +24031,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -24360,8 +24109,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -24439,8 +24187,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -24518,8 +24265,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -24597,8 +24343,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -24677,8 +24422,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: REST API
   close_connection: false
   completion_time: 1
@@ -24781,8 +24525,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -24869,8 +24612,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: 'Command: show running-config'
@@ -24956,8 +24698,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ipv4,ipv6
@@ -25043,8 +24784,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -25129,8 +24869,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -25215,8 +24954,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: REST API
   close_connection: false
   completion_time: 1
@@ -25321,8 +25059,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -25410,8 +25147,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -25497,8 +25233,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -25585,8 +25320,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -25672,8 +25406,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: REST API
   close_connection: false
   completion_time: 1
@@ -25779,8 +25512,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: POST
   completion_time: 1
   content_match: ''
@@ -25873,8 +25605,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: POST
   completion_time: 1
   content_match: ''
@@ -25965,8 +25696,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: POST
   completion_time: 1
   content_match: ''
@@ -26059,8 +25789,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: REST API
   close_connection: false
   completion_time: 1
@@ -26172,8 +25901,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: POST
   completion_time: 1
   content_match: ''
@@ -26260,8 +25988,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: POST
   completion_time: 1
   content_match: ''
@@ -26346,8 +26073,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: DELETE
   completion_time: 1
   content_match: ''
@@ -26433,8 +26159,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: GET
   completion_time: 1
   content_match: ''
@@ -26520,8 +26245,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   call_type: POST
   completion_time: 1
   content_match: ''
@@ -26610,8 +26334,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: SSH Connection
   close_connection: false
   completion_time: 1
@@ -26727,8 +26450,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: sh ip int br
@@ -26837,8 +26559,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: sh ip int br
@@ -26947,8 +26668,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: sh ip int br
@@ -27057,8 +26777,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Parameterized Form
   close_connection: false
   completion_time: 1
@@ -27144,8 +26863,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -27221,8 +26939,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Parameterized Form
   close_connection: false
   completion_time: 1
@@ -27330,8 +27047,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -27407,8 +27123,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Basics
   close_connection: false
   completion_time: 1
@@ -27490,8 +27205,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Scalability
   close_connection: false
   completion_time: 1
@@ -27584,8 +27298,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -27665,8 +27378,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -27746,8 +27458,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -27827,8 +27538,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -27908,8 +27618,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -27989,8 +27698,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -28070,8 +27778,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -28151,8 +27858,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -28232,8 +27938,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -28313,8 +28018,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -28394,8 +28098,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -28475,8 +28178,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -28556,8 +28258,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -28637,8 +28338,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -28718,8 +28418,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -28799,8 +28498,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -28880,8 +28578,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -28961,8 +28658,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -29042,8 +28738,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -29123,8 +28818,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -29204,8 +28898,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -29285,8 +28978,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -29366,8 +29058,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -29447,8 +29138,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -29528,8 +29218,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -29609,8 +29298,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -29690,8 +29378,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -29771,8 +29458,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -29852,8 +29538,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Scalability
   close_connection: false
   completion_time: 1
@@ -29945,8 +29630,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -30024,8 +29708,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Scalability
   close_connection: false
   completion_time: 1
@@ -30111,8 +29794,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -30188,8 +29870,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Scalability
   close_connection: false
   completion_time: 1
@@ -30278,8 +29959,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -30357,8 +30037,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Notification Mechanism
   close_connection: false
   completion_time: 1
@@ -30438,8 +30117,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   body: "Per device notification in default channel (random):\r\ndevice name: {{ device.name\
     \ }}"
   channel: ''
@@ -30518,8 +30196,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   body: One notification in general
   channel: general
   completion_time: 1
@@ -30597,8 +30274,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  add_header: true
+- add_header: true
   admin_only: false
   close_connection: false
   commands:
@@ -30714,8 +30390,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  add_header: true
+- add_header: true
   admin_only: false
   close_connection: false
   commands:
@@ -30832,8 +30507,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: SSH Connection
   close_connection: false
   completion_time: 1
@@ -30949,8 +30623,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   close_connection: false
   commands: sh ip int br
   completion_time: 1
@@ -31039,8 +30712,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   close_connection: false
   commands: sh ip int br
   completion_time: 1
@@ -31129,8 +30801,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   close_connection: false
   commands: sh ip int br
   completion_time: 1
@@ -31219,8 +30890,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -31309,8 +30979,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: "hostname core-sw-waw-01\r\n\r\nno ip domain lookup\r\nip domain\
     \ name local.lab\r\nip name-server 1.1.1.1\r\nip name-server 8.8.8.8\r\n\r\nntp\
@@ -31403,8 +31072,7 @@
   variable3: ''
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -31482,8 +31150,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   category: Services
   close_connection: false
   completion_time: 1
@@ -31600,8 +31267,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   close_connection: false
   commands: "show vrf\r\nshow ip int br\r\nshow users"
   completion_time: 1
@@ -31694,8 +31360,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   close_connection: false
   commands: "show vrf\r\nshow ip int br\r\nshow users"
   completion_time: 1
@@ -31788,8 +31453,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: "{%- for vrf in (\"a\", \"b\", \"c\") -%}\r\nshow vrf {{ vrf }}\r\n{%\
@@ -31900,8 +31564,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   auto_find_prompt: true
   close_connection: false
   commands: "{%- for vrf in (\"a\", \"b\", \"c\") -%}\r\nshow vrf {{ vrf }}\r\n{%\

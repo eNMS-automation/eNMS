@@ -1,5 +1,4 @@
-- access_groups: ''
-  category: Display
+- category: Display
   creator: admin
   description: ''
   icon: network
@@ -24,8 +23,7 @@
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: Subnetwork
+- category: Subnetwork
   creator: admin
   description: ''
   icon: network
@@ -53,8 +51,7 @@
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: ''
+- category: ''
   creator: admin
   description: ''
   icon: network
@@ -82,8 +79,7 @@
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: Editing
+- category: Editing
   creator: admin
   description: ''
   icon: network
@@ -117,8 +113,7 @@
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: ''
+- category: ''
   creator: admin
   description: ''
   icon: network
@@ -145,8 +140,7 @@
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: Editing
+- category: Editing
   creator: admin
   description: ''
   icon: network
@@ -177,8 +171,7 @@
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: ''
+- category: ''
   creator: admin
   description: ''
   icon: network
@@ -198,8 +191,7 @@
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: Display
+- category: Display
   creator: admin
   description: ''
   icon: network
@@ -230,8 +222,7 @@
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: Subnetwork
+- category: Subnetwork
   creator: admin
   description: ''
   icon: network
@@ -255,8 +246,7 @@
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: ''
+- category: ''
   creator: admin
   description: ''
   icon: network
@@ -276,8 +266,7 @@
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: ''
+- category: ''
   creator: admin
   description: ''
   icon: network
@@ -295,8 +284,7 @@
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: ''
+- category: ''
   creator: admin
   description: ''
   icon: network
@@ -314,8 +302,7 @@
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: Display
+- category: Display
   creator: admin
   description: ''
   icon: network
@@ -340,8 +327,7 @@
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: Editing
+- category: Editing
   creator: admin
   description: ''
   icon: network
@@ -377,8 +363,7 @@
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: Display
+- category: Display
   creator: admin
   description: ''
   icon: network

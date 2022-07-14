@@ -934,7 +934,7 @@ class Controller:
                         status = "Partial import (see logs)."
         db.session.commit()
         if not kwargs.get("skip_model_update"):
-            for model in ("access", "service", "network"):
+            for model in ("service", "network"):
                 for instance in db.fetch_all(model):
                     instance.update()
         if not kwargs.get("skip_pool_update"):

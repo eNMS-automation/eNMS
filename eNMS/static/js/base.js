@@ -694,7 +694,6 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
         });
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
-        $(`#${type}-access_groups`).val(user.groups);
         if (page == "workflow_builder" && creationMode == "create_service") {
           $(`#${type}-workflows`).append(new Option(instance.name, instance.name));
           $(`#${type}-workflows`).val(instance.name).trigger("change");

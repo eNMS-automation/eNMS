@@ -469,7 +469,6 @@ class ObjectForm(BaseForm):
     name = StringField("Name")
     type = StringField("Type")
     networks = MultipleInstanceField("Networks", model="network")
-    access_groups = StringField("Groups")
     description = StringField("Description")
     subtype = StringField("Subtype")
     location = StringField("Location")
@@ -481,7 +480,6 @@ class PoolForm(BaseForm):
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
     admin_only = BooleanField("Pool visible to admin users only")
-    access_groups = StringField("Groups")
     description = StringField("Description")
     manually_defined = BooleanField("Manually defined (won't be automatically updated)")
 
@@ -578,7 +576,6 @@ class ServiceForm(BaseForm):
     id = HiddenField()
     name = StringField("Name")
     type = StringField("Service Type")
-    access_groups = StringField("Groups")
     shared = BooleanField("Shared")
     scoped_name = StringField("Scoped Name", [InputRequired()])
     description = StringField("Description")

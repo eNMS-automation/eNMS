@@ -73,23 +73,15 @@ class Group(AbstractBase):
     description = db.Column(db.LargeString)
     email = db.Column(db.SmallString)
     creator = db.Column(db.SmallString)
-    users = relationship("User", secondary=db.user_group_table, back_populates="groups")
-    credentials = relationship(
-        "Credential", secondary=db.credential_group_table, back_populates="groups"
-    )
-
-
-class Access(AbstractBase):
-
-    __tablename__ = type = class_type = "access"
-    id = db.Column(Integer, primary_key=True)
-    name = db.Column(db.SmallString, unique=True)
-    description = db.Column(db.LargeString)
     menu = db.Column(db.List)
     pages = db.Column(db.List)
     get_requests = db.Column(db.List)
     post_requests = db.Column(db.List)
     delete_requests = db.Column(db.List)
+    users = relationship("User", secondary=db.user_group_table, back_populates="groups")
+    credentials = relationship(
+        "Credential", secondary=db.credential_group_table, back_populates="groups"
+    )
 
 
 class Credential(AbstractBase):

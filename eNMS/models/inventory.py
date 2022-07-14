@@ -18,7 +18,6 @@ class Object(AbstractBase):
     __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     creator = db.Column(db.SmallString)
-    access_groups = db.Column(db.LargeString)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     subtype = db.Column(db.SmallString)
     description = db.Column(db.LargeString)
@@ -275,7 +274,6 @@ class Pool(AbstractBase):
     name = db.Column(db.SmallString, unique=True)
     manually_defined = db.Column(Boolean, default=False)
     creator = db.Column(db.SmallString)
-    access_groups = db.Column(db.LargeString)
     admin_only = db.Column(Boolean, default=False)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     description = db.Column(db.LargeString)

@@ -28,7 +28,6 @@ class Service(AbstractBase):
     name = db.Column(db.SmallString, unique=True)
     path = db.Column(db.TinyString)
     creator = db.Column(db.SmallString)
-    access_groups = db.Column(db.LargeString)
     admin_only = db.Column(Boolean, default=False)
     owners_access = db.Column(db.SmallString)
     shared = db.Column(Boolean, default=False)

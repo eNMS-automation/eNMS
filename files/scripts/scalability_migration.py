@@ -15,7 +15,9 @@ def update_migration_files():
             instances = yaml.load(migration_file)
         updated_instances = []
         for instance in instances:
-            updated_instances.append({property: instance[property] for property in properties})
+            updated_instances.append(
+                {property: instance[property] for property in properties}
+            )
         with open(PATH / FILENAME / f"{model}.yaml", "w") as migration_file:
             yaml.dump(updated_instances, migration_file)
 

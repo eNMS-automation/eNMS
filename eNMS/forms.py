@@ -1145,9 +1145,20 @@ class GroupForm(RbacForm):
     users = MultipleInstanceField("Users", model="user")
     menu = SelectMultipleField("Menu", choices=vs.dualize(vs.rbac["menus"]))
     pages = SelectMultipleField("Pages", choices=vs.dualize(vs.rbac["pages"]))
-    get_requests = SelectMultipleField("GET Requests", choices=[(k, k) for k, v in vs.rbac["get_requests"].items() if v == "access"])
-    post_requests = SelectMultipleField("POST Requests", choices=[(k, k) for k, v in vs.rbac["post_requests"].items() if v == "access"])
-    delete_requests = SelectMultipleField("DELETE Requests", choices=[(k, k) for k, v in vs.rbac["delete_requests"].items() if v == "access"])
+    get_requests = SelectMultipleField(
+        "GET Requests",
+        choices=[(k, k) for k, v in vs.rbac["get_requests"].items() if v == "access"],
+    )
+    post_requests = SelectMultipleField(
+        "POST Requests",
+        choices=[(k, k) for k, v in vs.rbac["post_requests"].items() if v == "access"],
+    )
+    delete_requests = SelectMultipleField(
+        "DELETE Requests",
+        choices=[
+            (k, k) for k, v in vs.rbac["delete_requests"].items() if v == "access"
+        ],
+    )
 
 
 class ReplacementForm(FlaskForm):

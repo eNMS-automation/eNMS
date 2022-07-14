@@ -160,7 +160,6 @@ class FormFactory:
         self.generate_filtering_forms()
         self.generate_instance_insertion_forms()
         self.generate_service_forms()
-        self.generate_access_form()
 
     def generate_filtering_forms(self):
         for model, properties in vs.properties["filtering"].items():
@@ -237,43 +236,6 @@ class FormFactory:
                     "names": StringField(widget=TextArea(), render_kw={"rows": 8}),
                 },
             )
-
-    def generate_access_form(self):
-        class AccessForm(RbacForm):
-            template = "access"
-            form_type = HiddenField(default="access")
-            relations = ["pools", "services"]
-
-            @classmethod
-            def form_init(cls):
-                keys = ("get_requests", "post_requests", "delete_requests")
-                for key in keys:
-                    values = [(k, k) for k, v in vs.rbac[key].items() if v == "access"]
-                    field_name = " ".join(key.split("_")).capitalize()
-                    setattr(cls, key, SelectMultipleField(field_name, choices=values))
-                menus, pages = [], []
-                for category, values in vs.rbac["menu"].items():
-                    if values["rbac"] == "admin":
-                        continue
-                    if values["rbac"] == "access":
-                        menus.append(category)
-                    for page, page_values in values["pages"].items():
-                        if page_values["rbac"] == "admin":
-                            continue
-                        if page_values["rbac"] == "access":
-                            pages.append(page)
-                        subpages = page_values.get("subpages", {})
-                        for subpage, subpage_values in subpages.items():
-                            if subpage_values["rbac"] == "admin":
-                                continue
-                            if subpage_values["rbac"] == "access":
-                                pages.append(subpage)
-                menu_choices = vs.dualize(menus)
-                setattr(cls, "menu", SelectMultipleField("Menu", choices=menu_choices))
-                page_choices = vs.dualize(pages)
-                setattr(
-                    cls, "pages", SelectMultipleField("Pages", choices=page_choices)
-                )
 
     def generate_service_forms(self):
         for file in (vs.path / "eNMS" / "forms").glob("**/*.py"):
@@ -1184,6 +1146,11 @@ class GroupForm(RbacForm):
     form_type = HiddenField(default="group")
     creator = db.Column(db.SmallString)
     users = MultipleInstanceField("Users", model="user")
+    menu = SelectMultipleField("Menu", choices=vs.dualize(vs.rbac["menus"]))
+    pages = SelectMultipleField("Pages", choices=vs.dualize(vs.rbac["pages"]))
+    get_requests = SelectMultipleField("GET Requests", choices=[(k, k) for k, v in vs.rbac["get_requests"].items() if v == "access"])
+    post_requests = SelectMultipleField("POST Requests", choices=[(k, k) for k, v in vs.rbac["post_requests"].items() if v == "access"])
+    delete_requests = SelectMultipleField("DELETE Requests", choices=[(k, k) for k, v in vs.rbac["delete_requests"].items() if v == "access"])
 
 
 class ReplacementForm(FlaskForm):

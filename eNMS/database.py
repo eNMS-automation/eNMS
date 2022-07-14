@@ -324,7 +324,7 @@ class Database:
         if rbac and model != "user":
             user = current_user or self.fetch("user", name=username or "admin")
             if user.is_authenticated and not user.is_admin:
-                if model in vs.rbac["advanced"]["admin_models"].get(rbac, []):
+                if model in vs.rbac["admin_models"].get(rbac, []):
                     raise self.rbac_error
                 property = getattr(vs.models[model], f"rbac_{rbac}", None)
                 if not property:
@@ -526,7 +526,7 @@ class Database:
 
     def set_rbac_properties(self, table):
         model = getattr(table, "__tablename__", None)
-        properties = vs.rbac["advanced"]["form_access"].get(model, {})
+        properties = vs.rbac["form_access"].get(model, {})
         if not model or not properties:
             return
         for property in properties:

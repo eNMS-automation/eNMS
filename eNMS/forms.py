@@ -1171,4 +1171,4 @@ class CommandsForm(FlaskForm):
     prefix = StringField("Label")
 
 
-form_factory = FormFactory()
+form_factory = Fo

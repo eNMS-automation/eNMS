@@ -265,18 +265,16 @@
     "/view_filtering": "access",
     "/web_connection": "access"
   },
-  "advanced": {
-    "admin_models": {
-      "read": ["credential", "group", "server", "session"],
-      "edit": ["credential", "group", "server", "user", "session"]
-    },
-    "form_access": {
-      "device": {
-        "rbac_read": "Read",
-        "rbac_edit": "Edit",
-        "rbac_connect": "Connect via SSH",
-        "rbac_target": "Use as Target"
-      }
+  "admin_models": {
+    "read": ["credential", "group", "server", "session"],
+    "edit": ["credential", "group", "server", "user", "session"]
+  },
+  "form_access": {
+    "device": {
+      "rbac_read": "Read",
+      "rbac_edit": "Edit",
+      "rbac_connect": "Connect via SSH",
+      "rbac_target": "Use as Target"
     }
   }
 }

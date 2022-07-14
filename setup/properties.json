@@ -960,24 +960,6 @@
         "export": false
       }
     ],
-    "access": [
-      {
-        "data": "name",
-        "title": "Name",
-        "search": "text"
-      },
-      {
-        "data": "description",
-        "title": "Description",
-        "search": "text"
-      },
-      {
-        "data": "buttons",
-        "width": "130px",
-        "orderable": false,
-        "export": false
-      }
-    ],
     "server": [
       {
         "data": "name",

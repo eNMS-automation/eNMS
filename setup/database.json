@@ -44,16 +44,13 @@
     "network",
     "workflow_edge",
     "task",
-    "access",
     "credential",
     "pool"
   ],
   "dont_migrate": {
-    "access": ["id"],
     "credential": ["id"],
     "group": ["id", "credentials"],
     "device": [
-      "access",
       "id",
       "configuration",
       "operational_data",
@@ -70,7 +67,6 @@
       "users"
     ],
     "link": [
-      "access",
       "id",
       "pools",
       "networks",
@@ -81,8 +77,6 @@
       "source_name"
     ],
     "pool": [
-      "access",
-      "access_users",
       "credential_devices",
       "device_number",
       "id",
@@ -93,7 +87,6 @@
       "user_number"
     ],
     "service": [
-      "access",
       "children",
       "id",
       "sources",
@@ -109,7 +102,6 @@
     ],
     "network": ["id", "path"],
     "task": [
-      "access",
       "id",
       "service_name",
       "service_id",
@@ -119,7 +111,6 @@
       "status"
     ],
     "user": [
-      "access",
       "id",
       "devices",
       "pools",

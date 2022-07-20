@@ -23,6 +23,7 @@ Version 4.2.1
 - Add new Jinja2 Template Conversion in Data Extraction Service
 - Fix bulk deletion and bulk removal from a filtered table (e.g dashboard bulk deletion deletes everything,
   not just the objects displayed in the table)
+- Add get_connection function in global variables to access connection object from a python snippet service.
 
 To be tested:
 - mail notification

@@ -19,6 +19,11 @@ Version 4.2.1
 - Add "use genie" option in netmiko commands service for Genie / PyATS support
 - Add new `default_function` (sqlalchemy parameter) and `render_kw` (wtforms parameters) for custom fields in properties.json.
 - Add new `rest/workers` GET endpoint to get service count for each WSGI worker
+- Fix Data Extraction service bug if no device (service in run once mode)
+- Add new Jinja2 Template Conversion in Data Extraction Service
+- Fix bulk deletion and bulk removal from a filtered table (e.g dashboard bulk deletion deletes everything,
+  not just the objects displayed in the table)
+- Add get_connection function in global variables to access connection object from a python snippet service.
 
 Version 4.2.0
 -------------

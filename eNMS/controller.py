@@ -124,7 +124,7 @@ class Controller:
         return result
 
     def bulk_deletion(self, table, **kwargs):
-        instances = self.filtering(table, properties=["id"], form=kwargs)
+        instances = self.filtering(table, properties=["id"], **kwargs)
         for instance in instances:
             db.delete(table, id=instance.id)
         return len(instances)
@@ -146,14 +146,12 @@ class Controller:
         target_type,
         target_id,
         target_property,
-        constraint_property,
         **kwargs,
     ):
         target = db.fetch(target_type, id=target_id)
-        kwargs[constraint_property] = [target.name]
         if target.type == "pool" and not target.manually_defined:
             return {"alert": "Removing objects from a dynamic pool is an allowed."}
-        instances = self.filtering(table, bulk="object", form=kwargs)
+        instances = self.filtering(table, bulk="object", **kwargs)
         for instance in instances:
             getattr(target, target_property).remove(instance)
         self.update_rbac(*instances)

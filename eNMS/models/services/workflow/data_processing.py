@@ -11,10 +11,10 @@ from eNMS.fields import HiddenField, SelectField, StringField
 from eNMS.models.automation import Service
 
 
-class DataExtractionService(Service):
+class DataProcessingService(Service):
 
-    __tablename__ = "data_extraction_service"
-    pretty_name = "Data Extraction"
+    __tablename__ = "data_processing_service"
+    pretty_name = "Data Processing"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
     variable1 = db.Column(db.SmallString)
     query1 = db.Column(db.SmallString)
@@ -32,7 +32,7 @@ class DataExtractionService(Service):
     match3 = db.Column(db.LargeString)
     operation3 = db.Column(db.SmallString, default="__setitem__")
 
-    __mapper_args__ = {"polymorphic_identity": "data_extraction_service"}
+    __mapper_args__ = {"polymorphic_identity": "data_processing_service"}
 
     def job(self, run, device=None):
         result, success = {}, True
@@ -89,10 +89,10 @@ operation_choices = (
 )
 
 
-class DataExtractionForm(ServiceForm):
-    form_type = HiddenField(default="data_extraction_service")
+class DataProcessingForm(ServiceForm):
+    form_type = HiddenField(default="data_processing_service")
     variable1 = StringField("Variable Name")
-    query1 = StringField("Python Extraction Query", python=True)
+    query1 = StringField("Variable", python=True)
     match_type1 = SelectField("Post Processing", choices=match_choices)
     match1 = StringField(
         "Regular Expression / TextFSM Template Text / Jinja2 Template",
@@ -101,7 +101,7 @@ class DataExtractionForm(ServiceForm):
     )
     operation1 = SelectField("Operation", choices=operation_choices)
     variable2 = StringField("Variable Name")
-    query2 = StringField("Python Extraction Query", python=True)
+    query2 = StringField("Variable", python=True)
     match_type2 = SelectField("Post Processing", choices=match_choices)
     match2 = StringField(
         "Regular Expression / TextFSM Template Text / Jinja2 Template",
@@ -110,7 +110,7 @@ class DataExtractionForm(ServiceForm):
     )
     operation2 = SelectField("Operation", choices=operation_choices)
     variable3 = StringField("Variable Name")
-    query3 = StringField("Python Extraction Query", python=True)
+    query3 = StringField("Variable", python=True)
     match_type3 = SelectField("Post Processing", choices=match_choices)
     match3 = StringField(
         "Regular Expression / TextFSM Template Text / Jinja2 Template",
@@ -119,15 +119,15 @@ class DataExtractionForm(ServiceForm):
     )
     operation3 = SelectField("Operation", choices=operation_choices)
     groups = {
-        "Extraction 1": {
+        "Processing 1": {
             "commands": ["variable1", "query1", "match_type1", "match1", "operation1"],
             "default": "expanded",
         },
-        "Extraction 2": {
+        "Processing 2": {
             "commands": ["variable2", "query2", "match_type2", "match2", "operation2"],
             "default": "expanded",
         },
-        "Extraction 3": {
+        "Processing 3": {
             "commands": ["variable3", "query3", "match_type3", "match3", "operation3"],
             "default": "expanded",
         },

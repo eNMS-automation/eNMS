@@ -14,6 +14,7 @@ class PingService(Service):
     pretty_name = "ICMP / TCP Ping"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
     protocol = db.Column(db.SmallString)
+    ip_address = db.Column(db.SmallString)
     ports = db.Column(db.SmallString)
     count = db.Column(Integer, default=5)
     timeout = db.Column(Integer, default=2)
@@ -22,7 +23,8 @@ class PingService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "ping_service"}
 
-    def job(self, run, device):
+    def job(self, run, device=None):
+        ip_address = run.sub(run.ip_address, locals()) or device.ip_address
         if run.protocol == "ICMP":
             command = ["ping"]
             for variable, property in (
@@ -34,7 +36,7 @@ class PingService(Service):
                 value = getattr(self, property)
                 if value:
                     command.extend(f"-{variable} {value}".split())
-            command.append(device.ip_address)
+            command.append(ip_address)
             run.log("info", f"Running PING ({command})", device)
             output = check_output(command).decode().strip().splitlines()
             total = output[-2].split(",")[3].split()[1]
@@ -58,7 +60,7 @@ class PingService(Service):
                 s = socket()
                 s.settimeout(run.timeout)
                 try:
-                    connection = not s.connect_ex((device.ip_address, port))
+                    connection = not s.connect_ex((ip_address, port))
                 except (gaierror, timeout, error):
                     connection = False
                 finally:
@@ -70,6 +72,7 @@ class PingService(Service):
 class PingForm(ServiceForm):
     form_type = HiddenField(default="ping_service")
     protocol = SelectField(choices=(("ICMP", "ICMP Ping"), ("TCP", "TCP Ping")))
+    ip_address = StringField("IP Address (defaults to the device IP address if left empty)", substitution=True)
     ports = StringField("Ports (TCP ping only)", default=22)
     count = IntegerField(default=5)
     timeout = IntegerField(default=2)

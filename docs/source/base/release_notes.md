@@ -60,6 +60,7 @@ Version 4.3.0
 - Remove check box for "use device driver" add "use device driver" into drop down and make this the default.
 - Add Jinja2 template support for netmiko and scrapli commands field (iteration no longer required for loops)
 - Add get_connection function in global variables to access connection object from a python snippet service.
+- Support custom ip address in ping service (new IP address field, defaults to device IP if empty)
 
 Migration
 - dashboard is now controlled by RBAC: dashboard access must be explicitly granted via access pages, GET and

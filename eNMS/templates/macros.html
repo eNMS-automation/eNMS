@@ -1,6 +1,6 @@
 {% macro field_template(form_type, field) %} {% set id = "{}-{}".format(form_type,
 field.name) %} {% set style = "height: {}px".format(field.render_kw["rows"]*20 + 17) if
-"TextArea" in field.widget|string else "" %}
+"TextArea" in field.widget|string else "height: 50px" if field.type == "MultipleInstanceField" else "" %}
 <div id="{{ id }}-div" class="add-id" style="{{ style }}">
   {% set class = "form-control-bool" if field.type == "BooleanField" else "form-control"
   %} {% if field.widget.input_type == 'hidden' %} {{ field(id=id, class="add-id") }} {%

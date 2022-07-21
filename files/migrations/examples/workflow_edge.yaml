@@ -320,12 +320,6 @@
     Topology Import (netbox, librenms, opennms)] 2021-04-24 08:58:40.197786', source: '[Topology
     Import Services] OpenNMS Import', subtype: success, type: workflow_edge, workflow: Topology
     Import Services}
-- {color: green, destination: '[(R) Unix Command & Chell, Ping Service, Jump on Connect
-    mechanism] Validation: jump on server 2 from Washington', label: success, name: '[Regression
-    Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism] 2021-04-24
-    08:58:40.197801', source: '[(R) Unix Command & Chell, Ping Service, Jump on Connect
-    mechanism] Ping Washington', subtype: success, type: workflow_edge, workflow: '(R)
-    Unix Command & Chell, Ping Service, Jump on Connect mechanism'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     Unix Command & Chell, Ping Service, Jump on Connect mechanism] 2021-04-24 08:58:40.197815',
   source: '[(R) Unix Command & Chell, Ping Service, Jump on Connect mechanism] Validation:
@@ -1564,3 +1558,13 @@
   source: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Netmiko Jinja 2
     conversion (list)', subtype: success, type: workflow_edge, workflow: (R) Scrapli
     and Netmiko Multiple Commands and Jinja2}
+- {color: green, destination: '[(R) Unix Command & Chell, Ping Service, Jump on Connect
+    mechanism] Ping Custom IP', label: success, name: '2022-07-21 12:13:24.622927',
+  source: '[(R) Unix Command & Chell, Ping Service, Jump on Connect mechanism] Ping
+    Washington', subtype: success, type: workflow_edge, workflow: '(R) Unix Command
+    & Chell, Ping Service, Jump on Connect mechanism'}
+- {color: green, destination: '[(R) Unix Command & Chell, Ping Service, Jump on Connect
+    mechanism] Validation: jump on server 2 from Washington', label: success, name: '2022-07-21
+    12:13:25.620010', source: '[(R) Unix Command & Chell, Ping Service, Jump on Connect
+    mechanism] Ping Custom IP', subtype: success, type: workflow_edge, workflow: '(R)
+    Unix Command & Chell, Ping Service, Jump on Connect mechanism'}

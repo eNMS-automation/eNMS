@@ -743,8 +743,8 @@ function updateProperty(instance, el, property, value, type) {
     const idProperty = propertyType == "object" ? "id" : "name";
     value.forEach((o) => {
       const uiLink = `
-      <button type="button" class="btn btn-link btn-select2" onclick="
-      eNMS.base.showInstancePanel('${o.type}', '${o.id}')">
+      <button type="button" title="" class="btn btn-link btn-select2"
+      onclick="eNMS.base.showInstancePanel('${o.type}', '${o.id}')">
       ${o.ui_name || o.name}</button>`;
       el.append(new Option(uiLink, o[idProperty]));
     });

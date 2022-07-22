@@ -784,13 +784,6 @@ class ServiceForm(BaseForm):
         )
 
 
-class SettingsForm(BaseForm):
-    form_type = HiddenField(default="settings_panel")
-    action = "eNMS.administration.saveSettings"
-    settings = JsonField("Settings")
-    write_changes = BooleanField("Write changes back to 'settings.json' file")
-
-
 class TaskForm(BaseForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="task")

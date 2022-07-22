@@ -263,20 +263,6 @@
                 {% if user.is_admin %}
                 <li class="nav-item">
                   <a
-                    onclick="eNMS.administration.showSettings()"
-                    style="cursor: pointer;"
-                  >
-                    <img
-                      src="{{ url_for('static', filename='img/settings.png') }}"
-                      height="35"
-                      width="35"
-                    />
-                    &nbsp;Settings
-                  </a>
-                </li>
-                {% endif %} {% if user.is_admin %}
-                <li class="nav-item">
-                  <a
                     onclick="eNMS.base.openPanel({
                       name: 'administration', title: 'Administration Panel', size: 'auto'
                       })"

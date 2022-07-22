@@ -50,33 +50,6 @@ function displayFiles() {
   });
 }
 
-function saveSettings() {
-  const newSettings = jsonEditors.settings.get();
-  call({
-    url: "/save_settings",
-    data: {
-      settings: newSettings,
-      save: $("#settings_panel-write_changes").prop("checked"),
-    },
-    callback: function () {
-      settings = newSettings;
-      $("#settings_panel").remove();
-      notify("Settings saved.", "success", 5, true);
-    },
-  });
-}
-
-function showSettings() {
-  openPanel({
-    name: "settings_panel",
-    title: "Settings",
-    size: "700px 600px",
-    callback: function () {
-      jsonEditors.settings.set(settings);
-    },
-  });
-}
-
 function enterFolder(folder) {
   folderPath = `${folderPath}/${folder}`;
   localStorage.setItem("folderPath", folderPath);
@@ -385,12 +358,10 @@ configureNamespace("administration", [
   processFileData,
   resultLogDeletion,
   runDebugCode,
-  saveSettings,
   saveFile,
   saveProfile,
   scanCluster,
   scanFolder,
-  showSettings,
   showFileUploadPanel,
   showMigrationPanel,
   showProfile,

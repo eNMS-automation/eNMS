@@ -269,6 +269,13 @@ class Database:
             if "configure_events" in vars(model):
                 model.configure_events()
 
+        for model, properties in vs.rbac["form_access"].items():
+            for property in properties:
+                @event.listens_for(getattr(vs.models[model], property), "set")
+                def update_property(instance, *_):
+                    if not current_user.is_admin or current_user not in instance.owners:
+                        raise self.rbac_error
+
         if env.use_vault:
             for model in vs.private_properties:
 

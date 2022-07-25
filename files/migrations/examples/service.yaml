@@ -31670,7 +31670,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-07-25 08:00:14.609637'
+  last_modified: '2022-07-25 08:03:43.487197'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -31732,7 +31732,7 @@
   update_target_pools: false
   validation_condition: success
   validation_method: text
-  validation_section: results["result"]["rendered_template"]["value"]
+  validation_section: results["result"]["Jinja2 value"]["value"]
   variable1: Jinja2 value
   variable2: ''
   variable3: ''
@@ -32443,9 +32443,7 @@
 - access_groups: admin
   admin_only: false
   completion_time: 1
-  content_match: "hostname core-sw-waw-01\r\n\r\nno ip domain lookup\r\nip domain\
-    \ name local.lab\r\nip name-server 1.1.1.1\r\nip name-server 8.8.8.8\r\n\r\nntp\
-    \ server 0.pool.ntp.org prefer\r\nntp server 1.pool.ntp.org"
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -32467,7 +32465,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-07-25 07:59:38.291518'
+  last_modified: '2022-07-25 08:13:53.939594'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -32503,7 +32501,13 @@
   pools: [Everything]
   positions:
     Data Extraction Jinja2 Template: [80, 246]
-  postprocessing: ''
+  postprocessing: "results[\"success\"] = results[\"result\"][\"TTP value\"][\"value\"\
+    ] == [\r\n    [\r\n        {\r\n            \"description\": \"Router-id-loopback\"\
+    ,\r\n            \"interface\": \"Loopback0\",\r\n            \"ip\": \"192.168.0.113\"\
+    ,\r\n            \"mask\": \"24\"\r\n        },\r\n        {\r\n            \"\
+    description\": \"CPE_Acces_Vlan\",\r\n            \"interface\": \"Vlan778\",\r\
+    \n            \"ip\": \"2002::fd37\",\r\n            \"mask\": \"124\",\r\n  \
+    \          \"vrf\": \"CPE1\"\r\n        }\r\n    ]\r\n]"
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
@@ -32526,9 +32530,9 @@
   type: data_processing_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
+  validation_condition: none
   validation_method: text
-  validation_section: results["result"]["rendered_template"]["value"]
+  validation_section: ''
   variable1: TTP value
   variable2: ''
   variable3: ''

@@ -100,35 +100,27 @@ operation_choices = (
     ("update", "Update dictionary"),
 )
 
+match_label = (
+    "Regular Expression / TextFSM Template Text " "/ Jinja2 Template / TTP Template"
+)
+
 
 class DataProcessingForm(ServiceForm):
     form_type = HiddenField(default="data_processing_service")
     variable1 = StringField("Variable Name")
     query1 = StringField("Variable", python=True)
     match_type1 = SelectField("Post Processing", choices=match_choices)
-    match1 = StringField(
-        "Regular Expression / TextFSM Template Text / Jinja2 Template",
-        widget=TextArea(),
-        render_kw={"rows": 5},
-    )
+    match1 = StringField(match_label, widget=TextArea(), render_kw={"rows": 5})
     operation1 = SelectField("Operation", choices=operation_choices)
     variable2 = StringField("Variable Name")
     query2 = StringField("Variable", python=True)
     match_type2 = SelectField("Post Processing", choices=match_choices)
-    match2 = StringField(
-        "Regular Expression / TextFSM Template Text / Jinja2 Template",
-        widget=TextArea(),
-        render_kw={"rows": 5},
-    )
+    match2 = StringField(match_label, widget=TextArea(), render_kw={"rows": 5})
     operation2 = SelectField("Operation", choices=operation_choices)
     variable3 = StringField("Variable Name")
     query3 = StringField("Variable", python=True)
     match_type3 = SelectField("Post Processing", choices=match_choices)
-    match3 = StringField(
-        "Regular Expression / TextFSM Template Text / Jinja2 Template",
-        widget=TextArea(),
-        render_kw={"rows": 5},
-    )
+    match3 = StringField(match_label, widget=TextArea(), render_kw={"rows": 5})
     operation3 = SelectField("Operation", choices=operation_choices)
     groups = {
         "Processing 1": {

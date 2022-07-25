@@ -4,7 +4,7 @@
 Version 4.3.0
 -------------
 
-- Remove 3D Geographical Visualization
+- Remove 3D Geographical Visualization.
 - Default to "info" for services log level. Move "Disable logging" at the end of the list.
 - Add "username" variable in workflow global space set to the user that runs the workflow.
 - Forbid deletion of Start, End and Placeholder services.
@@ -19,8 +19,12 @@ Version 4.3.0
 - Add "use genie" option in netmiko commands service for Genie / PyATS support
 - Add new `default_function` (sqlalchemy parameter) and `render_kw` (wtforms parameters) for custom fields in properties.json.
 - Add new `rest/workers` GET endpoint to get service count for each WSGI worker
-- Fix Data Extraction service bug if no device (service in run once mode)
-- Add new Jinja2 Template Conversion in Data Extraction Service
+- Data Extraction Service update:
+  * Rename to "Data Processing" service.
+  * Fix bug if no device (service in run once mode).
+  * Add new option to parse TextFSM as JSON object.
+  * Add new option to support Jinja2 Template conversion.
+  * Add new option to support Template Text Parser conversion.
 - Fix bulk deletion and bulk removal from a filtered table (e.g dashboard bulk deletion deletes everything,
   not just the objects displayed in the table)
 - New feature to align nodes in Network Builder and Workflow Builder:
@@ -37,7 +41,6 @@ Version 4.3.0
   different from the old command: if it is and the user is not an admin, an error is raised.
 - Remove backward / forward mechanism in the network and service table. Make networks / workflows links to
   the network / workflow builder for consistency with results page.
-- Add new option in data extraction service to parse TextFSM as JSON object.
 - Add User Profile window to change username, password, user email, etc.
 - Add User landing page to decide which page to display after logging in (editable in profile).
 - Add mechanism to show a single device status in workflow builder UI (logs filtering + service display)

@@ -3,7 +3,13 @@ from jinja2 import Template
 from re import findall
 from sqlalchemy import ForeignKey, Integer
 from textfsm import TextFSM
+from warnings import warn
 from wtforms.widgets import TextArea
+
+try:
+    from ttp import ttp
+except ImportError as exc:
+    warn(f"Couldn't import ttp module ({exc})")
 
 from eNMS.database import db
 from eNMS.forms import ServiceForm

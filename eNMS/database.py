@@ -272,7 +272,7 @@ class Database:
         for model, properties in vs.rbac["form_access"].items():
             for property in properties:
                 @event.listens_for(getattr(vs.models[model], property), "set")
-                def update_property(instance, *_):
+                def update_rbac_property(instance, *_):
                     if not current_user.is_admin or current_user not in instance.owners:
                         raise self.rbac_error
 

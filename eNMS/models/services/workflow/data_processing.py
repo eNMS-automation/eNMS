@@ -1,5 +1,6 @@
 from io import StringIO
 from jinja2 import Template
+from json import loads
 from re import findall
 from sqlalchemy import ForeignKey, Integer
 from textfsm import TextFSM
@@ -71,7 +72,7 @@ class DataProcessingService(Service):
             elif match_type == "ttp":
                 parser = ttp(data=value, template=match)
                 parser.parse()
-                value = parser.result(format="json")[0]
+                value = loads(parser.result(format="json")[0])
             kwargs = {"device": getattr(device, "name", None), "operation": operation}
             run.payload_helper(variable, value, **kwargs)
             result[variable] = {

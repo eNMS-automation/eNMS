@@ -20,23 +20,23 @@ Version 4.3.0
 - Add new `default_function` (sqlalchemy parameter) and `render_kw` (wtforms parameters) for custom fields in properties.json.
 - Add new `rest/workers` GET endpoint to get service count for each WSGI worker
 - Data Extraction Service update:
-  * Rename to "Data Processing" service.
-  * Fix bug if no device (service in run once mode).
-  * Add new option to parse TextFSM as JSON object.
-  * Add new option to support Jinja2 Template conversion.
-  * Add new option to support Template Text Parser conversion.
+  * Rename to "Data Processing" service
+  * Fix bug if no device (service in run once mode)
+  * Add new option to parse TextFSM as JSON object
+  * Add new option to support Jinja2 Template conversion
+  * Add new option to support Template Text Parser conversion
 - Fix bulk deletion and bulk removal from a filtered table (e.g dashboard bulk deletion deletes everything,
-  not just the objects displayed in the table)
+  not just the objects displayed in the table).
 - New feature to align nodes in Network Builder and Workflow Builder:
   - Horizontal and vertical alignment
   - Horizontal and vertical distribution
 - Make all objects in object select list (both single and multiple entries) hyperlink to the edit panel.
 - Make it possible to share link to a specific workflow / runtime (optional) to the workflow builder, with the
-  following syntax: workflow_builder/{workflow_id}/{runtime}
+  following syntax: workflow_builder/{workflow_id}/{runtime}.
 - Make all results in the Results table link to the workflow builder.
 - Add "shared" property to the service table.
 - Add shared subworkflow to the list of top-level workflows in the workflow builder to provide the ability to
-  view all runtimes (including when it was run as standalone workflow)
+  view all runtimes (including when it was run as standalone workflow).
 - Remove "Approved by admin" mechanism for Unix Command Service. Instead, check if the new command is
   different from the old command: if it is and the user is not an admin, an error is raised.
 - Remove backward / forward mechanism in the network and service table. Make networks / workflows links to
@@ -49,7 +49,7 @@ Version 4.3.0
 - Fix vertical aligment in all tables (cell content was not centered on y axis because of buttons height in
   the last column).
 - Add export service button in Workflow Builder.
-- New Files Management System
+- New Files Management System:
   * defined via settings / paths / files (default: eNMS / files folder)
   * files are automatically scanned when starting the application, and can be rescanned via the UI
   * files have a "Status" property showing the last action (updated, moved, deleted, etc)
@@ -63,7 +63,7 @@ Version 4.3.0
 - Remove check box for "use device driver" add "use device driver" into drop down and make this the default.
 - Add Jinja2 template support for netmiko and scrapli commands field (iteration no longer required for loops)
 - Add get_connection function in global variables to access connection object from a python snippet service.
-- Support custom ip address in ping service (new IP address field, defaults to device IP if empty)
+- Support custom ip address in ping service (new IP address field, defaults to device IP if empty).
 
 Migration
 - dashboard is now controlled by RBAC: dashboard access must be explicitly granted via access pages, GET and

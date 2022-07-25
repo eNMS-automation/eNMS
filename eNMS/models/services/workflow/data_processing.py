@@ -65,9 +65,13 @@ class DataProcessingService(Service):
                 value = template.ParseText(value)
                 if match_type == "textfsm_dict":
                     value = [dict(zip(template.header, row)) for row in value]
-            elif "jinja2" in match_type:
+            elif match_type == "jinja2":
                 template = Template(match)
                 value = template.render(value)
+            elif match_type == "ttp":
+                parser = ttp(data=value, template=match)
+                parser.parse()
+                value = parser.result(format="json")[0]
             kwargs = {"device": getattr(device, "name", None), "operation": operation}
             run.payload_helper(variable, value, **kwargs)
             result[variable] = {
@@ -83,6 +87,7 @@ match_choices = (
     ("none", "Use Value as Extracted"),
     ("regex", "Apply Regular Expression (findall)"),
     ("jinja2", "Apply Jinja2 Template (text output)"),
+    ("ttp", "Apply TTP Template (JSON output)"),
     ("textfsm", "Apply TextFSM Template (list output)"),
     ("textfsm_dict", "Apply TextFSM Template (JSON output)"),
 )

@@ -31,9 +31,9 @@ Version 4.3.0
   - Horizontal and vertical alignment
   - Horizontal and vertical distribution
 - Make all objects in object select list (both single and multiple entries) hyperlink to the edit panel.
+- Make all results in the Results table link to the workflow builder.
 - Make it possible to share link to a specific workflow / runtime (optional) to the workflow builder, with the
   following syntax: workflow_builder/{workflow_id}/{runtime}.
-- Make all results in the Results table link to the workflow builder.
 - Add "shared" property to the service table.
 - Add shared subworkflow to the list of top-level workflows in the workflow builder to provide the ability to
   view all runtimes (including when it was run as standalone workflow).
@@ -70,6 +70,7 @@ Migration
   POST requests.
 - "download_file" endpoint -> "download" (add support for downloading folders)
 - the "driver" property must be updated for all netmiko, napalm and scrapli via the migration script
+- update services to use server IP and address from global variables and not from settings.
 
 To be tested:
 - bulk deletion and bulk removal (from dashboard and other tables too)

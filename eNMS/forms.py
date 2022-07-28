@@ -403,7 +403,6 @@ class ExcelImportForm(BaseForm):
 
 class FileForm(BaseForm):
     action = "eNMS.base.processData"
-    template = "object"
     form_type = HiddenField(default="file")
     id = HiddenField()
     path = StringField("Path", [InputRequired()])
@@ -779,7 +778,6 @@ class ServiceForm(BaseForm):
 
 class TaskForm(BaseForm):
     action = "eNMS.base.processData"
-    template = "object"
     form_type = HiddenField(default="task")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])

@@ -127,6 +127,7 @@
     "/confirmation_form": "access",
     "/credential_table": "admin",
     "/dashboard": "access",
+    "/device_access_form": "access",
     "/device_data_form": "access",
     "/device_table": "access",
     "/download": "access",

@@ -446,9 +446,9 @@ class Controller:
         instance = db.fetch(model, id=id)
         if not current_user.is_admin and current_user not in instance.owners:
             return {
-                "error": (
+                "alert": (
                     "You need to be an admin user or an owner of"
-                    f"{instance.name} to edit the access."
+                    f" '{instance.name}' to edit the access."
                 )
             }
         access_properties = ["id", "owners", *vs.rbac["rbac_models"][model]]

@@ -556,7 +556,7 @@ tables.device = class DeviceTable extends Table {
           <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.base.showInstanceAccessPanel('${row.type}', '${row.id}')"
           data-tooltip="Update Access"
-            ><span class="glyphicon glyphicon-duplicate"></span
+            ><span class="glyphicon glyphicon-eye-open"></span
           ></button>
         </li>
         <li>

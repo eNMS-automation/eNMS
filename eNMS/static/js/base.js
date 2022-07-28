@@ -648,8 +648,11 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
           callback: function (instance) {
             if (instance.owners) {
               const ownersNames = instance.owners.map((user) => user.name);
-              if (user.is_admin || ownersNames.includes(user.name))
+              if (user.is_admin || ownersNames.includes(user.name)) {
                 $("#rbac-nav").show();
+              } else {
+                $("#rbac-nav,#rbac").remove();
+              }
             }
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);

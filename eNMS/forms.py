@@ -482,6 +482,7 @@ class ObjectForm(BaseForm):
 
 class PoolForm(BaseForm):
     template = "pool"
+    models = ("device", "link")
     form_type = HiddenField(default="pool")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
@@ -491,7 +492,7 @@ class PoolForm(BaseForm):
 
     @classmethod
     def form_init(cls):
-        for model in ("device", "link"):
+        for model in cls.models:
             setattr(cls, f"{model}_properties", vs.properties["filtering"][model])
             for property in vs.properties["filtering"][model]:
                 setattr(cls, f"{model}_{property}", StringField(property))

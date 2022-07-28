@@ -36,7 +36,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -493,7 +492,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -962,7 +960,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -1047,7 +1044,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -1146,7 +1142,6 @@
   operating_system: ''
   optional_args: {}
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -1247,7 +1242,6 @@
   number_of_retries: 0
   operating_system: EOS
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -1357,7 +1351,6 @@
   number_of_retries: 0
   operating_system: EOS
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -1466,7 +1459,6 @@
   number_of_retries: 0
   operating_system: EOS
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -1577,7 +1569,6 @@
   number_of_retries: 2
   operating_system: EOS
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -1679,7 +1670,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -1798,7 +1788,6 @@
   operating_system: ''
   optional_args: {}
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -1894,7 +1883,6 @@
   operating_system: ''
   optional_args: {}
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -1982,7 +1970,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -2094,7 +2081,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -2200,7 +2186,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -2282,7 +2267,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -2361,7 +2345,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -2467,7 +2450,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -2575,7 +2557,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -2684,7 +2665,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -2777,7 +2757,6 @@
   operating_system: ''
   optional_args: {}
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -2884,7 +2863,6 @@
   operating_system: ''
   options: {}
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -2970,7 +2948,6 @@
   operating_system: ''
   options: {}
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -3055,7 +3032,6 @@
   operating_system: ''
   options: {}
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -3160,7 +3136,6 @@
   number_of_retries: 0
   operating_system: EOS
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -3269,7 +3244,6 @@
   number_of_retries: 0
   operating_system: EOS
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -3378,7 +3352,6 @@
   number_of_retries: 0
   operating_system: EOS
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -3468,7 +3441,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -3561,7 +3533,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -3679,7 +3650,6 @@
   number_of_retries: 0
   operating_system: EOS
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -3794,7 +3764,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -3886,7 +3855,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -3988,7 +3956,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -4107,7 +4074,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -4198,7 +4164,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -4330,7 +4295,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -4442,7 +4406,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -4541,7 +4504,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -4623,7 +4585,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -4706,7 +4667,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -4791,7 +4751,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -4874,7 +4833,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -4959,7 +4917,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -5062,7 +5019,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -5170,7 +5126,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -5279,7 +5234,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -5388,7 +5342,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -5467,7 +5420,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -5550,7 +5502,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -5653,7 +5604,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -5744,7 +5694,6 @@
   operating_system: ''
   options: {}
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -5850,7 +5799,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -5926,7 +5874,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -6033,7 +5980,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -6161,7 +6107,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -6238,7 +6183,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -6321,7 +6265,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -6400,7 +6343,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -6503,7 +6445,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -6580,7 +6521,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -6662,7 +6602,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -6741,7 +6680,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -6826,7 +6764,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -6911,7 +6848,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -6993,7 +6929,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -7086,7 +7021,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -7176,7 +7110,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   packet_size: 56
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
@@ -7264,7 +7197,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -7348,7 +7280,6 @@
   opennms_password: ''
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -7451,7 +7382,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -7542,7 +7472,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -7650,7 +7579,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -7763,7 +7691,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -7861,7 +7788,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -7942,7 +7868,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -8025,7 +7950,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -8111,7 +8035,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -8203,7 +8126,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -8295,7 +8217,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -8387,7 +8308,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -8481,7 +8401,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -8584,7 +8503,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -8677,7 +8595,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -8784,7 +8701,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -8880,7 +8796,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -8987,7 +8902,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -9080,7 +8994,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -9185,7 +9098,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -9261,7 +9173,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -9348,7 +9259,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -9435,7 +9345,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -9560,7 +9469,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -9640,7 +9548,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -9727,7 +9634,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -9814,7 +9720,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -9901,7 +9806,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -10021,7 +9925,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -10098,7 +10001,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -10213,7 +10115,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -10325,7 +10226,6 @@
   number_of_retries: 2
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -10441,7 +10341,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -10522,7 +10421,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -10611,7 +10509,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -10718,7 +10615,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -10804,7 +10700,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -10918,7 +10813,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -11003,7 +10897,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -11096,7 +10989,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -11180,7 +11072,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -11288,7 +11179,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -11378,7 +11268,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -11490,7 +11379,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -11572,7 +11460,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -11651,7 +11538,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -11736,7 +11622,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -11815,7 +11700,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -11922,7 +11806,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -12001,7 +11884,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -12085,7 +11967,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -12169,7 +12050,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -12250,7 +12130,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -12331,7 +12210,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -12412,7 +12290,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -12515,7 +12392,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -12627,7 +12503,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -12726,7 +12601,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -12824,7 +12698,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -12901,7 +12774,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -12979,7 +12851,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -13057,7 +12928,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -13136,7 +13006,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -13240,7 +13109,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -13316,7 +13184,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -13398,7 +13265,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -13480,7 +13346,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -13559,7 +13424,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -13639,7 +13503,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -13719,7 +13582,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -13799,7 +13661,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -13895,7 +13756,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -13971,7 +13831,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -14049,7 +13908,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -14127,7 +13985,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -14232,7 +14089,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -14317,7 +14173,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -14408,7 +14263,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -14502,7 +14356,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -14592,7 +14445,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -14693,7 +14545,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "labels = SelectMultipleStringField(\r\n  \"Labels\",\r\n  choices=(\r\
     \n    (\"tag1\", \"Tag 1\"),\r\n    (\"tag2\", \"Tag 2\"),\r\n    (\"precheck\"\
     , \"Pre-checks\"),\r\n    (\"postcheck\", \"Post-checks\"))\r\n)\r\ninterface\
@@ -14790,7 +14641,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -14906,7 +14756,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -14982,7 +14831,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -15064,7 +14912,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -15145,7 +14992,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -15244,7 +15090,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -15335,7 +15180,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -15432,7 +15276,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -15534,7 +15377,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -15631,7 +15473,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -15733,7 +15574,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -15845,7 +15685,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -15947,7 +15786,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -16055,7 +15893,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -16163,7 +16000,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -16273,7 +16109,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -16350,7 +16185,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -16431,7 +16265,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -16512,7 +16345,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -16612,7 +16444,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -16714,7 +16545,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -16813,7 +16643,6 @@
   operating_system: ''
   overwrite_file: false
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -16916,7 +16745,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -17023,7 +16851,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -17130,7 +16957,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -17246,7 +17072,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -17322,7 +17147,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -17426,7 +17250,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -17515,7 +17338,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -17625,7 +17447,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -17703,7 +17524,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -17783,7 +17603,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -17862,7 +17681,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -17941,7 +17759,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -18025,7 +17842,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -18104,7 +17920,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -18194,7 +18009,6 @@
   operation2: __setitem__
   operation3: __setitem__
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -18284,7 +18098,6 @@
   operation2: __setitem__
   operation3: __setitem__
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -18374,7 +18187,6 @@
   operation2: __setitem__
   operation3: __setitem__
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -18464,7 +18276,6 @@
   operation2: __setitem__
   operation3: __setitem__
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -18554,7 +18365,6 @@
   operation2: __setitem__
   operation3: __setitem__
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -18644,7 +18454,6 @@
   operation2: __setitem__
   operation3: __setitem__
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -18734,7 +18543,6 @@
   operation2: __setitem__
   operation3: __setitem__
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -18815,7 +18623,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -18923,7 +18730,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\nendpoint =\
     \ StringField('Endpoint', [InputRequired()], default=\"is_alive\")\r\ntarget_devices\
     \ = MultipleInstanceField('Devices', model='device')\r\ntarget_pools = MultipleInstanceField('Pools',\
@@ -18999,7 +18805,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -19087,7 +18892,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -19167,7 +18971,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -19272,7 +19075,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -19372,7 +19174,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -19473,7 +19274,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -19580,7 +19380,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -19687,7 +19486,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -19794,7 +19592,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -19887,7 +19684,6 @@
   number_of_retries: 0
   operating_system: EOS
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -19974,7 +19770,6 @@
   operating_system: EOS
   optional_args: {}
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -20064,7 +19859,6 @@
   operating_system: ''
   optional_args: {}
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -20170,7 +19964,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -20284,7 +20077,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -20411,7 +20203,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -20498,7 +20289,6 @@
   operating_system: ''
   optional_args: {}
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -20596,7 +20386,6 @@
   operating_system: ''
   optional_args: {}
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -20694,7 +20483,6 @@
   operating_system: ''
   optional_args: {}
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -20792,7 +20580,6 @@
   operating_system: ''
   optional_args: {}
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -20926,7 +20713,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -21028,7 +20814,6 @@
   number_of_retries: 0
   operating_system: EOS
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -21136,7 +20921,6 @@
   operation2: __setitem__
   operation3: __setitem__
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -21230,7 +21014,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -21320,7 +21103,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -21411,7 +21193,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -21500,7 +21281,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -21593,7 +21373,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -21672,7 +21451,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -21771,7 +21549,6 @@
   operation2: append
   operation3: update
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -21873,7 +21650,6 @@
   operation2: extend
   operation3: update
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -21966,7 +21742,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -22055,7 +21830,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -22148,7 +21922,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -22227,7 +22000,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -22305,7 +22077,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -22382,7 +22153,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -22459,7 +22229,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -22536,7 +22305,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -22613,7 +22381,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: ''
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -22694,7 +22461,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: [admin]
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -22775,7 +22541,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: [admin]
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -22850,7 +22615,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: [admin]
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -22926,7 +22690,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: [admin]
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -23002,7 +22765,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: [admin]
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -23079,7 +22841,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: [admin]
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -23156,7 +22917,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: [admin]
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -23246,7 +23006,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -23324,7 +23083,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -23401,7 +23159,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -23483,7 +23240,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -23560,7 +23316,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -23640,7 +23395,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -23720,7 +23474,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -23837,7 +23590,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -23915,7 +23667,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -23993,7 +23744,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -24071,7 +23821,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -24149,7 +23898,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -24227,7 +23975,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -24305,7 +24052,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -24385,7 +24131,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   packet_size: 56
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
@@ -24488,7 +24233,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -24571,7 +24315,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -24658,7 +24401,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -24744,7 +24486,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -24830,7 +24571,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -24915,7 +24655,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -25023,7 +24762,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -25105,7 +24843,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -25193,7 +24930,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -25279,7 +25015,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -25366,7 +25101,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -25477,7 +25211,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -25558,7 +25291,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -25651,7 +25383,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -25742,7 +25473,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -25863,7 +25593,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -25948,7 +25677,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -26034,7 +25762,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -26119,7 +25846,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -26205,7 +25931,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -26291,7 +26016,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -26415,7 +26139,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -26515,7 +26238,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -26624,7 +26346,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -26733,7 +26454,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -26835,7 +26555,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "multiprocessing = BooleanField('Multiprocessing', default=True)\r\
     \nmax_processes = IntegerField('Maximum number of processes', default=5)"
   positions: {}
@@ -26904,7 +26623,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -27017,7 +26735,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "target_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
     \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
@@ -27088,7 +26805,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -27172,7 +26888,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -27250,7 +26965,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -27339,7 +27053,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -27419,7 +27132,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -27499,7 +27211,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -27579,7 +27290,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -27659,7 +27369,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -27739,7 +27448,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -27819,7 +27527,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -27899,7 +27606,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -27979,7 +27685,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -28059,7 +27764,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -28139,7 +27843,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -28219,7 +27922,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -28299,7 +28001,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -28379,7 +28080,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -28459,7 +28159,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -28539,7 +28238,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -28619,7 +28317,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -28699,7 +28396,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -28779,7 +28475,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -28859,7 +28554,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -28939,7 +28633,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -29019,7 +28712,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -29099,7 +28791,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -29179,7 +28870,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -29259,7 +28949,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -29339,7 +29028,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -29419,7 +29107,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -29499,7 +29186,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -29596,7 +29282,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -29671,7 +29356,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -29760,7 +29444,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -29835,7 +29518,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -29925,7 +29607,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -30001,7 +29682,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -30082,7 +29762,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -30161,7 +29840,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -30239,7 +29917,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -30337,7 +30014,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -30454,7 +30130,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -30588,7 +30263,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -30673,7 +30347,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -30762,7 +30435,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -30851,7 +30523,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -30945,7 +30616,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -31034,7 +30704,6 @@
   operation2: __setitem__
   operation3: __setitem__
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -31114,7 +30783,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -31233,7 +30901,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -31322,7 +30989,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -31415,7 +31081,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -31524,7 +31189,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -31635,7 +31299,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -31682,8 +31345,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: ''
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -31724,7 +31386,6 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  owners_access: '[]'
   packet_size: 56
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
@@ -31734,7 +31395,6 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: [Everything]
   ports: '22'
   positions:
     (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [155, 189]
@@ -31766,8 +31426,7 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
-- access_groups: admin
-  admin_only: false
+- admin_only: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -31815,7 +31474,6 @@
   operation2: __setitem__
   operation3: __setitem__
   owners: []
-  owners_access: '[]'
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
@@ -31824,7 +31482,6 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
-  pools: [Everything]
   positions:
     Data Extraction Jinja2 Template: [80, 246]
   postprocessing: "results[\"success\"] = results[\"result\"][\"TTP value\"][\"value\"\

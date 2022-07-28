@@ -651,7 +651,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
               if (user.is_admin || ownersNames.includes(user.name)) {
                 $("#rbac-nav").show();
               } else {
-                $("#rbac-nav,#rbac").remove();
+                $("#rbac-nav,#rbac-properties").remove();
               }
             }
             const action = mode ? mode.toUpperCase() : "EDIT";

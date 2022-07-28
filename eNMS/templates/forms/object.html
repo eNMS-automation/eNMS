@@ -14,11 +14,10 @@
       <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#specific">Specific Properties</a>
       </li>
-      {% endif %} {% if user.is_admin and form.rbac_properties %}
-      <li class="nav-item">
+      {% endif %}
+      <li class="nav-item" id="rbac-nav" style="display:none">
         <a class="nav-link" data-toggle="tab" href="#rbac">Access Control</a>
       </li>
-      {% endif %}
     </ul>
     <div class="form-group">
       <div class="tab-content">
@@ -44,13 +43,12 @@
           {% for property in form.properties %} {% set field = form[property] %} {{
           field_template(form_type, field) }} {% endfor %}
         </div>
-        {% endif %} {% if user.is_admin and form.rbac_properties %}
+        {% endif %}
         <div class="tab-pane fade" id="rbac">
           {{ field_template(form_type, form["owners"]) }} {% for property in
           form.rbac_properties %} {% set field = form[property] %} {{
           field_template(form_type, field) }} {% endfor %}
         </div>
-        {% endif %}
       </div>
     </div>
   </div>

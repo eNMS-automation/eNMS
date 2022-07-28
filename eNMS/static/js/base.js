@@ -646,12 +646,17 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
         call({
           url: `/get${properties}/${type}/${id}`,
           callback: function (instance) {
+            if (instance.owners) {
+              const ownersNames = instance.owners.map((user) => user.name);
+              if (user.is_admin || ownersNames.includes(user.name)) $("#rbac-nav").show();
+            }
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
             processInstance(type, instance);
           },
         });
       } else if (mode == "bulk") {
+        $("#rbac-nav").show();
         const model = isService ? "service" : type;
         const form = {
           ...serializeForm(`#search-form-${tableId}`, `${model}_filtering`),

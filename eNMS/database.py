@@ -276,7 +276,7 @@ class Database:
                 model.configure_events()
 
         for model, properties in vs.rbac["rbac_models"].items():
-            for property in properties:
+            for property in ("owners", *properties):
 
                 @event.listens_for(getattr(vs.models[model], property), "set")
                 def update_rbac_property(instance, *_):

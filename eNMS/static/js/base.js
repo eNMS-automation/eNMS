@@ -629,12 +629,20 @@ function addInstancesToRelation(type, id) {
   });
 }
 
-function showInstanceAccessPanel(model, id) {
+function showInstanceAccessPanel(type, id) {
   openPanel({
-    name: `${model}_access`,
+    name: `${type}_access`,
     id: id,
-    callback: function (panel) {}
-  })
+    callback: function (panel) {
+      call({
+        url: `/get/${type}/${id}`,
+        callback: function (instance) {
+          panel.setHeaderTitle(`EDIT Access for ${type} - ${instance.name}`);
+          processInstance(`${type}_access`, instance);
+        },
+      });
+    }
+  });
 }
 
 export function showInstancePanel(type, id, mode, tableId, edge) {
@@ -784,6 +792,7 @@ export function processInstance(type, instance) {
     const el = $(
       instance ? `#${type}-${property}-${instance.id}` : `#${type}-${property}`
     );
+    if (!el.length) continue;
     updateProperty(instance, el, property, value, type);
   }
 }

@@ -633,6 +633,7 @@ function showInstanceAccessPanel(type, id) {
   openPanel({
     name: `${type}_access`,
     id: id,
+    type: type,
     callback: function (panel) {
       call({
         url: `/get/${type}/${id}`,
@@ -795,6 +796,20 @@ export function processInstance(type, instance) {
     if (!el.length) continue;
     updateProperty(instance, el, property, value, type);
   }
+}
+
+function processAccessData(type, id) {
+  call({
+    url: `/update/${type}`,
+    form: `${type}_access-form-${id}`,
+    callback: (instance) => {
+      $(`#${type}_access-${id}`).remove();
+      notify(`${type.toUpperCase()} Access of '${instance.name}' updated`,"success",
+        5,
+        true
+      );
+    },
+  });
 }
 
 function processData(type, id) {
@@ -1187,6 +1202,7 @@ configureNamespace("base", [
   fullScreen,
   loadScript,
   openPanel,
+  processAccessData,
   processData,
   processInstance,
   removeInstance,

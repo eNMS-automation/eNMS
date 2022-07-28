@@ -242,7 +242,8 @@ class FormFactory:
                 (BaseForm,),
                 {
                     "form_type": HiddenField(default=f"{model}_access"),
-                    "action": "eNMS.base.saveModelAccess",
+                    "id": HiddenField(),
+                    "action": "eNMS.base.processAccessData",
                     "owners": MultipleInstanceField("Owners", model="user"),
                     **{property: MultipleInstanceStringField(property_name, model="group")
                     for property, property_name in properties.items()}

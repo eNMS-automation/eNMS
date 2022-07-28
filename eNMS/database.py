@@ -358,11 +358,12 @@ class Database:
             if user.is_authenticated and not user.is_admin:
                 if model in vs.rbac["admin_models"].get(rbac, []):
                     raise self.rbac_error
-                property = getattr(vs.models[model], f"rbac_{rbac}", None)
-                if not property:
+                if model not in vs.rbac["form_access"]:
                     return query
+                property = getattr(vs.models[model], f"rbac_{rbac}", None)
                 constraints = [property.contains(f",{group},") for group in user.groups]
-                query = query.filter(or_(*constraints))
+                owners_constraint = vs.models[model].owners.any(id=current_user.id)
+                query = query.filter(or_(owners_constraint, *constraints))
         return query
 
     def fetch(

@@ -275,7 +275,7 @@ class Database:
             if "configure_events" in vars(model):
                 model.configure_events()
 
-        for model, properties in vs.rbac["form_access"].items():
+        for model, properties in vs.rbac["rbac_models"].items():
             for property in properties:
 
                 @event.listens_for(getattr(vs.models[model], property), "set")
@@ -330,7 +330,7 @@ class Database:
                     ),
                 ),
             )
-        for model in vs.rbac["form_access"]:
+        for model in vs.rbac["rbac_models"]:
             setattr(
                 self,
                 f"{model}_owner_table",
@@ -358,7 +358,7 @@ class Database:
             if user.is_authenticated and not user.is_admin:
                 if model in vs.rbac["admin_models"].get(rbac, []):
                     raise self.rbac_error
-                if model not in vs.rbac["form_access"]:
+                if model not in vs.rbac["rbac_models"]:
                     return query
                 property = getattr(vs.models[model], f"rbac_{rbac}", None)
                 constraints = [property.contains(f",{group},") for group in user.groups]
@@ -560,7 +560,7 @@ class Database:
     def set_rbac_properties(self, table):
         model = getattr(table, "__tablename__", None)
         if model == "user":
-            for rbac_model in vs.rbac["form_access"]:
+            for rbac_model in vs.rbac["rbac_models"]:
                 setattr(
                     table,
                     f"user_{rbac_model}s",
@@ -570,7 +570,7 @@ class Database:
                         back_populates="owners",
                     ),
                 )
-        properties = vs.rbac["form_access"].get(model, {})
+        properties = vs.rbac["rbac_models"].get(model, {})
         if not model or not properties:
             return
         setattr(

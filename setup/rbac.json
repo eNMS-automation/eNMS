@@ -269,7 +269,7 @@
     "read": ["credential", "group", "server", "session"],
     "edit": ["credential", "group", "server", "user", "session"]
   },
-  "form_access": {
+  "rbac_models": {
     "device": {
       "rbac_read": "Read",
       "rbac_edit": "Edit",

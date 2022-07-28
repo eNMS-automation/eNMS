@@ -70,8 +70,8 @@ class MetaForm(FormMeta):
             field = field(values["pretty_name"], **form_kw)
             setattr(form, property, field)
             attrs[property] = field
-        if form_type in vs.rbac["form_access"]:
-            form.rbac_properties = vs.rbac["form_access"].get(form_type, {})
+        if form_type in vs.rbac["rbac_models"]:
+            form.rbac_properties = vs.rbac["rbac_models"].get(form_type, {})
             setattr(form, "owners", MultipleInstanceField("Owners", model="user"))
             field_properties = {"type": "object-list", "model": "user"}
             vs.form_properties[form_type]["owners"] = field_properties

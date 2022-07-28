@@ -70,8 +70,8 @@ class MetaForm(FormMeta):
             field = field(values["pretty_name"], **form_kw)
             setattr(form, property, field)
             attrs[property] = field
-        form.rbac_properties = vs.rbac["form_access"].get(form_type, {})
-        if form.rbac_properties:
+        if form_type in vs.rbac["form_access"]:
+            form.rbac_properties = vs.rbac["form_access"].get(form_type, {})
             setattr(form, "owners", MultipleInstanceField("Owners", model="user"))
             field_properties = {"type": "object-list", "model": "user"}
             vs.form_properties[form_type]["owners"] = field_properties
@@ -125,6 +125,8 @@ class MetaForm(FormMeta):
 
 
 class BaseForm(FlaskForm, metaclass=MetaForm):
+    rbac_properties = {}
+
     def form_postprocessing(self, form_data):
         data = {"user": current_user, **form_data.to_dict()}
         if request.files:

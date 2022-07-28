@@ -629,23 +629,6 @@ function addInstancesToRelation(type, id) {
   });
 }
 
-function showInstanceAccessPanel(type, id) {
-  call({
-    url: `/get_access/${type}/${id}`,
-    callback: function (instance) {
-      openPanel({
-        name: `${type}_access`,
-        id: id,
-        type: type,
-        callback: function (panel) {
-          panel.setHeaderTitle(`EDIT Access for ${type} - ${instance.name}`);
-          processInstance(`${type}_access`, instance);
-        }
-      });
-    }
-  });
-}
-
 export function showInstancePanel(type, id, mode, tableId, edge) {
   openPanel({
     name: type,
@@ -796,18 +779,6 @@ export function processInstance(type, instance) {
     if (!el.length) continue;
     updateProperty(instance, el, property, value, type);
   }
-}
-
-function processAccessData(type, id) {
-  call({
-    url: `/update/${type}`,
-    form: `${type}_access-form-${id}`,
-    callback: (instance) => {
-      $(`#${type}_access-${id}`).remove();
-      const log = `${type.toUpperCase()} Access of '${instance.name}' updated`;
-      notify(log, "success", 5, true);
-    },
-  });
 }
 
 function processData(type, id) {
@@ -1200,14 +1171,12 @@ configureNamespace("base", [
   fullScreen,
   loadScript,
   openPanel,
-  processAccessData,
   processData,
   processInstance,
   removeInstance,
   showAddInstancePanel,
   showAllAlerts,
   showDeletionPanel,
-  showInstanceAccessPanel,
   showInstancePanel,
   switchTheme,
 ]);

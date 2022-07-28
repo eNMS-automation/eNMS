@@ -282,7 +282,10 @@ class Database:
                 def update_rbac_property(instance, *_):
                     if not current_user:
                         return
-                    if not current_user.is_admin and current_user not in instance.owners:
+                    if (
+                        not current_user.is_admin
+                        and current_user not in instance.owners
+                    ):
                         raise self.rbac_error
 
         if env.use_vault:

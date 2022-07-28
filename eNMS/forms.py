@@ -115,7 +115,6 @@ class MetaForm(FormMeta):
 
 
 class BaseForm(FlaskForm, metaclass=MetaForm):
-
     def form_postprocessing(self, form_data):
         data = {"user": current_user, **form_data.to_dict()}
         if request.files:
@@ -245,8 +244,12 @@ class FormFactory:
                     "id": HiddenField(),
                     "action": "eNMS.base.processAccessData",
                     "owners": MultipleInstanceField("Owners", model="user"),
-                    **{property: MultipleInstanceStringField(property_name, model="group")
-                    for property, property_name in properties.items()}
+                    **{
+                        property: MultipleInstanceStringField(
+                            property_name, model="group"
+                        )
+                        for property, property_name in properties.items()
+                    },
                 },
             )
 

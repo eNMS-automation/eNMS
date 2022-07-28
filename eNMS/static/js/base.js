@@ -629,6 +629,14 @@ function addInstancesToRelation(type, id) {
   });
 }
 
+function showInstanceAccessPanel(model, id) {
+  openPanel({
+    name: `${model}_access`,
+    id: id,
+    callback: function (panel) {}
+  })
+}
+
 export function showInstancePanel(type, id, mode, tableId, edge) {
   openPanel({
     name: type,
@@ -1176,6 +1184,7 @@ configureNamespace("base", [
   showAddInstancePanel,
   showAllAlerts,
   showDeletionPanel,
+  showInstanceAccessPanel,
   showInstancePanel,
   switchTheme,
 ]);

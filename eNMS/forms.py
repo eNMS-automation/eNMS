@@ -156,6 +156,7 @@ class FormFactory:
     def _initialize(self):
         self.generate_filtering_forms()
         self.generate_instance_insertion_forms()
+        self.generate_rbac_forms()
         self.generate_service_forms()
 
     def generate_filtering_forms(self):
@@ -231,6 +232,20 @@ class FormFactory:
                     "property": HiddenField(),
                     "instances": MultipleInstanceField(f"{model}s", model=model),
                     "names": StringField(widget=TextArea(), render_kw={"rows": 8}),
+                },
+            )
+
+    def generate_rbac_forms(self):
+        for model, properties in vs.rbac["rbac_models"].items():
+            type(
+                f"{model.capitalize()}AccessForm",
+                (BaseForm,),
+                {
+                    "form_type": HiddenField(default=f"{model}_access"),
+                    "action": "eNMS.base.saveModelAccess",
+                    "owners": MultipleInstanceField("Owners", model="user"),
+                    **{property: MultipleInstanceStringField(property_name, model="group")
+                    for property, property_name in properties.items()}
                 },
             )
 

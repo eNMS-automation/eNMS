@@ -16,8 +16,6 @@ import {
   configureForm,
   configureNamespace,
   downloadFile,
-  history,
-  historyPosition,
   notify,
   observeMutations,
   openPanel,

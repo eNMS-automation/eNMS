@@ -9,7 +9,6 @@ import {
   call,
   configureNamespace,
   editors,
-  jsonEditors,
   notify,
   openPanel,
   processInstance,

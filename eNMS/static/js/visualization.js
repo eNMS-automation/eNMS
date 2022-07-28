@@ -37,7 +37,6 @@ let clustered;
 let devicesProperties = {};
 let linksProperties = {};
 let routerIcon;
-let viewer;
 
 let currentPath = localStorage.getItem(page);
 let controls;

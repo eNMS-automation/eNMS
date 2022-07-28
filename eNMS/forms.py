@@ -788,6 +788,7 @@ class ServiceForm(BaseForm):
 
 class TaskForm(BaseForm):
     action = "eNMS.base.processData"
+    template = "object"
     form_type = HiddenField(default="task")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])

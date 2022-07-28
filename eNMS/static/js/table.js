@@ -515,7 +515,7 @@ tables.device = class DeviceTable extends Table {
 
   buttons(row) {
     return `
-      <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
+      <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.inventory.showDeviceData(${row.instance})"
@@ -550,13 +550,6 @@ tables.device = class DeviceTable extends Table {
           onclick="eNMS.base.showInstancePanel('${row.type}', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
-          ></button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showInstanceAccessPanel('${row.type}', '${row.id}')"
-          data-tooltip="Update Access"
-            ><span class="glyphicon glyphicon-eye-open"></span
           ></button>
         </li>
         <li>

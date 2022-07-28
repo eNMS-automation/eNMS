@@ -70,6 +70,16 @@ class MetaForm(FormMeta):
             field = field(values["pretty_name"], **form_kw)
             setattr(form, property, field)
             attrs[property] = field
+            if form_type in vs.rbac["rbac_models"]:
+                form.rbac_properties = vs.rbac["rbac_models"].get(form_type, {})
+                setattr(form, "owners", MultipleInstanceField("Owners", model="user"))
+                field_properties = {"type": "object-list", "model": "user"}
+                vs.form_properties[form_type]["owners"] = field_properties
+            for property, property_name in form.rbac_properties.items():
+                field = MultipleInstanceStringField(property_name, model="group")
+                setattr(form, property, field)
+                field_properties = {"type": "object-string-list", "model": "group"}
+                vs.form_properties[form_type][property] = field_properties
         vs.form_class[form_type] = form
         properties = {}
         for field_name, field in attrs.items():
@@ -115,6 +125,8 @@ class MetaForm(FormMeta):
 
 
 class BaseForm(FlaskForm, metaclass=MetaForm):
+    rbac_properties = {}
+
     def form_postprocessing(self, form_data):
         data = {"user": current_user, **form_data.to_dict()}
         if request.files:
@@ -155,7 +167,6 @@ class FormFactory:
     def _initialize(self):
         self.generate_filtering_forms()
         self.generate_instance_insertion_forms()
-        self.generate_rbac_forms()
         self.generate_service_forms()
 
     def generate_filtering_forms(self):
@@ -231,25 +242,6 @@ class FormFactory:
                     "property": HiddenField(),
                     "instances": MultipleInstanceField(f"{model}s", model=model),
                     "names": StringField(widget=TextArea(), render_kw={"rows": 8}),
-                },
-            )
-
-    def generate_rbac_forms(self):
-        for model, properties in vs.rbac["rbac_models"].items():
-            type(
-                f"{model.capitalize()}AccessForm",
-                (BaseForm,),
-                {
-                    "form_type": HiddenField(default=f"{model}_access"),
-                    "id": HiddenField(),
-                    "action": "eNMS.base.processAccessData",
-                    "owners": MultipleInstanceField("Owners", model="user"),
-                    **{
-                        property: MultipleInstanceStringField(
-                            property_name, model="group"
-                        )
-                        for property, property_name in properties.items()
-                    },
                 },
             )
 

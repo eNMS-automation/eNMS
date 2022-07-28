@@ -29,7 +29,6 @@ class Service(AbstractBase):
     path = db.Column(db.TinyString)
     creator = db.Column(db.SmallString)
     admin_only = db.Column(Boolean, default=False)
-    owners_access = db.Column(db.SmallString)
     shared = db.Column(Boolean, default=False)
     scoped_name = db.Column(db.SmallString, index=True)
     last_modified = db.Column(db.TinyString, info={"log_change": False})

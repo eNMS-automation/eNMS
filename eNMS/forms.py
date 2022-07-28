@@ -594,10 +594,6 @@ class ServiceForm(BaseForm):
     update_pools_after_running = BooleanField("Update pools after running")
     workflows = MultipleInstanceField("Workflows", model="workflow")
     owners = MultipleInstanceField("Owners", model="user")
-    owners_access = SelectMultipleStringField(
-        "Owners Access",
-        choices=[("run", "Run"), ("edit", "Edit")],
-    )
     waiting_time = IntegerField(
         "Time to Wait before next service is started (in seconds)", default=0
     )

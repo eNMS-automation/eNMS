@@ -195,6 +195,7 @@
     "/edit_file": "access",
     "/filtering": "all",
     "/get": "access",
+    "/get_access": "access",
     "/get_all": "access",
     "/get_cluster_status": "access",
     "/get_git_history": "access",

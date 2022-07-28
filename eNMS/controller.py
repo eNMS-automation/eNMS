@@ -442,6 +442,9 @@ class Controller:
     def get(self, model, id):
         return db.fetch(model, id=id).serialized
 
+    def get_access(self, model, id):
+        return db.fetch(model, id=id).serialized
+
     def get_all(self, model):
         return [instance.get_properties() for instance in db.fetch_all(model)]
 

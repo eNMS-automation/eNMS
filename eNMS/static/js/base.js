@@ -630,19 +630,19 @@ function addInstancesToRelation(type, id) {
 }
 
 function showInstanceAccessPanel(type, id) {
-  openPanel({
-    name: `${type}_access`,
-    id: id,
-    type: type,
-    callback: function (panel) {
-      call({
-        url: `/get/${type}/${id}`,
-        callback: function (instance) {
+  call({
+    url: `/get_access/${type}/${id}`,
+    callback: function (instance) {
+      openPanel({
+        name: `${type}_access`,
+        id: id,
+        type: type,
+        callback: function (panel) {
           panel.setHeaderTitle(`EDIT Access for ${type} - ${instance.name}`);
           processInstance(`${type}_access`, instance);
-        },
+        }
       });
-    },
+    }
   });
 }
 

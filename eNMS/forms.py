@@ -71,6 +71,10 @@ class MetaForm(FormMeta):
             setattr(form, property, field)
             attrs[property] = field
         form.rbac_properties = vs.rbac["form_access"].get(form_type, {})
+        if form.rbac_properties:
+            setattr(form, "owners", MultipleInstanceField("Owners", model="user"))
+            field_properties = {"type": "object-list", "model": "user"}
+            vs.form_properties[form_type]["owners"] = field_properties
         for property, property_name in form.rbac_properties.items():
             field = MultipleInstanceStringField(property_name, model="group")
             setattr(form, property, field)
@@ -593,7 +597,6 @@ class ServiceForm(BaseForm):
     update_target_pools = BooleanField("Update target pools before running")
     update_pools_after_running = BooleanField("Update pools after running")
     workflows = MultipleInstanceField("Workflows", model="workflow")
-    owners = MultipleInstanceField("Owners", model="user")
     waiting_time = IntegerField(
         "Time to Wait before next service is started (in seconds)", default=0
     )

@@ -275,6 +275,12 @@
       "rbac_edit": "Edit",
       "rbac_connect": "Connect via SSH",
       "rbac_target": "Use as Target"
+    },
+    "service": {
+      "rbac_read": "Read",
+      "rbac_edit": "Edit",
+      "rbac_run": "Run",
+      "rbac_schedule": "Schedule"
     }
   }
 }

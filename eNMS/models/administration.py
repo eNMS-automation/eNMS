@@ -42,9 +42,6 @@ class User(AbstractBase, UserMixin):
     groups = relationship(
         "Group", secondary=db.user_group_table, back_populates="users"
     )
-    services = relationship(
-        "Service", secondary=db.service_owner_table, back_populates="owners"
-    )
     is_admin = db.Column(Boolean, default=False)
 
     @classmethod

@@ -29,7 +29,13 @@ from sqlalchemy.exc import InvalidRequestError, OperationalError
 from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.ext.mutable import MutableDict, MutableList
-from sqlalchemy.orm import aliased, configure_mappers, scoped_session, sessionmaker
+from sqlalchemy.orm import (
+    aliased,
+    configure_mappers,
+    relationship,
+    scoped_session,
+    sessionmaker,
+)
 from sqlalchemy.orm.collections import InstrumentedList
 from sqlalchemy.types import JSON
 from time import sleep
@@ -271,6 +277,7 @@ class Database:
 
         for model, properties in vs.rbac["form_access"].items():
             for property in properties:
+
                 @event.listens_for(getattr(vs.models[model], property), "set")
                 def update_rbac_property(instance, *_):
                     if not current_user:
@@ -321,6 +328,22 @@ class Database:
                         ),
                         primary_key=True,
                     ),
+                ),
+            )
+        for model in vs.rbac["form_access"]:
+            setattr(
+                self,
+                f"{model}_owner_table",
+                Table(
+                    f"{model}_owner_association",
+                    self.base.metadata,
+                    Column(
+                        f"{model}_id",
+                        Integer,
+                        ForeignKey(f"{model}.id"),
+                        primary_key=True,
+                    ),
+                    Column("user_id", Integer, ForeignKey("user.id"), primary_key=True),
                 ),
             )
 
@@ -535,9 +558,29 @@ class Database:
 
     def set_rbac_properties(self, table):
         model = getattr(table, "__tablename__", None)
+        if model == "user":
+            for rbac_model in vs.rbac["form_access"]:
+                setattr(
+                    table,
+                    f"user_{rbac_model}s",
+                    relationship(
+                        rbac_model.capitalize(),
+                        secondary=getattr(self, f"{rbac_model}_owner_table"),
+                        back_populates="owners",
+                    ),
+                )
         properties = vs.rbac["form_access"].get(model, {})
         if not model or not properties:
             return
+        setattr(
+            table,
+            "owners",
+            relationship(
+                "User",
+                secondary=getattr(self, f"{model}_owner_table"),
+                back_populates=f"user_{model}s",
+            ),
+        )
         for property in properties:
             setattr(table, property, self.Column(self.LargeString))
 

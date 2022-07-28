@@ -70,16 +70,6 @@ class MetaForm(FormMeta):
             field = field(values["pretty_name"], **form_kw)
             setattr(form, property, field)
             attrs[property] = field
-        if form_type in vs.rbac["rbac_models"]:
-            form.rbac_properties = vs.rbac["rbac_models"].get(form_type, {})
-            setattr(form, "owners", MultipleInstanceField("Owners", model="user"))
-            field_properties = {"type": "object-list", "model": "user"}
-            vs.form_properties[form_type]["owners"] = field_properties
-        for property, property_name in form.rbac_properties.items():
-            field = MultipleInstanceStringField(property_name, model="group")
-            setattr(form, property, field)
-            field_properties = {"type": "object-string-list", "model": "group"}
-            vs.form_properties[form_type][property] = field_properties
         vs.form_class[form_type] = form
         properties = {}
         for field_name, field in attrs.items():
@@ -125,7 +115,6 @@ class MetaForm(FormMeta):
 
 
 class BaseForm(FlaskForm, metaclass=MetaForm):
-    rbac_properties = {}
 
     def form_postprocessing(self, form_data):
         data = {"user": current_user, **form_data.to_dict()}

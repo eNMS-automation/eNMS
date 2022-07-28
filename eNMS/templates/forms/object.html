@@ -15,17 +15,13 @@
         <a class="nav-link" data-toggle="tab" href="#specific">Specific Properties</a>
       </li>
       {% endif %}
-      <li class="nav-item" id="rbac-nav" style="display:none">
-        <a class="nav-link" data-toggle="tab" href="#rbac">Access Control</a>
-      </li>
     </ul>
     <div class="form-group">
       <div class="tab-content">
         <div class="tab-pane fade in active" id="common">
           <div id="content" class="add-id" style="height: 100%;"></div>
           {% for field in form %} {% set properties = form.properties or {} %} {% if
-          field.name not in properties and field.name != "owners" and field.name not in
-          form.rbac_properties %} {{ field_template(form_type, field) }} {% endif %} {%
+          field.name not in properties %} {{ field_template(form_type, field) }} {% endif %} {%
           endfor %}
           <center>
             <button
@@ -44,11 +40,6 @@
           field_template(form_type, field) }} {% endfor %}
         </div>
         {% endif %}
-        <div class="tab-pane fade" id="rbac">
-          {{ field_template(form_type, form["owners"]) }} {% for property in
-          form.rbac_properties %} {% set field = form[property] %} {{
-          field_template(form_type, field) }} {% endfor %}
-        </div>
       </div>
     </div>
   </div>

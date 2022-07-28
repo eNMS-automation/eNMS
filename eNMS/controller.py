@@ -443,7 +443,16 @@ class Controller:
         return db.fetch(model, id=id).serialized
 
     def get_access(self, model, id):
-        return db.fetch(model, id=id).serialized
+        instance = db.fetch(model, id=id)
+        if not current_user.is_admin and current_user not in instance.owners:
+            return {
+                "error": (
+                    "You need to be an admin user or an owner of"
+                    f"{instance.name} to edit the access."
+                )
+            }
+        access_properties = ["id", "owners", *vs.rbac["rbac_models"][model]]
+        return instance.to_dict(include=access_properties)
 
     def get_all(self, model):
         return [instance.get_properties() for instance in db.fetch_all(model)]

@@ -42,7 +42,6 @@ class User(AbstractBase, UserMixin):
     groups = relationship(
         "Group", secondary=db.user_group_table, back_populates="users"
     )
-    is_admin = db.Column(Boolean, default=False)
 
     @classmethod
     def database_init(cls):

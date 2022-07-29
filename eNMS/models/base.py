@@ -1,3 +1,5 @@
+from collections import defaultdict
+from flask_login import current_user
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 from eNMS.database import db
@@ -12,6 +14,7 @@ class AbstractBase(db.base):
 
     def __init__(self, **kwargs):
         self.update(**kwargs)
+        self.update_rbac()
 
     def __lt__(self, other):
         return True
@@ -79,6 +82,17 @@ class AbstractBase(db.base):
                     if current_value:
                         value = {**current_value, **value}
             setattr(self, property, value)
+
+    def update_rbac(self):
+        if self.type not in vs.rbac["rbac_models"]:
+            return
+        self.access_properties = defaultdict(list)
+        self.owners = [current_user]
+        for group in current_user.groups:
+            for access_type in getattr(group, f"{self.type}_access"):
+                self.access_properties[access_type].append(group.name)
+        for property, value in self.access_properties.items():
+            setattr(self, property, f",{','.join(value)},")
 
     def delete(self):
         pass

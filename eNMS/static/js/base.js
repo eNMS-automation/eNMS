@@ -660,47 +660,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
           },
         });
       } else if (mode == "bulk") {
-        $("#rbac-nav").show();
-        const model = isService ? "service" : type;
-        const form = {
-          ...serializeForm(`#search-form-${tableId}`, `${model}_filtering`),
-          ...tableInstances[tableId].constraints,
-          ...tableInstances[tableId].filteringConstraints,
-        };
-        call({
-          url: `/filtering/${model}`,
-          data: { form: form, bulk: "id" },
-          callback: function (instances) {
-            $(`#${type}-id-${tableId}`).val(instances.join("-"));
-            $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val(
-              "Bulk Edit"
-            );
-            const number = instances.length;
-            panel.setHeaderTitle(`Edit all ${number} ${model}s in table in bulk`);
-            for (const property of Object.keys(formProperties[type])) {
-              $(`#${type}-action-btn-${tableId}`)
-                .attr(
-                  "onclick",
-                  `eNMS.table.showBulkEditPanel(
-                  '${type}', '${model}', '${tableId}', ${number})`
-                )
-                .text("Bulk Edit");
-              if (["name", "scoped_name", "type"].includes(property)) {
-                $(`#${type}-${property}-${tableId}`).prop("readonly", true);
-              } else {
-                $(`label[for='${property}']`).after(`
-                  <div class="item" style='float:right; margin-left: 15px'>
-                    <input
-                      id="bulk-edit-${property}-${tableId}"
-                      name="bulk-edit-${property}"
-                      type="checkbox"
-                    />
-                  </div>
-                `);
-              }
-            }
-          },
-        });
+        buildBulkPanel(panel, type, tableId);
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
         if (page == "workflow_builder" && creationMode == "create_service") {
@@ -721,6 +681,50 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
     },
     type: type,
     duplicate: mode == "duplicate",
+  });
+}
+
+function buildBulkPanel(panel, type, tableId) {
+  $("#rbac-nav").show();
+  const model = type in subtypes.service ? "service" : type;
+  const form = {
+    ...serializeForm(`#search-form-${tableId}`, `${model}_filtering`),
+    ...tableInstances[tableId].constraints,
+    ...tableInstances[tableId].filteringConstraints,
+  };
+  call({
+    url: `/filtering/${model}`,
+    data: { form: form, bulk: "id" },
+    callback: function (instances) {
+      $(`#${type}-id-${tableId}`).val(instances.join("-"));
+      $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val(
+        "Bulk Edit"
+      );
+      const number = instances.length;
+      panel.setHeaderTitle(`Edit all ${number} ${model}s in table in bulk`);
+      for (const [property, value] of Object.entries(formProperties[type])) {
+        $(`#${type}-action-btn-${tableId}`)
+          .attr(
+            "onclick",
+            `eNMS.table.showBulkEditPanel(
+            '${type}', '${model}', '${tableId}', ${number})`
+          )
+          .text("Bulk Edit");
+        if (["name", "scoped_name", "type"].includes(property)) {
+          $(`#${type}-${property}-${tableId}`).prop("readonly", true);
+        } else {
+          $(`label[for='${property}']`).after(`
+            <div class="item" style='float:right; margin-left: 15px'>
+              <input
+                id="bulk-edit-${property}-${tableId}"
+                name="bulk-edit-${property}"
+                type="checkbox"
+              />
+            </div>
+          `);
+        }
+      }
+    },
   });
 }
 

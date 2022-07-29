@@ -1,0 +1,40 @@
+{% from 'macros.html' import field_template %}
+<form
+  id="{{ form_type }}-form"
+  class="form-horizontal form-label-left add-id"
+  method="post"
+  autocomplete="off"
+>
+  <div class="modal-body">
+    <ul class="nav nav-tabs bar_tabs">
+      <li class="nav-item active">
+        <a class="nav-link" data-toggle="tab" href="#group-properties">Group Properties</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#group-access">Group Access</a>
+      </li>
+    </ul>
+    <div class="form-group">
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="group-properties">
+          <div id="content" class="add-id" style="height: 100%;"></div>
+          {% for field in form %} {% if
+          field.name in ("name", "description", "email", "users") %} {{ field_template(form_type, field) }} {% endif %} {%
+          endfor %}
+          <center>
+            <button
+              id="{{ form_type }}-action-btn"
+              type="button"
+              class="btn btn-{{ button_class }} add-id btn-id"
+              value="{{ action }}"
+            >
+              {{ button_label }}
+            </button>
+          </center>
+        </div>
+        <div class="tab-pane fade" id="group-access">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

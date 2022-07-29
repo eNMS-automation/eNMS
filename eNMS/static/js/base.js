@@ -712,7 +712,7 @@ function buildBulkPanel(panel, type, tableId) {
           $(`#${type}-${property}-property-div-${tableId}`)
             .width("80%")
             .before(`
-              <div style="float:right; width: 19%; margin-top: 4px;">
+              <div style="float:right; width: 19%; margin-top: 2px;">
                 <select data-width="100%" id="${tableId}-${property}-list">
                   <option value="success">Set</option>
                   <option value="failure">Add</option>

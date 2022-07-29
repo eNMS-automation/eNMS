@@ -8,7 +8,6 @@ from eNMS.variables import vs
 class AbstractBase(db.base):
 
     __abstract__ = True
-    pool_model = False
     model_properties = {}
 
     def __init__(self, **kwargs):

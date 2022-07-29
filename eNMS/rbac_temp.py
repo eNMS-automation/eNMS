@@ -63,14 +63,6 @@
                 )
             )
         return query
-
-# Make a separate form
-
-        for property, property_name in form.rbac_properties.items():
-            field = MultipleInstanceStringField(property_name, model="group")
-            setattr(form, property, field)
-            field_properties = {"type": "object-string-list", "model": "group"}
-            vs.form_properties[form_type][property] = field_properties
             
 # Run class
 

@@ -18,8 +18,8 @@ field.name) %} {% set style = "height: {}px".format(field.render_kw["rows"]*20 +
   {% endif %}
   <div class="col-md-9 col-sm-9 col-xs-12">
     <div id="{{ id }}-property-div" class="add-id">
-    {{ field(id=id, class="collapsed {} add-id".format(class), checked=field.default,
-    style="width: 100%") }}
+      {{ field(id=id, class="collapsed {} add-id".format(class), checked=field.default,
+      style="width: 100%") }}
     </div>
   </div>
   <br /><br />

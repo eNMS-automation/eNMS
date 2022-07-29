@@ -1163,7 +1163,7 @@ class GroupForm(RbacForm):
         for model, properties in vs.rbac["rbac_models"].items():
             field = SelectMultipleField(choices=list(properties.items()))
             setattr(cls, f"{model}_access", field)
-            vs.form_properties["group"][f"{model}_access"] = {"type": "list"}
+            vs.form_properties["group"][f"{model}_access"] = {"type": "multiselect"}
 
 
 class ReplacementForm(FlaskForm):

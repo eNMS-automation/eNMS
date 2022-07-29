@@ -697,9 +697,7 @@ function buildBulkPanel(panel, type, tableId) {
     data: { form: form, bulk: "id" },
     callback: function (instances) {
       $(`#${type}-id-${tableId}`).val(instances.join("-"));
-      $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val(
-        "Bulk Edit"
-      );
+      $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val("Bulk Edit");
       const number = instances.length;
       panel.setHeaderTitle(`Edit all ${number} ${model}s in table in bulk`);
       for (const [property, value] of Object.entries(formProperties[type])) {
@@ -710,6 +708,20 @@ function buildBulkPanel(panel, type, tableId) {
             '${type}', '${model}', '${tableId}', ${number})`
           )
           .text("Bulk Edit");
+        if (["object-list", "object-string-list"].includes(value.type)) {
+          $(`#${type}-${property}-property-div-${tableId}`)
+            .width("80%")
+            .before(`
+              <div style="float:right; width: 19%; margin-top: 4px;">
+                <select data-width="100%" id="${tableId}-${property}-list">
+                  <option value="success">Set</option>
+                  <option value="failure">Add</option>
+                  <option value="failure">Remove</option>
+                </select>
+              </div>
+            `);
+          $(`#${tableId}-${property}-list`).selectpicker();
+        }
         if (["name", "scoped_name", "type"].includes(property)) {
           $(`#${type}-${property}-${tableId}`).prop("readonly", true);
         } else {

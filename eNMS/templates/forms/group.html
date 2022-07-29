@@ -13,7 +13,10 @@
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#group-access">Menu and Endpoint Access</a>
+        <a class="nav-link" data-toggle="tab" href="#group-ui-access">Menu and Endpoint Access</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#group-model-access">Default Model Access</a>
       </li>
     </ul>
     <div class="form-group">
@@ -33,9 +36,13 @@
             </button>
           </center>
         </div>
-        <div class="tab-pane fade" id="group-access">
+        <div class="tab-pane fade" id="group-ui-access">
           {% for field in form %} {% if field.name in ("menu", "pages", "get_requests",
           "post_requests", "delete_requests") %} {{ field_template(form_type, field) }}
+          {% endif %} {% endfor %}
+        </div>
+        <div class="tab-pane fade" id="group-model-access">
+          {% for field in form %} {% if field.name in ("device_access",) %} {{ field_template(form_type, field) }}
           {% endif %} {% endfor %}
         </div>
       </div>

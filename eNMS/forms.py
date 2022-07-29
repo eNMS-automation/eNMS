@@ -1158,6 +1158,12 @@ class GroupForm(RbacForm):
         ],
     )
 
+    @classmethod
+    def form_init(cls):
+        for model, properties in vs.rbac["rbac_models"].items():
+            field = SelectField(choices=list(properties.items()))
+            setattr(cls, f"{model}_access", field)
+
 
 class ReplacementForm(FlaskForm):
     pattern = StringField("Pattern")

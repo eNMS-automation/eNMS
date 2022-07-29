@@ -17,13 +17,6 @@
             .group_by(cls.id)
         )
 
-# Pool class
-
-    @classmethod
-    def rbac_filter(cls, query, *_):
-        return query.filter(cls.admin_only == false())
-
-
 # automation.py
 
 # Service class

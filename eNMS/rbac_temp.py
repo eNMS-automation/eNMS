@@ -1,22 +1,3 @@
-# inventory.py
-
-# Object class
-
-    @classmethod
-    def rbac_filter(cls, query, mode, user):
-        if cls.__tablename__ == "node":
-            return query
-        pool_alias = aliased(vs.models["pool"])
-        return (
-            query.join(cls.pools)
-            .join(vs.models["access"], vs.models["pool"].access)
-            .join(pool_alias, vs.models["access"].user_pools)
-            .join(vs.models["user"], pool_alias.users)
-            .filter(vs.models["access"].access_type.contains(mode))
-            .filter(vs.models["user"].name == user.name)
-            .group_by(cls.id)
-        )
-
 # automation.py
 
 # Service class

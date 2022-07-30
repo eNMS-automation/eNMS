@@ -905,6 +905,7 @@ table.display td.center {
   margin-right: 8px;
   margin-top: -10px;
   float: right;
+  display: none;
 }
 
 .dataTables_scrollBody {

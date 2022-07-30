@@ -632,8 +632,8 @@ tables.network = class NetworkTable extends Table {
           <option value="false">Display all networks</option>
         </select>
       </button>`,
-      this.refreshTableButton(),
       this.paginatioNButton(),
+      this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
@@ -714,8 +714,8 @@ tables.configuration = class ConfigurationTable extends Table {
         class="slider"
         style="width: 200px"
       >`,
-      this.refreshTableButton(),
       this.paginatioNButton(),
+      this.refreshTableButton(),
       this.searchTableButton("device"),
       this.clearSearchButton(),
       this.copyTableButton(),
@@ -929,7 +929,9 @@ tables.service = class ServiceTable extends Table {
           <option value="true">Display top-level services</option>
           <option value="false">Display all services</option>
         </select>
-      </button>
+      </button>`,
+      this.paginatioNButton(),
+      `
       <button
         class="btn btn-info"
         onclick="eNMS.table.refreshTable('service', true)"

@@ -131,13 +131,16 @@ class Controller:
 
     def bulk_edit(self, table, **kwargs):
         instances = kwargs.pop("id").split("-")
-        kwargs = {
-            property: value
-            for property, value in kwargs.items()
-            if kwargs.get(f"bulk-edit-{property}")
-        }
         for instance_id in instances:
-            db.factory(table, id=instance_id, **kwargs)
+            instance = db.factory(table, id=instance_id)
+            for property, value in kwargs.items():
+                if not kwargs.get(f"bulk-edit-{property}"):
+                    continue
+                edit_mode = kwargs.get(f"{property}-edit-mode", "set")
+                if edit_mode == "set":
+                    setattr(instance, property, value)
+                else:
+                    getattr(getattr(instance, property), edit_mode)(value)
         return len(instances)
 
     def bulk_removal(

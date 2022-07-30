@@ -411,7 +411,7 @@ class Controller:
     def filtering(
         self, model, bulk=False, rbac="read", username=None, properties=None, **kwargs
     ):
-        table, pagination = vs.models[model], kwargs["pagination"]
+        table, pagination = vs.models[model], kwargs.get("pagination")
         query = db.query(model, rbac, username, properties=properties)
         if not bulk and not properties:
             total_records = query.with_entities(table.id).count() if pagination else 0

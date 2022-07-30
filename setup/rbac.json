@@ -266,7 +266,7 @@
     "/web_connection": "access"
   },
   "admin_models": {
-    "read": ["credential", "group", "server", "session"],
+    "read": ["credential", "server", "session"],
     "edit": ["credential", "group", "server", "user", "session"]
   },
   "rbac_models": {

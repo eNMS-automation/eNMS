@@ -384,10 +384,11 @@ class Database:
                     raise self.rbac_error
                 if model not in vs.rbac["rbac_models"]:
                     return query
-                property = getattr(vs.models[model], f"rbac_{rbac}", None)
-                constraints = [property.contains(f",{group},") for group in user.groups]
+                user_group = [group.id for group in current_user.groups]
+                property = getattr(vs.models[model], f"rbac_{rbac}")
+                rbac_constraint = property.any(vs.models["group"].id.in_(user_group))
                 owners_constraint = vs.models[model].owners.any(id=current_user.id)
-                query = query.filter(or_(owners_constraint, *constraints))
+                query = query.filter(or_(owners_constraint, rbac_constraint))
         return query
 
     def fetch(

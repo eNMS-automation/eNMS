@@ -584,9 +584,9 @@ export function configureForm(form, id, panelId) {
       editor.on("change", () => editor.save());
       if (!editors[id]) editors[id] = {};
       editors[id][property] = editor;
-    } else if (["object", "object-list", "object-string-list"].includes(field.type)) {
+    } else if (["object", "object-list"].includes(field.type)) {
       let model;
-      if (relationships[form] && field.type !== "object-string-list") {
+      if (relationships[form]) {
         model = relationships[form][property].model;
       } else {
         model = field.model;
@@ -708,7 +708,7 @@ function buildBulkPanel(panel, type, tableId) {
             '${type}', '${model}', '${tableId}', ${number})`
           )
           .text("Bulk Edit");
-        if (["object-list", "object-string-list"].includes(value.type)) {
+        if (value.type == "object-list") {
           $(`#${type}-${property}-property-div-${tableId}`).width("80%").before(`
               <div style="float:right; width: 19%; margin-top: 2px;">
                 <select
@@ -764,10 +764,6 @@ function updateProperty(instance, el, property, value, type) {
     }
     el.selectpicker("val", value).trigger("change");
     el.selectpicker("render");
-  } else if (propertyType == "object-string-list") {
-    const values = value.slice(1, -1).split(",").filter(Boolean);
-    values.forEach((instance) => el.append(new Option(instance, instance)));
-    el.val(values).trigger("change");
   } else if (["object-list", "object"].includes(propertyType)) {
     if (propertyType == "object") value = [value];
     const idProperty = propertyType == "object" ? "id" : "name";

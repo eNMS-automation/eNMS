@@ -193,7 +193,3 @@ class MultipleInstanceField(FieldMixin, WtformsSelectMultipleField):
             error = f"Couldn't find the following {self.model}s: {', '.join(not_found)}"
             raise ValidationError(error)
         return True
-
-
-class MultipleInstanceStringField(MultipleInstanceField):
-    type = "object-string-list"

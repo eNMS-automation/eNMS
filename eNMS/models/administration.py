@@ -87,8 +87,14 @@ class Group(AbstractBase):
     def database_init(cls):
         for property in vs.rbac["form_properties"]:
             setattr(cls, property, db.Column(db.List))
-        for model in vs.rbac["rbac_models"]:
+        for model, properties in vs.rbac["rbac_models"].items():
             setattr(cls, f"{model}_access", db.Column(db.List))
+            for property in properties:
+                setattr(cls, f"{property}_{model}s", relationship(
+                    model.capitalize(),
+                    secondary=getattr(db, f"{model}_{property}_table"),
+                    back_populates=property,
+                ))
 
     def update(self, **kwargs):
         old_users = set(self.users)

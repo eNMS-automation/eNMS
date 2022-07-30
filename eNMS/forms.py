@@ -21,7 +21,6 @@ from eNMS.fields import (
     IntegerField,
     JsonField,
     MultipleInstanceField,
-    MultipleInstanceStringField,
     PasswordField,
     SelectField,
     SelectMultipleField,
@@ -76,9 +75,9 @@ class MetaForm(FormMeta):
             field_properties = {"type": "object-list", "model": "user"}
             vs.form_properties[form_type]["owners"] = field_properties
         for property, property_name in form.rbac_properties.items():
-            field = MultipleInstanceStringField(property_name, model="group")
+            field = MultipleInstanceField(property_name, model="group")
             setattr(form, property, field)
-            field_properties = {"type": "object-string-list", "model": "group"}
+            field_properties = {"type": "object-list", "model": "group"}
             vs.form_properties[form_type][property] = field_properties
         vs.form_class[form_type] = form
         properties = {}
@@ -134,7 +133,6 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
         for property, field in vs.form_properties[form_data.get("form_type")].items():
             if field["type"] in (
                 "object-list",
-                "object-string-list",
                 "multiselect",
                 "multiselect-string",
             ):
@@ -143,10 +141,6 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
                     value = str(value)
                 if field["type"] == "object-list":
                     value = [db.fetch(field["model"], name=name).id for name in value]
-                if field["type"] == "object-string-list":
-                    if property not in data:
-                        continue
-                    value = f",{','.join(value)},"
                 data[property] = value
             elif field["type"] == "object":
                 data[property] = form_data.get(property)

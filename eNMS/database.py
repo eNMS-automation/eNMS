@@ -333,7 +333,7 @@ class Database:
                     ),
                 ),
             )
-        for model in vs.rbac["rbac_models"]:
+        for model, properties in vs.rbac["rbac_models"].items():
             setattr(
                 self,
                 f"{model}_owner_table",
@@ -349,6 +349,22 @@ class Database:
                     Column("user_id", Integer, ForeignKey("user.id"), primary_key=True),
                 ),
             )
+            for property in properties:
+                setattr(
+                    self,
+                    f"{model}_{property}_table",
+                    Table(
+                        f"{model}_{property}_association",
+                        self.base.metadata,
+                        Column(
+                            f"{model}_id",
+                            Integer,
+                            ForeignKey(f"{model}.id"),
+                            primary_key=True,
+                        ),
+                        Column("group_id", Integer, ForeignKey("group.id"), primary_key=True),
+                    ),
+                )
 
     def query(self, model, rbac="read", username=None, properties=None):
         if properties:
@@ -586,7 +602,11 @@ class Database:
             ),
         )
         for property in properties:
-            setattr(table, property, self.Column(self.LargeString))
+            setattr(table, property, relationship(
+                        "Group",
+                        secondary=getattr(self, f"{model}_{property}_table"),
+                        back_populates=f"{property}_{model}s",
+                    ))
 
     def cleanup(self):
         self.engine.dispose()

@@ -136,11 +136,21 @@ class Controller:
             for property, value in kwargs.items():
                 if not kwargs.get(f"bulk-edit-{property}"):
                     continue
-                edit_mode = kwargs.get(f"{property}-edit-mode", "set")
-                if edit_mode == "set":
+                edit_mode = kwargs.get(f"{property}-edit-mode")
+                if not edit_mode:
                     setattr(instance, property, value)
                 else:
-                    getattr(getattr(instance, property), edit_mode)(value)
+                    current_value = getattr(instance, property)
+                    related_model = vs.relationships[table][property]["model"]
+                    objects = db.objectify(related_model, value)
+                    if edit_mode == "set":
+                        setattr(instance, property, objects)
+                    else:
+                        for obj in objects:
+                            if edit_mode == "append" and obj not in current_value:
+                                current_value.append(obj)
+                            elif edit_mode == "remove" and obj in current_value:
+                                current_value.remove(obj)
         return len(instances)
 
     def bulk_removal(

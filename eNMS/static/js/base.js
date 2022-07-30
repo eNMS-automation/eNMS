@@ -711,7 +711,11 @@ function buildBulkPanel(panel, type, tableId) {
         if (["object-list", "object-string-list"].includes(value.type)) {
           $(`#${type}-${property}-property-div-${tableId}`).width("80%").before(`
               <div style="float:right; width: 19%; margin-top: 2px;">
-                <select data-width="100%" id="${tableId}-${property}-list">
+                <select
+                  data-width="100%"
+                  id="${tableId}-${property}-list"
+                  name="${property}-edit-mode"
+                >
                   <option value="success">Set</option>
                   <option value="failure">Add</option>
                   <option value="failure">Remove</option>

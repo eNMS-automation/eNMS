@@ -413,7 +413,7 @@ class Controller:
     ):
         table, pagination = vs.models[model], kwargs.get("pagination")
         query = db.query(model, rbac, username, properties=properties)
-        total_records, filtered_records = (10 ** 6,) * 2
+        total_records, filtered_records = (10**6,) * 2
         if pagination and not bulk and not properties:
             total_records = query.with_entities(table.id).count()
         try:

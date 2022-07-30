@@ -337,7 +337,7 @@ export class Table {
         type="button"
       >
         <span class="glyphicon glyphicon-info-sign"></span>
-      </button>`
+      </button>`;
   }
 
   createNewButton() {

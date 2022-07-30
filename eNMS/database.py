@@ -362,7 +362,12 @@ class Database:
                             ForeignKey(f"{model}.id"),
                             primary_key=True,
                         ),
-                        Column("group_id", Integer, ForeignKey("group.id"), primary_key=True),
+                        Column(
+                            "group_id",
+                            Integer,
+                            ForeignKey("group.id"),
+                            primary_key=True,
+                        ),
                     ),
                 )
 
@@ -602,11 +607,15 @@ class Database:
             ),
         )
         for property in properties:
-            setattr(table, property, relationship(
-                        "Group",
-                        secondary=getattr(self, f"{model}_{property}_table"),
-                        back_populates=f"{property}_{model}s",
-                    ))
+            setattr(
+                table,
+                property,
+                relationship(
+                    "Group",
+                    secondary=getattr(self, f"{model}_{property}_table"),
+                    back_populates=f"{property}_{model}s",
+                ),
+            )
 
     def cleanup(self):
         self.engine.dispose()

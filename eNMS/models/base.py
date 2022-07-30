@@ -84,7 +84,7 @@ class AbstractBase(db.base):
             setattr(self, property, value)
 
     def update_rbac(self):
-        if self.type not in vs.rbac["rbac_models"]:
+        if self.type not in vs.rbac["rbac_models"] or not current_user:
             return
         self.access_properties = defaultdict(list)
         self.owners = [current_user]

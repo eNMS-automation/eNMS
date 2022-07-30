@@ -716,9 +716,9 @@ function buildBulkPanel(panel, type, tableId) {
                   id="${tableId}-${property}-list"
                   name="${property}-edit-mode"
                 >
-                  <option value="success">Set</option>
-                  <option value="failure">Add</option>
-                  <option value="failure">Remove</option>
+                  <option value="set">Set</option>
+                  <option value="add">Add</option>
+                  <option value="remove">Remove</option>
                 </select>
               </div>
             `);

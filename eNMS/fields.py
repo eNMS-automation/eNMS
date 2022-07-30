@@ -86,10 +86,6 @@ class SelectMultipleField(FieldMixin, WtformsSelectMultipleField):
     type = "multiselect"
 
 
-class SelectMultipleStringField(SelectMultipleField):
-    type = "multiselect-string"
-
-
 class FieldList(FieldMixin, WtformsFieldList):
     type = "field-list"
 

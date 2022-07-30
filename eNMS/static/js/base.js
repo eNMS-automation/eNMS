@@ -553,7 +553,7 @@ export function configureForm(form, id, panelId) {
         },
         useCurrent: false,
       });
-    } else if (["list", "multiselect", "multiselect-string"].includes(field.type)) {
+    } else if (["list", "multiselect"].includes(field.type)) {
       const elClass = el.attr("class");
       el.selectpicker({
         liveSearch: elClass ? !elClass.includes("no-search") : false,
@@ -753,14 +753,11 @@ function updateProperty(instance, el, property, value, type) {
     el.prop("checked", value);
   } else if (propertyType.includes("dict")) {
     el.val(value ? JSON.stringify(value) : "{}");
-  } else if (["list", "multiselect", "multiselect-string"].includes(propertyType)) {
+  } else if (["list", "multiselect"].includes(propertyType)) {
     try {
       el.selectpicker("deselectAll");
     } catch (e) {
       // ignore
-    }
-    if (propertyType == "multiselect-string") {
-      value = value ? JSON.parse(value.replace(/'/g, `"`)) : [];
     }
     el.selectpicker("val", value).trigger("change");
     el.selectpicker("render");

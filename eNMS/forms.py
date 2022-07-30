@@ -24,7 +24,6 @@ from eNMS.fields import (
     PasswordField,
     SelectField,
     SelectMultipleField,
-    SelectMultipleStringField,
     StringField,
 )
 from eNMS.variables import vs
@@ -134,11 +133,8 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
             if field["type"] in (
                 "object-list",
                 "multiselect",
-                "multiselect-string",
             ):
                 value = form_data.getlist(property)
-                if field["type"] == "multiselect-string":
-                    value = str(value)
                 if field["type"] == "object-list":
                     value = [db.fetch(field["model"], name=name).id for name in value]
                 data[property] = value

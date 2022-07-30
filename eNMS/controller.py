@@ -413,8 +413,9 @@ class Controller:
     ):
         table, pagination = vs.models[model], kwargs.get("pagination")
         query = db.query(model, rbac, username, properties=properties)
-        if not bulk and not properties:
-            total_records = query.with_entities(table.id).count() if pagination else 0
+        total_records, filtered_records = (10 ** 6,) * 2
+        if pagination and not bulk and not properties:
+            total_records = query.with_entities(table.id).count()
         try:
             constraints = self.filtering_base_constraints(model, **kwargs)
         except regex_error:
@@ -428,7 +429,8 @@ class Controller:
                 return instances
             else:
                 return [getattr(instance, bulk) for instance in instances]
-        filtered_records = query.with_entities(table.id).count() if pagination else 0
+        if pagination:
+            filtered_records = query.with_entities(table.id).count()
         data = kwargs["columns"][int(kwargs["order"][0]["column"])]["data"]
         ordering = getattr(getattr(table, data, None), kwargs["order"][0]["dir"], None)
         if ordering:

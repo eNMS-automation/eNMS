@@ -914,6 +914,7 @@ table.display td.center {
 
 .dataTables_paginate .pagination {
   display: block;
+  padding-left: 500px;
   margin-left: auto;
   margin-right: auto;
 }

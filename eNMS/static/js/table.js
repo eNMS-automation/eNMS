@@ -52,6 +52,7 @@ export class Table {
       orderCellsTop: true,
       autoWidth: false,
       scrollX: true,
+      pagingType: "simple",
       drawCallback: function () {
         $(".paginate_button > a").on("focus", function () {
           $(this).blur();
@@ -158,6 +159,7 @@ export class Table {
             copyToClipboard({ text: result.full_result, includeText: false });
             self.copyClipboard = false;
           }
+          $(`.dataTables_info`)[displayPagination ? "show" : "hide"]();
           return result.data.map((instance) =>
             self.addRow({ properties: instance, tableId: self.id })
           );
@@ -1790,7 +1792,6 @@ function togglePaginationDisplay(tableId) {
   displayPagination = !displayPagination;
   $("#pagination-btn").toggleClass("active");
   refreshTable(tableId);
-  $(`.dataTables_info`).toggle();
 }
 
 for (const [type, table] of Object.entries(tables)) {

@@ -90,9 +90,7 @@ class AbstractBase(db.base):
         self.owners = [current_user]
         for group in current_user.groups:
             for access_type in getattr(group, f"{self.type}_access"):
-                self.access_properties[access_type].append(group.name)
-        for property, value in self.access_properties.items():
-            setattr(self, property, f",{','.join(value)},")
+                getattr(self, access_type).append(group)
 
     def delete(self):
         pass

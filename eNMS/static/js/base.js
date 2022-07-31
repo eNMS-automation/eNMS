@@ -687,6 +687,37 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
 function buildBulkPanel(panel, type, tableId) {
   $("#rbac-nav").show();
   const model = type in subtypes.service ? "service" : type;
+  for (const [property, value] of Object.entries(formProperties[type])) {
+    if (value.type == "object-list") {
+      $(`#${type}-${property}-property-div-${tableId}`).width("80%").before(`
+          <div style="float:right; width: 19%; margin-top: 2px;">
+            <select
+              data-width="100%"
+              id="${tableId}-${property}-list"
+              name="${property}-edit-mode"
+            >
+              <option value="set">Set</option>
+              <option value="append">Append</option>
+              <option value="remove">Remove</option>
+            </select>
+          </div>
+        `);
+      $(`#${tableId}-${property}-list`).selectpicker();
+    }
+    if (["name", "scoped_name", "type"].includes(property)) {
+      $(`#${type}-${property}-${tableId}`).prop("readonly", true);
+    } else {
+      $(`label[for='${property}']`).after(`
+        <div class="item" style='float:right; margin-left: 15px'>
+          <input
+            id="bulk-edit-${property}-${tableId}"
+            name="bulk-edit-${property}"
+            type="checkbox"
+          />
+        </div>
+      `);
+    }
+  }
   const form = {
     ...serializeForm(`#search-form-${tableId}`, `${model}_filtering`),
     ...tableInstances[tableId].constraints,
@@ -700,44 +731,13 @@ function buildBulkPanel(panel, type, tableId) {
       $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val("Bulk Edit");
       const number = instances.length;
       panel.setHeaderTitle(`Edit all ${number} ${model}s in table in bulk`);
-      for (const [property, value] of Object.entries(formProperties[type])) {
-        $(`#${type}-action-btn-${tableId}`)
-          .attr(
-            "onclick",
-            `eNMS.table.showBulkEditPanel(
-            '${type}', '${model}', '${tableId}', ${number})`
-          )
-          .text("Bulk Edit");
-        if (value.type == "object-list") {
-          $(`#${type}-${property}-property-div-${tableId}`).width("80%").before(`
-              <div style="float:right; width: 19%; margin-top: 2px;">
-                <select
-                  data-width="100%"
-                  id="${tableId}-${property}-list"
-                  name="${property}-edit-mode"
-                >
-                  <option value="set">Set</option>
-                  <option value="append">Append</option>
-                  <option value="remove">Remove</option>
-                </select>
-              </div>
-            `);
-          $(`#${tableId}-${property}-list`).selectpicker();
-        }
-        if (["name", "scoped_name", "type"].includes(property)) {
-          $(`#${type}-${property}-${tableId}`).prop("readonly", true);
-        } else {
-          $(`label[for='${property}']`).after(`
-            <div class="item" style='float:right; margin-left: 15px'>
-              <input
-                id="bulk-edit-${property}-${tableId}"
-                name="bulk-edit-${property}"
-                type="checkbox"
-              />
-            </div>
-          `);
-        }
-      }
+      $(`#${type}-action-btn-${tableId}`)
+        .attr(
+          "onclick",
+          `eNMS.table.showBulkEditPanel(
+          '${type}', '${model}', '${tableId}', ${number})`
+        )
+        .text("Bulk Edit");
     },
   });
 }

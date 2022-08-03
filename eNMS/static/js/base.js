@@ -646,13 +646,13 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
         call({
           url: `/get${properties}/${type}/${id}`,
           callback: function (instance) {
-            if (instance.owners) {
-              const ownersNames = instance.owners.map((user) => user.name);
-              if (user.is_admin || ownersNames.includes(user.name)) {
-                $("#rbac-nav").show();
-              } else {
-                $("#rbac-nav,#rbac-properties").remove();
-              }
+            const ownersNames = instance.owners
+              ? instance.owners.map((user) => user.name)
+              : [];
+            if (user.is_admin || ownersNames.includes(user.name)) {
+              $("#rbac-nav").show();
+            } else {
+              $("#rbac-nav,#rbac-properties").remove();
             }
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);

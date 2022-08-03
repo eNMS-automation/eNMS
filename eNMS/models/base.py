@@ -89,7 +89,7 @@ class AbstractBase(db.base):
             return
         rbac_properties = ["owners"] + list(vs.rbac["rbac_models"][self.class_type])
         if (
-            not current_user.is_admin
+            not getattr(current_user, "is_admin", True)
             and current_user not in self.owners
             and any(property in kwargs for property in rbac_properties)
         ):

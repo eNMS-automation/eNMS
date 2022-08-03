@@ -1474,7 +1474,7 @@ tables.changelog = class ChangelogTable extends Table {
 tables.session = class SessionTable extends Table {
   get controls() {
     return [
-      this.tableDisplay(),
+      this.columnDisplay(),
       this.refreshTableButton("session"),
       this.bulkDeletionButton(),
     ];
@@ -1515,7 +1515,7 @@ tables.file = class FileTable extends Table {
   get controls() {
     const status = folderPath == defaultFolder ? "disabled" : "";
     return [
-      this.tableDisplay(),
+      this.columnDisplay(),
       `
       <button
         style="background:transparent; border:none; 

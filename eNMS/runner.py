@@ -823,7 +823,7 @@ class Runner:
             payload = payload.setdefault(section, {})
         if value is None:
             value = default
-        if operation in ("get", "__setitem__"):
+        if operation in ("get", "__setitem__", "setdefault"):
             value = getattr(payload, operation)(name, value)
         else:
             getattr(payload[name], operation)(value)

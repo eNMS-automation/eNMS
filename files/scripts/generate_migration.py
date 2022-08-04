@@ -10,7 +10,7 @@ service_type = [
 ]
 
 
-def generate_migration_file(project):
+def generate_scalability_migration_file(project):
     path = Path.cwd().parent.parent.parent / "eNMS" / "files" / "migrations" / project
 
     services = [
@@ -41,4 +41,23 @@ def generate_migration_file(project):
         yaml.dump(services, migration_file)
 
 
-generate_migration_file("temp")
+def generate_pool_scalability_migration_file(project):
+    path = Path.cwd().parent.parent.parent / "eNMS" / "files" / "migrations" / project
+    pools = []
+
+    for index in range(20_000):
+        # we associate each pool of index (1)xyyy
+        # to a range of 3K devices in [xK - 1, xK + 1]
+        x = index // 1000
+        pools.append({
+            "name": f"Pool n°{index}",
+            "device_name": f"d[{x - 1}-{x + 1}]\d{3}",
+            "device_name_match": "regex",
+            "type": "pool",
+        })
+
+    with open(path / "pool.yaml", "w") as migration_file:
+        yaml.dump(pools, migration_file)
+
+
+generate_pool_scalability_migration_file("pool_scalability")

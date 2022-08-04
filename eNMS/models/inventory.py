@@ -370,10 +370,17 @@ class Pool(AbstractBase):
                         }
                     )
                 if kwargs["form"]:
-                    instances = controller.filtering(model, **kwargs)
+                    instances = controller.filtering(model, properties=["id"], **kwargs)
                 else:
                     instances = []
-                setattr(self, f"{model}s", instances)
+                table = getattr(db, f"pool_{model}_table")
+                db.session.execute(table.delete().where(table.c.pool_id == self.id))
+                if instances:
+                    values = [
+                        {"pool_id": self.id, f"{model}_id": instance.id}
+                        for instance in instances
+                    ]
+                    db.session.execute(table.insert().values(values))
             else:
                 instances = getattr(self, f"{model}s")
             setattr(self, f"{model}_number", len(instances))

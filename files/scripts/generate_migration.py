@@ -11,7 +11,7 @@ service_type = [
 
 
 def generate_scalability_migration_file(project):
-    path = Path.cwd().parent.parent.parent / "eNMS" / "files" / "migrations" / project
+    path = Path.cwd().parent.parent.parent / "eNMS-prod" / "files" / "migrations" / project
 
     services = [
         {
@@ -42,7 +42,7 @@ def generate_scalability_migration_file(project):
 
 
 def generate_pool_scalability_migration_file(project):
-    path = Path.cwd().parent.parent.parent / "eNMS" / "files" / "migrations" / project
+    path = Path.cwd().parent.parent.parent / "eNMS-prod" / "files" / "migrations" / project
     pools = []
 
     for index in range(20_000):

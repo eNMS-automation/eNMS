@@ -50,8 +50,8 @@ def generate_pool_scalability_migration_file(project):
         # to a range of 3K devices in [xK - 1, xK + 1]
         x = index // 1000
         pools.append({
-            "name": f"Pool n°{index}",
-            "device_name": f"d[{x - 1}-{x + 1}]\d{3}",
+            "name": f"Pool {index}",
+            "device_name": "d[{}-{}]\d{{3}}".format(max(x - 1, 0), x + 1),
             "device_name_match": "regex",
             "type": "pool",
         })

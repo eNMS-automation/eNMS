@@ -289,6 +289,7 @@ function displayNetworkData({ type, name, id, result, datetime }) {
           editor.refresh();
         })
         .change();
+      new ResizeObserver(() => {editor.refresh();}).observe(content);
     },
   });
 }

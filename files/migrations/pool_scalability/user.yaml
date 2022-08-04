@@ -1,0 +1,6 @@
+- {authentication: database, description: '', email: admin@enms.io, is_admin: true,
+  landing_page: /dashboard, name: admin, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQyenVuTkdic25iTVdZdXk5TjhhWWt3JEh5VWhTeUlRckJTY21ZZTR2WWNWeFE=,
+  small_menu: false, theme: default, type: user}
+- {authentication: database, description: '', email: '', is_admin: false, landing_page: /dashboard,
+  name: nadmin, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRoekJtekRsSGlKR3k5ajduSEFOZ3JBJE92MkcwR3FETVVKZ1IrYkRqeGdqYVE=,
+  small_menu: false, theme: default, type: user}

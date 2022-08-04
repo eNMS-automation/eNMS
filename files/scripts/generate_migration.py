@@ -11,7 +11,9 @@ service_type = [
 
 
 def generate_scalability_migration_file(project):
-    path = Path.cwd().parent.parent.parent / "eNMS-prod" / "files" / "migrations" / project
+    path = (
+        Path.cwd().parent.parent.parent / "eNMS-prod" / "files" / "migrations" / project
+    )
 
     services = [
         {
@@ -42,19 +44,23 @@ def generate_scalability_migration_file(project):
 
 
 def generate_pool_scalability_migration_file(project):
-    path = Path.cwd().parent.parent.parent / "eNMS-prod" / "files" / "migrations" / project
+    path = (
+        Path.cwd().parent.parent.parent / "eNMS-prod" / "files" / "migrations" / project
+    )
     pools = []
 
-    for index in range(20_000):
-        # we associate each pool of index (1)xyyy
-        # to a range of 3K devices in [xK - 1, xK + 1]
-        x = index // 1000
-        pools.append({
-            "name": f"Pool {index}",
-            "device_name": "d[{}-{}]\d{{3}}".format(max(x - 1, 0), x + 1),
-            "device_name_match": "regex",
-            "type": "pool",
-        })
+    for index in range(1_000):
+        # we associate each pool of index (1)xyyy to a range of
+        # at most 3K devices in [max(0, xK - 1), min(9, xK + 1)]
+        x = index // 100
+        pools.append(
+            {
+                "name": f"Pool {index}",
+                "device_name": "d[{}-{}]\d{{3}}".format(max(x - 1, 0), min(x + 1, 9)),
+                "device_name_match": "regex",
+                "type": "pool",
+            }
+        )
 
     with open(path / "pool.yaml", "w") as migration_file:
         yaml.dump(pools, migration_file)

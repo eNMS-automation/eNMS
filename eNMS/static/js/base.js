@@ -19,7 +19,12 @@ subtypes: false
 user: false
 */
 
-import { folderPath, openDebugPanel, showCredentialPanel, showFolderPanel } from "./administration.js";
+import {
+  folderPath,
+  openDebugPanel,
+  showCredentialPanel,
+  showFolderPanel,
+} from "./administration.js";
 import { creationMode, initBuilder, instance, processBuilderData } from "./builder.js";
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";

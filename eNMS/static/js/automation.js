@@ -426,6 +426,7 @@ function displayLogs(service, runtime, change) {
     });
     $(`#service-logs-${service.id}`).data("CodeMirrorInstance", editor);
     editor.setSize("100%", "100%");
+    new ResizeObserver(() => {editor.refresh();}).observe(content);
   }
   $(`#runtimes-logs-${service.id}`).on("change", function () {
     refreshLogs(service, this.value, editor, true);

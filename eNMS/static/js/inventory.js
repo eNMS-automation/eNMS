@@ -224,6 +224,7 @@ function showSessionLog(sessionId) {
             });
             editor.setSize("100%", "100%");
             editor.setValue(log.replace(ansiEscapeRegex, ""));
+            new ResizeObserver(() => {editor.refresh();}).observe(content);
           },
         });
       }

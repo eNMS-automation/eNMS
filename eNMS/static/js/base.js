@@ -19,7 +19,7 @@ subtypes: false
 user: false
 */
 
-import { openDebugPanel, showCredentialPanel } from "./administration.js";
+import { openDebugPanel, showCredentialPanel, showFolderPanel } from "./administration.js";
 import { creationMode, initBuilder, instance, processBuilderData } from "./builder.js";
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
@@ -641,6 +641,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
       if (isNode) showNodePanel(type, id, mode, tableId);
       if (isLink) showLinkPanel(type, id, edge);
       if (type == "credential") showCredentialPanel(id);
+      if (type == "folder") showFolderPanel(id);
       if (id) {
         const properties = type === "pool" ? "_properties" : "";
         call({

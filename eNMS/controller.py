@@ -1127,7 +1127,7 @@ class Controller:
         if kwargs.get("file_content"):
             with open(Path(filepath), "w") as file:
                 content = file.write(kwargs["file_content"])
-        db.fetch("file", path=filepath).refresh()
+        db.fetch("file", path=filepath).update()
         return content
 
     def save_positions(self, type, id, **kwargs):

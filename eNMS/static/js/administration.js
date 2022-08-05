@@ -352,10 +352,6 @@ export function showCredentialPanel(id) {
     .trigger("change");
 }
 
-function openFilePanel() {
-  showInstancePanel($("#file-type-list").val());
-}
-
 function processFileData() {
   const type = $("#file-type-list").val();
   const filename = $(`#${type}-filename`).val();
@@ -381,7 +377,6 @@ configureNamespace("administration", [
   getGitContent,
   migrationsExport,
   migrationsImport,
-  openFilePanel,
   processFileData,
   resultLogDeletion,
   runDebugCode,

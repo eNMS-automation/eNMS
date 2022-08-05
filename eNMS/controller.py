@@ -1012,12 +1012,6 @@ class Controller:
                 ).id
         return instance
 
-    def process_file_data(self, **kwargs):
-        if kwargs["form_type"] == "folder":
-            makedirs(kwargs["path"])
-        else:
-            open(kwargs["path"], "a").close()
-
     def remove_instance(self, **kwargs):
         instance = db.fetch(kwargs["instance"]["type"], id=kwargs["instance"]["id"])
         target = db.fetch(kwargs["relation"]["type"], id=kwargs["relation"]["id"])

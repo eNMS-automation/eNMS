@@ -357,20 +357,6 @@ export function showCredentialPanel(id) {
     .trigger("change");
 }
 
-function processFileData(type) {
-  const filename = $(`#${type}-filename`).val();
-  $(`#${type}-path`).val(`${folderPath}/${filename}`);
-  call({
-    url: "/process_file_data",
-    form: `${type}-form`,
-    callback: () => {
-      $(`#${type}`).remove();
-      setTimeout(() => refreshTable("file"), 600);
-      notify(`${type.toUpperCase()} '${filename}' created.`, "success", 5, true);
-    },
-  });
-}
-
 configureNamespace("administration", [
   databaseDeletion,
   displayFiles,
@@ -381,7 +367,6 @@ configureNamespace("administration", [
   getGitContent,
   migrationsExport,
   migrationsImport,
-  processFileData,
   resultLogDeletion,
   runDebugCode,
   saveSettings,

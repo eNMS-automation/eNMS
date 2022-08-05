@@ -19,7 +19,7 @@ subtypes: false
 user: false
 */
 
-import { openDebugPanel, showCredentialPanel, showFolderPanel } from "./administration.js";
+import { folderPath, openDebugPanel, showCredentialPanel, showFolderPanel } from "./administration.js";
 import { creationMode, initBuilder, instance, processBuilderData } from "./builder.js";
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
@@ -701,12 +701,6 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
           $(`#${type}-workflows`).val(instance.name).trigger("change");
         }
         if (page == "network_builder") updateNetworkPanel(type);
-        if (["file", "folder"].includes(type)) {
-          $(`#${type}-action-btn`).attr(
-            "onclick",
-            `eNMS.administration.processFileData("${type}")`
-          );
-        }
       }
       if (isService) loadScript(`../static/js/services/${type}.js`, id);
       const property = isService ? "scoped_name" : "name";
@@ -783,6 +777,10 @@ function processData(type, id) {
     const relation = type in subtypes.service ? "workflow" : "network";
     const property = id ? `#${type}-${relation}s-${id}` : `#${type}-${relation}s`;
     $(property).prop("disabled", false);
+  }
+  if (type == "folder" && !id) {
+    const filename = $("#folder-filename").val();
+    $("#folder-path").val(`${folderPath}/${filename}`);
   }
   call({
     url: `/update/${type}`,

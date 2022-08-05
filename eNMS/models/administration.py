@@ -1,5 +1,6 @@
 from flask_login import UserMixin
 from itertools import chain
+from os import makedirs
 from os.path import exists, getmtime
 from passlib.hash import argon2
 from pathlib import Path
@@ -212,6 +213,11 @@ class Folder(File):
         "polymorphic_identity": "folder",
         "inherit_condition": id == File.id,
     }
+
+    def __init__(self, **kwargs):
+        if not exists(kwargs["path"]):
+            makedirs(kwargs["path"])
+        self.update(**kwargs)
 
     def delete(self):
         rmtree(self.path, ignore_errors=True)

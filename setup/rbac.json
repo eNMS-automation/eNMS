@@ -217,7 +217,6 @@
     "/migration_export": "admin",
     "/migration_import": "admin",
     "/multiselect_filtering": "all",
-    "/process_file_data": "access",
     "/remove_instance": "access",
     "/reset_status": "access",
     "/rest/create_pool": "access",

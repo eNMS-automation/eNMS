@@ -457,8 +457,10 @@ class FileForm(BaseForm):
 
     def validate(self):
         valid_form = super().validate()
-        new_path = self.path.data != db.fetch("file", id=self.id.data).path
-        path_already_used = new_path and exists(self.path.data)
+        current_file = db.fetch("file", id=self.id.data, allow_none=True)
+        path_taken = exists(self.path.data)
+        change_of_path = current_file and self.path.data != current_file.path
+        path_already_used = (not current_file or change_of_path) and path_taken
         if path_already_used:
             self.path.errors.append("There is already a file at the specified path.")
         out_of_scope_path = not self.path.data.startswith(env.file_path)

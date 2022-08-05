@@ -913,6 +913,11 @@ class Runner:
                 "payload": _self.payload,
                 "placeholder": _self.main_run.placeholder,
                 "send_email": env.send_email,
+                "server": {
+                    "ip_address": vs.server_ip,
+                    "name": vs.server,
+                    "url": vs.server_url,
+                },
                 "set_var": _self.payload_helper,
                 "settings": vs.settings,
                 "username": _self.main_run.creator,

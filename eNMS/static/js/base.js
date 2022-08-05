@@ -708,7 +708,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
         if (page == "network_builder") updateNetworkPanel(type);
       }
       if (isService) loadScript(`../static/js/services/${type}.js`, id);
-      const property = isService ? "scoped_name" : "name";
+      const property = isService ? "scoped_name" : type == "folder" ? "filename" : "name";
       $(`#${type}-${property}`).focus();
     },
     type: type,

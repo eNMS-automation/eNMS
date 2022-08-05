@@ -1098,7 +1098,8 @@
       {
         "data": "last_modified",
         "title": "Last Modified",
-        "search": "text"
+        "search": "text",
+        "visible": false
       },
       {
         "data": "last_updated",

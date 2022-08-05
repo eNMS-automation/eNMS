@@ -134,9 +134,12 @@ export function savePositions() {
     data: network.getPositions(),
     callback: function (updateTime) {
       if (updateTime) instance.last_modified = updateTime;
-      for (const [nodeId, node] of Object.entries(positions)) {
-        nodes.update({id: isNaN(nodeId) ? nodeId : parseInt(nodeId), ...node});
-      }
+      nodes.update(
+        Object.entries(positions).map(([id, position]) => ({
+          id: isNaN(id) ? id : parseInt(id),
+          ...position,
+        }))
+      );
     },
   });
 }

@@ -9,7 +9,8 @@ Version 4.3.0
 - Add "username" variable in workflow global space set to the user that runs the workflow.
 - Forbid deletion of Start, End and Placeholder services.
 - Fix merge_update behavior to not extend list every time an object is edited.
-- Define Server IP address and URL with the `SERVER_ADDR` (default `0.0.0.0`) and `SERVER_URL` (default `http://192.168.56.102`) environment variable instead of `settings.json` / `app` section (as VM settings, they don't belong in the application settings and shouldn't be checked in the code).
+- Define Server IP address and URL with the `SERVER_ADDR` (default `0.0.0.0`) and `SERVER_URL` (default `http://192.168.56.102`) environment variable instead of `settings.json` / `app` section (as VM
+  settings, they don't belong in the application settings and shouldn't be checked in the code).
 - Add new "server" variable in workflow global space set to a dictionary that contains server name,
   IP address and URL.
 - Make "Results as List" False by default for scrapli (not useful when only
@@ -35,11 +36,11 @@ Version 4.3.0
   - Horizontal and vertical distribution
 - Make all objects in object select list (both single and multiple entries) hyperlink to the edit panel.
 - Make all results in the Results table link to the workflow builder.
-- Make it possible to share link to a specific workflow / runtime (optional) to the workflow builder, with the
-  following syntax: workflow_builder/{workflow_id}/{runtime}.
+- Make it possible to share link to a specific workflow / runtime (optional) to the workflow builder,
+  with the following syntax: workflow_builder/{workflow_id}/{runtime}.
 - Add "shared" property to the service table.
-- Add shared subworkflow to the list of top-level workflows in the workflow builder to provide the ability to
-  view all runtimes (including when it was run as standalone workflow).
+- Add shared subworkflow to the list of top-level workflows in the workflow builder to provide
+  the ability to view all runtimes (including when it was run as standalone workflow).
 - Remove "Approved by admin" mechanism for Unix Command Service. Instead, check if the new command is
   different from the old command: if it is and the user is not an admin, an error is raised.
 - Remove backward / forward mechanism in the network and service table. Make networks / workflows links to

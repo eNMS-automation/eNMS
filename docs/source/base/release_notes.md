@@ -19,7 +19,7 @@ Version 4.3.0
   * Allow sending multiple commands via Netmiko Commands
   * Add "Results as List" to Netmiko Commands 
 - Add "use genie" option in netmiko commands service for Genie / PyATS support
-- Add Jinja2 template support for netmiko and scrapli commands field (iteration no longer required for loops)
+- Add Jinja2 template support for netmiko and scrapli commands field (iteration no longer required for loops), with "[[ ]]" for python substitution in a J2 template.
 - Add new `default_function` (sqlalchemy parameter) and `render_kw` (wtforms parameters) for custom fields in properties.json.
 - Add new `rest/workers` GET endpoint to get service count for each WSGI worker
 - Data Extraction Service update:

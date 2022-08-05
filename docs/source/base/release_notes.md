@@ -66,6 +66,7 @@ Version 4.3.0
 - Support custom ip address in ping service (new IP address field, defaults to device IP if empty).
 
 Migration
+- check "username" variable in workflow isn't in conflict with existing workflows
 - dashboard is now controlled by RBAC: dashboard access must be explicitly granted via access pages, GET and
   POST requests.
 - "download_file" endpoint -> "download" (add support for downloading folders)

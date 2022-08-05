@@ -19,6 +19,7 @@ Version 4.3.0
   * Allow sending multiple commands via Netmiko Commands
   * Add "Results as List" to Netmiko Commands 
 - Add "use genie" option in netmiko commands service for Genie / PyATS support
+- Add Jinja2 template support for netmiko and scrapli commands field (iteration no longer required for loops)
 - Add new `default_function` (sqlalchemy parameter) and `render_kw` (wtforms parameters) for custom fields in properties.json.
 - Add new `rest/workers` GET endpoint to get service count for each WSGI worker
 - Data Extraction Service update:
@@ -63,7 +64,6 @@ Version 4.3.0
 - redis config in settings.json moved to the inner key "redis" > "config
 - redis new option in settings.json > "redis" > "flush_on_restart": flush redis queue when the app restarts.
 - Remove check box for "use device driver" add "use device driver" into drop down and make this the default.
-- Add Jinja2 template support for netmiko and scrapli commands field (iteration no longer required for loops)
 - Add get_connection function in global variables to access connection object from a python snippet service.
 - Support custom ip address in ping service (new IP address field, defaults to device IP if empty).
 

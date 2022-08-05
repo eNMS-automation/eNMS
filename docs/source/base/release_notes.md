@@ -10,6 +10,8 @@ Version 4.3.0
 - Forbid deletion of Start, End and Placeholder services.
 - Fix merge_update behavior to not extend list every time an object is edited.
 - Define Server IP address and URL with the `SERVER_ADDR` (default `0.0.0.0`) and `SERVER_URL` (default `http://192.168.56.102`) environment variable instead of `settings.json` / `app` section (as VM settings, they don't belong in the application settings and shouldn't be checked in the code).
+- Add new "server" variable in workflow global space set to a dictionary that contains server name,
+  IP address and URL.
 - Make "Results as List" False by default for scrapli (not useful when only
   one command, which is most of the time)
 - For consistency with Scrapli
@@ -66,7 +68,7 @@ Version 4.3.0
 - Support custom ip address in ping service (new IP address field, defaults to device IP if empty).
 
 Migration
-- check "username" variable in workflow isn't in conflict with existing workflows
+- check "username" and "server" variables in workflow aren't in conflict with existing workflows.
 - dashboard is now controlled by RBAC: dashboard access must be explicitly granted via access pages, GET and
   POST requests.
 - "download_file" endpoint -> "download" (add support for downloading folders)

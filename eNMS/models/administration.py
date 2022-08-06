@@ -51,8 +51,7 @@ class User(AbstractBase, UserMixin):
 
     def delete(self):
         if self.name == getattr(current_user, "name", False):
-            print("OK2"*150)
-            raise db.rbac_error("A user cannot be deleted while being logged in.")
+            raise db.rbac_error("A user cannot be deleted while logged in.")
 
     def get_id(self):
         return self.name

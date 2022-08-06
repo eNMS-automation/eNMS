@@ -898,8 +898,6 @@ class Controller:
             "user": [current_user.name] if current_user else [],
             "service": ["[Shared] Start", "[Shared] End", "[Shared] Placeholder"],
         }
-        print("OK"*100)
-        print(fetch_instance)
         relations = defaultdict(lambda: defaultdict(dict))
         for model in models:
             path = vs.path / "files" / folder / kwargs["name"] / f"{model}.yaml"

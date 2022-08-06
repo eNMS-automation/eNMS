@@ -1512,7 +1512,7 @@ tables.file = class FileTable extends Table {
         data-tooltip="Upload Files"
         type="button"
       >
-        <span class="glyphicon glyphicon-upload"></span>
+        <span class="glyphicon glyphicon-import"></span>
       </button>`,
       ` <button
         class="btn btn-primary"
@@ -1546,7 +1546,7 @@ tables.file = class FileTable extends Table {
           class="btn btn-sm btn-info"
           onclick="location.href='/download/${row.type}/${row.path}'"
         >
-          <span class="glyphicon glyphicon-download"></span>
+          <span class="glyphicon glyphicon-export"></span>
         </button>
       </li>`;
   }

@@ -62,6 +62,7 @@ Version 4.3.0
   * files can be displayed hierarchically or flat in the table (default: hierarchical display)
   * both files and folder can be exported to browser; folders are compressed as tgz before export
   * new files can be uploaded to any folder from the UI
+  * deleting a file or folder in eNMS will delete it locally
   * watchdog is used to keep track of all files change done outside of the app
 - redis config in settings.json moved to the inner key "redis" > "config
 - redis new option in settings.json > "redis" > "flush_on_restart": flush redis queue when the app restarts.

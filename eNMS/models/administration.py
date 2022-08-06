@@ -1,4 +1,4 @@
-from flask_login import UserMixin
+from flask_login import current_user, UserMixin
 from itertools import chain
 from os import makedirs
 from os.path import exists, getmtime
@@ -48,6 +48,11 @@ class User(AbstractBase, UserMixin):
     def database_init(cls):
         for property in vs.rbac["form_properties"]:
             setattr(cls, property, db.Column(db.List))
+
+    def delete(self):
+        if self.name == getattr(current_user, "name", False):
+            print("OK2"*150)
+            raise db.rbac_error("A user cannot be deleted while being logged in.")
 
     def get_id(self):
         return self.name

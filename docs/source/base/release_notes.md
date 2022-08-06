@@ -63,6 +63,8 @@ Version 4.3.0
   * both files and folder can be exported to browser; folders are compressed as tgz before export
   * new files can be uploaded to any folder from the UI
   * deleting a file or folder in eNMS will delete it locally
+  * a folder can be created in currently displayed folder, not a file because a file must be
+    associated with a local file.
   * watchdog is used to keep track of all files change done outside of the app
 - redis config in settings.json moved to the inner key "redis" > "config
 - redis new option in settings.json > "redis" > "flush_on_restart": flush redis queue when the app restarts.

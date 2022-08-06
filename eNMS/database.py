@@ -378,20 +378,19 @@ class Database:
     def objectify(self, model, object_list, **kwargs):
         return [self.fetch(model, id=object_id, **kwargs) for object_id in object_list]
 
-    def delete_instance(self, instance, force_delete=False):
+    def delete_instance(self, instance):
         try:
             instance.delete()
         except Exception as exc:
-            if not force_delete:
-                return {"alert": f"Unable to delete {instance.name} ({exc})."}
+            return {"alert": f"Unable to delete {instance.name} ({exc})."}
         serialized_instance = instance.serialized
         self.session.delete(instance)
         return serialized_instance
 
-    def delete_all(self, *models, force_delete=False):
+    def delete_all(self, *models):
         for model in models:
             for instance in self.fetch_all(model):
-                self.delete_instance(instance, force_delete)
+                self.delete_instance(instance)
             self.session.commit()
 
     def export(self, model, private_properties=False):

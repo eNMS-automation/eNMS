@@ -886,7 +886,7 @@ class Controller:
         status, models = "Import successful.", kwargs["import_export_types"]
         empty_database = kwargs.get("empty_database_before_import", False)
         if empty_database:
-            db.delete_all(*models, force_delete=True)
+            db.delete_all(*models)
         relations = defaultdict(lambda: defaultdict(dict))
         for model in models:
             path = vs.path / "files" / folder / kwargs["name"] / f"{model}.yaml"

@@ -44,10 +44,9 @@ class NetmikoValidationService(ConnectionService):
     __mapper_args__ = {"polymorphic_identity": "netmiko_commands_service"}
 
     def job(self, run, device):
+        commands = run.sub(run.commands, locals())
         if self.jinja2_template:
-            commands = Template(run.commands).render(locals())
-        else:
-            commands = run.sub(run.commands, locals())
+            commands = Template(commands).render(locals())
         log_command = run.commands if "get_credential" in run.commands else commands
         netmiko_connection = run.netmiko_connection(device)
         try:

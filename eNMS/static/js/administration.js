@@ -12,7 +12,6 @@ import {
   notify,
   openPanel,
   processInstance,
-  showInstancePanel,
 } from "./base.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
 
@@ -274,6 +273,12 @@ function showFileUploadPanel(folder) {
   });
 }
 
+export function showFolderPanel(id) {
+  if (id) return;
+  $(`#folder-path`).prop("readonly", true);
+  $(`#folder-filename`).prop("readonly", false);
+}
+
 function showProfile() {
   openPanel({
     name: "profile",
@@ -324,25 +329,6 @@ export function showCredentialPanel(id) {
     .trigger("change");
 }
 
-function openFilePanel() {
-  showInstancePanel($("#file-type-list").val());
-}
-
-function processFileData() {
-  const type = $("#file-type-list").val();
-  const filename = $(`#${type}-filename`).val();
-  $(`#${type}-path`).val(`${folderPath}/${filename}`);
-  call({
-    url: "/process_file_data",
-    form: `${type}-form`,
-    callback: () => {
-      $(`#${type}`).remove();
-      setTimeout(() => refreshTable("file"), 600);
-      notify(`${type.toUpperCase()} '${filename}' created.`, "success", 5, true);
-    },
-  });
-}
-
 configureNamespace("administration", [
   databaseDeletion,
   displayFiles,
@@ -353,8 +339,6 @@ configureNamespace("administration", [
   getGitContent,
   migrationsExport,
   migrationsImport,
-  openFilePanel,
-  processFileData,
   resultLogDeletion,
   runDebugCode,
   saveFile,

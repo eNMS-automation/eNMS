@@ -128,11 +128,18 @@ function highlightNode(node) {
 }
 
 export function savePositions() {
+  const positions = network.getPositions();
   call({
     url: `/save_positions/${instance.type}/${instance.id}`,
     data: network.getPositions(),
     callback: function (updateTime) {
       if (updateTime) instance.last_modified = updateTime;
+      nodes.update(
+        Object.entries(positions).map(([id, position]) => ({
+          id: isNaN(id) ? id : parseInt(id),
+          ...position,
+        }))
+      );
     },
   });
 }
@@ -240,24 +247,26 @@ function openDeletionPanel() {
 }
 
 function positionNodes(mode, direction) {
-  const selectedNodes = network.getSelectedNodes();
+  const selectedNodes = network
+    .getSelectedNodes()
+    .map((id) => nodes.get(id))
+    .filter((node) => node.type != "label");
   const length = selectedNodes.length;
   if (mode == "align") {
     const property = direction == "horizontal" ? "y" : "x";
-    const value = nodes.get(selectedNodes[0])[property];
-    selectedNodes.forEach((nodeId) => {
-      nodes.update({ id: nodeId, [`${property}`]: value });
+    const value = selectedNodes[0][property];
+    selectedNodes.forEach((node) => {
+      nodes.update({ id: node.id, [`${property}`]: value });
     });
   } else if (selectedNodes.length > 2) {
     const property = direction == "horizontal" ? "x" : "y";
-    const visNodes = selectedNodes.map((id) => nodes.get(id));
-    visNodes.sort((n, m) => n[property] - m[property]);
-    const start = visNodes[0][property];
-    const increment = (visNodes[length - 1][property] - start) / (length - 1);
+    selectedNodes.sort((n, m) => n[property] - m[property]);
+    const start = selectedNodes[0][property];
+    const increment = (selectedNodes[length - 1][property] - start) / (length - 1);
     for (let index = 1; index < length - 1; index++) {
-      visNodes[index][property] = start + index * increment;
+      selectedNodes[index][property] = start + index * increment;
     }
-    nodes.update(visNodes);
+    nodes.update(selectedNodes);
   }
   savePositions();
 }

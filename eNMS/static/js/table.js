@@ -349,8 +349,6 @@ export class Table {
       ? `eNMS.automation.openServicePanel()`
       : this.type == "device" || this.type == "link"
       ? `eNMS.inventory.openObjectPanel('${this.type}')`
-      : this.type == "file"
-      ? "eNMS.administration.openFilePanel()"
       : `eNMS.base.showInstancePanel('${this.type}')`;
     return `
       <button
@@ -1541,17 +1539,14 @@ tables.file = class FileTable extends Table {
       >
         <span class="glyphicon glyphicon-chevron-up"></span>
       </a>`,
-      this.createNewButton(),
       `
       <button
-        style="background:transparent; border:none; 
-        color:transparent; width: 200px;"
+        class="btn btn-primary"
+        onclick="eNMS.base.showInstancePanel('folder')"
+        data-tooltip="Create New Folder"
         type="button"
       >
-        <select id="file-type-list" class="form-control">
-          <option value="file">File</option>
-          <option value="folder">Folder</option>
-        </select>
+        <span class="glyphicon glyphicon-folder-open"></span>
       </button>`,
       ` <button
         class="btn btn-primary"
@@ -1559,7 +1554,7 @@ tables.file = class FileTable extends Table {
         data-tooltip="Upload Files"
         type="button"
       >
-        <span class="glyphicon glyphicon-upload"></span>
+        <span class="glyphicon glyphicon-import"></span>
       </button>`,
       ` <button
         class="btn btn-primary"
@@ -1593,7 +1588,7 @@ tables.file = class FileTable extends Table {
           class="btn btn-sm btn-info"
           onclick="location.href='/download/${row.type}/${row.path}'"
         >
-          <span class="glyphicon glyphicon-download"></span>
+          <span class="glyphicon glyphicon-export"></span>
         </button>
       </li>`;
   }

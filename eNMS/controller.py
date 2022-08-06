@@ -1019,12 +1019,6 @@ class Controller:
                 ).id
         return instance
 
-    def process_file_data(self, **kwargs):
-        if kwargs["form_type"] == "folder":
-            makedirs(kwargs["path"])
-        else:
-            open(kwargs["path"], "a").close()
-
     def remove_instance(self, **kwargs):
         instance = db.fetch(kwargs["instance"]["type"], id=kwargs["instance"]["id"])
         target = db.fetch(kwargs["relation"]["type"], id=kwargs["relation"]["id"])
@@ -1133,7 +1127,7 @@ class Controller:
         if kwargs.get("file_content"):
             with open(Path(filepath), "w") as file:
                 content = file.write(kwargs["file_content"])
-        db.fetch("file", path=filepath).refresh()
+        db.fetch("file", path=filepath).update()
         return content
 
     def save_positions(self, type, id, **kwargs):

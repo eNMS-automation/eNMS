@@ -151,11 +151,6 @@ export function flipRuntimeDisplay(display) {
   if (!display) switchToWorkflow(currentPath);
 }
 
-function filterWorkflowTable(tableId, path) {
-  clearSearch(tableId);
-  switchToWorkflow(path);
-}
-
 export function showServicePanel(type, id, mode, tableId) {
   const postfix = tableId ? `-${tableId}` : "";
   const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
@@ -753,7 +748,6 @@ function filterDevice() {
 configureNamespace("workflowBuilder", [
   addServicesToWorkflow,
   filterDevice,
-  filterWorkflowTable,
   getWorkflowState,
   restartWorkflow,
   switchToWorkflow,

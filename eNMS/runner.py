@@ -821,7 +821,7 @@ class Runner:
             payload = payload.setdefault(section, {})
         if value is None:
             value = default
-        if operation in ("get", "__setitem__"):
+        if operation in ("get", "__setitem__", "setdefault"):
             value = getattr(payload, operation)(name, value)
         else:
             getattr(payload[name], operation)(value)
@@ -913,6 +913,11 @@ class Runner:
                 "payload": _self.payload,
                 "placeholder": _self.main_run.placeholder,
                 "send_email": env.send_email,
+                "server": {
+                    "ip_address": vs.server_ip,
+                    "name": vs.server,
+                    "url": vs.server_url,
+                },
                 "set_var": _self.payload_helper,
                 "settings": vs.settings,
                 "username": _self.main_run.creator,
@@ -929,8 +934,8 @@ class Runner:
         return results, exec_variables
 
     def sub(self, input, variables):
-
-        regex = compile("{{(.*?)}}")
+        is_jinja2_template = getattr(self, "jinja2_template", False)
+        regex = compile("\[\[(.*?)\]\]" if is_jinja2_template else "{{(.*?)}}")
         variables["payload"] = self.payload
 
         def replace(match):

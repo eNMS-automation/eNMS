@@ -893,7 +893,11 @@ class Controller:
         status, models = "Import successful.", kwargs["import_export_types"]
         empty_database = kwargs.get("empty_database_before_import", False)
         if empty_database:
-            db.delete_all(*models, force_delete=True)
+            db.delete_all(*models)
+        fetch_instance = {
+            "user": [current_user.name] if current_user else [],
+            "service": ["[Shared] Start", "[Shared] End", "[Shared] Placeholder"],
+        }
         relations = defaultdict(lambda: defaultdict(dict))
         for model in models:
             path = vs.path / "files" / folder / kwargs["name"] / f"{model}.yaml"
@@ -911,10 +915,11 @@ class Controller:
                         if property in vs.private_properties_set
                     }
                     try:
+                        existing_instance = instance["name"] in fetch_instance.get(model, [])
                         instance = db.factory(
                             type,
                             migration_import=True,
-                            no_fetch=empty_database,
+                            no_fetch=empty_database and not existing_instance,
                             update_pools=kwargs.get("update_pools", False),
                             import_mechanism=True,
                             **instance,

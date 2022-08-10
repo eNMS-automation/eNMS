@@ -908,7 +908,9 @@ class Controller:
                         if property in vs.private_properties_set
                     }
                     try:
-                        existing_instance = instance["name"] in fetch_instance.get(model, [])
+                        existing_instance = instance["name"] in fetch_instance.get(
+                            model, []
+                        )
                         instance = db.factory(
                             type,
                             migration_import=True,

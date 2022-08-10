@@ -36,7 +36,9 @@ class User(AbstractBase, UserMixin):
     groups = db.Column(db.LargeString)
     is_admin = db.Column(Boolean, default=False)
     email = db.Column(db.SmallString)
-    landing_page = db.Column(db.SmallString, default="/dashboard")
+    landing_page = db.Column(
+        db.SmallString, default=vs.settings["authentication"]["landing_page"]
+    )
     password = db.Column(db.SmallString)
     authentication = db.Column(db.TinyString)
     menu = db.Column(db.List)

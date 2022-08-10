@@ -1610,7 +1610,7 @@ tables.file = class FileTable extends Table {
   postProcessing(...args) {
     let self = this;
     super.postProcessing(...args);
-    displayFolderPath(folderPath)
+    displayFolderPath(folderPath);
     $("#file-type-list").selectpicker();
     $("#parent-filtering")
       .selectpicker()

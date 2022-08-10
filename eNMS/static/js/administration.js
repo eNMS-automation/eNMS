@@ -77,14 +77,18 @@ function showSettings() {
 }
 
 export function displayFolderPath() {
-  const htmlPath = folderPath.split("/").slice(1).map((value, index) => {
-    let folder = `${index ? "<b> / </b>" : ""}
+  const htmlPath = folderPath
+    .split("/")
+    .slice(1)
+    .map((value, index) => {
+      let folder = `${index ? "<b> / </b>" : ""}
       <button type="button" class="btn btn-xs btn-primary">
         ${value}
       </button>
       `;
-    return folder
-  }).join("");
+      return folder;
+    })
+    .join("");
   $("#current-folder-path").html(`<b>Current Folder :</b>${htmlPath}`);
 }
 

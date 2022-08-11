@@ -727,6 +727,12 @@
         "search": "text"
       },
       {
+        "data": "workflow_name",
+        "title": "Workflow",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "labels",
         "title": "Labels",
         "search": "text",

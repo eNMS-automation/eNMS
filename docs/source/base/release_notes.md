@@ -72,6 +72,7 @@ Version 4.3.0
 - Remove check box for "use device driver" add "use device driver" into drop down and make this the default.
 - Add get_connection function in global variables to access connection object from a python snippet service.
 - Support custom ip address in ping service (new IP address field, defaults to device IP if empty).
+- Add new "mandatory" keyword in custom properties to make the field required to submit the form.
 
 Migration
 - check "username" and "server" variables in workflow aren't in conflict with existing workflows.

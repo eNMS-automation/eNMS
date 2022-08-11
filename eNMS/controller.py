@@ -1385,7 +1385,7 @@ class Controller:
             options = ""
         environment = {
             **{key: str(value) for key, value in vs.settings["ssh"]["web"].items()},
-            "APP_ADDRESS": getenv("SERVER_ADDR", "https://0.0.0.0"),
+            "APP_ADDRESS": getenv("SERVER_URL", "https://0.0.0.0"),
             "DEVICE": str(device.id),
             "ENDPOINT": endpoint,
             "ENMS_USER": getenv("ENMS_USER", "admin"),

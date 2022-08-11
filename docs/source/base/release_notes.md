@@ -73,20 +73,6 @@ Version 4.3.0
 - Add get_connection function in global variables to access connection object from a python snippet service.
 - Support custom ip address in ping service (new IP address field, defaults to device IP if empty).
 
-Migration
-- check "username" and "server" variables in workflow aren't in conflict with existing workflows.
-- dashboard is now controlled by RBAC: dashboard access must be explicitly granted via access pages, GET and
-  POST requests.
-- "download_file" endpoint -> "download" (add support for downloading folders)
-- the "driver" property must be updated for all netmiko, napalm and scrapli via the migration script
-- update services to use server IP and address from global variables and not from settings.
-
-To be tested:
-- mail notification
-- web ssh
-- service logging mechanism, including disable logging
-- netmiko commands service: test old services still work + new multi commands / results as list option
-
 Version 4.2.0
 -------------
 
@@ -152,18 +138,6 @@ Version 4.2.0
   "network_data" folder)
 - Update slack notification service to use newest slack_sdk library (instead of slackclient<2)
 - Make scrapli connection arguments configurable from automation.json / scrapli / connection_args
-
-Migration:
-
-  - Update all access with new GET / POST endpoints
-  - Doc link in settings.json to be updated with custom doc links.
-  - Refresh rates in settings.json to be udpated (e.g 10s instead of 3 if RBAC is used)
-  - Redis config in settings.json
-  - In migration files, replace "default_access: admin" with "admin_only: true"
-  - Warn user about REST API run service endpoint new default (True)
-  - Update service priority to "current priority + 9" (see migration script in files / script)
-  - Update credentials of REST Call services (custom_username, custom_password)
-  - Add SSH command in settings.json / ssh section
 
 Version 4.1.0
 -------------

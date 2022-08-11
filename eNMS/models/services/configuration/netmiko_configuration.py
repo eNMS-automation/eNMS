@@ -17,7 +17,6 @@ class NetmikoConfigurationService(ConnectionService):
     enable_mode = db.Column(Boolean, default=True)
     config_mode = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
-    use_device_driver = db.Column(Boolean, default=True)
     fast_cli = db.Column(Boolean, default=False)
     timeout = db.Column(Integer, default=1.0)
     delay_factor = db.Column(Float, default=1.0)

@@ -62,9 +62,7 @@ class Runner:
         self.progress_key = f"progress/{device_progress}"
         self.is_admin_run = db.fetch("user", name=self.creator).is_admin
         self.main_run = db.fetch("run", runtime=self.parent_runtime)
-        if self.is_main_run:
-            self.path = str(self.service.id)
-        else:
+        if not self.is_main_run:
             self.path = f"{run.path}>{self.service.id}"
         db.session.commit()
         self.start_run()
@@ -823,7 +821,7 @@ class Runner:
             payload = payload.setdefault(section, {})
         if value is None:
             value = default
-        if operation in ("get", "__setitem__"):
+        if operation in ("get", "__setitem__", "setdefault"):
             value = getattr(payload, operation)(name, value)
         else:
             getattr(payload[name], operation)(value)
@@ -915,6 +913,11 @@ class Runner:
                 "payload": _self.payload,
                 "placeholder": _self.main_run.placeholder,
                 "send_email": env.send_email,
+                "server": {
+                    "ip_address": vs.server_ip,
+                    "name": vs.server,
+                    "url": vs.server_url,
+                },
                 "set_var": _self.payload_helper,
                 "settings": vs.settings,
                 "username": _self.main_run.creator,
@@ -931,8 +934,8 @@ class Runner:
         return results, exec_variables
 
     def sub(self, input, variables):
-
-        regex = compile("{{(.*?)}}")
+        is_jinja2_template = getattr(self, "jinja2_template", False)
+        regex = compile("\[\[(.*?)\]\]" if is_jinja2_template else "{{(.*?)}}")
         variables["payload"] = self.payload
 
         def replace(match):
@@ -998,7 +1001,7 @@ class Runner:
             change_log=False,
             logger="security",
         )
-        driver = device.netmiko_driver if self.use_device_driver else self.driver
+        driver = device.netmiko_driver if self.driver == "device" else self.driver
         sock = None
         if device.gateways:
             gateways = sorted(device.gateways, key=attrgetter("priority"), reverse=True)
@@ -1065,7 +1068,7 @@ class Runner:
         if is_netconf:
             kwargs["strip_namespaces"] = self.strip_namespaces
         else:
-            platform = device.scrapli_driver if self.use_device_driver else self.driver
+            platform = device.scrapli_driver if self.driver == "device" else self.driver
             kwargs.update(
                 {
                     "transport": self.transport,
@@ -1108,7 +1111,7 @@ class Runner:
         if "secret" not in optional_args:
             optional_args["secret"] = credentials.pop("secret", None)
         driver = get_network_driver(
-            device.napalm_driver if self.use_device_driver else self.driver
+            device.napalm_driver if self.driver == "device" else self.driver
         )
         napalm_connection = driver(
             hostname=device.ip_address,

@@ -3,7 +3,7 @@ from ruamel import yaml
 
 
 FILENAME = "examples"
-PATH = Path.cwd().parent.parent.parent / "eNMS" / "files" / "migrations"
+PATH = Path.cwd().parent.parent.parent / "eNMS-prod" / "files" / "migrations"
 
 
 def migrate_from_4_to_4_2():
@@ -26,15 +26,19 @@ def migrate_from_4_to_4_2():
         yaml.dump(services, migration_file)
 
 
-def migrate_from_4_2_to_4_2_1():
+def migrate_from_4_2_to_4_3():
     with open(PATH / FILENAME / "service.yaml", "r") as migration_file:
         services = yaml.load(migration_file)
     for service in services:
         if service["type"] == "netmiko_validation_service":
             service["type"] = "netmiko_commands_service"
             service["commands"] = service.pop("command", "")
+        if service["type"] == "data_extraction_service":
+            service["type"] = "data_processing_service"
+        if service.pop("use_device_driver", False):
+            service["driver"] = "device"
     with open(PATH / FILENAME / "service.yaml", "w") as migration_file:
         yaml.dump(services, migration_file)
 
 
-migrate_from_4_2_to_4_2_1()
+migrate_from_4_2_to_4_3()

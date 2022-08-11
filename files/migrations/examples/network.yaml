@@ -49,7 +49,7 @@
   model: ''
   name: Subnetwork and Teleport Mechanism
   networks: []
-  nodes: [Subnetwork 1, Subnetwork 2]
+  nodes: [Subnetwork 2, Subnetwork 1]
   pools: [Everything, All Networks]
   positions: {}
   subtype: ''

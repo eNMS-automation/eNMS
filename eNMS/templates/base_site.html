@@ -184,6 +184,11 @@
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li>
+                      <a onclick="eNMS.administration.showProfile()"
+                        ><i class="fa fa-user pull-right"></i>Profile</a
+                      >
+                    </li>
+                    <li>
                       <a href="/logout"
                         ><i class="fa fa-sign-out pull-right"></i>Log out</a
                       >
@@ -242,7 +247,6 @@
                     &nbsp;Docs
                   </a>
                 </li>
-                {% if user.is_admin or "Files" in user.upper_menu %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.administration.displayFiles()"
@@ -256,7 +260,7 @@
                     &nbsp;Files
                   </a>
                 </li>
-                {% endif %} {% if user.is_admin %}
+                {% if user.is_admin %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.administration.showSettings()"
@@ -301,7 +305,10 @@
     <script src="{{ url_for('static', filename='lib/jquery/jquery.min.js') }}"></script>
     <script>
       window.eNMS = {};
+      const applicationPath = {{ application_path|d("")|tojson|safe }};
       const page = "{{ endpoint }}";
+      const linkPath = {{ link_path|d("")|tojson|safe }};
+      const linkRuntime = {{ link_runtime|d("")|tojson|safe }};
       const user = {{ user|tojson|safe }};
       const configurationProperties = {{ configuration_properties|tojson|safe }};
       const formProperties = {{ form_properties|tojson|safe }};
@@ -342,18 +349,6 @@
     <script src="{{ url_for('static', filename='lib/jstree/jstree.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/dropzone/dropzone.min.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/base.js') }}"></script>
-    <script
-      type="module"
-      src="{{ url_for('static', filename='js/administration.js') }}"
-    ></script>
-    <script
-      type="module"
-      src="{{ url_for('static', filename='js/inventory.js') }}"
-    ></script>
-    <script
-      type="module"
-      src="{{ url_for('static', filename='js/automation.js') }}"
-    ></script>
     {% endblock %}
   </body>
 </html>

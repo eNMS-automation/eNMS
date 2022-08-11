@@ -10,8 +10,8 @@ from ipaddress import IPv4Network
 from json import dump, load
 from logging import info
 from operator import attrgetter, itemgetter
-from os import getenv, listdir, makedirs, remove, scandir
-from os.path import exists, getmtime
+from os import getenv, listdir, makedirs, scandir
+from os.path import exists
 from pathlib import Path
 from re import compile, error as regex_error, search, sub
 from requests import get as http_get
@@ -20,10 +20,10 @@ from shutil import rmtree
 from sqlalchemy import and_, or_
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import aliased
+from sqlalchemy.sql.expression import true
 from subprocess import Popen
 from tarfile import open as open_tar
 from threading import Thread
-from time import ctime
 from traceback import format_exc
 from uuid import uuid4
 from xlrd import open_workbook
@@ -45,6 +45,7 @@ class Controller:
             import_export_types=db.import_export_models,
         )
         self.get_git_content()
+        self.scan_folder()
 
     def _register_endpoint(self, func):
         setattr(self, func.__name__, func)
@@ -275,9 +276,6 @@ class Controller:
     def database_deletion(self, **kwargs):
         db.delete_all(*kwargs["deletion_types"])
 
-    def delete_file(self, filepath):
-        remove(Path(filepath.replace(">", "/")))
-
     def delete_instance(self, model, instance_id):
         return db.delete(model, id=instance_id)
 
@@ -307,6 +305,11 @@ class Controller:
         try:
             with open(Path(filepath.replace(">", "/"))) as file:
                 return file.read()
+        except FileNotFoundError:
+            file = db.fetch("file", path=filepath.replace(">", "/"), allow_none=True)
+            if file:
+                file.status = "Not Found"
+            return {"error": "File not found on disk."}
         except UnicodeDecodeError:
             return {"error": "Cannot read file (unsupported type)."}
 
@@ -486,6 +489,7 @@ class Controller:
         return vs.form_properties[f"initial-{service_id}"]
 
     def get_git_content(self):
+        env.log("info", "Starting Git Content Update")
         repo = vs.settings["app"]["git_repository"]
         if not repo:
             return
@@ -502,6 +506,7 @@ class Controller:
             self.update_database_configurations_from_git()
         except Exception as exc:
             env.log("error", f"Update of device configurations failed ({str(exc)})")
+        env.log("info", "Git Content Update Successful")
 
     def get_git_history(self, device_id):
         device = db.fetch("device", id=device_id, rbac="configuration")
@@ -548,28 +553,31 @@ class Controller:
         run_runtimes = set((run.runtime, run.name) for run in runs)
         return sorted(results_runtimes | run_runtimes, reverse=True)
 
-    def get_service_logs(self, service, runtime, start_line):
+    def get_service_logs(self, service, runtime, line=0, device=None):
         log_instance = db.fetch(
             "service_log", allow_none=True, runtime=runtime, service_id=service
         )
         number_of_lines = 0
         if log_instance:
-            logs = log_instance.content
+            lines = log_instance.content.splitlines()
         else:
             lines = (
-                env.log_queue(runtime, service, start_line=int(start_line), mode="get")
-                or []
+                env.log_queue(runtime, service, start_line=int(line), mode="get") or []
             )
-            number_of_lines, logs = len(lines), "\n".join(lines)
+            number_of_lines = len(lines)
+        if device:
+            device_name = db.fetch("device", id=device).name
+            lines = [line for line in lines if f"DEVICE {device_name}" in line]
         return {
-            "logs": logs,
+            "logs": "\n".join(lines),
             "refresh": not log_instance,
-            "line": int(start_line) + number_of_lines,
+            "line": int(line) + number_of_lines,
         }
 
     def get_service_state(self, path, **kwargs):
         state, run, path_id = None, None, path.split(">")
         runtime, display = kwargs.get("runtime"), kwargs.get("display")
+        output = {"runtime": runtime}
         service = db.fetch("service", id=path_id[-1], allow_none=True)
         if not service:
             raise db.rbac_error
@@ -585,6 +593,13 @@ class Controller:
             else:
                 run = db.fetch("run", allow_none=True, runtime=runtime)
             state = run.get_state() if run else None
+        if kwargs.get("device") and run:
+            output["device_state"] = {
+                result.service_id: result.success
+                for result in db.fetch_all(
+                    "result", parent_runtime=run.runtime, device_id=kwargs.get("device")
+                )
+            }
         serialized_service = service.to_dict(include=["edges", "superworkflow"])
         run_properties = vs.automation["workflow"]["state_properties"]["run"]
         service_properties = vs.automation["workflow"]["state_properties"]["service"]
@@ -602,7 +617,7 @@ class Controller:
             ),
             "state": state,
             "run": run.get_properties(include=run_properties) if run else None,
-            "runtime": runtime,
+            **output,
         }
 
     def get_session_log(self, session_id):
@@ -623,33 +638,33 @@ class Controller:
 
     def get_top_level_instances(self, type):
         result = defaultdict(list)
-        for instance in self.filtering(
-            type,
-            properties=["id", "category", "name"],
-            constraints={f"{type}s_filter": "empty"},
+        constraints = [~getattr(vs.models[type], f"{type}s").any()]
+        if type == "workflow":
+            constraints.append(vs.models[type].shared == true())
+        for instance in (
+            db.query(type, properties=["id", "category", "name"])
+            .filter(or_(*constraints))
+            .all()
         ):
             result[instance.category or "Other"].append(dict(instance))
         return result
 
-    def get_tree_files(self, path):
-        if path == "root":
-            path = vs.settings["paths"]["files"] or vs.path / "files"
-        else:
-            path = path.replace(">", "/")
-        return [
-            {
-                "a_attr": {"style": "width: 100%"},
-                "data": {
-                    "modified": ctime(getmtime(str(file))),
-                    "path": str(file),
-                    "name": file.name,
-                },
-                "text": file.name,
-                "children": file.is_dir(),
-                "type": "folder" if file.is_dir() else "file",
-            }
-            for file in Path(path).iterdir()
-        ]
+    def scan_folder(self, path=None):
+        env.log("info", "Starting Scan of Files")
+        path = env.file_path if not path else path.replace(">", "/")
+        folders = {Path(path)}
+        while folders:
+            folder = folders.pop()
+            for file in folder.iterdir():
+                if file.suffix in vs.settings["files"]["ignored_types"]:
+                    continue
+                if file.is_dir():
+                    folders.add(file)
+                if db.fetch("file", path=str(file), allow_none=True):
+                    continue
+                db.factory("folder" if file.is_dir() else "file", path=str(file))
+            db.session.commit()
+        env.log("info", "Scan of Files Successful")
 
     def get_visualization_pools(self, view):
         has_device = vs.models["pool"].devices.any()
@@ -867,10 +882,15 @@ class Controller:
                 )
 
     def migration_import(self, folder="migrations", **kwargs):
+        env.log("info", "Starting Migration Import")
         status, models = "Import successful.", kwargs["import_export_types"]
         empty_database = kwargs.get("empty_database_before_import", False)
         if empty_database:
             db.delete_all(*models)
+        fetch_instance = {
+            "user": [current_user.name] if current_user else [],
+            "service": ["[Shared] Start", "[Shared] End", "[Shared] Placeholder"],
+        }
         relations = defaultdict(lambda: defaultdict(dict))
         for model in models:
             path = vs.path / "files" / folder / kwargs["name"] / f"{model}.yaml"
@@ -888,10 +908,13 @@ class Controller:
                         if property in vs.private_properties_set
                     }
                     try:
+                        existing_instance = instance["name"] in fetch_instance.get(
+                            model, []
+                        )
                         instance = db.factory(
                             type,
                             migration_import=True,
-                            no_fetch=empty_database,
+                            no_fetch=empty_database and not existing_instance,
                             update_pools=kwargs.get("update_pools", False),
                             import_mechanism=True,
                             **instance,
@@ -926,7 +949,7 @@ class Controller:
                         status = "Partial import (see logs)."
         db.session.commit()
         if not kwargs.get("skip_model_update"):
-            for model in ("access", "service"):
+            for model in ("access", "service", "network"):
                 for instance in db.fetch_all(model):
                     instance.update()
         if not kwargs.get("skip_pool_update"):
@@ -942,9 +965,13 @@ class Controller:
         query = self.filtering_relationship_constraints(query, model, **params)
         query = query.filter(and_(*self.filtering_base_constraints(model, **params)))
         property = "name" if params["multiple"] else "id"
+        button_html = "type='button' class='btn btn-link btn-select2'"
         return {
             "items": [
-                {"text": result.ui_name, "id": getattr(result, property)}
+                {
+                    "text": f"<button {button_html}>{result.ui_name}</button>",
+                    "id": getattr(result, property),
+                }
                 for result in query.limit(10)
                 .offset((int(params["page"]) - 1) * 10)
                 .all()
@@ -1073,7 +1100,7 @@ class Controller:
             kwargs.pop(property, None)
         if kwargs.get("form_type", "").startswith("initial-"):
             kwargs = {"form": kwargs, "parameterized_run": True}
-        kwargs["creator"] = getattr(current_user, "name", "")
+        kwargs.update({"creator": getattr(current_user, "name", ""), "path": path})
         service = db.fetch("service", id=service_id, rbac="run")
         kwargs["runtime"] = runtime = vs.get_time()
         run_name = kwargs.get("form", {}).get("name")
@@ -1097,9 +1124,12 @@ class Controller:
         )
 
     def save_file(self, filepath, **kwargs):
+        filepath, content = filepath.replace(">", "/"), None
         if kwargs.get("file_content"):
-            with open(Path(filepath.replace(">", "/")), "w") as file:
-                return file.write(kwargs["file_content"])
+            with open(Path(filepath), "w") as file:
+                content = file.write(kwargs["file_content"])
+        db.fetch("file", path=filepath).update()
+        return content
 
     def save_positions(self, type, id, **kwargs):
         now, old_position = vs.get_time(), None
@@ -1119,6 +1149,9 @@ class Controller:
             if new_position != old_position:
                 instance.last_modified = now
         return now
+
+    def save_profile(self, **kwargs):
+        current_user.update(**kwargs)
 
     def save_settings(self, **kwargs):
         vs.settings = vs.template_context["settings"] = kwargs["settings"]
@@ -1151,6 +1184,14 @@ class Controller:
     def scheduler_action(self, mode, **kwargs):
         for task in self.filtering("task", properties=["id"], form=kwargs):
             self.task_action(mode, task.id)
+
+    def search_builder(self, type, id, text):
+        property = "nodes" if type == "network" else "services"
+        return [
+            node.id
+            for node in getattr(db.fetch(type, id=id), property)
+            if text.lower() in str(node.get_properties().values()).lower()
+        ]
 
     def search_workflow_services(self, **kwargs):
         service_alias = aliased(vs.models["service"])
@@ -1315,8 +1356,7 @@ class Controller:
         db.session.commit()
 
     def upload_files(self, **kwargs):
-        file = kwargs["file"]
-        file.save(f"{kwargs['folder']}/{file.filename}")
+        kwargs["file"].save(f"{kwargs['folder']}/{kwargs['file'].filename}")
 
     def update_pool(self, pool_id):
         db.fetch("pool", id=int(pool_id), rbac="edit").compute_pool()
@@ -1345,7 +1385,7 @@ class Controller:
             options = ""
         environment = {
             **{key: str(value) for key, value in vs.settings["ssh"]["web"].items()},
-            "APP_ADDRESS": getenv("SERVER_ADDR", "https://0.0.0.0"),
+            "APP_ADDRESS": getenv("SERVER_URL", "https://0.0.0.0"),
             "DEVICE": str(device.id),
             "ENDPOINT": endpoint,
             "ENMS_USER": getenv("ENMS_USER", "admin"),

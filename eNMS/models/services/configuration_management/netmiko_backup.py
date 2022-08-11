@@ -27,7 +27,6 @@ class NetmikoBackupService(ConnectionService):
     enable_mode = db.Column(Boolean, default=True)
     config_mode = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
-    use_device_driver = db.Column(Boolean, default=True)
     fast_cli = db.Column(Boolean, default=False)
     timeout = db.Column(Integer, default=10.0)
     global_delay_factor = db.Column(Float, default=1.0)

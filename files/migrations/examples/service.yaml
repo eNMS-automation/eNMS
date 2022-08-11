@@ -65,10 +65,10 @@
     (R) Netmiko Validation with TextFSM Option: &id020 [-366, 74]
     (R) Operational Data Backup Service: [-826, 220]
     (R) Scalability: &id010 [-437, -191]
-    (R) Scrapli Netconf Service: &id050 [-298, -101]
-    (R) Scrapli Service: &id036 [-192, 31]
-    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: &id035 [-382,
-      39]
+    (R) Scrapli Netconf Service: &id049 [-298, -101]
+    (R) Scrapli Service: &id035 [-192, 31]
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-376, 194]
+    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [-382, 39]
     Advanced Iteration Targets: &id034 [-131, -24]
     Advanced Multiprocessing (admin): [-492, -39]
     Ansible Playbook Service: &id061 [-638, 93]
@@ -79,9 +79,9 @@
     'Basic: Deletion (Device, Link, Service, Task)': &id002 [-335, 173]
     Combined Device & Target Iteration: &id007 [-458, -30]
     Conditional Skip Query in Failed and Discard Modes: &id062 [-322, 98]
-    Credentials (Password & Key, Priority Mechanism): &id040 [-157, 96]
-    Data Extraction Jinja2 Template: [-240, 238]
-    Data Extraction Service: &id041 [-421, 129]
+    Credentials (Password & Key, Priority Mechanism): &id039 [-157, 96]
+    Data Extraction Jinja2 Template: [-255, -44]
+    Data Extraction Service: &id040 [-421, 129]
     Deletion and Cascade Deletion: *id002
     Deletion of Devices, Links, Services, Tasks and associated Cascade Deletion: *id002
     Device Iteration: &id008 [-354, -121]
@@ -139,21 +139,21 @@
     Notification Mechanism: *id021
     Notifications: *id021
     Operational Data Backup (admin): [-689, 207]
-    Optional Prerequisite Services: &id046 [-356, 121]
+    Optional Prerequisite Services: &id045 [-356, 121]
     Optional Remediation Branch: [-356, 121]
     POST Endpoint search: &id026 [-374, 42]
     POST update, DELETE delete and GET & POST results: &id027 [-359, 245]
-    Parameterized Form (override labels & targets, add payload): &id047 [-262, -163]
+    Parameterized Form (override labels & targets, add payload): &id046 [-262, -163]
     Parameterized Multiprocessing: [-169, 101]
     Parameterized Run with a Superworkflow: &id022 [-293, -76]
     Parameterized Superworkflow Run: *id022
     Parameterized Targets: [-54, -115]
     Payload Extraction & Validation: [-308, -170]
-    Payload Extraction with Operations: &id048 [-661, -226]
+    Payload Extraction with Operations: &id047 [-661, -226]
     Payload Recursive Conservation with Restart Mechanism: &id059 [-238, -178]
     Preprocessing and Postprocessing Mechanism: &id023 [-197, -37]
     Preprocessing and Postprocessing Mechanisms: *id023
-    RBAC Target Restriction: &id049 [-176, -144]
+    RBAC Target Restriction: &id048 [-176, -144]
     'REST API: GET Endpoints': [-425, -25]
     'REST API: GET Endpoints is_alive, configuration and instance': *id024
     'REST API: GET Endpoints query and token': *id025
@@ -166,15 +166,15 @@
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id029 [-383,
       -95]
     'Regression Workflow 1: link neighbors mechanism': &id028 [-273, -126]
-    'Regression Workflow 2: Separate Failure - Success paths': &id051 [-327, -20]
-    'Regression Workflow 3: Napalm getters (postprocessing)': &id045 [-316, 80]
+    'Regression Workflow 2: Separate Failure - Success paths': &id050 [-327, -20]
+    'Regression Workflow 3: Napalm getters (postprocessing)': &id044 [-316, 80]
     'Regression Workflow 4: Link Neighbors Mechanism (public)': *id028
     'Regression Workflow 4: VRF creation and deletion with Netmiko': *id029
     'Regression Workflow 4: link neighbors mechanism': *id028
     'Regression Workflow 4: link neighbors mechanism (public)': *id028
     'Regression Workflow 5: VRF creation and deletion with Napalm': !!python/tuple [
       0, 0]
-    'Regression Workflow 6: Ansible with Validation': &id039 [-557, -5]
+    'Regression Workflow 6: Ansible with Validation': &id038 [-557, -5]
     'Regression Workflow 7: Payload Extraction & Validation': !!python/tuple [0, 0]
     'Regression Workflow 8: Payload Extraction with Operations': !!python/tuple [
       0, 0]
@@ -185,91 +185,92 @@
     'Regression Workflow C: Advanced multiprocessing': &id032 [-492, -39]
     'Regression Workflow C: Advanced multiprocessing (admin)': *id032
     'Regression Workflow D: Prompts': *id019
-    'Regression Workflow E: Iteration Targets': &id044 [-342, -252]
+    'Regression Workflow E: Iteration Targets': &id043 [-342, -252]
     'Regression Workflow F S1: Subworkflow of Workflow': !!python/tuple [0, 0]
     'Regression Workflow F S2: Access Variables from Parent Workflow': !!python/tuple [
       0, 0]
     'Regression Workflow F: Workflow of Workflows': &id057 [-965, 194]
     'Regression Workflow G: run methods (BFS)': *id033
-    'Regression Workflow H: shared service in multiple subworkflows': &id052 [55,
+    'Regression Workflow H: shared service in multiple subworkflows': &id051 [55,
       266]
     'Regression Workflow I: Iteration Targets Advanced': *id034
     'Regression Workflow J: Workflow and Subworkflow Iteration': [0, 0]
     'Regression Workflow K: preprocessing and postprocessing': *id023
-    'Regression Workflow L: superworkflow': &id055 [-179, 6]
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': *id035
+    'Regression Workflow L: superworkflow': &id054 [-179, 6]
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id056 [
+      -382, 39]
     'Regression Workflow M: Unix command & shell, ping, jump server': [-341, 17]
-    'Regression Workflow N: Topology Import (netbox, librenms, opennms)': &id056 [
+    'Regression Workflow N: Topology Import (netbox, librenms, opennms)': &id055 [
       -141, 21]
-    'Regression Workflow O: Scrapli': *id036
+    'Regression Workflow O: Scrapli': *id035
     'Regression Workflow P: large workflow (scalability)': *id010
-    'Regression Workflow Q: File transfer': &id042 [-479, -89]
-    'Regression Workflow R: Skip Services in SxS mode': &id037 [-336, -35]
-    'Regression Workflow R: skip services in service by service mode': *id037
-    'Regression Workflow S: conditional skip query in failed and discard mode': &id038 [
+    'Regression Workflow Q: File transfer': &id041 [-479, -89]
+    'Regression Workflow R: Skip Services in SxS mode': &id036 [-336, -35]
+    'Regression Workflow R: skip services in service by service mode': *id036
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id037 [
       -205, -81]
-    'Regression Workflow S: conditional skip query with skip value set to False': *id038
+    'Regression Workflow S: conditional skip query with skip value set to False': *id037
     'Regression Workflow T: global variables': [-277, -147]
     'Regression Workflow T: global variables and post-run pool update': [-277, -147]
     'Regression Workflow T: link neighbors mechanism': *id028
-    'Regression Workflow U: fork based on value with skip discard mode': &id043 [
+    'Regression Workflow U: fork based on value with skip discard mode': &id042 [
       -477, 154]
-    'Regression Workflow V: skip query with device in run once mode': &id053 [-412,
+    'Regression Workflow V: skip query with device in run once mode': &id052 [-412,
       -72]
     'Regression Workflow V: skip query with device in subworkflow SxS': [-71, -2]
     'Regression Workflow W: disable result creation mode': [-295, -141]
-    'Regression Workflow W: skip, discard and disable result creation mechanism': &id054 [
+    'Regression Workflow W: skip, discard and disable result creation mechanism': &id053 [
       -295, -141]
     'Regression Workflow X: Credentials (password & key, priority)': [-157, 96]
     'Regression Workflow: Advanced Iteration Targets': *id034
     'Regression Workflow: Advanced Multiprocessing (admin)': *id032
-    'Regression Workflow: Ansible with Validation': *id039
-    'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id038
-    'Regression Workflow: Credentials (Password & Key, Priority Mechanism)': *id040
-    'Regression Workflow: Data Extraction Service': *id041
+    'Regression Workflow: Ansible with Validation': *id038
+    'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id037
+    'Regression Workflow: Credentials (Password & Key, Priority Mechanism)': *id039
+    'Regression Workflow: Data Extraction Service': *id040
     'Regression Workflow: Device Iteration': [-235, -81]
     'Regression Workflow: DxD and SxS Run Methods': *id033
-    'Regression Workflow: File Transfer Mechanism': *id042
-    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id043
+    'Regression Workflow: File Transfer Mechanism': *id041
+    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id042
     'Regression Workflow: Generic File Transfer': *id004
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': *id005
     'Regression Workflow: Global get_credential Function and Log Obfuscation': *id006
-    'Regression Workflow: Iteration Targets Mechanism': *id044
+    'Regression Workflow: Iteration Targets Mechanism': *id043
     'Regression Workflow: Link Neighbors Mechanism (public)': *id028
     'Regression Workflow: NCClient Netconf Service': *id016
     'Regression Workflow: Napalm Getters Validation': *id017
-    'Regression Workflow: Napalm Getters and Postprocessing': *id045
+    'Regression Workflow: Napalm Getters and Postprocessing': *id044
     'Regression Workflow: Netmiko File Transfer': *id018
     'Regression Workflow: Netmiko Prompts': *id019
     'Regression Workflow: Netmiko TextFSM Option': *id020
     'Regression Workflow: Notifications': *id021
     'Regression Workflow: Operational Data Backup (admin)': *id030
-    'Regression Workflow: Optional Prerequisite Services': *id046
-    'Regression Workflow: Parameterized Form (override labels & targets, add payload)': *id047
+    'Regression Workflow: Optional Prerequisite Services': *id045
+    'Regression Workflow: Parameterized Form (override labels & targets, add payload)': *id046
     'Regression Workflow: Parameterized Superworkflow Run': *id022
     'Regression Workflow: Payload Extraction & Validation': &id087 [-115, -305]
-    'Regression Workflow: Payload Extraction with Operations': *id048
+    'Regression Workflow: Payload Extraction with Operations': *id047
     'Regression Workflow: Preprocessing and Postprocessing': *id023
-    'Regression Workflow: RBAC Target Restriction': *id049
+    'Regression Workflow: RBAC Target Restriction': *id048
     'Regression Workflow: Result content in memory (scalability)': [0, 0]
     'Regression Workflow: Scalability Test (large workflow)': *id010
-    'Regression Workflow: Scrapli': *id036
-    'Regression Workflow: Scrapli Netconf Service': *id050
-    'Regression Workflow: Separate Failure - Success Paths': *id051
+    'Regression Workflow: Scrapli': *id035
+    'Regression Workflow: Scrapli Netconf Service': *id049
+    'Regression Workflow: Separate Failure - Success Paths': *id050
     'Regression Workflow: Service Priorities, Napalm Getters, Postprocessing': &id060 [
       -316, 80]
-    'Regression Workflow: Shared Service in Multiple Subworkflows': *id052
-    'Regression Workflow: Skip Query with device in Run Once Mode': *id053
-    'Regression Workflow: Skip Services in SxS mode': *id037
-    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id054
-    'Regression Workflow: Specific Superworkflow': *id055
-    'Regression Workflow: Superworkflow': *id055
+    'Regression Workflow: Shared Service in Multiple Subworkflows': *id051
+    'Regression Workflow: Skip Query with device in Run Once Mode': *id052
+    'Regression Workflow: Skip Services in SxS mode': *id036
+    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id053
+    'Regression Workflow: Specific Superworkflow': *id054
+    'Regression Workflow: Superworkflow': *id054
     'Regression Workflow: Superworkflow in SxS w WT with Run Once service': &id067 [
       -197, -103]
     'Regression Workflow: SxS Service Targets with Run Once + Skip': &id065 [-436,
       94]
-    'Regression Workflow: Topology Import (netbox, librenms, opennms)': *id056
-    'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id035
+    'Regression Workflow: Topology Import (netbox, librenms, opennms)': *id055
+    'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id056
     'Regression Workflow: Using get_var, set_var, get_result functions': *id031
     'Regression Workflow: VRF Creation and Deletion with Napalm': *id015
     'Regression Workflow: VRF Creation and Deletion with Netmiko': *id029
@@ -281,33 +282,33 @@
     Restart From Feature and Superworkflow Interaction: *id058
     Restart Mechanism, payload + results recursive conservation: *id059
     Scalability Test (large workflow): *id010
-    Scrapli Netconf Service: *id050
-    Scrapli Service: *id036
+    Scrapli Netconf Service: *id049
+    Scrapli Service: *id035
     Separate Failure - Success Paths: [-327, -20]
     Service Priorities: [0, 0]
     Service Priorities, Napalm Getters, Postprocessing: *id060
     'Services: Ansible Playbook Service': *id061
-    Shared Service in Multiple Subworkflows: *id052
+    Shared Service in Multiple Subworkflows: *id051
     'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': *id062
     'Skip Mechanism: Fork based on value with Skip Discard Mechanism': *id063
     'Skip Mechanism: Skip in SxS mode': [-426, -49]
     'Skip Mechanism: Skip in SxS with WF targets mode': &id064 [-605, -49]
-    Skip Query with device in Run Once Mode: *id053
+    Skip Query with device in Run Once Mode: *id052
     Skip Services in SxS mode: [-347, -44]
     Skip in SxS with WF targets mode: *id064
     Skip in SxS with service targets and Run Once services: *id065
-    Skip, Discard and Disable Result Creation Mechanism: *id054
+    Skip, Discard and Disable Result Creation Mechanism: *id053
     Slack and Mattermost Notifications: &id066 [-143, 42]
     Slack and Mattermost notifications: *id066
-    Specific Superworkflow: *id055
+    Specific Superworkflow: *id054
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     Superworkflow in SxS w WT with Run Once service: *id067
     SxS Service Targets with Run Once + Skip: *id065
-    Target Restriction Mechanism: *id049
+    Target Restriction Mechanism: *id048
     Topology Import Service (netbox, librenms, opennms): &id068 [-141, 21]
     Topology Import Services: *id068
-    Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id035
+    Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id056
     Using get_var, set_var, and get_result Functions: *id031
     VRF Creation and Deletion with Napalm: *id015
     VRF Creation and Deletion with Netmiko: *id029
@@ -315,7 +316,7 @@
     'Validation Mechanism: Section to Validate Property': *id069
     Validation Section Mechanism: [-540, -145]
     Workflow  in device by device mode: !!python/tuple [0, 0]
-    'Workflow Regression R: skip services in service by service mode': *id037
+    'Workflow Regression R: skip services in service by service mode': *id036
     'Workflow Regression S: conditional skip query with skip value set to False': [
       -183, -152]
     Workflow and Subworkflow Iteration: *id070
@@ -398,7 +399,7 @@
     : *id087
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
-    : *id048
+    : *id047
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
     : *id017
@@ -407,7 +408,7 @@
     : *id087
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 8: Payload Extraction with Operations'
-    : *id048
+    : *id047
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow B: Napalm getters validation'
     : *id017
@@ -419,7 +420,7 @@
     : *id087
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id048
+    : *id047
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
     : *id017
@@ -428,7 +429,7 @@
     : *id087
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id048
+    : *id047
     get_credential Function: *id006
     iteration_devices_workflow: ['-164', '15']
   postprocessing: ''
@@ -523,10 +524,10 @@
     (R) Netmiko Validation with TextFSM Option: &id107 [522, 4]
     (R) Operational Data Backup Service: [328, 372]
     (R) Scalability: &id097 [483, -268]
-    (R) Scrapli Netconf Service: &id137 [-293, 114]
-    (R) Scrapli Service: &id123 [628, 113]
-    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: &id122 [560,
-      9]
+    (R) Scrapli Netconf Service: &id136 [-293, 114]
+    (R) Scrapli Service: &id122 [628, 113]
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [601, 109]
+    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [377, 272]
     AAA: !!python/tuple [500, 0]
     Advanced Iteration Targets: &id121 [350, -6]
     Advanced Multiprocessing (admin): [505, -10]
@@ -538,9 +539,9 @@
     'Basic: Deletion (Device, Link, Service, Task)': &id089 [664, 197]
     Combined Device & Target Iteration: &id094 [-437, 191]
     Conditional Skip Query in Failed and Discard Modes: &id149 [599, 331]
-    Credentials (Password & Key, Priority Mechanism): &id127 [590, 124]
-    Data Extraction Jinja2 Template: [602, 221]
-    Data Extraction Service: &id128 [365, 216]
+    Credentials (Password & Key, Priority Mechanism): &id126 [590, 124]
+    Data Extraction Jinja2 Template: [445, 190]
+    Data Extraction Service: &id127 [365, 216]
     Deletion and Cascade Deletion: *id089
     Deletion of Devices, Links, Services, Tasks and associated Cascade Deletion: *id089
     Device Iteration: &id095 [549, -155]
@@ -596,21 +597,21 @@
     Notification Mechanism: *id108
     Notifications: *id108
     Operational Data Backup (admin): [282, 396]
-    Optional Prerequisite Services: &id133 [734, 171]
+    Optional Prerequisite Services: &id132 [734, 171]
     Optional Remediation Branch: [734, 171]
     POST Endpoint search: &id113 [576, 170]
     POST update, DELETE delete and GET & POST results: &id114 [503, 145]
-    Parameterized Form (override labels & targets, add payload): &id134 [692, -112]
+    Parameterized Form (override labels & targets, add payload): &id133 [692, -112]
     Parameterized Multiprocessing: [615, 109]
     Parameterized Run with a Superworkflow: &id109 [565, -70]
     Parameterized Superworkflow Run: *id109
     Parameterized Targets: [-41, 252]
     Payload Extraction & Validation: [279, 262]
-    Payload Extraction with Operations: &id135 [-688, -153]
+    Payload Extraction with Operations: &id134 [-688, -153]
     Payload Recursive Conservation with Restart Mechanism: &id146 [663, 12]
     Preprocessing and Postprocessing Mechanism: &id110 [619, 353]
     Preprocessing and Postprocessing Mechanisms: *id110
-    RBAC Target Restriction: &id136 [654, -133]
+    RBAC Target Restriction: &id135 [654, -133]
     'REST API: GET Endpoints': [500, 0]
     'REST API: GET Endpoints is_alive, configuration and instance': *id111
     'REST API: GET Endpoints query and token': *id112
@@ -623,15 +624,15 @@
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id116 [-383,
       167]
     'Regression Workflow 1: link neighbors mechanism': &id115 [713, 86]
-    'Regression Workflow 2: Separate Failure - Success paths': &id138 [737, 276]
-    'Regression Workflow 3: Napalm getters (postprocessing)': &id132 [703, 150]
+    'Regression Workflow 2: Separate Failure - Success paths': &id137 [737, 276]
+    'Regression Workflow 3: Napalm getters (postprocessing)': &id131 [703, 150]
     'Regression Workflow 4: Link Neighbors Mechanism (public)': *id115
     'Regression Workflow 4: VRF creation and deletion with Netmiko': *id116
     'Regression Workflow 4: link neighbors mechanism': *id115
     'Regression Workflow 4: link neighbors mechanism (public)': *id115
     'Regression Workflow 5: VRF creation and deletion with Napalm': !!python/tuple [
       0, 0]
-    'Regression Workflow 6: Ansible with Validation': &id126 [567, -24]
+    'Regression Workflow 6: Ansible with Validation': &id125 [567, -24]
     'Regression Workflow 7: Payload Extraction & Validation': !!python/tuple [0, 0]
     'Regression Workflow 8: Payload Extraction with Operations': !!python/tuple [
       0, 0]
@@ -642,92 +643,93 @@
     'Regression Workflow C: Advanced multiprocessing': &id119 [505, -10]
     'Regression Workflow C: Advanced multiprocessing (admin)': *id119
     'Regression Workflow D: Prompts': *id106
-    'Regression Workflow E: Iteration Targets': &id131 [-334, 29]
+    'Regression Workflow E: Iteration Targets': &id130 [-334, 29]
     'Regression Workflow F S1: Subworkflow of Workflow': !!python/tuple [0, 0]
     'Regression Workflow F S2: Access Variables from Parent Workflow': !!python/tuple [
       0, 0]
     'Regression Workflow F: Workflow of Workflows': &id144 [-934, 289]
     'Regression Workflow G: run methods (BFS)': *id120
-    'Regression Workflow H: shared service in multiple subworkflows': &id139 [688,
+    'Regression Workflow H: shared service in multiple subworkflows': &id138 [688,
       -88]
     'Regression Workflow I: Iteration Targets Advanced': *id121
     'Regression Workflow J: Workflow and Subworkflow Iteration': [500, 0]
     'Regression Workflow K: preprocessing and postprocessing': *id110
-    'Regression Workflow L: superworkflow': &id142 [730, 218]
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': *id122
+    'Regression Workflow L: superworkflow': &id141 [730, 218]
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id143 [
+      560, 9]
     'Regression Workflow M: Unix command & shell, ping, jump server': [560, 9]
-    'Regression Workflow N: Topology Import (netbox, librenms, opennms)': &id143 [
+    'Regression Workflow N: Topology Import (netbox, librenms, opennms)': &id142 [
       636, 24]
-    'Regression Workflow O: Scrapli': *id123
+    'Regression Workflow O: Scrapli': *id122
     'Regression Workflow P: large workflow (scalability)': *id097
-    'Regression Workflow Q: File transfer': &id129 [576, 135]
-    'Regression Workflow R: Skip Services in SxS mode': &id124 [500, 0]
-    'Regression Workflow R: skip services in service by service mode': *id124
-    'Regression Workflow S: conditional skip query in failed and discard mode': &id125 [
+    'Regression Workflow Q: File transfer': &id128 [576, 135]
+    'Regression Workflow R: Skip Services in SxS mode': &id123 [500, 0]
+    'Regression Workflow R: skip services in service by service mode': *id123
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id124 [
       640, -155]
-    'Regression Workflow S: conditional skip query with skip value set to False': *id125
+    'Regression Workflow S: conditional skip query with skip value set to False': *id124
     'Regression Workflow T: global variables': [569, -66]
     'Regression Workflow T: global variables and post-run pool update': [569, -66]
     'Regression Workflow T: link neighbors mechanism': *id115
-    'Regression Workflow U: fork based on value with skip discard mode': &id130 [
+    'Regression Workflow U: fork based on value with skip discard mode': &id129 [
       645, 270]
-    'Regression Workflow V: skip query with device in run once mode': &id140 [670,
+    'Regression Workflow V: skip query with device in run once mode': &id139 [670,
       159]
     'Regression Workflow V: skip query with device in subworkflow SxS': [572, -3]
     'Regression Workflow W: disable result creation mode': [529, -52]
-    'Regression Workflow W: skip, discard and disable result creation mechanism': &id141 [
+    'Regression Workflow W: skip, discard and disable result creation mechanism': &id140 [
       547, -96]
     'Regression Workflow X: Credentials (password & key, priority)': [590, 124]
     'Regression Workflow: Advanced Iteration Targets': *id121
     'Regression Workflow: Advanced Multiprocessing (admin)': *id119
-    'Regression Workflow: Ansible with Validation': *id126
-    'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id125
-    'Regression Workflow: Credentials (Password & Key, Priority Mechanism)': *id127
-    'Regression Workflow: Data Extraction Service': *id128
+    'Regression Workflow: Ansible with Validation': *id125
+    'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id124
+    'Regression Workflow: Credentials (Password & Key, Priority Mechanism)': *id126
+    'Regression Workflow: Data Extraction Service': *id127
     'Regression Workflow: Device Iteration': [699, 125]
     'Regression Workflow: DxD and SxS Run Methods': *id120
-    'Regression Workflow: File Transfer Mechanism': *id129
-    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id130
+    'Regression Workflow: File Transfer Mechanism': *id128
+    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id129
     'Regression Workflow: Generic File Transfer': *id091
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': *id092
     'Regression Workflow: Global get_credential Function and Log Obfuscation': *id093
-    'Regression Workflow: Iteration Targets Mechanism': *id131
+    'Regression Workflow: Iteration Targets Mechanism': *id130
     'Regression Workflow: Link Neighbors Mechanism (public)': *id115
     'Regression Workflow: NCClient Netconf Service': *id103
     'Regression Workflow: Napalm Getters Validation': *id104
-    'Regression Workflow: Napalm Getters and Postprocessing': *id132
+    'Regression Workflow: Napalm Getters and Postprocessing': *id131
     'Regression Workflow: Netmiko File Transfer': *id105
     'Regression Workflow: Netmiko Prompts': *id106
     'Regression Workflow: Netmiko TextFSM Option': *id107
     'Regression Workflow: Notifications': *id108
     'Regression Workflow: Operational Data Backup (admin)': *id117
-    'Regression Workflow: Optional Prerequisite Services': *id133
-    'Regression Workflow: Parameterized Form (override labels & targets, add payload)': *id134
+    'Regression Workflow: Optional Prerequisite Services': *id132
+    'Regression Workflow: Parameterized Form (override labels & targets, add payload)': *id133
     'Regression Workflow: Parameterized Superworkflow Run': *id109
     'Regression Workflow: Payload Extraction & Validation': &id175 [279, 262]
-    'Regression Workflow: Payload Extraction with Operations': *id135
+    'Regression Workflow: Payload Extraction with Operations': *id134
     'Regression Workflow: Preprocessing and Postprocessing': *id110
-    'Regression Workflow: RBAC Target Restriction': *id136
+    'Regression Workflow: RBAC Target Restriction': *id135
     'Regression Workflow: Scalability Test (large workflow)': *id097
-    'Regression Workflow: Scrapli': *id123
-    'Regression Workflow: Scrapli Netconf Service': *id137
-    'Regression Workflow: Separate Failure - Success Paths': *id138
+    'Regression Workflow: Scrapli': *id122
+    'Regression Workflow: Scrapli Netconf Service': *id136
+    'Regression Workflow: Separate Failure - Success Paths': *id137
     'Regression Workflow: Service Priorities, Napalm Getters, Postprocessing': &id147 [
       703, 150]
-    'Regression Workflow: Shared Service in Multiple Subworkflows': *id139
-    'Regression Workflow: Skip Query with device in Run Once Mode': *id140
-    'Regression Workflow: Skip Services in SxS mode': *id124
-    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id141
-    'Regression Workflow: Specific Superworkflow': *id142
-    'Regression Workflow: Superworkflow': *id142
+    'Regression Workflow: Shared Service in Multiple Subworkflows': *id138
+    'Regression Workflow: Skip Query with device in Run Once Mode': *id139
+    'Regression Workflow: Skip Services in SxS mode': *id123
+    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id140
+    'Regression Workflow: Specific Superworkflow': *id141
+    'Regression Workflow: Superworkflow': *id141
     'Regression Workflow: Superworkflow in SxS w WT with Run Once service': &id154 [
       514, -109]
     'Regression Workflow: SxS Service Targets with Run Once + Skip': &id152 [605,
       380]
     'Regression Workflow: SxS Service Targets with Skip Global + Query': !!python/tuple [
       500, 0]
-    'Regression Workflow: Topology Import (netbox, librenms, opennms)': *id143
-    'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id122
+    'Regression Workflow: Topology Import (netbox, librenms, opennms)': *id142
+    'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id143
     'Regression Workflow: Using get_var, set_var, get_result functions': *id118
     'Regression Workflow: VRF Creation and Deletion with Napalm': *id102
     'Regression Workflow: VRF Creation and Deletion with Netmiko': *id116
@@ -739,25 +741,26 @@
     Restart From Feature and Superworkflow Interaction: *id145
     Restart Mechanism, payload + results recursive conservation: *id146
     Scalability Test (large workflow): *id097
-    Scrapli Netconf Service: *id137
-    Scrapli Service: *id123
+    Scrapli Netconf Service: *id136
+    Scrapli Service: *id122
+    Scrapli and Netmiko Multiple Commands and Jinja2: !!python/tuple [500, 0]
     Separate Failure - Success Paths: [737, 276]
     Service Priorities: [500, 0]
     Service Priorities, Napalm Getters, Postprocessing: *id147
     'Services: Ansible Playbook Service': *id148
-    Shared Service in Multiple Subworkflows: *id139
+    Shared Service in Multiple Subworkflows: *id138
     'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': *id149
     'Skip Mechanism: Fork based on value with Skip Discard Mechanism': *id150
     'Skip Mechanism: Skip in SxS mode': [407, -39]
     'Skip Mechanism: Skip in SxS with WF targets mode': &id151 [210, -67]
-    Skip Query with device in Run Once Mode: *id140
+    Skip Query with device in Run Once Mode: *id139
     Skip Services in SxS mode: [387, -76]
     Skip in SxS with WF targets mode: *id151
     Skip in SxS with service targets and Run Once services: *id152
-    Skip, Discard and Disable Result Creation Mechanism: *id141
+    Skip, Discard and Disable Result Creation Mechanism: *id140
     Slack and Mattermost Notifications: &id153 [588, 19]
     Slack and Mattermost notifications: *id153
-    Specific Superworkflow: *id142
+    Specific Superworkflow: *id141
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     Superworkflow in SxS w WT with Run Once service: *id154
@@ -765,10 +768,10 @@
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
-    Target Restriction Mechanism: *id136
+    Target Restriction Mechanism: *id135
     Topology Import Service (netbox, librenms, opennms): &id155 [636, 24]
     Topology Import Services: *id155
-    Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id122
+    Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id143
     Using get_var, set_var, and get_result Functions: *id118
     VRF Creation and Deletion with Napalm: *id102
     VRF Creation and Deletion with Netmiko: *id116
@@ -776,7 +779,7 @@
     'Validation Mechanism: Section to Validate Property': *id156
     Validation Section Mechanism: [470, 106]
     Workflow  in device by device mode: !!python/tuple [0, 0]
-    'Workflow Regression R: skip services in service by service mode': *id124
+    'Workflow Regression R: skip services in service by service mode': *id123
     'Workflow Regression S: conditional skip query with skip value set to False': [
       640, -155]
     Workflow and Subworkflow Iteration: *id157
@@ -867,7 +870,7 @@
     : *id175
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
-    : *id135
+    : *id134
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
     : *id104
@@ -876,7 +879,7 @@
     : *id175
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 8: Payload Extraction with Operations'
-    : *id135
+    : *id134
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow B: Napalm getters validation'
     : *id104
@@ -888,7 +891,7 @@
     : *id175
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id135
+    : *id134
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
     : *id104
@@ -897,7 +900,7 @@
     : *id175
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id135
+    : *id134
     get_credential Function: *id093
     iteration_devices_workflow: ['651', '20']
   postprocessing: ''
@@ -1126,7 +1129,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: eos
+  driver: device
   getters: [get_arp_table, get_interfaces]
   impacting: true
   include_device_results: true
@@ -1196,7 +1199,6 @@
   type: napalm_backup_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -1229,7 +1231,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: arista_eos
+  driver: device
   enable_mode: true
   exit_config_mode: true
   fast_cli: true
@@ -1300,7 +1302,6 @@
   type: netmiko_configuration_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -1333,7 +1334,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: arista_eos
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -1350,6 +1351,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -1418,7 +1420,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -1453,7 +1454,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: arista_eos
+  driver: device
   enable_mode: true
   exit_config_mode: true
   fast_cli: true
@@ -1525,7 +1526,6 @@
   type: netmiko_configuration_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -1558,7 +1558,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: arista_eos
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -1575,6 +1575,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -1646,7 +1647,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -1794,7 +1794,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: eos
+  driver: device
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -1865,7 +1865,6 @@
   type: napalm_getters_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: dict_included
   validation_section: results['result']
@@ -1893,7 +1892,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: eos
+  driver: device
   getters: [get_interfaces]
   impacting: true
   include_device_results: true
@@ -1964,7 +1963,6 @@
   type: napalm_getters_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: dict_included
   validation_section: results['result']
@@ -2088,7 +2086,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2163,7 +2161,6 @@
   type: netmiko_prompts_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -2197,7 +2194,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2272,7 +2269,6 @@
   type: netmiko_prompts_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -2470,7 +2466,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2487,6 +2483,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -2545,7 +2542,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -2580,7 +2576,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2597,6 +2593,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -2655,7 +2652,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -2690,7 +2686,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2707,6 +2703,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -2766,7 +2763,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -2797,7 +2793,7 @@
     '{{device.ip_address}}': {prefix_length: 24}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: eos
+  driver: device
   getters: [get_interfaces_ip]
   impacting: true
   include_device_results: true
@@ -2884,7 +2880,6 @@
   type: napalm_getters_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: success
   validation_method: dict_included
   validation_section: results['result']
@@ -3178,7 +3173,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: arista_eos
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -3195,6 +3190,7 @@
   iteration_devices_property: name
   iteration_values: '["Loopback11","Loopback15"]'
   iteration_variable_name: non_default_iteration_value_name
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -3254,7 +3250,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -3289,7 +3284,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: arista_eos
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -3306,6 +3301,7 @@
   iteration_devices_property: ip_address
   iteration_values: get_var('Interfaces 1', device=device.name)
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -3365,7 +3361,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -3400,7 +3395,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: arista_eos
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -3417,6 +3412,7 @@
   iteration_devices_property: name
   iteration_values: get_var('Interfaces 2')
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -3476,7 +3472,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -3940,7 +3935,7 @@
         For Test Netmiko Prompt Service, it is set to 2: it should run\r\nonce more\
         \ after the REST service.\r\n"
       positions: [288, -203]
-  last_modified: '2022-01-16 05:38:33.738332'
+  last_modified: '2022-07-12 05:30:46.993613'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -4484,7 +4479,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -4573,7 +4568,6 @@
   type: netmiko_backup_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -5118,7 +5112,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -5135,6 +5129,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -5193,7 +5188,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -5228,7 +5222,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -5245,6 +5239,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -5304,7 +5299,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -5339,7 +5333,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -5356,6 +5350,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -5414,7 +5409,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -5722,7 +5716,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -5739,6 +5733,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -5801,7 +5796,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -6110,7 +6104,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -6127,6 +6121,7 @@
   iteration_devices_property: name
   iteration_values: get_result("Set Variables for Iteration", device=device.name)["result"]["dict_iteration"]
   iteration_variable_name: command_dict
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -6188,7 +6183,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -7029,8 +7023,8 @@
       alignment: left
       content: "This service uses the password admin in the \"Jump on Connect\" section\
         \ :\r\nthis password must be set to \"admin\" after database reload."
-      positions: [392, 270]
-  last_modified: '2022-01-20 07:29:13.174233'
+      positions: [467, -1]
+  last_modified: '2022-07-21 12:13:43.982325'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -7070,7 +7064,8 @@
       & Chell, Ping Service, Jump on Connect mechanism] Unix shell: ping eNMS server
       from remote server', '[(R) Unix Command & Chell, Ping Service, Jump on Connect
       mechanism] Ping Washington', '[(R) Unix Command & Chell, Ping Service, Jump
-      on Connect mechanism] Validation: jump on server 2 from Washington']
+      on Connect mechanism] Validation: jump on server 2 from Washington', '[(R) Unix
+      Command & Chell, Ping Service, Jump on Connect mechanism] Ping Custom IP']
   shared: false
   skip: {}
   skip_query: ''
@@ -7087,7 +7082,6 @@
   vendor: ''
   waiting_time: 0
 - access_groups: ''
-  admin_approved: false
   admin_only: false
   command: ps -ef
   completion_time: 1
@@ -7139,9 +7133,9 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: &id258 [-177,
-      -94]
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': *id258
+    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [-142, -11]
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id258 [
+      -177, -94]
     'Regression Workflow M: Unix command & shell, ping, jump server': [-148, -126]
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id258
     Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id258
@@ -7234,9 +7228,9 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: &id259 [-113,
-      220]
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': *id259
+    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [-156, 196]
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id259 [
+      -113, 220]
     'Regression Workflow M: Unix command & shell, ping, jump server': [-76, 172]
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id259
     Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id259
@@ -7268,7 +7262,6 @@
   type: unix_shell_script_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: false
   validation_condition: success
   validation_method: text
   validation_section: results['result']
@@ -7296,6 +7289,7 @@
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
+  ip_address: ''
   iteration_devices: ''
   iteration_devices_property: name
   iteration_values: ''
@@ -7328,9 +7322,9 @@
   pools: [Everything]
   ports: '22'
   positions:
-    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: &id260 [200,
-      -71]
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': *id260
+    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [126, -10]
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id260 [
+      200, -71]
     'Regression Workflow M: Unix command & shell, ping, jump server': [182, -134]
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id260
     Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id260
@@ -7559,7 +7553,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: 'admin.*:'
@@ -7576,6 +7570,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh 192.168.56.103
   jump_on_connect: true
   jump_password: ''
@@ -7606,9 +7601,9 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: &id263 [358,
-      190]
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': *id263
+    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [428, 74]
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id263 [
+      358, 190]
     'Regression Workflow M: Unix command & shell, ping, jump server': [338, 138]
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id263
     Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id263
@@ -7637,7 +7632,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -7763,7 +7757,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -7780,6 +7774,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -7834,7 +7829,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -7879,7 +7873,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -7967,7 +7961,6 @@
   type: netmiko_backup_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -8246,7 +8239,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: cisco_iosxe
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8256,6 +8249,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   last_modified: '2020-07-15 02:01:30.590001'
   log_level: 1
   mail_recipient: ''
@@ -8311,7 +8305,6 @@
   type: scrapli_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -8340,7 +8333,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8350,6 +8343,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   last_modified: '2020-07-19 03:57:12.933011'
   log_level: 1
   mail_recipient: ''
@@ -8405,7 +8399,6 @@
   type: scrapli_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -8434,7 +8427,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: cisco_iosxe
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8444,6 +8437,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   last_modified: '2020-07-15 02:50:17.263309'
   log_level: 1
   mail_recipient: ''
@@ -8499,7 +8493,6 @@
   type: scrapli_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -8528,7 +8521,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8538,6 +8531,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   last_modified: '2020-07-19 03:57:21.922089'
   log_level: 1
   mail_recipient: ''
@@ -8593,7 +8587,6 @@
   type: scrapli_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -8718,7 +8711,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -8735,6 +8728,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -8794,7 +8788,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -8922,7 +8915,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -8939,6 +8932,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -9000,7 +8994,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -9129,7 +9122,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -9146,6 +9139,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -9205,7 +9199,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -10495,7 +10488,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -10512,6 +10505,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -10571,7 +10565,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -10895,7 +10888,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -10912,6 +10905,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -10972,7 +10966,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -11478,7 +11471,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -11495,6 +11488,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -11554,7 +11548,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -12733,7 +12726,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -12750,6 +12743,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -12804,7 +12798,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -12948,7 +12941,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -12965,6 +12958,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -13022,7 +13016,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -15059,7 +15052,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -15076,6 +15069,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -15134,7 +15128,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -16240,7 +16233,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -16257,6 +16250,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -16315,7 +16309,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -16350,7 +16343,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -16367,6 +16360,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -16425,7 +16419,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -16460,7 +16453,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -16477,6 +16470,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -16535,7 +16529,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -17024,7 +17017,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -17041,6 +17034,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -17098,7 +17092,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -17132,7 +17125,7 @@
   disable_md5: false
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   fast_cli: false
   file_system: ''
@@ -17198,7 +17191,6 @@
   type: netmiko_file_transfer_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -17231,7 +17223,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -17248,6 +17240,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -17305,7 +17298,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -17340,7 +17332,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -17357,6 +17349,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -17414,7 +17407,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -17449,7 +17441,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -17466,6 +17458,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -17523,7 +17516,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -17751,7 +17743,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -17768,6 +17760,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -17826,7 +17819,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -18606,7 +18598,7 @@
   target_devices: []
   target_pools: []
   time_between_retries: 10
-  type: data_extraction_service
+  type: data_processing_service
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none
@@ -18698,7 +18690,7 @@
   target_devices: []
   target_pools: []
   time_between_retries: 10
-  type: data_extraction_service
+  type: data_processing_service
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none
@@ -18790,7 +18782,7 @@
   target_devices: []
   target_pools: []
   time_between_retries: 10
-  type: data_extraction_service
+  type: data_processing_service
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none
@@ -18882,7 +18874,7 @@
   target_devices: []
   target_pools: []
   time_between_retries: 10
-  type: data_extraction_service
+  type: data_processing_service
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none
@@ -18974,7 +18966,7 @@
   target_devices: []
   target_pools: []
   time_between_retries: 10
-  type: data_extraction_service
+  type: data_processing_service
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none
@@ -19066,7 +19058,7 @@
   target_devices: []
   target_pools: []
   time_between_retries: 10
-  type: data_extraction_service
+  type: data_processing_service
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none
@@ -19158,7 +19150,7 @@
   target_devices: []
   target_pools: []
   time_between_retries: 10
-  type: data_extraction_service
+  type: data_processing_service
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none
@@ -19639,7 +19631,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -19656,6 +19648,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -19713,7 +19706,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -19844,7 +19836,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -19861,6 +19853,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -19918,7 +19911,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: true
   validation_condition: none
@@ -19953,7 +19945,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -19970,6 +19962,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -20027,7 +20020,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: true
   validation_condition: none
@@ -20062,7 +20054,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -20079,6 +20071,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -20136,7 +20129,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: true
   validation_condition: none
@@ -20171,7 +20163,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -20188,6 +20180,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -20245,7 +20238,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: true
   validation_condition: none
@@ -20367,7 +20359,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: eos
+  driver: device
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -20431,7 +20423,6 @@
   type: napalm_configuration_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -20459,7 +20450,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: eos
+  driver: device
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -20524,7 +20515,6 @@
   type: napalm_rollback_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -20557,7 +20547,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -20574,6 +20564,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -20637,7 +20628,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -20672,7 +20662,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -20689,6 +20679,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -20752,7 +20743,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: success
@@ -20902,7 +20892,7 @@
     is_alive: {is_alive: true}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: eos
+  driver: device
   getters: [is_alive]
   impacting: true
   include_device_results: true
@@ -20975,7 +20965,6 @@
   type: napalm_getters_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: success
   validation_method: dict_equal
   validation_section: results['result']
@@ -21003,7 +20992,7 @@
   dict_match: {fqdn: localhost, vendor: Arista}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: eos
+  driver: device
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -21076,7 +21065,6 @@
   type: napalm_getters_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: success
   validation_method: dict_included
   validation_section: results['result']
@@ -21104,7 +21092,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: eos
+  driver: device
   getters: [get_mac_address_table]
   impacting: true
   include_device_results: true
@@ -21177,7 +21165,6 @@
   type: napalm_getters_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: success
   validation_method: dict_equal
   validation_section: results['result']
@@ -21205,7 +21192,7 @@
   dict_match: {fqdn: localhost, uptime: '666', vendor: Arista}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: eos
+  driver: device
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -21278,7 +21265,6 @@
   type: napalm_getters_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: success
   validation_method: dict_included
   validation_section: results['result']
@@ -21435,7 +21421,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  driver: arista_eos
+  driver: device
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -21452,6 +21438,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ''
   jump_on_connect: false
   jump_password: ''
@@ -21520,7 +21507,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -21626,7 +21612,7 @@
   target_devices: []
   target_pools: []
   time_between_retries: 10
-  type: data_extraction_service
+  type: data_processing_service
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none
@@ -22275,7 +22261,7 @@
   target_devices: []
   target_pools: []
   time_between_retries: 10
-  type: data_extraction_service
+  type: data_processing_service
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none
@@ -22379,7 +22365,7 @@
   target_devices: []
   target_pools: []
   time_between_retries: 10
-  type: data_extraction_service
+  type: data_processing_service
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none
@@ -24889,6 +24875,7 @@
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
+  ip_address: ''
   iteration_devices: ''
   iteration_devices_property: name
   iteration_values: ''
@@ -27047,7 +27034,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -27064,6 +27051,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -27123,7 +27111,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -27158,7 +27145,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -27175,6 +27162,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -27234,7 +27222,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -27269,7 +27256,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: a10
+  driver: device
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -27286,6 +27273,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_password: ''
@@ -27345,7 +27333,6 @@
   type: netmiko_commands_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   use_genie: false
   use_textfsm: false
   validation_condition: none
@@ -30972,7 +30959,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31049,7 +31036,6 @@
   type: scrapli_backup_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -31091,7 +31077,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31169,7 +31155,6 @@
   type: scrapli_backup_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -31316,7 +31301,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31326,6 +31311,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   last_modified: '2022-05-20 13:52:25.523932'
   log_level: 1
   mail_recipient: ''
@@ -31378,7 +31364,6 @@
   type: scrapli_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -31407,7 +31392,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31417,6 +31402,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   last_modified: '2022-05-20 13:52:29.395990'
   log_level: 1
   mail_recipient: ''
@@ -31469,7 +31455,6 @@
   type: scrapli_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -31498,7 +31483,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  driver: arista_eos
+  driver: device
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31508,6 +31493,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jinja2_template: false
   last_modified: '2022-05-20 13:52:32.732435'
   log_level: 1
   mail_recipient: ''
@@ -31560,7 +31546,6 @@
   type: scrapli_service
   update_pools_after_running: false
   update_target_pools: false
-  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']
@@ -31603,9 +31588,9 @@
         \ the dictionary that is applied to the Jinja2 template.\r\nThe second service\
         \ does the Jinja2 conversion, and uses the validation \r\nmechanism to check\
         \ that the rendered template is correct."
-      positions: [206, -64]
+      positions: [148, -14]
       size: 14
-  last_modified: '2022-06-20 05:38:53.434918'
+  last_modified: '2022-07-25 08:00:16.671806'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -31641,7 +31626,8 @@
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Data Extraction Jinja2 Template]
-      Apply jinja2 Template', '[Data Extraction Jinja2 Template] Define Python Dictionary']
+      Apply jinja2 Template', '[Data Extraction Jinja2 Template] Define Input Variables',
+    '[Data Extraction Jinja2 Template] Apply TTP Template']
   shared: false
   skip: {}
   skip_query: ''
@@ -31684,7 +31670,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-06-20 05:38:15.611725'
+  last_modified: '2022-07-25 08:03:43.487197'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -31720,12 +31706,12 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    Data Extraction Jinja2 Template: [372, 47]
+    Data Extraction Jinja2 Template: [72, 107]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
-  query1: get_result("Define Python Dictionary")["result"]
+  query1: get_result("Define Input Variables")["result"]["jinja2"]
   query2: ''
   query3: ''
   reply_to: ''
@@ -31741,13 +31727,13 @@
   target_devices: []
   target_pools: []
   time_between_retries: 10
-  type: data_extraction_service
+  type: data_processing_service
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: success
   validation_method: text
-  validation_section: results["result"]["rendered_template"]["value"]
-  variable1: rendered_template
+  validation_section: results["result"]["Jinja2 value"]["value"]
+  variable1: Jinja2 value
   variable2: ''
   variable3: ''
   vendor: ''
@@ -31777,7 +31763,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-06-20 05:25:43.965804'
+  last_modified: '2022-07-25 07:58:35.248975'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -31785,7 +31771,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Data Extraction Jinja2 Template] Define Python Dictionary'
+  name: '[Data Extraction Jinja2 Template] Define Input Variables'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -31802,7 +31788,7 @@
     \ default=15)"
   pools: [Everything]
   positions:
-    Data Extraction Jinja2 Template: [-15, 41]
+    Data Extraction Jinja2 Template: [-266, 195]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -31810,17 +31796,20 @@
   reply_to: ''
   reserved: false
   run_method: once
-  scoped_name: Define Python Dictionary
+  scoped_name: Define Input Variables
   send_notification: false
   send_notification_method: mail
   shared: false
   skip: {}
   skip_query: ''
   skip_value: success
-  source_code: "result = {\r\n    \"hostname\": \"core-sw-waw-01\",\r\n    \"name_server_pri\"\
-    : \"1.1.1.1\",\r\n    \"name_server_sec\": \"8.8.8.8\",\r\n    \"ntp_server_pri\"\
-    : \"0.pool.ntp.org\",\r\n    \"ntp_server_sec\": \"1.pool.ntp.org\",\r\n}\r\n\
-    results[\"success\"] = True\r\nresults[\"result\"] = result"
+  source_code: "results[\"success\"] = True\r\nresults[\"result\"] = {\r\n  \t\"jinja2\"\
+    : {\r\n        \"hostname\": \"core-sw-waw-01\",\r\n        \"name_server_pri\"\
+    : \"1.1.1.1\",\r\n        \"name_server_sec\": \"8.8.8.8\",\r\n        \"ntp_server_pri\"\
+    : \"0.pool.ntp.org\",\r\n        \"ntp_server_sec\": \"1.pool.ntp.org\",\r\n\t\
+    },\r\n  \t\"ttp\": \"\"\"interface Loopback0\r\n description Router-id-loopback\r\
+    \n ip address 192.168.0.113/24\r\n!\r\ninterface Vlan778\r\n description CPE_Acces_Vlan\r\
+    \n ip address 2002::fd37/124\r\n ip vrf CPE1\r\n!\"\"\"\r\n}"
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -31830,5 +31819,722 @@
   validation_condition: none
   validation_method: text
   validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  category: Services
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  custom_property: Default Value
+  default_uuid: e1d27b95-ee07-44ab-9501-079bd14215fd
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    854236db-efe1-47cd-8be6-7e18374a43f8:
+      alignment: left
+      content: "is_string = isinstance(results[\"result\"], str)\r\nvalid_content\
+        \ = (\r\n  \"VRF\" in results[\"result\"]\r\n  and \"Loopback\" in results[\"\
+        result\"]\r\n  and \"vty\" in results[\"result\"]\r\n)\r\nresults[\"success\"\
+        ] = is_string and valid_content\r\n"
+      positions: [-116, -16]
+      size: 14
+    8b146c75-48a1-42d0-88e1-97f8c9a88ae4:
+      alignment: left
+      content: "is_list = isinstance(results[\"result\"], list)\r\nvalid_result =\
+        \ True\r\nfor index, vrf in enumerate((\"a\", \"b\", \"c\")):\r\n  if (\r\n\
+        \    f\"show vrf {vrf}\" not in results[\"commands\"]\r\n    or \"Protocols\"\
+        \ not in results[\"result\"][index]\r\n  ):\r\n    valid_result = False\r\n\
+        results[\"success\"] = is_list and valid_result"
+      positions: [310, 327]
+      size: 14
+    c1b2632b-1f52-4a63-84e0-73b56e179f03:
+      alignment: left
+      content: "is_list = isinstance(results[\"result\"], list)\r\nvalid_content =\
+        \ (\r\n  \"VRF\" in results[\"result\"][0]\r\n  and \"Loopback\" in results[\"\
+        result\"][1]\r\n  and \"vty\" in results[\"result\"][2]\r\n)\r\nresults[\"\
+        success\"] = is_list and valid_content"
+      positions: [-115, 329]
+      size: 14
+    d04ed45e-d3e6-49ce-94a6-b882b3b2af44:
+      alignment: left
+      content: "is_string = isinstance(results[\"result\"], str)\r\nvalid_commands\
+        \ = True\r\nfor vrf in (\"a\", \"b\", \"c\"):\r\n  if f\"show vrf {vrf}\"\
+        \ not in results[\"commands\"]:\r\n    valid_commands = False\r\nvalid_content\
+        \ = results[\"result\"].count(\"Interfaces\") == 3\r\nresults[\"success\"\
+        ] = is_string and valid_commands and valid_content"
+      positions: [337, -13]
+      size: 14
+  last_modified: '2022-07-13 03:39:11.984525'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: (R) Scrapli and Netmiko Multiple Commands and Jinja2
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: (R) Scrapli and Netmiko Multiple Commands and Jinja2
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[(R) Scrapli and Netmiko Multiple
+      Commands and Jinja2] Scrapli Multiple Commands (text)', '[(R) Scrapli and Netmiko
+      Multiple Commands and Jinja2] Scrapli Multiple Commands (list)', '[(R) Scrapli
+      and Netmiko Multiple Commands and Jinja2] Netmiko Jinja 2 conversion (text)',
+    '[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Netmiko Jinja 2 conversion
+      (list)']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: [Washington]
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  close_connection: false
+  commands: "show vrf\r\nshow ip int br\r\nshow users"
+  completion_time: 1
+  connection_name: default
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_uuid: 8733ec48-f66a-4e3c-9a9c-5ac7ddea5bd4
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: device
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  is_configuration: false
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jinja2_template: false
+  last_modified: '2022-07-13 02:39:00.258456'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Scrapli Multiple Commands
+    (text)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-142, 93]
+  postprocessing: "is_string = isinstance(results[\"result\"], str)\r\nvalid_content\
+    \ = (\r\n  \"VRF\" in results[\"result\"]\r\n  and \"Loopback\" in results[\"\
+    result\"]\r\n  and \"vty\" in results[\"result\"]\r\n)\r\nresults[\"success\"\
+    ] = is_string and valid_content\r\n"
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  reply_to: ''
+  reserved: false
+  results_as_list: false
+  run_method: per_device
+  scoped_name: Scrapli Multiple Commands (text)
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout_ops: 30.0
+  timeout_socket: 15.0
+  timeout_transport: 30.0
+  transport: system
+  type: scrapli_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  close_connection: false
+  commands: "show vrf\r\nshow ip int br\r\nshow users"
+  completion_time: 1
+  connection_name: default
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_uuid: 8733ec48-f66a-4e3c-9a9c-5ac7ddea5bd4
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: device
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  is_configuration: false
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jinja2_template: false
+  last_modified: '2022-07-13 02:39:38.241424'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Scrapli Multiple Commands
+    (list)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-147, 204]
+  postprocessing: "is_list = isinstance(results[\"result\"], list)\r\nvalid_content\
+    \ = (\r\n  \"VRF\" in results[\"result\"][0]\r\n  and \"Loopback\" in results[\"\
+    result\"][1]\r\n  and \"vty\" in results[\"result\"][2]\r\n)\r\nresults[\"success\"\
+    ] = is_list and valid_content\r\n"
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  reply_to: ''
+  reserved: false
+  results_as_list: true
+  run_method: per_device
+  scoped_name: Scrapli Multiple Commands (list)
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout_ops: 30.0
+  timeout_socket: 15.0
+  timeout_transport: 30.0
+  transport: system
+  type: scrapli_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  auto_find_prompt: true
+  close_connection: false
+  commands: "{%- for vrf in (\"a\", \"b\", \"c\") -%}\r\nshow vrf {{ vrf }}\r\n{%\
+    \ endfor %}"
+  completion_time: 1
+  config_mode: false
+  config_mode_command: ''
+  connection_name: default
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_uuid: 85001988-1b1f-4feb-9dee-12a8e994dad9
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: device
+  enable_mode: true
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jinja2_template: true
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_password: ''
+  jump_username: ''
+  last_modified: '2022-07-13 03:21:34.458029'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Netmiko Jinja 2 conversion
+    (text)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [273, 88]
+  postprocessing: "is_string = isinstance(results[\"result\"], str)\r\nvalid_commands\
+    \ = True\r\nfor vrf in (\"a\", \"b\", \"c\"):\r\n  if f\"show vrf {vrf}\" not\
+    \ in results[\"commands\"]:\r\n    valid_commands = False\r\nvalid_content = results[\"\
+    result\"].count(\"Interfaces\") == 3\r\nresults[\"success\"] = is_string and valid_commands\
+    \ and valid_content\r\n"
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  reply_to: ''
+  reserved: false
+  results_as_list: false
+  run_method: per_device
+  scoped_name: Netmiko Jinja 2 conversion (text)
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_commands_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_genie: false
+  use_textfsm: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  auto_find_prompt: true
+  close_connection: false
+  commands: "{%- for vrf in (\"a\", \"b\", \"c\") -%}\r\nshow vrf {{ vrf }}\r\n{%\
+    \ endfor %}"
+  completion_time: 1
+  config_mode: false
+  config_mode_command: ''
+  connection_name: default
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_uuid: 85001988-1b1f-4feb-9dee-12a8e994dad9
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: device
+  enable_mode: true
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jinja2_template: true
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_password: ''
+  jump_username: ''
+  last_modified: '2022-07-13 03:33:28.643596'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Netmiko Jinja 2 conversion
+    (list)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [273, 198]
+  postprocessing: "is_list = isinstance(results[\"result\"], list)\r\nvalid_result\
+    \ = True\r\nfor index, vrf in enumerate((\"a\", \"b\", \"c\")):\r\n  if (\r\n\
+    \    f\"show vrf {vrf}\" not in results[\"commands\"]\r\n    or \"Protocols\"\
+    \ not in results[\"result\"][index]\r\n  ):\r\n    valid_result = False\r\nresults[\"\
+    success\"] = is_list and valid_result"
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  reply_to: ''
+  reserved: false
+  results_as_list: true
+  run_method: per_device
+  scoped_name: Netmiko Jinja 2 conversion (list)
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_commands_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_genie: false
+  use_textfsm: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: ''
+  admin_only: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  count: 5
+  creator: admin
+  credential_type: any
+  default_uuid: 2caab1c2-7ef6-4977-ba4a-4cb6eef438ec
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  ip_address: 127.0.{{ "0" + ".1"}}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2022-07-21 12:13:16.912535'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[(R) Unix Command & Chell, Ping Service, Jump on Connect mechanism] Ping
+    Custom IP'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  packet_size: 56
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  ports: '22'
+  positions:
+    (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [155, 189]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  priority: 11
+  protocol: ICMP
+  reply_to: ''
+  reserved: false
+  run_method: once
+  scoped_name: Ping Custom IP
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 2
+  ttl: 60
+  type: ping_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  admin_only: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_uuid: 479273ac-164c-46fd-a720-1775f95cb5da
+  definition: Definition
+  delete_spaces_before_matching: true
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2022-07-25 08:13:53.939594'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  match1: "interface {{ interface }}\r\n ip address {{ ip }}/{{ mask }}\r\n description\
+    \ {{ description }}\r\n ip vrf {{ vrf }}"
+  match2: ''
+  match3: ''
+  match_type1: ttp
+  match_type2: none
+  match_type3: none
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Data Extraction Jinja2 Template] Apply TTP Template'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  operation1: __setitem__
+  operation2: __setitem__
+  operation3: __setitem__
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: [Everything]
+  positions:
+    Data Extraction Jinja2 Template: [80, 246]
+  postprocessing: "results[\"success\"] = results[\"result\"][\"TTP value\"][\"value\"\
+    ] == [\r\n    [\r\n        {\r\n            \"description\": \"Router-id-loopback\"\
+    ,\r\n            \"interface\": \"Loopback0\",\r\n            \"ip\": \"192.168.0.113\"\
+    ,\r\n            \"mask\": \"24\"\r\n        },\r\n        {\r\n            \"\
+    description\": \"CPE_Acces_Vlan\",\r\n            \"interface\": \"Vlan778\",\r\
+    \n            \"ip\": \"2002::fd37\",\r\n            \"mask\": \"124\",\r\n  \
+    \          \"vrf\": \"CPE1\"\r\n        }\r\n    ]\r\n]"
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  query1: get_result("Define Input Variables")["result"]["ttp"]
+  query2: ''
+  query3: ''
+  reply_to: ''
+  reserved: false
+  run_method: once
+  scoped_name: Apply TTP Template
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: data_processing_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: ''
+  variable1: TTP value
+  variable2: ''
+  variable3: ''
   vendor: ''
   waiting_time: 0

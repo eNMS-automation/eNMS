@@ -70,26 +70,16 @@ export function switchToNetwork(path, direction) {
     $("#up-arrow").addClass("disabled");
   }
   moveHistory(path, direction);
-  if (!path && page == "network_table") {
-    $("#network-filtering").val("");
-    tableInstances["network"].table.page(0).ajax.reload(null, false);
-    return;
-  }
   $("#automatic-layout-btn").removeClass("active");
   const [networkId] = currentPath.split(">").slice(-1);
   call({
     url: `/get/network/${networkId}`,
     callback: function (newNetwork) {
       network = newNetwork;
-      if (page == "network_builder") {
-        localStorage.setItem("path", path);
-        if (network) localStorage.setItem("network", JSON.stringify(network));
-        displayNetwork(network);
-        switchMode(currentMode, true);
-      } else {
-        $("#network-filtering").val(path ? network.name : "");
-        tableInstances["network"].table.page(0).ajax.reload(null, false);
-      }
+      localStorage.setItem("network_path", path);
+      if (network) localStorage.setItem("network", JSON.stringify(network));
+      displayNetwork(network);
+      switchMode(currentMode, true);
     },
   });
 }
@@ -301,6 +291,17 @@ export function drawNetworkEdge(link) {
       roundness: (parallelLinks[key] * (flip ? -1 : 1)) / 10,
     },
   };
+}
+
+export function resetNetworkDisplay() {
+  let nodeUpdates = [];
+  network.nodes.forEach((node) => {
+    nodeUpdates.push({
+      id: node.id,
+      image: `/static/img/network/default/${node.icon}.gif`,
+    });
+  });
+  if (nodes) nodes.update(nodeUpdates);
 }
 
 configureNamespace("networkBuilder", [addObjectsToNetwork, filterNetworkTable]);

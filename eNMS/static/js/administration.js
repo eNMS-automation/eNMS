@@ -12,8 +12,42 @@ import {
   jsonEditors,
   notify,
   openPanel,
+  processInstance,
 } from "./base.js";
-import { tables } from "./table.js";
+import { refreshTable, tables, tableInstances } from "./table.js";
+
+export const defaultFolder = settings.paths.file || `${applicationPath}/files`;
+export let folderPath = localStorage.getItem("folderPath") || defaultFolder;
+
+function displayFiles() {
+  if (tableInstances["file"]) {
+    return notify("The files table is already displayed.", "error", 5);
+  }
+  openPanel({
+    name: "files",
+    size: "1000 600",
+    content: `
+      <form id="search-form-file" style="margin: 15px">
+        <div id="tooltip-overlay" class="overlay"></div>
+        <nav
+          id="controls-file"
+          class="navbar navbar-default nav-controls"
+          role="navigation"
+        ></nav>
+        <table
+          id="table-file"
+          style="margin-top: 10px;"
+          class="table table-striped table-bordered table-hover"
+          cellspacing="0"
+          width="100%"
+        ></table>
+      </form>`,
+    title: "Files",
+    callback: function () {
+      new tables["file"]();
+    },
+  });
+}
 
 function saveSettings() {
   const newSettings = jsonEditors.settings.get();
@@ -40,6 +74,38 @@ function showSettings() {
       jsonEditors.settings.set(settings);
     },
   });
+}
+
+export function displayFolderPath() {
+  const htmlPath = folderPath
+    .split("/")
+    .slice(1)
+    .map((value, index) => {
+      let folder = `${index ? "<b> / </b>" : ""}
+      <button type="button" class="btn btn-xs btn-primary">
+        ${value}
+      </button>
+      `;
+      return folder;
+    })
+    .join("");
+  $("#current-folder-path").html(`<b>Current Folder :</b>${htmlPath}`);
+}
+
+function enterFolder(folder) {
+  if (folder) {
+    folderPath = `${folderPath}/${folder}`;
+  } else {
+    folderPath = folderPath.split("/").slice(0, -1).join("/");
+  }
+  localStorage.setItem("folderPath", folderPath);
+  refreshTable("file");
+  if (folder) {
+    $("#upward-folder-btn").removeClass("disabled");
+  } else if (folderPath == defaultFolder) {
+    $("#upward-folder-btn").addClass("disabled");
+  }
+  displayFolderPath();
 }
 
 export function openDebugPanel() {
@@ -82,7 +148,7 @@ function getClusterStatus() {
   call({
     url: "/get_cluster_status",
     callback: function () {
-      tables.server.table.ajax.reload(null, false);
+      refreshTable("server");
       setTimeout(getClusterStatus, 15000);
     },
   });
@@ -95,6 +161,16 @@ function migrationsExport() {
     form: "migration-form",
     callback: function () {
       notify("Migration Export successful.", "success", 5, true);
+    },
+  });
+}
+
+function scanFolder() {
+  call({
+    url: `/scan_folder/${folderPath.replace(/\//g, ">")}`,
+    callback: function () {
+      refreshTable("file");
+      notify("Scan successful.", "success", 5, true);
     },
   });
 }
@@ -175,29 +251,22 @@ function scanCluster() {
   });
 }
 
-function deleteFile(file) {
+function editFile(filename, filepath) {
   call({
-    url: `/delete_file/${file.data.path.replace(/\//g, ">")}`,
-    callback: function () {
-      $("#files-tree").jstree().delete_node(file.id);
-      notify(`File ${file.data.name} successfully deleted.`, "success", 5, true);
-    },
-  });
-}
-
-function editFile(file) {
-  const filepath = file.data.path.replace(/\//g, ">");
-  call({
-    url: `/edit_file/${filepath}`,
+    url: `/edit_file/${filename}`,
     callback: function (content) {
+      if (content.error) {
+        refreshTable("file");
+        return notify(content.error, "error", 5);
+      }
       openPanel({
-        name: "file",
-        title: `Edit ${file.data.path}`,
-        id: filepath,
+        name: "file_editor",
+        title: `Edit ${filepath}`,
+        id: filename,
         callback: () => {
-          const display = document.getElementById(`file_content-${filepath}`);
+          const display = document.getElementById(`file_content-${filename}`);
           // eslint-disable-next-line new-cap
-          let fileEditor = (editors[filepath] = CodeMirror.fromTextArea(display, {
+          let fileEditor = (editors[filename] = CodeMirror.fromTextArea(display, {
             lineWrapping: true,
             lineNumbers: true,
             theme: "cobalt",
@@ -220,16 +289,14 @@ function saveFile(file) {
     form: `file-content-form-${file}`,
     callback: function () {
       notify(`File ${file} successfully saved.`, "success", 5, true);
-      $(`[id="file-${file}"`).remove();
+      $(`[id="file_editor-${file}"`).remove();
+      refreshTable("file");
     },
   });
 }
 
-function createNewFolder() {
-  notify("Not implemented yet.", "error", 5);
-}
-
 function showFileUploadPanel(folder) {
+  if (!folder) folder = folderPath;
   const path = folder.replace(/\//g, ">");
   openPanel({
     name: "upload_files",
@@ -246,103 +313,49 @@ function showFileUploadPanel(folder) {
         dropzone.processQueue();
         notify("Files successfully uploaded.", "success", 5, true);
         $(`[id="upload_files-${path}"]`).remove();
+        setTimeout(() => refreshTable("file"), 600);
       });
     },
   });
 }
 
-function displayFiles() {
+export function showFolderPanel(id) {
+  if (id) return;
+  $(`#folder-path`).prop("readonly", true);
+  $(`#folder-filename`).prop("readonly", false);
+}
+
+function showProfile() {
   openPanel({
-    name: "files",
-    title: "Files",
-    content: `
-      <nav
-        class="navbar navbar-default nav-controls"
-        role="navigation"
-        style="margin-top: 5px;"
-      >
-        <button
-          type="button"
-          class="btn btn-primary"
-          onclick="eNMS.administration.createNewFolder()"
-        >
-          <span class="glyphicon glyphicon-folder-open"></span>
-        </button>
-      </nav>
-      <div id="files-tree" style="height: 500px;"></div>`,
+    name: "profile",
+    title: "Profile",
+    id: user.id,
+    callback: () => {
+      call({
+        url: `/get_properties/user/${user.id}`,
+        callback: function (user) {
+          for (const [page, endpoint] of Object.entries(rbac.all_pages)) {
+            if (!user.is_admin && !user.pages.includes(page)) continue;
+            const option = `<option value='${endpoint}'>${page}</option>`;
+            $(`#profile-landing_page-${user.id}`).append(option);
+          }
+          $(`#profile-landing_page-${user.id}`)
+            .val(user.landing_page)
+            .selectpicker("refresh");
+          processInstance("profile", user);
+        },
+      });
+    },
+  });
+}
+
+function saveProfile() {
+  call({
+    url: "/save_profile",
+    form: `profile-form-${user.id}`,
     callback: function () {
-      $("#files-tree").jstree({
-        core: {
-          animation: 200,
-          themes: { stripes: true, variant: "large" },
-          check_callback: true,
-          data: {
-            url: function (node) {
-              const path = node.id == "#" ? "root" : node.data.path;
-              return `/get_tree_files/${path.replace(/\//g, ">")}`;
-            },
-            type: "POST",
-          },
-        },
-        plugins: ["html_row", "state", "types", "wholerow"],
-        types: {
-          file: {
-            icon: "jstree-icon jstree-file",
-          },
-        },
-        html_row: {
-          default: function (el, node) {
-            if (!node) return;
-            if (node.type == "file") {
-              const data = JSON.stringify(node);
-              $(el).find("a").append(`
-                <div style="position: absolute; top: 0px; right: 200px">
-                  ${node.data.modified}
-                </div>
-                <div style="position: absolute; top: 0px; right: 50px">
-                  <button
-                    type="button"
-                    class="btn btn-xs btn-primary"
-                    onclick='eNMS.administration.editFile(${data})'
-                  >
-                    <span class="glyphicon glyphicon-edit"></span>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-xs btn-info"
-                    onclick="location.href='/download_file/${node.data.path}'"
-                  >
-                    <span class="glyphicon glyphicon-download"></span>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-xs btn-danger"
-                    onclick='eNMS.administration.deleteFile(${data})'
-                  >
-                    <span class="glyphicon glyphicon-trash"></span>
-                  </button>
-                </div>
-              `);
-            } else {
-              $(el).find("a").append(`
-                <div style="position: absolute; top: 0px; right: 50px">
-                  <button type="button"
-                    class="btn btn-xs btn-primary"
-                    onclick="eNMS.administration.showFileUploadPanel(
-                      '${node.data.path}'
-                    )"
-                  >
-                    <span class="glyphicon glyphicon-plus"></span>
-                  </button>
-                </div>
-                `);
-            }
-          },
-        },
-      });
-      $("#files-tree").on("ready.jstree", function () {
-        $(this).off("click.jstree", ".jstree-anchor");
-      });
+      notify("Profile saved.", "success", 5, true);
+      $(`#profile-${user.id}`).remove();
     },
   });
 }
@@ -363,11 +376,10 @@ export function showCredentialPanel(id) {
 }
 
 configureNamespace("administration", [
-  createNewFolder,
   databaseDeletion,
-  deleteFile,
   displayFiles,
   editFile,
+  enterFolder,
   getClusterStatus,
   getGitContent,
   migrationsExport,
@@ -376,8 +388,11 @@ configureNamespace("administration", [
   runDebugCode,
   saveSettings,
   saveFile,
+  saveProfile,
   scanCluster,
+  scanFolder,
   showSettings,
   showFileUploadPanel,
   showMigrationPanel,
+  showProfile,
 ]);

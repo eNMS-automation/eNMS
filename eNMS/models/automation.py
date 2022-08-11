@@ -1,5 +1,4 @@
 from copy import deepcopy
-from this import d
 from flask_login import current_user
 from functools import wraps
 from requests import get, post
@@ -28,6 +27,7 @@ class Service(AbstractBase):
     __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    path = db.Column(db.TinyString)
     creator = db.Column(db.SmallString)
     access_groups = db.Column(db.LargeString)
     admin_only = db.Column(Boolean, default=False)
@@ -129,8 +129,11 @@ class Service(AbstractBase):
     def update(self, **kwargs):
         if self.positions and "positions" in kwargs:
             kwargs["positions"] = {**self.positions, **kwargs["positions"]}
+        self.path = str(self.id)
         super().update(**kwargs)
         self.update_originals()
+        if len(self.workflows) == 1:
+            self.path = f"{self.workflows[0].path}>{self.id}"
         if not kwargs.get("migration_import"):
             self.set_name()
 
@@ -212,10 +215,10 @@ class Service(AbstractBase):
             workflow = f"[{self.workflows[0].name}] "
         self.name = f"{workflow}{name or self.scoped_name}"
 
-    def neighbors(self, workflow, direction, subtype):
-        for edge in getattr(self, f"{direction}s"):
+    def neighbors(self, workflow, subtype):
+        for edge in self.destinations:
             if edge.subtype == subtype and edge.workflow.name == workflow.name:
-                yield getattr(edge, direction), edge
+                yield edge
 
 
 class ConnectionService(Service):
@@ -312,7 +315,7 @@ class Run(AbstractBase):
     private = True
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    restart_run_id = db.Column(Integer, ForeignKey("run.id"))
+    restart_run_id = db.Column(Integer, ForeignKey("run.id", ondelete="SET NULL"))
     restart_run = relationship(
         "Run", remote_side=[id], foreign_keys="Run.restart_run_id"
     )
@@ -440,7 +443,7 @@ class Run(AbstractBase):
             restart_run=self.restart_run,
             parameterized_run=self.parameterized_run,
             parent_runtime=self.runtime,
-            path=str(self.service.id),
+            path=self.path,
             placeholder=self.placeholder,
             properties=self.properties,
             start_services=self.start_services,

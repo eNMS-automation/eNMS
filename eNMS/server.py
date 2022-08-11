@@ -17,6 +17,7 @@ from functools import wraps
 from importlib import import_module
 from logging import info
 from os import getenv
+from tarfile import open as open_tar
 from traceback import format_exc
 from werkzeug.exceptions import Forbidden, NotFound
 
@@ -95,9 +96,10 @@ class Server(Flask):
     def configure_context_processor(self):
         @self.context_processor
         def inject_properties():
-            user = current_user.serialized if current_user.is_authenticated else None
             return {
-                "user": user,
+                "user": current_user.get_properties()
+                if current_user.is_authenticated
+                else None,
                 "time": str(vs.get_time()),
                 "parameters": db.fetch("parameters").serialized,
                 **vs.template_context,
@@ -222,14 +224,14 @@ class Server(Flask):
                 finally:
                     env.log("info" if success else "warning", log, logger="security")
                     if success:
-                        url = url_for("blueprint.route", page="dashboard")
+                        url = url_for("blueprint.route", page=current_user.landing_page)
                         return redirect(request.args.get("next_url", url))
                     else:
                         abort(403)
             if not current_user.is_authenticated:
                 login_form = vs.form_class["login"](request.form)
                 return render_template("login.html", login_form=login_form)
-            return redirect(url_for("blueprint.route", page="dashboard"))
+            return redirect(url_for("blueprint.route", page=current_user.landing_page))
 
         @blueprint.route("/dashboard")
         @self.process_requests
@@ -260,9 +262,12 @@ class Server(Flask):
             return render_template("visualization.html", endpoint="geographical_view")
 
         @blueprint.route("/<type>_builder")
+        @blueprint.route("/<type>_builder/<link_path>")
+        @blueprint.route("/<type>_builder/<link_path>/<link_runtime>")
         @self.process_requests
-        def builder(type):
-            return render_template(f"{type}_builder.html", endpoint=f"{type}_builder")
+        def builder(type, **kwargs):
+            endpoint = f"{type}_builder"
+            return render_template(f"{endpoint}.html", endpoint=endpoint, **kwargs)
 
         @blueprint.route("/<form_type>_form")
         @self.process_requests
@@ -311,9 +316,13 @@ class Server(Flask):
                 return "No Results Found"
             return f"<pre>{vs.dict_to_string(results_dict)}</pre>"
 
-        @blueprint.route("/download_file/<path:path>")
+        @blueprint.route("/download/<type>/<path:path>")
         @self.process_requests
-        def download_file(path):
+        def download(type, path):
+            if type == "folder":
+                with open_tar(f"/{path}.tgz", "w:gz") as tar:
+                    tar.add(f"/{path}", arcname="")
+                path = f"/{path}.tgz"
             return send_file(f"/{path}", as_attachment=True)
 
         @blueprint.route("/export_service/<int:id>")

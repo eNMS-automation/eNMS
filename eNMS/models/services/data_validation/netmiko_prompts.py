@@ -23,7 +23,6 @@ class NetmikoPromptsService(ConnectionService):
     confirmation3 = db.Column(db.LargeString)
     response3 = db.Column(db.SmallString)
     driver = db.Column(db.SmallString)
-    use_device_driver = db.Column(Boolean, default=True)
     fast_cli = db.Column(Boolean, default=False)
     timeout = db.Column(Integer, default=10.0)
     delay_factor = db.Column(Float, default=1.0)

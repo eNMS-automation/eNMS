@@ -58,7 +58,6 @@
     /stop_run, /scheduler_action, /task_action, /topology_import, /update, /update_pool,
     /update_all_pools, /upload_files, /view_filtering, /web_connection, /process_form_data]
   type: access
-  upper_menu: [Files]
   user_pools: [All users]
 - access_pools: [Device 2K, Device 4K, Device 6K, Device 18K, Device 8K, 'Device [3K
       - 5K]', 'Device [17K - 19K]']
@@ -71,7 +70,6 @@
   pages: []
   post_requests: []
   type: access
-  upper_menu: []
   user_pools: [All users]
 - access_pools: [All services]
   access_type: "['Read']"
@@ -83,5 +81,4 @@
   pages: []
   post_requests: []
   type: access
-  upper_menu: []
   user_pools: [All users]

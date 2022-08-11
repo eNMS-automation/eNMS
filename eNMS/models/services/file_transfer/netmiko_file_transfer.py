@@ -21,7 +21,6 @@ class NetmikoFileTransferService(ConnectionService):
     direction = db.Column(db.SmallString)
     disable_md5 = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
-    use_device_driver = db.Column(Boolean, default=True)
     file_system = db.Column(db.SmallString)
     inline_transfer = db.Column(Boolean, default=False)
     overwrite_file = db.Column(Boolean, default=False)

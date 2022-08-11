@@ -6,8 +6,7 @@ statistics.
 
     !!! note
 
-    The iosxr driver does not support ping, but the ios driver can be selected in
-    its place by deselecting `Use_device_driver`.
+    The iosxr driver does not support ping, but the ios driver can be selected instead.
 
 Configuration parameters for creating this service instance:
 

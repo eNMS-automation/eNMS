@@ -20,9 +20,14 @@ from requests import Session as RequestSession
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from smtplib import SMTP
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm.exc import StaleDataError
 from sys import path as sys_path
+from threading import Thread
 from traceback import format_exc
 from warnings import warn
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
 
 try:
     from hvac import Client as VaultClient
@@ -56,7 +61,38 @@ class Environment:
         self.init_logs()
         self.init_redis()
         self.init_connection_pools()
+        self.file_path = vs.settings["paths"]["files"] or str(vs.path / "files")
+        main_thread = Thread(target=self.monitor_filesystem)
+        main_thread.daemon = True
+        main_thread.start()
         self.ssh_port = -1
+
+    def monitor_filesystem(self):
+        class Handler(FileSystemEventHandler):
+            def on_any_event(self, event):
+                filetype = "folder" if event.is_directory else "file"
+                if event.event_type in ("deleted", "modified", "moved"):
+                    file = db.fetch(filetype, path=event.src_path, allow_none=True)
+                    if file and event.event_type == "moved":
+                        file.update(path=event.dest_path, move_file=False)
+                elif event.event_type == "created":
+                    file = db.factory(filetype, path=event.src_path)
+                else:
+                    return
+                if not file:
+                    return
+                file.status = event.event_type.capitalize()
+                log = f"File {event.src_path} {event.event_type} (watchdog)."
+                env.log("info", log, change_log=True)
+                try:
+                    db.session.commit()
+                except (StaleDataError, IntegrityError):
+                    db.session.rollback()
+
+        event_handler = Handler()
+        observer = Observer()
+        observer.schedule(event_handler, path=self.file_path, recursive=True)
+        observer.start()
 
     def authenticate_user(self, **kwargs):
         name, password = kwargs["username"], kwargs["password"]
@@ -155,7 +191,12 @@ class Environment:
 
     def init_redis(self):
         host = getenv("REDIS_ADDR")
-        self.redis_queue = Redis(host=host, **vs.settings["redis"]) if host else None
+        if not host:
+            self.redis_queue = None
+        else:
+            self.redis_queue = Redis(host=host, **vs.settings["redis"]["config"])
+            if vs.settings["redis"]["flush_on_restart"]:
+                self.redis_queue.flushdb()
 
     def init_vault_client(self):
         url = getenv("VAULT_ADDR", "http://127.0.0.1:8200")
@@ -168,7 +209,7 @@ class Environment:
         if not self.redis_queue:
             return {"error": "This endpoint requires the use of a Redis queue."}
         workers = defaultdict(lambda: {"jobs": {}, "info": {}})
-        keys = env.redis("keys", f"workers/*")
+        keys = env.redis("keys", "workers/*")
         if not keys:
             return {"error": "No data available in the Redis queue."}
         data = dict(zip(keys, env.redis("mget", *keys)))

@@ -101,7 +101,7 @@ operation_choices = (
 )
 
 match_label = (
-    "Regular Expression / TextFSM Template Text " "/ Jinja2 Template / TTP Template"
+    "Regular Expression / TextFSM Template Text / Jinja2 Template / TTP Template"
 )
 
 

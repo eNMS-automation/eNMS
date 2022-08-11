@@ -1,3 +1,4 @@
+from jinja2 import Template
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from traceback import format_exc
 from wtforms.widgets import TextArea
@@ -17,9 +18,9 @@ class NetmikoValidationService(ConnectionService):
     enable_mode = db.Column(Boolean, default=True)
     config_mode = db.Column(Boolean, default=False)
     commands = db.Column(db.LargeString)
+    jinja2_template = db.Column(Boolean, default=False)
     results_as_list = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
-    use_device_driver = db.Column(Boolean, default=True)
     use_textfsm = db.Column(Boolean, default=False)
     use_genie = db.Column(Boolean, default=False)
     fast_cli = db.Column(Boolean, default=False)
@@ -44,6 +45,8 @@ class NetmikoValidationService(ConnectionService):
 
     def job(self, run, device):
         commands = run.sub(run.commands, locals())
+        if self.jinja2_template:
+            commands = Template(commands).render(locals())
         log_command = run.commands if "get_credential" in run.commands else commands
         netmiko_connection = run.netmiko_connection(device)
         try:
@@ -87,7 +90,10 @@ class NetmikoValidationService(ConnectionService):
 class NetmikoValidationForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_commands_service")
     commands = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
-    results_as_list = BooleanField("Results As List")
+    jinja2_template = BooleanField(
+        "Interpret Commands as Jinja2 Template", default=False
+    )
+    results_as_list = BooleanField("Results As List", default=False)
     use_textfsm = BooleanField("Use TextFSM", default=False)
     use_genie = BooleanField("Use Genie / PyATS", default=False)
     expect_string = StringField(substitution=True, help="netmiko/expect_string")
@@ -97,7 +103,7 @@ class NetmikoValidationForm(NetmikoForm):
     strip_command = BooleanField(default=True, help="netmiko/strip_command")
     groups = {
         "Main Parameters": {
-            "commands": ["commands", "results_as_list"],
+            "commands": ["commands", "jinja2_template", "results_as_list"],
             "default": "expanded",
         },
         **NetmikoForm.groups,

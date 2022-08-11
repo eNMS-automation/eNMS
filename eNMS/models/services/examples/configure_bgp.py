@@ -20,8 +20,7 @@ class ConfigureBgpService(ConnectionService):
     remote_as = db.Column(Integer, default=0)
     vrf_name = db.Column(db.SmallString)
     optional_args = db.Column(db.Dict)
-    driver = "ios"
-    use_device_driver = True
+    driver = "device"
     timeout = 1
 
     __mapper_args__ = {"polymorphic_identity": "configure_bgp_service"}

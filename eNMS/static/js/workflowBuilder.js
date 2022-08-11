@@ -17,8 +17,8 @@ import {
   notify,
   openPanel,
   showInstancePanel,
-  userIsActive,
   showConfirmationPanel,
+  userIsActive,
 } from "./base.js";
 import {
   configureGraph,
@@ -32,7 +32,7 @@ import {
   switchMode,
   updateBuilderBindings,
 } from "./builder.js";
-import { clearSearch, tables, tableInstances } from "./table.js";
+import { clearSearch, tables } from "./table.js";
 
 const options = {
   interaction: {
@@ -65,7 +65,7 @@ const options = {
 
 export let ends = new Set();
 export let workflow = JSON.parse(localStorage.getItem("workflow"));
-export let currentRuntime;
+export let currentRuntime = linkRuntime;
 
 let currentRun;
 let graph;
@@ -109,12 +109,14 @@ export function displayWorkflow(workflowData) {
       showInstancePanel(node.type, node.id);
     }
   });
+  const exportLocation = `location.href='/export_service/${workflow.id}'`;
+  $("#export-workflow-btn").attr("onclick", exportLocation);
   displayWorkflowState(workflowData);
 }
 
 function updateRuntimes(result) {
   currentPlaceholder = result.state?.[currentPath]?.placeholder;
-  let currentRuntime = $("#current-runtime").val();
+  if (!currentRuntime) currentRuntime = $("#current-runtime").val();
   const displayedRuntimes = result.runtimes.map((runtime) => runtime[0]);
   if (
     runtimeDisplayFlip &&
@@ -147,11 +149,6 @@ export function flipRuntimeDisplay(display) {
   localStorage.setItem("runtimeDisplay", runtimeDisplay);
   $("#runtime-display-icon").attr("class", `fa fa-${runtimeDisplay}`);
   if (!display) switchToWorkflow(currentPath);
-}
-
-function filterWorkflowTable(tableId, path) {
-  clearSearch(tableId);
-  switchToWorkflow(path);
 }
 
 export function showServicePanel(type, id, mode, tableId) {
@@ -195,35 +192,25 @@ export const switchToWorkflow = function (path, direction, runtime, selection) {
   }
   setPath(path);
   moveHistory(path, direction);
-  if (!path && page == "service_table") {
-    $("#workflow-filtering").val("");
-    tableInstances["service"].table.page(0).ajax.reload(null, false);
-    return;
-  }
   call({
     url: `/get_service_state/${path}`,
     data: { display: runtimeDisplay, runtime: runtime || "latest" },
     callback: function (result) {
       workflow = result.service;
       currentRun = result.run;
-      if (page == "workflow_builder") {
-        if (workflow?.superworkflow) {
-          if (!currentPath.includes(workflow.superworkflow.id)) {
-            setPath(`${workflow.superworkflow.id}>${path}`);
-          }
-          $("#up-arrow").removeClass("disabled");
+      if (workflow?.superworkflow) {
+        if (!currentPath.includes(workflow.superworkflow.id)) {
+          setPath(`${workflow.superworkflow.id}>${path}`);
         }
-        localStorage.setItem("path", path);
-        if (workflow) {
-          localStorage.setItem("workflow", JSON.stringify(workflow));
-        }
-        displayWorkflow(result);
-        if (selection) graph.setSelection(selection);
-        switchMode(currentMode, true);
-      } else {
-        $("#workflow-filtering").val(path ? workflow.name : "");
-        tableInstances["service"].table.page(0).ajax.reload(null, false);
+        $("#up-arrow").removeClass("disabled");
       }
+      localStorage.setItem("workflow_path", path);
+      if (workflow) {
+        localStorage.setItem("workflow", JSON.stringify(workflow));
+      }
+      displayWorkflow(result);
+      if (selection) graph.setSelection(selection);
+      switchMode(currentMode, true);
     },
   });
 };
@@ -503,9 +490,10 @@ function runWorkflow(parametrization) {
   if (isSuperworkflow) {
     return notify("A superworkflow cannot be run directly.", "error", 5);
   }
-  resetDisplay();
+  resetWorkflowDisplay();
   runService({
     id: workflow.id,
+    path: currentPath,
     parametrization: parametrization || workflow.mandatory_parametrization,
   });
 }
@@ -550,8 +538,8 @@ function restartWorkflow() {
   });
 }
 
-function colorService(id, color) {
-  if (!ends.has(id) && nodes) {
+export function colorService(id, color) {
+  if (!ends.has(id) && nodes && nodes.get(id)) {
     nodes.update({ id: id, color: color });
   }
 }
@@ -564,7 +552,7 @@ export function getServiceState(id, first) {
       if (first || result.state?.status == "Running") {
         colorService(id, "#89CFF0");
         if (result.service && result.service.type === "workflow") {
-          localStorage.setItem("path", id);
+          localStorage.setItem("workflow_path", id);
           localStorage.setItem("workflow", JSON.stringify(result.service));
         }
         setTimeout(() => getServiceState(id), 300);
@@ -576,10 +564,17 @@ export function getServiceState(id, first) {
 }
 
 function displayWorkflowState(result) {
-  resetDisplay();
+  if ($("#workflow-search").val()) return;
+  resetWorkflowDisplay();
   updateRuntimes(result);
   if (currentRuntime == "normal") return;
   if (!nodes || !edges || !result.state) return;
+  if (result.device_state) {
+    for (const [serviceId, status] of Object.entries(result.device_state)) {
+      colorService(parseInt(serviceId), status ? "#32cd32" : "#FF6666");
+    }
+    return;
+  }
   let nodeUpdates = [];
   let edgeUpdates = [];
   const serviceIds = workflow.services.map((s) => s.id);
@@ -644,7 +639,7 @@ function displayWorkflowState(result) {
   }
 }
 
-function resetDisplay() {
+export function resetWorkflowDisplay() {
   let nodeUpdates = [];
   let edgeUpdates = [];
   workflow.services.forEach((service) => {
@@ -677,7 +672,11 @@ export function getWorkflowState(periodic, first) {
   if (userIsActive && workflow?.id && !first) {
     call({
       url: `/get_service_state/${currentPath}`,
-      data: { display: runtimeDisplay, runtime: runtime },
+      data: {
+        display: runtimeDisplay,
+        runtime: runtime,
+        device: $("#device-filter").val(),
+      },
       callback: function (result) {
         if (!Object.keys(result).length || result.service.id != workflow.id) return;
         currentRun = result.run;
@@ -738,9 +737,17 @@ function compareWorkflowResults() {
   });
 }
 
+function filterDevice() {
+  $("#device-filter-div").toggle();
+  if (!$("#device-filter-div").is(":visible")) {
+    $("#device-filter").val(null).trigger("change");
+    getWorkflowState();
+  }
+}
+
 configureNamespace("workflowBuilder", [
   addServicesToWorkflow,
-  filterWorkflowTable,
+  filterDevice,
   getWorkflowState,
   restartWorkflow,
   switchToWorkflow,

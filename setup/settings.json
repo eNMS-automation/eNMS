@@ -9,6 +9,7 @@
   },
   "authentication": {
     "default": "database",
+    "landing_page": "/workflow_builder",
     "methods": {
       "database": {
         "display_name": "Local User",
@@ -67,6 +68,9 @@
     "workflow_builder": "automation/workflows/",
     "workflow_builder_table": "automation/workflows/"
   },
+  "files": {
+    "ignored_types": [".tgz"]
+  },
   "mail": {
     "port": 587,
     "reply_to": "antoine.fourmy@gmail.com",
@@ -102,11 +106,14 @@
     "playbooks": ""
   },
   "redis": {
-    "charset": "utf-8",
-    "db": 0,
-    "decode_responses": true,
-    "port": 6379,
-    "socket_timeout": 0.1
+    "config": {
+      "charset": "utf-8",
+      "db": 0,
+      "decode_responses": true,
+      "port": 6379,
+      "socket_timeout": 0.1
+    },
+    "flush_on_restart": false
   },
   "requests": {
     "pool": {

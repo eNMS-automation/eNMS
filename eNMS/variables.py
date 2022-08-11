@@ -49,7 +49,7 @@ class VariableStore:
         self.netmiko_drivers = sorted(self.dualize(CLASS_MAPPER))
         self.napalm_drivers = sorted(self.dualize(SUPPORTED_DRIVERS[1:]))
         self.netconf_drivers = sorted(self.dualize(supported_devices_cfg))
-        self.scrapli_drivers = CORE_PLATFORM_MAP
+        self.scrapli_drivers = sorted(self.dualize(CORE_PLATFORM_MAP))
         self.timestamps = ("status", "update", "failure", "runtime", "duration")
         self.configuration_properties = {
             "configuration": "Configuration",
@@ -110,12 +110,14 @@ class VariableStore:
                 )
 
     def _update_rbac_variables(self):
-        self.rbac = {"pages": [], **self.rbac}
+        self.rbac = {"pages": [], "all_pages": {}, **self.rbac}
         for category in self.rbac["menu"].values():
             for page, page_values in category["pages"].items():
+                self.rbac["all_pages"][page] = page_values["endpoint"]
                 if page_values["rbac"] == "access":
                     self.rbac["pages"].append(page)
                 for subpage, subpage_values in page_values.get("subpages", {}).items():
+                    self.rbac["all_pages"][subpage] = subpage_values["endpoint"]
                     if subpage_values["rbac"] == "access":
                         self.rbac["pages"].append(subpage)
 
@@ -131,6 +133,7 @@ class VariableStore:
 
     def set_template_context(self):
         self.template_context = {
+            "application_path": str(self.path),
             "configuration_properties": self.configuration_properties,
             "form_properties": self.form_properties,
             "names": self.property_names,

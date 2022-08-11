@@ -1,15 +1,18 @@
 
 # Release Notes
 
-Version 4.2.1
+Version 4.3.0
 -------------
 
-- Remove 3D Geographical Visualization
+- Remove 3D Geographical Visualization.
 - Default to "info" for services log level. Move "Disable logging" at the end of the list.
 - Add "username" variable in workflow global space set to the user that runs the workflow.
 - Forbid deletion of Start, End and Placeholder services.
 - Fix merge_update behavior to not extend list every time an object is edited.
-- Define Server IP address and URL with the `SERVER_ADDR` (default `0.0.0.0`) and `SERVER_URL` (default `http://192.168.56.102`) environment variable instead of `settings.json` / `app` section (as VM settings, they don't belong in the application settings and shouldn't be checked in the code).
+- Define Server IP address and URL with the `SERVER_ADDR` (default `0.0.0.0`) and `SERVER_URL` (default `http://192.168.56.102`) environment variable instead of `settings.json` / `app` section (as VM
+  settings, they don't belong in the application settings and shouldn't be checked in the code).
+- Add new "server" variable in workflow global space set to a dictionary that contains server name,
+  IP address and URL.
 - Make "Results as List" False by default for scrapli (not useful when only
   one command, which is most of the time)
 - For consistency with Scrapli
@@ -17,15 +20,69 @@ Version 4.2.1
   * Allow sending multiple commands via Netmiko Commands
   * Add "Results as List" to Netmiko Commands 
 - Add "use genie" option in netmiko commands service for Genie / PyATS support
+- Add Jinja2 template support for netmiko and scrapli commands field (iteration no longer required for loops), with "[[ ]]" for python substitution in a J2 template.
 - Add new `default_function` (sqlalchemy parameter) and `render_kw` (wtforms parameters) for custom fields in properties.json.
-- Add new `rest/workers` GET endpoint to get service count for each WSGI worker
-- Fix Data Extraction service bug if no device (service in run once mode)
-- Add new Jinja2 Template Conversion in Data Extraction Service
+- Add new `rest/workers` GET endpoint to get service count + cpu / memory usage for each 
+  WSGI worker (admin endpoint)
+- Data Extraction Service update:
+  * Rename to "Data Processing" service
+  * Fix bug if no device (service in run once mode)
+  * Add new option to parse TextFSM as JSON object
+  * Add new option to support Jinja2 Template conversion
+  * Add new option to support Template Text Parser conversion
 - Fix bulk deletion and bulk removal from a filtered table (e.g dashboard bulk deletion deletes everything,
-  not just the objects displayed in the table)
+  not just the objects displayed in the table).
+- New feature to align nodes in Network Builder and Workflow Builder:
+  - Horizontal and vertical alignment
+  - Horizontal and vertical distribution
+- Make all objects in object select list (both single and multiple entries) hyperlink to the edit panel.
+- Make all results in the Results table link to the workflow builder.
+- Make it possible to share link to a specific workflow / runtime (optional) to the workflow builder,
+  with the following syntax: workflow_builder/{workflow_id}/{runtime}.
+- Add "shared" property to the service table.
+- Add shared subworkflow to the list of top-level workflows in the workflow builder to provide
+  the ability to view all runtimes (including when it was run as standalone workflow).
+- Remove "Approved by admin" mechanism for Unix Command Service. Instead, check if the new command is
+  different from the old command: if it is and the user is not an admin, an error is raised.
+- Remove backward / forward mechanism in the network and service table. Make networks / workflows links to
+  the network / workflow builder for consistency with results page.
+- Add User Profile window to change username, password, user email, etc.
+- Add User landing page to decide which page to display after logging in (editable in profile).
+  Default landing page is configurable from settings.json > authentication > landing_page.
+- Add mechanism to show a single device status in workflow builder UI (logs filtering + service display)
+- Add mechanism to search for a string accross all services of a workflow in the workflow builder, and
+  accross all nodes in the network builder.
+- Fix vertical aligment in all tables (cell content was not centered on y axis because of buttons height in
+  the last column).
+- Add export service button in Workflow Builder.
+- New Files Management System:
+  * defined via settings / paths / files (default: eNMS / files folder)
+  * files are automatically scanned when starting the application, and can be rescanned via the UI
+  * files have a "Status" property showing the last action (updated, moved, deleted, etc)
+  * last_modified is the unix last modified timestamp
+  * files can be displayed hierarchically or flat in the table (default: hierarchical display)
+  * both files and folder can be exported to browser; folders are compressed as tgz before export
+  * new files can be uploaded to any folder from the UI
+  * deleting a file or folder in eNMS will delete it locally
+  * a folder can be created in currently displayed folder, not a file because a file must be
+    associated with a local file.
+  * watchdog is used to keep track of all files change done outside of the app
+- redis config in settings.json moved to the inner key "redis" > "config
+- redis new option in settings.json > "redis" > "flush_on_restart": flush redis queue when the app restarts.
+- Remove check box for "use device driver" add "use device driver" into drop down and make this the default.
 - Add get_connection function in global variables to access connection object from a python snippet service.
+- Support custom ip address in ping service (new IP address field, defaults to device IP if empty).
+
+Migration
+- check "username" and "server" variables in workflow aren't in conflict with existing workflows.
+- dashboard is now controlled by RBAC: dashboard access must be explicitly granted via access pages, GET and
+  POST requests.
+- "download_file" endpoint -> "download" (add support for downloading folders)
+- the "driver" property must be updated for all netmiko, napalm and scrapli via the migration script
+- update services to use server IP and address from global variables and not from settings.
 
 To be tested:
+- bulk deletion and bulk removal (from dashboard and other tables too)
 - mail notification
 - web ssh
 - service logging mechanism, including disable logging

@@ -126,6 +126,14 @@ block stylesheets %} {{ super() }}
         ></a>
       </li>
       <li>
+        <a
+          onclick="eNMS.builder.displayTextSearchField()"
+          data-tooltip="Network Search"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-search"></span
+        ></a>
+      </li>
+      <li>
         <a onclick="action['Zoom In']()" data-tooltip="Zoom In" style="cursor: pointer;"
           ><span class="glyphicon glyphicon-zoom-in"></span
         ></a>
@@ -171,6 +179,19 @@ block stylesheets %} {{ super() }}
         ></a>
       </li>
     </ul>
+    <div
+      id="network-search-div"
+      class="input-group"
+      style="width: 100%; margin-bottom: 5px; margin-top: 3px; display: none;"
+    >
+      <input
+        id="network-search"
+        type="text"
+        placeholder="&#xF002;"
+        class="form-control"
+        style="font-family: Arial, FontAwesome;"
+      />
+    </div>
   </nav>
 </div>
 <div id="builder"></div>
@@ -215,8 +236,4 @@ block stylesheets %} {{ super() }}
 </ul>
 {% endblock content %} {% block javascripts %} {{ super()}}
 <script src="{{ url_for('static', filename='lib/vis/vis.min.js') }}"></script>
-<script
-  type="module"
-  src="{{ url_for('static', filename='js/networkBuilder.js') }}"
-></script>
 {% endblock javascripts %}

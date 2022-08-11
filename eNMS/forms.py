@@ -3,6 +3,7 @@ from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from importlib.util import module_from_spec, spec_from_file_location
+from os.path import exists
 from traceback import format_exc
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
@@ -10,6 +11,7 @@ from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
+from eNMS.environment import env
 from eNMS.fields import (
     BooleanField,
     HiddenField,
@@ -63,7 +65,7 @@ class MetaForm(FormMeta):
             if field in (SelectField, SelectMultipleField):
                 form_kw["choices"] = values["choices"]
             if "render_kw" in values:
-               form_kw["render_kw"] = values["render_kw"]
+                form_kw["render_kw"] = values["render_kw"]
             field = field(values["pretty_name"], **form_kw)
             setattr(form, property, field)
             attrs[property] = field
@@ -246,12 +248,7 @@ class FormFactory:
 
             @classmethod
             def form_init(cls):
-                keys = (
-                    "get_requests",
-                    "post_requests",
-                    "delete_requests",
-                    "upper_menu",
-                )
+                keys = ("get_requests", "post_requests", "delete_requests")
                 for key in keys:
                     values = [(k, k) for k, v in vs.rbac[key].items() if v == "access"]
                     field_name = " ".join(key.split("_")).capitalize()
@@ -448,8 +445,39 @@ class ExcelImportForm(BaseForm):
 
 
 class FileForm(BaseForm):
-    template = "file"
+    action = "eNMS.base.processData"
     form_type = HiddenField(default="file")
+    id = HiddenField()
+    path = StringField("Path", [InputRequired()])
+    filename = StringField("Filename", render_kw={"readonly": True})
+    name = StringField("Name", render_kw={"readonly": True})
+    last_modified = StringField("Last Modified", render_kw={"readonly": True})
+    last_updated = StringField("Last Updated", render_kw={"readonly": True})
+    status = StringField("Status", render_kw={"readonly": True})
+
+    def validate(self):
+        valid_form = super().validate()
+        current_file = db.fetch("file", id=self.id.data, allow_none=True)
+        path_taken = exists(self.path.data)
+        change_of_path = current_file and self.path.data != current_file.path
+        path_already_used = (not current_file or change_of_path) and path_taken
+        if path_already_used:
+            self.path.errors.append("There is already a file at the specified path.")
+        out_of_scope_path = not self.path.data.startswith(env.file_path)
+        if out_of_scope_path:
+            self.path.errors.append(
+                f"The path must be in the {env.file_path} directory."
+            )
+        return valid_form and not any([path_already_used, out_of_scope_path])
+
+
+class FolderForm(FileForm):
+    form_type = HiddenField(default="folder")
+
+
+class FileEditorForm(BaseForm):
+    template = "file_editor"
+    form_type = HiddenField(default="file_editor")
     file_content = StringField(widget=TextArea(), render_kw={"rows": 8})
 
 
@@ -811,6 +839,7 @@ class SettingsForm(BaseForm):
 
 class TaskForm(BaseForm):
     action = "eNMS.base.processData"
+    template = "object"
     form_type = HiddenField(default="task")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
@@ -860,6 +889,21 @@ class UploadFilesForm(BaseForm):
     template = "upload_files"
     folder = HiddenField()
     form_type = HiddenField(default="upload_files")
+
+
+class UserProfileForm(BaseForm):
+    form_type = HiddenField(default="profile")
+    action = "eNMS.administration.saveProfile"
+    name = StringField("Name")
+    email = StringField("Email")
+    theme = SelectField(
+        "Theme",
+        choices=[
+            (theme, values["name"]) for theme, values in vs.themes["themes"].items()
+        ],
+    )
+    landing_page = SelectField("Landing Page", validate_choice=False)
+    password = PasswordField("Password")
 
 
 class WorkflowLabelForm(BaseForm):
@@ -944,9 +988,7 @@ class DeviceForm(ObjectForm):
         "Netmiko Driver", choices=vs.netmiko_drivers, default="cisco_ios"
     )
     scrapli_driver = SelectField(
-        "Scrapli Driver",
-        choices=vs.dualize(vs.scrapli_drivers),
-        default="cisco_iosxe",
+        "Scrapli Driver", choices=vs.scrapli_drivers, default="cisco_iosxe"
     )
     netconf_driver = SelectField(
         "Netconf Driver", choices=vs.netconf_drivers, default="default"
@@ -974,16 +1016,14 @@ class NapalmForm(ConnectionForm):
     form_type = HiddenField(default="napalm")
     get_request_allowed = False
     abstract_service = True
-    driver = SelectField(choices=vs.napalm_drivers)
-    use_device_driver = BooleanField(
-        default=True,
-        help="common/use_device_driver",
+    driver = SelectField(
+        choices=[("device", "Use Device Driver"), *vs.napalm_drivers],
     )
     timeout = IntegerField(default=10)
     optional_args = DictField()
     groups = {
         "Napalm Parameters": {
-            "commands": ["driver", "use_device_driver", "timeout", "optional_args"],
+            "commands": ["driver", "timeout", "optional_args"],
             "default": "expanded",
         },
         **ConnectionForm.groups,
@@ -1002,10 +1042,8 @@ class ParametersForm(BaseForm):
 class NetmikoForm(ConnectionForm):
     form_type = HiddenField(default="netmiko")
     abstract_service = True
-    driver = SelectField(choices=vs.netmiko_drivers)
-    use_device_driver = BooleanField(
-        default=True,
-        help="common/use_device_driver",
+    driver = SelectField(
+        choices=[("device", "Use Device Driver"), *vs.netmiko_drivers],
     )
     enable_mode = BooleanField(
         "Enable mode (run in enable mode or as root)", default=True
@@ -1075,7 +1113,6 @@ class NetmikoForm(ConnectionForm):
         "Netmiko Parameters": {
             "commands": [
                 "driver",
-                "use_device_driver",
                 "enable_mode",
                 "config_mode",
                 "fast_cli",
@@ -1105,8 +1142,9 @@ class NetmikoForm(ConnectionForm):
 class ScrapliForm(ConnectionForm):
     form_type = HiddenField(default="scrapli")
     abstract_service = True
-    use_device_driver = BooleanField(default=True)
-    driver = SelectField(choices=vs.dualize(vs.scrapli_drivers))
+    driver = SelectField(
+        choices=[("device", "Use Device Driver"), *vs.scrapli_drivers],
+    )
     is_configuration = BooleanField()
     transport = SelectField(choices=vs.dualize(("system", "paramiko", "ssh2")))
     timeout_socket = FloatField("Socket Timeout", default=15.0)
@@ -1115,7 +1153,6 @@ class ScrapliForm(ConnectionForm):
     groups = {
         "Scrapli Parameters": {
             "commands": [
-                "use_device_driver",
                 "driver",
                 "is_configuration",
                 "transport",

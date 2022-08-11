@@ -1,3 +1,4 @@
+from jinja2 import Template
 from sqlalchemy import Boolean, ForeignKey, Integer, Float
 from wtforms.widgets import TextArea
 
@@ -15,8 +16,8 @@ class ScrapliService(ConnectionService):
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     commands = db.Column(db.LargeString)
     is_configuration = db.Column(Boolean, default=False)
+    jinja2_template = db.Column(Boolean, default=False)
     results_as_list = db.Column(Boolean, default=False)
-    use_device_driver = db.Column(Boolean, default=True)
     driver = db.Column(db.SmallString)
     transport = db.Column(db.SmallString, default="system")
     timeout_socket = db.Column(Float, default=15.0)
@@ -26,7 +27,10 @@ class ScrapliService(ConnectionService):
     __mapper_args__ = {"polymorphic_identity": "scrapli_service"}
 
     def job(self, run, device):
-        commands = run.sub(run.commands, locals()).splitlines()
+        commands = run.sub(run.commands, locals())
+        if self.jinja2_template:
+            commands = Template(commands).render(locals())
+        commands = commands.splitlines()
         function = "send_configs" if run.is_configuration else "send_commands"
         run.log(
             "info",
@@ -46,10 +50,13 @@ class ScrapliService(ConnectionService):
 class ScrapliCommandsForm(ScrapliForm):
     form_type = HiddenField(default="scrapli_service")
     commands = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
-    results_as_list = BooleanField("Results As List")
+    jinja2_template = BooleanField(
+        "Interpret Commands as Jinja2 Template", default=False
+    )
+    results_as_list = BooleanField("Results As List", default=False)
     groups = {
         "Main Parameters": {
-            "commands": ["commands", "results_as_list"],
+            "commands": ["commands", "jinja2_template", "results_as_list"],
             "default": "expanded",
         },
         **ScrapliForm.groups,

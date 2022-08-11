@@ -18,6 +18,7 @@ import {
   showConfirmationPanel,
   userIsActive,
 } from "./base.js";
+import { defaultFolder, displayFolderPath, folderPath } from "./administration.js";
 import { exportServices } from "./automation.js";
 import { updateNetworkRightClickBindings } from "./networkBuilder.js";
 
@@ -195,10 +196,7 @@ export class Table {
 
   getFilteringData() {
     let data = {};
-    let form = serializeForm(
-      `#search-form-${this.id}`,
-      `${this.model}_filtering`
-    );
+    let form = serializeForm(`#search-form-${this.id}`, `${this.model}_filtering`);
     for (const [key, value] of Object.entries(form)) {
       if (key.includes("_invert")) form[key] = value == "y";
     }
@@ -571,17 +569,13 @@ tables.device = class DeviceTable extends Table {
 tables.network = class NetworkTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
-    row.name =
-      row.type == "network"
-        ? `<b><a href="#" onclick="eNMS.networkBuilder.filterNetworkTable(
-      '${this.id}', ${row.id})">${row.name}</a></b>`
-        : row.name;
-    row.links =
-      row.type == "network"
-        ? `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+    row.name = `<b><a href="/network_builder/${row.path}">${row.name}</a></b>`;
+    row.links = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
       'link', ${row.instance}, {parent: '${this.id}', from: 'networks',
-      to: 'links'})">Links</a></b>`
-        : "No links";
+      to: 'links'})">Links</a></b>`;
+    row.devices = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+      'device', ${row.instance}, {parent: '${this.id}', from: 'networks',
+      to: 'devices'})">Devices</a></b>`;
     return row;
   }
 
@@ -590,35 +584,38 @@ tables.network = class NetworkTable extends Table {
   }
 
   postProcessing(...args) {
+    let self = this;
     super.postProcessing(...args);
     updateNetworkRightClickBindings();
+    $("#parent-filtering")
+      .selectpicker()
+      .on("change", function () {
+        self.table.page(0).ajax.reload(null, false);
+      });
   }
 
   get controls() {
     return [
       this.columnDisplay(),
-      `<input type="hidden" id="network-filtering" name="network-filtering"></input>`,
+      `
+      <button
+        style="background:transparent; border:none; 
+        color:transparent; width: 240px;"
+        type="button"
+      >
+        <select
+          id="parent-filtering"
+          name="parent-filtering"
+          class="form-control"
+        >
+          <option value="true">Display top-level networks</option>
+          <option value="false">Display all networks</option>
+        </select>
+      </button>`,
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
-      `
-      <a
-        id="left-arrow"
-        class="btn btn-info disabled"
-        onclick="action['Backward']()"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-chevron-left"></span>
-      </a>
-      <a
-        id="right-arrow"
-        class="btn btn-info disabled"
-        onclick="action['Forward']()"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-chevron-right"></span>
-      </a>`,
       this.createNewButton(),
       this.bulkEditButton(),
       this.bulkDeletionButton(),
@@ -648,12 +645,8 @@ tables.network = class NetworkTable extends Table {
   }
 
   get filteringConstraints() {
-    const networkFiltering = $("#network-filtering").val();
-    if (networkFiltering?.length) {
-      return { networks: [networkFiltering] };
-    } else {
-      return { networks_filter: "empty", type: "network" };
-    }
+    const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
+    return { networks_filter: parentFiltering ? "empty" : "union", type: "network" };
   }
 };
 
@@ -878,13 +871,9 @@ tables.pool = class PoolTable extends Table {
 tables.service = class ServiceTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
-    row.name =
-      row.type === "workflow"
-        ? `<b><a href="#" onclick="eNMS.workflowBuilder.filterWorkflowTable(
-      '${this.id}', ${row.id})">${row.scoped_name}</a></b>`
-        : $("#parent-filtering").val() == "true"
-        ? row.scoped_name
-        : row.name;
+    if (row.type == "workflow") {
+      row.name = `<b><a href="/workflow_builder/${row.path}">${row.name}</a></b>`;
+    }
     for (const model of ["device", "pool"]) {
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
         '${model}', ${row.instance}, {parent: '${this.id}', from: 'target_services',
@@ -896,34 +885,27 @@ tables.service = class ServiceTable extends Table {
 
   get filteringConstraints() {
     const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
-    const workflowFiltering = $("#workflow-filtering").val();
-    if (workflowFiltering?.length) {
-      return { workflows: [workflowFiltering] };
-    } else {
-      return { workflows_filter: parentFiltering ? "empty" : "union" };
-    }
+    return { workflows_filter: parentFiltering ? "empty" : "union" };
   }
 
   get controls() {
     return [
       this.columnDisplay(),
       `
-      <input type="hidden" id="workflow-filtering" name="workflow-filtering">
-        <button
-          style="background:transparent; border:none; 
-          color:transparent; width: 240px;"
-          type="button"
+      <button
+        style="background:transparent; border:none; 
+        color:transparent; width: 240px;"
+        type="button"
+      >
+        <select
+          id="parent-filtering"
+          name="parent-filtering"
+          class="form-control"
         >
-          <select
-            id="parent-filtering"
-            name="parent-filtering"
-            class="form-control"
-          >
-            <option value="true">Display services hierarchically</option>
-            <option value="false">Display all services</option>
-          </select>
-        </button>
-      </input>
+          <option value="true">Display top-level services</option>
+          <option value="false">Display all services</option>
+        </select>
+      </button>
       <button
         class="btn btn-info"
         onclick="eNMS.table.refreshTable('service', true)"
@@ -935,23 +917,6 @@ tables.service = class ServiceTable extends Table {
       this.searchTableButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
-      `
-      <a
-        id="left-arrow"
-        class="btn btn-info disabled"
-        onclick="action['Backward']()"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-chevron-left"></span>
-      </a>
-      <a
-        id="right-arrow"
-        class="btn btn-info disabled"
-        onclick="action['Forward']()"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-chevron-right"></span>
-      </a>`,
       this.createNewButton(),
       `
       <button
@@ -1019,7 +984,7 @@ tables.service = class ServiceTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="location.href='/export_service/${row.id}'"*
+          onclick="location.href='/export_service/${row.id}'"
           data-tooltip="Export Service as .tgz"
             ><span class="glyphicon glyphicon-export"></span
           ></button>
@@ -1058,6 +1023,10 @@ tables.service = class ServiceTable extends Table {
 tables.run = class RunTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
+    if (row.service_properties.type == "workflow") {
+      const rowLink = `/workflow_builder/${row.path}/${row.runtime}`;
+      row.name = `<b><a href="${rowLink}">${row.name}</a></b>`;
+    }
     row.service = JSON.stringify(row.service_properties).replace(/"/g, "'");
     row.buttons = this.buttons(row);
     return row;
@@ -1482,38 +1451,173 @@ tables.session = class SessionTable extends Table {
   }
 };
 
-tables.event = class EventTable extends Table {
+tables.file = class FileTable extends Table {
+  addRow(properties) {
+    let row = super.addRow(properties);
+    if (row.type == "folder") {
+      row.filename = `<a href="#" onclick="eNMS.administration.enterFolder
+        ('${row.filename}', '${this.id}')">
+          <span class="glyphicon glyphicon-folder-open" style="margin-left: 8px"></span>
+          <b style="margin-left: 6px">${row.filename}</b>
+        </a>`;
+    } else {
+      row.filename = `
+        <span class="glyphicon glyphicon-file" style="margin-left: 8px"></span>
+        <span style="margin-left: 3px">${row.filename}</span>`;
+    }
+    return row;
+  }
+
   get controls() {
+    const status = folderPath == defaultFolder ? "disabled" : "";
     return [
       this.columnDisplay(),
-      this.refreshTableButton(),
-      this.clearSearchButton(),
-      this.createNewButton(),
-      this.exportTableButton(),
+      `
+      <button
+        style="background:transparent; border:none; 
+        color:transparent; width: 240px;"
+        type="button"
+      >
+        <select
+          id="parent-filtering"
+          name="parent-filtering"
+          class="form-control"
+        >
+          <option value="true">Hierarchical Display</option>
+          <option value="false">Flat Display</option>
+        </select>
+      </button>`,
+      this.refreshTableButton("file"),
+      `
+      <a
+        id="upward-folder-btn"
+        class="btn btn-info ${status}"
+        onclick="eNMS.administration.enterFolder()"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-chevron-up"></span>
+      </a>`,
+      `
+      <button
+        class="btn btn-primary"
+        onclick="eNMS.base.showInstancePanel('folder')"
+        data-tooltip="Create New Folder"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-folder-open"></span>
+      </button>`,
+      ` <button
+        class="btn btn-primary"
+        onclick="eNMS.administration.showFileUploadPanel()"
+        data-tooltip="Upload Files"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-import"></span>
+      </button>`,
+      ` <button
+        class="btn btn-primary"
+        onclick="eNMS.administration.scanFolder()"
+        data-tooltip="Scan Folder"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-flash"></span>
+      </button>`,
       this.bulkDeletionButton(),
+      `<div id="current-folder-path" style="margin-top: 9px; margin-left: 9px"></div>`,
     ];
   }
 
+  copyClipboardButton(row) {
+    return `
+      <li>
+        <button type="button" class="btn btn-sm btn-info"
+          onclick="eNMS.base.copyToClipboard({text: '${row.path}' })"
+          data-tooltip="Copy Path to clipboard"
+        >
+          <span class="glyphicon glyphicon-copy"></span>
+        </button>
+      </li>`;
+  }
+
+  downloadButton(row) {
+    return `
+      <li>
+        <button
+          type="button"
+          class="btn btn-sm btn-info"
+          onclick="location.href='/download/${row.type}/${row.path}'"
+        >
+          <span class="glyphicon glyphicon-export"></span>
+        </button>
+      </li>`;
+  }
+
+  editButton(row) {
+    return `
+      <li>
+        <button type="button" class="btn btn-sm btn-primary"
+        onclick="eNMS.base.showInstancePanel(
+          'file', '${row.id}')" data-tooltip="Edit"
+          ><span class="glyphicon glyphicon-edit"></span
+        ></button>
+      </li>`;
+  }
+
   buttons(row) {
-    return [
-      `
-      <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
-        <li>
-          <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showInstancePanel('event', '${row.id}')"
-          data-tooltip="Edit"><span class="glyphicon glyphicon-edit">
-          </span></button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showInstancePanel('event', '${row.id}', 'duplicate')"
-          data-tooltip="Duplicate">
-          <span class="glyphicon glyphicon-duplicate"></span></button>
-        </li>
-        ${this.deleteInstanceButton(row)}
-      </ul>
-    `,
-    ];
+    if (row.type == "folder") {
+      return [
+        `
+        <ul class="pagination pagination-lg" style="margin: 0px;">
+          ${this.copyClipboardButton(row)}
+          ${this.downloadButton(row)}
+          ${this.editButton(row)}
+          <button type="button"
+            class="btn btn-sm btn-primary"
+            onclick="eNMS.administration.showFileUploadPanel('${row.path}')"
+          >
+            <span class="glyphicon glyphicon-upload"></span>
+          </button>
+          ${this.deleteInstanceButton(row)}
+        </ul>
+        `,
+      ];
+    } else {
+      return [
+        `
+        <ul class="pagination pagination-lg" style="margin: 0px;">
+          ${this.copyClipboardButton(row)}
+          ${this.downloadButton(row)}
+          ${this.editButton(row)}
+          <li>
+            <button type="button" class="btn btn-sm btn-primary"
+            onclick="eNMS.administration.editFile('${row.name}', '${row.path}')"
+            data-tooltip="File Content">
+              <span class="glyphicon glyphicon-list"></span>
+            </button>
+          </li>
+          ${this.deleteInstanceButton(row)}
+        </ul>`,
+      ];
+    }
+  }
+
+  get filteringConstraints() {
+    const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
+    if (parentFiltering)
+      return { folder_path: folderPath, folder_path_filter: "equality" };
+  }
+
+  postProcessing(...args) {
+    let self = this;
+    super.postProcessing(...args);
+    displayFolderPath(folderPath);
+    $("#file-type-list").selectpicker();
+    $("#parent-filtering")
+      .selectpicker()
+      .on("change", function () {
+        self.table.page(0).ajax.reload(null, false);
+        $("#current-folder-path").toggle();
+      });
   }
 };
 

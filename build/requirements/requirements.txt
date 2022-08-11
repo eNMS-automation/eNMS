@@ -16,6 +16,7 @@ psutil
 redis
 ruamel.yaml
 sqlalchemy
+watchdog
 wtforms==2.3.3
 xlrd
 xlwt

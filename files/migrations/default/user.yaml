@@ -42,4 +42,3 @@
     /get_runtimes, /delete_node, /scheduler_action]
   small_menu: false
   type: user
-  upper_menu: [Admin, Files, Settings]

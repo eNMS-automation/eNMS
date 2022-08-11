@@ -1,5 +1,6 @@
 /*
 global
+linkPath: false
 page: false
 subtypes: false
 vis: false
@@ -11,6 +12,7 @@ import {
   createTooltips,
   history,
   historyPosition,
+  initSelect,
   loadTypes,
   notify,
   openPanel,
@@ -21,16 +23,19 @@ import {
   drawNetworkEdge,
   drawNetworkNode,
   getNetworkState,
+  resetNetworkDisplay,
   switchToNetwork,
   updateNetworkRightClickBindings,
 } from "./networkBuilder.js";
 import {
+  colorService,
   drawIterationEdge,
   drawWorkflowEdge,
   drawWorkflowNode,
   ends,
-  getWorkflowState,
   flipRuntimeDisplay,
+  getWorkflowState,
+  resetWorkflowDisplay,
   switchToWorkflow,
   updateWorkflowRightClickBindings,
 } from "./workflowBuilder.js";
@@ -38,13 +43,14 @@ import {
 const container = document.getElementById("builder");
 const type = page.includes("network") ? "network" : "workflow";
 const nodeType = type == "network" ? "node" : "service";
+const savedPath = linkPath || localStorage.getItem(`${type}_path`);
 let currentLabel;
 let mousePosition;
 let network;
 let selectedObject;
 export let creationMode;
 export let currentMode = "motion";
-export let currentPath = page.includes("builder") && localStorage.getItem("path");
+export let currentPath = page.includes("builder") && savedPath;
 export let instance;
 export let edges;
 export let nodes;
@@ -122,11 +128,18 @@ function highlightNode(node) {
 }
 
 export function savePositions() {
+  const positions = network.getPositions();
   call({
     url: `/save_positions/${instance.type}/${instance.id}`,
     data: network.getPositions(),
     callback: function (updateTime) {
       if (updateTime) instance.last_modified = updateTime;
+      nodes.update(
+        Object.entries(positions).map(([id, position]) => ({
+          id: isNaN(id) ? id : parseInt(id),
+          ...position,
+        }))
+      );
     },
   });
 }
@@ -233,6 +246,31 @@ function openDeletionPanel() {
   }
 }
 
+function positionNodes(mode, direction) {
+  const selectedNodes = network
+    .getSelectedNodes()
+    .map((id) => nodes.get(id))
+    .filter((node) => node.type != "label");
+  const length = selectedNodes.length;
+  if (mode == "align") {
+    const property = direction == "horizontal" ? "y" : "x";
+    const value = selectedNodes[0][property];
+    selectedNodes.forEach((node) => {
+      nodes.update({ id: node.id, [`${property}`]: value });
+    });
+  } else if (selectedNodes.length > 2) {
+    const property = direction == "horizontal" ? "x" : "y";
+    selectedNodes.sort((n, m) => n[property] - m[property]);
+    const start = selectedNodes[0][property];
+    const increment = (selectedNodes[length - 1][property] - start) / (length - 1);
+    for (let index = 1; index < length - 1; index++) {
+      selectedNodes[index][property] = start + index * increment;
+    }
+    nodes.update(selectedNodes);
+  }
+  savePositions();
+}
+
 export function updateBuilderBindings(action) {
   Object.assign(action, {
     [`Create ${type}`]: () => createNewNode(`create_${type}`),
@@ -244,8 +282,13 @@ export function updateBuilderBindings(action) {
     "Create Label Button": () => showLabelPanel({ usePosition: false }),
     "Edit Label": (label) => showLabelPanel({ label: label, usePosition: true }),
     Delete: openDeletionPanel,
+    "Horizontal Alignment": () => positionNodes("align", "horizontal"),
+    "Vertical Alignment": () => positionNodes("align", "vertical"),
+    "Horizontal Distribution": () => positionNodes("distribute", "horizontal"),
+    "Vertical Distribution": () => positionNodes("distribute", "vertical"),
     "Zoom In": () => network.zoom(0.2),
     "Zoom Out": () => network.zoom(-0.2),
+    Export: () => notify("No workflow found.", "error", 5),
     Backward: () => switchTo(history[historyPosition - 1], "left"),
     Forward: () => switchTo(history[historyPosition + 1], "right"),
     Upward: () => {
@@ -356,6 +399,21 @@ export function createNewNode(mode) {
     showInstancePanel(type, instance.id, "duplicate");
   } else {
     showInstancePanel($(`#${nodeType}-type-list`).val());
+  }
+}
+
+function displayTextSearchField() {
+  $(`#${type}-search-div`).toggle();
+  if ($(`#${type}-search-div`).is(":visible")) {
+    $(`#${type}-search`).focus();
+  } else {
+    $(`#${type}-search`).val("");
+    if (type == "workflow") {
+      getWorkflowState();
+    } else {
+      resetNetworkDisplay();
+      getNetworkState();
+    }
   }
 }
 
@@ -493,8 +551,14 @@ export function initBuilder() {
         }
       }
       $(`#current-${type},#current-runtimes`).selectpicker({ liveSearch: true });
+      let searchTimer = false;
+      $(`#${type}-search`).keyup(function () {
+        if (searchTimer) clearTimeout(searchTimer);
+        searchTimer = setTimeout(searchBuilderText, 300);
+      });
       if (type == "workflow") {
-        $("#current-runtime").on("change", function () {
+        initSelect($(`#device-filter`), "device", null, true);
+        $("#current-runtime,#device-filter").on("change", function () {
           getWorkflowState();
         });
         getWorkflowState(true, true);
@@ -507,6 +571,27 @@ export function initBuilder() {
     if (!instance || this.value != instance.id) switchTo(this.value);
   });
   updateRightClickBindings();
+}
+
+export function searchBuilderText() {
+  const searchValue = $(`#${type}-search`).val();
+  if (!searchValue) return;
+  call({
+    url: `/search_builder/${type}/${instance.id}/${searchValue}`,
+    callback: function (selectedNodes) {
+      if (type == "workflow") {
+        resetWorkflowDisplay();
+        selectedNodes.forEach((node) => colorService(node, "#EFFD5F"));
+      } else {
+        resetNetworkDisplay();
+        selectedNodes.forEach((nodeId) => {
+          const icon = nodes.get(parseInt(nodeId)).icon;
+          const image = `/static/img/network/red/${icon}.gif`;
+          nodes.update({ id: parseInt(nodeId), image: image });
+        });
+      }
+    },
+  });
 }
 
 function getTree() {
@@ -595,4 +680,10 @@ function getTree() {
   });
 }
 
-configureNamespace("builder", [createLabel, getTree, highlightNode, switchMode]);
+configureNamespace("builder", [
+  createLabel,
+  displayTextSearchField,
+  getTree,
+  highlightNode,
+  switchMode,
+]);

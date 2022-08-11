@@ -320,12 +320,6 @@
     Topology Import (netbox, librenms, opennms)] 2021-04-24 08:58:40.197786', source: '[Topology
     Import Services] OpenNMS Import', subtype: success, type: workflow_edge, workflow: Topology
     Import Services}
-- {color: green, destination: '[(R) Unix Command & Chell, Ping Service, Jump on Connect
-    mechanism] Validation: jump on server 2 from Washington', label: success, name: '[Regression
-    Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism] 2021-04-24
-    08:58:40.197801', source: '[(R) Unix Command & Chell, Ping Service, Jump on Connect
-    mechanism] Ping Washington', subtype: success, type: workflow_edge, workflow: '(R)
-    Unix Command & Chell, Ping Service, Jump on Connect mechanism'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     Unix Command & Chell, Ping Service, Jump on Connect mechanism] 2021-04-24 08:58:40.197815',
   source: '[(R) Unix Command & Chell, Ping Service, Jump on Connect mechanism] Validation:
@@ -505,10 +499,6 @@
   label: success, name: '[Regression Workflow: Netmiko Prompts] 2021-04-24 08:58:40.198893',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: (R) Netmiko
     Prompts Service}
-- {color: green, destination: '[(R) Netmiko Prompts Service] Test Netmiko Prompt Service',
-  label: success, name: '[Regression Workflow: Netmiko Prompts] 2021-04-24 08:58:40.198918',
-  source: '[(R) Netmiko Prompts Service] Check VRF (NOVRF) exists', subtype: success,
-  type: workflow_edge, workflow: (R) Netmiko Prompts Service}
 - {color: green, destination: '[Functions: factory, fetch, fetch_all, encrypt and
     get_result] Show vrf with custom encrypted credentials', label: success, name: '[Regression
     Workflow: Global Variables and post-run Pool Update Mechanism] 2021-04-24 08:58:40.198945',
@@ -1531,13 +1521,57 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2022-05-20 13:52:38.085027',
   source: '[(R) Gateway Mechanism (SSH Proxy with Scrapli)] Both', subtype: success,
   type: workflow_edge, workflow: (R) Gateway Mechanism (SSH Proxy with Scrapli)}
-- {color: green, destination: '[Data Extraction Jinja2 Template] Define Python Dictionary',
+- {color: green, destination: '[Data Extraction Jinja2 Template] Define Input Variables',
   label: success, name: '2022-06-20 05:14:02.229905', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: Data Extraction Jinja2 Template}
 - {color: green, destination: '[Data Extraction Jinja2 Template] Apply jinja2 Template',
   label: success, name: '2022-06-20 05:14:02.950731', source: '[Data Extraction Jinja2
-    Template] Define Python Dictionary', subtype: success, type: workflow_edge, workflow: Data
+    Template] Define Input Variables', subtype: success, type: workflow_edge, workflow: Data
     Extraction Jinja2 Template}
 - {color: green, destination: '[Shared] End', label: success, name: '2022-06-20 05:38:27.696576',
   source: '[Data Extraction Jinja2 Template] Apply jinja2 Template', subtype: success,
+  type: workflow_edge, workflow: Data Extraction Jinja2 Template}
+- {color: red, destination: '[(R) Netmiko Prompts Service] Test Netmiko Prompt Service',
+  label: failure, name: '2022-07-12 05:30:46.993613', source: '[(R) Netmiko Prompts
+    Service] Check VRF (NOVRF) exists', subtype: failure, type: workflow_edge, workflow: (R)
+    Netmiko Prompts Service}
+- {color: green, destination: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2]
+    Scrapli Multiple Commands (text)', label: success, name: '2022-07-12 13:21:49.502987',
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: (R) Scrapli
+    and Netmiko Multiple Commands and Jinja2}
+- {color: green, destination: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2]
+    Scrapli Multiple Commands (list)', label: success, name: '2022-07-12 13:21:50.427263',
+  source: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Scrapli Multiple
+    Commands (text)', subtype: success, type: workflow_edge, workflow: (R) Scrapli
+    and Netmiko Multiple Commands and Jinja2}
+- {color: green, destination: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2]
+    Netmiko Jinja 2 conversion (text)', label: success, name: '2022-07-12 14:08:45.343464',
+  source: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Scrapli Multiple
+    Commands (list)', subtype: success, type: workflow_edge, workflow: (R) Scrapli
+    and Netmiko Multiple Commands and Jinja2}
+- {color: green, destination: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2]
+    Netmiko Jinja 2 conversion (list)', label: success, name: '2022-07-12 14:08:46.048719',
+  source: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Netmiko Jinja 2
+    conversion (text)', subtype: success, type: workflow_edge, workflow: (R) Scrapli
+    and Netmiko Multiple Commands and Jinja2}
+- {color: green, destination: '[Shared] End', label: success, name: '2022-07-12 14:08:46.777494',
+  source: '[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Netmiko Jinja 2
+    conversion (list)', subtype: success, type: workflow_edge, workflow: (R) Scrapli
+    and Netmiko Multiple Commands and Jinja2}
+- {color: green, destination: '[(R) Unix Command & Chell, Ping Service, Jump on Connect
+    mechanism] Ping Custom IP', label: success, name: '2022-07-21 12:13:24.622927',
+  source: '[(R) Unix Command & Chell, Ping Service, Jump on Connect mechanism] Ping
+    Washington', subtype: success, type: workflow_edge, workflow: '(R) Unix Command
+    & Chell, Ping Service, Jump on Connect mechanism'}
+- {color: green, destination: '[(R) Unix Command & Chell, Ping Service, Jump on Connect
+    mechanism] Validation: jump on server 2 from Washington', label: success, name: '2022-07-21
+    12:13:25.620010', source: '[(R) Unix Command & Chell, Ping Service, Jump on Connect
+    mechanism] Ping Custom IP', subtype: success, type: workflow_edge, workflow: '(R)
+    Unix Command & Chell, Ping Service, Jump on Connect mechanism'}
+- {color: green, destination: '[Data Extraction Jinja2 Template] Apply TTP Template',
+  label: success, name: '2022-07-25 07:59:54.667358', source: '[Data Extraction Jinja2
+    Template] Define Input Variables', subtype: success, type: workflow_edge, workflow: Data
+    Extraction Jinja2 Template}
+- {color: green, destination: '[Shared] End', label: success, name: '2022-07-25 07:59:55.587645',
+  source: '[Data Extraction Jinja2 Template] Apply TTP Template', subtype: success,
   type: workflow_edge, workflow: Data Extraction Jinja2 Template}

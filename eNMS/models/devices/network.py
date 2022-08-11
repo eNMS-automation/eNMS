@@ -23,6 +23,7 @@ class Network(Node):
     category = db.Column(db.SmallString)
     icon = db.Column(db.TinyString, default="network")
     id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
+    path = db.Column(db.TinyString)
     labels = db.Column(db.Dict, info={"log_change": False})
     nodes = relationship(
         "Node", secondary=db.node_network_table, back_populates="networks"
@@ -43,8 +44,10 @@ class Network(Node):
         return clone
 
     def update(self, **kwargs):
-        old_name = self.name
+        old_name, self.path = self.name, str(self.id)
         super().update(**kwargs)
+        if len(self.networks) == 1:
+            self.path = f"{self.networks[0].path}>{self.id}"
         if self.name == old_name:
             return
         for node in self.nodes:

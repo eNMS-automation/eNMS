@@ -6,7 +6,11 @@
       "pages": {
         "Dashboard": {
           "endpoint": "/dashboard",
-          "rbac": "all"
+          "rbac": "access"
+        },
+        "Files": {
+          "endpoint": "/file_table",
+          "rbac": "access"
         },
         "Changelog": {
           "endpoint": "/changelog_table",
@@ -103,11 +107,6 @@
       }
     }
   },
-  "upper_menu": {
-    "Admin": "admin",
-    "Settings": "admin",
-    "Files": "access"
-  },
   "delete_requests": {
     "/rest/instance": "access"
   },
@@ -121,12 +120,13 @@
     "/configuration_table": "access",
     "/confirmation_form": "access",
     "/credential_table": "admin",
-    "/dashboard": "all",
+    "/dashboard": "access",
     "/device_data_form": "access",
     "/device_table": "access",
-    "/download_file": "access",
+    "/download": "access",
     "/event_table": "access",
     "/export_service": "access",
+    "/file_table": "access",
     "/files_form": "access",
     "/geographical_view": "access",
     "/git_history_form": "access",
@@ -140,7 +140,7 @@
     "/logs_form": "access",
     "/pool_table": "access",
     "/rest/configuration": "access",
-    "/rest/workers": "access",
+    "/rest/workers": "admin",
     "/rest/instance": "access",
     "/rest/is_alive": "none",
     "/rest/query": "access",
@@ -175,8 +175,8 @@
     "/clear_results": "access",
     "/clear_configurations": "access",
     "/compare": "access",
-    "/counters": "all",
-    "/count_models": "all",
+    "/counters": "access",
+    "/count_models": "access",
     "/create_label": "access",
     "/database_deletion": "admin",
     "/delete_instance": "access",
@@ -185,7 +185,6 @@
     "/export_service": "access",
     "/export_services": "access",
     "/topology_export": "access",
-    "/delete_file": "access",
     "/edit_file": "access",
     "/filtering": "all",
     "/get": "access",
@@ -207,7 +206,6 @@
     "/get_session_log": "admin",
     "/get_network_state": "access",
     "/get_top_level_instances": "access",
-    "/get_tree_files": "access",
     "/get_visualization_pools": "access",
     "/get_workflow_results": "access",
     "/get_workflow_services": "access",
@@ -238,9 +236,12 @@
     "/run_service_on_targets": "access",
     "/save_file": "access",
     "/save_positions": "access",
+    "/save_profile": "access",
     "/save_settings": "admin",
     "/scan_cluster": "access",
+    "/scan_folder": "access",
     "/scan_playbook_folder": "access",
+    "/search_builder": "access",
     "/search_workflow_services": "access",
     "/skip_services": "access",
     "/stop_run": "access",

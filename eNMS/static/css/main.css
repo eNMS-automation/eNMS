@@ -510,6 +510,28 @@ button {
   margin-right: 0;
 }
 
+.btn-select2 {
+  margin-top: -5px;
+  margin-right: -5px;
+  margin-left: -5px;
+  font-size: 12px;
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+/* Increase size of select2 drop-down list */
+.select2-container .select2-selection--single {
+  height: 35px !important;
+}
+
+.select2-selection__rendered {
+  line-height: 31px !important;
+}
+
+.select2-selection__arrow {
+  height: 34px !important;
+}
+
 .input-group {
   margin-bottom: 0px;
 }
@@ -858,6 +880,11 @@ textarea.form-control {
 
 td span {
   line-height: 18px;
+}
+
+/* Align Datatables cell content on y-axis */
+table.dataTable tbody td {
+  vertical-align: middle;
 }
 
 /* Set the table pages in the middle */

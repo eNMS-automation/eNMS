@@ -538,7 +538,8 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
   if (!$(`#service-logs-${service.id}`).length) return;
   if (runtime != $(`#runtimes-logs-${service.id}`).val()) return;
   call({
-    url: `/get_service_logs/${service.id}/${runtime}/${line || 0}`,
+    url: `/get_service_logs/${service.id}/${runtime}`,
+    data: { line: line || 0, device: $("#device-filter").val() },
     callback: function (result) {
       if (!first && result.refresh && result.logs.length) {
         // eslint-disable-next-line new-cap
@@ -580,7 +581,7 @@ function submitInitialForm(serviceId) {
   });
 }
 
-export const runService = function ({ id, type, parametrization }) {
+export const runService = function ({ id, path, type, parametrization }) {
   if (parametrization) {
     openPanel({
       name: "parameterized_form",
@@ -601,7 +602,7 @@ export const runService = function ({ id, type, parametrization }) {
     });
   } else {
     call({
-      url: `/run_service/${id}`,
+      url: `/run_service/${path || id}`,
       form: type ? `${type}-form-${id}` : null,
       callback: function (result) {
         if (type) $(`#${type}-${id}`).remove();
@@ -741,8 +742,6 @@ Object.assign(action, {
     runService({ id: service.id, parametrization: true }),
   Logs: (service) => showRuntimePanel("logs", service, currentRuntime),
   Results: (service) => showRuntimePanel("results", service, currentRuntime, "result"),
-  Backward: () => switchToWorkflow(history[historyPosition - 1], "left"),
-  Forward: () => switchToWorkflow(history[historyPosition + 1], "right"),
 });
 
 export function showRunServicePanel({ instance, tableId, targets, type }) {

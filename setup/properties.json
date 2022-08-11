@@ -54,6 +54,13 @@
         "type": "json"
       }
     },
+    "file": {
+      "custom_property": {
+        "pretty_name": "Custom Property",
+        "type": "str",
+        "default": "Custom"
+      }
+    },
     "link": {
       "custom_property": {
         "pretty_name": "Custom Property",
@@ -94,7 +101,7 @@
         "type": "str",
         "default": "",
         "default_function": "generate_uuid",
-        "render_kw": {"readonly": true}
+        "render_kw": { "readonly": true }
       }
     },
     "workflow": {
@@ -542,6 +549,12 @@
         "search": "text"
       },
       {
+        "data": "shared",
+        "title": "Shared",
+        "search": "bool",
+        "visible": false
+      },
+      {
         "data": "vendor",
         "title": "Vendor",
         "search": "text",
@@ -599,7 +612,7 @@
     "network": [
       {
         "data": "name",
-        "width": "200px",
+        "width": "400px",
         "title": "Name",
         "search": "text",
         "className": "dt-body-left"
@@ -607,9 +620,7 @@
       {
         "data": "description",
         "title": "Description",
-        "search": "text",
-        "visible": false,
-        "orderable": false
+        "search": "text"
       },
       {
         "data": "creator",
@@ -620,6 +631,11 @@
         "data": "location",
         "title": "Location",
         "search": "text"
+      },
+      {
+        "data": "devices",
+        "title": "Devices",
+        "width": "100px"
       },
       {
         "data": "links",
@@ -638,7 +654,7 @@
         "data": "name",
         "title": "Name",
         "search": "text",
-        "width": "200px"
+        "width": "250px"
       },
       {
         "data": "runtime",
@@ -709,6 +725,12 @@
         "data": "runtime",
         "title": "Runtime",
         "search": "text"
+      },
+      {
+        "data": "workflow_name",
+        "title": "Workflow",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "labels",
@@ -802,7 +824,7 @@
       {
         "data": "success",
         "title": "Status",
-        "search": "text",
+        "search": "bool",
         "width": "80px",
         "orderable": false
       },
@@ -1061,6 +1083,47 @@
         "orderable": false
       }
     ],
+    "file": [
+      {
+        "data": "filename",
+        "title": "Filename",
+        "search": "text",
+        "className": "dt-body-left"
+      },
+      {
+        "data": "name",
+        "title": "Name",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "path",
+        "title": "Path",
+        "search": "text"
+      },
+      {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_updated",
+        "title": "Last Updated",
+        "search": "text"
+      },
+      {
+        "data": "status",
+        "title": "Status",
+        "search": "text"
+      },
+      {
+        "data": "buttons",
+        "width": "200px",
+        "orderable": false,
+        "export": false
+      }
+    ],
     "session": [
       {
         "data": "timestamp",
@@ -1142,9 +1205,10 @@
       "network_number",
       "user_number"
     ],
-    "run": ["service_properties"],
-    "service": ["scoped_name", "mandatory_parametrization"],
-    "network": ["scoped_name"],
+    "run": ["path", "service_properties"],
+    "service": ["path", "scoped_name", "mandatory_parametrization"],
+    "network": ["path", "scoped_name"],
+    "result": ["service_name"],
     "task": ["frequency", "frequency_unit", "crontab_expression", "is_active"]
   },
   "filtering": {

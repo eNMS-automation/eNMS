@@ -1,8 +1,13 @@
 from flask_login import UserMixin
 from itertools import chain
+from os import makedirs
+from os.path import exists, getmtime
 from passlib.hash import argon2
-from sqlalchemy import Boolean, Integer
+from pathlib import Path
+from shutil import move, rmtree
+from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import relationship
+from time import ctime
 
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
@@ -31,11 +36,13 @@ class User(AbstractBase, UserMixin):
     groups = db.Column(db.LargeString)
     is_admin = db.Column(Boolean, default=False)
     email = db.Column(db.SmallString)
+    landing_page = db.Column(
+        db.SmallString, default=vs.settings["authentication"]["landing_page"]
+    )
     password = db.Column(db.SmallString)
     authentication = db.Column(db.TinyString)
     menu = db.Column(db.List)
     pages = db.Column(db.List)
-    upper_menu = db.Column(db.List)
     get_requests = db.Column(db.List)
     post_requests = db.Column(db.List)
     delete_requests = db.Column(db.List)
@@ -73,7 +80,7 @@ class User(AbstractBase, UserMixin):
             .all()
         )
         for property in vs.rbac:
-            if property == "advanced":
+            if property in ("advanced", "all_pages"):
                 continue
             access_value = (getattr(access, property) for access in user_access)
             setattr(self, property, list(set(chain.from_iterable(access_value))))
@@ -87,7 +94,6 @@ class Access(AbstractBase):
     description = db.Column(db.LargeString)
     menu = db.Column(db.List)
     pages = db.Column(db.List)
-    upper_menu = db.Column(db.List)
     get_requests = db.Column(db.List)
     post_requests = db.Column(db.List)
     delete_requests = db.Column(db.List)
@@ -156,3 +162,64 @@ class Parameters(AbstractBase):
     banner_active = db.Column(Boolean)
     banner_deactivate_on_restart = db.Column(Boolean)
     banner_properties = db.Column(db.Dict)
+
+
+class File(AbstractBase):
+
+    __tablename__ = type = "file"
+    type = db.Column(db.SmallString)
+    __mapper_args__ = {"polymorphic_identity": "file", "polymorphic_on": type}
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    filename = db.Column(db.SmallString)
+    path = db.Column(db.SmallString, unique=True)
+    last_modified = db.Column(db.TinyString)
+    last_updated = db.Column(db.TinyString)
+    status = db.Column(db.TinyString)
+    folder_id = db.Column(Integer, ForeignKey("folder.id"))
+    folder = relationship(
+        "Folder", foreign_keys="Folder.folder_id", back_populates="files"
+    )
+    folder_path = db.Column(db.SmallString)
+
+    def delete(self):
+        Path(self.path).unlink()
+
+    def update(self, move_file=True, **kwargs):
+        old_path = self.path
+        super().update(**kwargs)
+        if exists(str(old_path)) and not exists(self.path) and move_file:
+            move(old_path, self.path)
+        self.name = self.path.replace("/", ">")
+        *split_folder_path, self.filename = self.path.split("/")
+        self.folder_path = "/".join(split_folder_path)
+        self.folder = db.fetch("folder", path=self.folder_path, allow_none=True)
+        self.last_modified = ctime(getmtime(self.path))
+        self.last_updated = ctime()
+        self.status = "Updated"
+
+
+class Folder(File):
+
+    __tablename__ = "folder"
+    pretty_name = "Folder"
+    parent_type = "file"
+    id = db.Column(Integer, ForeignKey("file.id"), primary_key=True)
+    files = relationship(
+        "File",
+        back_populates="folder",
+        foreign_keys="File.folder_id",
+        cascade="all, delete-orphan",
+    )
+    __mapper_args__ = {
+        "polymorphic_identity": "folder",
+        "inherit_condition": id == File.id,
+    }
+
+    def __init__(self, **kwargs):
+        if not exists(kwargs["path"]):
+            makedirs(kwargs["path"])
+        self.update(**kwargs)
+
+    def delete(self):
+        rmtree(self.path)

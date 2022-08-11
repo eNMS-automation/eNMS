@@ -19,7 +19,12 @@ subtypes: false
 user: false
 */
 
-import { openDebugPanel, showCredentialPanel } from "./administration.js";
+import {
+  folderPath,
+  openDebugPanel,
+  showCredentialPanel,
+  showFolderPanel,
+} from "./administration.js";
 import { creationMode, initBuilder, instance, processBuilderData } from "./builder.js";
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
@@ -27,9 +32,9 @@ import { initVisualization } from "./visualization.js";
 import { showLinkPanel, showNodePanel, updateNetworkPanel } from "./networkBuilder.js";
 import { showServicePanel } from "./workflowBuilder.js";
 
-const currentUrl = window.location.href.split("#")[0].split("?")[0];
-export let editors = {};
+const currentUrl = `${location.origin}/${page}`;
 const pageHistory = ["workflow_builder", "service_table", "network_table"];
+export let editors = {};
 export let history = pageHistory.includes(page) ? [""] : [];
 export let historyPosition = page.includes("table") ? 0 : -1;
 export let jsonEditors = {};
@@ -63,7 +68,7 @@ export function detectUserInactivity() {
 const panelThemes = {
   logs: { bgContent: "#1B1B1B" },
   device_data: { bgContent: "#1B1B1B" },
-  file: { bgContent: "#1B1B1B" },
+  file_editor: { bgContent: "#1B1B1B" },
 };
 
 $.ajaxSetup({
@@ -501,7 +506,7 @@ export function preprocessForm(panel, id, type, duplicate) {
   });
 }
 
-function initSelect(el, model, parentId, single, constraints) {
+export function initSelect(el, model, parentId, single, constraints) {
   el.select2({
     multiple: !single,
     allowClear: true,
@@ -509,6 +514,7 @@ function initSelect(el, model, parentId, single, constraints) {
     closeOnSelect: single ? true : false,
     dropdownParent: parentId ? $(`#${parentId}`) : $(document.body),
     tags: !single,
+    escapeMarkup: (markup) => markup,
     width: "100%",
     tokenSeparators: [","],
     ajax: {
@@ -640,6 +646,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
       if (isNode) showNodePanel(type, id, mode, tableId);
       if (isLink) showLinkPanel(type, id, edge);
       if (type == "credential") showCredentialPanel(id);
+      if (type == "folder") showFolderPanel(id);
       if (id) {
         const properties = type === "pool" ? "_properties" : "";
         call({
@@ -701,7 +708,11 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
         if (page == "network_builder") updateNetworkPanel(type);
       }
       if (isService) loadScript(`../static/js/services/${type}.js`, id);
-      const property = isService ? "scoped_name" : "name";
+      const property = isService
+        ? "scoped_name"
+        : type == "folder"
+        ? "filename"
+        : "name";
       $(`#${type}-${property}`).focus();
     },
     type: type,
@@ -731,13 +742,17 @@ function updateProperty(instance, el, property, value, type) {
     }
     el.selectpicker("val", value).trigger("change");
     el.selectpicker("render");
-  } else if (propertyType == "object-list") {
-    value.forEach((o) => el.append(new Option(o.name, o.name)));
-    el.val(value.map((p) => p.name)).trigger("change");
-  } else if (propertyType == "object") {
-    el.append(new Option(value.ui_name || value.name, value.id))
-      .val(value.id)
-      .trigger("change");
+  } else if (["object-list", "object"].includes(propertyType)) {
+    if (propertyType == "object") value = [value];
+    const idProperty = propertyType == "object" ? "id" : "name";
+    value.forEach((o) => {
+      const uiLink = `
+      <button type="button" title="" class="btn btn-link btn-select2"
+      onclick="eNMS.base.showInstancePanel('${o.type}', '${o.id}')">
+      ${o.ui_name || o.name}</button>`;
+      el.append(new Option(uiLink, o[idProperty]));
+    });
+    el.val(value.map((p) => p[idProperty])).trigger("change");
   } else if (propertyType == "json") {
     el.val(JSON.stringify(value));
     const editor = jsonEditors[instance.id][property];
@@ -757,7 +772,7 @@ function updateProperty(instance, el, property, value, type) {
   }
 }
 
-function processInstance(type, instance) {
+export function processInstance(type, instance) {
   for (const [property, value] of Object.entries(instance)) {
     const el = $(
       instance ? `#${type}-${property}-${instance.id}` : `#${type}-${property}`
@@ -771,6 +786,10 @@ function processData(type, id) {
     const relation = type in subtypes.service ? "workflow" : "network";
     const property = id ? `#${type}-${relation}s-${id}` : `#${type}-${relation}s`;
     $(property).prop("disabled", false);
+  }
+  if (type == "folder" && !id) {
+    const filename = $("#folder-filename").val();
+    $("#folder-path").val(`${folderPath}/${filename}`);
   }
   call({
     url: `/update/${type}`,

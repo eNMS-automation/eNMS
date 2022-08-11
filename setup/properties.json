@@ -102,6 +102,12 @@
         "default": "",
         "default_function": "generate_uuid",
         "render_kw": { "readonly": true }
+      },
+      "mandatory_parameter": {
+        "pretty_name": "Mandatory Parameter",
+        "type": "str",
+        "default": "Default Value",
+        "mandatory": true
       }
     },
     "workflow": {

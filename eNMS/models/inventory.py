@@ -105,7 +105,7 @@ class Device(Node):
             main_constraint = {
                 "equality": row == value,
                 "inclusion": literal(value).contains(row),
-                "regex": literal(value).op(db.regex_operator)(row)
+                "regex": literal(value).op(db.regex_operator)(row),
             }
             match_constraints = []
             for match_property in ("equality", "inclusion", "regex"):
@@ -113,7 +113,13 @@ class Device(Node):
                     constraint = main_constraint[match_property]
                     if invert_value:
                         constraint = ~constraint
-                    match_constraints.append(and_(constraint, row_match == match_property, invert_value == row_invert))
+                    match_constraints.append(
+                        and_(
+                            constraint,
+                            row_match == match_property,
+                            invert_value == row_invert,
+                        )
+                    )
             constraints.append(and_(row != "", or_(*match_constraints)))
         self.pools = db.query("pool").filter(or_(*constraints)).all()
 

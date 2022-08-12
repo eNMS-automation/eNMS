@@ -355,27 +355,6 @@ class Pool(AbstractBase):
         if not kwargs.get("import_mechanism", False):
             self.compute_pool()
 
-    def match_instance(self, instance):
-        match_list = []
-        for property in vs.properties["filtering"][instance.class_type]:
-            pool_value = getattr(self, f"{instance.class_type}_{property}")
-            match_type = getattr(self, f"{instance.class_type}_{property}_match")
-            if not pool_value and match_type != "empty":
-                continue
-            value = str(getattr(instance, property))
-            match = (
-                match_type == "inclusion"
-                and pool_value in value
-                or match_type == "equality"
-                and pool_value == value
-                or match_type == "empty"
-                and not value
-                or bool(search(pool_value, value))
-            )
-            result = match != getattr(self, f"{instance.class_type}_{property}_invert")
-            match_list.append(result)
-        return match_list and all(match_list)
-
     def compute_pool(self):
         for model in self.models:
             if not self.manually_defined:

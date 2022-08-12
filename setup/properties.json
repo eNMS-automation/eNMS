@@ -1191,7 +1191,6 @@
       "name",
       "description",
       "creator",
-      "access_groups",
       "subtype",
       "model",
       "location",
@@ -1213,7 +1212,6 @@
       "name",
       "description",
       "creator",
-      "access_groups",
       "subtype",
       "model",
       "location",
@@ -1247,7 +1245,6 @@
       "type",
       "description",
       "creator",
-      "access_groups",
       "vendor",
       "operating_system",
       "send_notification"

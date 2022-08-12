@@ -51,6 +51,7 @@ class Database:
             setattr(self, *setting)
         self.database_url = getenv("DATABASE_URL", "sqlite:///database.db")
         self.dialect = self.database_url.split(":")[0]
+        self.regex_operator = "~" if self.dialect == "postgresql" else "regexp"
         self.rbac_error = type("RbacError", (Exception,), {})
         self.configure_columns()
         self.engine = create_engine(

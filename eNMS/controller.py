@@ -369,8 +369,7 @@ class Controller:
                 constraint = row.contains(value, autoescape=isinstance(value, str))
             else:
                 compile(value)
-                regex_operator = "~" if db.dialect == "postgresql" else "regexp"
-                constraint = row.op(regex_operator)(value)
+                constraint = row.op(db.regex_operator)(value)
             if constraint_dict.get(f"{property}_invert"):
                 constraint = ~constraint
             constraints.append(constraint)

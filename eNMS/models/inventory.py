@@ -1,5 +1,6 @@
 from re import search, sub
 from sqlalchemy import and_, Boolean, event, ForeignKey, Integer, or_
+from sqlalchemy.sql.expression import literal
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import aliased, backref, deferred, relationship
 from sqlalchemy.schema import UniqueConstraint
@@ -92,6 +93,29 @@ class Device(Node):
     sessions = relationship(
         "Session", back_populates="device", cascade="all, delete-orphan"
     )
+
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        constraints = []
+        for property in vs.properties["filtering"]["device"]:
+            table, pool_property = vs.models["pool"], f"{self.class_type}_{property}"
+            row, value = getattr(table, pool_property), getattr(self, property)
+            row_match = getattr(table, f"{pool_property}_match")
+            row_invert = getattr(table, f"{pool_property}_invert")
+            main_constraint = {
+                "equality": row == value,
+                "inclusion": literal(value).contains(row),
+                "regex": literal(value).op(db.regex_operator)(row)
+            }
+            match_constraints = []
+            for match_property in ("equality", "inclusion", "regex"):
+                for invert_value in (False, True):
+                    constraint = main_constraint[match_property]
+                    if invert_value:
+                        constraint = ~constraint
+                    match_constraints.append(and_(constraint, row_match == match_property, invert_value == row_invert))
+            constraints.append(and_(row != "", or_(*match_constraints)))
+        self.pools = db.query("pool").filter(or_(*constraints)).all()
 
     @classmethod
     def database_init(cls):

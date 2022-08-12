@@ -414,7 +414,7 @@ function displayLogs(service, runtime, change) {
     editor = $(`#service-logs-${service.id}`).data("CodeMirrorInstance");
     editor.setValue("");
   } else {
-    editor = initCodeMirror(`service-logs-${service.id}`, "logs")
+    editor = initCodeMirror(`service-logs-${service.id}`, "logs");
   }
   $(`#runtimes-logs-${service.id}`).on("change", function () {
     refreshLogs(service, this.value, editor, true);

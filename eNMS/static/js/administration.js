@@ -80,14 +80,12 @@ export function displayFolderPath() {
   const htmlPath = folderPath
     .split("/")
     .slice(1)
-    .map((value, index) => {
-      let folder = `${index ? "<b> / </b>" : ""}
+    .map(
+      (value) => `<b> / </b>
       <button type="button" class="btn btn-xs btn-primary">
         ${value}
-      </button>
-      `;
-      return folder;
-    })
+      </button>`
+    )
     .join("");
   $("#current-folder-path").html(`<b>Current Folder :</b>${htmlPath}`);
 }

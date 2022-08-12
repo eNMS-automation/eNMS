@@ -519,8 +519,10 @@ export function initCodeMirror(id, mode) {
   });
   $(`#${id}`).data("CodeMirrorInstance", editor);
   editor.setSize("100%", "100%");
-  new ResizeObserver(() => {editor.refresh();}).observe(element);
-  return editor
+  new ResizeObserver(() => {
+    editor.refresh();
+  }).observe(element);
+  return editor;
 }
 
 export function initSelect(el, model, parentId, single, constraints) {

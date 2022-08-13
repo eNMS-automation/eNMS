@@ -64,3 +64,6 @@ def generate_pool_scalability_migration_file():
         )
     with open(path / "pool.yaml", "w") as migration_file:
         yaml.dump(pools, migration_file)
+
+
+generate_model_scalability_device_migration_file()

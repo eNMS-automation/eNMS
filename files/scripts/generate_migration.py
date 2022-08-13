@@ -12,7 +12,7 @@ service_type = [
 PATH = Path.cwd().parent.parent.parent / "eNMS-prod" / "files" / "migrations"
 
 
-def generate_model_scalability_service_migration_file(project):
+def generate_model_scalability_service_migration_file():
     path = PATH / "model_scalability"
     services = [
         {
@@ -50,7 +50,7 @@ def generate_model_scalability_device_migration_file():
 def generate_model_scalability_pool_migration_file():
     path = PATH / "model_scalability"
     pools = []
-    for index in range(1_001):
+    for index in range(1, 1_001):
         # we associate each pool of index (1)xyyy to a range of
         # at most 3K devices in [max(0, xK - 1), min(9, xK + 1)]
         x = index // 100
@@ -73,4 +73,4 @@ def generate_model_scalability_pool_migration_file():
         yaml.dump(pools, migration_file)
 
 
-generate_model_scalability_device_migration_file()
+generate_model_scalability_pool_migration_file()

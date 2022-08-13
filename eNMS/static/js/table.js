@@ -57,6 +57,7 @@ export class Table {
         $(".paginate_button > a").on("focus", function () {
           $(this).blur();
         });
+        if (!displayPagination) self.setPagination();
         createTooltips();
       },
       sDom: "tilp",
@@ -159,7 +160,6 @@ export class Table {
             copyToClipboard({ text: result.full_result, includeText: false });
             self.copyClipboard = false;
           }
-          $(`.dataTables_info`)[displayPagination ? "show" : "hide"]();
           return result.data.map((instance) =>
             self.addRow({ properties: instance, tableId: self.id })
           );
@@ -257,6 +257,21 @@ export class Table {
     self.table.columns.adjust();
   }
 
+  setPagination() {
+    const button = `
+      <ul class="pagination" style="margin: 0px;">
+        <li>
+          <a
+            onclick="eNMS.table.togglePaginationDisplay('${this.id}')"
+            data-tooltip="Edit Workflow"
+            style="cursor: pointer;"
+            ><span class="glyphicon glyphicon-info-sign"></span
+          ></a>
+        </li>
+      </ul>`;
+    $(".dataTables_info").html(button).show();
+  }
+
   createfilteringTooltips() {
     this.columns.forEach((column) => {
       if (column.search != "text") return;
@@ -327,18 +342,6 @@ export class Table {
       </button>`;
   }
 
-  paginatioNButton() {
-    return `
-      <button
-        id="pagination-btn"
-        class="btn btn-info"
-        onclick="eNMS.table.togglePaginationDisplay('${this.id}')"
-        data-tooltip="Display Pagination Numbers"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-info-sign"></span>
-      </button>`;
-  }
 
   createNewButton() {
     const onClick = this.relation
@@ -499,7 +502,6 @@ tables.device = class DeviceTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.paginatioNButton(),
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
@@ -630,7 +632,6 @@ tables.network = class NetworkTable extends Table {
           <option value="false">Display all networks</option>
         </select>
       </button>`,
-      this.paginatioNButton(),
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
@@ -712,7 +713,6 @@ tables.configuration = class ConfigurationTable extends Table {
         class="slider"
         style="width: 200px"
       >`,
-      this.paginatioNButton(),
       this.refreshTableButton(),
       this.searchTableButton("device"),
       this.clearSearchButton(),
@@ -762,7 +762,6 @@ tables.link = class LinkTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.paginatioNButton(),
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
@@ -827,7 +826,6 @@ tables.pool = class PoolTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.paginatioNButton(),
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
@@ -928,7 +926,6 @@ tables.service = class ServiceTable extends Table {
           <option value="false">Display all services</option>
         </select>
       </button>`,
-      this.paginatioNButton(),
       `
       <button
         class="btn btn-info"
@@ -1061,7 +1058,6 @@ tables.run = class RunTable extends Table {
       this.columnDisplay(),
       this.searchTableButton(),
       this.clearSearchButton(),
-      this.paginatioNButton(),
       this.refreshTableButton(),
       ` <button
         class="btn btn-info"
@@ -1142,7 +1138,6 @@ tables.result = class ResultTable extends Table {
       >
         <span class="glyphicon glyphicon-adjust"></span>
       </button>`,
-      this.paginatioNButton(),
       this.refreshTableButton(),
       this.clearSearchButton(),
     ];
@@ -1213,7 +1208,6 @@ tables.task = class TaskTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.paginatioNButton(),
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
@@ -1293,7 +1287,6 @@ tables.group = class GroupTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.paginatioNButton(),
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
@@ -1342,7 +1335,6 @@ tables.user = class UserTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.paginatioNButton(),
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
@@ -1381,7 +1373,6 @@ tables.credential = class CredentialTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.paginatioNButton(),
       this.refreshTableButton(),
       this.clearSearchButton(),
       this.createNewButton(),
@@ -1417,7 +1408,6 @@ tables.server = class ServerTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.paginatioNButton(),
       this.refreshTableButton(),
       this.clearSearchButton(),
       this.createNewButton(),
@@ -1456,7 +1446,6 @@ tables.changelog = class ChangelogTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.paginatioNButton(),
       this.refreshTableButton(),
       this.clearSearchButton(),
       this.createNewButton(),
@@ -1804,7 +1793,6 @@ function displayRelationTable(type, instance, relation) {
 
 function togglePaginationDisplay(tableId) {
   displayPagination = !displayPagination;
-  $("#pagination-btn").toggleClass("active");
   refreshTable(tableId);
 }
 

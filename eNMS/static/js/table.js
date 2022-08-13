@@ -222,6 +222,7 @@ export class Table {
         name: `${this.model}_relation_filtering`,
         target: `#advanced-search-${this.id}`,
         container: `#controls-${this.id}`,
+        size: "auto 500",
         position: {
           my: "center-top",
           at: "center-bottom",

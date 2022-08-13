@@ -9,11 +9,10 @@ service_type = [
     "netmiko_commands_service",
 ]
 
-PATH = Path.cwd().parent.parent.parent / "eNMS-prod" / "files" / "migrations"
+PATH = Path.cwd().parent.parent.parent / "eNMS-prod" / "files" / "migrations" / "model_scalability"
 
 
-def generate_model_scalability_service_migration_file():
-    path = PATH / "model_scalability"
+def generate_services():
     services = [
         {
             "name": f"[Shared] s{index}",
@@ -36,19 +35,17 @@ def generate_model_scalability_service_migration_file():
             for index in range(1, 5)
         ]
     )
-    with open(path / "service.yaml", "w") as migration_file:
+    with open(PATH / "service.yaml", "w") as migration_file:
         yaml.dump(services, migration_file)
 
 
-def generate_model_scalability_device_migration_file():
-    path = PATH / "model_scalability"
+def generate_devices():
     devices = [{"name": f"d{index}"} for index in range(1, 80_001)]
-    with open(path / "device.yaml", "w") as migration_file:
+    with open(PATH / "device.yaml", "w") as migration_file:
         yaml.dump(devices, migration_file)
 
 
-def generate_model_scalability_pool_migration_file():
-    path = PATH / "model_scalability"
+def generate_pools():
     pools = []
     for index in range(1, 1_001):
         # we associate each pool of index (1)xyyy to a range of
@@ -69,15 +66,20 @@ def generate_model_scalability_pool_migration_file():
                 "device_name_match": "regex",
             }
         )
-    with open(path / "pool.yaml", "w") as migration_file:
+    with open(PATH / "pool.yaml", "w") as migration_file:
         yaml.dump(pools, migration_file)
 
 
-def generate_model_scalability_user_migration_file():
-    path = PATH / "model_scalability"
+def generate_users():
     users = [{"name": f"u{index}"} for index in range(1, 1_001)]
-    with open(path / "user.yaml", "w") as migration_file:
+    with open(PATH / "user.yaml", "w") as migration_file:
         yaml.dump(users, migration_file)
 
 
-generate_model_scalability_user_migration_file()
+def generate_tasks():
+    users = [{"name": f"u{index}"} for index in range(1, 2_001)]
+    with open(PATH / "task.yaml", "w") as migration_file:
+        yaml.dump(users, migration_file)
+
+
+generate_tasks()

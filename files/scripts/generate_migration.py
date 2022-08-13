@@ -82,4 +82,18 @@ def generate_tasks():
         yaml.dump(users, migration_file)
 
 
-generate_tasks()
+def generate_networks():
+    networks = [
+        {
+            "name": f"w{index}",
+            "nodes": list(
+                set(f"d{randrange(1, 80_000)}" for _ in range(30))
+            ),
+        }
+        for index in range(1, 1_001)
+    ]
+    with open(PATH / "network.yaml", "w") as migration_file:
+        yaml.dump(networks, migration_file)
+
+
+generate_networks()

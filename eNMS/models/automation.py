@@ -381,7 +381,7 @@ class Run(AbstractBase):
 
 class Task(AbstractBase):
 
-    __tablename__ = type = "task"
+    __tablename__ = type = class_type = "task"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     admin_only = db.Column(Boolean, default=False)

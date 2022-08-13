@@ -298,7 +298,7 @@ class Link(Object):
 
 class Pool(AbstractBase):
 
-    __tablename__ = type = "pool"
+    __tablename__ = type = class_type = "pool"
     models = ("device", "link")
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)

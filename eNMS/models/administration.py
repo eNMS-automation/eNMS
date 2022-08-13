@@ -166,7 +166,7 @@ class Parameters(AbstractBase):
 
 class File(AbstractBase):
 
-    __tablename__ = type = "file"
+    __tablename__ = type = class_type = "file"
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "file", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)

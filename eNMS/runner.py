@@ -1179,9 +1179,10 @@ class Runner:
             except Exception:
                 self.disconnect(library, device, connection)
 
-    def get_connection(self, library, device):
+    def get_connection(self, library, device, name=None):
         cache = vs.connections_cache[library].get(self.parent_runtime, {})
-        return cache.get(device, {}).get(getattr(self, "connection_name", "default"))
+        connection = name or getattr(self, "connection_name", "default")
+        return cache.get(device, {}).get(connection)
 
     def close_device_connection(self, device):
         for library in ("netmiko", "napalm", "scrapli", "ncclient"):

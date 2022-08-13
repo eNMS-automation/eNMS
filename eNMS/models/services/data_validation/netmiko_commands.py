@@ -90,7 +90,9 @@ class NetmikoValidationService(ConnectionService):
 class NetmikoValidationForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_commands_service")
     commands = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
-    jinja2_template = BooleanField("Jinja2 Template", default=False)
+    jinja2_template = BooleanField(
+        "Interpret Commands as Jinja2 Template", default=False
+    )
     results_as_list = BooleanField("Results As List", default=False)
     use_textfsm = BooleanField("Use TextFSM", default=False)
     use_genie = BooleanField("Use Genie / PyATS", default=False)

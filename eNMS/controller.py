@@ -328,7 +328,9 @@ class Controller:
         service = db.fetch("service", id=service_id)
         path = Path(vs.path / "files" / "services" / service.filename)
         path.mkdir(parents=True, exist_ok=True)
-        services = service.deep_services if service.type == "workflow" else [service]
+        services = (
+            set(service.deep_services) if service.type == "workflow" else [service]
+        )
         exclude = ("target_devices", "target_pools", "pools", "events")
         services = [
             service.to_dict(export=True, private_properties=True, exclude=exclude)
@@ -1384,7 +1386,7 @@ class Controller:
             options = ""
         environment = {
             **{key: str(value) for key, value in vs.settings["ssh"]["web"].items()},
-            "APP_ADDRESS": getenv("SERVER_ADDR", "https://0.0.0.0"),
+            "APP_ADDRESS": getenv("SERVER_URL", "https://0.0.0.0"),
             "DEVICE": str(device.id),
             "ENDPOINT": endpoint,
             "ENMS_USER": getenv("ENMS_USER", "admin"),

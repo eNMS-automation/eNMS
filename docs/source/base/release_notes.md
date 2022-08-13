@@ -53,6 +53,7 @@ Version 4.3.0
   the network / workflow builder for consistency with results page.
 - Add User Profile window to change username, password, user email, etc.
 - Add User landing page to decide which page to display after logging in (editable in profile).
+  Default landing page is configurable from settings.json > authentication > landing_page.
 - Add mechanism to show a single device status in workflow builder UI (logs filtering + service display)
 - Add mechanism to search for a string accross all services of a workflow in the workflow builder, and
   accross all nodes in the network builder.
@@ -75,7 +76,9 @@ Version 4.3.0
 - redis new option in settings.json > "redis" > "flush_on_restart": flush redis queue when the app restarts.
 - Remove check box for "use device driver" add "use device driver" into drop down and make this the default.
 - Add get_connection function in global variables to access connection object from a python snippet service.
+  A non-default connection can be retrieved from the cache by passing the keyword argument "name".
 - Support custom ip address in ping service (new IP address field, defaults to device IP if empty).
+- Add new "mandatory" keyword in custom properties to make the field required to submit the form.
 
 Migration
 - check "username" and "server" variables in workflow aren't in conflict with existing workflows.

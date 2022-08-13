@@ -14,6 +14,7 @@ import {
   call,
   configureNamespace,
   downloadFile,
+  initCodeMirror,
   notify,
   openPanel,
   openUrl,
@@ -212,17 +213,7 @@ function showSessionLog(sessionId) {
           title: "Session log",
           id: sessionId,
           callback: function () {
-            const content = document.getElementById(`content-${sessionId}`);
-            // eslint-disable-next-line new-cap
-            const editor = CodeMirror(content, {
-              lineWrapping: true,
-              lineNumbers: true,
-              readOnly: true,
-              theme: "cobalt",
-              mode: "network",
-              extraKeys: { "Ctrl-F": "findPersistent" },
-            });
-            editor.setSize("100%", "100%");
+            const editor = initCodeMirror(`content-${sessionId}`, "network");
             editor.setValue(log.replace(ansiEscapeRegex, ""));
           },
         });
@@ -271,18 +262,7 @@ function displayNetworkData({ type, name, id, result, datetime }) {
     id: id,
     callback: function () {
       $(`#data-type-${id}`).val(type).selectpicker("refresh");
-      const content = document.getElementById(`content-${id}`);
-      // eslint-disable-next-line new-cap
-      const editor = CodeMirror(content, {
-        lineWrapping: true,
-        lineNumbers: true,
-        readOnly: true,
-        theme: "cobalt",
-        mode: "network",
-        extraKeys: { "Ctrl-F": "findPersistent" },
-      });
-      $(`#content-${id}`).data("CodeMirrorInstance", editor);
-      editor.setSize("100%", "100%");
+      const editor = initCodeMirror(`content-${id}`, "network");
       $(`#data-type-${id}`)
         .on("change", function () {
           editor.setValue(result[this.value]);

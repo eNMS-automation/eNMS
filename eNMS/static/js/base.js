@@ -506,6 +506,25 @@ export function preprocessForm(panel, id, type, duplicate) {
   });
 }
 
+export function initCodeMirror(id, mode) {
+  const element = document.getElementById(id);
+  // eslint-disable-next-line new-cap
+  const editor = CodeMirror(element, {
+    lineWrapping: true,
+    lineNumbers: true,
+    readOnly: true,
+    theme: "cobalt",
+    mode: mode,
+    extraKeys: { "Ctrl-F": "findPersistent" },
+  });
+  $(`#${id}`).data("CodeMirrorInstance", editor);
+  editor.setSize("100%", "100%");
+  new ResizeObserver(() => {
+    editor.refresh();
+  }).observe(element);
+  return editor;
+}
+
 export function initSelect(el, model, parentId, single, constraints) {
   el.select2({
     multiple: !single,

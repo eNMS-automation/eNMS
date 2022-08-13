@@ -16,6 +16,7 @@ import {
   configureForm,
   configureNamespace,
   downloadFile,
+  initCodeMirror,
   notify,
   observeMutations,
   openPanel,
@@ -413,17 +414,7 @@ function displayLogs(service, runtime, change) {
     editor = $(`#service-logs-${service.id}`).data("CodeMirrorInstance");
     editor.setValue("");
   } else {
-    // eslint-disable-next-line new-cap
-    editor = CodeMirror(content, {
-      lineWrapping: true,
-      lineNumbers: true,
-      readOnly: true,
-      theme: "cobalt",
-      mode: "logs",
-      extraKeys: { "Ctrl-F": "findPersistent" },
-    });
-    $(`#service-logs-${service.id}`).data("CodeMirrorInstance", editor);
-    editor.setSize("100%", "100%");
+    editor = initCodeMirror(`service-logs-${service.id}`, "logs");
   }
   $(`#runtimes-logs-${service.id}`).on("change", function () {
     refreshLogs(service, this.value, editor, true);

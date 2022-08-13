@@ -108,7 +108,12 @@ class Workflow(Service):
 
     @property
     def deep_edges(self):
-        return sum([w.edges for w in self.deep_services if w.type == "workflow"], [])
+        edges = [
+            workflow.edges
+            for workflow in set(self.deep_services)
+            if workflow.type == "workflow"
+        ]
+        return sum(edges, [])
 
     def job(self, run, device=None):
         number_of_runs = defaultdict(int)

@@ -48,18 +48,34 @@ function displayFiles() {
   });
 }
 
-function enterFolder(folder) {
-  folderPath = `${folderPath}/${folder}`;
-  localStorage.setItem("folderPath", folderPath);
-  refreshTable("file");
-  $("#upward-folder-btn").removeClass("disabled");
+export function displayFolderPath() {
+  const htmlPath = folderPath
+    .split("/")
+    .slice(1)
+    .map(
+      (value) => `<b> / </b>
+      <button type="button" class="btn btn-xs btn-primary">
+        ${value}
+      </button>`
+    )
+    .join("");
+  $("#current-folder-path").html(`<b>Current Folder :</b>${htmlPath}`);
 }
 
-function enterUpwardFolder() {
-  folderPath = folderPath.split("/").slice(0, -1).join("/");
+function enterFolder(folder) {
+  if (folder) {
+    folderPath = `${folderPath}/${folder}`;
+  } else {
+    folderPath = folderPath.split("/").slice(0, -1).join("/");
+  }
   localStorage.setItem("folderPath", folderPath);
   refreshTable("file");
-  if (folderPath == defaultFolder) $("#upward-folder-btn").addClass("disabled");
+  if (folder) {
+    $("#upward-folder-btn").removeClass("disabled");
+  } else if (folderPath == defaultFolder) {
+    $("#upward-folder-btn").addClass("disabled");
+  }
+  displayFolderPath();
 }
 
 export function openDebugPanel() {
@@ -334,7 +350,6 @@ configureNamespace("administration", [
   displayFiles,
   editFile,
   enterFolder,
-  enterUpwardFolder,
   getClusterStatus,
   getGitContent,
   migrationsExport,

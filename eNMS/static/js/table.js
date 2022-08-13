@@ -18,7 +18,7 @@ import {
   showConfirmationPanel,
   userIsActive,
 } from "./base.js";
-import { defaultFolder, folderPath } from "./administration.js";
+import { defaultFolder, displayFolderPath, folderPath } from "./administration.js";
 import { exportServices } from "./automation.js";
 import { updateNetworkRightClickBindings } from "./networkBuilder.js";
 
@@ -1523,14 +1523,14 @@ tables.file = class FileTable extends Table {
       <a
         id="upward-folder-btn"
         class="btn btn-info ${status}"
-        onclick="eNMS.administration.enterUpwardFolder()"
+        onclick="eNMS.administration.enterFolder()"
         type="button"
       >
         <span class="glyphicon glyphicon-chevron-up"></span>
       </a>`,
       `
       <button
-        class="btn btn-primary"
+        class="btn btn-primary parent-filtering"
         onclick="eNMS.base.showInstancePanel('folder')"
         data-tooltip="Create New Folder"
         type="button"
@@ -1538,7 +1538,7 @@ tables.file = class FileTable extends Table {
         <span class="glyphicon glyphicon-folder-open"></span>
       </button>`,
       ` <button
-        class="btn btn-primary"
+        class="btn btn-primary parent-filtering"
         onclick="eNMS.administration.showFileUploadPanel()"
         data-tooltip="Upload Files"
         type="button"
@@ -1554,6 +1554,7 @@ tables.file = class FileTable extends Table {
         <span class="glyphicon glyphicon-flash"></span>
       </button>`,
       this.bulkDeletionButton(),
+      `<div id="current-folder-path" style="margin-top: 9px; margin-left: 9px"></div>`,
     ];
   }
 
@@ -1640,11 +1641,13 @@ tables.file = class FileTable extends Table {
   postProcessing(...args) {
     let self = this;
     super.postProcessing(...args);
+    displayFolderPath(folderPath);
     $("#file-type-list").selectpicker();
     $("#parent-filtering")
       .selectpicker()
       .on("change", function () {
         self.table.page(0).ajax.reload(null, false);
+        $("#current-folder-path,.parent-filtering").toggle();
       });
   }
 };

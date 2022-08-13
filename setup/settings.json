@@ -9,6 +9,7 @@
   },
   "authentication": {
     "default": "database",
+    "landing_page": "/workflow_builder",
     "methods": {
       "database": {
         "display_name": "Local User",

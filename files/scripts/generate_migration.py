@@ -85,7 +85,7 @@ def generate_model_scalability_user_migration_file():
         }
         for index in range(1, 1_001)
     ]
-    with open(path / "device.yaml", "w") as migration_file:
+    with open(path / "user.yaml", "w") as migration_file:
         yaml.dump(users, migration_file)
 
 

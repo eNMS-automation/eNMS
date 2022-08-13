@@ -1,9 +1,6 @@
 - admin_only: true
   creator: ''
   description: All objects
-  device_access_groups: ''
-  device_access_groups_invert: false
-  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
   device_configuration_match: inclusion
@@ -84,9 +81,6 @@
     Subnetwork 2 - G1, Subnetwork 2 - G2, Duplicate me 1, Duplication - G1, Duplication
       - R1, Subnetwork 1 - R3, S5 R1, S5 R2, S5 R3, S5 R4, S6 L3 R1, S6 L3 R2]
   last_modified: '2022-04-04 11:09:17.951569'
-  link_access_groups: ''
-  link_access_groups_invert: false
-  link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -142,16 +136,16 @@
       -> R3 L7, R4 -> R3 L8, S6 L1]
   manually_defined: false
   name: Everything
+  owners: []
   property1: CP
+  rbac_edit: []
+  rbac_read: []
   target_services: []
   tasks: []
   type: pool
 - admin_only: false
   creator: ''
   description: All devices
-  device_access_groups: ''
-  device_access_groups_invert: false
-  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
   device_configuration_match: inclusion
@@ -232,9 +226,6 @@
     Subnetwork 2 - G1, Subnetwork 2 - G2, Duplicate me 1, Duplication - G1, Duplication
       - R1, Subnetwork 1 - R3, S5 R1, S5 R2, S5 R3, S5 R4, S6 L3 R1, S6 L3 R2]
   last_modified: '2021-12-25 03:29:21.230786'
-  link_access_groups: ''
-  link_access_groups_invert: false
-  link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -268,17 +259,17 @@
   links: []
   manually_defined: false
   name: All Devices
+  owners: []
   property1: CP
-  target_services: ['[Skip in SxS with service targets and Run Once services] Run
-      Once with Pool', Large Device Configuration and Operational Data]
+  rbac_edit: []
+  rbac_read: []
+  target_services: [Large Device Configuration and Operational Data, '[Skip in SxS
+      with service targets and Run Once services] Run Once with Pool']
   tasks: []
   type: pool
 - admin_only: false
   creator: ''
   description: All links
-  device_access_groups: ''
-  device_access_groups_invert: false
-  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
   device_configuration_match: inclusion
@@ -347,9 +338,6 @@
   device_vendor_match: inclusion
   devices: []
   last_modified: '2021-12-25 03:29:37.110402'
-  link_access_groups: ''
-  link_access_groups_invert: false
-  link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -405,16 +393,16 @@
       -> R3 L7, R4 -> R3 L8, S6 L1]
   manually_defined: false
   name: All Links
+  owners: []
   property1: CP
+  rbac_edit: []
+  rbac_read: []
   target_services: []
   tasks: []
   type: pool
 - admin_only: false
   creator: ''
   description: Datacenter San Francisco
-  device_access_groups: ''
-  device_access_groups_invert: false
-  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
   device_configuration_match: inclusion
@@ -492,9 +480,6 @@
       1 - R1, Subnetwork 1 - R2, Subnetwork 2 - G1, Subnetwork 2 - G2, Duplicate me
       1, Subnetwork 1 - R3]
   last_modified: '2020-09-21 06:22:51.921859'
-  link_access_groups: ''
-  link_access_groups_invert: false
-  link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -550,16 +535,16 @@
       -> R3 L7, R4 -> R3 L8, S6 L1]
   manually_defined: false
   name: Datacenter San Francisco
+  owners: []
   property1: CP
+  rbac_edit: []
+  rbac_read: []
   target_services: [Parameterized Multiprocessing]
   tasks: []
   type: pool
 - admin_only: true
   creator: ''
   description: Datacenter New York
-  device_access_groups: ''
-  device_access_groups_invert: false
-  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
   device_configuration_match: inclusion
@@ -633,9 +618,6 @@
     Oakland-2, Router behind Gateway 1, Gateway 1, Gateway 2, Gateway 3, 'Router behind
       Gateway 1, 2 and 3', Duplicate me 1, Duplication - G1, Duplication - R1]
   last_modified: '2022-04-04 11:10:40.576415'
-  link_access_groups: ''
-  link_access_groups_invert: false
-  link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -691,16 +673,16 @@
       -> R3 L7, R4 -> R3 L8, S6 L1]
   manually_defined: false
   name: Datacenter New York
+  owners: []
   property1: CP
+  rbac_edit: []
+  rbac_read: []
   target_services: []
   tasks: []
   type: pool
 - admin_only: false
   creator: ''
   description: Datacenter Chicago
-  device_access_groups: ''
-  device_access_groups_invert: false
-  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
   device_configuration_match: inclusion
@@ -773,9 +755,6 @@
       behind Gateway 1, 'Router behind Gateway 1, 2 and 3', Duplicate me 1, Duplication
       - G1, Duplication - R1]
   last_modified: '2020-09-21 06:22:36.450390'
-  link_access_groups: ''
-  link_access_groups_invert: false
-  link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -831,16 +810,16 @@
       -> R3 L7, R4 -> R3 L8, S6 L1]
   manually_defined: false
   name: Datacenter Chicago
+  owners: []
   property1: CP
+  rbac_edit: []
+  rbac_read: []
   target_services: []
   tasks: []
   type: pool
 - admin_only: false
   creator: ''
   description: ''
-  device_access_groups: ''
-  device_access_groups_invert: false
-  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
   device_configuration_match: inclusion
@@ -909,9 +888,6 @@
   device_vendor_match: inclusion
   devices: [Washington]
   last_modified: '2019-10-25 14:45:46.418406'
-  link_access_groups: ''
-  link_access_groups_invert: false
-  link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -945,16 +921,16 @@
   links: []
   manually_defined: false
   name: Washington
+  owners: []
   property1: CP
+  rbac_edit: []
+  rbac_read: []
   target_services: [Parameterized Targets, Parameterized Run with a Superworkflow]
   tasks: []
   type: pool
 - admin_only: false
   creator: admin
   description: Used for testing credentials
-  device_access_groups: ''
-  device_access_groups_invert: false
-  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
   device_configuration_match: inclusion
@@ -1023,9 +999,6 @@
   device_vendor_match: inclusion
   devices: [Austin, Austin-2, Austin-3]
   last_modified: '2020-11-17 08:53:50.491397'
-  link_access_groups: ''
-  link_access_groups_invert: false
-  link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -1059,16 +1032,16 @@
   links: []
   manually_defined: false
   name: Credentials pool - Austin devices
+  owners: []
   property1: CP
+  rbac_edit: []
+  rbac_read: []
   target_services: ['Credentials (Password & Key, Priority Mechanism)']
   tasks: []
   type: pool
 - admin_only: false
   creator: admin
   description: "Used for testing credentials\t"
-  device_access_groups: ''
-  device_access_groups_invert: false
-  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
   device_configuration_match: inclusion
@@ -1137,9 +1110,6 @@
   device_vendor_match: inclusion
   devices: [Austin-3]
   last_modified: '2020-11-17 08:54:23.793140'
-  link_access_groups: ''
-  link_access_groups_invert: false
-  link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -1173,16 +1143,16 @@
   links: []
   manually_defined: false
   name: Credentials pool - Austin-3 alone
+  owners: []
   property1: CP
+  rbac_edit: []
+  rbac_read: []
   target_services: []
   tasks: []
   type: pool
 - admin_only: false
   creator: admin
   description: ''
-  device_access_groups: ''
-  device_access_groups_invert: false
-  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
   device_configuration_match: inclusion
@@ -1255,9 +1225,6 @@
     router26, router27, router28, router29, router30, router31, router32, router33,
     router34, router35, router36, router37]
   last_modified: '2022-01-03 03:42:46.084265'
-  link_access_groups: ''
-  link_access_groups_invert: false
-  link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -1291,7 +1258,10 @@
   links: []
   manually_defined: false
   name: All routers in Europe
+  owners: []
   property1: CP
+  rbac_edit: []
+  rbac_read: []
   target_services: []
   tasks: []
   type: pool

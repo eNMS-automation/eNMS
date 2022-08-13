@@ -1,48 +1,63 @@
 - creator: admin
   delete_requests: []
   description: All users
+  device_access: []
   email: ''
+  file_access: []
   get_requests: []
+  link_access: []
   menu: []
   name: All users
   pages: []
+  pool_access: []
   post_requests: []
+  service_access: []
+  task_access: []
   type: group
   users: [admin, readonly, nadmin, demo]
 - creator: admin
   delete_requests: []
   description: Admin User
+  device_access: []
   email: admin@enms.io
+  file_access: []
   get_requests: []
+  link_access: []
   menu: []
   name: Admin User
   pages: []
+  pool_access: []
   post_requests: []
+  service_access: []
+  task_access: []
   type: group
   users: [admin]
 - creator: admin
   delete_requests: [/rest/instance]
   description: Full UI Read + Edit Access
+  device_access: []
   email: ''
+  file_access: []
   get_requests: [/changelog_table, /compare_form, /configuration_table, /confirmation_form,
     /dashboard, /device_data_form, /device_table, /download, /event_table, /export_service,
-    /file_table, /files_form, /geographical_view, /git_history_form, /group_table,
-    /instance_deletion_form, /link_table, /network_builder, /logs_form, /pool_table,
-    /rest/configuration, /rest/workers, /rest/instance, /rest/query, /rest/result,
-    /rest/token, /result_comparison_form, /result_form, /run_table, /service_table,
+    /file_table, /files_form, /gateway_form, /geographical_view, /git_history_form,
+    /group_table, /instance_deletion_form, /link_table, /network_builder, /logs_form,
+    /pool_table, /rest/configuration, /rest/instance, /rest/query, /rest/result, /rest/token,
+    /result_comparison_form, /result_form, /router_form, /run_table, /service_table,
     /network_table, /table_form, /task_table, /terminal, /tree_form, /view_service_results,
     /workflow_builder, /instance_tree_form, /add_services_to_workflow_form, /add_to_network_form,
     /administration_form, /changelog_form, /credential_form, /database_deletion_form,
     /database_migration_form, /debug_form, /device_connection_form, /excel_export_form,
     /excel_import_form, /file_form, /folder_form, /file_editor_form, /import_services_form,
     /pool_form, /restart_workflow_form, /result_log_deletion_form, /run_service_form,
-    /server_form, /settings_panel_form, /task_form, /upload_files_form, /profile_form,
-    /label_form, /workflow_edge_form, /device_form, /link_form, /parameters_form,
-    /netmiko_form, /scrapli_form, /user_form]
+    /server_form, /task_form, /upload_files_form, /profile_form, /label_form, /workflow_edge_form,
+    /device_form, /link_form, /parameters_form, /netmiko_form, /scrapli_form, /user_form]
+  link_access: []
   menu: [Inventory, Visualization, Automation]
   name: Full UI Read + Edit Access
   pages: [Dashboard, Files, Changelog, Devices, Configurations, Links, Pools, Networks,
     Geographical View, Network Builder, Services, Workflow Builder, Scheduling, Results]
+  pool_access: []
   post_requests: [/add_edge, /add_instances_in_bulk, /add_objects_to_network, /bulk_deletion,
     /bulk_edit, /bulk_removal, /copy_service_in_workflow, /clear_results, /clear_configurations,
     /compare, /counters, /count_models, /create_label, /delete_instance, /delete_builder_selection,
@@ -51,13 +66,15 @@
     /get_device_logs, /get_git_network_data, /get_migration_folders, /get_service_logs,
     /get_properties, /get_result, /get_view_topology, /get_service_state, /get_network_state,
     /get_top_level_instances, /get_visualization_pools, /get_workflow_results, /get_workflow_services,
-    /get_instance_tree, /import_services, /process_file_data, /remove_instance, /reset_status,
-    /rest/create_pool, /rest/get_cluster_status, /rest/get_git_content, /rest/instance,
-    /rest/run_service, /rest/run_task, /rest/search, /rest/topology, /rest/update_all_pools,
-    /rest/update_database_configurations_from_git, /result_log_deletion, /run_service,
-    /run_service_on_targets, /save_file, /save_positions, /save_profile, /scan_cluster,
-    /scan_folder, /scan_playbook_folder, /search_builder, /search_workflow_services,
-    /skip_services, /stop_run, /scheduler_action, /task_action, /topology_import,
-    /update, /update_pool, /update_all_pools, /upload_files, /view_filtering, /web_connection]
+    /get_instance_tree, /import_services, /remove_instance, /reset_status, /rest/create_pool,
+    /rest/get_cluster_status, /rest/get_git_content, /rest/instance, /rest/run_service,
+    /rest/run_task, /rest/search, /rest/topology, /rest/update_all_pools, /rest/update_database_configurations_from_git,
+    /result_log_deletion, /run_service, /run_service_on_targets, /save_file, /save_positions,
+    /save_profile, /scan_cluster, /scan_folder, /scan_playbook_folder, /search_builder,
+    /search_workflow_services, /skip_services, /stop_run, /scheduler_action, /task_action,
+    /topology_import, /update, /update_pool, /update_all_pools, /upload_files, /view_filtering,
+    /web_connection]
+  service_access: []
+  task_access: []
   type: group
   users: [nadmin]

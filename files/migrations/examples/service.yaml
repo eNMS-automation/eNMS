@@ -25,6 +25,7 @@
   last_modified: '2019-10-01 01:36:02.097383'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -433,6 +434,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -481,6 +486,7 @@
   last_modified: '2019-08-01 11:40:22.000682'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -901,6 +907,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -949,6 +959,7 @@
   last_modified: '2019-07-11 13:51:13.461232'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -973,6 +984,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1032,6 +1047,7 @@
   mac_address: FF:FF:FF:FF:FF:FF
   mail_address: aaa@gmail.com
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -1070,6 +1086,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   regex: ''
   reply_to: ''
   reserved: false
@@ -1130,6 +1150,7 @@
   local_path: network_data
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -1162,6 +1183,10 @@
   preprocessing: ''
   priority: 11
   property: operational_data
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -1231,6 +1256,7 @@
   last_modified: '2019-08-04 11:01:33.553474'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -1264,6 +1290,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1340,6 +1370,7 @@
   last_modified: '2019-10-10 09:46:36.865576'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -1378,6 +1409,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -1448,6 +1483,7 @@
   last_modified: '2019-08-01 11:40:18.423301'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -1482,6 +1518,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1558,6 +1598,7 @@
   last_modified: '2021-10-09 03:24:55.798104'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -1599,6 +1640,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -1659,6 +1704,7 @@
   last_modified: '2020-05-28 10:36:02.393623'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -1718,6 +1764,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
@@ -1776,6 +1826,7 @@
   last_modified: '2021-03-07 12:58:14.647164'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -1814,6 +1865,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 12
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1871,6 +1926,7 @@
   last_modified: '2021-03-07 13:27:53.699477'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -1909,6 +1965,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 12
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1959,6 +2019,7 @@
   last_modified: '2019-12-09 12:30:00.373117'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -1992,6 +2053,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2070,6 +2135,7 @@
   last_modified: '2019-09-18 18:31:59.605812'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -2098,6 +2164,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   response1: show vrf b
@@ -2175,6 +2245,7 @@
   last_modified: '2019-07-19 15:41:59.683776'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -2203,6 +2274,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   response1: show vrf
@@ -2256,6 +2331,7 @@
   last_modified: '2020-02-26 06:48:21.758699'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -2284,6 +2360,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -2334,6 +2414,7 @@
   last_modified: '2020-05-29 06:50:07.334676'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -2362,6 +2443,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2439,6 +2524,7 @@
   last_modified: '2020-02-26 06:48:40.762497'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -2467,6 +2553,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -2546,6 +2636,7 @@
   last_modified: '2020-02-26 06:50:26.306070'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -2574,6 +2665,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -2653,6 +2748,7 @@
   last_modified: '2020-05-29 06:56:23.711236'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -2682,6 +2778,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -2745,6 +2845,7 @@
   last_modified: '2019-08-08 21:45:40.369909'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -2799,6 +2900,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2851,6 +2956,7 @@
   last_modified: '2022-04-26 12:51:19.802312'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -2885,6 +2991,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2935,6 +3045,7 @@
   last_modified: '2020-02-27 05:41:57.831683'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -2969,6 +3080,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3019,6 +3134,7 @@
   last_modified: '2020-02-27 05:38:15.786745'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -3053,6 +3169,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3125,6 +3245,7 @@
   last_modified: '2020-05-07 04:19:08.658446'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -3154,6 +3275,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -3233,6 +3358,7 @@
   last_modified: '2020-05-07 04:19:45.112707'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -3262,6 +3388,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -3341,6 +3471,7 @@
   last_modified: '2020-05-07 04:19:56.019693'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -3370,6 +3501,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -3430,6 +3565,7 @@
   last_modified: '2021-08-21 12:59:02.930936'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -3461,6 +3597,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{iteration_value}}
@@ -3522,6 +3662,7 @@
   last_modified: '2022-05-13 09:44:16.415721'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -3547,6 +3688,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -3639,6 +3784,7 @@
   last_modified: '2022-01-16 05:37:56.023249'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -3664,6 +3810,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3753,6 +3903,7 @@
   last_modified: '2022-01-16 05:41:23.421169'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -3777,6 +3928,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3844,6 +3999,7 @@
   last_modified: '2022-07-12 05:30:46.993613'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -3868,6 +4024,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3945,6 +4105,7 @@
   last_modified: '2022-01-20 07:16:42.896628'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -3969,6 +4130,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4063,6 +4228,7 @@
   last_modified: '2022-04-26 12:35:22.898565'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -4087,6 +4253,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4153,6 +4323,7 @@
   last_modified: '2022-01-16 05:30:59.362228'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 10
@@ -4177,6 +4348,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4284,6 +4459,7 @@
   last_modified: '2022-01-16 05:15:22.444345'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -4308,6 +4484,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4394,6 +4574,7 @@
   local_path: network_data
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -4426,6 +4607,10 @@
   preprocessing: ''
   priority: 11
   property: operational_data
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -4493,6 +4678,7 @@
   last_modified: '2022-01-16 05:31:20.934203'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -4517,6 +4703,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4574,6 +4764,7 @@
   last_modified: '2021-10-09 03:25:56.780411'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -4601,6 +4792,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4656,6 +4851,7 @@
   last_modified: '2019-12-05 04:47:34.680139'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -4685,6 +4881,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: ''
@@ -4740,6 +4940,7 @@
   last_modified: '2021-10-09 03:25:56.810878'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -4767,6 +4968,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -4822,6 +5027,7 @@
   last_modified: '2019-12-05 04:48:35.401292'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -4851,6 +5057,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: ''
@@ -4906,6 +5116,7 @@
   last_modified: '2021-10-09 03:25:56.844799'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -4933,6 +5144,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -5007,6 +5222,7 @@
   last_modified: '2019-12-05 04:52:26.145384'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -5035,6 +5251,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -5114,6 +5334,7 @@
   last_modified: '2019-12-05 04:52:44.909327'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -5143,6 +5364,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -5222,6 +5447,7 @@
   last_modified: '2019-12-05 04:53:36.285402'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -5250,6 +5476,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -5331,6 +5561,7 @@
   last_modified: '2022-01-20 07:28:59.262995'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -5355,6 +5586,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -5409,6 +5644,7 @@
   last_modified: '2021-10-09 03:25:56.924607'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -5437,6 +5673,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -5491,6 +5731,7 @@
   last_modified: '2021-10-09 03:25:56.957394'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -5519,6 +5760,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -5593,6 +5838,7 @@
   last_modified: '2019-12-16 16:46:16.211030'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -5625,6 +5871,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -5682,6 +5932,7 @@
   last_modified: '2020-02-19 05:09:22.996758'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -5715,6 +5966,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -5788,6 +6043,7 @@
   last_modified: '2022-01-16 05:15:50.185310'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -5812,6 +6068,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -5863,6 +6123,7 @@
   last_modified: '2020-02-22 09:57:19.634575'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -5894,6 +6155,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -5969,6 +6234,7 @@
   last_modified: '2020-02-22 10:09:31.770582'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -6000,6 +6266,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -6096,6 +6366,7 @@
   last_modified: '2022-01-16 05:15:58.440770'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -6120,6 +6391,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6172,6 +6447,7 @@
   last_modified: '2021-03-09 03:15:03.998374'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -6200,6 +6476,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6254,6 +6534,7 @@
   last_modified: '2021-10-09 03:25:57.123684'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -6282,6 +6563,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6332,6 +6617,7 @@
   last_modified: '2020-02-26 07:05:54.058757'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -6362,6 +6648,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6434,6 +6724,7 @@
   last_modified: '2022-01-20 07:14:19.999019'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -6458,6 +6749,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -6510,6 +6805,7 @@
   last_modified: '2020-06-17 05:05:10.364625'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -6541,6 +6837,10 @@
   postprocessing_mode: always
   preprocessing: set_var("test", device.operating_system, device=device.name)
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6591,6 +6891,7 @@
   last_modified: '2020-06-04 09:38:15.173377'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -6620,6 +6921,10 @@
   postprocessing_mode: failure
   preprocessing: set_var("integer", 10)
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6669,6 +6974,7 @@
   last_modified: '2020-03-24 07:01:45.366014'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -6701,6 +7007,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6753,6 +7063,7 @@
   last_modified: '2022-01-16 05:16:18.788732'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -6777,6 +7088,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -6837,6 +7152,7 @@
   last_modified: '2022-07-21 12:13:43.982325'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -6861,6 +7177,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -6917,6 +7237,7 @@
   last_modified: '2020-03-26 13:24:11.303147'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -6948,6 +7269,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7009,6 +7334,7 @@
   last_modified: '2020-09-26 05:39:44.995695'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -7040,6 +7366,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7098,6 +7428,7 @@
   last_modified: '2020-03-27 13:40:16.952410'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -7132,6 +7463,10 @@
   preprocessing: ''
   priority: 11
   protocol: ICMP
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7186,6 +7521,7 @@
   last_modified: '2022-01-16 05:09:23.121184'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -7210,6 +7546,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -7263,6 +7603,7 @@
   librenms_token: ''
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -7298,6 +7639,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -7370,6 +7715,7 @@
   last_modified: '2020-03-28 05:52:51.717182'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -7401,6 +7747,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -7461,6 +7811,7 @@
   last_modified: '2020-05-28 10:36:29.931698'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -7493,6 +7844,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{ placeholder.definition }}
@@ -7568,6 +7923,7 @@
   last_modified: '2021-08-07 08:46:58.575856'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -7592,6 +7948,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -7680,6 +8040,7 @@
   local_path: network_data
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -7711,6 +8072,10 @@
   preprocessing: ''
   priority: 11
   property: configuration
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -7777,6 +8142,7 @@
   local_repository: network_data
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -7807,6 +8173,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   relative_path: true
   remote_repository: ''
   reply_to: ''
@@ -7857,6 +8227,7 @@
   last_modified: '2020-06-24 03:55:19.605566'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -7885,6 +8256,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7939,6 +8314,7 @@
   last_modified: '2022-01-16 05:07:46.622434'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -7963,6 +8339,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -8024,6 +8404,7 @@
   last_modified: '2020-07-15 02:01:30.590001'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -8052,6 +8433,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -8115,6 +8500,7 @@
   last_modified: '2020-07-19 03:57:12.933011'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -8143,6 +8529,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -8206,6 +8596,7 @@
   last_modified: '2020-07-15 02:50:17.263309'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -8234,6 +8625,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -8297,6 +8692,7 @@
   last_modified: '2020-07-19 03:57:21.922089'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -8325,6 +8721,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -8390,6 +8790,7 @@
   last_modified: '2022-01-16 05:09:58.076503'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -8414,6 +8815,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -8492,6 +8897,7 @@
   last_modified: '2020-07-24 04:12:46.366228'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -8521,6 +8927,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -8582,6 +8992,7 @@
   load_known_host_keys: false
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -8614,6 +9025,10 @@
   preprocessing: ''
   priority: 11
   protocol: scp
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -8690,6 +9105,7 @@
   last_modified: '2020-07-24 04:13:28.626790'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -8721,6 +9137,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -8782,6 +9202,7 @@
   load_known_host_keys: false
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -8815,6 +9236,10 @@
   preprocessing: ''
   priority: 11
   protocol: scp
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -8891,6 +9316,7 @@
   last_modified: '2020-07-24 04:18:11.791054'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -8920,6 +9346,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -8981,6 +9411,7 @@
   load_known_host_keys: false
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -9013,6 +9444,10 @@
   preprocessing: ''
   priority: 11
   protocol: scp
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9087,6 +9522,7 @@
   last_modified: '2022-01-20 06:28:21.964618'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -9111,6 +9547,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -9162,6 +9602,7 @@
   last_modified: '2021-09-21 06:38:02.831326'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -9194,6 +9635,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9248,6 +9693,7 @@
   last_modified: '2021-09-21 06:38:39.317238'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -9280,6 +9726,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9334,6 +9784,7 @@
   last_modified: '2021-09-21 06:38:17.891973'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -9366,6 +9817,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9458,6 +9913,7 @@
   last_modified: '2022-01-20 06:28:03.483260'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -9482,6 +9938,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9536,6 +9996,7 @@
   last_modified: '2020-08-03 12:01:17.859136'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -9569,6 +10030,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9623,6 +10088,7 @@
   last_modified: '2021-08-18 00:13:35.279991'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -9655,6 +10121,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9709,6 +10179,7 @@
   last_modified: '2020-09-24 04:46:08.378087'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -9741,6 +10212,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9795,6 +10270,7 @@
   last_modified: '2020-08-03 12:00:41.901802'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -9827,6 +10303,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9914,6 +10394,7 @@
   last_modified: '2022-01-16 05:37:09.880045'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -9938,6 +10419,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9989,6 +10474,7 @@
   last_modified: '2020-09-01 07:22:37.645802'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -10024,6 +10510,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10103,6 +10593,7 @@
   last_modified: '2020-09-01 07:28:53.069205'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -10140,6 +10631,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{device.name}}
@@ -10215,6 +10710,7 @@
   last_modified: '2019-10-21 21:59:43.430409'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -10244,6 +10740,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -10330,6 +10830,7 @@
   last_modified: '2022-01-16 05:35:07.247712'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -10354,6 +10855,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -10409,6 +10914,7 @@
   last_modified: '2021-03-24 15:05:09.390396'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -10439,6 +10945,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10497,6 +11007,7 @@
   last_modified: '2020-09-24 04:20:21.737519'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -10527,6 +11038,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10603,6 +11118,7 @@
   last_modified: '2020-09-24 04:24:35.178486'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -10633,6 +11149,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -10688,6 +11208,7 @@
   last_modified: '2021-08-18 00:06:35.440142'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -10719,6 +11240,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10802,6 +11327,7 @@
   last_modified: '2022-01-20 06:28:13.405257'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -10826,6 +11352,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10885,6 +11415,7 @@
   last_modified: '2020-09-24 07:50:53.187875'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -10927,6 +11458,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
@@ -10978,6 +11513,7 @@
   last_modified: '2021-08-19 07:44:43.988142'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -11007,6 +11543,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11061,6 +11601,7 @@
   last_modified: '2021-08-19 07:44:52.104274'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -11090,6 +11631,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11168,6 +11713,7 @@
   last_modified: '2020-09-25 04:28:01.307849'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -11197,6 +11743,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -11257,6 +11807,7 @@
   last_modified: '2021-08-19 07:46:35.027296'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -11290,6 +11841,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
@@ -11368,6 +11923,7 @@
   last_modified: '2022-01-20 06:28:51.434075'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -11392,6 +11948,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11448,6 +12008,7 @@
   last_modified: '2021-10-09 03:25:58.147307'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -11477,6 +12038,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -11527,6 +12092,7 @@
   last_modified: '2020-09-29 04:31:17.767321'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -11555,6 +12121,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -11610,6 +12180,7 @@
   last_modified: '2021-10-09 03:25:58.176258'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -11639,6 +12210,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11688,6 +12263,7 @@
   last_modified: '2020-09-27 03:56:02.350546'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -11717,6 +12293,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11795,6 +12375,7 @@
   last_modified: '2022-01-20 06:28:38.346685'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -11819,6 +12400,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -11872,6 +12457,7 @@
   last_modified: '2020-10-01 04:05:51.093813'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -11902,6 +12488,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11956,6 +12546,7 @@
   last_modified: '2021-10-09 03:25:58.282963'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -11985,6 +12576,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12039,6 +12634,7 @@
   last_modified: '2021-10-09 03:25:58.315811'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -12068,6 +12664,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -12118,6 +12718,7 @@
   last_modified: '2020-10-01 04:05:55.852522'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -12148,6 +12749,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -12198,6 +12803,7 @@
   last_modified: '2020-10-01 04:06:03.214998'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -12228,6 +12834,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12278,6 +12888,7 @@
   last_modified: '2020-10-01 04:05:44.930376'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -12307,6 +12918,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12381,6 +12996,7 @@
   last_modified: '2021-08-07 08:46:54.921205'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -12405,6 +13021,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -12492,6 +13112,7 @@
   last_modified: '2022-01-15 07:51:27.989861'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -12516,6 +13137,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12590,6 +13215,7 @@
   last_modified: '2020-11-17 09:04:17.856544'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -12617,6 +13243,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -12687,6 +13317,7 @@
   last_modified: '2022-01-16 05:51:45.214836'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -12711,6 +13342,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12763,6 +13398,7 @@
   last_modified: '2020-12-22 05:26:18.550097'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -12790,6 +13426,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12840,6 +13480,7 @@
   last_modified: '2020-12-22 02:08:35.787494'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -12867,6 +13508,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12917,6 +13562,7 @@
   last_modified: '2020-12-22 05:29:35.324665'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -12944,6 +13590,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12995,6 +13645,7 @@
   last_modified: '2020-12-22 02:09:11.818342'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -13022,6 +13673,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13098,6 +13753,7 @@
   last_modified: '2022-01-16 05:15:29.754652'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -13123,6 +13779,10 @@
   preprocessing: "devices = [\"Austin\", \"PaloAlto\"] if device.name == \"Dallas\"\
     \ else [\"NewYork\"]\r\nset_var(\"iteration_devices\", devices, device=device.name)"
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13173,6 +13833,7 @@
   last_modified: '2021-03-03 03:43:39.735814'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -13200,6 +13861,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13254,6 +13919,7 @@
   last_modified: '2021-10-09 03:25:58.517714'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -13281,6 +13947,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13335,6 +14005,7 @@
   last_modified: '2021-10-09 03:25:58.552695'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -13362,6 +14033,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -13412,6 +14087,7 @@
   last_modified: '2021-03-09 03:22:49.943322'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -13441,6 +14117,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13491,6 +14171,7 @@
   last_modified: '2021-03-09 03:31:47.477556'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -13520,6 +14201,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13570,6 +14255,7 @@
   last_modified: '2021-03-24 15:03:50.088980'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -13599,6 +14285,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13649,6 +14339,7 @@
   last_modified: '2021-03-24 15:04:58.720648'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -13677,6 +14368,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13745,6 +14440,7 @@
   last_modified: '2022-01-15 07:51:11.373697'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -13769,6 +14465,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -13820,6 +14520,7 @@
   last_modified: '2021-03-28 04:54:12.473429'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -13847,6 +14548,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13897,6 +14602,7 @@
   last_modified: '2021-03-28 04:54:24.915967'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -13924,6 +14630,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13974,6 +14684,7 @@
   last_modified: '2021-03-28 04:54:47.352189'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -14001,6 +14712,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14078,6 +14793,7 @@
   last_modified: '2022-01-16 05:08:24.834235'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -14102,6 +14818,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14162,6 +14882,7 @@
   last_modified: '2021-05-02 03:34:31.845229'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -14191,6 +14912,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14252,6 +14977,7 @@
   last_modified: '2021-06-23 07:36:06.901673'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -14283,6 +15009,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14345,6 +15075,7 @@
   last_modified: '2021-06-23 06:17:31.604783'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -14372,6 +15103,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14434,6 +15169,7 @@
   last_modified: '2021-06-23 06:12:42.356680'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -14461,6 +15197,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14534,6 +15274,7 @@
   last_modified: '2022-01-15 07:58:36.303716'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -14554,6 +15295,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14629,6 +15374,7 @@
   last_modified: '2021-06-07 02:09:28.205784'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -14657,6 +15403,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -14745,6 +15495,7 @@
   last_modified: '2022-01-20 07:15:35.541645'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -14769,6 +15520,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14820,6 +15575,7 @@
   last_modified: '2021-06-22 02:58:21.081808'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -14848,6 +15604,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14901,6 +15661,7 @@
   last_modified: '2021-06-22 03:07:50.513458'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -14929,6 +15690,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14981,6 +15746,7 @@
   last_modified: '2021-06-22 08:17:12.564512'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -15009,6 +15775,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15079,6 +15849,7 @@
   last_modified: '2022-01-16 05:18:59.636624'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -15103,6 +15874,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15168,6 +15943,7 @@
   lock: false
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -15196,6 +15972,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15264,6 +16044,7 @@
   lock: false
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -15292,6 +16073,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15365,6 +16150,7 @@
   lock: false
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -15393,6 +16179,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15461,6 +16251,7 @@
   lock: false
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -15489,6 +16280,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15562,6 +16357,7 @@
   lock: false
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -15590,6 +16386,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15674,6 +16474,7 @@
   last_modified: '2022-01-16 05:06:57.438954'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -15698,6 +16499,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15774,6 +16579,7 @@
   last_modified: '2021-06-27 21:07:09.596633'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -15802,6 +16608,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -15881,6 +16691,7 @@
   last_modified: '2021-06-27 21:08:18.891441'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -15909,6 +16720,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -15988,6 +16803,7 @@
   last_modified: '2021-06-27 21:08:37.480645'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -16016,6 +16832,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -16098,6 +16918,7 @@
   last_modified: '2022-05-06 02:05:12.455315'
   log_level: 1
   mail_recipient: antoine.fourmy@gmail.com
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -16122,6 +16943,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -16173,6 +16998,7 @@
   last_modified: '2021-06-28 02:39:15.044828'
   log_level: 1
   mail_recipient: antoine.fourmy@gmail.com
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -16202,6 +17028,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -16252,6 +17082,7 @@
   last_modified: '2021-06-28 02:39:04.907474'
   log_level: 1
   mail_recipient: antoine.fourmy@gmail.com
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -16282,6 +17113,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -16332,6 +17167,7 @@
   last_modified: '2021-06-28 02:45:17.379373'
   log_level: 1
   mail_recipient: antoine.fourmy@gmail.com
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -16362,6 +17198,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: afourmy@enms.io
   reserved: false
   run_method: per_device
@@ -16433,6 +17273,7 @@
   last_modified: '2022-01-16 05:38:23.167263'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -16457,6 +17298,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -16534,6 +17379,7 @@
   last_modified: '2021-07-05 04:40:21.372109'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -16561,6 +17407,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -16631,6 +17481,7 @@
   last_modified: '2021-07-05 04:44:03.619111'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -16659,6 +17510,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -16734,6 +17589,7 @@
   last_modified: '2021-07-05 04:44:29.075333'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -16761,6 +17617,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -16840,6 +17700,7 @@
   last_modified: '2021-07-05 05:27:08.100508'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -16867,6 +17728,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -16946,6 +17811,7 @@
   last_modified: '2021-07-05 05:27:56.885680'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -16973,6 +17839,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -17061,6 +17931,7 @@
   last_modified: '2022-01-16 05:35:27.565228'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -17085,6 +17956,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -17136,6 +18011,7 @@
   last_modified: '2021-07-05 23:05:06.611016'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -17164,6 +18040,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -17239,6 +18119,7 @@
   last_modified: '2021-07-06 00:00:22.948685'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -17267,6 +18148,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -17327,6 +18212,7 @@
   last_modified: '2021-07-06 01:05:00.094390'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -17357,6 +18243,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{get_credential(name="Non Device Credential
@@ -17436,6 +18326,7 @@
   last_modified: '2022-01-20 06:30:16.255974'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -17460,6 +18351,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -17513,6 +18408,7 @@
   last_modified: '2021-07-08 00:49:08.620371'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -17541,6 +18437,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -17592,6 +18492,7 @@
   last_modified: '2021-07-08 00:52:11.438159'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -17620,6 +18521,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -17670,6 +18575,7 @@
   last_modified: '2021-07-08 00:54:36.888282'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -17698,6 +18604,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -17748,6 +18658,7 @@
   last_modified: '2021-07-08 00:57:57.869317'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -17776,6 +18687,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -17831,6 +18746,7 @@
   last_modified: '2022-01-16 05:10:21.356449'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -17855,6 +18771,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -17909,6 +18829,7 @@
   last_modified: '2021-07-10 10:13:25.555454'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -17935,6 +18856,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -17989,6 +18914,7 @@
   last_modified: '2021-07-10 05:10:39.268087'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   match1: ''
   match2: ''
@@ -18027,6 +18953,10 @@
   query1: get_var("string")
   query2: ''
   query3: ''
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18078,6 +19008,7 @@
   last_modified: '2021-07-10 05:11:13.766271'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   match1: ''
   match2: ''
@@ -18116,6 +19047,10 @@
   query1: get_var("dict")
   query2: ''
   query3: ''
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18167,6 +19102,7 @@
   last_modified: '2021-07-10 05:11:32.486632'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   match1: ''
   match2: ''
@@ -18205,6 +19141,10 @@
   query1: get_var("dict2")
   query2: ''
   query3: ''
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18256,6 +19196,7 @@
   last_modified: '2021-07-10 10:10:33.736633'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   match1: ''
   match2: ''
@@ -18294,6 +19235,10 @@
   query1: get_var("string2")
   query2: ''
   query3: ''
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18345,6 +19290,7 @@
   last_modified: '2021-07-10 10:14:26.174039'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   match1: ''
   match2: ''
@@ -18383,6 +19329,10 @@
   query1: get_var("list")
   query2: ''
   query3: ''
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18434,6 +19384,7 @@
   last_modified: '2021-07-10 10:16:33.711176'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   match1: ''
   match2: ''
@@ -18472,6 +19423,10 @@
   query1: get_var("list2")
   query2: ''
   query3: ''
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18523,6 +19478,7 @@
   last_modified: '2021-07-10 10:17:24.516441'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   match1: ''
   match2: ''
@@ -18561,6 +19517,10 @@
   query1: get_var("list3")
   query2: ''
   query3: ''
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18612,6 +19572,7 @@
   last_modified: '2021-07-10 10:27:45.384542'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -18641,6 +19602,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18719,6 +19684,7 @@
   last_modified: '2022-01-20 07:30:44.284827'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: true
   max_number_of_retries: 100
   max_processes: 15
@@ -18743,6 +19709,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18794,6 +19764,7 @@
   last_modified: '2021-07-11 01:00:17.856199'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -18821,6 +19792,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18881,6 +19856,7 @@
   last_modified: '2022-01-16 05:16:43.759975'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -18905,6 +19881,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -18960,6 +19940,7 @@
   last_modified: '2021-07-30 02:04:57.739986'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -18989,6 +19970,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{ endpoint }}
@@ -19064,6 +20049,7 @@
   last_modified: '2021-07-29 10:42:45.467689'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -19091,6 +20077,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -19163,6 +20153,7 @@
   last_modified: '2022-01-16 05:38:53.223357'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -19187,6 +20178,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19263,6 +20258,7 @@
   last_modified: '2021-07-30 10:12:09.146619'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -19290,6 +20286,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -19369,6 +20369,7 @@
   last_modified: '2021-07-30 10:16:08.282657'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -19396,6 +20397,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -19475,6 +20480,7 @@
   last_modified: '2021-07-30 10:16:29.599494'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -19502,6 +20508,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -19581,6 +20591,7 @@
   last_modified: '2021-07-30 10:16:44.791787'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -19608,6 +20619,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -19673,6 +20688,7 @@
   last_modified: '2022-01-16 05:08:01.192249'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -19697,6 +20713,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19758,6 +20778,7 @@
   last_modified: '2019-11-18 08:25:59.346737'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -19790,6 +20811,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19846,6 +20871,7 @@
   last_modified: '2019-11-18 08:26:18.990107'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -19879,6 +20905,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19953,6 +20983,7 @@
   last_modified: '2019-11-18 08:26:08.788541'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -19986,6 +21017,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -20065,6 +21100,7 @@
   last_modified: '2019-11-18 08:26:31.713881'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -20098,6 +21134,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -20192,6 +21232,7 @@
   last_modified: '2022-01-16 05:11:24.548696'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -20216,6 +21257,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -20277,6 +21322,7 @@
   last_modified: '2019-10-04 10:37:14.672735'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -20317,6 +21363,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -20374,6 +21424,7 @@
   last_modified: '2019-08-06 22:20:19.161043'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -20414,6 +21465,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -20471,6 +21526,7 @@
   last_modified: '2019-08-06 23:40:55.348647'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -20511,6 +21567,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -20568,6 +21628,7 @@
   last_modified: '2019-10-04 10:40:41.939110'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -20608,6 +21669,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -20702,6 +21767,7 @@
   last_modified: '2022-01-20 06:30:32.689622'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -20726,6 +21792,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -20803,6 +21873,7 @@
   last_modified: '2021-12-30 03:59:55.217474'
   log_level: 1
   mail_recipient: antoine.fourmy@gmail.com
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -20841,6 +21912,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -20896,6 +21971,7 @@
   last_modified: '2021-08-06 01:33:43.013667'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   match1: ''
   match2: (\d.*)/32
@@ -20951,6 +22027,10 @@
   query1: get_result("netmiko_show_ip_route", device.name)["success"]
   query2: get_result("netmiko_show_ip_route", device.name)["result"]
   query3: get_result("netmiko_show_ip_route", device=device.name)["result"]
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21003,6 +22083,7 @@
   last_modified: '2020-07-23 10:36:54.411888'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -21041,6 +22122,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21092,6 +22177,7 @@
   last_modified: '2020-03-16 06:56:21.199478'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -21130,6 +22216,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21182,6 +22272,7 @@
   last_modified: '2020-07-23 10:40:12.634239'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -21220,6 +22311,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21270,6 +22365,7 @@
   last_modified: '2020-03-16 06:57:42.629334'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -21308,6 +22404,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21362,6 +22462,7 @@
   last_modified: '2022-01-20 06:30:38.049079'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 5
@@ -21386,6 +22487,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21440,6 +22545,7 @@
   last_modified: '2019-08-14 23:42:49.512906'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -21478,6 +22584,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21529,6 +22639,7 @@
   last_modified: '2019-08-14 23:42:55.692116'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   match1: ''
   match2: ''
@@ -21579,6 +22690,10 @@
   query1: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query2: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query3: 'get_result("Getters Workflow: Interface IP", device=device.name)["match"]'
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21630,6 +22745,7 @@
   last_modified: '2019-08-14 23:57:00.505853'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   match1: ''
   match2: ''
@@ -21680,6 +22796,10 @@
   query1: get_result("Start")["state"]["completed"]
   query2: get_result("Start")["logs"]
   query3: get_result("Start")["state"]
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21731,6 +22851,7 @@
   last_modified: '2020-03-16 07:00:40.345141'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -21769,6 +22890,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21819,6 +22944,7 @@
   last_modified: '2020-03-16 07:01:27.192118'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -21857,6 +22983,10 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21911,6 +23041,7 @@
   last_modified: '2022-01-20 06:31:21.249638'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -21935,6 +23066,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -21989,6 +23124,7 @@
   last_modified: '2021-08-07 09:53:26.423950'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -22015,6 +23151,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -22066,6 +23206,7 @@
   last_modified: '2021-08-07 09:53:39.468365'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -22092,6 +23233,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -22142,6 +23287,7 @@
   last_modified: '2021-08-07 09:53:55.979734'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -22168,6 +23314,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -22218,6 +23368,7 @@
   last_modified: '2021-08-07 09:56:09.506269'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -22244,6 +23395,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -22294,6 +23449,7 @@
   last_modified: '2021-08-07 09:56:29.243853'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -22320,6 +23476,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -22370,6 +23530,7 @@
   last_modified: '2021-08-21 05:52:57.359508'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -22396,6 +23557,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22450,6 +23615,7 @@
   last_modified: '2022-01-20 07:30:11.659211'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -22474,6 +23640,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22530,6 +23700,7 @@
   last_modified: '2022-01-16 05:16:52.311485'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -22554,6 +23725,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -22604,6 +23779,7 @@
   last_modified: '2021-11-08 07:40:06.900918'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -22629,6 +23805,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22679,6 +23859,7 @@
   last_modified: '2021-11-08 07:40:14.741511'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -22704,6 +23885,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22754,6 +23939,7 @@
   last_modified: '2021-11-08 07:40:47.888047'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -22780,6 +23966,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22830,6 +24020,7 @@
   last_modified: '2021-11-08 07:40:52.757802'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -22856,6 +24047,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22906,6 +24101,7 @@
   last_modified: '2021-11-08 07:40:57.407517'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -22932,6 +24128,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22995,6 +24195,7 @@
   last_modified: '2022-04-08 07:07:34.081560'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -23019,6 +24220,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -23072,6 +24277,7 @@
   last_modified: '2021-11-21 00:54:13.502709'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -23098,6 +24304,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -23148,6 +24358,7 @@
   last_modified: '2021-11-21 01:01:25.969004'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -23174,6 +24385,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23229,6 +24444,7 @@
   last_modified: '2021-11-21 00:50:28.581310'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -23255,6 +24471,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23305,6 +24525,7 @@
   last_modified: '2021-11-21 01:12:01.108991'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -23331,6 +24552,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -23384,6 +24609,7 @@
   last_modified: '2021-11-21 01:10:51.370260'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -23410,6 +24636,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23463,6 +24693,7 @@
   last_modified: '2021-11-21 01:09:08.519718'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -23489,6 +24720,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23579,6 +24814,7 @@
   last_modified: '2022-01-16 05:27:29.540902'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -23603,6 +24839,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -23656,6 +24896,7 @@
   last_modified: '2021-12-28 12:00:50.083903'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -23683,6 +24924,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23733,6 +24978,7 @@
   last_modified: '2021-12-28 12:00:44.276785'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -23760,6 +25006,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23810,6 +25060,7 @@
   last_modified: '2021-12-28 12:16:44.033973'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -23837,6 +25088,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -23887,6 +25142,7 @@
   last_modified: '2021-12-28 12:16:47.598077'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -23914,6 +25170,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -23964,6 +25224,7 @@
   last_modified: '2021-12-28 12:24:57.723715'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -23991,6 +25252,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -24041,6 +25306,7 @@
   last_modified: '2021-12-28 12:32:20.352135'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -24068,6 +25334,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -24120,6 +25390,7 @@
   last_modified: '2021-12-30 04:00:48.116548'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -24147,6 +25418,10 @@
   preprocessing: ''
   priority: 11
   protocol: ICMP
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -24222,6 +25497,7 @@
   last_modified: '2022-01-15 07:44:00.798528'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -24246,6 +25522,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -24304,6 +25584,7 @@
   last_modified: '2021-12-30 04:57:55.707102'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -24334,6 +25615,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/is_alive
@@ -24390,6 +25675,7 @@
   last_modified: '2021-12-30 09:14:43.897124'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -24419,6 +25705,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/configuration/{{ device.name }}
@@ -24475,6 +25765,7 @@
   last_modified: '2021-12-30 09:15:32.868374'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -24504,6 +25795,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/configuration/{{ device.name }}?property=operational_data
@@ -24560,6 +25855,7 @@
   last_modified: '2021-12-30 09:23:16.509487'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -24588,6 +25884,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device/{{ device.name }}
@@ -24644,6 +25944,7 @@
   last_modified: '2021-12-30 09:33:25.027833'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -24672,6 +25973,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/user/admin
@@ -24751,6 +26056,7 @@
   last_modified: '2022-01-15 07:44:11.351612'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -24775,6 +26081,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -24832,6 +26142,7 @@
   last_modified: '2021-12-30 10:23:35.564272'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -24863,6 +26174,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?name={{ device.name }}
@@ -24919,6 +26234,7 @@
   last_modified: '2021-12-30 10:30:43.494121'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -24948,6 +26264,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?name=NonExisting&allow_none=true
@@ -25004,6 +26324,7 @@
   last_modified: '2021-12-30 10:52:26.463394'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -25034,6 +26355,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?operating_system=EOS
@@ -25090,6 +26415,7 @@
   last_modified: '2021-12-30 10:57:50.956919'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -25119,6 +26445,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/token
@@ -25200,6 +26530,7 @@
   last_modified: '2022-01-15 07:44:19.036936'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -25224,6 +26555,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -25280,6 +26615,7 @@
   last_modified: '2021-12-30 11:38:49.908283'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -25316,6 +26652,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/search
@@ -25372,6 +26712,7 @@
   last_modified: '2021-12-30 11:45:30.235163'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -25406,6 +26747,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/search
@@ -25462,6 +26807,7 @@
   last_modified: '2021-12-30 12:29:01.853798'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -25498,6 +26844,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/search
@@ -25582,6 +26932,7 @@
   last_modified: '2022-01-15 07:44:30.923925'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -25606,6 +26957,10 @@
   postprocessing_mode: success
   preprocessing: set_var("runtime", self.parent_runtime)
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -25665,6 +27020,7 @@
   last_modified: '2021-12-31 03:47:47.438589'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -25695,6 +27051,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device
@@ -25751,6 +27111,7 @@
   last_modified: '2021-12-31 03:47:42.124002'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -25779,6 +27140,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device
@@ -25835,6 +27200,7 @@
   last_modified: '2021-12-31 03:47:53.783395'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -25864,6 +27230,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device/NewDevice
@@ -25920,6 +27290,7 @@
   last_modified: '2021-12-31 03:37:28.832022'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -25948,6 +27319,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: 'http://192.168.56.102/rest/result/REST API: POST update, DELETE delete
@@ -26005,6 +27380,7 @@
   last_modified: '2021-12-31 03:52:29.182943'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -26037,6 +27413,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/search
@@ -26128,6 +27508,7 @@
   last_modified: '2022-05-20 13:46:04.332704'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -26152,6 +27533,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -26227,6 +27612,7 @@
   last_modified: '2022-01-01 03:01:33.611561'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -26256,6 +27642,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -26335,6 +27725,7 @@
   last_modified: '2022-01-01 03:01:18.510188'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -26364,6 +27755,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -26443,6 +27838,7 @@
   last_modified: '2022-01-01 03:02:00.816577'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -26472,6 +27868,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -26544,6 +27944,7 @@
   last_modified: '2022-01-15 06:14:22.375612'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 2
@@ -26562,6 +27963,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -26612,6 +28017,7 @@
   last_modified: '2022-01-15 06:13:13.584906'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -26637,6 +28043,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -26724,6 +28134,7 @@
   last_modified: '2022-01-15 08:33:35.116627'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -26745,6 +28156,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -26794,6 +28209,7 @@
   last_modified: '2022-01-15 08:09:20.547595'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -26819,6 +28235,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -26877,6 +28297,7 @@
   last_modified: '2022-01-20 07:17:43.717735'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -26901,6 +28322,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -26954,6 +28379,7 @@
   last_modified: '2022-01-28 04:47:54.571482'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -26979,6 +28405,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -27042,6 +28472,7 @@
   last_modified: '2022-01-21 10:52:37.932520'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -27071,6 +28502,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -27121,6 +28556,7 @@
   last_modified: '2022-01-21 10:52:45.162066'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -27150,6 +28586,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -27200,6 +28640,7 @@
   last_modified: '2022-01-21 10:52:48.316076'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -27229,6 +28670,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -27279,6 +28724,7 @@
   last_modified: '2022-01-21 10:52:53.264945'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -27308,6 +28754,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -27358,6 +28808,7 @@
   last_modified: '2022-01-21 10:52:56.740219'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -27387,6 +28838,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -27437,6 +28892,7 @@
   last_modified: '2022-01-21 10:53:00.621935'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -27466,6 +28922,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -27516,6 +28976,7 @@
   last_modified: '2022-01-21 10:53:06.649264'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -27545,6 +29006,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -27595,6 +29060,7 @@
   last_modified: '2022-01-21 10:53:16.318455'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -27624,6 +29090,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -27674,6 +29144,7 @@
   last_modified: '2022-01-21 10:53:21.443941'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -27703,6 +29174,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -27753,6 +29228,7 @@
   last_modified: '2022-01-21 10:53:27.774193'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -27782,6 +29258,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -27832,6 +29312,7 @@
   last_modified: '2022-01-21 10:53:31.949183'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -27861,6 +29342,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -27911,6 +29396,7 @@
   last_modified: '2022-01-21 10:54:29.990827'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -27940,6 +29426,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -27990,6 +29480,7 @@
   last_modified: '2022-01-21 10:54:32.823215'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -28019,6 +29510,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28069,6 +29564,7 @@
   last_modified: '2022-01-21 10:54:36.988357'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -28098,6 +29594,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28148,6 +29648,7 @@
   last_modified: '2022-01-21 10:54:40.569403'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -28177,6 +29678,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28227,6 +29732,7 @@
   last_modified: '2022-01-21 10:54:44.068564'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -28256,6 +29762,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28306,6 +29816,7 @@
   last_modified: '2022-01-21 10:54:47.932567'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -28335,6 +29846,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28385,6 +29900,7 @@
   last_modified: '2022-01-21 10:54:54.323875'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -28414,6 +29930,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28464,6 +29984,7 @@
   last_modified: '2022-01-21 10:54:58.153163'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -28493,6 +30014,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28543,6 +30068,7 @@
   last_modified: '2022-01-21 10:55:02.616978'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -28572,6 +30098,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28622,6 +30152,7 @@
   last_modified: '2022-01-21 10:55:44.109309'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -28651,6 +30182,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28701,6 +30236,7 @@
   last_modified: '2022-01-21 10:55:48.516525'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -28730,6 +30266,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28780,6 +30320,7 @@
   last_modified: '2022-01-21 10:55:56.471136'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -28809,6 +30350,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28859,6 +30404,7 @@
   last_modified: '2022-01-21 10:55:59.812987'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -28888,6 +30434,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28938,6 +30488,7 @@
   last_modified: '2022-01-21 10:56:03.668117'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -28967,6 +30518,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29017,6 +30572,7 @@
   last_modified: '2022-01-21 10:56:34.551820'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -29046,6 +30602,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29096,6 +30656,7 @@
   last_modified: '2022-01-21 10:56:38.173479'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -29125,6 +30686,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29175,6 +30740,7 @@
   last_modified: '2022-01-21 10:56:41.635965'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -29204,6 +30770,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29271,6 +30841,7 @@
   last_modified: '2022-01-22 07:20:13.966868'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -29295,6 +30866,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29345,6 +30920,7 @@
   last_modified: '2022-01-22 03:55:35.679131'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -29371,6 +30947,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29433,6 +31013,7 @@
   last_modified: '2022-01-22 07:20:19.517877'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -29457,6 +31038,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29507,6 +31092,7 @@
   last_modified: '2022-01-22 07:08:48.187560'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -29533,6 +31119,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29596,6 +31186,7 @@
   last_modified: '2022-01-22 07:44:03.566378'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 10
@@ -29620,6 +31211,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29670,6 +31265,7 @@
   last_modified: '2022-01-24 07:30:55.371123'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -29696,6 +31292,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29751,6 +31351,7 @@
   last_modified: '2022-05-06 02:05:25.761823'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -29775,6 +31376,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -29829,6 +31434,7 @@
   last_modified: '2022-04-12 04:27:44.216271'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -29855,6 +31461,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29906,6 +31516,7 @@
   last_modified: '2022-04-12 04:27:25.013194'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -29932,6 +31543,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -30003,6 +31618,7 @@
   local_path: network_data
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -30030,6 +31646,10 @@
   preprocessing: ''
   priority: 10
   property: configuration
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -30118,6 +31738,7 @@
   local_path: network_data
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -30146,6 +31767,10 @@
   preprocessing: ''
   priority: 10
   property: operational_data
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -30252,6 +31877,7 @@
   last_modified: '2022-05-20 13:52:38.085027'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -30276,6 +31902,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -30336,6 +31966,7 @@
   last_modified: '2022-05-20 13:52:25.523932'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -30361,6 +31992,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -30424,6 +32059,7 @@
   last_modified: '2022-05-20 13:52:29.395990'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -30449,6 +32085,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -30512,6 +32152,7 @@
   last_modified: '2022-05-20 13:52:32.732435'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -30537,6 +32178,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -30605,6 +32250,7 @@
   last_modified: '2022-07-25 08:00:16.671806'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -30629,6 +32275,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -30682,6 +32332,7 @@
   last_modified: '2022-07-25 08:03:43.487197'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   match1: "hostname {{ hostname }}\r\n\r\nno ip domain lookup\r\nip domain name local.lab\r\
     \nip name-server {{ name_server_pri }}\r\nip name-server {{ name_server_sec }}\r\
@@ -30721,6 +32372,10 @@
   query1: get_result("Define Input Variables")["result"]["jinja2"]
   query2: ''
   query3: ''
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -30772,6 +32427,7 @@
   last_modified: '2022-07-25 07:58:35.248975'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -30797,6 +32453,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -30890,6 +32550,7 @@
   last_modified: '2022-07-13 03:39:11.984525'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -30914,6 +32575,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30977,6 +32642,7 @@
   last_modified: '2022-07-13 02:39:00.258456'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -31006,6 +32672,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -31069,6 +32739,7 @@
   last_modified: '2022-07-13 02:39:38.241424'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -31098,6 +32769,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -31177,6 +32852,7 @@
   last_modified: '2022-07-13 03:21:34.458029'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -31207,6 +32883,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -31287,6 +32967,7 @@
   last_modified: '2022-07-13 03:33:28.643596'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -31317,6 +32998,10 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -31374,6 +33059,7 @@
   last_modified: '2022-07-21 12:13:16.912535'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
   max_processes: 15
@@ -31403,6 +33089,10 @@
   preprocessing: ''
   priority: 11
   protocol: ICMP
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -31453,6 +33143,7 @@
   last_modified: '2022-07-25 08:13:53.939594'
   log_level: 1
   mail_recipient: ''
+  mandatory_parameter: Default Value
   mandatory_parametrization: false
   match1: "interface {{ interface }}\r\n ip address {{ ip }}/{{ mask }}\r\n description\
     \ {{ description }}\r\n ip vrf {{ vrf }}"
@@ -31497,6 +33188,10 @@
   query1: get_result("Define Input Variables")["result"]["ttp"]
   query2: ''
   query3: ''
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once

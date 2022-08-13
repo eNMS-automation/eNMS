@@ -35,6 +35,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     Large Network Display: [621, 908]
@@ -42,6 +43,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -88,6 +90,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     Large Network Display: [-387, 104]
@@ -95,6 +98,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -141,6 +145,7 @@
   netmiko_driver: arista_eos
   operating_system: EOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     Large Network Display: [253, 413]
@@ -148,6 +153,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -175,9 +181,9 @@
   last_configuration_update: '2022-04-13 16:03:45.097013'
   last_modified: ''
   last_operational_data_duration: 5.549113s
-  last_operational_data_failure: '2022-04-13 15:59:32.307044'
-  last_operational_data_runtime: '2022-04-13 16:03:47.763592'
-  last_operational_data_status: Success
+  last_operational_data_failure: '2022-08-06 03:16:06.066969'
+  last_operational_data_runtime: '2022-08-06 03:16:06.066969'
+  last_operational_data_status: Failure
   last_operational_data_update: '2022-04-13 16:03:47.763592'
   last_specialized_data_duration: 3.775398s
   last_specialized_data_failure: Never
@@ -194,6 +200,7 @@
   netmiko_driver: arista_eos
   operating_system: EOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     Large Network Display: [-47, 331]
@@ -201,6 +208,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -247,6 +255,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     Large Network Display: [-1073, 540]
@@ -254,6 +263,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -300,6 +310,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     Large Network Display: [-92, -121]
@@ -307,6 +318,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -353,6 +365,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     Large Network Display: [333, -657]
@@ -360,6 +373,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -406,6 +420,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [562, 157]
@@ -413,6 +428,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -459,6 +475,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [-686, 820]
@@ -466,6 +483,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -512,6 +530,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [351, -244]
@@ -519,6 +538,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -565,6 +585,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [-1351, -44]
@@ -572,6 +593,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -618,6 +640,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [93, -32]
@@ -625,6 +648,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -671,6 +695,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [427, 535]
@@ -678,6 +703,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -724,6 +750,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [-1213, 935]
@@ -731,6 +758,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -777,6 +805,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [951, 21]
@@ -784,6 +813,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -830,6 +860,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [289, 127]
@@ -837,6 +868,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -883,6 +915,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [-993, 184]
@@ -890,6 +923,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -936,6 +970,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [-1099, -216]
@@ -943,6 +978,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -989,6 +1025,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [-1404, 258]
@@ -996,6 +1033,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1042,6 +1080,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [-367, 811]
@@ -1049,6 +1088,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1095,6 +1135,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [-1467, 680]
@@ -1102,6 +1143,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1148,6 +1190,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [-537, 433]
@@ -1155,6 +1198,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1201,6 +1245,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [-382, -610]
@@ -1208,6 +1253,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1254,6 +1300,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [-740, -568]
@@ -1261,6 +1308,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1307,6 +1355,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [686, -483]
@@ -1314,6 +1363,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1360,6 +1410,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions:
     Large Network Display: [-519, -222]
@@ -1367,6 +1418,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1413,6 +1465,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions:
     Large Network Display: [-770, 169]
@@ -1420,6 +1473,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1466,11 +1520,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1517,11 +1573,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1568,11 +1626,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1619,11 +1679,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1670,11 +1732,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1721,11 +1785,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1772,11 +1838,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1823,11 +1891,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1874,11 +1944,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1925,11 +1997,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -1976,11 +2050,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2027,11 +2103,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2078,11 +2156,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2129,11 +2209,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2180,11 +2262,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2231,11 +2315,13 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2282,11 +2368,13 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2333,11 +2421,13 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2384,11 +2474,13 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2435,11 +2527,13 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2486,11 +2580,13 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2537,11 +2633,13 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2588,11 +2686,13 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2639,11 +2739,13 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2690,11 +2792,13 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2741,11 +2845,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2792,11 +2898,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2843,11 +2951,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2894,11 +3004,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2945,11 +3057,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -2996,11 +3110,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3047,11 +3163,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3098,11 +3216,13 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3149,11 +3269,13 @@
   netmiko_driver: linux
   operating_system: Linux
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3200,11 +3322,13 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3251,6 +3375,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [285, 905]
@@ -3258,6 +3383,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3304,6 +3430,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [851, 631]
@@ -3311,6 +3438,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3357,12 +3485,14 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     'Network 9: Large Network Display': [1505, -2076]
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3409,6 +3539,7 @@
   netmiko_driver: arista_eos
   operating_system: EOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     Large Network Display: [1231, 770]
@@ -3416,6 +3547,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3462,12 +3594,14 @@
   netmiko_driver: arista_eos
   operating_system: EOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     'Network 9: Large Network Display': [272, 2538]
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3514,12 +3648,14 @@
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     'Network 9: Large Network Display': [2753, -63]
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3566,12 +3702,14 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions:
     'Network 9: Large Network Display': [-1288, 1977]
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3616,6 +3754,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     'Network 1: Top-level Devices and Links': &id001 [-314, 42]
@@ -3623,6 +3762,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3667,6 +3807,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     'Network 1: Top-level Devices and Links': &id002 [-59, 267]
@@ -3674,6 +3815,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3719,6 +3861,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     'Network 1: Top-level Devices and Links': &id003 [310, 56]
@@ -3726,6 +3869,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3771,11 +3915,13 @@
   netmiko_driver: arista_eos
   operating_system: EOS
   os_version: ''
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3822,12 +3968,14 @@
   netmiko_driver: cisco_ios
   operating_system: Linux
   os_version: ''
+  owners: []
   port: 22
   positions: {}
   priority: 1
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3873,12 +4021,14 @@
   netmiko_driver: cisco_ios
   operating_system: Linux
   os_version: ''
+  owners: []
   port: 22
   positions: {}
   priority: 2
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3924,12 +4074,14 @@
   netmiko_driver: cisco_ios
   operating_system: Linux
   os_version: ''
+  owners: []
   port: 22
   positions: {}
   priority: 3
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -3974,11 +4126,13 @@
   netmiko_driver: arista_eos
   operating_system: EOS
   os_version: ''
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -4024,12 +4178,14 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Subnetwork 1: [-284, -105]
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -4075,12 +4231,14 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Subnetwork 1: [298, -122]
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -4127,6 +4285,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Subnetwork 2: [-213, -57]
@@ -4134,6 +4293,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -4179,6 +4339,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Subnetwork 2: [202, -63]
@@ -4186,6 +4347,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -4230,6 +4392,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Duplication of Devices, Subnetworks and Top-level Networks: &id004 [-356, 0]
@@ -4237,6 +4400,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -4282,6 +4446,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Duplicate me 2: [-127, -54]
@@ -4289,6 +4454,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -4333,12 +4499,14 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Duplicate me 2: [127, 87]
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -4384,12 +4552,14 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Subnetwork 1: [-8, 136]
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -4435,6 +4605,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Loopback and Parallel Links: &id005 [-765, 312]
@@ -4442,6 +4613,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -4486,6 +4658,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Loopback and Parallel Links: &id006 [-345, 194]
@@ -4493,6 +4666,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -4537,6 +4711,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Loopback and Parallel Links: &id007 [-325, 426]
@@ -4544,6 +4719,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -4588,6 +4764,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Loopback and Parallel Links: &id008 [243, 271]
@@ -4595,6 +4772,7 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -4639,12 +4817,14 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     L3 Network: [-181, -10]
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -4689,12 +4869,14 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     L3 Network: [170, -14]
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]

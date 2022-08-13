@@ -49,7 +49,29 @@
   ],
   "dont_migrate": {
     "credential": ["id"],
-    "group": ["id", "credentials"],
+    "group": [
+      "id",
+      "credentials",
+      "rbac_configuration_devices",
+      "rbac_connect_devices",
+      "rbac_edit_devices",
+      "rbac_edit_files",
+      "rbac_edit_links",
+      "rbac_edit_pools",
+      "rbac_edit_services",
+      "rbac_edit_tasks",
+      "rbac_read_devices",
+      "rbac_read_files",
+      "rbac_read_links",
+      "rbac_read_pools",
+      "rbac_read_services",
+      "rbac_read_tasks",
+      "rbac_run_services",
+      "rbac_schedule_services",
+      "rbac_schedule_tasks",
+      "rbac_target_devices",
+      "rbac_use_files"
+  ],
     "device": [
       "id",
       "configuration",
@@ -120,7 +142,13 @@
       "get_requests",
       "post_requests",
       "services",
-      "pages"
+      "pages",
+      "user_devices",
+      "user_files",
+      "user_links",
+      "user_pools",
+      "user_services",
+      "user_tasks"
     ],
     "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"]
   },

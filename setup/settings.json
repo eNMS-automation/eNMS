@@ -69,7 +69,9 @@
     "workflow_builder_table": "automation/workflows/"
   },
   "files": {
-    "ignored_types": [".tgz"]
+    "ignored_types": [
+      ".tgz"
+    ]
   },
   "mail": {
     "port": 587,
@@ -129,15 +131,20 @@
     }
   },
   "security": {
-    "forbidden_python_libraries": ["eNMS", "os", "subprocess", "sys"],
+    "forbidden_python_libraries": [
+      "eNMS",
+      "os",
+      "subprocess",
+      "sys"
+    ],
     "hash_user_passwords": true
   },
   "slack": {
     "channel": "random"
   },
   "ssh": {
-    "command": "python3 -m flask run -h 0.0.0.0",
     "bypass_key_prompt": true,
+    "command": "python3 -m flask run -h 0.0.0.0",
     "credentials": {
       "custom": true,
       "device": true,

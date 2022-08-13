@@ -1237,11 +1237,6 @@
       "source_name",
       "destination_name"
     ],
-    "network": [
-      "name",
-      "description",
-      "creator"
-    ],
     "pool": [
       "name",
       "last_modified",

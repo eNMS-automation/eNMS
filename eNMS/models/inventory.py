@@ -28,7 +28,7 @@ class Object(AbstractBase):
 
     def update(self, **kwargs):
         super().update(**kwargs)
-        if not hasattr(self, "class_type"):
+        if not hasattr(self, "class_type") or not kwargs.get("update_pools"):
             return
         constraints = []
         for property in vs.properties["filtering"][self.class_type]:

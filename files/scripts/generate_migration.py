@@ -78,7 +78,10 @@ def generate_model_scalability_user_migration_file():
     users = [
         {
             "name": f"u{index}",
-            "password": "JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQyenVuTkdic25iTVdZdXk5TjhhWWt3JEh5VWhTeUlRckJTY21ZZTR2WWNWeFE=",
+            "password": (
+                "JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQyenVuTkdi"
+                "c25iTVdZdXk5TjhhWWt3JEh5VWhTeUlRckJTY21ZZTR2WWNWeFE="
+            ),
         }
         for index in range(1, 1_001)
     ]

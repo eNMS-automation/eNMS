@@ -600,10 +600,6 @@ tables.network = class NetworkTable extends Table {
     return row;
   }
 
-  get modelFiltering() {
-    return "node";
-  }
-
   postProcessing(...args) {
     let self = this;
     super.postProcessing(...args);

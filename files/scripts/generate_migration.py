@@ -71,13 +71,13 @@ def generate_pools():
 
 
 def generate_users():
-    users = [{"name": f"u{index}"} for index in range(1, 1_001)]
+    users = [{"name": f"user{index}"} for index in range(1, 1_001)]
     with open(PATH / "user.yaml", "w") as migration_file:
         yaml.dump(users, migration_file)
 
 
 def generate_tasks():
-    users = [{"name": f"u{index}"} for index in range(1, 2_001)]
+    users = [{"name": f"task{index}"} for index in range(1, 2_001)]
     with open(PATH / "task.yaml", "w") as migration_file:
         yaml.dump(users, migration_file)
 

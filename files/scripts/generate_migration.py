@@ -42,7 +42,7 @@ def generate_model_scalability_service_migration_file(project):
 
 def generate_model_scalability_device_migration_file():
     path = PATH / "model_scalability"
-    devices = [{"name": f"d{index}"} for index in range(1, 60_000)]
+    devices = [{"name": f"d{index}"} for index in range(1, 80_001)]
     with open(path / "device.yaml", "w") as migration_file:
         yaml.dump(devices, migration_file)
 

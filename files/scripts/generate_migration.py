@@ -75,9 +75,15 @@ def generate_model_scalability_pool_migration_file():
 
 def generate_model_scalability_user_migration_file():
     path = PATH / "model_scalability"
-    devices = [{"name": f"u{index}", "password": "JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQyenVuTkdic25iTVdZdXk5TjhhWWt3JEh5VWhTeUlRckJTY21ZZTR2WWNWeFE="} for index in range(1, 1_001)]
+    users = [
+        {
+            "name": f"u{index}",
+            "password": "JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQyenVuTkdic25iTVdZdXk5TjhhWWt3JEh5VWhTeUlRckJTY21ZZTR2WWNWeFE=",
+        }
+        for index in range(1, 1_001)
+    ]
     with open(path / "device.yaml", "w") as migration_file:
-        yaml.dump(devices, migration_file)
+        yaml.dump(users, migration_file)
 
 
-def generate_model_scalability_user_migration_file()
+generate_model_scalability_user_migration_file()

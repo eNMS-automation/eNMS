@@ -9,12 +9,11 @@ service_type = [
     "netmiko_commands_service",
 ]
 
+PATH = Path.cwd().parent.parent.parent / "eNMS-prod" / "files" / "migrations"
 
-def generate_scalability_migration_file(project):
-    path = (
-        Path.cwd().parent.parent.parent / "eNMS-prod" / "files" / "migrations" / project
-    )
 
+def generate_model_scalability_service_migration_file(project):
+    path = PATH / "model_scalability"
     services = [
         {
             "name": f"[Shared] s{index}",
@@ -24,7 +23,6 @@ def generate_scalability_migration_file(project):
         }
         for index in range(1, 30)
     ]
-
     services.extend(
         [
             {
@@ -38,17 +36,20 @@ def generate_scalability_migration_file(project):
             for index in range(1, 5)
         ]
     )
-
     with open(path / "service.yaml", "w") as migration_file:
         yaml.dump(services, migration_file)
 
 
-def generate_pool_scalability_migration_file(project):
-    path = (
-        Path.cwd().parent.parent.parent / "eNMS-prod" / "files" / "migrations" / project
-    )
-    pools = []
+def generate_model_scalability_device_migration_file():
+    path = PATH / "model_scalability"
+    devices = [{"name": f"d{index}"} for index in range(1, 60_000)]
+    with open(path / "device.yaml", "w") as migration_file:
+        yaml.dump(devices, migration_file)
 
+
+def generate_pool_scalability_migration_file():
+    path = PATH / "pool_scalability"
+    pools = []
     for index in range(1_000):
         # we associate each pool of index (1)xyyy to a range of
         # at most 3K devices in [max(0, xK - 1), min(9, xK + 1)]
@@ -61,9 +62,5 @@ def generate_pool_scalability_migration_file(project):
                 "type": "pool",
             }
         )
-
     with open(path / "pool.yaml", "w") as migration_file:
         yaml.dump(pools, migration_file)
-
-
-generate_pool_scalability_migration_file("pool_scalability")

@@ -4,6 +4,7 @@
 Version 4.4.0: RBAC and Credentials
 -----------------------------------
 
+- Remove settings from UI upper menu (doesn't work with multiple gunicorn workers)
 - Compute whether a device / link belongs to a pool with a SQL query rather than pure python (performance x3)
 
 Version 4.3.0

@@ -63,7 +63,7 @@ class AbstractBase(db.base):
         return {prop: getattr(self, prop) for prop in ("id", "name", "type")}
 
     def update(self, rbac="read", **kwargs):
-        self.check_rbac(**kwargs)
+        self.filter_rbac_kwargs(kwargs)
         relation = vs.relationships[self.__tablename__]
         for property, value in kwargs.items():
             if not hasattr(self, property):
@@ -84,16 +84,14 @@ class AbstractBase(db.base):
                         value = {**current_value, **value}
             setattr(self, property, value)
 
-    def check_rbac(self, **kwargs):
+    def filter_rbac_kwargs(self, kwargs):
         if getattr(self, "class_type", None) not in vs.rbac["rbac_models"]:
             return
         rbac_properties = ["owners"] + list(vs.rbac["rbac_models"][self.class_type])
-        if (
-            not getattr(current_user, "is_admin", True)
-            and current_user not in self.owners
-            and any(property in kwargs for property in rbac_properties)
-        ):
-            raise db.rbac_error
+        is_admin = getattr(current_user, "is_admin", True)
+        if not is_admin and current_user not in self.owners:
+            for property in rbac_properties:
+                kwargs.pop(property, None)
 
     def update_rbac(self):
         if self.type not in vs.rbac["rbac_models"] or not current_user:

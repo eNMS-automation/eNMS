@@ -47,10 +47,10 @@ def generate_model_scalability_device_migration_file():
         yaml.dump(devices, migration_file)
 
 
-def generate_pool_scalability_migration_file():
-    path = PATH / "pool_scalability"
+def generate_model_scalability_pool_migration_file():
+    path = PATH / "model_scalability"
     pools = []
-    for index in range(1_000):
+    for index in range(1_001):
         # we associate each pool of index (1)xyyy to a range of
         # at most 3K devices in [max(0, xK - 1), min(9, xK + 1)]
         x = index // 100
@@ -59,7 +59,14 @@ def generate_pool_scalability_migration_file():
                 "name": f"Pool {index}",
                 "device_name": "d[{}-{}]\d{{3}}".format(max(x - 1, 0), min(x + 1, 9)),
                 "device_name_match": "regex",
-                "type": "pool",
+            }
+        )
+    for index in range(1_001, 5_001):
+        pools.append(
+            {
+                "name": f"Pool {index}",
+                "device_name": ".*",
+                "device_name_match": "regex",
             }
         )
     with open(path / "pool.yaml", "w") as migration_file:

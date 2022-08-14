@@ -157,6 +157,7 @@ class FormFactory:
     def _initialize(self):
         self.generate_filtering_forms()
         self.generate_instance_insertion_forms()
+        self.generate_rbac_forms()
         self.generate_service_forms()
 
     def generate_filtering_forms(self):
@@ -234,6 +235,36 @@ class FormFactory:
                     "names": StringField(widget=TextArea(), render_kw={"rows": 8}),
                 },
             )
+
+    def generate_rbac_forms(self):
+        class GroupForm(RbacForm):
+            template = "group"
+            form_type = HiddenField(default="group")
+            creator = db.Column(db.SmallString)
+            users = MultipleInstanceField("Users", model="user")
+            menu = SelectMultipleField("Menu", choices=vs.dualize(vs.rbac["menus"]))
+            pages = SelectMultipleField("Pages", choices=vs.dualize(vs.rbac["pages"]))
+            get_requests = SelectMultipleField(
+                "GET Requests",
+                choices=[(k, k) for k, v in vs.rbac["get_requests"].items() if v == "access"],
+            )
+            post_requests = SelectMultipleField(
+                "POST Requests",
+                choices=[(k, k) for k, v in vs.rbac["post_requests"].items() if v == "access"],
+            )
+            delete_requests = SelectMultipleField(
+                "DELETE Requests",
+                choices=[
+                    (k, k) for k, v in vs.rbac["delete_requests"].items() if v == "access"
+                ],
+            )
+
+            @classmethod
+            def form_init(cls):
+                for model, properties in vs.rbac["rbac_models"].items():
+                    field = SelectMultipleField(choices=list(properties.items()))
+                    setattr(cls, f"{model}_access", field)
+                    vs.form_properties["group"][f"{model}_access"] = {"type": "multiselect"}
 
     def generate_service_forms(self):
         for file in (vs.path / "eNMS" / "forms").glob("**/*.py"):
@@ -1128,36 +1159,6 @@ class UserForm(RbacForm):
     )
     password = PasswordField("Password")
     is_admin = BooleanField(default=False)
-
-
-class GroupForm(RbacForm):
-    template = "group"
-    form_type = HiddenField(default="group")
-    creator = db.Column(db.SmallString)
-    users = MultipleInstanceField("Users", model="user")
-    menu = SelectMultipleField("Menu", choices=vs.dualize(vs.rbac["menus"]))
-    pages = SelectMultipleField("Pages", choices=vs.dualize(vs.rbac["pages"]))
-    get_requests = SelectMultipleField(
-        "GET Requests",
-        choices=[(k, k) for k, v in vs.rbac["get_requests"].items() if v == "access"],
-    )
-    post_requests = SelectMultipleField(
-        "POST Requests",
-        choices=[(k, k) for k, v in vs.rbac["post_requests"].items() if v == "access"],
-    )
-    delete_requests = SelectMultipleField(
-        "DELETE Requests",
-        choices=[
-            (k, k) for k, v in vs.rbac["delete_requests"].items() if v == "access"
-        ],
-    )
-
-    @classmethod
-    def form_init(cls):
-        for model, properties in vs.rbac["rbac_models"].items():
-            field = SelectMultipleField(choices=list(properties.items()))
-            setattr(cls, f"{model}_access", field)
-            vs.form_properties["group"][f"{model}_access"] = {"type": "multiselect"}
 
 
 class ReplacementForm(FlaskForm):

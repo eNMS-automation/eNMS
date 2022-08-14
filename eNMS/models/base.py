@@ -1,5 +1,6 @@
 from collections import defaultdict
 from flask_login import current_user
+from sqlalchemy import or_
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 from eNMS.database import db
@@ -92,6 +93,19 @@ class AbstractBase(db.base):
         if not is_admin and current_user not in self.owners:
             for property in rbac_properties:
                 kwargs.pop(property, None)
+
+    @classmethod
+    def rbac_filter(cls, query, mode, user, join_class=None):
+        model = join_class or getattr(cls, "class_type", None)
+        if model not in vs.rbac["rbac_models"]:
+            return query
+        if join_class:
+            query = query.join(getattr(cls, join_class))
+        user_group = [group.id for group in user.groups]
+        property = getattr(vs.models[model], f"rbac_{mode}")
+        rbac_constraint = property.any(vs.models["group"].id.in_(user_group))
+        owners_constraint = vs.models[model].owners.any(id=user.id)
+        return query.filter(or_(owners_constraint, rbac_constraint))
 
     def update_rbac(self):
         if self.type not in vs.rbac["rbac_models"] or not current_user:

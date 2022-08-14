@@ -310,6 +310,10 @@ class Run(AbstractBase):
     def __repr__(self):
         return f"{self.runtime}: SERVICE '{self.service}'"
 
+    @classmethod
+    def rbac_filter(cls, *args):
+        return super().rbac_filter(*args, join_class="service")
+
     @property
     def service_properties(self):
         return self.service.base_properties

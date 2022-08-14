@@ -18,7 +18,6 @@ from sqlalchemy import (
     Float,
     inspect,
     Integer,
-    or_,
     PickleType,
     String,
     Table,
@@ -370,13 +369,7 @@ class Database:
             if user.is_authenticated and not user.is_admin:
                 if model in vs.rbac["admin_models"].get(rbac, []):
                     raise self.rbac_error
-                if model not in vs.rbac["rbac_models"]:
-                    return query
-                user_group = [group.id for group in current_user.groups]
-                property = getattr(vs.models[model], f"rbac_{rbac}")
-                rbac_constraint = property.any(vs.models["group"].id.in_(user_group))
-                owners_constraint = vs.models[model].owners.any(id=current_user.id)
-                query = query.filter(or_(owners_constraint, rbac_constraint))
+                query = vs.models[model].rbac_filter(query, rbac, user)
         return query
 
     def fetch(

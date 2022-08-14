@@ -246,16 +246,26 @@ class FormFactory:
             pages = SelectMultipleField("Pages", choices=vs.dualize(vs.rbac["pages"]))
             get_requests = SelectMultipleField(
                 "GET Requests",
-                choices=[(k, k) for k, v in vs.rbac["get_requests"].items() if v == "access"],
+                choices=[
+                    (key, key)
+                    for key, value in vs.rbac["get_requests"].items()
+                    if value == "access"
+                ],
             )
             post_requests = SelectMultipleField(
                 "POST Requests",
-                choices=[(k, k) for k, v in vs.rbac["post_requests"].items() if v == "access"],
+                choices=[
+                    (key, key)
+                    for key, value in vs.rbac["post_requests"].items()
+                    if value == "access"
+                ],
             )
             delete_requests = SelectMultipleField(
                 "DELETE Requests",
                 choices=[
-                    (k, k) for k, v in vs.rbac["delete_requests"].items() if v == "access"
+                    (key, key)
+                    for key, value in vs.rbac["delete_requests"].items()
+                    if value == "access"
                 ],
             )
 
@@ -264,7 +274,9 @@ class FormFactory:
                 for model, properties in vs.rbac["rbac_models"].items():
                     field = SelectMultipleField(choices=list(properties.items()))
                     setattr(cls, f"{model}_access", field)
-                    vs.form_properties["group"][f"{model}_access"] = {"type": "multiselect"}
+                    vs.form_properties["group"][f"{model}_access"] = {
+                        "type": "multiselect"
+                    }
 
     def generate_service_forms(self):
         for file in (vs.path / "eNMS" / "forms").glob("**/*.py"):

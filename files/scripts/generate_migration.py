@@ -9,7 +9,13 @@ service_type = [
     "netmiko_commands_service",
 ]
 
-PATH = Path.cwd().parent.parent.parent / "eNMS-prod" / "files" / "migrations" / "model_scalability"
+PATH = (
+    Path.cwd().parent.parent.parent
+    / "eNMS-prod"
+    / "files"
+    / "migrations"
+    / "model_scalability"
+)
 
 
 def generate_services():
@@ -86,9 +92,7 @@ def generate_networks():
     networks = [
         {
             "name": f"w{index}",
-            "nodes": list(
-                set(f"d{randrange(1, 80_000)}" for _ in range(30))
-            ),
+            "nodes": list(set(f"d{randrange(1, 80_000)}" for _ in range(30))),
         }
         for index in range(1, 1_001)
     ]

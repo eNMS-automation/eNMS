@@ -434,9 +434,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -906,9 +906,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -982,9 +982,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1083,9 +1083,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   regex: ''
   reply_to: ''
   reserved: false
@@ -1179,9 +1179,9 @@
   preprocessing: ''
   priority: 11
   property: operational_data
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -1285,9 +1285,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1403,9 +1403,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -1511,9 +1511,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1632,9 +1632,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -1755,9 +1755,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
@@ -1855,9 +1855,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 12
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1954,9 +1954,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 12
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2041,9 +2041,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2151,9 +2151,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   response1: show vrf b
@@ -2260,9 +2260,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   response1: show vrf
@@ -2345,9 +2345,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -2427,9 +2427,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2536,9 +2536,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -2647,9 +2647,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -2759,9 +2759,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -2880,9 +2880,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2970,9 +2970,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3058,9 +3058,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3146,9 +3146,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3251,9 +3251,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -3363,9 +3363,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -3475,9 +3475,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -3570,9 +3570,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{iteration_value}}
@@ -3660,9 +3660,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -3781,9 +3781,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3898,9 +3898,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3993,9 +3993,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4098,9 +4098,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4220,9 +4220,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4314,9 +4314,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4449,9 +4449,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4571,9 +4571,9 @@
   preprocessing: ''
   priority: 11
   property: operational_data
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -4666,9 +4666,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4754,9 +4754,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4842,9 +4842,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: ''
@@ -4928,9 +4928,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -5016,9 +5016,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: ''
@@ -5102,9 +5102,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -5208,9 +5208,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -5320,9 +5320,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -5431,9 +5431,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -5540,9 +5540,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -5626,9 +5626,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -5712,9 +5712,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -5822,9 +5822,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -5916,9 +5916,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6017,9 +6017,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6103,9 +6103,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6213,9 +6213,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -6337,9 +6337,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6421,9 +6421,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6507,9 +6507,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6591,9 +6591,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6691,9 +6691,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -6778,9 +6778,9 @@
   postprocessing_mode: always
   preprocessing: set_var("test", device.operating_system, device=device.name)
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6861,9 +6861,9 @@
   postprocessing_mode: failure
   preprocessing: set_var("integer", 10)
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6946,9 +6946,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7026,9 +7026,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -7114,9 +7114,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -7205,9 +7205,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7301,9 +7301,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7397,9 +7397,9 @@
   preprocessing: ''
   priority: 11
   protocol: ICMP
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7479,9 +7479,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -7571,9 +7571,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -7678,9 +7678,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -7774,9 +7774,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{ placeholder.definition }}
@@ -7877,9 +7877,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -8000,9 +8000,9 @@
   preprocessing: ''
   priority: 11
   property: configuration
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -8100,9 +8100,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   relative_path: true
   remote_repository: ''
   reply_to: ''
@@ -8182,9 +8182,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -8264,9 +8264,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -8357,9 +8357,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -8452,9 +8452,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -8547,9 +8547,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -8642,9 +8642,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -8735,9 +8735,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -8846,9 +8846,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -8943,9 +8943,9 @@
   preprocessing: ''
   priority: 11
   protocol: scp
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9054,9 +9054,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -9152,9 +9152,9 @@
   preprocessing: ''
   priority: 11
   protocol: scp
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9261,9 +9261,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -9358,9 +9358,9 @@
   preprocessing: ''
   priority: 11
   protocol: scp
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9460,9 +9460,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -9547,9 +9547,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9637,9 +9637,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9727,9 +9727,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9847,9 +9847,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9938,9 +9938,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10028,9 +10028,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10118,9 +10118,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10208,9 +10208,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10323,9 +10323,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10413,9 +10413,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10533,9 +10533,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{device.name}}
@@ -10641,9 +10641,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -10755,9 +10755,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -10844,9 +10844,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10936,9 +10936,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11046,9 +11046,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -11136,9 +11136,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11247,9 +11247,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11352,9 +11352,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
@@ -11436,9 +11436,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11523,9 +11523,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11634,9 +11634,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -11731,9 +11731,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
@@ -11837,9 +11837,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11926,9 +11926,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -12008,9 +12008,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -12096,9 +12096,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12178,9 +12178,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12284,9 +12284,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -12371,9 +12371,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12458,9 +12458,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12545,9 +12545,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -12629,9 +12629,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -12713,9 +12713,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12796,9 +12796,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12898,9 +12898,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -13013,9 +13013,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13118,9 +13118,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -13216,9 +13216,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13299,9 +13299,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13380,9 +13380,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13461,9 +13461,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13543,9 +13543,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13648,9 +13648,9 @@
   preprocessing: "devices = [\"Austin\", \"PaloAlto\"] if device.name == \"Dallas\"\
     \ else [\"NewYork\"]\r\nset_var(\"iteration_devices\", devices, device=device.name)"
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13729,9 +13729,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13814,9 +13814,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13899,9 +13899,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -13982,9 +13982,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14065,9 +14065,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14148,9 +14148,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14230,9 +14230,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14326,9 +14326,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -14408,9 +14408,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14489,9 +14489,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14570,9 +14570,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14675,9 +14675,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14768,9 +14768,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14864,9 +14864,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14957,9 +14957,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15050,9 +15050,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15147,9 +15147,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15254,9 +15254,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -15370,9 +15370,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15453,9 +15453,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15538,9 +15538,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15622,9 +15622,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15720,9 +15720,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15817,9 +15817,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15917,9 +15917,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -16022,9 +16022,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -16122,9 +16122,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -16227,9 +16227,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -16339,9 +16339,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -16447,9 +16447,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -16558,9 +16558,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -16669,9 +16669,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -16779,9 +16779,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -16863,9 +16863,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -16947,9 +16947,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -17031,9 +17031,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: afourmy@enms.io
   reserved: false
   run_method: per_device
@@ -17130,9 +17130,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -17238,9 +17238,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -17340,9 +17340,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -17446,9 +17446,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -17556,9 +17556,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -17666,9 +17666,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -17782,9 +17782,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -17865,9 +17865,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -17972,9 +17972,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -18066,9 +18066,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{get_credential(name="Non Device Credential
@@ -18173,9 +18173,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -18258,9 +18258,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18341,9 +18341,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18423,9 +18423,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18505,9 +18505,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -18588,9 +18588,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18672,9 +18672,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18768,9 +18768,9 @@
   query1: get_var("string")
   query2: ''
   query3: ''
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18861,9 +18861,9 @@
   query1: get_var("dict")
   query2: ''
   query3: ''
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18954,9 +18954,9 @@
   query1: get_var("dict2")
   query2: ''
   query3: ''
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19047,9 +19047,9 @@
   query1: get_var("string2")
   query2: ''
   query3: ''
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19140,9 +19140,9 @@
   query1: get_var("list")
   query2: ''
   query3: ''
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19233,9 +19233,9 @@
   query1: get_var("list2")
   query2: ''
   query3: ''
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19326,9 +19326,9 @@
   query1: get_var("list3")
   query2: ''
   query3: ''
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19410,9 +19410,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19516,9 +19516,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19598,9 +19598,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19686,9 +19686,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -19774,9 +19774,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{ endpoint }}
@@ -19880,9 +19880,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -19980,9 +19980,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -20087,9 +20087,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -20197,9 +20197,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -20307,9 +20307,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -20417,9 +20417,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -20510,9 +20510,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -20607,9 +20607,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -20700,9 +20700,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -20811,9 +20811,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -20927,9 +20927,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -21049,9 +21049,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21154,9 +21154,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21255,9 +21255,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21356,9 +21356,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21457,9 +21457,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21579,9 +21579,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21698,9 +21698,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -21812,9 +21812,9 @@
   query1: get_result("netmiko_show_ip_route", device.name)["success"]
   query2: get_result("netmiko_show_ip_route", device.name)["result"]
   query3: get_result("netmiko_show_ip_route", device=device.name)["result"]
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21906,9 +21906,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21999,9 +21999,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22093,9 +22093,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22185,9 +22185,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22267,9 +22267,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22363,9 +22363,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22468,9 +22468,9 @@
   query1: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query2: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query3: 'get_result("Getters Workflow: Interface IP", device=device.name)["match"]'
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22573,9 +22573,9 @@
   query1: get_result("Start")["state"]["completed"]
   query2: get_result("Start")["logs"]
   query3: get_result("Start")["state"]
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22666,9 +22666,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22758,9 +22758,9 @@
   postprocessing_mode: always
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22840,9 +22840,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -22924,9 +22924,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -23005,9 +23005,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -23085,9 +23085,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -23165,9 +23165,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -23245,9 +23245,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -23325,9 +23325,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23407,9 +23407,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23491,9 +23491,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -23570,9 +23570,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23649,9 +23649,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23729,9 +23729,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23809,9 +23809,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23889,9 +23889,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23980,9 +23980,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -24063,9 +24063,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -24143,9 +24143,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -24228,9 +24228,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -24308,9 +24308,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -24391,9 +24391,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -24474,9 +24474,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -24592,9 +24592,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -24676,9 +24676,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -24757,9 +24757,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -24838,9 +24838,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -24919,9 +24919,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -25000,9 +25000,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -25081,9 +25081,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -25164,9 +25164,9 @@
   preprocessing: ''
   priority: 11
   protocol: ICMP
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -25267,9 +25267,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -25359,9 +25359,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/is_alive
@@ -25448,9 +25448,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/configuration/{{ device.name }}
@@ -25537,9 +25537,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/configuration/{{ device.name }}?property=operational_data
@@ -25625,9 +25625,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device/{{ device.name }}
@@ -25713,9 +25713,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/user/admin
@@ -25820,9 +25820,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -25912,9 +25912,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?name={{ device.name }}
@@ -26001,9 +26001,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?name=NonExisting&allow_none=true
@@ -26091,9 +26091,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?operating_system=EOS
@@ -26180,9 +26180,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/token
@@ -26289,9 +26289,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -26385,9 +26385,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/search
@@ -26479,9 +26479,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/search
@@ -26575,9 +26575,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/search
@@ -26687,9 +26687,9 @@
   postprocessing_mode: success
   preprocessing: set_var("runtime", self.parent_runtime)
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -26780,9 +26780,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device
@@ -26868,9 +26868,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device
@@ -26957,9 +26957,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device/NewDevice
@@ -27045,9 +27045,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: 'http://192.168.56.102/rest/result/REST API: POST update, DELETE delete
@@ -27138,9 +27138,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/search
@@ -27257,9 +27257,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -27365,9 +27365,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -27477,9 +27477,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -27589,9 +27589,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -27683,9 +27683,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -27762,9 +27762,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -27874,9 +27874,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -27952,9 +27952,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28038,9 +28038,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28120,9 +28120,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28216,9 +28216,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28299,9 +28299,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28382,9 +28382,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28465,9 +28465,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28548,9 +28548,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28631,9 +28631,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28714,9 +28714,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28797,9 +28797,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28880,9 +28880,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28963,9 +28963,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29046,9 +29046,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29129,9 +29129,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29212,9 +29212,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29295,9 +29295,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29378,9 +29378,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29461,9 +29461,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29544,9 +29544,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29627,9 +29627,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29710,9 +29710,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29793,9 +29793,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29876,9 +29876,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29959,9 +29959,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30042,9 +30042,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30125,9 +30125,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30208,9 +30208,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30291,9 +30291,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30374,9 +30374,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30457,9 +30457,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30552,9 +30552,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30632,9 +30632,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30722,9 +30722,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30802,9 +30802,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30893,9 +30893,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30973,9 +30973,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -31056,9 +31056,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -31140,9 +31140,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -31221,9 +31221,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -31323,9 +31323,9 @@
   preprocessing: ''
   priority: 10
   property: configuration
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -31443,9 +31443,9 @@
   preprocessing: ''
   priority: 10
   property: operational_data
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -31577,9 +31577,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 11
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -31666,9 +31666,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -31758,9 +31758,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -31850,9 +31850,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -31946,9 +31946,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -32042,9 +32042,9 @@
   query1: get_result("Define Input Variables")["result"]["jinja2"]
   query2: ''
   query3: ''
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -32122,9 +32122,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -32243,9 +32243,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -32339,9 +32339,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -32435,9 +32435,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -32548,9 +32548,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -32662,9 +32662,9 @@
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -32752,9 +32752,9 @@
   preprocessing: ''
   priority: 11
   protocol: ICMP
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once
@@ -32850,9 +32850,9 @@
   query1: get_result("Define Input Variables")["result"]["ttp"]
   query2: ''
   query3: ''
-  rbac_edit: []
-  rbac_read: []
-  rbac_run: []
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   reserved: false
   run_method: once

@@ -722,7 +722,7 @@ class Controller:
         return rec(service, path)
 
     def get_workflow_services(self, id, node):
-        parents = db.fetch("workflow", id=id)..get_ancestors()
+        parents = db.fetch("workflow", id=id).get_ancestors()
         if node == "all":
             workflows = self.filtering(
                 "workflow", bulk="object", constraints={"workflows_filter": "empty"}

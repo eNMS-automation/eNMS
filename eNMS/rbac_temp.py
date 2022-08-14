@@ -37,27 +37,6 @@
                 )
             )
         return query
-            
-# Run class
-
-    @classmethod
-    def rbac_filter(cls, query, mode, user):
-        service_alias = aliased(vs.models["service"])
-        pool_alias = aliased(vs.models["pool"])
-        services = (
-            service.id
-            for service in db.session.query(vs.models["user"])
-            .join(pool_alias, vs.models["user"].pools)
-            .join(vs.models["access"], pool_alias.access_users)
-            .join(vs.models["pool"], vs.models["access"].access_pools)
-            .join(service_alias, vs.models["pool"].services)
-            .filter(vs.models["user"].name == user.name)
-            .filter(vs.models["access"].access_type.contains(mode))
-            .filter(service_alias.admin_only == false())
-            .with_entities(service_alias.id)
-            .all()
-        )
-        return query.join(cls.service).filter(vs.models["service"].id.in_(services))
 
 # controller.py
 

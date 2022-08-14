@@ -373,6 +373,8 @@
                   {{ field_template(form_type, form["owners"]) }} {% for property in
                   form.rbac_properties %} {% set field = form[property] %} {{
                   field_template(form_type, field) }} {% endfor %}
+                  {{ field_template(form_type, form["freeze_edit"]) }}
+                  {{ field_template(form_type, form["freeze_run"]) }}
                 </div>
               </div>
             </div>

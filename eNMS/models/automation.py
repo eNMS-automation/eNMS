@@ -113,7 +113,7 @@ class Service(AbstractBase):
             raise db.rbac_error(f"It is not allowed to delete '{self.name}'")
 
     def check_freeze(self, mode):
-        if not current_user.is_admin any(
+        if not current_user.is_admin and any(
             getattr(workflow, f"freeze_{mode}") and current_user not in workflow.owners
             for workflow in self.get_ancestors()
         ):

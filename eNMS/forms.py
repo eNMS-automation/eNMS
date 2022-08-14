@@ -630,6 +630,8 @@ class ServiceForm(BaseForm):
     device_query_property = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
+    freeze_edit = BooleanField("Freeze Edit")
+    freeze_run = BooleanField("Freeze Run")
     target_devices = MultipleInstanceField("Devices", model="device")
     disable_result_creation = BooleanField("Save only failed results")
     target_pools = MultipleInstanceField("Pools", model="pool")
@@ -1184,4 +1186,3 @@ class CommandsForm(FlaskForm):
 
 
 form_factory = FormFactory()
-                                                                                          

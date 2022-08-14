@@ -119,6 +119,13 @@ class Service(AbstractBase):
         if self.name in ("[Shared] Start", "[Shared] End", "[Shared] Placeholder"):
             raise db.rbac_error(f"It is not allowed to delete '{self.name}'")
 
+    def check_freeze(self, mode):
+        if any(
+            getattr(workflow, f"freeze_{mode}") and current_user not in workflow.owners
+            for workflow in self.originals
+        ):
+            raise db.rbac_error
+
     def update(self, **kwargs):
         if self.positions and "positions" in kwargs:
             kwargs["positions"] = {**self.positions, **kwargs["positions"]}

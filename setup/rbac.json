@@ -294,8 +294,7 @@
     "service": {
       "rbac_read": "Read",
       "rbac_edit": "Edit",
-      "rbac_run": "Run",
-      "rbac_schedule": "Schedule"
+      "rbac_run": "Run"
     },
     "task": {
       "rbac_read": "Read",

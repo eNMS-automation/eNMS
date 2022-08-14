@@ -87,6 +87,13 @@ class Service(AbstractBase):
         back_populates="service",
         cascade="all, delete-orphan",
     )
+    originals = relationship(
+        "Service",
+        secondary=db.originals_association_table,
+        primaryjoin=id == db.originals_association_table.c.original_id,
+        secondaryjoin=id == db.originals_association_table.c.child_id,
+        backref="children",
+    )
     maximum_runs = db.Column(Integer, default=1)
     multiprocessing = db.Column(Boolean, default=False)
     max_processes = db.Column(Integer, default=5)
@@ -115,16 +122,17 @@ class Service(AbstractBase):
             kwargs["positions"] = {**self.positions, **kwargs["positions"]}
         self.path = str(self.id)
         super().update(**kwargs)
+        self.update_originals()
         if len(self.workflows) == 1:
             self.path = f"{self.workflows[0].path}>{self.id}"
         if not kwargs.get("migration_import"):
             self.set_name()
 
-    def get_ancestors(self):
+    def update_originals(self):
         def rec(service):
             return {service} | set().union(*(rec(w) for w in service.workflows))
 
-        return rec(self)
+        self.originals = list(rec(self))
 
     def duplicate(self, workflow=None):
         index = 0

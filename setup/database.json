@@ -113,6 +113,7 @@
       "id",
       "sources",
       "destinations",
+      "originals",
       "path",
       "status",
       "superworkflow_id",
@@ -286,6 +287,16 @@
         "model2": {
           "column": "pool_id",
           "foreign_key": "pool"
+        }
+      },
+      "originals_association": {
+        "model1": {
+          "column": "original_id",
+          "foreign_key": "service"
+        },
+        "model2": {
+          "column": "child_id",
+          "foreign_key": "service"
         }
       },
       "service_target_device": {

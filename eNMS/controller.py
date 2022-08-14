@@ -238,6 +238,7 @@ class Controller:
             else:
                 workflow.services.append(service)
             services.append(service)
+            service.update_originals()
         workflow.last_modified = vs.get_time()
         db.session.commit()
         return {
@@ -307,6 +308,8 @@ class Controller:
                 instance.services.remove(service)
                 if not service.shared:
                     db.delete("service", id=service.id)
+                else:
+                    service.update_originals()
         return instance.last_modified
 
     def edit_file(self, filepath):
@@ -722,7 +725,7 @@ class Controller:
         return rec(service, path)
 
     def get_workflow_services(self, id, node):
-        parents = db.fetch("workflow", id=id).get_ancestors()
+        parents = db.fetch("workflow", id=id).originals
         if node == "all":
             workflows = self.filtering(
                 "workflow", bulk="object", constraints={"workflows_filter": "empty"}

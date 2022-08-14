@@ -59,22 +59,6 @@
         )
         return query.join(cls.service).filter(vs.models["service"].id.in_(services))
 
-# Task class
-
-    @classmethod
-    def rbac_filter(cls, query, mode, user):
-        pool_alias = aliased(vs.models["pool"])
-        return (
-            query.join(cls.service)
-            .join(vs.models["pool"], vs.models["service"].pools)
-            .join(vs.models["access"], vs.models["pool"].access)
-            .join(pool_alias, vs.models["access"].user_pools)
-            .join(vs.models["user"], pool_alias.users)
-            .filter(vs.models["access"].access_type.contains(mode))
-            .filter(vs.models["user"].name == user.name)
-            .filter(cls.admin_only == false())
-        )
-
 # controller.py
 
 # filtering function

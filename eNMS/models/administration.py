@@ -146,7 +146,7 @@ class Changelog(AbstractBase):
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "changelog", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
-    time = db.Column(db.TinyString)
+    time = db.Column(db.TinyString, index=True)
     content = db.Column(db.LargeString)
     severity = db.Column(db.TinyString, default="debug")
     user = db.Column(db.SmallString, default="admin")

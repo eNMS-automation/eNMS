@@ -437,7 +437,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -910,7 +909,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -987,7 +985,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1089,7 +1086,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   regex: ''
   reply_to: ''
   reserved: false
@@ -1186,7 +1182,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -1293,7 +1288,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1412,7 +1406,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -1521,7 +1514,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1643,7 +1635,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -1767,7 +1758,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
@@ -1868,7 +1858,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1968,7 +1957,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2056,7 +2044,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2167,7 +2154,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   response1: show vrf b
@@ -2277,7 +2263,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   response1: show vrf
@@ -2363,7 +2348,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -2446,7 +2430,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2556,7 +2539,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -2668,7 +2650,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -2781,7 +2762,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -2903,7 +2883,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2994,7 +2973,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3083,7 +3061,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3172,7 +3149,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3278,7 +3254,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -3391,7 +3366,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -3504,7 +3478,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -3600,7 +3573,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{iteration_value}}
@@ -3691,7 +3663,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -3813,7 +3784,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3931,7 +3901,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4027,7 +3996,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4133,7 +4101,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4256,7 +4223,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4351,7 +4317,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4487,7 +4452,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4610,7 +4574,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -4706,7 +4669,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4795,7 +4757,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4884,7 +4845,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: ''
@@ -4971,7 +4931,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -5060,7 +5019,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: ''
@@ -5147,7 +5105,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -5254,7 +5211,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -5367,7 +5323,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -5479,7 +5434,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -5589,7 +5543,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -5676,7 +5629,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -5763,7 +5715,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -5874,7 +5825,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -5969,7 +5919,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6071,7 +6020,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6158,7 +6106,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6269,7 +6216,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -6394,7 +6340,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6479,7 +6424,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6566,7 +6510,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6651,7 +6594,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6752,7 +6694,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -6840,7 +6781,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6924,7 +6864,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7010,7 +6949,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7091,7 +7029,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -7180,7 +7117,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -7272,7 +7208,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7369,7 +7304,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7466,7 +7400,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7549,7 +7482,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -7642,7 +7574,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -7750,7 +7681,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -7847,7 +7777,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{ placeholder.definition }}
@@ -7951,7 +7880,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -8075,7 +8003,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -8176,7 +8103,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   relative_path: true
   remote_repository: ''
   reply_to: ''
@@ -8259,7 +8185,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -8342,7 +8267,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -8436,7 +8360,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -8532,7 +8455,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -8628,7 +8550,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -8724,7 +8645,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -8818,7 +8738,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -8930,7 +8849,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -9028,7 +8946,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9140,7 +9057,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -9239,7 +9155,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9349,7 +9264,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -9447,7 +9361,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9550,7 +9463,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -9638,7 +9550,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9729,7 +9640,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9820,7 +9730,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -9941,7 +9850,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10033,7 +9941,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10124,7 +10031,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10215,7 +10121,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10306,7 +10211,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10422,7 +10326,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10513,7 +10416,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -10634,7 +10536,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{device.name}}
@@ -10743,7 +10644,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -10858,7 +10758,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -10948,7 +10847,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11041,7 +10939,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11152,7 +11049,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -11243,7 +11139,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11355,7 +11250,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11461,7 +11355,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
@@ -11546,7 +11439,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11634,7 +11526,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -11746,7 +11637,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -11844,7 +11734,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
@@ -11951,7 +11840,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12041,7 +11929,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -12124,7 +12011,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -12213,7 +12099,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12296,7 +12181,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12403,7 +12287,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -12491,7 +12374,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12579,7 +12461,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12667,7 +12548,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -12752,7 +12632,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -12837,7 +12716,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -12921,7 +12799,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13024,7 +12901,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -13140,7 +13016,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13246,7 +13121,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -13345,7 +13219,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13429,7 +13302,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13511,7 +13383,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13593,7 +13464,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13676,7 +13546,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13782,7 +13651,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13864,7 +13732,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -13950,7 +13817,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14036,7 +13902,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -14120,7 +13985,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14204,7 +14068,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14288,7 +14151,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14371,7 +14233,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14468,7 +14329,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -14551,7 +14411,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14633,7 +14492,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14715,7 +14573,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14821,7 +14678,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -14915,7 +14771,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15012,7 +14867,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15106,7 +14960,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15200,7 +15053,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15298,7 +15150,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15406,7 +15257,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -15523,7 +15373,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15607,7 +15456,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15693,7 +15541,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15778,7 +15625,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15877,7 +15723,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -15975,7 +15820,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -16076,7 +15920,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -16182,7 +16025,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -16283,7 +16125,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -16389,7 +16230,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -16502,7 +16342,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -16611,7 +16450,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -16723,7 +16561,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -16835,7 +16672,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -16946,7 +16782,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -17031,7 +16866,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -17116,7 +16950,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -17201,7 +17034,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: afourmy@enms.io
   reserved: false
   run_method: per_device
@@ -17301,7 +17133,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -17410,7 +17241,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -17513,7 +17343,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -17620,7 +17449,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -17731,7 +17559,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -17842,7 +17669,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -17959,7 +17785,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -18043,7 +17868,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18151,7 +17975,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -18246,7 +18069,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{get_credential(name="Non Device Credential
@@ -18354,7 +18176,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -18440,7 +18261,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18524,7 +18344,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18607,7 +18426,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18690,7 +18508,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -18774,7 +18591,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18859,7 +18675,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -18956,7 +18771,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19050,7 +18864,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19144,7 +18957,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19238,7 +19050,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19332,7 +19143,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19426,7 +19236,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19520,7 +19329,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19605,7 +19413,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19712,7 +19519,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19795,7 +19601,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -19884,7 +19689,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -19973,7 +19777,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{ endpoint }}
@@ -20080,7 +19883,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -20181,7 +19983,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -20289,7 +20090,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -20400,7 +20200,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -20511,7 +20310,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -20622,7 +20420,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -20716,7 +20513,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -20814,7 +20610,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -20908,7 +20703,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21020,7 +20814,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -21137,7 +20930,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -21260,7 +21052,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21366,7 +21157,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21468,7 +21258,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21570,7 +21359,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21672,7 +21460,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21795,7 +21582,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -21915,7 +21701,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -22030,7 +21815,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22125,7 +21909,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22219,7 +22002,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22314,7 +22096,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22407,7 +22188,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22490,7 +22270,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22587,7 +22366,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22693,7 +22471,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22799,7 +22576,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22893,7 +22669,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -22986,7 +22761,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23069,7 +22843,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -23154,7 +22927,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -23236,7 +23008,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -23317,7 +23088,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -23398,7 +23168,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -23479,7 +23248,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -23560,7 +23328,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23643,7 +23410,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23728,7 +23494,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -23808,7 +23573,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23888,7 +23652,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -23969,7 +23732,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -24050,7 +23812,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -24131,7 +23892,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -24223,7 +23983,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -24307,7 +24066,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -24388,7 +24146,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -24474,7 +24231,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -24555,7 +24311,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -24639,7 +24394,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -24723,7 +24477,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -24842,7 +24595,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -24927,7 +24679,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -25009,7 +24760,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -25091,7 +24841,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -25173,7 +24922,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -25255,7 +25003,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -25337,7 +25084,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -25421,7 +25167,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -25525,7 +25270,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -25618,7 +25362,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/is_alive
@@ -25708,7 +25451,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/configuration/{{ device.name }}
@@ -25798,7 +25540,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/configuration/{{ device.name }}?property=operational_data
@@ -25887,7 +25628,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device/{{ device.name }}
@@ -25976,7 +25716,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/user/admin
@@ -26084,7 +25823,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -26177,7 +25915,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?name={{ device.name }}
@@ -26267,7 +26004,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?name=NonExisting&allow_none=true
@@ -26358,7 +26094,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?operating_system=EOS
@@ -26448,7 +26183,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/token
@@ -26558,7 +26292,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -26655,7 +26388,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/search
@@ -26750,7 +26482,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/search
@@ -26847,7 +26578,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/search
@@ -26960,7 +26690,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -27054,7 +26783,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device
@@ -27143,7 +26871,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device
@@ -27233,7 +26960,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device/NewDevice
@@ -27322,7 +27048,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: 'http://192.168.56.102/rest/result/REST API: POST update, DELETE delete
@@ -27416,7 +27141,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   rest_url: http://192.168.56.102/rest/search
@@ -27536,7 +27260,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -27645,7 +27368,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -27758,7 +27480,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -27871,7 +27592,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -27966,7 +27686,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28046,7 +27765,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28159,7 +27877,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28238,7 +27955,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28325,7 +28041,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28408,7 +28123,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28505,7 +28219,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28589,7 +28302,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28673,7 +28385,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28757,7 +28468,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28841,7 +28551,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -28925,7 +28634,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29009,7 +28717,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29093,7 +28800,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29177,7 +28883,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29261,7 +28966,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29345,7 +29049,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29429,7 +29132,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29513,7 +29215,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29597,7 +29298,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29681,7 +29381,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29765,7 +29464,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29849,7 +29547,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -29933,7 +29630,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30017,7 +29713,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30101,7 +29796,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30185,7 +29879,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30269,7 +29962,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30353,7 +30045,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30437,7 +30128,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30521,7 +30211,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30605,7 +30294,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30689,7 +30377,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30773,7 +30460,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30869,7 +30555,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -30950,7 +30635,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -31041,7 +30725,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -31122,7 +30805,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -31214,7 +30896,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -31295,7 +30976,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -31379,7 +31059,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -31464,7 +31143,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -31546,7 +31224,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -31649,7 +31326,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -31770,7 +31446,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -31905,7 +31580,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -31995,7 +31669,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -32088,7 +31761,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -32181,7 +31853,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -32278,7 +31949,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -32375,7 +32045,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -32456,7 +32125,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -32578,7 +32246,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -32675,7 +32342,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -32772,7 +32438,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -32886,7 +32551,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: false
@@ -33001,7 +32665,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   results_as_list: true
@@ -33092,7 +32755,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once
@@ -33191,7 +32853,6 @@
   rbac_edit: []
   rbac_read: []
   rbac_run: []
-  rbac_schedule: []
   reply_to: ''
   reserved: false
   run_method: once

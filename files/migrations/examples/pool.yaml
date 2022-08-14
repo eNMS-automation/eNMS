@@ -263,8 +263,8 @@
   property1: CP
   rbac_edit: []
   rbac_read: []
-  target_services: [Large Device Configuration and Operational Data, '[Skip in SxS
-      with service targets and Run Once services] Run Once with Pool']
+  target_services: ['[Skip in SxS with service targets and Run Once services] Run
+      Once with Pool', Large Device Configuration and Operational Data]
   tasks: []
   type: pool
 - admin_only: false

@@ -116,11 +116,6 @@
                     {{ form.admin_only.label() }}
                   </div>
                 </fieldset>
-                {{ form.owners.label(help="common/owners") }}
-                <div class="form-group">
-                  {{ form.owners(id=form_type + '-owners', class="form-control add-id")
-                  }}
-                </div>
                 {{ form.type.label() }}
                 <div class="form-group">
                   {{ form.type(id=form_type + '-class', class="form-control add-id") }}

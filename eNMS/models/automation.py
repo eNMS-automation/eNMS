@@ -40,6 +40,7 @@ class Service(AbstractBase):
     credential_type = db.Column(db.SmallString, default="any")
     positions = db.Column(db.Dict, info={"log_change": False})
     disable_result_creation = db.Column(Boolean, default=False)
+    frozen = db.Column(Boolean, default=False)
     tasks = relationship("Task", back_populates="service", cascade="all,delete")
     vendor = db.Column(db.SmallString)
     operating_system = db.Column(db.SmallString)

@@ -343,7 +343,6 @@ export class Table {
       </button>`;
   }
 
-
   createNewButton() {
     const onClick = this.relation
       ? `eNMS.base.showAddInstancePanel(

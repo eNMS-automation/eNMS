@@ -374,8 +374,8 @@
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {{ field_template(form_type, form["owners"]) }} {% for property in
-                  form.rbac_properties %} {% set field = form[property] %} {{
-                  field_template(form_type, field) }} {% endfor %}
+                form.rbac_properties %} {% set field = form[property] %} {{
+                field_template(form_type, field) }} {% endfor %}
               </div>
             </div>
           </div>

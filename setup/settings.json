@@ -69,9 +69,7 @@
     "workflow_builder_table": "automation/workflows/"
   },
   "files": {
-    "ignored_types": [
-      ".tgz"
-    ]
+    "ignored_types": [".tgz"]
   },
   "mail": {
     "port": 587,
@@ -131,12 +129,7 @@
     }
   },
   "security": {
-    "forbidden_python_libraries": [
-      "eNMS",
-      "os",
-      "subprocess",
-      "sys"
-    ],
+    "forbidden_python_libraries": ["eNMS", "os", "subprocess", "sys"],
     "hash_user_passwords": true
   },
   "slack": {

@@ -71,7 +71,7 @@
       "rbac_schedule_tasks",
       "rbac_target_devices",
       "rbac_use_files"
-  ],
+    ],
     "device": [
       "id",
       "configuration",

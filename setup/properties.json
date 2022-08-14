@@ -1219,12 +1219,7 @@
       "longitude",
       "property1"
     ],
-    "group": [
-      "name",
-      "description",
-      "creator",
-      "email"
-    ],
+    "group": ["name", "description", "creator", "email"],
     "link": [
       "name",
       "description",

@@ -40,8 +40,7 @@ class Service(AbstractBase):
     credential_type = db.Column(db.SmallString, default="any")
     positions = db.Column(db.Dict, info={"log_change": False})
     disable_result_creation = db.Column(Boolean, default=False)
-    freeze_edit = db.Column(Boolean, default=False)
-    freeze_run = db.Column(Boolean, default=False)
+    freeze = db.Column(db.List)
     tasks = relationship("Task", back_populates="service", cascade="all,delete")
     vendor = db.Column(db.SmallString)
     operating_system = db.Column(db.SmallString)
@@ -114,7 +113,7 @@ class Service(AbstractBase):
 
     def check_freeze(self, mode):
         if not getattr(current_user, "is_admin", True) and any(
-            getattr(workflow, f"freeze_{mode}") and current_user not in workflow.owners
+            mode in getattr(workflow, "freeze") and current_user not in workflow.owners
             for workflow in self.get_ancestors()
         ):
             raise db.rbac_error

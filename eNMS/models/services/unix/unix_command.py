@@ -30,6 +30,8 @@ class UnixCommandForm(ServiceForm):
 
     def validate(self):
         valid_form = super().validate()
+        if not self.id.data:
+            return valid_form
         current_command = db.fetch("service", id=self.id.data).command
         rbac_error = not current_user.is_admin and self.command.data != current_command
         if rbac_error:

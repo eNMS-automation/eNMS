@@ -51,6 +51,7 @@ class Workflow(Service):
         for service in self.services:
             if not service.shared:
                 db.delete_instance(service)
+        super().delete()
 
     def set_name(self, name=None):
         old_name = self.name

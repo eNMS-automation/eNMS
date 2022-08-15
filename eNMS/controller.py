@@ -304,9 +304,11 @@ class Controller:
                 instance.nodes.remove(db.fetch("node", id=node_id))
             else:
                 service = db.fetch("service", id=node_id)
-                instance.services.remove(service)
+                service.check_freeze("edit")
                 if not service.shared:
-                    db.delete("service", id=service.id)
+                    db.delete_instance(service)
+                else:
+                    instance.services.remove(service)
         return instance.last_modified
 
     def edit_file(self, filepath):

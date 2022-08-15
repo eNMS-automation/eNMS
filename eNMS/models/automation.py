@@ -109,14 +109,15 @@ class Service(AbstractBase):
 
     def delete(self):
         if self.name in ("[Shared] Start", "[Shared] End", "[Shared] Placeholder"):
-            raise db.rbac_error(f"It is not allowed to delete '{self.name}'")
+            raise db.rbac_error(f"It is not allowed to delete '{self.name}'.")
+        self.check_freeze("edit")
 
     def check_freeze(self, mode):
         if not getattr(current_user, "is_admin", True) and any(
             mode in getattr(workflow, "freeze") and current_user not in workflow.owners
             for workflow in self.get_ancestors()
         ):
-            raise db.rbac_error
+            raise db.rbac_error("Deletion forbidden because of active freeze.")
 
     def update(self, **kwargs):
         self.check_freeze("edit")

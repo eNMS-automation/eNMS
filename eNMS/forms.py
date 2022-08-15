@@ -906,7 +906,11 @@ class UserProfileForm(BaseForm):
         ],
     )
     landing_page = SelectField("Landing Page", validate_choice=False)
-    password = PasswordField("Password")
+
+    @classmethod
+    def form_init(cls):
+        if vs.settings["authentication"]["show_password_in_profile"]:
+            cls.password = PasswordField("Password")
 
 
 class WorkflowLabelForm(BaseForm):

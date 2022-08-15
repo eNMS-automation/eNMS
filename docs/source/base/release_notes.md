@@ -14,16 +14,16 @@ Version 4.3.0
 - Add new "server" variable in workflow global space set to a dictionary that contains server name,
   IP address and URL.
 - Make "Results as List" False by default for scrapli (not useful when only
-  one command, which is most of the time)
+  one command, which is most of the time).
 - For consistency with Scrapli
   * Rename "Netmiko Validation" to "Netmiko Commands"
   * Allow sending multiple commands via Netmiko Commands
   * Add "Results as List" to Netmiko Commands 
 - Add "use genie" option in netmiko commands service for Genie / PyATS support
-- Add Jinja2 template support for netmiko and scrapli commands field (iteration no longer required for loops), with "[[ ]]" for python substitution in a J2 template.
+- Add Jinja2 template support for netmiko and scrapli commands field (iteration no longer required for loops).
 - Add new `default_function` (sqlalchemy parameter) and `render_kw` (wtforms parameters) for custom fields in properties.json.
 - Add new `rest/workers` GET endpoint to get service count + cpu / memory usage for each 
-  WSGI worker (admin endpoint)
+  WSGI worker (admin endpoint).
 - Data Extraction Service update:
   * Rename to "Data Processing" service
   * Fix bug if no device (service in run once mode)

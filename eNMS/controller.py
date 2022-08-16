@@ -292,6 +292,7 @@ class Controller:
     def delete_builder_selection(self, type, id, **selection):
         instance = db.fetch(type, id=id)
         instance.last_modified = vs.get_time()
+        instance.check_freeze("edit")
         for edge_id in selection["edges"]:
             if type == "workflow":
                 db.delete("workflow_edge", id=edge_id)
@@ -304,7 +305,6 @@ class Controller:
                 instance.nodes.remove(db.fetch("node", id=node_id))
             else:
                 service = db.fetch("service", id=node_id)
-                service.check_freeze("edit")
                 if not service.shared:
                     db.delete_instance(service)
                 else:

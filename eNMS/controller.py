@@ -287,7 +287,10 @@ class Controller:
         db.delete_all(*kwargs["deletion_types"])
 
     def delete_instance(self, model, instance_id):
-        return db.delete(model, id=instance_id)
+        try:
+            db.delete(model, id=instance_id)
+        except Exception as exc:
+            return {"alert": f"Unable to delete {model} ({exc})"}
 
     def delete_builder_selection(self, type, id, **selection):
         instance = db.fetch(type, id=id)

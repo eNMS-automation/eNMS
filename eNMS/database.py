@@ -418,10 +418,7 @@ class Database:
         return [self.fetch(model, id=object_id, **kwargs) for object_id in object_list]
 
     def delete_instance(self, instance):
-        try:
-            instance.delete()
-        except Exception as exc:
-            return {"alert": f"Unable to delete {instance.name} ({exc})."}
+        instance.delete()
         serialized_instance = instance.serialized
         self.session.delete(instance)
         return serialized_instance

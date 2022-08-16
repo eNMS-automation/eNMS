@@ -14,6 +14,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -65,7 +66,7 @@
     (R) Scalability: &id010 [-437, -191]
     (R) Scrapli Netconf Service: &id049 [-298, -101]
     (R) Scrapli Service: &id035 [-192, 31]
-    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-376, 194]
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-473, 156]
     (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [-382, 39]
     Advanced Iteration Targets: &id034 [-131, -24]
     Advanced Multiprocessing (admin): [-492, -39]
@@ -474,6 +475,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -525,7 +527,7 @@
     (R) Scalability: &id097 [483, -268]
     (R) Scrapli Netconf Service: &id136 [-293, 114]
     (R) Scrapli Service: &id122 [628, 113]
-    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [601, 109]
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [651, 173]
     (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [377, 272]
     AAA: !!python/tuple [500, 0]
     Advanced Iteration Targets: &id121 [350, -6]
@@ -946,6 +948,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1030,6 +1033,7 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   exclusion_field: d
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1133,6 +1137,7 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   driver: device
+  freeze: []
   getters: [get_arp_table, get_interfaces]
   impacting: true
   include_device_results: true
@@ -1239,6 +1244,7 @@
   enable_mode: true
   exit_config_mode: true
   fast_cli: true
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -1347,6 +1353,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -1464,6 +1471,7 @@
   enable_mode: true
   exit_config_mode: true
   fast_cli: true
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -1573,6 +1581,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -1683,6 +1692,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -1804,6 +1814,7 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   driver: device
+  freeze: []
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -1903,6 +1914,7 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   driver: device
+  freeze: []
   getters: [get_interfaces]
   impacting: true
   include_device_results: true
@@ -1996,6 +2008,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -2106,6 +2119,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -2215,6 +2229,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -2305,6 +2320,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2387,6 +2403,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2490,6 +2507,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -2601,6 +2619,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -2712,6 +2731,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -2813,6 +2833,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: device
+  freeze: []
   getters: [get_interfaces_ip]
   impacting: true
   include_device_results: true
@@ -2924,6 +2945,7 @@
   dict_match: {ok: 2}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3012,6 +3034,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3100,6 +3123,7 @@
   dict_match: {action: debug, changed: false, failed: false}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3204,6 +3228,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -3316,6 +3341,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -3428,6 +3454,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -3526,6 +3553,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -3616,6 +3644,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -3710,6 +3739,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -3830,6 +3860,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3945,6 +3976,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4040,6 +4072,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4148,6 +4181,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4268,6 +4302,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4361,6 +4396,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4521,6 +4557,7 @@
   expect_prompt: ''
   expect_username_prompt: ''
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -4629,6 +4666,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -4714,6 +4752,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -4800,6 +4839,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -4888,6 +4928,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -4974,6 +5015,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -5062,6 +5104,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5162,6 +5205,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -5273,6 +5317,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -5385,6 +5430,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -5481,6 +5527,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5585,6 +5632,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5671,6 +5719,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5772,6 +5821,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -5871,6 +5921,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5959,6 +6010,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6060,6 +6112,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6164,6 +6217,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -6263,6 +6317,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6381,6 +6436,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6466,6 +6522,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6549,6 +6606,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6636,6 +6694,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6735,6 +6794,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6820,6 +6880,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6902,6 +6963,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6989,6 +7051,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7072,6 +7135,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7162,6 +7226,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7257,6 +7322,7 @@
   enable_mode: true
   expect_string: root.*#
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -7350,6 +7416,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7442,6 +7509,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7521,6 +7589,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   import_type: opennms
   include_device_results: false
@@ -7629,6 +7698,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -7729,6 +7799,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -7835,6 +7906,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -7951,6 +8023,7 @@
   expect_prompt: ''
   expect_username_prompt: ''
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -8057,6 +8130,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8142,6 +8216,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8227,6 +8302,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8315,6 +8391,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: device
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8410,6 +8487,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: device
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8505,6 +8583,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: device
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8600,6 +8679,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: device
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8691,6 +8771,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8799,6 +8880,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -8898,6 +8980,7 @@
   direction: put
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9005,6 +9088,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -9106,6 +9190,7 @@
   direction: put
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9214,6 +9299,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -9313,6 +9399,7 @@
   direction: put
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9405,6 +9492,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9503,6 +9591,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9593,6 +9682,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9683,6 +9773,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9777,6 +9868,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9893,6 +9985,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9984,6 +10077,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10074,6 +10168,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10164,6 +10259,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10257,6 +10353,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10366,6 +10463,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10483,6 +10581,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -10594,6 +10693,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -10691,6 +10791,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10802,6 +10903,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10894,6 +10996,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10998,6 +11101,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -11093,6 +11197,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11185,6 +11290,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11297,6 +11403,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -11395,6 +11502,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11482,6 +11590,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11587,6 +11696,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -11685,6 +11795,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -11777,6 +11888,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11884,6 +11996,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11968,6 +12081,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12054,6 +12168,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12137,6 +12252,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12227,6 +12343,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12329,6 +12446,7 @@
   dict_match: {}
   disable_result_creation: true
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12416,6 +12534,7 @@
   dict_match: {}
   disable_result_creation: true
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12503,6 +12622,7 @@
   dict_match: {}
   disable_result_creation: true
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12587,6 +12707,7 @@
   dict_match: {}
   disable_result_creation: true
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12671,6 +12792,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12755,6 +12877,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12856,6 +12979,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -12948,6 +13072,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13073,6 +13198,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -13168,6 +13294,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13260,6 +13387,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13341,6 +13469,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13422,6 +13551,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13504,6 +13634,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13588,6 +13719,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13690,6 +13822,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13774,6 +13907,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13859,6 +13993,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13941,6 +14076,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14024,6 +14160,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14107,6 +14244,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14190,6 +14328,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14275,6 +14414,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14369,6 +14509,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14450,6 +14591,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14531,6 +14673,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14615,6 +14758,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -14727,6 +14871,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -14821,6 +14966,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -14918,6 +15064,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15011,6 +15158,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15096,6 +15244,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15208,6 +15357,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -15304,6 +15454,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15413,6 +15564,7 @@
   dict_match: {key1: value1}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15498,6 +15650,7 @@
     c: ['3']
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15582,6 +15735,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15668,6 +15822,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15776,6 +15931,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   error_option: stop-on-error
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15876,6 +16032,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   error_option: stop-on-error
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15981,6 +16138,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   error_option: stop-on-error
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16081,6 +16239,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   error_option: stop-on-error
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16186,6 +16345,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   error_option: stop-on-error
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16278,6 +16438,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16401,6 +16562,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -16512,6 +16674,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -16623,6 +16786,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -16719,6 +16883,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: true
   include_link_in_summary: true
@@ -16822,6 +16987,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16905,6 +17071,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
+  freeze: []
   impacting: false
   include_device_results: true
   include_link_in_summary: false
@@ -16989,6 +17156,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
+  freeze: []
   impacting: false
   include_device_results: true
   include_link_in_summary: true
@@ -17076,6 +17244,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -17193,6 +17362,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -17298,6 +17468,7 @@
   enable_mode: true
   fast_cli: false
   file_system: ''
+  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -17401,6 +17572,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -17511,6 +17683,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -17621,6 +17794,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -17716,6 +17890,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -17825,6 +18000,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -17926,6 +18102,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -18023,6 +18200,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: false
   include_device_results: false
@@ -18113,6 +18291,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -18218,6 +18397,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -18301,6 +18481,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -18383,6 +18564,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -18465,6 +18647,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -18551,6 +18734,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -18634,6 +18818,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -18718,6 +18903,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -18811,6 +18997,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -18904,6 +19091,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -18997,6 +19185,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19090,6 +19279,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19183,6 +19373,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19276,6 +19467,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19369,6 +19561,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19459,6 +19652,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19559,6 +19753,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19643,6 +19838,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19732,6 +19928,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: false
   include_device_results: false
@@ -19835,6 +20032,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -19930,6 +20128,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -20042,6 +20241,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -20152,6 +20352,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -20262,6 +20463,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -20372,6 +20574,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -20467,6 +20670,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -20563,6 +20767,7 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   driver: device
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -20655,6 +20860,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: device
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -20760,6 +20966,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -20876,6 +21083,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -20977,6 +21185,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -21101,6 +21310,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: device
+  freeze: []
   getters: [is_alive]
   impacting: true
   include_device_results: true
@@ -21202,6 +21412,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: device
+  freeze: []
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -21303,6 +21514,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: device
+  freeze: []
   getters: [get_mac_address_table]
   impacting: true
   include_device_results: true
@@ -21404,6 +21616,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: device
+  freeze: []
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -21502,6 +21715,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -21642,6 +21856,7 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -21745,6 +21960,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -21856,6 +22072,7 @@
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -21949,6 +22166,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -22043,6 +22261,7 @@
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -22135,6 +22354,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -22230,6 +22450,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -22313,6 +22534,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -22406,6 +22628,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -22511,6 +22734,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -22616,6 +22840,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -22708,6 +22933,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -22803,6 +23029,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -22886,6 +23113,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -22967,6 +23195,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23047,6 +23276,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23127,6 +23357,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23207,6 +23438,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23287,6 +23519,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23370,6 +23603,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23454,6 +23688,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23533,6 +23768,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23612,6 +23848,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23691,6 +23928,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23771,6 +24009,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23851,6 +24090,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23934,6 +24174,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24025,6 +24266,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24105,6 +24347,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24189,6 +24432,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24270,6 +24514,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24353,6 +24598,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24436,6 +24682,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24524,6 +24771,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24637,6 +24885,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24718,6 +24967,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24799,6 +25049,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24880,6 +25131,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24961,6 +25213,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25042,6 +25295,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25124,6 +25378,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25209,6 +25464,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25316,6 +25572,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -25406,6 +25663,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -25495,6 +25753,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -25584,6 +25843,7 @@
   dict_match: {netmiko_driver: arista_eos}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -25672,6 +25932,7 @@
   dict_match: {is_admin: true}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -25759,6 +26020,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25868,6 +26130,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -25959,6 +26222,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -26048,6 +26312,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -26138,6 +26403,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -26226,6 +26492,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26336,6 +26603,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -26432,6 +26700,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -26526,6 +26795,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -26621,6 +26891,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26737,6 +27008,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -26827,6 +27099,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -26915,6 +27188,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -27004,6 +27278,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -27093,6 +27368,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -27184,6 +27460,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -27318,6 +27595,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -27430,6 +27708,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -27542,6 +27821,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -27639,6 +27919,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -27725,6 +28006,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -27807,6 +28089,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -27915,6 +28198,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -27997,6 +28281,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -28082,6 +28367,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -28175,6 +28461,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -28258,6 +28545,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -28341,6 +28629,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -28424,6 +28713,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -28507,6 +28797,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -28590,6 +28881,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -28673,6 +28965,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -28756,6 +29049,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -28839,6 +29133,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -28922,6 +29217,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29005,6 +29301,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29088,6 +29385,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29171,6 +29469,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29254,6 +29553,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29337,6 +29637,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29420,6 +29721,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29503,6 +29805,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29586,6 +29889,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29669,6 +29973,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29752,6 +30057,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29835,6 +30141,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29918,6 +30225,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30001,6 +30309,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30084,6 +30393,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30167,6 +30477,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30250,6 +30561,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30333,6 +30645,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30416,6 +30729,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30502,6 +30816,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30594,6 +30909,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30678,6 +30994,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30764,6 +31081,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30846,6 +31164,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30935,6 +31254,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31019,6 +31339,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31102,6 +31423,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31183,6 +31505,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31282,6 +31605,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: device
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31401,6 +31725,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: device
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31504,6 +31829,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31627,6 +31953,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: device
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31719,6 +32046,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: device
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31811,6 +32139,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: device
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31899,6 +32228,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31991,6 +32321,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32085,6 +32416,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32172,6 +32504,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32181,13 +32514,22 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    4e630a65-7ba5-4e46-91df-47627c2a2e98:
+      alignment: left
+      content: "Tests sending multiple commands, including Jinja2 template\r\nvia\
+        \ Netmiko and Scrapli.\r\nIn the workflow preprocessing field, we define a\
+        \ variable \"abc\"\r\nwith \"set_var(\"abc\", [\"a\", \"b\", \"c\"], device=device.name)\"\
+        .\r\nThis variable is used in a jinja2 template whose context includes\r\n\
+        the \"global variables\", including \"get_var\" and \"get_result\"."
+      positions: [103, -16]
+      size: 14
     854236db-efe1-47cd-8be6-7e18374a43f8:
       alignment: left
       content: "is_string = isinstance(results[\"result\"], str)\r\nvalid_content\
         \ = (\r\n  \"VRF\" in results[\"result\"]\r\n  and \"Loopback\" in results[\"\
         result\"]\r\n  and \"vty\" in results[\"result\"]\r\n)\r\nresults[\"success\"\
         ] = is_string and valid_content\r\n"
-      positions: [-116, -16]
+      positions: [-298, -19]
       size: 14
     8b146c75-48a1-42d0-88e1-97f8c9a88ae4:
       alignment: left
@@ -32196,7 +32538,7 @@
         \    f\"show vrf {vrf}\" not in results[\"commands\"]\r\n    or \"Protocols\"\
         \ not in results[\"result\"][index]\r\n  ):\r\n    valid_result = False\r\n\
         results[\"success\"] = is_list and valid_result"
-      positions: [310, 327]
+      positions: [456, 351]
       size: 14
     c1b2632b-1f52-4a63-84e0-73b56e179f03:
       alignment: left
@@ -32204,7 +32546,7 @@
         \ (\r\n  \"VRF\" in results[\"result\"][0]\r\n  and \"Loopback\" in results[\"\
         result\"][1]\r\n  and \"vty\" in results[\"result\"][2]\r\n)\r\nresults[\"\
         success\"] = is_list and valid_content"
-      positions: [-115, 329]
+      positions: [-253, 345]
       size: 14
     d04ed45e-d3e6-49ce-94a6-b882b3b2af44:
       alignment: left
@@ -32213,9 +32555,9 @@
         \ not in results[\"commands\"]:\r\n    valid_commands = False\r\nvalid_content\
         \ = results[\"result\"].count(\"Interfaces\") == 3\r\nresults[\"success\"\
         ] = is_string and valid_commands and valid_content"
-      positions: [337, -13]
+      positions: [570, -11]
       size: 14
-  last_modified: '2022-07-13 03:39:11.984525'
+  last_modified: '2022-08-16 11:56:00.658820'
   log_level: 1
   mail_recipient: ''
   mandatory_parameter: Default Value
@@ -32241,7 +32583,7 @@
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
-  preprocessing: ''
+  preprocessing: set_var("abc", ["a", "b", "c"], device=device.name)
   priority: 10
   rbac_edit: [Full UI Read + Edit Access]
   rbac_read: [Full UI Read + Edit Access]
@@ -32296,6 +32638,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: device
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32331,7 +32674,7 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   positions:
-    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-142, 93]
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-274, 92]
   postprocessing: "is_string = isinstance(results[\"result\"], str)\r\nvalid_content\
     \ = (\r\n  \"VRF\" in results[\"result\"]\r\n  and \"Loopback\" in results[\"\
     result\"]\r\n  and \"vty\" in results[\"result\"]\r\n)\r\nresults[\"success\"\
@@ -32392,6 +32735,7 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: device
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32427,7 +32771,7 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   positions:
-    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-147, 204]
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-290, 222]
   postprocessing: "is_list = isinstance(results[\"result\"], list)\r\nvalid_content\
     \ = (\r\n  \"VRF\" in results[\"result\"][0]\r\n  and \"Loopback\" in results[\"\
     result\"][1]\r\n  and \"vty\" in results[\"result\"][2]\r\n)\r\nresults[\"success\"\
@@ -32468,8 +32812,8 @@
 - admin_only: false
   auto_find_prompt: true
   close_connection: false
-  commands: "{%- for vrf in (\"a\", \"b\", \"c\") -%}\r\nshow vrf {{ vrf }}\r\n{%\
-    \ endfor %}"
+  commands: "{%- for vrf in get_var(\"abc\", device=device.name) -%}\r\nshow vrf {{\
+    \ vrf }}\r\n{% endfor %}"
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -32500,6 +32844,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -32514,7 +32859,7 @@
   jump_on_connect: false
   jump_password: ''
   jump_username: ''
-  last_modified: '2022-07-13 03:21:34.458029'
+  last_modified: '2022-08-16 11:53:24.721875'
   log_level: 1
   mail_recipient: ''
   mandatory_parameter: Default Value
@@ -32539,7 +32884,7 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   positions:
-    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [273, 88]
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [463, 96]
   postprocessing: "is_string = isinstance(results[\"result\"], str)\r\nvalid_commands\
     \ = True\r\nfor vrf in (\"a\", \"b\", \"c\"):\r\n  if f\"show vrf {vrf}\" not\
     \ in results[\"commands\"]:\r\n    valid_commands = False\r\nvalid_content = results[\"\
@@ -32582,8 +32927,8 @@
 - admin_only: false
   auto_find_prompt: true
   close_connection: false
-  commands: "{%- for vrf in (\"a\", \"b\", \"c\") -%}\r\nshow vrf {{ vrf }}\r\n{%\
-    \ endfor %}"
+  commands: "{%- for vrf in get_var(\"abc\", device=device.name) -%}\r\nshow vrf {{\
+    \ vrf }}\r\n{% endfor %}"
   completion_time: 1
   config_mode: false
   config_mode_command: ''
@@ -32614,6 +32959,7 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
+  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -32628,7 +32974,7 @@
   jump_on_connect: false
   jump_password: ''
   jump_username: ''
-  last_modified: '2022-07-13 03:33:28.643596'
+  last_modified: '2022-08-16 11:53:30.272100'
   log_level: 1
   mail_recipient: ''
   mandatory_parameter: Default Value
@@ -32653,7 +32999,7 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   positions:
-    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [273, 198]
+    (R) Scrapli and Netmiko Multiple Commands and Jinja2: [441, 226]
   postprocessing: "is_list = isinstance(results[\"result\"], list)\r\nvalid_result\
     \ = True\r\nfor index, vrf in enumerate((\"a\", \"b\", \"c\")):\r\n  if (\r\n\
     \    f\"show vrf {vrf}\" not in results[\"commands\"]\r\n    or \"Protocols\"\
@@ -32710,6 +33056,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32794,6 +33141,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
+  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false

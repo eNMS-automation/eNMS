@@ -1161,6 +1161,8 @@ class Controller:
         return now
 
     def save_profile(self, **kwargs):
+        if not vs.settings["authentication"]["show_password_in_profile"]:
+            kwargs.pop("password", None)
         current_user.update(**kwargs)
 
     def save_settings(self, **kwargs):

@@ -10,6 +10,7 @@
   "authentication": {
     "default": "database",
     "landing_page": "/workflow_builder",
+    "show_password_in_profile": true,
     "methods": {
       "database": {
         "display_name": "Local User",

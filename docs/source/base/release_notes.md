@@ -8,6 +8,10 @@ Version 4.4.0: RBAC and Credentials
 - Compute whether a device / link belongs to a pool with a SQL query rather than pure python (performance x3)
 - Refactor freeze edit / run mechanism (pure python check instead of SQL query with originals)
 
+Migration:
+- The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The appropriate groups
+  must be created first.
+
 Version 4.3.0
 -------------
 

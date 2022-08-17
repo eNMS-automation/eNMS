@@ -88,6 +88,12 @@ Version 4.3.0
 - Add new "mandatory" keyword in custom properties to make the field required to submit the form.
 - Add new "show_password_in_profile" keyword in settings > authentication to configure whether the user
   profile lets users change their own password (if `false`, the password field is not shown)
+- Add new 'Man Minutes' feature to compute time saved per workflow
+  * Only for top-level workflows
+  * Man Minutes can be defined per device or for the whole workflow
+  * Per Device is only allowed if the workflow run method is DxD or SxS with workflow targets
+  * The workflow must be a success (or per device success) to be counted in the total man minutes
+  * Man Minutes can be made mandatory via 'mandatory_man_minutes' key in automation.json > workflow
 
 Migration
 - check "username" and "server" variables in workflow aren't in conflict with existing workflows.

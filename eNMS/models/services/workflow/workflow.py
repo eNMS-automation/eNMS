@@ -243,7 +243,9 @@ class WorkflowForm(ServiceForm):
         ),
     )
     man_minutes = IntegerField("Number of Man Minutes", default=0)
-    man_minutes_total = IntegerField("Man Minutes Total", render_kw={"readonly": True})
+    man_minutes_total = IntegerField(
+        "Man Minutes Total", default=0, render_kw={"readonly": True}
+    )
     superworkflow = InstanceField(
         "Superworkflow",
         constraints={"children": ["[Shared] Placeholder"], "children_filter": "union"},

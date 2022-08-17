@@ -47,6 +47,7 @@
       "fetch_all": ["device", "link", "pool", "service"],
       "factory": ["device", "link", "pool"]
     },
+    "mandatory_man_minutes": false,
     "state_properties": {
       "run": ["id", "creator", "runtime", "status"],
       "service": [

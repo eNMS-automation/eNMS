@@ -89,7 +89,7 @@
     Fork based on Result with Success & Failure Edges: &id003 [-327, -20]
     Fork based on Success Value: *id003
     Fork based on value with Skip Discard Mechanism: &id063 [-563, 184]
-    'Function: get_connection': [-150, 89]
+    'Function: get_connection': [-222, 85]
     'Function: get_credential': &id006 [-477, -78]
     'Functions: factory, fetch, fetch_all, encrypt and get_result': &id005 [-228,
       7]
@@ -552,7 +552,7 @@
     Fork based on Result with Success & Failure Edges: &id090 [553, 357]
     Fork based on Success Value: *id090
     Fork based on value with Skip Discard Mechanism: &id150 [388, 363]
-    'Function: get_connection': [582, 80]
+    'Function: get_connection': [617, 78]
     'Function: get_credential': &id093 [591, -45]
     'Functions: factory, fetch, fetch_all, encrypt and get_result': &id092 [749, 100]
     'Functions: get_result and get_var': [697, -62]
@@ -33499,11 +33499,14 @@
     ac1cfd3b-4974-4a8a-8060-f13973effffd:
       alignment: left
       content: "This workflow uses the get_connection function to use\r\nthe netmiko\
-        \ connection in pure python.\r\nThe first service opens the connection and\
-        \ the next one\r\nwill use it to send a \"show ip int br\" command."
-      positions: [227, -118]
+        \ connection in pure python.\r\nThe two first services opens the \"default\"\
+        \ and \"special\"\r\nconnections with a netmiko command service.\r\nThe python\
+        \ snippet service will use it to send a \"show ip int br\"\r\ncommand with\
+        \ both connections and check in the post-processing\r\nfield that the result\
+        \ is correct in both cases."
+      positions: [267, -159]
       size: 14
-  last_modified: '2022-08-17 10:14:09.671062'
+  last_modified: '2022-08-17 10:20:50.683078'
   log_level: 1
   mail_recipient: ''
   man_minutes: 0
@@ -33544,7 +33547,8 @@
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Function: get_connection] Open default
-      connection', '[Function: get_connection] Use default connection']
+      connection', '[Function: get_connection] Use default connection', '[Function:
+      get_connection] Open special connection']
   shared: false
   skip: {}
   skip_query: ''
@@ -33633,7 +33637,7 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   positions:
-    'Function: get_connection': [309, -22]
+    'Function: get_connection': [4, -56]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -33694,7 +33698,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-08-17 10:13:31.673103'
+  last_modified: '2022-08-17 10:19:02.687460'
   log_level: 1
   mail_recipient: ''
   mandatory_parameter: Default Value
@@ -33718,7 +33722,7 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   positions:
-    'Function: get_connection': [2, -20]
+    'Function: get_connection': [410, 51]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -33736,15 +33740,126 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  source_code: "connection = get_connection(\"netmiko\", device.name)\r\nresult =\
-    \ {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = connection.send_command(\"\
-    sh ip int br\")"
+  source_code: "default_connection = get_connection(\"netmiko\", device.name)\r\n\
+    special_connection = get_connection(\"netmiko\", device.name, \"special\")\r\n\
+    result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = {\r\n  \"\
+    default\": default_connection.send_command(\"sh ip int br\"),\r\n  \"special\"\
+    : special_connection.send_command(\"sh ip int br\")\r\n}"
   target_devices: []
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- admin_only: false
+  auto_find_prompt: true
+  close_connection: false
+  commands: show users
+  completion_time: 1
+  config_mode: false
+  config_mode_command: ''
+  connection_name: special
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_uuid: 709f9a8f-efab-46dd-811e-dcdc4cfe8637
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: device
+  enable_mode: true
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  freeze: []
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jinja2_template: false
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_password: ''
+  jump_username: ''
+  last_modified: '2022-08-17 10:18:01.073857'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parameter: Default Value
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Function: get_connection] Open special connection'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  positions:
+    'Function: get_connection': [1, 161]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  reply_to: ''
+  reserved: false
+  results_as_list: false
+  run_method: per_device
+  scoped_name: Open special connection
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_commands_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_genie: false
+  use_textfsm: false
   validation_condition: none
   validation_method: text
   validation_section: results['result']

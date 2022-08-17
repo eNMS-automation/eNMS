@@ -1575,3 +1575,10 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2022-07-25 07:59:55.587645',
   source: '[Data Extraction Jinja2 Template] Apply TTP Template', subtype: success,
   type: workflow_edge, workflow: Data Extraction Jinja2 Template}
+- {color: green, destination: '[Function: get_connection] Use default connection',
+  label: success, name: '2022-08-17 10:14:08.924721', source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: 'Function: get_connection'}
+- {color: green, destination: '[Function: get_connection] Open default connection',
+  label: success, name: '2022-08-17 10:14:09.671062', source: '[Function: get_connection]
+    Use default connection', subtype: success, type: workflow_edge, workflow: 'Function:
+    get_connection'}

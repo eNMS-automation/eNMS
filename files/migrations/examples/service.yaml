@@ -89,6 +89,7 @@
     Fork based on Result with Success & Failure Edges: &id003 [-327, -20]
     Fork based on Success Value: *id003
     Fork based on value with Skip Discard Mechanism: &id063 [-563, 184]
+    'Function: get_connection': [-150, 89]
     'Function: get_credential': &id006 [-477, -78]
     'Functions: factory, fetch, fetch_all, encrypt and get_result': &id005 [-228,
       7]
@@ -551,6 +552,7 @@
     Fork based on Result with Success & Failure Edges: &id090 [553, 357]
     Fork based on Success Value: *id090
     Fork based on value with Skip Discard Mechanism: &id150 [388, 363]
+    'Function: get_connection': [582, 80]
     'Function: get_credential': &id093 [591, -45]
     'Functions: factory, fetch, fetch_all, encrypt and get_result': &id092 [749, 100]
     'Functions: get_result and get_var': [697, -62]
@@ -3663,6 +3665,9 @@
   last_modified: '2022-05-13 09:44:16.415721'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -3785,6 +3790,9 @@
   last_modified: '2022-01-16 05:37:56.023249'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -3904,6 +3912,9 @@
   last_modified: '2022-01-16 05:41:23.421169'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -4000,6 +4011,9 @@
   last_modified: '2022-07-12 05:30:46.993613'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -4106,6 +4120,9 @@
   last_modified: '2022-01-20 07:16:42.896628'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -4229,6 +4246,9 @@
   last_modified: '2022-04-26 12:35:22.898565'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -4324,6 +4344,9 @@
   last_modified: '2022-01-16 05:30:59.362228'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -4460,6 +4483,9 @@
   last_modified: '2022-01-16 05:15:22.444345'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -4679,6 +4705,9 @@
   last_modified: '2022-01-16 05:31:20.934203'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -4765,6 +4794,9 @@
   last_modified: '2021-10-09 03:25:56.780411'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -4941,6 +4973,9 @@
   last_modified: '2021-10-09 03:25:56.810878'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -5117,6 +5152,9 @@
   last_modified: '2021-10-09 03:25:56.844799'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -5562,6 +5600,9 @@
   last_modified: '2022-01-20 07:28:59.262995'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -5645,6 +5686,9 @@
   last_modified: '2021-10-09 03:25:56.924607'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -5732,6 +5776,9 @@
   last_modified: '2021-10-09 03:25:56.957394'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -6044,6 +6091,9 @@
   last_modified: '2022-01-16 05:15:50.185310'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -6367,6 +6417,9 @@
   last_modified: '2022-01-16 05:15:58.440770'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -6535,6 +6588,9 @@
   last_modified: '2021-10-09 03:25:57.123684'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -6725,6 +6781,9 @@
   last_modified: '2022-01-20 07:14:19.999019'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -7064,6 +7123,9 @@
   last_modified: '2022-01-16 05:16:18.788732'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -7153,6 +7215,9 @@
   last_modified: '2022-07-21 12:13:43.982325'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -7522,6 +7587,9 @@
   last_modified: '2022-01-16 05:09:23.121184'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -8315,6 +8383,9 @@
   last_modified: '2022-01-16 05:07:46.622434'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -8791,6 +8862,9 @@
   last_modified: '2022-01-16 05:09:58.076503'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -9523,6 +9597,9 @@
   last_modified: '2022-01-20 06:28:21.964618'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -9914,6 +9991,9 @@
   last_modified: '2022-01-20 06:28:03.483260'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -10395,6 +10475,9 @@
   last_modified: '2022-01-16 05:37:09.880045'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -10831,6 +10914,9 @@
   last_modified: '2022-01-16 05:35:07.247712'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -11328,6 +11414,9 @@
   last_modified: '2022-01-20 06:28:13.405257'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -11924,6 +12013,9 @@
   last_modified: '2022-01-20 06:28:51.434075'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -12009,6 +12101,9 @@
   last_modified: '2021-10-09 03:25:58.147307'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -12181,6 +12276,9 @@
   last_modified: '2021-10-09 03:25:58.176258'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -12376,6 +12474,9 @@
   last_modified: '2022-01-20 06:28:38.346685'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -12547,6 +12648,9 @@
   last_modified: '2021-10-09 03:25:58.282963'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -12635,6 +12739,9 @@
   last_modified: '2021-10-09 03:25:58.315811'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -13113,6 +13220,9 @@
   last_modified: '2022-01-15 07:51:27.989861'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -13318,6 +13428,9 @@
   last_modified: '2022-01-16 05:51:45.214836'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -13754,6 +13867,9 @@
   last_modified: '2022-01-16 05:15:29.754652'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -13920,6 +14036,9 @@
   last_modified: '2021-10-09 03:25:58.517714'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -14006,6 +14125,9 @@
   last_modified: '2021-10-09 03:25:58.552695'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -14441,6 +14563,9 @@
   last_modified: '2022-01-15 07:51:11.373697'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -14794,6 +14919,9 @@
   last_modified: '2022-01-16 05:08:24.834235'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -15275,6 +15403,9 @@
   last_modified: '2022-01-15 07:58:36.303716'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -15496,6 +15627,9 @@
   last_modified: '2022-01-20 07:15:35.541645'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -15850,6 +15984,9 @@
   last_modified: '2022-01-16 05:18:59.636624'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -16475,6 +16612,9 @@
   last_modified: '2022-01-16 05:06:57.438954'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -16919,6 +17059,9 @@
   last_modified: '2022-05-06 02:05:12.455315'
   log_level: 1
   mail_recipient: antoine.fourmy@gmail.com
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -17274,6 +17417,9 @@
   last_modified: '2022-01-16 05:38:23.167263'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -17932,6 +18078,9 @@
   last_modified: '2022-01-16 05:35:27.565228'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -18327,6 +18476,9 @@
   last_modified: '2022-01-20 06:30:16.255974'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -18747,6 +18899,9 @@
   last_modified: '2022-01-16 05:10:21.356449'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -19685,6 +19840,9 @@
   last_modified: '2022-01-20 07:30:44.284827'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: true
   max_number_of_retries: 100
@@ -19857,6 +20015,9 @@
   last_modified: '2022-01-16 05:16:43.759975'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -20154,6 +20315,9 @@
   last_modified: '2022-01-16 05:38:53.223357'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -20689,6 +20853,9 @@
   last_modified: '2022-01-16 05:08:01.192249'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -21233,6 +21400,9 @@
   last_modified: '2022-01-16 05:11:24.548696'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -21768,6 +21938,9 @@
   last_modified: '2022-01-20 06:30:32.689622'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -22463,6 +22636,9 @@
   last_modified: '2022-01-20 06:30:38.049079'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -23042,6 +23218,9 @@
   last_modified: '2022-01-20 06:31:21.249638'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -23616,6 +23795,9 @@
   last_modified: '2022-01-20 07:30:11.659211'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -23701,6 +23883,9 @@
   last_modified: '2022-01-16 05:16:52.311485'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -24196,6 +24381,9 @@
   last_modified: '2022-04-08 07:07:34.081560'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -24445,6 +24633,9 @@
   last_modified: '2021-11-21 00:50:28.581310'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -24815,6 +25006,9 @@
   last_modified: '2022-01-16 05:27:29.540902'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -25498,6 +25692,9 @@
   last_modified: '2022-01-15 07:44:00.798528'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -26057,6 +26254,9 @@
   last_modified: '2022-01-15 07:44:11.351612'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -26531,6 +26731,9 @@
   last_modified: '2022-01-15 07:44:19.036936'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -26933,6 +27136,9 @@
   last_modified: '2022-01-15 07:44:30.923925'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -27509,6 +27715,9 @@
   last_modified: '2022-05-20 13:46:04.332704'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -27945,6 +28154,9 @@
   last_modified: '2022-01-15 06:14:22.375612'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -28135,6 +28347,9 @@
   last_modified: '2022-01-15 08:33:35.116627'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -28298,6 +28513,9 @@
   last_modified: '2022-01-20 07:17:43.717735'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -28380,6 +28598,9 @@
   last_modified: '2022-01-28 04:47:54.571482'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -30842,6 +31063,9 @@
   last_modified: '2022-01-22 07:20:13.966868'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -31014,6 +31238,9 @@
   last_modified: '2022-01-22 07:20:19.517877'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -31187,6 +31414,9 @@
   last_modified: '2022-01-22 07:44:03.566378'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -31352,6 +31582,9 @@
   last_modified: '2022-05-06 02:05:25.761823'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -31878,6 +32111,9 @@
   last_modified: '2022-05-20 13:52:38.085027'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -32251,6 +32487,9 @@
   last_modified: '2022-07-25 08:00:16.671806'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -32560,6 +32799,9 @@
   last_modified: '2022-08-16 11:56:00.658820'
   log_level: 1
   mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
   mandatory_parameter: Default Value
   mandatory_parametrization: false
   max_number_of_retries: 100
@@ -33223,5 +33465,288 @@
   variable1: TTP value
   variable2: ''
   variable3: ''
+  vendor: ''
+  waiting_time: 0
+- admin_only: false
+  category: Global Variables
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  custom_property: Default Value
+  default_uuid: 83047f18-a261-4863-8247-7a84c5f46fe4
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  freeze: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    ac1cfd3b-4974-4a8a-8060-f13973effffd:
+      alignment: left
+      content: "This workflow uses the get_connection function to use\r\nthe netmiko\
+        \ connection in pure python.\r\nThe first service opens the connection and\
+        \ the next one\r\nwill use it to send a \"show ip int br\" command."
+      positions: [227, -118]
+      size: 14
+  last_modified: '2022-08-17 10:14:09.671062'
+  log_level: 1
+  mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
+  mandatory_parameter: Default Value
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Function: get_connection'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Function: get_connection'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Function: get_connection] Open default
+      connection', '[Function: get_connection] Use default connection']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- admin_only: false
+  auto_find_prompt: true
+  close_connection: false
+  commands: show users
+  completion_time: 1
+  config_mode: false
+  config_mode_command: ''
+  connection_name: default
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_uuid: 709f9a8f-efab-46dd-811e-dcdc4cfe8637
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: device
+  enable_mode: true
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  freeze: []
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jinja2_template: false
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_password: ''
+  jump_username: ''
+  last_modified: '2022-08-17 10:11:21.052554'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parameter: Default Value
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Function: get_connection] Open default connection'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  positions:
+    'Function: get_connection': [309, -22]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  reply_to: ''
+  reserved: false
+  results_as_list: false
+  run_method: per_device
+  scoped_name: Open default connection
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_commands_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_genie: false
+  use_textfsm: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- admin_only: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_uuid: e08b102b-0588-48e1-b4e0-4cc8c8918a4c
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  freeze: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2022-08-17 10:13:31.673103'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parameter: Default Value
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Function: get_connection] Use default connection'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  positions:
+    'Function: get_connection': [2, -20]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Use default connection
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "connection = get_connection(\"netmiko\", device.name)\r\nresult =\
+    \ {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = connection.send_command(\"\
+    sh ip int br\")"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0

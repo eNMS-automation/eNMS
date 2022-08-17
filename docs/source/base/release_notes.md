@@ -80,6 +80,7 @@ Version 4.3.0
   * Only for top-level workflows
   * Man Minutes can be defined per device or for the whole workflow
   * Per Device is only allowed if the workflow run method is DxD or SxS with workflow targets
+  * The workflow must be a success (or per device success) to be counted in the total man minutes
   * Man Minutes can be made mandatory via 'mandatory_man_minutes' key in automation.json > workflow
 
 Migration

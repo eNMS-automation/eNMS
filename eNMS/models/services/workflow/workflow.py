@@ -253,18 +253,29 @@ class WorkflowForm(ServiceForm):
 
     def validate(self):
         valid_form = super().validate()
-        invalid_man_minutes_type = (
+        invalid_man_minutes_error = (
+            vs.automation["workflow"]["mandatory_man_minutes"]
+            and not self.workflows.data
+            and self.man_minutes.data == 0
+        )
+        if invalid_man_minutes_error:
+            self.man_minutes.errors.append(
+                "The 'Man Minutes' Parameter cannot be set to 0."
+            )
+        invalid_man_minutes_type_error = (
             self.run_method.data == "per_service_with_service_targets"
             and self.man_minutes_type.data == "device"
         )
-        if invalid_man_minutes_type:
+        if invalid_man_minutes_type_error:
             self.man_minutes_type.errors.append(
                 (
                     "'Per Device' Man Minutes Type is not compatible"
                     " with the 'Service Targets' Run Method."
                 )
             )
-        return valid_form and not any([invalid_man_minutes_type])
+        return valid_form and not any(
+            [invalid_man_minutes_type_error, invalid_man_minutes_error]
+        )
 
 
 class WorkflowEdge(AbstractBase):

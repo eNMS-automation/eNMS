@@ -8,7 +8,7 @@ Version 4.4.0: RBAC and Credentials
 - Compute whether a device / link belongs to a pool with a SQL query rather than pure python (performance x3)
 - Refactor freeze edit / run mechanism (pure python check instead of SQL query with originals)
 - New Bulk Edit option for appending / removing to a multiple instance list (dropdown list on the right of the field).
-- Add regression tests
+- Add regression tests for get_connection global variable
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The appropriate groups

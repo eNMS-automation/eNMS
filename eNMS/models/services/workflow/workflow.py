@@ -256,7 +256,7 @@ class WorkflowForm(ServiceForm):
         invalid_man_minutes_error = (
             vs.automation["workflow"]["mandatory_man_minutes"]
             and not self.workflows.data
-            and self.man_minutes.data == 0
+            and not self.man_minutes.data
         )
         if invalid_man_minutes_error:
             self.man_minutes.errors.append(

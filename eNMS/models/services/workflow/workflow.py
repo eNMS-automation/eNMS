@@ -7,7 +7,13 @@ from sqlalchemy.schema import UniqueConstraint
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
 from eNMS.forms import ServiceForm
-from eNMS.fields import BooleanField, HiddenField, InstanceField, IntegerField, SelectField
+from eNMS.fields import (
+    BooleanField,
+    HiddenField,
+    InstanceField,
+    IntegerField,
+    SelectField,
+)
 from eNMS.models.automation import Service
 from eNMS.runner import Runner
 from eNMS.variables import vs
@@ -197,6 +203,12 @@ class Workflow(Service):
         else:
             results = {"payload": run.payload, "success": end in visited}
         run.restart_run = restart_run
+        if run.is_main_run:
+            self.man_minutes_total += (
+                len(summary["success"]) * self.man_minutes
+                if self.man_minutes_type == "device"
+                else self.man_minutes
+            )
         return results
 
 
@@ -231,6 +243,7 @@ class WorkflowForm(ServiceForm):
         ),
     )
     man_minutes = IntegerField("Number of Man Minutes", default=0)
+    man_minutes_total = IntegerField("Man Minutes Total", render_kw={"readonly": True})
     superworkflow = InstanceField(
         "Superworkflow",
         constraints={"children": ["[Shared] Placeholder"], "children_filter": "union"},

@@ -249,6 +249,21 @@ class WorkflowForm(ServiceForm):
         constraints={"children": ["[Shared] Placeholder"], "children_filter": "union"},
     )
 
+    def validate(self):
+        valid_form = super().validate()
+        invalid_man_minutes_type = (
+            self.run_method.data == "per_service_with_service_targets"
+            and self.man_minutes_type.data == "device"
+        )
+        if invalid_man_minutes_type:
+            self.man_minutes_type.errors.append(
+                (
+                    "'Per Device' Man Minutes Type is not compatible"
+                    " with the 'Service Targets' Run Method."
+                )
+            )
+        return valid_form and not any([invalid_man_minutes_type])
+
 
 class WorkflowEdge(AbstractBase):
 

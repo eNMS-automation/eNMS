@@ -207,7 +207,7 @@ class Workflow(Service):
             self.man_minutes_total += (
                 len(summary["success"]) * self.man_minutes
                 if self.man_minutes_type == "device"
-                else self.man_minutes
+                else self.man_minutes * results["success"]
             )
         return results
 

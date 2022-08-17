@@ -89,7 +89,7 @@
     Fork based on Result with Success & Failure Edges: &id003 [-327, -20]
     Fork based on Success Value: *id003
     Fork based on value with Skip Discard Mechanism: &id063 [-563, 184]
-    'Function: get_connection': [-222, 85]
+    'Function: get_connection': [-297, 70]
     'Function: get_credential': &id006 [-477, -78]
     'Functions: factory, fetch, fetch_all, encrypt and get_result': &id005 [-228,
       7]
@@ -552,7 +552,7 @@
     Fork based on Result with Success & Failure Edges: &id090 [553, 357]
     Fork based on Success Value: *id090
     Fork based on value with Skip Discard Mechanism: &id150 [388, 363]
-    'Function: get_connection': [617, 78]
+    'Function: get_connection': [585, -100]
     'Function: get_credential': &id093 [591, -45]
     'Functions: factory, fetch, fetch_all, encrypt and get_result': &id092 [749, 100]
     'Functions: get_result and get_var': [697, -62]
@@ -33504,9 +33504,9 @@
         \ snippet service will use it to send a \"show ip int br\"\r\ncommand with\
         \ both connections and check in the post-processing\r\nfield that the result\
         \ is correct in both cases."
-      positions: [267, -159]
+      positions: [117, 58]
       size: 14
-  last_modified: '2022-08-17 10:20:50.683078'
+  last_modified: '2022-08-17 10:27:21.935707'
   log_level: 1
   mail_recipient: ''
   man_minutes: 0
@@ -33553,7 +33553,7 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  target_devices: []
+  target_devices: [Washington]
   target_pools: []
   time_between_retries: 10
   type: workflow
@@ -33637,7 +33637,7 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   positions:
-    'Function: get_connection': [4, -56]
+    'Function: get_connection': [60, -76]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -33698,7 +33698,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-08-17 10:19:02.687460'
+  last_modified: '2022-08-17 10:26:17.534705'
   log_level: 1
   mail_recipient: ''
   mandatory_parameter: Default Value
@@ -33722,11 +33722,13 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   positions:
-    'Function: get_connection': [410, 51]
-  postprocessing: ''
+    'Function: get_connection': [599, 121]
+  postprocessing: "results[\"success\"] = (\r\n  \"Loopback\" in results[\"result\"\
+    ][\"default\"]\r\n  and results[\"result\"][\"default\"] == results[\"result\"\
+    ][\"special\"]\r\n)"
   postprocessing_mode: success
   preprocessing: ''
-  priority: 10
+  priority: 9
   rbac_edit: []
   rbac_read: []
   rbac_run: []
@@ -33829,7 +33831,7 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   positions:
-    'Function: get_connection': [1, 161]
+    'Function: get_connection': [19, 248]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''

@@ -621,7 +621,7 @@ class Runner:
             log = f"DEVICE {device_name} - {log}"
         settings = env.log(
             severity, 
-            f"USER {self.creator} - SERVICE '{self.service.name}' - {log}",
+            f"RUNTIME {self.parent_runtime} - USER {self.creator} - SERVICE '{self.service.name}' - {log}",
             user=self.creator,
             change_log=change_log,
             logger=logger

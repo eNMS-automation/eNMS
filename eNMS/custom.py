@@ -36,6 +36,16 @@ class CustomApp:
 
     def generate_uuid(self):
         return str(uuid4())
+    
+    def run_post_processing(self, user, run_result):
+        env.log(
+            "info",
+            (
+                f"RUNTIME {run_result['runtime']} - USER {user} -"
+                f"SERVICE '{run_result['properties']['scoped_name']}' - Completed in {run_result['duration']}'"
+            ),
+            log_change=False
+        )
 
 
 vs.custom = CustomApp()

@@ -267,8 +267,7 @@ class Runner:
             if env.redis_queue and self.is_main_run:
                 runtime_keys = env.redis("keys", f"{self.parent_runtime}/*") or []
                 env.redis("delete", *runtime_keys)
-            if self.is_main_run and hasattr(vs.custom, vs.automation['run'].get('post_processing','')):
-                getattr(vs.custom, vs.automation['run']['post_processing'])(self.creator, results)
+            vs.custom.run_post_processing(self, results)
 
         self.results = results
 

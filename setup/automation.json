@@ -34,9 +34,6 @@
     "multiprocessing = BooleanField('Multiprocessing', default=False)",
     "max_processes = IntegerField('Maximum number of processes', default=15)"
   ],
-  "run": {
-    "post_processing": "run_post_processing"
-  },
   "scrapli": {
     "connection_args": {
       "auth_private_key": false,

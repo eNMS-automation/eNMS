@@ -235,16 +235,16 @@ class WorkflowForm(ServiceForm):
             ),
         ),
     )
+    man_minutes = IntegerField("Minutes to Complete Task Manually", default=0)
     man_minutes_type = SelectField(
-        "Man Minutes Type",
+        "Type of Minutes",
         choices=(
             ("device", "Per Device"),
             ("workflow", "For the whole Workflow"),
         ),
     )
-    man_minutes = IntegerField("Number of Man Minutes", default=0)
     man_minutes_total = IntegerField(
-        "Man Minutes Total", default=0, render_kw={"readonly": True}
+        "Total Number of Minutes", default=0, render_kw={"readonly": True}
     )
     superworkflow = InstanceField(
         "Superworkflow",

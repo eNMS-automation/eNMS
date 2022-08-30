@@ -66,9 +66,9 @@ const options = {
 export let ends = new Set();
 export let workflow = JSON.parse(localStorage.getItem("workflow"));
 export let currentRuntime = linkRuntime;
+export let graph;
 
 let currentRun;
-let graph;
 let currentPlaceholder;
 let placeholder;
 let isSuperworkflow;

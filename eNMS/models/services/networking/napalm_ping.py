@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, ForeignKey, Integer
+from sqlalchemy import ForeignKey, Integer
 
 from eNMS.database import db
 from eNMS.fields import HiddenField, IntegerField, StringField
@@ -14,12 +14,12 @@ class NapalmPingService(ConnectionService):
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     count = db.Column(Integer, default=0)
     driver = db.Column(db.SmallString)
-    timeout = db.Column(Integer, default=60)
+    ping_timeout = db.Column(Integer, default=2)
     optional_args = db.Column(db.Dict)
     packet_size = db.Column(Integer, default=0)
     destination_ip = db.Column(db.SmallString)
     source_ip = db.Column(db.SmallString)
-    timeout = db.Column(Integer, default=0)
+    timeout = db.Column(Integer, default=10)
     ttl = db.Column(Integer, default=0)
     vrf = db.Column(db.SmallString)
 
@@ -35,7 +35,7 @@ class NapalmPingService(ConnectionService):
             source=source,
             vrf=run.vrf,
             ttl=run.ttl or 255,
-            timeout=run.timeout or 2,
+            timeout=run.ping_timeout or 2,
             size=run.packet_size or 100,
             count=run.count or 5,
         )
@@ -48,9 +48,9 @@ class NapalmPingForm(NapalmForm):
     packet_size = IntegerField(default=100)
     destination_ip = StringField(substitution=True)
     source_ip = StringField(substitution=True)
-    timeout = IntegerField(default=2)
+    ping_timeout = IntegerField(default=2)
     ttl = IntegerField(default=255)
-    vrf = StringField()
+    vrf = StringField(label="vrf or router", substitution=True)
     groups = {
         "Ping Parameters": {
             "commands": [
@@ -58,7 +58,7 @@ class NapalmPingForm(NapalmForm):
                 "packet_size",
                 "destination_ip",
                 "source_ip",
-                "timeout",
+                "ping_timeout",
                 "ttl",
                 "vrf",
             ],

@@ -50,9 +50,9 @@ Version 4.3.0
 - Add User landing page to decide which page to display after logging in (editable in profile).
   Default landing page is configurable from settings.json > authentication > landing_page.
 - Add mechanism to show a single device status in workflow builder UI (logs filtering + service display)
-- Add mechanism to search for a string accross all services of a workflow in the workflow builder, and
+- Add mechanism to search for a string across all services of a workflow in the workflow builder, and
   accross all nodes in the network builder.
-- Fix vertical aligment in all tables (cell content was not centered on y axis because of buttons height in
+- Fix vertical alignment in all tables (cell content was not centered on y axis because of buttons height in
   the last column).
 - Add export service button in Workflow Builder.
 - New Files Management System:
@@ -82,6 +82,12 @@ Version 4.3.0
   * Per Device is only allowed if the workflow run method is DxD or SxS with workflow targets
   * The workflow must be a success (or per device success) to be counted in the total man minutes
   * Man Minutes can be made mandatory via 'mandatory_man_minutes' key in automation.json > workflow
+- Import Services:
+  * The timeout for the Import_services endpoint is configurable in "automation.json" under
+    the "timeout" property.  Logging on timeout is also improved.  
+  * The "stem" of the imported file (e.g., service.tgz) does not have to exactly match the 
+    directory in the .tgz file (i.e., "serviceA_v1.tgz" with "serviceA/service.yaml" is supported).
+- The napalm ping service separated the `ping_timeout` from the napalm `timeout`. 
 
 Migration
 - check "username" and "server" variables in workflow aren't in conflict with existing workflows.
@@ -90,6 +96,8 @@ Migration
 - "download_file" endpoint -> "download" (add support for downloading folders)
 - the "driver" property must be updated for all netmiko, napalm and scrapli via the migration script
 - update services to use server IP and address from global variables and not from settings.
+- the napalm_ping_service added a `ping_timeout` property. If desired, set both
+  values to be at least the defaults (2 for `ping_timeout`, 10 for napalm's `timeout`)
 
 To be tested:
 - bulk deletion and bulk removal (from dashboard and other tables too)

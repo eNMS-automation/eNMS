@@ -40,6 +40,9 @@
       "auth_strict_key": false
     }
   },
+  "timeout": {
+    "import_services": 900000
+  },
   "workflow": {
     "allowed_models": {
       "delete": ["device", "link", "pool", "service"],

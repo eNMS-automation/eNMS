@@ -22,7 +22,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import aliased
 from sqlalchemy.sql.expression import true
 from subprocess import Popen
-from tarfile import open as open_tar
+from tarfile import open as open_tar, DIRTYPE
 from threading import Thread
 from traceback import format_exc
 from uuid import uuid4
@@ -982,20 +982,42 @@ class Controller:
         }
 
     def import_services(self, **kwargs):
+        def unpack_tar_file(filepath):
+            with open_tar(filepath) as tar_file:
+                first_tar_folder = (
+                    [f for f in tar_file.getmembers() if f.type == DIRTYPE][0:1]
+                    + [None]
+                )[0]
+                if not first_tar_folder:
+                    raise Exception(
+                        "Invalid service.tgz file provided in service import."
+                    )
+                service_folder = first_tar_folder.name
+                if f"{service_folder}/service.yaml" not in tar_file.getnames():
+                    raise Exception(
+                        f"Missing service.yaml file from {filepath.parts[-1]} - "
+                        f"import failed."
+                    )
+                unpacked_folder = filepath.parent / service_folder
+                if unpacked_folder.exists():
+                    rmtree(unpacked_folder)
+                tar_file.extractall(filepath.parent)
+                return service_folder
+
         file = kwargs["file"]
         filepath = vs.path / "files" / "services" / file.filename
         file.save(str(filepath))
-        with open_tar(filepath) as tar_file:
-            tar_file.extractall(path=vs.path / "files" / "services")
-            status = self.migration_import(
-                folder="services",
-                name=filepath.stem,
-                import_export_types=["service", "workflow_edge"],
-                service_import=True,
-                skip_pool_update=True,
-                skip_model_update=True,
-                update_pools=True,
-            )
+        status = self.migration_import(
+            folder="services",
+            name=unpack_tar_file(filepath),
+            import_export_types=["service", "workflow_edge"],
+            service_import=True,
+            skip_pool_update=True,
+            skip_model_update=True,
+            update_pools=True,
+        )
+        if "Partial import" in status:
+            raise Exception(status)
         return status
 
     def import_topology(self, **kwargs):

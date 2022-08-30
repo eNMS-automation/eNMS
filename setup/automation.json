@@ -41,7 +41,7 @@
     }
   },
   "timeout": {
-    "import_services": 900000
+    "import_services": 180000
   },
   "workflow": {
     "allowed_models": {

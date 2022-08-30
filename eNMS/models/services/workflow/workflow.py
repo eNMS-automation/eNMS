@@ -203,7 +203,7 @@ class Workflow(Service):
         else:
             results = {"payload": run.payload, "success": end in visited}
         run.restart_run = restart_run
-        if run.is_main_run:
+        if run.is_main_run and self.man_minutes:
             self.man_minutes_total += (
                 len(summary["success"]) * self.man_minutes
                 if self.man_minutes_type == "device"
@@ -263,7 +263,8 @@ class WorkflowForm(ServiceForm):
                 "The 'Man Minutes' Parameter cannot be set to 0."
             )
         invalid_man_minutes_type_error = (
-            self.run_method.data == "per_service_with_service_targets"
+            self.man_minutes.data
+            and self.run_method.data == "per_service_with_service_targets"
             and self.man_minutes_type.data == "device"
         )
         if invalid_man_minutes_type_error:

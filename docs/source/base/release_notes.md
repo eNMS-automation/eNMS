@@ -82,6 +82,7 @@ Version 4.3.0
   * Per Device is only allowed if the workflow run method is DxD or SxS with workflow targets
   * The workflow must be a success (or per device success) to be counted in the total man minutes
   * Man Minutes can be made mandatory via 'mandatory_man_minutes' key in automation.json > workflow
+- Remove unused parent and parent_device relationship on the Run class.
 - Import Services:
   * The timeout for the Import_services endpoint is configurable in "automation.json" under
     the "timeout" property.  Logging on timeout is also improved.  

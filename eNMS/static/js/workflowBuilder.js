@@ -32,7 +32,7 @@ import {
   switchMode,
   updateBuilderBindings,
 } from "./builder.js";
-import { clearSearch, tables } from "./table.js";
+import { tables } from "./table.js";
 
 const options = {
   interaction: {

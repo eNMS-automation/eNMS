@@ -949,6 +949,7 @@ export function notify(...args) {
 function showAllAlerts() {
   openPanel({
     name: "alerts_table",
+    title: "Alerts",
     callback: () => {
       $("#alerts-table")
         // eslint-disable-next-line new-cap

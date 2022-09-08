@@ -459,9 +459,18 @@ function getResultLink(service, device) {
   copyToClipboard({ text: link });
 }
 
+function getWorkflowLink(includeRuntime) {
+  const baseUrl = serverUrl || `${window.location.protocol}//${window.location.hostname}`;
+  let link = `${baseUrl}/workflow_builder/${workflow.id}`;
+  if (includeRuntime) link += `/${currentRuntime}`;
+  copyToClipboard({ text: link });
+}
+
 export function updateWorkflowRightClickBindings() {
   updateBuilderBindings(action);
   Object.assign(action, {
+    "Link to Workflow": () => getWorkflowLink(),
+    "Link to Runtime": () => getWorkflowLink(true),
     "Run Workflow": () => runWorkflow(),
     "Parameterized Workflow Run": () => runWorkflow(true),
     "Restart Workflow from Here": showRestartWorkflowPanel,

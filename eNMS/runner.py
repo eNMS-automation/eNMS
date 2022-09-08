@@ -622,11 +622,11 @@ class Runner:
             device_name = device if isinstance(device, str) else device.name
             log = f"DEVICE {device_name} - {log}"
         settings = env.log(
-            severity, 
+            severity,
             f"RUNTIME {self.parent_runtime} - USER {self.creator} - SERVICE '{self.service.name}' - {log}",
             user=self.creator,
             change_log=change_log,
-            logger=logger
+            logger=logger,
         )
         if service_log or logger and settings.get("service_log"):
             run_log = f"{vs.get_time()} - {severity} - USER {self.creator} - SERVICE {self.service.scoped_name} - {log}"

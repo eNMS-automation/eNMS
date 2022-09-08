@@ -36,22 +36,16 @@ class CustomApp:
 
     def generate_uuid(self):
         return str(uuid4())
-    
-    def run_post_processing(self, run, run_result):
-        """
-        This function is called at the end of a run and can be used to perform business-specific logic.
 
-        :param run: the run object
-        :param run_result: the run's result object
-        """
+    def run_post_processing(self, run, run_result):
         if run.is_main_run:
             env.log(
                 "info",
                 (
                     f"RUNTIME {run_result['runtime']} - USER {run.creator} -"
-                    f"SERVICE '{run_result['properties']['scoped_name']}' - Completed in {run_result['duration']}'"
+                    f"SERVICE '{run_result['properties']['scoped_name']}' - "
+                    f"Completed in {run_result['duration']}'"
                 ),
-                log_change=False
             )
 
 

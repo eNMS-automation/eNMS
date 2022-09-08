@@ -203,7 +203,7 @@ class Workflow(Service):
         else:
             results = {"payload": run.payload, "success": end in visited}
         run.restart_run = restart_run
-        if run.is_main_run:
+        if run.is_main_run and self.man_minutes:
             self.man_minutes_total += (
                 len(summary["success"]) * self.man_minutes
                 if self.man_minutes_type == "device"
@@ -235,16 +235,16 @@ class WorkflowForm(ServiceForm):
             ),
         ),
     )
+    man_minutes = IntegerField("Minutes to Complete Task Manually", default=0)
     man_minutes_type = SelectField(
-        "Man Minutes Type",
+        "Type of Minutes",
         choices=(
             ("device", "Per Device"),
             ("workflow", "For the whole Workflow"),
         ),
     )
-    man_minutes = IntegerField("Number of Man Minutes", default=0)
     man_minutes_total = IntegerField(
-        "Man Minutes Total", default=0, render_kw={"readonly": True}
+        "Total Number of Minutes", default=0, render_kw={"readonly": True}
     )
     superworkflow = InstanceField(
         "Superworkflow",
@@ -263,7 +263,8 @@ class WorkflowForm(ServiceForm):
                 "The 'Man Minutes' Parameter cannot be set to 0."
             )
         invalid_man_minutes_type_error = (
-            self.run_method.data == "per_service_with_service_targets"
+            self.man_minutes.data
+            and self.run_method.data == "per_service_with_service_targets"
             and self.man_minutes_type.data == "device"
         )
         if invalid_man_minutes_type_error:

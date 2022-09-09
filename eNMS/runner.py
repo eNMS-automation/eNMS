@@ -621,15 +621,18 @@ class Runner:
         if device:
             device_name = device if isinstance(device, str) else device.name
             log = f"DEVICE {device_name} - {log}"
+        full_log = (
+            f"RUNTIME {self.parent_runtime} - USER {self.creator} -"
+            f" SERVICE '{self.service.name}' - {log}"
+        )
         settings = env.log(
-            severity,
-            f"RUNTIME {self.parent_runtime} - USER {self.creator} - SERVICE '{self.service.name}' - {log}",
-            user=self.creator,
-            change_log=change_log,
-            logger=logger,
+            severity, full_log, user=self.creator, change_log=change_log, logger=logger
         )
         if service_log or logger and settings.get("service_log"):
-            run_log = f"{vs.get_time()} - {severity} - USER {self.creator} - SERVICE {self.service.scoped_name} - {log}"
+            run_log = (
+                f"{vs.get_time()} - {severity} - USER {self.creator} -"
+                f" SERVICE {self.service.scoped_name} - {log}"
+            )
             env.log_queue(self.parent_runtime, self.service.id, run_log)
             if not self.is_main_run:
                 env.log_queue(self.parent_runtime, self.main_run.service.id, run_log)

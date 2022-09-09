@@ -44,7 +44,7 @@ class CustomApp:
                 (
                     f"RUNTIME {run_result['runtime']} - USER {run.creator} -"
                     f"SERVICE '{run_result['properties']['scoped_name']}' - "
-                    f"Completed in {run_result['duration']}'"
+                    f"Completed in {run_result['duration']}"
                 ),
             )
 

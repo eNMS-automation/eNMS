@@ -942,7 +942,6 @@ class Runner:
         return results, exec_variables
 
     def sub(self, input, variables):
-        is_jinja2_template = getattr(self, "jinja2_template", False)
         regex = compile("{{(.*?)}}")
         variables["payload"] = self.payload
 

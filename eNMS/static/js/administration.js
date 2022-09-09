@@ -299,19 +299,23 @@ function showFileUploadPanel(folder) {
   openPanel({
     name: "upload_files",
     title: `Upload files to ${folder}`,
+    size: "700 615",
     id: path,
     callback: () => {
       const element = document.getElementById(`dropzone-${path}`);
       let dropzone = new Dropzone(element, {
         url: "/upload_files",
         autoProcessQueue: false,
+        addRemoveLinks: true,
+        parallelUploads: 10,
+        queuecomplete: () => {
+          notify("Files successfully uploaded.", "success", 5, true);
+          setTimeout(() => refreshTable("file"), 500);
+        },
       });
       $(`[id="dropzone-submit-${path}"]`).click(function () {
         $(`[id="folder-${path}"]`).val(folder);
         dropzone.processQueue();
-        notify("Files successfully uploaded.", "success", 5, true);
-        $(`[id="upload_files-${path}"]`).remove();
-        setTimeout(() => refreshTable("file"), 600);
       });
     },
   });

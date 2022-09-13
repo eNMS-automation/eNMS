@@ -102,6 +102,12 @@ class Environment:
         default_method = vs.settings["authentication"]["default"]
         user_method = getattr(user, "authentication", default_method)
         method = kwargs.get("authentication_method", user_method)
+        if (
+            vs.settings["authentication"]["force_authentication_method"]
+            and user
+            and user.authentication != method
+        ):
+            return False
         if method not in vs.settings["authentication"]["methods"]:
             return False
         elif method == "database":

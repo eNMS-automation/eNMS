@@ -40,7 +40,7 @@ class User(AbstractBase, UserMixin):
         db.SmallString, default=vs.settings["authentication"]["landing_page"]
     )
     password = db.Column(db.SmallString)
-    authentication = db.Column(db.TinyString)
+    authentication = db.Column(db.TinyString, default="database")
     menu = db.Column(db.List)
     pages = db.Column(db.List)
     get_requests = db.Column(db.List)

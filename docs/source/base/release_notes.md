@@ -76,6 +76,8 @@ Version 4.3.0
 - Add new "mandatory" keyword in custom properties to make the field required to submit the form.
 - Add new "show_password_in_profile" keyword in settings > authentication to configure whether the user
   profile lets users change their own password (if `false`, the password field is not shown)
+- Add new "force_authentication_method" to force users to log in with the authentication method saved in
+  the database (e.g first authentication method used)
 - Add new 'Man Minutes' feature to compute time saved per workflow
   * Only for top-level workflows
   * Man Minutes can be defined per device or for the whole workflow

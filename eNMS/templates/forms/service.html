@@ -171,11 +171,6 @@
                   {{ form.initial_payload(id=form_type + '-initial_payload',
                   class="form-control add-id") }}
                 </div>
-                {{ form.parameterized_form.label(help="common/parameterized_form") }}
-                <div class="form-group">
-                  {{ form.parameterized_form(id=form_type + '-parameterized_form',
-                  class="form-control add-id") }}
-                </div>
                 <fieldset>
                   <div class="item">
                     <input
@@ -185,11 +180,14 @@
                       class="add-id"
                       value="y"
                     />
-                    {{
-                    form.mandatory_parametrization.label(help="common/mandatory_parametrization")
-                    }}
+                    {{ form.mandatory_parametrization.label(help="common/mandatory_parametrization") }}
                   </div>
                 </fieldset>
+                {{ form.parameterized_form.label(help="common/parameterized_form") }}
+                <div class="form-group">
+                  {{ form.parameterized_form(id=form_type + '-parameterized_form',
+                  class="form-control add-id") }}
+                </div>
                 {{ form.priority.label(help="common/priority") }}
                 <div class="form-group">
                   {{ form.priority(id=form_type + '-priority', class="form-control

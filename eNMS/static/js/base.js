@@ -313,7 +313,7 @@ export function openPanel({
     id: panelId,
     border: "2px solid #2A3F52",
     theme: panelThemes[name] || "light filledlight",
-    headerLogo: "../static/img/logo.png",
+    headerLogo: "/static/img/logo.png",
     contentOverflow: "hidden scroll",
     contentSize: size || {
       width: () => window.innerWidth * 0.5,
@@ -335,7 +335,7 @@ export function openPanel({
     kwargs.content = content;
   } else {
     kwargs.contentAjax = {
-      url: url || `../${name}_form`,
+      url: url || `/${name}_form`,
       done: function (_, panel) {
         panel.content.innerHTML = this.responseText;
         preprocessForm(panel, id, type, duplicate);

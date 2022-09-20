@@ -19,4 +19,4 @@ Configuration parameters for creating this service instance:
 - `Ttl` Time to Live parameter, which tells routers when to discard
   this packet because it has been in the network too long (too many
   hops).
-- `Vrf or Router` Ping a specific virtual routing and forwarding interface.
+- `VRF` Ping a specific virtual routing and forwarding interface.

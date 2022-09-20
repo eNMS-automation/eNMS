@@ -50,7 +50,7 @@ class NapalmPingForm(NapalmForm):
     source_ip = StringField(substitution=True)
     ping_timeout = IntegerField(default=2)
     ttl = IntegerField(default=255)
-    vrf = StringField(label="vrf or router", substitution=True)
+    vrf = StringField(label="VRF", substitution=True)
     groups = {
         "Ping Parameters": {
             "commands": [

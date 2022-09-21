@@ -789,7 +789,7 @@ function showImportServicesPanel() {
     callback: () => {
       new Dropzone(document.getElementById(`dropzone-services`), {
         url: "/import_services",
-        timeout: automation.timeout["import_services"],
+        timeout: automation.service_import.timeout,
         init: function () {
           this.on('sending', function (file, xhr) {
             xhr.ontimeout = function () {
@@ -805,7 +805,7 @@ function showImportServicesPanel() {
           file.previewElement.classList.add("dz-error");
         },
         success: function (file, message) {
-          const log = `File ${file.name} uploaded with response ${message}`;
+          const log = `File ${file.name} uploaded with response "${message}"`;
           notify(log, "success", 5, true);
           file.previewElement.classList.add("dz-success");
         },

@@ -40,8 +40,8 @@
       "auth_strict_key": false
     }
   },
-  "timeout": {
-    "import_services": 180000
+  "service_import": {
+    "timeout": 180000
   },
   "workflow": {
     "allowed_models": {

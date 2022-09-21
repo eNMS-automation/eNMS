@@ -793,7 +793,7 @@ function showImportServicesPanel() {
         init: function () {
           this.on('sending', function (file, xhr) {
             xhr.ontimeout = function () {
-              notify(`File upload (${file.name}) timed out.`, "error", 5, true);
+              notify(`Upload of File "${file.name}" timed out.`, "error", 5, true);
               file.previewElement.classList.add("dz-error");
             }
           });

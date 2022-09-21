@@ -782,37 +782,25 @@ function runServicesOnTargets(id) {
 }
 
 function showImportServicesPanel() {
-  const endpoint = "import_services";
-  const timeout = automation?.timeout[endpoint] ?? 180000;
-  const cancelFileTimer = (file) => {
-    if (file.processingTimerID) {
-      clearTimeout(file.processingTimerID);
-      file.processingTimerID = null;
-    }
-  };
   openPanel({
-    name: endpoint,
+    name: "import_services",
     title: "Import Services",
     size: "600 500",
     callback: () => {
       new Dropzone(document.getElementById(`dropzone-services`), {
-        url: `/${endpoint}`,
-        timeout: timeout,
-        canceled: function (file) {
-          const log = `File ${file.name} upload canceled`;
-          notify(log, "error", 5, true);
-          file.previewElement.classList.add("dz-error");
-          cancelFileTimer(file);
-        },
-        complete: function (file) {
-          cancelFileTimer(file);
+        url: "/import_services",
+        timeout: automation.timeout["import_services"],
+        init: function () {
+          this.on('sending', function (file, xhr) {
+            xhr.ontimeout = function () {
+              notify(`File upload (${file.name}) timed out.`, "error", 5, true);
+              file.previewElement.classList.add("dz-error");
+            }
+          });
         },
         error: function (file, message) {
-          let error = typeof message == "string" ? message : message["alert"];
-          if (error.toLowerCase().indexOf("internal server") >= 0) {
-            error = "malformed file or server error; see logs for details";
-          }
-          const log = `File ${file.name} could not be imported - ${error}.`;
+          const error = typeof message == "string" ? message : message.alert;
+          const log = `File ${file.name} was not uploaded - ${error}`;
           notify(log, "error", 5, true);
           file.previewElement.classList.add("dz-error");
         },
@@ -826,15 +814,6 @@ function showImportServicesPanel() {
             done("The file must be a .tgz archive");
           } else {
             notify(`File ${file.name} accepted for upload.`, "success", 5, true);
-            file.processingTimerID = setTimeout(
-              (file) => {
-                const log = `File ${file.name} timed out during processing - see logs to determine import status.`;
-                notify(log, "error", 10, true);
-                file.previewElement.classList.add("dz-error");
-              },
-              timeout + 3000,
-              file
-            );
             done();
           }
         },

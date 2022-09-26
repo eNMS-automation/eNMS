@@ -897,6 +897,8 @@ class Controller:
         for model in models:
             path = vs.path / "files" / folder / kwargs["name"] / f"{model}.yaml"
             if not path.exists():
+                if kwargs.get("service_import") and model == "service":
+                    raise Exception("Invalid archive provided in service import.")
                 continue
             with open(path, "r") as migration_file:
                 instances = yaml.load(migration_file)
@@ -987,15 +989,19 @@ class Controller:
         file.save(str(filepath))
         with open_tar(filepath) as tar_file:
             tar_file.extractall(path=vs.path / "files" / "services")
+            folder_name = tar_file.getmembers()[0].name
             status = self.migration_import(
                 folder="services",
-                name=filepath.stem,
+                name=folder_name,
                 import_export_types=["service", "workflow_edge"],
                 service_import=True,
                 skip_pool_update=True,
                 skip_model_update=True,
                 update_pools=True,
             )
+        rmtree(vs.path / "files" / "services" / folder_name, ignore_errors=True)
+        if "Partial import" in status:
+            raise Exception(status)
         return status
 
     def import_topology(self, **kwargs):

@@ -789,14 +789,23 @@ function showImportServicesPanel() {
     callback: () => {
       new Dropzone(document.getElementById(`dropzone-services`), {
         url: "/import_services",
-        timeout: 180000,
+        timeout: automation.service_import.timeout,
+        init: function () {
+          this.on('sending', function (file, xhr) {
+            xhr.ontimeout = function () {
+              notify(`Upload of File "${file.name}" timed out.`, "error", 5, true);
+              file.previewElement.classList.add("dz-error");
+            }
+          });
+        },
         error: function (file, message) {
-          const log = `File ${file.name} was not uploaded - ${message}`;
+          const error = typeof message == "string" ? message : message.alert;
+          const log = `File ${file.name} was not uploaded - ${error}`;
           notify(log, "error", 5, true);
           file.previewElement.classList.add("dz-error");
         },
         success: function (file, message) {
-          const log = `File ${file.name} uploaded with response ${message}`;
+          const log = `File ${file.name} uploaded with response "${message}"`;
           notify(log, "success", 5, true);
           file.previewElement.classList.add("dz-success");
         },

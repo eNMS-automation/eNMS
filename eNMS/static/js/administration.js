@@ -312,6 +312,7 @@ function showFileUploadPanel(folder) {
           notify("Files successfully uploaded.", "success", 5, true);
           setTimeout(() => refreshTable("file"), 500);
         },
+        timeout: settings.files.upload_timeout
       });
       $(`[id="dropzone-submit-${path}"]`).click(function () {
         $(`[id="folder-${path}"]`).val(folder);

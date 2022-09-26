@@ -3,6 +3,7 @@
     "config_mode": "debug",
     "documentation_url": "https://enms.readthedocs.io/en/latest/",
     "git_repository": "git@github.com:afourmy/gitpython-test.git",
+    "max_content_length": 104857600,
     "plugin_path": "eNMS/plugins",
     "session_timeout_minutes": 30,
     "startup_migration": "examples"
@@ -71,7 +72,8 @@
     "workflow_builder_table": "automation/workflows/"
   },
   "files": {
-    "ignored_types": [".tgz"]
+    "ignored_types": [".tgz"],
+    "upload_timeout": 600000
   },
   "mail": {
     "port": 587,

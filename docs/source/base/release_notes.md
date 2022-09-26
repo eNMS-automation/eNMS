@@ -91,6 +91,8 @@ Version 4.3.0
   * The "stem" of the imported file (e.g., service.tgz) does not have to exactly match the
     directory in the .tgz file (i.e., "serviceA_v1.tgz" with "serviceA/service.yaml" is supported).
 - The napalm ping service separated the `ping_timeout` from the napalm `timeout`.
+- Add new settings "max_content_length" in settings.json > "app" (Flask parameter)
+- Add new timeout setting for file import in settings.json > "files"
 
 Migration
 - check "username" and "server" variables in workflow aren't in conflict with existing workflows.

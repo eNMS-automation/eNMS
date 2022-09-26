@@ -85,10 +85,10 @@ Version 4.3.0
 - Remove unused parent and parent_device relationship on the Run class.
 - Import Services:
   * The timeout for the Import_services endpoint is configurable in "automation.json" under
-    the "timeout" property.  Logging on timeout is also improved.  
-  * The "stem" of the imported file (e.g., service.tgz) does not have to exactly match the 
+    the "service_import" > "timeout" property. Logging on timeout is also improved.
+  * The "stem" of the imported file (e.g., service.tgz) does not have to exactly match the
     directory in the .tgz file (i.e., "serviceA_v1.tgz" with "serviceA/service.yaml" is supported).
-- The napalm ping service separated the `ping_timeout` from the napalm `timeout`. 
+- The napalm ping service separated the `ping_timeout` from the napalm `timeout`.
 
 Migration
 - check "username" and "server" variables in workflow aren't in conflict with existing workflows.

@@ -20,7 +20,7 @@ export const defaultFolder = settings.paths.files || `${applicationPath}/files`;
 export let folderPath = localStorage.getItem("folderPath") || defaultFolder;
 
 function displayFiles() {
-  if (tableInstances["file"]) {
+  if ($("#files").length) {
     return notify("The files table is already displayed.", "error", 5);
   }
   openPanel({

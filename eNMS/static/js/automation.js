@@ -574,7 +574,7 @@ export const runService = function ({ id, path, type, parametrization }) {
     openPanel({
       name: "parameterized_form",
       id: id,
-      url: `parameterized_form/${id}`,
+      url: `/parameterized_form/${id}`,
       title: "Parameterized Form",
       size: "900px auto",
       checkRbac: false,

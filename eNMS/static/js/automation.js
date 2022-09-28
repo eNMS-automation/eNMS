@@ -791,11 +791,11 @@ function showImportServicesPanel() {
         url: "/import_services",
         timeout: automation.service_import.timeout,
         init: function () {
-          this.on('sending', function (file, xhr) {
+          this.on("sending", function (file, xhr) {
             xhr.ontimeout = function () {
               notify(`Upload of File "${file.name}" timed out.`, "error", 5, true);
               file.previewElement.classList.add("dz-error");
-            }
+            };
           });
         },
         error: function (file, message) {

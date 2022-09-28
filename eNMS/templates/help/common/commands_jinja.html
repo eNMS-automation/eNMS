@@ -3,10 +3,10 @@
     <h2>Interpret Commands as Jinja2 Template</h2>
     <p>
       Select the checkbox to interpret the <b>Commands</b> text as a
-      <a href=""https://jinja.palletsprojects.com/en/3.1.x/">Jinja2</a>
-      template.  The output of the rendered template is used as the list of
-      commands for execution.  A common use case is looping over values to generate
-      a command per value.
+      <a href="https://jinja.palletsprojects.com/en/3.1.x/">Jinja2</a>
+      template. The output of the rendered template is used as the list of commands for
+      execution. A common use case is looping over values to generate a command per
+      value.
     </p>
   </div>
   <div>
@@ -17,14 +17,17 @@
         interest:
       </p>
       <pre>
-{{raw}}{% for intf in get_var("interfaces", device=device.name) -%}{{endraw}}
-{{raw}}  show interface {{ intf }}{{endraw}}
-{{raw}}{% endfor %}{{endraw}}
-      </pre>
+{% raw %}{% for intf in get_var("interfaces", device=device.name) -%}
+ show interface {{ intf }}
+{% endfor %}{% endraw %}</pre
+      >
       <p>
-        Note the minus sign on the closing Jinja2 tag <code>-%></code> with the for loop.
-        This prevents Jinja2 from generating unwanted blank lines.  See
-        <a href="https://jinja.palletsprojects.com/en/3.0.x/templates/#whitespace-control">whitespace control</a>.
+        Note the minus sign on the closing Jinja2 tag <code>-%></code> with the for
+        loop. This prevents Jinja2 from generating unwanted blank lines. See
+        <a
+          href="https://jinja.palletsprojects.com/en/3.0.x/templates/#whitespace-control"
+          >whitespace control</a
+        >.
       </p>
     </div>
   </div>

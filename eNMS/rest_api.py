@@ -113,7 +113,6 @@ class RestApi:
         if devices or pools:
             data.update({"target_devices": devices, "target_pools": pools})
         data["runtime"] = runtime = vs.get_time()
-        data["path"] = service.id
         if handle_asynchronously:
             Thread(target=controller.run, args=(service.id,), kwargs=data).start()
             return {"errors": errors, "runtime": runtime}
@@ -127,7 +126,6 @@ class RestApi:
             "creator": task.last_scheduled_by,
             "runtime": vs.get_time(),
             "task": task.id,
-            "path": task.service.id
             **task.initial_payload,
         }
         if task.devices:

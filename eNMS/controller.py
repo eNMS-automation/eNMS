@@ -1055,6 +1055,8 @@ class Controller:
 
     @staticmethod
     def run(service, **kwargs):
+        if "path" not in kwargs:
+            kwargs["path"] = str(service)
         keys = list(vs.model_properties["run"]) + list(vs.relationships["run"])
         run_kwargs = {key: kwargs.pop(key) for key in keys if kwargs.get(key)}
         for property in ("name", "labels"):

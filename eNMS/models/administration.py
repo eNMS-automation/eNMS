@@ -10,6 +10,7 @@ from sqlalchemy.orm import relationship
 from time import ctime
 
 from eNMS.database import db
+from eNMS.environment import env
 from eNMS.models.base import AbstractBase
 from eNMS.variables import vs
 
@@ -183,7 +184,10 @@ class File(AbstractBase):
     folder_path = db.Column(db.SmallString)
 
     def delete(self):
-        Path(self.path).unlink()
+        try:
+            Path(self.path).unlink()
+        except Exception as exc:
+            env.log("warning", f"Cannot delete file '{self.name}' ({exc})")
 
     def update(self, move_file=True, **kwargs):
         old_path = self.path

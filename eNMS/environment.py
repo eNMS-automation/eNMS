@@ -71,15 +71,14 @@ class Environment:
         class Handler(FileSystemEventHandler):
             def on_any_event(self, event):
                 filetype = "folder" if event.is_directory else "file"
-                if event.event_type in ("deleted", "modified", "moved"):
-                    file = db.fetch(filetype, path=event.src_path, allow_none=True)
-                    if file and event.event_type == "moved":
-                        file.update(path=event.dest_path, move_file=False)
-                elif event.event_type == "created":
+                file = db.fetch(filetype, path=event.src_path, allow_none=True)
+                if event.event_type == "moved" and file:
+                    file.update(path=event.dest_path, move_file=False)
+                elif event.event_type in ("created", "modified"):
                     file = db.factory(filetype, path=event.src_path)
+                elif event.event_type == "deleted" and file:
+                    db.delete_instance(file)
                 else:
-                    return
-                if not file:
                     return
                 file.status = event.event_type.capitalize()
                 log = f"File {event.src_path} {event.event_type} (watchdog)."

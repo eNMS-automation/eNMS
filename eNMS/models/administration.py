@@ -184,10 +184,7 @@ class File(AbstractBase):
     folder_path = db.Column(db.SmallString)
 
     def delete(self):
-        try:
-            Path(self.path).unlink()
-        except Exception as exc:
-            env.log("warning", f"Cannot delete file '{self.name}' ({exc})")
+        Path(self.path).unlink(missing_ok=True)
 
     def update(self, move_file=True, **kwargs):
         old_path = self.path

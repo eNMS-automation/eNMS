@@ -1,7 +1,6 @@
 /*
 global
 action: true
-page: false
 visualization: false
 */
 

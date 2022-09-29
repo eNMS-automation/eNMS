@@ -1,8 +1,10 @@
 /*
 global
 action: false
+linkRuntime: false
 page: false
 subtypes: false
+serverUrl: false
 theme: false
 user: false
 */

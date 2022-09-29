@@ -1072,6 +1072,7 @@ class Controller:
         restart_run = db.fetch("run", allow_none=True, runtime=restart_runtime)
         if service.type == "workflow" and service.superworkflow and not restart_run:
             run_kwargs["placeholder"] = run_kwargs["start_service"] = service.id
+            run_kwargs["path"] = str(service.superworkflow.id)
             service = service.superworkflow
             initial_payload.update(service.initial_payload)
         else:

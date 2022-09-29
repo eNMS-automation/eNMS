@@ -1,6 +1,7 @@
 /*
 global
 action: true
+automation: false
 CodeMirror: false
 Diff2HtmlUI: false
 Dropzone: false
@@ -408,7 +409,6 @@ export const showRuntimePanel = function (
 };
 
 function displayLogs(service, runtime, change) {
-  const content = document.getElementById(`service-logs-${service.id}`);
   let editor;
   if (change) {
     editor = $(`#service-logs-${service.id}`).data("CodeMirrorInstance");

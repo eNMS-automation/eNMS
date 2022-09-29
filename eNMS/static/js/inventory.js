@@ -1,6 +1,5 @@
 /*
 global
-CodeMirror: false
 configurationProperties: false
 formProperties: false
 serverUrl: false

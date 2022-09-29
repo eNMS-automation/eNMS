@@ -1,8 +1,11 @@
 /*
 global
+applicationPath: false
 CodeMirror: false
 settings: true
 Dropzone: false
+rbac: false
+user: false
 */
 
 import {
@@ -14,7 +17,7 @@ import {
   openPanel,
   processInstance,
 } from "./base.js";
-import { refreshTable, tables, tableInstances } from "./table.js";
+import { refreshTable, tables } from "./table.js";
 
 export const defaultFolder = settings.paths.files || `${applicationPath}/files`;
 export let folderPath = localStorage.getItem("folderPath") || defaultFolder;
@@ -44,6 +47,7 @@ function displayFiles() {
       </form>`,
     title: "Files",
     callback: function () {
+      // eslint-disable-next-line new-cap
       new tables["file"]();
     },
   });

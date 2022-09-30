@@ -1,7 +1,6 @@
 /*
 global
 action: true
-page: false
 visualization: false
 */
 
@@ -35,7 +34,7 @@ import {
   showDeviceData,
   showDeviceResultsPanel,
 } from "./inventory.js";
-import { clearSearch, tableInstances } from "./table.js";
+import { clearSearch } from "./table.js";
 
 const displayImage = visualization["Network Builder"].display_nodes_as_images;
 

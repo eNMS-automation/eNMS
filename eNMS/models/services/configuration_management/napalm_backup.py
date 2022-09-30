@@ -2,7 +2,7 @@ from datetime import datetime
 from flask_wtf import FlaskForm
 from pathlib import Path
 from re import M, sub
-from sqlalchemy import Boolean, ForeignKey, Integer
+from sqlalchemy import ForeignKey, Integer
 from sqlalchemy.orm import load_only
 from wtforms import FormField
 

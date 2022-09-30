@@ -267,6 +267,8 @@ class Runner:
             if env.redis_queue and self.is_main_run:
                 runtime_keys = env.redis("keys", f"{self.parent_runtime}/*") or []
                 env.redis("delete", *runtime_keys)
+            vs.custom.run_post_processing(self, results)
+
         self.results = results
 
     def make_json_compliant(self, input):
@@ -619,12 +621,18 @@ class Runner:
         if device:
             device_name = device if isinstance(device, str) else device.name
             log = f"DEVICE {device_name} - {log}"
-        log = f"USER {self.creator} - SERVICE {self.service.scoped_name} - {log}"
+        full_log = (
+            f"RUNTIME {self.parent_runtime} - USER {self.creator} -"
+            f" SERVICE '{self.service.name}' - {log}"
+        )
         settings = env.log(
-            severity, log, user=self.creator, change_log=change_log, logger=logger
+            severity, full_log, user=self.creator, change_log=change_log, logger=logger
         )
         if service_log or logger and settings.get("service_log"):
-            run_log = f"{vs.get_time()} - {severity} - {log}"
+            run_log = (
+                f"{vs.get_time()} - {severity} - USER {self.creator} -"
+                f" SERVICE {self.service.scoped_name} - {log}"
+            )
             env.log_queue(self.parent_runtime, self.service.id, run_log)
             if not self.is_main_run:
                 env.log_queue(self.parent_runtime, self.main_run.service.id, run_log)
@@ -934,8 +942,7 @@ class Runner:
         return results, exec_variables
 
     def sub(self, input, variables):
-        is_jinja2_template = getattr(self, "jinja2_template", False)
-        regex = compile("\[\[(.*?)\]\]" if is_jinja2_template else "{{(.*?)}}")
+        regex = compile("{{(.*?)}}")
         variables["payload"] = self.payload
 
         def replace(match):
@@ -1179,9 +1186,10 @@ class Runner:
             except Exception:
                 self.disconnect(library, device, connection)
 
-    def get_connection(self, library, device):
+    def get_connection(self, library, device, name=None):
         cache = vs.connections_cache[library].get(self.parent_runtime, {})
-        return cache.get(device, {}).get(getattr(self, "connection_name", "default"))
+        connection = name or getattr(self, "connection_name", "default")
+        return cache.get(device, {}).get(connection)
 
     def close_device_connection(self, device):
         for library in ("netmiko", "napalm", "scrapli", "ncclient"):

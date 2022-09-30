@@ -7,7 +7,13 @@ from sqlalchemy.schema import UniqueConstraint
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
 from eNMS.forms import ServiceForm
-from eNMS.fields import BooleanField, HiddenField, InstanceField, SelectField
+from eNMS.fields import (
+    BooleanField,
+    HiddenField,
+    InstanceField,
+    IntegerField,
+    SelectField,
+)
 from eNMS.models.automation import Service
 from eNMS.runner import Runner
 from eNMS.variables import vs
@@ -22,6 +28,9 @@ class Workflow(Service):
     category = db.Column(db.SmallString)
     close_connection = db.Column(Boolean, default=False)
     labels = db.Column(db.Dict, info={"log_change": False})
+    man_minutes_type = db.Column(db.TinyString, default="device")
+    man_minutes = db.Column(Integer, default=0)
+    man_minutes_total = db.Column(Integer, default=0)
     services = relationship(
         "Service", secondary=db.service_workflow_table, back_populates="workflows"
     )
@@ -108,7 +117,12 @@ class Workflow(Service):
 
     @property
     def deep_edges(self):
-        return sum([w.edges for w in self.deep_services if w.type == "workflow"], [])
+        edges = [
+            workflow.edges
+            for workflow in set(self.deep_services)
+            if workflow.type == "workflow"
+        ]
+        return sum(edges, [])
 
     def job(self, run, device=None):
         number_of_runs = defaultdict(int)
@@ -189,6 +203,12 @@ class Workflow(Service):
         else:
             results = {"payload": run.payload, "success": end in visited}
         run.restart_run = restart_run
+        if run.is_main_run and self.man_minutes:
+            self.man_minutes_total += (
+                len(summary["success"]) * self.man_minutes
+                if self.man_minutes_type == "device"
+                else self.man_minutes * results["success"]
+            )
         return results
 
 
@@ -215,10 +235,48 @@ class WorkflowForm(ServiceForm):
             ),
         ),
     )
+    man_minutes = IntegerField("Minutes to Complete Task Manually", default=0)
+    man_minutes_type = SelectField(
+        "Type of Minutes",
+        choices=(
+            ("device", "Per Device"),
+            ("workflow", "For the whole Workflow"),
+        ),
+    )
+    man_minutes_total = IntegerField(
+        "Total Number of Minutes", default=0, render_kw={"readonly": True}
+    )
     superworkflow = InstanceField(
         "Superworkflow",
         constraints={"children": ["[Shared] Placeholder"], "children_filter": "union"},
     )
+
+    def validate(self):
+        valid_form = super().validate()
+        invalid_man_minutes_error = (
+            vs.automation["workflow"]["mandatory_man_minutes"]
+            and not self.workflows.data
+            and not self.man_minutes.data
+        )
+        if invalid_man_minutes_error:
+            self.man_minutes.errors.append(
+                "The 'Man Minutes' Parameter cannot be set to 0."
+            )
+        invalid_man_minutes_type_error = (
+            self.man_minutes.data
+            and self.run_method.data == "per_service_with_service_targets"
+            and self.man_minutes_type.data == "device"
+        )
+        if invalid_man_minutes_type_error:
+            self.man_minutes_type.errors.append(
+                (
+                    "'Per Device' Man Minutes Type is not compatible"
+                    " with the 'Service Targets' Run Method."
+                )
+            )
+        return valid_form and not any(
+            [invalid_man_minutes_type_error, invalid_man_minutes_error]
+        )
 
 
 class WorkflowEdge(AbstractBase):

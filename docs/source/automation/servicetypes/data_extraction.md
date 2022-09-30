@@ -10,14 +10,14 @@ Configuration parameters for creating this service instance:
 - `Python Extraction Query`: a python query to retrieve data from the
    payload. 
 
-- `Post Processing`: choose the type of post-processing: 
+- `Processing`: choose the type of processing: 
 
     - `Use Value as Extracted`.
     - `Apply Regular Expression (findall)`.
     - `Apply TextFSM Template`.
     
 - `Regular Expression/ TestFSM Template Text`: regular expression or
-  TextFSM template, depending on the value of the "Post Processing". 
+  TextFSM template, depending on the value of the "Processing" field. 
 
 - `Operation` Choose the operation type: 
 

@@ -1,8 +1,11 @@
 /*
 global
+applicationPath: false
 CodeMirror: false
 settings: true
 Dropzone: false
+rbac: false
+user: false
 */
 
 import {
@@ -14,13 +17,13 @@ import {
   openPanel,
   processInstance,
 } from "./base.js";
-import { refreshTable, tables, tableInstances } from "./table.js";
+import { refreshTable, tables } from "./table.js";
 
-export const defaultFolder = settings.paths.file || `${applicationPath}/files`;
+export const defaultFolder = settings.paths.files || `${applicationPath}/files`;
 export let folderPath = localStorage.getItem("folderPath") || defaultFolder;
 
 function displayFiles() {
-  if (tableInstances["file"]) {
+  if ($("#files").length) {
     return notify("The files table is already displayed.", "error", 5);
   }
   openPanel({
@@ -44,6 +47,7 @@ function displayFiles() {
       </form>`,
     title: "Files",
     callback: function () {
+      // eslint-disable-next-line new-cap
       new tables["file"]();
     },
   });
@@ -80,14 +84,12 @@ export function displayFolderPath() {
   const htmlPath = folderPath
     .split("/")
     .slice(1)
-    .map((value, index) => {
-      let folder = `${index ? "<b> / </b>" : ""}
+    .map(
+      (value) => `<b> / </b>
       <button type="button" class="btn btn-xs btn-primary">
         ${value}
-      </button>
-      `;
-      return folder;
-    })
+      </button>`
+    )
     .join("");
   $("#current-folder-path").html(`<b>Current Folder :</b>${htmlPath}`);
 }
@@ -301,19 +303,24 @@ function showFileUploadPanel(folder) {
   openPanel({
     name: "upload_files",
     title: `Upload files to ${folder}`,
+    size: "700 615",
     id: path,
     callback: () => {
       const element = document.getElementById(`dropzone-${path}`);
       let dropzone = new Dropzone(element, {
         url: "/upload_files",
         autoProcessQueue: false,
+        addRemoveLinks: true,
+        parallelUploads: 10,
+        queuecomplete: () => {
+          notify("Files successfully uploaded.", "success", 5, true);
+          setTimeout(() => refreshTable("file"), 500);
+        },
+        timeout: settings.files.upload_timeout,
       });
       $(`[id="dropzone-submit-${path}"]`).click(function () {
         $(`[id="folder-${path}"]`).val(folder);
         dropzone.processQueue();
-        notify("Files successfully uploaded.", "success", 5, true);
-        $(`[id="upload_files-${path}"]`).remove();
-        setTimeout(() => refreshTable("file"), 600);
       });
     },
   });

@@ -317,7 +317,9 @@ class Controller:
         service = db.fetch("service", id=service_id)
         path = Path(vs.path / "files" / "services" / service.filename)
         path.mkdir(parents=True, exist_ok=True)
-        services = service.deep_services if service.type == "workflow" else [service]
+        services = (
+            set(service.deep_services) if service.type == "workflow" else [service]
+        )
         exclude = ("target_devices", "target_pools", "pools", "events")
         services = [
             service.to_dict(export=True, private_properties=True, exclude=exclude)
@@ -895,6 +897,8 @@ class Controller:
         for model in models:
             path = vs.path / "files" / folder / kwargs["name"] / f"{model}.yaml"
             if not path.exists():
+                if kwargs.get("service_import") and model == "service":
+                    raise Exception("Invalid archive provided in service import.")
                 continue
             with open(path, "r") as migration_file:
                 instances = yaml.load(migration_file)
@@ -985,15 +989,19 @@ class Controller:
         file.save(str(filepath))
         with open_tar(filepath) as tar_file:
             tar_file.extractall(path=vs.path / "files" / "services")
+            folder_name = tar_file.getmembers()[0].name
             status = self.migration_import(
                 folder="services",
-                name=filepath.stem,
+                name=folder_name,
                 import_export_types=["service", "workflow_edge"],
                 service_import=True,
                 skip_pool_update=True,
                 skip_model_update=True,
                 update_pools=True,
             )
+        rmtree(vs.path / "files" / "services" / folder_name, ignore_errors=True)
+        if "Partial import" in status:
+            raise Exception(status)
         return status
 
     def import_topology(self, **kwargs):
@@ -1047,6 +1055,8 @@ class Controller:
 
     @staticmethod
     def run(service, **kwargs):
+        if "path" not in kwargs:
+            kwargs["path"] = str(service)
         keys = list(vs.model_properties["run"]) + list(vs.relationships["run"])
         run_kwargs = {key: kwargs.pop(key) for key in keys if kwargs.get(key)}
         for property in ("name", "labels"):
@@ -1062,6 +1072,7 @@ class Controller:
         restart_run = db.fetch("run", allow_none=True, runtime=restart_runtime)
         if service.type == "workflow" and service.superworkflow and not restart_run:
             run_kwargs["placeholder"] = run_kwargs["start_service"] = service.id
+            run_kwargs["path"] = str(service.superworkflow.id)
             service = service.superworkflow
             initial_payload.update(service.initial_payload)
         else:
@@ -1151,6 +1162,8 @@ class Controller:
         return now
 
     def save_profile(self, **kwargs):
+        if not vs.settings["authentication"]["show_password_in_profile"]:
+            kwargs.pop("password", None)
         current_user.update(**kwargs)
 
     def save_settings(self, **kwargs):

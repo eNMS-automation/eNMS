@@ -3,6 +3,7 @@
     "config_mode": "debug",
     "documentation_url": "https://enms.readthedocs.io/en/latest/",
     "git_repository": "git@github.com:afourmy/gitpython-test.git",
+    "max_content_length": 104857600,
     "plugin_path": "eNMS/plugins",
     "session_timeout_minutes": 30,
     "startup_migration": "examples"
@@ -10,6 +11,8 @@
   "authentication": {
     "default": "database",
     "landing_page": "/workflow_builder",
+    "show_password_in_profile": true,
+    "force_authentication_method": false,
     "methods": {
       "database": {
         "display_name": "Local User",
@@ -69,7 +72,8 @@
     "workflow_builder_table": "automation/workflows/"
   },
   "files": {
-    "ignored_types": [".tgz"]
+    "ignored_types": [".tgz"],
+    "upload_timeout": 600000
   },
   "mail": {
     "port": 587,
@@ -113,7 +117,7 @@
       "port": 6379,
       "socket_timeout": 0.1
     },
-    "flush_on_restart": false
+    "flush_on_restart": true
   },
   "requests": {
     "pool": {
@@ -136,8 +140,8 @@
     "channel": "random"
   },
   "ssh": {
-    "command": "python3 -m flask run -h 0.0.0.0",
     "bypass_key_prompt": true,
+    "command": "python3 -m flask run -h 0.0.0.0",
     "credentials": {
       "custom": true,
       "device": true,

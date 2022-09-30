@@ -44,9 +44,11 @@ class NetmikoValidationService(ConnectionService):
     __mapper_args__ = {"polymorphic_identity": "netmiko_commands_service"}
 
     def job(self, run, device):
-        commands = run.sub(run.commands, locals())
         if self.jinja2_template:
-            commands = Template(commands).render(locals())
+            variables = {**locals(), **run.global_variables()}
+            commands = Template(run.commands).render(variables)
+        else:
+            commands = run.sub(run.commands, locals())
         log_command = run.commands if "get_credential" in run.commands else commands
         netmiko_connection = run.netmiko_connection(device)
         try:
@@ -91,7 +93,9 @@ class NetmikoValidationForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_commands_service")
     commands = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
     jinja2_template = BooleanField(
-        "Interpret Commands as Jinja2 Template", default=False
+        "Interpret Commands as Jinja2 Template",
+        default=False,
+        help="common/commands_jinja",
     )
     results_as_list = BooleanField("Results As List", default=False)
     use_textfsm = BooleanField("Use TextFSM", default=False)

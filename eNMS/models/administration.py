@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask_login import UserMixin
 from itertools import chain
 from os import makedirs
@@ -10,6 +11,7 @@ from sqlalchemy.orm import relationship
 from time import ctime
 
 from eNMS.database import db
+from eNMS.environment import env
 from eNMS.models.base import AbstractBase
 from eNMS.variables import vs
 
@@ -40,7 +42,7 @@ class User(AbstractBase, UserMixin):
         db.SmallString, default=vs.settings["authentication"]["landing_page"]
     )
     password = db.Column(db.SmallString)
-    authentication = db.Column(db.TinyString)
+    authentication = db.Column(db.TinyString, default="database")
     menu = db.Column(db.List)
     pages = db.Column(db.List)
     get_requests = db.Column(db.List)
@@ -171,7 +173,7 @@ class File(AbstractBase):
     __mapper_args__ = {"polymorphic_identity": "file", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    filename = db.Column(db.SmallString)
+    filename = db.Column(db.SmallString, index=True)
     path = db.Column(db.SmallString, unique=True)
     last_modified = db.Column(db.TinyString)
     last_updated = db.Column(db.TinyString)
@@ -183,7 +185,7 @@ class File(AbstractBase):
     folder_path = db.Column(db.SmallString)
 
     def delete(self):
-        Path(self.path).unlink()
+        Path(self.path).unlink(missing_ok=True)
 
     def update(self, move_file=True, **kwargs):
         old_path = self.path
@@ -194,8 +196,8 @@ class File(AbstractBase):
         *split_folder_path, self.filename = self.path.split("/")
         self.folder_path = "/".join(split_folder_path)
         self.folder = db.fetch("folder", path=self.folder_path, allow_none=True)
-        self.last_modified = ctime(getmtime(self.path))
-        self.last_updated = ctime()
+        self.last_modified = datetime.strptime(ctime(getmtime(self.path)), "%c")
+        self.last_updated = datetime.strptime(ctime(), "%c")
         self.status = "Updated"
 
 

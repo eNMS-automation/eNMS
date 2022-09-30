@@ -27,9 +27,11 @@ class ScrapliService(ConnectionService):
     __mapper_args__ = {"polymorphic_identity": "scrapli_service"}
 
     def job(self, run, device):
-        commands = run.sub(run.commands, locals())
         if self.jinja2_template:
-            commands = Template(commands).render(locals())
+            variables = {**locals(), **run.global_variables()}
+            commands = Template(run.commands).render(variables)
+        else:
+            commands = run.sub(run.commands, locals())
         commands = commands.splitlines()
         function = "send_configs" if run.is_configuration else "send_commands"
         run.log(
@@ -51,7 +53,9 @@ class ScrapliCommandsForm(ScrapliForm):
     form_type = HiddenField(default="scrapli_service")
     commands = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
     jinja2_template = BooleanField(
-        "Interpret Commands as Jinja2 Template", default=False
+        "Interpret Commands as Jinja2 Template",
+        default=False,
+        help="common/commands_jinja",
     )
     results_as_list = BooleanField("Results As List", default=False)
     groups = {

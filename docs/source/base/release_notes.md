@@ -14,16 +14,16 @@ Version 4.3.0
 - Add new "server" variable in workflow global space set to a dictionary that contains server name,
   IP address and URL.
 - Make "Results as List" False by default for scrapli (not useful when only
-  one command, which is most of the time)
+  one command, which is most of the time).
 - For consistency with Scrapli
   * Rename "Netmiko Validation" to "Netmiko Commands"
   * Allow sending multiple commands via Netmiko Commands
   * Add "Results as List" to Netmiko Commands 
 - Add "use genie" option in netmiko commands service for Genie / PyATS support
-- Add Jinja2 template support for netmiko and scrapli commands field (iteration no longer required for loops), with "[[ ]]" for python substitution in a J2 template.
+- Add Jinja2 template support for netmiko and scrapli commands field (iteration no longer required for loops).
 - Add new `default_function` (sqlalchemy parameter) and `render_kw` (wtforms parameters) for custom fields in properties.json.
 - Add new `rest/workers` GET endpoint to get service count + cpu / memory usage for each 
-  WSGI worker (admin endpoint)
+  WSGI worker (admin endpoint).
 - Data Extraction Service update:
   * Rename to "Data Processing" service
   * Fix bug if no device (service in run once mode)
@@ -50,9 +50,9 @@ Version 4.3.0
 - Add User landing page to decide which page to display after logging in (editable in profile).
   Default landing page is configurable from settings.json > authentication > landing_page.
 - Add mechanism to show a single device status in workflow builder UI (logs filtering + service display)
-- Add mechanism to search for a string accross all services of a workflow in the workflow builder, and
+- Add mechanism to search for a string across all services of a workflow in the workflow builder, and
   accross all nodes in the network builder.
-- Fix vertical aligment in all tables (cell content was not centered on y axis because of buttons height in
+- Fix vertical alignment in all tables (cell content was not centered on y axis because of buttons height in
   the last column).
 - Add export service button in Workflow Builder.
 - New Files Management System:
@@ -71,7 +71,28 @@ Version 4.3.0
 - redis new option in settings.json > "redis" > "flush_on_restart": flush redis queue when the app restarts.
 - Remove check box for "use device driver" add "use device driver" into drop down and make this the default.
 - Add get_connection function in global variables to access connection object from a python snippet service.
+  A non-default connection can be retrieved from the cache by passing the keyword argument "name".
 - Support custom ip address in ping service (new IP address field, defaults to device IP if empty).
+- Add new "mandatory" keyword in custom properties to make the field required to submit the form.
+- Add new "show_password_in_profile" keyword in settings > authentication to configure whether the user
+  profile lets users change their own password (if `false`, the password field is not shown)
+- Add new "force_authentication_method" to force users to log in with the authentication method saved in
+  the database (e.g first authentication method used)
+- Add new 'Man Minutes' feature to compute time saved per workflow
+  * Only for top-level workflows
+  * Man Minutes can be defined per device or for the whole workflow
+  * Per Device is only allowed if the workflow run method is DxD or SxS with workflow targets
+  * The workflow must be a success (or per device success) to be counted in the total man minutes
+  * Man Minutes can be made mandatory via 'mandatory_man_minutes' key in automation.json > workflow
+- Remove unused parent and parent_device relationship on the Run class.
+- Import Services:
+  * The timeout for the Import_services endpoint is configurable in "automation.json" under
+    the "service_import" > "timeout" property. Logging on timeout is also improved.
+  * The "stem" of the imported file (e.g., service.tgz) does not have to exactly match the
+    directory in the .tgz file (i.e., "serviceA_v1.tgz" with "serviceA/service.yaml" is supported).
+- The napalm ping service separated the `ping_timeout` from the napalm `timeout`.
+- Add new settings "max_content_length" in settings.json > "app" (Flask parameter)
+- Add new timeout setting for file import in settings.json > "files"
 
 Version 4.2.0
 -------------

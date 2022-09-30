@@ -1,6 +1,5 @@
 /*
 global
-CodeMirror: false
 configurationProperties: false
 formProperties: false
 serverUrl: false
@@ -262,7 +261,7 @@ function displayNetworkData({ type, name, id, result, datetime }) {
     id: id,
     callback: function () {
       $(`#data-type-${id}`).val(type).selectpicker("refresh");
-      const editor = initCodeMirror(`content-${id}`, "network")
+      const editor = initCodeMirror(`content-${id}`, "network");
       $(`#data-type-${id}`)
         .on("change", function () {
           editor.setValue(result[this.value]);

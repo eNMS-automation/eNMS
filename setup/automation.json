@@ -40,6 +40,9 @@
       "auth_strict_key": false
     }
   },
+  "service_import": {
+    "timeout": 180000
+  },
   "workflow": {
     "allowed_models": {
       "delete": ["device", "link", "pool", "service"],
@@ -47,6 +50,7 @@
       "fetch_all": ["device", "link", "pool", "service"],
       "factory": ["device", "link", "pool"]
     },
+    "mandatory_man_minutes": false,
     "state_properties": {
       "run": ["id", "creator", "runtime", "status"],
       "service": [

@@ -62,11 +62,14 @@ class MetaForm(FormMeta):
                     "multiselect": SelectMultipleField,
                 }[values.get("type", "str")]
             form_kw = {"default": values["default"]} if "default" in values else {}
+            form_args = []
             if field in (SelectField, SelectMultipleField):
                 form_kw["choices"] = values["choices"]
             if "render_kw" in values:
                 form_kw["render_kw"] = values["render_kw"]
-            field = field(values["pretty_name"], **form_kw)
+            if values.get("mandatory", False):
+                form_args.append([InputRequired()])
+            field = field(values["pretty_name"], *form_args, **form_kw)
             setattr(form, property, field)
             attrs[property] = field
         vs.form_class[form_type] = form
@@ -903,7 +906,11 @@ class UserProfileForm(BaseForm):
         ],
     )
     landing_page = SelectField("Landing Page", validate_choice=False)
-    password = PasswordField("Password")
+
+    @classmethod
+    def form_init(cls):
+        if vs.settings["authentication"]["show_password_in_profile"]:
+            cls.password = PasswordField("Password")
 
 
 class WorkflowLabelForm(BaseForm):

@@ -1,4 +1,5 @@
 from flask_login import current_user, UserMixin
+from datetime import datetime
 from itertools import chain
 from os import makedirs
 from os.path import exists, getmtime
@@ -10,6 +11,7 @@ from sqlalchemy.orm import relationship
 from time import ctime
 
 from eNMS.database import db
+from eNMS.environment import env
 from eNMS.models.base import AbstractBase
 from eNMS.variables import vs
 
@@ -39,7 +41,7 @@ class User(AbstractBase, UserMixin):
         db.SmallString, default=vs.settings["authentication"]["landing_page"]
     )
     password = db.Column(db.SmallString)
-    authentication = db.Column(db.TinyString)
+    authentication = db.Column(db.TinyString, default="database")
     small_menu = db.Column(Boolean, default=False, info={"log_change": False})
     theme = db.Column(db.TinyString, default="default", info={"log_change": False})
     groups = relationship(
@@ -183,7 +185,7 @@ class File(AbstractBase):
     folder_path = db.Column(db.SmallString)
 
     def delete(self):
-        Path(self.path).unlink()
+        Path(self.path).unlink(missing_ok=True)
 
     def update(self, move_file=True, **kwargs):
         old_path = self.path
@@ -194,8 +196,8 @@ class File(AbstractBase):
         *split_folder_path, self.filename = self.path.split("/")
         self.folder_path = "/".join(split_folder_path)
         self.folder = db.fetch("folder", path=self.folder_path, allow_none=True)
-        self.last_modified = ctime(getmtime(self.path))
-        self.last_updated = ctime()
+        self.last_modified = datetime.strptime(ctime(getmtime(self.path)), "%c")
+        self.last_updated = datetime.strptime(ctime(), "%c")
         self.status = "Updated"
 
 

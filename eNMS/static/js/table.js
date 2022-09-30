@@ -1572,7 +1572,7 @@ tables.file = class FileTable extends Table {
         <button
           type="button"
           class="btn btn-sm btn-info"
-          onclick="location.href='/download/${row.type}/${row.path}'"
+          onclick="location.href='/download/${row.type}/${row.path.slice(1)}'"
         >
           <span class="glyphicon glyphicon-export"></span>
         </button>
@@ -1630,8 +1630,11 @@ tables.file = class FileTable extends Table {
 
   get filteringConstraints() {
     const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
-    if (parentFiltering)
+    if (parentFiltering) {
       return { folder_path: folderPath, folder_path_filter: "equality" };
+    } else {
+      return {};
+    }
   }
 
   postProcessing(...args) {

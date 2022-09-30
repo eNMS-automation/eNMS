@@ -1,6 +1,7 @@
 /*
 global
 action: true
+automation: false
 CodeMirror: false
 Diff2HtmlUI: false
 Dropzone: false
@@ -408,7 +409,6 @@ export const showRuntimePanel = function (
 };
 
 function displayLogs(service, runtime, change) {
-  const content = document.getElementById(`service-logs-${service.id}`);
   let editor;
   if (change) {
     editor = $(`#service-logs-${service.id}`).data("CodeMirrorInstance");
@@ -574,7 +574,7 @@ export const runService = function ({ id, path, type, parametrization }) {
     openPanel({
       name: "parameterized_form",
       id: id,
-      url: `parameterized_form/${id}`,
+      url: `/parameterized_form/${id}`,
       title: "Parameterized Form",
       size: "900px auto",
       checkRbac: false,
@@ -789,14 +789,23 @@ function showImportServicesPanel() {
     callback: () => {
       new Dropzone(document.getElementById(`dropzone-services`), {
         url: "/import_services",
-        timeout: 180000,
+        timeout: automation.service_import.timeout,
+        init: function () {
+          this.on("sending", function (file, xhr) {
+            xhr.ontimeout = function () {
+              notify(`Upload of File "${file.name}" timed out.`, "error", 5, true);
+              file.previewElement.classList.add("dz-error");
+            };
+          });
+        },
         error: function (file, message) {
-          const log = `File ${file.name} was not uploaded - ${message}`;
+          const error = typeof message == "string" ? message : message.alert;
+          const log = `File ${file.name} was not uploaded - ${error}`;
           notify(log, "error", 5, true);
           file.previewElement.classList.add("dz-error");
         },
         success: function (file, message) {
-          const log = `File ${file.name} uploaded with response ${message}`;
+          const log = `File ${file.name} uploaded with response "${message}"`;
           notify(log, "success", 5, true);
           file.previewElement.classList.add("dz-success");
         },

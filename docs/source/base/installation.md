@@ -1,7 +1,7 @@
 # Installation
 
 eNMS is a Flask web application designed to run on a **Unix server**
-with Python **3.7+**. The first section below describes how to get eNMS up
+with Python **3.8+**. The first section below describes how to get eNMS up
 and running quickly in demo mode to help in understanding what it is.  The
 following sections give details for setting up a production environment.
     

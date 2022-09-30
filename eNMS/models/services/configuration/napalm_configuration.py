@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, ForeignKey, Integer
+from sqlalchemy import ForeignKey, Integer
 from wtforms.widgets import TextArea
 
 from eNMS.database import db

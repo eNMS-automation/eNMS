@@ -267,6 +267,8 @@ class Runner:
             if env.redis_queue and self.is_main_run:
                 runtime_keys = env.redis("keys", f"{self.parent_runtime}/*") or []
                 env.redis("delete", *runtime_keys)
+            vs.custom.run_post_processing(self, results)
+
         self.results = results
 
     def make_json_compliant(self, input):
@@ -619,12 +621,18 @@ class Runner:
         if device:
             device_name = device if isinstance(device, str) else device.name
             log = f"DEVICE {device_name} - {log}"
-        log = f"USER {self.creator} - SERVICE {self.service.scoped_name} - {log}"
+        full_log = (
+            f"RUNTIME {self.parent_runtime} - USER {self.creator} -"
+            f" SERVICE '{self.service.name}' - {log}"
+        )
         settings = env.log(
-            severity, log, user=self.creator, change_log=change_log, logger=logger
+            severity, full_log, user=self.creator, change_log=change_log, logger=logger
         )
         if service_log or logger and settings.get("service_log"):
-            run_log = f"{vs.get_time()} - {severity} - {log}"
+            run_log = (
+                f"{vs.get_time()} - {severity} - USER {self.creator} -"
+                f" SERVICE {self.service.scoped_name} - {log}"
+            )
             env.log_queue(self.parent_runtime, self.service.id, run_log)
             if not self.is_main_run:
                 env.log_queue(self.parent_runtime, self.main_run.service.id, run_log)
@@ -693,7 +701,7 @@ class Runner:
         results["notification"] = {"success": True, "result": result}
         return results
 
-    def get_credentials(self, device):
+    def get_credentials(self, device, add_secret=True):
         result, credential_type = {}, self.main_run.service.credential_type
         credential = db.get_credential(
             self.creator,
@@ -701,7 +709,7 @@ class Runner:
             credential_type=credential_type,
             optional=self.credentials != "device",
         )
-        if device and credential:
+        if add_secret and device and credential:
             log = f"Using '{credential.name}' credential for '{device.name}'"
             self.log("info", log)
             result["secret"] = env.get_password(credential.enable_password)
@@ -934,7 +942,6 @@ class Runner:
         return results, exec_variables
 
     def sub(self, input, variables):
-        is_jinja2_template = getattr(self, "jinja2_template", False)
         regex = compile("{{(.*?)}}")
         variables["payload"] = self.payload
 
@@ -1007,7 +1014,7 @@ class Runner:
             gateways = sorted(device.gateways, key=attrgetter("priority"), reverse=True)
             for gateway in gateways:
                 try:
-                    credentials = self.get_credentials(gateway)
+                    credentials = self.get_credentials(gateway, add_secret=False)
                     connection_log = f"Trying to establish connection to {gateway}"
                     self.log("info", connection_log, device, logger="security")
                     client = SSHClient()
@@ -1015,8 +1022,7 @@ class Runner:
                     client.connect(
                         hostname=gateway.ip_address,
                         port=gateway.port,
-                        username=credentials["username"],
-                        password=credentials["password"],
+                        **credentials
                     )
                     sock = client.get_transport().open_channel(
                         "direct-tcpip", (device.ip_address, device.port), ("", 0)

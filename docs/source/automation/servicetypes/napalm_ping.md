@@ -15,8 +15,8 @@ Configuration parameters for creating this service instance:
 - `Size` Size of the ping packet payload to send in bytes.
 - `Source IP address` Override the source ip address of the ping
   packet with this provided IP.
-- `Timeout` Seconds to wait before declaring timeout.
+- `Ping Timeout` Seconds to wait before declaring a ping timeout.
 - `Ttl` Time to Live parameter, which tells routers when to discard
   this packet because it has been in the network too long (too many
   hops).
-- `Vrf` Ping a specific virtual routing and forwarding interface.
+- `VRF` Ping a specific virtual routing and forwarding interface.

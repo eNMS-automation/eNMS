@@ -65,7 +65,7 @@ class Server(Flask):
                 "SECRET_KEY": getenv("SECRET_KEY", "secret_key"),
                 "WTF_CSRF_TIME_LIMIT": None,
                 "ERROR_404_HELP": False,
-                "MAX_CONTENT_LENGTH": 20 * 1024 * 1024,
+                "MAX_CONTENT_LENGTH": vs.settings["app"]["max_content_length"],
                 "PERMANENT_SESSION_LIFETIME": timedelta(minutes=session_timeout),
             }
         )

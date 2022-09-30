@@ -1,8 +1,10 @@
 /*
 global
 action: false
+linkRuntime: false
 page: false
 subtypes: false
+serverUrl: false
 theme: false
 user: false
 */
@@ -32,7 +34,7 @@ import {
   switchMode,
   updateBuilderBindings,
 } from "./builder.js";
-import { clearSearch, tables } from "./table.js";
+import { tables } from "./table.js";
 
 const options = {
   interaction: {
@@ -66,9 +68,9 @@ const options = {
 export let ends = new Set();
 export let workflow = JSON.parse(localStorage.getItem("workflow"));
 export let currentRuntime = linkRuntime;
+export let graph;
 
 let currentRun;
-let graph;
 let currentPlaceholder;
 let placeholder;
 let isSuperworkflow;
@@ -459,9 +461,19 @@ function getResultLink(service, device) {
   copyToClipboard({ text: link });
 }
 
+function getWorkflowLink(includeRuntime) {
+  const baseUrl =
+    serverUrl || `${window.location.protocol}//${window.location.hostname}`;
+  let link = `${baseUrl}/workflow_builder/${workflow.id}`;
+  if (includeRuntime) link += `/${currentRuntime}`;
+  copyToClipboard({ text: link });
+}
+
 export function updateWorkflowRightClickBindings() {
   updateBuilderBindings(action);
   Object.assign(action, {
+    "Link to Workflow": () => getWorkflowLink(),
+    "Link to Runtime": () => getWorkflowLink(true),
     "Run Workflow": () => runWorkflow(),
     "Parameterized Workflow Run": () => runWorkflow(true),
     "Restart Workflow from Here": showRestartWorkflowPanel,

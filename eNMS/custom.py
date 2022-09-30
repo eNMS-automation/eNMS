@@ -37,5 +37,16 @@ class CustomApp:
     def generate_uuid(self):
         return str(uuid4())
 
+    def run_post_processing(self, run, run_result):
+        if run.is_main_run:
+            env.log(
+                "info",
+                (
+                    f"RUNTIME {run_result['runtime']} - USER {run.creator} -"
+                    f"SERVICE '{run_result['properties']['scoped_name']}' - "
+                    f"Completed in {run_result['duration']}"
+                ),
+            )
+
 
 vs.custom = CustomApp()

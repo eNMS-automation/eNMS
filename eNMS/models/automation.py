@@ -281,14 +281,7 @@ class Run(AbstractBase):
     runtime = db.Column(db.TinyString, index=True)
     duration = db.Column(db.TinyString)
     trigger = db.Column(db.TinyString)
-    parent_id = db.Column(Integer, ForeignKey("run.id", ondelete="cascade"))
-    parent = relationship(
-        "Run", remote_side=[id], foreign_keys="Run.parent_id", back_populates="children"
-    )
-    children = relationship("Run", foreign_keys="Run.parent_id")
     path = db.Column(db.TinyString)
-    parent_device_id = db.Column(Integer, ForeignKey("device.id", ondelete="cascade"))
-    parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
     parameterized_run = db.Column(Boolean, default=False)
     service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
     service = relationship("Service", foreign_keys="Run.service_id")

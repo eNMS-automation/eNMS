@@ -3,14 +3,7 @@ from wtforms.widgets import TextArea
 
 from eNMS.database import db
 from eNMS.forms import NetmikoForm
-from eNMS.fields import (
-    BooleanField,
-    FloatField,
-    HiddenField,
-    IntegerField,
-    SelectField,
-    StringField,
-)
+from eNMS.fields import BooleanField, HiddenField, StringField
 from eNMS.models.automation import ConnectionService
 from eNMS.variables import vs
 

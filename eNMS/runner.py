@@ -701,7 +701,7 @@ class Runner:
         results["notification"] = {"success": True, "result": result}
         return results
 
-    def get_credentials(self, device):
+    def get_credentials(self, device, add_secret=True):
         result, credential_type = {}, self.main_run.service.credential_type
         credential = db.get_credential(
             self.creator,
@@ -709,7 +709,7 @@ class Runner:
             credential_type=credential_type,
             optional=self.credentials != "device",
         )
-        if device and credential:
+        if add_secret and device and credential:
             log = f"Using '{credential.name}' credential for '{device.name}'"
             self.log("info", log)
             result["secret"] = env.get_password(credential.enable_password)
@@ -1014,7 +1014,7 @@ class Runner:
             gateways = sorted(device.gateways, key=attrgetter("priority"), reverse=True)
             for gateway in gateways:
                 try:
-                    credentials = self.get_credentials(gateway)
+                    credentials = self.get_credentials(gateway, add_secret=False)
                     connection_log = f"Trying to establish connection to {gateway}"
                     self.log("info", connection_log, device, logger="security")
                     client = SSHClient()
@@ -1022,8 +1022,7 @@ class Runner:
                     client.connect(
                         hostname=gateway.ip_address,
                         port=gateway.port,
-                        username=credentials["username"],
-                        password=credentials["password"],
+                        **credentials
                     )
                     sock = client.get_transport().open_channel(
                         "direct-tcpip", (device.ip_address, device.port), ("", 0)

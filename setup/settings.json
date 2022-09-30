@@ -117,7 +117,7 @@
       "port": 6379,
       "socket_timeout": 0.1
     },
-    "flush_on_restart": false
+    "flush_on_restart": true
   },
   "requests": {
     "pool": {

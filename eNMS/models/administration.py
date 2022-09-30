@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask_login import UserMixin
 from itertools import chain
 from os import makedirs
@@ -195,8 +196,8 @@ class File(AbstractBase):
         *split_folder_path, self.filename = self.path.split("/")
         self.folder_path = "/".join(split_folder_path)
         self.folder = db.fetch("folder", path=self.folder_path, allow_none=True)
-        self.last_modified = ctime(getmtime(self.path))
-        self.last_updated = ctime()
+        self.last_modified = datetime.strptime(ctime(getmtime(self.path)), "%c")
+        self.last_updated = datetime.strptime(ctime(), "%c")
         self.status = "Updated"
 
 

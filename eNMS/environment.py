@@ -13,7 +13,7 @@ from logging.config import dictConfig
 from logging import getLogger, info
 from os import getenv, getpid
 from passlib.hash import argon2
-from psutil import cpu_percent, virtual_memory
+from psutil import Process
 from redis import Redis
 from redis.exceptions import ConnectionError, TimeoutError
 from requests import Session as RequestSession
@@ -229,8 +229,7 @@ class Environment:
         if not self.redis_queue:
             return
         key = f"workers/{getpid()}"
-        self.redis("set", f"{key}/info/memory", f"{virtual_memory().percent}%")
-        self.redis("set", f"{key}/info/cpu", f"{cpu_percent()}%")
+        self.redis("set", f"{key}/info/memory", f"{Process().memory_percent()}%")
         self.redis(mode, f"{key}/jobs/{job}", 1)
 
     def log(self, severity, content, user=None, change_log=True, logger="root"):

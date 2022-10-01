@@ -5729,8 +5729,8 @@
   scoped_name: Subworkflow 1
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Shared] Shared Service for Regression
-      Workflow H']
+  services: ['[Shared] Start', '[Shared] End', '[Shared] Shared Service used Twice
+      in Workflow']
   shared: false
   skip: {}
   skip_query: ''
@@ -5819,8 +5819,8 @@
   scoped_name: Subworkflow 2
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Shared] Shared Service for Regression
-      Workflow H']
+  services: ['[Shared] Start', '[Shared] End', '[Shared] Shared Service used Twice
+      in Workflow']
   shared: false
   skip: {}
   skip_query: ''
@@ -5885,7 +5885,7 @@
   jump_on_connect: false
   jump_password: ''
   jump_username: ''
-  last_modified: '2019-12-16 16:46:16.211030'
+  last_modified: '2022-10-01 16:10:22.811771'
   log_level: 1
   mail_recipient: ''
   mandatory_parameter: Default Value
@@ -5894,7 +5894,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Shared] Shared Service for Regression Workflow H'
+  name: '[Shared] Shared Service used Twice in Workflow'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -5928,7 +5928,7 @@
   reserved: false
   results_as_list: false
   run_method: per_device
-  scoped_name: Shared Service for Regression Workflow H
+  scoped_name: Shared Service used Twice in Workflow
   send_notification: false
   send_notification_method: mail
   shared: true
@@ -7277,6 +7277,7 @@
   vendor: ''
   waiting_time: 0
 - admin_only: false
+  approved_by_admin: false
   command: ps -ef
   completion_time: 1
   content_match: python\d

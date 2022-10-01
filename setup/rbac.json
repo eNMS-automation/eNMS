@@ -13,7 +13,7 @@
       "pages": {
         "Dashboard": {
           "endpoint": "/dashboard",
-          "rbac": "access"
+          "rbac": "all"
         },
         "Files": {
           "endpoint": "/file_table",
@@ -126,7 +126,7 @@
     "/configuration_table": "access",
     "/confirmation_form": "access",
     "/credential_table": "admin",
-    "/dashboard": "access",
+    "/dashboard": "all",
     "/device_data_form": "access",
     "/device_table": "access",
     "/download": "access",
@@ -183,7 +183,7 @@
     "/clear_configurations": "access",
     "/compare": "access",
     "/counters": "access",
-    "/count_models": "access",
+    "/count_models": "all",
     "/create_label": "access",
     "/database_deletion": "admin",
     "/delete_instance": "access",

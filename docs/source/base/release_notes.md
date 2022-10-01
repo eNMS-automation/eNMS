@@ -11,6 +11,8 @@ Version 4.4.0: RBAC and Credentials
 - Add regression tests for get_connection global variable
 - New defaultRbac mechanism to set rbac value of filtering function. In the configuration table, the
   default RBAC mode is set to "configuration".
+- Use tableOrdering function when initializing a table instead of redrawing table after initialization,
+  to avoid calling draw function twice when loading a table. (7d8999d0fc4ac7a6a7fd49e3275fdca4ac12ade3)
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The appropriate groups

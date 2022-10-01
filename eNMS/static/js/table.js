@@ -209,6 +209,7 @@ export class Table {
       constraints: { ...this.constraints, ...this.filteringConstraints },
       columns: this.columns,
       type: this.type,
+      rbac: this.defaultRbac || "read",
     });
     return data;
   }
@@ -680,6 +681,10 @@ tables.configuration = class ConfigurationTable extends Table {
       if (value.toLowerCase() == "success") row[key] = `${successBtn}Success</button>`;
     }
     return row;
+  }
+
+  get defaultRbac() {
+    return "configuration";
   }
 
   get modelFiltering() {

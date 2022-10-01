@@ -289,7 +289,7 @@
     Service Priorities: [0, 0]
     Service Priorities, Napalm Getters, Postprocessing: *id061
     'Services: Ansible Playbook Service': *id062
-    Shared Service in Multiple Subworkflows: *id052
+    Shared Service in Multiple Subworkflows: [55, 266]
     'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': *id063
     'Skip Mechanism: Fork based on value with Skip Discard Mechanism': *id064
     'Skip Mechanism: Skip in SxS mode': [-426, -49]
@@ -753,7 +753,7 @@
     Service Priorities: [500, 0]
     Service Priorities, Napalm Getters, Postprocessing: *id149
     'Services: Ansible Playbook Service': *id150
-    Shared Service in Multiple Subworkflows: *id140
+    Shared Service in Multiple Subworkflows: [688, -88]
     'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': *id151
     'Skip Mechanism: Fork based on value with Skip Discard Mechanism': *id152
     'Skip Mechanism: Skip in SxS mode': [407, -39]
@@ -5586,11 +5586,13 @@
       positions: [146, -81]
     468e9cf3-85da-4e97-9a1c-0acc89076aeb:
       alignment: left
-      content: "This first subworkflow will run on Washington and Austin\r\nas hardcoded\
-        \ iterated devices.\r\nWashington should pass the shared service, Austin fail.\r\
-        \nA failure edge is drawn to the end, so both iterated devices\r\nshould pass\
-        \ the workflow, and it should be a success\r\nfor PaloAlto (iteration device)."
-      positions: [-213, 46]
+      content: "This first subworkflow will run on Washington and Minneapolis\r\n\
+        as hardcoded iterated devices.\r\nWashington should pass the shared service,\
+        \ Minneapolis fail.\r\nA failure edge is drawn to the end, so both iterated\
+        \ devices\r\nshould pass the workflow, and it should be a success\r\nfor PaloAlto\
+        \ (iteration device)."
+      positions: [-212, 47]
+      size: 14
     77bbb8a5-d4ab-4eed-818d-da17f6ec405d:
       alignment: left
       content: "This subworkflow contains the same shared service, but :\r\n- it runs\
@@ -5599,7 +5601,7 @@
         \ still reach end through the failure edge,\r\nso the top-level workflow should\
         \ be a success."
       positions: [580, 192]
-  last_modified: '2022-01-20 07:28:59.262995'
+  last_modified: '2022-10-01 16:31:13.832546'
   log_level: 1
   mail_recipient: ''
   man_minutes: 0
@@ -5680,12 +5682,12 @@
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_devices: '["Washington", "Austin"]'
+  iteration_devices: '["Washington", "Minneapolis"]'
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-10-09 03:25:56.924607'
+  last_modified: '2022-10-01 16:29:47.451842'
   log_level: 1
   mail_recipient: ''
   man_minutes: 0
@@ -5715,7 +5717,7 @@
     'Regression Workflow H: shared service in multiple subworkflows': &id243 [-241,
       197]
     'Regression Workflow: Shared Service in Multiple Subworkflows': *id243
-    Shared Service in Multiple Subworkflows: *id243
+    Shared Service in Multiple Subworkflows: [-241, 197]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -5805,7 +5807,7 @@
     'Regression Workflow H: shared service in multiple subworkflows': &id244 [548,
       48]
     'Regression Workflow: Shared Service in Multiple Subworkflows': *id244
-    Shared Service in Multiple Subworkflows: *id244
+    Shared Service in Multiple Subworkflows: [548, 48]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''

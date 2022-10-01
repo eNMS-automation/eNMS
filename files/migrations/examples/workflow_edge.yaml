@@ -213,10 +213,6 @@
     2021-04-24 08:58:40.196943', source: '[Shared Service in Multiple Subworkflows]
     Subworkflow 1', subtype: success, type: workflow_edge, workflow: Shared Service
     in Multiple Subworkflows}
-- {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Shared Service in Multiple Subworkflows] 2021-04-24 08:58:40.197037', source: '[Shared
-    Service in Multiple Subworkflows] Subworkflow 2', subtype: success, type: workflow_edge,
-  workflow: Shared Service in Multiple Subworkflows}
 - {color: green, destination: '[Shared] Shared Service used Twice in Workflow', label: success,
   name: '[[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow
     1] 2021-04-24 08:58:40.197124', source: '[Shared] Start', subtype: success, type: workflow_edge,

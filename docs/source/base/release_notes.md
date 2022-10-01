@@ -9,6 +9,8 @@ Version 4.4.0: RBAC and Credentials
 - Refactor freeze edit / run mechanism (pure python check instead of SQL query with originals)
 - New Bulk Edit option for appending / removing to a multiple instance list (dropdown list on the right of the field).
 - Add regression tests for get_connection global variable
+- New defaultRbac mechanism to set rbac value of filtering function. In the configuration table, the
+  default RBAC mode is set to "configuration".
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The appropriate groups

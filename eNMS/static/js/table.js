@@ -52,6 +52,7 @@ export class Table {
       orderCellsTop: true,
       autoWidth: false,
       scrollX: true,
+      order: this.tableOrdering,
       pagingType: "simple",
       drawCallback: function () {
         $(".paginate_button > a").on("focus", function () {
@@ -168,7 +169,6 @@ export class Table {
     });
     $(window).resize(this.table.columns.adjust);
     $(`[name=table-${this.id}_length]`).selectpicker("refresh");
-    this.table.order(this.tableOrdering).draw();
     const refreshRate = settings.tables.refresh[this.type];
     if (refreshRate) refreshTablePeriodically(this.id, refreshRate, true);
   }

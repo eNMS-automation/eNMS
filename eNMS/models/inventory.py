@@ -361,10 +361,11 @@ class Pool(AbstractBase):
             )
             setattr(cls, f"{model}_number", db.Column(Integer, default=0))
 
+    def post_update(self):
+        self.compute_pool()
+
     def update(self, **kwargs):
         super().update(**kwargs)
-        if not kwargs.get("import_mechanism", False):
-            self.compute_pool()
         self.update_last_modified_properties()
 
     def compute_pool(self):

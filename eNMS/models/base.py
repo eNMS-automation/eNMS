@@ -85,6 +85,10 @@ class AbstractBase(db.base):
                         value = {**current_value, **value}
             setattr(self, property, value)
 
+    def update_last_modified_properties(self):
+        self.last_modified = vs.get_time()
+        self.last_modified_by = getattr(current_user, "name", "admin")
+
     def filter_rbac_kwargs(self, kwargs):
         if getattr(self, "class_type", None) not in vs.rbac["rbac_models"]:
             return

@@ -32,6 +32,7 @@ class Service(AbstractBase):
     shared = db.Column(Boolean, default=False)
     scoped_name = db.Column(db.SmallString, index=True)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
+    last_modified_by = db.Column(db.SmallString)
     description = db.Column(db.LargeString)
     priority = db.Column(Integer, default=10)
     number_of_retries = db.Column(Integer, default=0)
@@ -129,6 +130,13 @@ class Service(AbstractBase):
             self.path = f"{self.workflows[0].path}>{self.id}"
         if not kwargs.get("migration_import"):
             self.set_name()
+        self.update_last_modified_properties()
+
+    def update_last_modified_properties(self):
+        super().update_last_modified_properties()
+        for ancestor in self.get_ancestors():
+            ancestor.last_modified = self.last_modified
+            ancestor.last_modified_by = self.last_modified_by
 
     def get_ancestors(self):
         def rec(service):

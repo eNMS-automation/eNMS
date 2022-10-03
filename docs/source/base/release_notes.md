@@ -13,6 +13,17 @@ Version 4.4.0: RBAC and Credentials
   default RBAC mode is set to "configuration".
 - Use tableOrdering function when initializing a table instead of redrawing table after initialization,
   to avoid calling draw function twice when loading a table. (7d8999d0fc4ac7a6a7fd49e3275fdca4ac12ade3)
+- Added "last_modified_by" property to store name of user who last modified service/object/pool
+  Mail: "new feature request (minor)"
+- Added mechanism to update last_modified property of a workflow whenever there is any change to an
+  (sub)edge or a (sub)service. Cases when the last modified property is updated:
+  - the workflow itself is updated
+  - any service or subservice is updated (ie including subworkflows)
+  - copy service in workflow is used in workflow or subworkflows
+  - add edge in workflow or subworkflows
+  - any deletion is made in workflow or subworkflows
+  - any service is skipped in workflow or subworkflows
+- Same last_modified(_by) mechanism for devices, links and pools.
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The appropriate groups

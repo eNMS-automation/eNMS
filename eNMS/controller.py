@@ -57,22 +57,21 @@ class Controller:
         return wrapper
 
     def add_edge(self, workflow_id, subtype, source, destination):
-        now = vs.get_time()
         workflow = db.fetch("workflow", id=workflow_id, rbac="edit")
         workflow_edge = self.update(
             "workflow_edge",
             rbac=None,
             **{
-                "name": now,
+                "name": vs.get_time(),
                 "workflow": workflow_id,
                 "subtype": subtype,
                 "source": source,
                 "destination": destination,
             },
         )
+        workflow.update_last_modified_properties()
         db.session.commit()
-        workflow.last_modified = now
-        return {"update_time": now, **workflow_edge}
+        return {"update_time": workflow.last_modified, **workflow_edge}
 
     def add_instances_in_bulk(self, **kwargs):
         target = db.fetch(kwargs["relation_type"], id=kwargs["relation_id"])
@@ -90,6 +89,7 @@ class Controller:
         for instance in instances:
             getattr(target, property).append(instance)
         target.last_modified = vs.get_time()
+        target.last_modified_by = current_user.name
         return {"number": len(instances), "target": target.base_properties}
 
     def add_objects_to_network(self, network_id, **kwargs):
@@ -238,7 +238,7 @@ class Controller:
             else:
                 workflow.services.append(service)
             services.append(service)
-        workflow.last_modified = vs.get_time()
+        workflow.update_last_modified_properties()
         db.session.commit()
         return {
             "services": [service.serialized for service in services],
@@ -294,7 +294,7 @@ class Controller:
 
     def delete_builder_selection(self, type, id, **selection):
         instance = db.fetch(type, id=id)
-        instance.last_modified = vs.get_time()
+        instance.update_last_modified_properties()
         instance.check_freeze("edit")
         for edge_id in selection["edges"]:
             if type == "workflow":
@@ -1232,7 +1232,7 @@ class Controller:
         skip = not all(service.skip.get(workflow.name) for service in services)
         for service in services:
             service.skip[workflow.name] = skip
-        workflow.last_modified = vs.get_time()
+        workflow.update_last_modified_properties()
         return {
             "skip": "skip" if skip else "unskip",
             "update_time": workflow.last_modified,
@@ -1305,10 +1305,8 @@ class Controller:
 
     def update(self, type, **kwargs):
         try:
-            current_time = vs.get_time()
             kwargs.update(
                 {
-                    "last_modified": current_time,
                     "update_pools": True,
                     "must_be_new": kwargs.get("id") == "",
                 }
@@ -1323,12 +1321,11 @@ class Controller:
                         continue
                     builder_id = kwargs[f"{builder_type}s"][0]
                     builder = db.fetch(builder_type, id=builder_id, rbac="edit")
-                    builder.last_modified = current_time
             instance = db.factory(type, **kwargs)
             if kwargs.get("copy"):
                 db.fetch(type, id=kwargs["copy"]).duplicate(clone=instance)
             db.session.flush()
-            return {**instance.serialized, "last_modified": current_time}
+            return instance.serialized
         except db.rbac_error:
             return {"alert": "Error 403 - Operation not allowed."}
         except Exception as exc:

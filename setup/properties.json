@@ -177,6 +177,18 @@
         "visible": false
       },
       {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified_by",
+        "title": "Last Modified By",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "subtype",
         "title": "Subtype",
         "search": "text",
@@ -404,6 +416,18 @@
         "visible": false
       },
       {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified_by",
+        "title": "Last Modified By",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "subtype",
         "title": "Subtype",
         "search": "text",
@@ -471,6 +495,18 @@
       {
         "data": "creator",
         "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified_by",
+        "title": "Last Modified By",
         "search": "text",
         "visible": false
       },
@@ -558,6 +594,18 @@
         "data": "creator",
         "title": "Creator",
         "search": "text"
+      },
+      {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified_by",
+        "title": "Last Modified By",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "status",

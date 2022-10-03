@@ -20,6 +20,7 @@ class Object(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     creator = db.Column(db.SmallString)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
+    last_modified_by = db.Column(db.SmallString)
     subtype = db.Column(db.SmallString)
     description = db.Column(db.LargeString)
     model = db.Column(db.SmallString)
@@ -56,6 +57,7 @@ class Object(AbstractBase):
                     )
             constraints.append(and_(row != "", or_(*match_constraints)))
         self.pools = db.query("pool").filter(or_(*constraints)).all()
+        self.update_last_modified_properties()
 
     def delete(self):
         number = f"{self.class_type}_number"
@@ -306,6 +308,7 @@ class Pool(AbstractBase):
     creator = db.Column(db.SmallString)
     admin_only = db.Column(Boolean, default=False)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
+    last_modified_by = db.Column(db.SmallString)
     description = db.Column(db.LargeString)
     target_services = relationship(
         "Service", secondary=db.service_target_pool_table, back_populates="target_pools"
@@ -362,6 +365,7 @@ class Pool(AbstractBase):
         super().update(**kwargs)
         if not kwargs.get("import_mechanism", False):
             self.compute_pool()
+        self.update_last_modified_properties()
 
     def compute_pool(self):
         for model in self.models:

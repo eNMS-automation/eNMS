@@ -30,6 +30,8 @@ Version 4.4.0: RBAC and Credentials
   - any service is skipped in workflow or subworkflows
 - Same last_modified(_by) mechanism for devices, links and pools.
 - Make buttons in path displayed in Files table clickable to move to button folder.
+- Refactor get function to fix scalability issues:
+  - the properties sent to the front-end are defined in properties.json > "panel"
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The appropriate groups

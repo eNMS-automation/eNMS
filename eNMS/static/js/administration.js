@@ -2,6 +2,7 @@
 global
 applicationPath: false
 CodeMirror: false
+page: false
 settings: true
 Dropzone: false
 rbac: false
@@ -54,18 +55,20 @@ function displayFiles() {
 
 export function displayFolderPath() {
   let currentPath = "";
-  let htmlPath = []
-  folderPath.split("/").slice(1).forEach((folder) => {
-    currentPath += `/${folder}`;
-    let onclick = currentPath.includes(defaultFolder)
-      ? `onclick="eNMS.administration.enterFolder({path: '${currentPath}'})"`
-      : "";
-    htmlPath.push(`<b> / </b>
+  let htmlPath = [];
+  folderPath
+    .split("/")
+    .slice(1)
+    .forEach((folder) => {
+      currentPath += `/${folder}`;
+      let onclick = currentPath.includes(defaultFolder)
+        ? `onclick="eNMS.administration.enterFolder({path: '${currentPath}'})"`
+        : "";
+      htmlPath.push(`<b> / </b>
     <button type="button" class="btn btn-xs btn-primary" ${onclick}>
       ${folder}
-    </button>`
-    );
-  });
+    </button>`);
+    });
   $("#current-folder-path").html(`<b>Current Folder :</b>${htmlPath.join("")}`);
 }
 

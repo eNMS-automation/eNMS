@@ -667,9 +667,9 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
       if (type == "credential") showCredentialPanel(id);
       if (type == "folder") showFolderPanel(id);
       if (id) {
-        const properties = type === "pool" ? "_properties" : "";
         call({
-          url: `/get${properties}/${type}/${id}`,
+          url: `/get/${type}/${id}`,
+          data: panelProperties[type],
           callback: function (instance) {
             const ownersNames = instance.owners
               ? instance.owners.map((user) => user.name)

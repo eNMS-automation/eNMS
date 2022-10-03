@@ -457,8 +457,8 @@ class Controller:
             table_result["full_result"] = ",".join(obj.name for obj in query.all())
         return table_result
 
-    def get(self, model, id):
-        return db.fetch(model, id=id).serialized
+    def get(self, model, id, **kwargs):
+        return db.fetch(model, id=id).to_dict(**kwargs)
 
     def get_all(self, model):
         return [instance.get_properties() for instance in db.fetch_all(model)]

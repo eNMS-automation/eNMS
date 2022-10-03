@@ -156,6 +156,23 @@
     "task": ["status", "frequency", "frequency_unit", "crontab_expression"],
     "user": ["is_admin", "groups"]
   },
+  "panel": {
+    "device": {
+      "exclude": ["pools", "target_services", "tasks"]
+    },
+    "link": {
+      "exclude": ["pools"]
+    },
+    "network": {
+      "exclude": ["labels", "links", "networks", "nodes", "positions"]
+    },
+    "pool": {
+      "exclude": ["credential_devices", "devices", "links", "tasks", "target_services"]
+    },
+    "user": {
+      "include": ["groups"]
+    }
+  },
   "tables": {
     "device": [
       {

@@ -53,22 +53,25 @@ function displayFiles() {
 }
 
 export function displayFolderPath() {
-  const htmlPath = folderPath
-    .split("/")
-    .slice(1)
-    .map(
-      (value) => `<b> / </b>
-      <button type="button" class="btn btn-xs btn-primary">
-        ${value}
-      </button>`
-    )
-    .join("");
-  $("#current-folder-path").html(`<b>Current Folder :</b>${htmlPath}`);
+  let currentPath = "";
+  let htmlPath = []
+  folderPath.split("/").slice(1).forEach((folder) => {
+    currentPath += `/${folder}`;
+    let onclick = currentPath.includes(defaultFolder)
+      ? `onclick="eNMS.administration.enterFolder({path: '${currentPath}'})"`
+      : "";
+    htmlPath.push(`<b> / </b>
+    <button type="button" class="btn btn-xs btn-primary" ${onclick}>
+      ${folder}
+    </button>`
+    );
+  });
+  $("#current-folder-path").html(`<b>Current Folder :</b>${htmlPath.join("")}`);
 }
 
-function enterFolder(folder) {
-  if (folder) {
-    folderPath = `${folderPath}/${folder}`;
+function enterFolder({ folder, path }) {
+  if (path || folder) {
+    folderPath = path || `${folderPath}/${folder}`;
   } else {
     folderPath = folderPath.split("/").slice(0, -1).join("/");
   }

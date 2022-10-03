@@ -1488,7 +1488,7 @@ tables.file = class FileTable extends Table {
     let row = super.addRow(properties);
     if (row.type == "folder") {
       row.filename = `<a href="#" onclick="eNMS.administration.enterFolder
-        ('${row.filename}', '${this.id}')">
+        ({ folder: '${row.filename}'})">
           <span class="glyphicon glyphicon-folder-open" style="margin-left: 8px"></span>
           <b style="margin-left: 6px">${row.filename}</b>
         </a>`;
@@ -1524,7 +1524,7 @@ tables.file = class FileTable extends Table {
       <a
         id="upward-folder-btn"
         class="btn btn-info ${status}"
-        onclick="eNMS.administration.enterFolder()"
+        onclick="eNMS.administration.enterFolder({})"
         type="button"
       >
         <span class="glyphicon glyphicon-chevron-up"></span>

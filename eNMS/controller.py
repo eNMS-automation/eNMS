@@ -460,9 +460,6 @@ class Controller:
     def get(self, model, id, **kwargs):
         return db.fetch(model, id=id).to_dict(**kwargs)
 
-    def get_all(self, model):
-        return [instance.get_properties() for instance in db.fetch_all(model)]
-
     def get_cluster_status(self):
         return [server.status for server in db.fetch_all("server")]
 

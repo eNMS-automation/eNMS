@@ -31,7 +31,8 @@ Version 4.4.0: RBAC and Credentials
 - Same last_modified(_by) mechanism for devices, links and pools.
 - Make buttons in path displayed in Files table clickable to move to button folder.
 - Refactor get function to fix scalability issues:
-  - the properties sent to the front-end are defined in properties.json > "panel"
+  - The properties sent to the front-end are defined in properties.json > "panel"
+  - Remove get_all controller function
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The appropriate groups

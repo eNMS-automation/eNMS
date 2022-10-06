@@ -1020,9 +1020,7 @@ class Runner:
                     client = SSHClient()
                     client.set_missing_host_key_policy(AutoAddPolicy())
                     client.connect(
-                        hostname=gateway.ip_address,
-                        port=gateway.port,
-                        **credentials
+                        hostname=gateway.ip_address, port=gateway.port, **credentials
                     )
                     sock = client.get_transport().open_channel(
                         "direct-tcpip", (device.ip_address, device.port), ("", 0)

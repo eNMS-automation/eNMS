@@ -224,4 +224,4 @@ class Folder(File):
         self.update(**kwargs)
 
     def delete(self):
-        rmtree(self.path)
+        rmtree(self.path, ignore_errors=True)

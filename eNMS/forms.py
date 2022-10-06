@@ -1,4 +1,5 @@
 from copy import deepcopy
+from datetime import datetime
 from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
@@ -839,7 +840,7 @@ class TaskForm(BaseForm):
     description = StringField("Description")
     start_date = StringField("Start Date", type="date")
     end_date = StringField("End Date", type="date")
-    frequency = IntegerField("Frequency", default=0)
+    frequency = IntegerField("Frequency", default=60)
     frequency_unit = SelectField(
         "Frequency Unit",
         choices=(
@@ -862,6 +863,11 @@ class TaskForm(BaseForm):
         no_date = self.scheduling_mode.data == "standard" and not self.start_date.data
         if no_date:
             self.start_date.errors.append("A start date must be set.")
+        wrong_end_date = self.end_date.data and datetime.strptime(
+            self.end_date.data, "%d/%m/%Y %H:%M:%S"
+        ) <= datetime.strptime(self.start_date.data, "%d/%m/%Y %H:%M:%S")
+        if wrong_end_date:
+            self.end_date.errors.append("The end date must come after the start date.")
         no_cron_expression = (
             self.scheduling_mode.data == "cron" and not self.crontab_expression.data
         )
@@ -870,7 +876,9 @@ class TaskForm(BaseForm):
         no_service = not self.service.data
         if no_service:
             self.service.errors.append("No service set.")
-        return valid_form and not any([no_date, no_cron_expression, no_service])
+        return valid_form and not any(
+            [no_date, no_cron_expression, no_service, wrong_end_date]
+        )
 
 
 class UploadFilesForm(BaseForm):

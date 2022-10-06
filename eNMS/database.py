@@ -482,9 +482,9 @@ class Database:
             .join(vs.models["user"], vs.models["group"].users)
         )
         if device:
-            query = query.join(vs.models["pool"], vs.models["credential"].device_pools).join(
-                vs.models["device"], vs.models["pool"].devices
-            )
+            query = query.join(
+                vs.models["pool"], vs.models["credential"].device_pools
+            ).join(vs.models["device"], vs.models["pool"].devices)
         query = query.filter(vs.models["user"].name == username)
         if name:
             query = query.filter(vs.models["credential"].name == name)

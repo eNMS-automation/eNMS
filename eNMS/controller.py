@@ -458,6 +458,8 @@ class Controller:
         return table_result
 
     def get(self, model, id, **kwargs):
+        if not kwargs:
+            kwargs = vs.properties["serialized"][model]
         func = "get_properties" if kwargs.pop("properties_only", None) else "to_dict"
         return getattr(db.fetch(model, id=id), func)(**kwargs)
 

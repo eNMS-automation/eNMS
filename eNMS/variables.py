@@ -155,7 +155,6 @@ class VariableStore:
             "settings": self.settings,
             "themes": self.themes,
             "table_properties": self.properties["tables"],
-            "panel_properties": self.properties["serialized"],
             "version": self.version,
             "visualization": self.visualization,
         }

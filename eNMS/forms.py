@@ -840,7 +840,7 @@ class TaskForm(BaseForm):
     description = StringField("Description")
     start_date = StringField("Start Date", type="date")
     end_date = StringField("End Date", type="date")
-    frequency = IntegerField("Frequency", default=60)
+    frequency = IntegerField("Frequency", default=0)
     frequency_unit = SelectField(
         "Frequency Unit",
         choices=(

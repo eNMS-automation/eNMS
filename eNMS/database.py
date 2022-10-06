@@ -401,15 +401,16 @@ class Database:
 
     def factory(self, _class, commit=False, no_fetch=False, rbac="edit", **kwargs):
         def transaction(_class, **kwargs):
+            property = "path" if _class in ("file", "folder") else "name"
             characters = set(kwargs.get("name", "") + kwargs.get("scoped_name", ""))
             if set("/\\'" + '"') & characters:
                 raise Exception("Names cannot contain a slash or a quote.")
             instance, instance_id = None, kwargs.pop("id", 0)
             if instance_id:
                 instance = self.fetch(_class, id=instance_id, rbac=rbac)
-            elif "name" in kwargs and not no_fetch:
+            elif property in kwargs and not no_fetch:
                 instance = self.fetch(
-                    _class, allow_none=True, name=kwargs["name"], rbac=rbac
+                    _class, allow_none=True, rbac=rbac, **{property: kwargs[property]}
                 )
             if instance and not kwargs.get("must_be_new"):
                 instance.update(**kwargs)

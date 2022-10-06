@@ -160,6 +160,9 @@
     "device": {
       "exclude": ["pools", "target_services", "tasks"]
     },
+    "group": {
+      "include": ["users"]
+    },
     "link": {
       "exclude": ["pools"]
     },

@@ -11,6 +11,7 @@
         \ as an optical switch.\r\nThe icon of a device is decoupled from its type."
       positions: [19, -70]
   last_modified: '2022-01-13 14:58:18.207435'
+  last_modified_by: ''
   latitude: '0.0'
   links: [R1 - R2, R2 - R3, R1 - R3]
   location: ''
@@ -39,6 +40,7 @@
         \ to the other and back."
       positions: [-310, -212]
   last_modified: '2022-01-13 14:59:24.690428'
+  last_modified_by: ''
   latitude: '0.0'
   links: []
   location: ''
@@ -46,7 +48,7 @@
   model: ''
   name: Subnetwork and Teleport Mechanism
   networks: []
-  nodes: [Subnetwork 2, Subnetwork 1]
+  nodes: [Subnetwork 1, Subnetwork 2]
   positions: {}
   subtype: ''
   type: network
@@ -63,6 +65,7 @@
         \ L1-3\""
       positions: [51, -231]
   last_modified: '2022-01-03 12:55:19.074280'
+  last_modified_by: ''
   latitude: '0.0'
   links: [Subnetwork 1 - L1, Subnetwork 1 - L2, Subnetwork 1 - L3]
   location: ''
@@ -101,6 +104,7 @@
         \ the network itself from the Network table."
       positions: [227, -507]
   last_modified: '2022-01-13 14:59:33.685691'
+  last_modified_by: ''
   latitude: '0.0'
   links: []
   location: ''
@@ -124,6 +128,7 @@
         \ G1-2\"\r\n- one link between them, \"Subnetwork 2 - L1\""
       positions: [4, -181]
   last_modified: '2022-01-03 12:55:37.570662'
+  last_modified_by: ''
   latitude: '0.0'
   links: [Subnetwork 2 - L1]
   location: ''
@@ -159,6 +164,7 @@
         \ top-level network."
       positions: [-47, -187]
   last_modified: '2022-01-13 14:59:46.234188'
+  last_modified_by: ''
   latitude: '0.0'
   links: [Duplicate 1 - 2]
   location: ''
@@ -177,6 +183,7 @@
   icon: network
   labels: {}
   last_modified: '2022-01-01 11:55:14.172281'
+  last_modified_by: ''
   latitude: '0.0'
   links: [G1 - R1]
   location: ''
@@ -206,6 +213,7 @@
         \ R3 and R4\r\n- One link between R1 and R4"
       positions: [-499, 98]
   last_modified: '2022-01-13 14:59:54.526299'
+  last_modified_by: ''
   latitude: '0.0'
   links: [R3 -> R2 L1, R3 -> R2 L2, R3 -> R2 L3, R3 -> R2 L4, R3 Loopback 1, R1 Loopback
       1, R1 -> R2 L1, R1 -> R2 L2, R1 -> R2 L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1
@@ -234,6 +242,7 @@
         - The Duplication: all subnetworks down to the last should be duplicated."
       positions: [40, -173]
   last_modified: '2022-01-13 15:00:11.686882'
+  last_modified_by: ''
   latitude: '0.0'
   links: []
   location: ''
@@ -252,6 +261,7 @@
   icon: network
   labels: {}
   last_modified: '2022-01-02 12:46:03.753457'
+  last_modified_by: ''
   latitude: '0.0'
   links: []
   location: ''
@@ -272,6 +282,7 @@
   icon: network
   labels: {}
   last_modified: '2022-01-02 12:46:14.439473'
+  last_modified_by: ''
   latitude: '0.0'
   links: []
   location: ''
@@ -290,6 +301,7 @@
   icon: network
   labels: {}
   last_modified: '2022-01-02 12:47:02.746851'
+  last_modified_by: ''
   latitude: '0.0'
   links: [S6 L1]
   location: ''
@@ -315,6 +327,7 @@
         \ everything and delete it."
       positions: [63, -168]
   last_modified: '2022-01-13 15:01:16.843061'
+  last_modified_by: ''
   latitude: '0.0'
   links: []
   location: ''
@@ -351,6 +364,7 @@
         \ option: the link should be added between \"Dallas\" and \"Atlanta\"."
       positions: [110, -18]
   last_modified: '2022-01-13 15:00:20.775721'
+  last_modified_by: ''
   latitude: '0.0'
   links: []
   location: ''
@@ -369,6 +383,7 @@
   icon: network
   labels: {}
   last_modified: '2022-05-23 11:06:26.816309'
+  last_modified_by: ''
   latitude: '0.0'
   links: [link22, link13, link20, link0, link5, link23, link19, link21, link7, link18,
     link15, link3, link4, link17, link10, link27, link25-3, link14, link16, link25-reversed,

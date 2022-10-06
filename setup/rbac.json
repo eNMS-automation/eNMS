@@ -204,7 +204,6 @@
     "/get_git_content": "admin",
     "/get_migration_folders": "access",
     "/get_service_logs": "access",
-    "/get_properties": "access",
     "/get_result": "access",
     "/get_runtimes": "all",
     "/get_view_topology": "access",

@@ -317,7 +317,8 @@ function showProfile() {
     id: user.id,
     callback: () => {
       call({
-        url: `/get_properties/user/${user.id}`,
+        url: `/get/user/${user.id}`,
+        data: { properties_only: true },
         callback: function (user) {
           for (const [page, endpoint] of Object.entries(rbac.all_pages)) {
             if (!user.is_admin && !user.pages.includes(page)) continue;

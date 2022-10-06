@@ -458,7 +458,8 @@ class Controller:
         return table_result
 
     def get(self, model, id, **kwargs):
-        return db.fetch(model, id=id).to_dict(**kwargs)
+        func = "get_properties" if kwargs.pop("properties_only", None) else "to_dict"
+        return getattr(db.fetch(model, id=id), func)(**kwargs)
 
     def get_cluster_status(self):
         return [server.status for server in db.fetch_all("server")]

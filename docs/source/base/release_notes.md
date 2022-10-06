@@ -32,7 +32,8 @@ Version 4.4.0: RBAC and Credentials
 - Make buttons in path displayed in Files table clickable to move to button folder.
 - Refactor get function to fix scalability issues:
   - The properties sent to the front-end are defined in properties.json > "panel"
-  - Remove get_all controller function
+  - Remove get_all controller endpoint (unused)
+  - Remove get_properties controller endpoint (replaced by get with "properties_only" keyword)
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The appropriate groups

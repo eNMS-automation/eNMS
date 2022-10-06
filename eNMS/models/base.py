@@ -116,12 +116,13 @@ class AbstractBase(db.base):
         return query.filter(or_(owners_constraint, rbac_constraint))
 
     def update_rbac(self):
-        if self.type not in vs.rbac["rbac_models"] or not current_user:
+        model = getattr(self, "class_type", None)
+        if model not in vs.rbac["rbac_models"] or not current_user:
             return
         self.access_properties = defaultdict(list)
         self.owners = [current_user]
         for group in current_user.groups:
-            for access_type in getattr(group, f"{self.type}_access"):
+            for access_type in getattr(group, f"{model}_access"):
                 getattr(self, access_type).append(group)
 
     def delete(self):

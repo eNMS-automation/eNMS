@@ -156,7 +156,7 @@
     "task": ["status", "frequency", "frequency_unit", "crontab_expression"],
     "user": ["is_admin", "groups"]
   },
-  "panel": {
+  "serialized": {
     "device": {
       "exclude": ["pools", "target_services", "tasks"]
     },

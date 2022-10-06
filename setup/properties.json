@@ -157,26 +157,28 @@
     "user": ["is_admin", "groups"]
   },
   "serialized": {
-    "device": {
-      "exclude": ["pools", "target_services", "tasks"]
-    },
-    "group": {
-      "include": ["users"]
-    },
-    "link": {
-      "exclude": ["pools"]
-    },
-    "network": {
-      "exclude": ["labels", "links", "nodes", "positions"]
-    },
-    "pool": {
-      "exclude": ["credential_devices", "devices", "links", "tasks", "target_services"]
-    },
-    "service": {
-      "include": ["workflows"]
-    },
-    "user": {
-      "include": ["groups"]
+    "get": {
+      "device": {
+        "exclude": ["pools", "target_services", "tasks"]
+      },
+      "group": {
+        "include": ["users"]
+      },
+      "link": {
+        "exclude": ["pools"]
+      },
+      "network": {
+        "exclude": ["labels", "links", "nodes", "positions"]
+      },
+      "pool": {
+        "exclude": ["credential_devices", "devices", "links", "tasks", "target_services"]
+      },
+      "workflow": {
+        "exclude": ["services", "edges"]
+      },
+      "user": {
+        "include": ["groups"]
+      }
     }
   },
   "tables": {

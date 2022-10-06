@@ -159,6 +159,7 @@
   },
   "tables": {
     "refresh": {
+      "file": 3000,
       "run": 5000,
       "service": 3000,
       "task": 3000

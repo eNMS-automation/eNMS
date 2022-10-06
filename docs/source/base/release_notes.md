@@ -35,6 +35,7 @@ Version 4.4.0: RBAC and Credentials
   - The properties sent to the front-end are defined in properties.json > "panel"
   - Remove get_all controller endpoint (unused)
   - Remove get_properties controller endpoint (replaced by get with "properties_only" keyword)
+- In task form validation, forbid end date to be equal or anterior to start date.
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The appropriate groups

@@ -1324,7 +1324,7 @@ class Controller:
                 db.fetch(type, id=kwargs["copy"]).duplicate(clone=instance)
             db.session.flush()
             instance.post_update()
-            return instance.get_properties()
+            return instance.to_dict(**vs.properties["panel"][instance.class_type])
         except db.rbac_error:
             return {"alert": "Error 403 - Operation not allowed."}
         except Exception as exc:

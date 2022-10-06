@@ -172,6 +172,9 @@
     "pool": {
       "exclude": ["credential_devices", "devices", "links", "tasks", "target_services"]
     },
+    "service": {
+      "include": ["workflows"]
+    },
     "user": {
       "include": ["groups"]
     }

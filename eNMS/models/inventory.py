@@ -31,6 +31,8 @@ class Object(AbstractBase):
         super().update(**kwargs)
         if not hasattr(self, "class_type") or not kwargs.get("update_pools"):
             return
+        if self.class_type == "network":
+            return
         constraints = []
         for property in vs.properties["filtering"][self.class_type]:
             table, pool_property = vs.models["pool"], f"{self.class_type}_{property}"

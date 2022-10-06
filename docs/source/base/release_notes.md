@@ -8,7 +8,8 @@ Version 4.4.0: RBAC and Credentials
 - Compute whether a device / link belongs to a pool with a SQL query rather than pure python (performance x3)
   Add post_update function (60350ede71f6a5146bab9f42a87f7fef0360b98e) after db flush in controller udpate function
   to compute pool only after the ID has been set.
-  Return properties in controller update instead of serialized for scalability with > 50K devices.
+  Return default serialized properties in controller update instead of all serialized relationship
+  for scalability with > 50K devices.
 - Refactor freeze edit / run mechanism (pure python check instead of SQL query with originals)
 - New Bulk Edit option for appending / removing to a multiple instance list (dropdown list on the right of the field).
 - Add regression tests for get_connection global variable

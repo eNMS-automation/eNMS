@@ -72,7 +72,7 @@
     "workflow_builder_table": "automation/workflows/"
   },
   "files": {
-    "ignored_types": [".tgz"],
+    "ignored_types": [".swp", ".tgz"],
     "upload_timeout": 600000
   },
   "mail": {
@@ -159,6 +159,7 @@
   },
   "tables": {
     "refresh": {
+      "file": 3000,
       "run": 5000,
       "service": 3000,
       "task": 3000

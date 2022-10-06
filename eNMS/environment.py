@@ -70,6 +70,11 @@ class Environment:
     def monitor_filesystem(self):
         class Handler(FileSystemEventHandler):
             def on_any_event(self, event):
+                if any(
+                    event.src_path.endswith(extension)
+                    for extension in vs.settings["files"]["ignored_types"]
+                ):
+                    return
                 filetype = "folder" if event.is_directory else "file"
                 file = db.fetch(filetype, path=event.src_path, allow_none=True)
                 if event.event_type == "moved" and file:

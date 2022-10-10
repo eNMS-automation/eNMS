@@ -1255,7 +1255,7 @@ class Controller:
         db.fetch("user", rbac=None, id=user_id).theme = theme
 
     def task_action(self, mode, task_id):
-        return db.fetch("task", id=task_id, rbac="schedule").schedule(mode)
+        return db.fetch("task", id=task_id, rbac="edit").schedule(mode)
 
     def topology_export(self, **kwargs):
         workbook = Workbook()

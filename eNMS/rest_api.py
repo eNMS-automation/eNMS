@@ -121,7 +121,7 @@ class RestApi:
             return {**controller.run(service.id, **data), "errors": errors}
 
     def run_task(self, task_id):
-        task = db.fetch("task", rbac="schedule", id=task_id)
+        task = db.fetch("task", rbac="edit", id=task_id)
         data = {
             "trigger": "Scheduler",
             "creator": task.last_scheduled_by,

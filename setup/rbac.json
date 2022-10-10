@@ -294,8 +294,7 @@
     },
     "task": {
       "rbac_read": "Read",
-      "rbac_edit": "Edit",
-      "rbac_schedule": "Schedule"
+      "rbac_edit": "Edit"
     }
   }
 }

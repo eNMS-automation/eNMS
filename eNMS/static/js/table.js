@@ -1520,6 +1520,7 @@ tables.file = class FileTable extends Table {
         </select>
       </button>`,
       this.refreshTableButton("file"),
+      this.clearSearchButton(),
       `
       <a
         id="upward-folder-btn"

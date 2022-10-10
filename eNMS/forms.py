@@ -880,7 +880,13 @@ class TaskForm(BaseForm):
         if no_service:
             self.service.errors.append("No service set.")
         return valid_form and not any(
-            [no_date, no_cron_expression, no_service, invalid_end_date, invalid_frequency]
+            [
+                no_date,
+                no_cron_expression,
+                no_service,
+                invalid_end_date,
+                invalid_frequency,
+            ]
         )
 
 

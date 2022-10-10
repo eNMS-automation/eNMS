@@ -40,6 +40,7 @@ Version 4.4.0: RBAC and Credentials
   - Forbid end date to be equal or anterior to start date.
   - Forbid frequency to be 0 when a task has an end date (= is periodic)
 - Fix URL encoding for links to workflow builder with runtime (encode space to %20) (#278)
+- Add Clear Search button in file table
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The appropriate groups

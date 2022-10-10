@@ -31,7 +31,7 @@ Version 4.4.0: RBAC and Credentials
   - any deletion is made in workflow or subworkflows
   - any service is skipped in workflow or subworkflows
 - Same last_modified(_by) mechanism for devices, links and pools.
-- Make buttons in path displayed in Files table clickable to move to button folder.
+- Make buttons in path displayed in Files table clickable to move to button folder (#275).
 - Refactor get function to fix scalability issues:
   - The properties sent to the front-end are defined in properties.json > "panel"
   - Remove get_all controller endpoint (unused)

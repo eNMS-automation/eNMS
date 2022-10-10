@@ -863,11 +863,14 @@ class TaskForm(BaseForm):
         no_date = self.scheduling_mode.data == "standard" and not self.start_date.data
         if no_date:
             self.start_date.errors.append("A start date must be set.")
-        wrong_end_date = self.end_date.data and datetime.strptime(
+        invalid_end_date = self.end_date.data and datetime.strptime(
             self.end_date.data, "%d/%m/%Y %H:%M:%S"
         ) <= datetime.strptime(self.start_date.data, "%d/%m/%Y %H:%M:%S")
-        if wrong_end_date:
+        if invalid_end_date:
             self.end_date.errors.append("The end date must come after the start date.")
+        invalid_frequency = self.end_date.data and not self.frequency.data
+        if invalid_frequency:
+            self.frequency.errors.append("A periodic task must have a frequency.")
         no_cron_expression = (
             self.scheduling_mode.data == "cron" and not self.crontab_expression.data
         )
@@ -877,7 +880,7 @@ class TaskForm(BaseForm):
         if no_service:
             self.service.errors.append("No service set.")
         return valid_form and not any(
-            [no_date, no_cron_expression, no_service, wrong_end_date]
+            [no_date, no_cron_expression, no_service, invalid_end_date, invalid_frequency]
         )
 
 

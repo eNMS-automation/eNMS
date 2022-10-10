@@ -26,7 +26,7 @@ from sys import path as sys_path
 from threading import Thread
 from traceback import format_exc
 from warnings import warn
-from watchdog.observers import Observer
+from watchdog.observers.polling import PollingObserver
 from watchdog.events import FileSystemEventHandler
 
 try:
@@ -94,7 +94,7 @@ class Environment:
                     db.session.rollback()
 
         event_handler = Handler()
-        observer = Observer()
+        observer = PollingObserver()
         observer.schedule(event_handler, path=self.file_path, recursive=True)
         observer.start()
 

@@ -83,6 +83,9 @@ class Node(Object):
         "Network", secondary=db.node_network_table, back_populates="nodes"
     )
 
+    def post_update(self):
+        return self.to_dict(include=["networks", "nodes"])
+
     def update(self, **kwargs):
         if self.positions and "positions" in kwargs:
             kwargs["positions"] = {**self.positions, **kwargs["positions"]}
@@ -365,6 +368,7 @@ class Pool(AbstractBase):
 
     def post_update(self):
         self.compute_pool()
+        return super().post_update()
 
     def update(self, **kwargs):
         super().update(**kwargs)

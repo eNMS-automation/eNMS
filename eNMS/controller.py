@@ -1325,9 +1325,7 @@ class Controller:
             if kwargs.get("copy"):
                 db.fetch(type, id=kwargs["copy"]).duplicate(clone=instance)
             db.session.flush()
-            instance.post_update()
-            properties = vs.properties["serialized"].get(instance.class_type, {})
-            return instance.to_dict(**properties)
+            return instance.post_update()
         except db.rbac_error:
             return {"alert": "Error 403 - Operation not allowed."}
         except Exception as exc:

@@ -64,7 +64,7 @@ class AbstractBase(db.base):
         return {prop: getattr(self, prop) for prop in ("id", "name", "type")}
 
     def post_update(self):
-        pass
+        return self.get_properties()
 
     def update(self, rbac="read", **kwargs):
         self.filter_rbac_kwargs(kwargs)

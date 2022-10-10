@@ -120,6 +120,9 @@ class Service(AbstractBase):
         ):
             raise db.rbac_error("Deletion forbidden because of active freeze.")
 
+    def post_update(self):
+        return self.to_dict(include=["workflows", "services"])
+
     def update(self, **kwargs):
         self.check_freeze("edit")
         if self.positions and "positions" in kwargs:

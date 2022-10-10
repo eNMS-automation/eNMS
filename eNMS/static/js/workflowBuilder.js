@@ -466,7 +466,7 @@ function getWorkflowLink(includeRuntime) {
     serverUrl || `${window.location.protocol}//${window.location.hostname}`;
   let link = `${baseUrl}/workflow_builder/${workflow.id}`;
   if (includeRuntime) link += `/${currentRuntime}`;
-  copyToClipboard({ text: link });
+  copyToClipboard({ text: encodeURI(link) });
 }
 
 export function updateWorkflowRightClickBindings() {

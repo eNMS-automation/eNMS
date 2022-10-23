@@ -11,7 +11,6 @@ from sqlalchemy.orm import relationship
 from time import ctime
 
 from eNMS.database import db
-from eNMS.environment import env
 from eNMS.models.base import AbstractBase
 from eNMS.variables import vs
 

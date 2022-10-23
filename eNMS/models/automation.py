@@ -6,8 +6,7 @@ from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout
 from sqlalchemy import Boolean, case, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.orm import aliased, deferred, relationship
-from sqlalchemy.sql.expression import false, true
+from sqlalchemy.orm import deferred, relationship
 
 from eNMS.controller import controller
 from eNMS.database import db

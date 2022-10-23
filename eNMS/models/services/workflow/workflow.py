@@ -1,7 +1,7 @@
 from collections import defaultdict
 from heapq import heappop, heappush
 from sqlalchemy import Boolean, ForeignKey, Integer
-from sqlalchemy.orm import aliased, backref, relationship
+from sqlalchemy.orm import backref, relationship
 from sqlalchemy.schema import UniqueConstraint
 
 from eNMS.database import db

@@ -241,7 +241,6 @@ class FormFactory:
         class GroupForm(RbacForm):
             template = "group"
             form_type = HiddenField(default="group")
-            creator = db.Column(db.SmallString)
             users = MultipleInstanceField("Users", model="user")
             menu = SelectMultipleField("Menu", choices=vs.dualize(vs.rbac["menus"]))
             pages = SelectMultipleField("Pages", choices=vs.dualize(vs.rbac["pages"]))
@@ -562,6 +561,7 @@ class RbacForm(BaseForm):
     get_request_allowed = False
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+    creator = StringField(render_kw={"readonly": True})
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     email = StringField("Email")
 

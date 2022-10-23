@@ -28,7 +28,7 @@
       <div class="tab-content">
         <div class="tab-pane fade in active" id="group-properties">
           <div id="content" class="add-id" style="height: 100%;"></div>
-          {% for field in form %} {% if field.name in ("name", "description", "email",
+          {% for field in form %} {% if field.name in ("name", "creator", "description", "email",
           "users") %} {{ field_template(form_type, field) }} {% endif %} {% endfor %}
           <center>
             <button

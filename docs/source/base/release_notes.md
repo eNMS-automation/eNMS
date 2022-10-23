@@ -41,6 +41,9 @@ Version 4.4.0: RBAC and Credentials
   - Forbid frequency to be 0 when a task has an end date (= is periodic)
 - Fix URL encoding for links to workflow builder with runtime (encode space to %20) (#278)
 - Add Clear Search button in file table
+- Use SQL Alchemy `regexp_match` mechanism (new from 1.4, replaced eNMS custom per DB regex match mechanism)
+  Link: https://docs.sqlalchemy.org/en/14/core/sqlelement.html#sqlalchemy.sql.expression.ColumnOperators.regexp_match
+  Commit: a6af8a88f197b891928986dd492ce2ff39fc629a
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The appropriate groups

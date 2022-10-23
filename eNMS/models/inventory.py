@@ -42,7 +42,7 @@ class Object(AbstractBase):
             main_constraint = {
                 "equality": row == value,
                 "inclusion": literal(value).contains(row),
-                "regex": literal(value).op(db.regex_operator)(row),
+                "regex": literal(value).regexp_match(row),
             }
             match_constraints = []
             for match_property in ("equality", "inclusion", "regex"):

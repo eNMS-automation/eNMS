@@ -13,12 +13,12 @@ from operator import attrgetter, itemgetter
 from os import getenv, listdir, makedirs, scandir
 from os.path import exists
 from pathlib import Path
-from re import compile, error as regex_error, search, sub
+from re import compile, search, sub
 from requests import get as http_get
 from ruamel import yaml
 from shutil import rmtree
 from sqlalchemy import and_, or_
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, OperationalError
 from sqlalchemy.orm import aliased
 from sqlalchemy.sql.expression import true
 from subprocess import Popen
@@ -372,8 +372,7 @@ class Controller:
             elif not filter_value or filter_value == "inclusion":
                 constraint = row.contains(value, autoescape=isinstance(value, str))
             else:
-                compile(value)
-                constraint = row.op(db.regex_operator)(value)
+                constraint = row.regexp_match(value)
             if constraint_dict.get(f"{property}_invert"):
                 constraint = ~constraint
             constraints.append(constraint)
@@ -419,10 +418,7 @@ class Controller:
         total_records, filtered_records = (10**6,) * 2
         if pagination and not bulk and not properties:
             total_records = query.with_entities(table.id).count()
-        try:
-            constraints = self.filtering_base_constraints(model, **kwargs)
-        except regex_error:
-            return {"error": "Invalid regular expression as search parameter."}
+        constraints = self.filtering_base_constraints(model, **kwargs)
         constraints.extend(table.filtering_constraints(**kwargs))
         query = self.filtering_relationship_constraints(query, model, **kwargs)
         query = query.filter(and_(*constraints))
@@ -438,15 +434,19 @@ class Controller:
         ordering = getattr(getattr(table, data, None), kwargs["order"][0]["dir"], None)
         if ordering:
             query = query.order_by(ordering())
+        try:
+            query_data = (query.limit(int(kwargs["length"]))
+                    .offset(int(kwargs["start"]))
+                    .all())
+        except OperationalError:
+            return {"error": "Invalid regular expression as search parameter."}
         table_result = {
             "draw": int(kwargs["draw"]),
             "recordsTotal": total_records,
             "recordsFiltered": filtered_records,
             "data": [
                 obj.table_properties(**kwargs)
-                for obj in query.limit(int(kwargs["length"]))
-                .offset(int(kwargs["start"]))
-                .all()
+                for obj in query_data
             ],
         }
         if kwargs.get("export"):

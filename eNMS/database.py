@@ -173,7 +173,6 @@ class Database:
         self.Column = init_column
 
     def configure_events(self):
-
         @event.listens_for(self.base, "mapper_configured", propagate=True)
         def model_inspection(mapper, model):
             name = model.__tablename__

@@ -435,19 +435,16 @@ class Controller:
         if ordering:
             query = query.order_by(ordering())
         try:
-            query_data = (query.limit(int(kwargs["length"]))
-                    .offset(int(kwargs["start"]))
-                    .all())
+            query_data = (
+                query.limit(int(kwargs["length"])).offset(int(kwargs["start"])).all()
+            )
         except OperationalError:
             return {"error": "Invalid regular expression as search parameter."}
         table_result = {
             "draw": int(kwargs["draw"]),
             "recordsTotal": total_records,
             "recordsFiltered": filtered_records,
-            "data": [
-                obj.table_properties(**kwargs)
-                for obj in query_data
-            ],
+            "data": [obj.table_properties(**kwargs) for obj in query_data],
         }
         if kwargs.get("export"):
             table_result["full_result"] = [

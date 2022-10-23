@@ -171,7 +171,13 @@
         "exclude": ["labels", "links", "nodes", "positions"]
       },
       "pool": {
-        "exclude": ["credential_devices", "devices", "links", "tasks", "target_services"]
+        "exclude": [
+          "credential_devices",
+          "devices",
+          "links",
+          "tasks",
+          "target_services"
+        ]
       },
       "workflow": {
         "exclude": ["services", "edges"]

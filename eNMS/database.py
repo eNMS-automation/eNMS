@@ -8,7 +8,6 @@ from logging import error, info, warning
 from operator import attrgetter
 from os import getenv, getpid
 from pathlib import Path
-from re import search
 from sqlalchemy import (
     Boolean,
     Column,
@@ -29,7 +28,6 @@ from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import (
-    aliased,
     configure_mappers,
     relationship,
     scoped_session,

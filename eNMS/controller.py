@@ -13,7 +13,7 @@ from operator import attrgetter, itemgetter
 from os import getenv, listdir, makedirs, scandir
 from os.path import exists
 from pathlib import Path
-from re import compile, search, sub
+from re import search, sub
 from requests import get as http_get
 from ruamel import yaml
 from shutil import rmtree
@@ -1317,7 +1317,7 @@ class Controller:
                     if not kwargs.get(f"{builder_type}s"):
                         continue
                     builder_id = kwargs[f"{builder_type}s"][0]
-                    builder = db.fetch(builder_type, id=builder_id, rbac="edit")
+                    db.fetch(builder_type, id=builder_id, rbac="edit")
             instance = db.factory(type, **kwargs)
             if kwargs.get("copy"):
                 db.fetch(type, id=kwargs["copy"]).duplicate(clone=instance)

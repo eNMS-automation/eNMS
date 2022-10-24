@@ -1120,8 +1120,10 @@ class Controller:
         if run_name and db.fetch("run", name=run_name, allow_none=True):
             return {"error": "There is already a run with the same name."}
         if kwargs.get("asynchronous", True):
-            Thread(target=self.run, args=(service_id,), kwargs=kwargs).start()
-        else:
+            if vs.settings["automation"]["use_task_queue"]:
+                self.run.send(service_id, **kwargs)
+            else:
+                Thread(target=self.run, args=(service_id,), kwargs=kwargs).start()
             service.run(runtime=runtime)
         return {
             "service": service.serialized,

@@ -2,6 +2,7 @@ from collections import Counter, defaultdict
 from contextlib import redirect_stdout
 from datetime import datetime
 from difflib import unified_diff
+from dramatiq import actor
 from flask_login import current_user
 from functools import wraps
 from git import Repo
@@ -1054,6 +1055,7 @@ class Controller:
             db.session.commit()
 
     @staticmethod
+    @actor
     def run(service, **kwargs):
         if "path" not in kwargs:
             kwargs["path"] = str(service)

@@ -114,3 +114,10 @@ You can follow us on _[Twitter](https://twitter.com/AutomationEnms)_ or _[Linked
     export FLASK_APP=app.py
     flask run --host=0.0.0.0
     Log in (default credentials: admin / admin)
+
+## Using Dramatiq
+Dramatiq, a distributed task queue, can be used for executing automations:
+
+1. In setup/settings.json set `"use_task_queue": true`
+2. Perform the quick-install steps to start the flask app.
+3. In another terminal, run `dramatiq eNMS.controller` from the project root.

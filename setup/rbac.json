@@ -275,11 +275,6 @@
       "rbac_connect": "Connect via SSH",
       "rbac_target": "Use as Target"
     },
-    "file": {
-      "rbac_read": "Read",
-      "rbac_edit": "Edit",
-      "rbac_use": "Use in Services"
-    },
     "link": {
       "rbac_read": "Read",
       "rbac_edit": "Edit"

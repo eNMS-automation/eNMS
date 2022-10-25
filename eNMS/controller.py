@@ -1371,16 +1371,13 @@ class Controller:
         db.session.commit()
 
     def update_device_rbac(self):
-        device_class = vs.models["device"]
         for group in db.fetch_all("group"):
             for property in vs.rbac["rbac_models"]["device"]:
+                pool_property = getattr(vs.models["pool"], f"rbac_group_{property}")
                 devices = (
                     db.query("device")
-                    .join(device_class.pools)
-                    .join(
-                        vs.models["group"],
-                        getattr(vs.models["pool"], f"rbac_group_{property}"),
-                    )
+                    .join(vs.models["device"].pools)
+                    .join(vs.models["group"], pool_property)
                     .filter(vs.models["group"].id == group.id)
                     .all()
                 )

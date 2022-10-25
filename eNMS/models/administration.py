@@ -20,6 +20,7 @@ class Server(AbstractBase):
     __tablename__ = type = "server"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    creator = db.Column(db.SmallString)
     description = db.Column(db.LargeString)
     mac_address = db.Column(db.TinyString)
     ip_address = db.Column(db.TinyString)

@@ -1371,7 +1371,20 @@ class Controller:
         db.session.commit()
 
     def update_device_rbac(self):
-        return
+        device_class = vs.models["device"]
+        for group in db.fetch_all("group"):
+            for property in vs.rbac["rbac_models"]["device"]:
+                devices = (
+                    db.query("device")
+                    .join(device_class.pools)
+                    .join(
+                        vs.models["group"],
+                        getattr(vs.models["pool"], f"rbac_group_{property}"),
+                    )
+                    .filter(vs.models["group"].id == group.id)
+                    .all()
+                )
+                setattr(group, f"{property}_devices", devices)
 
     def upload_files(self, **kwargs):
         kwargs["file"].save(f"{kwargs['folder']}/{kwargs['file'].filename}")

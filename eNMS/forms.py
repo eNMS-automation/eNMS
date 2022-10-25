@@ -512,6 +512,7 @@ class ObjectForm(BaseForm):
     get_request_allowed = False
     id = HiddenField()
     name = StringField("Name")
+    creator = StringField(render_kw={"readonly": True})
     type = StringField("Type")
     networks = MultipleInstanceField("Networks", model="network")
     description = StringField("Description")
@@ -525,8 +526,9 @@ class PoolForm(BaseForm):
     form_type = HiddenField(default="pool")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+    creator = StringField(render_kw={"readonly": True})
     admin_only = BooleanField("Pool visible to admin users only")
-    description = StringField(widget=TextArea(), render_kw={"rows": 10})
+    description = StringField(widget=TextArea(), render_kw={"rows": 8})
     manually_defined = BooleanField("Manually defined (won't be automatically updated)")
 
     @classmethod

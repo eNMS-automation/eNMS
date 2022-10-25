@@ -57,6 +57,7 @@ class NetworkForm(BaseForm):
     form_type = HiddenField(default="network")
     id = HiddenField()
     name = StringField("Name")
+    creator = StringField(render_kw={"readonly": True})
     category = SelectField(
         "Category",
         choices=vs.dualize(vs.properties["property_list"]["network"]["category"]),

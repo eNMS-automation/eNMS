@@ -57,8 +57,8 @@
           %} {{ field_template(form_type, field) }} {% endif %} {% endfor %}
         </div>
         <div class="tab-pane fade" id="group-pool-access">
-          {% for field in form %} {% if field.name in form.pool_properties
-          %} {{ field_template(form_type, field) }} {% endif %} {% endfor %}
+          {% for field in form %} {% if field.name in form.pool_properties %} {{
+          field_template(form_type, field) }} {% endif %} {% endfor %}
         </div>
       </div>
     </div>

@@ -286,7 +286,6 @@ class FormFactory:
                     setattr(cls, property_name, field)
                     field_properties = {"type": "object-list", "model": "pool"}
                     vs.form_properties["group"][property_name] = field_properties
-                
 
     def generate_service_forms(self):
         for file in (vs.path / "eNMS" / "forms").glob("**/*.py"):

@@ -354,6 +354,7 @@ class CredentialForm(BaseForm):
     form_type = HiddenField(default="credential")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+    creator = StringField(render_kw={"readonly": True})
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     role = SelectField(
         "Role",

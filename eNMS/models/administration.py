@@ -85,9 +85,9 @@ class Group(AbstractBase):
     __tablename__ = type = class_type = "group"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    creator = db.Column(db.SmallString)
     description = db.Column(db.LargeString)
     email = db.Column(db.SmallString)
-    creator = db.Column(db.SmallString)
     users = relationship("User", secondary=db.user_group_table, back_populates="groups")
     credentials = relationship(
         "Credential", secondary=db.credential_group_table, back_populates="groups"
@@ -123,6 +123,7 @@ class Credential(AbstractBase):
     __tablename__ = type = class_type = "credential"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    creator = db.Column(db.SmallString)
     role = db.Column(db.SmallString, default="read-write")
     subtype = db.Column(db.SmallString, default="password")
     description = db.Column(db.LargeString)

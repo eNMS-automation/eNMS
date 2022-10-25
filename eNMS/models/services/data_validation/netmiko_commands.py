@@ -44,11 +44,12 @@ class NetmikoValidationService(ConnectionService):
     __mapper_args__ = {"polymorphic_identity": "netmiko_commands_service"}
 
     def job(self, run, device):
+        local_variables = locals()
         if self.jinja2_template:
-            variables = {**locals(), **run.global_variables()}
+            variables = {**local_variables, **run.global_variables()}
             commands = Template(run.commands).render(variables)
         else:
-            commands = run.sub(run.commands, locals())
+            commands = run.sub(run.commands, local_variables)
         log_command = run.commands if "get_credential" in run.commands else commands
         netmiko_connection = run.netmiko_connection(device)
         try:
@@ -66,7 +67,7 @@ class NetmikoValidationService(ConnectionService):
                     use_textfsm=run.use_textfsm,
                     use_genie=run.use_genie,
                     delay_factor=run.delay_factor,
-                    expect_string=run.sub(run.expect_string, locals()) or None,
+                    expect_string=run.sub(run.expect_string, local_variables) or None,
                     auto_find_prompt=run.auto_find_prompt,
                     strip_prompt=run.strip_prompt,
                     strip_command=run.strip_command,

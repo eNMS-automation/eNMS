@@ -625,6 +625,7 @@ class ServiceForm(BaseForm):
     get_request_allowed = False
     id = HiddenField()
     name = StringField("Name")
+    creator = StringField(render_kw={"readonly": True})
     type = StringField("Service Type")
     shared = BooleanField("Shared")
     scoped_name = StringField("Scoped Name", [InputRequired()])
@@ -836,6 +837,7 @@ class TaskForm(BaseForm):
     form_type = HiddenField(default="task")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+    creator = StringField(render_kw={"readonly": True})
     admin_only = BooleanField("Admin Only", default=False)
     scheduling_mode = SelectField(
         "Scheduling Mode",

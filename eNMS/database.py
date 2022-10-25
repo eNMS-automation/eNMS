@@ -319,8 +319,15 @@ class Database:
         else:
             entity = [vs.models[model]]
         query = self.session.query(*entity)
-        if rbac and model != "user":
-            user = current_user or self.fetch("user", name=username or "admin")
+        if rbac:
+            user = (
+                current_user
+                or self.session.query(vs.models["user"])
+                .filter_by(name=username or "admin")
+                .first()
+            )
+            if not user:
+                return
             if user.is_authenticated and not user.is_admin:
                 if model in vs.rbac["advanced"]["admin_models"].get(rbac, []):
                     raise self.rbac_error
@@ -342,7 +349,10 @@ class Database:
         username=None,
         **kwargs,
     ):
-        query = self.query(instance_type, rbac, username=username).filter(
+        query = self.query(instance_type, rbac, username=username)
+        if not query:
+            return
+        query = query.filter(
             *(
                 getattr(vs.models[instance_type], key) == value
                 for key, value in kwargs.items()

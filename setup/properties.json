@@ -162,7 +162,14 @@
         "exclude": ["pools", "target_services", "tasks"]
       },
       "group": {
-        "include": ["users"]
+        "include": [
+          "users",
+          "rbac_pool_rbac_read",
+          "rbac_pool_rbac_configuration",
+          "rbac_pool_rbac_edit",
+          "rbac_pool_rbac_connect",
+          "rbac_pool_rbac_target"
+        ]
       },
       "link": {
         "exclude": ["pools"]

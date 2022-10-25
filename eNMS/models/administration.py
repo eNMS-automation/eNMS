@@ -109,6 +109,16 @@ class Group(AbstractBase):
                         back_populates=property,
                     ),
                 )
+        for property in vs.rbac["rbac_models"]["device"]:
+            setattr(
+                cls,
+                f"rbac_pool_{property}",
+                relationship(
+                    "Pool",
+                    secondary=getattr(db, f"pool_group_{property}_table"),
+                    back_populates=f"rbac_group_{property}",
+                ),
+            )
 
     def update(self, **kwargs):
         old_users = set(self.users)

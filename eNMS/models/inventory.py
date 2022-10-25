@@ -364,6 +364,16 @@ class Pool(AbstractBase):
                 ),
             )
             setattr(cls, f"{model}_number", db.Column(Integer, default=0))
+        for property in vs.rbac["rbac_models"]["device"]:
+            setattr(
+                cls,
+                f"rbac_group_{property}",
+                relationship(
+                    "Group",
+                    secondary=getattr(db, f"pool_group_{property}_table"),
+                    back_populates=f"rbac_pool_{property}",
+                ),
+            )
 
     def post_update(self):
         self.compute_pool()

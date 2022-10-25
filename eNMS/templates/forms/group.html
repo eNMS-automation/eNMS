@@ -23,6 +23,11 @@
           >Default Model Access</a
         >
       </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#group-pool-access"
+          >Device RBAC Setup</a
+        >
+      </li>
     </ul>
     <div class="form-group">
       <div class="tab-content">
@@ -49,6 +54,10 @@
         </div>
         <div class="tab-pane fade" id="group-model-access">
           {% for field in form %} {% if field.name.split("_")[0] in rbac["rbac_models"]
+          %} {{ field_template(form_type, field) }} {% endif %} {% endfor %}
+        </div>
+        <div class="tab-pane fade" id="group-pool-access">
+          {% for field in form %} {% if field.name in form.pool_properties
           %} {{ field_template(form_type, field) }} {% endif %} {% endfor %}
         </div>
       </div>

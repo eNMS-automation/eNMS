@@ -271,12 +271,22 @@ class FormFactory:
 
             @classmethod
             def form_init(cls):
+                cls.pool_properties = []
                 for model, properties in vs.rbac["rbac_models"].items():
                     field = SelectMultipleField(choices=list(properties.items()))
                     setattr(cls, f"{model}_access", field)
                     vs.form_properties["group"][f"{model}_access"] = {
                         "type": "multiselect"
                     }
+                for property in vs.rbac["rbac_models"]["device"]:
+                    property_name = f"rbac_pool_{property}"
+                    ui_name = property.split("_")[-1].capitalize()
+                    cls.pool_properties.append(property_name)
+                    field = MultipleInstanceField(ui_name, model="pool")
+                    setattr(cls, property_name, field)
+                    field_properties = {"type": "object-list", "model": "pool"}
+                    vs.form_properties["group"][property_name] = field_properties
+                
 
     def generate_service_forms(self):
         for file in (vs.path / "eNMS" / "forms").glob("**/*.py"):

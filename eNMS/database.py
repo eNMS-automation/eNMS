@@ -345,6 +345,27 @@ class Database:
                         ),
                     ),
                 )
+        for property in vs.rbac["rbac_models"]["device"]:
+            setattr(
+                self,
+                f"pool_group_{property}_table",
+                Table(
+                    f"pool_group_{property}_association",
+                    self.base.metadata,
+                    Column(
+                        "pool_id",
+                        Integer,
+                        ForeignKey(f"pool.id"),
+                        primary_key=True,
+                    ),
+                    Column(
+                        "group_id",
+                        Integer,
+                        ForeignKey("group.id"),
+                        primary_key=True,
+                    ),
+                ),
+            )
 
     def query(self, model, rbac="read", username=None, properties=None):
         if properties:

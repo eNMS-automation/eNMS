@@ -361,6 +361,16 @@ export function showCredentialPanel(id) {
     .trigger("change");
 }
 
+function updateDeviceRbac() {
+  notify("RBAC Update Initiated.", "success", 5, true);
+  call({
+    url: "/update_device_rbac",
+    callback: function () {
+      notify("RBAC Update successful", "success", 5, true);
+    },
+  });
+}
+
 configureNamespace("administration", [
   databaseDeletion,
   displayFiles,
@@ -379,4 +389,5 @@ configureNamespace("administration", [
   showFileUploadPanel,
   showMigrationPanel,
   showProfile,
+  updateDeviceRbac,
 ]);

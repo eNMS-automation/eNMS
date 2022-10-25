@@ -1370,6 +1370,9 @@ class Controller:
                 pool.compute_pool()
         db.session.commit()
 
+    def update_device_rbac(self):
+        return
+
     def upload_files(self, **kwargs):
         kwargs["file"].save(f"{kwargs['folder']}/{kwargs['file'].filename}")
 

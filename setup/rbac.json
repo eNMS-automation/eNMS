@@ -258,6 +258,7 @@
     "/update": "access",
     "/update_pool": "access",
     "/update_all_pools": "access",
+    "/update_device_rbac": "admin",
     "/upload_files": "access",
     "/view_filtering": "access",
     "/web_connection": "access"

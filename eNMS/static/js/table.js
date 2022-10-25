@@ -1295,6 +1295,14 @@ tables.group = class GroupTable extends Table {
       this.createNewButton(),
       this.bulkEditButton(),
       this.exportTableButton(),
+      ` <button
+        class="btn btn-primary"
+        onclick="eNMS.administration.updateDeviceRbac()"
+        data-tooltip="Update Device RBAC from Pools"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-flash"></span>
+      </button>`,
       this.bulkDeletionButton(),
     ];
   }

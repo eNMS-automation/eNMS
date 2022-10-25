@@ -919,6 +919,12 @@
         "width": "150px"
       },
       {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "description",
         "title": "Description",
         "width": "400px",
@@ -1029,6 +1035,12 @@
         "width": "150px"
       },
       {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "description",
         "title": "Description",
         "width": "400px",
@@ -1056,6 +1068,12 @@
         "data": "name",
         "title": "Name",
         "search": "text"
+      },
+      {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "description",
@@ -1094,6 +1112,12 @@
         "data": "name",
         "title": "Name",
         "search": "text"
+      },
+      {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "subtype",

@@ -681,6 +681,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
             processInstance(type, instance);
+            if (isService) loadScript(`../static/js/services/${type}.js`, id);
           },
         });
       } else if (mode == "bulk") {
@@ -693,7 +694,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
         }
         if (page == "network_builder") updateNetworkPanel(type);
       }
-      if (isService) loadScript(`../static/js/services/${type}.js`, id);
+      if (isService && !id) loadScript(`../static/js/services/${type}.js`);
       const property = isService
         ? "scoped_name"
         : type == "folder"

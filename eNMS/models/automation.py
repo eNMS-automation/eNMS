@@ -120,19 +120,20 @@ class Service(AbstractBase):
             raise db.rbac_error("Deletion forbidden because of active freeze.")
 
     def post_update(self):
-        return self.to_dict(include=["workflows", "services"])
-
-    def update(self, **kwargs):
-        self.check_freeze("edit")
-        if self.positions and "positions" in kwargs:
-            kwargs["positions"] = {**self.positions, **kwargs["positions"]}
-        self.path = str(self.id)
-        super().update(**kwargs)
         if len(self.workflows) == 1:
             self.path = f"{self.workflows[0].path}>{self.id}"
-        if not kwargs.get("migration_import"):
-            self.set_name()
+        else:
+            self.path = str(self.id)
+        self.set_name()
         self.update_last_modified_properties()
+        return self.to_dict(include=["workflows"])
+
+    def update(self, **kwargs):
+        if self.path:
+            self.check_freeze("edit")
+        if self.positions and "positions" in kwargs:
+            kwargs["positions"] = {**self.positions, **kwargs["positions"]}
+        super().update(**kwargs)
 
     def update_last_modified_properties(self):
         super().update_last_modified_properties()

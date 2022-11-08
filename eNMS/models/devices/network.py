@@ -39,11 +39,15 @@ class Network(Node):
         db.session.commit()
         return clone
 
-    def update(self, **kwargs):
-        old_name, self.path = self.name, str(self.id)
-        super().update(**kwargs)
+    def post_update(self):
         if len(self.networks) == 1:
             self.path = f"{self.networks[0].path}>{self.id}"
+        else:
+            self.path = str(self.id)
+
+    def update(self, **kwargs):
+        old_name = self.name
+        super().update(**kwargs)
         if self.name == old_name:
             return
         for node in self.nodes:

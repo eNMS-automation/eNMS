@@ -960,7 +960,7 @@ class Controller:
         if not kwargs.get("skip_model_update"):
             for model in ("user", "service", "network"):
                 for instance in db.fetch_all(model):
-                    instance.update()
+                    instance.post_update()
         if not kwargs.get("skip_pool_update"):
             for pool in db.fetch_all("pool"):
                 pool.compute_pool()

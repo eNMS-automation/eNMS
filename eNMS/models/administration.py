@@ -61,6 +61,9 @@ class User(AbstractBase, UserMixin):
     def get_id(self):
         return self.name
 
+    def post_update(self):
+        self.update_rbac()
+
     def update(self, **kwargs):
         if (
             vs.settings["security"]["hash_user_passwords"]
@@ -69,8 +72,6 @@ class User(AbstractBase, UserMixin):
         ):
             kwargs["password"] = argon2.hash(kwargs["password"])
         super().update(**kwargs)
-        if not kwargs.get("import_mechanism", False):
-            self.update_rbac()
 
     def update_rbac(self):
         if self.is_admin:

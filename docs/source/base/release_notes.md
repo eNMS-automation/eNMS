@@ -45,6 +45,8 @@ Version 4.4.0: RBAC and Credentials
   Link: https://docs.sqlalchemy.org/en/14/core/sqlelement.html#sqlalchemy.sql.expression.ColumnOperators.regexp_match
   Commit: a6af8a88f197b891928986dd492ce2ff39fc629a
 - Add "creator" properties in all edit panels
+- Fix link to workflow / network set to None after creating new or duplicating existing
+  instance (via post_update mechanism)
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The 

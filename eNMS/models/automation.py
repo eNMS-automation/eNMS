@@ -120,7 +120,7 @@ class Service(AbstractBase):
             raise db.rbac_error("Deletion forbidden because of active freeze.")
 
     def post_update(self):
-        if len(self.workflows) == 1:
+        if len(self.workflows) == 1 and not self.shared:
             self.path = f"{self.workflows[0].path}>{self.id}"
         else:
             self.path = str(self.id)

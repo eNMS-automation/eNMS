@@ -134,6 +134,8 @@ class Service(AbstractBase):
         if self.positions and "positions" in kwargs:
             kwargs["positions"] = {**self.positions, **kwargs["positions"]}
         super().update(**kwargs)
+        if not kwargs.get("migration_import"):
+            self.set_name()
 
     def update_last_modified_properties(self):
         super().update_last_modified_properties()

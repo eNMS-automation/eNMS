@@ -47,6 +47,8 @@ Version 4.4.0: RBAC and Credentials
 - Add "creator" properties in all edit panels
 - Fix link to workflow / network set to None after creating new or duplicating existing
   instance (via post_update mechanism)
+- Fix asynchronous bug in netmiko services: wrong disabled status after opening
+  edit panel to a service in netmiko "Expect String" field.
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The 

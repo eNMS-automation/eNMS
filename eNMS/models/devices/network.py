@@ -44,6 +44,7 @@ class Network(Node):
             self.path = f"{self.networks[0].path}>{self.id}"
         else:
             self.path = str(self.id)
+        return self.get_properties()
 
     def update(self, **kwargs):
         old_name = self.name

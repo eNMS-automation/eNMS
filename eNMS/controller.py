@@ -17,7 +17,7 @@ from re import search, sub
 from requests import get as http_get
 from ruamel import yaml
 from shutil import rmtree
-from sqlalchemy import and_, or_
+from sqlalchemy import and_, cast, or_, String
 from sqlalchemy.exc import IntegrityError, OperationalError
 from sqlalchemy.orm import aliased
 from sqlalchemy.sql.expression import true
@@ -372,7 +372,7 @@ class Controller:
             elif not filter_value or filter_value == "inclusion":
                 constraint = row.contains(value, autoescape=isinstance(value, str))
             else:
-                constraint = row.regexp_match(value)
+                constraint = cast(row, String()).regexp_match(value)
             if constraint_dict.get(f"{property}_invert"):
                 constraint = ~constraint
             constraints.append(constraint)

@@ -3,11 +3,11 @@
   description: All users
   device_access: []
   email: ''
-  file_access: []
   get_requests: []
   link_access: []
   menu: []
   name: All users
+  network_access: []
   pages: []
   pool_access: []
   post_requests: []
@@ -20,11 +20,11 @@
   description: Admin User
   device_access: []
   email: admin@enms.io
-  file_access: []
   get_requests: []
   link_access: []
   menu: []
   name: Admin User
+  network_access: []
   pages: []
   pool_access: []
   post_requests: []
@@ -37,7 +37,6 @@
   description: Full UI Read + Edit Access
   device_access: []
   email: ''
-  file_access: []
   get_requests: [/changelog_table, /compare_form, /configuration_table, /confirmation_form,
     /device_data_form, /device_table, /download, /event_table, /export_service, /file_table,
     /files_form, /geographical_view, /git_history_form, /group_table, /instance_deletion_form,
@@ -75,6 +74,7 @@
   link_access: []
   menu: [Inventory, Visualization, Automation]
   name: Full UI Read + Edit Access
+  network_access: []
   pages: [Files, Changelog, Devices, Configurations, Links, Pools, Networks, Geographical
       View, Network Builder, Services, Workflow Builder, Scheduling, Results]
   pool_access: []

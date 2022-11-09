@@ -1,12 +1,12 @@
-- {authentication: database, description: '', email: admin@enms.io, is_admin: true,
+- {authentication: database, creator: '', description: '', email: admin@enms.io, is_admin: true,
   landing_page: /dashboard, name: admin, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRNaWFrOVA3Zit6OW5qSEd1RmVLOGR3JEhLWk5VWnVpMnlObkt5QnRHNFR4WEE=,
   small_menu: false, theme: default, type: user}
-- {authentication: database, description: Read Only user, email: read-only@enms.io,
+- {authentication: database, creator: '', description: Read Only user, email: read-only@enms.io,
   is_admin: false, landing_page: /dashboard, name: readonly, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQrcjkzTHNXWUU4SjRiODNaVytzOTV3JG5FNXFiU3B2QWM1ZUpyYWdwSlBycXc=,
   small_menu: false, theme: default, type: user}
-- {authentication: database, description: Non-admin user with full access rights,
-  email: '', is_admin: false, landing_page: /dashboard, name: nadmin, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRlRTlwYlcxdHpWbHJMU1VFb0JTQ0VBJDJHT3dDeEQwRU5jRitIcXhyV3Fsanc=,
+- {authentication: database, creator: '', description: Non-admin user with full access
+    rights, email: '', is_admin: false, landing_page: /dashboard, name: nadmin, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRlRTlwYlcxdHpWbHJMU1VFb0JTQ0VBJDJHT3dDeEQwRU5jRitIcXhyV3Fsanc=,
   small_menu: false, theme: default, type: user}
-- {authentication: database, description: Read Only user, email: demo@enms.io, is_admin: false,
-  landing_page: /dashboard, name: demo, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQwM3FQc1pieTNwdnpmZytCOEw1M3JnJHVPYjJ0RGdjUU45MUI2TEdPYkhOaVE=,
+- {authentication: database, creator: '', description: Read Only user, email: demo@enms.io,
+  is_admin: false, landing_page: /dashboard, name: demo, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQwM3FQc1pieTNwdnpmZytCOEw1M3JnJHVPYjJ0RGdjUU45MUI2TEdPYkhOaVE=,
   small_menu: true, theme: default, type: user}

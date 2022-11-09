@@ -20,7 +20,10 @@
   name: Top-level Devices and Links
   networks: []
   nodes: [Router 1, Router 2, Router 3]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
@@ -48,8 +51,11 @@
   model: ''
   name: Subnetwork and Teleport Mechanism
   networks: []
-  nodes: [Subnetwork 1, Subnetwork 2]
+  nodes: [Subnetwork 2, Subnetwork 1]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
@@ -74,11 +80,14 @@
   name: Subnetwork 1
   networks: [Subnetwork and Teleport Mechanism, Subnetwork 2]
   nodes: [Subnetwork 2, Subnetwork 1 - R1, Subnetwork 1 - R2, Subnetwork 1 - R3]
+  owners: []
   positions:
     'Network 2: Subnetwork': &id001 [-558, -27]
     'Network 2: Subnetwork and Teleport Mechanism': *id001
     Subnetwork 2: [-15, 43]
     Subnetwork and Teleport Mechanism: *id001
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
@@ -113,7 +122,10 @@
   name: Creation, Edit and Deletion
   networks: []
   nodes: []
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
@@ -137,11 +149,14 @@
   name: Subnetwork 2
   networks: [Subnetwork and Teleport Mechanism, Subnetwork 1]
   nodes: [Subnetwork 1, Subnetwork 2 - G1, Subnetwork 2 - G2]
+  owners: []
   positions:
     'Network 2: Subnetwork': &id002 [-144, -36]
     'Network 2: Subnetwork and Teleport Mechanism': *id002
     Subnetwork 1: [-2, -48]
     Subnetwork and Teleport Mechanism: *id002
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
@@ -173,7 +188,10 @@
   name: Duplication of Devices, Subnetworks and Top-level Networks
   networks: []
   nodes: [Duplicate me 2, Duplicate me 1]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
@@ -192,9 +210,12 @@
   name: Duplicate me 2
   networks: ['Duplication of Devices, Subnetworks and Top-level Networks']
   nodes: [Duplication - G1, Duplication - R1]
+  owners: []
   positions:
     Duplication of Devices, Subnetworks and Top-level Networks: &id003 [135, 6]
     'Network 4: Duplication of Devices, Subnetworks and Top-level Networks': *id003
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
@@ -226,7 +247,10 @@
   name: Loopback and Parallel Links
   networks: []
   nodes: [S5 R1, S5 R2, S5 R3, S5 R4]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
@@ -251,7 +275,10 @@
   name: Subsubnetwork and Subsubsubnetwork
   networks: []
   nodes: [L1 Network]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
@@ -270,9 +297,12 @@
   name: L1 Network
   networks: [Subsubnetwork and Subsubsubnetwork]
   nodes: [L2 Network]
+  owners: []
   positions:
     'Network 6: Subsubnetwork and Subsubsubnetwork': &id004 [-27, -55]
     Subsubnetwork and Subsubsubnetwork: *id004
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
@@ -291,7 +321,10 @@
   name: L2 Network
   networks: [L1 Network]
   nodes: [L3 Network]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
@@ -310,7 +343,10 @@
   name: L3 Network
   networks: [L2 Network]
   nodes: [S6 L3 R1, S6 L3 R2]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
@@ -336,7 +372,10 @@
   name: Layout of Large Graph
   networks: []
   nodes: []
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
@@ -373,7 +412,10 @@
   name: Import with Add Connected Nodes and Links
   networks: []
   nodes: []
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
@@ -398,7 +440,10 @@
     Baltimore, PaloAlto, SanJose, Cleveland, Jackson, Richmond, Cambridge, Chicago,
     Philadelphia, Cincinnati, NewYork, Minneapolis, SanFrancisco, Atlanta, Detroit,
     Denver, Sacramento, SanDiego, LosAngeles, Boston, Dallas-2, Dallas]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''

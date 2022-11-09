@@ -13,7 +13,6 @@
   pools: []
   rbac_edit: []
   rbac_read: []
-  rbac_schedule: []
   scheduling_mode: standard
   service: (R) Configuration Properties Backup Services
   start_date: 09/10/2019 21:17:13
@@ -33,7 +32,6 @@
   pools: []
   rbac_edit: []
   rbac_read: []
-  rbac_schedule: []
   scheduling_mode: standard
   service: cluster_monitoring
   start_date: 01/11/2020 12:05:19
@@ -53,7 +51,6 @@
   pools: []
   rbac_edit: []
   rbac_read: []
-  rbac_schedule: []
   scheduling_mode: standard
   service: (R) Scrapli Service
   start_date: 30/06/2020 09:15:18

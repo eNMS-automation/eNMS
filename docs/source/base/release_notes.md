@@ -54,6 +54,8 @@ Version 4.4.0: RBAC and Credentials
 - Remove "settings" from global variables so that it cannot be overriden.
   Thread: "Settings and security question"
 - Enable migration for files and folders.
+- When selection in builder changed, close deletion panel (wrong node / edge count)
+  Issue #280 / Commit 6fc007f6a1d43fd2b61652f02983dba0cedef68a
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The 

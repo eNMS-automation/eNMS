@@ -98,12 +98,12 @@
     ],
     "file": [
       "id",
-      "name",
+      "filename",
       "status"
     ],
     "folder": [
       "id",
-      "name",
+      "filename",
       "status"
     ],
     "link": [

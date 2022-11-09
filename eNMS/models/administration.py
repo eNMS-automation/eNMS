@@ -186,6 +186,7 @@ class File(AbstractBase):
     __mapper_args__ = {"polymorphic_identity": "file", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    description = db.Column(db.LargeString)
     filename = db.Column(db.SmallString, index=True)
     path = db.Column(db.SmallString, unique=True)
     last_modified = db.Column(db.TinyString)

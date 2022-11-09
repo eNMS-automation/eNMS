@@ -59,6 +59,7 @@ Version 4.4.0: RBAC and Credentials
 - Resize table headers when the panel that contains the table is resized
   Commit 40a909673f4b9cfbfcae58fb60e86f6e6bd83994
 - When a file is deleted, mark as missing instead of deleting associate file object
+- Make "update device RBAC" pool mechanism accessible from REST API.
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The 

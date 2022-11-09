@@ -56,6 +56,8 @@ Version 4.4.0: RBAC and Credentials
 - Enable migration for files and folders.
 - When selection in builder changed, close deletion panel (wrong node / edge count)
   Issue #280 / Commit 6fc007f6a1d43fd2b61652f02983dba0cedef68a
+- Resize table when a panel that contains it is resized
+  Commit 40a909673f4b9cfbfcae58fb60e86f6e6bd83994
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The 

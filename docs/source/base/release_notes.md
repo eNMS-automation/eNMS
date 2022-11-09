@@ -51,10 +51,14 @@ Version 4.4.0: RBAC and Credentials
   edit panel to a service in netmiko "Expect String" field.
 - Fix bug where RBAC Edit access is needed to run a service
   Thread: "Edit Service/Device Needed for user using /rest/run_service"
+- Remove "settings" from global variables so that it cannot be overriden.
+  Thread: "Settings and security question"
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The 
   appropriate groups must be created first.
+- In migration files, check that the "settings" variable isn't used in any workflow. If the
+  server IP, name or URL is used, the "server variable should be used instead.
 
 Version 4.3.0
 -------------

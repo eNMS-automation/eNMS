@@ -927,7 +927,6 @@ class Runner:
                     "url": vs.server_url,
                 },
                 "set_var": _self.payload_helper,
-                "settings": vs.settings,
                 "username": _self.main_run.creator,
                 "workflow": _self.workflow,
             }

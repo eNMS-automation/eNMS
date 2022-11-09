@@ -49,6 +49,8 @@ Version 4.4.0: RBAC and Credentials
   instance (via post_update mechanism)
 - Fix asynchronous bug in netmiko services: wrong disabled status after opening
   edit panel to a service in netmiko "Expect String" field.
+- Fix bug where RBAC Edit access is needed to run a service
+  Thread: "Edit Service/Device Needed for user using /rest/run_service"
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The 

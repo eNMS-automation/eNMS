@@ -92,19 +92,19 @@ class RestApi:
         service.check_freeze("run")
         handle_asynchronously = data.get("async", True)
         for device_name in data.get("devices", ""):
-            device = db.fetch("device", name=device_name)
+            device = db.fetch("device", name=device_name, allow_none=True)
             if device:
                 devices.append(device.id)
             else:
                 errors.append(f"No device with the name '{device_name}'")
         for device_ip in data.get("ip_addresses", ""):
-            device = db.fetch("device", ip_address=device_ip)
+            device = db.fetch("device", ip_address=device_ip, allow_none=True)
             if device:
                 devices.append(device.id)
             else:
                 errors.append(f"No device with the IP address '{device_ip}'")
         for pool_name in data.get("pools", ""):
-            pool = db.fetch("pool", name=pool_name)
+            pool = db.fetch("pool", name=pool_name, allow_none=True)
             if pool:
                 pools.append(pool.id)
             else:

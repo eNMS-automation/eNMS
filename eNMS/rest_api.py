@@ -39,6 +39,7 @@ class RestApi:
         "get_git_content",
         "update_all_pools",
         "update_database_configurations_from_git",
+        "update_device_rbac",
     ]
 
     def __init__(self):

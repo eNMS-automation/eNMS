@@ -235,6 +235,7 @@
     "/rest/topology": "access",
     "/rest/update_all_pools": "access",
     "/rest/update_database_configurations_from_git": "access",
+    "/rest/update_device_rbac": "admin",
     "/result_log_deletion": "access",
     "/run_debug_code": "admin",
     "/run_service": "access",

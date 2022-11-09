@@ -39,6 +39,7 @@
     "user",
     "group",
     "device",
+    "file",
     "link",
     "service",
     "network",
@@ -57,12 +58,19 @@
       "rbac_edit_devices",
       "rbac_edit_files",
       "rbac_edit_links",
+      "rbac_edit_networks",
       "rbac_edit_pools",
       "rbac_edit_services",
       "rbac_edit_tasks",
+      "rbac_pool_rbac_configuration",
+      "rbac_pool_rbac_connect",
+      "rbac_pool_rbac_edit",
+      "rbac_pool_rbac_read",
+      "rbac_pool_rbac_target",
       "rbac_read_devices",
       "rbac_read_files",
       "rbac_read_links",
+      "rbac_read_networks",
       "rbac_read_pools",
       "rbac_read_services",
       "rbac_read_tasks",
@@ -87,6 +95,12 @@
       "target_services",
       "tasks",
       "users"
+    ],
+    "file": [
+      "id",
+      "filename",
+      "name",
+      "status"
     ],
     "link": [
       "id",
@@ -146,6 +160,7 @@
       "user_devices",
       "user_files",
       "user_links",
+      "user_networks",
       "user_pools",
       "user_services",
       "user_tasks"

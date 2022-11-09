@@ -98,7 +98,11 @@
     ],
     "file": [
       "id",
-      "filename",
+      "name",
+      "status"
+    ],
+    "folder": [
+      "id",
       "name",
       "status"
     ],

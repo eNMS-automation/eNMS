@@ -457,7 +457,6 @@ class ExcelImportForm(BaseForm):
 
 class FileForm(BaseForm):
     action = "eNMS.base.processData"
-    template = "object"
     form_type = HiddenField(default="file")
     id = HiddenField()
     path = StringField("Path", [InputRequired()])

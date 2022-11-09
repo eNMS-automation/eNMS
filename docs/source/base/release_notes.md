@@ -53,6 +53,7 @@ Version 4.4.0: RBAC and Credentials
   Thread: "Edit Service/Device Needed for user using /rest/run_service"
 - Remove "settings" from global variables so that it cannot be overriden.
   Thread: "Settings and security question"
+- Enable migration for files and folders.
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The 

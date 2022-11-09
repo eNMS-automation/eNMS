@@ -126,7 +126,7 @@ class Service(AbstractBase):
             self.path = str(self.id)
         self.set_name()
         self.update_last_modified_properties()
-        return self.to_dict(include=["workflows"])
+        return self.to_dict(include=["services", "workflows"])
 
     def update(self, **kwargs):
         if self.path:

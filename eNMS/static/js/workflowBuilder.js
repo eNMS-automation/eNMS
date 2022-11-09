@@ -738,6 +738,7 @@ function compareWorkflowResults() {
     type: "full_result",
     title: "Result Comparison",
     id: mainId,
+    tableId: `full_result-${mainId}`,
     callback: function () {
       let constraints = {
         parent_service_id: currentPath.split(">")[0],

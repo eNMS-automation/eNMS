@@ -45,6 +45,7 @@ function displayFiles() {
           width="100%"
         ></table>
       </form>`,
+    tableId: "file",
     title: "Files",
     callback: function () {
       // eslint-disable-next-line new-cap

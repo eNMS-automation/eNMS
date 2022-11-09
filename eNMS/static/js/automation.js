@@ -387,6 +387,7 @@ export const showRuntimePanel = function (
         type: "result",
         title: `${type} - ${service.name}`,
         id: service.id,
+        tableId: panelType == "table" ? `result-${service.id}` : null,
         callback: function () {
           $(`#runtimes-${panelId}`).empty();
           runtimes.forEach((runtime) => {

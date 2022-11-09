@@ -289,6 +289,7 @@ export function openPanel({
   duplicate,
   content,
   size,
+  tableId,
   url,
   css,
   checkRbac = true,
@@ -328,6 +329,9 @@ export function openPanel({
     },
     resizeit: {
       containment: 0,
+      stop: function() {
+        if (tableId) refreshTable(tableId);
+      }
     },
     ...other,
   };

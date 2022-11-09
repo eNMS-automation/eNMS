@@ -321,6 +321,7 @@ function showFilteredTable(id, type, constraints) {
       </div>`,
     id: id,
     title: `Colocated ${type}s`,
+    tableId: `${type}-${id}`,
     callback: function () {
       // eslint-disable-next-line new-cap
       new tables[type](id, constraints);

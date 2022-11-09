@@ -279,6 +279,10 @@
       "rbac_read": "Read",
       "rbac_edit": "Edit"
     },
+    "network": {
+      "rbac_read": "Read",
+      "rbac_edit": "Edit"
+    },
     "pool": {
       "rbac_read": "Read",
       "rbac_edit": "Edit"

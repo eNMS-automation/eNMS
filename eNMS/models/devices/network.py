@@ -59,6 +59,7 @@ class Network(Node):
 
 class NetworkForm(BaseForm):
     action = "eNMS.base.processData"
+    template = "object"
     form_type = HiddenField(default="network")
     id = HiddenField()
     name = StringField("Name")

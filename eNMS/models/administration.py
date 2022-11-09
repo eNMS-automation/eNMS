@@ -211,7 +211,8 @@ class File(AbstractBase):
         self.folder_path = "/".join(split_folder_path)
         self.folder = db.fetch("folder", path=self.folder_path, allow_none=True)
         self.last_modified = datetime.strptime(ctime(getmtime(self.path)), "%c")
-        self.last_updated = datetime.strptime(ctime(), "%c")
+        if not kwargs.get("migration_import"):
+            self.last_updated = datetime.strptime(ctime(), "%c")
         self.status = "Updated"
 
 

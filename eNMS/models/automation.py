@@ -125,7 +125,6 @@ class Service(AbstractBase):
         else:
             self.path = str(self.id)
         self.set_name()
-        self.update_last_modified_properties()
         return self.to_dict(include=["services", "workflows"])
 
     def update(self, **kwargs):
@@ -136,6 +135,7 @@ class Service(AbstractBase):
         super().update(**kwargs)
         if not kwargs.get("migration_import"):
             self.set_name()
+            self.update_last_modified_properties()
 
     def update_last_modified_properties(self):
         super().update_last_modified_properties()

@@ -381,7 +381,8 @@ class Pool(AbstractBase):
 
     def update(self, **kwargs):
         super().update(**kwargs)
-        self.update_last_modified_properties()
+        if not kwargs.get("migration_import"):
+            self.update_last_modified_properties()
 
     def compute_pool(self):
         for model in self.models:

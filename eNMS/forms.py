@@ -460,6 +460,7 @@ class FileForm(BaseForm):
     form_type = HiddenField(default="file")
     id = HiddenField()
     path = StringField("Path", [InputRequired()])
+    description = StringField(widget=TextArea(), render_kw={"rows": 8})
     filename = StringField("Filename", render_kw={"readonly": True})
     name = StringField("Name", render_kw={"readonly": True})
     last_modified = StringField("Last Modified", render_kw={"readonly": True})

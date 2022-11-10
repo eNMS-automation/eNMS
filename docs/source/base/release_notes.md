@@ -60,6 +60,8 @@ Version 4.4.0: RBAC and Credentials
   Commit 40a909673f4b9cfbfcae58fb60e86f6e6bd83994
 - When a file is deleted, mark as missing instead of deleting associate file object
 - Make "update device RBAC" pool mechanism accessible from REST API.
+- Fix bug where using run_service REST endpoint with non existing device returns 403
+  not allowed error instead of more specific "Device not found" error
 
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The 

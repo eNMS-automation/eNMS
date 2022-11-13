@@ -96,12 +96,12 @@ class GenericFileTransferForm(ServiceForm):
         "Credentials",
         choices=(
             ("device", "Device Credentials"),
-            ("credential", "Credential Object"),
+            ("object", "Credential Object"),
             ("user", "User Credentials"),
             ("custom", "Custom Credentials"),
         ),
     )
-    credential_object = InstanceField("Credential", model="credential")
+    credential_object = InstanceField("Credential Object", model="credential")
     custom_username = StringField("Custom Username", substitution=True)
     custom_password = PasswordField("Custom Password", substitution=True)
 

@@ -957,7 +957,7 @@ class ConnectionForm(ServiceForm):
         "Credentials",
         choices=(
             ("device", "Device Credentials"),
-            ("credential", "Credential Object"),
+            ("object", "Credential Object"),
             ("user", "User Credentials"),
             ("custom", "Custom Credentials"),
         ),

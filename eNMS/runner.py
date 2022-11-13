@@ -703,17 +703,20 @@ class Runner:
 
     def get_credentials(self, device, add_secret=True):
         result, credential_type = {}, self.main_run.service.credential_type
-        credential = db.get_credential(
-            self.creator,
-            device=device,
-            credential_type=credential_type,
-            optional=self.credentials != "device",
-        )
+        if self.credentials == "object":
+            credential = self.credential_object
+        else:
+            credential = db.get_credential(
+                self.creator,
+                device=device,
+                credential_type=credential_type,
+                optional=self.credentials != "device",
+            )
         if add_secret and device and credential:
             log = f"Using '{credential.name}' credential for '{device.name}'"
             self.log("info", log)
             result["secret"] = env.get_password(credential.enable_password)
-        if self.credentials == "device":
+        if self.credentials in ("device", "object"):
             result["username"] = credential.username
             if credential.subtype == "password":
                 result["password"] = env.get_password(credential.password)

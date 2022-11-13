@@ -957,10 +957,12 @@ class ConnectionForm(ServiceForm):
         "Credentials",
         choices=(
             ("device", "Device Credentials"),
+            ("credential", "Credential Object"),
             ("user", "User Credentials"),
             ("custom", "Custom Credentials"),
         ),
     )
+    credential_object = InstanceField("Credential Object", model="credential")
     custom_username = StringField("Custom Username", substitution=True)
     custom_password = PasswordField("Custom Password", substitution=True)
     start_new_connection = BooleanField("Start New Connection")
@@ -970,6 +972,7 @@ class ConnectionForm(ServiceForm):
         "Connection Parameters": {
             "commands": [
                 "credentials",
+                "credential_object",
                 "custom_username",
                 "custom_password",
                 "start_new_connection",

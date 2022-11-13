@@ -614,7 +614,7 @@ export function configureForm(form, id, panelId) {
       editors[id][property] = editor;
     } else if (["object", "object-list"].includes(field.type)) {
       let model;
-      if (relationships[form]) {
+      if (relationships?.[form]?.[property]?.model) {
         model = relationships[form][property].model;
       } else {
         model = field.model;

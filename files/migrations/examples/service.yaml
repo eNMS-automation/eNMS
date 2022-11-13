@@ -50,6 +50,8 @@
   positions:
     (R) Ansible Playbook Service: [-638, 93]
     (R) Configuration Properties Backup Services: [-826, 220]
+    (R) Credential Object Mechanism: [-172, -4]
+    (R) Custom Object Credential Mechanism: [0, 0]
     '(R) Function: get_connection': &id004 [-297, 70]
     (R) Gateway Mechanism (SSH Proxy with Netmiko): &id001 [-208, -125]
     (R) Gateway Mechanism (SSH Proxy with Paramiko): *id001
@@ -514,6 +516,8 @@
   positions:
     (R) Ansible Playbook Service: [512, 246]
     (R) Configuration Properties Backup Services: [328, 372]
+    (R) Credential Object Mechanism: [599, -19]
+    (R) Custom Object Credential Mechanism: [500, 0]
     '(R) Function: get_connection': &id092 [585, -100]
     (R) Gateway Mechanism (SSH Proxy with Netmiko): &id089 [795, -51]
     (R) Gateway Mechanism (SSH Proxy with Paramiko): *id089
@@ -34217,4 +34221,189 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  waiting_time: 0
+- admin_only: false
+  category: Other
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  custom_property: Default Value
+  default_uuid: 4e5f4585-344f-471a-8ca0-1cdf6d3957fb
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  freeze: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    f87e4c24-ca94-41f9-b248-af0a2448ed5d:
+      alignment: left
+      content: "This workflow tests the \"Credential Object\" mechanism,\r\nused in\
+        \ the following services:\r\n- Connection Services (Netmiko, Napalm, Scrapli)\r\
+        \n- REST Call Service\r\n- Generic File Transfer Service"
+      positions: [248, -130]
+      size: 14
+  last_modified: '2022-11-13 01:52:27.017423'
+  last_modified_by: admin
+  log_level: 1
+  mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
+  mandatory_parameter: Default Value
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: (R) Credential Object Mechanism
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: [admin]
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: (R) Credential Object Mechanism
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[(R) Credential Object Mechanism]
+      REST Call']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- admin_only: false
+  call_type: GET
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_object: REST API Credential
+  credential_object_id: 6
+  credential_type: any
+  credentials: credential
+  custom_password: ''
+  custom_username: ''
+  default_uuid: aa2d7a5d-622c-45e5-94d5-733a72e041e9
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  freeze: []
+  headers: {}
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2022-11-13 01:52:23.298541'
+  last_modified_by: admin
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parameter: Default Value
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[(R) Credential Object Mechanism] REST Call'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: [admin]
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  params: {}
+  payload: {}
+  positions:
+    (R) Credential Object Mechanism: [193, 106]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  rbac_edit: []
+  rbac_read: []
+  rbac_run: []
+  reply_to: ''
+  reserved: false
+  rest_url: ''
+  run_method: per_device
+  scoped_name: REST Call
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 15
+  type: rest_call_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  verify_ssl_certificate: false
   waiting_time: 0

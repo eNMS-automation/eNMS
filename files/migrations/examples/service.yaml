@@ -34258,7 +34258,7 @@
         \n- REST Call Service\r\n- Generic File Transfer Service"
       positions: [248, -130]
       size: 14
-  last_modified: '2022-11-13 01:52:27.017423'
+  last_modified: '2022-11-13 02:38:48.396329'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -34326,7 +34326,7 @@
   credential_object: REST API Credential
   credential_object_id: 6
   credential_type: any
-  credentials: credential
+  credentials: object
   custom_password: ''
   custom_username: ''
   default_uuid: aa2d7a5d-622c-45e5-94d5-733a72e041e9
@@ -34348,7 +34348,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-11-13 01:52:23.298541'
+  last_modified: '2022-11-13 02:38:48.396329'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -34385,7 +34385,7 @@
   rbac_run: []
   reply_to: ''
   reserved: false
-  rest_url: ''
+  rest_url: http://192.168.56.102/rest/query/device?name={{ device.name }}
   run_method: per_device
   scoped_name: REST Call
   send_notification: false

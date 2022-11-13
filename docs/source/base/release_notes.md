@@ -62,6 +62,9 @@ Version 4.4.0: RBAC and Credentials
 - Make "update device RBAC" pool mechanism accessible from REST API.
 - Fix bug where using run_service REST endpoint with non existing device returns 403
   not allowed error instead of more specific "Device not found" error
+- Add new "Credential Object" mechanism in connection services, REST service and
+  generic file transfer service. Choose credential object explicitly instead of using
+  custom username / password.
 
 RBAC Refactoring:
 - Service export: owners and RBAC read / edit / etc are exported in the service

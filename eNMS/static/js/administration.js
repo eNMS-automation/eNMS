@@ -62,11 +62,13 @@ export function displayFolderPath() {
     .slice(1)
     .forEach((folder) => {
       currentPath += `/${folder}`;
-      let onclick = currentPath.includes(defaultFolder)
+      const clickable = currentPath.includes(defaultFolder);
+      const onclick = clickable
         ? `onclick="eNMS.administration.enterFolder({path: '${currentPath}'})"`
         : "";
+      const status = clickable ? "" : "disabled";
       htmlPath.push(`<b> / </b>
-    <button type="button" class="btn btn-xs btn-primary" ${onclick}>
+    <button type="button" ${status} class="btn btn-xs btn-primary" ${onclick}>
       ${folder}
     </button>`);
     });

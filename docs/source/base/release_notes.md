@@ -63,6 +63,11 @@ Version 4.4.0: RBAC and Credentials
 - Fix bug where using run_service REST endpoint with non existing device returns 403
   not allowed error instead of more specific "Device not found" error
 
+RBAC Refactoring:
+- Service export: owners and RBAC read / edit / etc are exported in the service
+  .yaml file. If the importing user doesn't have access to the service based on
+  how RBAC is set up, the service will not be visible after export.
+
 Migration:
 - The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The 
   appropriate groups must be created first.

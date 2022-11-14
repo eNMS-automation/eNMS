@@ -35014,7 +35014,7 @@
         \n    \"ip_address\": device.ip_address,\r\n    \"port\": device.port\r\n}"
       positions: [-50, 47]
       size: 14
-  last_modified: '2022-11-14 07:15:10.425028'
+  last_modified: '2022-11-14 07:33:44.878468'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -35049,7 +35049,8 @@
   rbac_read: []
   rbac_run: []
   reply_to: ''
-  report: ''
+  report: '{{ "\n\n".join(dict_to_string(result["result"]) for result in get_result("Service",
+    all_matches=True)) }}'
   reserved: false
   run_method: per_device
   scoped_name: Text Reports with Normal Templates

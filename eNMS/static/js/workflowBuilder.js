@@ -168,15 +168,14 @@ export function showServicePanel(type, id, mode, tableId) {
     $(`#${type}-vendor`).val(workflow.vendor).trigger("change");
     $(`#${type}-operating_system`).val(workflow.operating_system).trigger("change");
   }
-  $(field("report_template", type, id))
-    .on("change", function () {
-      call({
-        url: `/get_report_template/${this.value}`,
-        callback: function (template) {
-          field("report", type, id).val(template);
-        },
-      });
-    })
+  $(field("report_template", type, id)).on("change", function () {
+    call({
+      url: `/get_report_template/${this.value}`,
+      callback: function (template) {
+        field("report", type, id).val(template);
+      },
+    });
+  });
   $(workflowId).prop("disabled", true);
   const wizardId = id ? `#${type}-wizard-${id}` : `#${type}-wizard${postfix}`;
   $(wizardId).smartWizard({

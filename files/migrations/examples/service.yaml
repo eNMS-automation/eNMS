@@ -35561,17 +35561,18 @@
       size: 14
     437168b5-9f78-4d25-ae10-6b98b60e9bf4:
       alignment: left
-      content: "In the template, we use the following python substitution:\r\n<div>\r\
-        \n<table>\r\n  <tr>\r\n    {% for header in (\"Name\", \"IP address\", \"\
-        Port\" %}\r\n    <th>{{ header }}</th>\r\n    {% endfor %}\r\n  </tr>\r\n\
-        \   {% for result in get_result(\"Service\", all_matches=True)) %}\r\n  <tr>\r\
-        \n    <td>result[\"result\"][\"name\"]</td>\r\n    <td>result[\"result\"][\"\
-        ip_address\"]</td>\r\n    <td>result[\"result\"][\"port\"]</td>\r\n  </tr>\r\
-        \n  {% endfor %}\r\n</table>\r\n</div>\r\nto display each device properties\
-        \ individually."
-      positions: [427, 94]
+      content: "In the template, we use the following python substitution:\r\n<center>\r\
+        \n  <div>\r\n    <table>\r\n      <tr>\r\n        {% for header in (\"Name\"\
+        , \"IP address\", \"Port\") %}\r\n          <th>{{ header }}</th>\r\n    \
+        \    {% endfor %}\r\n      </tr>\r\n      {% for result in get_result(\"Service\"\
+        , all_matches=True) %}\r\n        <tr>\r\n          <td>{{ result[\"result\"\
+        ][\"name\"] }}</td>\r\n          <td>{{ result[\"result\"][\"ip_address\"\
+        ] }}</td>\r\n          <td>{{ result[\"result\"][\"port\"] }}</td>\r\n   \
+        \     </tr>\r\n      {% endfor %}\r\n    </table>\r\n  </div>\r\n<center>\r\
+        \nto display each device properties individually."
+      positions: [375, 103]
       size: 14
-  last_modified: '2022-11-14 08:46:25.008161'
+  last_modified: '2022-11-14 09:00:00.094837'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -35606,12 +35607,13 @@
   rbac_read: []
   rbac_run: []
   reply_to: ''
-  report: "<div>\r\n<table>\r\n  <tr>\r\n    {% for header in (\"Name\", \"IP address\"\
-    , \"Port\" %}\r\n    <th>{{ header }}</th>\r\n    {% endfor %}\r\n  </tr>\r\n\
-    \   {% for result in get_result(\"Service\", all_matches=True)) %}\r\n  <tr>\r\
-    \n    <td>result[\"result\"][\"name\"]</td>\r\n    <td>result[\"result\"][\"ip_address\"\
-    ]</td>\r\n    <td>result[\"result\"][\"port\"]</td>\r\n  </tr>\r\n  {% endfor\
-    \ %}\r\n</table>\r\n</div>\r\n\r\n  \r\n"
+  report: "<center>\r\n  <div>\r\n    <table>\r\n      <tr>\r\n        {% for header\
+    \ in (\"Name\", \"IP address\", \"Port\") %}\r\n          <th>{{ header }}</th>\r\
+    \n        {% endfor %}\r\n      </tr>\r\n      {% for result in get_result(\"\
+    Service\", all_matches=True) %}\r\n        <tr>\r\n          <td>{{ result[\"\
+    result\"][\"name\"] }}</td>\r\n          <td>{{ result[\"result\"][\"ip_address\"\
+    ] }}</td>\r\n          <td>{{ result[\"result\"][\"port\"] }}</td>\r\n       \
+    \ </tr>\r\n      {% endfor %}\r\n    </table>\r\n  </div>\r\n<center>"
   report_format: html
   reserved: false
   run_method: per_device
@@ -35685,7 +35687,7 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   positions:
-    HTML Reports with Jinja2 Templates: [141, 302]
+    HTML Reports with Jinja2 Templates: [126, 349]
     HTML Reports with Normal Templates: &id486 [187, 202]
     Text Reports with Normal Templates: *id486
   postprocessing: ''

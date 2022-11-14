@@ -160,9 +160,11 @@ function copyClipboard(elementId, result) {
   target.click();
 }
 
-function downloadLogs(serviceId) {
-  const logs = $(`#service-logs-${serviceId}`).data("CodeMirrorInstance").getValue();
-  downloadFile(`logs-${serviceId}`, logs, "txt");
+function downloadRun(type, serviceId) {
+  const content = type == "logs"
+    ? $(`#service-${type}-${serviceId}`).data("CodeMirrorInstance").getValue()
+    : $(`#service-${type}-${serviceId}`).text();
+  downloadFile(`${type}-${serviceId}`, content, "txt");
 }
 
 function stopRun(runtime) {
@@ -308,8 +310,8 @@ export const showRuntimePanel = function (
             <div style="width: 30px; float: left; margin-left: 15px;">
               <button
                 class="btn btn-default pull-right"
-                onclick="eNMS.automation.downloadLogs(${service.id})"
-                data-tooltip="Download Logs"
+                onclick="eNMS.automation.downloadRun('${panelType}', ${service.id})"
+                data-tooltip="Download"
                 type="button"
               >
                 <span
@@ -844,7 +846,7 @@ configureNamespace("automation", [
   displayDiff,
   copyClipboard,
   displayCalendar,
-  downloadLogs,
+  downloadRun,
   field,
   openServicePanel,
   pauseTask,

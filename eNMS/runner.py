@@ -849,7 +849,7 @@ class Runner:
     def get_var(self, *args, **kwargs):
         return self.payload_helper(*args, operation="get", **kwargs)
 
-    def get_result(self, service_name, device=None, workflow=None):
+    def get_result(self, service_name, device=None, workflow=None, all_matches=False):
         def filter_run(query, property):
             query = query.filter(
                 vs.models["result"].service.has(
@@ -878,7 +878,10 @@ class Runner:
             if not results:
                 return recursive_search(run.restart_run)
             else:
-                return results.pop().result
+                if all_matches:
+                    return [result.result for result in results]
+                else:
+                    return results.pop().result
 
         return recursive_search(self.main_run)
 

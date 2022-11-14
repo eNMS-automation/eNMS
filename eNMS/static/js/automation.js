@@ -270,11 +270,13 @@ export const showRuntimePanel = function (
   const displayFunction =
     type == "logs"
       ? displayLogs
+      : type == "report"
+      ? displayReport
       : service.type == "workflow" && !table
       ? displayResultsTree
       : displayResultsTable;
   const panelType =
-    type == "logs" ? "logs" : service.type == "workflow" && !table ? "tree" : "table";
+    type == "logs" ? "logs" : type == "report" ? "report" : service.type == "workflow" && !table ? "tree" : "table";
   const panelId = `${panelType}-${service.id}`;
   call({
     url: `/get_runtimes/${service.id}`,
@@ -282,7 +284,7 @@ export const showRuntimePanel = function (
       if (newRuntime) runtimes.push([runtime, runtime]);
       if (!runtimes.length) return notify(`No ${type} yet.`, "error", 5);
       let content;
-      if (panelType == "logs") {
+      if (panelType == "logs" || panelType == "report") {
         content = `
         <div class="modal-body">
           <nav
@@ -408,6 +410,15 @@ export const showRuntimePanel = function (
     },
   });
 };
+
+function displayReport(service, runtime) {
+  call({
+    url: `/get_report/${runtime}`,
+    callback: function (report) {
+      $(`#service-report-${service.id}`).text(report);
+    }
+  });
+}
 
 function displayLogs(service, runtime, change) {
   let editor;

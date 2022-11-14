@@ -480,6 +480,7 @@ export function updateWorkflowRightClickBindings() {
     "Workflow Result Tree": () => showRuntimePanel("results", workflow),
     "Workflow Result Table": () =>
       showRuntimePanel("results", workflow, null, "full_result", null, true),
+    "Workflow Report": () => showRuntimePanel("report", workflow),
     "Workflow Result Comparison": () => compareWorkflowResults(),
     "Workflow Logs": () => showRuntimePanel("logs", workflow),
     "Add to Workflow": addServicePanel,

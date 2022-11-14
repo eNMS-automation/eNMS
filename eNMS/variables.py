@@ -30,6 +30,7 @@ class VariableStore:
         self._set_general_variables()
         self._set_custom_variables()
         self._set_configuration_variables()
+        self._set_report_variables()
         self._set_run_variables()
         self._set_version()
         self._set_plugins_settings()
@@ -122,6 +123,14 @@ class VariableStore:
                     self.rbac["all_pages"][subpage] = subpage_values["endpoint"]
                     if subpage_values["rbac"] == "access":
                         self.rbac["pages"].append(subpage)
+
+    def _set_report_variables(self):
+        self.reports = {}
+        for path in Path(self.path / "files" / "reports").glob("**/*"):
+            if path.suffix not in {".j2", ".txt"}:
+                continue
+            with open(path, "r") as file:
+                self.reports[path.name] = file.read()
 
     def _set_run_variables(self):
         self.run_targets = {}

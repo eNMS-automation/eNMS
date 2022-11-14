@@ -96,16 +96,8 @@
       "tasks",
       "users"
     ],
-    "file": [
-      "id",
-      "filename",
-      "status"
-    ],
-    "folder": [
-      "id",
-      "filename",
-      "status"
-    ],
+    "file": ["id", "filename", "status"],
+    "folder": ["id", "filename", "status"],
     "link": [
       "id",
       "pools",

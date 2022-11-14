@@ -73,7 +73,7 @@ export function configureGraph(newInstance, graph, options) {
       network.canvas.body.container.style.cursor = "default";
     });
   }
-  network.on("select", function() {
+  network.on("select", function () {
     $("#confirmation-builder_deletion").remove();
   });
   network.on("oncontext", function (properties) {

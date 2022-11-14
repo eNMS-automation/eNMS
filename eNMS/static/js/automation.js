@@ -276,7 +276,13 @@ export const showRuntimePanel = function (
       ? displayResultsTree
       : displayResultsTable;
   const panelType =
-    type == "logs" ? "logs" : type == "report" ? "report" : service.type == "workflow" && !table ? "tree" : "table";
+    type == "logs"
+      ? "logs"
+      : type == "report"
+      ? "report"
+      : service.type == "workflow" && !table
+      ? "tree"
+      : "table";
   const panelId = `${panelType}-${service.id}`;
   call({
     url: `/get_runtimes/${service.id}`,
@@ -416,7 +422,7 @@ function displayReport(service, runtime) {
     url: `/get_report/${runtime}`,
     callback: function (report) {
       $(`#service-report-${service.id}`).text(report);
-    }
+    },
   });
 }
 

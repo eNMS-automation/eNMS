@@ -329,9 +329,9 @@ export function openPanel({
     },
     resizeit: {
       containment: 0,
-      stop: function() {
+      stop: function () {
         if (tableId) refreshTable(tableId);
-      }
+      },
     },
     ...other,
   };

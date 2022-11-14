@@ -66,6 +66,8 @@ Version 4.4.0: RBAC and Credentials
   generic file transfer service. Choose credential object explicitly instead of using
   custom username / password.
 - Report feature
+  - Report template can use python substitution or Jinja 2
+  - Report output can be either text-based or HTML
   - New option to display a report besides the service results.
   - In get_result, new "all_matches" keyword to get all results.
 

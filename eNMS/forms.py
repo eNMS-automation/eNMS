@@ -656,6 +656,7 @@ class ServiceForm(BaseForm):
         "Time to Wait before next service is started (in seconds)", default=0
     )
     priority = IntegerField("Priority", default=10)
+    report_template = SelectField("Report Template", choices=(vs.dualize(vs.reports)))
     report = StringField(
         widget=TextArea(), render_kw={"rows": 8}, substitution=True
     )

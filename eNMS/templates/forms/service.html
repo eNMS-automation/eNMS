@@ -798,11 +798,18 @@
                   {{ form.report(id=form_type + '-report',
                   class="form-control add-id") }}
                 </div>
-                {{ form.display_report.label() }}
-                <div class="form-group">
-                  {{ form.display_report(id=form_type + '-display_report',
-                  class="form-control add-id") }}
-                </div>
+                <fieldset>
+                  <div class="item">
+                    <input
+                      id="{{ form_type }}-display_report"
+                      name="display_report"
+                      type="checkbox"
+                      class="add-id"
+                      value="y"
+                    />
+                    {{ form.display_report.label() }}
+                  </div>
+                </fieldset>
                 <fieldset>
                   <div class="item">
                     <input

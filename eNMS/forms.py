@@ -659,7 +659,7 @@ class ServiceForm(BaseForm):
     report = StringField(
         widget=TextArea(), render_kw={"rows": 8}, substitution=True
     )
-    display_report = BooleanField("Display Report after Run")
+    display_report = BooleanField("Display Report instead of Results")
     send_notification = BooleanField("Send a notification")
     send_notification_method = SelectField(
         "Notification Method",

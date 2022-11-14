@@ -67,6 +67,7 @@ Version 4.4.0: RBAC and Credentials
   custom username / password.
 - Report feature
   - New option to display a report besides the service results.
+  - In get_result, new "all_matches" keyword to get all results.
 
 RBAC Refactoring:
 - Service export: owners and RBAC read / edit / etc are exported in the service

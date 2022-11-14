@@ -798,6 +798,11 @@
                   {{ form.report_template(id=form_type + '-report_template',
                   class="form-control add-id") }}
                 </div>
+                {{ form.report_format.label() }}
+                <div class="form-group">
+                  {{ form.report_format(id=form_type + '-report_format',
+                  class="form-control add-id") }}
+                </div>
                 {{ form.report.label(help="common/report") }}
                 <div class="form-group">
                   {{ form.report(id=form_type + '-report', class="form-control add-id")

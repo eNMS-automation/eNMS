@@ -658,6 +658,7 @@ class ServiceForm(BaseForm):
     priority = IntegerField("Priority", default=10)
     report_template = SelectField("Report Template", choices=(vs.dualize(vs.reports)))
     report = StringField(widget=TextArea(), render_kw={"rows": 8}, substitution=True)
+    report_format = SelectField("Report Format", choices=(("text", "Text"), ("html", "HTML")))
     display_report = BooleanField("Display Report instead of Results")
     send_notification = BooleanField("Send a notification")
     send_notification_method = SelectField(

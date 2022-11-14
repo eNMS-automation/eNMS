@@ -61,6 +61,7 @@ class Service(AbstractBase):
     update_target_pools = db.Column(Boolean, default=False)
     update_pools_after_running = db.Column(Boolean, default=False)
     report = db.Column(db.LargeString)
+    report_format = db.Column(db.TinyString, default="text")
     display_report = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.TinyString, default="mail")

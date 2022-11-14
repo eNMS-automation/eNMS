@@ -236,12 +236,16 @@ class Runner:
             if self.update_pools_after_running:
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
-            if self.report and self.report_format == "text":
-                report = self.sub(self.report, self.global_variables())
-            elif self.report and self.report_format == "html":
-                report = Template(self.report).render(self.global_variables())
-            else:
-                report = ""
+            try:
+                if self.report and self.report_format == "text":
+                    report = self.sub(self.report, self.global_variables())
+                elif self.report and self.report_format == "html":
+                    report = Template(self.report).render(self.global_variables())
+                else:
+                    report = ""
+            except Exception:
+                error = report = "\n".join(format_exc().splitlines())
+                self.log("error", f"Failed to build report:\n{error}")
             if self.get("send_notification"):
                 try:
                     results = self.notify(results, report)

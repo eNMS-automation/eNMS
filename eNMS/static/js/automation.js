@@ -679,7 +679,7 @@ function resumeTask(id) {
   });
 }
 
-function field(name, type, id) {
+export function field(name, type, id) {
   const fieldId = id ? `${type}-${name}-${id}` : `${type}-${name}`;
   return $(`#${fieldId}`);
 }

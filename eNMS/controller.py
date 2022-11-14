@@ -551,6 +551,9 @@ class Controller:
     def get_report(self, runtime):
         return db.fetch("run", runtime=runtime).report
 
+    def get_report_template(self, template):
+        return vs.reports[template]
+
     def get_result(self, id):
         return db.fetch("result", id=id).result
 

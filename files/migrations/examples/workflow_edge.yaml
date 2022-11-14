@@ -1600,3 +1600,9 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2022-11-13 03:04:19.871633',
   source: '[(R) Credential Object Mechanism] Napalm - get interfaces -', subtype: success,
   type: workflow_edge, workflow: (R) Credential Object Mechanism}
+- {color: green, destination: '[Text Reports with Normal Templates] Service', label: success,
+  name: '2022-11-14 07:01:50.870434', source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: Text Reports with Normal Templates}
+- {color: green, destination: '[Shared] End', label: success, name: '2022-11-14 07:01:52.011357',
+  source: '[Text Reports with Normal Templates] Service', subtype: success, type: workflow_edge,
+  workflow: Text Reports with Normal Templates}

@@ -29,7 +29,7 @@
   multiprocessing: false
   name: '[Shared] Start'
   negative_logic: false
-  notification_header: ''
+  report: ''
   number_of_retries: 0
   operating_system: ''
   target_pools: []
@@ -84,7 +84,7 @@
   multiprocessing: false
   name: '[Shared] End'
   negative_logic: false
-  notification_header: ''
+  report: ''
   number_of_retries: 0
   operating_system: ''
   target_pools: []
@@ -139,7 +139,7 @@
   multiprocessing: false
   name: cluster_monitoring
   negative_logic: false
-  notification_header: ''
+  report: ''
   number_of_retries: 0
   operating_system: ''
   target_pools: []
@@ -193,7 +193,7 @@
   multiprocessing: false
   name: '[Shared] Placeholder'
   negative_logic: false
-  notification_header: ''
+  report: ''
   number_of_retries: 0
   operating_system: ''
   target_pools: []

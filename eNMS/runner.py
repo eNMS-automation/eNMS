@@ -645,8 +645,8 @@ class Runner:
         }
         if "result" in results:
             notification["Results"] = results["result"]
-        if self.notification_header:
-            notification["Header"] = self.sub(self.notification_header, locals())
+        if self.report:
+            notification["Header"] = self.sub(self.report, locals())
         if self.include_link_in_summary:
             run = f"{self.main_run.id}/{self.service.id}"
             notification["Link"] = f"{vs.server_url}/view_service_results/{run}"

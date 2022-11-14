@@ -784,7 +784,7 @@
               href="#collapse-step4-3-{{ panel_id }}"
             >
               <h4 class="panel-title" style="color: #000;">
-                Notifications
+                Report and Notification
               </h4>
             </a>
             <div
@@ -810,9 +810,9 @@
                   {{ form.send_notification_method(id=form_type +
                   '-send_notification_method', class="form-control add-id") }}
                 </div>
-                {{ form.notification_header.label(help="common/notification_header") }}
+                {{ form.report.label(help="common/report") }}
                 <div class="form-group">
-                  {{ form.notification_header(id=form_type + '-notification_header',
+                  {{ form.report(id=form_type + '-report',
                   class="form-control add-id") }}
                 </div>
                 <fieldset>

@@ -65,6 +65,8 @@ Version 4.4.0: RBAC and Credentials
 - Add new "Credential Object" mechanism in connection services, REST service and
   generic file transfer service. Choose credential object explicitly instead of using
   custom username / password.
+- Report feature
+  - New option to display a report besides the service results.
 
 RBAC Refactoring:
 - Service export: owners and RBAC read / edit / etc are exported in the service
@@ -76,6 +78,11 @@ Migration:
   appropriate groups must be created first.
 - In migration files, check that the "settings" variable isn't used in any workflow. If the
   server IP, name or URL is used, the "server variable should be used instead.
+- In service.yaml file, "notification_header" must be renamed "report".
+
+Test:
+- the notification mechanism hasn't been impacted (in particular notification header
+  option + devices results)
 
 Version 4.3.0
 -------------

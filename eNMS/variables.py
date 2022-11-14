@@ -125,7 +125,7 @@ class VariableStore:
                         self.rbac["pages"].append(subpage)
 
     def _set_report_variables(self):
-        self.reports = {"Empty template": ""}
+        self.reports = {"Empty report": ""}
         for path in Path(self.path / "files" / "reports").glob("**/*"):
             if path.suffix not in {".j2", ".txt"}:
                 continue

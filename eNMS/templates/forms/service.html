@@ -793,6 +793,16 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
+                {{ form.report.label(help="common/report") }}
+                <div class="form-group">
+                  {{ form.report(id=form_type + '-report',
+                  class="form-control add-id") }}
+                </div>
+                {{ form.display_report.label() }}
+                <div class="form-group">
+                  {{ form.display_report(id=form_type + '-display_report',
+                  class="form-control add-id") }}
+                </div>
                 <fieldset>
                   <div class="item">
                     <input
@@ -809,11 +819,6 @@
                 <div class="form-group">
                   {{ form.send_notification_method(id=form_type +
                   '-send_notification_method', class="form-control add-id") }}
-                </div>
-                {{ form.report.label(help="common/report") }}
-                <div class="form-group">
-                  {{ form.report(id=form_type + '-report',
-                  class="form-control add-id") }}
                 </div>
                 <fieldset>
                   <div class="item">

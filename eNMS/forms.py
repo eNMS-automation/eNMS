@@ -656,14 +656,14 @@ class ServiceForm(BaseForm):
         "Time to Wait before next service is started (in seconds)", default=0
     )
     priority = IntegerField("Priority", default=10)
+    report = StringField(
+        widget=TextArea(), render_kw={"rows": 8}, substitution=True
+    )
     display_report = BooleanField("Display Report after Run")
     send_notification = BooleanField("Send a notification")
     send_notification_method = SelectField(
         "Notification Method",
         choices=(("mail", "Mail"), ("slack", "Slack"), ("mattermost", "Mattermost")),
-    )
-    report = StringField(
-        widget=TextArea(), render_kw={"rows": 5}, substitution=True
     )
     include_device_results = BooleanField("Include Device Results")
     include_link_in_summary = BooleanField("Include Result Link in Summary")

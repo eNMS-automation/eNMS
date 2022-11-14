@@ -437,6 +437,8 @@ function displayReport(service, runtime, change) {
       if (service.report_format == "text") {
         editor.setValue(report);
         editor.refresh();
+      } else {
+        $(`#${id}`).html(report);
       }
     },
   });

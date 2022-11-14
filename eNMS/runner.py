@@ -4,6 +4,7 @@ from datetime import datetime
 from functools import partial
 from importlib import __import__ as importlib_import
 from io import BytesIO, StringIO
+from jinja2 import Template
 from json import dump, load, loads
 from json.decoder import JSONDecodeError
 from multiprocessing.pool import ThreadPool
@@ -235,8 +236,10 @@ class Runner:
             if self.update_pools_after_running:
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
-            if self.report:
+            if self.report and self.report_format == "text":
                 report = self.sub(self.report, self.global_variables())
+            elif self.report and self.report_format == "html":
+                report = Template(self.report).render(self.global_variables())
             else:
                 report = ""
             if self.get("send_notification"):

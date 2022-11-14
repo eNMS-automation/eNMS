@@ -1606,3 +1606,11 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2022-11-14 07:01:52.011357',
   source: '[Text Reports with Normal Templates] Service', subtype: success, type: workflow_edge,
   workflow: Text Reports with Normal Templates}
+- {color: green, destination: '[HTML Reports with Jinja2 Templates] Service', label: success,
+  name: '[HTML Reports with Normal Templates] 2022-11-14 08:41:51.082368', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: HTML Reports with Jinja2
+    Templates}
+- {color: green, destination: '[Shared] End', label: success, name: '[HTML Reports
+    with Normal Templates] 2022-11-14 08:41:51.115326', source: '[HTML Reports with
+    Jinja2 Templates] Service', subtype: success, type: workflow_edge, workflow: HTML
+    Reports with Jinja2 Templates}

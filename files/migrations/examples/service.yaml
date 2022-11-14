@@ -310,7 +310,7 @@
     Superworkflow in SxS w WT with Run Once service: *id068
     SxS Service Targets with Run Once + Skip: *id066
     Target Restriction Mechanism: *id049
-    Text Reports with Normal Templates: [-128, 47]
+    Text Reports with Normal Templates: [-217, 200]
     Topology Import Service (netbox, librenms, opennms): &id069 [-141, 21]
     Topology Import Services: *id069
     Unix Command & Chell, Ping Service, Jump on Connect mechanism: *id057
@@ -782,7 +782,7 @@
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
     Target Restriction Mechanism: *id137
-    Text Reports with Normal Templates: [568, 53]
+    Text Reports with Normal Templates: [615, 191]
     Text Reports with Normal and Jinja2 Templates: !!python/tuple [500, 0]
     Topology Import Service (netbox, librenms, opennms): &id157 [636, 24]
     Topology Import Services: *id157
@@ -34976,7 +34976,7 @@
   vendor: ''
   waiting_time: 0
 - admin_only: false
-  category: Other
+  category: Reports
   close_connection: false
   completion_time: 1
   content_match: ''
@@ -34994,7 +34994,7 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  display_report: false
+  display_report: true
   freeze: []
   impacting: true
   include_device_results: false
@@ -35004,8 +35004,17 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2022-11-14 07:02:22.511098'
+  labels:
+    175d3f3d-8cb3-44e7-9bb4-531b3a55271a:
+      alignment: left
+      content: "This workflow tests the report mechanism with:\r\n- a text-based template\
+        \ with standard substitution (no Jinja2)\r\n- a text report (no HTML)\r\n\
+        The workflow runs on 3 devices, with the python snippet service\r\nadding\
+        \ the following results for each device:\r\nresult = {\r\n    \"name\": device.name,\r\
+        \n    \"ip_address\": device.ip_address,\r\n    \"port\": device.port\r\n}"
+      positions: [-50, 47]
+      size: 14
+  last_modified: '2022-11-14 07:15:10.425028'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -35089,7 +35098,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-11-14 07:02:22.511098'
+  last_modified: '2022-11-14 07:13:41.867677'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -35113,7 +35122,7 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   positions:
-    Text Reports with Normal Templates: [192, 9]
+    Text Reports with Normal Templates: [187, 202]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -35132,8 +35141,9 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  source_code: "result = {\"name\": device.name}\r\nresults[\"success\"] = True\r\n\
-    results[\"result\"] = result"
+  source_code: "result = {\r\n    \"name\": device.name,\r\n    \"ip_address\": device.ip_address,\r\
+    \n    \"port\": device.port\r\n}\r\nresults[\"success\"] = True\r\nresults[\"\
+    result\"] = result"
   target_devices: []
   target_pools: []
   time_between_retries: 10

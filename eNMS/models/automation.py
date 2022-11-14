@@ -291,6 +291,7 @@ class Run(AbstractBase):
     server = db.Column(db.SmallString)
     properties = db.Column(db.Dict)
     payload = deferred(db.Column(db.Dict))
+    report = db.Column(db.LargeString)
     success = db.Column(Boolean, default=False)
     labels = db.Column(db.LargeString)
     status = db.Column(db.TinyString, default="Running")

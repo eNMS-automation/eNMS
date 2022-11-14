@@ -235,9 +235,10 @@ class Runner:
             if self.update_pools_after_running:
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
+            report = self.sub(self.report, locals()) if self.report else ""
             if self.get("send_notification"):
                 try:
-                    results = self.notify(results)
+                    results = self.notify(results, report)
                 except Exception:
                     error = "\n".join(format_exc().splitlines())
                     self.log("error", f"Notification error: {error}")
@@ -252,6 +253,7 @@ class Runner:
                 status = "Aborted" if self.stop else "Completed"
                 self.main_run.state = state
                 self.main_run.duration = results["duration"]
+                self.main_run.report = report
                 self.main_run.status = state["status"] = status
                 self.success = results["success"]
                 self.close_remaining_connections()
@@ -637,7 +639,7 @@ class Runner:
             if not self.is_main_run:
                 env.log_queue(self.parent_runtime, self.main_run.service.id, run_log)
 
-    def build_notification(self, results):
+    def build_notification(self, results, report):
         notification = {
             "Service": f"{self.service.name} ({self.service.type})",
             "Runtime": self.runtime,
@@ -645,8 +647,8 @@ class Runner:
         }
         if "result" in results:
             notification["Results"] = results["result"]
-        if self.report:
-            notification["Header"] = self.sub(self.report, locals())
+        if report:
+            notification["Header"] = report
         if self.include_link_in_summary:
             run = f"{self.main_run.id}/{self.service.id}"
             notification["Link"] = f"{vs.server_url}/view_service_results/{run}"
@@ -657,9 +659,9 @@ class Runner:
                 notification["PASSED"] = results["summary"]["success"]
         return notification
 
-    def notify(self, results):
+    def notify(self, results, report):
         self.log("info", f"Sending {self.send_notification_method} notification...")
-        notification = self.build_notification(results)
+        notification = self.build_notification(results, report)
         file_content = deepcopy(notification)
         if self.include_device_results:
             file_content["Device Results"] = {}

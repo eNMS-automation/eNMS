@@ -567,7 +567,8 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
         setTimeout(() => {
           $(`#logs-${service.id}`).remove();
           const table = service.type == "workflow" ? null : "result";
-          showRuntimePanel("results", service, runtime, table);
+          const panel = service.display_report ? "report" : "results";
+          showRuntimePanel(panel, service, runtime, table);
         }, 1000);
       }
     },

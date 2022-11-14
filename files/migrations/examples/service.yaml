@@ -446,6 +446,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Start
@@ -927,6 +928,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: End
@@ -1006,6 +1008,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: cluster_monitoring
@@ -1111,6 +1114,7 @@
   regex: ''
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Example Service (does nothing)
@@ -1213,6 +1217,7 @@
   - {pattern: '', replace_with: ''}
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Configuration Backup (NAPALM)
@@ -1318,6 +1323,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: netmiko_create_vrf_test
@@ -1439,6 +1445,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -1550,6 +1557,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: netmiko_delete_vrf_test
@@ -1674,6 +1682,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -1800,6 +1809,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
   run_method: per_device
@@ -1903,6 +1913,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'NAPALM: Get Facts'
@@ -2005,6 +2016,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'NAPALM: Get interfaces'
@@ -2095,6 +2107,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Modify Payload for Iteration
@@ -2208,6 +2221,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   response1: show vrf b
   response2: show vrf c
@@ -2320,6 +2334,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   response1: show vrf
   response2: ''
@@ -2408,6 +2423,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Modify payload (no device)
@@ -2493,6 +2509,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Modify payload (per device)
@@ -2605,6 +2622,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -2719,6 +2737,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -2834,6 +2853,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -2958,6 +2978,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'Getters Workflow: Interface IP'
@@ -3051,6 +3072,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show version'
@@ -3142,6 +3164,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show configuration (regex match)'
@@ -3233,6 +3256,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show configuration (dict match)'
@@ -3341,6 +3365,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -3456,6 +3481,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -3571,6 +3597,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -3669,6 +3696,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{iteration_value}}
   run_method: per_device
@@ -3765,6 +3793,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: (R) Configuration Properties Backup Services
@@ -3892,6 +3921,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: (R) Netmiko Configuration and Validation Services
@@ -4015,6 +4045,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Fork based on Success Value
@@ -4116,6 +4147,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: (R) Netmiko Prompts Service
@@ -4227,6 +4259,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'Functions: get_var, set_var, and get_result'
@@ -4355,6 +4388,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: (R) Ansible Playbook Service
@@ -4455,6 +4489,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Multiprocessing in DxD mode
@@ -4596,6 +4631,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Combined Device & Target Iteration
@@ -4734,6 +4770,7 @@
   - {pattern: '', replace_with: ''}
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Get Operational Data with Netmiko
@@ -4822,6 +4859,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: DxD and SxS Run Methods
@@ -4916,6 +4954,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Workflow  in device by device mode
@@ -5007,6 +5046,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: ''
   run_method: per_device
@@ -5099,6 +5139,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Workflow in service by service mode (workflow targets)
@@ -5190,6 +5231,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: ''
   run_method: per_device
@@ -5282,6 +5324,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: Workflow in service targets mode
@@ -5391,6 +5434,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -5506,6 +5550,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -5620,6 +5665,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -5737,6 +5783,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Shared Service in Multiple Subworkflows
@@ -5829,6 +5876,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow 1
@@ -5921,6 +5969,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow 2
@@ -6034,6 +6083,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -6131,6 +6181,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Simple Playbook
@@ -6238,6 +6289,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Dictionary as Iteration Target Variable
@@ -6327,6 +6379,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Set Variables for Iteration
@@ -6440,6 +6493,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -6570,6 +6624,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Workflow and Subworkflow Iteration
@@ -6657,6 +6712,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Test Iteration
@@ -6749,6 +6805,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Subworkflow Value Iteration
@@ -6836,6 +6893,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Test Iteration
@@ -6942,6 +7000,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Preprocessing and Postprocessing Mechanisms
@@ -7032,6 +7091,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Preprocessing
@@ -7118,6 +7178,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Service preprocessing and postprocessing
@@ -7206,6 +7267,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Placeholder
@@ -7292,6 +7354,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Specific Superworkflow
@@ -7386,6 +7449,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism
@@ -7481,6 +7545,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'Unix command: ps -ef | grep test'
@@ -7580,6 +7645,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'Unix shell: ping eNMS server from remote server'
@@ -7679,6 +7745,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Ping Washington
@@ -7767,6 +7834,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: Topology Import Services
@@ -7862,6 +7930,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: OpenNMS Import
@@ -7972,6 +8041,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -8071,6 +8141,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{ placeholder.definition }}
   run_method: per_device
@@ -8177,6 +8248,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -8316,6 +8388,7 @@
   - {pattern: '', replace_with: ''}
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Get Configuration with Netmiko
@@ -8408,6 +8481,7 @@
   remote_repository: ''
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Push Configurations to Git
@@ -8491,6 +8565,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Post Placeholder Processing
@@ -8579,6 +8654,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: (R) Scrapli Service
@@ -8675,6 +8751,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -8773,6 +8850,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -8871,6 +8949,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -8969,6 +9048,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -9068,6 +9148,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: (R) Generic File Transfer Service
@@ -9182,6 +9263,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -9282,6 +9364,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Transfer a.bin
@@ -9396,6 +9479,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -9497,6 +9581,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Transfer bc.bin and bd.bin with glob option
@@ -9609,6 +9694,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -9709,6 +9795,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Transfer non-existing file
@@ -9817,6 +9904,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Skip in SxS with WF targets mode
@@ -9907,6 +9995,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Partial failure (Washington)
@@ -10000,6 +10089,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Query Skipped Service
@@ -10093,6 +10183,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Globally Skipped Service
@@ -10219,6 +10310,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Conditional Skip Query in Failed and Discard Modes
@@ -10313,6 +10405,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Skip Washington with Skip value == False
@@ -10406,6 +10499,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Post-success service
@@ -10499,6 +10593,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Post-failure service
@@ -10592,6 +10687,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Final service
@@ -10713,6 +10809,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Link Neighbors Mechanism (device.get_neighbors function)
@@ -10806,6 +10903,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Test get_neighbors function
@@ -10929,6 +11027,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{device.name}}
   run_method: per_device
@@ -11040,6 +11139,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -11160,6 +11260,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: 'Functions: factory, fetch, fetch_all, encrypt and get_result'
@@ -11252,6 +11353,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Functions fetch and fetch_all
@@ -11347,6 +11449,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Credentials encryption
@@ -11460,6 +11563,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -11553,6 +11657,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Skip router5-7 in discard mode
@@ -11670,6 +11775,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Fork based on value with Skip Discard Mechanism
@@ -11778,6 +11884,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
   run_method: per_device
@@ -11865,6 +11972,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Arista devices
@@ -11955,6 +12063,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Juniper devices
@@ -12069,6 +12178,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -12169,6 +12279,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
   run_method: per_device
@@ -12281,6 +12392,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Skip Query with device in Run Once Mode
@@ -12376,6 +12488,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow in SxS mode - workflow targets
@@ -12461,6 +12574,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Python service in run once mode
@@ -12555,6 +12669,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Subworkflow in SxS mode - service targets
@@ -12640,6 +12755,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Fail Austin
@@ -12752,6 +12868,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Skip, Discard and Disable Result Creation Mechanism
@@ -12842,6 +12959,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Pre-service with result creation disabled
@@ -12935,6 +13053,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Workflow in DxD mode
@@ -13028,6 +13147,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Workflow in SxS mode
@@ -13115,6 +13235,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Service in run once mode
@@ -13202,6 +13323,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Fail Austin
@@ -13288,6 +13410,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Fail PaloAlto
@@ -13393,6 +13516,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -13514,6 +13638,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Credentials (Password & Key, Priority Mechanism)
@@ -13622,6 +13747,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -13726,6 +13852,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Optional Remediation Branch
@@ -13812,6 +13939,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Dispatch Devices
@@ -13896,6 +14024,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Last Service
@@ -13980,6 +14109,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'Failure case: device + value iteration'
@@ -14065,6 +14195,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Post-Iteration Service
@@ -14176,6 +14307,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Device Iteration
@@ -14260,6 +14392,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Hard-coded iteration devices
@@ -14351,6 +14484,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Subworkflow Device Iteration
@@ -14442,6 +14576,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow Device Iteration 2
@@ -14528,6 +14663,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Service that does nothing
@@ -14614,6 +14750,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Service that does nothing
@@ -14700,6 +14837,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'Factory function: Create new device'
@@ -14785,6 +14923,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'Delete function: delete new device'
@@ -14887,6 +15026,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: Target Restriction Mechanism
@@ -14972,6 +15112,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Direct Target
@@ -15056,6 +15197,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Device Targets
@@ -15140,6 +15282,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Iteration Targets
@@ -15251,6 +15394,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: (R) Scrapli Netconf Service
@@ -15347,6 +15491,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Get Running Configuration
@@ -15446,6 +15591,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Get State
@@ -15542,6 +15688,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Edit Interface Loopback 5
@@ -15638,6 +15785,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Delete Loopback 5 description
@@ -15741,6 +15889,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: (R) Labels and Custom Property
@@ -15851,6 +16000,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -15973,6 +16123,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Validation Mechanism
@@ -16059,6 +16210,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Dict Equality Validation of default path
@@ -16147,6 +16299,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Dict Inclusion Validation of new key
@@ -16234,6 +16387,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Nested Result String Validation
@@ -16338,6 +16492,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: (R) NCClient Netconf Service
@@ -16438,6 +16593,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Get Full Config
@@ -16541,6 +16697,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Set Description of Lo4 to ZZZZ
@@ -16649,6 +16806,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Check for ZZZZ in Config
@@ -16752,6 +16910,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Erase Lo4 Description
@@ -16860,6 +17019,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Check ZZZZ is not in Config
@@ -16978,6 +17138,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: (R) Multiple parallel connections to same device
@@ -17089,6 +17250,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -17203,6 +17365,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -17317,6 +17480,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -17433,6 +17597,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: Include device results + result link in summary
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Mail Notifications
@@ -17520,6 +17685,7 @@
   reply_to: ''
   report: "* Run Once service\r\n* Simple mail notification\r\n* All options left\
     \ empty"
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Notification 1
@@ -17606,6 +17772,7 @@
   reply_to: ''
   report: "* Once per device service\r\n* Include Device Results in mail\r\n* All\
     \ devices including success devices\r\n* No link in summary\r\n* No reply to address"
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Notification 2
@@ -17693,6 +17860,7 @@
   report: "Notification 3:\r\n* Include device results + result link in summary\r\n\
     * Reply to address set\r\n* Display only Display Failed Devices - washigton pass\
     \ so it is\r\nexcluded from the results. The others two are passing"
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Notification 3
@@ -17798,6 +17966,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: (R) Netmiko File Transfer Service
@@ -17909,6 +18078,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -18014,6 +18184,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Transfer netmiko_file
@@ -18123,6 +18294,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -18236,6 +18408,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -18349,6 +18522,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -18471,6 +18645,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: 'Function: get_credential'
@@ -18557,6 +18732,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Get device credential
@@ -18667,6 +18843,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -18764,6 +18941,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{get_credential(name="Non Device Credential
     - 2")["password"]}}
@@ -18877,6 +19055,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: Skip in SxS with service targets and Run Once services
@@ -18965,6 +19144,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Once per device
@@ -19051,6 +19231,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Skip Query
@@ -19136,6 +19317,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Global Skip
@@ -19221,6 +19403,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Run Once with Pool
@@ -19310,6 +19493,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Data Extraction Service
@@ -19397,6 +19581,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Initialize Variables
@@ -19496,6 +19681,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: String Extraction
@@ -19592,6 +19778,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Dict Definition
@@ -19688,6 +19875,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Dict Update
@@ -19784,6 +19972,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: String Replacement
@@ -19880,6 +20069,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: List Definition
@@ -19976,6 +20166,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: List Append
@@ -20072,6 +20263,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: List Extend
@@ -20159,6 +20351,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Operation via set_var
@@ -20271,6 +20464,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Parameterized Run with a Superworkflow
@@ -20356,6 +20550,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Service
@@ -20450,6 +20645,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Superworkflow in SxS w WT with Run Once service
@@ -20541,6 +20737,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{ endpoint }}
   run_method: once
@@ -20650,6 +20847,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -20756,6 +20954,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: (R) Netmiko Validation with TextFSM Option
@@ -20866,6 +21065,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -20979,6 +21179,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -21092,6 +21293,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -21205,6 +21407,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -21304,6 +21507,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: (R) NAPALM Configuration and Rollback Services
@@ -21404,6 +21608,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Create a VRF with NAPALM
@@ -21500,6 +21705,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Rollback Configuration with NAPALM
@@ -21614,6 +21820,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -21733,6 +21940,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -21861,6 +22069,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: (R) Napalm Getters Service
@@ -21969,6 +22178,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'Getters Workflow: is alive'
@@ -22073,6 +22283,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'Getters Workflow: get facts'
@@ -22177,6 +22388,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'Getters Workflow: MAC address'
@@ -22281,6 +22493,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'Getters Workflow: get facts failed match'
@@ -22409,6 +22622,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Payload Extraction & Validation
@@ -22531,6 +22745,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -22648,6 +22863,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Payload Extraction
@@ -22745,6 +22961,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Validation dict via results
@@ -22841,6 +23058,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Validate text via results
@@ -22938,6 +23156,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Validate dict via payload
@@ -23033,6 +23252,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Validate text via payload
@@ -23121,6 +23341,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Payload Extraction with Operations
@@ -23220,6 +23441,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'Payload Workflow: Add initial variables'
@@ -23328,6 +23550,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'Payload Workflow: Extraction 1'
@@ -23436,6 +23659,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: 'Payload Workflow: Extraction 2'
@@ -23532,6 +23756,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Validation 1
@@ -23627,6 +23852,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Validation 2
@@ -23715,6 +23941,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Payload Recursive Conservation with Restart Mechanism
@@ -23802,6 +24029,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Set Payload and Result
@@ -23886,6 +24114,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Get Payload 1
@@ -23969,6 +24198,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Get Payload 2
@@ -24052,6 +24282,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Get Result 1
@@ -24135,6 +24366,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Get Result 2
@@ -24218,6 +24450,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Iteration Devices from Predefined Variable
@@ -24306,6 +24539,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Interaction of Restart Mechanism and Superworkflow
@@ -24396,6 +24630,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Basic Superworkflow
@@ -24478,6 +24713,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Before Placeholder
@@ -24560,6 +24796,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: After Placeholder
@@ -24643,6 +24880,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Service 1
@@ -24726,6 +24964,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Service 2
@@ -24809,6 +25048,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Service 3
@@ -24906,6 +25146,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: 'Functions: get_result and get_var'
@@ -24992,6 +25233,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Before Run Once
@@ -25075,6 +25317,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Before Run Per Device
@@ -25166,6 +25409,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Subworkflow
@@ -25249,6 +25493,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: After Run Once
@@ -25335,6 +25580,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: After Run Per Device
@@ -25421,6 +25667,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Subservice
@@ -25545,6 +25792,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: Deletion and Cascade Deletion
@@ -25632,6 +25880,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Service1
@@ -25716,6 +25965,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Service2
@@ -25800,6 +26050,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Deletion of SanJose
@@ -25884,6 +26135,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Deletion of Service2
@@ -25968,6 +26220,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Link Deletion
@@ -26052,6 +26305,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Task Deletion
@@ -26138,6 +26392,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: ICMP Ping
@@ -26247,6 +26502,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: GET Endpoints is_alive, configuration and instance
@@ -26342,6 +26598,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://192.168.56.102/rest/is_alive
   run_method: per_device
@@ -26434,6 +26691,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://192.168.56.102/rest/configuration/{{ device.name }}
   run_method: per_device
@@ -26526,6 +26784,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://192.168.56.102/rest/configuration/{{ device.name }}?property=operational_data
   run_method: per_device
@@ -26617,6 +26876,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device/{{ device.name }}
   run_method: per_device
@@ -26708,6 +26968,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/user/admin
   run_method: per_device
@@ -26821,6 +27082,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: GET Endpoints query and token
@@ -26916,6 +27178,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?name={{ device.name }}
   run_method: per_device
@@ -27008,6 +27271,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?name=NonExisting&allow_none=true
   run_method: per_device
@@ -27101,6 +27365,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?operating_system=EOS
   run_method: per_device
@@ -27193,6 +27458,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://192.168.56.102/rest/token
   run_method: per_device
@@ -27308,6 +27574,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: POST Endpoint search
@@ -27407,6 +27674,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://192.168.56.102/rest/search
   run_method: per_device
@@ -27504,6 +27772,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://192.168.56.102/rest/search
   run_method: per_device
@@ -27603,6 +27872,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://192.168.56.102/rest/search
   run_method: per_device
@@ -27721,6 +27991,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: POST update, DELETE delete and GET & POST results
@@ -27817,6 +28088,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device
   run_method: once
@@ -27908,6 +28180,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device
   run_method: once
@@ -28000,6 +28273,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device/NewDevice
   run_method: once
@@ -28091,6 +28365,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: 'http://192.168.56.102/rest/result/REST API: POST update, DELETE delete
     and GET & POST results/{{ runtime }}'
@@ -28187,6 +28462,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://192.168.56.102/rest/search
   run_method: once
@@ -28312,6 +28588,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: (R) Gateway Mechanism (SSH Proxy with Netmiko)
@@ -28423,6 +28700,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -28538,6 +28816,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -28653,6 +28932,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -28753,6 +29033,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Parameterized Multiprocessing
@@ -28835,6 +29116,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Empty Service
@@ -28953,6 +29235,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Parameterized Targets
@@ -29034,6 +29317,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Empty Service
@@ -29126,6 +29410,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Service Priorities
@@ -29214,6 +29499,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Large Workflow (30 services)
@@ -29313,6 +29599,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S1
@@ -29399,6 +29686,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S2
@@ -29485,6 +29773,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S3
@@ -29571,6 +29860,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S4
@@ -29657,6 +29947,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S5
@@ -29743,6 +30034,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S6
@@ -29829,6 +30121,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S7
@@ -29915,6 +30208,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S8
@@ -30001,6 +30295,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S9
@@ -30087,6 +30382,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S10
@@ -30173,6 +30469,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S11
@@ -30259,6 +30556,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S12
@@ -30345,6 +30643,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S13
@@ -30431,6 +30730,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S14
@@ -30517,6 +30817,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S15
@@ -30603,6 +30904,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S16
@@ -30689,6 +30991,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S17
@@ -30775,6 +31078,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S18
@@ -30861,6 +31165,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S19
@@ -30947,6 +31252,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S20
@@ -31033,6 +31339,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S21
@@ -31119,6 +31426,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S22
@@ -31205,6 +31513,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S23
@@ -31291,6 +31600,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S24
@@ -31377,6 +31687,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S25
@@ -31463,6 +31774,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S26
@@ -31549,6 +31861,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S27
@@ -31635,6 +31948,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: S28
@@ -31736,6 +32050,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Large Payload
@@ -31819,6 +32134,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Create Large Payload
@@ -31915,6 +32231,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Large Results
@@ -31998,6 +32315,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Create Large Result
@@ -32095,6 +32413,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Large Device Configuration and Operational Data
@@ -32178,6 +32497,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Set Large Configuration and Operational Data
@@ -32267,6 +32587,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Slack and Mattermost Notifications
@@ -32354,6 +32675,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Slack in random, per device
@@ -32438,6 +32760,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Notification in general, once
@@ -32556,6 +32879,7 @@
   - {pattern: '', replace_with: ''}
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Get Configuration with Scrapli
@@ -32679,6 +33003,7 @@
   - {pattern: '', replace_with: ''}
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Get Operational Data with Scrapli
@@ -32806,6 +33131,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: (R) Gateway Mechanism (SSH Proxy with Scrapli)
@@ -32898,6 +33224,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -32993,6 +33320,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -33088,6 +33416,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -33190,6 +33519,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: Data Extraction Jinja2 Template
@@ -33289,6 +33619,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Apply jinja2 Template
@@ -33372,6 +33703,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Define Input Variables
@@ -33508,6 +33840,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: (R) Scrapli and Netmiko Multiple Commands and Jinja2
@@ -33607,6 +33940,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -33706,6 +34040,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -33822,6 +34157,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -33939,6 +34275,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -34032,6 +34369,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Ping Custom IP
@@ -34133,6 +34471,7 @@
   rbac_run: [Full UI Read + Edit Access]
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: once
   scoped_name: Apply TTP Template
@@ -34232,6 +34571,7 @@
   rbac_run: []
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: '(R) Function: get_connection'
@@ -34340,6 +34680,7 @@
   rbac_run: []
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -34430,6 +34771,7 @@
   rbac_run: []
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Use default connection
@@ -34540,6 +34882,7 @@
   rbac_run: []
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -34655,6 +34998,7 @@
   rbac_run: []
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: (R) Credential Object Mechanism
@@ -34747,6 +35091,7 @@
   rbac_run: []
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?name={{ device.name }}
   run_method: per_device
@@ -34856,6 +35201,7 @@
   rbac_run: []
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -34953,6 +35299,7 @@
   rbac_run: []
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Napalm - get interfaces -
@@ -35014,7 +35361,15 @@
         \n    \"ip_address\": device.ip_address,\r\n    \"port\": device.port\r\n}"
       positions: [-50, 47]
       size: 14
-  last_modified: '2022-11-14 07:33:44.878468'
+    437168b5-9f78-4d25-ae10-6b98b60e9bf4:
+      alignment: left
+      content: "In the template, we use the following python substitution:\r\n{{ \r\
+        \n  \"\\n\\n\".join(dict_to_string(\r\n          result[\"result\"]) for result\
+        \ in\r\n          get_result(\"Service\", all_matches=True))\r\n}}\r\nto display\
+        \ each device properties individually."
+      positions: [407, 39]
+      size: 14
+  last_modified: '2022-11-14 08:34:37.096165'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -35051,6 +35406,7 @@
   reply_to: ''
   report: '{{ "\n\n".join(dict_to_string(result["result"]) for result in get_result("Service",
     all_matches=True)) }}'
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Text Reports with Normal Templates
@@ -35133,6 +35489,7 @@
   rbac_run: []
   reply_to: ''
   report: ''
+  report_format: text
   reserved: false
   run_method: per_device
   scoped_name: Service

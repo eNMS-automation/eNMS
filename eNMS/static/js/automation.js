@@ -282,7 +282,7 @@ export const showRuntimePanel = function (
     type == "logs"
       ? "logs"
       : type == "report"
-      ? "report"
+      ? `report-${service.report_format}`
       : service.type == "workflow" && !table
       ? "tree"
       : "table";
@@ -293,7 +293,7 @@ export const showRuntimePanel = function (
       if (newRuntime) runtimes.push([runtime, runtime]);
       if (!runtimes.length) return notify(`No ${type} yet.`, "error", 5);
       let content;
-      if (panelType == "logs" || panelType == "report") {
+      if (panelType == "logs" || panelType.startsWith("report")) {
         content = `
         <div class="modal-body">
           <nav
@@ -420,11 +420,24 @@ export const showRuntimePanel = function (
   });
 };
 
-function displayReport(service, runtime) {
+function displayReport(service, runtime, change) {
+  let editor;
+  const id = `service-report-${service.report_format}-${service.id}`;
+  if (service.report_format == "text") {
+    if (change) {
+      editor = $(`#${id}`).data("CodeMirrorInstance");
+      editor.setValue("");
+    } else {
+      editor = initCodeMirror(id, "logs");
+    }
+  }
   call({
     url: `/get_report/${runtime}`,
     callback: function (report) {
-      $(`#service-report-${service.id}`).text(report);
+      if (service.report_format == "text") {
+        editor.setValue(report);
+        editor.refresh();
+      }
     },
   });
 }

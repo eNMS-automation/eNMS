@@ -766,6 +766,7 @@ Object.assign(action, {
   "Parameterized Run": (service) =>
     runService({ id: service.id, parametrization: true }),
   Logs: (service) => showRuntimePanel("logs", service, currentRuntime),
+  Reports: (service) => showRuntimePanel("report", service, currentRuntime),
   Results: (service) => showRuntimePanel("results", service, currentRuntime, "result"),
 });
 

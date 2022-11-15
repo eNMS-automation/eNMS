@@ -90,6 +90,12 @@ class Service(AbstractBase):
         back_populates="service",
         cascade="all, delete-orphan",
     )
+    reports = relationship(
+        "ServiceReport",
+        foreign_keys="[ServiceReport.service_id]",
+        back_populates="service",
+        cascade="all, delete-orphan",
+    )
     maximum_runs = db.Column(Integer, default=1)
     multiprocessing = db.Column(Boolean, default=False)
     max_processes = db.Column(Integer, default=5)
@@ -277,6 +283,21 @@ class ServiceLog(AbstractBase):
         return f"SERVICE '{self.service}' ({self.runtime})"
 
 
+class ServiceReport(AbstractBase):
+
+    __tablename__ = type = "service_report"
+    private = True
+    log_change = False
+    id = db.Column(Integer, primary_key=True)
+    content = db.Column(db.LargeString)
+    runtime = db.Column(db.TinyString)
+    service_id = db.Column(Integer, ForeignKey("service.id"))
+    service = relationship("Service", foreign_keys="ServiceReport.service_id")
+
+    def __repr__(self):
+        return f"SERVICE REPORT '{self.service}' ({self.runtime})"
+
+
 class Run(AbstractBase):
 
     __tablename__ = type = "run"
@@ -292,7 +313,6 @@ class Run(AbstractBase):
     server = db.Column(db.SmallString)
     properties = db.Column(db.Dict)
     payload = deferred(db.Column(db.Dict))
-    report = db.Column(db.LargeString)
     success = db.Column(Boolean, default=False)
     labels = db.Column(db.LargeString)
     status = db.Column(db.TinyString, default="Running")

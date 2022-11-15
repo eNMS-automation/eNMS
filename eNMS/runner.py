@@ -236,16 +236,6 @@ class Runner:
             if self.update_pools_after_running:
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
-            try:
-                if self.report and self.report_format == "text":
-                    report = self.sub(self.report, self.global_variables())
-                elif self.report and self.report_format == "html":
-                    report = Template(self.report).render(self.global_variables())
-                else:
-                    report = ""
-            except Exception:
-                error = report = "\n".join(format_exc().splitlines())
-                self.log("error", f"Failed to build report:\n{error}")
             if self.get("send_notification"):
                 try:
                     results = self.notify(results, report)
@@ -263,7 +253,6 @@ class Runner:
                 status = "Aborted" if self.stop else "Completed"
                 self.main_run.state = state
                 self.main_run.duration = results["duration"]
-                self.main_run.report = report
                 self.main_run.status = state["status"] = status
                 self.success = results["success"]
                 self.close_remaining_connections()
@@ -463,11 +452,28 @@ class Runner:
             services = list(vs.run_logs.get(self.parent_runtime, []))
             for service_id in services:
                 logs = env.log_queue(self.parent_runtime, service_id, mode="get")
+                service = db.fetch("service", id=service_id)
                 db.factory(
                     "service_log",
                     runtime=self.parent_runtime,
                     service=service_id,
                     content="\n".join(logs or []),
+                )
+                try:
+                    if self.report and self.report_format == "text":
+                        report = self.sub(self.report, self.global_variables())
+                    elif self.report and self.report_format == "html":
+                        report = Template(self.report).render(self.global_variables())
+                    else:
+                        report = ""
+                except Exception:
+                    error = report = "\n".join(format_exc().splitlines())
+                    self.log("error", f"Failed to build report:\n{error}")
+                db.factory(
+                    "service_report",
+                    runtime=self.parent_runtime,
+                    service=service_id,
+                    content=report,
                 )
             if self.main_run.trigger == "REST API":
                 results["devices"] = {}

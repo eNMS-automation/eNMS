@@ -432,7 +432,7 @@ function displayReport(service, runtime, change) {
     }
   }
   call({
-    url: `/get_report/${runtime}`,
+    url: `/get_report/${service.id}/${runtime}`,
     callback: function (report) {
       if (service.report_format == "text") {
         editor.setValue(report);

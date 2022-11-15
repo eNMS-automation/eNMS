@@ -460,21 +460,22 @@ class Runner:
                     content="\n".join(logs or []),
                 )
                 try:
-                    if self.report and self.report_format == "text":
-                        report = self.sub(self.report, self.global_variables())
-                    elif self.report and self.report_format == "html":
-                        report = Template(self.report).render(self.global_variables())
+                    if service.report and service.report_format == "text":
+                        report = self.sub(service.report, self.global_variables())
+                    elif service.report and service.report_format == "html":
+                        report = Template(service.report).render(self.global_variables())
                     else:
                         report = ""
                 except Exception:
                     error = report = "\n".join(format_exc().splitlines())
                     self.log("error", f"Failed to build report:\n{error}")
-                db.factory(
-                    "service_report",
-                    runtime=self.parent_runtime,
-                    service=service_id,
-                    content=report,
-                )
+                if report:
+                    db.factory(
+                        "service_report",
+                        runtime=self.parent_runtime,
+                        service=service_id,
+                        content=report,
+                    )
             if self.main_run.trigger == "REST API":
                 results["devices"] = {}
                 for result in self.main_run.results:

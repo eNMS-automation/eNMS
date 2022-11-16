@@ -549,9 +549,16 @@ class Controller:
         return db.fetch(model, id=id).get_properties()
 
     def get_report(self, service_id, runtime):
-        return getattr(db.fetch(
-            "service_report", allow_none=True, runtime=runtime, service_id=service_id
-        ), "content", "")
+        return getattr(
+            db.fetch(
+                "service_report",
+                allow_none=True,
+                runtime=runtime,
+                service_id=service_id,
+            ),
+            "content",
+            "",
+        )
 
     def get_report_template(self, template):
         return vs.reports[template]

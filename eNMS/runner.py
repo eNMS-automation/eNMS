@@ -460,12 +460,13 @@ class Runner:
                     content="\n".join(logs or []),
                 )
                 try:
-                    if service.report and service.report_format == "text":
-                        report = self.sub(service.report, self.global_variables())
-                    elif service.report and service.report_format == "html":
-                        report = Template(service.report).render(self.global_variables())
-                    else:
-                        report = ""
+                    report = ""
+                    if service.report:
+                        variables = self.global_variables()
+                        if service.report_jinja2_template:
+                            report = Template(service.report).render(variables)
+                        else:
+                            report = self.sub(service.report, variables)
                 except Exception:
                     error = report = "\n".join(format_exc().splitlines())
                     self.log("error", f"Failed to build report:\n{error}")

@@ -661,7 +661,7 @@ class ServiceForm(BaseForm):
     report_format = SelectField(
         "Report Display Format", choices=(("text", "Text"), ("html", "HTML"))
     )
-    jinja2_template = BooleanField("Interpret Report as Jinja2 Template")
+    report_jinja2_template = BooleanField("Interpret Report as Jinja2 Template")
     display_report = BooleanField("Display Report instead of Results")
     send_notification = BooleanField("Send a notification")
     send_notification_method = SelectField(

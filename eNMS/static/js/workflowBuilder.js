@@ -169,6 +169,8 @@ export function showServicePanel(type, id, mode, tableId) {
     $(`#${type}-operating_system`).val(workflow.operating_system).trigger("change");
   }
   $(field("report_template", type, id)).on("change", function () {
+    const isJinja2 = this.value.endsWith(".j2");
+    field("report_jinja2_template", type, id).prop("checked", isJinja2);
     call({
       url: `/get_report_template/${this.value}`,
       callback: function (template) {

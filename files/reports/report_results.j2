@@ -52,7 +52,14 @@
       role="tabpanel"
     >
       <div class="panel-body" style="background-color: #fafafa;">
-        bbb
+        {% for result in results %}
+          {% if not result["success"] %}
+            <pre>
+              {{ dict_to_string(result) }}
+            </pre>
+            <hr>
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
   </div>

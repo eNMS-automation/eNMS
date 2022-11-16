@@ -68,9 +68,11 @@ Version 4.4.0: RBAC and Credentials
 - Report feature
   - Report template can use python substitution or Jinja 2
   - Report output can be either text-based or HTML
-  - New option to display a report besides the service results.
+  - Option to display the report when the run is over instead of the service results.
   - Report can be used for any services in a workflow, not just the workflow itself.
   - In get_result, new "all_matches" keyword to get all results.
+  - New "files" / "reports" folder to store predefined templates that are used to
+    populate the "report" field in the service edit panel.
 
 RBAC Refactoring:
 - Service export: owners and RBAC read / edit / etc are exported in the service

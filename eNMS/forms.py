@@ -659,7 +659,7 @@ class ServiceForm(BaseForm):
     report_template = SelectField("Report Template", choices=(vs.dualize(vs.reports)))
     report = StringField(widget=TextArea(), render_kw={"rows": 8}, substitution=True)
     report_format = SelectField(
-        "Report Format", choices=(("text", "Text"), ("html", "HTML"))
+        "Report Display Format", choices=(("text", "Text"), ("html", "HTML"))
     )
     jinja2_template = BooleanField("Interpret Report as Jinja2 Template")
     display_report = BooleanField("Display Report instead of Results")

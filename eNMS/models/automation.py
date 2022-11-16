@@ -62,6 +62,7 @@ class Service(AbstractBase):
     update_pools_after_running = db.Column(Boolean, default=False)
     report = db.Column(db.LargeString)
     report_format = db.Column(db.TinyString, default="text")
+    jinja2_template = db.Column(Boolean, default=False)
     display_report = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.TinyString, default="mail")

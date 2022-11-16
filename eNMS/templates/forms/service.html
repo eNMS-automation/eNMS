@@ -803,6 +803,18 @@
                   {{ form.report_format(id=form_type + '-report_format',
                   class="form-control add-id") }}
                 </div>
+                <fieldset>
+                  <div class="item">
+                    <input
+                      id="{{ form_type }}-jinja2_template"
+                      name="jinja2_template"
+                      type="checkbox"
+                      class="add-id"
+                      value="y"
+                    />
+                    {{ form.jinja2_template.label() }}
+                  </div>
+                </fieldset>
                 {{ form.report.label(help="common/report") }}
                 <div class="form-group">
                   {{ form.report(id=form_type + '-report', class="form-control add-id")

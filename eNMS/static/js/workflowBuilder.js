@@ -472,7 +472,7 @@ function getResultLink(service, device) {
 function getWorkflowLink(includeRuntime) {
   const baseUrl =
     serverUrl || `${window.location.protocol}//${window.location.hostname}`;
-  let link = `${baseUrl}/workflow_builder/${workflow.id}`;
+  let link = `${baseUrl}/workflow_builder/${currentPath}`;
   if (includeRuntime) link += `/${currentRuntime}`;
   copyToClipboard({ text: encodeURI(link) });
 }

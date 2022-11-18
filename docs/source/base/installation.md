@@ -73,6 +73,13 @@ it is recommended to run the application with the following command:
     # start the application with gunicorn
     gunicorn --config gunicorn.py app:app
 
+### Dramatiq
+
+Dramatiq, a distributed task queue, can be used for executing automations:
+
+1. In setup/settings.json set `"use_task_queue": true`
+2. Set the `REDIS_ADDR` environment variable and run `dramatiq eNMS` from the project root.
+
 ### Hashicorp Vault
 
 All credentials should be stored in a Hashicorp Vault: the settings

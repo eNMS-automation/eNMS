@@ -1,6 +1,7 @@
 apscheduler
 argon2-cffi
 dicttoxml
+dramatiq[redis, watch]
 flask
 flask_login
 flask-socketio

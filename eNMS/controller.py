@@ -1124,6 +1124,7 @@ class Controller:
                 self.run.send(service_id, **kwargs)
             else:
                 Thread(target=self.run, args=(service_id,), kwargs=kwargs).start()
+        else:
             service.run(runtime=runtime)
         return {
             "service": service.serialized,

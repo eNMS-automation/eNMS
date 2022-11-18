@@ -1,4 +1,3 @@
-import eNMS.worker
 from eNMS.controller import controller
 from eNMS.custom import CustomApp  # noqa: F401
 from eNMS.database import db

@@ -114,7 +114,7 @@ class RestApi:
             data.update({"target_devices": devices, "target_pools": pools})
         data["runtime"] = runtime = vs.get_time()
         if handle_asynchronously:
-            if vs.settings['automation']['use_task_queue']:
+            if vs.settings["automation"]["use_task_queue"]:
                 controller.run.send(service.id, **data)
             else:
                 Thread(target=controller.run, args=(service.id,), kwargs=data).start()
@@ -135,8 +135,8 @@ class RestApi:
             data["target_devices"] = [device.id for device in task.devices]
         if task.pools:
             data["target_pools"] = [pool.id for pool in task.pools]
-        
-        if vs.settings['automation']['use_task_queue']:
+
+        if vs.settings["automation"]["use_task_queue"]:
             controller.run.send(task.service.id, **data)
         else:
             Thread(target=controller.run, args=(task.service.id,), kwargs=data).start()

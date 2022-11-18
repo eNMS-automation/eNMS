@@ -73,6 +73,7 @@ Version 4.4.0: RBAC and Credentials
   - In get_result, new "all_matches" keyword to get all results.
   - New "files" / "reports" folder to store predefined templates that are used to
     populate the "report" field in the service edit panel.
+- Add support for distributed task queue for automation with Dramatiq.
 
 RBAC Refactoring:
 - Service export: owners and RBAC read / edit / etc are exported in the service

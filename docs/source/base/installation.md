@@ -78,7 +78,7 @@ it is recommended to run the application with the following command:
 Dramatiq, a distributed task queue, can be used for executing automations:
 
 1. In setup/settings.json set `"use_task_queue": true`
-2. Set the `REDIS_ADDR` environment variable and run `dramatiq eNMS.controller` from the project root.
+2. Set the `REDIS_ADDR` environment variable and run `dramatiq eNMS` from the project root.
 
 ### Hashicorp Vault
 

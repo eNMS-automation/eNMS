@@ -542,7 +542,7 @@ class Runner:
                     else:
                         log = (
                             "Postprocessing was skipped as it is set to "
-                            f"{self.postprocessing_mode} only, but the service "
+                            f"{self.postprocessing_mode} only, and the service "
                             f"{'passed' if results['success'] else 'failed'})"
                         )
                         self.log("warning", log, device)

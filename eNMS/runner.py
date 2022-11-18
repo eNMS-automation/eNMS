@@ -278,7 +278,9 @@ class Runner:
                 return {key: rec(value[key]) for key in list(value)}
             elif isinstance(value, list):
                 return list(map(rec, value))
-            elif not isinstance(value, (int, str, bool, float, None.__class__)):
+            elif not isinstance(
+                value, (int, str, bool, float, None.__class__)
+            ) or value in (float("inf"), float("-inf")):
                 self.log("info", f"Converting {value} to string")
                 return str(value)
             else:

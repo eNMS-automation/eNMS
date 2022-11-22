@@ -455,12 +455,15 @@ class Runner:
             for service_id in services:
                 logs = env.log_queue(self.parent_runtime, service_id, mode="get")
                 service = db.fetch("service", id=service_id)
-                db.factory(
-                    "service_log",
-                    runtime=self.parent_runtime,
-                    service=service_id,
-                    content="\n".join(logs or []),
-                )
+                try:
+                    db.factory(
+                        "service_log",
+                        runtime=self.parent_runtime,
+                        service=service_id,
+                        content="\n".join(logs or []),
+                    )
+                except Exception:
+                    self.log("error", f"Failed to commit service log:\n{format_exc()}")
                 try:
                     report = ""
                     if service.report:
@@ -473,12 +476,15 @@ class Runner:
                     error = report = "\n".join(format_exc().splitlines())
                     self.log("error", f"Failed to build report:\n{error}")
                 if report:
-                    db.factory(
-                        "service_report",
-                        runtime=self.parent_runtime,
-                        service=service_id,
-                        content=report,
-                    )
+                    try:
+                        db.factory(
+                            "service_report",
+                            runtime=self.parent_runtime,
+                            service=service_id,
+                            content=report,
+                        )
+                    except Exception:
+                        self.log("error", f"Failed to commit report:\n{format_exc()}")
             if self.main_run.trigger == "REST API":
                 results["devices"] = {}
                 for result in self.main_run.results:
@@ -491,7 +497,10 @@ class Runner:
         results = self.make_json_compliant(results)
         if not self.disable_result_creation or create_failed_results or run_result:
             self.has_result = True
-            db.factory("result", result=results, commit=commit, **result_kw)
+            try:
+                db.factory("result", result=results, commit=commit, **result_kw)
+            except Exception:
+                self.log("critical", f"Failed to commit result:\n{format_exc()}")
         return results
 
     def run_service_job(self, device):

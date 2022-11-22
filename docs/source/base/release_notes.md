@@ -74,6 +74,8 @@ Version 4.4.0: RBAC and Credentials
   - New "files" / "reports" folder to store predefined templates that are used to
     populate the "report" field in the service edit panel.
 - Add support for distributed task queue for automation with Dramatiq.
+- Return an error in the UI if the commit of workflow logs, report or result
+  fails (e.g data too long db error because of payload data for the results)
 
 RBAC Refactoring:
 - Service export: owners and RBAC read / edit / etc are exported in the service

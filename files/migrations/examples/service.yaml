@@ -158,7 +158,7 @@
     Payload Extraction with Operations: &id048 [-661, -226]
     Payload Recursive Conservation with Restart Mechanism: &id060 [-238, -178]
     Preprocessing and Postprocessing Mechanism: &id035 [-197, -37]
-    Preprocessing and Postprocessing Mechanisms: [-197, -37]
+    Preprocessing and Postprocessing Mechanisms: [-155, 200]
     RBAC Target Restriction: &id049 [-176, -144]
     'REST API: GET Endpoints': [-425, -25]
     'REST API: GET Endpoints is_alive, configuration and instance': *id024
@@ -630,7 +630,7 @@
     Payload Extraction with Operations: &id137 [-688, -153]
     Payload Recursive Conservation with Restart Mechanism: &id149 [663, 12]
     Preprocessing and Postprocessing Mechanism: &id124 [619, 353]
-    Preprocessing and Postprocessing Mechanisms: [619, 353]
+    Preprocessing and Postprocessing Mechanisms: [635, 466]
     RBAC Target Restriction: &id138 [654, -133]
     'REST API: GET Endpoints': [500, 0]
     'REST API: GET Endpoints is_alive, configuration and instance': *id113
@@ -7017,7 +7017,7 @@
         \ be in the results.\r\n\r\nBesides, the results should contain:\r\n- func_result\
         \ set to EOS (Washington) / IOS (Chicago)\r\n- cls_result set to Washington\
         \ / Chicago"
-      positions: [568, 34]
+      positions: [681, 217]
     15b463f1-e8ba-4d61-a84f-cf39d1434533:
       alignment: left
       content: "Preprocessing: set a per-device variable \"device OS\" in payload\
@@ -7027,9 +7027,19 @@
         \ device.operating_system\r\n\r\nclass Test():\r\n    device = device.name\r\
         \n\r\nset_var(\"func\", test, device=device.name)\r\nset_var(\"cls\", Test,\
         \ device=device.name)"
-      positions: [44, 270]
+      positions: [14, 449]
       size: 14
-  last_modified: '2022-11-28 07:35:23.174759'
+    9bd5f8ae-d539-4fc3-bef5-2ee74517b58f:
+      alignment: left
+      content: "This workflow has the superworkflow \"Specific Superworkflow\".\r\n\
+        - To be run a first time without change and make sure that the\r\nresults\
+        \ of \"Service preprocessing and postprocessing\" contain\r\nthe \"func_result\"\
+        \ and \"cls_result\" variables.\r\n- To be run a second time by setting the\
+        \ success value to \"True\"\r\nin the second service, and make sure that post-processing\
+        \ does\r\nnot run because it is set to \"Run on failure only\"."
+      positions: [216, 204]
+      size: 14
+  last_modified: '2022-11-28 07:47:20.205089'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -7142,7 +7152,7 @@
     \ default=15)"
   positions:
     Preprocessing and Postprocessing Mechanism: &id258 [-26, 123]
-    Preprocessing and Postprocessing Mechanisms: [-26, 123]
+    Preprocessing and Postprocessing Mechanisms: [-97, 303]
     'Regression Workflow K: preprocessing and postprocessing': *id258
     'Regression Workflow: Preprocessing and Postprocessing': *id258
   postprocessing: "results[\"postprocessing\"] = f\"Value set with postprocessing\
@@ -7232,7 +7242,7 @@
     \ default=15)"
   positions:
     Preprocessing and Postprocessing Mechanism: &id259 [558, 152]
-    Preprocessing and Postprocessing Mechanisms: [558, 152]
+    Preprocessing and Postprocessing Mechanisms: [612, 349]
     'Regression Workflow K: preprocessing and postprocessing': *id259
     'Regression Workflow: Preprocessing and Postprocessing': *id259
   postprocessing: "results[\"SHOULD BE THERE\"] = \"NO BUG\"\r\n\r\nresults[\"func_result\"\

@@ -85,7 +85,7 @@
     Credentials (Password & Key, Priority Mechanism): &id040 [-157, 96]
     Data Extraction Jinja2 Template: [-255, -44]
     Data Extraction Service: &id041 [-421, 129]
-    Deletion and Cascade Deletion: *id002
+    Deletion and Cascade Deletion: [-335, 173]
     Deletion of Devices, Links, Services, Tasks and associated Cascade Deletion: *id002
     Device Iteration: &id009 [-354, -121]
     Dictionary as Iteration Target Variable: &id010 [-308, -231]
@@ -449,6 +449,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Start
@@ -558,7 +559,7 @@
     Credentials (Password & Key, Priority Mechanism): &id129 [590, 124]
     Data Extraction Jinja2 Template: [445, 190]
     Data Extraction Service: &id130 [365, 216]
-    Deletion and Cascade Deletion: *id091
+    Deletion and Cascade Deletion: [664, 197]
     Deletion of Devices, Links, Services, Tasks and associated Cascade Deletion: *id091
     Device Iteration: &id098 [549, -155]
     Dictionary as Iteration Target Variable: &id099 [596, -221]
@@ -934,6 +935,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: End
@@ -1015,6 +1017,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: cluster_monitoring
@@ -1121,6 +1124,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Example Service (does nothing)
@@ -1224,6 +1228,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Configuration Backup (NAPALM)
@@ -1330,6 +1335,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: netmiko_create_vrf_test
@@ -1452,6 +1458,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -1564,6 +1571,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: netmiko_delete_vrf_test
@@ -1689,6 +1697,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -1816,6 +1825,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
   run_method: per_device
@@ -1920,6 +1930,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'NAPALM: Get Facts'
@@ -2023,6 +2034,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'NAPALM: Get interfaces'
@@ -2114,6 +2126,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Modify Payload for Iteration
@@ -2228,6 +2241,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   response1: show vrf b
   response2: show vrf c
@@ -2341,6 +2355,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   response1: show vrf
   response2: ''
@@ -2430,6 +2445,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Modify payload (no device)
@@ -2516,6 +2532,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Modify payload (per device)
@@ -2629,6 +2646,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -2744,6 +2762,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -2860,6 +2879,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -2985,6 +3005,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'Getters Workflow: Interface IP'
@@ -3079,6 +3100,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show version'
@@ -3171,6 +3193,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show configuration (regex match)'
@@ -3263,6 +3286,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show configuration (dict match)'
@@ -3372,6 +3396,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -3488,6 +3513,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -3604,6 +3630,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -3703,6 +3730,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{iteration_value}}
   run_method: per_device
@@ -3800,6 +3828,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: (R) Configuration Properties Backup Services
@@ -3928,6 +3957,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: (R) Netmiko Configuration and Validation Services
@@ -4052,6 +4082,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Fork based on Success Value
@@ -4154,6 +4185,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: (R) Netmiko Prompts Service
@@ -4266,6 +4298,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'Functions: get_var, set_var, and get_result'
@@ -4395,6 +4428,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: (R) Ansible Playbook Service
@@ -4496,6 +4530,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Multiprocessing in DxD mode
@@ -4638,6 +4673,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Combined Device & Target Iteration
@@ -4777,6 +4813,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Get Operational Data with Netmiko
@@ -4866,6 +4903,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: DxD and SxS Run Methods
@@ -4961,6 +4999,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Workflow  in device by device mode
@@ -5053,6 +5092,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: ''
   run_method: per_device
@@ -5146,6 +5186,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Workflow in service by service mode (workflow targets)
@@ -5238,6 +5279,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: ''
   run_method: per_device
@@ -5331,6 +5373,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: Workflow in service targets mode
@@ -5441,6 +5484,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -5557,6 +5601,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -5672,6 +5717,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -5790,6 +5836,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Shared Service in Multiple Subworkflows
@@ -5883,6 +5930,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow 1
@@ -5976,6 +6024,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow 2
@@ -6090,6 +6139,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -6188,6 +6238,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Simple Playbook
@@ -6296,6 +6347,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Dictionary as Iteration Target Variable
@@ -6386,6 +6438,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Set Variables for Iteration
@@ -6500,6 +6553,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -6631,6 +6685,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Workflow and Subworkflow Iteration
@@ -6719,6 +6774,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Test Iteration
@@ -6812,6 +6868,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Subworkflow Value Iteration
@@ -6900,6 +6957,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Test Iteration
@@ -7007,6 +7065,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Preprocessing and Postprocessing Mechanisms
@@ -7098,6 +7157,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Preprocessing
@@ -7185,6 +7245,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Service preprocessing and postprocessing
@@ -7274,6 +7335,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Placeholder
@@ -7361,6 +7423,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Specific Superworkflow
@@ -7456,6 +7519,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism
@@ -7552,6 +7616,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'Unix command: ps -ef | grep test'
@@ -7652,6 +7717,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'Unix shell: ping eNMS server from remote server'
@@ -7752,6 +7818,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Ping Washington
@@ -7841,6 +7908,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: Topology Import Services
@@ -7937,6 +8005,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: OpenNMS Import
@@ -8048,6 +8117,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -8148,6 +8218,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{ placeholder.definition }}
   run_method: per_device
@@ -8255,6 +8326,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -8395,6 +8467,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Get Configuration with Netmiko
@@ -8488,6 +8561,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Push Configurations to Git
@@ -8572,6 +8646,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Post Placeholder Processing
@@ -8661,6 +8736,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: (R) Scrapli Service
@@ -8758,6 +8834,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -8857,6 +8934,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -8956,6 +9034,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -9055,6 +9134,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -9155,6 +9235,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: (R) Generic File Transfer Service
@@ -9270,6 +9351,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -9371,6 +9453,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Transfer a.bin
@@ -9486,6 +9569,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -9588,6 +9672,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Transfer bc.bin and bd.bin with glob option
@@ -9701,6 +9786,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -9802,6 +9888,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Transfer non-existing file
@@ -9911,6 +9998,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Skip in SxS with WF targets mode
@@ -10002,6 +10090,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Partial failure (Washington)
@@ -10096,6 +10185,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Query Skipped Service
@@ -10190,6 +10280,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Globally Skipped Service
@@ -10317,6 +10408,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Conditional Skip Query in Failed and Discard Modes
@@ -10412,6 +10504,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Skip Washington with Skip value == False
@@ -10506,6 +10599,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Post-success service
@@ -10600,6 +10694,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Post-failure service
@@ -10694,6 +10789,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Final service
@@ -10816,6 +10912,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Link Neighbors Mechanism (device.get_neighbors function)
@@ -10910,6 +11007,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Test get_neighbors function
@@ -11034,6 +11132,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{device.name}}
   run_method: per_device
@@ -11146,6 +11245,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -11267,6 +11367,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: 'Functions: factory, fetch, fetch_all, encrypt and get_result'
@@ -11360,6 +11461,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Functions fetch and fetch_all
@@ -11456,6 +11558,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Credentials encryption
@@ -11570,6 +11673,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -11664,6 +11768,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Skip router5-7 in discard mode
@@ -11782,6 +11887,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Fork based on value with Skip Discard Mechanism
@@ -11891,6 +11997,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
   run_method: per_device
@@ -11979,6 +12086,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Arista devices
@@ -12070,6 +12178,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Juniper devices
@@ -12185,6 +12294,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -12286,6 +12396,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
   run_method: per_device
@@ -12399,6 +12510,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Skip Query with device in Run Once Mode
@@ -12495,6 +12607,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow in SxS mode - workflow targets
@@ -12581,6 +12694,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Python service in run once mode
@@ -12676,6 +12790,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Subworkflow in SxS mode - service targets
@@ -12762,6 +12877,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Fail Austin
@@ -12875,6 +12991,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Skip, Discard and Disable Result Creation Mechanism
@@ -12966,6 +13083,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Pre-service with result creation disabled
@@ -13060,6 +13178,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Workflow in DxD mode
@@ -13154,6 +13273,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Workflow in SxS mode
@@ -13242,6 +13362,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Service in run once mode
@@ -13330,6 +13451,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Fail Austin
@@ -13417,6 +13539,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Fail PaloAlto
@@ -13523,6 +13646,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -13645,6 +13769,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Credentials (Password & Key, Priority Mechanism)
@@ -13754,6 +13879,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -13859,6 +13985,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Optional Remediation Branch
@@ -13946,6 +14073,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Dispatch Devices
@@ -14031,6 +14159,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Last Service
@@ -14116,6 +14245,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'Failure case: device + value iteration'
@@ -14202,6 +14332,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Post-Iteration Service
@@ -14314,6 +14445,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Device Iteration
@@ -14399,6 +14531,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Hard-coded iteration devices
@@ -14491,6 +14624,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Subworkflow Device Iteration
@@ -14583,6 +14717,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow Device Iteration 2
@@ -14670,6 +14805,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Service that does nothing
@@ -14757,6 +14893,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Service that does nothing
@@ -14844,6 +14981,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'Factory function: Create new device'
@@ -14930,6 +15068,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'Delete function: delete new device'
@@ -15033,6 +15172,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: Target Restriction Mechanism
@@ -15119,6 +15259,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Direct Target
@@ -15204,6 +15345,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Device Targets
@@ -15289,6 +15431,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Iteration Targets
@@ -15401,6 +15544,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: (R) Scrapli Netconf Service
@@ -15498,6 +15642,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Get Running Configuration
@@ -15598,6 +15743,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Get State
@@ -15695,6 +15841,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Edit Interface Loopback 5
@@ -15792,6 +15939,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Delete Loopback 5 description
@@ -15896,6 +16044,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: (R) Labels and Custom Property
@@ -16007,6 +16156,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -16130,6 +16280,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Validation Mechanism
@@ -16217,6 +16368,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Dict Equality Validation of default path
@@ -16306,6 +16458,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Dict Inclusion Validation of new key
@@ -16394,6 +16547,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Nested Result String Validation
@@ -16499,6 +16653,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: (R) NCClient Netconf Service
@@ -16600,6 +16755,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Get Full Config
@@ -16704,6 +16860,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Set Description of Lo4 to ZZZZ
@@ -16813,6 +16970,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Check for ZZZZ in Config
@@ -16917,6 +17075,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Erase Lo4 Description
@@ -17026,6 +17185,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Check ZZZZ is not in Config
@@ -17145,6 +17305,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: (R) Multiple parallel connections to same device
@@ -17257,6 +17418,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -17372,6 +17534,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -17487,6 +17650,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -17604,6 +17768,7 @@
   reply_to: ''
   report: Include device results + result link in summary
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Mail Notifications
@@ -17692,6 +17857,7 @@
   report: "* Run Once service\r\n* Simple mail notification\r\n* All options left\
     \ empty"
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Notification 1
@@ -17779,6 +17945,7 @@
   report: "* Once per device service\r\n* Include Device Results in mail\r\n* All\
     \ devices including success devices\r\n* No link in summary\r\n* No reply to address"
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Notification 2
@@ -17867,6 +18034,7 @@
     * Reply to address set\r\n* Display only Display Failed Devices - washigton pass\
     \ so it is\r\nexcluded from the results. The others two are passing"
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Notification 3
@@ -17973,6 +18141,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: (R) Netmiko File Transfer Service
@@ -18085,6 +18254,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -18191,6 +18361,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Transfer netmiko_file
@@ -18301,6 +18472,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -18415,6 +18587,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -18529,6 +18702,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -18652,6 +18826,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: 'Function: get_credential'
@@ -18739,6 +18914,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Get device credential
@@ -18850,6 +19026,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -18948,6 +19125,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{get_credential(name="Non Device Credential
     - 2")["password"]}}
@@ -19062,6 +19240,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: Skip in SxS with service targets and Run Once services
@@ -19151,6 +19330,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Once per device
@@ -19238,6 +19418,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Skip Query
@@ -19324,6 +19505,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Global Skip
@@ -19410,6 +19592,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Run Once with Pool
@@ -19500,6 +19683,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Data Extraction Service
@@ -19588,6 +19772,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Initialize Variables
@@ -19688,6 +19873,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: String Extraction
@@ -19785,6 +19971,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Dict Definition
@@ -19882,6 +20069,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Dict Update
@@ -19979,6 +20167,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: String Replacement
@@ -20076,6 +20265,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: List Definition
@@ -20173,6 +20363,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: List Append
@@ -20270,6 +20461,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: List Extend
@@ -20358,6 +20550,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Operation via set_var
@@ -20471,6 +20664,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Parameterized Run with a Superworkflow
@@ -20557,6 +20751,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Service
@@ -20652,6 +20847,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Superworkflow in SxS w WT with Run Once service
@@ -20744,6 +20940,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{ endpoint }}
   run_method: once
@@ -20854,6 +21051,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -20961,6 +21159,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: (R) Netmiko Validation with TextFSM Option
@@ -21072,6 +21271,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -21186,6 +21386,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -21300,6 +21501,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -21414,6 +21616,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -21514,6 +21717,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: (R) NAPALM Configuration and Rollback Services
@@ -21615,6 +21819,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Create a VRF with NAPALM
@@ -21712,6 +21917,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Rollback Configuration with NAPALM
@@ -21827,6 +22033,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -21947,6 +22154,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -22076,6 +22284,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: (R) Napalm Getters Service
@@ -22185,6 +22394,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'Getters Workflow: is alive'
@@ -22290,6 +22500,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'Getters Workflow: get facts'
@@ -22395,6 +22606,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'Getters Workflow: MAC address'
@@ -22500,6 +22712,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'Getters Workflow: get facts failed match'
@@ -22629,6 +22842,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Payload Extraction & Validation
@@ -22752,6 +22966,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -22870,6 +23085,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Payload Extraction
@@ -22968,6 +23184,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Validation dict via results
@@ -23065,6 +23282,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Validate text via results
@@ -23163,6 +23381,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Validate dict via payload
@@ -23259,6 +23478,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Validate text via payload
@@ -23348,6 +23568,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Payload Extraction with Operations
@@ -23448,6 +23669,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'Payload Workflow: Add initial variables'
@@ -23557,6 +23779,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'Payload Workflow: Extraction 1'
@@ -23666,6 +23889,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: 'Payload Workflow: Extraction 2'
@@ -23763,6 +23987,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Validation 1
@@ -23859,6 +24084,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Validation 2
@@ -23948,6 +24174,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Payload Recursive Conservation with Restart Mechanism
@@ -24036,6 +24263,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Set Payload and Result
@@ -24121,6 +24349,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Get Payload 1
@@ -24205,6 +24434,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Get Payload 2
@@ -24289,6 +24519,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Get Result 1
@@ -24373,6 +24604,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Get Result 2
@@ -24457,6 +24689,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Iteration Devices from Predefined Variable
@@ -24546,6 +24779,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Interaction of Restart Mechanism and Superworkflow
@@ -24637,6 +24871,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Basic Superworkflow
@@ -24720,6 +24955,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Before Placeholder
@@ -24803,6 +25039,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: After Placeholder
@@ -24887,6 +25124,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Service 1
@@ -24971,6 +25209,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Service 2
@@ -25055,6 +25294,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Service 3
@@ -25153,6 +25393,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: 'Functions: get_result and get_var'
@@ -25240,6 +25481,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Before Run Once
@@ -25324,6 +25566,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Before Run Per Device
@@ -25416,6 +25659,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Subworkflow
@@ -25500,6 +25744,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: After Run Once
@@ -25587,6 +25832,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: After Run Per Device
@@ -25674,6 +25920,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Subservice
@@ -25738,13 +25985,15 @@
         \ an edge from \"Start\"\r\nto \"Deletion of SanJose\". Deleting immediately\
         \ after running Service1 and\r\nService2 would yield an \"Out of session scope\"\
         \ database error.\r\n1) The first service runs on \"SanJose\", and the second\
-        \ service runs\r\non \"router14\" and \"router15\"\r\n2) - The third service\
-        \ will delete :\r\n    * \"SanJose\" to test cascade deletion of results when\
-        \ the associated device is deleted.\r\n    * \"Service1\" to test cascade\
-        \ deletion of results when the associated service is deleted.\r\n- The fourth\
-        \ service will deleted a link.\r\n- The last service should fail at deleting\
-        \ a task (tasks are not\r\nin the \"allowed_models\" for deletion in automation.json)"
-      positions: [101, 174]
+        \ service runs\r\non \"router14\" and \"router15\"\r\n2) - The services from\
+        \ the lower branch will delete :\r\n    * \"SanJose\" to test cascade deletion\
+        \ of results when the associated device is deleted.\r\n    * \"Service2\"\
+        \ to test cascade deletion of results when the associated service is deleted.\r\
+        \n    * The link \"atlantic-r26-boston-3\"\r\n- The last service should fail\
+        \ at deleting a task (tasks are not\r\nin the \"allowed_models\" for deletion\
+        \ in automation.json)"
+      positions: [115, 168]
+      size: 14
     2636fd0a-5a91-4600-b090-d7ba4b831aa6:
       alignment: left
       content: Runs on "router14" and "router15"
@@ -25762,7 +26011,7 @@
       alignment: left
       content: Runs on "SanJose"
       positions: [-118, -18]
-  last_modified: '2022-11-09 01:23:33.226962'
+  last_modified: '2022-11-28 06:58:15.498442'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -25799,6 +26048,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: Deletion and Cascade Deletion
@@ -25875,7 +26125,7 @@
     \ default=15)"
   positions:
     'Basic: Deletion (Device, Link, Service, Task)': &id424 [-119, 33]
-    Deletion and Cascade Deletion: *id424
+    Deletion and Cascade Deletion: [-119, 33]
     Deletion of Devices, Links, Services, Tasks and associated Cascade Deletion: *id424
   postprocessing: ''
   postprocessing_mode: success
@@ -25887,6 +26137,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Service1
@@ -25960,7 +26211,7 @@
     \ default=15)"
   positions:
     'Basic: Deletion (Device, Link, Service, Task)': &id425 [380, 42]
-    Deletion and Cascade Deletion: *id425
+    Deletion and Cascade Deletion: [380, 42]
     Deletion of Devices, Links, Services, Tasks and associated Cascade Deletion: *id425
   postprocessing: ''
   postprocessing_mode: success
@@ -25972,6 +26223,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Service2
@@ -26045,7 +26297,7 @@
     \ default=15)"
   positions:
     'Basic: Deletion (Device, Link, Service, Task)': &id426 [-204, 300]
-    Deletion and Cascade Deletion: *id426
+    Deletion and Cascade Deletion: [-204, 300]
     Deletion of Devices, Links, Services, Tasks and associated Cascade Deletion: *id426
   postprocessing: ''
   postprocessing_mode: success
@@ -26057,6 +26309,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Deletion of SanJose
@@ -26130,7 +26383,7 @@
     \ default=15)"
   positions:
     'Basic: Deletion (Device, Link, Service, Task)': &id427 [33, 305]
-    Deletion and Cascade Deletion: *id427
+    Deletion and Cascade Deletion: [33, 305]
     Deletion of Devices, Links, Services, Tasks and associated Cascade Deletion: *id427
   postprocessing: ''
   postprocessing_mode: success
@@ -26142,6 +26395,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Deletion of Service2
@@ -26215,7 +26469,7 @@
     \ default=15)"
   positions:
     'Basic: Deletion (Device, Link, Service, Task)': &id428 [265, 307]
-    Deletion and Cascade Deletion: *id428
+    Deletion and Cascade Deletion: [265, 307]
     Deletion of Devices, Links, Services, Tasks and associated Cascade Deletion: *id428
   postprocessing: ''
   postprocessing_mode: success
@@ -26227,6 +26481,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Link Deletion
@@ -26300,7 +26555,7 @@
     \ default=15)"
   positions:
     'Basic: Deletion (Device, Link, Service, Task)': &id429 [530, 289]
-    Deletion and Cascade Deletion: *id429
+    Deletion and Cascade Deletion: [530, 289]
     Deletion of Devices, Links, Services, Tasks and associated Cascade Deletion: *id429
   postprocessing: ''
   postprocessing_mode: success
@@ -26312,6 +26567,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Task Deletion
@@ -26399,6 +26655,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: ICMP Ping
@@ -26509,6 +26766,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: GET Endpoints is_alive, configuration and instance
@@ -26605,6 +26863,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/is_alive
   run_method: per_device
@@ -26698,6 +26957,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/configuration/{{ device.name }}
   run_method: per_device
@@ -26791,6 +27051,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/configuration/{{ device.name }}?property=operational_data
   run_method: per_device
@@ -26883,6 +27144,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device/{{ device.name }}
   run_method: per_device
@@ -26975,6 +27237,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/user/admin
   run_method: per_device
@@ -27089,6 +27352,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: GET Endpoints query and token
@@ -27185,6 +27449,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?name={{ device.name }}
   run_method: per_device
@@ -27278,6 +27543,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?name=NonExisting&allow_none=true
   run_method: per_device
@@ -27372,6 +27638,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?operating_system=EOS
   run_method: per_device
@@ -27465,6 +27732,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/token
   run_method: per_device
@@ -27581,6 +27849,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: POST Endpoint search
@@ -27681,6 +27950,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/search
   run_method: per_device
@@ -27779,6 +28049,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/search
   run_method: per_device
@@ -27879,6 +28150,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/search
   run_method: per_device
@@ -27998,6 +28270,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: POST update, DELETE delete and GET & POST results
@@ -28095,6 +28368,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device
   run_method: once
@@ -28187,6 +28461,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device
   run_method: once
@@ -28280,6 +28555,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device/NewDevice
   run_method: once
@@ -28372,6 +28648,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: 'http://192.168.56.102/rest/result/REST API: POST update, DELETE delete
     and GET & POST results/{{ runtime }}'
@@ -28469,6 +28746,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/search
   run_method: once
@@ -28595,6 +28873,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: (R) Gateway Mechanism (SSH Proxy with Netmiko)
@@ -28707,6 +28986,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -28823,6 +29103,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -28939,6 +29220,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -29040,6 +29322,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Parameterized Multiprocessing
@@ -29123,6 +29406,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Empty Service
@@ -29242,6 +29526,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Parameterized Targets
@@ -29324,6 +29609,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Empty Service
@@ -29417,6 +29703,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Service Priorities
@@ -29506,6 +29793,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Large Workflow (30 services)
@@ -29606,6 +29894,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S1
@@ -29693,6 +29982,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S2
@@ -29780,6 +30070,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S3
@@ -29867,6 +30158,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S4
@@ -29954,6 +30246,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S5
@@ -30041,6 +30334,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S6
@@ -30128,6 +30422,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S7
@@ -30215,6 +30510,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S8
@@ -30302,6 +30598,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S9
@@ -30389,6 +30686,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S10
@@ -30476,6 +30774,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S11
@@ -30563,6 +30862,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S12
@@ -30650,6 +30950,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S13
@@ -30737,6 +31038,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S14
@@ -30824,6 +31126,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S15
@@ -30911,6 +31214,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S16
@@ -30998,6 +31302,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S17
@@ -31085,6 +31390,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S18
@@ -31172,6 +31478,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S19
@@ -31259,6 +31566,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S20
@@ -31346,6 +31654,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S21
@@ -31433,6 +31742,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S22
@@ -31520,6 +31830,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S23
@@ -31607,6 +31918,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S24
@@ -31694,6 +32006,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S25
@@ -31781,6 +32094,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S26
@@ -31868,6 +32182,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S27
@@ -31955,6 +32270,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: S28
@@ -32057,6 +32373,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Large Payload
@@ -32141,6 +32458,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Create Large Payload
@@ -32238,6 +32556,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Large Results
@@ -32322,6 +32641,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Create Large Result
@@ -32420,6 +32740,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Large Device Configuration and Operational Data
@@ -32504,6 +32825,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Set Large Configuration and Operational Data
@@ -32594,6 +32916,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Slack and Mattermost Notifications
@@ -32682,6 +33005,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Slack in random, per device
@@ -32767,6 +33091,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Notification in general, once
@@ -32886,6 +33211,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Get Configuration with Scrapli
@@ -33010,6 +33336,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Get Operational Data with Scrapli
@@ -33138,6 +33465,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: (R) Gateway Mechanism (SSH Proxy with Scrapli)
@@ -33231,6 +33559,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -33327,6 +33656,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -33423,6 +33753,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -33526,6 +33857,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_service_with_service_targets
   scoped_name: Data Extraction Jinja2 Template
@@ -33626,6 +33958,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Apply jinja2 Template
@@ -33710,6 +34043,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Define Input Variables
@@ -33847,6 +34181,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: (R) Scrapli and Netmiko Multiple Commands and Jinja2
@@ -33947,6 +34282,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -34047,6 +34383,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -34164,6 +34501,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -34282,6 +34620,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: true
   run_method: per_device
@@ -34376,6 +34715,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Ping Custom IP
@@ -34478,6 +34818,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: once
   scoped_name: Apply TTP Template
@@ -34578,6 +34919,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: '(R) Function: get_connection'
@@ -34687,6 +35029,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -34778,6 +35121,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Use default connection
@@ -34889,6 +35233,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -35005,6 +35350,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: (R) Credential Object Mechanism
@@ -35098,6 +35444,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?name={{ device.name }}
   run_method: per_device
@@ -35208,6 +35555,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   results_as_list: false
   run_method: per_device
@@ -35306,6 +35654,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Napalm - get interfaces -
@@ -35413,6 +35762,7 @@
   report: '{{ "\n\n".join(dict_to_string(result["result"]) for result in get_result("Service",
     all_matches=True)) }}'
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Text Reports with Normal Templates
@@ -35497,6 +35847,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Service
@@ -35615,6 +35966,7 @@
     ] }}</td>\r\n          <td>{{ result[\"result\"][\"port\"] }}</td>\r\n       \
     \ </tr>\r\n      {% endfor %}\r\n    </table>\r\n  </div>\r\n<center>"
   report_format: html
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: HTML Reports with Jinja2 Templates
@@ -35700,6 +36052,7 @@
   reply_to: ''
   report: ''
   report_format: text
+  report_jinja2_template: false
   reserved: false
   run_method: per_device
   scoped_name: Service

@@ -83,7 +83,7 @@ RBAC Refactoring:
   how RBAC is set up, the service will not be visible after export.
 
 Migration:
-- The credential file must be updated to use groups instead of pools ("pools" -> "groups"). The 
+- The credential file must be updated to use groups instead of pools ("user_pools" -> "groups"). The 
   appropriate groups must be created first.
 - In migration files, check that the "settings" variable isn't used in any workflow. If the
   server IP, name or URL is used, the "server variable should be used instead.

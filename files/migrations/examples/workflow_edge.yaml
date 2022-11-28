@@ -686,21 +686,18 @@
   name: '[Regression Workflow: Optional Prerequisite Services] 2021-04-24 08:58:40.199607',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: Optional
     Remediation Branch}
-- {color: red, destination: '[Optional Remediation Branch] Failure case: device +
-    value iteration', label: failure, name: '[Regression Workflow: Optional Prerequisite
-    Services] 2021-04-24 08:58:40.199622', source: '[Optional Remediation Branch]
-    Dispatch Devices', subtype: failure, type: workflow_edge, workflow: Optional Remediation
-    Branch}
+- {color: red, destination: '[Optional Remediation Branch] Failure case', label: failure,
+  name: '[Regression Workflow: Optional Prerequisite Services] 2021-04-24 08:58:40.199622',
+  source: '[Optional Remediation Branch] Dispatch Devices', subtype: failure, type: workflow_edge,
+  workflow: Optional Remediation Branch}
 - {color: red, destination: '[Optional Remediation Branch] Post-Iteration Service',
   label: failure, name: '[Regression Workflow: Optional Prerequisite Services] 2021-04-24
-    08:58:40.199637', source: '[Optional Remediation Branch] Failure case: device
-    + value iteration', subtype: failure, type: workflow_edge, workflow: Optional
-    Remediation Branch}
+    08:58:40.199637', source: '[Optional Remediation Branch] Failure case', subtype: failure,
+  type: workflow_edge, workflow: Optional Remediation Branch}
 - {color: green, destination: '[Optional Remediation Branch] Post-Iteration Service',
   label: success, name: '[Regression Workflow: Optional Prerequisite Services] 2021-04-24
-    08:58:40.199651', source: '[Optional Remediation Branch] Failure case: device
-    + value iteration', subtype: success, type: workflow_edge, workflow: Optional
-    Remediation Branch}
+    08:58:40.199651', source: '[Optional Remediation Branch] Failure case', subtype: success,
+  type: workflow_edge, workflow: Optional Remediation Branch}
 - {color: green, destination: '[Optional Remediation Branch] Last Service', label: success,
   name: '[Regression Workflow: Optional Prerequisite Services] 2021-04-24 08:58:40.199666',
   source: '[Optional Remediation Branch] Post-Iteration Service', subtype: success,

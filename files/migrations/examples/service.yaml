@@ -4045,7 +4045,7 @@
       alignment: left
       content: 'Expected: 2 devices'
       positions: [113, 266]
-  last_modified: '2022-11-09 01:23:32.368508'
+  last_modified: '2022-11-28 07:03:03.620272'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -4057,7 +4057,7 @@
   max_number_of_retries: 100
   max_processes: 5
   maximum_runs: 1
-  multiprocessing: true
+  multiprocessing: false
   name: Fork based on Success Value
   negative_logic: false
   number_of_retries: 0
@@ -13941,14 +13941,14 @@
       alignment: left
       content: "When a service fails, there can be a remediation process to apply\
         \ to\r\nthe failed devices before moving on to the next service.\r\nThe remediation\
-        \ must be run before the next service if there are any\r\nfailed device, while\
-        \ not preventing the workflow from running to\r\ncompletion if there aren't\
-        \ any.\r\nThis justifies the move from the concept of \"prerequisite edges\"\
-        \ to a\r\npriority-based graph traversal implemented with Dijkstra algorithm.\r\
-        \nIn this workflow: TODO remove iteration and describe with and without\r\n\
-        use-case"
-      positions: [172, 116]
-  last_modified: '2022-11-09 01:23:32.776693'
+        \ branch must be run before the next service if there are any\r\nfailed device,\
+        \ while not preventing the workflow from running to\r\ncompletion if there\
+        \ aren't any.\r\nThis justifies the move from the concept of \"prerequisite\
+        \ edges\" to a\r\npriority-based graph traversal implemented with Dijkstra\
+        \ algorithm."
+      positions: [177, 138]
+      size: 14
+  last_modified: '2022-11-28 07:24:15.237709'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -13993,8 +13993,7 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Optional Remediation Branch] Dispatch
       Devices', '[Optional Remediation Branch] Last Service', '[Optional Remediation
-      Branch] Failure case: device + value iteration', '[Optional Remediation Branch]
-      Post-Iteration Service']
+      Branch] Failure case', '[Optional Remediation Branch] Post-Iteration Service']
   shared: false
   skip: {}
   skip_query: ''
@@ -14204,11 +14203,11 @@
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_devices: '["PaloAlto", "Atlanta"]'
+  iteration_devices: ''
   iteration_devices_property: name
-  iteration_values: ("v1", "v2", "v3")
+  iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-11-09 01:23:32.775265'
+  last_modified: '2022-11-28 07:24:15.237709'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -14218,7 +14217,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Optional Remediation Branch] Failure case: device + value iteration'
+  name: '[Optional Remediation Branch] Failure case'
   negative_logic: false
   number_of_retries: 0
   operating_system: ''
@@ -14248,7 +14247,7 @@
   report_jinja2_template: false
   reserved: false
   run_method: per_device
-  scoped_name: 'Failure case: device + value iteration'
+  scoped_name: Failure case
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -14256,7 +14255,7 @@
   skip_query: ''
   skip_value: success
   source_code: "# Click on \"i\" to right of \"Source Code\" for examples.\r\n\r\n\
-    result = {}\r\nresults[\"success\"] = parent_device.name == \"Austin\"\r\nresults[\"\
+    result = {}\r\nresults[\"success\"] = device.name == \"Austin\"\r\nresults[\"\
     result\"] = result"
   target_devices: []
   target_pools: []

@@ -291,7 +291,7 @@
     Scrapli Netconf Service: *id050
     Scrapli Service: *id036
     Separate Failure - Success Paths: [-327, -20]
-    Service Priorities: [0, 0]
+    Service Priorities: [-103, 35]
     Service Priorities, Napalm Getters, Postprocessing: *id061
     'Services: Ansible Playbook Service': *id062
     Shared Service in Multiple Subworkflows: [55, 266]
@@ -765,7 +765,7 @@
     Scrapli Service: *id125
     Scrapli and Netmiko Multiple Commands and Jinja2: !!python/tuple [500, 0]
     Separate Failure - Success Paths: [737, 276]
-    Service Priorities: [500, 0]
+    Service Priorities: [559, 44]
     Service Priorities, Napalm Getters, Postprocessing: *id150
     'Services: Ansible Playbook Service': *id151
     Shared Service in Multiple Subworkflows: [688, -88]
@@ -29635,99 +29635,6 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools_after_running: false
-  update_target_pools: false
-  validation_condition: none
-  validation_method: text
-  validation_section: results['result']
-  vendor: ''
-  waiting_time: 0
-- admin_only: false
-  category: Basics
-  close_connection: false
-  completion_time: 1
-  content_match: ''
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  credential_type: any
-  custom_property: Default Value
-  default_uuid: 7adc02b4-ee9a-4db6-86fd-8a1e615263dc
-  definition: Definition
-  delete_spaces_before_matching: false
-  description: ''
-  device_query: ''
-  device_query_property: name
-  dict_match: {}
-  disable_result_creation: false
-  display_only_failed_nodes: false
-  display_report: false
-  freeze: []
-  impacting: true
-  include_device_results: false
-  include_link_in_summary: false
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: name
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  labels:
-    926ebbc5-e82b-4ae5-85fe-f25675a5149b:
-      alignment: left
-      content: Tests the priority mechanism.
-      positions: [211, -52]
-  last_modified: '2022-11-09 01:23:33.341187'
-  last_modified_by: admin
-  log_level: 1
-  mail_recipient: ''
-  man_minutes: 0
-  man_minutes_total: 0
-  man_minutes_type: device
-  mandatory_parameter: Default Value
-  mandatory_parametrization: false
-  max_number_of_retries: 100
-  max_processes: 15
-  maximum_runs: 1
-  multiprocessing: false
-  name: Service Priorities
-  negative_logic: false
-  number_of_retries: 0
-  operating_system: ''
-  owners: []
-  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
-    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
-    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
-    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
-    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
-    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
-    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
-    \ default=15)"
-  positions: {}
-  postprocessing: ''
-  postprocessing_mode: success
-  preprocessing: ''
-  priority: 11
-  rbac_edit: [Full UI Read + Edit Access]
-  rbac_read: [Full UI Read + Edit Access]
-  rbac_run: [Full UI Read + Edit Access]
-  reply_to: ''
-  report: ''
-  report_format: text
-  report_jinja2_template: false
-  reserved: false
-  run_method: per_device
-  scoped_name: Service Priorities
-  send_notification: false
-  send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End']
-  shared: false
-  skip: {}
-  skip_query: ''
-  skip_value: success
-  target_devices: []
-  target_pools: []
-  time_between_retries: 10
-  type: workflow
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none

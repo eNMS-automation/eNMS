@@ -236,9 +236,32 @@ class Runner:
             if self.update_pools_after_running:
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
+            if self.service.report:
+                try:
+                    report = ""
+                    if self.service.report:
+                        variables = {"service": self.service, **self.global_variables()}
+                        if self.service.report_jinja2_template:
+                            report = Template(self.service.report).render(variables)
+                        else:
+                            report = self.sub(self.service.report, variables)
+                except Exception:
+                    report = "\n".join(format_exc().splitlines())
+                    self.log("error", f"Failed to build report:\n{report}")
+                if report:
+                    results["report"] = report
+                    try:
+                        db.factory(
+                            "service_report",
+                            runtime=self.parent_runtime,
+                            service=self.service.id,
+                            content=report,
+                        )
+                    except Exception:
+                        self.log("error", f"Failed to commit report:\n{format_exc()}")
             if self.get("send_notification"):
                 try:
-                    results = self.notify(results, report)
+                    results = self.notify(results)
                 except Exception:
                     error = "\n".join(format_exc().splitlines())
                     self.log("error", f"Notification error: {error}")
@@ -464,27 +487,6 @@ class Runner:
                     )
                 except Exception:
                     self.log("error", f"Failed to commit service log:\n{format_exc()}")
-                try:
-                    report = ""
-                    if service.report:
-                        variables = {"service": service, **self.global_variables()}
-                        if service.report_jinja2_template:
-                            report = Template(service.report).render(variables)
-                        else:
-                            report = self.sub(service.report, variables)
-                except Exception:
-                    error = report = "\n".join(format_exc().splitlines())
-                    self.log("error", f"Failed to build report:\n{error}")
-                if report:
-                    try:
-                        db.factory(
-                            "service_report",
-                            runtime=self.parent_runtime,
-                            service=service_id,
-                            content=report,
-                        )
-                    except Exception:
-                        self.log("error", f"Failed to commit report:\n{format_exc()}")
             if self.main_run.trigger == "REST API":
                 results["devices"] = {}
                 for result in self.main_run.results:
@@ -668,7 +670,7 @@ class Runner:
             if not self.is_main_run:
                 env.log_queue(self.parent_runtime, self.main_run.service.id, run_log)
 
-    def build_notification(self, results, report):
+    def build_notification(self, results):
         notification = {
             "Service": f"{self.service.name} ({self.service.type})",
             "Runtime": self.runtime,
@@ -676,8 +678,8 @@ class Runner:
         }
         if "result" in results:
             notification["Results"] = results["result"]
-        if report:
-            notification["Header"] = report
+        if "report" in results:
+            notification["Report"] = results["report"]
         if self.include_link_in_summary:
             run = f"{self.main_run.id}/{self.service.id}"
             notification["Link"] = f"{vs.server_url}/view_service_results/{run}"
@@ -688,9 +690,9 @@ class Runner:
                 notification["PASSED"] = results["summary"]["success"]
         return notification
 
-    def notify(self, results, report):
+    def notify(self, results):
         self.log("info", f"Sending {self.send_notification_method} notification...")
-        notification = self.build_notification(results, report)
+        notification = self.build_notification(results)
         file_content = deepcopy(notification)
         if self.include_device_results:
             file_content["Device Results"] = {}

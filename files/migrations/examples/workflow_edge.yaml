@@ -25,48 +25,49 @@
 - {color: red, destination: '[Shared] REST API: call *is_alive* endpoint', label: failure,
   name: '[Regression Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195644',
   source: '[Shared] Netmiko: Check VRF (Telecom1) does not exist', subtype: failure,
-  type: workflow_edge, workflow: Fork based on Success Value}
+  type: workflow_edge, workflow: (R) Fork based on Success Value}
 - {color: green, destination: '[Shared] Netmiko: Check VRF (Telecom1) does not exist',
   label: success, name: '[Regression Workflow: Separate Failure - Success Paths] 2021-04-24
     08:58:40.195658', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: Fork based on Success Value}
+  workflow: (R) Fork based on Success Value}
 - {color: green, destination: '[Shared] NAPALM: Get Facts', label: success, name: '[Regression
     Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195673', source: '[Shared]
     Netmiko: Check VRF (Telecom1) does not exist', subtype: success, type: workflow_edge,
-  workflow: Fork based on Success Value}
+  workflow: (R) Fork based on Success Value}
 - {color: red, destination: '[(R) Netmiko Prompts Service] Test netmiko prompts pass',
   label: failure, name: '[Regression Workflow: Netmiko Prompts] 2021-04-24 08:58:40.195689',
   source: '[(R) Netmiko Prompts Service] Test Netmiko Prompt Service', subtype: failure,
   type: workflow_edge, workflow: (R) Netmiko Prompts Service}
-- {color: green, destination: '[Functions: get_var, set_var, and get_result] Modify
+- {color: green, destination: '[(R) Functions: get_var, set_var, and get_result] Modify
     payload (no device)', label: success, name: '[Regression Workflow: Using get_var,
     set_var, get_result functions] 2021-04-24 08:58:40.195705', source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'Functions: get_var,
+    Start', subtype: success, type: workflow_edge, workflow: '(R) Functions: get_var,
     set_var, and get_result'}
-- {color: green, destination: '[Functions: get_var, set_var, and get_result] Modify
+- {color: green, destination: '[(R) Functions: get_var, set_var, and get_result] Modify
     payload (per device)', label: success, name: '[Regression Workflow: Using get_var,
-    set_var, get_result functions] 2021-04-24 08:58:40.195720', source: '[Functions:
+    set_var, get_result functions] 2021-04-24 08:58:40.195720', source: '[(R) Functions:
     get_var, set_var, and get_result] Modify payload (no device)', subtype: success,
-  type: workflow_edge, workflow: 'Functions: get_var, set_var, and get_result'}
-- {color: green, destination: '[Functions: get_var, set_var, and get_result] Show
+  type: workflow_edge, workflow: '(R) Functions: get_var, set_var, and get_result'}
+- {color: green, destination: '[(R) Functions: get_var, set_var, and get_result] Show
     vrf with payload helper', label: success, name: '[Regression Workflow: Using get_var,
-    set_var, get_result functions] 2021-04-24 08:58:40.195734', source: '[Functions:
+    set_var, get_result functions] 2021-04-24 08:58:40.195734', source: '[(R) Functions:
     get_var, set_var, and get_result] Modify payload (per device)', subtype: success,
-  type: workflow_edge, workflow: 'Functions: get_var, set_var, and get_result'}
+  type: workflow_edge, workflow: '(R) Functions: get_var, set_var, and get_result'}
 - {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
   name: '[Regression Workflow: Using get_var, set_var, get_result functions] 2021-04-24
-    08:58:40.195749', source: '[Functions: get_var, set_var, and get_result] Show
-    vrf with python query', subtype: success, type: workflow_edge, workflow: 'Functions:
-    get_var, set_var, and get_result'}
-- {color: green, destination: '[Functions: get_var, set_var, and get_result] show
+    08:58:40.195749', source: '[(R) Functions: get_var, set_var, and get_result] Show
+    vrf with python query', subtype: success, type: workflow_edge, workflow: '(R)
+    Functions: get_var, set_var, and get_result'}
+- {color: green, destination: '[(R) Functions: get_var, set_var, and get_result] show
     runtime with get_result helper', label: success, name: '[Regression Workflow:
     Using get_var, set_var, get_result functions] 2021-04-24 08:58:40.195764', source: '[Shared]
-    REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Functions:
-    get_var, set_var, and get_result'}
+    REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: '(R)
+    Functions: get_var, set_var, and get_result'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Using get_var, set_var, get_result functions] 2021-04-24 08:58:40.195778', source: '[Functions:
-    get_var, set_var, and get_result] show runtime with get_result helper', subtype: success,
-  type: workflow_edge, workflow: 'Functions: get_var, set_var, and get_result'}
+    Using get_var, set_var, get_result functions] 2021-04-24 08:58:40.195778', source: '[(R)
+    Functions: get_var, set_var, and get_result] show runtime with get_result helper',
+  subtype: success, type: workflow_edge, workflow: '(R) Functions: get_var, set_var,
+    and get_result'}
 - {color: green, destination: '[(R) Ansible Playbook Service] Ansible Workflow: Arista
     show configuration (regex match)', label: success, name: '[Regression Workflow:
     Ansible with Validation] 2021-04-24 08:58:40.195881', source: '[(R) Ansible Playbook
@@ -83,41 +84,42 @@
   type: workflow_edge, workflow: (R) Ansible Playbook Service}
 - {color: green, destination: '[Shared] NAPALM: Get interfaces', label: success, name: '[Regression
     Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195925', source: '[Shared]
-    REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: Fork
-    based on Success Value}
+    REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: (R)
+    Fork based on Success Value}
 - {color: green, destination: '[Shared] Example Service (does nothing)', label: success,
   name: '[Regression Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195940',
   source: '[Shared] NAPALM: Get interfaces', subtype: success, type: workflow_edge,
-  workflow: Fork based on Success Value}
+  workflow: (R) Fork based on Success Value}
 - {color: green, destination: '[Shared] NAPALM: Get interfaces', label: success, name: '[Regression
     Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195955', source: '[Shared]
-    NAPALM: Get Facts', subtype: success, type: workflow_edge, workflow: Fork based
-    on Success Value}
+    NAPALM: Get Facts', subtype: success, type: workflow_edge, workflow: (R) Fork
+    based on Success Value}
 - {color: red, destination: '[Shared] Example Service (does nothing)', label: failure,
   name: '[Regression Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195970',
   source: '[Shared] NAPALM: Get interfaces', subtype: failure, type: workflow_edge,
-  workflow: Fork based on Success Value}
+  workflow: (R) Fork based on Success Value}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     Advanced Multiprocessing (admin)] 2021-04-24 08:58:40.196046', source: '[Shared]
     REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: Multiprocessing
     in DxD mode}
 - {color: green, destination: '[Shared] Modify Payload for Iteration', label: success,
   name: '[Regression Workflow: Iteration Targets Mechanism] 2021-04-24 08:58:40.196062',
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: Combined
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: (R) Combined
     Device & Target Iteration}
-- {color: green, destination: '[Combined Device & Target Iteration] Iteration Target
-    Workflow - Test 2', label: success, name: '[Regression Workflow: Iteration Targets
-    Mechanism] 2021-04-24 08:58:40.196078', source: '[Combined Device & Target Iteration]
-    Iteration Targets Workflow - Test 1', subtype: success, type: workflow_edge, workflow: Combined
-    Device & Target Iteration}
+- {color: green, destination: '[(R) Combined Device & Target Iteration] Iteration
+    Target Workflow - Test 2', label: success, name: '[Regression Workflow: Iteration
+    Targets Mechanism] 2021-04-24 08:58:40.196078', source: '[(R) Combined Device
+    & Target Iteration] Iteration Targets Workflow - Test 1', subtype: success, type: workflow_edge,
+  workflow: (R) Combined Device & Target Iteration}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Iteration Targets Mechanism] 2021-04-24 08:58:40.196164', source: '[Combined Device
-    & Target Iteration] Iteration Targets Workflow - Test 4', subtype: success, type: workflow_edge,
-  workflow: Combined Device & Target Iteration}
-- {color: green, destination: '[Combined Device & Target Iteration] Iteration Targets
-    Workflow - Test 1', label: success, name: '[Regression Workflow: Iteration Targets
-    Mechanism] 2021-04-24 08:58:40.196341', source: '[Shared] Modify Payload for Iteration',
-  subtype: success, type: workflow_edge, workflow: Combined Device & Target Iteration}
+    Iteration Targets Mechanism] 2021-04-24 08:58:40.196164', source: '[(R) Combined
+    Device & Target Iteration] Iteration Targets Workflow - Test 4', subtype: success,
+  type: workflow_edge, workflow: (R) Combined Device & Target Iteration}
+- {color: green, destination: '[(R) Combined Device & Target Iteration] Iteration
+    Targets Workflow - Test 1', label: success, name: '[Regression Workflow: Iteration
+    Targets Mechanism] 2021-04-24 08:58:40.196341', source: '[Shared] Modify Payload
+    for Iteration', subtype: success, type: workflow_edge, workflow: (R) Combined
+    Device & Target Iteration}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     Netmiko Prompts] 2021-04-24 08:58:40.196356', source: '[(R) Netmiko Prompts Service]
     Test netmiko prompts pass', subtype: success, type: workflow_edge, workflow: (R)
@@ -132,8 +134,8 @@
   workflow: (R) Netmiko Prompts Service}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     Separate Failure - Success Paths] 2021-04-24 08:58:40.196401', source: '[Shared]
-    Example Service (does nothing)', subtype: success, type: workflow_edge, workflow: Fork
-    based on Success Value}
+    Example Service (does nothing)', subtype: success, type: workflow_edge, workflow: (R)
+    Fork based on Success Value}
 - {color: green, destination: '[(R) Configuration Properties Backup Services] Configuration
     Backup (NAPALM)', label: success, name: '[Regression Workflow: Operational Data
     Backup (admin)] 2021-04-24 08:58:40.196417', source: '[Shared] Start', subtype: success,
@@ -204,56 +206,56 @@
     08:58:40.196887', source: '[[DxD and SxS Run Methods] Workflow in service targets
     mode] Validation show VRF', subtype: success, type: workflow_edge, workflow: '[DxD
     and SxS Run Methods] Workflow in service targets mode'}
-- {color: green, destination: '[Shared Service in Multiple Subworkflows] Subworkflow
+- {color: green, destination: '[(R) Shared Service in Multiple Subworkflows] Subworkflow
     1', label: success, name: '[Regression Workflow: Shared Service in Multiple Subworkflows]
     2021-04-24 08:58:40.196916', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: Shared Service in Multiple Subworkflows}
-- {color: green, destination: '[Shared Service in Multiple Subworkflows] Subworkflow
+  workflow: (R) Shared Service in Multiple Subworkflows}
+- {color: green, destination: '[(R) Shared Service in Multiple Subworkflows] Subworkflow
     2', label: success, name: '[Regression Workflow: Shared Service in Multiple Subworkflows]
-    2021-04-24 08:58:40.196943', source: '[Shared Service in Multiple Subworkflows]
-    Subworkflow 1', subtype: success, type: workflow_edge, workflow: Shared Service
+    2021-04-24 08:58:40.196943', source: '[(R) Shared Service in Multiple Subworkflows]
+    Subworkflow 1', subtype: success, type: workflow_edge, workflow: (R) Shared Service
     in Multiple Subworkflows}
 - {color: green, destination: '[Shared] Shared Service used Twice in Workflow', label: success,
   name: '[[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow
     1] 2021-04-24 08:58:40.197124', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: '[Shared Service in Multiple Subworkflows] Subworkflow 1'}
+  workflow: '[(R) Shared Service in Multiple Subworkflows] Subworkflow 1'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
     Workflow: Shared Service in Multiple Subworkflows] Subworkflow 1] 2021-04-24 08:58:40.197150',
   source: '[Shared] Shared Service used Twice in Workflow', subtype: success, type: workflow_edge,
-  workflow: '[Shared Service in Multiple Subworkflows] Subworkflow 1'}
+  workflow: '[(R) Shared Service in Multiple Subworkflows] Subworkflow 1'}
 - {color: green, destination: '[Shared] Shared Service used Twice in Workflow', label: success,
   name: '[[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow
     2] 2021-04-24 08:58:40.197179', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: '[Shared Service in Multiple Subworkflows] Subworkflow 2'}
+  workflow: '[(R) Shared Service in Multiple Subworkflows] Subworkflow 2'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
     Workflow: Shared Service in Multiple Subworkflows] Subworkflow 2] 2021-04-24 08:58:40.197209',
   source: '[Shared] Shared Service used Twice in Workflow', subtype: success, type: workflow_edge,
-  workflow: '[Shared Service in Multiple Subworkflows] Subworkflow 2'}
+  workflow: '[(R) Shared Service in Multiple Subworkflows] Subworkflow 2'}
 - {color: red, destination: '[Shared] End', label: failure, name: '[[Regression Workflow:
     Shared Service in Multiple Subworkflows] Subworkflow 1] 2021-04-24 08:58:40.197236',
   source: '[Shared] Shared Service used Twice in Workflow', subtype: failure, type: workflow_edge,
-  workflow: '[Shared Service in Multiple Subworkflows] Subworkflow 1'}
+  workflow: '[(R) Shared Service in Multiple Subworkflows] Subworkflow 1'}
 - {color: red, destination: '[Shared] End', label: failure, name: '[Regression Workflow:
-    Shared Service in Multiple Subworkflows] 2021-04-24 08:58:40.197334', source: '[Shared
-    Service in Multiple Subworkflows] Subworkflow 2', subtype: failure, type: workflow_edge,
-  workflow: Shared Service in Multiple Subworkflows}
+    Shared Service in Multiple Subworkflows] 2021-04-24 08:58:40.197334', source: '[(R)
+    Shared Service in Multiple Subworkflows] Subworkflow 2', subtype: failure, type: workflow_edge,
+  workflow: (R) Shared Service in Multiple Subworkflows}
 - {color: green, destination: '[(R) Ansible Playbook Service] Simple Playbook', label: success,
   name: '[Regression Workflow: Ansible with Validation] 2021-04-24 08:58:40.197355',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: (R) Ansible
     Playbook Service}
-- {color: green, destination: '[Dictionary as Iteration Target Variable] Set Variables
+- {color: green, destination: '[(R) Dictionary as Iteration Target Variable] Set Variables
     for Iteration', label: success, name: '[Regression Workflow: Advanced Iteration
     Targets] 2021-04-24 08:58:40.197373', source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: Dictionary as Iteration Target Variable}
-- {color: green, destination: '[Dictionary as Iteration Target Variable] Show VRF
-    with iteration', label: success, name: '[Regression Workflow: Advanced Iteration
-    Targets] 2021-04-24 08:58:40.197390', source: '[Dictionary as Iteration Target
+  type: workflow_edge, workflow: (R) Dictionary as Iteration Target Variable}
+- {color: green, destination: '[(R) Dictionary as Iteration Target Variable] Show
+    VRF with iteration', label: success, name: '[Regression Workflow: Advanced Iteration
+    Targets] 2021-04-24 08:58:40.197390', source: '[(R) Dictionary as Iteration Target
     Variable] Set Variables for Iteration', subtype: success, type: workflow_edge,
-  workflow: Dictionary as Iteration Target Variable}
+  workflow: (R) Dictionary as Iteration Target Variable}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Advanced Iteration Targets] 2021-04-24 08:58:40.197405', source: '[Dictionary
+    Advanced Iteration Targets] 2021-04-24 08:58:40.197405', source: '[(R) Dictionary
     as Iteration Target Variable] Show VRF with iteration', subtype: success, type: workflow_edge,
-  workflow: Dictionary as Iteration Target Variable}
+  workflow: (R) Dictionary as Iteration Target Variable}
 - {color: green, destination: '[Workflow and Subworkflow Iteration] Test Iteration',
   label: success, name: '[Regression Workflow: Workflow and Subworkflow Iteration]
     2021-04-24 08:58:40.197446', source: '[Shared] Start', subtype: success, type: workflow_edge,
@@ -323,16 +325,16 @@
     show version', label: success, name: '[Regression Workflow: Ansible with Validation]
     2021-04-24 08:58:40.197830', source: '[(R) Ansible Playbook Service] Simple Playbook',
   subtype: success, type: workflow_edge, workflow: (R) Ansible Playbook Service}
-- {color: green, destination: '[Combined Device & Target Iteration] Iteration Target
-    Workflow - Test 3', label: success, name: '[Regression Workflow: Iteration Targets
-    Mechanism] 2021-04-24 08:58:40.197847', source: '[Combined Device & Target Iteration]
-    Iteration Target Workflow - Test 2', subtype: success, type: workflow_edge, workflow: Combined
-    Device & Target Iteration}
-- {color: green, destination: '[Combined Device & Target Iteration] Iteration Targets
-    Workflow - Test 4', label: success, name: '[Regression Workflow: Iteration Targets
-    Mechanism] 2021-04-24 08:58:40.197863', source: '[Combined Device & Target Iteration]
-    Iteration Target Workflow - Test 3', subtype: success, type: workflow_edge, workflow: Combined
-    Device & Target Iteration}
+- {color: green, destination: '[(R) Combined Device & Target Iteration] Iteration
+    Target Workflow - Test 3', label: success, name: '[Regression Workflow: Iteration
+    Targets Mechanism] 2021-04-24 08:58:40.197847', source: '[(R) Combined Device
+    & Target Iteration] Iteration Target Workflow - Test 2', subtype: success, type: workflow_edge,
+  workflow: (R) Combined Device & Target Iteration}
+- {color: green, destination: '[(R) Combined Device & Target Iteration] Iteration
+    Targets Workflow - Test 4', label: success, name: '[Regression Workflow: Iteration
+    Targets Mechanism] 2021-04-24 08:58:40.197863', source: '[(R) Combined Device
+    & Target Iteration] Iteration Target Workflow - Test 3', subtype: success, type: workflow_edge,
+  workflow: (R) Combined Device & Target Iteration}
 - {color: green, destination: '[Specific Superworkflow] REST API: call to placeholder
     property', label: success, name: '[Regression Workflow: Superworkflow] 2021-04-24
     08:58:40.197878', source: '[Shared] REST API: call *is_alive* endpoint', subtype: success,
@@ -341,11 +343,11 @@
     Workflow: Superworkflow] 2021-04-24 08:58:40.197893', source: '[Specific Superworkflow]
     REST API: call to placeholder property', subtype: success, type: workflow_edge,
   workflow: Specific Superworkflow}
-- {color: green, destination: '[Functions: get_var, set_var, and get_result] Show
+- {color: green, destination: '[(R) Functions: get_var, set_var, and get_result] Show
     vrf with python query', label: success, name: '[Regression Workflow: Using get_var,
-    set_var, get_result functions] 2021-04-24 08:58:40.197909', source: '[Functions:
+    set_var, get_result functions] 2021-04-24 08:58:40.197909', source: '[(R) Functions:
     get_var, set_var, and get_result] Show vrf with payload helper', subtype: success,
-  type: workflow_edge, workflow: 'Functions: get_var, set_var, and get_result'}
+  type: workflow_edge, workflow: '(R) Functions: get_var, set_var, and get_result'}
 - {color: green, destination: '[(R) Configuration Properties Backup Services] Get
     Configuration with Netmiko', label: success, name: '[Regression Workflow: Operational
     Data Backup (admin)] 2021-04-24 08:58:40.197930', source: '[Shared] Start', subtype: success,
@@ -903,20 +905,20 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2021-07-05 05:28:17.315359',
   source: '[(R) Netmiko File Transfer Service] Check netmiko_file is deleted', subtype: success,
   type: workflow_edge, workflow: (R) Netmiko File Transfer Service}
-- {color: green, destination: '[Function: get_credential] Show interface via get_credential',
-  label: success, name: '2021-07-05 23:51:18.198534', source: '[Function: get_credential]
-    Get device credential', subtype: success, type: workflow_edge, workflow: 'Function:
-    get_credential'}
-- {color: green, destination: '[Function: get_credential] Rest Call with get_credential',
-  label: success, name: '2021-07-06 00:44:16.816912', source: '[Function: get_credential]
-    Show interface via get_credential', subtype: success, type: workflow_edge, workflow: 'Function:
-    get_credential'}
+- {color: green, destination: '[(R) Function: get_credential] Show interface via get_credential',
+  label: success, name: '2021-07-05 23:51:18.198534', source: '[(R) Function: get_credential]
+    Get device credential', subtype: success, type: workflow_edge, workflow: '(R)
+    Function: get_credential'}
+- {color: green, destination: '[(R) Function: get_credential] Rest Call with get_credential',
+  label: success, name: '2021-07-06 00:44:16.816912', source: '[(R) Function: get_credential]
+    Show interface via get_credential', subtype: success, type: workflow_edge, workflow: '(R)
+    Function: get_credential'}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-07-06 00:44:17.647413',
-  source: '[Function: get_credential] Rest Call with get_credential', subtype: success,
-  type: workflow_edge, workflow: 'Function: get_credential'}
-- {color: green, destination: '[Function: get_credential] Get device credential',
+  source: '[(R) Function: get_credential] Rest Call with get_credential', subtype: success,
+  type: workflow_edge, workflow: '(R) Function: get_credential'}
+- {color: green, destination: '[(R) Function: get_credential] Get device credential',
   label: success, name: '2021-07-06 01:05:21.203122', source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: 'Function: get_credential'}
+  type: workflow_edge, workflow: '(R) Function: get_credential'}
 - {color: green, destination: '[Skip in SxS with service targets and Run Once services]
     Once per device', label: success, name: '2021-07-08 00:48:49.407758', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: Skip in SxS with service

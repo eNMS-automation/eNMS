@@ -1611,3 +1611,7 @@
     with Normal Templates] 2022-11-14 08:41:51.115326', source: '[HTML Reports with
     Jinja2 Templates] Service', subtype: success, type: workflow_edge, workflow: HTML
     Reports with Jinja2 Templates}
+- {color: red, destination: '[Shared] End', label: failure, name: '2022-12-04 07:43:05.701845',
+  source: '[Functions: factory, fetch, fetch_all, encrypt and get_result] Show vrf
+    with custom encrypted credentials', subtype: failure, type: workflow_edge, workflow: 'Functions:
+    factory, fetch, fetch_all, encrypt and get_result'}

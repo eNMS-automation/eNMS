@@ -10885,7 +10885,7 @@
         \ of how RBAC is configured.\r\nWhen logging in with \"ny\" user, it should\
         \ be visible in the workflow\r\nbuilder."
       positions: [28, -27]
-  last_modified: '2022-11-09 01:23:32.642493'
+  last_modified: '2022-12-04 08:01:36.837799'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -10972,7 +10972,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-11-09 01:23:32.640946'
+  last_modified: '2022-12-04 08:01:08.413124'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -11043,16 +11043,16 @@
     \ link, 10G\": names(device.get_neighbors(\"link\", direction=\"destination\"\
     , model=\"10G\")),\r\n}\r\nresults[\"expected_result\"] = {\r\n   \t\"direction=both,\
     \ device\": {\"Austin\", \"Atlanta\", \"Houston\", \"LosAngeles\"},\r\n\t\"direction=both,\
-    \ link\": {\"link13\", \"link25\", \"link0\", \"link24\"},\r\n\t\"direction=source,\
-    \ device\": {\"Atlanta\", \"LosAngeles\"},\r\n\t\"direction=source, link\": {\"\
-    link25\", \"link24\"},\r\n\t\"direction=destination, device\": {\"Austin\", \"\
-    Houston\"},\r\n  \t\"direction=destination, link\": {\"link13\", \"link0\"},\r\
-    \n\t\"direction=both, device, 10G\": {\"Houston\"},\r\n  \t\"direction=both, link,\
-    \ 400G\": {\"link25\", \"link24\"},\r\n  \t\"direction=source, device, 40G\":\
-    \ set(),\r\n  \t\"direction=destination, link, 10G\": {\"link0\"},\r\n}\r\n\r\n\
-    results[\"success\"] = True\r\nfor test, result in results[\"result\"].items():\r\
-    \n    if result != results[\"expected_result\"][test]:\r\n        results[\"success\"\
-    ] = False\r\n"
+    \ link\": {\"link13\", \"link25\", \"link0\", \"link24\", \"link25-3\", \"link25-2\"\
+    },\r\n\t\"direction=source, device\": {\"Atlanta\", \"LosAngeles\"},\r\n\t\"direction=source,\
+    \ link\": {\"link25\", \"link24\", \"link25-3\", \"link25-2\"},\r\n\t\"direction=destination,\
+    \ device\": {\"Austin\", \"Houston\"},\r\n  \t\"direction=destination, link\"\
+    : {\"link13\", \"link0\"},\r\n\t\"direction=both, device, 10G\": {\"Houston\"\
+    },\r\n  \t\"direction=both, link, 400G\": {\"link25\", \"link24\", \"link25-3\"\
+    , \"link25-2\"},\r\n  \t\"direction=source, device, 40G\": set(),\r\n  \t\"direction=destination,\
+    \ link, 10G\": {\"link0\"},\r\n}\r\n\r\nresults[\"success\"] = True\r\nfor test,\
+    \ result in results[\"result\"].items():\r\n    if result != results[\"expected_result\"\
+    ][test]:\r\n        results[\"success\"] = False\r\n"
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -11073,7 +11073,7 @@
   creator: admin
   credential_type: any
   credentials: custom
-  custom_password: ''
+  custom_password: YWRtaW4=
   custom_username: admin
   default_uuid: a2459a9d-c2ec-4541-9112-5f162faeecc2
   definition: Definition
@@ -11095,7 +11095,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-11-09 01:23:32.642493'
+  last_modified: '2022-12-04 08:01:36.837799'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''

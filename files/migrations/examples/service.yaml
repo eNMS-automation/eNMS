@@ -4904,7 +4904,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2022-11-09 01:23:32.441443'
+  last_modified: '2022-12-05 12:15:23.730112'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -5091,7 +5091,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-11-09 01:23:32.432461'
+  last_modified: '2022-12-05 12:14:03.159804'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -5132,7 +5132,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
-  rest_url: ''
+  rest_url: http://127.0.0.1:5000/rest/is_alive
   run_method: per_device
   scoped_name: Service in run once mode
   send_notification: false
@@ -5256,8 +5256,8 @@
   creator: admin
   credential_type: any
   credentials: custom
-  custom_password: ''
-  custom_username: ''
+  custom_password: YWRtaW4=
+  custom_username: admin
   default_uuid: e10751fb-4e75-4cc6-b340-297faffa0940
   definition: Definition
   delete_spaces_before_matching: false
@@ -5278,7 +5278,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-11-09 01:23:32.434742'
+  last_modified: '2022-12-05 12:15:23.730112'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -5319,7 +5319,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
-  rest_url: ''
+  rest_url: http://127.0.0.1:5000/rest/instance/device/{{ device.name }}
   run_method: per_device
   scoped_name: Service in Run once per device mode
   send_notification: false

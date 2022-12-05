@@ -456,14 +456,14 @@
   down: false
   gateways: []
   icon: router
-  ip_address: 10.0.0.101
+  ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
   last_configuration_runtime: Never
   last_configuration_status: Never
   last_configuration_update: Never
-  last_modified: ''
-  last_modified_by: ''
+  last_modified: '2022-12-05 12:16:33.238298'
+  last_modified_by: admin
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -512,14 +512,14 @@
   down: false
   gateways: []
   icon: optical_switch
-  ip_address: 10.0.0.13
+  ip_address: 192.168.56.50
   last_configuration_duration: 1.974735s
   last_configuration_failure: Never
   last_configuration_runtime: '2022-04-18 09:22:21.472097'
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:22:21.472097'
-  last_modified: ''
-  last_modified_by: ''
+  last_modified: '2022-12-05 12:16:26.278044'
+  last_modified_by: admin
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -4010,7 +4010,7 @@
   custom_multiselect: []
   custom_select: b
   description: ''
-  devices: [Router behind Gateway 1, 'Router behind Gateway 1, 2 and 3']
+  devices: ['Router behind Gateway 1, 2 and 3', Router behind Gateway 1]
   down: false
   gateways: []
   icon: antenna

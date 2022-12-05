@@ -182,8 +182,8 @@
   last_configuration_runtime: '2022-04-13 16:03:45.097013'
   last_configuration_status: Success
   last_configuration_update: '2022-04-13 16:03:45.097013'
-  last_modified: ''
-  last_modified_by: ''
+  last_modified: '2022-12-05 11:45:22.775053'
+  last_modified_by: admin
   last_operational_data_duration: 5.549113s
   last_operational_data_failure: '2022-04-13 15:59:32.307044'
   last_operational_data_runtime: '2022-04-13 16:03:47.763592'
@@ -215,8 +215,8 @@
   rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
-  rbac_read: [Full UI Read + Edit Access]
-  rbac_target: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access, ny Group]
+  rbac_target: [Full UI Read + Edit Access, ny Group]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -742,8 +742,8 @@
   last_configuration_runtime: Never
   last_configuration_status: Never
   last_configuration_update: Never
-  last_modified: ''
-  last_modified_by: ''
+  last_modified: '2022-12-05 11:45:32.718811'
+  last_modified_by: admin
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -775,7 +775,7 @@
   rbac_configuration: []
   rbac_connect: [Full UI Read + Edit Access]
   rbac_edit: [Full UI Read + Edit Access]
-  rbac_read: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access, ny Group]
   rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
@@ -4010,7 +4010,7 @@
   custom_multiselect: []
   custom_select: b
   description: ''
-  devices: [Router behind Gateway 1, 'Router behind Gateway 1, 2 and 3']
+  devices: ['Router behind Gateway 1, 2 and 3', Router behind Gateway 1]
   down: false
   gateways: []
   icon: antenna

@@ -10,3 +10,7 @@
 - {authentication: database, creator: '', description: Read Only user, email: demo@enms.io,
   is_admin: false, landing_page: /dashboard, name: demo, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQwM3FQc1pieTNwdnpmZytCOEw1M3JnJHVPYjJ0RGdjUU45MUI2TEdPYkhOaVE=,
   small_menu: true, theme: default, type: user}
+- {authentication: database, creator: admin, description: 'Used in "Target Restriction
+    Mechanism". Has access to Washington ("Read", "Use as target") and Boston ("Read"
+    only).', email: '', is_admin: false, landing_page: /dashboard, name: ny, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQ1THlYc2xiS21kTWF3emdueEJoakxBJHRhVTZ2K2RwTnZLM0ZOTDNMV21ualE=,
+  small_menu: false, theme: default, type: user}

@@ -1273,13 +1273,6 @@
   label: success, name: '2021-12-30 10:51:49.275620', source: '[GET Endpoints query
     and token] Query Device - NonExisting', subtype: success, type: workflow_edge,
   workflow: GET Endpoints query and token}
-- {color: green, destination: '[GET Endpoints query and token] Get Token', label: success,
-  name: '2021-12-30 10:56:24.181911', source: '[GET Endpoints query and token] Query
-    Device - OS EOS', subtype: success, type: workflow_edge, workflow: GET Endpoints
-    query and token}
-- {color: green, destination: '[Shared] End', label: success, name: '2021-12-30 10:56:25.486031',
-  source: '[GET Endpoints query and token] Get Token', subtype: success, type: workflow_edge,
-  workflow: GET Endpoints query and token}
 - {color: green, destination: '[POST Endpoint search] First 5 devices', label: success,
   name: '2021-12-30 11:08:32.597472', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: POST Endpoint search}
@@ -1606,3 +1599,6 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2022-12-05 11:12:12.181404',
   source: '[(R) Payload Extraction with Operations] Validation 1', subtype: success,
   type: workflow_edge, workflow: (R) Payload Extraction with Operations}
+- {color: green, destination: '[Shared] End', label: success, name: '2022-12-05 11:54:35.322073',
+  source: '[GET Endpoints query and token] Query Device - OS EOS', subtype: success,
+  type: workflow_edge, workflow: GET Endpoints query and token}

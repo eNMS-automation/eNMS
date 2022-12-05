@@ -237,28 +237,7 @@ class Runner:
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
             if self.service.report:
-                try:
-                    report = ""
-                    if self.service.report:
-                        variables = {"service": self.service, **self.global_variables()}
-                        if self.service.report_jinja2_template:
-                            report = Template(self.service.report).render(variables)
-                        else:
-                            report = self.sub(self.service.report, variables)
-                except Exception:
-                    report = "\n".join(format_exc().splitlines())
-                    self.log("error", f"Failed to build report:\n{report}")
-                if report:
-                    results["report"] = report
-                    try:
-                        db.factory(
-                            "service_report",
-                            runtime=self.parent_runtime,
-                            service=self.service.id,
-                            content=report,
-                        )
-                    except Exception:
-                        self.log("error", f"Failed to commit report:\n{format_exc()}")
+                self.generate_report(results)
             if self.get("send_notification"):
                 try:
                     results = self.notify(results)
@@ -689,6 +668,30 @@ class Runner:
             if results["summary"]["success"] and not self.display_only_failed_nodes:
                 notification["PASSED"] = results["summary"]["success"]
         return notification
+
+    def generate_report(self, results):
+        try:
+            report = ""
+            if self.service.report:
+                variables = {"service": self.service, **self.global_variables()}
+                if self.service.report_jinja2_template:
+                    report = Template(self.service.report).render(variables)
+                else:
+                    report = self.sub(self.service.report, variables)
+        except Exception:
+            report = "\n".join(format_exc().splitlines())
+            self.log("error", f"Failed to build report:\n{report}")
+        if report:
+            results["report"] = report
+            try:
+                db.factory(
+                    "service_report",
+                    runtime=self.parent_runtime,
+                    service=self.service.id,
+                    content=report,
+                )
+            except Exception:
+                self.log("error", f"Failed to commit report:\n{format_exc()}")
 
     def notify(self, results):
         self.log("info", f"Sending {self.send_notification_method} notification...")

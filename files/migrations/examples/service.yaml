@@ -15190,7 +15190,7 @@
         \ must apply to direct targets as well as\r\niteration and device targets.\r\
         \nMust be run both in DxD and SxS w/ WF targets mode."
       positions: [279, -88]
-  last_modified: '2022-11-09 01:23:32.808825'
+  last_modified: '2022-12-05 11:48:47.299549'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -15222,8 +15222,8 @@
   preprocessing: ''
   priority: 11
   rbac_edit: [Full UI Read + Edit Access]
-  rbac_read: [Full UI Read + Edit Access]
-  rbac_run: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access, ny Group]
+  rbac_run: [Full UI Read + Edit Access, ny Group]
   reply_to: ''
   report: ''
   report_format: text

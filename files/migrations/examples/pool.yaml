@@ -1084,7 +1084,7 @@
   rbac_group_rbac_read: []
   rbac_group_rbac_target: []
   rbac_read: []
-  target_services: ['Credentials (Password & Key, Priority Mechanism)']
+  target_services: ['(R) Credentials (Password & Key, Priority Mechanism)']
   tasks: []
   type: pool
 - admin_only: false

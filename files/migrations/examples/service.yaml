@@ -16041,13 +16041,14 @@
   labels:
     19c40c2f-b0c6-4c33-b1b7-22085dcb07e3:
       alignment: left
-      content: "Runs on two devices: San Diego and Dallas.\r\nUses a parameterized\
+      content: "Runs on three devices: San Diego, Dallas and Atlanta.\r\nUses a parameterized\
         \ form to define the value of an interface.\r\nBoth services use netmiko to\
         \ show the description of the interface:\r\n* the first service access the\
         \ interface from the payload, with payload[\"form\"].\r\n* the second service\
         \ access the interface as a global variable.\r\nThe parameterized run uses\
         \ the \"labels\" property to add labels\r\nto the run object."
-      positions: [225, -24]
+      positions: [218, -16]
+      size: 14
     46e3d026-f4f9-4d74-9ba9-2807c97ffe18:
       alignment: left
       content: 'Access the interface as a global variable: "interface"'
@@ -16057,7 +16058,7 @@
       content: "Access the interface property directly from the payload :\r\n\"payload[\"\
         form\"][\"interface\"]\"\r\n"
       positions: [-88, 196]
-  last_modified: '2022-11-09 01:23:33.012933'
+  last_modified: '2022-12-05 10:24:37.287623'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -16075,10 +16076,7 @@
   number_of_retries: 0
   operating_system: ''
   owners: []
-  parameterized_form: "labels = SelectMultipleStringField(\r\n  \"Labels\",\r\n  choices=(\r\
-    \n    (\"tag1\", \"Tag 1\"),\r\n    (\"tag2\", \"Tag 2\"),\r\n    (\"precheck\"\
-    , \"Pre-checks\"),\r\n    (\"postcheck\", \"Post-checks\"))\r\n)\r\ninterface\
-    \ = StringField(\"Interface\", default=\"Lo1\")\r\n"
+  parameterized_form: "interface = StringField(\"Interface\", default=\"Lo1\")\r\n"
   positions: {}
   postprocessing: ''
   postprocessing_mode: always

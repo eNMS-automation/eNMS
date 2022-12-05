@@ -344,14 +344,14 @@
   down: false
   gateways: []
   icon: router
-  ip_address: 10.0.0.12
+  ip_address: 192.168.56.50
   last_configuration_duration: 3.556486s
   last_configuration_failure: '2022-04-18 09:22:23.714879'
   last_configuration_runtime: '2022-04-18 09:28:19.332441'
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:28:19.332441'
-  last_modified: ''
-  last_modified_by: ''
+  last_modified: '2022-12-05 10:24:05.390651'
+  last_modified_by: admin
   last_operational_data_duration: 5.404194s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:26:28.749577'
@@ -400,14 +400,14 @@
   down: false
   gateways: []
   icon: router
-  ip_address: 10.0.0.100
+  ip_address: 192.168.56.50
   last_configuration_duration: 3.777961s
   last_configuration_failure: '2022-04-18 09:22:23.790350'
   last_configuration_runtime: '2022-04-18 09:28:05.343361'
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:28:05.343361'
-  last_modified: ''
-  last_modified_by: ''
+  last_modified: '2022-12-05 10:23:58.006972'
+  last_modified_by: admin
   last_operational_data_duration: 5.483296s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:26:02.136986'
@@ -680,14 +680,14 @@
   down: false
   gateways: []
   icon: router
-  ip_address: 10.0.0.102
+  ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
   last_configuration_runtime: Never
   last_configuration_status: Never
   last_configuration_update: Never
-  last_modified: ''
-  last_modified_by: ''
+  last_modified: '2022-12-05 10:24:12.407824'
+  last_modified_by: admin
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never

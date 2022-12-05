@@ -1117,10 +1117,6 @@
     with Operations] 2021-08-07 08:40:56.100082', source: '[(R) Payload Extraction
     with Operations] Payload Workflow: Add initial variables', subtype: success, type: workflow_edge,
   workflow: (R) Payload Extraction with Operations}
-- {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Payload Extraction with Operations] 2021-08-07 08:40:56.266388', source: '[(R)
-    Payload Extraction with Operations] Validation 2', subtype: success, type: workflow_edge,
-  workflow: (R) Payload Extraction with Operations}
 - {color: green, destination: '[Payload Recursive Conservation with Restart Mechanism]
     Set Payload and Result', label: success, name: '2021-08-07 09:52:01.571590', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: Payload Recursive Conservation
@@ -1607,11 +1603,6 @@
     1', label: success, name: '2022-12-05 11:08:53.745039', source: '[(R) Payload
     Extraction with Operations] Payload Workflow: Extraction 1', subtype: success,
   type: workflow_edge, workflow: (R) Payload Extraction with Operations}
-- {color: green, destination: '[(R) Payload Extraction with Operations] Payload Workflow:
-    Extraction 2', label: success, name: '2022-12-05 11:08:54.711702', source: '[(R)
-    Payload Extraction with Operations] Validation 1', subtype: success, type: workflow_edge,
-  workflow: (R) Payload Extraction with Operations}
-- {color: green, destination: '[(R) Payload Extraction with Operations] Validation
-    2', label: success, name: '2022-12-05 11:08:55.770974', source: '[(R) Payload
-    Extraction with Operations] Payload Workflow: Extraction 2', subtype: success,
+- {color: green, destination: '[Shared] End', label: success, name: '2022-12-05 11:12:12.181404',
+  source: '[(R) Payload Extraction with Operations] Validation 1', subtype: success,
   type: workflow_edge, workflow: (R) Payload Extraction with Operations}

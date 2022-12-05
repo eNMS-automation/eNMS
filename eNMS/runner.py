@@ -456,7 +456,6 @@ class Runner:
             services = list(vs.run_logs.get(self.parent_runtime, []))
             for service_id in services:
                 logs = env.log_queue(self.parent_runtime, service_id, mode="get")
-                service = db.fetch("service", id=service_id)
                 try:
                     db.factory(
                         "service_log",

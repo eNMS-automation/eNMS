@@ -355,7 +355,7 @@ class Database:
                     Column(
                         "pool_id",
                         Integer,
-                        ForeignKey(f"pool.id"),
+                        ForeignKey("pool.id"),
                         primary_key=True,
                     ),
                     Column(

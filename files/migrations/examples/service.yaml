@@ -22303,10 +22303,11 @@
       positions: [-391, -186]
     4d62e069-5dfd-4e6d-b418-8c273a750b06:
       alignment: left
-      content: "This workflow is running on two target_devices: Washington (vEOS)\
-        \ and Austin (dummy).\r\nIt uses NAPALM to retrieve data from a device and\
-        \ the validation mechanism.\r\nTo be tested with and without multiprocessing."
-      positions: [-13, 4]
+      content: "This workflow is running on Washington and Baltimore (vEOS).\r\nIt\
+        \ uses NAPALM to retrieve data from a device and the validation mechanism.\r\
+        \nTo be tested with and without multiprocessing."
+      positions: ['23.92722465467147', '2.503257818641927']
+      size: 14
     a5c335bc-dced-4512-b5bc-1149ea7eec73:
       alignment: left
       content: "Dictionary Inclusion Validation:\r\n{\"fqdn\":\"localhost\",\"uptime\"\
@@ -22320,7 +22321,7 @@
         \ match, but the negative logic\r\nis set to True, so the resulting value\
         \ is a success."
       positions: [-79, 230]
-  last_modified: '2022-11-09 01:23:33.081572'
+  last_modified: '2022-12-07 15:18:17.064508'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -22372,7 +22373,7 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  target_devices: [Austin, Washington]
+  target_devices: [Washington, Baltimore]
   target_pools: []
   time_between_retries: 10
   type: workflow

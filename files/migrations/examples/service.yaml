@@ -18163,7 +18163,7 @@
       content: "Run command \"dir enms_files\", use negative logic to\r\nmake sure\
         \ that \"netmiko_file\" is not in the output."
       positions: [-329, 141]
-  last_modified: '2022-11-09 01:23:32.929961'
+  last_modified: '2022-12-07 15:53:59.908550'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -18382,7 +18382,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-11-09 01:23:32.922266'
+  last_modified: '2022-12-07 15:53:59.908550'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -18430,7 +18430,7 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  source_file: /media/sf_shared/eNMS/tests/file_transfer/a.bin
+  source_file: /media/sf_shared/eNMS-prod/files/file_transfer/a.bin
   start_new_connection: false
   target_devices: []
   target_pools: []

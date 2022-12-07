@@ -408,15 +408,15 @@
     Transfer Mechanism] 2021-04-24 08:58:40.198571', source: '[(R) Generic File Transfer
     Service] Transfer a.bin', subtype: success, type: workflow_edge, workflow: (R)
     Generic File Transfer Service}
-- {color: green, destination: '[(R) Generic File Transfer Service] Check that test
-    file does exist', label: success, name: '[Regression Workflow: File Transfer Mechanism]
-    2021-04-24 08:58:40.198586', source: '[(R) Generic File Transfer Service] Transfer
-    bc.bin and bd.bin with glob option', subtype: success, type: workflow_edge, workflow: (R)
-    Generic File Transfer Service}
+- {color: green, destination: '[(R) Generic File Transfer Service] Check that the
+    files are on the disk', label: success, name: '[Regression Workflow: File Transfer
+    Mechanism] 2021-04-24 08:58:40.198586', source: '[(R) Generic File Transfer Service]
+    Transfer bc.bin and bd.bin with glob option', subtype: success, type: workflow_edge,
+  workflow: (R) Generic File Transfer Service}
 - {color: green, destination: '[(R) Generic File Transfer Service] Delete all transferred
     files', label: success, name: '[Regression Workflow: File Transfer Mechanism]
     2021-04-24 08:58:40.198601', source: '[(R) Generic File Transfer Service] Check
-    that test file does exist', subtype: success, type: workflow_edge, workflow: (R)
+    that the files are on the disk', subtype: success, type: workflow_edge, workflow: (R)
     Generic File Transfer Service}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     File Transfer Mechanism] 2021-04-24 08:58:40.198616', source: '[(R) Generic File

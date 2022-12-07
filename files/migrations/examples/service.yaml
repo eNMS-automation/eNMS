@@ -3086,7 +3086,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-11-09 01:23:32.313157'
+  last_modified: '2022-12-07 14:32:48.085758'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -3111,7 +3111,7 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   pass_device_properties: true
-  playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_version.yml
+  playbook_path: /media/sf_shared/eNMS-prod/files/playbooks/arista_show_version.yml
   positions:
     (R) Ansible Playbook Service: [-305, 177]
     Ansible Playbook Service: &id225 [-305, 177]
@@ -3179,7 +3179,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-11-09 01:23:32.318324'
+  last_modified: '2022-12-07 14:32:57.292687'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -3205,7 +3205,7 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   pass_device_properties: true
-  playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_running_config.yml
+  playbook_path: /media/sf_shared/eNMS-prod/files/playbooks/arista_show_running_config.yml
   positions:
     (R) Ansible Playbook Service: [267, 283]
     Ansible Playbook Service: &id227 [267, 283]
@@ -3272,7 +3272,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-11-09 01:23:32.321361'
+  last_modified: '2022-12-07 14:33:01.272656'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -3298,7 +3298,7 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   pass_device_properties: true
-  playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_running_config.yml
+  playbook_path: /media/sf_shared/eNMS-prod/files/playbooks/arista_show_running_config.yml
   positions:
     (R) Ansible Playbook Service: [211, 148]
     Ansible Playbook Service: &id229 [211, 148]
@@ -4429,7 +4429,7 @@
         \ conversion)\r\n- uses the \"Text with regular expression\" and \"dictionary\
         \ inclusion\" mechanisms to validate the result."
       positions: [-240, 69]
-  last_modified: '2022-11-09 01:23:32.461454'
+  last_modified: '2022-12-07 14:33:01.272656'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -6235,7 +6235,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-11-09 01:23:32.461454'
+  last_modified: '2022-12-07 14:32:37.733568'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -6260,7 +6260,7 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   pass_device_properties: false
-  playbook_path: /media/sf_shared/eNMS/files/playbooks/simple_playbook.yml
+  playbook_path: /media/sf_shared/eNMS-prod/files/playbooks/simple_playbook.yml
   positions:
     (R) Ansible Playbook Service: [-640, 277]
     Ansible Playbook Service: &id254 [-640, 277]

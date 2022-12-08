@@ -21,8 +21,9 @@ Version 4.4.0: RBAC and Credentials
   service/object/pool
   Mail: "new feature request (minor)"
   Commit: 0e0d90aeac5f5a977e6a452946794cd1293621ed
-- Added mechanism to update last_modified property of a workflow whenever there is any change to an
-  (sub)edge or a (sub)service. Cases when the last modified property is updated:
+- Added mechanism to update last_modified property of a workflow whenever there
+  is any change to an (sub)edge or a (sub)service.
+  Cases when the last modified property is updated:
   - the workflow itself is updated
   - any service or subservice is updated (ie including subworkflows)
   - copy service in workflow is used in workflow or subworkflows
@@ -89,6 +90,8 @@ Migration:
 - In migration files, check that the "settings" variable isn't used in any workflow. If the
   server IP, name or URL is used, the "server variable should be used instead.
 - In service.yaml file, "notification_header" must be renamed "report".
+- "get_all" and "get_properties" controller functions have been removed. Check that they
+  are not used anywhere in custom code (plugin, custom.py, etc)
 
 Test:
 - the notification mechanism hasn't been impacted (in particular notification header
@@ -98,6 +101,10 @@ Test:
   - new mechanism
   - Freeze Edit / Run mechanism (refactored)
 - New Bulk Edit option for appending / removing to a multiple instance list
+- last_modified and last_modified_by properties (for workflows, tests that they
+  are updated in all cases mentioned above)
+- Task form validation (#267)
+- URL encoding for links to workflow builder with runtime (#278)
 
 Version 4.3.0
 -------------

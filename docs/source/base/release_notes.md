@@ -6,20 +6,19 @@ Version 4.4.0: RBAC and Credentials
 
 - Remove settings from UI upper menu (doesn't work with multiple gunicorn workers)
 - Compute whether a device / link belongs to a pool with a SQL query rather than pure python (performance x3)
-  Add post_update function (60350ede71f6a5146bab9f42a87f7fef0360b98e) after db flush in controller udpate function
-  to compute pool only after the ID has been set, and determine what properties to return (e.g not serialized
-  object but only what is needed)
-  Return default serialized properties in controller update instead of all serialized relationship
-  for scalability with > 50K devices.
+  Add post_update function (60350ede71f6a5146bab9f42a87f7fef0360b98e) after db flush in controller udpate function to compute pool only after the ID has been set, and
+  determine what properties to return (e.g not serialized object but only what is needed)
+  Return default serialized properties in controller update instead of all serialized relationship for scalability with > 50K devices.
 - Refactor freeze edit / run mechanism (pure python check instead of SQL query with originals)
 - New Bulk Edit option for appending / removing to a multiple instance list (dropdown list on the right of the field).
 - Add regression tests for get_connection global variable
-- New defaultRbac mechanism to set rbac value of filtering function. In the configuration table, the
-  default RBAC mode is set to "configuration".
-- Use tableOrdering function when initializing a table instead of redrawing table after initialization,
-  to avoid calling draw function twice when loading a table.
+- New defaultRbac mechanism to set rbac value of filtering function. In the
+  configuration table, the default RBAC mode is set to "configuration".
+- Use tableOrdering function when initializing a table instead of redrawing table
+  after initialization, to avoid calling draw function twice when loading a table.
   Commit: 7d8999d0fc4ac7a6a7fd49e3275fdca4ac12ade3
-- Added "last_modified_by" property to store name of user who last modified service/object/pool
+- Added "last_modified_by" property to store name of user who last modified
+  service/object/pool
   Mail: "new feature request (minor)"
   Commit: 0e0d90aeac5f5a977e6a452946794cd1293621ed
 - Added mechanism to update last_modified property of a workflow whenever there is any change to an
@@ -95,6 +94,10 @@ Test:
 - the notification mechanism hasn't been impacted (in particular notification header
   option + devices results)
 - Jump on connect mechanism
+- RBAC
+  - new mechanism
+  - Freeze Edit / Run mechanism (refactored)
+- New Bulk Edit option for appending / removing to a multiple instance list
 
 Version 4.3.0
 -------------

@@ -76,6 +76,8 @@ Version 4.4.0: RBAC and Credentials
 - Add support for distributed task queue for automation with Dramatiq.
 - Return an error in the UI if the commit of workflow logs, report or result
   fails (e.g data too long db error because of payload data for the results)
+- Fix "List index out of range" bug in Jump on Connect mechanism
+  Commit 457f46dd2c496757e924d922f3455626d35a3784
 
 RBAC Refactoring:
 - Service export: owners and RBAC read / edit / etc are exported in the service
@@ -92,6 +94,7 @@ Migration:
 Test:
 - the notification mechanism hasn't been impacted (in particular notification header
   option + devices results)
+- Jump on connect mechanism
 
 Version 4.3.0
 -------------

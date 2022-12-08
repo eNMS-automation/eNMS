@@ -763,4 +763,5 @@ configureNamespace("workflowBuilder", [
   getWorkflowState,
   restartWorkflow,
   switchToWorkflow,
+  stopWorkflow,
 ]);

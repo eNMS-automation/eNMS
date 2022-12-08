@@ -580,28 +580,11 @@
     Skip Query with device in Run Once Mode] 2021-04-24 08:58:40.199309', source: '[Skip
     Query with device in Run Once Mode] Python service in run once mode', subtype: success,
   type: workflow_edge, workflow: Skip Query with device in Run Once Mode}
-- {color: green, destination: '[Skip Query with device in Run Once Mode] Subworkflow
-    in SxS mode - service targets', label: success, name: '[Regression Workflow: Skip
-    Query with device in Run Once Mode] 2021-04-24 08:58:40.199324', source: '[Skip
-    Query with device in Run Once Mode] Subworkflow in SxS mode - workflow targets',
-  subtype: success, type: workflow_edge, workflow: Skip Query with device in Run Once
-    Mode}
-- {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Skip Query with device in Run Once Mode] 2021-04-24 08:58:40.199339', source: '[Skip
-    Query with device in Run Once Mode] Subworkflow in SxS mode - service targets',
-  subtype: success, type: workflow_edge, workflow: Skip Query with device in Run Once
-    Mode}
 - {color: red, destination: '[Skip Query with device in Run Once Mode] Subworkflow
     in SxS mode - workflow targets', label: failure, name: '[Regression Workflow:
     Skip Query with device in Run Once Mode] 2021-04-24 08:58:40.199354', source: '[Skip
     Query with device in Run Once Mode] Python service in run once mode', subtype: failure,
   type: workflow_edge, workflow: Skip Query with device in Run Once Mode}
-- {color: red, destination: '[Skip Query with device in Run Once Mode] Subworkflow
-    in SxS mode - service targets', label: failure, name: '[Regression Workflow: Skip
-    Query with device in Run Once Mode] 2021-04-24 08:58:40.199368', source: '[Skip
-    Query with device in Run Once Mode] Subworkflow in SxS mode - workflow targets',
-  subtype: failure, type: workflow_edge, workflow: Skip Query with device in Run Once
-    Mode}
 - {color: green, destination: '[[Skip Query with device in Run Once Mode] Subworkflow
     in SxS mode - workflow targets] Fail Austin', label: success, name: '[[Regression
     Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow
@@ -1598,3 +1581,11 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2022-12-08 00:22:51.121547',
   source: '[(R) Scrapli Netconf Service] Delete Loopback 5 description', subtype: success,
   type: workflow_edge, workflow: (R) Scrapli Netconf Service}
+- {color: green, destination: '[Shared] End', label: success, name: '2022-12-08 01:19:39.541076',
+  source: '[Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow
+    targets', subtype: success, type: workflow_edge, workflow: Skip Query with device
+    in Run Once Mode}
+- {color: red, destination: '[Shared] End', label: failure, name: '2022-12-08 01:19:42.533588',
+  source: '[Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow
+    targets', subtype: failure, type: workflow_edge, workflow: Skip Query with device
+    in Run Once Mode}

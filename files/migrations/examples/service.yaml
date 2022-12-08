@@ -10020,7 +10020,7 @@
         \ = device.name != \"Washington\".\r\nWashington should fail, others should\
         \ pass."
       positions: [-579, 220]
-  last_modified: '2022-11-09 01:23:32.616603'
+  last_modified: '2022-12-08 01:13:39.881930'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -10347,7 +10347,8 @@
   send_notification_method: mail
   shared: false
   skip: {'Regression Workflow R: skip services in service by service mode': true,
-    'Skip Mechanism: Skip in SxS mode': true, 'Skip Mechanism: Skip in SxS with WF targets mode': true}
+    'Skip Mechanism: Skip in SxS mode': true, 'Skip Mechanism: Skip in SxS with WF targets mode': true,
+    Skip in SxS with WF targets mode: true}
   skip_query: ''
   skip_value: success
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\

@@ -177,18 +177,18 @@
   gateways: []
   icon: router
   ip_address: 192.168.56.50
-  last_configuration_duration: 1.235048s
+  last_configuration_duration: 2.093764s
   last_configuration_failure: '2022-04-13 15:59:28.944444'
-  last_configuration_runtime: '2022-12-07 14:38:38.958265'
+  last_configuration_runtime: '2022-12-07 14:38:17.218344'
   last_configuration_status: Success
-  last_configuration_update: '2022-12-07 14:38:38.958265'
+  last_configuration_update: '2022-12-07 14:38:17.218344'
   last_modified: '2022-12-05 11:45:22.775053'
   last_modified_by: admin
-  last_operational_data_duration: 0.81199s
+  last_operational_data_duration: 3.991951s
   last_operational_data_failure: '2022-04-13 15:59:32.307044'
-  last_operational_data_runtime: '2022-12-07 14:38:40.250639'
+  last_operational_data_runtime: '2022-12-07 14:38:19.367834'
   last_operational_data_status: Success
-  last_operational_data_update: '2022-12-07 14:38:40.250639'
+  last_operational_data_update: '2022-12-07 14:38:19.367834'
   last_specialized_data_duration: 3.775398s
   last_specialized_data_failure: Never
   last_specialized_data_runtime: '2022-02-14 10:13:39.034416'
@@ -4010,7 +4010,7 @@
   custom_multiselect: []
   custom_select: b
   description: ''
-  devices: [Router behind Gateway 1, 'Router behind Gateway 1, 2 and 3']
+  devices: ['Router behind Gateway 1, 2 and 3', Router behind Gateway 1]
   down: false
   gateways: []
   icon: antenna

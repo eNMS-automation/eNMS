@@ -105,6 +105,9 @@ Test:
   are updated in all cases mentioned above)
 - Task form validation (#267)
 - URL encoding for links to workflow builder with runtime (#278)
+- Regex filtering in table (refactored)
+- "creator" property in all object panels: must be properly set and not modified when
+  the object is edited.
 
 Version 4.3.0
 -------------

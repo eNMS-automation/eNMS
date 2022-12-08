@@ -8752,7 +8752,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2022-11-09 01:23:32.579038'
+  last_modified: '2022-12-08 00:28:25.116759'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -9049,7 +9049,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   jinja2_template: false
-  last_modified: '2022-11-09 01:23:32.577031'
+  last_modified: '2022-12-08 00:28:25.116759'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -9089,7 +9089,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
-  results_as_list: true
+  results_as_list: false
   run_method: per_device
   scoped_name: Check that TEST-VRF is configured
   send_notification: false

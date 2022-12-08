@@ -795,16 +795,9 @@
   label: success, name: '2021-05-01 04:54:21.358634', source: '[(R) Scrapli Netconf
     Service] Edit Interface Loopback 5', subtype: success, type: workflow_edge, workflow: (R)
     Scrapli Netconf Service}
-- {color: green, destination: '[Shared] End', label: success, name: '2021-05-01 04:54:26.508627',
-  source: '[(R) Scrapli Netconf Service] Get State', subtype: success, type: workflow_edge,
-  workflow: (R) Scrapli Netconf Service}
 - {color: green, destination: '[(R) Scrapli Netconf Service] Delete Loopback 5 description',
   label: success, name: '2021-05-02 03:58:06.389762', source: '[(R) Scrapli Netconf
     Service] Get Running Configuration', subtype: success, type: workflow_edge, workflow: (R)
-    Scrapli Netconf Service}
-- {color: green, destination: '[(R) Scrapli Netconf Service] Get State', label: success,
-  name: '2021-05-02 03:58:07.428143', source: '[(R) Scrapli Netconf Service] Delete
-    Loopback 5 description', subtype: success, type: workflow_edge, workflow: (R)
     Scrapli Netconf Service}
 - {color: green, destination: '[(R) Labels and Custom Property] Show interface from
     initial form (default: Lo1)', label: success, name: '2021-06-07 01:39:02.877827',
@@ -1602,3 +1595,6 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2022-12-05 11:54:35.322073',
   source: '[GET Endpoints query and token] Query Device - OS EOS', subtype: success,
   type: workflow_edge, workflow: GET Endpoints query and token}
+- {color: green, destination: '[Shared] End', label: success, name: '2022-12-08 00:22:51.121547',
+  source: '[(R) Scrapli Netconf Service] Delete Loopback 5 description', subtype: success,
+  type: workflow_edge, workflow: (R) Scrapli Netconf Service}

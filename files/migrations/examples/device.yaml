@@ -4010,7 +4010,7 @@
   custom_multiselect: []
   custom_select: b
   description: ''
-  devices: ['Router behind Gateway 1, 2 and 3', Router behind Gateway 1]
+  devices: [Router behind Gateway 1, 'Router behind Gateway 1, 2 and 3']
   down: false
   gateways: []
   icon: antenna

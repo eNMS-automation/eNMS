@@ -1284,14 +1284,11 @@ class Runner:
                 ],
             )
         )
-        for (send, expect) in zip(commands[::2], commands[1::2]):
+        for index, (send, expect) in enumerate(zip(commands[::2], commands[1::2])):
             if not send or not expect:
                 continue
-            self.log(
-                "info",
-                f"Sent '{send if send != commands[4] else 'jump on connect password'}'"
-                f", waiting for '{expect}'",
-            )
+            command_sent = send if index != 4 else "jump on connect password"
+            self.log("info", f"Sent '{command_sent}', waiting for '{expect}'")
             connection.send_command(
                 send,
                 expect_string=expect,

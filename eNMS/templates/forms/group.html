@@ -1,0 +1,66 @@
+{% from 'macros.html' import field_template %}
+<form
+  id="{{ form_type }}-form"
+  class="form-horizontal form-label-left add-id"
+  method="post"
+  autocomplete="off"
+>
+  {{ form.id(id='group-id', class="add-id") }} {{ form.hidden_tag() }}
+  <div class="modal-body">
+    <ul class="nav nav-tabs bar_tabs">
+      <li class="nav-item active">
+        <a class="nav-link" data-toggle="tab" href="#group-properties"
+          >Main Properties</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#group-ui-access"
+          >Menu and Endpoint Access</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#group-model-access"
+          >Default Model Access</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#group-pool-access"
+          >Device RBAC Setup</a
+        >
+      </li>
+    </ul>
+    <div class="form-group">
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="group-properties">
+          <div id="content" class="add-id" style="height: 100%;"></div>
+          {% for field in form %} {% if field.name in ("name", "creator", "description",
+          "email", "users") %} {{ field_template(form_type, field) }} {% endif %} {%
+          endfor %}
+          <center>
+            <button
+              id="{{ form_type }}-action-btn"
+              type="button"
+              class="btn btn-{{ button_class }} add-id btn-id"
+              value="{{ action }}"
+            >
+              {{ button_label }}
+            </button>
+          </center>
+        </div>
+        <div class="tab-pane fade" id="group-ui-access">
+          {% for field in form %} {% if field.name in ("menu", "pages", "get_requests",
+          "post_requests", "delete_requests") %} {{ field_template(form_type, field) }}
+          {% endif %} {% endfor %}
+        </div>
+        <div class="tab-pane fade" id="group-model-access">
+          {% for field in form %} {% if field.name.split("_")[0] in rbac["rbac_models"]
+          %} {{ field_template(form_type, field) }} {% endif %} {% endfor %}
+        </div>
+        <div class="tab-pane fade" id="group-pool-access">
+          {% for field in form %} {% if field.name in form.pool_properties %} {{
+          field_template(form_type, field) }} {% endif %} {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

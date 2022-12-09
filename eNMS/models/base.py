@@ -1,3 +1,6 @@
+from collections import defaultdict
+from flask_login import current_user
+from sqlalchemy import or_
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 from eNMS.database import db
@@ -8,11 +11,11 @@ from eNMS.variables import vs
 class AbstractBase(db.base):
 
     __abstract__ = True
-    pool_model = False
     model_properties = {}
 
     def __init__(self, **kwargs):
         self.update(**kwargs)
+        self.update_rbac()
 
     def __lt__(self, other):
         return True
@@ -60,7 +63,11 @@ class AbstractBase(db.base):
     def base_properties(self):
         return {prop: getattr(self, prop) for prop in ("id", "name", "type")}
 
+    def post_update(self):
+        return self.get_properties()
+
     def update(self, rbac="read", **kwargs):
+        self.filter_rbac_kwargs(kwargs)
         relation = vs.relationships[self.__tablename__]
         for property, value in kwargs.items():
             if not hasattr(self, property):
@@ -80,19 +87,43 @@ class AbstractBase(db.base):
                     if current_value:
                         value = {**current_value, **value}
             setattr(self, property, value)
-        if not kwargs.get("update_pools") or not self.pool_model:
+
+    def update_last_modified_properties(self):
+        self.last_modified = vs.get_time()
+        self.last_modified_by = getattr(current_user, "name", "admin")
+
+    def filter_rbac_kwargs(self, kwargs):
+        if getattr(self, "class_type", None) not in vs.rbac["rbac_models"]:
             return
-        rbac_pools_kwargs = {
-            "rbac": None,
-            "manually_defined": False,
-            "admin_only": True,
-        }
-        for pool in db.fetch_all("pool", **rbac_pools_kwargs):
-            match = pool.match_instance(self)
-            if match and self not in getattr(pool, f"{self.class_type}s"):
-                getattr(pool, f"{self.class_type}s").append(self)
-            if self in getattr(pool, f"{self.class_type}s") and not match:
-                getattr(pool, f"{self.class_type}s").remove(self)
+        rbac_properties = ["owners", "freeze"]
+        model_rbac_properties = list(vs.rbac["rbac_models"][self.class_type])
+        is_admin = getattr(current_user, "is_admin", True)
+        if not is_admin and current_user not in self.owners:
+            for property in rbac_properties + model_rbac_properties:
+                kwargs.pop(property, None)
+
+    @classmethod
+    def rbac_filter(cls, query, mode, user, join_class=None):
+        model = join_class or getattr(cls, "class_type", None)
+        if model not in vs.rbac["rbac_models"]:
+            return query
+        if join_class:
+            query = query.join(getattr(cls, join_class))
+        user_group = [group.id for group in user.groups]
+        property = getattr(vs.models[model], f"rbac_{mode}")
+        rbac_constraint = property.any(vs.models["group"].id.in_(user_group))
+        owners_constraint = vs.models[model].owners.any(id=user.id)
+        return query.filter(or_(owners_constraint, rbac_constraint))
+
+    def update_rbac(self):
+        model = getattr(self, "class_type", None)
+        if model not in vs.rbac["rbac_models"] or not current_user:
+            return
+        self.access_properties = defaultdict(list)
+        self.owners = [current_user]
+        for group in current_user.groups:
+            for access_type in getattr(group, f"{model}_access"):
+                getattr(self, access_type).append(group)
 
     def delete(self):
         pass
@@ -127,10 +158,6 @@ class AbstractBase(db.base):
                     continue
             result[property] = value
         return result
-
-    @classmethod
-    def rbac_filter(cls, query, *_):
-        return query
 
     def table_properties(self, **kwargs):
         displayed = [column["data"] for column in kwargs["columns"]]

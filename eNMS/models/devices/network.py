@@ -15,7 +15,6 @@ from eNMS.models.inventory import Node
 
 class Network(Node):
 
-    pool_model = True
     __tablename__ = class_type = "network"
     __mapper_args__ = {"polymorphic_identity": "network"}
     pretty_name = "Network"
@@ -31,9 +30,6 @@ class Network(Node):
     links = relationship(
         "Link", secondary=db.link_network_table, back_populates="networks"
     )
-    pools = relationship(
-        "Pool", secondary=db.pool_network_table, back_populates="networks"
-    )
 
     def duplicate(self, clone=None):
         for property in ("labels", "nodes", "links"):
@@ -43,11 +39,16 @@ class Network(Node):
         db.session.commit()
         return clone
 
-    def update(self, **kwargs):
-        old_name, self.path = self.name, str(self.id)
-        super().update(**kwargs)
+    def post_update(self):
         if len(self.networks) == 1:
             self.path = f"{self.networks[0].path}>{self.id}"
+        else:
+            self.path = str(self.id)
+        return self.to_dict(include=["networks", "nodes"])
+
+    def update(self, **kwargs):
+        old_name = self.name
+        super().update(**kwargs)
         if self.name == old_name:
             return
         for node in self.nodes:
@@ -58,9 +59,11 @@ class Network(Node):
 
 class NetworkForm(BaseForm):
     action = "eNMS.base.processData"
+    template = "object"
     form_type = HiddenField(default="network")
     id = HiddenField()
     name = StringField("Name")
+    creator = StringField(render_kw={"readonly": True})
     category = SelectField(
         "Category",
         choices=vs.dualize(vs.properties["property_list"]["network"]["category"]),

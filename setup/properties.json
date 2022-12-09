@@ -156,6 +156,44 @@
     "task": ["status", "frequency", "frequency_unit", "crontab_expression"],
     "user": ["is_admin", "groups"]
   },
+  "serialized": {
+    "get": {
+      "device": {
+        "exclude": ["pools", "target_services", "tasks"]
+      },
+      "group": {
+        "include": [
+          "users",
+          "rbac_pool_rbac_read",
+          "rbac_pool_rbac_configuration",
+          "rbac_pool_rbac_edit",
+          "rbac_pool_rbac_connect",
+          "rbac_pool_rbac_target"
+        ]
+      },
+      "link": {
+        "exclude": ["pools"]
+      },
+      "network": {
+        "exclude": ["labels", "links", "nodes", "positions"]
+      },
+      "pool": {
+        "exclude": [
+          "credential_devices",
+          "devices",
+          "links",
+          "tasks",
+          "target_services"
+        ]
+      },
+      "workflow": {
+        "exclude": ["services", "edges"]
+      },
+      "user": {
+        "include": ["groups"]
+      }
+    }
+  },
   "tables": {
     "device": [
       {
@@ -173,6 +211,18 @@
       {
         "data": "creator",
         "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified_by",
+        "title": "Last Modified By",
         "search": "text",
         "visible": false
       },
@@ -404,6 +454,18 @@
         "visible": false
       },
       {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified_by",
+        "title": "Last Modified By",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "subtype",
         "title": "Subtype",
         "search": "text",
@@ -475,6 +537,18 @@
         "visible": false
       },
       {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified_by",
+        "title": "Last Modified By",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "description",
         "title": "Description",
         "search": "text",
@@ -503,24 +577,6 @@
         "data": "links",
         "title": "Links",
         "width": "80px"
-      },
-      {
-        "data": "users",
-        "title": "Users",
-        "width": "80px",
-        "visible": false
-      },
-      {
-        "data": "services",
-        "title": "Services",
-        "width": "80px",
-        "visible": false
-      },
-      {
-        "data": "networks",
-        "title": "Networks",
-        "width": "80px",
-        "visible": false
       },
       {
         "data": "objectNumber",
@@ -576,6 +632,18 @@
         "data": "creator",
         "title": "Creator",
         "search": "text"
+      },
+      {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified_by",
+        "title": "Last Modified By",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "status",
@@ -850,6 +918,37 @@
         "orderable": false
       }
     ],
+    "group": [
+      {
+        "data": "name",
+        "title": "Name",
+        "search": "text",
+        "width": "150px"
+      },
+      {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "description",
+        "title": "Description",
+        "width": "400px",
+        "search": "text"
+      },
+      {
+        "data": "users",
+        "title": "Users",
+        "width": "80px"
+      },
+      {
+        "data": "buttons",
+        "width": "130px",
+        "orderable": false,
+        "export": false
+      }
+    ],
     "task": [
       {
         "data": "name",
@@ -943,14 +1042,15 @@
         "width": "150px"
       },
       {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "description",
         "title": "Description",
         "width": "400px",
-        "search": "text"
-      },
-      {
-        "data": "groups",
-        "title": "Groups",
         "search": "text"
       },
       {
@@ -959,27 +1059,9 @@
         "search": "text"
       },
       {
-        "data": "pools",
-        "title": "Pools",
+        "data": "groups",
+        "title": "Groups",
         "width": "80px"
-      },
-      {
-        "data": "buttons",
-        "width": "130px",
-        "orderable": false,
-        "export": false
-      }
-    ],
-    "access": [
-      {
-        "data": "name",
-        "title": "Name",
-        "search": "text"
-      },
-      {
-        "data": "description",
-        "title": "Description",
-        "search": "text"
       },
       {
         "data": "buttons",
@@ -993,6 +1075,12 @@
         "data": "name",
         "title": "Name",
         "search": "text"
+      },
+      {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "description",
@@ -1031,6 +1119,12 @@
         "data": "name",
         "title": "Name",
         "search": "text"
+      },
+      {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "subtype",
@@ -1194,6 +1288,7 @@
         "Payload",
         "RBAC",
         "REST API",
+        "Reports",
         "Run Methods",
         "SSH Connection",
         "Scalability",
@@ -1204,13 +1299,7 @@
     }
   },
   "tables_additional": {
-    "pool": [
-      "device_number",
-      "link_number",
-      "service_number",
-      "network_number",
-      "user_number"
-    ],
+    "pool": ["device_number", "link_number"],
     "run": ["path", "service_properties"],
     "service": ["path", "scoped_name", "mandatory_parametrization"],
     "network": ["path", "scoped_name"],
@@ -1218,14 +1307,12 @@
     "task": ["frequency", "frequency_unit", "crontab_expression", "is_active"]
   },
   "filtering": {
-    "access": ["name", "description"],
     "changelog": ["time", "user", "severity", "content"],
     "credential": ["name", "subtype", "description", "username", "priority"],
     "device": [
       "name",
       "description",
       "creator",
-      "access_groups",
       "subtype",
       "model",
       "location",
@@ -1243,11 +1330,11 @@
       "longitude",
       "property1"
     ],
+    "group": ["name", "description", "creator", "email"],
     "link": [
       "name",
       "description",
       "creator",
-      "access_groups",
       "subtype",
       "model",
       "location",
@@ -1281,7 +1368,6 @@
       "type",
       "description",
       "creator",
-      "access_groups",
       "vendor",
       "operating_system",
       "send_notification"

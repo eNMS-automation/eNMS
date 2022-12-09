@@ -1,3 +1,4 @@
+{% from 'macros.html' import field_template %}
 <form
   id="{{ form_type }}-form"
   class="form-horizontal form-label-left add-id"
@@ -103,6 +104,11 @@
                   {{ form.name(id=form_type + '-name', class="form-control add-id
                   required") }}
                 </div>
+                <label for="creator">Creator</label>
+                <div class="form-group">
+                  {{ form.creator(id=form_type + '-creator', class="form-control add-id
+                  required") }}
+                </div>
                 <fieldset>
                   <div class="item">
                     <input
@@ -115,21 +121,6 @@
                     {{ form.admin_only.label() }}
                   </div>
                 </fieldset>
-                {{ form.access_groups.label(help="common/access_groups") }}
-                <div class="form-group">
-                  {{ form.access_groups(id=form_type + '-access_groups',
-                  class="form-control add-id required") }}
-                </div>
-                {{ form.owners.label(help="common/owners") }}
-                <div class="form-group">
-                  {{ form.owners(id=form_type + '-owners', class="form-control add-id")
-                  }}
-                </div>
-                {{ form.owners_access.label(help="common/owners_access") }}
-                <div class="form-group">
-                  {{ form.owners_access(id=form_type + '-owners_access',
-                  class="form-control add-id") }}
-                </div>
                 {{ form.type.label() }}
                 <div class="form-group">
                   {{ form.type(id=form_type + '-class', class="form-control add-id") }}
@@ -355,6 +346,43 @@
             </div>
           </div>
           {% endif %}
+          <div id="rbac-properties">
+            <div class="panel" style="border-color: #000; position: relative;">
+              <a
+                class="doc-link"
+                style="position: absolute; top: 10px; right: 10px;"
+                href="automation/services/#workflow-parameters"
+                target="_blank"
+                ><i
+                  class="glyphicon glyphicon-info-sign fa-2x"
+                  style="cursor: pointer;"
+                ></i
+              ></a>
+              <a
+                class="panel-heading collapsed"
+                role="tab"
+                id="heading-step1-4"
+                data-toggle="collapse"
+                href="#collapse-step1-4-{{ panel_id }}"
+              >
+                <h4 class="panel-title" style="color: #000;">
+                  Access Controls
+                </h4>
+              </a>
+              <div
+                id="collapse-step1-4-{{ panel_id }}"
+                class="panel-collapse collapse in"
+                role="tabpanel"
+              >
+                <div class="panel-body" style="background-color: #fafafa;">
+                  {{ field_template(form_type, form["owners"]) }} {% for property in
+                  form.rbac_properties %} {% set field = form[property] %} {{
+                  field_template(form_type, field) }} {% endfor %} {{
+                  field_template(form_type, form["freeze"]) }}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div id="step-2">
@@ -756,7 +784,7 @@
               href="#collapse-step4-3-{{ panel_id }}"
             >
               <h4 class="panel-title" style="color: #000;">
-                Notifications
+                Report and Notification
               </h4>
             </a>
             <div
@@ -765,6 +793,45 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
+                {{ form.report_template.label() }}
+                <div class="form-group">
+                  {{ form.report_template(id=form_type + '-report_template',
+                  class="form-control add-id") }}
+                </div>
+                {{ form.report_format.label() }}
+                <div class="form-group">
+                  {{ form.report_format(id=form_type + '-report_format',
+                  class="form-control add-id") }}
+                </div>
+                <fieldset>
+                  <div class="item">
+                    <input
+                      id="{{ form_type }}-report_jinja2_template"
+                      name="report_jinja2_template"
+                      type="checkbox"
+                      class="add-id"
+                      value="y"
+                    />
+                    {{ form.report_jinja2_template.label() }}
+                  </div>
+                </fieldset>
+                {{ form.report.label(help="common/report") }}
+                <div class="form-group">
+                  {{ form.report(id=form_type + '-report', class="form-control add-id")
+                  }}
+                </div>
+                <fieldset>
+                  <div class="item">
+                    <input
+                      id="{{ form_type }}-display_report"
+                      name="display_report"
+                      type="checkbox"
+                      class="add-id"
+                      value="y"
+                    />
+                    {{ form.display_report.label() }}
+                  </div>
+                </fieldset>
                 <fieldset>
                   <div class="item">
                     <input
@@ -781,11 +848,6 @@
                 <div class="form-group">
                   {{ form.send_notification_method(id=form_type +
                   '-send_notification_method', class="form-control add-id") }}
-                </div>
-                {{ form.notification_header.label(help="common/notification_header") }}
-                <div class="form-group">
-                  {{ form.notification_header(id=form_type + '-notification_header',
-                  class="form-control add-id") }}
                 </div>
                 <fieldset>
                   <div class="item">

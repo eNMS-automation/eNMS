@@ -6,8 +6,7 @@ from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout
 from sqlalchemy import Boolean, case, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.orm import aliased, deferred, relationship
-from sqlalchemy.sql.expression import false, true
+from sqlalchemy.orm import deferred, relationship
 
 from eNMS.controller import controller
 from eNMS.database import db
@@ -22,19 +21,17 @@ from eNMS.variables import vs
 class Service(AbstractBase):
 
     __tablename__ = class_type = export_type = "service"
-    pool_model = True
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     path = db.Column(db.TinyString)
     creator = db.Column(db.SmallString)
-    access_groups = db.Column(db.LargeString)
     admin_only = db.Column(Boolean, default=False)
-    owners_access = db.Column(db.SmallString)
     shared = db.Column(Boolean, default=False)
     scoped_name = db.Column(db.SmallString, index=True)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
+    last_modified_by = db.Column(db.SmallString)
     description = db.Column(db.LargeString)
     priority = db.Column(Integer, default=10)
     number_of_retries = db.Column(Integer, default=0)
@@ -43,6 +40,7 @@ class Service(AbstractBase):
     credential_type = db.Column(db.SmallString, default="any")
     positions = db.Column(db.Dict, info={"log_change": False})
     disable_result_creation = db.Column(Boolean, default=False)
+    freeze = db.Column(db.List)
     tasks = relationship("Task", back_populates="service", cascade="all,delete")
     vendor = db.Column(db.SmallString)
     operating_system = db.Column(db.SmallString)
@@ -60,17 +58,14 @@ class Service(AbstractBase):
     target_pools = relationship(
         "Pool", secondary=db.service_target_pool_table, back_populates="target_services"
     )
-    pools = relationship(
-        "Pool", secondary=db.pool_service_table, back_populates="services"
-    )
-    owners = relationship(
-        "User", secondary=db.service_owner_table, back_populates="services"
-    )
     update_target_pools = db.Column(Boolean, default=False)
     update_pools_after_running = db.Column(Boolean, default=False)
+    report = db.Column(db.LargeString)
+    report_format = db.Column(db.TinyString, default="text")
+    report_jinja2_template = db.Column(Boolean, default=False)
+    display_report = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.TinyString, default="mail")
-    notification_header = db.Column(db.LargeString)
     display_only_failed_nodes = db.Column(Boolean, default=True)
     include_device_results = db.Column(Boolean, default=True)
     include_link_in_summary = db.Column(Boolean, default=True)
@@ -96,12 +91,11 @@ class Service(AbstractBase):
         back_populates="service",
         cascade="all, delete-orphan",
     )
-    originals = relationship(
-        "Service",
-        secondary=db.originals_association_table,
-        primaryjoin=id == db.originals_association_table.c.original_id,
-        secondaryjoin=id == db.originals_association_table.c.child_id,
-        backref="children",
+    reports = relationship(
+        "ServiceReport",
+        foreign_keys="[ServiceReport.service_id]",
+        back_populates="service",
+        cascade="all, delete-orphan",
     )
     maximum_runs = db.Column(Integer, default=1)
     multiprocessing = db.Column(Boolean, default=False)
@@ -124,24 +118,45 @@ class Service(AbstractBase):
 
     def delete(self):
         if self.name in ("[Shared] Start", "[Shared] End", "[Shared] Placeholder"):
-            raise db.rbac_error(f"It is not allowed to delete '{self.name}'")
+            raise db.rbac_error(f"It is not allowed to delete '{self.name}'.")
+        self.check_freeze("edit")
+
+    def check_freeze(self, mode):
+        if not getattr(current_user, "is_admin", True) and any(
+            mode in getattr(workflow, "freeze") and current_user not in workflow.owners
+            for workflow in self.get_ancestors()
+        ):
+            raise db.rbac_error("Deletion forbidden because of active freeze.")
+
+    def post_update(self):
+        if len(self.workflows) == 1 and not self.shared:
+            self.path = f"{self.workflows[0].path}>{self.id}"
+        else:
+            self.path = str(self.id)
+        self.set_name()
+        return self.to_dict(include=["services", "workflows"])
 
     def update(self, **kwargs):
+        if self.path:
+            self.check_freeze("edit")
         if self.positions and "positions" in kwargs:
             kwargs["positions"] = {**self.positions, **kwargs["positions"]}
-        self.path = str(self.id)
         super().update(**kwargs)
-        self.update_originals()
-        if len(self.workflows) == 1:
-            self.path = f"{self.workflows[0].path}>{self.id}"
         if not kwargs.get("migration_import"):
             self.set_name()
+            self.update_last_modified_properties()
 
-    def update_originals(self):
+    def update_last_modified_properties(self):
+        super().update_last_modified_properties()
+        for ancestor in self.get_ancestors():
+            ancestor.last_modified = self.last_modified
+            ancestor.last_modified_by = self.last_modified_by
+
+    def get_ancestors(self):
         def rec(service):
             return {service} | set().union(*(rec(w) for w in service.workflows))
 
-        self.originals = list(rec(self))
+        return rec(self)
 
     def duplicate(self, workflow=None):
         index = 0
@@ -164,48 +179,6 @@ class Service(AbstractBase):
     def filename(self):
         return vs.strip_all(self.name)
 
-    @classmethod
-    def rbac_filter(cls, query, mode, user):
-        pool_alias = aliased(vs.models["pool"])
-        query = (
-            query.join(cls.pools)
-            .join(vs.models["access"], vs.models["pool"].access)
-            .join(pool_alias, vs.models["access"].user_pools)
-            .join(vs.models["user"], pool_alias.users)
-            .filter(vs.models["access"].access_type.contains(mode))
-            .filter(vs.models["user"].name == user.name)
-            .filter(cls.admin_only == false())
-            .group_by(cls.id)
-        )
-        originals_alias = aliased(vs.models["service"])
-        owners_alias = aliased(vs.models["user"])
-        if mode in ("edit", "run"):
-            services_with_no_access_configured = {
-                service.id
-                for service in db.session.query(cls.id).filter(
-                    ~cls.originals.any(cls.owners_access.contains(mode))
-                )
-            }
-            services_allowed_for_user = {
-                service.id
-                for service in db.session.query(cls.id)
-                .join(originals_alias, cls.originals)
-                .join(owners_alias, originals_alias.owners)
-                .filter(owners_alias.name == user.name)
-            }
-            shared_services = {
-                service.id
-                for service in db.session.query(cls.id).filter(cls.shared == true())
-            }
-            query = query.filter(
-                cls.id.in_(
-                    services_with_no_access_configured
-                    | services_allowed_for_user
-                    | shared_services
-                )
-            )
-        return query
-
     def set_name(self, name=None):
         if self.shared:
             workflow = "[Shared] "
@@ -227,6 +200,8 @@ class ConnectionService(Service):
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
     parent_type = "service"
     credentials = db.Column(db.SmallString, default="device")
+    credential_object_id = db.Column(Integer, ForeignKey("credential.id"))
+    credential_object = relationship("Credential")
     custom_username = db.Column(db.SmallString)
     custom_password = db.Column(db.SmallString)
     start_new_connection = db.Column(Boolean, default=False)
@@ -309,6 +284,21 @@ class ServiceLog(AbstractBase):
         return f"SERVICE '{self.service}' ({self.runtime})"
 
 
+class ServiceReport(AbstractBase):
+
+    __tablename__ = type = "service_report"
+    private = True
+    log_change = False
+    id = db.Column(Integer, primary_key=True)
+    content = db.Column(db.LargeString)
+    runtime = db.Column(db.TinyString)
+    service_id = db.Column(Integer, ForeignKey("service.id"))
+    service = relationship("Service", foreign_keys="ServiceReport.service_id")
+
+    def __repr__(self):
+        return f"SERVICE REPORT '{self.service}' ({self.runtime})"
+
+
 class Run(AbstractBase):
 
     __tablename__ = type = "run"
@@ -359,27 +349,12 @@ class Run(AbstractBase):
             self.name = f"{self.runtime} ({self.creator})"
         self.service_name = (self.placeholder or self.service).scoped_name
 
-    @classmethod
-    def rbac_filter(cls, query, mode, user):
-        service_alias = aliased(vs.models["service"])
-        pool_alias = aliased(vs.models["pool"])
-        services = (
-            service.id
-            for service in db.session.query(vs.models["user"])
-            .join(pool_alias, vs.models["user"].pools)
-            .join(vs.models["access"], pool_alias.access_users)
-            .join(vs.models["pool"], vs.models["access"].access_pools)
-            .join(service_alias, vs.models["pool"].services)
-            .filter(vs.models["user"].name == user.name)
-            .filter(vs.models["access"].access_type.contains(mode))
-            .filter(service_alias.admin_only == false())
-            .with_entities(service_alias.id)
-            .all()
-        )
-        return query.join(cls.service).filter(vs.models["service"].id.in_(services))
-
     def __repr__(self):
         return f"{self.runtime}: SERVICE '{self.service}'"
+
+    @classmethod
+    def rbac_filter(cls, *args):
+        return super().rbac_filter(*args, join_class="service")
 
     @property
     def service_properties(self):
@@ -452,7 +427,7 @@ class Run(AbstractBase):
 
 class Task(AbstractBase):
 
-    __tablename__ = type = "task"
+    __tablename__ = type = class_type = "task"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     admin_only = db.Column(Boolean, default=False)
@@ -496,20 +471,6 @@ class Task(AbstractBase):
     @status.expression
     def status(cls):  # noqa: N805
         return case([(cls.is_active, "Active")], else_="Inactive")
-
-    @classmethod
-    def rbac_filter(cls, query, mode, user):
-        pool_alias = aliased(vs.models["pool"])
-        return (
-            query.join(cls.service)
-            .join(vs.models["pool"], vs.models["service"].pools)
-            .join(vs.models["access"], vs.models["pool"].access)
-            .join(pool_alias, vs.models["access"].user_pools)
-            .join(vs.models["user"], pool_alias.users)
-            .filter(vs.models["access"].access_type.contains(mode))
-            .filter(vs.models["user"].name == user.name)
-            .filter(cls.admin_only == false())
-        )
 
     def _catch_request_exceptions(func):  # noqa: N805
         @wraps(func)

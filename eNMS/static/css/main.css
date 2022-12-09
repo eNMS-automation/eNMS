@@ -510,6 +510,7 @@ button {
   margin-right: 0;
 }
 
+/* Controls size of select2 drop-down list */
 .btn-select2 {
   margin-top: -5px;
   margin-right: -5px;
@@ -519,17 +520,16 @@ button {
   text-decoration: none !important;
 }
 
-/* Increase size of select2 drop-down list */
 .select2-container .select2-selection--single {
-  height: 35px !important;
+  height: 32px !important;
 }
 
 .select2-selection__rendered {
-  line-height: 31px !important;
+  line-height: 25px !important;
 }
 
 .select2-selection__arrow {
-  height: 34px !important;
+  height: 30px !important;
 }
 
 .input-group {
@@ -905,6 +905,7 @@ table.display td.center {
   margin-right: 8px;
   margin-top: -10px;
   float: right;
+  display: none;
 }
 
 .dataTables_scrollBody {
@@ -913,6 +914,7 @@ table.display td.center {
 
 .dataTables_paginate .pagination {
   display: block;
+  padding-left: 500px;
   margin-left: auto;
   margin-right: auto;
 }

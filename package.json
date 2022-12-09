@@ -1,6 +1,6 @@
 {
   "name": "eNMS",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "description": "A enterprise-grade vendor-agnostic network automation platform.",
   "scripts": {
     "prettier": "prettier --config build/linting/.prettierrc --ignore-path build/linting/.prettierignore --write eNMS/**/* setup/**/*",

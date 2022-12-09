@@ -2,6 +2,8 @@ from base64 import b64decode, b64encode
 from click import get_current_context
 from collections import defaultdict
 from cryptography.fernet import Fernet
+from dramatiq.brokers.redis import RedisBroker
+from dramatiq import set_broker
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -60,6 +62,8 @@ class Environment:
             sys_path.append(vs.settings["paths"]["custom_code"])
         self.init_logs()
         self.init_redis()
+        if vs.settings["automation"]["use_task_queue"]:
+            self.init_dramatiq()
         self.init_connection_pools()
         self.file_path = vs.settings["paths"]["files"] or str(vs.path / "files")
         main_thread = Thread(target=self.monitor_filesystem)
@@ -81,9 +85,7 @@ class Environment:
                     file.update(path=event.dest_path, move_file=False)
                 elif event.event_type in ("created", "modified"):
                     file = db.factory(filetype, path=event.src_path)
-                elif event.event_type == "deleted" and file:
-                    db.delete_instance(file)
-                else:
+                elif event.event_type != "deleted" or not file:
                     return
                 file.status = event.event_type.capitalize()
                 log = f"File {event.src_path} {event.event_type} (watchdog)."
@@ -179,6 +181,18 @@ class Environment:
                 f"{protocol}://",
                 HTTPAdapter(max_retries=retry, **vs.settings["requests"]["pool"]),
             )
+
+    def init_dramatiq(self):
+        set_broker(
+            RedisBroker(
+                host=getenv("REDIS_ADDR"),
+                **{
+                    key: value
+                    for key, value in vs.settings["redis"]["config"].items()
+                    if key != "decode_responses"
+                },
+            )
+        )
 
     def init_encryption(self):
         self.fernet_encryption = getenv("FERNET_KEY")

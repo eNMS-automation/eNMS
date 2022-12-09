@@ -9,7 +9,7 @@ theme: false
 user: false
 */
 
-import { runService, runLogic, showRuntimePanel } from "./automation.js";
+import { field, runService, runLogic, showRuntimePanel } from "./automation.js";
 import {
   call,
   configureNamespace,
@@ -168,6 +168,16 @@ export function showServicePanel(type, id, mode, tableId) {
     $(`#${type}-vendor`).val(workflow.vendor).trigger("change");
     $(`#${type}-operating_system`).val(workflow.operating_system).trigger("change");
   }
+  $(field("report_template", type, id)).on("change", function () {
+    const isJinja2 = this.value.endsWith(".j2");
+    field("report_jinja2_template", type, id).prop("checked", isJinja2);
+    call({
+      url: `/get_report_template/${this.value}`,
+      callback: function (template) {
+        field("report", type, id).val(template);
+      },
+    });
+  });
   $(workflowId).prop("disabled", true);
   const wizardId = id ? `#${type}-wizard-${id}` : `#${type}-wizard${postfix}`;
   $(wizardId).smartWizard({
@@ -464,9 +474,9 @@ function getResultLink(service, device) {
 function getWorkflowLink(includeRuntime) {
   const baseUrl =
     serverUrl || `${window.location.protocol}//${window.location.hostname}`;
-  let link = `${baseUrl}/workflow_builder/${workflow.id}`;
+  let link = `${baseUrl}/workflow_builder/${currentPath}`;
   if (includeRuntime) link += `/${currentRuntime}`;
-  copyToClipboard({ text: link });
+  copyToClipboard({ text: encodeURI(link) });
 }
 
 export function updateWorkflowRightClickBindings() {
@@ -480,6 +490,7 @@ export function updateWorkflowRightClickBindings() {
     "Workflow Result Tree": () => showRuntimePanel("results", workflow),
     "Workflow Result Table": () =>
       showRuntimePanel("results", workflow, null, "full_result", null, true),
+    "Workflow Report": () => showRuntimePanel("report", workflow),
     "Workflow Result Comparison": () => compareWorkflowResults(),
     "Workflow Logs": () => showRuntimePanel("logs", workflow),
     "Add to Workflow": addServicePanel,
@@ -738,6 +749,7 @@ function compareWorkflowResults() {
     type: "full_result",
     title: "Result Comparison",
     id: mainId,
+    tableId: `full_result-${mainId}`,
     callback: function () {
       let constraints = {
         parent_service_id: currentPath.split(">")[0],

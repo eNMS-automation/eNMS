@@ -8,7 +8,6 @@ from logging import error, info, warning
 from operator import attrgetter
 from os import getenv, getpid
 from pathlib import Path
-from re import search
 from sqlalchemy import (
     Boolean,
     Column,
@@ -28,7 +27,12 @@ from sqlalchemy.exc import InvalidRequestError, OperationalError
 from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.ext.mutable import MutableDict, MutableList
-from sqlalchemy.orm import aliased, configure_mappers, scoped_session, sessionmaker
+from sqlalchemy.orm import (
+    configure_mappers,
+    relationship,
+    scoped_session,
+    sessionmaker,
+)
 from sqlalchemy.orm.collections import InstrumentedList
 from sqlalchemy.types import JSON
 from time import sleep
@@ -124,6 +128,7 @@ class Database:
                 if hasattr(cls, "database_init") and "database_init" in cls.__dict__:
                     cls.database_init()
                 self.set_custom_properties(cls)
+                self.set_rbac_properties(cls)
 
         return SubDeclarativeMeta
 
@@ -166,15 +171,6 @@ class Database:
         self.Column = init_column
 
     def configure_events(self):
-        if self.dialect == "sqlite":
-
-            @event.listens_for(self.engine, "connect")
-            def do_begin(connection, _):
-                def regexp(pattern, value):
-                    return search(pattern, str(value)) is not None
-
-                connection.create_function("regexp", 2, regexp)
-
         @event.listens_for(self.base, "mapper_configured", propagate=True)
         def model_inspection(mapper, model):
             name = model.__tablename__
@@ -312,6 +308,64 @@ class Database:
                     ),
                 ),
             )
+        for model, properties in vs.rbac["rbac_models"].items():
+            setattr(
+                self,
+                f"{model}_owner_table",
+                Table(
+                    f"{model}_owner_association",
+                    self.base.metadata,
+                    Column(
+                        f"{model}_id",
+                        Integer,
+                        ForeignKey(f"{model}.id"),
+                        primary_key=True,
+                    ),
+                    Column("user_id", Integer, ForeignKey("user.id"), primary_key=True),
+                ),
+            )
+            for property in properties:
+                setattr(
+                    self,
+                    f"{model}_{property}_table",
+                    Table(
+                        f"{model}_{property}_association",
+                        self.base.metadata,
+                        Column(
+                            f"{model}_id",
+                            Integer,
+                            ForeignKey(f"{model}.id"),
+                            primary_key=True,
+                        ),
+                        Column(
+                            "group_id",
+                            Integer,
+                            ForeignKey("group.id"),
+                            primary_key=True,
+                        ),
+                    ),
+                )
+        for property in vs.rbac["rbac_models"]["device"]:
+            setattr(
+                self,
+                f"pool_group_{property}_table",
+                Table(
+                    f"pool_group_{property}_association",
+                    self.base.metadata,
+                    Column(
+                        "pool_id",
+                        Integer,
+                        ForeignKey("pool.id"),
+                        primary_key=True,
+                    ),
+                    Column(
+                        "group_id",
+                        Integer,
+                        ForeignKey("group.id"),
+                        primary_key=True,
+                    ),
+                ),
+            )
 
     def query(self, model, rbac="read", username=None, properties=None):
         if properties:
@@ -329,14 +383,8 @@ class Database:
             if not user:
                 return
             if user.is_authenticated and not user.is_admin:
-                if model in vs.rbac["advanced"]["admin_models"].get(rbac, []):
+                if model in vs.rbac["admin_models"].get(rbac, []):
                     raise self.rbac_error
-                if (
-                    rbac == "read"
-                    and vs.rbac["advanced"]["deactivate_rbac_on_read"]
-                    and model != "pool"
-                ):
-                    return query
                 query = vs.models[model].rbac_filter(query, rbac, user)
         return query
 
@@ -389,10 +437,7 @@ class Database:
         return [self.fetch(model, id=object_id, **kwargs) for object_id in object_list]
 
     def delete_instance(self, instance):
-        try:
-            instance.delete()
-        except Exception as exc:
-            return {"alert": f"Unable to delete {instance.name} ({exc})."}
+        instance.delete()
         serialized_instance = instance.serialized
         self.session.delete(instance)
         return serialized_instance
@@ -450,16 +495,15 @@ class Database:
     def get_credential(
         self, username, name=None, device=None, credential_type="any", optional=False
     ):
-        pool_alias = aliased(vs.models["pool"])
         query = (
             self.session.query(vs.models["credential"])
-            .join(vs.models["pool"], vs.models["credential"].user_pools)
-            .join(vs.models["user"], vs.models["pool"].users)
+            .join(vs.models["group"], vs.models["credential"].groups)
+            .join(vs.models["user"], vs.models["group"].users)
         )
         if device:
-            query = query.join(pool_alias, vs.models["credential"].device_pools).join(
-                vs.models["device"], pool_alias.devices
-            )
+            query = query.join(
+                vs.models["pool"], vs.models["credential"].device_pools
+            ).join(vs.models["device"], vs.models["pool"].devices)
         query = query.filter(vs.models["user"].name == username)
         if name:
             query = query.filter(vs.models["credential"].name == name)
@@ -534,7 +578,42 @@ class Database:
             if not values.get("migrate", True):
                 self.dont_migrate[model].append(property)
             setattr(table, property, column)
-        return table
+
+    def set_rbac_properties(self, table):
+        model = getattr(table, "__tablename__", None)
+        if model == "user":
+            for rbac_model in vs.rbac["rbac_models"]:
+                setattr(
+                    table,
+                    f"user_{rbac_model}s",
+                    relationship(
+                        rbac_model.capitalize(),
+                        secondary=getattr(self, f"{rbac_model}_owner_table"),
+                        back_populates="owners",
+                    ),
+                )
+        properties = vs.rbac["rbac_models"].get(model, {})
+        if not model or not properties:
+            return
+        setattr(
+            table,
+            "owners",
+            relationship(
+                "User",
+                secondary=getattr(self, f"{model}_owner_table"),
+                back_populates=f"user_{model}s",
+            ),
+        )
+        for property in properties:
+            setattr(
+                table,
+                property,
+                relationship(
+                    "Group",
+                    secondary=getattr(self, f"{model}_{property}_table"),
+                    back_populates=f"{property}_{model}s",
+                ),
+            )
 
     def cleanup(self):
         self.engine.dispose()

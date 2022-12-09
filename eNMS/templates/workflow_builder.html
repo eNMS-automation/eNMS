@@ -224,8 +224,16 @@
       </li>
       <li>
         <a
+          onclick="action['Workflow Report']()"
+          data-tooltip="Report"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-modal-window"></span
+        ></a>
+      </li>
+      <li>
+        <a
           onclick="action['Workflow Result Tree']()"
-          data-tooltip="Result Tree"
+          data-tooltip="Results"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-list-alt"></span
         ></a>
@@ -282,6 +290,9 @@
   </li>
   <li class="menu-entry node-selection">
     <a tabindex="-1" href="#">Logs</a>
+  </li>
+  <li class="menu-entry node-selection">
+    <a tabindex="-1" href="#">Reports</a>
   </li>
   <li class="menu-entry node-selection">
     <a tabindex="-1" href="#">Results</a>

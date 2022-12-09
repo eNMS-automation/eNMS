@@ -37,21 +37,50 @@
   },
   "import_export_models": [
     "user",
+    "group",
     "device",
+    "file",
     "link",
     "service",
     "network",
     "workflow_edge",
     "task",
-    "access",
     "credential",
     "pool"
   ],
   "dont_migrate": {
-    "access": ["id"],
     "credential": ["id"],
+    "group": [
+      "id",
+      "credentials",
+      "rbac_configuration_devices",
+      "rbac_connect_devices",
+      "rbac_edit_devices",
+      "rbac_edit_files",
+      "rbac_edit_links",
+      "rbac_edit_networks",
+      "rbac_edit_pools",
+      "rbac_edit_services",
+      "rbac_edit_tasks",
+      "rbac_pool_rbac_configuration",
+      "rbac_pool_rbac_connect",
+      "rbac_pool_rbac_edit",
+      "rbac_pool_rbac_read",
+      "rbac_pool_rbac_target",
+      "rbac_read_devices",
+      "rbac_read_files",
+      "rbac_read_links",
+      "rbac_read_networks",
+      "rbac_read_pools",
+      "rbac_read_services",
+      "rbac_read_tasks",
+      "rbac_run_services",
+      "rbac_schedule_services",
+      "rbac_schedule_tasks",
+      "rbac_target_devices",
+      "rbac_use_files"
+    ],
     "device": [
-      "access",
       "id",
       "configuration",
       "operational_data",
@@ -67,8 +96,9 @@
       "tasks",
       "users"
     ],
+    "file": ["id", "filename", "status"],
+    "folder": ["id", "filename", "status"],
     "link": [
-      "access",
       "id",
       "pools",
       "networks",
@@ -79,10 +109,7 @@
       "source_name"
     ],
     "pool": [
-      "access",
-      "access_users",
       "credential_devices",
-      "credential_users",
       "device_number",
       "id",
       "link_number",
@@ -92,12 +119,10 @@
       "user_number"
     ],
     "service": [
-      "access",
       "children",
       "id",
       "sources",
       "destinations",
-      "originals",
       "path",
       "status",
       "superworkflow_id",
@@ -108,7 +133,6 @@
     ],
     "network": ["id", "path"],
     "task": [
-      "access",
       "id",
       "service_name",
       "service_id",
@@ -118,17 +142,24 @@
       "status"
     ],
     "user": [
-      "access",
       "id",
       "devices",
       "pools",
+      "groups",
       "links",
       "menu",
       "delete_requests",
       "get_requests",
       "post_requests",
       "services",
-      "pages"
+      "pages",
+      "user_devices",
+      "user_files",
+      "user_links",
+      "user_networks",
+      "user_pools",
+      "user_services",
+      "user_tasks"
     ],
     "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"]
   },
@@ -186,30 +217,10 @@
           "foreign_key": "link"
         }
       },
-      "pool_service": {
+      "user_group": {
         "model1": {
-          "column": "pool_id",
-          "foreign_key": "pool"
-        },
-        "model2": {
-          "column": "service_id",
-          "foreign_key": "service"
-        }
-      },
-      "pool_network": {
-        "model1": {
-          "column": "pool_id",
-          "foreign_key": "pool"
-        },
-        "model2": {
-          "column": "network_id",
-          "foreign_key": "network"
-        }
-      },
-      "pool_user": {
-        "model1": {
-          "column": "pool_id",
-          "foreign_key": "pool"
+          "column": "group_id",
+          "foreign_key": "group"
         },
         "model2": {
           "column": "user_id",
@@ -246,16 +257,6 @@
         "model2": {
           "column": "device_id",
           "foreign_key": "device"
-        }
-      },
-      "service_owner": {
-        "model1": {
-          "column": "service_id",
-          "foreign_key": "service"
-        },
-        "model2": {
-          "column": "user_id",
-          "foreign_key": "user"
         }
       },
       "service_pool": {
@@ -298,16 +299,6 @@
           "foreign_key": "pool"
         }
       },
-      "originals_association": {
-        "model1": {
-          "column": "original_id",
-          "foreign_key": "service"
-        },
-        "model2": {
-          "column": "child_id",
-          "foreign_key": "service"
-        }
-      },
       "service_target_device": {
         "model1": {
           "column": "service_id",
@@ -328,26 +319,6 @@
           "foreign_key": "pool"
         }
       },
-      "access_user_pools": {
-        "model1": {
-          "column": "access_id",
-          "foreign_key": "access"
-        },
-        "model2": {
-          "column": "pool_id",
-          "foreign_key": "pool"
-        }
-      },
-      "access_model_pools": {
-        "model1": {
-          "column": "access_id",
-          "foreign_key": "access"
-        },
-        "model2": {
-          "column": "pool_id",
-          "foreign_key": "pool"
-        }
-      },
       "credential_device": {
         "model1": {
           "column": "credential_id",
@@ -358,14 +329,14 @@
           "foreign_key": "pool"
         }
       },
-      "credential_user": {
+      "credential_group": {
         "model1": {
           "column": "credential_id",
           "foreign_key": "credential"
         },
         "model2": {
-          "column": "pool_id",
-          "foreign_key": "pool"
+          "column": "group_id",
+          "foreign_key": "group"
         }
       }
     }

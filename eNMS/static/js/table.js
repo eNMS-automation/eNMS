@@ -24,6 +24,7 @@ import { updateNetworkRightClickBindings } from "./networkBuilder.js";
 
 export let tables = {};
 export let tableInstances = {};
+let displayPagination = false;
 export const models = {};
 let waitForSearch = false;
 
@@ -51,10 +52,13 @@ export class Table {
       orderCellsTop: true,
       autoWidth: false,
       scrollX: true,
+      order: this.tableOrdering,
+      pagingType: "simple",
       drawCallback: function () {
         $(".paginate_button > a").on("focus", function () {
           $(this).blur();
         });
+        if (!displayPagination) self.setPagination();
         createTooltips();
       },
       sDom: "tilp",
@@ -138,6 +142,7 @@ export class Table {
           Object.assign(data, {
             export: self.csvExport,
             clipboard: self.copyClipboard,
+            pagination: displayPagination,
             ...this.getFilteringData(),
           });
           Object.assign(data, self.filteringData);
@@ -164,7 +169,6 @@ export class Table {
     });
     $(window).resize(this.table.columns.adjust);
     $(`[name=table-${this.id}_length]`).selectpicker("refresh");
-    this.table.order(this.tableOrdering).draw();
     const refreshRate = settings.tables.refresh[this.type];
     if (refreshRate) refreshTablePeriodically(this.id, refreshRate, true);
   }
@@ -205,6 +209,7 @@ export class Table {
       constraints: { ...this.constraints, ...this.filteringConstraints },
       columns: this.columns,
       type: this.type,
+      rbac: this.defaultRbac || "read",
     });
     return data;
   }
@@ -218,6 +223,7 @@ export class Table {
         name: `${this.model}_relation_filtering`,
         target: `#advanced-search-${this.id}`,
         container: `#controls-${this.id}`,
+        size: "auto 500",
         position: {
           my: "center-top",
           at: "center-bottom",
@@ -251,6 +257,21 @@ export class Table {
       localStorage.setItem(`${self.type}_table`, $(this).val());
     });
     self.table.columns.adjust();
+  }
+
+  setPagination() {
+    const button = `
+      <ul class="pagination" style="margin: 0px;">
+        <li>
+          <a
+            onclick="eNMS.table.togglePaginationDisplay('${this.id}')"
+            data-tooltip="Edit Workflow"
+            style="cursor: pointer;"
+            ><span class="glyphicon glyphicon-info-sign"></span
+          ></a>
+        </li>
+      </ul>`;
+    $(".dataTables_info").html(button).show();
   }
 
   createfilteringTooltips() {
@@ -579,10 +600,6 @@ tables.network = class NetworkTable extends Table {
     return row;
   }
 
-  get modelFiltering() {
-    return "node";
-  }
-
   postProcessing(...args) {
     let self = this;
     super.postProcessing(...args);
@@ -664,6 +681,10 @@ tables.configuration = class ConfigurationTable extends Table {
       if (value.toLowerCase() == "success") row[key] = `${successBtn}Success</button>`;
     }
     return row;
+  }
+
+  get defaultRbac() {
+    return "configuration";
   }
 
   get modelFiltering() {
@@ -793,9 +814,9 @@ tables.pool = class PoolTable extends Table {
   addRow(properties) {
     let row = super.addRow(properties);
     row.objectNumber = "";
-    for (const model of ["device", "link", "service", "network", "user"]) {
+    for (const model of ["device", "link"]) {
       row.objectNumber += `${row[`${model}_number`]} ${model}s`;
-      if (model !== "user") row.objectNumber += " - ";
+      if (model !== "link") row.objectNumber += " - ";
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
         '${model}', ${row.instance}, {parent: '${this.id}', from: 'pools',
         to: '${model}s'})">${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
@@ -905,7 +926,8 @@ tables.service = class ServiceTable extends Table {
           <option value="true">Display top-level services</option>
           <option value="false">Display all services</option>
         </select>
-      </button>
+      </button>`,
+      `
       <button
         class="btn btn-info"
         onclick="eNMS.table.refreshTable('service', true)"
@@ -1254,12 +1276,68 @@ tables.task = class TaskTable extends Table {
   }
 };
 
+tables.group = class GroupTable extends Table {
+  addRow(kwargs) {
+    let row = super.addRow(kwargs);
+    row.users = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+      'user', ${row.instance}, {parent: '${this.id}', from: 'groups', to: 'users'})">
+      Users</a></b>`;
+    return row;
+  }
+
+  get controls() {
+    return [
+      this.columnDisplay(),
+      this.refreshTableButton(),
+      this.searchTableButton(),
+      this.clearSearchButton(),
+      this.copyTableButton(),
+      this.createNewButton(),
+      this.bulkEditButton(),
+      this.exportTableButton(),
+      ` <button
+        class="btn btn-primary"
+        onclick="eNMS.administration.updateDeviceRbac()"
+        data-tooltip="Update Device RBAC from Pools"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-flash"></span>
+      </button>`,
+      this.bulkDeletionButton(),
+    ];
+  }
+
+  buttons(row) {
+    return [
+      `
+      <ul class="pagination pagination-lg" style="margin: 0px;">
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showInstancePanel('group', '${
+            row.id
+          }')" data-tooltip="Edit"
+            ><span class="glyphicon glyphicon-edit"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showInstancePanel('group', '${row.id}', 'duplicate')"
+          data-tooltip="Duplicate"
+            ><span class="glyphicon glyphicon-duplicate"></span
+          ></button>
+        </li>
+        ${this.deleteInstanceButton(row)}
+      </ul>`,
+    ];
+  }
+};
+
 tables.user = class UserTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
-    row.pools = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-      'pool', ${row.instance}, {parent: '${this.id}', from: 'users', to: 'pools'})">
-      Pools</a></b>`;
+    row.groups = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+      'group', ${row.instance}, {parent: '${this.id}', from: 'users', to: 'groups'})">
+      Groups</a></b>`;
     return row;
   }
 
@@ -1290,44 +1368,6 @@ tables.user = class UserTable extends Table {
         <li>
           <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.base.showInstancePanel('user', '${row.id}', 'duplicate')"
-          data-tooltip="Duplicate"
-            ><span class="glyphicon glyphicon-duplicate"></span
-          ></button>
-        </li>
-        ${this.deleteInstanceButton(row)}
-      </ul>`,
-    ];
-  }
-};
-
-tables.access = class AccessTable extends Table {
-  get controls() {
-    return [
-      this.columnDisplay(),
-      this.refreshTableButton(),
-      this.searchTableButton(),
-      this.clearSearchButton(),
-      this.createNewButton(),
-      this.exportTableButton(),
-      this.bulkDeletionButton(),
-    ];
-  }
-
-  buttons(row) {
-    return [
-      `
-      <ul class="pagination pagination-lg" style="margin: 0px;">
-        <li>
-          <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showInstancePanel('access', '${
-            row.id
-          }')" data-tooltip="Edit"
-            ><span class="glyphicon glyphicon-edit"></span
-          ></button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showInstancePanel('access', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
@@ -1456,7 +1496,7 @@ tables.file = class FileTable extends Table {
     let row = super.addRow(properties);
     if (row.type == "folder") {
       row.filename = `<a href="#" onclick="eNMS.administration.enterFolder
-        ('${row.filename}', '${this.id}')">
+        ({ folder: '${row.filename}'})">
           <span class="glyphicon glyphicon-folder-open" style="margin-left: 8px"></span>
           <b style="margin-left: 6px">${row.filename}</b>
         </a>`;
@@ -1488,11 +1528,12 @@ tables.file = class FileTable extends Table {
         </select>
       </button>`,
       this.refreshTableButton("file"),
+      this.clearSearchButton(),
       `
       <a
         id="upward-folder-btn"
         class="btn btn-info ${status}"
-        onclick="eNMS.administration.enterFolder()"
+        onclick="eNMS.administration.enterFolder({})"
         type="button"
       >
         <span class="glyphicon glyphicon-chevron-up"></span>
@@ -1758,12 +1799,18 @@ function displayRelationTable(type, instance, relation) {
     id: instance.id,
     size: "1200 600",
     title: `${instance.name} - ${type}s`,
+    tableId: `${type}-${instance.id}`,
     callback: function () {
       const constraints = { [`${relation.from}`]: [instance.name] };
       // eslint-disable-next-line new-cap
       new tables[type](instance.id, constraints, { relation, ...instance });
     },
   });
+}
+
+function togglePaginationDisplay(tableId) {
+  displayPagination = !displayPagination;
+  refreshTable(tableId);
 }
 
 for (const [type, table] of Object.entries(tables)) {
@@ -1782,4 +1829,5 @@ configureNamespace("table", [
   showBulkDeletionPanel,
   showBulkEditPanel,
   showBulkServiceExportPanel,
+  togglePaginationDisplay,
 ]);

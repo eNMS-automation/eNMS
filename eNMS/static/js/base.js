@@ -66,6 +66,7 @@ export function detectUserInactivity() {
 }
 
 const panelThemes = {
+  "report-text": { bgContent: "#1B1B1B" },
   logs: { bgContent: "#1B1B1B" },
   device_data: { bgContent: "#1B1B1B" },
   file_editor: { bgContent: "#1B1B1B" },
@@ -289,6 +290,7 @@ export function openPanel({
   duplicate,
   content,
   size,
+  tableId,
   url,
   css,
   checkRbac = true,
@@ -328,6 +330,9 @@ export function openPanel({
     },
     resizeit: {
       containment: 0,
+      stop: function () {
+        if (tableId) refreshTable(tableId);
+      },
     },
     ...other,
   };
@@ -577,7 +582,7 @@ export function configureForm(form, id, panelId) {
         },
         useCurrent: false,
       });
-    } else if (["list", "multiselect", "multiselect-string"].includes(field.type)) {
+    } else if (["list", "multiselect"].includes(field.type)) {
       const elClass = el.attr("class");
       el.selectpicker({
         liveSearch: elClass ? !elClass.includes("no-search") : false,
@@ -610,7 +615,7 @@ export function configureForm(form, id, panelId) {
       editors[id][property] = editor;
     } else if (["object", "object-list"].includes(field.type)) {
       let model;
-      if (relationships[form]) {
+      if (relationships?.[form]?.[property]?.model) {
         model = relationships[form][property].model;
       } else {
         model = field.model;
@@ -667,66 +672,34 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
       if (type == "credential") showCredentialPanel(id);
       if (type == "folder") showFolderPanel(id);
       if (id) {
-        const properties = type === "pool" ? "_properties" : "";
         call({
-          url: `/get${properties}/${type}/${id}`,
+          url: `/get/${type}/${id}`,
           callback: function (instance) {
+            const ownersNames = instance.owners
+              ? instance.owners.map((user) => user.name)
+              : [];
+            if (user.is_admin || ownersNames.includes(user.name)) {
+              $("#rbac-nav").show();
+            } else {
+              $("#rbac-nav,#rbac-properties").remove();
+            }
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
             processInstance(type, instance);
+            if (isService) loadScript(`../static/js/services/${type}.js`, id);
           },
         });
       } else if (mode == "bulk") {
-        const model = isService ? "service" : type;
-        const form = {
-          ...serializeForm(`#search-form-${tableId}`, `${model}_filtering`),
-          ...tableInstances[tableId].constraints,
-          ...tableInstances[tableId].filteringConstraints,
-        };
-        call({
-          url: `/filtering/${model}`,
-          data: { form: form, bulk: "id" },
-          callback: function (instances) {
-            $(`#${type}-id-${tableId}`).val(instances.join("-"));
-            $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val(
-              "Bulk Edit"
-            );
-            const number = instances.length;
-            panel.setHeaderTitle(`Edit all ${number} ${model}s in table in bulk`);
-            for (const property of Object.keys(formProperties[type])) {
-              $(`#${type}-action-btn-${tableId}`)
-                .attr(
-                  "onclick",
-                  `eNMS.table.showBulkEditPanel(
-                  '${type}', '${model}', '${tableId}', ${number})`
-                )
-                .text("Bulk Edit");
-              if (["name", "scoped_name", "type"].includes(property)) {
-                $(`#${type}-${property}-${tableId}`).prop("readonly", true);
-              } else {
-                $(`label[for='${property}']`).after(`
-                  <div class="item" style='float:right; margin-left: 15px'>
-                    <input
-                      id="bulk-edit-${property}-${tableId}"
-                      name="bulk-edit-${property}"
-                      type="checkbox"
-                    />
-                  </div>
-                `);
-              }
-            }
-          },
-        });
+        buildBulkPanel(panel, type, tableId);
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
-        $(`#${type}-access_groups`).val(user.groups);
         if (page == "workflow_builder" && creationMode == "create_service") {
           $(`#${type}-workflows`).append(new Option(instance.name, instance.name));
           $(`#${type}-workflows`).val(instance.name).trigger("change");
         }
         if (page == "network_builder") updateNetworkPanel(type);
       }
-      if (isService) loadScript(`../static/js/services/${type}.js`, id);
+      if (isService && !id) loadScript(`../static/js/services/${type}.js`);
       const property = isService
         ? "scoped_name"
         : type == "folder"
@@ -736,6 +709,64 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
     },
     type: type,
     duplicate: mode == "duplicate",
+  });
+}
+
+function buildBulkPanel(panel, type, tableId) {
+  $("#rbac-nav").show();
+  const model = type in subtypes.service ? "service" : type;
+  for (const [property, value] of Object.entries(formProperties[type])) {
+    if (value.type == "object-list") {
+      $(`#${type}-${property}-property-div-${tableId}`).width("80%").before(`
+          <div style="float:right; width: 19%; margin-top: 2px;">
+            <select
+              data-width="100%"
+              id="${tableId}-${property}-list"
+              name="${property}-edit-mode"
+            >
+              <option value="set">Set</option>
+              <option value="append">Append</option>
+              <option value="remove">Remove</option>
+            </select>
+          </div>
+        `);
+      $(`#${tableId}-${property}-list`).selectpicker();
+    }
+    if (["name", "scoped_name", "type"].includes(property)) {
+      $(`#${type}-${property}-${tableId}`).prop("readonly", true);
+    } else {
+      $(`label[for='${property}']`).after(`
+        <div class="item" style='float:right; margin-left: 15px'>
+          <input
+            id="bulk-edit-${property}-${tableId}"
+            name="bulk-edit-${property}"
+            type="checkbox"
+          />
+        </div>
+      `);
+    }
+  }
+  const form = {
+    ...serializeForm(`#search-form-${tableId}`, `${model}_filtering`),
+    ...tableInstances[tableId].constraints,
+    ...tableInstances[tableId].filteringConstraints,
+  };
+  call({
+    url: `/filtering/${model}`,
+    data: { form: form, bulk: "id" },
+    callback: function (instances) {
+      $(`#${type}-id-${tableId}`).val(instances.join("-"));
+      $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val("Bulk Edit");
+      const number = instances.length;
+      panel.setHeaderTitle(`Edit all ${number} ${model}s in table in bulk`);
+      $(`#${type}-action-btn-${tableId}`)
+        .attr(
+          "onclick",
+          `eNMS.table.showBulkEditPanel(
+          '${type}', '${model}', '${tableId}', ${number})`
+        )
+        .text("Bulk Edit");
+    },
   });
 }
 
@@ -750,14 +781,11 @@ function updateProperty(instance, el, property, value, type) {
     el.prop("checked", value);
   } else if (propertyType.includes("dict")) {
     el.val(value ? JSON.stringify(value) : "{}");
-  } else if (["list", "multiselect", "multiselect-string"].includes(propertyType)) {
+  } else if (["list", "multiselect"].includes(propertyType)) {
     try {
       el.selectpicker("deselectAll");
     } catch (e) {
       // ignore
-    }
-    if (propertyType == "multiselect-string") {
-      value = value ? JSON.parse(value.replace(/'/g, `"`)) : [];
     }
     el.selectpicker("val", value).trigger("change");
     el.selectpicker("render");
@@ -796,6 +824,7 @@ export function processInstance(type, instance) {
     const el = $(
       instance ? `#${type}-${property}-${instance.id}` : `#${type}-${property}`
     );
+    if (!el.length) continue;
     updateProperty(instance, el, property, value, type);
   }
 }

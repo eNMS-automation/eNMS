@@ -1,6 +1,6 @@
 {% macro field_template(form_type, field) %} {% set id = "{}-{}".format(form_type,
 field.name) %} {% set style = "height: {}px".format(field.render_kw["rows"]*20 + 17) if
-"TextArea" in field.widget|string else "height: 50px" if field.type ==
+"TextArea" in field.widget|string else "height: 40px" if field.type ==
 "MultipleInstanceField" else "" %}
 <div id="{{ id }}-div" class="add-id" style="{{ style }}">
   {% set class = "form-control-bool" if field.type == "BooleanField" else "form-control"
@@ -17,8 +17,10 @@ field.name) %} {% set style = "height: {}px".format(field.render_kw["rows"]*20 +
   <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}</label>
   {% endif %}
   <div class="col-md-9 col-sm-9 col-xs-12">
-    {{ field(id=id, class="collapsed {} add-id".format(class), checked=field.default,
-    style="width: 100%") }}
+    <div id="{{ id }}-property-div" class="add-id">
+      {{ field(id=id, class="collapsed {} add-id".format(class), checked=field.default,
+      style="width: 100%") }}
+    </div>
   </div>
   <br /><br />
   {% endif %}

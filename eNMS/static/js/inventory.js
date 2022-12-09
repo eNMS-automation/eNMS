@@ -81,6 +81,7 @@ function drawDiagrams(type, objects, property) {
           </form>
         </div>`,
       id: id,
+      tableId: `${tableType}-${id}`,
       title: `All ${tableType}s with ${property} set to "${value}"`,
       callback: function () {
         if (formProperties[tableType][property]?.type == "bool") {
@@ -446,6 +447,7 @@ export function showDeviceResultsPanel(device) {
     id: device.id,
     type: "device_result",
     title: `Results - ${device.name}`,
+    tableId: `device_result-${device.id}`,
     callback: function () {
       // eslint-disable-next-line new-cap
       new tables["device_result"](device.id, {

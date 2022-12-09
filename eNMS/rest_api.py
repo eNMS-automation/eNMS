@@ -39,6 +39,7 @@ class RestApi:
         "get_git_content",
         "update_all_pools",
         "update_database_configurations_from_git",
+        "update_device_rbac",
     ]
 
     def __init__(self):
@@ -89,21 +90,22 @@ class RestApi:
         data = {"trigger": "REST API", "creator": current_user.name, **kwargs}
         errors, devices, pools = [], [], []
         service = db.fetch("service", name=data.pop("name"), rbac="run")
+        service.check_freeze("run")
         handle_asynchronously = data.get("async", True)
         for device_name in data.get("devices", ""):
-            device = db.fetch("device", name=device_name)
+            device = db.fetch("device", name=device_name, allow_none=True)
             if device:
                 devices.append(device.id)
             else:
                 errors.append(f"No device with the name '{device_name}'")
         for device_ip in data.get("ip_addresses", ""):
-            device = db.fetch("device", ip_address=device_ip)
+            device = db.fetch("device", ip_address=device_ip, allow_none=True)
             if device:
                 devices.append(device.id)
             else:
                 errors.append(f"No device with the IP address '{device_ip}'")
         for pool_name in data.get("pools", ""):
-            pool = db.fetch("pool", name=pool_name)
+            pool = db.fetch("pool", name=pool_name, allow_none=True)
             if pool:
                 pools.append(pool.id)
             else:
@@ -114,13 +116,16 @@ class RestApi:
             data.update({"target_devices": devices, "target_pools": pools})
         data["runtime"] = runtime = vs.get_time()
         if handle_asynchronously:
-            Thread(target=controller.run, args=(service.id,), kwargs=data).start()
+            if vs.settings["automation"]["use_task_queue"]:
+                controller.run.send(service.id, **data)
+            else:
+                Thread(target=controller.run, args=(service.id,), kwargs=data).start()
             return {"errors": errors, "runtime": runtime}
         else:
             return {**controller.run(service.id, **data), "errors": errors}
 
     def run_task(self, task_id):
-        task = db.fetch("task", rbac="schedule", id=task_id)
+        task = db.fetch("task", rbac="edit", id=task_id)
         data = {
             "trigger": "Scheduler",
             "creator": task.last_scheduled_by,
@@ -132,7 +137,11 @@ class RestApi:
             data["target_devices"] = [device.id for device in task.devices]
         if task.pools:
             data["target_pools"] = [pool.id for pool in task.pools]
-        Thread(target=controller.run, args=(task.service.id,), kwargs=data).start()
+
+        if vs.settings["automation"]["use_task_queue"]:
+            controller.run.send(task.service.id, **data)
+        else:
+            Thread(target=controller.run, args=(task.service.id,), kwargs=data).start()
 
     def search(self, **kwargs):
         filtering_kwargs = {

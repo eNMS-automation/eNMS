@@ -1081,6 +1081,12 @@ class Runner:
             sock=sock,
             **self.get_credentials(device),
         )
+
+        # BEGIN DEVIATION - log netmiko driver to ease debugging
+        self.log("debug", f"netmiko driver: {type(netmiko_connection)}", device=device, service_log=False,
+                 logger="root")
+        # END DEVIATION - log netmiko driver to ease debugging
+
         if self.enable_mode:
             netmiko_connection.enable()
         if self.config_mode:

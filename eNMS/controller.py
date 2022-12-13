@@ -24,15 +24,12 @@ from sqlalchemy.orm import aliased
 from sqlalchemy.sql.expression import true
 from subprocess import Popen
 from tarfile import open as open_tar
-from threading import Thread
+from threading import current_thread, Thread
 from traceback import format_exc
 from uuid import uuid4
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from xlwt import Workbook
-# BEGIN DEVIATION - import current_thread
-from threading import current_thread
-# END DEVIATION - import current_thread
 
 from eNMS.database import db
 from eNMS.forms import form_factory
@@ -1079,9 +1076,7 @@ class Controller:
     @staticmethod
     @actor
     def run(service, **kwargs):
-        # BEGIN DEVIATION - overwrite threadname for logging
         current_thread().name = kwargs["runtime"]
-        # END DEVIATION - overwrite threadname for logging
         if "path" not in kwargs:
             kwargs["path"] = str(service)
         keys = list(vs.model_properties["run"]) + list(vs.relationships["run"])

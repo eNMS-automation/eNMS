@@ -1041,14 +1041,14 @@ class Runner:
         if connection:
             self.log("info", f"Using cached {connection_name}", device)
             return self.update_netmiko_connection(connection)
+        driver = device.netmiko_driver if self.driver == "device" else self.driver
         self.log(
             "info",
-            f"OPENING {connection_name}",
+            f"OPENING {connection_name} (driver: {driver})",
             device,
             change_log=False,
             logger="security",
         )
-        driver = device.netmiko_driver if self.driver == "device" else self.driver
         sock = None
         if device.gateways:
             gateways = sorted(device.gateways, key=attrgetter("priority"), reverse=True)
@@ -1081,12 +1081,6 @@ class Runner:
             sock=sock,
             **self.get_credentials(device),
         )
-
-        # BEGIN DEVIATION - log netmiko driver to ease debugging
-        self.log("debug", f"netmiko driver: {type(netmiko_connection)}", device=device, service_log=False,
-                 logger="root")
-        # END DEVIATION - log netmiko driver to ease debugging
-
         if self.enable_mode:
             netmiko_connection.enable()
         if self.config_mode:

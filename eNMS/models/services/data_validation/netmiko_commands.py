@@ -61,7 +61,11 @@ class NetmikoValidationService(ConnectionService):
                 device,
                 logger="security",
             )
+#BEGIN iEN-AP deviation: change the result format
+            commands = commands.splitlines()
+            prepend_command = not run.results_as_list and len(commands) > 1
             result = [
+                (("\nCOMMAND: " + command + '\n') if prepend_command else "") +
                 netmiko_connection.send_command(
                     command,
                     use_textfsm=run.use_textfsm,
@@ -72,22 +76,25 @@ class NetmikoValidationService(ConnectionService):
                     strip_prompt=run.strip_prompt,
                     strip_command=run.strip_command,
                 )
-                for command in commands.splitlines()
+                for command in commands
             ]
-            if len(result) == 1:
-                (result,) = result
-            elif not run.results_as_list:
+            if not run.results_as_list:
                 result = "\n".join(map(str, result))
+# END iEN-AP deviation: change the result format
             run.exit_remote_device(netmiko_connection, prompt, device)
         except Exception:
             result = netmiko_connection.session_log.getvalue().decode().lstrip("\u0000")
             return {
-                "commands": log_command,
+# BEGIN iEN-AP deviation: use the command list as the value
+                "commands": commands,
+# END iEN-AP deviation: use the command list as the value
                 "error": format_exc(),
                 "result": result,
                 "success": False,
             }
-        return {"commands": log_command, "result": result}
+# BEGIN iEN-AP deviation: use the command list as the value
+        return {"commands": commands, "result": result}
+# END iEN-AP deviation: use the command list as the value
 
 
 class NetmikoValidationForm(NetmikoForm):

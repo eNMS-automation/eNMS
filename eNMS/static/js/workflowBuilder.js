@@ -774,5 +774,6 @@ configureNamespace("workflowBuilder", [
   filterDevice,
   getWorkflowState,
   restartWorkflow,
+  stopWorkflow,
   switchToWorkflow,
 ]);

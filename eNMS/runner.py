@@ -1041,14 +1041,14 @@ class Runner:
         if connection:
             self.log("info", f"Using cached {connection_name}", device)
             return self.update_netmiko_connection(connection)
+        driver = device.netmiko_driver if self.driver == "device" else self.driver
         self.log(
             "info",
-            f"OPENING {connection_name}",
+            f"OPENING {connection_name} (driver: {driver})",
             device,
             change_log=False,
             logger="security",
         )
-        driver = device.netmiko_driver if self.driver == "device" else self.driver
         sock = None
         if device.gateways:
             gateways = sorted(device.gateways, key=attrgetter("priority"), reverse=True)

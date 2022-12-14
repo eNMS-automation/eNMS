@@ -41,4 +41,13 @@ def migrate_from_4_2_to_4_3():
         yaml.dump(services, migration_file)
 
 
+def migrate_from_4_3_to_4_4():
+    with open(PATH / FILENAME / "service.yaml", "r") as service_file:
+        services = yaml.load(service_file)
+    for service in services:
+        service["notification_header"] = service["report"]
+    with open(PATH / FILENAME / "service.yaml", "w") as service_file:
+        yaml.dump(services, service_file)
+
+
 migrate_from_4_2_to_4_3()

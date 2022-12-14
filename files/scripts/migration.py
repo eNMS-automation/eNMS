@@ -56,4 +56,4 @@ def migrate_from_4_3_to_4_4():
         yaml.dump(credentials, credential_file)
 
 
-migrate_from_4_2_to_4_3()
+migrate_from_4_3_to_4_4()

@@ -520,6 +520,12 @@ function displayResultsTree(service, runtime) {
                 <button type="button"
                   class="btn btn-xs btn-primary"
                   onclick='eNMS.automation.showRuntimePanel(
+                    "report", ${data}, "${runtime}"
+                  )'><span class="glyphicon glyphicon-modal-window"></span>
+                </button>
+                <button type="button"
+                  class="btn btn-xs btn-primary"
+                  onclick='eNMS.automation.showRuntimePanel(
                     "results", ${data}, "${runtime}", "result"
                   )'>
                   <span class="glyphicon glyphicon-list-alt"></span>

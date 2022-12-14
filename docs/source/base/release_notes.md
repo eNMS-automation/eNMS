@@ -93,25 +93,13 @@ Migration:
 - "get_all" and "get_properties" controller functions have been removed. Check that they
   are not used anywhere in custom code (plugin, custom.py, etc)
 
-Test:
+Test (besides what is in release notes):
 - the notification mechanism hasn't been impacted (in particular notification header
   option + devices results)
 - Jump on connect mechanism
 - RBAC
   - new mechanism
   - Freeze Edit / Run mechanism (refactored)
-- New Bulk Edit option for appending / removing to a multiple instance list
-- last_modified and last_modified_by properties (for workflows, tests that they
-  are updated in all cases mentioned above)
-- Task form validation (#267)
-- URL encoding for links to workflow builder with runtime (#278)
-- Regex filtering in table (refactored)
-- "creator" property in all object panels: must be properly set and not modified when
-  the object is edited.
-- Clickable buttons in file table path
-- Link to a workflow in service table after creating new or duplicating existing workflow.ù
-- "Expect String" property field enabled / disabled based on service configuration.
-- Calling "/rest/run_service" should not require edit access to service.
 
 Version 4.3.0
 -------------

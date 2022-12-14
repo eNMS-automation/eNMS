@@ -108,6 +108,10 @@ Test:
 - Regex filtering in table (refactored)
 - "creator" property in all object panels: must be properly set and not modified when
   the object is edited.
+- Clickable buttons in file table path
+- Link to a workflow in service table after creating new or duplicating existing workflow.ù
+- "Expect String" property field enabled / disabled based on service configuration.
+- Calling "/rest/run_service" should not require edit access to service.
 
 Version 4.3.0
 -------------

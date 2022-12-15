@@ -714,7 +714,7 @@ class Runner:
             result = env.send_email(
                 f"{status}: {self.service.name}",
                 vs.dict_to_string(notification),
-                recipients=self.get("mail_recipient"),
+                recipients=self.sub(self.get("mail_recipient"), locals()),
                 reply_to=self.reply_to,
                 filename=f"results-{filename}.txt",
                 file_content=vs.dict_to_string(file_content),

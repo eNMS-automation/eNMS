@@ -671,7 +671,7 @@ class ServiceForm(BaseForm):
     include_device_results = BooleanField("Include Device Results")
     include_link_in_summary = BooleanField("Include Result Link in Summary")
     display_only_failed_nodes = BooleanField("Display only Failed Devices")
-    mail_recipient = StringField("Mail Recipients (separated by comma)")
+    mail_recipient = StringField("Mail Recipients (separated by comma)", substitution=True)
     reply_to = StringField("Reply-to Email Address")
     number_of_retries = IntegerField("Number of retries", default=0)
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)

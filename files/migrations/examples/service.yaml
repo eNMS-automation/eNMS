@@ -17750,7 +17750,7 @@
         \n* Reply to address set\r\n* Display only Display Failed Devices - washigton\
         \ pass so it is\r\nexcluded from the results. The others two are passing"
       positions: [410, 285]
-  last_modified: '2022-12-16 04:00:56.031636'
+  last_modified: '2022-12-16 04:07:51.142378'
   last_modified_by: admin
   log_level: 1
   mail_recipient: antoine.fourmy@gmail.com
@@ -17916,7 +17916,7 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
-  display_only_failed_nodes: true
+  display_only_failed_nodes: false
   display_report: false
   freeze: []
   impacting: false
@@ -17927,7 +17927,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2022-12-16 04:00:49.312159'
+  last_modified: '2022-12-16 04:07:51.142378'
   last_modified_by: admin
   log_level: 1
   mail_recipient: antoine.fourmy@gmail.com

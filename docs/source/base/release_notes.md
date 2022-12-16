@@ -88,7 +88,7 @@ Migration:
 - The credential file must be updated to use groups instead of pools
   ("user_pools" -> "groups"). The appropriate groups must be created first.
 - In migration files, check that the "settings" variable isn't used in
-  any workflow. If the server IP, name or URL is used, the "server variable
+  any workflow. If the server IP, name or URL is used, the "server" variable
   should be used instead.
 - In service.yaml file, "notification_header" must be renamed "report".
 - "get_all" and "get_properties" controller functions have been removed.

@@ -656,8 +656,8 @@ class Runner:
         }
         if "result" in results:
             notification["Results"] = results["result"]
-        if "report" in results:
-            notification["Report"] = results["report"]
+        if self.notification_header:
+            notification["Header"] = self.sub(self.notification_header, locals())
         if self.include_link_in_summary:
             run = f"{self.main_run.id}/{self.service.id}"
             notification["Link"] = f"{vs.server_url}/view_service_results/{run}"
@@ -681,7 +681,6 @@ class Runner:
             report = "\n".join(format_exc().splitlines())
             self.log("error", f"Failed to build report:\n{report}")
         if report:
-            results["report"] = report
             try:
                 db.factory(
                     "service_report",

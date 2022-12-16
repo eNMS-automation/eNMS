@@ -19,7 +19,7 @@ class Object(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     creator = db.Column(db.SmallString)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
-    last_modified_by = db.Column(db.SmallString)
+    last_modified_by = db.Column(db.SmallString, info={"log_change": False})
     subtype = db.Column(db.SmallString)
     description = db.Column(db.LargeString)
     model = db.Column(db.SmallString)
@@ -312,7 +312,7 @@ class Pool(AbstractBase):
     creator = db.Column(db.SmallString)
     admin_only = db.Column(Boolean, default=False)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
-    last_modified_by = db.Column(db.SmallString)
+    last_modified_by = db.Column(db.SmallString, info={"log_change": False})
     description = db.Column(db.LargeString)
     target_services = relationship(
         "Service", secondary=db.service_target_pool_table, back_populates="target_pools"

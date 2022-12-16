@@ -360,6 +360,7 @@ class ChangelogForm(BaseForm):
 
 class CredentialForm(BaseForm):
     action = "eNMS.base.processData"
+    template = "object"
     form_type = HiddenField(default="credential")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
@@ -668,6 +669,7 @@ class ServiceForm(BaseForm):
         "Notification Method",
         choices=(("mail", "Mail"), ("slack", "Slack"), ("mattermost", "Mattermost")),
     )
+    notification_header = StringField(widget=TextArea(), render_kw={"rows": 8}, substitution=True)
     include_device_results = BooleanField("Include Device Results")
     include_link_in_summary = BooleanField("Include Result Link in Summary")
     display_only_failed_nodes = BooleanField("Display only Failed Devices")
@@ -961,12 +963,12 @@ class ConnectionForm(ServiceForm):
         "Credentials",
         choices=(
             ("device", "Device Credentials"),
-            ("object", "Credential Object"),
+            ("object", "Named Credential"),
             ("user", "User Credentials"),
             ("custom", "Custom Credentials"),
         ),
     )
-    credential_object = InstanceField("Credential Object", model="credential")
+    named_credential = InstanceField("Named Credential", model="credential")
     custom_username = StringField("Custom Username", substitution=True)
     custom_password = PasswordField("Custom Password", substitution=True)
     start_new_connection = BooleanField("Start New Connection")
@@ -976,7 +978,7 @@ class ConnectionForm(ServiceForm):
         "Connection Parameters": {
             "commands": [
                 "credentials",
-                "credential_object",
+                "named_credential",
                 "custom_username",
                 "custom_password",
                 "start_new_connection",

@@ -769,7 +769,7 @@
             <a
               class="doc-link"
               style="position: absolute; top: 10px; right: 10px;"
-              href="automation/services/#notifications"
+              href="automation/services/#report"
               target="_blank"
               ><i
                 class="glyphicon glyphicon-info-sign fa-2x"
@@ -784,7 +784,7 @@
               href="#collapse-step4-3-{{ panel_id }}"
             >
               <h4 class="panel-title" style="color: #000;">
-                Report and Notification
+                Report
               </h4>
             </a>
             <div
@@ -815,7 +815,7 @@
                     {{ form.report_jinja2_template.label() }}
                   </div>
                 </fieldset>
-                {{ form.report.label(help="common/report") }}
+                {{ form.report.label() }}
                 <div class="form-group">
                   {{ form.report(id=form_type + '-report', class="form-control add-id")
                   }}
@@ -832,6 +832,37 @@
                     {{ form.display_report.label() }}
                   </div>
                 </fieldset>
+              </div>
+            </div>
+          </div>
+          <div class="panel" style="border-color: #000; position: relative;">
+            <a
+              class="doc-link"
+              style="position: absolute; top: 10px; right: 10px;"
+              href="automation/services/#notifications"
+              target="_blank"
+              ><i
+                class="glyphicon glyphicon-info-sign fa-2x"
+                style="cursor: pointer;"
+              ></i
+            ></a>
+            <a
+              class="panel-heading collapsed"
+              role="tab"
+              id="heading-step4-4"
+              data-toggle="collapse"
+              href="#collapse-step4-4-{{ panel_id }}"
+            >
+              <h4 class="panel-title" style="color: #000;">
+                Notification
+              </h4>
+            </a>
+            <div
+              id="collapse-step4-4-{{ panel_id }}"
+              class="panel-collapse collapse in"
+              role="tabpanel"
+            >
+              <div class="panel-body" style="background-color: #fafafa;">
                 <fieldset>
                   <div class="item">
                     <input
@@ -848,6 +879,11 @@
                 <div class="form-group">
                   {{ form.send_notification_method(id=form_type +
                   '-send_notification_method', class="form-control add-id") }}
+                </div>
+                {{ form.notification_header.label(help="common/notification_header") }}
+                <div class="form-group">
+                  {{ form.notification_header(id=form_type + '-notification_header', class="form-control add-id")
+                  }}
                 </div>
                 <fieldset>
                   <div class="item">

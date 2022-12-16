@@ -41,4 +41,13 @@ def migrate_from_4_2_to_4_3():
         yaml.dump(services, migration_file)
 
 
-migrate_from_4_2_to_4_3()
+def migrate_from_4_3_to_4_4():
+    with open(PATH / FILENAME / "credential.yaml", "r") as credential_file:
+        credentials = yaml.load(credential_file)
+    for credential in credentials:
+        credential["groups"] = credential.pop("user_pools")
+    with open(PATH / FILENAME / "credential.yaml", "w") as credential_file:
+        yaml.dump(credentials, credential_file)
+
+
+migrate_from_4_3_to_4_4()

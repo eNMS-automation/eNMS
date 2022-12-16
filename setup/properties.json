@@ -524,13 +524,6 @@
         "search": "text"
       },
       {
-        "data": "last_modified",
-        "title": "Last modified",
-        "search": "text",
-        "width": "150px",
-        "visible": false
-      },
-      {
         "data": "creator",
         "title": "Creator",
         "search": "text",
@@ -598,12 +591,6 @@
         "title": "Name",
         "search": "text",
         "className": "dt-body-left"
-      },
-      {
-        "data": "last_modified",
-        "title": "Last Modified",
-        "search": "text",
-        "visible": false
       },
       {
         "data": "type",

@@ -123,6 +123,7 @@
       "id",
       "sources",
       "destinations",
+      "named_credential_id",
       "path",
       "status",
       "superworkflow_id",

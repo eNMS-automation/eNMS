@@ -1536,20 +1536,20 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2022-08-17 10:19:26.148219',
   source: '[(R) Function: get_connection] Use default connection', subtype: success,
   type: workflow_edge, workflow: '(R) Function: get_connection'}
-- {color: green, destination: '[(R) Credential Object Mechanism] REST Call', label: success,
+- {color: green, destination: '[(R) Named Credential Mechanism] REST Call', label: success,
   name: '2022-11-13 01:52:25.674925', source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: (R) Credential Object Mechanism}
-- {color: green, destination: '[(R) Credential Object Mechanism] Netmiko - show run
-    -', label: success, name: '2022-11-13 03:04:17.815788', source: '[(R) Credential
-    Object Mechanism] REST Call', subtype: success, type: workflow_edge, workflow: (R)
-    Credential Object Mechanism}
-- {color: green, destination: '[(R) Credential Object Mechanism] Napalm - get interfaces
-    -', label: success, name: '2022-11-13 03:04:18.779776', source: '[(R) Credential
-    Object Mechanism] Netmiko - show run -', subtype: success, type: workflow_edge,
-  workflow: (R) Credential Object Mechanism}
+  type: workflow_edge, workflow: (R) Named Credential Mechanism}
+- {color: green, destination: '[(R) Named Credential Mechanism] Netmiko - show run
+    -', label: success, name: '2022-11-13 03:04:17.815788', source: '[(R) Named Credential
+    Mechanism] REST Call', subtype: success, type: workflow_edge, workflow: (R) Named
+    Credential Mechanism}
+- {color: green, destination: '[(R) Named Credential Mechanism] Napalm - get interfaces
+    -', label: success, name: '2022-11-13 03:04:18.779776', source: '[(R) Named Credential
+    Mechanism] Netmiko - show run -', subtype: success, type: workflow_edge, workflow: (R)
+    Named Credential Mechanism}
 - {color: green, destination: '[Shared] End', label: success, name: '2022-11-13 03:04:19.871633',
-  source: '[(R) Credential Object Mechanism] Napalm - get interfaces -', subtype: success,
-  type: workflow_edge, workflow: (R) Credential Object Mechanism}
+  source: '[(R) Named Credential Mechanism] Napalm - get interfaces -', subtype: success,
+  type: workflow_edge, workflow: (R) Named Credential Mechanism}
 - {color: green, destination: '[Text Reports with Normal Templates] Service', label: success,
   name: '2022-11-14 07:01:50.870434', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: Text Reports with Normal Templates}

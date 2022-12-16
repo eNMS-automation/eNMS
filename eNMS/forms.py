@@ -360,6 +360,7 @@ class ChangelogForm(BaseForm):
 
 class CredentialForm(BaseForm):
     action = "eNMS.base.processData"
+    template = "object"
     form_type = HiddenField(default="credential")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])

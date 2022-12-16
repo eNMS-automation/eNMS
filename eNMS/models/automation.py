@@ -31,7 +31,7 @@ class Service(AbstractBase):
     shared = db.Column(Boolean, default=False)
     scoped_name = db.Column(db.SmallString, index=True)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
-    last_modified_by = db.Column(db.SmallString)
+    last_modified_by = db.Column(db.SmallString, info={"log_change": False})
     description = db.Column(db.LargeString)
     priority = db.Column(Integer, default=10)
     number_of_retries = db.Column(Integer, default=0)

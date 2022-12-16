@@ -189,7 +189,7 @@ class File(AbstractBase):
     description = db.Column(db.LargeString)
     filename = db.Column(db.SmallString, index=True)
     path = db.Column(db.SmallString, unique=True)
-    last_modified = db.Column(db.TinyString)
+    last_modified = db.Column(db.TinyString, info={"log_change": False})
     last_updated = db.Column(db.TinyString)
     status = db.Column(db.TinyString)
     folder_id = db.Column(Integer, ForeignKey("folder.id"))

@@ -35203,8 +35203,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  credential_object: REST API Credential
-  credential_object_id: 6
+  named_credential: REST API Credential
   credential_type: any
   credentials: object
   custom_password: ''
@@ -35303,8 +35302,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  credential_object: Router Credentials - SSH Key
-  credential_object_id: 2
+  named_credential: Router Credentials - SSH Key
   credential_type: any
   credentials: object
   custom_password: ''
@@ -35415,8 +35413,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  credential_object: Router Credentials - Password
-  credential_object_id: 1
+  named_credential: Router Credentials - Password
   credential_type: any
   credentials: object
   custom_password: ''

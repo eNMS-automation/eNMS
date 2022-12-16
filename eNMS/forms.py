@@ -967,7 +967,7 @@ class ConnectionForm(ServiceForm):
             ("custom", "Custom Credentials"),
         ),
     )
-    credential_object = InstanceField("Named Credential", model="credential")
+    named_credential = InstanceField("Named Credential", model="credential")
     custom_username = StringField("Custom Username", substitution=True)
     custom_password = PasswordField("Custom Password", substitution=True)
     start_new_connection = BooleanField("Start New Connection")
@@ -977,7 +977,7 @@ class ConnectionForm(ServiceForm):
         "Connection Parameters": {
             "commands": [
                 "credentials",
-                "credential_object",
+                "named_credential",
                 "custom_username",
                 "custom_password",
                 "start_new_connection",

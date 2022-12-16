@@ -67,6 +67,8 @@ class MetaForm(FormMeta):
                 form_kw["choices"] = values["choices"]
             if "render_kw" in values:
                 form_kw["render_kw"] = values["render_kw"]
+            if "exclude_from_duplication" in values:
+                form_kw["exclude_from_duplication"] = values["exclude_from_duplication"]
             if values.get("mandatory", False):
                 form_args.append([InputRequired()])
             field = field(values["pretty_name"], *form_args, **form_kw)
@@ -84,6 +86,7 @@ class MetaForm(FormMeta):
                 "type": field_type,
                 "model": field.kwargs.get("model", None),
                 "constraints": field.kwargs.get("constraints", {}),
+                "exclude_from_duplication": field.kwargs.get("exclude_from_duplication", False)
             }
             if field.args and isinstance(field.args[0], str):
                 vs.property_names[field_name] = field.args[0]

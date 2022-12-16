@@ -101,6 +101,7 @@
         "type": "str",
         "default": "",
         "default_function": "generate_uuid",
+        "exclude_from_duplication": true,
         "render_kw": { "readonly": true }
       },
       "mandatory_parameter": {

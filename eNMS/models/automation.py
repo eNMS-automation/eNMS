@@ -66,6 +66,7 @@ class Service(AbstractBase):
     display_report = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.TinyString, default="mail")
+    notification_header = db.Column(db.LargeString)
     display_only_failed_nodes = db.Column(Boolean, default=True)
     include_device_results = db.Column(Boolean, default=True)
     include_link_in_summary = db.Column(Boolean, default=True)

@@ -668,6 +668,7 @@ class ServiceForm(BaseForm):
         "Notification Method",
         choices=(("mail", "Mail"), ("slack", "Slack"), ("mattermost", "Mattermost")),
     )
+    notification_header = StringField(widget=TextArea(), render_kw={"rows": 8}, substitution=True)
     include_device_results = BooleanField("Include Device Results")
     include_link_in_summary = BooleanField("Include Result Link in Summary")
     display_only_failed_nodes = BooleanField("Display only Failed Devices")

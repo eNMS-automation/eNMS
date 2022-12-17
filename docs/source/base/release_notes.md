@@ -78,6 +78,7 @@ Version 4.4.0: RBAC and Credentials
   fails (e.g data too long db error because of payload data for the results)
 - Fix "List index out of range" bug in Jump on Connect mechanism
   Commit 457f46dd2c496757e924d922f3455626d35a3784
+- Add RBAC support to credentials
 
 RBAC Refactoring:
 - Service export: owners and RBAC read / edit / etc are exported in the service

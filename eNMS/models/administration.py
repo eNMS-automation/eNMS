@@ -156,6 +156,11 @@ class Credential(AbstractBase):
         back_populates="credentials",
     )
 
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        if not kwargs.get("migration_import"):
+            self.update_last_modified_properties()
+
 
 class Changelog(AbstractBase):
 

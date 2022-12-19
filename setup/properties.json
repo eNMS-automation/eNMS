@@ -1114,6 +1114,18 @@
         "visible": false
       },
       {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified_by",
+        "title": "Last Modified By",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "subtype",
         "title": "Type",
         "search": "text"

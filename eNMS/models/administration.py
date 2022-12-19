@@ -135,6 +135,8 @@ class Credential(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     creator = db.Column(db.SmallString)
+    last_modified = db.Column(db.TinyString, info={"log_change": False})
+    last_modified_by = db.Column(db.SmallString, info={"log_change": False})
     role = db.Column(db.SmallString, default="read-write")
     subtype = db.Column(db.SmallString, default="password")
     description = db.Column(db.LargeString)

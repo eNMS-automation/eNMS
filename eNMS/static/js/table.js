@@ -1077,7 +1077,7 @@ tables.run = class RunTable extends Table {
 
   buttons(row) {
     return [
-      `<ul class="pagination pagination-lg" style="margin: 0px; width: 120px">
+      `<ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.automation.showRuntimePanel('logs', ${row.service},
@@ -1086,8 +1086,14 @@ tables.run = class RunTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
+          onclick="eNMS.automation.showRuntimePanel('report', ${row.service},
+          '${row.runtime}')" data-tooltip="Report">
+          <span class="glyphicon glyphicon-modal-window"></span></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.automation.showRuntimePanel('results', ${row.service},
-          '${row.runtime}')" data-tooltip="Result Tree">
+          '${row.runtime}')" data-tooltip="Results">
           <span class="glyphicon glyphicon-list-alt"></span></button>
         </li>
         <li>

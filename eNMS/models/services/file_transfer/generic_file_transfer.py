@@ -3,6 +3,7 @@ from os.path import split
 from pathlib import Path
 from paramiko import SSHClient, AutoAddPolicy
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
+from sqlalchemy.orm import relationship
 from wtforms.validators import InputRequired
 
 from eNMS.database import db
@@ -11,6 +12,7 @@ from eNMS.fields import (
     BooleanField,
     FloatField,
     HiddenField,
+    InstanceField,
     IntegerField,
     PasswordField,
     SelectField,
@@ -35,6 +37,8 @@ class GenericFileTransferService(Service):
     window_size = db.Column(Integer, default=2**30)
     timeout = db.Column(Float, default=10.0)
     credentials = db.Column(db.SmallString, default="device")
+    named_credential_id = db.Column(Integer, ForeignKey("credential.id"))
+    named_credential = relationship("Credential")
     custom_username = db.Column(db.SmallString)
     custom_password = db.Column(db.SmallString)
 
@@ -92,10 +96,12 @@ class GenericFileTransferForm(ServiceForm):
         "Credentials",
         choices=(
             ("device", "Device Credentials"),
+            ("object", "Named Credential"),
             ("user", "User Credentials"),
             ("custom", "Custom Credentials"),
         ),
     )
+    named_credential = InstanceField("Named Credential", model="credential")
     custom_username = StringField("Custom Username", substitution=True)
     custom_password = PasswordField("Custom Password", substitution=True)
 

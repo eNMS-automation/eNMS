@@ -160,9 +160,12 @@ function copyClipboard(elementId, result) {
   target.click();
 }
 
-function downloadLogs(serviceId) {
-  const logs = $(`#service-logs-${serviceId}`).data("CodeMirrorInstance").getValue();
-  downloadFile(`logs-${serviceId}`, logs, "txt");
+function downloadRun(type, serviceId) {
+  const content =
+    type == "logs"
+      ? $(`#service-${type}-${serviceId}`).data("CodeMirrorInstance").getValue()
+      : $(`#service-${type}-${serviceId}`).text();
+  downloadFile(`${type}-${serviceId}`, content, "txt");
 }
 
 function stopRun(runtime) {
@@ -270,11 +273,19 @@ export const showRuntimePanel = function (
   const displayFunction =
     type == "logs"
       ? displayLogs
+      : type == "report"
+      ? displayReport
       : service.type == "workflow" && !table
       ? displayResultsTree
       : displayResultsTable;
   const panelType =
-    type == "logs" ? "logs" : service.type == "workflow" && !table ? "tree" : "table";
+    type == "logs"
+      ? "logs"
+      : type == "report"
+      ? `report-${service.report_format}`
+      : service.type == "workflow" && !table
+      ? "tree"
+      : "table";
   const panelId = `${panelType}-${service.id}`;
   call({
     url: `/get_runtimes/${service.id}`,
@@ -282,7 +293,7 @@ export const showRuntimePanel = function (
       if (newRuntime) runtimes.push([runtime, runtime]);
       if (!runtimes.length) return notify(`No ${type} yet.`, "error", 5);
       let content;
-      if (panelType == "logs") {
+      if (panelType == "logs" || panelType.startsWith("report")) {
         content = `
         <div class="modal-body">
           <nav
@@ -300,8 +311,8 @@ export const showRuntimePanel = function (
             <div style="width: 30px; float: left; margin-left: 15px;">
               <button
                 class="btn btn-default pull-right"
-                onclick="eNMS.automation.downloadLogs(${service.id})"
-                data-tooltip="Download Logs"
+                onclick="eNMS.automation.downloadRun('${panelType}', ${service.id})"
+                data-tooltip="Download"
                 type="button"
               >
                 <span
@@ -387,6 +398,7 @@ export const showRuntimePanel = function (
         type: "result",
         title: `${type} - ${service.name}`,
         id: service.id,
+        tableId: panelType == "table" ? `result-${service.id}` : null,
         callback: function () {
           $(`#runtimes-${panelId}`).empty();
           runtimes.forEach((runtime) => {
@@ -407,6 +419,30 @@ export const showRuntimePanel = function (
     },
   });
 };
+
+function displayReport(service, runtime, change) {
+  let editor;
+  const id = `service-report-${service.report_format}-${service.id}`;
+  if (service.report_format == "text") {
+    if (change) {
+      editor = $(`#${id}`).data("CodeMirrorInstance");
+      editor.setValue("");
+    } else {
+      editor = initCodeMirror(id, "logs");
+    }
+  }
+  call({
+    url: `/get_report/${service.id}/${runtime}`,
+    callback: function (report) {
+      if (service.report_format == "text") {
+        editor.setValue(report);
+        editor.refresh();
+      } else {
+        $(`#${id}`).html(report);
+      }
+    },
+  });
+}
 
 function displayLogs(service, runtime, change) {
   let editor;
@@ -484,6 +520,12 @@ function displayResultsTree(service, runtime) {
                 <button type="button"
                   class="btn btn-xs btn-primary"
                   onclick='eNMS.automation.showRuntimePanel(
+                    "report", ${data}, "${runtime}"
+                  )'><span class="glyphicon glyphicon-modal-window"></span>
+                </button>
+                <button type="button"
+                  class="btn btn-xs btn-primary"
+                  onclick='eNMS.automation.showRuntimePanel(
                     "results", ${data}, "${runtime}", "result"
                   )'>
                   <span class="glyphicon glyphicon-list-alt"></span>
@@ -547,7 +589,8 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
         setTimeout(() => {
           $(`#logs-${service.id}`).remove();
           const table = service.type == "workflow" ? null : "result";
-          showRuntimePanel("results", service, runtime, table);
+          const panel = service.display_report ? "report" : "results";
+          showRuntimePanel(panel, service, runtime, table);
         }, 1000);
       }
     },
@@ -657,7 +700,7 @@ function resumeTask(id) {
   });
 }
 
-function field(name, type, id) {
+export function field(name, type, id) {
   const fieldId = id ? `${type}-${name}-${id}` : `${type}-${name}`;
   return $(`#${fieldId}`);
 }
@@ -729,6 +772,7 @@ Object.assign(action, {
   "Parameterized Run": (service) =>
     runService({ id: service.id, parametrization: true }),
   Logs: (service) => showRuntimePanel("logs", service, currentRuntime),
+  Reports: (service) => showRuntimePanel("report", service, currentRuntime),
   Results: (service) => showRuntimePanel("results", service, currentRuntime, "result"),
 });
 
@@ -826,7 +870,7 @@ configureNamespace("automation", [
   displayDiff,
   copyClipboard,
   displayCalendar,
-  downloadLogs,
+  downloadRun,
   field,
   openServicePanel,
   pauseTask,

@@ -1,5 +1,6 @@
 from requests.auth import HTTPBasicAuth
 from sqlalchemy import Boolean, ForeignKey, Integer
+from sqlalchemy.orm import relationship
 from sqlalchemy.types import JSON
 
 from eNMS.database import db
@@ -8,6 +9,7 @@ from eNMS.fields import (
     BooleanField,
     DictField,
     HiddenField,
+    InstanceField,
     IntegerField,
     PasswordField,
     SelectField,
@@ -30,6 +32,8 @@ class RestCallService(Service):
     verify_ssl_certificate = db.Column(Boolean, default=True)
     timeout = db.Column(Integer, default=15)
     credentials = db.Column(db.SmallString, default="custom")
+    named_credential_id = db.Column(Integer, ForeignKey("credential.id"))
+    named_credential = relationship("Credential")
     custom_username = db.Column(db.SmallString)
     custom_password = db.Column(db.SmallString)
 
@@ -86,10 +90,12 @@ class RestCallForm(ServiceForm):
         "Credentials",
         choices=(
             ("device", "Device Credentials"),
+            ("object", "Named Credential"),
             ("user", "User Credentials"),
             ("custom", "Custom Credentials"),
         ),
     )
+    named_credential = InstanceField("Named Credential", model="credential")
     custom_username = StringField("Custom Username", substitution=True)
     custom_password = PasswordField("Custom Password", substitution=True)
 

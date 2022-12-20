@@ -14,17 +14,17 @@ from operator import attrgetter, itemgetter
 from os import getenv, listdir, makedirs, scandir
 from os.path import exists
 from pathlib import Path
-from re import compile, error as regex_error, search, sub
+from re import search, sub
 from requests import get as http_get
 from ruamel import yaml
 from shutil import rmtree
-from sqlalchemy import and_, or_
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy import and_, cast, or_, String
+from sqlalchemy.exc import IntegrityError, OperationalError
 from sqlalchemy.orm import aliased
 from sqlalchemy.sql.expression import true
 from subprocess import Popen
 from tarfile import open as open_tar
-from threading import Thread
+from threading import current_thread, Thread
 from traceback import format_exc
 from uuid import uuid4
 from xlrd import open_workbook
@@ -58,22 +58,21 @@ class Controller:
         return wrapper
 
     def add_edge(self, workflow_id, subtype, source, destination):
-        now = vs.get_time()
         workflow = db.fetch("workflow", id=workflow_id, rbac="edit")
         workflow_edge = self.update(
             "workflow_edge",
             rbac=None,
             **{
-                "name": now,
+                "name": vs.get_time(),
                 "workflow": workflow_id,
                 "subtype": subtype,
                 "source": source,
                 "destination": destination,
             },
         )
+        workflow.update_last_modified_properties()
         db.session.commit()
-        workflow.last_modified = now
-        return {"update_time": now, **workflow_edge}
+        return {"update_time": workflow.last_modified, **workflow_edge}
 
     def add_instances_in_bulk(self, **kwargs):
         target = db.fetch(kwargs["relation_type"], id=kwargs["relation_id"])
@@ -91,7 +90,7 @@ class Controller:
         for instance in instances:
             getattr(target, property).append(instance)
         target.last_modified = vs.get_time()
-        self.update_rbac(*instances)
+        target.last_modified_by = current_user.name
         return {"number": len(instances), "target": target.base_properties}
 
     def add_objects_to_network(self, network_id, **kwargs):
@@ -133,13 +132,26 @@ class Controller:
 
     def bulk_edit(self, table, **kwargs):
         instances = kwargs.pop("id").split("-")
-        kwargs = {
-            property: value
-            for property, value in kwargs.items()
-            if kwargs.get(f"bulk-edit-{property}")
-        }
         for instance_id in instances:
-            db.factory(table, id=instance_id, **kwargs)
+            instance = db.factory(table, id=instance_id)
+            for property, value in kwargs.items():
+                if not kwargs.get(f"bulk-edit-{property}"):
+                    continue
+                edit_mode = kwargs.get(f"{property}-edit-mode")
+                if not edit_mode:
+                    setattr(instance, property, value)
+                else:
+                    current_value = getattr(instance, property)
+                    related_model = vs.relationships[table][property]["model"]
+                    objects = db.objectify(related_model, value)
+                    if edit_mode == "set":
+                        setattr(instance, property, objects)
+                    else:
+                        for obj in objects:
+                            if edit_mode == "append" and obj not in current_value:
+                                current_value.append(obj)
+                            elif edit_mode == "remove" and obj in current_value:
+                                current_value.remove(obj)
         return len(instances)
 
     def bulk_removal(
@@ -156,7 +168,6 @@ class Controller:
         instances = self.filtering(table, bulk="object", **kwargs)
         for instance in instances:
             getattr(target, target_property).remove(instance)
-        self.update_rbac(*instances)
         return len(instances)
 
     def calendar_init(self, type):
@@ -228,8 +239,7 @@ class Controller:
             else:
                 workflow.services.append(service)
             services.append(service)
-            service.update_originals()
-        workflow.last_modified = vs.get_time()
+        workflow.update_last_modified_properties()
         db.session.commit()
         return {
             "services": [service.serialized for service in services],
@@ -278,11 +288,15 @@ class Controller:
         db.delete_all(*kwargs["deletion_types"])
 
     def delete_instance(self, model, instance_id):
-        return db.delete(model, id=instance_id)
+        try:
+            db.delete(model, id=instance_id)
+        except Exception as exc:
+            return {"alert": f"Unable to delete {model} ({exc})"}
 
     def delete_builder_selection(self, type, id, **selection):
         instance = db.fetch(type, id=id)
-        instance.last_modified = vs.get_time()
+        instance.update_last_modified_properties()
+        instance.check_freeze("edit")
         for edge_id in selection["edges"]:
             if type == "workflow":
                 db.delete("workflow_edge", id=edge_id)
@@ -295,11 +309,10 @@ class Controller:
                 instance.nodes.remove(db.fetch("node", id=node_id))
             else:
                 service = db.fetch("service", id=node_id)
-                instance.services.remove(service)
                 if not service.shared:
-                    db.delete("service", id=service.id)
+                    db.delete_instance(service)
                 else:
-                    service.update_originals()
+                    instance.services.remove(service)
         return instance.last_modified
 
     def edit_file(self, filepath):
@@ -360,9 +373,7 @@ class Controller:
             elif not filter_value or filter_value == "inclusion":
                 constraint = row.contains(value, autoescape=isinstance(value, str))
             else:
-                compile(value)
-                regex_operator = "~" if db.dialect == "postgresql" else "regexp"
-                constraint = row.op(regex_operator)(value)
+                constraint = cast(row, String()).regexp_match(value)
             if constraint_dict.get(f"{property}_invert"):
                 constraint = ~constraint
             constraints.append(constraint)
@@ -403,20 +414,12 @@ class Controller:
     def filtering(
         self, model, bulk=False, rbac="read", username=None, properties=None, **kwargs
     ):
-        table = vs.models[model]
-        if (
-            rbac == "read"
-            and kwargs.get("type") == "configuration"
-            and set(kwargs.get("form", {})) & set(vs.configuration_properties)
-        ):
-            rbac = "configuration"
+        table, pagination = vs.models[model], kwargs.get("pagination")
         query = db.query(model, rbac, username, properties=properties)
-        if not bulk and not properties:
+        total_records, filtered_records = (10**6,) * 2
+        if pagination and not bulk and not properties:
             total_records = query.with_entities(table.id).count()
-        try:
-            constraints = self.filtering_base_constraints(model, **kwargs)
-        except regex_error:
-            return {"error": "Invalid regular expression as search parameter."}
+        constraints = self.filtering_base_constraints(model, **kwargs)
         constraints.extend(table.filtering_constraints(**kwargs))
         query = self.filtering_relationship_constraints(query, model, **kwargs)
         query = query.filter(and_(*constraints))
@@ -426,21 +429,23 @@ class Controller:
                 return instances
             else:
                 return [getattr(instance, bulk) for instance in instances]
-        filtered_records = query.with_entities(table.id).count()
+        if pagination:
+            filtered_records = query.with_entities(table.id).count()
         data = kwargs["columns"][int(kwargs["order"][0]["column"])]["data"]
         ordering = getattr(getattr(table, data, None), kwargs["order"][0]["dir"], None)
         if ordering:
             query = query.order_by(ordering())
+        try:
+            query_data = (
+                query.limit(int(kwargs["length"])).offset(int(kwargs["start"])).all()
+            )
+        except OperationalError:
+            return {"error": "Invalid regular expression as search parameter."}
         table_result = {
             "draw": int(kwargs["draw"]),
             "recordsTotal": total_records,
             "recordsFiltered": filtered_records,
-            "data": [
-                obj.table_properties(**kwargs)
-                for obj in query.limit(int(kwargs["length"]))
-                .offset(int(kwargs["start"]))
-                .all()
-            ],
+            "data": [obj.table_properties(**kwargs) for obj in query_data],
         }
         if kwargs.get("export"):
             table_result["full_result"] = [
@@ -450,11 +455,11 @@ class Controller:
             table_result["full_result"] = ",".join(obj.name for obj in query.all())
         return table_result
 
-    def get(self, model, id):
-        return db.fetch(model, id=id).serialized
-
-    def get_all(self, model):
-        return [instance.get_properties() for instance in db.fetch_all(model)]
+    def get(self, model, id, **kwargs):
+        if not kwargs:
+            kwargs = vs.properties["serialized"]["get"].get(model, {})
+        func = "get_properties" if kwargs.pop("properties_only", None) else "to_dict"
+        return getattr(db.fetch(model, id=id), func)(**kwargs)
 
     def get_cluster_status(self):
         return [server.status for server in db.fetch_all("server")]
@@ -543,6 +548,21 @@ class Controller:
 
     def get_properties(self, model, id):
         return db.fetch(model, id=id).get_properties()
+
+    def get_report(self, service_id, runtime):
+        return getattr(
+            db.fetch(
+                "service_report",
+                allow_none=True,
+                runtime=runtime,
+                service_id=service_id,
+            ),
+            "content",
+            "",
+        )
+
+    def get_report_template(self, template):
+        return vs.reports[template]
 
     def get_result(self, id):
         return db.fetch("result", id=id).result
@@ -720,7 +740,7 @@ class Controller:
         return rec(service, path)
 
     def get_workflow_services(self, id, node):
-        parents = db.fetch("workflow", id=id).originals
+        parents = db.fetch("workflow", id=id).get_ancestors()
         if node == "all":
             workflows = self.filtering(
                 "workflow", bulk="object", constraints={"workflows_filter": "empty"}
@@ -954,9 +974,9 @@ class Controller:
                         status = "Partial import (see logs)."
         db.session.commit()
         if not kwargs.get("skip_model_update"):
-            for model in ("access", "service", "network"):
+            for model in ("user", "service", "network"):
                 for instance in db.fetch_all(model):
-                    instance.update()
+                    instance.post_update()
         if not kwargs.get("skip_pool_update"):
             for pool in db.fetch_all("pool"):
                 pool.compute_pool()
@@ -1038,7 +1058,6 @@ class Controller:
             relationship_property.remove(instance)
         else:
             return {"alert": f"{instance.name} is not associated with {target.name}."}
-        self.update_rbac(instance)
 
     def result_log_deletion(self, **kwargs):
         date_time_object = datetime.strptime(kwargs["date_time"], "%d/%m/%Y %H:%M:%S")
@@ -1057,6 +1076,7 @@ class Controller:
     @staticmethod
     @actor
     def run(service, **kwargs):
+        current_thread().name = kwargs["runtime"]
         if "path" not in kwargs:
             kwargs["path"] = str(service)
         keys = list(vs.model_properties["run"]) + list(vs.relationships["run"])
@@ -1115,6 +1135,7 @@ class Controller:
             kwargs = {"form": kwargs, "parameterized_run": True}
         kwargs.update({"creator": getattr(current_user, "name", ""), "path": path})
         service = db.fetch("service", id=service_id, rbac="run")
+        service.check_freeze("run")
         kwargs["runtime"] = runtime = vs.get_time()
         run_name = kwargs.get("form", {}).get("name")
         if run_name and db.fetch("run", name=run_name, allow_none=True):
@@ -1229,7 +1250,7 @@ class Controller:
         skip = not all(service.skip.get(workflow.name) for service in services)
         for service in services:
             service.skip[workflow.name] = skip
-        workflow.last_modified = vs.get_time()
+        workflow.update_last_modified_properties()
         return {
             "skip": "skip" if skip else "unskip",
             "update_time": workflow.last_modified,
@@ -1252,7 +1273,7 @@ class Controller:
         db.fetch("user", rbac=None, id=user_id).theme = theme
 
     def task_action(self, mode, task_id):
-        return db.fetch("task", id=task_id, rbac="schedule").schedule(mode)
+        return db.fetch("task", id=task_id, rbac="edit").schedule(mode)
 
     def topology_export(self, **kwargs):
         workbook = Workbook()
@@ -1302,10 +1323,8 @@ class Controller:
 
     def update(self, type, **kwargs):
         try:
-            current_time = vs.get_time()
             kwargs.update(
                 {
-                    "last_modified": current_time,
                     "update_pools": True,
                     "must_be_new": kwargs.get("id") == "",
                 }
@@ -1319,13 +1338,12 @@ class Controller:
                     if not kwargs.get(f"{builder_type}s"):
                         continue
                     builder_id = kwargs[f"{builder_type}s"][0]
-                    builder = db.fetch(builder_type, id=builder_id, rbac="edit")
-                    builder.last_modified = current_time
+                    db.fetch(builder_type, id=builder_id, rbac="edit")
             instance = db.factory(type, **kwargs)
             if kwargs.get("copy"):
                 db.fetch(type, id=kwargs["copy"]).duplicate(clone=instance)
             db.session.flush()
-            return {**instance.serialized, "last_modified": current_time}
+            return instance.post_update()
         except db.rbac_error:
             return {"alert": "Error 403 - Operation not allowed."}
         except Exception as exc:
@@ -1373,17 +1391,24 @@ class Controller:
                 pool.compute_pool()
         db.session.commit()
 
+    def update_device_rbac(self):
+        for group in db.fetch_all("group"):
+            for property in vs.rbac["rbac_models"]["device"]:
+                pool_property = getattr(vs.models["pool"], f"rbac_group_{property}")
+                devices = (
+                    db.query("device")
+                    .join(vs.models["device"].pools)
+                    .join(vs.models["group"], pool_property)
+                    .filter(vs.models["group"].id == group.id)
+                    .all()
+                )
+                setattr(group, f"{property}_devices", devices)
+
     def upload_files(self, **kwargs):
         kwargs["file"].save(f"{kwargs['folder']}/{kwargs['file'].filename}")
 
     def update_pool(self, pool_id):
         db.fetch("pool", id=int(pool_id), rbac="edit").compute_pool()
-
-    def update_rbac(self, *instances):
-        for instance in instances:
-            if instance.type != "user":
-                continue
-            instance.update_rbac()
 
     def view_filtering(self, **kwargs):
         return {

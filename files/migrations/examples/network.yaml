@@ -1,5 +1,4 @@
-- access_groups: ''
-  category: Display
+- category: Display
   creator: admin
   description: ''
   icon: network
@@ -12,6 +11,7 @@
         \ as an optical switch.\r\nThe icon of a device is decoupled from its type."
       positions: [19, -70]
   last_modified: '2022-01-13 14:58:18.207435'
+  last_modified_by: ''
   latitude: '0.0'
   links: [R1 - R2, R2 - R3, R1 - R3]
   location: ''
@@ -20,13 +20,14 @@
   name: Top-level Devices and Links
   networks: []
   nodes: [Router 1, Router 2, Router 3]
-  pools: [Everything, All Networks]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: Subnetwork
+- category: Subnetwork
   creator: admin
   description: ''
   icon: network
@@ -42,6 +43,7 @@
         \ to the other and back."
       positions: [-310, -212]
   last_modified: '2022-01-13 14:59:24.690428'
+  last_modified_by: ''
   latitude: '0.0'
   links: []
   location: ''
@@ -50,13 +52,14 @@
   name: Subnetwork and Teleport Mechanism
   networks: []
   nodes: [Subnetwork 2, Subnetwork 1]
-  pools: [Everything, All Networks]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: ''
+- category: ''
   creator: admin
   description: ''
   icon: network
@@ -68,6 +71,7 @@
         \ L1-3\""
       positions: [51, -231]
   last_modified: '2022-01-03 12:55:19.074280'
+  last_modified_by: ''
   latitude: '0.0'
   links: [Subnetwork 1 - L1, Subnetwork 1 - L2, Subnetwork 1 - L3]
   location: ''
@@ -76,17 +80,18 @@
   name: Subnetwork 1
   networks: [Subnetwork and Teleport Mechanism, Subnetwork 2]
   nodes: [Subnetwork 2, Subnetwork 1 - R1, Subnetwork 1 - R2, Subnetwork 1 - R3]
-  pools: [Everything, All Networks]
+  owners: []
   positions:
     'Network 2: Subnetwork': &id001 [-558, -27]
     'Network 2: Subnetwork and Teleport Mechanism': *id001
     Subnetwork 2: [-15, 43]
     Subnetwork and Teleport Mechanism: *id001
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: Editing
+- category: Editing
   creator: admin
   description: ''
   icon: network
@@ -108,6 +113,7 @@
         \ the network itself from the Network table."
       positions: [227, -507]
   last_modified: '2022-01-13 14:59:33.685691'
+  last_modified_by: ''
   latitude: '0.0'
   links: []
   location: ''
@@ -116,13 +122,14 @@
   name: Creation, Edit and Deletion
   networks: []
   nodes: []
-  pools: [All Networks, Everything]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: ''
+- category: ''
   creator: admin
   description: ''
   icon: network
@@ -133,6 +140,7 @@
         \ G1-2\"\r\n- one link between them, \"Subnetwork 2 - L1\""
       positions: [4, -181]
   last_modified: '2022-01-03 12:55:37.570662'
+  last_modified_by: ''
   latitude: '0.0'
   links: [Subnetwork 2 - L1]
   location: ''
@@ -141,17 +149,18 @@
   name: Subnetwork 2
   networks: [Subnetwork and Teleport Mechanism, Subnetwork 1]
   nodes: [Subnetwork 1, Subnetwork 2 - G1, Subnetwork 2 - G2]
-  pools: [Everything, All Networks]
+  owners: []
   positions:
     'Network 2: Subnetwork': &id002 [-144, -36]
     'Network 2: Subnetwork and Teleport Mechanism': *id002
     Subnetwork 1: [-2, -48]
     Subnetwork and Teleport Mechanism: *id002
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: Editing
+- category: Editing
   creator: admin
   description: ''
   icon: network
@@ -170,6 +179,7 @@
         \ top-level network."
       positions: [-47, -187]
   last_modified: '2022-01-13 14:59:46.234188'
+  last_modified_by: ''
   latitude: '0.0'
   links: [Duplicate 1 - 2]
   location: ''
@@ -178,18 +188,20 @@
   name: Duplication of Devices, Subnetworks and Top-level Networks
   networks: []
   nodes: [Duplicate me 2, Duplicate me 1]
-  pools: [All Networks, Everything]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: ''
+- category: ''
   creator: admin
   description: ''
   icon: network
   labels: {}
   last_modified: '2022-01-01 11:55:14.172281'
+  last_modified_by: ''
   latitude: '0.0'
   links: [G1 - R1]
   location: ''
@@ -198,15 +210,16 @@
   name: Duplicate me 2
   networks: ['Duplication of Devices, Subnetworks and Top-level Networks']
   nodes: [Duplication - G1, Duplication - R1]
-  pools: [All Networks, Everything]
+  owners: []
   positions:
     Duplication of Devices, Subnetworks and Top-level Networks: &id003 [135, 6]
     'Network 4: Duplication of Devices, Subnetworks and Top-level Networks': *id003
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: Display
+- category: Display
   creator: admin
   description: ''
   icon: network
@@ -221,6 +234,7 @@
         \ R3 and R4\r\n- One link between R1 and R4"
       positions: [-499, 98]
   last_modified: '2022-01-13 14:59:54.526299'
+  last_modified_by: ''
   latitude: '0.0'
   links: [R3 -> R2 L1, R3 -> R2 L2, R3 -> R2 L3, R3 -> R2 L4, R3 Loopback 1, R1 Loopback
       1, R1 -> R2 L1, R1 -> R2 L2, R1 -> R2 L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1
@@ -233,13 +247,14 @@
   name: Loopback and Parallel Links
   networks: []
   nodes: [S5 R1, S5 R2, S5 R3, S5 R4]
-  pools: [Everything, All Networks]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: Subnetwork
+- category: Subnetwork
   creator: admin
   description: ''
   icon: network
@@ -251,6 +266,7 @@
         - The Duplication: all subnetworks down to the last should be duplicated."
       positions: [40, -173]
   last_modified: '2022-01-13 15:00:11.686882'
+  last_modified_by: ''
   latitude: '0.0'
   links: []
   location: ''
@@ -259,18 +275,20 @@
   name: Subsubnetwork and Subsubsubnetwork
   networks: []
   nodes: [L1 Network]
-  pools: [Everything, All Networks]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: ''
+- category: ''
   creator: admin
   description: ''
   icon: network
   labels: {}
   last_modified: '2022-01-02 12:46:03.753457'
+  last_modified_by: ''
   latitude: '0.0'
   links: []
   location: ''
@@ -279,20 +297,22 @@
   name: L1 Network
   networks: [Subsubnetwork and Subsubsubnetwork]
   nodes: [L2 Network]
-  pools: [Everything, All Networks]
+  owners: []
   positions:
     'Network 6: Subsubnetwork and Subsubsubnetwork': &id004 [-27, -55]
     Subsubnetwork and Subsubsubnetwork: *id004
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: ''
+- category: ''
   creator: admin
   description: ''
   icon: network
   labels: {}
   last_modified: '2022-01-02 12:46:14.439473'
+  last_modified_by: ''
   latitude: '0.0'
   links: []
   location: ''
@@ -301,18 +321,20 @@
   name: L2 Network
   networks: [L1 Network]
   nodes: [L3 Network]
-  pools: [Everything, All Networks]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: ''
+- category: ''
   creator: admin
   description: ''
   icon: network
   labels: {}
   last_modified: '2022-01-02 12:47:02.746851'
+  last_modified_by: ''
   latitude: '0.0'
   links: [S6 L1]
   location: ''
@@ -321,13 +343,14 @@
   name: L3 Network
   networks: [L2 Network]
   nodes: [S6 L3 R1, S6 L3 R2]
-  pools: [Everything, All Networks]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: Display
+- category: Display
   creator: admin
   description: ''
   icon: network
@@ -340,6 +363,7 @@
         \ everything and delete it."
       positions: [63, -168]
   last_modified: '2022-01-13 15:01:16.843061'
+  last_modified_by: ''
   latitude: '0.0'
   links: []
   location: ''
@@ -348,13 +372,14 @@
   name: Layout of Large Graph
   networks: []
   nodes: []
-  pools: [Everything, All Networks]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: Editing
+- category: Editing
   creator: admin
   description: ''
   icon: network
@@ -378,6 +403,7 @@
         \ option: the link should be added between \"Dallas\" and \"Atlanta\"."
       positions: [110, -18]
   last_modified: '2022-01-13 15:00:20.775721'
+  last_modified_by: ''
   latitude: '0.0'
   links: []
   location: ''
@@ -386,18 +412,20 @@
   name: Import with Add Connected Nodes and Links
   networks: []
   nodes: []
-  pools: [All Networks, Everything]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''
-- access_groups: ''
-  category: Display
+- category: Display
   creator: admin
   description: ''
   icon: network
   labels: {}
   last_modified: '2022-05-23 11:06:26.816309'
+  last_modified_by: ''
   latitude: '0.0'
   links: [link22, link13, link20, link0, link5, link23, link19, link21, link7, link18,
     link15, link3, link4, link17, link10, link27, link25-3, link14, link16, link25-reversed,
@@ -412,8 +440,10 @@
     Baltimore, PaloAlto, SanJose, Cleveland, Jackson, Richmond, Cambridge, Chicago,
     Philadelphia, Cincinnati, NewYork, Minneapolis, SanFrancisco, Atlanta, Detroit,
     Denver, Sacramento, SanDiego, LosAngeles, Boston, Dallas-2, Dallas]
-  pools: [Everything, All Networks]
+  owners: []
   positions: {}
+  rbac_edit: []
+  rbac_read: []
   subtype: ''
   type: network
   vendor: ''

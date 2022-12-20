@@ -2,6 +2,7 @@
 global
 applicationPath: false
 CodeMirror: false
+page: false
 settings: true
 Dropzone: false
 rbac: false
@@ -12,7 +13,6 @@ import {
   call,
   configureNamespace,
   editors,
-  jsonEditors,
   notify,
   openPanel,
   processInstance,
@@ -45,6 +45,7 @@ function displayFiles() {
           width="100%"
         ></table>
       </form>`,
+    tableId: "file",
     title: "Files",
     callback: function () {
       // eslint-disable-next-line new-cap
@@ -53,50 +54,30 @@ function displayFiles() {
   });
 }
 
-function saveSettings() {
-  const newSettings = jsonEditors.settings.get();
-  call({
-    url: "/save_settings",
-    data: {
-      settings: newSettings,
-      save: $("#settings_panel-write_changes").prop("checked"),
-    },
-    callback: function () {
-      settings = newSettings;
-      $("#settings_panel").remove();
-      notify("Settings saved.", "success", 5, true);
-    },
-  });
-}
-
-function showSettings() {
-  openPanel({
-    name: "settings_panel",
-    title: "Settings",
-    size: "700px 600px",
-    callback: function () {
-      jsonEditors.settings.set(settings);
-    },
-  });
-}
-
 export function displayFolderPath() {
-  const htmlPath = folderPath
+  let currentPath = "";
+  let htmlPath = [];
+  folderPath
     .split("/")
     .slice(1)
-    .map(
-      (value) => `<b> / </b>
-      <button type="button" class="btn btn-xs btn-primary">
-        ${value}
-      </button>`
-    )
-    .join("");
-  $("#current-folder-path").html(`<b>Current Folder :</b>${htmlPath}`);
+    .forEach((folder) => {
+      currentPath += `/${folder}`;
+      const clickable = currentPath.includes(defaultFolder);
+      const onclick = clickable
+        ? `onclick="eNMS.administration.enterFolder({path: '${currentPath}'})"`
+        : "";
+      const status = clickable ? "" : "disabled";
+      htmlPath.push(`<b> / </b>
+    <button type="button" ${status} class="btn btn-xs btn-primary" ${onclick}>
+      ${folder}
+    </button>`);
+    });
+  $("#current-folder-path").html(`<b>Current Folder :</b>${htmlPath.join("")}`);
 }
 
-function enterFolder(folder) {
-  if (folder) {
-    folderPath = `${folderPath}/${folder}`;
+function enterFolder({ folder, path }) {
+  if (path || folder) {
+    folderPath = path || `${folderPath}/${folder}`;
   } else {
     folderPath = folderPath.split("/").slice(0, -1).join("/");
   }
@@ -339,7 +320,8 @@ function showProfile() {
     id: user.id,
     callback: () => {
       call({
-        url: `/get_properties/user/${user.id}`,
+        url: `/get/user/${user.id}`,
+        data: { properties_only: true },
         callback: function (user) {
           for (const [page, endpoint] of Object.entries(rbac.all_pages)) {
             if (!user.is_admin && !user.pages.includes(page)) continue;
@@ -382,6 +364,16 @@ export function showCredentialPanel(id) {
     .trigger("change");
 }
 
+function updateDeviceRbac() {
+  notify("RBAC Update Initiated.", "success", 5, true);
+  call({
+    url: "/update_device_rbac",
+    callback: function () {
+      notify("RBAC Update successful", "success", 5, true);
+    },
+  });
+}
+
 configureNamespace("administration", [
   databaseDeletion,
   displayFiles,
@@ -393,13 +385,12 @@ configureNamespace("administration", [
   migrationsImport,
   resultLogDeletion,
   runDebugCode,
-  saveSettings,
   saveFile,
   saveProfile,
   scanCluster,
   scanFolder,
-  showSettings,
   showFileUploadPanel,
   showMigrationPanel,
   showProfile,
+  updateDeviceRbac,
 ]);

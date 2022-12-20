@@ -9,10 +9,16 @@ service_type = [
     "netmiko_commands_service",
 ]
 
+PATH = (
+    Path.cwd().parent.parent.parent
+    / "eNMS-prod"
+    / "files"
+    / "migrations"
+    / "model_scalability"
+)
 
-def generate_migration_file(project):
-    path = Path.cwd().parent.parent.parent / "eNMS" / "files" / "migrations" / project
 
+def generate_services():
     services = [
         {
             "name": f"[Shared] s{index}",
@@ -22,7 +28,6 @@ def generate_migration_file(project):
         }
         for index in range(1, 30)
     ]
-
     services.extend(
         [
             {
@@ -36,9 +41,63 @@ def generate_migration_file(project):
             for index in range(1, 5)
         ]
     )
-
-    with open(path / "service.yaml", "w") as migration_file:
+    with open(PATH / "service.yaml", "w") as migration_file:
         yaml.dump(services, migration_file)
 
 
-generate_migration_file("temp")
+def generate_devices():
+    devices = [{"name": f"d{index}"} for index in range(1, 80_001)]
+    with open(PATH / "device.yaml", "w") as migration_file:
+        yaml.dump(devices, migration_file)
+
+
+def generate_pools():
+    pools = []
+    for index in range(1, 1_001):
+        # we associate each pool of index (1)xyyy to a range of
+        # at most 3K devices in [max(0, xK - 1), min(9, xK + 1)]
+        x = index // 100
+        pools.append(
+            {
+                "name": f"Pool {index}",
+                "device_name": "d[{}-{}]\d{{3}}".format(max(x - 1, 0), min(x + 1, 9)),
+                "device_name_match": "regex",
+            }
+        )
+    for index in range(1_001, 5_001):
+        pools.append(
+            {
+                "name": f"Pool {index}",
+                "device_name": ".*",
+                "device_name_match": "regex",
+            }
+        )
+    with open(PATH / "pool.yaml", "w") as migration_file:
+        yaml.dump(pools, migration_file)
+
+
+def generate_users():
+    users = [{"name": f"user{index}"} for index in range(1, 1_001)]
+    with open(PATH / "user.yaml", "w") as migration_file:
+        yaml.dump(users, migration_file)
+
+
+def generate_tasks():
+    users = [{"name": f"task{index}"} for index in range(1, 2_001)]
+    with open(PATH / "task.yaml", "w") as migration_file:
+        yaml.dump(users, migration_file)
+
+
+def generate_networks():
+    networks = [
+        {
+            "name": f"w{index}",
+            "nodes": list(set(f"d{randrange(1, 80_000)}" for _ in range(30))),
+        }
+        for index in range(1, 1_001)
+    ]
+    with open(PATH / "network.yaml", "w") as migration_file:
+        yaml.dump(networks, migration_file)
+
+
+generate_networks()

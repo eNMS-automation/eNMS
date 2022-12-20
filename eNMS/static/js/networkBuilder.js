@@ -73,6 +73,7 @@ export function switchToNetwork(path, direction) {
   const [networkId] = currentPath.split(">").slice(-1);
   call({
     url: `/get/network/${networkId}`,
+    data: { include: ["nodes", "networks", "links"] },
     callback: function (newNetwork) {
       network = newNetwork;
       localStorage.setItem("network_path", path);

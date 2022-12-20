@@ -4,6 +4,7 @@ from datetime import datetime
 from functools import partial
 from importlib import __import__ as importlib_import
 from io import BytesIO, StringIO
+from jinja2 import Template
 from json import dump, load, loads
 from json.decoder import JSONDecodeError
 from multiprocessing.pool import ThreadPool
@@ -235,6 +236,8 @@ class Runner:
             if self.update_pools_after_running:
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
+            if self.service.report:
+                self.generate_report(results)
             if self.get("send_notification"):
                 try:
                     results = self.notify(results)
@@ -453,12 +456,15 @@ class Runner:
             services = list(vs.run_logs.get(self.parent_runtime, []))
             for service_id in services:
                 logs = env.log_queue(self.parent_runtime, service_id, mode="get")
-                db.factory(
-                    "service_log",
-                    runtime=self.parent_runtime,
-                    service=service_id,
-                    content="\n".join(logs or []),
-                )
+                try:
+                    db.factory(
+                        "service_log",
+                        runtime=self.parent_runtime,
+                        service=service_id,
+                        content="\n".join(logs or []),
+                    )
+                except Exception:
+                    self.log("error", f"Failed to commit service log:\n{format_exc()}")
             if self.main_run.trigger == "REST API":
                 results["devices"] = {}
                 for result in self.main_run.results:
@@ -471,7 +477,10 @@ class Runner:
         results = self.make_json_compliant(results)
         if not self.disable_result_creation or create_failed_results or run_result:
             self.has_result = True
-            db.factory("result", result=results, commit=commit, **result_kw)
+            try:
+                db.factory("result", result=results, commit=commit, **result_kw)
+            except Exception:
+                self.log("critical", f"Failed to commit result:\n{format_exc()}")
         return results
 
     def run_service_job(self, device):
@@ -522,7 +531,7 @@ class Runner:
                     else:
                         log = (
                             "Postprocessing was skipped as it is set to "
-                            f"{self.postprocessing_mode} only, but the service "
+                            f"{self.postprocessing_mode} only, and the service "
                             f"{'passed' if results['success'] else 'failed'})"
                         )
                         self.log("warning", log, device)
@@ -659,6 +668,29 @@ class Runner:
                 notification["PASSED"] = results["summary"]["success"]
         return notification
 
+    def generate_report(self, results):
+        try:
+            report = ""
+            if self.service.report:
+                variables = {"service": self.service, **self.global_variables()}
+                if self.service.report_jinja2_template:
+                    report = Template(self.service.report).render(variables)
+                else:
+                    report = self.sub(self.service.report, variables)
+        except Exception:
+            report = "\n".join(format_exc().splitlines())
+            self.log("error", f"Failed to build report:\n{report}")
+        if report:
+            try:
+                db.factory(
+                    "service_report",
+                    runtime=self.parent_runtime,
+                    service=self.service.id,
+                    content=report,
+                )
+            except Exception:
+                self.log("error", f"Failed to commit report:\n{format_exc()}")
+
     def notify(self, results):
         self.log("info", f"Sending {self.send_notification_method} notification...")
         notification = self.build_notification(results)
@@ -681,7 +713,7 @@ class Runner:
             result = env.send_email(
                 f"{status}: {self.service.name}",
                 vs.dict_to_string(notification),
-                recipients=self.get("mail_recipient"),
+                recipients=self.sub(self.get("mail_recipient"), locals()),
                 reply_to=self.reply_to,
                 filename=f"results-{filename}.txt",
                 file_content=vs.dict_to_string(file_content),
@@ -705,17 +737,20 @@ class Runner:
 
     def get_credentials(self, device, add_secret=True):
         result, credential_type = {}, self.main_run.service.credential_type
-        credential = db.get_credential(
-            self.creator,
-            device=device,
-            credential_type=credential_type,
-            optional=self.credentials != "device",
-        )
+        if self.credentials == "object":
+            credential = self.named_credential
+        else:
+            credential = db.get_credential(
+                self.creator,
+                device=device,
+                credential_type=credential_type,
+                optional=self.credentials != "device",
+            )
         if add_secret and device and credential:
             log = f"Using '{credential.name}' credential for '{device.name}'"
             self.log("info", log)
             result["secret"] = env.get_password(credential.enable_password)
-        if self.credentials == "device":
+        if self.credentials in ("device", "object"):
             result["username"] = credential.username
             if credential.subtype == "password":
                 result["password"] = env.get_password(credential.password)
@@ -843,7 +878,7 @@ class Runner:
     def get_var(self, *args, **kwargs):
         return self.payload_helper(*args, operation="get", **kwargs)
 
-    def get_result(self, service_name, device=None, workflow=None):
+    def get_result(self, service_name, device=None, workflow=None, all_matches=False):
         def filter_run(query, property):
             query = query.filter(
                 vs.models["result"].service.has(
@@ -872,7 +907,10 @@ class Runner:
             if not results:
                 return recursive_search(run.restart_run)
             else:
-                return results.pop().result
+                if all_matches:
+                    return [result.result for result in results]
+                else:
+                    return results.pop().result
 
         return recursive_search(self.main_run)
 
@@ -929,7 +967,6 @@ class Runner:
                     "url": vs.server_url,
                 },
                 "set_var": _self.payload_helper,
-                "settings": vs.settings,
                 "username": _self.main_run.creator,
                 "workflow": _self.workflow,
             }
@@ -1003,14 +1040,14 @@ class Runner:
         if connection:
             self.log("info", f"Using cached {connection_name}", device)
             return self.update_netmiko_connection(connection)
+        driver = device.netmiko_driver if self.driver == "device" else self.driver
         self.log(
             "info",
-            f"OPENING {connection_name}",
+            f"OPENING {connection_name} (driver: {driver})",
             device,
             change_log=False,
             logger="security",
         )
-        driver = device.netmiko_driver if self.driver == "device" else self.driver
         sock = None
         if device.gateways:
             gateways = sorted(device.gateways, key=attrgetter("priority"), reverse=True)
@@ -1246,14 +1283,11 @@ class Runner:
                 ],
             )
         )
-        for (send, expect) in zip(commands[::2], commands[1::2]):
+        for index, (send, expect) in enumerate(zip(commands[::2], commands[1::2])):
             if not send or not expect:
                 continue
-            self.log(
-                "info",
-                f"Sent '{send if send != commands[4] else 'jump on connect password'}'"
-                f", waiting for '{expect}'",
-            )
+            command_sent = send if index != 4 else "jump on connect password"
+            self.log("info", f"Sent '{command_sent}', waiting for '{expect}'")
             connection.send_command(
                 send,
                 expect_string=expect,

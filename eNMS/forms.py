@@ -1,4 +1,5 @@
 from copy import deepcopy
+from datetime import datetime
 from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
@@ -24,7 +25,6 @@ from eNMS.fields import (
     PasswordField,
     SelectField,
     SelectMultipleField,
-    SelectMultipleStringField,
     StringField,
 )
 from eNMS.variables import vs
@@ -74,6 +74,16 @@ class MetaForm(FormMeta):
             field = field(values["pretty_name"], *form_args, **form_kw)
             setattr(form, property, field)
             attrs[property] = field
+        if form_type in vs.rbac["rbac_models"]:
+            form.rbac_properties = vs.rbac["rbac_models"].get(form_type, {})
+            setattr(form, "owners", MultipleInstanceField("Owners", model="user"))
+            field_properties = {"type": "object-list", "model": "user"}
+            vs.form_properties[form_type]["owners"] = field_properties
+        for property, property_name in form.rbac_properties.items():
+            field = MultipleInstanceField(property_name, model="group")
+            setattr(form, property, field)
+            field_properties = {"type": "object-list", "model": "group"}
+            vs.form_properties[form_type][property] = field_properties
         vs.form_class[form_type] = form
         properties = {}
         for field_name, field in attrs.items():
@@ -120,15 +130,15 @@ class MetaForm(FormMeta):
 
 
 class BaseForm(FlaskForm, metaclass=MetaForm):
+    rbac_properties = {}
+
     def form_postprocessing(self, form_data):
         data = {"user": current_user, **form_data.to_dict()}
         if request.files:
             data["file"] = request.files["file"]
         for property, field in vs.form_properties[form_data.get("form_type")].items():
-            if field["type"] in ("object-list", "multiselect", "multiselect-string"):
+            if field["type"] in ("object-list", "multiselect"):
                 value = form_data.getlist(property)
-                if field["type"] == "multiselect-string":
-                    value = str(value)
                 if field["type"] == "object-list":
                     value = [db.fetch(field["model"], name=name).id for name in value]
                 data[property] = value
@@ -151,8 +161,8 @@ class FormFactory:
     def _initialize(self):
         self.generate_filtering_forms()
         self.generate_instance_insertion_forms()
+        self.generate_rbac_forms()
         self.generate_service_forms()
-        self.generate_access_form()
 
     def generate_filtering_forms(self):
         for model, properties in vs.properties["filtering"].items():
@@ -230,58 +240,55 @@ class FormFactory:
                 },
             )
 
-    def generate_access_form(self):
-        class AccessForm(RbacForm):
-            template = "access"
-            form_type = HiddenField(default="access")
-            user_pools = MultipleInstanceField("pool", model="pool")
-            access_pools = MultipleInstanceField("pool", model="pool")
-            access_type = SelectMultipleStringField(
-                "Access Type",
-                choices=vs.dualize(
-                    [
-                        "Read",
-                        "Configuration",
-                        "Edit",
-                        "Run",
-                        "Schedule",
-                        "Connect",
-                        "Use as target",
-                    ]
-                ),
+    def generate_rbac_forms(self):
+        class GroupForm(RbacForm):
+            template = "group"
+            form_type = HiddenField(default="group")
+            users = MultipleInstanceField("Users", model="user")
+            menu = SelectMultipleField("Menu", choices=vs.dualize(vs.rbac["menus"]))
+            pages = SelectMultipleField("Pages", choices=vs.dualize(vs.rbac["pages"]))
+            get_requests = SelectMultipleField(
+                "GET Requests",
+                choices=[
+                    (key, key)
+                    for key, value in vs.rbac["get_requests"].items()
+                    if value == "access"
+                ],
             )
-            relations = ["pools", "services"]
+            post_requests = SelectMultipleField(
+                "POST Requests",
+                choices=[
+                    (key, key)
+                    for key, value in vs.rbac["post_requests"].items()
+                    if value == "access"
+                ],
+            )
+            delete_requests = SelectMultipleField(
+                "DELETE Requests",
+                choices=[
+                    (key, key)
+                    for key, value in vs.rbac["delete_requests"].items()
+                    if value == "access"
+                ],
+            )
 
             @classmethod
             def form_init(cls):
-                keys = ("get_requests", "post_requests", "delete_requests")
-                for key in keys:
-                    values = [(k, k) for k, v in vs.rbac[key].items() if v == "access"]
-                    field_name = " ".join(key.split("_")).capitalize()
-                    setattr(cls, key, SelectMultipleField(field_name, choices=values))
-                menus, pages = [], []
-                for category, values in vs.rbac["menu"].items():
-                    if values["rbac"] == "admin":
-                        continue
-                    if values["rbac"] == "access":
-                        menus.append(category)
-                    for page, page_values in values["pages"].items():
-                        if page_values["rbac"] == "admin":
-                            continue
-                        if page_values["rbac"] == "access":
-                            pages.append(page)
-                        subpages = page_values.get("subpages", {})
-                        for subpage, subpage_values in subpages.items():
-                            if subpage_values["rbac"] == "admin":
-                                continue
-                            if subpage_values["rbac"] == "access":
-                                pages.append(subpage)
-                menu_choices = vs.dualize(menus)
-                setattr(cls, "menu", SelectMultipleField("Menu", choices=menu_choices))
-                page_choices = vs.dualize(pages)
-                setattr(
-                    cls, "pages", SelectMultipleField("Pages", choices=page_choices)
-                )
+                cls.pool_properties = []
+                for model, properties in vs.rbac["rbac_models"].items():
+                    field = SelectMultipleField(choices=list(properties.items()))
+                    setattr(cls, f"{model}_access", field)
+                    vs.form_properties["group"][f"{model}_access"] = {
+                        "type": "multiselect"
+                    }
+                for property in vs.rbac["rbac_models"]["device"]:
+                    property_name = f"rbac_pool_{property}"
+                    ui_name = property.split("_")[-1].capitalize()
+                    cls.pool_properties.append(property_name)
+                    field = MultipleInstanceField(ui_name, model="pool")
+                    setattr(cls, property_name, field)
+                    field_properties = {"type": "object-list", "model": "pool"}
+                    vs.form_properties["group"][property_name] = field_properties
 
     def generate_service_forms(self):
         for file in (vs.path / "eNMS" / "forms").glob("**/*.py"):
@@ -356,9 +363,11 @@ class ChangelogForm(BaseForm):
 
 class CredentialForm(BaseForm):
     action = "eNMS.base.processData"
+    template = "object"
     form_type = HiddenField(default="credential")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+    creator = StringField(render_kw={"readonly": True})
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     role = SelectField(
         "Role",
@@ -372,7 +381,7 @@ class CredentialForm(BaseForm):
         choices=(("password", "Username / Password"), ("key", "SSH Key")),
     )
     device_pools = MultipleInstanceField("Devices", model="pool")
-    user_pools = MultipleInstanceField("Users", model="pool")
+    groups = MultipleInstanceField("Groups", model="group")
     priority = IntegerField("Priority", default=1)
     username = StringField("Username")
     password = PasswordField("Password")
@@ -455,6 +464,7 @@ class FileForm(BaseForm):
     form_type = HiddenField(default="file")
     id = HiddenField()
     path = StringField("Path", [InputRequired()])
+    description = StringField(widget=TextArea(), render_kw={"rows": 8})
     filename = StringField("Filename", render_kw={"readonly": True})
     name = StringField("Name", render_kw={"readonly": True})
     last_modified = StringField("Last Modified", render_kw={"readonly": True})
@@ -515,9 +525,9 @@ class ObjectForm(BaseForm):
     get_request_allowed = False
     id = HiddenField()
     name = StringField("Name")
+    creator = StringField(render_kw={"readonly": True})
     type = StringField("Type")
     networks = MultipleInstanceField("Networks", model="network")
-    access_groups = StringField("Groups")
     description = StringField("Description")
     subtype = StringField("Subtype")
     location = StringField("Location")
@@ -525,17 +535,17 @@ class ObjectForm(BaseForm):
 
 class PoolForm(BaseForm):
     template = "pool"
+    models = ("device", "link")
     form_type = HiddenField(default="pool")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+    creator = StringField(render_kw={"readonly": True})
     admin_only = BooleanField("Pool visible to admin users only")
-    access_groups = StringField("Groups")
-    description = StringField("Description")
+    description = StringField(widget=TextArea(), render_kw={"rows": 8})
     manually_defined = BooleanField("Manually defined (won't be automatically updated)")
 
     @classmethod
     def form_init(cls):
-        cls.models = ("device", "link", "service", "user", "network")
         for model in cls.models:
             setattr(cls, f"{model}_properties", vs.properties["filtering"][model])
             for property in vs.properties["filtering"][model]:
@@ -567,6 +577,7 @@ class RbacForm(BaseForm):
     get_request_allowed = False
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+    creator = StringField(render_kw={"readonly": True})
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     email = StringField("Email")
 
@@ -615,6 +626,7 @@ class ServerForm(BaseForm):
     form_type = HiddenField(default="server")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+    creator = StringField(render_kw={"readonly": True})
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     ip_address = StringField("IP address")
     weight = IntegerField("Weigth", default=1)
@@ -626,8 +638,8 @@ class ServiceForm(BaseForm):
     get_request_allowed = False
     id = HiddenField()
     name = StringField("Name")
+    creator = StringField(render_kw={"readonly": True})
     type = StringField("Service Type")
-    access_groups = StringField("Groups")
     shared = BooleanField("Shared")
     scoped_name = StringField("Scoped Name", [InputRequired()])
     description = StringField("Description")
@@ -637,33 +649,38 @@ class ServiceForm(BaseForm):
     device_query_property = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
+    freeze = SelectMultipleField("Freeze", choices=(("edit", "Edit"), ("run", "Run")))
     target_devices = MultipleInstanceField("Devices", model="device")
     disable_result_creation = BooleanField("Save only failed results")
     target_pools = MultipleInstanceField("Pools", model="pool")
     update_target_pools = BooleanField("Update target pools before running")
     update_pools_after_running = BooleanField("Update pools after running")
     workflows = MultipleInstanceField("Workflows", model="workflow")
-    owners = MultipleInstanceField("Owners", model="user")
-    owners_access = SelectMultipleStringField(
-        "Owners Access",
-        choices=[("run", "Run"), ("edit", "Edit")],
-    )
     waiting_time = IntegerField(
         "Time to Wait before next service is started (in seconds)", default=0
     )
     priority = IntegerField("Priority", default=10)
+    report_template = SelectField("Report Template", choices=(vs.dualize(vs.reports)))
+    report = StringField(widget=TextArea(), render_kw={"rows": 8}, substitution=True)
+    report_format = SelectField(
+        "Report Display Format", choices=(("text", "Text"), ("html", "HTML"))
+    )
+    report_jinja2_template = BooleanField("Interpret Report as Jinja2 Template")
+    display_report = BooleanField("Display Report instead of Results")
     send_notification = BooleanField("Send a notification")
     send_notification_method = SelectField(
         "Notification Method",
         choices=(("mail", "Mail"), ("slack", "Slack"), ("mattermost", "Mattermost")),
     )
     notification_header = StringField(
-        widget=TextArea(), render_kw={"rows": 5}, substitution=True
+        widget=TextArea(), render_kw={"rows": 8}, substitution=True
     )
     include_device_results = BooleanField("Include Device Results")
     include_link_in_summary = BooleanField("Include Result Link in Summary")
     display_only_failed_nodes = BooleanField("Display only Failed Devices")
-    mail_recipient = StringField("Mail Recipients (separated by comma)")
+    mail_recipient = StringField(
+        "Mail Recipients (separated by comma)", substitution=True
+    )
     reply_to = StringField("Reply-to Email Address")
     number_of_retries = IntegerField("Number of retries", default=0)
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
@@ -836,19 +853,13 @@ class ServiceForm(BaseForm):
         )
 
 
-class SettingsForm(BaseForm):
-    form_type = HiddenField(default="settings_panel")
-    action = "eNMS.administration.saveSettings"
-    settings = JsonField("Settings")
-    write_changes = BooleanField("Write changes back to 'settings.json' file")
-
-
 class TaskForm(BaseForm):
     action = "eNMS.base.processData"
     template = "object"
     form_type = HiddenField(default="task")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+    creator = StringField(render_kw={"readonly": True})
     admin_only = BooleanField("Admin Only", default=False)
     scheduling_mode = SelectField(
         "Scheduling Mode",
@@ -880,6 +891,14 @@ class TaskForm(BaseForm):
         no_date = self.scheduling_mode.data == "standard" and not self.start_date.data
         if no_date:
             self.start_date.errors.append("A start date must be set.")
+        invalid_end_date = self.end_date.data and datetime.strptime(
+            self.end_date.data, "%d/%m/%Y %H:%M:%S"
+        ) <= datetime.strptime(self.start_date.data, "%d/%m/%Y %H:%M:%S")
+        if invalid_end_date:
+            self.end_date.errors.append("The end date must come after the start date.")
+        invalid_frequency = self.end_date.data and not self.frequency.data
+        if invalid_frequency:
+            self.frequency.errors.append("A periodic task must have a frequency.")
         no_cron_expression = (
             self.scheduling_mode.data == "cron" and not self.crontab_expression.data
         )
@@ -888,7 +907,15 @@ class TaskForm(BaseForm):
         no_service = not self.service.data
         if no_service:
             self.service.errors.append("No service set.")
-        return valid_form and not any([no_date, no_cron_expression, no_service])
+        return valid_form and not any(
+            [
+                no_date,
+                no_cron_expression,
+                no_service,
+                invalid_end_date,
+                invalid_frequency,
+            ]
+        )
 
 
 class UploadFilesForm(BaseForm):
@@ -943,10 +970,12 @@ class ConnectionForm(ServiceForm):
         "Credentials",
         choices=(
             ("device", "Device Credentials"),
+            ("object", "Named Credential"),
             ("user", "User Credentials"),
             ("custom", "Custom Credentials"),
         ),
     )
+    named_credential = InstanceField("Named Credential", model="credential")
     custom_username = StringField("Custom Username", substitution=True)
     custom_password = PasswordField("Custom Password", substitution=True)
     start_new_connection = BooleanField("Start New Connection")
@@ -956,6 +985,7 @@ class ConnectionForm(ServiceForm):
         "Connection Parameters": {
             "commands": [
                 "credentials",
+                "named_credential",
                 "custom_username",
                 "custom_password",
                 "start_new_connection",
@@ -1178,7 +1208,7 @@ class ScrapliForm(ConnectionForm):
 
 class UserForm(RbacForm):
     form_type = HiddenField(default="user")
-    groups = StringField("Groups")
+    groups = MultipleInstanceField("Groups", model="group")
     theme = SelectField(
         "Theme",
         choices=[

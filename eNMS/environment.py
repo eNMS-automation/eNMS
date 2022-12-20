@@ -85,9 +85,7 @@ class Environment:
                     file.update(path=event.dest_path, move_file=False)
                 elif event.event_type in ("created", "modified"):
                     file = db.factory(filetype, path=event.src_path)
-                elif event.event_type == "deleted" and file:
-                    db.delete_instance(file)
-                else:
+                elif event.event_type != "deleted" or not file:
                     return
                 file.status = event.event_type.capitalize()
                 log = f"File {event.src_path} {event.event_type} (watchdog)."

@@ -1,9 +1,9 @@
 from re import search, sub
 from sqlalchemy import and_, Boolean, event, ForeignKey, Integer, or_
+from sqlalchemy.sql.expression import literal
 from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.orm import aliased, backref, deferred, relationship
+from sqlalchemy.orm import backref, deferred, relationship
 from sqlalchemy.schema import UniqueConstraint
-from sqlalchemy.sql.expression import false
 
 from eNMS.controller import controller
 from eNMS.models.base import AbstractBase
@@ -18,13 +18,47 @@ class Object(AbstractBase):
     __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     creator = db.Column(db.SmallString)
-    access_groups = db.Column(db.LargeString)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
+    last_modified_by = db.Column(db.SmallString, info={"log_change": False})
     subtype = db.Column(db.SmallString)
     description = db.Column(db.LargeString)
     model = db.Column(db.SmallString)
     location = db.Column(db.SmallString)
     vendor = db.Column(db.SmallString)
+
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        if not hasattr(self, "class_type") or not kwargs.get("update_pools"):
+            return
+        if self.class_type == "network":
+            return
+        constraints = []
+        for property in vs.properties["filtering"][self.class_type]:
+            table, pool_property = vs.models["pool"], f"{self.class_type}_{property}"
+            row, value = getattr(table, pool_property), getattr(self, property)
+            row_match = getattr(table, f"{pool_property}_match")
+            row_invert = getattr(table, f"{pool_property}_invert")
+            main_constraint = {
+                "equality": row == value,
+                "inclusion": literal(value).contains(row),
+                "regex": literal(value).regexp_match(row),
+            }
+            match_constraints = []
+            for match_property in ("equality", "inclusion", "regex"):
+                for invert_value in (False, True):
+                    constraint = main_constraint[match_property]
+                    if invert_value:
+                        constraint = ~constraint
+                    match_constraints.append(
+                        and_(
+                            constraint,
+                            row_match == match_property,
+                            invert_value == row_invert,
+                        )
+                    )
+            constraints.append(and_(row != "", or_(*match_constraints)))
+        self.pools = db.query("pool").filter(or_(*constraints)).all()
+        self.update_last_modified_properties()
 
     def delete(self):
         number = f"{self.class_type}_number"
@@ -32,21 +66,6 @@ class Object(AbstractBase):
             return
         for pool in self.pools:
             setattr(pool, number, getattr(pool, number) - 1)
-
-    @classmethod
-    def rbac_filter(cls, query, mode, user):
-        if cls.__tablename__ == "node":
-            return query
-        pool_alias = aliased(vs.models["pool"])
-        return (
-            query.join(cls.pools)
-            .join(vs.models["access"], vs.models["pool"].access)
-            .join(pool_alias, vs.models["access"].user_pools)
-            .join(vs.models["user"], pool_alias.users)
-            .filter(vs.models["access"].access_type.contains(mode))
-            .filter(vs.models["user"].name == user.name)
-            .group_by(cls.id)
-        )
 
 
 class Node(Object):
@@ -63,6 +82,9 @@ class Node(Object):
         "Network", secondary=db.node_network_table, back_populates="nodes"
     )
 
+    def post_update(self):
+        return self.to_dict(include=["networks", "nodes"])
+
     def update(self, **kwargs):
         if self.positions and "positions" in kwargs:
             kwargs["positions"] = {**self.positions, **kwargs["positions"]}
@@ -74,7 +96,6 @@ class Device(Node):
     __tablename__ = class_type = export_type = "device"
     __mapper_args__ = {"polymorphic_identity": "device"}
     pretty_name = "Device"
-    pool_model = True
     parent_type = "node"
     id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
     icon = db.Column(db.TinyString, default="router")
@@ -226,7 +247,6 @@ class Link(Object):
     __tablename__ = class_type = export_type = "link"
     __mapper_args__ = {"polymorphic_identity": "link"}
     pretty_name = "Link"
-    pool_model = True
     parent_type = "object"
     id = db.Column(Integer, ForeignKey("object.id"), primary_key=True)
     name = db.Column(db.SmallString, unique=True)
@@ -284,15 +304,15 @@ class Link(Object):
 
 class Pool(AbstractBase):
 
-    __tablename__ = type = "pool"
-    models = ("device", "link", "service", "network", "user")
+    __tablename__ = type = class_type = "pool"
+    models = ("device", "link")
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     manually_defined = db.Column(Boolean, default=False)
     creator = db.Column(db.SmallString)
-    access_groups = db.Column(db.LargeString)
     admin_only = db.Column(Boolean, default=False)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
+    last_modified_by = db.Column(db.SmallString, info={"log_change": False})
     description = db.Column(db.LargeString)
     target_services = relationship(
         "Service", secondary=db.service_target_pool_table, back_populates="target_pools"
@@ -301,21 +321,10 @@ class Pool(AbstractBase):
         "Run", secondary=db.run_pool_table, back_populates="target_pools"
     )
     tasks = relationship("Task", secondary=db.task_pool_table, back_populates="pools")
-    access_users = relationship(
-        "Access", secondary=db.access_user_pools_table, back_populates="user_pools"
-    )
-    access = relationship(
-        "Access", secondary=db.access_model_pools_table, back_populates="access_pools"
-    )
     credential_devices = relationship(
         "Credential",
         secondary=db.credential_device_table,
         back_populates="device_pools",
-    )
-    credential_users = relationship(
-        "Credential",
-        secondary=db.credential_user_table,
-        back_populates="user_pools",
     )
 
     @classmethod
@@ -355,35 +364,25 @@ class Pool(AbstractBase):
                 ),
             )
             setattr(cls, f"{model}_number", db.Column(Integer, default=0))
+        for property in vs.rbac["rbac_models"]["device"]:
+            setattr(
+                cls,
+                f"rbac_group_{property}",
+                relationship(
+                    "Group",
+                    secondary=getattr(db, f"pool_group_{property}_table"),
+                    back_populates=f"rbac_pool_{property}",
+                ),
+            )
+
+    def post_update(self):
+        self.compute_pool()
+        return super().post_update()
 
     def update(self, **kwargs):
-        old_users = set(self.users)
         super().update(**kwargs)
-        if not kwargs.get("import_mechanism", False):
-            self.compute_pool()
-            for user in set(self.users) | old_users:
-                user.update_rbac()
-
-    def match_instance(self, instance):
-        match_list = []
-        for property in vs.properties["filtering"][instance.class_type]:
-            pool_value = getattr(self, f"{instance.class_type}_{property}")
-            match_type = getattr(self, f"{instance.class_type}_{property}_match")
-            if not pool_value and match_type != "empty":
-                continue
-            value = str(getattr(instance, property))
-            match = (
-                match_type == "inclusion"
-                and pool_value in value
-                or match_type == "equality"
-                and pool_value == value
-                or match_type == "empty"
-                and not value
-                or bool(search(pool_value, value))
-            )
-            result = match != getattr(self, f"{instance.class_type}_{property}_invert")
-            match_list.append(result)
-        return match_list and all(match_list)
+        if not kwargs.get("migration_import"):
+            self.update_last_modified_properties()
 
     def compute_pool(self):
         for model in self.models:
@@ -403,17 +402,20 @@ class Pool(AbstractBase):
                         }
                     )
                 if kwargs["form"]:
-                    instances = controller.filtering(model, **kwargs)
+                    instances = controller.filtering(model, properties=["id"], **kwargs)
                 else:
                     instances = []
-                setattr(self, f"{model}s", instances)
+                table = getattr(db, f"pool_{model}_table")
+                db.session.execute(table.delete().where(table.c.pool_id == self.id))
+                if instances:
+                    values = [
+                        {"pool_id": self.id, f"{model}_id": instance.id}
+                        for instance in instances
+                    ]
+                    db.session.execute(table.insert().values(values))
             else:
                 instances = getattr(self, f"{model}s")
             setattr(self, f"{model}_number", len(instances))
-
-    @classmethod
-    def rbac_filter(cls, query, *_):
-        return query.filter(cls.admin_only == false())
 
 
 class Session(AbstractBase):

@@ -87,10 +87,6 @@ class SelectMultipleField(FieldMixin, WtformsSelectMultipleField):
     type = "multiselect"
 
 
-class SelectMultipleStringField(SelectMultipleField):
-    type = "multiselect-string"
-
-
 class FieldList(FieldMixin, WtformsFieldList):
     type = "field-list"
 
@@ -186,7 +182,7 @@ class MultipleInstanceField(FieldMixin, WtformsSelectMultipleField):
         not_found = [
             name
             for name in self.data
-            if not db.fetch(self.model, name=name, allow_none=True)
+            if not db.fetch(self.model, rbac=None, name=name, allow_none=True)
         ]
         if len(set(self.data)) != len(self.data):
             raise ValidationError(f"Duplicated {self.model}s selected.")

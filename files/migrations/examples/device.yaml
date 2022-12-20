@@ -1,5 +1,4 @@
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -16,6 +15,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:24:51.560542'
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: 5.654736s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:26:36.380951'
@@ -36,6 +36,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     Large Network Display: [621, 908]
@@ -43,13 +44,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -66,6 +71,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:22:10.788763'
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: 5.459427s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:23:44.174033'
@@ -86,6 +92,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     Large Network Display: [-387, 104]
@@ -93,13 +100,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -115,7 +126,8 @@
   last_configuration_runtime: '2022-04-18 09:28:00.381174'
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:28:00.381174'
-  last_modified: '2020-11-17 09:30:44.618796'
+  last_modified: '2022-07-13 13:53:29.460598'
+  last_modified_by: ''
   last_operational_data_duration: 3.422292s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-02-08 09:20:32.098841'
@@ -136,6 +148,7 @@
   netmiko_driver: arista_eos
   operating_system: EOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     Large Network Display: [253, 413]
@@ -143,13 +156,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Arista
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -160,17 +177,18 @@
   gateways: []
   icon: router
   ip_address: 192.168.56.50
-  last_configuration_duration: 2.556811s
+  last_configuration_duration: 2.093764s
   last_configuration_failure: '2022-04-13 15:59:28.944444'
-  last_configuration_runtime: '2022-04-13 16:03:45.097013'
+  last_configuration_runtime: '2022-12-07 14:38:17.218344'
   last_configuration_status: Success
-  last_configuration_update: '2022-04-13 16:03:45.097013'
-  last_modified: ''
-  last_operational_data_duration: 5.549113s
+  last_configuration_update: '2022-12-07 14:38:17.218344'
+  last_modified: '2022-12-05 11:45:22.775053'
+  last_modified_by: admin
+  last_operational_data_duration: 3.991951s
   last_operational_data_failure: '2022-04-13 15:59:32.307044'
-  last_operational_data_runtime: '2022-04-13 16:03:47.763592'
+  last_operational_data_runtime: '2022-12-07 14:38:19.367834'
   last_operational_data_status: Success
-  last_operational_data_update: '2022-04-13 16:03:47.763592'
+  last_operational_data_update: '2022-12-07 14:38:19.367834'
   last_specialized_data_duration: 3.775398s
   last_specialized_data_failure: Never
   last_specialized_data_runtime: '2022-02-14 10:13:39.034416'
@@ -186,6 +204,7 @@
   netmiko_driver: arista_eos
   operating_system: EOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     Large Network Display: [-47, 331]
@@ -193,13 +212,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access, ny Group]
+  rbac_target: [Full UI Read + Edit Access, ny Group]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Arista
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -216,6 +239,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: 2.506649s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-02-08 09:14:23.739464'
@@ -236,6 +260,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     Large Network Display: [-1073, 540]
@@ -243,13 +268,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -266,6 +295,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -286,6 +316,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     Large Network Display: [-92, -121]
@@ -293,13 +324,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -309,13 +344,14 @@
   down: false
   gateways: []
   icon: router
-  ip_address: 10.0.0.12
+  ip_address: 192.168.56.50
   last_configuration_duration: 3.556486s
   last_configuration_failure: '2022-04-18 09:22:23.714879'
   last_configuration_runtime: '2022-04-18 09:28:19.332441'
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:28:19.332441'
-  last_modified: ''
+  last_modified: '2022-12-05 10:24:05.390651'
+  last_modified_by: admin
   last_operational_data_duration: 5.404194s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:26:28.749577'
@@ -336,6 +372,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     Large Network Display: [333, -657]
@@ -343,13 +380,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -359,13 +400,14 @@
   down: false
   gateways: []
   icon: router
-  ip_address: 10.0.0.100
+  ip_address: 192.168.56.50
   last_configuration_duration: 3.777961s
   last_configuration_failure: '2022-04-18 09:22:23.790350'
   last_configuration_runtime: '2022-04-18 09:28:05.343361'
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:28:05.343361'
-  last_modified: ''
+  last_modified: '2022-12-05 10:23:58.006972'
+  last_modified_by: admin
   last_operational_data_duration: 5.483296s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:26:02.136986'
@@ -386,6 +428,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [562, 157]
@@ -393,13 +436,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -409,13 +456,14 @@
   down: false
   gateways: []
   icon: router
-  ip_address: 10.0.0.101
+  ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
   last_configuration_runtime: Never
   last_configuration_status: Never
   last_configuration_update: Never
-  last_modified: ''
+  last_modified: '2022-12-05 12:16:33.238298'
+  last_modified_by: admin
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -436,6 +484,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [-686, 820]
@@ -443,13 +492,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -459,13 +512,14 @@
   down: false
   gateways: []
   icon: optical_switch
-  ip_address: 10.0.0.13
+  ip_address: 192.168.56.50
   last_configuration_duration: 1.974735s
   last_configuration_failure: Never
   last_configuration_runtime: '2022-04-18 09:22:21.472097'
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:22:21.472097'
-  last_modified: ''
+  last_modified: '2022-12-05 12:16:26.278044'
+  last_modified_by: admin
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -486,6 +540,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [351, -244]
@@ -493,13 +548,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -516,6 +575,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -536,6 +596,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [-1351, -44]
@@ -543,13 +604,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -566,6 +631,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -586,6 +652,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [93, -32]
@@ -593,13 +660,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -609,13 +680,14 @@
   down: false
   gateways: []
   icon: router
-  ip_address: 10.0.0.102
+  ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
   last_configuration_runtime: Never
   last_configuration_status: Never
   last_configuration_update: Never
-  last_modified: ''
+  last_modified: '2022-12-05 10:24:12.407824'
+  last_modified_by: admin
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -636,6 +708,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [427, 535]
@@ -643,13 +716,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -665,7 +742,8 @@
   last_configuration_runtime: Never
   last_configuration_status: Never
   last_configuration_update: Never
-  last_modified: ''
+  last_modified: '2022-12-05 11:45:32.718811'
+  last_modified_by: admin
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -686,6 +764,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [-1213, 935]
@@ -693,13 +772,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access, ny Group]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -716,6 +799,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -736,6 +820,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [951, 21]
@@ -743,13 +828,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -766,6 +855,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-01-21 05:28:07.900073'
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -786,6 +876,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [289, 127]
@@ -793,13 +884,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -816,6 +911,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -836,6 +932,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [-993, 184]
@@ -843,13 +940,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -866,6 +967,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -886,6 +988,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [-1099, -216]
@@ -893,13 +996,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -916,6 +1023,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -936,6 +1044,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [-1404, 258]
@@ -943,13 +1052,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -966,6 +1079,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:21:50.573740'
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: 5.436114s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:22:33.273974'
@@ -986,6 +1100,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [-367, 811]
@@ -993,13 +1108,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1016,6 +1135,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:22:00.040454'
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: 5.558267s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:23:01.854054'
@@ -1036,6 +1156,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [-1467, 680]
@@ -1043,13 +1164,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1066,6 +1191,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:22:08.371152'
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: 5.421781s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:23:30.985479'
@@ -1086,6 +1212,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [-537, 433]
@@ -1093,13 +1220,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1116,6 +1247,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:28:15.763323'
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: 5.788923s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:25:04.103280'
@@ -1136,6 +1268,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [-382, -610]
@@ -1143,13 +1276,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1166,6 +1303,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:27:51.846707'
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: 5.386003s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:25:41.066658'
@@ -1186,6 +1324,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [-740, -568]
@@ -1193,13 +1332,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1216,6 +1359,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:28:24.264047'
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: 5.568083s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:26:15.431125'
@@ -1236,6 +1380,7 @@
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions:
     Large Network Display: [686, -483]
@@ -1243,13 +1388,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1266,6 +1415,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -1286,6 +1436,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions:
     Large Network Display: [-519, -222]
@@ -1293,13 +1444,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1316,6 +1471,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -1336,6 +1492,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions:
     Large Network Display: [-770, 169]
@@ -1343,13 +1500,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1366,6 +1527,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -1386,18 +1548,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1414,6 +1581,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -1434,18 +1602,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1462,6 +1635,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -1482,18 +1656,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1510,6 +1689,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -1530,18 +1710,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1558,6 +1743,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -1578,18 +1764,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1606,6 +1797,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2020-11-16 05:46:50.709114'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -1626,18 +1818,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1654,6 +1851,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -1674,18 +1872,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1702,6 +1905,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -1722,18 +1926,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1750,6 +1959,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -1770,18 +1980,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1798,6 +2013,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -1818,18 +2034,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1846,6 +2067,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -1866,18 +2088,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1894,6 +2121,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -1914,18 +2142,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1942,6 +2175,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -1962,18 +2196,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1990,6 +2229,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:21:46.585524'
   last_modified: '2020-11-16 05:46:58.341050'
+  last_modified_by: ''
   last_operational_data_duration: 3.204787s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:22:27.838586'
@@ -2010,18 +2250,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2038,6 +2283,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:21:56.060676'
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: 3.369878s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:22:56.237709'
@@ -2058,18 +2304,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2086,6 +2337,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:22:06.373762'
   last_modified: '2020-11-16 06:00:06.539207'
+  last_modified_by: ''
   last_operational_data_duration: 3.261867s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:23:38.665996'
@@ -2106,18 +2358,23 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2134,6 +2391,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:28:10.714080'
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: 3.263038s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:24:58.589660'
@@ -2154,18 +2412,23 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2182,6 +2445,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:27:55.433679'
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: 3.536934s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:25:48.683744'
@@ -2202,18 +2466,23 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2230,6 +2499,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:28:03.957961'
   last_modified: '2020-11-16 06:00:11.599550'
+  last_modified_by: ''
   last_operational_data_duration: 3.238552s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:26:23.275721'
@@ -2250,18 +2520,23 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2278,6 +2553,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -2298,18 +2574,23 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2326,6 +2607,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -2346,18 +2628,23 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2374,6 +2661,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: '2021-12-22 15:24:38.592728'
   last_operational_data_runtime: '2021-12-22 15:24:38.592728'
@@ -2394,18 +2682,23 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2422,6 +2715,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -2442,18 +2736,23 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2470,6 +2769,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -2490,18 +2790,23 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2518,6 +2823,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -2538,18 +2844,23 @@
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Juniper
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2566,6 +2877,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -2586,18 +2898,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2614,6 +2931,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -2634,18 +2952,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2662,6 +2985,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -2682,18 +3006,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2710,6 +3039,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -2730,18 +3060,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2758,6 +3093,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -2778,18 +3114,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2806,6 +3147,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -2826,18 +3168,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2854,6 +3201,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -2874,18 +3222,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2902,6 +3255,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -2922,18 +3276,23 @@
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2950,6 +3309,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -2970,18 +3330,23 @@
   netmiko_driver: linux
   operating_system: Linux
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Linux
-- access_groups: ''
-  creator: ''
+- creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2998,6 +3363,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:21:48.407633'
   last_modified: ''
+  last_modified_by: ''
   last_operational_data_duration: 5.395513s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:22:40.932981'
@@ -3018,18 +3384,23 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: admin
+- creator: admin
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -3046,6 +3417,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:22:02.126645'
   last_modified: '2020-11-06 04:49:26.367303'
+  last_modified_by: ''
   last_operational_data_duration: 5.543365s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:23:15.122604'
@@ -3066,6 +3438,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [285, 905]
@@ -3073,13 +3446,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: admin
+- creator: admin
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -3096,6 +3473,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:22:04.258899'
   last_modified: '2020-11-06 04:49:32.451857'
+  last_modified_by: ''
   last_operational_data_duration: 5.809166s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:23:22.945405'
@@ -3116,6 +3494,7 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     Large Network Display: [851, 631]
@@ -3123,13 +3502,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: admin
+- creator: admin
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -3146,6 +3529,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:28:12.074747'
   last_modified: '2020-11-06 04:49:37.427351'
+  last_modified_by: ''
   last_operational_data_duration: 5.5754s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:25:17.867791'
@@ -3166,19 +3550,24 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
+  owners: []
   port: 22
   positions:
     'Network 9: Large Network Display': [1505, -2076]
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: admin
+- creator: admin
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -3195,6 +3584,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:27:48.294962'
   last_modified: '2020-11-17 09:18:39.830009'
+  last_modified_by: ''
   last_operational_data_duration: 5.502484s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:25:25.673711'
@@ -3215,6 +3605,7 @@
   netmiko_driver: arista_eos
   operating_system: EOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     Large Network Display: [1231, 770]
@@ -3222,13 +3613,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Arista
-- access_groups: ''
-  creator: admin
+- creator: admin
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -3245,6 +3640,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2020-11-17 09:18:47.192385'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -3265,19 +3661,24 @@
   netmiko_driver: arista_eos
   operating_system: EOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     'Network 9: Large Network Display': [272, 2538]
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Arista
-- access_groups: ''
-  creator: admin
+- creator: admin
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -3294,6 +3695,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:24:53.652023'
   last_modified: '2020-11-06 04:49:59.322806'
+  last_modified_by: ''
   last_operational_data_duration: 5.487372s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:26:49.958700'
@@ -3314,19 +3716,24 @@
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
+  owners: []
   port: 22
   positions:
     'Network 9: Large Network Display': [2753, -63]
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: ''
-  creator: admin
+- creator: admin
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -3343,6 +3750,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2020-11-06 04:50:06.701973'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -3363,19 +3771,24 @@
   netmiko_driver: arista_eos
   operating_system: IOS-XE
   os_version: '3.6.5E '
+  owners: []
   port: 22
   positions:
     'Network 9: Large Network Display': [-1288, 1977]
   property1: 10.145.14.1
   property2: CP
   property3: ''
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
   type: device
   vendor: Cisco
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -3390,6 +3803,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2021-12-24 12:29:20.016415'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -3410,6 +3824,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     'Network 1: Top-level Devices and Links': &id001 [-314, 42]
@@ -3417,13 +3832,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
   type: device
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -3438,6 +3857,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2021-12-24 12:29:33.757035'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -3458,6 +3878,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     'Network 1: Top-level Devices and Links': &id002 [-59, 267]
@@ -3465,14 +3886,18 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   serial_number: ''
   subtype: ''
   type: router
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -3487,6 +3912,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2021-12-24 12:29:26.980532'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -3507,6 +3933,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     'Network 1: Top-level Devices and Links': &id003 [310, 56]
@@ -3514,14 +3941,18 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   serial_number: ''
   subtype: ''
   type: router
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -3536,6 +3967,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2022-01-01 02:47:52.588960'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -3556,19 +3988,24 @@
   netmiko_driver: arista_eos
   operating_system: EOS
   os_version: ''
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   serial_number: ''
   subtype: ''
   type: router
   vendor: Arista
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -3584,6 +4021,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2021-12-31 13:04:52.737606'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -3604,19 +4042,24 @@
   netmiko_driver: cisco_ios
   operating_system: Linux
   os_version: ''
+  owners: []
   port: 22
   positions: {}
   priority: 1
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
   type: gateway
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -3632,6 +4075,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2022-01-01 03:11:02.891379'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -3652,19 +4096,24 @@
   netmiko_driver: cisco_ios
   operating_system: Linux
   os_version: ''
+  owners: []
   port: 22
   positions: {}
   priority: 2
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
   type: gateway
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -3680,6 +4129,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:28:22.904639'
   last_modified: '2022-01-01 03:11:10.036270'
+  last_modified_by: ''
   last_operational_data_duration: 3.43952s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:25:12.151286'
@@ -3700,19 +4150,24 @@
   netmiko_driver: cisco_ios
   operating_system: Linux
   os_version: ''
+  owners: []
   port: 22
   positions: {}
   priority: 3
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
   type: gateway
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -3727,6 +4182,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:27:56.805455'
   last_modified: '2022-01-01 02:48:16.568443'
+  last_modified_by: ''
   last_operational_data_duration: 5.393015s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:25:33.411352'
@@ -3747,19 +4203,24 @@
   netmiko_driver: arista_eos
   operating_system: EOS
   os_version: ''
+  owners: []
   port: 22
   positions: {}
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: arista_eos
   serial_number: ''
   subtype: ''
   type: router
   vendor: Arista
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -3774,6 +4235,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:28:09.308434'
   last_modified: '2022-01-01 10:34:12.609346'
+  last_modified_by: ''
   last_operational_data_duration: 3.309849s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:26:09.888036'
@@ -3794,20 +4256,25 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Subnetwork 1: [-284, -105]
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   serial_number: ''
   subtype: ''
   type: router
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -3822,6 +4289,7 @@
   last_configuration_status: Success
   last_configuration_update: '2022-04-18 09:24:49.444219'
   last_modified: '2022-01-01 10:34:21.544114'
+  last_modified_by: ''
   last_operational_data_duration: 3.454503s
   last_operational_data_failure: Never
   last_operational_data_runtime: '2022-04-18 09:26:44.276171'
@@ -3842,20 +4310,25 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Subnetwork 1: [298, -122]
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   serial_number: ''
   subtype: ''
   type: router
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -3871,6 +4344,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2022-01-01 10:34:56.257187'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -3891,6 +4365,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Subnetwork 2: [-213, -57]
@@ -3898,13 +4373,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
   type: gateway
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -3920,6 +4399,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2022-01-01 10:35:00.548021'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -3940,6 +4420,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Subnetwork 2: [202, -63]
@@ -3947,13 +4428,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
   type: gateway
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -3968,6 +4453,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2022-01-01 11:54:16.905934'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -3988,6 +4474,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Duplication of Devices, Subnetworks and Top-level Networks: &id004 [-356, 0]
@@ -3995,13 +4482,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
   type: device
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -4017,6 +4508,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2022-01-01 11:55:03.583298'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -4037,6 +4529,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Duplicate me 2: [-127, -54]
@@ -4044,13 +4537,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
   type: gateway
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -4065,6 +4562,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2022-01-01 11:55:12.994632'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -4085,20 +4583,25 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Duplicate me 2: [127, 87]
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   serial_number: ''
   subtype: ''
   type: router
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -4113,6 +4616,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2022-01-02 03:15:44.359212'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -4133,20 +4637,25 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Subnetwork 1: [-8, 136]
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   serial_number: ''
   subtype: ''
   type: router
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -4161,6 +4670,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2022-01-02 05:24:07.817862'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -4181,6 +4691,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Loopback and Parallel Links: &id005 [-765, 312]
@@ -4188,13 +4699,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
   type: device
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -4209,6 +4724,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2022-01-02 05:24:13.627415'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -4229,6 +4745,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Loopback and Parallel Links: &id006 [-345, 194]
@@ -4236,13 +4753,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
   type: device
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -4257,6 +4778,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2022-01-02 05:24:18.521582'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -4277,6 +4799,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Loopback and Parallel Links: &id007 [-325, 426]
@@ -4284,13 +4807,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
   type: device
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -4305,6 +4832,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2022-01-02 05:24:28.410560'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -4325,6 +4853,7 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     Loopback and Parallel Links: &id008 [243, 271]
@@ -4332,13 +4861,17 @@
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
   type: device
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -4353,6 +4886,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2022-01-02 12:46:48.359895'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -4373,19 +4907,24 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     L3 Network: [-181, -10]
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
   type: device
   vendor: ''
-- access_groups: admin
-  creator: admin
+- creator: admin
   custom_json: {}
   custom_multiselect: []
   custom_select: b
@@ -4400,6 +4939,7 @@
   last_configuration_status: Never
   last_configuration_update: Never
   last_modified: '2022-01-02 12:47:00.857228'
+  last_modified_by: ''
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -4420,12 +4960,18 @@
   netmiko_driver: cisco_ios
   operating_system: ''
   os_version: ''
+  owners: []
   port: 22
   positions:
     L3 Network: [170, -14]
   property1: 10.145.14.1
   property2: CP
   property3: password
+  rbac_configuration: []
+  rbac_connect: [Full UI Read + Edit Access]
+  rbac_edit: [Full UI Read + Edit Access]
+  rbac_read: [Full UI Read + Edit Access]
+  rbac_target: [Full UI Read + Edit Access]
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''

@@ -1,6 +1,107 @@
 
 # Release Notes
 
+Version 4.4.0: RBAC and Credentials
+-----------------------------------
+
+- Remove settings from UI upper menu (doesn't work with multiple gunicorn workers)
+- Compute whether a device / link belongs to a pool with a SQL query rather than pure python (performance x3)
+  Add post_update function (60350ede71f6a5146bab9f42a87f7fef0360b98e) after db flush in controller udpate function to compute pool only after the ID has been set, and
+  determine what properties to return (e.g not serialized object but only what is needed)
+  Return default serialized properties in controller update instead of all serialized relationship for scalability with > 50K devices.
+- Refactor freeze edit / run mechanism (pure python check instead of SQL query with originals)
+- New Bulk Edit option for appending / removing to a multiple instance list (dropdown list on the right of the field).
+- Add regression tests for get_connection global variable
+- New defaultRbac mechanism to set rbac value of filtering function. In the
+  configuration table, the default RBAC mode is set to "configuration".
+- Use tableOrdering function when initializing a table instead of redrawing table
+  after initialization, to avoid calling draw function twice when loading a table.
+  Commit: 7d8999d0fc4ac7a6a7fd49e3275fdca4ac12ade3
+- Added "last_modified_by" property to store name of user who last modified
+  service/object/pool
+  Mail: "new feature request (minor)"
+  Commit: 0e0d90aeac5f5a977e6a452946794cd1293621ed
+- Added mechanism to update last_modified property of a workflow whenever there
+  is any change to an (sub)edge or a (sub)service.
+  Cases when the last modified property is updated:
+  - the workflow itself is updated
+  - any service or subservice is updated (ie including subworkflows)
+  - copy service in workflow is used in workflow or subworkflows
+  - add edge in workflow or subworkflows
+  - any deletion is made in workflow or subworkflows
+  - any service is skipped in workflow or subworkflows
+- Same last_modified(_by) mechanism for devices, links and pools.
+- Make buttons in path displayed in Files table clickable to move to button folder (#275).
+- Refactor get function to fix scalability issues:
+  - The properties sent to the front-end are defined in properties.json > "panel"
+  - Remove get_all controller endpoint (unused)
+  - Remove get_properties controller endpoint (replaced by get with "properties_only" keyword)
+- In task form validation (#267):
+  - Forbid end date to be equal or anterior to start date.
+  - Forbid frequency to be 0 when a task has an end date (= is periodic)
+- Fix URL encoding for links to workflow builder with runtime (encode space to %20) (#278)
+- Add Clear Search button in file table
+- Use SQL Alchemy `regexp_match` mechanism (new from 1.4, replaced eNMS custom per DB regex match mechanism)
+  Link: https://docs.sqlalchemy.org/en/14/core/sqlelement.html#sqlalchemy.sql.expression.ColumnOperators.regexp_match
+  Commit: a6af8a88f197b891928986dd492ce2ff39fc629a
+- Add "creator" properties in all edit panels
+- Fix link to workflow / network set to None after creating new or duplicating existing
+  instance (via post_update mechanism)
+- Fix asynchronous bug in netmiko services: wrong disabled status after opening
+  edit panel to a service in netmiko "Expect String" field.
+- Fix bug where RBAC Edit access is needed to run a service
+  Thread: "Edit Service/Device Needed for user using /rest/run_service"
+- Remove "settings" from global variables so that it cannot be overriden.
+  Thread: "Settings and security question"
+- Enable migration for files and folders.
+- When selection in builder changed, close deletion panel (wrong node / edge count)
+  Issue #280 / Commit 6fc007f6a1d43fd2b61652f02983dba0cedef68a
+- Resize table headers when the panel that contains the table is resized
+  Commit 40a909673f4b9cfbfcae58fb60e86f6e6bd83994
+- When a file is deleted, mark as missing instead of deleting associate file object
+- Make "update device RBAC" pool mechanism accessible from REST API.
+- Fix bug where using run_service REST endpoint with non existing device returns 403
+  not allowed error instead of more specific "Device not found" error
+- Add new "Credential Object" mechanism in connection services, REST service and
+  generic file transfer service. Choose credential object explicitly instead of using
+  custom username / password.
+- Report feature
+  - Report template can use python substitution or Jinja 2
+  - Report output can be either text-based or HTML
+  - Option to display the report when the run is over instead of the service results.
+  - Report can be used for any services in a workflow, not just the workflow itself.
+  - In get_result, new "all_matches" keyword to get all results.
+  - New "files" / "reports" folder to store predefined templates that are used to
+    populate the "report" field in the service edit panel.
+- Add support for distributed task queue for automation with Dramatiq.
+- Return an error in the UI if the commit of workflow logs, report or result
+  fails (e.g data too long db error because of payload data for the results)
+- Fix "List index out of range" bug in Jump on Connect mechanism
+  Commit 457f46dd2c496757e924d922f3455626d35a3784
+- Add RBAC support to credentials
+
+RBAC Refactoring:
+- Service export: owners and RBAC read / edit / etc are exported in the service
+  .yaml file. If the importing user doesn't have access to the service based on
+  how RBAC is set up, the service will not be visible after export.
+
+Migration:
+- The credential file must be updated to use groups instead of pools
+  ("user_pools" -> "groups"). The appropriate groups must be created first.
+- In migration files, check that the "settings" variable isn't used in
+  any workflow. If the server IP, name or URL is used, the "server" variable
+  should be used instead.
+- "get_all" and "get_properties" controller functions have been removed.
+  Check that they are not used anywhere in custom code (plugin, custom.py, etc)
+
+Test (besides what is in release notes):
+- the notification mechanism hasn't been impacted (in particular notification header
+  option + devices results)
+- Jump on connect mechanism
+- RBAC
+  - new mechanism
+  - Freeze Edit / Run mechanism (refactored)
+
 Version 4.3.0
 -------------
 

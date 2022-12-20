@@ -1,0 +1,66 @@
+<div
+  class="accordion"
+  id="accordion-step4"
+  role="tablist"
+  aria-multiselectable="true"
+>
+  {% set results = get_result(service.name, all_matches=True) %}
+  <div class="panel" style="border-color: #000; position: relative;">
+    <a
+      class="panel-heading collapsed"
+      role="tab"
+      id="heading-step4"
+      data-toggle="collapse"
+      href="#collapse-step4-1"
+    >
+      <h4 class="panel-title" style="color: #000;">
+        Successful Results
+      </h4>
+    </a>
+    <div
+      id="collapse-step4-1"
+      class="panel-collapse collapse"
+      role="tabpanel"
+    >
+      <div class="panel-body" style="background-color: #fafafa;">
+        {% for result in results %}
+          {% if result["success"] %}
+            <pre>
+              {{ dict_to_string(result) }}
+            </pre>
+            <hr>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="panel" style="border-color: #000; position: relative;">
+    <a
+      class="panel-heading collapsed"
+      role="tab"
+      id="heading-step4-2"
+      data-toggle="collapse"
+      href="#collapse-step4-2-1"
+    >
+      <h4 class="panel-title" style="color: #000;">
+        Failed Results
+      </h4>
+    </a>
+    <div
+      id="collapse-step4-2-1"
+      class="panel-collapse collapse"
+      role="tabpanel"
+    >
+      <div class="panel-body" style="background-color: #fafafa;">
+        {% for result in results %}
+          {% if not result["success"] %}
+            <pre>
+              {{ dict_to_string(result) }}
+            </pre>
+            <hr>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

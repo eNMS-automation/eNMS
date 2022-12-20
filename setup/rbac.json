@@ -1,4 +1,11 @@
 {
+  "form_properties": [
+    "menu",
+    "pages",
+    "get_requests",
+    "post_requests",
+    "delete_requests"
+  ],
   "menu": {
     "Home": {
       "icon": "home",
@@ -6,7 +13,7 @@
       "pages": {
         "Dashboard": {
           "endpoint": "/dashboard",
-          "rbac": "access"
+          "rbac": "all"
         },
         "Files": {
           "endpoint": "/file_table",
@@ -24,23 +31,23 @@
     },
     "Administration": {
       "icon": "users",
-      "rbac": "admin",
+      "rbac": "access",
       "pages": {
         "Users": {
           "endpoint": "/user_table",
           "rbac": "admin"
         },
-        "Servers": {
-          "endpoint": "/server_table",
+        "Groups": {
+          "endpoint": "/group_table",
           "rbac": "admin"
         },
-        "Access": {
-          "endpoint": "/access_table",
-          "rbac": "admin"
+        "Servers": {
+          "endpoint": "/server_table",
+          "rbac": "access"
         },
         "Credentials": {
           "endpoint": "/credential_table",
-          "rbac": "admin"
+          "rbac": "access"
         }
       }
     },
@@ -112,15 +119,14 @@
   },
   "get_requests": {
     "/": "none",
-    "/access_table": "admin",
     "/alerts_table_form": "all",
     "/calendar_form": "all",
     "/changelog_table": "access",
     "/compare_form": "access",
     "/configuration_table": "access",
     "/confirmation_form": "access",
-    "/credential_table": "admin",
-    "/dashboard": "access",
+    "/credential_table": "access",
+    "/dashboard": "all",
     "/device_data_form": "access",
     "/device_table": "access",
     "/download": "access",
@@ -130,6 +136,7 @@
     "/files_form": "access",
     "/geographical_view": "access",
     "/git_history_form": "access",
+    "/group_table": "access",
     "/help": "all",
     "/parameterized_form": "all",
     "/instance_deletion_form": "access",
@@ -149,7 +156,7 @@
     "/result_comparison_form": "access",
     "/result_form": "access",
     "/run_table": "access",
-    "/server_table": "admin",
+    "/server_table": "access",
     "/service_table": "access",
     "/session_log_form": "admin",
     "/session_table": "admin",
@@ -176,7 +183,7 @@
     "/clear_configurations": "access",
     "/compare": "access",
     "/counters": "access",
-    "/count_models": "access",
+    "/count_models": "all",
     "/create_label": "access",
     "/database_deletion": "admin",
     "/delete_instance": "access",
@@ -188,7 +195,6 @@
     "/edit_file": "access",
     "/filtering": "all",
     "/get": "access",
-    "/get_all": "access",
     "/get_cluster_status": "access",
     "/get_git_history": "access",
     "/get_device_network_data": "access",
@@ -198,7 +204,8 @@
     "/get_git_content": "admin",
     "/get_migration_folders": "access",
     "/get_service_logs": "access",
-    "/get_properties": "access",
+    "/get_report": "access",
+    "/get_report_template": "access",
     "/get_result": "access",
     "/get_runtimes": "all",
     "/get_view_topology": "access",
@@ -230,6 +237,7 @@
     "/rest/topology": "access",
     "/rest/update_all_pools": "access",
     "/rest/update_database_configurations_from_git": "access",
+    "/rest/update_device_rbac": "admin",
     "/result_log_deletion": "access",
     "/run_debug_code": "admin",
     "/run_service": "access",
@@ -253,15 +261,47 @@
     "/update": "access",
     "/update_pool": "access",
     "/update_all_pools": "access",
+    "/update_device_rbac": "admin",
     "/upload_files": "access",
     "/view_filtering": "access",
     "/web_connection": "access"
   },
-  "advanced": {
-    "admin_models": {
-      "read": ["access", "credential", "server", "session"],
-      "edit": ["access", "credential", "server", "user", "session"]
+  "admin_models": {
+    "read": ["session"],
+    "edit": ["group", "user", "session"]
+  },
+  "rbac_models": {
+    "credential": {
+      "rbac_read": "Read",
+      "rbac_edit": "Edit"
     },
-    "deactivate_rbac_on_read": true
+    "device": {
+      "rbac_read": "Read",
+      "rbac_configuration": "Configuration",
+      "rbac_edit": "Edit",
+      "rbac_connect": "Connect via SSH",
+      "rbac_target": "Use as Target"
+    },
+    "link": {
+      "rbac_read": "Read",
+      "rbac_edit": "Edit"
+    },
+    "network": {
+      "rbac_read": "Read",
+      "rbac_edit": "Edit"
+    },
+    "pool": {
+      "rbac_read": "Read",
+      "rbac_edit": "Edit"
+    },
+    "service": {
+      "rbac_read": "Read",
+      "rbac_edit": "Edit",
+      "rbac_run": "Run"
+    },
+    "task": {
+      "rbac_read": "Read",
+      "rbac_edit": "Edit"
+    }
   }
 }

@@ -63,9 +63,7 @@ class NetmikoValidationService(ConnectionService):
             )
 #BEGIN iEN-AP deviation: change the result format
             commands = commands.splitlines()
-            prepend_command = not run.results_as_list and len(commands) > 1
             result = [
-                (("\nCOMMAND: " + command + '\n') if prepend_command else "") +
                 netmiko_connection.send_command(
                     command,
                     use_textfsm=run.use_textfsm,
@@ -78,7 +76,11 @@ class NetmikoValidationService(ConnectionService):
                 )
                 for command in commands
             ]
-            if not run.results_as_list:
+            if len(result) == 1:
+                (result,) = result
+            elif not run.results_as_list:
+                for i, r in enumerate(result):
+                    result[i] = "\nCOMMAND: " + commands[i] + '\n' + result[i]
                 result = "\n".join(map(str, result))
 # END iEN-AP deviation: change the result format
             run.exit_remote_device(netmiko_connection, prompt, device)

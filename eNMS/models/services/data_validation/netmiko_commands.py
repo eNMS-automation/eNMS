@@ -50,17 +50,17 @@ class NetmikoValidationService(ConnectionService):
             commands = Template(run.commands).render(variables)
         else:
             commands = run.sub(run.commands, local_variables)
-        log_command = run.commands if "get_credential" in run.commands else commands
         netmiko_connection = run.netmiko_connection(device)
         try:
             prompt = run.enter_remote_device(netmiko_connection, device)
             netmiko_connection.session_log.truncate(0)
             run.log(
                 "info",
-                f"sending COMMAND '{log_command}' with Netmiko",
+                f"sending COMMAND '{commands}' with Netmiko",
                 device,
                 logger="security",
             )
+            commands = commands.splitlines()
             result = [
                 netmiko_connection.send_command(
                     command,
@@ -72,22 +72,25 @@ class NetmikoValidationService(ConnectionService):
                     strip_prompt=run.strip_prompt,
                     strip_command=run.strip_command,
                 )
-                for command in commands.splitlines()
+                for command in commands
             ]
             if len(result) == 1:
                 (result,) = result
             elif not run.results_as_list:
+                for index in range(len(result)):
+                    prefix = "{}COMMAND :".format("\n" if index else "")
+                    result[index] = prefix + commands[index] + "\n\n" + result[index]
                 result = "\n".join(map(str, result))
             run.exit_remote_device(netmiko_connection, prompt, device)
         except Exception:
             result = netmiko_connection.session_log.getvalue().decode().lstrip("\u0000")
             return {
-                "commands": log_command,
+                "commands": commands,
                 "error": format_exc(),
                 "result": result,
                 "success": False,
             }
-        return {"commands": log_command, "result": result}
+        return {"commands": commands, "result": result}
 
 
 class NetmikoValidationForm(NetmikoForm):

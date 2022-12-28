@@ -50,18 +50,16 @@ class NetmikoValidationService(ConnectionService):
             commands = Template(run.commands).render(variables)
         else:
             commands = run.sub(run.commands, local_variables)
-        log_command = run.commands if "get_credential" in run.commands else commands
         netmiko_connection = run.netmiko_connection(device)
         try:
             prompt = run.enter_remote_device(netmiko_connection, device)
             netmiko_connection.session_log.truncate(0)
             run.log(
                 "info",
-                f"sending COMMAND '{log_command}' with Netmiko",
+                f"sending COMMAND '{commands}' with Netmiko",
                 device,
                 logger="security",
             )
-#BEGIN iEN-AP deviation: change the result format
             commands = commands.splitlines()
             result = [
                 netmiko_connection.send_command(
@@ -79,24 +77,20 @@ class NetmikoValidationService(ConnectionService):
             if len(result) == 1:
                 (result,) = result
             elif not run.results_as_list:
-                for i, r in enumerate(result):
-                    result[i] = "\nCOMMAND: " + commands[i] + '\n' + result[i]
+                for index in range(len(result)):
+                    prefix = "{}COMMAND :".format("\n" if index else "")
+                    result[index] = prefix + commands[index] + "\n\n" + result[index]
                 result = "\n".join(map(str, result))
-# END iEN-AP deviation: change the result format
             run.exit_remote_device(netmiko_connection, prompt, device)
         except Exception:
             result = netmiko_connection.session_log.getvalue().decode().lstrip("\u0000")
             return {
-# BEGIN iEN-AP deviation: use the command list as the value
                 "commands": commands,
-# END iEN-AP deviation: use the command list as the value
                 "error": format_exc(),
                 "result": result,
                 "success": False,
             }
-# BEGIN iEN-AP deviation: use the command list as the value
         return {"commands": commands, "result": result}
-# END iEN-AP deviation: use the command list as the value
 
 
 class NetmikoValidationForm(NetmikoForm):

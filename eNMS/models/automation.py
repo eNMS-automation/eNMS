@@ -117,6 +117,10 @@ class Service(AbstractBase):
         kwargs.pop("status", None)
         super().__init__(**kwargs)
 
+    @property
+    def base_properties(self):
+        return {**super().base_properties, "report_format": self.report_format}
+
     def delete(self):
         if self.name in ("[Shared] Start", "[Shared] End", "[Shared] Placeholder"):
             raise db.rbac_error(f"It is not allowed to delete '{self.name}'.")

@@ -24,7 +24,7 @@ from sqlalchemy.orm import aliased
 from sqlalchemy.sql.expression import true
 from subprocess import Popen
 from tarfile import open as open_tar
-from threading import Thread
+from threading import current_thread, Thread
 from traceback import format_exc
 from uuid import uuid4
 from xlrd import open_workbook
@@ -289,7 +289,7 @@ class Controller:
 
     def delete_instance(self, model, instance_id):
         try:
-            db.delete(model, id=instance_id)
+            return db.delete(model, id=instance_id).get("name", "")
         except Exception as exc:
             return {"alert": f"Unable to delete {model} ({exc})"}
 
@@ -1076,6 +1076,7 @@ class Controller:
     @staticmethod
     @actor
     def run(service, **kwargs):
+        current_thread().name = kwargs["runtime"]
         if "path" not in kwargs:
             kwargs["path"] = str(service)
         keys = list(vs.model_properties["run"]) + list(vs.relationships["run"])

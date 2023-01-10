@@ -3,7 +3,7 @@
   "disable_existing_loggers": false,
   "formatters": {
     "standard": {
-      "format": "%(asctime)s %(name)s %(levelname)-8s %(message)s"
+      "format": "[%(threadName)s] %(asctime)s %(name)s %(levelname)-8s %(message)s"
     }
   },
   "handlers": {

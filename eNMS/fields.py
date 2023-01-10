@@ -32,6 +32,7 @@ class FieldMixin(metaclass=MetaField):
     def __init__(self, *args, **kwargs):
         if "help" in kwargs:
             kwargs.setdefault("render_kw", {})["help"] = kwargs.pop("help")
+        kwargs.pop("dont_duplicate", None)
         super().__init__(*args, **kwargs)
 
 

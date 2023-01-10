@@ -31,15 +31,15 @@
     },
     "Administration": {
       "icon": "users",
-      "rbac": "admin",
+      "rbac": "access",
       "pages": {
         "Servers": {
           "endpoint": "/server_table",
-          "rbac": "admin"
+          "rbac": "access"
         },
         "Credentials": {
           "endpoint": "/credential_table",
-          "rbac": "admin"
+          "rbac": "access"
         }
       }
     },
@@ -117,7 +117,7 @@
     "/compare_form": "access",
     "/configuration_table": "access",
     "/confirmation_form": "access",
-    "/credential_table": "admin",
+    "/credential_table": "access",
     "/dashboard": "all",
     "/device_data_form": "access",
     "/device_table": "access",
@@ -148,7 +148,7 @@
     "/result_comparison_form": "access",
     "/result_form": "access",
     "/run_table": "access",
-    "/server_table": "admin",
+    "/server_table": "access",
     "/service_table": "access",
     "/session_log_form": "admin",
     "/session_table": "admin",
@@ -259,10 +259,14 @@
     "/web_connection": "access"
   },
   "admin_models": {
-    "read": ["credential", "server", "session"],
-    "edit": ["credential", "group", "server", "user", "session"]
+    "read": ["session"],
+    "edit": ["group", "user", "session"]
   },
   "rbac_models": {
+    "credential": {
+      "rbac_read": "Read",
+      "rbac_edit": "Edit"
+    },
     "device": {
       "rbac_read": "Read",
       "rbac_configuration": "Configuration",

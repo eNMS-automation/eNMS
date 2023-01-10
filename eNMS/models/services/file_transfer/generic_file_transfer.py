@@ -37,8 +37,8 @@ class GenericFileTransferService(Service):
     window_size = db.Column(Integer, default=2**30)
     timeout = db.Column(Float, default=10.0)
     credentials = db.Column(db.SmallString, default="device")
-    credential_object_id = db.Column(Integer, ForeignKey("credential.id"))
-    credential_object = relationship("Credential")
+    named_credential_id = db.Column(Integer, ForeignKey("credential.id"))
+    named_credential = relationship("Credential")
     custom_username = db.Column(db.SmallString)
     custom_password = db.Column(db.SmallString)
 
@@ -96,12 +96,12 @@ class GenericFileTransferForm(ServiceForm):
         "Credentials",
         choices=(
             ("device", "Device Credentials"),
-            ("object", "Credential Object"),
+            ("object", "Named Credential"),
             ("user", "User Credentials"),
             ("custom", "Custom Credentials"),
         ),
     )
-    credential_object = InstanceField("Credential Object", model="credential")
+    named_credential = InstanceField("Named Credential", model="credential")
     custom_username = StringField("Custom Username", substitution=True)
     custom_password = PasswordField("Custom Password", substitution=True)
 

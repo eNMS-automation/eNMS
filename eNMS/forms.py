@@ -61,12 +61,14 @@ class MetaForm(FormMeta):
                     "select": SelectField,
                     "multiselect": SelectMultipleField,
                 }[values.get("type", "str")]
-            form_kw = {"default": values["default"]} if "default" in values else {}
+            form_kw = {
+                property: values[property]
+                for property in ("default", "render_kw", "dont_duplicate")
+                if property in values
+            }
             form_args = []
             if field in (SelectField, SelectMultipleField):
                 form_kw["choices"] = values["choices"]
-            if "render_kw" in values:
-                form_kw["render_kw"] = values["render_kw"]
             if values.get("mandatory", False):
                 form_args.append([InputRequired()])
             field = field(values["pretty_name"], *form_args, **form_kw)
@@ -94,6 +96,7 @@ class MetaForm(FormMeta):
                 "type": field_type,
                 "model": field.kwargs.get("model", None),
                 "constraints": field.kwargs.get("constraints", {}),
+                "dont_duplicate": field.kwargs.get("dont_duplicate", False),
             }
             if field.args and isinstance(field.args[0], str):
                 vs.property_names[field_name] = field.args[0]
@@ -360,6 +363,7 @@ class ChangelogForm(BaseForm):
 
 class CredentialForm(BaseForm):
     action = "eNMS.base.processData"
+    template = "object"
     form_type = HiddenField(default="credential")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
@@ -668,10 +672,15 @@ class ServiceForm(BaseForm):
         "Notification Method",
         choices=(("mail", "Mail"), ("slack", "Slack"), ("mattermost", "Mattermost")),
     )
+    notification_header = StringField(
+        widget=TextArea(), render_kw={"rows": 8}, substitution=True
+    )
     include_device_results = BooleanField("Include Device Results")
     include_link_in_summary = BooleanField("Include Result Link in Summary")
     display_only_failed_nodes = BooleanField("Display only Failed Devices")
-    mail_recipient = StringField("Mail Recipients (separated by comma)")
+    mail_recipient = StringField(
+        "Mail Recipients (separated by comma)", substitution=True
+    )
     reply_to = StringField("Reply-to Email Address")
     number_of_retries = IntegerField("Number of retries", default=0)
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
@@ -961,12 +970,12 @@ class ConnectionForm(ServiceForm):
         "Credentials",
         choices=(
             ("device", "Device Credentials"),
-            ("object", "Credential Object"),
+            ("object", "Named Credential"),
             ("user", "User Credentials"),
             ("custom", "Custom Credentials"),
         ),
     )
-    credential_object = InstanceField("Credential Object", model="credential")
+    named_credential = InstanceField("Named Credential", model="credential")
     custom_username = StringField("Custom Username", substitution=True)
     custom_password = PasswordField("Custom Password", substitution=True)
     start_new_connection = BooleanField("Start New Connection")
@@ -976,7 +985,7 @@ class ConnectionForm(ServiceForm):
         "Connection Parameters": {
             "commands": [
                 "credentials",
-                "credential_object",
+                "named_credential",
                 "custom_username",
                 "custom_password",
                 "start_new_connection",

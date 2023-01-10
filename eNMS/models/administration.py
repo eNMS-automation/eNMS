@@ -135,6 +135,8 @@ class Credential(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     creator = db.Column(db.SmallString)
+    last_modified = db.Column(db.TinyString, info={"log_change": False})
+    last_modified_by = db.Column(db.SmallString, info={"log_change": False})
     role = db.Column(db.SmallString, default="read-write")
     subtype = db.Column(db.SmallString, default="password")
     description = db.Column(db.LargeString)
@@ -153,6 +155,11 @@ class Credential(AbstractBase):
         secondary=db.credential_group_table,
         back_populates="credentials",
     )
+
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        if not kwargs.get("migration_import"):
+            self.update_last_modified_properties()
 
 
 class Changelog(AbstractBase):
@@ -189,7 +196,7 @@ class File(AbstractBase):
     description = db.Column(db.LargeString)
     filename = db.Column(db.SmallString, index=True)
     path = db.Column(db.SmallString, unique=True)
-    last_modified = db.Column(db.TinyString)
+    last_modified = db.Column(db.TinyString, info={"log_change": False})
     last_updated = db.Column(db.TinyString)
     status = db.Column(db.TinyString)
     folder_id = db.Column(Integer, ForeignKey("folder.id"))

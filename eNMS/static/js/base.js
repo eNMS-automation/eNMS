@@ -183,7 +183,7 @@ export function serializeForm(form, formDefault) {
 const deleteInstance = function (type, id, tableId) {
   call({
     url: `/delete_instance/${type}/${id}`,
-    callback: function (result) {
+    callback: function (name) {
       if (type in subtypes.service) {
         type = "service";
         const path = localStorage.getItem("path");
@@ -197,8 +197,7 @@ const deleteInstance = function (type, id, tableId) {
           .remove()
           .draw(false);
       }
-      const name = result.name ? `'${result.name}'` : "";
-      notify(`${type.toUpperCase()} ${name} deleted.`, "success", 5, true);
+      notify(`${type.toUpperCase()} '${name}' deleted.`, "success", 5, true);
     },
   });
 };
@@ -465,7 +464,11 @@ export function preprocessForm(panel, id, type, duplicate) {
   panel.querySelectorAll(".add-id").forEach((el) => {
     if (duplicate) {
       const property = type in subtypes.service ? "scoped_name" : "name";
-      if ([property, "id"].includes(el.name)) return;
+      if (
+        [property, "id"].includes(el.name) ||
+        formProperties[type][el.name]?.dont_duplicate
+      )
+        return;
     }
     if (id) $(el).prop("id", `${$(el).attr("id")}-${id}`);
   });
@@ -1233,3 +1236,4 @@ configureNamespace("base", [
   showInstancePanel,
   switchTheme,
 ]);
+          

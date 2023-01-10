@@ -61,6 +61,13 @@
         "default": "Custom"
       }
     },
+    "group": {
+      "custom_property": {
+        "pretty_name": "Custom Property",
+        "default": "CP",
+        "type": "str"
+      }
+    },
     "link": {
       "custom_property": {
         "pretty_name": "Custom Property",
@@ -101,6 +108,7 @@
         "type": "str",
         "default": "",
         "default_function": "generate_uuid",
+        "dont_duplicate": true,
         "render_kw": { "readonly": true }
       },
       "mandatory_parameter": {
@@ -524,13 +532,6 @@
         "search": "text"
       },
       {
-        "data": "last_modified",
-        "title": "Last modified",
-        "search": "text",
-        "width": "150px",
-        "visible": false
-      },
-      {
         "data": "creator",
         "title": "Creator",
         "search": "text",
@@ -598,12 +599,6 @@
         "title": "Name",
         "search": "text",
         "className": "dt-body-left"
-      },
-      {
-        "data": "last_modified",
-        "title": "Last Modified",
-        "search": "text",
-        "visible": false
       },
       {
         "data": "type",
@@ -1123,6 +1118,18 @@
       {
         "data": "creator",
         "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified_by",
+        "title": "Last Modified By",
         "search": "text",
         "visible": false
       },

@@ -78,6 +78,7 @@ Version 4.4.0: RBAC and Credentials
   fails (e.g data too long db error because of payload data for the results)
 - Fix "List index out of range" bug in Jump on Connect mechanism
   Commit 457f46dd2c496757e924d922f3455626d35a3784
+- Add RBAC support to credentials
 
 RBAC Refactoring:
 - Service export: owners and RBAC read / edit / etc are exported in the service
@@ -85,29 +86,21 @@ RBAC Refactoring:
   how RBAC is set up, the service will not be visible after export.
 
 Migration:
-- The credential file must be updated to use groups instead of pools ("user_pools" -> "groups"). The 
-  appropriate groups must be created first.
-- In migration files, check that the "settings" variable isn't used in any workflow. If the
-  server IP, name or URL is used, the "server variable should be used instead.
-- In service.yaml file, "notification_header" must be renamed "report".
-- "get_all" and "get_properties" controller functions have been removed. Check that they
-  are not used anywhere in custom code (plugin, custom.py, etc)
+- The credential file must be updated to use groups instead of pools
+  ("user_pools" -> "groups"). The appropriate groups must be created first.
+- In migration files, check that the "settings" variable isn't used in
+  any workflow. If the server IP, name or URL is used, the "server" variable
+  should be used instead.
+- "get_all" and "get_properties" controller functions have been removed.
+  Check that they are not used anywhere in custom code (plugin, custom.py, etc)
 
-Test:
+Test (besides what is in release notes):
 - the notification mechanism hasn't been impacted (in particular notification header
   option + devices results)
 - Jump on connect mechanism
 - RBAC
   - new mechanism
   - Freeze Edit / Run mechanism (refactored)
-- New Bulk Edit option for appending / removing to a multiple instance list
-- last_modified and last_modified_by properties (for workflows, tests that they
-  are updated in all cases mentioned above)
-- Task form validation (#267)
-- URL encoding for links to workflow builder with runtime (#278)
-- Regex filtering in table (refactored)
-- "creator" property in all object panels: must be properly set and not modified when
-  the object is edited.
 
 Version 4.3.0
 -------------

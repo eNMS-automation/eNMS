@@ -656,8 +656,8 @@ class Runner:
         }
         if "result" in results:
             notification["Results"] = results["result"]
-        if "report" in results:
-            notification["Report"] = results["report"]
+        if self.notification_header:
+            notification["Header"] = self.sub(self.notification_header, locals())
         if self.include_link_in_summary:
             run = f"{self.main_run.id}/{self.service.id}"
             notification["Link"] = f"{vs.server_url}/view_service_results/{run}"
@@ -681,7 +681,6 @@ class Runner:
             report = "\n".join(format_exc().splitlines())
             self.log("error", f"Failed to build report:\n{report}")
         if report:
-            results["report"] = report
             try:
                 db.factory(
                     "service_report",
@@ -714,7 +713,7 @@ class Runner:
             result = env.send_email(
                 f"{status}: {self.service.name}",
                 vs.dict_to_string(notification),
-                recipients=self.get("mail_recipient"),
+                recipients=self.sub(self.get("mail_recipient"), locals()),
                 reply_to=self.reply_to,
                 filename=f"results-{filename}.txt",
                 file_content=vs.dict_to_string(file_content),
@@ -739,7 +738,7 @@ class Runner:
     def get_credentials(self, device, add_secret=True):
         result, credential_type = {}, self.main_run.service.credential_type
         if self.credentials == "object":
-            credential = self.credential_object
+            credential = self.named_credential
         else:
             credential = db.get_credential(
                 self.creator,
@@ -1041,14 +1040,14 @@ class Runner:
         if connection:
             self.log("info", f"Using cached {connection_name}", device)
             return self.update_netmiko_connection(connection)
+        driver = device.netmiko_driver if self.driver == "device" else self.driver
         self.log(
             "info",
-            f"OPENING {connection_name}",
+            f"OPENING {connection_name} (driver: {driver})",
             device,
             change_log=False,
             logger="security",
         )
-        driver = device.netmiko_driver if self.driver == "device" else self.driver
         sock = None
         if device.gateways:
             gateways = sorted(device.gateways, key=attrgetter("priority"), reverse=True)

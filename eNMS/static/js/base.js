@@ -465,9 +465,10 @@ export function preprocessForm(panel, id, type, duplicate) {
     if (duplicate) {
       const property = type in subtypes.service ? "scoped_name" : "name";
       if (
-        [property, "id"].includes(el.name)
-        || (formProperties[type][el.name]?.dont_duplicate)
-      ) return;
+        [property, "id"].includes(el.name) ||
+        formProperties[type][el.name]?.dont_duplicate
+      )
+        return;
     }
     if (id) $(el).prop("id", `${$(el).attr("id")}-${id}`);
   });

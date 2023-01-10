@@ -33,6 +33,7 @@ If ssh2 or paramiko are the selected the timeouts for each respective library is
       object for each device. If there are multiple credentials available, eNMS
       will use the `Type of Credential` and `Priority` properties as a tie
       breaker.
+    - `Named Credential` - Credential type
     - `User Credentials` - Use the user's currently logged in credentials to
       access the device.
     - `Custom Credentials` - The user provides the credentials below:

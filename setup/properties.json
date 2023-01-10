@@ -61,6 +61,13 @@
         "default": "Custom"
       }
     },
+    "group": {
+      "custom_property": {
+        "pretty_name": "Custom Property",
+        "default": "CP",
+        "type": "str"
+      }
+    },
     "link": {
       "custom_property": {
         "pretty_name": "Custom Property",

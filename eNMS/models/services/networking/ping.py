@@ -1,5 +1,5 @@
 from socket import error, gaierror, socket, timeout
-from subprocess import check_output
+from subprocess import run as sub_run
 from sqlalchemy import ForeignKey, Integer
 
 from eNMS.database import db
@@ -38,13 +38,13 @@ class PingService(Service):
                     command.extend(f"-{variable} {value}".split())
             command.append(ip_address)
             run.log("info", f"Running PING ({command})", device)
-            output = check_output(command).decode().strip().splitlines()
-            total = output[-2].split(",")[3].split()[1]
-            loss = output[-2].split(",")[2].split()[0]
-            timing = output[-1].split()[3].split("/")
-            return {
-                "success": True,
-                "result": {
+            sub_result, result = sub_run(command, capture_output=True), None
+            output = sub_result.stdout.decode().strip().splitlines()
+            if sub_result.returncode == 0:
+                total = output[-2].split(",")[3].split()[1]
+                loss = output[-2].split(",")[2].split()[0]
+                timing = output[-1].split()[3].split("/")
+                result = {
                     "probes_sent": run.count,
                     "packet_loss": loss,
                     "rtt_min": timing[0],
@@ -52,7 +52,12 @@ class PingService(Service):
                     "rtt_avg": timing[1],
                     "rtt_stddev": timing[3],
                     "total rtt": total,
-                },
+                }
+            return {
+                "error": sub_result.stderr.decode().strip(),
+                "output": "\n".join(output),
+                "result": result,
+                "success": sub_result.returncode == 0
             }
         else:
             result = {}

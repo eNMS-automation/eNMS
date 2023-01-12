@@ -107,8 +107,8 @@ match_label = (
 
 class DataProcessingForm(ServiceForm):
     form_type = HiddenField(default="data_processing_service")
-    variable1 = StringField("Variable Name")
-    query1 = StringField("Variable", python=True)
+    variable1 = StringField("Variable Name", help="data_processing/variable_name")
+    query1 = StringField("Variable", python=True, help="data_processing/variable")
     match_type1 = SelectField("Processing", choices=match_choices)
     match1 = StringField(match_label, widget=TextArea(), render_kw={"rows": 5})
     operation1 = SelectField("Operation", choices=operation_choices)

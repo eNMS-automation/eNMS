@@ -1236,4 +1236,3 @@ configureNamespace("base", [
   showInstancePanel,
   switchTheme,
 ]);
-          

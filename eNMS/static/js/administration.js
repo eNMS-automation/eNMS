@@ -62,15 +62,13 @@ export function displayFolderPath() {
     .slice(1)
     .forEach((folder) => {
       currentPath += `/${folder}`;
-      const clickable = currentPath.includes(defaultFolder);
-      const onclick = clickable
-        ? `onclick="eNMS.administration.enterFolder({path: '${currentPath}'})"`
-        : "";
-      const status = clickable ? "" : "disabled";
+      if (!currentPath.includes(defaultFolder)) return;
       htmlPath.push(`<b> / </b>
-    <button type="button" ${status} class="btn btn-xs btn-primary" ${onclick}>
-      ${folder}
-    </button>`);
+        <button type="button" class="btn btn-xs btn-primary"
+        onclick="eNMS.administration.enterFolder({path: '${currentPath}'})">
+          ${folder}
+        </button>
+      `);
     });
   $("#current-folder-path").html(`<b>Current Folder :</b>${htmlPath.join("")}`);
 }

@@ -1,4 +1,6 @@
 - creator: admin
+  credential_access: []
+  custom_property: CP
   delete_requests: []
   description: All users
   device_access: []
@@ -16,6 +18,8 @@
   type: group
   users: [admin, readonly, nadmin, demo]
 - creator: admin
+  credential_access: []
+  custom_property: CP
   delete_requests: []
   description: Admin User
   device_access: []
@@ -33,6 +37,8 @@
   type: group
   users: [admin]
 - creator: admin
+  credential_access: []
+  custom_property: CP
   delete_requests: [/rest/instance]
   description: Full UI Read + Edit Access
   device_access: []
@@ -41,28 +47,28 @@
     /credential_table, /device_data_form, /device_table, /download, /event_table,
     /export_service, /file_table, /files_form, /geographical_view, /git_history_form,
     /group_table, /instance_deletion_form, /link_table, /network_builder, /logs_form,
-    /pool_table, /rest/configuration, /rest/instance, /rest/query, /rest/result, /rest/token,
-    /result_comparison_form, /result_form, /run_table, /server_table, /service_table,
-    /network_table, /table_form, /task_table, /terminal, /tree_form, /view_service_results,
-    /workflow_builder, /instance_tree_form, /add_services_to_workflow_form, /add_to_network_form,
-    /administration_form, /changelog_form, /credential_form, /database_deletion_form,
-    /database_migration_form, /debug_form, /device_connection_form, /excel_export_form,
-    /excel_import_form, /file_form, /folder_form, /file_editor_form, /import_services_form,
-    /pool_form, /restart_workflow_form, /result_log_deletion_form, /run_service_form,
-    /server_form, /task_form, /upload_files_form, /profile_form, /label_form, /workflow_edge_form,
-    /device_form, /link_form, /parameters_form, /netmiko_form, /scrapli_form, /user_form,
-    /gateway_form, /network_form, /router_form, /ethernet_link_form, /napalm_configuration_service_form,
-    /napalm_rollback_service_form, /netmiko_configuration_service_form, /napalm_backup_service_form,
-    /netmiko_backup_service_form, /scrapli_backup_service_form, /napalm_getters_service_form,
-    /netmiko_commands_service_form, /netmiko_prompts_service_form, /scrapli_service_form,
-    /configure_bgp_service_form, /example_service_form, /generic_file_transfer_service_form,
-    /netmiko_file_transfer_service_form, /ansible_playbook_service_form, /git_service_form,
-    /rest_call_service_form, /swiss_army_knife_service_form, /topology_import_service_form,
-    /netconf_service_form, /scrapli_netconf_service_form, /napalm_ping_service_form,
-    /napalm_traceroute_service_form, /ping_service_form, /mail_notification_service_form,
-    /mattermost_notification_service_form, /slack_notification_service_form, /unix_command_service_form,
-    /unix_shell_script_service_form, /data_processing_service_form, /data_validation_service_form,
-    /python_snippet_service_form, /workflow_form, /changelog_relation_filtering_form,
+    /pool_table, /report_form, /rest/configuration, /rest/instance, /rest/query, /rest/result,
+    /rest/token, /result_comparison_form, /result_form, /run_table, /server_table,
+    /service_table, /network_table, /table_form, /task_table, /terminal, /tree_form,
+    /view_service_results, /workflow_builder, /instance_tree_form, /add_services_to_workflow_form,
+    /add_to_network_form, /administration_form, /changelog_form, /credential_form,
+    /database_deletion_form, /database_migration_form, /debug_form, /device_connection_form,
+    /excel_export_form, /excel_import_form, /file_form, /folder_form, /file_editor_form,
+    /import_services_form, /pool_form, /restart_workflow_form, /result_log_deletion_form,
+    /run_service_form, /server_form, /task_form, /upload_files_form, /profile_form,
+    /label_form, /workflow_edge_form, /device_form, /link_form, /parameters_form,
+    /netmiko_form, /scrapli_form, /user_form, /gateway_form, /network_form, /router_form,
+    /ethernet_link_form, /napalm_configuration_service_form, /napalm_rollback_service_form,
+    /netmiko_configuration_service_form, /napalm_backup_service_form, /netmiko_backup_service_form,
+    /scrapli_backup_service_form, /napalm_getters_service_form, /netmiko_commands_service_form,
+    /netmiko_prompts_service_form, /scrapli_service_form, /configure_bgp_service_form,
+    /example_service_form, /generic_file_transfer_service_form, /netmiko_file_transfer_service_form,
+    /ansible_playbook_service_form, /git_service_form, /rest_call_service_form, /swiss_army_knife_service_form,
+    /topology_import_service_form, /netconf_service_form, /scrapli_netconf_service_form,
+    /napalm_ping_service_form, /napalm_traceroute_service_form, /ping_service_form,
+    /mail_notification_service_form, /mattermost_notification_service_form, /slack_notification_service_form,
+    /unix_command_service_form, /unix_shell_script_service_form, /data_processing_service_form,
+    /data_validation_service_form, /python_snippet_service_form, /workflow_form, /changelog_relation_filtering_form,
     /changelog_filtering_form, /credential_relation_filtering_form, /credential_filtering_form,
     /device_relation_filtering_form, /device_filtering_form, /group_relation_filtering_form,
     /group_filtering_form, /link_relation_filtering_form, /link_filtering_form, /pool_relation_filtering_form,
@@ -101,6 +107,8 @@
   type: group
   users: [nadmin]
 - creator: admin
+  credential_access: []
+  custom_property: CP
   delete_requests: [/rest/instance]
   description: ''
   device_access: []

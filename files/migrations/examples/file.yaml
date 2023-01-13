@@ -13,7 +13,7 @@
   files: ['>media>sf_shared>eNMS-prod>files>migrations>default', '>media>sf_shared>eNMS-prod>files>migrations>examples',
     '>media>sf_shared>eNMS-prod>files>migrations>model_scalability', '>media>sf_shared>eNMS-prod>files>migrations>rbac_scalability']
   folder_path: /media/sf_shared/eNMS-prod/files
-  last_modified: '2022-12-14 08:58:37'
+  last_modified: '2022-12-20 02:57:35'
   last_updated: '2022-11-09 01:27:12'
   name: '>media>sf_shared>eNMS-prod>files>migrations'
   path: /media/sf_shared/eNMS-prod/files/migrations
@@ -25,7 +25,7 @@
     '>media>sf_shared>eNMS-prod>files>playbooks>inventory', '>media>sf_shared>eNMS-prod>files>playbooks>output.txt',
     '>media>sf_shared>eNMS-prod>files>playbooks>save_running_config.yaml', '>media>sf_shared>eNMS-prod>files>playbooks>simple_playbook.yml']
   folder_path: /media/sf_shared/eNMS-prod/files
-  last_modified: '2022-12-13 00:38:13'
+  last_modified: '2023-01-09 05:10:20'
   last_updated: '2022-11-09 01:23:39'
   name: '>media>sf_shared>eNMS-prod>files>playbooks'
   path: /media/sf_shared/eNMS-prod/files/playbooks
@@ -36,7 +36,7 @@
     '>media>sf_shared>eNMS-prod>files>scripts>generate_topology.py', '>media>sf_shared>eNMS-prod>files>scripts>gitlab_test.py',
     '>media>sf_shared>eNMS-prod>files>scripts>migration.py', '>media>sf_shared>eNMS-prod>files>scripts>scalability_migration.py']
   folder_path: /media/sf_shared/eNMS-prod/files
-  last_modified: '2022-12-13 00:38:13'
+  last_modified: '2023-01-10 07:28:35'
   last_updated: '2022-11-09 01:23:39'
   name: '>media>sf_shared>eNMS-prod>files>scripts'
   path: /media/sf_shared/eNMS-prod/files/scripts
@@ -44,9 +44,10 @@
 - custom_property: Custom
   description: ''
   files: ['>media>sf_shared>eNMS-prod>files>services>.gitkeep', '>media>sf_shared>eNMS-prod>files>services>RGatewayMechanismSSHProxywithScrapli',
-    '>media>sf_shared>eNMS-prod>files>services>AAAA']
+    '>media>sf_shared>eNMS-prod>files>services>AAAA', '>media>sf_shared>eNMS-prod>files>services>AAA',
+    '>media>sf_shared>eNMS-prod>files>services>AAA (1)']
   folder_path: /media/sf_shared/eNMS-prod/files
-  last_modified: '2022-11-13 05:11:29'
+  last_modified: '2022-12-28 15:19:38'
   last_updated: '2022-11-09 01:23:39'
   name: '>media>sf_shared>eNMS-prod>files>services'
   path: /media/sf_shared/eNMS-prod/files/services
@@ -100,7 +101,7 @@
   folder: '>media>sf_shared>eNMS-prod>files>migrations'
   folder_id: 2
   folder_path: /media/sf_shared/eNMS-prod/files/migrations
-  last_modified: '2022-12-13 00:38:13'
+  last_modified: '2022-12-20 03:00:17'
   last_updated: '2022-11-09 01:23:39'
   name: '>media>sf_shared>eNMS-prod>files>migrations>default'
   path: /media/sf_shared/eNMS-prod/files/migrations/default
@@ -117,7 +118,7 @@
   folder: '>media>sf_shared>eNMS-prod>files>migrations'
   folder_id: 2
   folder_path: /media/sf_shared/eNMS-prod/files/migrations
-  last_modified: '2022-12-16 04:16:57'
+  last_modified: '2023-01-13 08:31:28'
   last_updated: '2022-11-09 01:23:39'
   name: '>media>sf_shared>eNMS-prod>files>migrations>examples'
   path: /media/sf_shared/eNMS-prod/files/migrations/examples
@@ -132,7 +133,7 @@
   folder: '>media>sf_shared>eNMS-prod>files>migrations'
   folder_id: 2
   folder_path: /media/sf_shared/eNMS-prod/files/migrations
-  last_modified: '2022-12-13 00:38:13'
+  last_modified: '2022-12-20 02:57:35'
   last_updated: '2022-11-09 01:23:39'
   name: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability'
   path: /media/sf_shared/eNMS-prod/files/migrations/model_scalability
@@ -145,7 +146,7 @@
   folder: '>media>sf_shared>eNMS-prod>files>migrations'
   folder_id: 2
   folder_path: /media/sf_shared/eNMS-prod/files/migrations
-  last_modified: '2022-12-13 00:38:13'
+  last_modified: '2022-12-20 02:57:35'
   last_updated: '2022-11-09 01:23:39'
   name: '>media>sf_shared>eNMS-prod>files>migrations>rbac_scalability'
   path: /media/sf_shared/eNMS-prod/files/migrations/rbac_scalability
@@ -155,8 +156,8 @@
     09:52:15', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>scripts>generate_fernet_key.py',
   path: /media/sf_shared/eNMS-prod/files/scripts/generate_fernet_key.py, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>scripts',
-  folder_id: 4, folder_path: /media/sf_shared/eNMS-prod/files/scripts, last_modified: '2022-12-13
-    00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>scripts>generate_migration.py',
+  folder_id: 4, folder_path: /media/sf_shared/eNMS-prod/files/scripts, last_modified: '2022-12-20
+    03:00:17', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>scripts>generate_migration.py',
   path: /media/sf_shared/eNMS-prod/files/scripts/generate_migration.py, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>scripts',
   folder_id: 4, folder_path: /media/sf_shared/eNMS-prod/files/scripts, last_modified: '2022-10-18
@@ -167,29 +168,29 @@
     09:52:15', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>scripts>gitlab_test.py',
   path: /media/sf_shared/eNMS-prod/files/scripts/gitlab_test.py, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>scripts',
-  folder_id: 4, folder_path: /media/sf_shared/eNMS-prod/files/scripts, last_modified: '2022-12-16
-    02:57:19', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>scripts>migration.py',
+  folder_id: 4, folder_path: /media/sf_shared/eNMS-prod/files/scripts, last_modified: '2023-01-10
+    07:28:35', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>scripts>migration.py',
   path: /media/sf_shared/eNMS-prod/files/scripts/migration.py, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>scripts',
-  folder_id: 4, folder_path: /media/sf_shared/eNMS-prod/files/scripts, last_modified: '2022-12-13
-    00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>scripts>scalability_migration.py',
+  folder_id: 4, folder_path: /media/sf_shared/eNMS-prod/files/scripts, last_modified: '2022-12-20
+    02:57:35', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>scripts>scalability_migration.py',
   path: /media/sf_shared/eNMS-prod/files/scripts/scalability_migration.py, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>rbac_scalability',
   folder_id: 14, folder_path: /media/sf_shared/eNMS-prod/files/migrations/rbac_scalability,
-  last_modified: '2022-12-13 00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>rbac_scalability>device.yaml',
+  last_modified: '2022-12-20 02:57:35', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>rbac_scalability>device.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/rbac_scalability/device.yaml,
   type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>rbac_scalability',
   folder_id: 14, folder_path: /media/sf_shared/eNMS-prod/files/migrations/rbac_scalability,
-  last_modified: '2022-12-13 00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>rbac_scalability>group.yaml',
+  last_modified: '2022-12-20 02:57:35', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>rbac_scalability>group.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/rbac_scalability/group.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>rbac_scalability',
   folder_id: 14, folder_path: /media/sf_shared/eNMS-prod/files/migrations/rbac_scalability,
-  last_modified: '2022-12-13 00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>rbac_scalability>link.yaml',
+  last_modified: '2022-12-20 02:57:35', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>rbac_scalability>link.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/rbac_scalability/link.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>rbac_scalability',
   folder_id: 14, folder_path: /media/sf_shared/eNMS-prod/files/migrations/rbac_scalability,
-  last_modified: '2022-12-13 00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>rbac_scalability>user.yaml',
+  last_modified: '2022-12-20 02:57:35', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>rbac_scalability>user.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/rbac_scalability/user.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>default',
   folder_id: 11, folder_path: /media/sf_shared/eNMS-prod/files/migrations/default,
@@ -205,7 +206,7 @@
   path: /media/sf_shared/eNMS-prod/files/migrations/default/pool.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>default',
   folder_id: 11, folder_path: /media/sf_shared/eNMS-prod/files/migrations/default,
-  last_modified: '2022-12-13 00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>default>service.yaml',
+  last_modified: '2022-12-20 03:00:17', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>default>service.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/default/service.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>default',
   folder_id: 11, folder_path: /media/sf_shared/eNMS-prod/files/migrations/default,
@@ -229,7 +230,7 @@
   folder: '>media>sf_shared>eNMS-prod>files>services'
   folder_id: 5
   folder_path: /media/sf_shared/eNMS-prod/files/services
-  last_modified: '2022-11-09 00:20:31'
+  last_modified: '2022-12-28 15:19:38'
   last_updated: '2022-11-09 01:23:39'
   name: '>media>sf_shared>eNMS-prod>files>services>RGatewayMechanismSSHProxywithScrapli'
   path: /media/sf_shared/eNMS-prod/files/services/RGatewayMechanismSSHProxywithScrapli
@@ -321,27 +322,27 @@
   path: /media/sf_shared/eNMS-prod/files/snippets/sql_performances.py, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>examples',
   folder_id: 12, folder_path: /media/sf_shared/eNMS-prod/files/migrations/examples,
-  last_modified: '2022-12-16 04:30:05', last_updated: '2022-12-07 15:15:38', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>credential.yaml',
+  last_modified: '2023-01-13 08:31:28', last_updated: '2022-12-07 15:15:38', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>credential.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/examples/credential.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>examples',
   folder_id: 12, folder_path: /media/sf_shared/eNMS-prod/files/migrations/examples,
-  last_modified: '2022-12-16 04:35:28', last_updated: '2022-12-16 04:35:28', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>device.yaml',
+  last_modified: '2023-01-13 08:34:50', last_updated: '2023-01-13 08:34:51', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>device.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/examples/device.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>examples',
   folder_id: 12, folder_path: /media/sf_shared/eNMS-prod/files/migrations/examples,
-  last_modified: '2022-12-16 04:35:28', last_updated: '2022-12-16 04:35:28', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>group.yaml',
+  last_modified: '2023-01-13 08:34:50', last_updated: '2023-01-13 08:34:51', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>group.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/examples/group.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>examples',
   folder_id: 12, folder_path: /media/sf_shared/eNMS-prod/files/migrations/examples,
-  last_modified: '2022-12-16 04:29:58', last_updated: '2022-12-07 15:15:29', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>link.yaml',
+  last_modified: '2023-01-13 08:31:28', last_updated: '2022-12-07 15:15:29', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>link.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/examples/link.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>examples',
   folder_id: 12, folder_path: /media/sf_shared/eNMS-prod/files/migrations/examples,
-  last_modified: '2022-12-16 04:30:04', last_updated: '2022-12-07 15:15:37', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>network.yaml',
+  last_modified: '2023-01-13 08:31:28', last_updated: '2022-12-07 15:15:37', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>network.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/examples/network.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>examples',
   folder_id: 12, folder_path: /media/sf_shared/eNMS-prod/files/migrations/examples,
-  last_modified: '2022-12-16 04:30:06', last_updated: '2022-12-07 15:15:38', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>pool.yaml',
+  last_modified: '2023-01-13 08:31:28', last_updated: '2022-12-07 15:15:38', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>pool.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/examples/pool.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>examples',
   folder_id: 12, folder_path: /media/sf_shared/eNMS-prod/files/migrations/examples,
@@ -349,19 +350,19 @@
   path: /media/sf_shared/eNMS-prod/files/migrations/examples/port.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>examples',
   folder_id: 12, folder_path: /media/sf_shared/eNMS-prod/files/migrations/examples,
-  last_modified: '2022-12-16 04:30:04', last_updated: '2022-12-07 15:15:36', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>service.yaml',
+  last_modified: '2023-01-13 08:31:28', last_updated: '2022-12-07 15:15:36', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>service.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/examples/service.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>examples',
   folder_id: 12, folder_path: /media/sf_shared/eNMS-prod/files/migrations/examples,
-  last_modified: '2022-12-16 04:30:05', last_updated: '2022-12-07 15:15:38', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>task.yaml',
+  last_modified: '2023-01-13 08:31:28', last_updated: '2022-12-07 15:15:38', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>task.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/examples/task.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>examples',
   folder_id: 12, folder_path: /media/sf_shared/eNMS-prod/files/migrations/examples,
-  last_modified: '2022-12-16 04:35:28', last_updated: '2022-12-16 04:35:28', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>user.yaml',
+  last_modified: '2023-01-13 08:34:50', last_updated: '2023-01-13 08:34:50', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>user.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/examples/user.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>examples',
   folder_id: 12, folder_path: /media/sf_shared/eNMS-prod/files/migrations/examples,
-  last_modified: '2022-12-16 04:30:05', last_updated: '2022-12-07 15:15:37', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>workflow_edge.yaml',
+  last_modified: '2023-01-13 08:31:28', last_updated: '2022-12-07 15:15:37', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>workflow_edge.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/examples/workflow_edge.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>playbooks',
   folder_id: 3, folder_path: /media/sf_shared/eNMS-prod/files/playbooks, last_modified: '2022-11-09
@@ -373,74 +374,74 @@
   path: /media/sf_shared/eNMS-prod/files/playbooks/arista_show_running_config.yml,
   type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>playbooks',
-  folder_id: 3, folder_path: /media/sf_shared/eNMS-prod/files/playbooks, last_modified: '2022-12-13
-    00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>playbooks>arista_show_version.yml',
+  folder_id: 3, folder_path: /media/sf_shared/eNMS-prod/files/playbooks, last_modified: '2023-01-09
+    05:10:20', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>playbooks>arista_show_version.yml',
   path: /media/sf_shared/eNMS-prod/files/playbooks/arista_show_version.yml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>playbooks',
-  folder_id: 3, folder_path: /media/sf_shared/eNMS-prod/files/playbooks, last_modified: '2022-12-13
-    00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>playbooks>change_hostname.yml',
+  folder_id: 3, folder_path: /media/sf_shared/eNMS-prod/files/playbooks, last_modified: '2022-12-20
+    03:00:17', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>playbooks>change_hostname.yml',
   path: /media/sf_shared/eNMS-prod/files/playbooks/change_hostname.yml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>playbooks',
   folder_id: 3, folder_path: /media/sf_shared/eNMS-prod/files/playbooks, last_modified: '2022-11-09
     03:11:40', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>playbooks>inventory',
   path: /media/sf_shared/eNMS-prod/files/playbooks/inventory, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>playbooks',
-  folder_id: 3, folder_path: /media/sf_shared/eNMS-prod/files/playbooks, last_modified: '2022-12-13
-    00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>playbooks>output.txt',
+  folder_id: 3, folder_path: /media/sf_shared/eNMS-prod/files/playbooks, last_modified: '2022-12-20
+    03:00:17', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>playbooks>output.txt',
   path: /media/sf_shared/eNMS-prod/files/playbooks/output.txt, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>playbooks',
   folder_id: 3, folder_path: /media/sf_shared/eNMS-prod/files/playbooks, last_modified: '2022-11-09
     03:11:40', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>playbooks>save_running_config.yaml',
   path: /media/sf_shared/eNMS-prod/files/playbooks/save_running_config.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>playbooks',
-  folder_id: 3, folder_path: /media/sf_shared/eNMS-prod/files/playbooks, last_modified: '2022-12-13
-    00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>playbooks>simple_playbook.yml',
+  folder_id: 3, folder_path: /media/sf_shared/eNMS-prod/files/playbooks, last_modified: '2022-12-20
+    03:00:17', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>playbooks>simple_playbook.yml',
   path: /media/sf_shared/eNMS-prod/files/playbooks/simple_playbook.yml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability',
   folder_id: 13, folder_path: /media/sf_shared/eNMS-prod/files/migrations/model_scalability,
-  last_modified: '2022-12-13 00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability>device.yaml',
+  last_modified: '2022-12-20 02:57:35', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability>device.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/model_scalability/device.yaml,
   type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability',
   folder_id: 13, folder_path: /media/sf_shared/eNMS-prod/files/migrations/model_scalability,
-  last_modified: '2022-12-13 00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability>group.yaml',
+  last_modified: '2022-12-20 02:57:35', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability>group.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/model_scalability/group.yaml,
   type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability',
   folder_id: 13, folder_path: /media/sf_shared/eNMS-prod/files/migrations/model_scalability,
-  last_modified: '2022-12-13 00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability>link.yaml',
+  last_modified: '2022-12-20 02:57:35', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability>link.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/model_scalability/link.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability',
   folder_id: 13, folder_path: /media/sf_shared/eNMS-prod/files/migrations/model_scalability,
-  last_modified: '2022-12-13 00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability>network.yaml',
+  last_modified: '2022-12-20 02:57:35', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability>network.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/model_scalability/network.yaml,
   type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability',
   folder_id: 13, folder_path: /media/sf_shared/eNMS-prod/files/migrations/model_scalability,
-  last_modified: '2022-12-13 00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability>pool.yaml',
+  last_modified: '2022-12-20 02:57:35', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability>pool.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/model_scalability/pool.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability',
   folder_id: 13, folder_path: /media/sf_shared/eNMS-prod/files/migrations/model_scalability,
-  last_modified: '2022-12-13 00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability>service.yaml',
+  last_modified: '2022-12-20 02:57:35', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability>service.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/model_scalability/service.yaml,
   type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability',
   folder_id: 13, folder_path: /media/sf_shared/eNMS-prod/files/migrations/model_scalability,
-  last_modified: '2022-12-13 00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability>task.yaml',
+  last_modified: '2022-12-20 02:57:35', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability>task.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/model_scalability/task.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability',
   folder_id: 13, folder_path: /media/sf_shared/eNMS-prod/files/migrations/model_scalability,
-  last_modified: '2022-12-13 00:38:13', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability>user.yaml',
+  last_modified: '2022-12-20 02:57:35', last_updated: '2022-11-09 01:23:39', name: '>media>sf_shared>eNMS-prod>files>migrations>model_scalability>user.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/model_scalability/user.yaml, type: file}
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>migrations>examples',
   folder_id: 12, folder_path: /media/sf_shared/eNMS-prod/files/migrations/examples,
-  last_modified: '2022-12-16 04:29:57', last_updated: '2022-12-07 15:15:29', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>file.yaml',
+  last_modified: '2023-01-13 08:31:28', last_updated: '2022-12-07 15:15:29', name: '>media>sf_shared>eNMS-prod>files>migrations>examples>file.yaml',
   path: /media/sf_shared/eNMS-prod/files/migrations/examples/file.yaml, type: file}
 - custom_property: Custom
   description: ''
   files: ['>media>sf_shared>eNMS-prod>files>reports>report_results.j2']
   folder_path: /media/sf_shared/eNMS-prod/files
-  last_modified: '2022-12-13 00:38:13'
+  last_modified: '2022-12-20 02:57:35'
   last_updated: '2022-11-14 06:34:59'
   name: '>media>sf_shared>eNMS-prod>files>reports'
   path: /media/sf_shared/eNMS-prod/files/reports
@@ -451,12 +452,74 @@
   folder: '>media>sf_shared>eNMS-prod>files>services'
   folder_id: 5
   folder_path: /media/sf_shared/eNMS-prod/files/services
-  last_modified: '2022-11-13 05:15:27'
+  last_modified: '2022-12-28 15:19:38'
   last_updated: '2022-11-14 06:34:59'
   name: '>media>sf_shared>eNMS-prod>files>services>AAAA'
   path: /media/sf_shared/eNMS-prod/files/services/AAAA
   type: folder
 - {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>reports',
-  folder_id: 82, folder_path: /media/sf_shared/eNMS-prod/files/reports, last_modified: '2022-12-13
-    00:38:13', last_updated: '2022-11-28 06:54:27', name: '>media>sf_shared>eNMS-prod>files>reports>report_results.j2',
+  folder_id: 82, folder_path: /media/sf_shared/eNMS-prod/files/reports, last_modified: '2022-12-20
+    02:57:35', last_updated: '2022-11-28 06:54:27', name: '>media>sf_shared>eNMS-prod>files>reports>report_results.j2',
   path: /media/sf_shared/eNMS-prod/files/reports/report_results.j2, type: file}
+- custom_property: Custom
+  description: ''
+  files: []
+  folder: '>media>sf_shared>eNMS-prod>files>services'
+  folder_id: 5
+  folder_path: /media/sf_shared/eNMS-prod/files/services
+  last_modified: '2022-12-20 04:12:12'
+  last_updated: '2023-01-13 08:33:51'
+  name: '>media>sf_shared>eNMS-prod>files>services>AAA'
+  path: /media/sf_shared/eNMS-prod/files/services/AAA
+  type: folder
+- custom_property: Custom
+  description: ''
+  files: ['>media>sf_shared>eNMS-prod>files>services>AAA (1)>AAA']
+  folder: '>media>sf_shared>eNMS-prod>files>services'
+  folder_id: 5
+  folder_path: /media/sf_shared/eNMS-prod/files/services
+  last_modified: '2022-12-20 03:40:40'
+  last_updated: '2023-01-13 08:33:51'
+  name: '>media>sf_shared>eNMS-prod>files>services>AAA (1)'
+  path: /media/sf_shared/eNMS-prod/files/services/AAA (1)
+  type: folder
+- custom_property: Custom
+  description: ''
+  files: ['>media>sf_shared>eNMS-prod>files>services>AAA (1)>AAA>@PaxHeader', '>media>sf_shared>eNMS-prod>files>services>AAA
+      (1)>AAA>AAA']
+  folder: '>media>sf_shared>eNMS-prod>files>services>AAA (1)'
+  folder_id: 86
+  folder_path: /media/sf_shared/eNMS-prod/files/services/AAA (1)
+  last_modified: '2022-12-20 03:40:42'
+  last_updated: '2023-01-13 08:33:51'
+  name: '>media>sf_shared>eNMS-prod>files>services>AAA (1)>AAA'
+  path: /media/sf_shared/eNMS-prod/files/services/AAA (1)/AAA
+  type: folder
+- {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>services>AAA
+    (1)>AAA', folder_id: 87, folder_path: /media/sf_shared/eNMS-prod/files/services/AAA
+    (1)/AAA, last_modified: '2022-12-20 03:40:15', last_updated: '2023-01-13 08:33:51',
+  name: '>media>sf_shared>eNMS-prod>files>services>AAA (1)>AAA>@PaxHeader', path: /media/sf_shared/eNMS-prod/files/services/AAA
+    (1)/AAA/@PaxHeader, type: file}
+- custom_property: Custom
+  description: ''
+  files: ['>media>sf_shared>eNMS-prod>files>services>AAA (1)>AAA>AAA>service.yaml',
+    '>media>sf_shared>eNMS-prod>files>services>AAA (1)>AAA>AAA>workflow_edge.yaml']
+  folder: '>media>sf_shared>eNMS-prod>files>services>AAA (1)>AAA'
+  folder_id: 87
+  folder_path: /media/sf_shared/eNMS-prod/files/services/AAA (1)/AAA
+  last_modified: '2022-12-20 03:40:15'
+  last_updated: '2023-01-13 08:33:51'
+  name: '>media>sf_shared>eNMS-prod>files>services>AAA (1)>AAA>AAA'
+  path: /media/sf_shared/eNMS-prod/files/services/AAA (1)/AAA/AAA
+  type: folder
+- {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>services>AAA
+    (1)>AAA>AAA', folder_id: 89, folder_path: /media/sf_shared/eNMS-prod/files/services/AAA
+    (1)/AAA/AAA, last_modified: '2022-12-20 03:40:15', last_updated: '2023-01-13 08:33:51',
+  name: '>media>sf_shared>eNMS-prod>files>services>AAA (1)>AAA>AAA>service.yaml',
+  path: /media/sf_shared/eNMS-prod/files/services/AAA (1)/AAA/AAA/service.yaml, type: file}
+- {custom_property: Custom, description: '', folder: '>media>sf_shared>eNMS-prod>files>services>AAA
+    (1)>AAA>AAA', folder_id: 89, folder_path: /media/sf_shared/eNMS-prod/files/services/AAA
+    (1)/AAA/AAA, last_modified: '2022-12-20 03:40:15', last_updated: '2023-01-13 08:33:52',
+  name: '>media>sf_shared>eNMS-prod>files>services>AAA (1)>AAA>AAA>workflow_edge.yaml',
+  path: /media/sf_shared/eNMS-prod/files/services/AAA (1)/AAA/AAA/workflow_edge.yaml,
+  type: file}

@@ -472,6 +472,9 @@ export function preprocessForm(panel, id, type, duplicate) {
     }
     if (id) $(el).prop("id", `${$(el).attr("id")}-${id}`);
   });
+  panel.querySelectorAll(".href-id").forEach((el) => {
+    if (id) $(el).prop("href", `${$(el).attr("href")}-${id}`);
+  });
   panel.querySelectorAll(".btn-id").forEach((el) => {
     if (id) {
       $(el).attr(
@@ -682,9 +685,9 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
               ? instance.owners.map((user) => user.name)
               : [];
             if (user.is_admin || ownersNames.includes(user.name)) {
-              $("#rbac-nav").show();
+              $(`#rbac-nav-${id}`).show();
             } else {
-              $("#rbac-nav,#rbac-properties").remove();
+              $(`#rbac-nav-${id},#rbac-properties-${id}`).remove();
             }
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
@@ -1236,4 +1239,3 @@ configureNamespace("base", [
   showInstancePanel,
   switchTheme,
 ]);
-          

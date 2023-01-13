@@ -1,5 +1,5 @@
 from flask_login import current_user
-from subprocess import check_output
+from subprocess import run as sub_run
 from sqlalchemy import Boolean, ForeignKey, Integer
 
 from eNMS.database import db
@@ -25,8 +25,13 @@ class UnixCommandService(Service):
             return {"success": False, "result": log}
         command = run.sub(run.command, locals())
         run.log("info", f"Running UNIX command: {command}", device)
-        result = check_output(command, shell=True).decode()
-        return {"command": command, "result": result}
+        result = sub_run(command, shell=True, capture_output=True, text=True)
+        return {
+            "command": command,
+            "result": result.stdout or result.stderr,
+            "return_code": result.returncode,
+            "success": result.returncode == 0,
+        }
 
 
 class UnixCommandForm(ServiceForm):

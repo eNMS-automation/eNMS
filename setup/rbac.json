@@ -146,6 +146,7 @@
     "/logout": "all",
     "/logs_form": "access",
     "/pool_table": "access",
+    "/report_form": "access",
     "/rest/configuration": "access",
     "/rest/workers": "admin",
     "/rest/instance": "access",

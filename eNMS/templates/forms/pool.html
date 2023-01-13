@@ -8,29 +8,29 @@
   >
     <ul class="nav nav-tabs bar_tabs">
       <li class="nav-item active">
-        <a class="nav-link" data-toggle="tab" href="#common-properties">Properties</a>
+        <a class="nav-link href-id" data-toggle="tab" href="#common-properties">Properties</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#device-properties"
+        <a class="nav-link href-id" data-toggle="tab" href="#device-properties"
           >Device Properties</a
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#link-properties"
+        <a class="nav-link href-id" data-toggle="tab" href="#link-properties"
           >Link Properties</a
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#custom-properties"
+        <a class="nav-link href-id" data-toggle="tab" href="#custom-properties"
           >Custom Properties</a
         >
       </li>
-      <li class="nav-item" id="rbac-nav" style="display: none;">
-        <a class="nav-link" data-toggle="tab" href="#rbac-properties">Access Control</a>
+      <li class="nav-item add-id" id="rbac-nav" style="display: none;">
+        <a class="nav-link href-id" data-toggle="tab" href="#rbac-properties">Access Control</a>
       </li>
     </ul>
     <div class="tab-content">
-      <div class="tab-pane fade in active" id="common-properties">
+      <div class="tab-pane fade in active add-id" id="common-properties">
         {{ form.id(id='pool-id', class="add-id") }} {{ form.hidden_tag() }}
         <div class="form-group">
           <label>Name</label>
@@ -71,7 +71,7 @@
         </center>
       </div>
       {% for model in form.models %}
-      <div class="tab-pane fade" id="{{ model }}-properties">
+      <div class="tab-pane fade add-id" id="{{ model }}-properties">
         <table
           class="table table-striped table-bordered dt-responsive nowrap"
           cellspacing="0"
@@ -113,7 +113,7 @@
         </table>
       </div>
       {% endfor %}
-      <div class="tab-pane fade" id="custom-properties">
+      <div class="tab-pane fade add-id" id="custom-properties">
         <div class="x_title">
           <h3>Custom Properties</h3>
         </div>
@@ -142,7 +142,7 @@
           </tbody>
         </table>
       </div>
-      <div class="tab-pane fade" id="rbac-properties">
+      <div class="tab-pane fade add-id" id="rbac-properties">
         {{ field_template(form_type, form["owners"]) }} {% for property in
         form.rbac_properties %} {% set field = form[property] %} {{
         field_template(form_type, field) }} {% endfor %}

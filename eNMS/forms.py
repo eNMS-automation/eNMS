@@ -929,13 +929,13 @@ class UserProfileForm(BaseForm):
     action = "eNMS.administration.saveProfile"
     name = StringField("Name")
     email = StringField("Email")
+    landing_page = SelectField("Landing Page", validate_choice=False)
     theme = SelectField(
         "Theme",
         choices=[
             (theme, values["name"]) for theme, values in vs.themes["themes"].items()
         ],
     )
-    landing_page = SelectField("Landing Page", validate_choice=False)
 
     @classmethod
     def form_init(cls):

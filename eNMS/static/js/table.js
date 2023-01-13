@@ -265,10 +265,9 @@ export class Table {
         <li>
           <a
             onclick="eNMS.table.togglePaginationDisplay('${this.id}')"
-            data-tooltip="Edit Workflow"
+            data-tooltip="Load Table Count"
             style="cursor: pointer;"
-            ><span class="glyphicon glyphicon-info-sign"></span
-          ></a>
+            >Load Table Count</a>
         </li>
       </ul>`;
     $(".dataTables_info").html(button).show();

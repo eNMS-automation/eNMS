@@ -42,12 +42,16 @@ class PingService(Service):
             output = sub_result.stdout.decode().strip().splitlines()
             if sub_result.returncode == 0:
                 # The first ping statistics line can look like either:
-                # 3 packets transmitted, 0 received, +3 errors, 100% packet loss, time 2055ms
-                # 3 packets transmitted, 0 received, 100% packet loss, time 2081ms
+                # - 3 packets transmitted, 0 received, +3 errors,
+                # 100% packet loss, time 2055ms
+                # - 3 packets transmitted, 0 received, 100% packet loss, time 2081ms
                 error_offset = 1 if "errors," in output[-2] else 0
                 sent = output[-2].split(",")[0].split()[0].strip()
                 rcvd = output[-2].split(",")[1].split()[0].strip()
-                errors = output[-2].split(",")[2].split()[0].strip() if error_offset else 0
+                if error_offset:
+                    errors = output[-2].split(",")[2].split()[0].strip()
+                else:
+                    errors = 0
                 total = output[-2].split(",")[3 + error_offset].split()[1].strip()
                 loss = output[-2].split(",")[2 + error_offset].split()[0].strip()
                 timing = output[-1].split()[3].split("/")
@@ -66,7 +70,7 @@ class PingService(Service):
                 "error": sub_result.stderr.decode().strip(),
                 "output": "\n".join(output),
                 "result": result,
-                "success": sub_result.returncode == 0
+                "success": sub_result.returncode == 0,
             }
         else:
             result = {}

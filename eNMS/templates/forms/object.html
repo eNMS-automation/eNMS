@@ -8,20 +8,20 @@
   <div class="modal-body">
     <ul class="nav nav-tabs bar_tabs">
       <li class="nav-item active">
-        <a class="nav-link" data-toggle="tab" href="#common">Common Properties</a>
+        <a class="nav-link href-id" data-toggle="tab" href="#common">Common Properties</a>
       </li>
       {% if form.properties %}
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#specific">Specific Properties</a>
+        <a class="nav-link href-id" data-toggle="tab" href="#specific">Specific Properties</a>
       </li>
       {% endif %}
-      <li class="nav-item" id="rbac-nav" style="display: none;">
-        <a class="nav-link" data-toggle="tab" href="#rbac-properties">Access Control</a>
+      <li class="nav-item add-id" id="rbac-nav" style="display: none;">
+        <a class="nav-link href-id" data-toggle="tab" href="#rbac-properties">Access Control</a>
       </li>
     </ul>
     <div class="form-group">
       <div class="tab-content">
-        <div class="tab-pane fade in active" id="common">
+        <div class="tab-pane fade in active add-id" id="common">
           <div id="content" class="add-id" style="height: 100%;"></div>
           {% for field in form %} {% set properties = form.properties or {} %} {% if
           field.name not in properties and field.name != "owners" and field.name not in
@@ -40,12 +40,12 @@
           </center>
         </div>
         {% if form.properties %}
-        <div class="tab-pane fade" id="specific">
+        <div class="tab-pane fade add-id" id="specific">
           {% for property in form.properties %} {% set field = form[property] %} {{
           field_template(form_type, field) }} {% endfor %}
         </div>
         {% endif %}
-        <div class="tab-pane fade" id="rbac-properties">
+        <div class="tab-pane fade add-id" id="rbac-properties">
           {{ field_template(form_type, form["owners"]) }} {% for property in
           form.rbac_properties %} {% set field = form[property] %} {{
           field_template(form_type, field) }} {% endfor %}

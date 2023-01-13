@@ -30,7 +30,7 @@ class UnixCommandService(Service):
             "command": command,
             "result": result.stdout or result.stderr,
             "return_code": result.returncode,
-            "success": result.returncode == 0
+            "success": result.returncode == 0,
         }
 
 

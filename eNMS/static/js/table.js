@@ -265,7 +265,7 @@ export class Table {
         <li>
           <a
             onclick="eNMS.table.togglePaginationDisplay('${this.id}')"
-            data-tooltip="Edit Workflow"
+            data-tooltip="Load Table Count"
             style="cursor: pointer;"
             >Load Table Count</a>
         </li>

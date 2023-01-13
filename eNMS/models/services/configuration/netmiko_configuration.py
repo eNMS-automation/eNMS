@@ -42,7 +42,7 @@ class NetmikoConfigurationService(ConnectionService):
             config.splitlines(),
             enter_config_mode=run.config_mode,
             delay_factor=run.delay_factor,
-            exit_config_mode=run.exit_config_mode,
+            exit_config_mode=False,
             strip_prompt=run.strip_prompt,
             strip_command=run.strip_command,
             config_mode_command=run.config_mode_command,
@@ -50,6 +50,8 @@ class NetmikoConfigurationService(ConnectionService):
         )
         if run.commit_configuration:
             netmiko_connection.commit()
+        if run.exit_config_mode:
+            netmiko_connection.exit_config_mode()
         return {"success": True, "result": f"configuration OK {config}"}
 
 

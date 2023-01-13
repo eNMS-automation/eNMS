@@ -472,6 +472,9 @@ export function preprocessForm(panel, id, type, duplicate) {
     }
     if (id) $(el).prop("id", `${$(el).attr("id")}-${id}`);
   });
+  panel.querySelectorAll(".href-id").forEach((el) => {
+    if (id) $(el).prop("href", `${$(el).attr("href")}-${id}`);
+  });
   panel.querySelectorAll(".btn-id").forEach((el) => {
     if (id) {
       $(el).attr(

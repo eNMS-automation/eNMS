@@ -316,6 +316,7 @@ export function showFolderPanel(id) {
 function showProfile() {
   openPanel({
     name: "profile",
+    size: "800 auto",
     title: "Profile",
     id: user.id,
     callback: () => {

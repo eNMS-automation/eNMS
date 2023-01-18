@@ -168,7 +168,7 @@ to change the displayed devices and links.
 
 ## Use a Pool as target of a Service or a Workflow
 
-In `Automation -> Services -> Step 3`, select Device(s) and/or Pool(s) as target(s).
+In `Service Edit Panel -> Step 3`, select Device(s) and/or Pool(s) as target(s).
 
 ![Use a pool as a target](../_static/inventory/pools/target_pool.png)
 

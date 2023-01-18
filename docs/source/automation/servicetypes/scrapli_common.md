@@ -26,7 +26,7 @@ If ssh2 or paramiko are the selected the timeouts for each respective library is
     
 ## Connection Parameters
 
-![Scrapli Common Parameters](../../_static/automation/builtin_service_types/netmiko_connectionparameters.png)
+![Scrapli Common Parameters](../../_static/automation/builtin_service_types/netmiko_connection_parameters.png)
 
 - `Credentials`: Select between:
     - `Device Credentials` - eNMS will select the most appropriate credential

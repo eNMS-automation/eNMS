@@ -629,7 +629,7 @@ class ServerForm(BaseForm):
     creator = StringField(render_kw={"readonly": True})
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     ip_address = StringField("IP address")
-    weight = IntegerField("Weigth", default=1)
+    weight = IntegerField("Weight", default=1)
 
 
 class ServiceForm(BaseForm):

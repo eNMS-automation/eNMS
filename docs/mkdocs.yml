@@ -42,7 +42,7 @@ nav:
       - Git Action Service: automation/servicetypes/git_action.md
       - ICMP TCP Ping Service: automation/servicetypes/icmptcp_ping.md
       - Mail Notification Service: automation/servicetypes/mail_notification.md
-      - MatterMost Notificatoin Service: automation/servicetypes/mattermost_notification.md
+      - MatterMost Notification Service: automation/servicetypes/mattermost_notification.md
       - Napalm Service Common Parameters: automation/servicetypes/napalm_common.md
       - Napalm Configuration Service: automation/servicetypes/napalm_configuration.md
       - Napalm Data Backup Service: automation/servicetypes/napalm_databackup.md

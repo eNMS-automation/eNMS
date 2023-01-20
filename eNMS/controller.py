@@ -1183,8 +1183,6 @@ class Controller:
             elif id in instance.labels:
                 old_position = instance.labels[id].pop("positions")
                 instance.labels[id] = {"positions": new_position, **instance.labels[id]}
-            if new_position != old_position:
-                instance.last_modified = now
         return now
 
     def save_profile(self, **kwargs):

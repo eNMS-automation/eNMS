@@ -896,7 +896,11 @@ class TaskForm(BaseForm):
         ) <= datetime.strptime(self.start_date.data, "%d/%m/%Y %H:%M:%S")
         if invalid_end_date:
             self.end_date.errors.append("The end date must come after the start date.")
-        invalid_frequency = self.end_date.data and not self.frequency.data
+        invalid_frequency = (
+            self.end_date.data
+            and not self.frequency.data
+            and self.scheduling_mode.data == "standard"
+        )
         if invalid_frequency:
             self.frequency.errors.append("A periodic task must have a frequency.")
         no_cron_expression = (

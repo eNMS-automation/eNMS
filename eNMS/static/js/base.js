@@ -467,8 +467,9 @@ export function preprocessForm(panel, id, type, duplicate) {
       if (
         [property, "id"].includes(el.name) ||
         formProperties[type][el.name]?.dont_duplicate
-      )
+      ) {
         return;
+      }
     }
     if (id) $(el).prop("id", `${$(el).attr("id")}-${id}`);
   });
@@ -669,7 +670,8 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
     name: type,
     id: id || tableId,
     footerToolbar: `
-      <div style="width: 100%; height: 40px; display: flex; align-items: center; justify-content: center;">
+      <div style="width: 100%; height: 40px; display: flex;
+        align-items: center; justify-content: center;">
         <button
           style="width: 100px"
           id="${type}-action-btn"

@@ -33,17 +33,6 @@
           field.name not in properties and field.name != "owners" and field.name not in
           form.rbac_properties %} {{ field_template(form_type, field) }} {% endif %} {%
           endfor %}
-          <center>
-            <button
-              id="{{ form_type }}-action-btn"
-              type="button"
-              class="btn btn-{{ button_class }} add-id btn-id"
-              value="{{ action }}"
-              style="margin-top: 10px;"
-            >
-              {{ button_label }}
-            </button>
-          </center>
         </div>
         {% if form.properties %}
         <div class="tab-pane fade add-id" id="specific">

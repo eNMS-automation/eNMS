@@ -668,6 +668,18 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
   openPanel({
     name: type,
     id: id || tableId,
+    footerToolbar: `
+      <div style="width: 100%; height: 40px; display: flex; align-items: center; justify-content: center;">
+        <button
+          style="width: 100px"
+          id="${type}-action-btn"
+          type="button"
+          class="btn btn-success btn-id add-id"
+          value="eNMS.base.processData"
+        >
+          Save
+        </button>
+      </div>`,
     callback: function (panel) {
       const isService = type in subtypes.service;
       const isNode = type in subtypes.node;

@@ -8,19 +8,7 @@
   {% set panel_id = range(10000) | random %} {{ form.id(id=form_type + '-id',
   class="add-id") }} {{ form.hidden_tag() }}
   <input type="hidden" id="copy" name="copy" class="add-id" />
-  <div style="padding: 20px;">
-    <center>
-      <button
-        id="{{ form_type }}-action-btn"
-        type="button"
-        style="width: 15%;"
-        class="btn btn-success add-id btn-id"
-        value="eNMS.base.processData"
-      >
-        Save
-      </button>
-    </center>
-    <br />
+  <div style="padding: 40px;">
     <div id="{{ form_type }}-wizard" class="form_wizard wizard_horizontal add-id">
       <ul class="wizard_steps">
         <li>

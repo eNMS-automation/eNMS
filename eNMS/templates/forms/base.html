@@ -38,16 +38,16 @@
       {% endfor %}
     </div>
     {% if action %}
-      <center>
-        <button
-          id="{{ form_type }}-action-btn"
-          type="button"
-          class="btn btn-{{ button_class }} add-id btn-id"
-          value="{{ action }}"
-        >
-          {{ button_label }}
-        </button>
-      </center>
+    <center>
+      <button
+        id="{{ form_type }}-action-btn"
+        type="button"
+        class="btn btn-{{ button_class }} add-id btn-id"
+        value="{{ action }}"
+      >
+        {{ button_label }}
+      </button>
+    </center>
     {% endif %}
   </div>
 </form>

@@ -345,7 +345,6 @@ class AdminForm(BaseForm):
 
 
 class ChangelogForm(BaseForm):
-    action = "eNMS.base.processData"
     form_type = HiddenField(default="changelog")
     id = HiddenField()
     severity = SelectField(
@@ -362,7 +361,6 @@ class ChangelogForm(BaseForm):
 
 
 class CredentialForm(BaseForm):
-    action = "eNMS.base.processData"
     template = "object"
     form_type = HiddenField(default="credential")
     id = HiddenField()
@@ -460,7 +458,6 @@ class ExcelImportForm(BaseForm):
 
 
 class FileForm(BaseForm):
-    action = "eNMS.base.processData"
     form_type = HiddenField(default="file")
     id = HiddenField()
     path = StringField("Path", [InputRequired()])
@@ -519,7 +516,6 @@ class LoginForm(BaseForm):
 
 
 class ObjectForm(BaseForm):
-    action = "eNMS.base.processData"
     template = "object"
     form_type = HiddenField(default="object")
     get_request_allowed = False
@@ -621,7 +617,6 @@ class RunServiceForm(BaseForm):
 
 
 class ServerForm(BaseForm):
-    action = "eNMS.base.processData"
     form_type = HiddenField(default="server")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
@@ -853,7 +848,6 @@ class ServiceForm(BaseForm):
 
 
 class TaskForm(BaseForm):
-    action = "eNMS.base.processData"
     template = "object"
     form_type = HiddenField(default="task")
     id = HiddenField()
@@ -958,7 +952,6 @@ class WorkflowLabelForm(BaseForm):
 
 
 class WorkflowEdgeForm(BaseForm):
-    action = "eNMS.base.processData"
     form_type = HiddenField(default="workflow_edge")
     id = HiddenField()
     label = StringField()
@@ -1040,7 +1033,6 @@ class DeviceForm(ObjectForm):
 
 
 class LinkForm(ObjectForm):
-    action = "eNMS.base.processData"
     form_type = HiddenField(default="link")
     vendor = SelectField(
         "Vendor",
@@ -1075,7 +1067,6 @@ class NapalmForm(ConnectionForm):
 
 class ParametersForm(BaseForm):
     form_type = HiddenField(default="parameters")
-    action = "eNMS.base.processData"
     id = HiddenField()
     banner_active = BooleanField()
     banner_deactivate_on_restart = BooleanField()

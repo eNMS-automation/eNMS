@@ -572,7 +572,6 @@ class PoolForm(BaseForm):
 
 
 class RbacForm(BaseForm):
-    action = "eNMS.base.processData"
     form_type = HiddenField(default="rbac")
     get_request_allowed = False
     id = HiddenField()

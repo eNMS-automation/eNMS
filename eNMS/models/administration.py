@@ -63,6 +63,7 @@ class User(AbstractBase, UserMixin):
 
     def post_update(self):
         self.update_rbac()
+        return self.get_properties()
 
     def update(self, **kwargs):
         if (

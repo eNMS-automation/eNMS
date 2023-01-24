@@ -999,10 +999,14 @@ function showAllAlerts() {
   openPanel({
     name: "alerts_table",
     title: "Alerts",
+    size: "1200 500",
     callback: () => {
       $("#alerts-table")
         // eslint-disable-next-line new-cap
         .DataTable({
+          pagingType: "full_numbers",
+          sDom: `<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f>
+            <"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>`,
           columns: [{ width: "200px" }, { width: "60px" }, null],
         })
         .order([0, "desc"])

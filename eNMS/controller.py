@@ -1074,7 +1074,7 @@ class Controller:
             db.session.commit()
 
     @staticmethod
-    @actor
+    @actor(max_retries=0)
     def run(service, **kwargs):
         current_thread().name = kwargs["runtime"]
         if "path" not in kwargs:

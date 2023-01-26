@@ -270,7 +270,7 @@ export class Table {
             >Load Table Count</a>
         </li>
       </ul>`;
-    $(".dataTables_info").html(button).show();
+    $(`#table-${this.id}_wrapper > .dataTables_info`).html(button).show();
   }
 
   createfilteringTooltips() {

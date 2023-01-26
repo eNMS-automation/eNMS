@@ -250,7 +250,8 @@ export class Table {
     $(`#column-display-${this.id}`).selectpicker("refresh");
     $(`#column-display-${this.id}`).on("change", function () {
       self.columns.forEach((col) => {
-        self.table.column(`${col.name}:name`).visible($(this).val().includes(col.data));
+        const isVisible = $(this).val() && $(this).val().includes(col.data);
+        self.table.column(`${col.name}:name`).visible(isVisible);
       });
       self.table.ajax.reload(null, false);
       self.createfilteringTooltips();

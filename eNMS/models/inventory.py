@@ -34,6 +34,8 @@ class Object(AbstractBase):
             return
         constraints = []
         for property in vs.properties["filtering"][self.class_type]:
+            if property in vs.configuration_properties:
+                continue
             table, pool_property = vs.models["pool"], f"{self.class_type}_{property}"
             row, value = getattr(table, pool_property), getattr(self, property)
             row_match = getattr(table, f"{pool_property}_match")
@@ -56,9 +58,36 @@ class Object(AbstractBase):
                             invert_value == row_invert,
                         )
                     )
-            constraints.append(and_(row != "", or_(*match_constraints)))
-        self.pools = db.query("pool").filter(or_(*constraints)).all()
+            constraints.append(or_(row == "", *match_constraints))
+        self.pools = [
+            pool
+            for pool in db.query("pool").filter(and_(*constraints)).all()
+            if self.match_pool_configuration_properties(pool)
+        ]
         self.update_last_modified_properties()
+
+    def match_pool_configuration_properties(self, pool):
+        match_list = []
+        for property in vs.configuration_properties:
+            print(self.class_type)
+            pool_value = getattr(pool, f"{self.class_type}_{property}")
+            match_type = getattr(pool, f"{self.class_type}_{property}_match")
+            if not pool_value and match_type != "empty":
+                continue
+            value = str(getattr(self, property))
+            match = (
+                match_type == "inclusion"
+                and pool_value in value
+                or match_type == "equality"
+                and pool_value == value
+                or match_type == "empty"
+                and not value
+                or bool(search(pool_value, value))
+            )
+            result = match != getattr(pool, f"{self.class_type}_{property}_invert")
+            match_list.append(result)
+        print(all(match_list))
+        return all(match_list)
 
     def delete(self):
         number = f"{self.class_type}_number"

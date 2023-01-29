@@ -15,7 +15,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -461,6 +460,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Start
   send_notification: false
@@ -498,7 +498,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -958,6 +957,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: End
   send_notification: false
@@ -995,7 +995,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1041,6 +1040,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: cluster_monitoring
   send_notification: false
@@ -1085,7 +1085,6 @@
   display_only_failed_nodes: true
   display_report: false
   exclusion_field: d
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1150,6 +1149,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Example Service (does nothing)
   send_notification: false
@@ -1195,7 +1195,6 @@
   display_only_failed_nodes: true
   display_report: false
   driver: device
-  freeze: []
   getters: [get_arp_table, get_interfaces]
   impacting: true
   include_device_results: true
@@ -1255,6 +1254,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Configuration Backup (NAPALM)
   send_notification: false
@@ -1307,7 +1307,6 @@
   enable_mode: true
   exit_config_mode: true
   fast_cli: true
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -1363,6 +1362,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: netmiko_create_vrf_test
   send_notification: false
@@ -1421,7 +1421,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -1487,6 +1486,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: netmiko_check_vrf_test
@@ -1544,7 +1544,6 @@
   enable_mode: true
   exit_config_mode: true
   fast_cli: true
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -1601,6 +1600,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: netmiko_delete_vrf_test
   send_notification: false
@@ -1659,7 +1659,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -1729,6 +1728,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: 'Netmiko: Check VRF (Telecom1) does not exist'
@@ -1776,7 +1776,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -1861,6 +1860,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'REST API: call *is_alive* endpoint'
   send_notification: false
@@ -1905,7 +1905,6 @@
   display_only_failed_nodes: true
   display_report: false
   driver: device
-  freeze: []
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -1967,6 +1966,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'NAPALM: Get Facts'
   send_notification: false
@@ -2011,7 +2011,6 @@
   display_only_failed_nodes: true
   display_report: false
   driver: device
-  freeze: []
   getters: [get_interfaces]
   impacting: true
   include_device_results: true
@@ -2073,6 +2072,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'NAPALM: Get interfaces'
   send_notification: false
@@ -2111,7 +2111,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -2167,6 +2166,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Modify Payload for Iteration
   send_notification: false
@@ -2228,7 +2228,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -2286,6 +2285,7 @@
   response1: show vrf b
   response2: show vrf c
   response3: ''
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Test Netmiko Prompt Service
   send_notification: false
@@ -2343,7 +2343,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -2401,6 +2400,7 @@
   response1: show vrf
   response2: ''
   response3: ''
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Test netmiko prompts pass
   send_notification: false
@@ -2439,7 +2439,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2490,6 +2489,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Modify payload (no device)
   send_notification: false
@@ -2528,7 +2528,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2579,6 +2578,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Modify payload (per device)
   send_notification: false
@@ -2638,7 +2638,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -2695,6 +2694,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Show vrf with payload helper
@@ -2756,7 +2756,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -2813,6 +2812,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Show vrf with python query
@@ -2874,7 +2874,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -2932,6 +2931,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: show runtime with get_result helper
@@ -2982,7 +2982,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   getters: [get_interfaces_ip]
   impacting: true
   include_device_results: true
@@ -3060,6 +3059,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'Getters Workflow: Interface IP'
   send_notification: false
@@ -3100,7 +3100,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3156,6 +3155,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show version'
   send_notification: false
@@ -3194,7 +3194,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3250,6 +3249,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show configuration (regex match)'
   send_notification: false
@@ -3288,7 +3288,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3344,6 +3343,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show configuration (dict match)'
   send_notification: false
@@ -3398,7 +3398,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -3457,6 +3456,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Iteration Targets Workflow - Test 1
@@ -3518,7 +3518,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -3577,6 +3576,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Iteration Target Workflow - Test 2
@@ -3638,7 +3638,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -3697,6 +3696,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Iteration Target Workflow - Test 3
@@ -3744,7 +3744,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -3801,6 +3800,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{iteration_value}}
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Iteration Targets Workflow - Test 4
   send_notification: false
@@ -3842,7 +3842,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -3899,6 +3898,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: (R) Configuration Properties Backup Services
   send_notification: false
@@ -3945,7 +3945,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -4029,6 +4028,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Netmiko Configuration and Validation Services
   send_notification: false
@@ -4074,7 +4074,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4155,6 +4154,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Fork based on Success Value
   send_notification: false
@@ -4198,7 +4198,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4259,6 +4258,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Netmiko Prompts Service
   send_notification: false
@@ -4302,7 +4302,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4373,6 +4372,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: '(R) Functions: get_var, set_var, and get_result'
   send_notification: false
@@ -4419,7 +4419,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4504,6 +4503,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Ansible Playbook Service
   send_notification: false
@@ -4548,7 +4548,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4607,6 +4606,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Multiprocessing in DxD mode
   send_notification: false
@@ -4650,7 +4650,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4751,6 +4750,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Combined Device & Target Iteration
   send_notification: false
@@ -4819,7 +4819,6 @@
   expect_prompt: ''
   expect_username_prompt: ''
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -4892,6 +4891,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Get Operational Data with Netmiko
   send_notification: false
@@ -4933,7 +4933,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -4983,6 +4982,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: DxD and SxS Run Methods
   send_notification: false
@@ -5027,7 +5027,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5080,6 +5079,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Workflow  in device by device mode
   send_notification: false
@@ -5122,7 +5122,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -5175,6 +5174,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Service in run once mode
   send_notification: false
@@ -5216,7 +5216,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5269,6 +5268,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: Workflow in service by service mode (workflow targets)
   send_notification: false
@@ -5311,7 +5311,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -5364,6 +5363,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{ device.name }}
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Service in Run once per device mode
   send_notification: false
@@ -5405,7 +5405,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5458,6 +5457,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_service_targets
   scoped_name: Workflow in service targets mode
   send_notification: false
@@ -5514,7 +5514,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -5570,6 +5569,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Validation show VRF
@@ -5631,7 +5631,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -5688,6 +5687,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Validation show VRF
@@ -5749,7 +5749,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -5805,6 +5804,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Validation show VRF
@@ -5851,7 +5851,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5925,6 +5924,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: (R) Shared Service in Multiple Subworkflows
   send_notification: false
@@ -5966,7 +5966,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6021,6 +6020,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow 1
   send_notification: false
@@ -6062,7 +6062,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6117,6 +6116,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow 2
   send_notification: false
@@ -6173,7 +6173,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -6233,6 +6232,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Shared Service used Twice in Workflow
@@ -6278,7 +6278,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6333,6 +6332,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Simple Playbook
   send_notification: false
@@ -6372,7 +6372,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6443,6 +6442,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Dictionary as Iteration Target Variable
   send_notification: false
@@ -6482,7 +6482,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6536,6 +6535,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Set Variables for Iteration
   send_notification: false
@@ -6593,7 +6593,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -6653,6 +6652,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Show VRF with iteration
@@ -6699,7 +6699,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6786,6 +6785,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Workflow and Subworkflow Iteration
   send_notification: false
@@ -6826,7 +6826,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6876,6 +6875,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Test Iteration
   send_notification: false
@@ -6917,7 +6917,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6971,6 +6970,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Subworkflow Value Iteration
   send_notification: false
@@ -7009,7 +7009,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7061,6 +7060,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Test Iteration
   send_notification: false
@@ -7102,7 +7102,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7181,6 +7180,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: Preprocessing and Postprocessing Mechanisms
   send_notification: false
@@ -7221,7 +7221,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7274,6 +7273,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Preprocessing
   send_notification: false
@@ -7312,7 +7312,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7363,6 +7362,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Service preprocessing and postprocessing
   send_notification: false
@@ -7400,7 +7400,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7454,6 +7453,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Placeholder
   send_notification: false
@@ -7493,7 +7493,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7543,6 +7542,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: Specific Superworkflow
   send_notification: false
@@ -7585,7 +7585,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7640,6 +7639,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_service_targets
   scoped_name: (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism
   send_notification: false
@@ -7685,7 +7685,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7738,6 +7737,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'Unix command: ps -ef | grep test'
   send_notification: false
@@ -7786,7 +7786,6 @@
   enable_mode: true
   expect_string: root.*#
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -7840,6 +7839,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'Unix shell: ping eNMS server from remote server'
   send_notification: false
@@ -7885,7 +7885,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7942,6 +7941,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Ping Washington
   send_notification: false
@@ -7983,7 +7983,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8033,6 +8032,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_service_targets
   scoped_name: Topology Import Services
   send_notification: false
@@ -8071,7 +8071,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   import_type: opennms
   include_device_results: false
@@ -8131,6 +8130,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: OpenNMS Import
   send_notification: false
@@ -8185,7 +8185,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -8244,6 +8243,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: 'Validation: jump on server 2 from Washington'
@@ -8291,7 +8291,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -8347,6 +8346,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{ placeholder.definition }}
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'REST API: call to placeholder property'
   send_notification: false
@@ -8403,7 +8403,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -8455,6 +8454,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Open File Descriptors Leak (public)
@@ -8525,7 +8525,6 @@
   expect_prompt: ''
   expect_username_prompt: ''
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -8597,6 +8596,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Get Configuration with Netmiko
   send_notification: false
@@ -8637,7 +8637,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8692,6 +8691,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Push Configurations to Git
   send_notification: false
@@ -8728,7 +8728,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8778,6 +8777,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Post Placeholder Processing
   send_notification: false
@@ -8819,7 +8819,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8869,6 +8868,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Scrapli Service
   send_notification: false
@@ -8916,7 +8916,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8968,6 +8967,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: true
   run_method: per_device
   scoped_name: Check running configuration
@@ -9017,7 +9017,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9069,6 +9068,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: true
   run_method: per_device
   scoped_name: Configure VRF TEST-VRF
@@ -9118,7 +9118,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9170,6 +9169,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Check that TEST-VRF is configured
@@ -9219,7 +9219,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9271,6 +9270,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: true
   run_method: per_device
   scoped_name: Decommission VRF TEST-VRF
@@ -9316,7 +9316,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9379,6 +9378,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Generic File Transfer Service
   send_notification: false
@@ -9439,7 +9439,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -9496,6 +9495,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Check that test file does not exist
@@ -9544,7 +9544,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9599,6 +9598,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Transfer a.bin
   send_notification: false
@@ -9657,7 +9657,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -9716,6 +9715,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Check that the files are on the disk
@@ -9764,7 +9764,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9820,6 +9819,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Transfer bc.bin and bd.bin with glob option
   send_notification: false
@@ -9878,7 +9878,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -9935,6 +9934,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Delete all transferred files
@@ -9983,7 +9983,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10038,6 +10037,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Transfer non-existing file
   send_notification: false
@@ -10081,7 +10081,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10149,6 +10148,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: Skip in SxS with WF targets mode
   send_notification: false
@@ -10188,7 +10188,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10242,6 +10241,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Partial failure (Washington)
   send_notification: false
@@ -10284,7 +10284,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10338,6 +10337,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Query Skipped Service
   send_notification: false
@@ -10380,7 +10380,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10434,6 +10433,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Globally Skipped Service
   send_notification: false
@@ -10481,7 +10481,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10564,6 +10563,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Conditional Skip Query in Failed and Discard Modes
   send_notification: false
@@ -10606,7 +10606,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10661,6 +10660,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Skip Washington with Skip value == False
   send_notification: false
@@ -10703,7 +10703,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10757,6 +10756,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Post-success service
   send_notification: false
@@ -10799,7 +10799,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10853,6 +10852,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Post-failure service
   send_notification: false
@@ -10895,7 +10895,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10949,6 +10948,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Final service
   send_notification: false
@@ -10994,7 +10994,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11073,6 +11072,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Link Neighbors Mechanism (device.get_neighbors function)
   send_notification: false
@@ -11112,7 +11112,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11169,6 +11168,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Test get_neighbors function
   send_notification: false
@@ -11235,7 +11235,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -11296,6 +11295,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{device.name}}
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Iterate over neighbors of workflow device
   send_notification: false
@@ -11352,7 +11352,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -11409,6 +11408,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Check VRF (NOVRF) exists
@@ -11455,7 +11455,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11534,6 +11533,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: 'Functions: factory, fetch, fetch_all, encrypt and get_result'
   send_notification: false
@@ -11577,7 +11577,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11629,6 +11628,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Functions fetch and fetch_all
   send_notification: false
@@ -11675,7 +11675,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11727,6 +11726,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Credentials encryption
   send_notification: false
@@ -11785,7 +11785,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -11843,6 +11842,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Show vrf with custom encrypted credentials
@@ -11886,7 +11886,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11939,6 +11938,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Skip router5-7 in discard mode
   send_notification: false
@@ -11984,7 +11984,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12059,6 +12058,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Fork based on value with Skip Discard Mechanism
   send_notification: false
@@ -12105,7 +12105,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -12171,6 +12170,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'REST API: call *is_alive* endpoint'
   send_notification: false
@@ -12209,7 +12209,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12260,6 +12259,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Arista devices
   send_notification: false
@@ -12302,7 +12302,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12353,6 +12352,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Juniper devices
   send_notification: false
@@ -12413,7 +12413,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -12470,6 +12469,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Show VRF
@@ -12517,7 +12517,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -12574,6 +12573,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'is_alive endpoint 2: Skipped'
   send_notification: false
@@ -12615,7 +12615,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12688,6 +12687,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: Skip Query with device in Run Once Mode
   send_notification: false
@@ -12730,7 +12730,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12785,6 +12784,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow in SxS mode - workflow targets
   send_notification: false
@@ -12823,7 +12823,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12873,6 +12872,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Python service in run once mode
   send_notification: false
@@ -12912,7 +12912,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12963,6 +12962,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Fail Austin
   send_notification: false
@@ -13008,7 +13008,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13078,6 +13077,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: Skip, Discard and Disable Result Creation Mechanism
   send_notification: false
@@ -13119,7 +13119,6 @@
   disable_result_creation: true
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13171,6 +13170,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Pre-service with result creation disabled
   send_notification: false
@@ -13212,7 +13212,6 @@
   disable_result_creation: true
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13267,6 +13266,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Workflow in DxD mode
   send_notification: false
@@ -13308,7 +13308,6 @@
   disable_result_creation: true
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13363,6 +13362,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: Workflow in SxS mode
   send_notification: false
@@ -13401,7 +13401,6 @@
   disable_result_creation: true
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13453,6 +13452,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Service in run once mode
   send_notification: false
@@ -13491,7 +13491,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13543,6 +13542,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Fail Austin
   send_notification: false
@@ -13581,7 +13581,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13632,6 +13631,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Fail PaloAlto
   send_notification: false
@@ -13688,7 +13688,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -13740,6 +13739,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Connect to Router with Device Credentials
@@ -13786,7 +13786,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13864,6 +13863,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Credentials (Password & Key, Priority Mechanism)
   send_notification: false
@@ -13920,7 +13920,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -13977,6 +13976,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Show interfaces with netmiko
@@ -14023,7 +14023,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14084,6 +14083,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Optional Remediation Branch
   send_notification: false
@@ -14123,7 +14123,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14172,6 +14171,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Dispatch Devices
   send_notification: false
@@ -14210,7 +14210,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14259,6 +14258,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Last Service
   send_notification: false
@@ -14297,7 +14297,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14346,6 +14345,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Failure case
   send_notification: false
@@ -14385,7 +14385,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14434,6 +14433,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Post-Iteration Service
   send_notification: false
@@ -14475,7 +14475,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14548,6 +14547,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Device Iteration
   send_notification: false
@@ -14586,7 +14586,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14635,6 +14634,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Hard-coded iteration devices
   send_notification: false
@@ -14676,7 +14676,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14729,6 +14728,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Subworkflow Device Iteration
   send_notification: false
@@ -14770,7 +14770,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14823,6 +14822,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow Device Iteration 2
   send_notification: false
@@ -14861,7 +14861,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14912,6 +14911,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Service that does nothing
   send_notification: false
@@ -14950,7 +14950,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15001,6 +15000,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Service that does nothing
   send_notification: false
@@ -15039,7 +15039,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15089,6 +15088,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'Factory function: Create new device'
   send_notification: false
@@ -15127,7 +15127,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15177,6 +15176,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'Delete function: delete new device'
   send_notification: false
@@ -15218,7 +15218,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15282,6 +15281,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_service_targets
   scoped_name: Target Restriction Mechanism
   send_notification: false
@@ -15321,7 +15321,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15370,6 +15369,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Direct Target
   send_notification: false
@@ -15408,7 +15408,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15457,6 +15456,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Device Targets
   send_notification: false
@@ -15495,7 +15495,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15544,6 +15543,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Iteration Targets
   send_notification: false
@@ -15585,7 +15585,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15652,6 +15651,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Scrapli Netconf Service
   send_notification: false
@@ -15699,7 +15699,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15750,6 +15749,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Get Running Configuration
   send_notification: false
@@ -15800,7 +15800,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15849,6 +15848,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Edit Interface Loopback 5
   send_notification: false
@@ -15899,7 +15899,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15948,6 +15947,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Delete Loopback 5 description
   send_notification: false
@@ -15990,7 +15990,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16052,6 +16051,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Labels and Custom Property
   send_notification: false
@@ -16109,7 +16109,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -16165,6 +16164,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: 'Show interface from initial form (default: Lo1)'
@@ -16211,7 +16211,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16290,6 +16289,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Validation Mechanism
   send_notification: false
@@ -16329,7 +16329,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16379,6 +16378,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Dict Equality Validation of default path
   send_notification: false
@@ -16420,7 +16420,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16470,6 +16469,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Dict Inclusion Validation of new key
   send_notification: false
@@ -16510,7 +16510,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16560,6 +16559,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Nested Result String Validation
   send_notification: false
@@ -16602,7 +16602,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16667,6 +16666,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) NCClient Netconf Service
   send_notification: false
@@ -16719,7 +16719,6 @@
   display_only_failed_nodes: false
   display_report: false
   error_option: stop-on-error
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16770,6 +16769,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Get Full Config
   send_notification: false
@@ -16825,7 +16825,6 @@
   display_only_failed_nodes: false
   display_report: false
   error_option: stop-on-error
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16876,6 +16875,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Set Description of Lo4 to ZZZZ
   send_notification: false
@@ -16936,7 +16936,6 @@
   display_only_failed_nodes: false
   display_report: false
   error_option: stop-on-error
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16987,6 +16986,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Check for ZZZZ in Config
   send_notification: false
@@ -17042,7 +17042,6 @@
   display_only_failed_nodes: false
   display_report: false
   error_option: stop-on-error
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -17093,6 +17092,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Erase Lo4 Description
   send_notification: false
@@ -17153,7 +17153,6 @@
   display_only_failed_nodes: false
   display_report: false
   error_option: stop-on-error
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -17204,6 +17203,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Check ZZZZ is not in Config
   send_notification: false
@@ -17251,7 +17251,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -17325,6 +17324,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Multiple parallel connections to same device
   send_notification: false
@@ -17383,7 +17383,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -17439,6 +17438,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Show VRF with default connection
@@ -17500,7 +17500,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -17556,6 +17555,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Show VRF with connection connection2
@@ -17617,7 +17617,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -17673,6 +17672,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Show users with connection2 and close
@@ -17719,7 +17719,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: true
   include_link_in_summary: true
@@ -17792,6 +17791,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: Mail Notifications
   send_notification: true
@@ -17831,7 +17831,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -17882,6 +17881,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Notification 1
   send_notification: true
@@ -17920,7 +17920,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: true
   include_link_in_summary: false
@@ -17972,6 +17971,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Notification 2
   send_notification: true
@@ -18010,7 +18010,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: true
   include_link_in_summary: true
@@ -18062,6 +18061,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Notification 3
   send_notification: true
@@ -18103,7 +18103,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -18170,6 +18169,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Netmiko File Transfer Service
   send_notification: false
@@ -18229,7 +18229,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -18284,6 +18283,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Check no file in enms_files directory
@@ -18340,7 +18340,6 @@
   enable_mode: true
   fast_cli: false
   file_system: ''
-  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -18392,6 +18391,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Transfer netmiko_file
   send_notification: false
@@ -18449,7 +18449,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -18504,6 +18503,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Check file in directory
@@ -18565,7 +18565,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -18620,6 +18619,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Delete netmiko_file
@@ -18681,7 +18681,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -18736,6 +18735,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Check netmiko_file is deleted
@@ -18782,7 +18782,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -18861,6 +18860,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: '(R) Function: get_credential'
   send_notification: false
@@ -18900,7 +18900,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -18951,6 +18950,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Get device credential
   send_notification: false
@@ -19008,7 +19008,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -19065,6 +19064,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Show interface via get_credential
@@ -19112,7 +19112,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: false
   include_device_results: false
@@ -19168,6 +19167,7 @@
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{get_credential(name="Non Device Credential
     - 2")["password"]}}
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Rest Call with get_credential
   send_notification: false
@@ -19209,7 +19209,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19282,6 +19281,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_service_targets
   scoped_name: Skip in SxS with service targets and Run Once services
   send_notification: false
@@ -19323,7 +19323,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19373,6 +19372,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Once per device
   send_notification: false
@@ -19412,7 +19412,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19462,6 +19461,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Skip Query
   send_notification: false
@@ -19500,7 +19500,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19550,6 +19549,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Global Skip
   send_notification: false
@@ -19588,7 +19588,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19638,6 +19637,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Run Once with Pool
   send_notification: false
@@ -19680,7 +19680,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19730,6 +19729,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Data Extraction Service
   send_notification: false
@@ -19772,7 +19772,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19820,6 +19819,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Initialize Variables
   send_notification: false
@@ -19862,7 +19862,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19922,6 +19921,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: String Extraction
   send_notification: false
@@ -19961,7 +19961,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20021,6 +20020,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Dict Definition
   send_notification: false
@@ -20060,7 +20060,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20120,6 +20119,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Dict Update
   send_notification: false
@@ -20159,7 +20159,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20219,6 +20218,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: String Replacement
   send_notification: false
@@ -20258,7 +20258,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20318,6 +20317,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: List Definition
   send_notification: false
@@ -20357,7 +20357,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20417,6 +20416,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: List Append
   send_notification: false
@@ -20456,7 +20456,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20516,6 +20515,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: List Extend
   send_notification: false
@@ -20555,7 +20555,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20606,6 +20605,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Operation via set_var
   send_notification: false
@@ -20651,7 +20651,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20721,6 +20720,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Parameterized Run with a Superworkflow
   send_notification: false
@@ -20760,7 +20760,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20809,6 +20808,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Service
   send_notification: false
@@ -20850,7 +20850,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20906,6 +20905,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: Superworkflow in SxS w WT with Run Once service
   send_notification: false
@@ -20948,7 +20948,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: false
   include_device_results: false
@@ -21001,6 +21000,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{ endpoint }}
+  restrict_to_owners: []
   run_method: once
   scoped_name: Call to is_alive, Run Once
   send_notification: false
@@ -21057,7 +21057,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: false
   include_device_results: false
@@ -21112,6 +21111,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Show inteface as global variable
@@ -21158,7 +21158,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -21221,6 +21220,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Netmiko Validation with TextFSM Option
   send_notification: false
@@ -21279,7 +21279,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -21334,6 +21333,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: show ip int brief
@@ -21395,7 +21395,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -21450,6 +21449,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: show version
@@ -21511,7 +21511,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -21566,6 +21565,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: show arp
@@ -21627,7 +21627,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -21682,6 +21681,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: show lldp neighbor
@@ -21728,7 +21728,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -21795,6 +21794,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) NAPALM Configuration and Rollback Services
   send_notification: false
@@ -21844,7 +21844,6 @@
   display_only_failed_nodes: true
   display_report: false
   driver: device
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -21898,6 +21897,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Create a VRF with NAPALM
   send_notification: false
@@ -21942,7 +21942,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -21997,6 +21996,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Rollback Configuration with NAPALM
   send_notification: false
@@ -22053,7 +22053,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -22114,6 +22113,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Check VRF exists with Netmiko
@@ -22175,7 +22175,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -22236,6 +22235,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Check VRF is not configured with Netmiko
@@ -22282,7 +22282,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -22368,6 +22367,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Napalm Getters Service
   send_notification: false
@@ -22416,7 +22416,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   getters: [is_alive]
   impacting: true
   include_device_results: true
@@ -22479,6 +22478,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'Getters Workflow: is alive'
   send_notification: false
@@ -22523,7 +22523,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -22586,6 +22585,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'Getters Workflow: get facts'
   send_notification: false
@@ -22630,7 +22630,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   getters: [get_mac_address_table]
   impacting: true
   include_device_results: true
@@ -22693,6 +22692,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'Getters Workflow: MAC address'
   send_notification: false
@@ -22737,7 +22737,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -22800,6 +22799,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'Getters Workflow: get facts failed match'
   send_notification: false
@@ -22841,7 +22841,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -22931,6 +22930,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Payload Extraction & Validation
   send_notification: false
@@ -22991,7 +22991,6 @@
   expect_string: ''
   expect_username_prompt: ''
   fast_cli: true
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: true
@@ -23058,6 +23057,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: netmiko_show_ip_route
@@ -23101,7 +23101,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -23179,6 +23178,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Payload Extraction
   send_notification: false
@@ -23219,7 +23219,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23280,6 +23279,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Validation dict via results
   send_notification: false
@@ -23319,7 +23319,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23380,6 +23379,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Validate text via results
   send_notification: false
@@ -23420,7 +23420,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23481,6 +23480,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Validate dict via payload
   send_notification: false
@@ -23519,7 +23519,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23580,6 +23579,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Validate text via payload
   send_notification: false
@@ -23621,7 +23621,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -23671,6 +23670,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Payload Extraction with Operations
   send_notification: false
@@ -23711,7 +23711,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -23772,6 +23771,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'Payload Workflow: Add initial variables'
   send_notification: false
@@ -23811,7 +23811,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -23884,6 +23883,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: 'Payload Workflow: Extraction 1'
   send_notification: false
@@ -23923,7 +23923,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23984,6 +23983,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Validation 1
   send_notification: false
@@ -24027,7 +24027,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24077,6 +24076,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: Payload Recursive Conservation with Restart Mechanism
   send_notification: false
@@ -24119,7 +24119,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24167,6 +24166,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Set Payload and Result
   send_notification: false
@@ -24206,7 +24206,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24254,6 +24253,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Get Payload 1
   send_notification: false
@@ -24292,7 +24292,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24340,6 +24339,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Get Payload 2
   send_notification: false
@@ -24378,7 +24378,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24426,6 +24425,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Get Result 1
   send_notification: false
@@ -24464,7 +24464,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24512,6 +24511,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Get Result 2
   send_notification: false
@@ -24550,7 +24550,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24598,6 +24597,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Iteration Devices from Predefined Variable
   send_notification: false
@@ -24639,7 +24639,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24689,6 +24688,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Interaction of Restart Mechanism and Superworkflow
   send_notification: false
@@ -24732,7 +24732,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24782,6 +24781,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: Basic Superworkflow
   send_notification: false
@@ -24820,7 +24820,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24867,6 +24866,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Before Placeholder
   send_notification: false
@@ -24905,7 +24905,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24952,6 +24951,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: After Placeholder
   send_notification: false
@@ -24990,7 +24990,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25038,6 +25037,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Service 1
   send_notification: false
@@ -25076,7 +25076,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25124,6 +25123,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Service 2
   send_notification: false
@@ -25162,7 +25162,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25210,6 +25209,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Service 3
   send_notification: false
@@ -25251,7 +25251,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25310,6 +25309,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: 'Functions: get_result and get_var'
   send_notification: false
@@ -25351,7 +25351,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25399,6 +25398,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Before Run Once
   send_notification: false
@@ -25437,7 +25437,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25485,6 +25484,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Before Run Per Device
   send_notification: false
@@ -25527,7 +25527,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25579,6 +25578,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Subworkflow
   send_notification: false
@@ -25617,7 +25617,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25665,6 +25664,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: After Run Once
   send_notification: false
@@ -25706,7 +25706,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25754,6 +25753,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: After Run Per Device
   send_notification: false
@@ -25795,7 +25795,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25843,6 +25842,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Subservice
   send_notification: false
@@ -25889,7 +25889,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25972,6 +25971,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_service_targets
   scoped_name: Deletion and Cascade Deletion
   send_notification: false
@@ -26013,7 +26013,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26062,6 +26061,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Service1
   send_notification: false
@@ -26100,7 +26100,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26149,6 +26148,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Service2
   send_notification: false
@@ -26187,7 +26187,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26236,6 +26235,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Deletion of SanJose
   send_notification: false
@@ -26274,7 +26274,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26323,6 +26322,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Deletion of Service2
   send_notification: false
@@ -26361,7 +26361,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26410,6 +26409,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Link Deletion
   send_notification: false
@@ -26448,7 +26448,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26497,6 +26496,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Task Deletion
   send_notification: false
@@ -26536,7 +26536,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26586,6 +26585,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: ICMP Ping
   send_notification: false
@@ -26627,7 +26627,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26698,6 +26697,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: GET Endpoints is_alive, configuration and instance
   send_notification: false
@@ -26743,7 +26743,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -26797,6 +26796,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/is_alive
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: is_alive
   send_notification: false
@@ -26839,7 +26839,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -26892,6 +26891,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/configuration/{{ device.name }}
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: configuration
   send_notification: false
@@ -26934,7 +26934,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -26987,6 +26986,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/configuration/{{ device.name }}?property=operational_data
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: operational_data
   send_notification: false
@@ -27029,7 +27029,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -27081,6 +27080,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device/{{ device.name }}
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: instance - device
   send_notification: false
@@ -27123,7 +27123,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -27175,6 +27174,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/user/admin
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: instance - user
   send_notification: false
@@ -27216,7 +27216,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -27285,6 +27284,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: GET Endpoints query and token
   send_notification: false
@@ -27328,7 +27328,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -27383,6 +27382,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?name={{ device.name }}
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Query Device - Washington
   send_notification: false
@@ -27425,7 +27425,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -27478,6 +27477,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?name=NonExisting&allow_none=true
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Query Device - NonExisting
   send_notification: false
@@ -27520,7 +27520,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -27574,6 +27573,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?operating_system=EOS
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Query Device - OS EOS
   send_notification: false
@@ -27615,7 +27615,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -27691,6 +27690,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: POST Endpoint search
   send_notification: false
@@ -27734,7 +27734,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -27794,6 +27793,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/search
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: First 5 devices
   send_notification: false
@@ -27836,7 +27836,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -27894,6 +27893,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/search
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Devices with i
   send_notification: false
@@ -27936,7 +27936,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -27996,6 +27995,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/search
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Configuration with regex TRAFFIC-dd
   send_notification: false
@@ -28037,7 +28037,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -28117,6 +28116,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_service_targets
   scoped_name: POST update, DELETE delete and GET & POST results
   send_notification: false
@@ -28163,7 +28163,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -28217,6 +28216,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device
+  restrict_to_owners: []
   run_method: once
   scoped_name: POST Update NewDevice property1
   send_notification: false
@@ -28259,7 +28259,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -28311,6 +28310,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device
+  restrict_to_owners: []
   run_method: once
   scoped_name: POST Create NewDevice
   send_notification: false
@@ -28353,7 +28353,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -28406,6 +28405,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/instance/device/NewDevice
+  restrict_to_owners: []
   run_method: once
   scoped_name: DELETE NewDevice
   send_notification: false
@@ -28448,7 +28448,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -28500,6 +28499,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/result/POST Create NewDevice/{{ runtime }}
+  restrict_to_owners: []
   run_method: once
   scoped_name: GET result
   send_notification: false
@@ -28542,7 +28542,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -28598,6 +28597,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/search
+  restrict_to_owners: []
   run_method: once
   scoped_name: POST Search Result
   send_notification: false
@@ -28639,7 +28639,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -28725,6 +28724,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_service_targets
   scoped_name: (R) Gateway Mechanism (SSH Proxy with Netmiko)
   send_notification: false
@@ -28782,7 +28782,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -28839,6 +28838,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Gateway 1
@@ -28900,7 +28900,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -28957,6 +28956,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Gateway 3, 2 then 1
@@ -29018,7 +29018,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -29075,6 +29074,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Both
@@ -29121,7 +29121,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29178,6 +29177,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Parameterized Multiprocessing
   send_notification: false
@@ -29216,7 +29216,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29263,6 +29262,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Empty Service
   send_notification: false
@@ -29304,7 +29304,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29384,6 +29383,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Parameterized Targets
   send_notification: false
@@ -29421,7 +29421,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29468,6 +29467,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Empty Service
   send_notification: false
@@ -29509,7 +29509,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29560,6 +29559,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Large Workflow (30 services)
   send_notification: false
@@ -29611,7 +29611,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29662,6 +29661,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S1
   send_notification: false
@@ -29700,7 +29700,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29751,6 +29750,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S2
   send_notification: false
@@ -29789,7 +29789,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29840,6 +29839,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S3
   send_notification: false
@@ -29878,7 +29878,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29929,6 +29928,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S4
   send_notification: false
@@ -29967,7 +29967,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30018,6 +30017,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S5
   send_notification: false
@@ -30056,7 +30056,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30107,6 +30106,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S6
   send_notification: false
@@ -30145,7 +30145,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30196,6 +30195,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S7
   send_notification: false
@@ -30234,7 +30234,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30285,6 +30284,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S8
   send_notification: false
@@ -30323,7 +30323,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30374,6 +30373,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S9
   send_notification: false
@@ -30412,7 +30412,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30463,6 +30462,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S10
   send_notification: false
@@ -30501,7 +30501,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30552,6 +30551,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S11
   send_notification: false
@@ -30590,7 +30590,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30641,6 +30640,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S12
   send_notification: false
@@ -30679,7 +30679,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30730,6 +30729,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S13
   send_notification: false
@@ -30768,7 +30768,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30819,6 +30818,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S14
   send_notification: false
@@ -30857,7 +30857,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30908,6 +30907,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S15
   send_notification: false
@@ -30946,7 +30946,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30997,6 +30996,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S16
   send_notification: false
@@ -31035,7 +31035,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31086,6 +31085,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S17
   send_notification: false
@@ -31124,7 +31124,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31175,6 +31174,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S18
   send_notification: false
@@ -31213,7 +31213,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31264,6 +31263,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S19
   send_notification: false
@@ -31302,7 +31302,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31353,6 +31352,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S20
   send_notification: false
@@ -31391,7 +31391,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31442,6 +31441,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S21
   send_notification: false
@@ -31480,7 +31480,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31531,6 +31530,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S22
   send_notification: false
@@ -31569,7 +31569,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31620,6 +31619,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S23
   send_notification: false
@@ -31658,7 +31658,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31709,6 +31708,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S24
   send_notification: false
@@ -31747,7 +31747,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31798,6 +31797,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S25
   send_notification: false
@@ -31836,7 +31836,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31887,6 +31886,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S26
   send_notification: false
@@ -31925,7 +31925,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31976,6 +31975,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S27
   send_notification: false
@@ -32014,7 +32014,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32065,6 +32064,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: S28
   send_notification: false
@@ -32106,7 +32106,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32170,6 +32169,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Large Payload
   send_notification: false
@@ -32208,7 +32208,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32256,6 +32255,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Create Large Payload
   send_notification: false
@@ -32298,7 +32298,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32355,6 +32354,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Large Results
   send_notification: false
@@ -32393,7 +32393,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32441,6 +32440,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Create Large Result
   send_notification: false
@@ -32481,7 +32481,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32541,6 +32540,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Large Device Configuration and Operational Data
   send_notification: false
@@ -32579,7 +32579,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32627,6 +32626,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Set Large Configuration and Operational Data
   send_notification: false
@@ -32669,7 +32669,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32719,6 +32718,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_workflow_targets
   scoped_name: Slack and Mattermost Notifications
   send_notification: false
@@ -32761,7 +32761,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32809,6 +32808,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Slack in random, per device
   send_notification: false
@@ -32848,7 +32848,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32896,6 +32895,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Notification in general, once
   send_notification: false
@@ -32953,7 +32953,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33017,6 +33016,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Get Configuration with Scrapli
   send_notification: false
@@ -33078,7 +33078,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33143,6 +33142,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Get Operational Data with Scrapli
   send_notification: false
@@ -33187,7 +33187,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33273,6 +33272,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_service_targets
   scoped_name: (R) Gateway Mechanism (SSH Proxy with Scrapli)
   send_notification: false
@@ -33319,7 +33319,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33368,6 +33367,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: true
   run_method: per_device
   scoped_name: Gateway 1
@@ -33417,7 +33417,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33466,6 +33465,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: true
   run_method: per_device
   scoped_name: Gateway 3, 2 then 1
@@ -33515,7 +33515,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33564,6 +33563,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: true
   run_method: per_device
   scoped_name: Both
@@ -33609,7 +33609,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33669,6 +33668,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_service_with_service_targets
   scoped_name: Data Extraction Jinja2 Template
   send_notification: false
@@ -33710,7 +33710,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33771,6 +33770,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Apply jinja2 Template
   send_notification: false
@@ -33810,7 +33810,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33857,6 +33856,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Define Input Variables
   send_notification: false
@@ -33903,7 +33903,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33996,6 +33995,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Scrapli and Netmiko Multiple Commands and Jinja2
   send_notification: false
@@ -34045,7 +34045,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -34098,6 +34097,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Scrapli Multiple Commands (text)
@@ -34147,7 +34147,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -34200,6 +34199,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: true
   run_method: per_device
   scoped_name: Scrapli Multiple Commands (list)
@@ -34261,7 +34261,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -34319,6 +34318,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Netmiko Jinja 2 conversion (text)
@@ -34381,7 +34381,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -34439,6 +34438,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: true
   run_method: per_device
   scoped_name: Netmiko Jinja 2 conversion (list)
@@ -34483,7 +34483,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -34535,6 +34534,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Ping Custom IP
   send_notification: false
@@ -34573,7 +34573,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -34639,6 +34638,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: once
   scoped_name: Apply TTP Template
   send_notification: false
@@ -34681,7 +34681,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -34741,6 +34740,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: '(R) Function: get_connection'
   send_notification: false
@@ -34798,7 +34798,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -34852,6 +34851,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Open default connection
@@ -34895,7 +34895,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -34945,6 +34944,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Use default connection
   send_notification: false
@@ -35004,7 +35004,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -35058,6 +35057,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Open special connection
@@ -35104,7 +35104,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -35176,6 +35175,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: (R) Named Credential Mechanism
   send_notification: false
@@ -35219,7 +35219,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -35272,6 +35271,7 @@
   report_jinja2_template: false
   reserved: false
   rest_url: http://192.168.56.102/rest/query/device?name={{ device.name }}
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: REST Call
   send_notification: false
@@ -35328,7 +35328,6 @@
   expect_string: ''
   expect_username_prompt: 'username:'
   fast_cli: false
-  freeze: []
   global_delay_factor: 1.0
   impacting: true
   include_device_results: false
@@ -35383,6 +35382,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   results_as_list: false
   run_method: per_device
   scoped_name: Netmiko - show run -
@@ -35432,7 +35432,6 @@
   display_only_failed_nodes: false
   display_report: false
   driver: device
-  freeze: []
   getters: [get_interfaces]
   impacting: true
   include_device_results: false
@@ -35483,6 +35482,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Napalm - get interfaces -
   send_notification: false
@@ -35524,7 +35524,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: true
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -35592,6 +35591,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Text Reports with Normal Templates
   send_notification: false
@@ -35630,7 +35630,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -35678,6 +35677,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Service
   send_notification: false
@@ -35720,7 +35720,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: true
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -35798,6 +35797,7 @@
   report_format: html
   report_jinja2_template: true
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: HTML Reports with Jinja2 Templates
   send_notification: false
@@ -35836,7 +35836,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   display_report: false
-  freeze: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -35885,6 +35884,7 @@
   report_format: text
   report_jinja2_template: false
   reserved: false
+  restrict_to_owners: []
   run_method: per_device
   scoped_name: Service
   send_notification: false

@@ -44,11 +44,11 @@ class Object(AbstractBase):
                 "equality": row == value,
                 "inclusion": literal(value).contains(row),
                 "regex": literal(value).regexp_match(row),
+                "empty": literal(value) == "",
             }
             match_constraints = []
-            for match_property in ("equality", "inclusion", "regex"):
+            for match_property, constraint in main_constraint.items():
                 for invert_value in (False, True):
-                    constraint = main_constraint[match_property]
                     if invert_value:
                         constraint = ~constraint
                     match_constraints.append(
@@ -69,7 +69,6 @@ class Object(AbstractBase):
     def match_pool_configuration_properties(self, pool):
         match_list = []
         for property in vs.configuration_properties:
-            print(self.class_type)
             pool_value = getattr(pool, f"{self.class_type}_{property}")
             match_type = getattr(pool, f"{self.class_type}_{property}_match")
             if not pool_value and match_type != "empty":
@@ -86,7 +85,6 @@ class Object(AbstractBase):
             )
             result = match != getattr(pool, f"{self.class_type}_{property}_invert")
             match_list.append(result)
-        print(all(match_list))
         return all(match_list)
 
     def delete(self):

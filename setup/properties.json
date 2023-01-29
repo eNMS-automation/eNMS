@@ -564,12 +564,6 @@
         "width": "100px"
       },
       {
-        "data": "admin_only",
-        "title": "Admin Only",
-        "search": "bool",
-        "visible": false
-      },
-      {
         "data": "devices",
         "title": "Devices",
         "width": "80px"
@@ -1355,8 +1349,7 @@
       "last_modified",
       "creator",
       "description",
-      "manually_defined",
-      "admin_only"
+      "manually_defined"
     ],
     "run": [
       "runtime",

@@ -536,7 +536,6 @@ class PoolForm(BaseForm):
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
     creator = StringField(render_kw={"readonly": True})
-    admin_only = BooleanField("Pool visible to admin users only")
     description = StringField(widget=TextArea(), render_kw={"rows": 8})
     manually_defined = BooleanField("Manually defined (won't be automatically updated)")
 

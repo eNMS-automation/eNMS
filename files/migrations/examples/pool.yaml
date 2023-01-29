@@ -1,5 +1,4 @@
-- admin_only: true
-  creator: ''
+- creator: ''
   description: All objects
   device_configuration: ''
   device_configuration_invert: false
@@ -149,8 +148,7 @@
   target_services: []
   tasks: []
   type: pool
-- admin_only: false
-  creator: ''
+- creator: ''
   description: All devices
   device_configuration: ''
   device_configuration_invert: false
@@ -276,12 +274,11 @@
   rbac_group_rbac_target: []
   rbac_read: []
   target_services: ['[Skip in SxS with service targets and Run Once services] Run
-      Once with Pool', Large Workflow (30 services), Large Device Configuration and
-      Operational Data]
+      Once with Pool', Large Device Configuration and Operational Data, Large Workflow
+      (30 services)]
   tasks: []
   type: pool
-- admin_only: false
-  creator: ''
+- creator: ''
   description: All links
   device_configuration: ''
   device_configuration_invert: false
@@ -419,8 +416,7 @@
   target_services: []
   tasks: []
   type: pool
-- admin_only: false
-  creator: ''
+- creator: ''
   description: Datacenter San Francisco
   device_configuration: ''
   device_configuration_invert: false
@@ -567,8 +563,7 @@
   target_services: [Parameterized Multiprocessing]
   tasks: []
   type: pool
-- admin_only: true
-  creator: ''
+- creator: ''
   description: Datacenter New York
   device_configuration: ''
   device_configuration_invert: false
@@ -711,8 +706,7 @@
   target_services: []
   tasks: []
   type: pool
-- admin_only: false
-  creator: ''
+- creator: ''
   description: Datacenter Chicago
   device_configuration: ''
   device_configuration_invert: false
@@ -854,8 +848,7 @@
   target_services: []
   tasks: []
   type: pool
-- admin_only: false
-  creator: ''
+- creator: ''
   description: ''
   device_configuration: ''
   device_configuration_invert: false
@@ -971,8 +964,7 @@
   target_services: [Parameterized Targets, Parameterized Run with a Superworkflow]
   tasks: []
   type: pool
-- admin_only: false
-  creator: admin
+- creator: admin
   description: Used for testing credentials
   device_configuration: ''
   device_configuration_invert: false
@@ -1088,8 +1080,7 @@
   target_services: ['(R) Credentials (Password & Key, Priority Mechanism)']
   tasks: []
   type: pool
-- admin_only: false
-  creator: admin
+- creator: admin
   description: "Used for testing credentials\t"
   device_configuration: ''
   device_configuration_invert: false
@@ -1205,8 +1196,7 @@
   target_services: []
   tasks: []
   type: pool
-- admin_only: false
-  creator: admin
+- creator: admin
   description: ''
   device_configuration: ''
   device_configuration_invert: false

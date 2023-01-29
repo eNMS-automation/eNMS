@@ -296,7 +296,7 @@ class Controller:
     def delete_builder_selection(self, type, id, **selection):
         instance = db.fetch(type, id=id)
         instance.update_last_modified_properties()
-        instance.check_freeze("edit")
+        instance.check_restriction_to_owners("edit")
         for edge_id in selection["edges"]:
             if type == "workflow":
                 db.delete("workflow_edge", id=edge_id)
@@ -1135,7 +1135,7 @@ class Controller:
             kwargs = {"form": kwargs, "parameterized_run": True}
         kwargs.update({"creator": getattr(current_user, "name", ""), "path": path})
         service = db.fetch("service", id=service_id, rbac="run")
-        service.check_freeze("run")
+        service.check_restriction_to_owners("run")
         kwargs["runtime"] = runtime = vs.get_time()
         run_name = kwargs.get("form", {}).get("name")
         if run_name and db.fetch("run", name=run_name, allow_none=True):

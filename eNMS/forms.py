@@ -642,7 +642,7 @@ class ServiceForm(BaseForm):
     device_query_property = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
-    freeze = SelectMultipleField("Freeze", choices=(("edit", "Edit"), ("run", "Run")))
+    restrict_to_owners = SelectMultipleField("Restrict to Owners", choices=(("edit", "Edit"), ("run", "Run")))
     target_devices = MultipleInstanceField("Devices", model="device")
     disable_result_creation = BooleanField("Save only failed results")
     target_pools = MultipleInstanceField("Pools", model="pool")

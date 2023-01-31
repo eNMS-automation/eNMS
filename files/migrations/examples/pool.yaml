@@ -1,4 +1,5 @@
-- creator: ''
+- admin_only: false
+  creator: ''
   description: All objects
   device_configuration: ''
   device_configuration_invert: false
@@ -148,7 +149,8 @@
   target_services: []
   tasks: []
   type: pool
-- creator: ''
+- admin_only: false
+  creator: ''
   description: All devices
   device_configuration: ''
   device_configuration_invert: false
@@ -278,7 +280,8 @@
       Operational Data]
   tasks: []
   type: pool
-- creator: ''
+- admin_only: false
+  creator: ''
   description: All links
   device_configuration: ''
   device_configuration_invert: false
@@ -416,7 +419,8 @@
   target_services: []
   tasks: []
   type: pool
-- creator: ''
+- admin_only: false
+  creator: ''
   description: Datacenter San Francisco
   device_configuration: ''
   device_configuration_invert: false
@@ -563,7 +567,8 @@
   target_services: [Parameterized Multiprocessing]
   tasks: []
   type: pool
-- creator: ''
+- admin_only: false
+  creator: ''
   description: Datacenter New York
   device_configuration: ''
   device_configuration_invert: false
@@ -706,7 +711,8 @@
   target_services: []
   tasks: []
   type: pool
-- creator: ''
+- admin_only: false
+  creator: ''
   description: Datacenter Chicago
   device_configuration: ''
   device_configuration_invert: false
@@ -848,7 +854,8 @@
   target_services: []
   tasks: []
   type: pool
-- creator: ''
+- admin_only: false
+  creator: ''
   description: ''
   device_configuration: ''
   device_configuration_invert: false
@@ -964,7 +971,8 @@
   target_services: [Parameterized Targets, Parameterized Run with a Superworkflow]
   tasks: []
   type: pool
-- creator: admin
+- admin_only: false
+  creator: admin
   description: Used for testing credentials
   device_configuration: ''
   device_configuration_invert: false
@@ -1080,7 +1088,8 @@
   target_services: ['(R) Credentials (Password & Key, Priority Mechanism)']
   tasks: []
   type: pool
-- creator: admin
+- admin_only: false
+  creator: admin
   description: "Used for testing credentials\t"
   device_configuration: ''
   device_configuration_invert: false
@@ -1196,7 +1205,8 @@
   target_services: []
   tasks: []
   type: pool
-- creator: admin
+- admin_only: false
+  creator: admin
   description: ''
   device_configuration: ''
   device_configuration_invert: false

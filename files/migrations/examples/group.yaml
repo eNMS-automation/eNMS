@@ -1,4 +1,5 @@
-- creator: admin
+- admin_only: false
+  creator: admin
   credential_access: []
   custom_property: CP
   delete_requests: []
@@ -17,7 +18,8 @@
   task_access: []
   type: group
   users: [admin, readonly, nadmin, demo]
-- creator: admin
+- admin_only: false
+  creator: admin
   credential_access: []
   custom_property: CP
   delete_requests: []
@@ -36,7 +38,8 @@
   task_access: []
   type: group
   users: [admin]
-- creator: admin
+- admin_only: false
+  creator: admin
   credential_access: []
   custom_property: CP
   delete_requests: [/rest/instance]
@@ -82,9 +85,9 @@
   menu: [Administration, Inventory, Visualization, Automation]
   name: Full UI Read + Edit Access
   network_access: []
-  pages: [Files, Changelog, Servers, Credentials, Devices, Configurations, Links,
-    Pools, Networks, Geographical View, Network Builder, Services, Workflow Builder,
-    Scheduling, Results]
+  pages: [Files, Changelog, Groups, Servers, Credentials, Devices, Configurations,
+    Links, Pools, Networks, Geographical View, Network Builder, Services, Workflow
+      Builder, Scheduling, Results]
   pool_access: []
   post_requests: [/add_edge, /add_instances_in_bulk, /add_objects_to_network, /bulk_deletion,
     /bulk_edit, /bulk_removal, /copy_service_in_workflow, /clear_results, /clear_configurations,
@@ -106,7 +109,8 @@
   task_access: []
   type: group
   users: [nadmin]
-- creator: admin
+- admin_only: false
+  creator: admin
   credential_access: []
   custom_property: CP
   delete_requests: [/rest/instance]
@@ -114,12 +118,13 @@
   device_access: []
   email: ''
   get_requests: [/changelog_table, /compare_form, /configuration_table, /confirmation_form,
-    /device_data_form, /device_table, /download, /event_table, /export_service, /file_table,
-    /files_form, /geographical_view, /git_history_form, /group_table, /instance_deletion_form,
-    /link_table, /network_builder, /logs_form, /pool_table, /rest/configuration, /rest/instance,
-    /rest/query, /rest/result, /rest/token, /result_comparison_form, /result_form,
-    /run_table, /service_table, /network_table, /table_form, /task_table, /terminal,
-    /tree_form, /view_service_results, /workflow_builder, /instance_tree_form, /add_services_to_workflow_form,
+    /credential_table, /device_data_form, /device_table, /download, /event_table,
+    /export_service, /file_table, /files_form, /geographical_view, /git_history_form,
+    /group_table, /instance_deletion_form, /link_table, /network_builder, /logs_form,
+    /pool_table, /report_form, /rest/configuration, /rest/instance, /rest/query, /rest/result,
+    /rest/token, /result_comparison_form, /result_form, /run_table, /server_table,
+    /service_table, /network_table, /table_form, /task_table, /terminal, /tree_form,
+    /view_service_results, /workflow_builder, /instance_tree_form, /add_services_to_workflow_form,
     /add_to_network_form, /administration_form, /changelog_form, /credential_form,
     /database_deletion_form, /database_migration_form, /debug_form, /device_connection_form,
     /excel_export_form, /excel_import_form, /file_form, /folder_form, /file_editor_form,
@@ -151,8 +156,9 @@
   menu: [Inventory, Visualization, Automation]
   name: ny Group
   network_access: []
-  pages: [Files, Changelog, Devices, Configurations, Links, Pools, Networks, Geographical
-      View, Network Builder, Services, Workflow Builder, Scheduling, Results]
+  pages: [Files, Changelog, Groups, Servers, Credentials, Devices, Configurations,
+    Links, Pools, Networks, Geographical View, Network Builder, Services, Workflow
+      Builder, Scheduling, Results]
   pool_access: []
   post_requests: [/add_edge, /add_instances_in_bulk, /add_objects_to_network, /bulk_deletion,
     /bulk_edit, /bulk_removal, /copy_service_in_workflow, /clear_results, /clear_configurations,

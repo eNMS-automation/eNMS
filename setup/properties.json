@@ -927,6 +927,12 @@
         "visible": false
       },
       {
+        "data": "admin_only",
+        "title": "Admin Only",
+        "search": "bool",
+        "visible": false
+      },
+      {
         "data": "description",
         "title": "Description",
         "width": "400px",
@@ -1119,6 +1125,12 @@
         "data": "creator",
         "title": "Creator",
         "search": "text",
+        "visible": false
+      },
+      {
+        "data": "admin_only",
+        "title": "Admin Only",
+        "search": "bool",
         "visible": false
       },
       {
@@ -1315,7 +1327,7 @@
   },
   "filtering": {
     "changelog": ["time", "user", "severity", "content"],
-    "credential": ["name", "subtype", "description", "username", "priority"],
+    "credential": ["name", "subtype", "description", "admin_only", "username", "priority"],
     "device": [
       "name",
       "description",
@@ -1337,7 +1349,7 @@
       "longitude",
       "property1"
     ],
-    "group": ["name", "description", "creator", "email"],
+    "group": ["name", "description", "creator", "admin_only", "email"],
     "link": [
       "name",
       "description",

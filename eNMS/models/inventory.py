@@ -337,6 +337,7 @@ class Pool(AbstractBase):
     name = db.Column(db.SmallString, unique=True)
     manually_defined = db.Column(Boolean, default=False)
     creator = db.Column(db.SmallString)
+    admin_only = db.Column(Boolean, default=False)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     last_modified_by = db.Column(db.SmallString, info={"log_change": False})
     description = db.Column(db.LargeString)

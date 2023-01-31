@@ -583,7 +583,7 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
         setTimeout(
           () =>
             refreshLogs(service, runtime, editor, false, result.refresh, result.line),
-          1000
+          automation.workflow.logs_refresh_rate
         );
       } else if (wasRefreshed) {
         setTimeout(() => {

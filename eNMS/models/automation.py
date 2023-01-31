@@ -128,7 +128,8 @@ class Service(AbstractBase):
 
     def check_restriction_to_owners(self, mode):
         if not getattr(current_user, "is_admin", True) and any(
-            mode in getattr(workflow, "restrict_to_owners") and current_user not in workflow.owners
+            mode in getattr(workflow, "restrict_to_owners")
+            and current_user not in workflow.owners
             for workflow in self.get_ancestors()
         ):
             raise db.rbac_error("Deletion forbidden because restricted to owners.")

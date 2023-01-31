@@ -1327,7 +1327,14 @@
   },
   "filtering": {
     "changelog": ["time", "user", "severity", "content"],
-    "credential": ["name", "subtype", "description", "admin_only", "username", "priority"],
+    "credential": [
+      "name",
+      "subtype",
+      "description",
+      "admin_only",
+      "username",
+      "priority"
+    ],
     "device": [
       "name",
       "description",

@@ -39,7 +39,7 @@
         },
         "Groups": {
           "endpoint": "/group_table",
-          "rbac": "admin"
+          "rbac": "access"
         },
         "Servers": {
           "endpoint": "/server_table",

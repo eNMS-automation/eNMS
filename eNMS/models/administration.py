@@ -206,9 +206,6 @@ class File(AbstractBase):
     )
     folder_path = db.Column(db.SmallString)
 
-    def delete(self):
-        Path(self.path).unlink(missing_ok=True)
-
     def update(self, move_file=True, **kwargs):
         old_path = self.path
         super().update(**kwargs)
@@ -245,6 +242,3 @@ class Folder(File):
         if not exists(kwargs["path"]):
             makedirs(kwargs["path"])
         self.update(**kwargs)
-
-    def delete(self):
-        rmtree(self.path, ignore_errors=True)

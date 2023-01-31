@@ -244,7 +244,7 @@ class FormFactory:
         class GroupForm(RbacForm):
             template = "group"
             form_type = HiddenField(default="group")
-            admin_only = BooleanField("Admin Only")
+            admin_only = BooleanField("Admin Only", default=False)
             users = MultipleInstanceField("Users", model="user")
             menu = SelectMultipleField("Menu", choices=vs.dualize(vs.rbac["menus"]))
             pages = SelectMultipleField("Pages", choices=vs.dualize(vs.rbac["pages"]))
@@ -367,7 +367,7 @@ class CredentialForm(BaseForm):
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
     creator = StringField(render_kw={"readonly": True})
-    admin_only = BooleanField("Admin Only")
+    admin_only = BooleanField("Admin Only", default=False)
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     role = SelectField(
         "Role",
@@ -741,7 +741,7 @@ class ServiceForm(BaseForm):
             ("always", "Always run"),
         )
     )
-    admin_only = BooleanField("Admin Only")
+    admin_only = BooleanField("Admin Only", default=False)
     log_level = SelectField(
         "Logging",
         choices=(*enumerate(vs.log_levels), (-1, "Disable logging")),

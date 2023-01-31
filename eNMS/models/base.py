@@ -2,6 +2,7 @@ from collections import defaultdict
 from flask_login import current_user
 from sqlalchemy import or_
 from sqlalchemy.ext.mutable import MutableDict, MutableList
+from sqlalchemy.sql.expression import false
 
 from eNMS.database import db
 from eNMS.environment import env
@@ -113,6 +114,8 @@ class AbstractBase(db.base):
         property = getattr(vs.models[model], f"rbac_{mode}")
         rbac_constraint = property.any(vs.models["group"].id.in_(user_group))
         owners_constraint = vs.models[model].owners.any(id=user.id)
+        if hasattr(vs.models[model], "admin_only"):
+            query = query.filter(cls.admin_only == false())
         return query.filter(or_(owners_constraint, rbac_constraint))
 
     def update_rbac(self):

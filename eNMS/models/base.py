@@ -115,7 +115,7 @@ class AbstractBase(db.base):
         rbac_constraint = property.any(vs.models["group"].id.in_(user_group))
         owners_constraint = vs.models[model].owners.any(id=user.id)
         if hasattr(vs.models[model], "admin_only"):
-            query = query.filter(cls.admin_only == false())
+            query = query.filter(vs.models[model].admin_only == false())
         return query.filter(or_(owners_constraint, rbac_constraint))
 
     def update_rbac(self):

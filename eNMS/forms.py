@@ -392,7 +392,9 @@ class CredentialForm(BaseForm):
         valid_form = super().validate()
         invalid_priority = not current_user.is_admin and self.priority.data > 1
         if invalid_priority:
-            self.priority.errors.append("Non admin users cannot set a priority higher than 1.")
+            self.priority.errors.append(
+                "Non admin users cannot set a priority higher than 1."
+            )
         return valid_form and not invalid_priority
 
 

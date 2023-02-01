@@ -46,7 +46,7 @@ class Object(AbstractBase):
                 "regex": literal(value).regexp_match(row),
                 "empty": literal(value) == "",
             }
-            match_constraints = []
+            match_constraints = [and_(row == "", row_match != "empty")]
             for match_property, constraint in main_constraint.items():
                 for invert_value in (False, True):
                     if invert_value:
@@ -58,7 +58,7 @@ class Object(AbstractBase):
                             invert_value == row_invert,
                         )
                     )
-            constraints.append(or_(row == "", *match_constraints))
+            constraints.append(or_(*match_constraints))
         self.pools = [
             pool
             for pool in db.query("pool").filter(and_(*constraints)).all()

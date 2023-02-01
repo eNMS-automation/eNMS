@@ -388,6 +388,13 @@ class CredentialForm(BaseForm):
     private_key = StringField(widget=TextArea(), render_kw={"rows": 1})
     enable_password = PasswordField("'Enable' Password")
 
+    def validate(self):
+        valid_form = super().validate()
+        invalid_priority = not current_user.is_admin and self.priority.data > 1
+        if invalid_priority:
+            self.priority.errors.append("Non admin users cannot set a priority higher than 1.")
+        return valid_form and not invalid_priority
+
 
 class DatabaseDeletionForm(BaseForm):
     action = "eNMS.administration.databaseDeletion"

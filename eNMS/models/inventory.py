@@ -28,64 +28,9 @@ class Object(AbstractBase):
 
     def update(self, **kwargs):
         super().update(**kwargs)
-        if not hasattr(self, "class_type") or not kwargs.get("update_pools"):
+        if not hasattr(self, "class_type") or self.class_type == "network":
             return
-        if self.class_type == "network":
-            return
-        constraints = []
-        for property in vs.properties["filtering"][self.class_type]:
-            if property in vs.configuration_properties:
-                continue
-            table, pool_property = vs.models["pool"], f"{self.class_type}_{property}"
-            row, value = getattr(table, pool_property), getattr(self, property)
-            row_match = getattr(table, f"{pool_property}_match")
-            row_invert = getattr(table, f"{pool_property}_invert")
-            main_constraint = {
-                "equality": row == value,
-                "inclusion": literal(value).contains(row),
-                "regex": literal(value).regexp_match(row),
-                "empty": literal(value) == "",
-            }
-            match_constraints = [and_(row == "", row_match != "empty")]
-            for match_property, constraint in main_constraint.items():
-                for invert_value in (False, True):
-                    if invert_value:
-                        constraint = ~constraint
-                    match_constraints.append(
-                        and_(
-                            constraint,
-                            row_match == match_property,
-                            invert_value == row_invert,
-                        )
-                    )
-            constraints.append(or_(*match_constraints))
-        self.pools = [
-            pool
-            for pool in db.query("pool").filter(and_(*constraints)).all()
-            if self.match_pool_configuration_properties(pool)
-        ]
         self.update_last_modified_properties()
-
-    def match_pool_configuration_properties(self, pool):
-        match_list = []
-        for property in vs.configuration_properties:
-            pool_value = getattr(pool, f"{self.class_type}_{property}")
-            match_type = getattr(pool, f"{self.class_type}_{property}_match")
-            if not pool_value and match_type != "empty":
-                continue
-            value = str(getattr(self, property))
-            match = (
-                match_type == "inclusion"
-                and pool_value in value
-                or match_type == "equality"
-                and pool_value == value
-                or match_type == "empty"
-                and not value
-                or bool(search(pool_value, value))
-            )
-            result = match != getattr(pool, f"{self.class_type}_{property}_invert")
-            match_list.append(result)
-        return all(match_list)
 
     def delete(self):
         number = f"{self.class_type}_number"

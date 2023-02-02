@@ -358,7 +358,7 @@ class ChangelogForm(BaseForm):
             ("critical", "Critical"),
         ),
     )
-    content = StringField(widget=TextArea(), render_kw={"rows": 10})
+    content = StringField(widget=TextArea(), render_kw={"rows": 20})
 
 
 class CredentialForm(BaseForm):

@@ -1593,6 +1593,7 @@ tables.file = class FileTable extends Table {
           type="button"
           class="btn btn-sm btn-info"
           onclick="location.href='/download/${row.type}/${row.path.slice(1)}'"
+          data-tooltip="Download File"
         >
           <span class="glyphicon glyphicon-export"></span>
         </button>
@@ -1620,6 +1621,7 @@ tables.file = class FileTable extends Table {
           <button type="button"
             class="btn btn-sm btn-primary"
             onclick="eNMS.administration.showFileUploadPanel('${row.path}')"
+            data-tooltip="Upload Files in Folder"
           >
             <span class="glyphicon glyphicon-import"></span>
           </button>

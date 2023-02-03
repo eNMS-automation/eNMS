@@ -534,7 +534,6 @@ class ObjectForm(BaseForm):
     name = StringField("Name")
     creator = StringField(render_kw={"readonly": True})
     type = StringField("Type")
-    networks = MultipleInstanceField("Networks", model="network")
     description = StringField("Description")
     subtype = StringField("Subtype")
     location = StringField("Location")

@@ -771,9 +771,10 @@ function buildBulkPanel(panel, type, tableId) {
     ...tableInstances[tableId].constraints,
     ...tableInstances[tableId].filteringConstraints,
   };
+  const rbac = tableId.includes("configuration") ? "configuration" : "read";
   call({
     url: `/filtering/${model}`,
-    data: { form: form, bulk: "id" },
+    data: { form: form, bulk: "id", rbac: rbac },
     callback: function (instances) {
       $(`#${type}-id-${tableId}`).val(instances.join("-"));
       $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val("Bulk Edit");

@@ -40,8 +40,8 @@ class Server(Flask):
     }
 
     status_error_message = {
-        401: "Wrong Credentials",
-        403: "Operation not allowed.",
+        401: "Wrong Credentials.",
+        403: "Not Authorized.",
         404: "Invalid POST request.",
         500: "Internal Server Error.",
     }

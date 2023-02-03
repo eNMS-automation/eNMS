@@ -110,7 +110,7 @@ export function cantorPairing(x, y) {
 
 function processResults(callback, results) {
   if (results === false) {
-    notify("Error 403 - Operation not allowed.", "error", 5);
+    notify("Error 403 - Not Authorized.", "error", 5);
   } else if (results && results.alert) {
     if (Array.isArray(results.alert)) {
       results.alert.map((e) => notify(e, "error", 5, true));
@@ -148,7 +148,7 @@ export const call = function ({ url, data, form, callback }) {
       if (error.status == 400) {
         message += " Your session might have expired, try refreshing the page.";
       } else if (error.status == 403) {
-        message = "Error 403 - Operation not allowed.";
+        message = "Error 403 - Not Authorized.";
       }
       notify(message, "error", 5);
     },
@@ -302,7 +302,7 @@ export function openPanel({
     !user.get_requests.includes(endpoint) &&
     rbac.get_requests[endpoint] != "all"
   ) {
-    return notify("Error 403 - Operation not allowed.", "error", 5);
+    return notify("Error 403 - Not Authorized.", "error", 5);
   }
   const panelId = id ? `${name}-${id}` : name;
   if ($(`#${panelId}`).length) {
@@ -467,10 +467,14 @@ export function preprocessForm(panel, id, type, duplicate) {
       if (
         [property, "id"].includes(el.name) ||
         formProperties[type][el.name]?.dont_duplicate
-      )
+      ) {
         return;
+      }
     }
     if (id) $(el).prop("id", `${$(el).attr("id")}-${id}`);
+  });
+  panel.querySelectorAll(".href-id").forEach((el) => {
+    if (id) $(el).prop("href", `${$(el).attr("href")}-${id}`);
   });
   panel.querySelectorAll(".btn-id").forEach((el) => {
     if (id) {
@@ -665,6 +669,19 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
   openPanel({
     name: type,
     id: id || tableId,
+    footerToolbar: `
+      <div style="width: 100%; height: 40px; display: flex;
+        align-items: center; justify-content: center;">
+        <button
+          style="width: 100px"
+          id="${type}-action-btn"
+          type="button"
+          class="btn btn-success btn-id add-id"
+          value="eNMS.base.processData"
+        >
+          Save
+        </button>
+      </div>`,
     callback: function (panel) {
       const isService = type in subtypes.service;
       const isNode = type in subtypes.node;
@@ -682,9 +699,9 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
               ? instance.owners.map((user) => user.name)
               : [];
             if (user.is_admin || ownersNames.includes(user.name)) {
-              $("#rbac-nav").show();
+              $(`#rbac-nav-${id}`).show();
             } else {
-              $("#rbac-nav,#rbac-properties").remove();
+              $(`#rbac-nav-${id},#rbac-properties-${id}`).remove();
             }
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
@@ -754,9 +771,10 @@ function buildBulkPanel(panel, type, tableId) {
     ...tableInstances[tableId].constraints,
     ...tableInstances[tableId].filteringConstraints,
   };
+  const rbac = tableId.includes("configuration") ? "configuration" : "read";
   call({
     url: `/filtering/${model}`,
-    data: { form: form, bulk: "id" },
+    data: { form: form, bulk: "id", rbac: rbac },
     callback: function (instances) {
       $(`#${type}-id-${tableId}`).val(instances.join("-"));
       $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val("Bulk Edit");
@@ -982,10 +1000,14 @@ function showAllAlerts() {
   openPanel({
     name: "alerts_table",
     title: "Alerts",
+    size: "1200 500",
     callback: () => {
       $("#alerts-table")
         // eslint-disable-next-line new-cap
         .DataTable({
+          pagingType: "full_numbers",
+          sDom: `<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f>
+            <"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>`,
           columns: [{ width: "200px" }, { width: "60px" }, null],
         })
         .order([0, "desc"])

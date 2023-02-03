@@ -40,7 +40,7 @@ class Service(AbstractBase):
     credential_type = db.Column(db.SmallString, default="any")
     positions = db.Column(db.Dict, info={"log_change": False})
     disable_result_creation = db.Column(Boolean, default=False)
-    freeze = db.Column(db.List)
+    restrict_to_owners = db.Column(db.List)
     tasks = relationship("Task", back_populates="service", cascade="all,delete")
     vendor = db.Column(db.SmallString)
     operating_system = db.Column(db.SmallString)
@@ -124,14 +124,15 @@ class Service(AbstractBase):
     def delete(self):
         if self.name in ("[Shared] Start", "[Shared] End", "[Shared] Placeholder"):
             raise db.rbac_error(f"It is not allowed to delete '{self.name}'.")
-        self.check_freeze("edit")
+        self.check_restriction_to_owners("edit")
 
-    def check_freeze(self, mode):
+    def check_restriction_to_owners(self, mode):
         if not getattr(current_user, "is_admin", True) and any(
-            mode in getattr(workflow, "freeze") and current_user not in workflow.owners
+            mode in getattr(workflow, "restrict_to_owners")
+            and current_user not in workflow.owners
             for workflow in self.get_ancestors()
         ):
-            raise db.rbac_error("Deletion forbidden because of active freeze.")
+            raise db.rbac_error("Deletion forbidden because restricted to owners.")
 
     def post_update(self):
         if len(self.workflows) == 1 and not self.shared:
@@ -143,7 +144,7 @@ class Service(AbstractBase):
 
     def update(self, **kwargs):
         if self.path:
-            self.check_freeze("edit")
+            self.check_restriction_to_owners("edit")
         if self.positions and "positions" in kwargs:
             kwargs["positions"] = {**self.positions, **kwargs["positions"]}
         super().update(**kwargs)

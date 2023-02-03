@@ -296,7 +296,7 @@ class Controller:
     def delete_builder_selection(self, type, id, **selection):
         instance = db.fetch(type, id=id)
         instance.update_last_modified_properties()
-        instance.check_freeze("edit")
+        instance.check_restriction_to_owners("edit")
         for edge_id in selection["edges"]:
             if type == "workflow":
                 db.delete("workflow_edge", id=edge_id)
@@ -1074,7 +1074,7 @@ class Controller:
             db.session.commit()
 
     @staticmethod
-    @actor
+    @actor(max_retries=0, time_limit=float("inf"))
     def run(service, **kwargs):
         current_thread().name = kwargs["runtime"]
         if "path" not in kwargs:
@@ -1135,7 +1135,7 @@ class Controller:
             kwargs = {"form": kwargs, "parameterized_run": True}
         kwargs.update({"creator": getattr(current_user, "name", ""), "path": path})
         service = db.fetch("service", id=service_id, rbac="run")
-        service.check_freeze("run")
+        service.check_restriction_to_owners("run")
         kwargs["runtime"] = runtime = vs.get_time()
         run_name = kwargs.get("form", {}).get("name")
         if run_name and db.fetch("run", name=run_name, allow_none=True):
@@ -1183,8 +1183,6 @@ class Controller:
             elif id in instance.labels:
                 old_position = instance.labels[id].pop("positions")
                 instance.labels[id] = {"positions": new_position, **instance.labels[id]}
-            if new_position != old_position:
-                instance.last_modified = now
         return now
 
     def save_profile(self, **kwargs):
@@ -1345,7 +1343,7 @@ class Controller:
             db.session.flush()
             return instance.post_update()
         except db.rbac_error:
-            return {"alert": "Error 403 - Operation not allowed."}
+            return {"alert": "Error 403 - Not Authorized."}
         except Exception as exc:
             db.session.rollback()
             if isinstance(exc, IntegrityError):

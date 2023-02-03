@@ -90,7 +90,7 @@ class RestApi:
         data = {"trigger": "REST API", "creator": current_user.name, **kwargs}
         errors, devices, pools = [], [], []
         service = db.fetch("service", name=data.pop("name"), rbac="run")
-        service.check_freeze("run")
+        service.check_restriction_to_owners("run")
         handle_asynchronously = data.get("async", True)
         for device_name in data.get("devices", ""):
             device = db.fetch("device", name=device_name, allow_none=True)

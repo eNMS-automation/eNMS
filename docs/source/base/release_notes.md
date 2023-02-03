@@ -5,8 +5,7 @@ Version 4.4.0: RBAC and Credentials
 -----------------------------------
 
 - Remove settings from UI upper menu (doesn't work with multiple gunicorn workers)
-- Compute whether a device / link belongs to a pool with a SQL query rather than pure python (performance x3)
-  Add post_update function (60350ede71f6a5146bab9f42a87f7fef0360b98e) after db flush in controller udpate function to compute pool only after the ID has been set, and
+- Add post_update function (60350ede71f6a5146bab9f42a87f7fef0360b98e) after db flush in controller udpate function to compute pool only after the ID has been set, and
   determine what properties to return (e.g not serialized object but only what is needed)
   Return default serialized properties in controller update instead of all serialized relationship for scalability with > 50K devices.
 - Refactor freeze edit / run mechanism (pure python check instead of SQL query with originals)
@@ -79,6 +78,7 @@ Version 4.4.0: RBAC and Credentials
 - Fix "List index out of range" bug in Jump on Connect mechanism
   Commit 457f46dd2c496757e924d922f3455626d35a3784
 - Add RBAC support to credentials
+- Fix Netmiko exit_config_mode bug (to be called after commit)
 
 RBAC Refactoring:
 - Service export: owners and RBAC read / edit / etc are exported in the service

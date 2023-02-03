@@ -244,6 +244,7 @@ class FormFactory:
         class GroupForm(RbacForm):
             template = "group"
             form_type = HiddenField(default="group")
+            admin_only = BooleanField("Admin Only", default=False)
             users = MultipleInstanceField("Users", model="user")
             menu = SelectMultipleField("Menu", choices=vs.dualize(vs.rbac["menus"]))
             pages = SelectMultipleField("Pages", choices=vs.dualize(vs.rbac["pages"]))
@@ -345,7 +346,6 @@ class AdminForm(BaseForm):
 
 
 class ChangelogForm(BaseForm):
-    action = "eNMS.base.processData"
     form_type = HiddenField(default="changelog")
     id = HiddenField()
     severity = SelectField(
@@ -358,16 +358,16 @@ class ChangelogForm(BaseForm):
             ("critical", "Critical"),
         ),
     )
-    content = StringField(widget=TextArea(), render_kw={"rows": 10})
+    content = StringField(widget=TextArea(), render_kw={"rows": 20})
 
 
 class CredentialForm(BaseForm):
-    action = "eNMS.base.processData"
     template = "object"
     form_type = HiddenField(default="credential")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
     creator = StringField(render_kw={"readonly": True})
+    admin_only = BooleanField("Admin Only", default=False)
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     role = SelectField(
         "Role",
@@ -387,6 +387,15 @@ class CredentialForm(BaseForm):
     password = PasswordField("Password")
     private_key = StringField(widget=TextArea(), render_kw={"rows": 1})
     enable_password = PasswordField("'Enable' Password")
+
+    def validate(self):
+        valid_form = super().validate()
+        invalid_priority = not current_user.is_admin and self.priority.data > 1
+        if invalid_priority:
+            self.priority.errors.append(
+                "Non admin users cannot set a priority higher than 1."
+            )
+        return valid_form and not invalid_priority
 
 
 class DatabaseDeletionForm(BaseForm):
@@ -460,7 +469,6 @@ class ExcelImportForm(BaseForm):
 
 
 class FileForm(BaseForm):
-    action = "eNMS.base.processData"
     form_type = HiddenField(default="file")
     id = HiddenField()
     path = StringField("Path", [InputRequired()])
@@ -519,7 +527,6 @@ class LoginForm(BaseForm):
 
 
 class ObjectForm(BaseForm):
-    action = "eNMS.base.processData"
     template = "object"
     form_type = HiddenField(default="object")
     get_request_allowed = False
@@ -527,7 +534,6 @@ class ObjectForm(BaseForm):
     name = StringField("Name")
     creator = StringField(render_kw={"readonly": True})
     type = StringField("Type")
-    networks = MultipleInstanceField("Networks", model="network")
     description = StringField("Description")
     subtype = StringField("Subtype")
     location = StringField("Location")
@@ -572,7 +578,6 @@ class PoolForm(BaseForm):
 
 
 class RbacForm(BaseForm):
-    action = "eNMS.base.processData"
     form_type = HiddenField(default="rbac")
     get_request_allowed = False
     id = HiddenField()
@@ -622,14 +627,13 @@ class RunServiceForm(BaseForm):
 
 
 class ServerForm(BaseForm):
-    action = "eNMS.base.processData"
     form_type = HiddenField(default="server")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
     creator = StringField(render_kw={"readonly": True})
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     ip_address = StringField("IP address")
-    weight = IntegerField("Weigth", default=1)
+    weight = IntegerField("Weight", default=1)
 
 
 class ServiceForm(BaseForm):
@@ -649,7 +653,9 @@ class ServiceForm(BaseForm):
     device_query_property = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
-    freeze = SelectMultipleField("Freeze", choices=(("edit", "Edit"), ("run", "Run")))
+    restrict_to_owners = SelectMultipleField(
+        "Restrict to Owners", choices=(("edit", "Edit"), ("run", "Run"))
+    )
     target_devices = MultipleInstanceField("Devices", model="device")
     disable_result_creation = BooleanField("Save only failed results")
     target_pools = MultipleInstanceField("Pools", model="pool")
@@ -743,7 +749,7 @@ class ServiceForm(BaseForm):
             ("always", "Always run"),
         )
     )
-    admin_only = BooleanField("Admin Only")
+    admin_only = BooleanField("Admin Only", default=False)
     log_level = SelectField(
         "Logging",
         choices=(*enumerate(vs.log_levels), (-1, "Disable logging")),
@@ -854,7 +860,6 @@ class ServiceForm(BaseForm):
 
 
 class TaskForm(BaseForm):
-    action = "eNMS.base.processData"
     template = "object"
     form_type = HiddenField(default="task")
     id = HiddenField()
@@ -896,7 +901,11 @@ class TaskForm(BaseForm):
         ) <= datetime.strptime(self.start_date.data, "%d/%m/%Y %H:%M:%S")
         if invalid_end_date:
             self.end_date.errors.append("The end date must come after the start date.")
-        invalid_frequency = self.end_date.data and not self.frequency.data
+        invalid_frequency = (
+            self.end_date.data
+            and not self.frequency.data
+            and self.scheduling_mode.data == "standard"
+        )
         if invalid_frequency:
             self.frequency.errors.append("A periodic task must have a frequency.")
         no_cron_expression = (
@@ -929,13 +938,13 @@ class UserProfileForm(BaseForm):
     action = "eNMS.administration.saveProfile"
     name = StringField("Name")
     email = StringField("Email")
+    landing_page = SelectField("Landing Page", validate_choice=False)
     theme = SelectField(
         "Theme",
         choices=[
             (theme, values["name"]) for theme, values in vs.themes["themes"].items()
         ],
     )
-    landing_page = SelectField("Landing Page", validate_choice=False)
 
     @classmethod
     def form_init(cls):
@@ -955,7 +964,6 @@ class WorkflowLabelForm(BaseForm):
 
 
 class WorkflowEdgeForm(BaseForm):
-    action = "eNMS.base.processData"
     form_type = HiddenField(default="workflow_edge")
     id = HiddenField()
     label = StringField()
@@ -1037,7 +1045,6 @@ class DeviceForm(ObjectForm):
 
 
 class LinkForm(ObjectForm):
-    action = "eNMS.base.processData"
     form_type = HiddenField(default="link")
     vendor = SelectField(
         "Vendor",
@@ -1072,7 +1079,6 @@ class NapalmForm(ConnectionForm):
 
 class ParametersForm(BaseForm):
     form_type = HiddenField(default="parameters")
-    action = "eNMS.base.processData"
     id = HiddenField()
     banner_active = BooleanField()
     banner_deactivate_on_restart = BooleanField()

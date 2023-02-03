@@ -222,9 +222,9 @@ function showSessionLog(sessionId) {
   });
 }
 
-function downloadNetworkData(id) {
+function downloadNetworkData(id, name) {
   downloadFile(
-    $(`#data-type-${id}`).val(),
+    `${$(`#data-type-${id}`).val()}-${name}`,
     $(`#content-${id}`).data("CodeMirrorInstance").getValue(),
     "txt"
   );
@@ -245,7 +245,7 @@ function displayNetworkData({ type, name, id, result, datetime }) {
             )}
           </select>
           <button
-            onclick="eNMS.inventory.downloadNetworkData('${id}')"
+            onclick="eNMS.inventory.downloadNetworkData('${id}', '${name}')"
             type="button"
             class="btn btn-primary"
             style="margin-left: 10px"

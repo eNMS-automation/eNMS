@@ -117,7 +117,7 @@ is selected:
 
 ## Connection Parameters
 
-![Netconf Connection Parameters](../../_static/automation/builtin_service_types/netconf_connectionparameters.png)
+![Netconf Connection Parameters](../../_static/automation/builtin_service_types/netconf_connection_parameters.png)
 
 - `Credentials`.
 - `Custom Username`.

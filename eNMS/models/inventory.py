@@ -28,36 +28,8 @@ class Object(AbstractBase):
 
     def update(self, **kwargs):
         super().update(**kwargs)
-        if not hasattr(self, "class_type") or not kwargs.get("update_pools"):
+        if not hasattr(self, "class_type") or self.class_type == "network":
             return
-        if self.class_type == "network":
-            return
-        constraints = []
-        for property in vs.properties["filtering"][self.class_type]:
-            table, pool_property = vs.models["pool"], f"{self.class_type}_{property}"
-            row, value = getattr(table, pool_property), getattr(self, property)
-            row_match = getattr(table, f"{pool_property}_match")
-            row_invert = getattr(table, f"{pool_property}_invert")
-            main_constraint = {
-                "equality": row == value,
-                "inclusion": literal(value).contains(row),
-                "regex": literal(value).regexp_match(row),
-            }
-            match_constraints = []
-            for match_property in ("equality", "inclusion", "regex"):
-                for invert_value in (False, True):
-                    constraint = main_constraint[match_property]
-                    if invert_value:
-                        constraint = ~constraint
-                    match_constraints.append(
-                        and_(
-                            constraint,
-                            row_match == match_property,
-                            invert_value == row_invert,
-                        )
-                    )
-            constraints.append(and_(row != "", or_(*match_constraints)))
-        self.pools = db.query("pool").filter(or_(*constraints)).all()
         self.update_last_modified_properties()
 
     def delete(self):

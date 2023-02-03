@@ -250,7 +250,8 @@ export class Table {
     $(`#column-display-${this.id}`).selectpicker("refresh");
     $(`#column-display-${this.id}`).on("change", function () {
       self.columns.forEach((col) => {
-        self.table.column(`${col.name}:name`).visible($(this).val().includes(col.data));
+        const isVisible = $(this).val() && $(this).val().includes(col.data);
+        self.table.column(`${col.name}:name`).visible(isVisible);
       });
       self.table.ajax.reload(null, false);
       self.createfilteringTooltips();
@@ -265,13 +266,12 @@ export class Table {
         <li>
           <a
             onclick="eNMS.table.togglePaginationDisplay('${this.id}')"
-            data-tooltip="Edit Workflow"
+            data-tooltip="Load Table Count"
             style="cursor: pointer;"
-            ><span class="glyphicon glyphicon-info-sign"></span
-          ></a>
+            >Load Table Count</a>
         </li>
       </ul>`;
-    $(".dataTables_info").html(button).show();
+    $(`#table-${this.id}_wrapper > .dataTables_info`).html(button).show();
   }
 
   createfilteringTooltips() {
@@ -1593,6 +1593,7 @@ tables.file = class FileTable extends Table {
           type="button"
           class="btn btn-sm btn-info"
           onclick="location.href='/download/${row.type}/${row.path.slice(1)}'"
+          data-tooltip="Download File"
         >
           <span class="glyphicon glyphicon-export"></span>
         </button>
@@ -1617,13 +1618,14 @@ tables.file = class FileTable extends Table {
         <ul class="pagination pagination-lg" style="margin: 0px;">
           ${this.copyClipboardButton(row)}
           ${this.downloadButton(row)}
-          ${this.editButton(row)}
           <button type="button"
             class="btn btn-sm btn-primary"
             onclick="eNMS.administration.showFileUploadPanel('${row.path}')"
+            data-tooltip="Upload Files in Folder"
           >
-            <span class="glyphicon glyphicon-upload"></span>
+            <span class="glyphicon glyphicon-import"></span>
           </button>
+          ${this.editButton(row)}
           ${this.deleteInstanceButton(row)}
         </ul>
         `,

@@ -33,6 +33,10 @@
       "icon": "users",
       "rbac": "access",
       "pages": {
+        "Groups": {
+          "endpoint": "/group_table",
+          "rbac": "access"
+        },
         "Servers": {
           "endpoint": "/server_table",
           "rbac": "access"
@@ -138,6 +142,7 @@
     "/logout": "all",
     "/logs_form": "access",
     "/pool_table": "access",
+    "/report_form": "access",
     "/rest/configuration": "access",
     "/rest/workers": "admin",
     "/rest/instance": "access",

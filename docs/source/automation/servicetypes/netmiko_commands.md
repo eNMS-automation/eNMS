@@ -1,8 +1,8 @@
-Uses Netmiko to send a command to a device and validates the output to
+Uses Netmiko to send a command to a device to
 determine the state of that device. See the `Workflow` section for
 examples of how it is used in a workflow.
 
-![Netmiko Validation Service](../../_static/automation/builtin_service_types/netmiko_validation.png)
+![Netmiko Validation Service](../../_static/automation/builtin_service_types/netmiko_commands.png)
 
 There is a `command` field and an `expect string` field in the Advanced
 Netmiko Parameters. eNMS will check if the expected pattern can be found

@@ -76,6 +76,9 @@ export function configureGraph(newInstance, graph, options) {
   network.on("select", function () {
     $("#confirmation-builder_deletion").remove();
   });
+  network.on("dragStart", () => {
+    $("#confirmation-builder_deletion").remove();
+  });
   network.on("oncontext", function (properties) {
     if (triggerMenu) {
       properties.event.preventDefault();

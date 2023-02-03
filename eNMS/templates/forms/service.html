@@ -8,19 +8,7 @@
   {% set panel_id = range(10000) | random %} {{ form.id(id=form_type + '-id',
   class="add-id") }} {{ form.hidden_tag() }}
   <input type="hidden" id="copy" name="copy" class="add-id" />
-  <div style="padding: 20px;">
-    <center>
-      <button
-        id="{{ form_type }}-action-btn"
-        type="button"
-        style="width: 15%;"
-        class="btn btn-success add-id btn-id"
-        value="eNMS.base.processData"
-      >
-        Save
-      </button>
-    </center>
-    <br />
+  <div style="padding: 40px;">
     <div id="{{ form_type }}-wizard" class="form_wizard wizard_horizontal add-id">
       <ul class="wizard_steps">
         <li>
@@ -346,7 +334,7 @@
             </div>
           </div>
           {% endif %}
-          <div id="rbac-properties">
+          <div class="add-id" id="rbac-properties">
             <div class="panel" style="border-color: #000; position: relative;">
               <a
                 class="doc-link"
@@ -378,7 +366,7 @@
                   {{ field_template(form_type, form["owners"]) }} {% for property in
                   form.rbac_properties %} {% set field = form[property] %} {{
                   field_template(form_type, field) }} {% endfor %} {{
-                  field_template(form_type, form["freeze"]) }}
+                  field_template(form_type, form["restrict_to_owners"]) }}
                 </div>
               </div>
             </div>

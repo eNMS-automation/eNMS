@@ -1,4 +1,4 @@
-- admin_only: true
+- admin_only: false
   creator: ''
   description: All objects
   device_configuration: ''
@@ -276,8 +276,8 @@
   rbac_group_rbac_target: []
   rbac_read: []
   target_services: ['[Skip in SxS with service targets and Run Once services] Run
-      Once with Pool', Large Device Configuration and Operational Data, Large Workflow
-      (30 services)]
+      Once with Pool', Large Workflow (30 services), Large Device Configuration and
+      Operational Data]
   tasks: []
   type: pool
 - admin_only: false
@@ -567,7 +567,7 @@
   target_services: [Parameterized Multiprocessing]
   tasks: []
   type: pool
-- admin_only: true
+- admin_only: false
   creator: ''
   description: Datacenter New York
   device_configuration: ''

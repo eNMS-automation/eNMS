@@ -44,6 +44,7 @@
     "timeout": 180000
   },
   "workflow": {
+    "logs_refresh_rate": 1000,
     "allowed_models": {
       "delete": ["device", "link", "pool", "service"],
       "fetch": ["device", "link", "pool", "service"],

@@ -1,5 +1,5 @@
 from socket import error, gaierror, socket, timeout
-from subprocess import check_output
+from subprocess import run as sub_run
 from sqlalchemy import ForeignKey, Integer
 
 from eNMS.database import db
@@ -38,21 +38,39 @@ class PingService(Service):
                     command.extend(f"-{variable} {value}".split())
             command.append(ip_address)
             run.log("info", f"Running PING ({command})", device)
-            output = check_output(command).decode().strip().splitlines()
-            total = output[-2].split(",")[3].split()[1]
-            loss = output[-2].split(",")[2].split()[0]
-            timing = output[-1].split()[3].split("/")
-            return {
-                "success": True,
-                "result": {
-                    "probes_sent": run.count,
+            sub_result, result = sub_run(command, capture_output=True), None
+            output = sub_result.stdout.decode().strip().splitlines()
+            if sub_result.returncode == 0:
+                # The first ping statistics line can look like either:
+                # - 3 packets transmitted, 0 received, +3 errors,
+                # 100% packet loss, time 2055ms
+                # - 3 packets transmitted, 0 received, 100% packet loss, time 2081ms
+                error_offset = 1 if "errors," in output[-2] else 0
+                sent = output[-2].split(",")[0].split()[0].strip()
+                rcvd = output[-2].split(",")[1].split()[0].strip()
+                if error_offset:
+                    errors = output[-2].split(",")[2].split()[0].strip()
+                else:
+                    errors = 0
+                total = output[-2].split(",")[3 + error_offset].split()[1].strip()
+                loss = output[-2].split(",")[2 + error_offset].split()[0].strip()
+                timing = output[-1].split()[3].split("/")
+                result = {
+                    "probes_sent": sent,
+                    "probes_rcvd": rcvd,
+                    "errors": errors,
                     "packet_loss": loss,
                     "rtt_min": timing[0],
                     "rtt_max": timing[2],
                     "rtt_avg": timing[1],
                     "rtt_stddev": timing[3],
                     "total rtt": total,
-                },
+                }
+            return {
+                "error": sub_result.stderr.decode().strip(),
+                "output": "\n".join(output),
+                "result": result,
+                "success": sub_result.returncode == 0,
             }
         else:
             result = {}

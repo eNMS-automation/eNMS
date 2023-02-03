@@ -26,7 +26,7 @@ These are the Netmiko Common Parameters for all Netmiko Services.
 
 ## Connection Parameters
 
-![Netmiko Connection Parameters](../../_static/automation/builtin_service_types/netmiko_connectionparameters.png)
+![Netmiko Connection Parameters](../../_static/automation/builtin_service_types/netmiko_connection_parameters.png)
 
 - `Credentials`: Select between:
     - `Device Credentials` - eNMS will select the most appropriate credential

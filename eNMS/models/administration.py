@@ -63,6 +63,7 @@ class User(AbstractBase, UserMixin):
 
     def post_update(self):
         self.update_rbac()
+        return self.get_properties()
 
     def update(self, **kwargs):
         if (
@@ -87,6 +88,7 @@ class Group(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     creator = db.Column(db.SmallString)
+    admin_only = db.Column(Boolean, default=False)
     description = db.Column(db.LargeString)
     email = db.Column(db.SmallString)
     users = relationship("User", secondary=db.user_group_table, back_populates="groups")
@@ -135,6 +137,7 @@ class Credential(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     creator = db.Column(db.SmallString)
+    admin_only = db.Column(Boolean, default=False)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     last_modified_by = db.Column(db.SmallString, info={"log_change": False})
     role = db.Column(db.SmallString, default="read-write")
@@ -205,9 +208,6 @@ class File(AbstractBase):
     )
     folder_path = db.Column(db.SmallString)
 
-    def delete(self):
-        Path(self.path).unlink(missing_ok=True)
-
     def update(self, move_file=True, **kwargs):
         old_path = self.path
         super().update(**kwargs)
@@ -244,6 +244,3 @@ class Folder(File):
         if not exists(kwargs["path"]):
             makedirs(kwargs["path"])
         self.update(**kwargs)
-
-    def delete(self):
-        rmtree(self.path, ignore_errors=True)

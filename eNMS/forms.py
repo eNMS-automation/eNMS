@@ -948,7 +948,8 @@ class UserProfileForm(BaseForm):
 
     @classmethod
     def form_init(cls):
-        if vs.settings["authentication"]["show_password_in_profile"]:
+        show = vs.settings["authentication"]["show_password_in_profile"]
+        if show and current_user.authentication == "database":
             cls.password = PasswordField("Password")
 
 

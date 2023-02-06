@@ -292,6 +292,7 @@ function showFileUploadPanel(folder) {
         addRemoveLinks: true,
         parallelUploads: 10,
         queuecomplete: () => {
+          $(".dz-remove").remove();
           notify("Files successfully uploaded.", "success", 5, true);
           setTimeout(() => refreshTable("file"), 500);
         },

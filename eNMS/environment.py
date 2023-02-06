@@ -89,7 +89,8 @@ class Environment:
                     return
                 file.status = event.event_type.capitalize()
                 log = f"File {event.src_path} {event.event_type} (watchdog)."
-                env.log("info", log, change_log=True)
+                if event.event_type != "modified":
+                    env.log("info", log, change_log=True)
                 try:
                     db.session.commit()
                 except (StaleDataError, IntegrityError):

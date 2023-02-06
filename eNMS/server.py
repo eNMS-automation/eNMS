@@ -15,8 +15,10 @@ from flask_login import current_user, LoginManager, login_user, logout_user, log
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
 from importlib import import_module
+from io import BytesIO
 from logging import info
-from os import getenv
+from os import getenv, remove
+from pathlib import Path
 from tarfile import open as open_tar
 from traceback import format_exc
 from werkzeug.exceptions import Forbidden, NotFound
@@ -319,11 +321,16 @@ class Server(Flask):
         @blueprint.route("/download/<type>/<path:path>")
         @self.process_requests
         def download(type, path):
+            return_data = BytesIO()
             if type == "folder":
                 with open_tar(f"/{path}.tgz", "w:gz") as tar:
                     tar.add(f"/{path}", arcname="")
                 path = f"/{path}.tgz"
-            return send_file(f"/{path}", as_attachment=True)
+            with open(path, "rb") as file:
+                return_data.write(file.read())
+            return_data.seek(0)
+            remove(path)
+            return send_file(return_data, attachment_filename=Path(path).name)
 
         @blueprint.route("/export_service/<int:id>")
         @self.process_requests

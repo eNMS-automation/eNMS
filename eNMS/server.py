@@ -330,7 +330,7 @@ class Server(Flask):
                 return_data.write(file.read())
             return_data.seek(0)
             remove(path)
-            return send_file(return_data, attachment_filename=Path(path).name)
+            return send_file(return_data, download_name=Path(path).name)
 
         @blueprint.route("/export_service/<int:id>")
         @self.process_requests

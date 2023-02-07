@@ -11,7 +11,7 @@
   "authentication": {
     "default": "database",
     "landing_page": "/dashboard",
-    "show_password_in_profile": true,
+    "allow_password_change": true,
     "force_authentication_method": false,
     "methods": {
       "database": {

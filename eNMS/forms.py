@@ -945,12 +945,17 @@ class UserProfileForm(BaseForm):
             (theme, values["name"]) for theme, values in vs.themes["themes"].items()
         ],
     )
+    password = PasswordField("Password")
 
-    @classmethod
-    def form_init(cls):
-        show = vs.settings["authentication"]["show_password_in_profile"]
-        if show and current_user.authentication == "database":
-            cls.password = PasswordField("Password")
+    def validate(self):
+        valid_form = super().validate()
+        invalid_password = self.password.data and (
+            not vs.settings["authentication"]["allow_password_change"]
+            or current_user.authentication != "database"
+        )
+        if invalid_password:
+            self.password.errors.append("Changing local user password is not allowed.")
+        return valid_form and not invalid_password
 
 
 class WorkflowLabelForm(BaseForm):

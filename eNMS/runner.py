@@ -1270,24 +1270,26 @@ class Runner:
             return
         connection.find_prompt()
         prompt = connection.base_prompt
-        commands = list(
-            filter(
-                None,
-                [
-                    self.sub(self.jump_command, locals()),
-                    self.sub(self.expect_username_prompt, locals()),
-                    self.sub(self.jump_username, locals()),
-                    self.sub(self.expect_password_prompt, locals()),
-                    self.sub(env.get_password(self.jump_password), locals()),
-                    self.sub(self.expect_prompt, locals()),
-                ],
-            )
-        )
-        for index, (send, expect) in enumerate(zip(commands[::2], commands[1::2])):
-            if not send or not expect:
+        password = self.sub(env.get_password(self.jump_password), locals())
+        commands = [
+            (
+                self.sub(self.jump_command, locals()),
+                self.sub(self.expect_username_prompt, locals()),
+            ),
+            (
+                self.sub(self.jump_username, locals()),
+                self.sub(self.expect_password_prompt, locals()),
+            ),
+            (password, self.sub(self.expect_prompt, locals())),
+        ]
+        for send, expect in commands:
+            if not send:
                 continue
-            command_sent = send if index != 4 else "jump on connect password"
-            self.log("info", f"Sent '{command_sent}', waiting for '{expect}'")
+            self.log(
+                "info",
+                f"Sent '{send if password and send != password else 'jump on connect password'}'"
+                f", waiting for '{expect}'",
+            )
             connection.send_command(
                 send,
                 expect_string=expect,

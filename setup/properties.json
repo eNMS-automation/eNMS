@@ -572,18 +572,21 @@
       {
         "data": "devices",
         "title": "Devices",
-        "width": "80px"
+        "width": "80px",
+        "export": false
       },
       {
         "data": "links",
         "title": "Links",
-        "width": "80px"
+        "width": "80px",
+        "export": false
       },
       {
         "data": "objectNumber",
         "title": "Object Count",
         "width": "170px",
-        "orderable": false
+        "orderable": false,
+        "export": false
       },
       {
         "data": "buttons",

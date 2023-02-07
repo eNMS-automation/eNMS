@@ -1186,8 +1186,8 @@ class Controller:
         return now
 
     def save_profile(self, **kwargs):
-        show = vs.settings["authentication"]["show_password_in_profile"]
-        if not show or current_user.authentication != "database":
+        allow_password_change = vs.settings["authentication"]["allow_password_change"]
+        if not allow_password_change or current_user.authentication != "database":
             kwargs.pop("password", None)
         current_user.update(**kwargs)
 

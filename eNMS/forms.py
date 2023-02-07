@@ -954,7 +954,7 @@ class UserProfileForm(BaseForm):
             or current_user.authentication != "database"
         )
         if invalid_password:
-            self.password.errors.append("Changing local user password is not allowed.")
+            self.password.errors.append("Changing user password is not allowed.")
         return valid_form and not invalid_password
 
 

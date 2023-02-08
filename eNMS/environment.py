@@ -88,8 +88,8 @@ class Environment:
                 elif event.event_type != "deleted" or not file:
                     return
                 file.status = event.event_type.capitalize()
-                log = f"File {event.src_path} {event.event_type} (watchdog)."
-                if event.event_type != "modified":
+                if vs.settings["files"]["log_events"]:
+                    log = f"File {event.src_path} {event.event_type} (watchdog)."
                     env.log("info", log, change_log=True)
                 try:
                     db.session.commit()

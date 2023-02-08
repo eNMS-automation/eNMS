@@ -74,7 +74,8 @@
   },
   "files": {
     "ignored_types": [".swp", ".tgz"],
-    "upload_timeout": 600000
+    "upload_timeout": 600000,
+    "log_events": false
   },
   "mail": {
     "port": 587,

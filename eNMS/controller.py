@@ -951,6 +951,9 @@ class Controller:
                             setattr(instance, *property)
                     except Exception:
                         info(f"{str(instance)} could not be imported:\n{format_exc()}")
+                        if kwargs.get("service_import", False):
+                            db.session.rollback()
+                            return "Error during import; service was not imported."
                         status = "Partial import (see logs)."
             db.session.commit()
         for model, instances in relations.items():
@@ -971,6 +974,9 @@ class Controller:
                         setattr(db.fetch(model, name=instance_name), property, value)
                     except Exception:
                         info("\n".join(format_exc().splitlines()))
+                        if kwargs.get("service_import", False):
+                            db.session.rollback()
+                            return "Error during import; service was not imported."
                         status = "Partial import (see logs)."
         db.session.commit()
         if not kwargs.get("skip_model_update"):
@@ -1021,7 +1027,7 @@ class Controller:
                 update_pools=True,
             )
         rmtree(vs.path / "files" / "services" / folder_name, ignore_errors=True)
-        if "Partial import" in status:
+        if "Error during import" in status:
             raise Exception(status)
         return status
 

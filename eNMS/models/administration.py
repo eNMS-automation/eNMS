@@ -192,6 +192,7 @@ class Parameters(AbstractBase):
 class File(AbstractBase):
 
     __tablename__ = type = class_type = "file"
+    log_change = vs.settings["files"]["log_events"]
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "file", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)

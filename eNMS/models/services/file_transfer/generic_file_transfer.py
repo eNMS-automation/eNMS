@@ -97,7 +97,6 @@ class GenericFileTransferForm(ServiceForm):
         choices=(
             ("device", "Device Credentials"),
             ("object", "Named Credential"),
-            ("user", "User Credentials"),
             ("custom", "Custom Credentials"),
         ),
     )

@@ -103,7 +103,6 @@ class AnsiblePlaybookForm(ServiceForm):
         "Credentials",
         choices=(
             ("device", "Device Credentials"),
-            ("user", "User Credentials"),
         ),
     )
     options = DictField(

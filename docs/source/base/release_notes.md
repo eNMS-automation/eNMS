@@ -79,6 +79,8 @@ Version 4.4.0: RBAC and Credentials
   Commit 457f46dd2c496757e924d922f3455626d35a3784
 - Add RBAC support to credentials
 - Fix Netmiko exit_config_mode bug (to be called after commit)
+- Add new "log_events" key under settings.json > files to control whether file changes
+  must be logged as unix log and changelog.
 
 RBAC Refactoring:
 - Service export: owners and RBAC read / edit / etc are exported in the service

@@ -68,6 +68,7 @@ Version 4.4.0: RBAC and Credentials
   - Report template can use python substitution or Jinja 2
   - Report output can be either text-based or HTML
   - Option to display the report when the run is over instead of the service results.
+  - Option to send report as part of the email notification
   - Report can be used for any services in a workflow, not just the workflow itself.
   - In get_result, new "all_matches" keyword to get all results.
   - New "files" / "reports" folder to store predefined templates that are used to

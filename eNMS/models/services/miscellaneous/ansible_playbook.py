@@ -101,9 +101,7 @@ class AnsiblePlaybookForm(ServiceForm):
     )
     credentials = SelectField(
         "Credentials",
-        choices=(
-            ("device", "Device Credentials"),
-        ),
+        choices=(("device", "Device Credentials"),),
     )
     options = DictField(
         "Options (passed to ansible as -e extra args)",

@@ -672,7 +672,11 @@ class Runner:
         try:
             report = ""
             if self.service.report:
-                variables = {"service": self.service, **self.global_variables()}
+                variables = {
+                    "service": self.service,
+                    "results": results,
+                    **self.global_variables(),
+                }
                 if self.service.report_jinja2_template:
                     report = Template(self.service.report).render(variables)
                 else:

@@ -673,6 +673,7 @@ class ServiceForm(BaseForm):
     )
     report_jinja2_template = BooleanField("Interpret Report as Jinja2 Template")
     display_report = BooleanField("Display Report instead of Results")
+    email_report = BooleanField("Send Report in Mail Notification")
     send_notification = BooleanField("Send a notification")
     send_notification_method = SelectField(
         "Notification Method",

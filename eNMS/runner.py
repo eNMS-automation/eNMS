@@ -237,10 +237,10 @@ class Runner:
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
             if self.service.report:
-                self.generate_report(results)
+                report = self.generate_report(results)
             if self.get("send_notification"):
                 try:
-                    results = self.notify(results)
+                    results = self.notify(results, report)
                 except Exception:
                     error = "\n".join(format_exc().splitlines())
                     self.log("error", f"Notification error: {error}")
@@ -694,8 +694,9 @@ class Runner:
                 )
             except Exception:
                 self.log("error", f"Failed to commit report:\n{format_exc()}")
+        return report
 
-    def notify(self, results):
+    def notify(self, results, report):
         self.log("info", f"Sending {self.send_notification_method} notification...")
         notification = self.build_notification(results)
         file_content = deepcopy(notification)
@@ -714,13 +715,15 @@ class Runner:
         if self.send_notification_method == "mail":
             filename = self.runtime.replace(".", "").replace(":", "")
             status = "PASS" if results["success"] else "FAILED"
+            content = report if self.email_report else vs.dict_to_string(notification)
             result = env.send_email(
                 f"{status}: {self.service.name}",
-                vs.dict_to_string(notification),
+                content,
                 recipients=self.sub(self.get("mail_recipient"), locals()),
                 reply_to=self.reply_to,
-                filename=f"results-{filename}.txt",
-                file_content=vs.dict_to_string(file_content),
+                filename=f"results-{filename}.{'html' if self.email_report else 'txt'}",
+                file_content=content,
+                content_type="html" if self.email_report else "plain",
             )
         elif self.send_notification_method == "slack":
             result = WebClient(token=getenv("SLACK_TOKEN")).chat_postMessage(

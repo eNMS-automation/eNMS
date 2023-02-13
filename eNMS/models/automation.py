@@ -64,7 +64,7 @@ class Service(AbstractBase):
     report_format = db.Column(db.TinyString, default="text")
     report_jinja2_template = db.Column(Boolean, default=False)
     disabled = db.Column(Boolean, default=False)
-    disabled_on = db.Column(db.TinyString)
+    disabled_info = db.Column(db.TinyString)
     display_report = db.Column(Boolean, default=False)
     email_report = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)

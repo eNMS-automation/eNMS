@@ -654,7 +654,7 @@ class ServiceForm(BaseForm):
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
     disabled = BooleanField("Disabled")
-    disabled_on = StringField("Disabled On")
+    disabled_info = StringField("Disabled On")
     restrict_to_owners = SelectMultipleField(
         "Restrict to Owners", choices=(("edit", "Edit"), ("run", "Run"))
     )

@@ -644,6 +644,7 @@ export const runService = function ({ id, path, type, parametrization }) {
 };
 
 export function runLogic(result) {
+  if (result.error) return notify(result.error, "error", 5, true);
   const service = result.restart
     ? result.service
     : result.service.superworkflow || result.service;

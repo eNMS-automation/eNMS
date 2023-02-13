@@ -1141,6 +1141,8 @@ class Controller:
             kwargs = {"form": kwargs, "parameterized_run": True}
         kwargs.update({"creator": getattr(current_user, "name", ""), "path": path})
         service = db.fetch("service", id=service_id, rbac="run")
+        if service.disabled:
+            return {"error": "The workflow is disabled."}
         service.check_restriction_to_owners("run")
         kwargs["runtime"] = runtime = vs.get_time()
         run_name = kwargs.get("form", {}).get("name")

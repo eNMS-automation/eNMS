@@ -146,11 +146,16 @@ class Service(AbstractBase):
         return self.to_dict(include=["services", "workflows"])
 
     def update(self, **kwargs):
+        old_disabled_status = self.disabled
         if self.path:
             self.check_restriction_to_owners("edit")
         if self.positions and "positions" in kwargs:
             kwargs["positions"] = {**self.positions, **kwargs["positions"]}
         super().update(**kwargs)
+        if self.disabled and not old_disabled_status:
+            self.disabled_info = f"Disabled at {vs.get_time()} by {current_user}"
+        elif not self.disabled:
+            self.disabled_info = ""
         if not kwargs.get("migration_import"):
             self.set_name()
             self.update_last_modified_properties()

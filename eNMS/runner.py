@@ -237,10 +237,10 @@ class Runner:
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
             if self.service.report:
-                self.generate_report(results)
+                report = self.generate_report(results)
             if self.get("send_notification"):
                 try:
-                    results = self.notify(results)
+                    results = self.notify(results, report)
                 except Exception:
                     error = "\n".join(format_exc().splitlines())
                     self.log("error", f"Notification error: {error}")
@@ -672,7 +672,11 @@ class Runner:
         try:
             report = ""
             if self.service.report:
-                variables = {"service": self.service, **self.global_variables()}
+                variables = {
+                    "service": self.service,
+                    "results": results,
+                    **self.global_variables(),
+                }
                 if self.service.report_jinja2_template:
                     report = Template(self.service.report).render(variables)
                 else:
@@ -690,8 +694,9 @@ class Runner:
                 )
             except Exception:
                 self.log("error", f"Failed to commit report:\n{format_exc()}")
+        return report
 
-    def notify(self, results):
+    def notify(self, results, report):
         self.log("info", f"Sending {self.send_notification_method} notification...")
         notification = self.build_notification(results)
         file_content = deepcopy(notification)
@@ -710,13 +715,15 @@ class Runner:
         if self.send_notification_method == "mail":
             filename = self.runtime.replace(".", "").replace(":", "")
             status = "PASS" if results["success"] else "FAILED"
+            content = report if self.email_report else vs.dict_to_string(notification)
             result = env.send_email(
                 f"{status}: {self.service.name}",
-                vs.dict_to_string(notification),
+                content,
                 recipients=self.sub(self.get("mail_recipient"), locals()),
                 reply_to=self.reply_to,
-                filename=f"results-{filename}.txt",
-                file_content=vs.dict_to_string(file_content),
+                filename=f"results-{filename}.{'html' if self.email_report else 'txt'}",
+                file_content=content,
+                content_type="html" if self.email_report else "plain",
             )
         elif self.send_notification_method == "slack":
             result = WebClient(token=getenv("SLACK_TOKEN")).chat_postMessage(
@@ -914,6 +921,9 @@ class Runner:
 
         return recursive_search(self.main_run)
 
+    def get_all_results(self):
+        return db.fetch_all("result", parent_runtime=self.parent_runtime)
+
     @staticmethod
     def _import(module, *args, **kwargs):
         if module in vs.settings["security"]["forbidden_python_libraries"]:
@@ -953,6 +963,7 @@ class Runner:
                 "factory": partial(_self.database_function, "factory"),
                 "fetch": partial(_self.database_function, "fetch"),
                 "fetch_all": partial(_self.database_function, "fetch_all"),
+                "get_all_results": _self.get_all_results,
                 "get_connection": _self.get_connection,
                 "get_result": _self.get_result,
                 "get_var": _self.get_var,

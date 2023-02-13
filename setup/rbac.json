@@ -227,7 +227,6 @@
     "/multiselect_filtering": "all",
     "/remove_instance": "access",
     "/reset_status": "access",
-    "/rest/create_pool": "access",
     "/rest/get_cluster_status": "access",
     "/rest/get_git_content": "access",
     "/rest/instance": "access",

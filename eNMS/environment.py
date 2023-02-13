@@ -300,6 +300,7 @@ class Environment:
         sender=None,
         filename=None,
         file_content=None,
+        content_type="plain",
     ):
         sender = sender or vs.settings["mail"]["sender"]
         message = MIMEMultipart()
@@ -308,7 +309,7 @@ class Environment:
         message["Date"] = formatdate(localtime=True)
         message["Subject"] = subject
         message.add_header("reply-to", reply_to or vs.settings["mail"]["reply_to"])
-        message.attach(MIMEText(content))
+        message.attach(MIMEText(content, content_type))
         if filename:
             attached_file = MIMEApplication(file_content, Name=filename)
             attached_file["Content-Disposition"] = f'attachment; filename="{filename}"'

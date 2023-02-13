@@ -68,10 +68,12 @@ Version 4.4.0: RBAC and Credentials
   - Report template can use python substitution or Jinja 2
   - Report output can be either text-based or HTML
   - Option to display the report when the run is over instead of the service results.
+  - Option to send report as part of the email notification
   - Report can be used for any services in a workflow, not just the workflow itself.
   - In get_result, new "all_matches" keyword to get all results.
   - New "files" / "reports" folder to store predefined templates that are used to
     populate the "report" field in the service edit panel.
+  - Add new "get_all_results" function in global variables
 - Add support for distributed task queue for automation with Dramatiq.
 - Return an error in the UI if the commit of workflow logs, report or result
   fails (e.g data too long db error because of payload data for the results)
@@ -79,6 +81,8 @@ Version 4.4.0: RBAC and Credentials
   Commit 457f46dd2c496757e924d922f3455626d35a3784
 - Add RBAC support to credentials
 - Fix Netmiko exit_config_mode bug (to be called after commit)
+- Add new "log_events" key under settings.json > files to control whether file changes
+  must be logged as unix log and changelog.
 
 RBAC Refactoring:
 - Service export: owners and RBAC read / edit / etc are exported in the service

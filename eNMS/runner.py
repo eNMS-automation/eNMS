@@ -921,6 +921,9 @@ class Runner:
 
         return recursive_search(self.main_run)
 
+    def get_all_results(self):
+        return db.fetch_all("result", parent_runtime=self.parent_runtime)
+
     @staticmethod
     def _import(module, *args, **kwargs):
         if module in vs.settings["security"]["forbidden_python_libraries"]:
@@ -960,6 +963,7 @@ class Runner:
                 "factory": partial(_self.database_function, "factory"),
                 "fetch": partial(_self.database_function, "fetch"),
                 "fetch_all": partial(_self.database_function, "fetch_all"),
+                "get_all_results": _self.get_all_results,
                 "get_connection": _self.get_connection,
                 "get_result": _self.get_result,
                 "get_var": _self.get_var,

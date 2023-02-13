@@ -73,6 +73,7 @@ Version 4.4.0: RBAC and Credentials
   - In get_result, new "all_matches" keyword to get all results.
   - New "files" / "reports" folder to store predefined templates that are used to
     populate the "report" field in the service edit panel.
+  - Add new "get_all_results" function in global variables
 - Add support for distributed task queue for automation with Dramatiq.
 - Return an error in the UI if the commit of workflow logs, report or result
   fails (e.g data too long db error because of payload data for the results)

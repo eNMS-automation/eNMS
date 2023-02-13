@@ -330,6 +330,10 @@ class Server(Flask):
                 return_data.write(file.read())
             return_data.seek(0)
             remove(path)
+            if type == "folder":
+                archive = db.fetch("folder", path=path, allow_none=True)
+                if archive:
+                    db.session.delete(archive)
             return send_file(return_data, download_name=Path(path).name)
 
         @blueprint.route("/export_service/<int:id>")

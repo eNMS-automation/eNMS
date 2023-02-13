@@ -940,7 +940,7 @@ class Controller:
                             type,
                             migration_import=True,
                             no_fetch=empty_database and not existing_instance,
-                            update_pools=kwargs.get("update_pools", False),
+                            update_pools=False,
                             import_mechanism=True,
                             **instance,
                         )
@@ -1024,7 +1024,6 @@ class Controller:
                 service_import=True,
                 skip_pool_update=True,
                 skip_model_update=True,
-                update_pools=True,
             )
         rmtree(vs.path / "files" / "services" / folder_name, ignore_errors=True)
         if "Error during import" in status:

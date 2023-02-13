@@ -83,6 +83,11 @@ Version 4.4.0: RBAC and Credentials
 - Fix Netmiko exit_config_mode bug (to be called after commit)
 - Add new "log_events" key under settings.json > files to control whether file changes
   must be logged as unix log and changelog.
+- Add new "Disable Workflow" feature:
+  - New property "Disabled" in service form to disable a workflow
+  - When a service / workflow is disabled, it cannot be run from the UI or the REST API
+  - New property "Disabled Time & User": if the workflow is disabled, indicates when the
+  service was disabled and by whom; empty otherwise.
 
 RBAC Refactoring:
 - Service export: owners and RBAC read / edit / etc are exported in the service

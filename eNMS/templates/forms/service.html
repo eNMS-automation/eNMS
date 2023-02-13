@@ -116,6 +116,22 @@
                 <fieldset>
                   <div class="item">
                     <input
+                      id="{{ form_type }}-disabled"
+                      name="disabled"
+                      type="checkbox"
+                      class="add-id"
+                      value="y"
+                    />
+                    {{ form.disabled.label() }}
+                  </div>
+                </fieldset>
+                {{ form.disabled_on.label() }}
+                <div class="form-group">
+                  {{ form.disabled_on(id=form_type + '-disabled_on', class="form-control add-id") }}
+                </div>
+                <fieldset>
+                  <div class="item">
+                    <input
                       id="{{ form_type }}-shared"
                       name="shared"
                       class="add-id"

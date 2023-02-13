@@ -915,7 +915,7 @@ class Controller:
             "service": ["[Shared] Start", "[Shared] End", "[Shared] Placeholder"],
         }
         relations = defaultdict(lambda: defaultdict(dict))
-        services_name = []
+        service_instances = []
         for model in models:
             path = vs.path / "files" / folder / kwargs["name"] / f"{model}.yaml"
             if not path.exists():
@@ -949,7 +949,7 @@ class Controller:
                             if instance.type == "workflow":
                                 instance.edges = []
                             if model == "service":
-                                services_name.append(instance.name)
+                                service_instances.append(instance)
                         relations[type][instance.name] = relation_dict
                         for property in instance_private_properties.items():
                             setattr(instance, *property)
@@ -984,8 +984,8 @@ class Controller:
                         status = "Partial import (see logs)."
         db.session.commit()
         if kwargs.get("service_import", False):
-            for service_name in services_name:
-                db.fetch("service", name=service_name).post_update()
+            for service in service_instances:
+                service.post_update()
         if not kwargs.get("skip_model_update"):
             for model in ("user", "service", "network"):
                 for instance in db.fetch_all(model):

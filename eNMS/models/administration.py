@@ -4,8 +4,7 @@ from itertools import chain
 from os import makedirs
 from os.path import exists, getmtime
 from passlib.hash import argon2
-from pathlib import Path
-from shutil import move, rmtree
+from shutil import move
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import relationship
 from time import ctime

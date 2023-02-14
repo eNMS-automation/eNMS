@@ -1,6 +1,5 @@
 from re import search, sub
 from sqlalchemy import and_, Boolean, event, ForeignKey, Integer, or_
-from sqlalchemy.sql.expression import literal
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, deferred, relationship
 from sqlalchemy.schema import UniqueConstraint

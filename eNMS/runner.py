@@ -1296,11 +1296,8 @@ class Runner:
         for send, expect in commands:
             if not send:
                 continue
-            self.log(
-                "info",
-                f"Sent '{send if password and send != password else 'jump on connect password'}'"
-                f", waiting for '{expect}'",
-            )
+            pwd = send if password and send != password else "jump on connect password"
+            self.log("info", f"Sent '{pwd}'" f", waiting for '{expect}'")
             connection.send_command(
                 send,
                 expect_string=expect,

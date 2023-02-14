@@ -1185,7 +1185,7 @@ class Controller:
         return content
 
     def save_positions(self, type, id, **kwargs):
-        now, old_position = vs.get_time(), None
+        now = vs.get_time()
         instance = db.fetch(type, allow_none=True, id=id, rbac="edit")
         if not instance:
             return
@@ -1194,10 +1194,8 @@ class Controller:
             new_position = [position["x"], position["y"]]
             if "-" not in id:
                 relation = db.fetch(relation_type, id=id, rbac=None)
-                old_position = relation.positions.get(instance.name)
                 relation.positions[instance.name] = new_position
             elif id in instance.labels:
-                old_position = instance.labels[id].pop("positions")
                 instance.labels[id] = {"positions": new_position, **instance.labels[id]}
         return now
 

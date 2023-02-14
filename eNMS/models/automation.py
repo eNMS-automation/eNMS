@@ -142,7 +142,6 @@ class Service(AbstractBase):
             self.path = f"{self.workflows[0].path}>{self.id}"
         else:
             self.path = str(self.id)
-        print(self.name, self.path)
         self.set_name()
         return self.to_dict(include=["services", "workflows"])
 

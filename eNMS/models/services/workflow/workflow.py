@@ -56,6 +56,15 @@ class Workflow(Service):
         if not migration_import and self.name not in end.positions:
             end.positions[self.name] = (500, 0)
 
+    def recursive_update(self):
+        def rec(service):
+            service.post_update()
+            if service.type == "workflow":
+                for subservice in service.services:
+                    rec(subservice)
+
+        rec(self)
+
     def delete(self):
         for service in self.services:
             if not service.shared:

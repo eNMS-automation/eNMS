@@ -984,8 +984,8 @@ class Controller:
                         status = "Partial import (see logs)."
         db.session.commit()
         if kwargs.get("service_import", False):
-            for service in service_instances:
-                service.post_update()
+            main_workflow = [service for service in service_instances if not service.workflows][0]
+            main_workflow.recursive_update()
         if not kwargs.get("skip_model_update"):
             for model in ("user", "service", "network"):
                 for instance in db.fetch_all(model):

@@ -236,8 +236,7 @@ class Runner:
             if self.update_pools_after_running:
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
-            if self.service.report:
-                report = self.generate_report(results)
+            report = self.generate_report(results) if self.service.report else ""
             if self.get("send_notification"):
                 try:
                     results = self.notify(results, report)

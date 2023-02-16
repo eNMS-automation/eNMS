@@ -161,10 +161,9 @@ function copyClipboard(elementId, result) {
 }
 
 function downloadRun(type, serviceId) {
+  const cmInstance = $(`#service-${type}-${serviceId}`).data("CodeMirrorInstance");
   const content =
-    type == "logs"
-      ? $(`#service-${type}-${serviceId}`).data("CodeMirrorInstance").getValue()
-      : $(`#service-${type}-${serviceId}`).text();
+    cmInstance ? cmInstance.getValue() : $(`#service-${type}-${serviceId}`).text();
   downloadFile(`${type}-${serviceId}`, content, "txt");
 }
 

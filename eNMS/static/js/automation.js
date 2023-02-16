@@ -165,7 +165,7 @@ function downloadRun(type, serviceId) {
   const content = cmInstance
     ? cmInstance.getValue()
     : $(`#service-${type}-${serviceId}`).html();
-  const extension = cmInstance ? "txt" : "html"
+  const extension = cmInstance ? "txt" : "html";
   downloadFile(`${type}-${serviceId}`, content, extension);
 }
 

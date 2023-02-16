@@ -715,14 +715,15 @@ class Runner:
             filename = self.runtime.replace(".", "").replace(":", "")
             status = "PASS" if results["success"] else "FAILED"
             content = report if self.email_report else vs.dict_to_string(notification)
+            html_report = self.email_report and self.report_format == "html"
             result = env.send_email(
                 f"{status}: {self.service.name}",
                 content,
                 recipients=self.sub(self.get("mail_recipient"), locals()),
                 reply_to=self.reply_to,
-                filename=f"results-{filename}.{'html' if self.email_report else 'txt'}",
+                filename=f"results-{filename}.{'html' if html_report else 'txt'}",
                 file_content=content,
-                content_type="html" if self.email_report else "plain",
+                content_type="html" if html_report else "plain",
             )
         elif self.send_notification_method == "slack":
             result = WebClient(token=getenv("SLACK_TOKEN")).chat_postMessage(

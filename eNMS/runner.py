@@ -455,15 +455,12 @@ class Runner:
             services = list(vs.run_logs.get(self.parent_runtime, []))
             for service_id in services:
                 logs = env.log_queue(self.parent_runtime, service_id, mode="get")
-                try:
-                    db.factory(
-                        "service_log",
-                        runtime=self.parent_runtime,
-                        service=service_id,
-                        content="\n".join(logs or []),
-                    )
-                except Exception:
-                    self.log("error", f"Failed to commit service log:\n{format_exc()}")
+                db.factory(
+                    "service_log",
+                    runtime=self.parent_runtime,
+                    service=service_id,
+                    content="\n".join(logs or []),
+                )
             if self.main_run.trigger == "REST API":
                 results["devices"] = {}
                 for result in self.main_run.results:
@@ -684,15 +681,12 @@ class Runner:
             report = "\n".join(format_exc().splitlines())
             self.log("error", f"Failed to build report:\n{report}")
         if report:
-            try:
-                db.factory(
-                    "service_report",
-                    runtime=self.parent_runtime,
-                    service=self.service.id,
-                    content=report,
-                )
-            except Exception:
-                self.log("error", f"Failed to commit report:\n{format_exc()}")
+            db.factory(
+                "service_report",
+                runtime=self.parent_runtime,
+                service=self.service.id,
+                content=report,
+            )
         return report
 
     def notify(self, results, report):

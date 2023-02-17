@@ -1194,7 +1194,12 @@ class NetmikoForm(ConnectionForm):
 
     def validate(self):
         valid_form = super().validate()
-        invalid_prompt_configuration = self.auto_find_prompt.data and self.expect_string.data or not self.auto_find_prompt.data and not self.expect_string.data
+        invalid_prompt_configuration = (
+            self.auto_find_prompt.data
+            and self.expect_string.data
+            or not self.auto_find_prompt.data
+            and not self.expect_string.data
+        )
         if invalid_prompt_configuration:
             self.auto_find_prompt.errors.append(
                 "'Auto Find Prompt' and 'Expect String' are mutually exclusive:"

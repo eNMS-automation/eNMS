@@ -382,6 +382,8 @@ Key parameters to be aware of:
   database.
 - `large_string` (default: `429496729`) Length of a large string in the
   database.
+- `pickletype` (default: `16777215`) Length of a list or dictionary in the
+  database.
 
 
 ### `logging.json`

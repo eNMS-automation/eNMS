@@ -89,16 +89,16 @@ class UnixShellScriptForm(NetmikoForm):
             "fi\n"
         ),
     )
-    expect_string = StringField(substitution=True)
     auto_find_prompt = BooleanField(default=True)
+    expect_string = StringField(substitution=True)
     strip_prompt = BooleanField(default=True)
     strip_command = BooleanField(default=True)
     groups = {
         "Main Parameters": {"commands": ["source_code"], "default": "expanded"},
         "Advanced Netmiko Parameters": {
             "commands": [
-                "expect_string",
                 "auto_find_prompt",
+                "expect_string",
                 "strip_prompt",
                 "strip_command",
             ],

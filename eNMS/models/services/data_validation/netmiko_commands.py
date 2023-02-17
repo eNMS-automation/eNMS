@@ -104,9 +104,9 @@ class NetmikoValidationForm(NetmikoForm):
     results_as_list = BooleanField("Results As List", default=False)
     use_textfsm = BooleanField("Use TextFSM", default=False)
     use_genie = BooleanField("Use Genie / PyATS", default=False)
+    auto_find_prompt = BooleanField(default=True, help="netmiko/auto_find_prompt")
     expect_string = StringField(substitution=True, help="netmiko/expect_string")
     config_mode_command = StringField(help="netmiko/config_mode_command")
-    auto_find_prompt = BooleanField(default=True, help="netmiko/auto_find_prompt")
     strip_prompt = BooleanField(default=True, help="netmiko/strip_prompt")
     strip_command = BooleanField(default=True, help="netmiko/strip_command")
     groups = {
@@ -119,9 +119,9 @@ class NetmikoValidationForm(NetmikoForm):
             "commands": [
                 "use_textfsm",
                 "use_genie",
+                "auto_find_prompt",
                 "expect_string",
                 "config_mode_command",
-                "auto_find_prompt",
                 "strip_prompt",
                 "strip_command",
             ],

@@ -1192,6 +1192,17 @@ class NetmikoForm(ConnectionForm):
         },
     }
 
+    def validate(self):
+        valid_form = super().validate()
+        invalid_prompt_configuration = self.auto_find_prompt.data and self.expect_string.data or not self.auto_find_prompt.data and not self.expect_string.data
+        if invalid_prompt_configuration:
+            self.auto_find_prompt.errors.append(
+                "'Auto Find Prompt' and 'Expect String' are mutually exclusive:"
+                "If 'Auto Find Prompt' is checked, 'Expect String' must be empty, "
+                "and if it is unchecked, 'Expect String' cannot be left empty."
+            )
+        return valid_form and not invalid_prompt_configuration
+
 
 class ScrapliForm(ConnectionForm):
     form_type = HiddenField(default="scrapli")

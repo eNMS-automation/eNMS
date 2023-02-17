@@ -18,9 +18,9 @@
   },
   "columns": {
     "length": {
-      "tiny_string_length": 64,
-      "small_string_length": 255,
-      "large_string_length": 4294967295,
+      "tiny_string": 64,
+      "small_string": 255,
+      "large_string": 4294967295,
       "pickletype": 1000000
     }
   },

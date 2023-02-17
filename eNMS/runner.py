@@ -435,7 +435,7 @@ class Runner:
             }
 
     def check_size_before_commit(self, data, data_type):
-        column_type = "pickletype" if data_type == "result" else "large_string_length"
+        column_type = "pickletype" if data_type == "result" else "large_string"
         data_size = getsizeof(str(data))
         max_allowed_size = vs.database["columns"]["length"][column_type]
         if data_size >= max_allowed_size:

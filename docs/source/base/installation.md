@@ -377,10 +377,10 @@ Key parameters to be aware of:
   persistently in [SQL Alchemy pool](https://docs.sqlalchemy.org/en/13/core/pooling.html#sqlalchemy.pool.QueuePool/).
 - `max_overflow` (default: `10`) Maximum overflow size of the connection
   pool.
-- `tiny_string_length` (default: `64`) Length of a tiny string in the database.
-- `small_string_length` (default: `255`) Length of a small string in the
+- `tiny_string` (default: `64`) Length of a tiny string in the database.
+- `small_string` (default: `255`) Length of a small string in the
   database.
-- `small_string_length` (default: `32768`) Length of a large string in the
+- `large_string` (default: `429496729`) Length of a large string in the
   database.
 
 

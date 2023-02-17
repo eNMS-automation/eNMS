@@ -76,7 +76,9 @@ Version 4.4.0: RBAC and Credentials
   - Add new "get_all_results" function in the global variables
 - Add support for distributed task queue for automation with Dramatiq.
 - Return an error in the UI if the commit of workflow logs, report or result
-  fails (e.g data too long db error because of payload data for the results)
+  fails (e.g data too long db error because of payload data for the results),
+  don't commit if the size of the data is higher than the maximum column size
+  configured in database.json, and emit warning if it is than 50%
 - Fix "List index out of range" bug in Jump on Connect mechanism
   Commit 457f46dd2c496757e924d922f3455626d35a3784
 - Add RBAC support to credentials

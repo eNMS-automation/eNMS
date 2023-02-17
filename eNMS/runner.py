@@ -441,8 +441,8 @@ class Runner:
         if data_size >= max_allowed_size:
             logs = (
                 f"The {data_type} are too large to be committed to the database\n"
-                f"Size: {data_size}B\nMax Allowed Size: {max_allowed_size}B"
-            ) 
+                f"Size: {data_size}B\nMaximum Allowed Size: {max_allowed_size}B"
+            )
             self.log("critical", logs)
             raise Exception(f"{data_type.capitalize()} Data Overflow")
 
@@ -474,7 +474,7 @@ class Runner:
                     "service_log",
                     runtime=self.parent_runtime,
                     service=service_id,
-                    content=content
+                    content=content,
                 )
             if self.main_run.trigger == "REST API":
                 results["devices"] = {}
@@ -698,6 +698,7 @@ class Runner:
             report = "\n".join(format_exc().splitlines())
             self.log("error", f"Failed to build report:\n{report}")
         if report:
+            self.check_size_before_commit(report, "report")
             db.factory(
                 "service_report",
                 runtime=self.parent_runtime,

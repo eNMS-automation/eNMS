@@ -434,7 +434,7 @@ class Runner:
                 "runtime": self.runtime,
             }
 
-    def size_check_before_commit(self, data, data_type):
+    def check_size_before_commit(self, data, data_type):
         column_type = "pickletype" if data_type == "results" else "large_string_length"
         data_size = getsizeof(str(data))
         max_allowed_size = vs.database["columns"]["length"][column_type]
@@ -484,7 +484,7 @@ class Runner:
             results.pop("payload", None)
         create_failed_results = self.disable_result_creation and not self.success
         results = self.make_json_compliant(results)
-        self.size_check_before_commit(results, "results")
+        self.check_size_before_commit(results, "results")
         if not self.disable_result_creation or create_failed_results or run_result:
             self.has_result = True
             try:

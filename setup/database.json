@@ -21,7 +21,7 @@
       "tiny_string": 64,
       "small_string": 255,
       "large_string": 4294967295,
-      "pickletype": 16777215 
+      "pickletype": 16777215
     }
   },
   "transactions": {

@@ -477,6 +477,7 @@ class Runner:
                 db.factory("result", result=results, commit=commit, **result_kw)
             except Exception:
                 self.log("critical", f"Failed to commit result:\n{format_exc()}")
+                db.session.rollback()
         return results
 
     def run_service_job(self, device):

@@ -435,12 +435,12 @@ class Runner:
             }
 
     def check_size_before_commit(self, data, data_type):
-        column_type = "pickletype" if data_type == "results" else "large_string_length"
+        column_type = "pickletype" if data_type == "result" else "large_string_length"
         data_size = getsizeof(str(data))
         max_allowed_size = vs.database["columns"]["length"][column_type]
         if data_size >= max_allowed_size:
             logs = (
-                f"The {data_type} are too large to be committed to the database\n"
+                f"The {data_type} is too large to be committed to the database\n"
                 f"Size: {data_size}B\nMaximum Allowed Size: {max_allowed_size}B"
             )
             self.log("critical", logs)
@@ -469,7 +469,7 @@ class Runner:
             for service_id in services:
                 logs = env.log_queue(self.parent_runtime, service_id, mode="get")
                 content = "\n".join(logs or [])
-                self.check_size_before_commit(content, "logs")
+                self.check_size_before_commit(content, "log")
                 db.factory(
                     "service_log",
                     runtime=self.parent_runtime,
@@ -486,7 +486,7 @@ class Runner:
             results.pop("payload", None)
         create_failed_results = self.disable_result_creation and not self.success
         results = self.make_json_compliant(results)
-        self.check_size_before_commit(results, "results")
+        self.check_size_before_commit(results, "result")
         if not self.disable_result_creation or create_failed_results or run_result:
             self.has_result = True
             try:

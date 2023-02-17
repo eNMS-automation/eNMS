@@ -20,7 +20,8 @@
     "length": {
       "tiny_string_length": 64,
       "small_string_length": 255,
-      "large_string_length": 4294967295
+      "large_string_length": 4294967295,
+      "pickletype": 1000000
     }
   },
   "transactions": {

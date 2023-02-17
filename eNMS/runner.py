@@ -17,6 +17,7 @@ from paramiko import AutoAddPolicy, RSAKey, SFTPClient, SSHClient
 from re import compile, search
 from requests import post
 from scp import SCPClient
+from sys import getsizeof
 from threading import Thread
 from time import sleep
 from traceback import format_exc
@@ -433,6 +434,18 @@ class Runner:
                 "runtime": self.runtime,
             }
 
+    def size_check_before_commit(self, data, data_type):
+        column_type = "pickletype" if data_type == "results" else "large_string_length"
+        data_size = getsizeof(str(data))
+        max_allowed_size = vs.database["columns"]["length"][column_type]
+        if data_size >= max_allowed_size:
+            logs = (
+                f"The {data_type} are too large to be committed to the database\n"
+                f"Size: {data_size}B\nMax Allowed Size: {max_allowed_size}B"
+            ) 
+            self.log("critical", logs)
+            raise Exception(f"{data_type.capitalize()} Data Overflow")
+
     def create_result(self, results, device=None, commit=True, run_result=False):
         self.success = results["success"]
         result_kw = {
@@ -471,6 +484,7 @@ class Runner:
             results.pop("payload", None)
         create_failed_results = self.disable_result_creation and not self.success
         results = self.make_json_compliant(results)
+        self.size_check_before_commit(results, "results")
         if not self.disable_result_creation or create_failed_results or run_result:
             self.has_result = True
             try:

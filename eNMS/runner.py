@@ -468,11 +468,13 @@ class Runner:
             services = list(vs.run_logs.get(self.parent_runtime, []))
             for service_id in services:
                 logs = env.log_queue(self.parent_runtime, service_id, mode="get")
+                content = "\n".join(logs or [])
+                self.check_size_before_commit(content, "logs")
                 db.factory(
                     "service_log",
                     runtime=self.parent_runtime,
                     service=service_id,
-                    content="\n".join(logs or []),
+                    content=content
                 )
             if self.main_run.trigger == "REST API":
                 results["devices"] = {}

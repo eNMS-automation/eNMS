@@ -445,6 +445,11 @@ class Runner:
             )
             self.log("critical", logs)
             raise Exception(f"{data_type.capitalize()} Data Overflow")
+        else:
+            size_percentage = data_size / max_allowed_size * 100
+            log = f"The {data_type} is {size_percentage}% the maximum allowed size."
+            if size_percentage > 50:
+                self.log("warning", log)
 
     def create_result(self, results, device=None, commit=True, run_result=False):
         self.success = results["success"]

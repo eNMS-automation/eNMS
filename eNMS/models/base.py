@@ -106,9 +106,7 @@ class AbstractBase(db.base):
     @classmethod
     def rbac_filter(cls, query, mode, user, join_class=None):
         model = join_class or getattr(cls, "class_type", None)
-        if model not in vs.rbac["rbac_models"] or any(
-            mode in group.admin_rights for group in user.groups
-        ):
+        if model not in vs.rbac["rbac_models"]:
             return query
         if join_class:
             query = query.join(getattr(cls, join_class))

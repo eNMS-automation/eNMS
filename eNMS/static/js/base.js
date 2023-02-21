@@ -699,9 +699,9 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
               ? instance.owners.map((user) => user.name)
               : [];
             if (user.is_admin || ownersNames.includes(user.name)) {
-              $(`#rbac-nav-${id}`).show();
+              $(`#rbac-properties-${id} *`).prop("disabled", false);
             } else {
-              $(`#rbac-nav-${id},#rbac-properties-${id}`).remove();
+              $(`#rbac-properties-${id} *`).prop("disabled", true);
             }
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
@@ -733,7 +733,6 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
 }
 
 function buildBulkPanel(panel, type, tableId) {
-  $("#rbac-nav").show();
   const model = type in subtypes.service ? "service" : type;
   for (const [property, value] of Object.entries(formProperties[type])) {
     if (value.type == "object-list") {

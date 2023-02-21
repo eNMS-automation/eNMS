@@ -13,8 +13,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -496,8 +499,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -993,8 +999,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1082,8 +1091,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
+  email_report: false
   exclusion_field: d
   impacting: true
   include_device_results: true
@@ -1192,9 +1204,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
   driver: device
+  email_report: false
   getters: [get_arp_table, get_interfaces]
   impacting: true
   include_device_results: true
@@ -1301,9 +1316,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_config_mode: true
   fast_cli: true
@@ -1411,9 +1429,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -1538,9 +1559,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_config_mode: true
   fast_cli: true
@@ -1649,9 +1673,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -1774,8 +1801,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: true
@@ -1902,9 +1932,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
   driver: device
+  email_report: false
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -2008,9 +2041,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
   driver: device
+  email_report: false
   getters: [get_interfaces]
   impacting: true
   include_device_results: true
@@ -2109,8 +2145,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -2218,9 +2257,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2333,9 +2375,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2437,8 +2482,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2526,8 +2574,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2628,9 +2679,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2746,9 +2800,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2864,9 +2921,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -2979,9 +3039,12 @@
   dict_match:
     '{{device.ip_address}}': {prefix_length: 24}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   getters: [get_interfaces_ip]
   impacting: true
   include_device_results: true
@@ -3098,8 +3161,11 @@
   device_query_property: ip_address
   dict_match: {ok: 2}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3192,8 +3258,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3286,8 +3355,11 @@
   device_query_property: ip_address
   dict_match: {action: debug, changed: false, failed: false}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3388,9 +3460,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -3508,9 +3583,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -3628,9 +3706,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -3742,8 +3823,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: true
@@ -3840,8 +3924,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -3943,8 +4030,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -4072,8 +4162,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4196,8 +4289,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4300,8 +4396,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4417,8 +4516,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4546,8 +4648,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4648,8 +4753,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4810,9 +4918,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -4931,8 +5042,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5025,8 +5139,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5120,8 +5237,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -5214,8 +5334,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5309,8 +5432,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -5403,8 +5529,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5504,9 +5633,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -5621,9 +5753,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -5739,9 +5874,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -5849,8 +5987,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5964,8 +6105,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6060,8 +6204,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6163,9 +6310,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -6276,8 +6426,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6370,8 +6523,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6480,8 +6636,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6583,9 +6742,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -6697,8 +6859,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6824,8 +6989,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6915,8 +7083,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7007,8 +7178,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7100,8 +7274,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7219,8 +7396,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7310,8 +7490,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7398,8 +7581,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7491,8 +7677,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7583,8 +7772,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7683,8 +7875,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7780,9 +7975,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: linux
+  email_report: false
   enable_mode: true
   expect_string: root.*#
   fast_cli: false
@@ -7883,8 +8081,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7981,8 +8182,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8069,8 +8273,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   import_type: opennms
   include_device_results: false
@@ -8175,9 +8382,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: 'admin.*:'
@@ -8289,8 +8499,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: true
@@ -8393,9 +8606,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -8516,9 +8732,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -8635,8 +8854,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8726,8 +8948,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8817,8 +9042,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8913,9 +9141,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9014,9 +9245,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9115,9 +9349,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9216,9 +9453,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9314,8 +9554,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9429,9 +9672,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -9542,8 +9788,11 @@
   dict_match: {}
   direction: put
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9647,9 +9896,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -9762,8 +10014,11 @@
   dict_match: {}
   direction: put
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9868,9 +10123,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -9981,8 +10239,11 @@
   dict_match: {}
   direction: put
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10079,8 +10340,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10186,8 +10450,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10282,8 +10549,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10378,8 +10648,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10479,8 +10752,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10604,8 +10880,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10701,8 +10980,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10797,8 +11079,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10893,8 +11178,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10992,8 +11280,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11110,8 +11401,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11233,8 +11527,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -11342,9 +11639,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -11453,8 +11753,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11575,8 +11878,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11673,8 +11979,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11775,9 +12084,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -11884,8 +12196,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11982,8 +12297,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12103,8 +12421,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: true
@@ -12207,8 +12528,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12300,8 +12624,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12403,9 +12730,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -12515,8 +12845,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: true
@@ -12613,8 +12946,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12728,8 +13064,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12821,8 +13160,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12910,8 +13252,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13006,8 +13351,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13117,8 +13465,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: true
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13210,8 +13561,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: true
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13306,8 +13660,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: true
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13399,8 +13756,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: true
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13489,8 +13849,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13579,8 +13942,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13678,9 +14044,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -13784,8 +14153,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13910,9 +14282,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -14021,8 +14396,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14121,8 +14499,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14208,8 +14589,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14295,8 +14679,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14383,8 +14770,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14473,8 +14863,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14584,8 +14977,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14674,8 +15070,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14768,8 +15167,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14859,8 +15261,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14948,8 +15353,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15037,8 +15445,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15125,8 +15536,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15216,8 +15630,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15319,8 +15736,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15406,8 +15826,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15493,8 +15916,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15583,8 +16009,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15697,8 +16126,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15798,8 +16230,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15897,8 +16332,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -15988,8 +16426,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16099,9 +16540,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -16209,8 +16653,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16327,8 +16774,11 @@
   device_query_property: name
   dict_match: {key1: value1}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16418,8 +16868,11 @@
     a: LLLoLLL
     c: ['3']
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16508,8 +16961,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16600,8 +17056,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -16716,8 +17175,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   error_option: stop-on-error
   impacting: false
   include_device_results: false
@@ -16822,8 +17284,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   error_option: stop-on-error
   impacting: false
   include_device_results: false
@@ -16933,8 +17398,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   error_option: stop-on-error
   impacting: false
   include_device_results: false
@@ -17039,8 +17507,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   error_option: stop-on-error
   impacting: false
   include_device_results: false
@@ -17150,8 +17621,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   error_option: stop-on-error
   impacting: false
   include_device_results: false
@@ -17249,8 +17723,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -17373,9 +17850,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -17490,9 +17970,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -17607,9 +18090,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -17717,8 +18203,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: true
   include_link_in_summary: true
@@ -17829,8 +18318,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -17918,8 +18410,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: true
   include_link_in_summary: false
@@ -18008,8 +18503,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: true
   include_link_in_summary: true
@@ -18101,8 +18599,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -18219,9 +18720,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -18334,9 +18838,12 @@
   direction: put
   disable_md5: false
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   fast_cli: false
   file_system: ''
@@ -18439,9 +18946,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -18555,9 +19065,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -18671,9 +19184,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -18780,8 +19296,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -18898,8 +19417,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -18998,9 +19520,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -19110,8 +19635,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: false
   include_device_results: false
@@ -19207,8 +19735,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19321,8 +19852,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19410,8 +19944,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19498,8 +20035,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19586,8 +20126,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19678,8 +20221,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19770,8 +20316,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19860,8 +20409,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -19959,8 +20511,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20058,8 +20613,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20157,8 +20715,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20256,8 +20817,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20355,8 +20919,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20454,8 +21021,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20553,8 +21123,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20649,8 +21222,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20758,8 +21334,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20848,8 +21427,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: false
   include_device_results: false
   include_link_in_summary: false
@@ -20946,8 +21528,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: false
   include_device_results: false
@@ -21047,9 +21632,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -21156,8 +21744,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -21269,9 +21860,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -21385,9 +21979,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -21501,9 +22098,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -21617,9 +22217,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -21726,8 +22329,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -21841,9 +22447,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
   driver: device
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -21939,9 +22548,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -22043,9 +22655,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -22165,9 +22780,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -22280,8 +22898,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -22413,9 +23034,12 @@
   dict_match:
     is_alive: {is_alive: true}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   getters: [is_alive]
   impacting: true
   include_device_results: true
@@ -22520,9 +23144,12 @@
   device_query_property: ip_address
   dict_match: {fqdn: localhost, vendor: Arista}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -22627,9 +23254,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   getters: [get_mac_address_table]
   impacting: true
   include_device_results: true
@@ -22734,9 +23364,12 @@
   device_query_property: ip_address
   dict_match: {fqdn: localhost, uptime: '666', vendor: Arista}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -22839,8 +23472,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -22981,9 +23617,12 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: ''
   expect_password_prompt: ''
@@ -23099,8 +23738,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: true
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -23217,8 +23859,11 @@
   dict_match:
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23317,8 +23962,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23418,8 +24066,11 @@
   dict_match:
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23517,8 +24168,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -23619,8 +24273,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -23709,8 +24366,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -23809,8 +24469,11 @@
   device_query_property: ip_address
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -23921,8 +24584,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24025,8 +24691,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24117,8 +24786,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24204,8 +24876,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24290,8 +24965,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24376,8 +25054,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24462,8 +25143,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24548,8 +25232,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24637,8 +25324,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24730,8 +25420,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24818,8 +25511,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24903,8 +25599,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -24988,8 +25687,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25074,8 +25776,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25160,8 +25865,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25249,8 +25957,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25349,8 +26060,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25435,8 +26149,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25525,8 +26242,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25615,8 +26335,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25704,8 +26427,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25793,8 +26519,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -25887,8 +26616,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26011,8 +26743,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26098,8 +26833,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26185,8 +26923,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26272,8 +27013,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26359,8 +27103,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26446,8 +27193,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26534,8 +27284,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26625,8 +27378,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -26741,8 +27497,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -26837,8 +27596,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -26932,8 +27694,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -27027,8 +27792,11 @@
   device_query_property: name
   dict_match: {netmiko_driver: arista_eos}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -27121,8 +27889,11 @@
   device_query_property: name
   dict_match: {is_admin: true}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -27214,8 +27985,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -27326,8 +28100,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -27423,8 +28200,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -27518,8 +28298,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -27613,8 +28396,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -27732,8 +28518,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -27834,8 +28623,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -27934,8 +28726,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -28035,8 +28830,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -28161,8 +28959,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -28257,8 +29058,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -28351,8 +29155,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -28446,8 +29253,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -28540,8 +29350,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -28637,8 +29450,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -28772,9 +29588,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -28890,9 +29709,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -29008,9 +29830,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -29119,8 +29944,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29214,8 +30042,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29302,8 +30133,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29419,8 +30253,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29507,8 +30344,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29609,8 +30449,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29698,8 +30541,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29787,8 +30633,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29876,8 +30725,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -29965,8 +30817,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30054,8 +30909,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30143,8 +31001,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30232,8 +31093,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30321,8 +31185,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30410,8 +31277,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30499,8 +31369,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30588,8 +31461,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30677,8 +31553,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30766,8 +31645,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30855,8 +31737,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -30944,8 +31829,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31033,8 +31921,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31122,8 +32013,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31211,8 +32105,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31300,8 +32197,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31389,8 +32289,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31478,8 +32381,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31567,8 +32473,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31656,8 +32565,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31745,8 +32657,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31834,8 +32749,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -31923,8 +32841,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32012,8 +32933,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32104,8 +33028,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32206,8 +33133,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32296,8 +33226,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32391,8 +33324,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32479,8 +33415,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32577,8 +33516,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32667,8 +33609,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32759,8 +33704,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32846,8 +33794,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -32950,9 +33901,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33075,9 +34029,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33185,8 +34142,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33316,9 +34276,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33414,9 +34377,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33512,9 +34478,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33607,8 +34576,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33708,8 +34680,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33808,8 +34783,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -33901,8 +34879,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -34042,9 +35023,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -34144,9 +35128,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -34251,9 +35238,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -34371,9 +35361,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -34481,8 +35474,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -34571,8 +35567,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -34679,8 +35678,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -34788,9 +35790,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -34893,8 +35898,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -34994,9 +36002,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -35102,8 +36113,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -35217,8 +36231,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   headers: {}
   impacting: true
   include_device_results: false
@@ -35318,9 +36335,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   enable_mode: true
   exit_command: exit
   expect_password_prompt: password
@@ -35429,9 +36449,12 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
   driver: device
+  email_report: false
   getters: [get_interfaces]
   impacting: true
   include_device_results: false
@@ -35522,8 +36545,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: true
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -35628,8 +36654,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -35718,8 +36747,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: true
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -35834,8 +36866,11 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
+  disabled: false
+  disabled_info: ''
   display_only_failed_nodes: false
   display_report: false
+  email_report: false
   impacting: true
   include_device_results: false
   include_link_in_summary: false

@@ -6,6 +6,7 @@
   description: All users
   device_access: []
   email: ''
+  force_read_access: false
   get_requests: []
   link_access: []
   menu: []
@@ -26,6 +27,7 @@
   description: Admin User
   device_access: []
   email: admin@enms.io
+  force_read_access: true
   get_requests: []
   link_access: []
   menu: []
@@ -46,6 +48,7 @@
   description: Full UI Read + Edit Access
   device_access: []
   email: ''
+  force_read_access: false
   get_requests: [/changelog_table, /compare_form, /configuration_table, /confirmation_form,
     /credential_table, /device_data_form, /device_table, /download, /event_table,
     /export_service, /file_table, /files_form, /geographical_view, /git_history_form,
@@ -117,6 +120,7 @@
   description: ''
   device_access: []
   email: ''
+  force_read_access: false
   get_requests: [/changelog_table, /compare_form, /configuration_table, /confirmation_form,
     /credential_table, /device_data_form, /device_table, /download, /event_table,
     /export_service, /file_table, /files_form, /geographical_view, /git_history_form,

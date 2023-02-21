@@ -698,11 +698,8 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
             const ownersNames = instance.owners
               ? instance.owners.map((user) => user.name)
               : [];
-            if (user.is_admin || ownersNames.includes(user.name)) {
-              $(`#rbac-properties-${id} *`).prop("disabled", false);
-            } else {
-              $(`#rbac-properties-${id} *`).prop("disabled", true);
-            }
+            const allowedUser = user.is_admin || ownersNames.includes(user.name);
+            $(`#rbac-properties-${id} *`).prop("disabled", !allowedUser);
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
             processInstance(type, instance);

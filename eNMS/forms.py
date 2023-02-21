@@ -245,9 +245,7 @@ class FormFactory:
             template = "group"
             form_type = HiddenField(default="group")
             admin_only = BooleanField("Admin Only", default=False)
-            mandatory_rbac = SelectMultipleField(
-                "Mandatory RBAC", choices=(("read", "Read"), ("edit", "Edit"))
-            )
+            force_read_access = BooleanField("Always set 'Read' access", default=False)
             users = MultipleInstanceField("Users", model="user")
             menu = SelectMultipleField("Menu", choices=vs.dualize(vs.rbac["menus"]))
             pages = SelectMultipleField("Pages", choices=vs.dualize(vs.rbac["pages"]))

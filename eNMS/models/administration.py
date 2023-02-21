@@ -88,7 +88,7 @@ class Group(AbstractBase):
     name = db.Column(db.SmallString, unique=True)
     creator = db.Column(db.SmallString)
     admin_only = db.Column(Boolean, default=False)
-    mandatory_rbac = db.Column(db.List)
+    force_read_access = db.Column(Boolean, default=False)
     description = db.Column(db.LargeString)
     email = db.Column(db.SmallString)
     users = relationship("User", secondary=db.user_group_table, back_populates="groups")

@@ -139,7 +139,7 @@ class Service(AbstractBase):
                 for workflow in self.get_ancestors()
             )
         ):
-            raise db.rbac_error("Deletion forbidden because restricted to owners.")
+            raise db.rbac_error("Not Authorized (restricted to owners).")
 
     def post_update(self):
         if len(self.workflows) == 1 and not self.shared:

@@ -131,7 +131,8 @@ class AbstractBase(db.base):
         self.owners = [current_user]
         for group in current_user.groups:
             for access_type in getattr(group, f"{model}_access"):
-                getattr(self, access_type).append(group)
+                if group not in getattr(self, access_type):
+                    getattr(self, access_type).append(group)
 
     def delete(self):
         pass

@@ -62,8 +62,8 @@ class Runner:
         self.in_process = False if self.is_main_run else run.in_process
         device_progress = "iteration_device" if self.iteration_run else "device"
         self.progress_key = f"progress/{device_progress}"
-        self.is_admin_run = db.fetch("user", name=self.creator).is_admin
-        self.main_run = db.fetch("run", runtime=self.parent_runtime)
+        self.is_admin_run = db.fetch("user", name=self.creator, rbac=None).is_admin
+        self.main_run = db.fetch("run", runtime=self.parent_runtime, rbac=None)
         if not self.is_main_run:
             self.path = f"{run.path}>{self.service.id}"
         db.session.commit()
@@ -782,7 +782,7 @@ class Runner:
                 private_key = env.get_password(credential.private_key)
                 result["pkey"] = RSAKey.from_private_key(StringIO(private_key))
         elif self.credentials == "user":
-            user = db.fetch("user", name=self.creator)
+            user = db.fetch("user", name=self.creator, rbac=None)
             result["username"] = user.name
             result["password"] = env.get_password(user.password)
         else:

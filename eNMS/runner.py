@@ -456,6 +456,7 @@ class Runner:
         result_kw = {
             "parent_runtime": self.parent_runtime,
             "parent_service_id": self.main_run.service.id,
+            "path": self.path,
             "run_id": self.main_run.id,
             "service": self.service.id,
             "labels": self.main_run.labels,

@@ -234,6 +234,7 @@ class Result(AbstractBase):
     private = True
     log_change = False
     id = db.Column(Integer, primary_key=True)
+    path = db.Column(db.SmallString)
     success = db.Column(Boolean, default=False)
     labels = db.Column(db.LargeString)
     runtime = db.Column(db.TinyString)
@@ -269,9 +270,8 @@ class Result(AbstractBase):
         return self.result[key]
 
     def __init__(self, **kwargs):
-        self.success = kwargs["result"]["success"]
-        self.runtime = kwargs["result"]["runtime"]
-        self.duration = kwargs["result"]["duration"]
+        for key in ("duration", "path", "runtime", "success"):
+            setattr(self, key, kwargs["result"][key])
         super().__init__(**kwargs)
 
     def __repr__(self):

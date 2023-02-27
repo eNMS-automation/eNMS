@@ -971,14 +971,22 @@ class Controller:
                     relation = vs.relationships[model][property]
                     if relation["list"]:
                         related_instances = (
-                            db.fetch(relation["model"], name=name, allow_none=True)
+                            db.fetch(
+                                relation["model"], name=name, rbac=None, allow_none=True
+                            )
                             for name in value
                         )
                         value = list(filter(None, related_instances))
                     else:
-                        value = db.fetch(relation["model"], name=value, allow_none=True)
+                        value = db.fetch(
+                            relation["model"], name=value, rbac=None, allow_none=True
+                        )
                     try:
-                        setattr(db.fetch(model, name=instance_name), property, value)
+                        setattr(
+                            db.fetch(model, name=instance_name, rbac=None),
+                            property,
+                            value,
+                        )
                     except Exception:
                         info("\n".join(format_exc().splitlines()))
                         if kwargs.get("service_import", False):

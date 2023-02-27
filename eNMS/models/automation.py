@@ -270,8 +270,9 @@ class Result(AbstractBase):
         return self.result[key]
 
     def __init__(self, **kwargs):
-        for key in ("duration", "path", "runtime", "success"):
+        for key in ("duration", "runtime", "success"):
             setattr(self, key, kwargs["result"][key])
+        self.path = kwargs["path"]
         super().__init__(**kwargs)
 
     def __repr__(self):

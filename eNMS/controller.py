@@ -1361,7 +1361,6 @@ class Controller:
             db.session.flush()
             return instance.post_update()
         except db.rbac_error:
-            print("TTT"*200, format_exc())
             return {"alert": "Error 403 - Not Authorized."}
         except Exception as exc:
             db.session.rollback()

@@ -937,7 +937,7 @@ class Controller:
                         existing_instance = instance["name"] in fetch_instance.get(
                             model, []
                         )
-                        if kwargs.get("service_import", False):
+                        if kwargs.get("service_import", False) and existing_instance:
                             instance = db.fetch(type, name=instance["name"], rbac=None)
                         else:
                             instance = db.factory(

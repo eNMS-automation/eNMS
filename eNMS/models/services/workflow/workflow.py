@@ -137,8 +137,8 @@ class Workflow(Service):
 
     def job(self, run, device=None):
         number_of_runs = defaultdict(int)
-        start = db.fetch("service", scoped_name="Start")
-        end = db.fetch("service", scoped_name="End")
+        start = db.fetch("service", scoped_name="Start", rbac=None)
+        end = db.fetch("service", scoped_name="End", rbac=None)
         services, targets = [], defaultdict(set)
         start_targets = [device] if device else run.target_devices
         for service_id in run.start_services or [start.id]:

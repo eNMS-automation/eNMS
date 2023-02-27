@@ -937,14 +937,17 @@ class Controller:
                         existing_instance = instance["name"] in fetch_instance.get(
                             model, []
                         )
-                        instance = db.factory(
-                            type,
-                            migration_import=True,
-                            no_fetch=empty_database and not existing_instance,
-                            update_pools=False,
-                            import_mechanism=True,
-                            **instance,
-                        )
+                        if kwargs.get("service_import", False):
+                            instance = db.fetch(type, name=instance["name"], rbac=None)
+                        else:
+                            instance = db.factory(
+                                type,
+                                migration_import=True,
+                                no_fetch=empty_database,
+                                update_pools=False,
+                                import_mechanism=True,
+                                **instance,
+                            )
                         if kwargs.get("service_import"):
                             if instance.type == "workflow":
                                 instance.edges = []
@@ -1358,6 +1361,7 @@ class Controller:
             db.session.flush()
             return instance.post_update()
         except db.rbac_error:
+            print("TTT"*200, format_exc())
             return {"alert": "Error 403 - Not Authorized."}
         except Exception as exc:
             db.session.rollback()

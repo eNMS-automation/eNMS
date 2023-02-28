@@ -1128,7 +1128,9 @@ class Controller:
             run_kwargs["restart_run"] = restart_run
             initial_payload = restart_run.payload
         run_kwargs["services"] = [service.id]
-        run = db.factory("run", service=service.id, commit=True, rbac=None, **run_kwargs)
+        run = db.factory(
+            "run", service=service.id, commit=True, rbac=None, **run_kwargs
+        )
         run.properties, run.payload = kwargs, {**initial_payload, **kwargs}
         return run.run()
 

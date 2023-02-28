@@ -44,7 +44,7 @@ class ScrapliService(ConnectionService):
         if self.results_as_list:
             result = [response.result for response in multi_response]
         elif len(commands) == 1:
-            result = multi_response.result
+            result = multi_response.data[0].result
         else:
             result = "\n\n".join(
                 f"COMMAND: {response.channel_input}\n{response.result}"

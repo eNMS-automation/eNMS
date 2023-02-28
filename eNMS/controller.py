@@ -1128,7 +1128,7 @@ class Controller:
             run_kwargs["restart_run"] = restart_run
             initial_payload = restart_run.payload
         run_kwargs["services"] = [service.id]
-        run = db.factory("run", service=service.id, commit=True, **run_kwargs)
+        run = db.factory("run", service=service.id, commit=True, rbac=None, **run_kwargs)
         run.properties, run.payload = kwargs, {**initial_payload, **kwargs}
         return run.run()
 
@@ -1165,7 +1165,7 @@ class Controller:
         service.check_restriction_to_owners("run")
         kwargs["runtime"] = runtime = vs.get_time()
         run_name = kwargs.get("form", {}).get("name")
-        if run_name and db.fetch("run", name=run_name, allow_none=True):
+        if run_name and db.fetch("run", name=run_name, allow_none=True, rbac=None):
             return {"error": "There is already a run with the same name."}
         if kwargs.get("asynchronous", True):
             if vs.settings["automation"]["use_task_queue"]:

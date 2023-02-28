@@ -142,7 +142,7 @@ class Workflow(Service):
         services, targets = [], defaultdict(set)
         start_targets = [device] if device else run.target_devices
         for service_id in run.start_services or [start.id]:
-            service = db.fetch("service", id=service_id)
+            service = db.fetch("service", id=service_id, rbac=None)
             targets[service.name] |= {device.name for device in start_targets}
             heappush(services, (1 / service.priority, service))
         visited, restart_run = set(), run.restart_run

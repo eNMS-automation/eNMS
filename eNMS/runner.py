@@ -481,6 +481,7 @@ class Runner:
                     runtime=self.parent_runtime,
                     service=service_id,
                     content=content,
+                    rbac=None,
                 )
             if self.main_run.trigger == "REST API":
                 results["devices"] = {}
@@ -496,7 +497,9 @@ class Runner:
         if not self.disable_result_creation or create_failed_results or run_result:
             self.has_result = True
             try:
-                db.factory("result", result=results, commit=commit, **result_kw)
+                db.factory(
+                    "result", result=results, commit=commit, rbac=None, **result_kw
+                )
             except Exception:
                 self.log("critical", f"Failed to commit result:\n{format_exc()}")
                 db.session.rollback()
@@ -710,6 +713,7 @@ class Runner:
                 runtime=self.parent_runtime,
                 service=self.service.id,
                 content=report,
+                rbac=None,
             )
         return report
 

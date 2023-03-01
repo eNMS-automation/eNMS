@@ -1109,7 +1109,7 @@ class Controller:
         for property in ("name", "labels"):
             if property in kwargs.get("form", {}):
                 run_kwargs[property] = kwargs["form"][property]
-        service = db.fetch("service", id=service)
+        service = db.fetch("service", id=service, rbac="run")
         service.status = "Running"
         initial_payload = {
             **service.initial_payload,

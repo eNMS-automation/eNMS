@@ -841,7 +841,8 @@ export function processInstance(type, instance) {
     const el = $(
       instance ? `#${type}-${property}-${instance.id}` : `#${type}-${property}`
     );
-    if (!el.length) continue;
+    const isList = formProperties?.[type]?.[property]?.type == "field-list";
+    if (!el.length && !isList) continue;
     updateProperty(instance, el, property, value, type);
   }
 }

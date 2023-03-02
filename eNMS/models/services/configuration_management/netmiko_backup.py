@@ -108,6 +108,8 @@ class NetmikoBackupForm(NetmikoForm):
     commands = FieldList(FormField(CommandsForm), min_entries=12)
     replacements = FieldList(FormField(ReplacementForm), min_entries=12)
     add_header = BooleanField("Add header for each command", default=True)
+    auto_find_prompt = BooleanField(default=True, help="netmiko/auto_find_prompt")
+    expect_string = StringField(substitution=True, help="netmiko/expect_string")
     groups = {
         "Target property and commands": {
             "commands": ["property", "local_path", "add_header", "commands"],
@@ -118,4 +120,12 @@ class NetmikoBackupForm(NetmikoForm):
             "default": "expanded",
         },
         **NetmikoForm.groups,
+        "Advanced Netmiko Parameters": {
+            "commands": [
+                "auto_find_prompt",
+                "expect_string",
+            ],
+            "default": "hidden",
+        },
+
     }

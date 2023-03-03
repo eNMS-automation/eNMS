@@ -472,7 +472,7 @@ class Database:
                     _class, allow_none=True, rbac=rbac, **{property: kwargs[property]}
                 )
             if instance and not kwargs.get("must_be_new"):
-                instance.update(**kwargs)
+                instance.update(rbac=rbac, **kwargs)
             else:
                 instance = vs.models[_class](rbac=rbac, **kwargs)
                 self.session.add(instance)

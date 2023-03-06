@@ -168,6 +168,7 @@ class Runner:
             if self.update_target_pools:
                 pool.compute_pool()
             devices |= set(pool.devices)
+        db.session.commit()
         restricted_devices = set(
             device
             for device in devices

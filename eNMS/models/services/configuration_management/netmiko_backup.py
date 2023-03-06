@@ -127,5 +127,4 @@ class NetmikoBackupForm(NetmikoForm):
             ],
             "default": "hidden",
         },
-
     }

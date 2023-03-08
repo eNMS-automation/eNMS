@@ -707,7 +707,9 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
           },
         });
       } else if (mode == "bulk-edit") {
-        buildBulkPanel(panel, type, tableId);
+        buildBulkEditPanel(panel, type, tableId);
+      } else if (mode == "bulk-filter") {
+        buildBulkFilterPanel(type, tableId);
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
         if (page == "workflow_builder" && creationMode == "create_service") {
@@ -729,7 +731,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
   });
 }
 
-function buildBulkPanel(panel, type, tableId) {
+function buildBulkEditPanel(panel, type, tableId) {
   const model = type in subtypes.service ? "service" : type;
   for (const [property, value] of Object.entries(formProperties[type])) {
     if (value.type == "object-list") {
@@ -785,6 +787,52 @@ function buildBulkPanel(panel, type, tableId) {
         .text("Bulk Edit");
     },
   });
+}
+
+function buildBulkFilterPanel(type, tableId) {
+  for (const [property, value] of Object.entries(formProperties[type])) {
+    if (value.type == "object-list") {
+      $(`#${type}-${property}-property-div-${tableId}`).width("80%").before(`
+          <div style="float:right; width: 19%; margin-top: 2px;">
+            <select
+              data-width="100%"
+              id="${tableId}-${property}-list"
+              name="${property}-edit-mode"
+            >
+              <option value="union">Union</option>
+              <option value="intersection">Intersection</option>
+              <option value="empty">Empty</option>
+            </select>
+          </div>
+        `);
+      $(`#${tableId}-${property}-list`).selectpicker();
+    } else if (["str", "integer", "list"].includes(value.type)) {
+      $(`#${type}-${property}-property-div-${tableId}`).width("80%").before(`
+          <div style="float:right; width: 19%; margin-top: 2px;">
+            <select
+              data-width="100%"
+              id="${tableId}-${property}-list"
+              name="${property}-edit-mode"
+            >
+              <option value="inclusion">Inclusion</option>
+              <option value="equality">Equality</option>
+              <option value="regex">Regular Expression</option>
+              <option value="empty">Empty</option>
+            </select>
+          </div>
+        `);
+      $(`#${tableId}-${property}-list`).selectpicker();
+    }
+    $(`label[for='${property}']`).after(`
+      <div class="item" style='float:right; margin-left: 15px'>
+        <input
+          id="bulk-edit-${property}-${tableId}"
+          name="bulk-edit-${property}"
+          type="checkbox"
+        />
+      </div>
+    `);
+  }
 }
 
 function updateProperty(instance, el, property, value, type) {

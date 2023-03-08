@@ -790,6 +790,7 @@ function buildBulkEditPanel(panel, type, tableId) {
 }
 
 function buildBulkFilterPanel(type, tableId) {
+  const model = type in subtypes.service ? "service" : type;
   $(`#${type}-creator-${tableId}`).prop("readonly", false);
   for (const [property, value] of Object.entries(formProperties[type])) {
     if (value.type == "object-list") {
@@ -798,7 +799,7 @@ function buildBulkFilterPanel(type, tableId) {
             <select
               data-width="100%"
               id="${tableId}-${property}-list"
-              name="${property}-edit-mode"
+              name="${property}-filter-mode"
             >
               <option value="union">Union</option>
               <option value="intersection">Intersection</option>
@@ -813,7 +814,7 @@ function buildBulkFilterPanel(type, tableId) {
             <select
               data-width="100%"
               id="${tableId}-${property}-list"
-              name="${property}-edit-mode"
+              name="${property}-filter-mode"
             >
               <option value="inclusion">Inclusion</option>
               <option value="equality">Equality</option>
@@ -827,13 +828,19 @@ function buildBulkFilterPanel(type, tableId) {
     $(`label[for='${property}']`).after(`
       <div class="item" style='float:right; margin-left: 15px'>
         <input
-          id="bulk-edit-${property}-${tableId}"
-          name="bulk-edit-${property}"
+          id="bulk-filter-${property}-${tableId}"
+          name="bulk-filter-${property}"
           type="checkbox"
         />
       </div>
     `);
   }
+  $(`#${type}-action-btn-${tableId}`)
+    .attr(
+      "onclick",
+      `eNMS.table.bulkFilter('${type}', '${model}', '${tableId}')`
+    )
+    .text("Bulk Filter");
 }
 
 function updateProperty(instance, el, property, value, type) {

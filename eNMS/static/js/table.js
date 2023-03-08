@@ -344,6 +344,22 @@ export class Table {
       </button>`;
   }
 
+  bulkFilteringButton() {
+    const showPanelFunction =
+      this.model == "service"
+        ? `automation.openServicePanel('${this.id}', 'bulk-filter')`
+        : `base.showInstancePanel('${this.model}', null, 'bulk-filter', '${this.id}')`;
+    return `
+      <button
+        class="btn btn-info"
+        onclick="eNMS.${showPanelFunction}"
+        data-tooltip="Bulk Filtering"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-filter"></span>
+      </button>`;
+  }
+
   createNewButton() {
     const onClick = this.relation
       ? `eNMS.base.showAddInstancePanel(
@@ -428,8 +444,8 @@ export class Table {
   bulkEditButton() {
     const showPanelFunction =
       this.model == "service"
-        ? `automation.openServicePanel('${this.id}')`
-        : `base.showInstancePanel('${this.model}', null, 'bulk', '${this.id}')`;
+        ? `automation.openServicePanel('${this.id}', 'bulk-edit')`
+        : `base.showInstancePanel('${this.model}', null, 'bulk-edit', '${this.id}')`;
     return `
       <button
         class="btn btn-primary"
@@ -504,6 +520,7 @@ tables.device = class DeviceTable extends Table {
     return [
       this.columnDisplay(),
       this.refreshTableButton(),
+      this.bulkFilteringButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
       this.copyTableButton(),

@@ -706,7 +706,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
             if (isService) loadScript(`../static/js/services/${type}.js`, id);
           },
         });
-      } else if (mode == "bulk") {
+      } else if (mode == "bulk-edit") {
         buildBulkPanel(panel, type, tableId);
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);

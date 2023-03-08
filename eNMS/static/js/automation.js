@@ -34,8 +34,8 @@ import {
   workflow,
 } from "./workflowBuilder.js";
 
-function openServicePanel(tableId) {
-  const args = tableId ? [null, "bulk", tableId] : [];
+function openServicePanel(tableId, bulkMode) {
+  const args = tableId ? [null, bulkMode, tableId] : [];
   showInstancePanel($("#service-type-list").val(), ...args);
 }
 

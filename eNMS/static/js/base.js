@@ -709,7 +709,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
       } else if (mode == "bulk-edit") {
         buildBulkEditPanel(panel, type, tableId);
       } else if (mode == "bulk-filter") {
-        buildBulkFilterPanel(type, tableId);
+        buildBulkFilterPanel(panel, type, tableId);
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
         if (page == "workflow_builder" && creationMode == "create_service") {
@@ -789,8 +789,9 @@ function buildBulkEditPanel(panel, type, tableId) {
   });
 }
 
-function buildBulkFilterPanel(type, tableId) {
+function buildBulkFilterPanel(panel, type, tableId) {
   const model = type in subtypes.service ? "service" : type;
+  panel.setHeaderTitle(`Filter all ${model}s in table`);
   $(`#${type}-creator-${tableId}`).prop("readonly", false);
   for (const [property, value] of Object.entries(formProperties[type])) {
     if (value.type == "object-list") {

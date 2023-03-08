@@ -214,7 +214,7 @@ export class Table {
     }
     for (const [key, value] of Object.entries(form)) {
       if (bulkfiltering && !propertiesToKeep.includes(key)) delete form[key];
-      if (key.includes("_invert")) form[key] = value == "y";
+      if (key.includes("_invert")) form[key] = ["y", "on"].includes(value);
     }
     Object.assign(data, {
       form: form,

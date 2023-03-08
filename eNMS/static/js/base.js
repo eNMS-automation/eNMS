@@ -666,15 +666,16 @@ function addInstancesToRelation(type, id) {
 }
 
 export function showInstancePanel(type, id, mode, tableId, edge) {
+  const formType = mode == "bulk-filter" ? `${type}_filtering` : type;
   openPanel({
-    name: type,
+    name: formType,
     id: id || tableId,
     footerToolbar: `
       <div style="width: 100%; height: 40px; display: flex;
         align-items: center; justify-content: center;">
         <button
           style="width: 100px"
-          id="${type}-action-btn"
+          id="${formType}-action-btn"
           type="button"
           class="btn btn-success btn-id add-id"
           value="eNMS.base.processData"
@@ -709,7 +710,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
       } else if (mode == "bulk-edit") {
         buildBulkEditPanel(panel, type, tableId);
       } else if (mode == "bulk-filter") {
-        buildBulkFilterPanel(panel, type, tableId);
+        buildBulkFilterPanel(panel, formType, tableId);
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
         if (page == "workflow_builder" && creationMode == "create_service") {

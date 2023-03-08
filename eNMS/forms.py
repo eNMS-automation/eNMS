@@ -159,65 +159,33 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
 
 class FormFactory:
     def _initialize(self):
-        self.generate_filtering_forms()
         self.generate_instance_insertion_forms()
         self.generate_rbac_forms()
         self.generate_service_forms()
+        self.generate_filtering_forms()
 
     def generate_filtering_forms(self):
         for model, properties in vs.properties["filtering"].items():
-            relations = {}
+            if model not in vs.form_class:
+                continue
+            relations, model_form = {}, vs.form_class[model]
             for related_model, relation in vs.relationships[model].items():
+                if hasattr(model_form, related_model):
+                    continue
                 if related_model in ("edges", "results"):
                     continue
                 relations[related_model] = MultipleInstanceField(
                     related_model, model=related_model
                 )
                 vs.relationships[f"{model}_filtering"][related_model] = relation
-                filtering_key = f"{model}_relation_filtering"
-                vs.relationships[filtering_key][related_model] = relation
             relation_form = {
-                "template": "filtering",
+                "template": "object",
                 "properties": sorted(relations),
                 "object_type": model,
-                "form_type": HiddenField(default=f"{model}_relation_filtering"),
-                **{
-                    **relations,
-                    **{
-                        f"{relation}_filter": SelectField(
-                            choices=(
-                                ("union", "Union"),
-                                ("intersection", "Intersection"),
-                                ("empty", "Empty"),
-                            )
-                        )
-                        for relation in relations
-                    },
-                },
+                "form_type": HiddenField(default=f"{model}_filtering"),
+                **relations,
             }
-            type(f"{model}RelationshipFilteringForm", (BaseForm,), relation_form)
-            form, form_type = deepcopy(relation_form), f"{model}_filtering"
-            for property in properties:
-                vs.form_properties[form_type][f"{property}_filter"] = {"type": "list"}
-            form.update(
-                {
-                    "form_type": HiddenField(default=form_type),
-                    "properties": sorted(properties) + sorted(relations),
-                    **{property: StringField() for property in properties},
-                    **{
-                        f"{property}_filter": SelectField(
-                            choices=(
-                                ("inclusion", "Inclusion"),
-                                ("equality", "Equality"),
-                                ("regex", "Regular Expression"),
-                                ("empty", "Empty"),
-                            )
-                        )
-                        for property in properties
-                    },
-                }
-            )
-            type(f"{model}FilteringForm", (BaseForm,), form)
+            type(f"{model}FilteringForm", (model_form,), relation_form)
 
     def generate_instance_insertion_forms(self):
         for model in ("device", "link", "user", "service"):

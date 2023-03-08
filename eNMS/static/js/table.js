@@ -201,9 +201,9 @@ export class Table {
   getFilteringData() {
     let data = {};
     let propertiesToKeep = [];
-    const bulkfiltering = $(`#${this.model}-form-${this.id}`).length;
+    const bulkfiltering = $(`#${this.model}_filtering-form-${this.id}`).length;
     const serializedForm = bulkfiltering
-      ? `#${this.model}-form-${this.id}`
+      ? `#${this.model}_filtering-form-${this.id}`
       : `#search-form-${this.id}`;
     let form = serializeForm(serializedForm, `${this.model}_filtering`);
     if (bulkfiltering) {

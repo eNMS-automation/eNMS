@@ -795,8 +795,8 @@ function buildBulkFilterPanel(panel, type, tableId) {
   $(`#${type}-creator-${tableId}`).prop("readonly", false);
   for (const [property, value] of Object.entries(formProperties[type])) {
     if (value.type == "object-list") {
-      $(`#${type}-${property}-property-div-${tableId}`).width("80%").before(`
-          <div style="float:right; width: 19%; margin-top: 2px;">
+      $(`#${type}-${property}-property-div-${tableId}`).width("75%").before(`
+          <div style="float:right; width: 24%; margin-top: 2px;">
             <select
               data-width="100%"
               id="${tableId}-${property}-list"
@@ -810,8 +810,18 @@ function buildBulkFilterPanel(panel, type, tableId) {
         `);
       $(`#${tableId}-${property}-list`).selectpicker();
     } else if (["str", "integer", "list"].includes(value.type)) {
-      $(`#${type}-${property}-property-div-${tableId}`).width("80%").before(`
-          <div style="float:right; width: 19%; margin-top: 2px;">
+      $(`#${type}-${property}-property-div-${tableId}`).width("75%").before(`
+          <center>
+          <div style="float:right; width: 3%; margin-left: -5px;">
+            <input
+              class="collapsed form-control-bool"
+              name="${property}_invert"
+              type="checkbox"
+              title="Invert Search"
+            />
+          </div>
+          </center>
+          <div style="float:right; width: 22%;">
             <select
               data-width="100%"
               id="${tableId}-${property}-list"

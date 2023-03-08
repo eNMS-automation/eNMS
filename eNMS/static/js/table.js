@@ -208,7 +208,7 @@ export class Table {
       $("input[name^='bulk-filter']").each(function(i, el) {
         if ($(el).prop("checked")) {
           const property = $(el).data("property");
-          propertiesToKeep.push(property, `${property}_filter`);
+          propertiesToKeep.push(property, `${property}_filter`, `${property}_invert`);
         }
       }); 
     }

@@ -800,7 +800,7 @@ function buildBulkFilterPanel(panel, type, tableId) {
             <select
               data-width="100%"
               id="${tableId}-${property}-list"
-              name="${property}-filter-mode"
+              name="${property}_filter"
             >
               <option value="union">Union</option>
               <option value="intersection">Intersection</option>
@@ -815,7 +815,7 @@ function buildBulkFilterPanel(panel, type, tableId) {
             <select
               data-width="100%"
               id="${tableId}-${property}-list"
-              name="${property}-filter-mode"
+              name="${property}_filter"
             >
               <option value="inclusion">Inclusion</option>
               <option value="equality">Equality</option>
@@ -831,6 +831,7 @@ function buildBulkFilterPanel(panel, type, tableId) {
         <input
           id="bulk-filter-${property}-${tableId}"
           name="bulk-filter-${property}"
+          data-property="${property}"
           type="checkbox"
         />
       </div>
@@ -839,7 +840,7 @@ function buildBulkFilterPanel(panel, type, tableId) {
   $(`#${type}-action-btn-${tableId}`)
     .attr(
       "onclick",
-      `eNMS.table.bulkFilter('${type}', '${model}', '${tableId}')`
+      `eNMS.table.refreshTable('${tableId}', false, true)`
     )
     .text("Bulk Filter");
 }

@@ -200,8 +200,20 @@ export class Table {
 
   getFilteringData() {
     let data = {};
-    let form = serializeForm(`#search-form-${this.id}`, `${this.model}_filtering`);
+    let propertiesToKeep = []
+    const bulkfiltering = $(`#${this.model}-form-${this.id}`).length;
+    const serializedForm = bulkfiltering ? `#${this.model}-form-${this.id}` : `#search-form-${this.id}`;
+    let form = serializeForm(serializedForm, `${this.model}_filtering`);
+    if (bulkfiltering) {
+      $("input[name^='bulk-filter']").each(function(i, el) {
+        if ($(el).prop("checked")) {
+          const property = $(el).data("property");
+          propertiesToKeep.push(property, `${property}_filter`);
+        }
+      }); 
+    }
     for (const [key, value] of Object.entries(form)) {
+      if (bulkfiltering && !propertiesToKeep.includes(key)) delete form[key];
       if (key.includes("_invert")) form[key] = value == "y";
     }
     Object.assign(data, {
@@ -1757,17 +1769,6 @@ function showBulkEditPanel(formId, model, tableId, number) {
   });
 }
 
-function bulkFilter(tableId, model) {
-  call({
-    url: `/bulk_filter/${model}`,
-    form: `${model}-form-${tableId}`,
-    callback: function () {
-      refreshTable(tableId, false, true);
-      notify("Table filtered.", "success", 5);
-    },
-  });
-}
-
 function bulkDeletion(tableId, model) {
   call({
     url: `/bulk_deletion/${model}`,
@@ -1856,7 +1857,6 @@ for (const [type, table] of Object.entries(tables)) {
 configureNamespace("table", [
   bulkDeletion,
   bulkEdit,
-  bulkFilter,
   bulkRemoval,
   clearSearch,
   copySelectionToClipboard,

@@ -177,6 +177,7 @@
     "/add_objects_to_network": "access",
     "/bulk_deletion": "access",
     "/bulk_edit": "access",
+    "/bulk_filter": "access",
     "/bulk_removal": "access",
     "/copy_service_in_workflow": "access",
     "/calendar_init": "all",

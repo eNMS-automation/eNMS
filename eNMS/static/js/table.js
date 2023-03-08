@@ -1757,6 +1757,17 @@ function showBulkEditPanel(formId, model, tableId, number) {
   });
 }
 
+function bulkFilter(tableId, model) {
+  call({
+    url: `/bulk_filter/${model}`,
+    form: `${model}-form-${tableId}`,
+    callback: function () {
+      refreshTable(tableId, false, true);
+      notify("Table filtered.", "success", 5);
+    },
+  });
+}
+
 function bulkDeletion(tableId, model) {
   call({
     url: `/bulk_deletion/${model}`,
@@ -1845,6 +1856,7 @@ for (const [type, table] of Object.entries(tables)) {
 configureNamespace("table", [
   bulkDeletion,
   bulkEdit,
+  bulkFilter,
   bulkRemoval,
   clearSearch,
   copySelectionToClipboard,

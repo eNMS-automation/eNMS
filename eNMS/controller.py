@@ -154,6 +154,9 @@ class Controller:
                                 current_value.remove(obj)
         return len(instances)
 
+    def bulk_filter(self, *a, **kw):
+        print(a, kw)
+
     def bulk_removal(
         self,
         table,

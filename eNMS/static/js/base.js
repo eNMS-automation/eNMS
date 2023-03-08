@@ -848,10 +848,7 @@ function buildBulkFilterPanel(panel, type, tableId) {
     `);
   }
   $(`#${type}-action-btn-${tableId}`)
-    .attr(
-      "onclick",
-      `eNMS.table.refreshTable('${tableId}', true, true)`
-    )
+    .attr("onclick", `eNMS.table.refreshTable('${tableId}', true, true)`)
     .text("Bulk Filter");
 }
 

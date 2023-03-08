@@ -200,17 +200,19 @@ export class Table {
 
   getFilteringData() {
     let data = {};
-    let propertiesToKeep = []
+    let propertiesToKeep = [];
     const bulkfiltering = $(`#${this.model}-form-${this.id}`).length;
-    const serializedForm = bulkfiltering ? `#${this.model}-form-${this.id}` : `#search-form-${this.id}`;
+    const serializedForm = bulkfiltering
+      ? `#${this.model}-form-${this.id}`
+      : `#search-form-${this.id}`;
     let form = serializeForm(serializedForm, `${this.model}_filtering`);
     if (bulkfiltering) {
-      $("input[name^='bulk-filter']").each(function(i, el) {
+      $("input[name^='bulk-filter']").each(function (_, el) {
         if ($(el).prop("checked")) {
           const property = $(el).data("property");
           propertiesToKeep.push(property, `${property}_filter`, `${property}_invert`);
         }
-      }); 
+      });
     }
     for (const [key, value] of Object.entries(form)) {
       if (bulkfiltering && !propertiesToKeep.includes(key)) delete form[key];

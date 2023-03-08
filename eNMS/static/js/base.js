@@ -790,6 +790,7 @@ function buildBulkEditPanel(panel, type, tableId) {
 }
 
 function buildBulkFilterPanel(type, tableId) {
+  $(`#${type}-creator-${tableId}`).prop("readonly", false);
   for (const [property, value] of Object.entries(formProperties[type])) {
     if (value.type == "object-list") {
       $(`#${type}-${property}-property-div-${tableId}`).width("80%").before(`

@@ -230,23 +230,6 @@ export class Table {
 
   postProcessing() {
     let self = this;
-    if ($(`#advanced-search-${this.id}`).length) {
-      createTooltip({
-        autoshow: true,
-        persistent: true,
-        name: `${this.model}_relation_filtering`,
-        target: `#advanced-search-${this.id}`,
-        container: `#controls-${this.id}`,
-        size: "auto 500",
-        position: {
-          my: "center-top",
-          at: "center-bottom",
-          offsetY: 18,
-        },
-        url: `../${this.model}_relation_filtering_form`,
-        title: "Relationship-based Filtering",
-      });
-    }
     this.createfilteringTooltips();
     createTooltips();
     const visibleColumns = localStorage.getItem(`${this.type}_table`);
@@ -407,18 +390,6 @@ export class Table {
       </button>`;
   }
 
-  searchTableButton() {
-    return `
-      <button
-        id="advanced-search-${this.id}"
-        class="btn btn-info"
-        data-tooltip="Advanced Search"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-search"></span>
-      </button>`;
-  }
-
   clearSearchButton() {
     return `
       <button
@@ -535,7 +506,6 @@ tables.device = class DeviceTable extends Table {
       this.columnDisplay(),
       this.refreshTableButton(),
       this.bulkFilteringButton(),
-      this.searchTableButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
       this.createNewButton(),
@@ -661,7 +631,7 @@ tables.network = class NetworkTable extends Table {
         </select>
       </button>`,
       this.refreshTableButton(),
-      this.searchTableButton(),
+      this.bulkFilteringButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
       this.createNewButton(),
@@ -746,7 +716,7 @@ tables.configuration = class ConfigurationTable extends Table {
         style="width: 200px"
       >`,
       this.refreshTableButton(),
-      this.searchTableButton("device"),
+      this.bulkFilteringButton("device"),
       this.clearSearchButton(),
       this.copyTableButton(),
       this.bulkEditButton(),
@@ -795,7 +765,7 @@ tables.link = class LinkTable extends Table {
     return [
       this.columnDisplay(),
       this.refreshTableButton(),
-      this.searchTableButton(),
+      this.bulkFilteringButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
       this.createNewButton(),
@@ -859,7 +829,7 @@ tables.pool = class PoolTable extends Table {
     return [
       this.columnDisplay(),
       this.refreshTableButton(),
-      this.searchTableButton(),
+      this.bulkFilteringButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
       this.createNewButton(),
@@ -967,7 +937,7 @@ tables.service = class ServiceTable extends Table {
       >
         <span class="glyphicon glyphicon-refresh"></span>
       </button>`,
-      this.searchTableButton(),
+      this.bulkFilteringButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
       this.createNewButton(),
@@ -1088,7 +1058,7 @@ tables.run = class RunTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.searchTableButton(),
+      this.bulkFilteringButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
       ` <button
@@ -1247,7 +1217,7 @@ tables.task = class TaskTable extends Table {
     return [
       this.columnDisplay(),
       this.refreshTableButton(),
-      this.searchTableButton(),
+      this.bulkFilteringButton(),
       this.clearSearchButton(),
       ` <button
         class="btn btn-info"
@@ -1326,7 +1296,7 @@ tables.group = class GroupTable extends Table {
     return [
       this.columnDisplay(),
       this.refreshTableButton(),
-      this.searchTableButton(),
+      this.bulkFilteringButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
       this.createNewButton(),
@@ -1382,7 +1352,7 @@ tables.user = class UserTable extends Table {
     return [
       this.columnDisplay(),
       this.refreshTableButton(),
-      this.searchTableButton(),
+      this.bulkFilteringButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
       this.createNewButton(),

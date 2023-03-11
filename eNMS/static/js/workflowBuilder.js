@@ -155,6 +155,7 @@ export function flipRuntimeDisplay(display) {
 
 export function showServicePanel(type, id, mode, tableId) {
   const postfix = tableId ? `-${tableId}` : "";
+  const prefix = mode == "bulk-filter" ? `${type}_filtering` : type;
   const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
   typeInput.val(type).prop("disabled", true);
   $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
@@ -179,7 +180,7 @@ export function showServicePanel(type, id, mode, tableId) {
     });
   });
   $(workflowId).prop("disabled", true);
-  const wizardId = id ? `#${type}-wizard-${id}` : `#${type}-wizard${postfix}`;
+  const wizardId = id ? `#${prefix}-wizard-${id}` : `#${prefix}-wizard${postfix}`;
   $(wizardId).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
@@ -193,6 +194,7 @@ export function showServicePanel(type, id, mode, tableId) {
   });
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
   $(wizardId).smartWizard("fixHeight");
+  if (mode == "bulk-filter") $(wizardId).smartWizard('disableStep', 2);
 }
 
 export const switchToWorkflow = function (path, direction, runtime, selection) {

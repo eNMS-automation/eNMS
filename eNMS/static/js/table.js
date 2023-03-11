@@ -145,6 +145,7 @@ export class Table {
             pagination: displayPagination,
             ...this.getFilteringData(),
           });
+          console.log(data)
           Object.assign(data, self.filteringData);
           return JSON.stringify(data);
         },
@@ -201,12 +202,14 @@ export class Table {
   getFilteringData() {
     let data = {};
     let propertiesToKeep = [];
-    const bulkfiltering = $(`#${this.model}_filtering-form-${this.id}`).length;
-    const serializedForm = bulkfiltering
-      ? `#${this.model}_filtering-form-${this.id}`
+    const subModel = this.model == "service" ? $("#service-type-list").val() : this.model;
+    let bulkFiltering = $(`#${subModel}_filtering-form-${this.id}`).length;
+    const serializedForm = bulkFiltering
+      ? `#${subModel}_filtering-form-${this.id}`
       : `#search-form-${this.id}`;
-    let form = serializeForm(serializedForm, `${this.model}_filtering`);
-    if (bulkfiltering) {
+    let form = serializeForm(serializedForm, `${subModel}_filtering`);
+    console.log(form)
+    if (bulkFiltering) {
       $("input[name^='bulk-filter']").each(function (_, el) {
         if ($(el).prop("checked")) {
           const property = $(el).data("property");
@@ -215,7 +218,7 @@ export class Table {
       });
     }
     for (const [key, value] of Object.entries(form)) {
-      if (bulkfiltering && !propertiesToKeep.includes(key)) delete form[key];
+      if (bulkFiltering && !propertiesToKeep.includes(key)) delete form[key];
       if (key.includes("_invert")) form[key] = ["y", "on"].includes(value);
     }
     Object.assign(data, {

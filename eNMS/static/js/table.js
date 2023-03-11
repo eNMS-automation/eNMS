@@ -353,7 +353,7 @@ export class Table {
         data-tooltip="Bulk Filtering"
         type="button"
       >
-        <span class="glyphicon glyphicon-filter"></span>
+        <span class="glyphicon glyphicon-search"></span>
       </button>`;
   }
 

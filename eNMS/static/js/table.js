@@ -208,7 +208,6 @@ export class Table {
       ? `#${subModel}_filtering-form-${this.id}`
       : `#search-form-${this.id}`;
     let form = serializeForm(serializedForm, `${subModel}_filtering`);
-    console.log(form)
     if (bulkFiltering) {
       $("input[name^='bulk-filter']").each(function (_, el) {
         if ($(el).prop("checked")) {

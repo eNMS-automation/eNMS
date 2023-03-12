@@ -25,7 +25,7 @@ field.name) %} {% set style = "height: {}px".format(field.render_kw["rows"]*20 +
   <br /><br />
   {% endif %}
 </div>
-{% endmacro %} {% macro service_field(form, field_name, label=None, help=None) %} {% set
+{% endmacro %} {% macro service_field(form, field_name, label=None) %} {% set
 id = "{}-{}".format(form.form_type.default, field_name) %}
 <div id="{{ id }}-div" class="add-id">
   {% set label %} {% if form[field_name].render_kw and "help" in

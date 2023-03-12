@@ -626,7 +626,7 @@ class ServiceForm(BaseForm):
     form_type = HiddenField(default="service")
     get_request_allowed = False
     id = HiddenField()
-    name = StringField("Name")
+    name = StringField("Name", help="common/full_name")
     creator = StringField(render_kw={"readonly": True})
     type = StringField("Service Type")
     shared = BooleanField("Shared")

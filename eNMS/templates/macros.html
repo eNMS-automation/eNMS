@@ -25,16 +25,16 @@ field.name) %} {% set style = "height: {}px".format(field.render_kw["rows"]*20 +
   <br /><br />
   {% endif %}
 </div>
-{% endmacro %} {% macro service_field(form, field_name, label=None) %} {% set
+{% endmacro %} {% macro service_field(form, field_name) %} {% set
 id = "{}-{}".format(form.form_type.default, field_name) %}
+{% set render_kw = form[field_name].render_kw or {} %}
 <div id="{{ id }}-div" class="add-id">
-  {% set label %} {% if form[field_name].render_kw and "help" in
-  form[field_name].render_kw %}
+  {% set label %} {% if "help" in render_kw %}
   <label help="{{ form[field_name].render_kw['help'] }}" property="{{ field_name }}">
-    {{ label or form[field_name].label }}
+    {{ render_kw.get("ui_name", form[field_name].label) }}
   </label>
   {% else %}
-  <label>{{ label or form[field_name].label }}</label>
+  <label>{{ render_kw.get("ui_name", form[field_name].label) }}</label>
   {% endif %} {% endset %} {% if field_name == "run_method" or field_name == "form_type"
   %} {% elif form[field_name].type == "BooleanField" %}
   <fieldset>

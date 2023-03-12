@@ -626,11 +626,11 @@ class ServiceForm(BaseForm):
     form_type = HiddenField(default="service")
     get_request_allowed = False
     id = HiddenField()
-    name = StringField("Name", help="common/full_name")
+    name = StringField("Name", help="common/full_name", ui_name="Full Name")
     creator = StringField(render_kw={"readonly": True})
     type = StringField("Service Type")
     shared = BooleanField("Shared")
-    scoped_name = StringField("Scoped Name", [InputRequired()])
+    scoped_name = StringField("Scoped Name", [InputRequired()], ui_name="Name")
     description = StringField("Description")
     device_query = StringField(
         "Device Query", python=True, widget=TextArea(), render_kw={"rows": 2}

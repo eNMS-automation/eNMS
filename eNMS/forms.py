@@ -784,6 +784,9 @@ class ServiceForm(BaseForm):
             ("once", "Run the service once"),
         ),
     )
+    group_properties = {
+        "step1-1": ["name", "scoped_name", "creator", "admin_only", "type"]
+    }
 
     def validate(self):
         valid_form = super().validate()

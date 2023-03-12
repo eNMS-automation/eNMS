@@ -810,7 +810,7 @@ function buildBulkFilterPanel(panel, type, formType, tableId) {
           </div>
         `);
       $(`#${tableId}-${property}-list`).selectpicker();
-    } else if (["str", "integer", "list"].includes(value.type)) {
+    } else if (["str", "integer"].includes(value.type)) {
       $(`#${formType}-${property}-property-div-${tableId}`).width("73%").before(`
           <center>
           <div style="float:right; width: 3%; margin-left: -5px; margin-right: 10px;">
@@ -836,6 +836,9 @@ function buildBulkFilterPanel(panel, type, formType, tableId) {
           </div>
         `);
       $(`#${tableId}-${property}-list`).selectpicker();
+    } else if (value.type == "dict") {
+      $(`#${formType}-${property}-${tableId}`).prop("readonly", true);
+      continue
     }
     $(`label[for='${property}']`).after(`
       <div class="item" style='float:right; margin-left: 15px'>

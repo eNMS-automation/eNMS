@@ -25,35 +25,28 @@ field.name) %} {% set style = "height: {}px".format(field.render_kw["rows"]*20 +
   <br /><br />
   {% endif %}
 </div>
-{% endmacro %}
-{% macro service_field(form, form_type, field_name, label=None, help=None) %}
-{% set id = "{}-{}".format(form_type, field_name) %}
-{% set help_property = 'help={}'.format(help) if help else '' %}
+{% endmacro %} {% macro service_field(form, form_type, field_name, label=None,
+help=None) %} {% set id = "{}-{}".format(form_type, field_name) %} {% set help_property
+= 'help={}'.format(help) if help else '' %}
 <div id="{{ form_type }}-{{ field_name }}-div" class="add-id">
   {% set label %} {% if form[field_name].render_kw and "help" in
   form[field_name].render_kw %}
-  <label
-    help="{{ form[field_name].render_kw['help'] }}"
-    property="{{ field_name }}"
-  >
+  <label help="{{ form[field_name].render_kw['help'] }}" property="{{ field_name }}">
     {{ label or form[field_name].label }}
   </label>
   {% else %}
   <label>{{ form[field_name].label }}</label>
-  {% endif %} {% endset %} {% if field_name == "run_method" or
-  field_name == "form_type" %} {% elif form[field_name].type ==
-  "BooleanField" %}
+  {% endif %} {% endset %} {% if field_name == "run_method" or field_name == "form_type"
+  %} {% elif form[field_name].type == "BooleanField" %}
   <fieldset>
     <div class="item">
-      {% if form[field_name].default %} {{
-      form[field_name](id="{}-{}".format(form_type, field_name),
-      class="add-id", checked=True) }} {% else %} {{
-      form[field_name](id="{}-{}".format(form_type, field_name),
-      class="add-id") }} {% endif %} {{ label }}
+      {% if form[field_name].default %} {{ form[field_name](id="{}-{}".format(form_type,
+      field_name), class="add-id", checked=True) }} {% else %} {{
+      form[field_name](id="{}-{}".format(form_type, field_name), class="add-id") }} {%
+      endif %} {{ label }}
     </div>
   </fieldset>
-  {% elif form[field_name].type == "FieldList" %} {% for entry in
-  form[field_name] %}
+  {% elif form[field_name].type == "FieldList" %} {% for entry in form[field_name] %}
   <fieldset>
     <legend style="font-weight: bold;">
       {{ field_name | capitalize() }} {{ loop.index }}
@@ -61,15 +54,14 @@ field.name) %} {% set style = "height: {}px".format(field.render_kw["rows"]*20 +
     {% for l in entry %} {% if l.widget.input_type != 'hidden' %}
     <label>{{ l.label }}</label>
     <div class="form-group">
-      {{ l(id="{}-{}".format(form_type, l.name), class="form-control
-      add-id") }}
+      {{ l(id="{}-{}".format(form_type, l.name), class="form-control add-id") }}
     </div>
     {% endif %} {% endfor %}
   </fieldset>
   {% endfor %} {% else %} {{ label }}
   <div class="form-group">
-    {{ form[field_name](id="{}-{}".format(form_type, field_name),
-    class="form-control add-id") }}
+    {{ form[field_name](id="{}-{}".format(form_type, field_name), class="form-control
+    add-id") }}
   </div>
   {% endif %}
 </div>

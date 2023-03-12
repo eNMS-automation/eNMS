@@ -34,7 +34,7 @@ id = "{}-{}".format(form.form_type.default, field_name) %}
     {{ label or form[field_name].label }}
   </label>
   {% else %}
-  <label>{{ form[field_name].label }}</label>
+  <label>{{ label or form[field_name].label }}</label>
   {% endif %} {% endset %} {% if field_name == "run_method" or field_name == "form_type"
   %} {% elif form[field_name].type == "BooleanField" %}
   <fieldset>

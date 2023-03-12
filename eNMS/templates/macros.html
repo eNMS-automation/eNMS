@@ -26,8 +26,7 @@ field.name) %} {% set style = "height: {}px".format(field.render_kw["rows"]*20 +
   {% endif %}
 </div>
 {% endmacro %} {% macro service_field(form, form_type, field_name, label=None,
-help=None) %} {% set id = "{}-{}".format(form_type, field_name) %} {% set help_property
-= 'help={}'.format(help) if help else '' %}
+help=None) %} {% set id = "{}-{}".format(form_type, field_name) %}
 <div id="{{ form_type }}-{{ field_name }}-div" class="add-id">
   {% set label %} {% if form[field_name].render_kw and "help" in
   form[field_name].render_kw %}
@@ -40,10 +39,9 @@ help=None) %} {% set id = "{}-{}".format(form_type, field_name) %} {% set help_p
   %} {% elif form[field_name].type == "BooleanField" %}
   <fieldset>
     <div class="item">
-      {% if form[field_name].default %} {{ form[field_name](id="{}-{}".format(form_type,
-      field_name), class="add-id", checked=True) }} {% else %} {{
-      form[field_name](id="{}-{}".format(form_type, field_name), class="add-id") }} {%
-      endif %} {{ label }}
+      {% if form[field_name].default %} {{ form[field_name](id=id, class="add-id",
+      checked=True) }} {% else %} {{ form[field_name](id=id, class="add-id") }} {% endif
+      %} {{ label }}
     </div>
   </fieldset>
   {% elif form[field_name].type == "FieldList" %} {% for entry in form[field_name] %}
@@ -60,8 +58,7 @@ help=None) %} {% set id = "{}-{}".format(form_type, field_name) %} {% set help_p
   </fieldset>
   {% endfor %} {% else %} {{ label }}
   <div class="form-group">
-    {{ form[field_name](id="{}-{}".format(form_type, field_name), class="form-control
-    add-id") }}
+    {{ form[field_name](id=id, class="form-control add-id") }}
   </div>
   {% endif %}
 </div>

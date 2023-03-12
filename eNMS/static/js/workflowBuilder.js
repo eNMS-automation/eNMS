@@ -156,7 +156,7 @@ export function flipRuntimeDisplay(display) {
 export function showServicePanel(type, id, mode, tableId) {
   const postfix = tableId ? `-${tableId}` : "";
   const prefix = mode == "bulk-filter" ? `${type}_filtering` : type;
-  const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
+  const typeInput = $(id ? `#${type}-type-${id}` : `#${type}-type`);
   typeInput.val(type).prop("disabled", true);
   $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
   if (id && mode == "duplicate" && type == "workflow") $(`#copy-${id}`).val(id);

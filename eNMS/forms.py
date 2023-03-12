@@ -590,9 +590,14 @@ class RunForm(BaseForm):
     form_type = HiddenField(default="run")
     id = HiddenField()
     name = StringField("Name")
+    service_name = StringField("Service Name")
     runtime = StringField("Runtime")
     duration = StringField("Duration")
-
+    creator = StringField("Creator")
+    status = StringField("Status")
+    trigger = StringField("Trigger")
+    parameterized_run = BooleanField("Parameterized Run")
+    labels = StringField("Labels")
 
 class RunServiceForm(BaseForm):
     action = "eNMS.automation.runServicesOnTargets"

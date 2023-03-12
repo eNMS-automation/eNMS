@@ -811,9 +811,9 @@ function buildBulkFilterPanel(panel, type, formType, tableId) {
         `);
       $(`#${tableId}-${property}-list`).selectpicker();
     } else if (["str", "integer", "list"].includes(value.type)) {
-      $(`#${formType}-${property}-property-div-${tableId}`).width("75%").before(`
+      $(`#${formType}-${property}-property-div-${tableId}`).width("73%").before(`
           <center>
-          <div style="float:right; width: 3%; margin-left: -5px;">
+          <div style="float:right; width: 3%; margin-left: -5px; margin-right: 10px;">
             <input
               class="collapsed form-control-bool"
               name="${property}_invert"

@@ -194,7 +194,6 @@ export function showServicePanel(type, id, mode, tableId) {
   });
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
   $(wizardId).smartWizard("fixHeight");
-  if (mode == "bulk-filter") $(wizardId).smartWizard("disableStep", 2);
 }
 
 export const switchToWorkflow = function (path, direction, runtime, selection) {

@@ -795,6 +795,9 @@ class ServiceForm(BaseForm):
             "disabled_info",
             "shared",
             "workflows",
+            "description",
+            "vendor",
+            "operating_system",
         ]
     }
 

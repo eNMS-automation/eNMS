@@ -81,9 +81,8 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {{ service_field(form, form_type, "scoped_name", "Name") }} {{
-                service_field(form, form_type, "name", "Full Name", "common/full_name")
-                }}
+                {{ service_field(form, "scoped_name", "Name") }} {{ service_field(form,
+                "name", "Full Name", "common/full_name") }}
                 <label for="creator">Creator</label>
                 <div class="form-group">
                   {{ form.creator(id=form_type + '-creator', class="form-control add-id
@@ -421,7 +420,7 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {% for field_name in group.commands %} {{ service_field(form, form_type,
+                {% for field_name in group.commands %} {{ service_field(form,
                 field_name) }} {% endfor %}
               </div>
             </div>

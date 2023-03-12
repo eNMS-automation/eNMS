@@ -25,9 +25,9 @@ field.name) %} {% set style = "height: {}px".format(field.render_kw["rows"]*20 +
   <br /><br />
   {% endif %}
 </div>
-{% endmacro %} {% macro service_field(form, form_type, field_name, label=None,
-help=None) %} {% set id = "{}-{}".format(form_type, field_name) %}
-<div id="{{ form_type }}-{{ field_name }}-div" class="add-id">
+{% endmacro %} {% macro service_field(form, field_name, label=None, help=None) %} {% set
+id = "{}-{}".format(form.form_type.default, field_name) %}
+<div id="{{ id }}-div" class="add-id">
   {% set label %} {% if form[field_name].render_kw and "help" in
   form[field_name].render_kw %}
   <label help="{{ form[field_name].render_kw['help'] }}" property="{{ field_name }}">
@@ -52,8 +52,8 @@ help=None) %} {% set id = "{}-{}".format(form_type, field_name) %}
     {% for subfield in entry %} {% if subfield.widget.input_type != 'hidden' %}
     <label>{{ subfield.label }}</label>
     <div class="form-group">
-      {{ subfield(id="{}-{}".format(form_type, subfield.name), class="form-control
-      add-id") }}
+      {{ subfield(id="{}-{}".format(form.form_type.default, subfield.name),
+      class="form-control add-id") }}
     </div>
     {% endif %} {% endfor %}
   </fieldset>

@@ -49,10 +49,10 @@ help=None) %} {% set id = "{}-{}".format(form_type, field_name) %}
     <legend style="font-weight: bold;">
       {{ field_name | capitalize() }} {{ loop.index }}
     </legend>
-    {% for l in entry %} {% if l.widget.input_type != 'hidden' %}
-    <label>{{ l.label }}</label>
+    {% for subfield in entry %} {% if subfield.widget.input_type != 'hidden' %}
+    <label>{{ subfield.label }}</label>
     <div class="form-group">
-      {{ l(id="{}-{}".format(form_type, l.name), class="form-control add-id") }}
+      {{ subfield(id="{}-{}".format(form_type, subfield.name), class="form-control add-id") }}
     </div>
     {% endif %} {% endfor %}
   </fieldset>

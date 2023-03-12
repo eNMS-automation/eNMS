@@ -58,7 +58,9 @@ help=None) %} {% set id = "{}-{}".format(form_type, field_name) %}
   </fieldset>
   {% endfor %} {% else %} {{ label }}
   <div class="form-group">
+    <div id="{{ id }}-property-div" class="add-id">
     {{ form[field_name](id=id, class="form-control add-id") }}
+    </div>
   </div>
   {% endif %}
 </div>

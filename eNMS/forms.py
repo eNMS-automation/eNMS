@@ -712,7 +712,7 @@ class ServiceForm(BaseForm):
         validate_choice=False,
     )
     iteration_values = StringField("Iteration Values", python=True)
-    initial_payload = DictField()
+    initial_payload = DictField(help="common/initial_payload")
     mandatory_parametrization = BooleanField("Parameterized Form is Mandatory")
     parameterized_form = StringField(
         type="code",
@@ -798,6 +798,7 @@ class ServiceForm(BaseForm):
             "description",
             "vendor",
             "operating_system",
+            "initial_payload",
         ]
     }
 

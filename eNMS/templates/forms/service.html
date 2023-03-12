@@ -83,11 +83,6 @@
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step1-1"] %} {{ service_field(form,
                   field_name) }} {% endfor %}
-                {{ form.initial_payload.label(help="common/initial_payload") }}
-                <div class="form-group">
-                  {{ form.initial_payload(id=form_type + '-initial_payload',
-                  class="form-control add-id") }}
-                </div>
                 <fieldset>
                   <div class="item">
                     <input

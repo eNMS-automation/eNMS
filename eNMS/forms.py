@@ -585,6 +585,15 @@ class ResultLogDeletionForm(BaseForm):
     date_time = StringField(type="date", label="Delete Records before")
 
 
+class RunForm(BaseForm):
+    template = "object"
+    form_type = HiddenField(default="run")
+    id = HiddenField()
+    name = StringField("Name")
+    runtime = StringField("Runtime")
+    duration = StringField("Duration")
+
+
 class RunServiceForm(BaseForm):
     action = "eNMS.automation.runServicesOnTargets"
     button_label = "Run Service"

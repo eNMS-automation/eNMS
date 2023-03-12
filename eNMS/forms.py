@@ -175,7 +175,8 @@ class FormFactory:
                 if related_model in ("edges", "results"):
                     continue
                 relations[related_model] = MultipleInstanceField(
-                    " ".join(word.capitalize() for word in related_model.split("_")), model=related_model
+                    " ".join(word.capitalize() for word in related_model.split("_")),
+                    model=related_model,
                 )
                 vs.relationships[f"{model}_filtering"][related_model] = relation
             relation_form = {
@@ -598,6 +599,7 @@ class RunForm(BaseForm):
     trigger = StringField("Trigger")
     parameterized_run = BooleanField("Parameterized Run")
     labels = StringField("Labels")
+
 
 class RunServiceForm(BaseForm):
     action = "eNMS.automation.runServicesOnTargets"

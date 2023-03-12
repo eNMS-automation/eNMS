@@ -629,7 +629,7 @@ class ServiceForm(BaseForm):
     name = StringField("Name", help="common/full_name", ui_name="Full Name")
     creator = StringField(render_kw={"readonly": True})
     type = StringField("Service Type")
-    shared = BooleanField("Shared")
+    shared = BooleanField("Shared", help="common/shared")
     scoped_name = StringField("Scoped Name", [InputRequired()], ui_name="Name")
     description = StringField("Description")
     device_query = StringField(
@@ -785,7 +785,17 @@ class ServiceForm(BaseForm):
         ),
     )
     group_properties = {
-        "step1-1": ["name", "scoped_name", "creator", "admin_only", "type"]
+        "step1-1": [
+            "name",
+            "scoped_name",
+            "creator",
+            "admin_only",
+            "type",
+            "disabled",
+            "disabled_info",
+            "shared",
+            "workflows",
+        ]
     }
 
     def validate(self):

@@ -1,4 +1,4 @@
-{% from 'macros.html' import field_template %}
+{% from 'macros.html' import field_template, service_field %}
 <form
   id="{{ form_type }}-form"
   class="form-horizontal form-label-left add-id"
@@ -81,17 +81,9 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                <label for="scoped_name">Name</label>
-                <div class="form-group">
-                  {{ form.scoped_name(id=form_type + '-scoped_name', class="form-control
-                  add-id required") }}
-                </div>
-                <label for="name">Full</label>
-                {{ form.name.label(help="common/full_name") }}
-                <div class="form-group">
-                  {{ form.name(id=form_type + '-name', class="form-control add-id
-                  required") }}
-                </div>
+
+                {{ service_field(form, form_type, "scoped_name", "Name") }}
+                {{ service_field(form, form_type, "name", "Full Name", "common/full_name") }}
                 <label for="creator">Creator</label>
                 <div class="form-group">
                   {{ form.creator(id=form_type + '-creator', class="form-control add-id
@@ -430,50 +422,8 @@
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in group.commands %}
-                <div id="{{ form_type }}-{{ field_name }}-div" class="add-id">
-                  {% set label %} {% if form[field_name].render_kw and "help" in
-                  form[field_name].render_kw %}
-                  <label
-                    help="{{ form[field_name].render_kw['help'] }}"
-                    property="{{ field_name }}"
-                  >
-                    {{ form[field_name].label }}
-                  </label>
-                  {% else %}
-                  <label>{{ form[field_name].label }}</label>
-                  {% endif %} {% endset %} {% if field_name == "run_method" or
-                  field_name == "form_type" %} {% elif form[field_name].type ==
-                  "BooleanField" %}
-                  <fieldset>
-                    <div class="item">
-                      {% if form[field_name].default %} {{
-                      form[field_name](id="{}-{}".format(form_type, field_name),
-                      class="add-id", checked=True) }} {% else %} {{
-                      form[field_name](id="{}-{}".format(form_type, field_name),
-                      class="add-id") }} {% endif %} {{ label }}
-                    </div>
-                  </fieldset>
-                  {% elif form[field_name].type == "FieldList" %} {% for entry in
-                  form[field_name] %}
-                  <fieldset>
-                    <legend style="font-weight: bold;">
-                      {{ field_name | capitalize() }} {{ loop.index }}
-                    </legend>
-                    {% for l in entry %} {% if l.widget.input_type != 'hidden' %}
-                    <label>{{ l.label }}</label>
-                    <div class="form-group">
-                      {{ l(id="{}-{}".format(form_type, l.name), class="form-control
-                      add-id") }}
-                    </div>
-                    {% endif %} {% endfor %}
-                  </fieldset>
-                  {% endfor %} {% else %} {{ label }}
-                  <div class="form-group">
-                    {{ form[field_name](id="{}-{}".format(form_type, field_name),
-                    class="form-control add-id") }}
-                  </div>
-                  {% endif %}
-                </div>
+                {{ service_field(form, form_type, field_name) }}
+
                 {% endfor %}
               </div>
             </div>

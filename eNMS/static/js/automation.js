@@ -36,7 +36,8 @@ import {
 
 function openServicePanel(tableId, bulkMode) {
   const args = tableId ? [null, bulkMode, tableId] : [];
-  showInstancePanel($("#service-type-list").val(), ...args);
+  const panelType = bulkMode == "bulk-filter" ? "service" : $("#service-type-list").val();
+  showInstancePanel(panelType, ...args);
 }
 
 export function displayDiff(type, instanceId) {

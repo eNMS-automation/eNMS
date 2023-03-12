@@ -165,7 +165,7 @@ class FormFactory:
         self.generate_filtering_forms()
 
     def generate_filtering_forms(self):
-        for model in vs.model_properties:
+        for model in vs.properties["filtering"]:
             if model not in vs.form_class:
                 continue
             relations, model_form = {}, vs.form_class[model]
@@ -179,7 +179,7 @@ class FormFactory:
                 )
                 vs.relationships[f"{model}_filtering"][related_model] = relation
             relation_form = {
-                "template": "service" if "service" in model else "object",
+                "template": "service" if model == "service" else "object",
                 "properties": sorted(relations),
                 "object_type": model,
                 "form_type": HiddenField(default=f"{model}_filtering"),

@@ -145,7 +145,6 @@ export class Table {
             pagination: displayPagination,
             ...this.getFilteringData(),
           });
-          console.log(data)
           Object.assign(data, self.filteringData);
           return JSON.stringify(data);
         },
@@ -202,12 +201,11 @@ export class Table {
   getFilteringData() {
     let data = {};
     let propertiesToKeep = [];
-    const subModel = this.model == "service" ? $("#service-type-list").val() : this.model;
-    let bulkFiltering = $(`#${subModel}_filtering-form-${this.id}`).length;
+    let bulkFiltering = $(`#${this.model}_filtering-form-${this.id}`).length;
     const serializedForm = bulkFiltering
-      ? `#${subModel}_filtering-form-${this.id}`
+      ? `#${this.model}_filtering-form-${this.id}`
       : `#search-form-${this.id}`;
-    let form = serializeForm(serializedForm, `${subModel}_filtering`);
+    let form = serializeForm(serializedForm, `${this.model}_filtering`);
     if (bulkFiltering) {
       $("input[name^='bulk-filter']").each(function (_, el) {
         if ($(el).prop("checked")) {

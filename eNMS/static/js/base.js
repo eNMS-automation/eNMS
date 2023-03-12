@@ -684,7 +684,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
         </button>
       </div>`,
     callback: function (panel) {
-      const isService = type in subtypes.service;
+      const isService = type == "service" || type in subtypes.service;
       const isNode = type in subtypes.node;
       const isLink = type in subtypes.link;
       if (isService) showServicePanel(type, id, mode, tableId);

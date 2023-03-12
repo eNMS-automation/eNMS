@@ -18,8 +18,7 @@
           >Specific Properties</a
         >
       </li>
-      {% endif %}
-      {% if form.rbac_properties %}
+      {% endif %} {% if form.rbac_properties %}
       <li class="nav-item add-id" id="rbac-nav">
         <a class="nav-link href-id" data-toggle="tab" href="#rbac-properties"
           >Access Control</a
@@ -41,8 +40,7 @@
           {% for property in form.properties %} {% set field = form[property] %} {{
           field_template(form_type, field) }} {% endfor %}
         </div>
-        {% endif %}
-        {% if form.rbac_properties %}
+        {% endif %} {% if form.rbac_properties %}
         <div class="tab-pane fade add-id" id="rbac-properties">
           {{ field_template(form_type, form["owners"]) }} {% for property in
           form.rbac_properties %} {% set field = form[property] %} {{

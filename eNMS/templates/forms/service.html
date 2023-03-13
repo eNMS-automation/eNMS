@@ -83,21 +83,6 @@
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step1-1"] %} {{
                 service_field(form, field_name) }} {% endfor %}
-                {{ form.max_number_of_retries.label() }}
-                <div class="form-group">
-                  {{ form.max_number_of_retries(id=form_type + '-max_number_of_retries',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.credential_type.label(help="common/type_of_credentials") }}
-                <div class="form-group">
-                  {{ form.credential_type(id=form_type + '-credential_type',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.log_level.label(help="common/logging") }}
-                <div class="form-group">
-                  {{ form.log_level(id=form_type + '-log_level', class="form-control
-                  add-id") }}
-                </div>
                 <fieldset>
                   <div class="item">
                     <input

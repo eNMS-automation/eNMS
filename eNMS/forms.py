@@ -686,6 +686,7 @@ class ServiceForm(BaseForm):
             ("read-write", "Read Write"),
             ("read-only", "Read Only"),
         ),
+        help="common/type_of_credentials",
     )
     maximum_runs = IntegerField("Maximum number of runs", default=1)
     skip_query = StringField(
@@ -745,6 +746,7 @@ class ServiceForm(BaseForm):
         "Logging",
         choices=(*enumerate(vs.log_levels), (-1, "Disable logging")),
         default=1,
+        help="common/logging",
     )
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=15)
@@ -807,6 +809,9 @@ class ServiceForm(BaseForm):
             "priority",
             "number_of_retries",
             "time_between_retries",
+            "max_number_of_retries",
+            "credential_type",
+            "log_level",
         ]
     }
 

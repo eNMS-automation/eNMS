@@ -31,12 +31,18 @@ form[field_name].render_kw or {} %}
 <div id="{{ id }}-div" class="add-id">
   {% set label %} {% if "help" in render_kw %}
   <label help="{{ form[field_name].render_kw['help'] }}" property="{{ field_name }}">
-    {{ render_kw.get("ui_name", form[field_name].label) }}
+    {% if "ui_name" in render_kw %}
+    <label for="{{ field_name }}">{{ render_kw["ui_name"] }}</label>
+    {% else %} {{ render_kw.get("ui_name", form[field_name].label) }} {% endif %}
   </label>
   {% else %}
-  <label>{{ render_kw.get("ui_name", form[field_name].label) }}</label>
-  {% endif %} {% endset %} {% if field_name == "form_type"
-  %} {% elif form[field_name].type == "BooleanField" %}
+  <label>
+    {% if "ui_name" in render_kw %}
+    <label for="{{ field_name }}">{{ render_kw["ui_name"] }}</label>
+    {% else %} {{ render_kw.get("ui_name", form[field_name].label) }} {% endif %}
+  </label>
+  {% endif %} {% endset %} {% if field_name == "form_type" %} {% elif
+  form[field_name].type == "BooleanField" %}
   <fieldset>
     <div class="item">
       {% if form[field_name].default %} {{ form[field_name](id=id, class="add-id",

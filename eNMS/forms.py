@@ -633,7 +633,12 @@ class ServiceForm(BaseForm):
     scoped_name = StringField("Scoped Name", [InputRequired()], ui_name="Name")
     description = StringField("Description")
     device_query = StringField(
-        "Device Query", python=True, widget=TextArea(), render_kw={"rows": 2}
+        "Device Query",
+        python=True,
+        widget=TextArea(),
+        render_kw={"rows": 2},
+        help="common/device_query",
+        ui_name="Device Query (define targets from a python query)",
     )
     device_query_property = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
@@ -836,6 +841,8 @@ class ServiceForm(BaseForm):
             "target_devices",
             "target_pools",
             "update_target_pools",
+            "device_query",
+            "device_query_property",
         ],
     }
 

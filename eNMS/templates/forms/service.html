@@ -83,29 +83,6 @@
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step1-1"] %} {{
                 service_field(form, field_name) }} {% endfor %}
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-disable_result_creation"
-                      name="disable_result_creation"
-                      class="add-id"
-                      type="checkbox"
-                    />
-                    {{ form.disable_result_creation.label() }}
-                  </div>
-                </fieldset>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-update_pools_after_running"
-                      name="update_pools_after_running"
-                      type="checkbox"
-                      class="add-id"
-                      value="y"
-                    />
-                    {{ form.update_pools_after_running.label() }}
-                  </div>
-                </fieldset>
               </div>
             </div>
           </div>
@@ -137,11 +114,8 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {{ form.preprocessing.label(help="common/preprocessing") }}
-                <div class="form-group">
-                  {{ form.preprocessing(id=form_type + '-preprocessing',
-                  class="form-control add-id") }}
-                </div>
+                {% for field_name in form.group_properties["step1-2"] %} {{
+                  service_field(form, field_name) }} {% endfor %}
                 {{ form.skip_query.label(help="common/skip_query") }}
                 <div class="form-group">
                   {{ form.skip_query(id=form_type + '-skip_query', class="form-control

@@ -732,7 +732,7 @@ class ServiceForm(BaseForm):
         "Iteration Devices Property",
         choices=(("name", "Name"), ("ip_address", "IP address")),
     )
-    preprocessing = StringField(type="code", python=True, widget=TextArea())
+    preprocessing = StringField(type="code", python=True, widget=TextArea(), help="common/preprocessing")
     postprocessing = StringField(type="code", python=True, widget=TextArea())
     postprocessing_mode = SelectField(
         choices=(
@@ -812,7 +812,12 @@ class ServiceForm(BaseForm):
             "max_number_of_retries",
             "credential_type",
             "log_level",
-        ]
+            "disable_result_creation",
+            "update_pools_after_running",
+        ],
+        "step1-2": [
+            "preprocessing",
+        ],
     }
 
     def validate(self):

@@ -834,6 +834,8 @@ class ServiceForm(BaseForm):
         "step3-1": [
             "run_method",
             "target_devices",
+            "target_pools",
+            "update_target_pools",
         ],
     }
 

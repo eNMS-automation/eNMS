@@ -292,23 +292,6 @@
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step3-1"] %} {{
                   service_field(form, field_name) }} {% endfor %}
-                {{ form.target_pools.label() }}
-                <div class="form-group">
-                  {{ form.target_pools(id=form_type + '-target_pools',
-                  class="form-control add-id") }}
-                </div>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-update_target_pools"
-                      name="update_target_pools"
-                      type="checkbox"
-                      class="add-id"
-                      value="y"
-                    />
-                    {{ form.update_target_pools.label() }}
-                  </div>
-                </fieldset>
                 <label>Device Query (define targets from a python query)</label>
                 {{ form.device_query.label(help="common/device_query") }}
                 <div class="form-group">

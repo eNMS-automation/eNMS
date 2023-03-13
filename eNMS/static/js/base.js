@@ -849,7 +849,7 @@ function buildBulkFilterPanel(panel, type, formType, tableId) {
       $(`#${tableId}-${property}-list`).selectpicker();
     } else if (value.type == "dict") {
       $(`#${formType}-${property}-${tableId}`).prop("readonly", true);
-      continue
+      continue;
     }
     $(`label[for='${property}']`).after(`
       <div class="item" style='float:right; margin-left: 15px'>

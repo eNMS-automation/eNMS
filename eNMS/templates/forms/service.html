@@ -115,8 +115,8 @@
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step1-2"] %} {{
-                  service_field(form, field_name) }} {% endfor %}
-                {{ form.maximum_runs.label() }}
+                service_field(form, field_name) }} {% endfor %} {{
+                form.maximum_runs.label() }}
                 <div class="form-group">
                   {{ form.maximum_runs(id=form_type + '-maximum_runs',
                   class="form-control add-id") }}

@@ -82,22 +82,7 @@
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step1-1"] %} {{
-                service_field(form, field_name) }} {% endfor %} {{
-                form.priority.label(help="common/priority") }}
-                <div class="form-group">
-                  {{ form.priority(id=form_type + '-priority', class="form-control
-                  add-id") }}
-                </div>
-                {{ form.number_of_retries.label(help="common/number_of_retries") }}
-                <div class="form-group">
-                  {{ form.number_of_retries(id=form_type + '-number_of_retries',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.time_between_retries.label() }}
-                <div class="form-group">
-                  {{ form.time_between_retries(id=form_type + '-time_between_retries',
-                  class="form-control add-id") }}
-                </div>
+                service_field(form, field_name) }} {% endfor %}
                 {{ form.max_number_of_retries.label() }}
                 <div class="form-group">
                   {{ form.max_number_of_retries(id=form_type + '-max_number_of_retries',

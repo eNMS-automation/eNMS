@@ -652,7 +652,7 @@ class ServiceForm(BaseForm):
     waiting_time = IntegerField(
         "Time to Wait before next service is started (in seconds)", default=0
     )
-    priority = IntegerField("Priority", default=10)
+    priority = IntegerField("Priority", default=10, help="common/priority")
     report_template = SelectField("Report Template", choices=(vs.dualize(vs.reports)))
     report = StringField(widget=TextArea(), render_kw={"rows": 8}, substitution=True)
     report_format = SelectField(
@@ -676,7 +676,7 @@ class ServiceForm(BaseForm):
         "Mail Recipients (separated by comma)", substitution=True
     )
     reply_to = StringField("Reply-to Email Address")
-    number_of_retries = IntegerField("Number of retries", default=0)
+    number_of_retries = IntegerField("Number of retries", default=0, help="common/number_of_retries")
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
     max_number_of_retries = IntegerField("Maximum number of retries", default=100)
     credential_type = SelectField(
@@ -804,6 +804,9 @@ class ServiceForm(BaseForm):
             "initial_payload",
             "mandatory_parametrization",
             "parameterized_form",
+            "priority",
+            "number_of_retries",
+            "time_between_retries",
         ]
     }
 

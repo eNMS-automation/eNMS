@@ -828,6 +828,8 @@ class ServiceForm(BaseForm):
             "preprocessing",
             "skip_query",
             "skip_value",
+            "maximum_runs",
+            "waiting_time",
         ],
     }
 

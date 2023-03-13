@@ -690,7 +690,7 @@ class ServiceForm(BaseForm):
     )
     maximum_runs = IntegerField("Maximum number of runs", default=1)
     skip_query = StringField(
-        "Skip Query (Python)", python=True, widget=TextArea(), render_kw={"rows": 2}
+        "Skip Query (Python)", python=True, widget=TextArea(), render_kw={"rows": 2}, help="common/skip_query"
     )
     skip_value = SelectField(
         "Skip Value",
@@ -699,6 +699,7 @@ class ServiceForm(BaseForm):
             ("failure", "Failure"),
             ("discard", "Discard"),
         ),
+        help="common/skip_value",
     )
     vendor = SelectField(
         "Vendor",
@@ -817,6 +818,8 @@ class ServiceForm(BaseForm):
         ],
         "step1-2": [
             "preprocessing",
+            "skip_query",
+            "skip_value",
         ],
     }
 

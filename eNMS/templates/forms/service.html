@@ -116,16 +116,6 @@
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step1-2"] %} {{
                   service_field(form, field_name) }} {% endfor %}
-                {{ form.skip_query.label(help="common/skip_query") }}
-                <div class="form-group">
-                  {{ form.skip_query(id=form_type + '-skip_query', class="form-control
-                  add-id") }}
-                </div>
-                {{ form.skip_value.label(help="common/skip_value") }}
-                <div class="form-group">
-                  {{ form.skip_value(id=form_type + '-skip_value', class="form-control
-                  add-id") }}
-                </div>
                 {{ form.maximum_runs.label() }}
                 <div class="form-group">
                   {{ form.maximum_runs(id=form_type + '-maximum_runs',

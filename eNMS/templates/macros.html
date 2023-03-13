@@ -35,7 +35,7 @@ form[field_name].render_kw or {} %}
   </label>
   {% else %}
   <label>{{ render_kw.get("ui_name", form[field_name].label) }}</label>
-  {% endif %} {% endset %} {% if field_name == "run_method" or field_name == "form_type"
+  {% endif %} {% endset %} {% if field_name == "form_type"
   %} {% elif form[field_name].type == "BooleanField" %}
   <fieldset>
     <div class="item">

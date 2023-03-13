@@ -831,6 +831,10 @@ class ServiceForm(BaseForm):
             "maximum_runs",
             "waiting_time",
         ],
+        "step3-1": [
+            "run_method",
+            "target_devices",
+        ],
     }
 
     def validate(self):

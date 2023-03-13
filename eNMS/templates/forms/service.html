@@ -249,8 +249,8 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {% for field_name in group.commands %} {{ service_field(form,
-                field_name) }} {% endfor %}
+                {% for field_name in group.commands %} {% if field_name != "run_method" %} {{ service_field(form,
+                field_name) }} {% endif %} {% endfor %}
               </div>
             </div>
           </div>
@@ -290,16 +290,8 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {{ form.run_method.label() }}
-                <div class="form-group">
-                  {{ form.run_method(id=form_type + '-run_method', class="form-control
-                  add-id no-search") }}
-                </div>
-                {{ form.target_devices.label() }}
-                <div class="form-group">
-                  {{ form.target_devices(id=form_type + '-target_devices',
-                  class="form-control add-id") }}
-                </div>
+                {% for field_name in form.group_properties["step3-1"] %} {{
+                  service_field(form, field_name) }} {% endfor %}
                 {{ form.target_pools.label() }}
                 <div class="form-group">
                   {{ form.target_pools(id=form_type + '-target_pools',

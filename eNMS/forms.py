@@ -721,6 +721,7 @@ class ServiceForm(BaseForm):
         python=True,
         widget=TextArea(),
         default="\n".join(vs.automation["parameterized_form"]),
+        help="common/parameterized_form",
     )
     iteration_variable_name = StringField(
         "Iteration Variable Name", default="iteration_value"

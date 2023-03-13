@@ -796,8 +796,8 @@ function buildBulkFilterPanel(panel, type, formType, tableId) {
   $(`#${formType}-creator-${tableId}`).prop("readonly", false);
   for (const [property, value] of Object.entries(formProperties[formType])) {
     if (value.type == "object-list") {
-      $(`#${formType}-${property}-property-div-${tableId}`).width("75%").before(`
-          <div style="float:right; width: 24%; margin-top: 2px;">
+      $(`#${formType}-${property}-property-div-${tableId}`).width("73%").before(`
+          <div style="float:right; width: 26%; margin-top: 2px;">
             <select
               data-width="100%"
               id="${tableId}-${property}-list"
@@ -810,31 +810,42 @@ function buildBulkFilterPanel(panel, type, formType, tableId) {
           </div>
         `);
       $(`#${tableId}-${property}-list`).selectpicker();
-    } else if (["str", "integer"].includes(value.type)) {
-      $(`#${formType}-${property}-property-div-${tableId}`).width("73%").before(`
+    } else if (["str", "integer", "code"].includes(value.type)) {
+      const invertCheckbox = `
+        <input
+        class="collapsed form-control-bool"
+        name="${property}_invert"
+        type="checkbox"
+        title="Invert Search"
+      />`;
+      const modeSelectList = `
+        <select
+        data-width="100%"
+        id="${tableId}-${property}-list"
+        name="${property}_filter"
+      >
+        <option value="inclusion">Inclusion</option>
+        <option value="equality">Equality</option>
+        <option value="regex">Regular Expression</option>
+        <option value="empty">Empty</option>
+      </select>`;
+      if (value.type == "code") {
+        $(`#${formType}-${property}-property-div-${tableId}`).after(`
+          <div style="margin-top: 8px;">
+            <div style="float:left; width: 93%;">${modeSelectList}</div>
+            <div style="float:left; width: 5%;">${invertCheckbox}</div>
+          </div>
+          `);
+      } else {
+        $(`#${formType}-${property}-property-div-${tableId}`).width("73%").before(`
           <center>
-          <div style="float:right; width: 3%; margin-left: -5px; margin-right: 10px;">
-            <input
-              class="collapsed form-control-bool"
-              name="${property}_invert"
-              type="checkbox"
-              title="Invert Search"
-            />
-          </div>
+            <div style="float:right; width: 3%; margin-left: -5px; margin-right: 10px;">
+              ${invertCheckbox}
+            </div>
           </center>
-          <div style="float:right; width: 22%;">
-            <select
-              data-width="100%"
-              id="${tableId}-${property}-list"
-              name="${property}_filter"
-            >
-              <option value="inclusion">Inclusion</option>
-              <option value="equality">Equality</option>
-              <option value="regex">Regular Expression</option>
-              <option value="empty">Empty</option>
-            </select>
-          </div>
+          <div style="float:right; width: 22%;">${modeSelectList}</div>
         `);
+      }
       $(`#${tableId}-${property}-list`).selectpicker();
     } else if (value.type == "dict") {
       $(`#${formType}-${property}-${tableId}`).prop("readonly", true);

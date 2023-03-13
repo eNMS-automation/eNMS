@@ -83,25 +83,6 @@
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step1-1"] %} {{ service_field(form,
                   field_name) }} {% endfor %}
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-mandatory_parametrization"
-                      name="mandatory_parametrization"
-                      type="checkbox"
-                      class="add-id"
-                      value="y"
-                    />
-                    {{
-                    form.mandatory_parametrization.label(help="common/mandatory_parametrization")
-                    }}
-                  </div>
-                </fieldset>
-                {{ form.parameterized_form.label(help="common/parameterized_form") }}
-                <div class="form-group">
-                  {{ form.parameterized_form(id=form_type + '-parameterized_form',
-                  class="form-control add-id") }}
-                </div>
                 {{ form.priority.label(help="common/priority") }}
                 <div class="form-group">
                   {{ form.priority(id=form_type + '-priority', class="form-control

@@ -829,7 +829,7 @@ function buildBulkFilterPanel(panel, type, formType, tableId) {
         <option value="regex">Regular Expression</option>
         <option value="empty">Empty</option>
       </select>`;
-      if (value.type == "code") {
+      if (value.type == "code" || $(`#${formType}-${property}-${tableId}`).prop('nodeName') == "TEXTAREA") {
         $(`#${formType}-${property}-property-div-${tableId}`).after(`
           <div style="margin-top: 8px;">
             <div style="float:left; width: 93%;">${modeSelectList}</div>

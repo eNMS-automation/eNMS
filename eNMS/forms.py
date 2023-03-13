@@ -676,7 +676,9 @@ class ServiceForm(BaseForm):
         "Mail Recipients (separated by comma)", substitution=True
     )
     reply_to = StringField("Reply-to Email Address")
-    number_of_retries = IntegerField("Number of retries", default=0, help="common/number_of_retries")
+    number_of_retries = IntegerField(
+        "Number of retries", default=0, help="common/number_of_retries"
+    )
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
     max_number_of_retries = IntegerField("Maximum number of retries", default=100)
     credential_type = SelectField(
@@ -690,7 +692,11 @@ class ServiceForm(BaseForm):
     )
     maximum_runs = IntegerField("Maximum number of runs", default=1)
     skip_query = StringField(
-        "Skip Query (Python)", python=True, widget=TextArea(), render_kw={"rows": 2}, help="common/skip_query"
+        "Skip Query (Python)",
+        python=True,
+        widget=TextArea(),
+        render_kw={"rows": 2},
+        help="common/skip_query",
     )
     skip_value = SelectField(
         "Skip Value",
@@ -733,7 +739,9 @@ class ServiceForm(BaseForm):
         "Iteration Devices Property",
         choices=(("name", "Name"), ("ip_address", "IP address")),
     )
-    preprocessing = StringField(type="code", python=True, widget=TextArea(), help="common/preprocessing")
+    preprocessing = StringField(
+        type="code", python=True, widget=TextArea(), help="common/preprocessing"
+    )
     postprocessing = StringField(type="code", python=True, widget=TextArea())
     postprocessing_mode = SelectField(
         choices=(

@@ -201,10 +201,9 @@
                 role="tabpanel"
               >
                 <div class="panel-body" style="background-color: #fafafa;">
-                  {{ field_template(form_type, form["owners"]) }} {% for property in
-                  form.rbac_properties %} {% set field = form[property] %} {{
-                  field_template(form_type, field) }} {% endfor %} {{
-                  field_template(form_type, form["restrict_to_owners"]) }}
+                  {{ service_field(form, "owners") }} {% for property in
+                  form.rbac_properties %} {{ service_field(form, property) }} {% endfor
+                  %} {{ service_field(form, "restrict_to_owners") }}
                 </div>
               </div>
             </div>

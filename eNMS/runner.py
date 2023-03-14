@@ -448,7 +448,7 @@ class Runner:
             raise Exception(f"{data_type.capitalize()} Data Overflow")
         else:
             size_percentage = data_size / max_allowed_size * 100
-            log = f"The {data_type} is {size_percentage}% the maximum allowed size."
+            log = f"The {data_type} is {size_percentage:.1f}% the maximum allowed size."
             if size_percentage > 50:
                 self.log("warning", log)
 

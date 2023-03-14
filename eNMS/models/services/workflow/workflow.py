@@ -285,8 +285,23 @@ class WorkflowForm(ServiceForm):
                     " with the 'Service Targets' Run Method."
                 )
             )
+        invalid_targets_error = (
+            self.run_method.data == "per_service_with_service_targets"
+            and (self.target_devices.data or self.target_pools.data)
+        )
+        if invalid_targets_error:
+            self.run_method.errors.append(
+                (
+                    "The workflow has device targets but the "
+                    "run method is set to 'Service by Service'."
+                )
+            )
         return valid_form and not any(
-            [invalid_man_minutes_type_error, invalid_man_minutes_error]
+            [
+                invalid_man_minutes_type_error,
+                invalid_man_minutes_error,
+                invalid_targets_error,
+            ]
         )
 
 

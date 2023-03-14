@@ -724,7 +724,7 @@ class ServiceForm(BaseForm):
         ),
         validate_choice=False,
     )
-    iteration_values = StringField("Iteration Values", python=True)
+    iteration_values = StringField("Iteration Values", python=True, help="common/iteration_values")
     initial_payload = DictField(help="common/initial_payload")
     mandatory_parametrization = BooleanField(
         "Parameterized Form is Mandatory", help="common/mandatory_parametrization"
@@ -849,6 +849,8 @@ class ServiceForm(BaseForm):
         "step3-2": [
             "iteration_devices",
             "iteration_devices_property",
+            "iteration_values",
+            "iteration_variable_name",
         ],
     }
 

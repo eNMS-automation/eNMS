@@ -873,6 +873,10 @@ class ServiceForm(BaseForm):
             "delete_spaces_before_matching",
             "negative_logic",
         ],
+        "step4-3": [
+            "report_template",
+            "report_format",
+        ],
     }
 
     def validate(self):

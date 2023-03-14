@@ -739,7 +739,7 @@ class ServiceForm(BaseForm):
     iteration_variable_name = StringField(
         "Iteration Variable Name", default="iteration_value"
     )
-    iteration_devices = StringField("Iteration Devices", python=True)
+    iteration_devices = StringField("Iteration Devices", python=True, help="common/iteration_devices")
     iteration_devices_property = SelectField(
         "Iteration Devices Property",
         choices=(("name", "Name"), ("ip_address", "IP address")),
@@ -845,6 +845,10 @@ class ServiceForm(BaseForm):
             "device_query_property",
             "multiprocessing",
             "max_processes",
+        ],
+        "step3-2": [
+            "iteration_devices",
+            "iteration_devices_property",
         ],
     }
 

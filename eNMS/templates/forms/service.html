@@ -323,16 +323,8 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {{ form.iteration_devices.label(help="common/iteration_devices") }}
-                <div class="form-group">
-                  {{ form.iteration_devices(id=form_type + '-iteration_devices',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.iteration_devices_property.label() }}
-                <div class="form-group">
-                  {{ form.iteration_devices_property(id=form_type +
-                  '-iteration_devices_property', class="form-control add-id") }}
-                </div>
+                {% for field_name in form.group_properties["step3-2"] %} {{
+                  service_field(form, field_name) }} {% endfor %}
                 {{ form.iteration_values.label(help="common/iteration_values") }}
                 <div class="form-group">
                   {{ form.iteration_values(id=form_type + '-iteration_values',

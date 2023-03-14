@@ -853,6 +853,9 @@ function buildBulkFilterPanel(panel, type, formType, tableId) {
     } else if (value.type == "dict") {
       $(`#${formType}-${property}-${tableId}`).prop("readonly", true);
       continue;
+    } else if (value.type == "multiselect") {
+      $(`#${formType}-${property}-${tableId}`).attr("disabled", "disabled");
+      continue;
     }
     $(`label[for='${property}']`).after(`
       <div class="item" style='float:right; margin-left: 15px'>

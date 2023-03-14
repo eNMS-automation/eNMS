@@ -466,23 +466,6 @@
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step4-4"] %} {{
                   service_field(form, field_name) }} {% endfor %}
-                {{ form.reply_to.label() }}
-                <div class="form-group">
-                  {{ form.reply_to(id=form_type + '-reply_to', class="form-control
-                  add-id") }}
-                </div>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-display_only_failed_nodes"
-                      name="display_only_failed_nodes"
-                      class="add-id"
-                      type="checkbox"
-                      value="y"
-                    />
-                    {{ form.display_only_failed_nodes.label() }}
-                  </div>
-                </fieldset>
               </div>
             </div>
           </div>

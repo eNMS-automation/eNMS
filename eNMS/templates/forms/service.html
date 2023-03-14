@@ -365,16 +365,8 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {{ form.conversion_method.label() }}
-                <div class="form-group">
-                  {{ form.conversion_method(id=form_type + '-conversion_method',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.postprocessing_mode.label() }}
-                <div class="form-group">
-                  {{ form.postprocessing_mode(id=form_type + '-postprocessing_mode',
-                  class="form-control add-id") }}
-                </div>
+                {% for field_name in form.group_properties["step4-1"] %} {{
+                  service_field(form, field_name) }} {% endfor %}
                 {{ form.postprocessing.label(help="common/postprocessing") }}
                 <div class="form-group">
                   {{ form.postprocessing(id=form_type + '-postprocessing',

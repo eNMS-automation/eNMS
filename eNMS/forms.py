@@ -852,6 +852,10 @@ class ServiceForm(BaseForm):
             "iteration_values",
             "iteration_variable_name",
         ],
+        "step4-1": [
+            "conversion_method",
+            "postprocessing_mode",
+        ],
     }
 
     def validate(self):

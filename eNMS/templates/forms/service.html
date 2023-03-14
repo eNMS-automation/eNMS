@@ -466,23 +466,6 @@
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step4-4"] %} {{
                   service_field(form, field_name) }} {% endfor %}
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-include_link_in_summary"
-                      name="include_link_in_summary"
-                      class="add-id"
-                      type="checkbox"
-                      value="y"
-                    />
-                    {{ form.include_link_in_summary.label() }}
-                  </div>
-                </fieldset>
-                {{ form.mail_recipient.label() }}
-                <div class="form-group">
-                  {{ form.mail_recipient(id=form_type + '-mail_recipient',
-                  class="form-control add-id") }}
-                </div>
                 {{ form.reply_to.label() }}
                 <div class="form-group">
                   {{ form.reply_to(id=form_type + '-reply_to', class="form-control

@@ -886,6 +886,8 @@ class ServiceForm(BaseForm):
             "send_notification_method",
             "notification_header",
             "include_device_results",
+            "include_link_in_summary",
+            "mail_recipient",
         ]
     }
 

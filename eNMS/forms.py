@@ -868,6 +868,8 @@ class ServiceForm(BaseForm):
             "validation_method",
             "validation_section",
             "content_match",
+            "content_match_regex",
+            "dict_match",
         ],
     }
 

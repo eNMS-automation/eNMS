@@ -433,30 +433,6 @@
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step4-3"] %} {{
                   service_field(form, field_name) }} {% endfor %}
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-display_report"
-                      name="display_report"
-                      type="checkbox"
-                      class="add-id"
-                      value="y"
-                    />
-                    {{ form.display_report.label() }}
-                  </div>
-                </fieldset>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-email_report"
-                      name="email_report"
-                      type="checkbox"
-                      class="add-id"
-                      value="y"
-                    />
-                    {{ form.email_report.label() }}
-                  </div>
-                </fieldset>
               </div>
             </div>
           </div>

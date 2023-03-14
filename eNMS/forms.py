@@ -878,6 +878,8 @@ class ServiceForm(BaseForm):
             "report_format",
             "report_jinja2_template",
             "report",
+            "display_report",
+            "email_report",
         ],
     }
 

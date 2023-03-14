@@ -863,6 +863,10 @@ class ServiceForm(BaseForm):
             "postprocessing_mode",
             "postprocessing",
         ],
+        "step4-2": [
+            "validation_condition",
+            "validation_method",
+        ],
     }
 
     def validate(self):

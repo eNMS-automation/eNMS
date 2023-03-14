@@ -398,16 +398,8 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {{ form.validation_condition.label() }}
-                <div class="form-group">
-                  {{ form.validation_condition(id=form_type + '-validation_condition',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.validation_method.label() }}
-                <div class="form-group">
-                  {{ form.validation_method(id=form_type + '-validation_method',
-                  class="form-control add-id") }}
-                </div>
+                {% for field_name in form.group_properties["step4-2"] %} {{
+                  service_field(form, field_name) }} {% endfor %}
                 {{ form.validation_section.label() }}
                 <div class="form-group">
                   {{ form.validation_section(id=form_type + '-validation_section',

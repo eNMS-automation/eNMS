@@ -866,6 +866,8 @@ class ServiceForm(BaseForm):
         "step4-2": [
             "validation_condition",
             "validation_method",
+            "validation_section",
+            "content_match",
         ],
     }
 

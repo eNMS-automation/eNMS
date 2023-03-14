@@ -400,16 +400,6 @@
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step4-2"] %} {{
                   service_field(form, field_name) }} {% endfor %}
-                {{ form.validation_section.label() }}
-                <div class="form-group">
-                  {{ form.validation_section(id=form_type + '-validation_section',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.content_match.label() }}
-                <div class="form-group">
-                  {{ form.content_match(id=form_type + '-content_match',
-                  class="form-control add-id") }}
-                </div>
                 <fieldset>
                   <div class="item">
                     <input

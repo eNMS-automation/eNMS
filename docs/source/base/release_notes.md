@@ -6,6 +6,7 @@ Version 4.5.0
 -------------
 
 - Bulk Filtering mechanism
+  - refactoring of the service template with new Jinja2 macro
 - Round result size to 1 decimal when the result size is higher than 50% the maximum
   allowed size
 

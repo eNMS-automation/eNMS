@@ -724,7 +724,9 @@ class ServiceForm(BaseForm):
         ),
         validate_choice=False,
     )
-    iteration_values = StringField("Iteration Values", python=True, help="common/iteration_values")
+    iteration_values = StringField(
+        "Iteration Values", python=True, help="common/iteration_values"
+    )
     initial_payload = DictField(help="common/initial_payload")
     mandatory_parametrization = BooleanField(
         "Parameterized Form is Mandatory", help="common/mandatory_parametrization"
@@ -739,7 +741,9 @@ class ServiceForm(BaseForm):
     iteration_variable_name = StringField(
         "Iteration Variable Name", default="iteration_value"
     )
-    iteration_devices = StringField("Iteration Devices", python=True, help="common/iteration_devices")
+    iteration_devices = StringField(
+        "Iteration Devices", python=True, help="common/iteration_devices"
+    )
     iteration_devices_property = SelectField(
         "Iteration Devices Property",
         choices=(("name", "Name"), ("ip_address", "IP address")),
@@ -747,7 +751,9 @@ class ServiceForm(BaseForm):
     preprocessing = StringField(
         type="code", python=True, widget=TextArea(), help="common/preprocessing"
     )
-    postprocessing = StringField(type="code", python=True, widget=TextArea(), help="common/postprocessing")
+    postprocessing = StringField(
+        type="code", python=True, widget=TextArea(), help="common/postprocessing"
+    )
     postprocessing_mode = SelectField(
         choices=(
             ("success", "Run on success only"),

@@ -876,6 +876,8 @@ class ServiceForm(BaseForm):
         "step4-3": [
             "report_template",
             "report_format",
+            "report_jinja2_template",
+            "report",
         ],
     }
 

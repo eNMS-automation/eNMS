@@ -436,23 +436,6 @@
                 <fieldset>
                   <div class="item">
                     <input
-                      id="{{ form_type }}-report_jinja2_template"
-                      name="report_jinja2_template"
-                      type="checkbox"
-                      class="add-id"
-                      value="y"
-                    />
-                    {{ form.report_jinja2_template.label() }}
-                  </div>
-                </fieldset>
-                {{ form.report.label() }}
-                <div class="form-group">
-                  {{ form.report(id=form_type + '-report', class="form-control add-id")
-                  }}
-                </div>
-                <fieldset>
-                  <div class="item">
-                    <input
                       id="{{ form_type }}-display_report"
                       name="display_report"
                       type="checkbox"

@@ -9,6 +9,8 @@ Version 4.5.0
   - refactoring of the service template with new Jinja2 macro
 - Round result size to 1 decimal when the result size is higher than 50% the maximum
   allowed size
+- Don't allow saving a workflow if the run method is set to Service x Service and the
+  workflow has target devices or pools
 
 Version 4.4.0: RBAC and Credentials
 -----------------------------------

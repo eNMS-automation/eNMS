@@ -870,6 +870,8 @@ class ServiceForm(BaseForm):
             "content_match",
             "content_match_regex",
             "dict_match",
+            "delete_spaces_before_matching",
+            "negative_logic",
         ],
     }
 

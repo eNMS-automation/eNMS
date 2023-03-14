@@ -762,7 +762,7 @@ class ServiceForm(BaseForm):
         default=1,
         help="common/logging",
     )
-    multiprocessing = BooleanField("Multiprocessing")
+    multiprocessing = BooleanField("Multiprocessing", help="common/multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=15)
     validation_condition = SelectField(
         choices=(
@@ -843,6 +843,8 @@ class ServiceForm(BaseForm):
             "update_target_pools",
             "device_query",
             "device_query_property",
+            "multiprocessing",
+            "max_processes",
         ],
     }
 

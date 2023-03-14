@@ -367,11 +367,6 @@
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step4-1"] %} {{
                   service_field(form, field_name) }} {% endfor %}
-                {{ form.postprocessing.label(help="common/postprocessing") }}
-                <div class="form-group">
-                  {{ form.postprocessing(id=form_type + '-postprocessing',
-                  class="form-control add-id") }}
-                </div>
               </div>
             </div>
           </div>

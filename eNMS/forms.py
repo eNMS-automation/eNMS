@@ -747,7 +747,7 @@ class ServiceForm(BaseForm):
     preprocessing = StringField(
         type="code", python=True, widget=TextArea(), help="common/preprocessing"
     )
-    postprocessing = StringField(type="code", python=True, widget=TextArea())
+    postprocessing = StringField(type="code", python=True, widget=TextArea(), help="common/postprocessing")
     postprocessing_mode = SelectField(
         choices=(
             ("success", "Run on success only"),
@@ -855,6 +855,7 @@ class ServiceForm(BaseForm):
         "step4-1": [
             "conversion_method",
             "postprocessing_mode",
+            "postprocessing",
         ],
     }
 

@@ -672,7 +672,7 @@ class ServiceForm(BaseForm):
         choices=(("mail", "Mail"), ("slack", "Slack"), ("mattermost", "Mattermost")),
     )
     notification_header = StringField(
-        widget=TextArea(), render_kw={"rows": 8}, substitution=True
+        widget=TextArea(), render_kw={"rows": 8}, substitution=True, help="common/notification_header"
     )
     include_device_results = BooleanField("Include Device Results")
     include_link_in_summary = BooleanField("Include Result Link in Summary")
@@ -884,6 +884,8 @@ class ServiceForm(BaseForm):
         "step4-4": [
             "send_notification",
             "send_notification_method",
+            "notification_header",
+            "include_device_results",
         ]
     }
 

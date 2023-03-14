@@ -881,6 +881,10 @@ class ServiceForm(BaseForm):
             "display_report",
             "email_report",
         ],
+        "step4-4": [
+            "send_notification",
+            "send_notification_method",
+        ]
     }
 
     def validate(self):

@@ -464,23 +464,8 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-send_notification"
-                      name="send_notification"
-                      type="checkbox"
-                      class="add-id"
-                      value="y"
-                    />
-                    {{ form.send_notification.label() }}
-                  </div>
-                </fieldset>
-                <label>Send Notification Method</label>
-                <div class="form-group">
-                  {{ form.send_notification_method(id=form_type +
-                  '-send_notification_method', class="form-control add-id") }}
-                </div>
+                {% for field_name in form.group_properties["step4-4"] %} {{
+                  service_field(form, field_name) }} {% endfor %}
                 {{ form.notification_header.label(help="common/notification_header") }}
                 <div class="form-group">
                   {{ form.notification_header(id=form_type + '-notification_header',

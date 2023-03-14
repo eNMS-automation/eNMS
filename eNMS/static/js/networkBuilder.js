@@ -154,7 +154,7 @@ function saveLink(edge) {
   if (nodes.get(edge.from).type == "network" || nodes.get(edge.to).type == "network") {
     return notify("Cannot draw a link from or to a network", "error", 5);
   }
-  showInstancePanel($("#edge-type-list").val(), null, null, null, edge);
+  showInstancePanel($("#edge-type-dd-list").val(), null, null, null, edge);
 }
 
 export function showLinkPanel(type, id, edge) {

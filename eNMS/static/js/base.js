@@ -267,12 +267,12 @@ export function createTooltips(panel) {
 
 export function loadTypes(model) {
   const subtypeModel = model == "edge" ? "link" : model;
-  $(`#${model}-type-list`).selectpicker({ liveSearch: true });
+  $(`#${model}-type-dd-list`).selectpicker({ liveSearch: true });
   for (const [subtype, name] of Object.entries(subtypes[subtypeModel])) {
     if (page == "device_table" && subtype == "network") continue;
-    $(`#${model}-type-list`).append(new Option(name, subtype));
+    $(`#${model}-type-dd-list`).append(new Option(name, subtype));
   }
-  $(`#${model}-type-list`).selectpicker("refresh");
+  $(`#${model}-type-dd-list`).selectpicker("refresh");
 }
 
 function createNotificationBanner() {

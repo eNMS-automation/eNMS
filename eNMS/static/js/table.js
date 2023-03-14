@@ -515,7 +515,7 @@ tables.device = class DeviceTable extends Table {
         color:transparent; width: 200px;"
         type="button"
       >
-        <select id="node-type-list" class="form-control"></select>
+        <select id="node-type-dd-list" class="form-control"></select>
       </button>`,
       this.bulkEditButton(),
       this.exportTableButton(),
@@ -775,7 +775,7 @@ tables.link = class LinkTable extends Table {
         color:transparent; width: 200px;"
         type="button"
       >
-        <select id="link-type-list" class="form-control"></select>
+        <select id="link-type-dd-list" class="form-control"></select>
       </button>`,
       this.bulkEditButton(),
       this.exportTableButton(),
@@ -947,7 +947,7 @@ tables.service = class ServiceTable extends Table {
         color:transparent; width: 200px;"
         type="button"
       >
-        <select id="service-type-list" class="form-control"></select>
+        <select id="service-type-dd-list" class="form-control"></select>
       </button>`,
       `<button
         class="btn btn-primary"
@@ -1664,7 +1664,6 @@ tables.file = class FileTable extends Table {
     let self = this;
     super.postProcessing(...args);
     displayFolderPath(folderPath);
-    $("#file-type-list").selectpicker();
     $("#parent-filtering")
       .selectpicker()
       .on("change", function () {

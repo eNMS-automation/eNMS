@@ -402,7 +402,7 @@ export function createNewNode(mode) {
   } else if (mode == `duplicate_${type}`) {
     showInstancePanel(type, instance.id, "duplicate");
   } else {
-    showInstancePanel($(`#${nodeType}-type-list`).val());
+    showInstancePanel($(`#${nodeType}-type-dd-list`).val());
   }
 }
 
@@ -431,7 +431,7 @@ function drawEdge(edge) {
 
 export function switchMode(mode, noNotification) {
   const oldMode = currentMode;
-  const newLinkMode = type == "network" ? "create_link" : $("#edge-type-list").val();
+  const newLinkMode = type == "network" ? "create_link" : $("#edge-type-dd-list").val();
   currentMode = mode || (currentMode == "motion" ? newLinkMode : "motion");
   if ((oldMode == "motion" || currentMode == "motion") && oldMode != currentMode) {
     $("#mode-icon").toggleClass("glyphicon-move").toggleClass("glyphicon-random");
@@ -504,7 +504,7 @@ export function initBuilder() {
     };
     this.view.moveTo(animationOptions);
   };
-  $("#edge-type-list")
+  $("#edge-type-dd-list")
     .selectpicker()
     .on("change", function () {
       switchMode(this.value);

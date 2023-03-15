@@ -490,6 +490,7 @@ export function preprocessForm(panel, id, type, duplicate) {
     $(el).attr("href", `${settings.app.documentation_url}${$(el).attr("href")}`);
   });
   panel.querySelectorAll("[help]").forEach((el) => {
+    if ($(el).prop("nodeName") != "LABEL") return;
     const button = $(`
       <button class="icon-button" type="button">
         <span class="glyphicon glyphicon-info-sign"></span>

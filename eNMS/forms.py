@@ -641,12 +641,14 @@ class ServiceForm(BaseForm):
         ui_name="Device Query (define targets from a python query)",
     )
     device_query_property = SelectField(
-        "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
+        "Query Property Type",
+        choices=(("name", "Name"), ("ip_address", "IP address")),
+        no_search=True,
     )
     disabled = BooleanField("Disabled")
     disabled_info = StringField("Disabled Time & User", render_kw={"readonly": True})
     restrict_to_owners = SelectMultipleField(
-        "Restrict to Owners", choices=(("edit", "Edit"), ("run", "Run"))
+        "Restrict to Owners", choices=(("edit", "Edit"), ("run", "Run")), no_search=True
     )
     target_devices = MultipleInstanceField("Devices", model="device")
     disable_result_creation = BooleanField("Save only failed results")
@@ -661,7 +663,9 @@ class ServiceForm(BaseForm):
     report_template = SelectField("Report Template", choices=(vs.dualize(vs.reports)))
     report = StringField(widget=TextArea(), render_kw={"rows": 8}, substitution=True)
     report_format = SelectField(
-        "Report Display Format", choices=(("text", "Text"), ("html", "HTML"))
+        "Report Display Format",
+        choices=(("text", "Text"), ("html", "HTML")),
+        no_search=True,
     )
     report_jinja2_template = BooleanField("Interpret Report as Jinja2 Template")
     display_report = BooleanField("Display Report instead of Results")
@@ -670,6 +674,7 @@ class ServiceForm(BaseForm):
     send_notification_method = SelectField(
         "Notification Method",
         choices=(("mail", "Mail"), ("slack", "Slack"), ("mattermost", "Mattermost")),
+        no_search=True,
     )
     notification_header = StringField(
         widget=TextArea(),
@@ -715,6 +720,7 @@ class ServiceForm(BaseForm):
             ("discard", "Discard"),
         ),
         help="common/skip_value",
+        no_search=True,
     )
     vendor = SelectField(
         "Vendor",
@@ -751,6 +757,7 @@ class ServiceForm(BaseForm):
     iteration_devices_property = SelectField(
         "Iteration Devices Property",
         choices=(("name", "Name"), ("ip_address", "IP address")),
+        no_search=True,
     )
     preprocessing = StringField(
         type="code", python=True, widget=TextArea(), help="common/preprocessing"
@@ -763,7 +770,8 @@ class ServiceForm(BaseForm):
             ("success", "Run on success only"),
             ("failure", "Run on failure only"),
             ("always", "Always run"),
-        )
+        ),
+        no_search=True,
     )
     admin_only = BooleanField("Admin Only", default=False)
     log_level = SelectField(
@@ -771,6 +779,7 @@ class ServiceForm(BaseForm):
         choices=(*enumerate(vs.log_levels), (-1, "Disable logging")),
         default=1,
         help="common/logging",
+        no_search=True,
     )
     multiprocessing = BooleanField("Multiprocessing", help="common/multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=15)
@@ -780,7 +789,8 @@ class ServiceForm(BaseForm):
             ("success", "Run on success only"),
             ("failure", "Run on failure only"),
             ("always", "Always run"),
-        )
+        ),
+        no_search=True,
     )
     conversion_method = SelectField(
         choices=(
@@ -788,7 +798,8 @@ class ServiceForm(BaseForm):
             ("text", "Text"),
             ("json", "Json dictionary"),
             ("xml", "XML dictionary"),
-        )
+        ),
+        no_search=True,
     )
     validation_method = SelectField(
         "Validation Method",
@@ -797,6 +808,7 @@ class ServiceForm(BaseForm):
             ("dict_included", "Validation by dictionary inclusion"),
             ("dict_equal", "Validation by dictionary equality"),
         ),
+        no_search=True,
     )
     validation_section = StringField("Section to Validate", default="results['result']")
     content_match = StringField(
@@ -812,6 +824,7 @@ class ServiceForm(BaseForm):
             ("per_device", "Run the service once per device"),
             ("once", "Run the service once"),
         ),
+        no_search=True,
     )
     group_properties = {
         "step1-1": [

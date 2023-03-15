@@ -245,6 +245,7 @@ class WorkflowForm(ServiceForm):
                 "Run the workflow service by service using service targets",
             ),
         ),
+        no_search=True,
     )
     man_minutes = IntegerField("Minutes to Complete Task Manually", default=0)
     man_minutes_type = SelectField(

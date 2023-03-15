@@ -11,6 +11,8 @@ Version 4.5.0
   allowed size
 - Don't allow saving a workflow if the run method is set to Service x Service and the
   workflow has target devices or pools
+- Don't allow skipping services in a workflow if workflow edit is restricted to
+  owners via RBAC access control
 
 Version 4.4.0: RBAC and Credentials
 -----------------------------------

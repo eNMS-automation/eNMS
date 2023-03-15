@@ -83,6 +83,15 @@ class FloatField(FieldMixin, WtformsFloatField):
 class SelectField(FieldMixin, WtformsSelectField):
     type = "list"
 
+    def __init__(self, *args, **kwargs):
+        self.no_search = kwargs.pop("no_search", False)
+        super().__init__(*args, **kwargs)
+
+    def __call__(self, *args, **kwargs):
+        if self.no_search:
+            kwargs["class"] += " no-search"
+        return super().__call__(*args, **kwargs)
+
 
 class SelectMultipleField(FieldMixin, WtformsSelectMultipleField):
     type = "multiselect"

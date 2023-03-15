@@ -697,6 +697,7 @@ class ServiceForm(BaseForm):
             ("read-only", "Read Only"),
         ),
         help="common/type_of_credentials",
+        no_search=True,
     )
     maximum_runs = IntegerField("Maximum number of runs", default=1)
     skip_query = StringField(

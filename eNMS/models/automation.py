@@ -184,7 +184,7 @@ class Service(AbstractBase):
             name = f"[{workflow.name}] {scoped_name}" if workflow else scoped_name
             if not db.fetch("service", allow_none=True, name=name):
                 service = super().duplicate(
-                    name=name, scoped_name=scoped_name, shared=False, update_pools=True
+                    name=name, scoped_name=scoped_name, shared=False
                 )
                 break
             index += 1

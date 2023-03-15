@@ -13,6 +13,8 @@ Version 4.5.0
   workflow has target devices or pools
 - Don't allow skipping services in a workflow if workflow edit is restricted to
   owners via RBAC access control
+- Remove all references to old "update_pools" mechanism (removed last release)
+  Commit: 14e57286f731dcd5e8302abe327ef5d9d5c2dfbf
 
 Version 4.4.0: RBAC and Credentials
 -----------------------------------

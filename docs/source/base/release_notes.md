@@ -15,7 +15,8 @@ Version 4.5.0
   owners via RBAC access control
 - Remove all references to old "update_pools" mechanism (removed last release)
   Commit: 14e57286f731dcd5e8302abe327ef5d9d5c2dfbf
-- Add new "no_search" keyword argument in SelectField to disable search box
+- Add new "no_search" keyword argument in SelectField and MultipleSelectField
+  to disable search box (in service form)
 
 Version 4.4.0: RBAC and Credentials
 -----------------------------------

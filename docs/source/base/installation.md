@@ -626,8 +626,6 @@ load on eNMS.
 
 #### `security` section
 
-- `hash_user_passwords` (default: `true`) All user passwords are
-  automatically hashed by default.
 - `forbidden_python_libraries` (default:
   `["eNMS","os","subprocess","sys"]`) There are a number of places in
   the UI where the user is allowed to run custom python scripts. The user

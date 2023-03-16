@@ -66,8 +66,7 @@ class User(AbstractBase, UserMixin):
 
     def update(self, **kwargs):
         if (
-            vs.settings["security"]["hash_user_passwords"]
-            and kwargs.get("password")
+            kwargs.get("password")
             and not kwargs["password"].startswith("$argon2i")
         ):
             kwargs["password"] = argon2.hash(kwargs["password"])

@@ -120,10 +120,8 @@ class Environment:
         elif method == "database":
             if not user:
                 return False
-            hash = vs.settings["security"]["hash_user_passwords"]
-            verify = argon2.verify if hash else str.__eq__
             user_password = self.get_password(user.password)
-            success = user and user_password and verify(password, user_password)
+            success = user and user_password and argon2.verify(password, user_password)
             return user if success else False
         else:
             authentication_function = getattr(vs.custom, f"{method}_authentication")

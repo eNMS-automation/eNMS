@@ -136,7 +136,6 @@
   },
   "security": {
     "forbidden_python_libraries": ["eNMS", "os", "subprocess", "sys"],
-    "hash_user_passwords": true
   },
   "slack": {
     "channel": "random"

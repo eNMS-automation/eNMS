@@ -472,8 +472,6 @@ class Controller:
             if not credentials:
                 return
             return credentials.username, env.get_password(credentials.password)
-        elif kwargs["credentials"] == "user":
-            return current_user.name, env.get_password(current_user.password)
         else:
             return kwargs["username"], kwargs["password"]
 

@@ -787,10 +787,6 @@ class Runner:
             else:
                 private_key = env.get_password(credential.private_key)
                 result["pkey"] = RSAKey.from_private_key(StringIO(private_key))
-        elif self.credentials == "user":
-            user = db.fetch("user", name=self.creator, rbac=None)
-            result["username"] = user.name
-            result["password"] = env.get_password(user.password)
         else:
             result["username"] = self.sub(self.custom_username, locals())
             password = env.get_password(self.custom_password)

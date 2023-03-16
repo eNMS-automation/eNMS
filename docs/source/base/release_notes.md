@@ -17,6 +17,8 @@ Version 4.5.0
   Commit: 14e57286f731dcd5e8302abe327ef5d9d5c2dfbf
 - Add new "no_search" keyword argument in SelectField and MultipleSelectField
   to disable search box (in service form)
+- Remove `hash_user_passwords` options from settings.json (always hash passwords)
+  Remove ability to use user passwords for automation & web SSH.
 
 Version 4.4.0: RBAC and Credentials
 -----------------------------------

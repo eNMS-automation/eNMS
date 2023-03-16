@@ -1304,6 +1304,8 @@ class NetmikoForm(ConnectionForm):
 
     def validate(self):
         valid_form = super().validate()
+        if not hasattr(self, "auto_find_prompt") or not hasattr(self, "expect_string"):
+            return valid_form
         invalid_prompt_configuration = (
             self.auto_find_prompt.data
             and self.expect_string.data

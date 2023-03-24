@@ -1,11 +1,11 @@
 {
   "engine": {
     "common": {
-      "convert_unicode": true,
       "pool_pre_ping": true,
       "pool_recycle": 3600
     },
     "mysql": {
+      "convert_unicode": true,
       "max_overflow": 10,
       "pool_size": 1000,
       "isolation_level": "READ COMMITTED"

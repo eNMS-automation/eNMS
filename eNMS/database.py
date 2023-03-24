@@ -24,7 +24,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.exc import InvalidRequestError, OperationalError
-from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
+from sqlalchemy.ext.associationproxy import AssociationProxyExtensionType
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import (
@@ -189,7 +189,8 @@ class Database:
                     }.get(type(col.type), "str")
                 vs.model_properties[name][col.key] = property_type
             for descriptor in inspect(model).all_orm_descriptors:
-                if descriptor.extension_type is ASSOCIATION_PROXY:
+                association_proxy = AssociationProxyExtensionType.ASSOCIATION_PROXY
+                if descriptor.extension_type is association_proxy:
                     property = (
                         descriptor.info.get("name")
                         or f"{descriptor.target_collection}_{descriptor.value_attr}"

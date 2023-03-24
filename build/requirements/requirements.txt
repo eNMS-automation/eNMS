@@ -16,7 +16,7 @@ passlib
 psutil
 redis
 ruamel.yaml
-sqlalchemy==1.4.46
+sqlalchemy
 watchdog
 wtforms
 xlrd

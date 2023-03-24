@@ -59,7 +59,7 @@ function run() {
   if [ "$gunicorn" = true ]; then
     gunicorn --config gunicorn.py app:app
   else
-    python3.8 -m flask run -h 0.0.0.0 --no-reload
+    python3 -m flask run -h 0.0.0.0 --no-reload
   fi
 }
 

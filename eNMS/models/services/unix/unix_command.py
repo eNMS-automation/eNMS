@@ -39,7 +39,7 @@ class UnixCommandForm(ServiceForm):
     command = StringField(substitution=True)
     approved_by_admin = BooleanField("Approved by an admin user", default=False)
 
-    def validate(self):
+    def validate(self, **_):
         valid_form = super().validate()
         service = db.fetch("service", id=self.id.data, allow_none=True)
         current_command = getattr(service, "command", "")

@@ -104,7 +104,7 @@ class GenericFileTransferForm(ServiceForm):
     custom_username = StringField("Custom Username", substitution=True)
     custom_password = PasswordField("Custom Password", substitution=True)
 
-    def validate(self):
+    def validate(self, **_):
         valid_form = super().validate()
         invalid_direction = (
             self.source_file_includes_globbing.data and self.direction.data == "get"

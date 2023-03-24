@@ -263,7 +263,7 @@ class WorkflowForm(ServiceForm):
         constraints={"children": ["[Shared] Placeholder"], "children_filter": "union"},
     )
 
-    def validate(self):
+    def validate(self, **_):
         valid_form = super().validate()
         invalid_man_minutes_error = (
             vs.automation["workflow"]["mandatory_man_minutes"]

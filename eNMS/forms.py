@@ -358,7 +358,7 @@ class CredentialForm(BaseForm):
     private_key = StringField(widget=TextArea(), render_kw={"rows": 1})
     enable_password = PasswordField("'Enable' Password")
 
-    def validate(self):
+    def validate(self, **_):
         valid_form = super().validate()
         invalid_priority = not current_user.is_admin and self.priority.data > 1
         if invalid_priority:
@@ -449,7 +449,7 @@ class FileForm(BaseForm):
     last_updated = StringField("Last Updated", render_kw={"readonly": True})
     status = StringField("Status", render_kw={"readonly": True})
 
-    def validate(self):
+    def validate(self, **_):
         valid_form = super().validate()
         current_file = db.fetch("file", id=self.id.data, allow_none=True)
         path_taken = exists(self.path.data)
@@ -910,7 +910,7 @@ class ServiceForm(BaseForm):
         ],
     }
 
-    def validate(self):
+    def validate(self, **_):
         valid_form = super().validate()
         no_recipient_error = (
             self.send_notification.data
@@ -1002,7 +1002,7 @@ class TaskForm(BaseForm):
     pools = MultipleInstanceField("Pools", model="pool")
     service = InstanceField("Service", model="service")
 
-    def validate(self):
+    def validate(self, **_):
         valid_form = super().validate()
         if self.name.data == "Bulk Edit":
             return valid_form
@@ -1060,7 +1060,7 @@ class UserProfileForm(BaseForm):
     )
     password = PasswordField("Password")
 
-    def validate(self):
+    def validate(self, **_):
         valid_form = super().validate()
         invalid_password = self.password.data and (
             not vs.settings["authentication"]["allow_password_change"]
@@ -1302,7 +1302,7 @@ class NetmikoForm(ConnectionForm):
         },
     }
 
-    def validate(self):
+    def validate(self, **_):
         valid_form = super().validate()
         if not hasattr(self, "auto_find_prompt") or not hasattr(self, "expect_string"):
             return valid_form

@@ -5,7 +5,7 @@ dramatiq[redis, watch]
 flask
 flask_login
 flask-socketio
-flask_wtf==1.0.1
+flask_wtf
 gitpython
 gunicorn
 itsdangerous==2.0.1

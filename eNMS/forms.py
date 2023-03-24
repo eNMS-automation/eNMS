@@ -396,7 +396,7 @@ class DatabaseMigrationsForm(BaseForm):
 class DebugForm(BaseForm):
     template = "debug"
     form_type = HiddenField(default="debug")
-    snippets = SelectField(validate_choice=False)
+    snippets = SelectField(choices=(), validate_choice=False)
     code = StringField(
         "Python Code",
         type="code",
@@ -562,7 +562,7 @@ class RestartWorkflowForm(BaseForm):
     form_type = HiddenField(default="restart_workflow")
     start_services = HiddenField()
     restart_runtime = SelectField(
-        "Restart Runtime", [InputRequired()], validate_choice=False
+        "Restart Runtime", [InputRequired()], choices=(), validate_choice=False
     )
     targets = SelectField(
         "Targets",

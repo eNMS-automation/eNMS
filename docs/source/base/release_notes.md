@@ -20,6 +20,7 @@ Version 4.5.0
 - Remove `hash_user_passwords` options from settings.json (always hash passwords)
   Remove ability to use user passwords for automation & web SSH.
 - Remove pin to 2.3.3 for wtforms in requirements
+- Remove pin to 1.0.1 for flask_wtf in requirements
 
 Version 4.4.0: RBAC and Credentials
 -----------------------------------

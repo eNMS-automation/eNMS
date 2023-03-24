@@ -662,12 +662,14 @@ class Controller:
         constraints = [~getattr(vs.models[type], f"{type}s").any()]
         if type == "workflow":
             constraints.append(vs.models[type].shared == true())
+        properties = ["id", "category", "name"]
         for instance in (
-            db.query(type, properties=["id", "category", "name"])
+            db.query(type, properties=properties)
             .filter(or_(*constraints))
             .all()
         ):
-            result[instance.category or "Other"].append(dict(instance))
+            entry = dict(zip(properties, instance))
+            result[instance.category or "Other"].append(entry)
         return result
 
     def scan_folder(self, path=None):

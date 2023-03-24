@@ -489,7 +489,7 @@ class Task(AbstractBase):
 
     @status.expression
     def status(cls):  # noqa: N805
-        return case([(cls.is_active, "Active")], else_="Inactive")
+        return case((cls.is_active, "Active"), else_="Inactive")
 
     def _catch_request_exceptions(func):  # noqa: N805
         @wraps(func)

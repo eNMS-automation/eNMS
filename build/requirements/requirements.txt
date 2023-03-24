@@ -8,7 +8,7 @@ flask-socketio
 flask_wtf
 gitpython
 gunicorn
-itsdangerous==2.0.1
+itsdangerous
 napalm
 ncclient
 netmiko==3.4.0

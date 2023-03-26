@@ -1,4 +1,4 @@
-{% from 'macros.html' import field_template, service_field %}
+{% from 'macros.html' import block_field %}
 <form
   id="{{ form_type }}-form"
   class="form-horizontal form-label-left add-id"
@@ -82,7 +82,7 @@
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step1-1"] %} {{
-                service_field(form, field_name) }} {% endfor %}
+                block_field(form, field_name) }} {% endfor %}
               </div>
             </div>
           </div>
@@ -115,7 +115,7 @@
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step1-2"] %} {{
-                service_field(form, field_name) }} {% endfor %}
+                block_field(form, field_name) }} {% endfor %}
               </div>
             </div>
           </div>
@@ -201,9 +201,9 @@
                 role="tabpanel"
               >
                 <div class="panel-body" style="background-color: #fafafa;">
-                  {{ service_field(form, "owners") }} {% for property in
-                  form.rbac_properties %} {{ service_field(form, property) }} {% endfor
-                  %} {{ service_field(form, "restrict_to_owners") }}
+                  {{ block_field(form, "owners") }} {% for property in
+                  form.rbac_properties %} {{ block_field(form, property) }} {% endfor
+                  %} {{ block_field(form, "restrict_to_owners") }}
                 </div>
               </div>
             </div>
@@ -250,7 +250,7 @@
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in group.commands %} {% if field_name != "run_method"
-                %} {{ service_field(form, field_name) }} {% endif %} {% endfor %}
+                %} {{ block_field(form, field_name) }} {% endif %} {% endfor %}
               </div>
             </div>
           </div>
@@ -291,7 +291,7 @@
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step3-1"] %} {{
-                service_field(form, field_name) }} {% endfor %}
+                block_field(form, field_name) }} {% endfor %}
               </div>
             </div>
           </div>
@@ -324,7 +324,7 @@
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step3-2"] %} {{
-                service_field(form, field_name) }} {% endfor %}
+                block_field(form, field_name) }} {% endfor %}
               </div>
             </div>
           </div>
@@ -366,7 +366,7 @@
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step4-1"] %} {{
-                service_field(form, field_name) }} {% endfor %}
+                block_field(form, field_name) }} {% endfor %}
               </div>
             </div>
           </div>
@@ -399,7 +399,7 @@
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step4-2"] %} {{
-                service_field(form, field_name) }} {% endfor %}
+                block_field(form, field_name) }} {% endfor %}
               </div>
             </div>
           </div>
@@ -432,7 +432,7 @@
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step4-3"] %} {{
-                service_field(form, field_name) }} {% endfor %}
+                block_field(form, field_name) }} {% endfor %}
               </div>
             </div>
           </div>
@@ -465,7 +465,7 @@
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in form.group_properties["step4-4"] %} {{
-                service_field(form, field_name) }} {% endfor %}
+                block_field(form, field_name) }} {% endfor %}
               </div>
             </div>
           </div>

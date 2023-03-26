@@ -1,4 +1,4 @@
-{% from 'macros.html' import field_template, service_field %}
+{% from 'macros.html' import inline_field, block_field %}
 {% set filtering = form_type != "pool_filtering" %}
 <div class="modal-body">
   <form
@@ -143,9 +143,8 @@
         </table>
       </div>
       <div class="tab-pane fade add-id" id="rbac-properties">
-        {{ service_field(form, "owners") }} {% for property in
-        form.rbac_properties %} {{
-          service_field(form, property) }} {% endfor %}
+        {{ block_field(form, "owners") }} {% for property in
+        form.rbac_properties %} {{ block_field(form, property) }} {% endfor %}
       </div>
     </div>
   </form>

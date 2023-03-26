@@ -1,4 +1,4 @@
-{% from 'macros.html' import field_template %}
+{% from 'macros.html' import inline_field %}
 <form
   id="{{ form_type }}-form"
   class="form-horizontal form-label-left add-id"
@@ -35,20 +35,20 @@
           <div id="content" class="add-id" style="height: 100%;"></div>
           {% for field in form if field.name in ("name", "creator", "admin_only",
           "force_read_access", "description", "email", "users") or field.name in
-          form.custom_properties %} {{ field_template(form_type, field) }} {% endfor %}
+          form.custom_properties %} {{ inline_field(form_type, field) }} {% endfor %}
         </div>
         <div class="tab-pane fade" id="group-ui-access">
           {% for field in form %} {% if field.name in ("menu", "pages", "get_requests",
-          "post_requests", "delete_requests") %} {{ field_template(form_type, field) }}
+          "post_requests", "delete_requests") %} {{ inline_field(form_type, field) }}
           {% endif %} {% endfor %}
         </div>
         <div class="tab-pane fade" id="group-model-access">
           {% for field in form %} {% if field.name.split("_")[0] in rbac["rbac_models"]
-          %} {{ field_template(form_type, field) }} {% endif %} {% endfor %}
+          %} {{ inline_field(form_type, field) }} {% endif %} {% endfor %}
         </div>
         <div class="tab-pane fade" id="group-pool-access">
           {% for field in form %} {% if field.name in form.pool_properties %} {{
-          field_template(form_type, field) }} {% endif %} {% endfor %}
+          inline_field(form_type, field) }} {% endif %} {% endfor %}
         </div>
       </div>
     </div>

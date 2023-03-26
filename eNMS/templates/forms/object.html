@@ -1,4 +1,4 @@
-{% from 'macros.html' import field_template %}
+{% from 'macros.html' import inline_field %}
 <form
   id="{{ form_type }}-form"
   class="form-horizontal form-label-left add-id"
@@ -32,19 +32,19 @@
           <div id="content" class="add-id" style="height: 100%;"></div>
           {% for field in form %} {% set properties = form.properties or {} %} {% if
           field.name not in properties and field.name != "owners" and field.name not in
-          form.rbac_properties %} {{ field_template(form_type, field) }} {% endif %} {%
+          form.rbac_properties %} {{ inline_field(form_type, field) }} {% endif %} {%
           endfor %}
         </div>
         {% if form.properties %}
         <div class="tab-pane fade add-id" id="specific">
           {% for property in form.properties %} {% set field = form[property] %} {{
-          field_template(form_type, field) }} {% endfor %}
+          inline_field(form_type, field) }} {% endfor %}
         </div>
         {% endif %} {% if form.rbac_properties %}
         <div class="tab-pane fade add-id" id="rbac-properties">
-          {{ field_template(form_type, form["owners"]) }} {% for property in
+          {{ inline_field(form_type, form["owners"]) }} {% for property in
           form.rbac_properties %} {% set field = form[property] %} {{
-          field_template(form_type, field) }} {% endfor %}
+          inline_field(form_type, field) }} {% endfor %}
         </div>
         {% endif %}
       </div>

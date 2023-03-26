@@ -1,4 +1,4 @@
-{% macro field_template(form_type, field) %} {% set id = "{}-{}".format(form_type,
+{% macro inline_field(form_type, field) %} {% set id = "{}-{}".format(form_type,
 field.name) %} {% set style = "height: {}px".format(field.render_kw["rows"]*20 + 17) if
 "TextArea" in field.widget|string else "height: 40px" if field.type ==
 "MultipleInstanceField" else "" %}
@@ -25,7 +25,7 @@ field.name) %} {% set style = "height: {}px".format(field.render_kw["rows"]*20 +
   <br /><br />
   {% endif %}
 </div>
-{% endmacro %} {% macro service_field(form, field_name) %} {% set id =
+{% endmacro %} {% macro block_field(form, field_name) %} {% set id =
 "{}-{}".format(form.form_type.default, field_name) %} {% set render_kw =
 form[field_name].render_kw or {} %}
 <div id="{{ id }}-div" class="add-id">

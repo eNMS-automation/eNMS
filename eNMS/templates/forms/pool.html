@@ -1,4 +1,5 @@
-{% from 'macros.html' import field_template %}
+{% from 'macros.html' import field_template, service_field %}
+{% set filtering = form_type != "pool_filtering" %}
 <div class="modal-body">
   <form
     id="pool-form"
@@ -76,8 +77,10 @@
             <tr>
               <th>Property</th>
               <th>Value</th>
+              {% if filtering %}
               <th style="width: 25%;">Match</th>
               <th style="width: 5%;">Invert</th>
+              {% endif %}
             </tr>
           </thead>
           <tbody>
@@ -91,6 +94,7 @@
                 {{ form[property_name](id="pool-" + property_name, class="form-control
                 add-id") }}
               </td>
+              {% if filtering %}
               <td>
                 {{ form[property_name + '_match'](id="pool-" + property_name + '_match',
                 class="form-control add-id no-search") }}
@@ -102,6 +106,7 @@
                   25px") }}
                 </center>
               </td>
+              {% endif %}
             </tr>
             {% endfor %}
           </tbody>
@@ -138,9 +143,9 @@
         </table>
       </div>
       <div class="tab-pane fade add-id" id="rbac-properties">
-        {{ field_template(form_type, form["owners"]) }} {% for property in
-        form.rbac_properties %} {% set field = form[property] %} {{
-        field_template(form_type, field) }} {% endfor %}
+        {{ service_field(form, "owners") }} {% for property in
+        form.rbac_properties %} {{
+          service_field(form, property) }} {% endfor %}
       </div>
     </div>
   </form>

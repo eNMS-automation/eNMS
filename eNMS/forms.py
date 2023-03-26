@@ -180,7 +180,7 @@ class FormFactory:
                 )
                 vs.relationships[f"{model}_filtering"][related_model] = relation
             relation_form = {
-                "template": "service" if model == "service" else "object",
+                "template": model if model in ("pool", "service") else "object",
                 "properties": sorted(relations),
                 "object_type": model,
                 "form_type": HiddenField(default=f"{model}_filtering"),

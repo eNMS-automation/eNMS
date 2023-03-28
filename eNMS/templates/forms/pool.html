@@ -38,20 +38,8 @@
       <div class="tab-pane fade in active add-id" id="common-properties">
         {{ form.id(id='pool-id', class="add-id") }} {{ form.hidden_tag() }}
         <div class="form-group">
-          {% for field_name in ("name", "creator", "description") %} {{
+          {% for field_name in ("name", "creator", "description", "admin_only", "manually_defined") %} {{
             block_field(form, field_name) }} {% endfor %}
-          <fieldset>
-            <div class="item">
-              {{ form.(id="pool-admin_only", class="add-id") }}
-              <label>Admin only (pool is only visible to admin users)</label>
-            </div>
-          </fieldset>
-          <fieldset>
-            <div class="item">
-              {{ form.manually_defined(id="pool-manually_defined", class="add-id") }}
-              <label>Manually defined (will not be automatically updated)</label>
-            </div>
-          </fieldset>
         </div>
       </div>
       {% for model in form.models %}

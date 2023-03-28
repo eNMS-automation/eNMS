@@ -8,7 +8,6 @@ from eNMS.variables import vs
 
 
 class NapalmGettersService(ConnectionService):
-
     __tablename__ = "napalm_getters_service"
     pretty_name = "NAPALM getters"
     parent_type = "connection_service"

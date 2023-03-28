@@ -10,7 +10,6 @@ from eNMS.variables import vs
 
 
 class MattermostNotificationService(Service):
-
     __tablename__ = "mattermost_notification_service"
     pretty_name = "Mattermost Notification"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)

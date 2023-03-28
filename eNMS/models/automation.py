@@ -19,7 +19,6 @@ from eNMS.variables import vs
 
 
 class Service(AbstractBase):
-
     __tablename__ = class_type = export_type = "service"
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
@@ -213,7 +212,6 @@ class Service(AbstractBase):
 
 
 class ConnectionService(Service):
-
     __tablename__ = "connection_service"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
     parent_type = "service"
@@ -229,7 +227,6 @@ class ConnectionService(Service):
 
 
 class Result(AbstractBase):
-
     __tablename__ = type = "result"
     private = True
     log_change = False
@@ -289,7 +286,6 @@ class Result(AbstractBase):
 
 
 class ServiceLog(AbstractBase):
-
     __tablename__ = type = "service_log"
     private = True
     log_change = False
@@ -304,7 +300,6 @@ class ServiceLog(AbstractBase):
 
 
 class ServiceReport(AbstractBase):
-
     __tablename__ = type = "service_report"
     private = True
     log_change = False
@@ -319,7 +314,6 @@ class ServiceReport(AbstractBase):
 
 
 class Run(AbstractBase):
-
     __tablename__ = type = "run"
     private = True
     id = db.Column(Integer, primary_key=True)
@@ -445,7 +439,6 @@ class Run(AbstractBase):
 
 
 class Task(AbstractBase):
-
     __tablename__ = type = class_type = "task"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)

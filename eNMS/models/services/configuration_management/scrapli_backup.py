@@ -14,7 +14,6 @@ from traceback import format_exc
 
 
 class ScrapliBackupService(ConnectionService):
-
     __tablename__ = "scrapli_backup_service"
     pretty_name = "Scrapli Data Backup"
     parent_type = "connection_service"

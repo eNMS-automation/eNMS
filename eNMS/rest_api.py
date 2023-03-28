@@ -11,7 +11,6 @@ from eNMS.variables import vs
 
 
 class RestApi:
-
     rest_endpoints = {
         "GET": {
             "configuration": "get_configuration",

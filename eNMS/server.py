@@ -32,7 +32,6 @@ from eNMS.variables import vs
 
 
 class Server(Flask):
-
     status_log_level = {
         200: "info",
         401: "warning",

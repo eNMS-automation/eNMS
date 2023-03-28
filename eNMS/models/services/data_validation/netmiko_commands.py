@@ -10,7 +10,6 @@ from eNMS.models.automation import ConnectionService
 
 
 class NetmikoValidationService(ConnectionService):
-
     __tablename__ = "netmiko_commands_service"
     pretty_name = "Netmiko Commands"
     parent_type = "connection_service"

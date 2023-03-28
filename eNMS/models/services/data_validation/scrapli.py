@@ -9,7 +9,6 @@ from eNMS.models.automation import ConnectionService
 
 
 class ScrapliService(ConnectionService):
-
     __tablename__ = "scrapli_service"
     pretty_name = "Scrapli Commands"
     parent_type = "connection_service"

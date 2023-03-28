@@ -15,7 +15,6 @@ from eNMS.models.automation import Service
 
 
 class TopologyImportService(Service):
-
     __tablename__ = "topology_import_service"
     pretty_name = "Topology Import"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)

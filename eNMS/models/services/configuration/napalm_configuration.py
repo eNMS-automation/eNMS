@@ -8,7 +8,6 @@ from eNMS.models.automation import ConnectionService
 
 
 class NapalmConfigurationService(ConnectionService):
-
     __tablename__ = "napalm_configuration_service"
     pretty_name = "NAPALM Configuration"
     parent_type = "connection_service"

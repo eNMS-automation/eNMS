@@ -7,7 +7,6 @@ from eNMS.models.inventory import Device
 
 
 class Router(Device):
-
     __tablename__ = "router"
     __mapper_args__ = {"polymorphic_identity": "router"}
     pretty_name = "Router"

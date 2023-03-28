@@ -37,7 +37,6 @@ from eNMS.models.automation import Service
 
 
 class ExampleService(Service):
-
     __tablename__ = "example_service"
     pretty_name = "Example"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)

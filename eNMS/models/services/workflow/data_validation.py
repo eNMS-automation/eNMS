@@ -7,7 +7,6 @@ from eNMS.models.automation import Service
 
 
 class DataValidationService(Service):
-
     __tablename__ = "data_validation_service"
     pretty_name = "Data Validation"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)

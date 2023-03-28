@@ -18,7 +18,6 @@ from eNMS.variables import vs
 
 
 class AnsiblePlaybookService(Service):
-
     __tablename__ = "ansible_playbook_service"
     pretty_name = "Ansible Playbook"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)

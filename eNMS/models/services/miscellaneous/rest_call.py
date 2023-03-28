@@ -20,7 +20,6 @@ from eNMS.models.automation import Service
 
 
 class RestCallService(Service):
-
     __tablename__ = "rest_call_service"
     pretty_name = "REST Call"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)

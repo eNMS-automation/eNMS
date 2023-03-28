@@ -20,7 +20,6 @@ from eNMS.variables import vs
 
 
 class Workflow(Service):
-
     __tablename__ = "workflow"
     pretty_name = "Workflow"
     parent_type = "service"
@@ -307,7 +306,6 @@ class WorkflowForm(ServiceForm):
 
 
 class WorkflowEdge(AbstractBase):
-
     __tablename__ = type = class_type = "workflow_edge"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)

@@ -15,7 +15,6 @@ from eNMS.variables import vs
 
 
 class Server(AbstractBase):
-
     __tablename__ = type = "server"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
@@ -28,7 +27,6 @@ class Server(AbstractBase):
 
 
 class User(AbstractBase, UserMixin):
-
     __tablename__ = type = class_type = "user"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
@@ -65,10 +63,7 @@ class User(AbstractBase, UserMixin):
         return self.get_properties()
 
     def update(self, **kwargs):
-        if (
-            kwargs.get("password")
-            and not kwargs["password"].startswith("$argon2i")
-        ):
+        if kwargs.get("password") and not kwargs["password"].startswith("$argon2i"):
             kwargs["password"] = argon2.hash(kwargs["password"])
         super().update(**kwargs)
 
@@ -81,7 +76,6 @@ class User(AbstractBase, UserMixin):
 
 
 class Group(AbstractBase):
-
     __tablename__ = type = class_type = "group"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
@@ -131,7 +125,6 @@ class Group(AbstractBase):
 
 
 class Credential(AbstractBase):
-
     __tablename__ = type = class_type = "credential"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
@@ -165,7 +158,6 @@ class Credential(AbstractBase):
 
 
 class Changelog(AbstractBase):
-
     __tablename__ = "changelog"
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "changelog", "polymorphic_on": type}
@@ -180,7 +172,6 @@ class Changelog(AbstractBase):
 
 
 class Parameters(AbstractBase):
-
     __tablename__ = type = "parameters"
     id = db.Column(Integer, primary_key=True)
     banner_active = db.Column(Boolean)
@@ -189,7 +180,6 @@ class Parameters(AbstractBase):
 
 
 class File(AbstractBase):
-
     __tablename__ = type = class_type = "file"
     log_change = vs.settings["files"]["log_events"]
     type = db.Column(db.SmallString)
@@ -224,7 +214,6 @@ class File(AbstractBase):
 
 
 class Folder(File):
-
     __tablename__ = "folder"
     pretty_name = "Folder"
     parent_type = "file"

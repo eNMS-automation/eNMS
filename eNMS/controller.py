@@ -664,9 +664,7 @@ class Controller:
             constraints.append(vs.models[type].shared == true())
         properties = ["id", "category", "name"]
         for instance in (
-            db.query(type, properties=properties)
-            .filter(or_(*constraints))
-            .all()
+            db.query(type, properties=properties).filter(or_(*constraints)).all()
         ):
             entry = dict(zip(properties, instance))
             result[instance.category or "Other"].append(entry)

@@ -518,7 +518,9 @@ class PoolForm(BaseForm):
     creator = StringField(render_kw={"readonly": True})
     admin_only = BooleanField(ui_name="Admin only (only visible to admin users)")
     description = StringField(widget=TextArea(), render_kw={"rows": 8})
-    manually_defined = BooleanField(ui_name="Manually defined (will not be automatically updated)")
+    manually_defined = BooleanField(
+        ui_name="Manually defined (will not be automatically updated)"
+    )
 
     @classmethod
     def form_init(cls):
@@ -528,9 +530,7 @@ class PoolForm(BaseForm):
                 name = " ".join(word.capitalize() for word in property.split("_"))
                 setattr(cls, f"{model}_{property}", StringField(property, ui_name=name))
                 setattr(cls, f"{model}_{property}_invert", BooleanField(property))
-                vs.form_properties["pool"][f"{model}_{property}"] = {
-                    "type": "str"
-                }
+                vs.form_properties["pool"][f"{model}_{property}"] = {"type": "str"}
                 vs.form_properties["pool"][f"{model}_{property}_match"] = {
                     "type": "list"
                 }

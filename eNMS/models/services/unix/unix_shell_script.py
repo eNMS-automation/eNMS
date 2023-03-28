@@ -9,7 +9,6 @@ from eNMS.variables import vs
 
 
 class UnixShellScriptService(ConnectionService):
-
     __tablename__ = "unix_shell_script_service"
     pretty_name = "Unix Shell"
     parent_type = "connection_service"

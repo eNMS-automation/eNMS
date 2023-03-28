@@ -19,7 +19,6 @@ from eNMS.variables import vs
 
 
 class NetmikoBackupService(ConnectionService):
-
     __tablename__ = "netmiko_backup_service"
     pretty_name = "Netmiko Data Backup"
     parent_type = "connection_service"

@@ -8,7 +8,6 @@ from eNMS.models.automation import ConnectionService
 
 
 class NetmikoConfigurationService(ConnectionService):
-
     __tablename__ = "netmiko_configuration_service"
     pretty_name = "Netmiko Configuration"
     parent_type = "connection_service"

@@ -9,7 +9,6 @@ from eNMS.models.automation import Service
 
 
 class PingService(Service):
-
     __tablename__ = "ping_service"
     pretty_name = "ICMP / TCP Ping"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)

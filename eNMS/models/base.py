@@ -10,7 +10,6 @@ from eNMS.variables import vs
 
 
 class AbstractBase(db.base):
-
     __abstract__ = True
     model_properties = {}
 

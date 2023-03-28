@@ -9,7 +9,6 @@ from eNMS.models.automation import ConnectionService
 
 
 class NetmikoFileTransferService(ConnectionService):
-
     __tablename__ = "netmiko_file_transfer_service"
     pretty_name = "Netmiko File Transfer"
     parent_type = "connection_service"

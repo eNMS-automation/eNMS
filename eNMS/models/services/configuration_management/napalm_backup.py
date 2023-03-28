@@ -20,7 +20,6 @@ from eNMS.variables import vs
 
 
 class NapalmBackupService(ConnectionService):
-
     __tablename__ = "napalm_backup_service"
     pretty_name = "NAPALM Data Backup"
     parent_type = "connection_service"

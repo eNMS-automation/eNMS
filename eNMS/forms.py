@@ -525,7 +525,8 @@ class PoolForm(BaseForm):
         for model in cls.models:
             setattr(cls, f"{model}_properties", vs.properties["filtering"][model])
             for property in vs.properties["filtering"][model]:
-                setattr(cls, f"{model}_{property}", StringField(property))
+                name = " ".join(word.capitalize() for word in property.split("_"))
+                setattr(cls, f"{model}_{property}", StringField(property, ui_name=name))
                 setattr(cls, f"{model}_{property}_invert", BooleanField(property))
                 vs.form_properties["pool"][f"{model}_{property}"] = {
                     "type": "str"

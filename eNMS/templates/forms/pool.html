@@ -1,5 +1,5 @@
 {% from 'macros.html' import inline_field, block_field %}
-{% set filtering = form_type != "pool_filtering" %}
+{% set filtering = form_type == "pool_filtering" %}
 <div class="modal-body">
   <form
     id="pool-form"
@@ -49,19 +49,24 @@
           cellspacing="0"
           width="100%"
         >
+          {% if not filtering %}
           <thead>
             <tr>
               <th>Property</th>
               <th>Value</th>
-              {% if filtering %}
+              
               <th style="width: 25%;">Match</th>
               <th style="width: 5%;">Invert</th>
-              {% endif %}
+              
             </tr>
           </thead>
+          {% endif %}
           <tbody>
             {% for property in form[model + "_properties"] %} {% set property_name =
             "{}_{}".format(model, property) %}
+              {% if filtering %}
+                {{ block_field(form, property_name) }}
+              {% else %}
             <tr>
               <td>
                 {{ names.get(property, property.replace("_", " ").capitalize() ) }}
@@ -70,7 +75,6 @@
                 {{ form[property_name](id="pool-" + property_name, class="form-control
                 add-id") }}
               </td>
-              {% if filtering %}
               <td>
                 {{ form[property_name + '_match'](id="pool-" + property_name + '_match',
                 class="form-control add-id no-search") }}
@@ -82,8 +86,8 @@
                   25px") }}
                 </center>
               </td>
-              {% endif %}
             </tr>
+            {% endif %}
             {% endfor %}
           </tbody>
         </table>

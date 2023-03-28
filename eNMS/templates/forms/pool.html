@@ -2,7 +2,7 @@
 {% set filtering = form_type == "pool_filtering" %}
 <div class="modal-body">
   <form
-    id="pool-form"
+    id="{{ form_type }}-form"
     class="form-horizontal form-label-left add-id"
     method="post"
     autocomplete="off"

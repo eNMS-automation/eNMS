@@ -38,23 +38,11 @@
       <div class="tab-pane fade in active add-id" id="common-properties">
         {{ form.id(id='pool-id', class="add-id") }} {{ form.hidden_tag() }}
         <div class="form-group">
-          <label>Name</label>
-          <div class="form-group">
-            {{ form.name(id="pool-name", class="form-control required add-id",
-            placeholder="Name") }}
-          </div>
-          <label>Creator</label>
-          <div class="form-group">
-            {{ form.creator(id="pool-creator", class="form-control required add-id") }}
-          </div>
-          <label>Description</label>
-          <div class="form-group">
-            {{ form.description(id="pool-description", class="form-control add-id",
-            placeholder="Description") }}
-          </div>
+          {% for field_name in ("name", "creator", "description") %} {{
+            block_field(form, field_name) }} {% endfor %}
           <fieldset>
             <div class="item">
-              {{ form.admin_only(id="pool-admin_only", class="add-id") }}
+              {{ form.(id="pool-admin_only", class="add-id") }}
               <label>Admin only (pool is only visible to admin users)</label>
             </div>
           </fieldset>

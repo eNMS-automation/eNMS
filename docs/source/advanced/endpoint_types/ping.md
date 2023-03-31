@@ -9,7 +9,7 @@ Test whether the application is alive.
 #
 # Example
 ## Ping Response
-``` 
+```json
 {
     "name": 153558346480170,
     "cluster_id": true,

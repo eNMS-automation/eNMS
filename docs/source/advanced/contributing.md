@@ -60,5 +60,5 @@ will launch a local documentation server:
 mkdocs serve
 ```
 
-This server will automatically update & refresh whenever any filesystem
+This server will automatically update and refresh whenever any filesystem
 changes are made in the `enms/docs` folder or `mkdocs.yml`

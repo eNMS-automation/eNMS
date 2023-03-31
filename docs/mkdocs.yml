@@ -10,6 +10,21 @@ nav:
     - Features: base/features.md
     - Installation: base/installation.md
     - Release Notes: base/release_notes.md
+  - System:
+    - Changelog: system/changelog.md
+    - Dashboard: system/dashboard.md
+    - Files: system/files.md
+    - Sessions: system/sessions.md
+  - Administration:
+    - Access:
+      - Overview: administration/overview.md
+      - Credentials: administration/credentials.md
+      - Groups: administration/groups.md
+      - Users: administration/users.md
+    - Servers: administration/servers.md
+    - Tools:
+      - Admin Panel: administration/admin_panel.md
+      - Debugging: administration/debug.md
   - Inventory:
     - Network Creation: inventory/network_creation.md
     - Device Management:
@@ -28,15 +43,10 @@ nav:
       - Service Management: automation/services.md
       - Service Editor: automation/service_editor.md
       - Using Python in the Service Editor: automation/service_python_code.md
-    - Workflows:
-      - Workflow Builder: automation/workflow_builder.md
-      - Workflow Traversal: automation/workflow_traversal.md
-      - Sharing Data between Services: automation/workflow_data.md
-      - More Workflow Features: automation/workflow_more_features.md
-    - Built-in Service Types:
-      - Service Type Index: automation/builtin_services.md
+    - Service Types:
+      - Service Type Index: automation/service_types.md
       - Ansible Playbook Service: automation/servicetypes/ansible_playbook.md
-      - Data Extraction Service: automation/servicetypes/data_extraction.md
+      - Data Processing Service: automation/servicetypes/data_processing.md
       - Data Validation Service: automation/servicetypes/data_validation.md
       - Generic File Transfer Service: automation/servicetypes/generic_filetransfer.md
       - Git Action Service: automation/servicetypes/git_action.md
@@ -68,8 +78,13 @@ nav:
       - UNIX Command Service: automation/servicetypes/unix_command.md
       - UNIX Shell Script Service: automation/servicetypes/unix_shell.md
       - Workflow (subworkflow) Service: automation/servicetypes/workflow.md
-    - Scheduling: automation/scheduling.md
+    - Workflows:
+      - Workflow Builder: automation/workflow_builder.md
+      - Workflow Traversal: automation/workflow_traversal.md
+      - Sharing Data between Services: automation/workflow_data.md
+      - More Workflow Features: automation/workflow_more_features.md
     - Results: automation/results.md
+    - Scheduling: automation/scheduling.md
   - Advanced:
     - Search System: advanced/search_system.md
     - Workflow and Service Design:
@@ -86,30 +101,21 @@ nav:
       - Get status or results of service: advanced/endpoint_types/results_service.md
       - Retrieve device configuration: advanced/endpoint_types/device_config.md
       - Migrate between applications: advanced/endpoint_types/migrate.md
+      - Get worker stats: advanced/endpoint_types/workers.md
       - Ping application: advanced/endpoint_types/ping.md
       - Administrative: advanced/endpoint_types/admin.md
     - CLI Commands: advanced/cli_commands.md
     - Customization: advanced/customization.md
     - Contributing: advanced/contributing.md
-  - Administration:
-    - Users: administration/users.md
-    - Servers: administration/servers.md
-    - Access: administration/access.md
-    - Credentials: administration/credentials.md
-    - Changelog:  administration/changelog.md
-    - Sessions: administration/sessions.md
-    - Administrative Tools:
-      - Admin Panel: administration/admin_panel.md
-      - Debugging: administration/debug.md
 theme:
   name: material
   custom_dir: theme_overrides
   features:
-    - navigation.instant
-    - navigation.tracking
     - navigation.expand
+    - navigation.instant
     - navigation.tabs
     - navigation.tabs.sticky
+    - navigation.tracking
 plugins:
   - search
 extra:
@@ -124,7 +130,7 @@ extra:
       link: mailto://contact@enms.io
   generator: false
   no_auto_expand:
-    - 'Built-in Service Types'
+    - 'Service Types'
     - 'REST API'
 extra_javascript:
   - https://code.jquery.com/jquery-2.2.4.min.js

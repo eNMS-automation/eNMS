@@ -24,6 +24,8 @@ running the application. The options are:
 
 - `delete_corrupted_edges.py` - This code looks for any duplicate edges in
 Workflows and removes any that it finds.
+- `duplicates_in_association_table.py` - Provides a straightforward way to reproduce the duplicate rows issue
+ in an association table.
 - `empty.py` - This file is empty and allows custom python code to be entered
 and executed.
 - `functions.py` - The code in this file tests the ability to create a device,

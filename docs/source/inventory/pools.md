@@ -3,41 +3,31 @@
 
 ## Overview 
 
-A Pool is a collection of objects of the following types:
-
-- Devices.
-- Links.
-- Users.
-- Services.
-- Networks.
-
-Pools can contain a single type of object or a mix of objects types.  For each
-object type, a set of selection properties is used to determine which objects
-of that type will be included in the pool. If the properties of an object
+A Pool is a collection of device and/or link objects. When defining a Pool, 
+a combination of selection properties are specified that define a match based on
+inclusion, equality, or regular expression; this match determines which
+devices and links are included in the Pool. If the properties of an object
 matches the pool properties, that object is automatically included in
 the pool. Alternatively, pools can be edited to manually select objects instead
-of using criteria based on properties.
+of using criteria based on properties. 
 
-The context where a pool is used determines which object types are used from
-the pool. For example, when a pool specifies the targets for a workflow, the
-devices are used and links, users, and services in the pool are ignored.
+Pools of devices and links can also be used to define the objects displayed in
+the `Geographic View` and in the `Network Builder` `Visualization` panels.
 
 Pools are used in several parts of the application:
 
 - Targets of a Service or Workflow:  Devices can be added to a
-pool, which is then selected as the execution target for a Service or Workflow
-automation to run on.
-
+  pool, which is then selected as the execution target for a Service or Workflow
+  automation to run on.
     - Pools can also be specified as the execution targets of a Scheduled Task.
-    If a pool is also specified as the target within the service or workflow,
-    the Scheduled Task's pool overrides which devices the
-    automation executes against.
+      If a pool is also specified as the target within the service or workflow,
+      the Scheduled Task's pool overrides which devices the
+      automation executes against.
     
 - Visualization Scope:
     - Geographical Visualization: pool selection is used to filter which objects 
     are presented on the map. The pool list only shows pools with devices
-    and links. Pools of only Users and Services are omitted since these don't
-    make sense to show on a map.
+    and links. 
     - Network Builder: displays existing Network objects (from 
     `Inventory -> Networks`) on the graph.  The `Add to Network` button allows
     pools of devices and links (as well as individual devices and links) to be
@@ -45,12 +35,6 @@ automation to run on.
 
 - Advanced Search / Relationship Based Filtering:  Pools can be targets for the 
 union, intersection, or empty match in order to filter a table in the application.
-    
-- RBAC (Role Based Access Controls): Pools are used in the 
-  `Administration -> Access` menu to define which objects a user can access:
-  Devices, Links, Services.  
-    - Also, when defining credentials in `Administration -> Credentials',
-    Pools of Users are used to define who can access that credential.
 
 ## Pool Management
 
@@ -60,7 +44,7 @@ The `Inventory -> Pools` menu supports the following operations on each pool
 listed in the Pools table:
 
 - Update: Recalculate membership in the pool based on the current pool properties
-  and object properties to determine are now included in the pool.
+  and object properties to determine which objects are now included in the pool.
   
 - Edit: Modify the properties for matching this pool.
 
@@ -90,12 +74,16 @@ filtering or advanced search criteria:
 - Export:  Export the list of Pools as a .csv file that is downloaded to the 
   user's browser.
  
-- Update All Pools: Recalculate pool membership.
+- Update All Pools: Recalculate pool membership for all Pools.
   
 - Run Service on All Pools in the Table: Run a Service or Workflow using all
   the pools in the table as the combined set of execution targets. 
   
 - Bulk Deletion:  Delete all pools currently displayed in the table.
+
+## Managing Pool Access
+User maintained `Access Control` is available for this object. This allows the `Owners` to select desired access.
+[Check out this page for more details on modifying `Access Control`.](../administration/overview.md)  
 
 ## Device Pool Creation Example
 
@@ -138,7 +126,7 @@ This pool enforces the intersection of the following conditions:
 - source name: `sto` - Match is Inclusion; all links whose source
   name includes the string `sto` are matched, e.g. `Boston` and `Houston`.
 
-In summary, all `Ethernet Link`s starting with source devices whose name includes
+In summary, all `Ethernet Link`(s) starting with source devices whose name includes
 `sto` will be members of the pool.
 
 ## Default Pools
@@ -172,29 +160,24 @@ In `Service Edit Panel -> Step 3`, select Device(s) and/or Pool(s) as target(s).
 
 ![Use a pool as a target](../_static/inventory/pools/target_pool.png)
 
-## Use a Pool to restrict User Access or Credential Use
-
-In `Administration -> Access` and `Administration -> Credentials`, the
-administrator has the ability to restrict users. See [Credentials](../administration/credentials.md) 
-
 ## Pool Recalculation
 
 All Pools are subject to automatic updates by eNMS (contingent upon the
-fact that its `Manually Defined` flag is NOT set). Pool recalculations occur
-after creation in the following cases:
+fact that the Pool's `Manually Defined` flag is NOT set). Pool recalculations occur
+in the following cases:
 
-- When the eNMS starts up or restarts.
-- When a device is manually added to the inventory (only for applicable
-  pools).
-- When a device is modified.
+- When a new pool is created, it is (re)calculated.
+- When the REST API migration_import and topology_import endpoints are run and 
+  their skip_pool_update parameter is not provided, and when update_all_pools 
+  endpoint is run
 - After pulling or cloning the content from the git configuration
   repository, and the applicable pool relies on `configuration` and/or 
   `operational data` parameter fields.
-- When a service runs that has `Update pools before running` selected in
+- When a service runs that has `Update target pools before running` selected in
   `Step 3` of the service targets panel, only the target pools for that
   service are updated.
-- When a service runs that has `Update all pools after running`, all pools
-  are updated once that service terminates. 
+- When a service runs that has `Update pools after running` selected in
+  `Step 1`, all pools are updated once that service terminates. 
 
 To manually update a Pool:
 
@@ -205,17 +188,18 @@ To manually update a Pool:
 ## Manual definition and `Manually Defined` option
 
 Initially, by default, the devices and links within a pool are
-determined based on the pool properties. First edit the pool and set
-`Manually Defined` to enabled.  
+determined automatically based on the pool properties. To disable automatic 
+recalculations for a Pool, first edit the pool and set `Manually Defined` to
+enabled.  
 
 ![Manual definition of a pool](../_static/inventory/pools/manual_definition.png)
 
 Next, the individual pools can be edited by the user clicking the hyperlink for
-each object type: device, link, user, service.  The table for that object
-type's included members will be displayed. Click the `+` button at the top of
-the table to add the object. The user can select the devices to manually add
-from the inventory list or paste a list of comma-separated devices from the
-clipboard (however, all devices must exist in the inventory).
+Devices or Links.  The table for that object type's included members will be
+displayed. Click the `+` button at the top of the table to add the object.
+The user can select the devices to manually add from the inventory list or
+paste a list of comma-separated devices from the clipboard (however, all devices
+must exist in the inventory).
 
 ![Manual definition of a pool](../_static/inventory/pools/manual_add.png)
 

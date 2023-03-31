@@ -1,6 +1,6 @@
 # Get the Status or Results of a Service
 
-Return results of a completed service, or the status of a service if currently running
+Return results of a completed service, or the status of a service if currently running.
 
 **Method:** Get<br />
 **Address:** /rest/result/`service_name`/`runtime` <br />
@@ -30,7 +30,7 @@ Return results of a completed service, or the status of a service if currently r
     "result" property, as below.
 
 #
-##Get run service result - result is ready
+## Get run service result - result is ready
 ```json
 {
     "status": "Completed",
@@ -44,6 +44,7 @@ Return results of a completed service, or the status of a service if currently r
             ],
             "failure": []
         },
-        "duration": "0:00:02",
+        "duration": "0:00:02"
+    }
 }
 ```

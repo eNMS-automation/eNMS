@@ -6,7 +6,7 @@ Allows you to migrate the service from one application instance to another provi
 **Parameters:** None <br />
 **Payload:** Pending
 
-The body must contain the name of the project, the types of instance to
+The body must contain the name of the project and the types of instances to
 import/export. The import endpoint supports an additional boolean parameter
 `empty_database_before_import` that controls whether to empty the database
 before importing.
@@ -16,12 +16,12 @@ before importing.
 ```json
 {
   "name": "test_project",
-  "import_export_types": ["user", "device", "link", "pool", "service", "workflow_edge", "task"],
+  "import_export_types": ["user", "group", "device", "file", "link", "service", "network", "workflow_edge", "task", "credential", "pool"],
   "empty_database_before_import": true
 }
 ```
 
-You can also trigger the import/export programmatically. Here\'s an
+You can also trigger the import/export programmatically. Here's an
 example with the python `requests` library.
 
 ```python
@@ -33,7 +33,7 @@ post(
     json={
         "name": "Backup",
         "empty_database_before_import": False,
-        "import_export_types": ["user", "device", "link", "pool", "service", "workflow_edge", "task"],
+        "import_export_types": ["user", "group", "device", "file", "link", "service", "network", "workflow_edge", "task", "credential", "pool"],
     },
     headers={'content-type': 'application/json'},
     auth=HTTPBasicAuth('admin', 'admin')

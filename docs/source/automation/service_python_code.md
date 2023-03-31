@@ -32,6 +32,9 @@ are made available to the user.
         properties are supported:
 
         - device.name.
+        - device.creator.
+        - device.last_modified.
+        - device.last_modified_by.
         - device.subtype.
         - device.description.
         - device.model.
@@ -64,7 +67,7 @@ are made available to the user.
     - **Type**: Set of Database Objects.
     - **Available**: In service by service workflows.
 
--   `dict_to_string` - convert a dictionary to a string form with
+-   `dict_to_string()` - convert a dictionary to a string form with
     indentation.
         **Type**: Function.
         **Available**: Always.
@@ -160,12 +163,15 @@ are made available to the user.
     -   **Return Type**: Dictionary.
     -   **Available**: When the service runs inside a workflow.
     -   **Parameters**:
-        -   `service`: (**mandatory**) Name of the service.
+        -   `service_name`: (**mandatory**) Name of the service.
         -   `device`: (**optional**) Name of the device, when you want to
             get the result of the service for a specific device.
         -   `workflow`: (**optional**) If the workflow has multiple
             subworkflows, a subworkflow can be specified to get the
             result of the service for a specific subworkflow.
+        -   `all_matches`: (**optional**, default=False) When True, returns
+            a list with results for all devices.  Otherwise only the first
+            result is returned.
 
 - `get_var()`
     -   **Meaning**: Retrieve a value by `name` that was previously
@@ -282,7 +288,7 @@ are made available to the user.
     -   **Type**: Dictionary.
     -   **Available**: Always.
 
--   `send_email` allows for sending an email with optional attached file. It
+-   `send_email()` allows for sending an email with optional attached file. It
     takes the following parameters:
 
     -   `title`: (**string, mandatory**).
@@ -354,7 +360,7 @@ fields). Some examples of where Python fields are used:
     or IP address(es) of the desired inventory devices.
 -   In the `Skip Query` field of the "Workflow" section of a
     service. The expression result is treated as a boolean.
--   In the `Python Exraction Query` field of the `Data Extraction Service`.
+-   In the `Variable` field of the `Data Processing Service`.
     The expression result is used as the extracted value.
 -   In the code of a Python Snippet Service, or the `Preprocessing` and
     `Postprocessing` field of every service.

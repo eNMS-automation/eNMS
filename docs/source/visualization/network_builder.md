@@ -18,6 +18,7 @@ Button controls exist for the following functionality:
 - `Delete` devices and/or links from the diagram.
 - `Network Tree` displays a hierarchical tree diagram of included devices.
 - `Run a service or workflow` against all the devices in this Network diagram
+- `Network Search` for devices and/or links from the diagram.
 - `Zoom in / Zoom out`.
 - `Auto-arrange the Network` diagram: toggle this button to turn auto-arrange
   on and off.

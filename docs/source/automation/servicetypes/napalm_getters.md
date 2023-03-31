@@ -1,14 +1,14 @@
 Uses Napalm to retrieve the output of a list of getters. The output can be
-validated in Step4 of the service or later validated with `Data Validation
-Service`.
+validated in Step 4 of the service or later with [Data Validation
+Service](data_validation.md).
 
-![Napalm Getters Service](../../_static/automation/builtin_service_types/napalm_getters.png)
+![Napalm Getters Service](../../_static/automation/service_types/napalm_getters.png)
 
 Configuration parameters for creating this service instance:
 
 - All [Napalm Service Common Parameters](napalm_common.md).
 
-- `Getters` Choose one or more getters to retrieve; Napalm getters
+- `Getters`- Choose one or more getters to retrieve. Napalm getters
   (standard retrieval APIs) are documented 
   [here](https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix).
 

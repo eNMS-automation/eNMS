@@ -2,14 +2,14 @@ Scrapli netconf service works similar to Netconf (ncclient) Service. It allows
 sending an XML payload to a device's netconf interface, and the returned
 result can be validated.
 
-![Scrapli Netconf Service](../../_static/automation/builtin_service_types/scrapli_netconf.png)
+![Scrapli Netconf Service](../../_static/automation/service_types/scrapli_netconf.png)
 
 Scrapli Project Documentation can be reviewed
 [HERE](https://carlmontanari.github.io/scrapli/user_guide/project_details/)
 
 ## Main Parameters
 
-- `Command`: Netconf operation to send to the device netconf interface.
+- `Command`- Netconf operation to send to the device netconf interface.
 
     - `Get`.
     - `RPC`.
@@ -21,43 +21,43 @@ Scrapli Project Documentation can be reviewed
     - `Lock`.
     - `Unlock`.
 
-- `Target`: Which device config to impact (only displayed for Get,Edit,Delete
+- `Target`- Which device config to impact (only displayed for Get,Edit,Delete
   Configurations, Lock and Unlock).
 
     - `Running Configuration`.
     - `Startup Configuration`.
     - `Candidate Configuration`.
 
-- `Content`: XML content to send as a filter to the device.
+- `Content`- XML content to send as a filter to the device.
 
-- `Commit After Editing Configuration`: Go ahead and commit, or we have more 
+- `Commit After Editing Configuration`- Go ahead and commit, or we have more 
   edits and changes to make?
 
-- `Strip Namespaces from returned XML`: Some device's adherence to namespaces
+- `Strip Namespaces from returned XML`- Some device's adherence to namespaces
   is unruly so strip it off. 
 
 ## Connection Parameters
 
-- `Credentials`: Select between:
-    - `Device Credentials` - eNMS will select the most appropriate credential
+- `Credentials`- Select between:
+    - `Device Credentials`- eNMS will select the most appropriate credential
       object for each device. If there are multiple credentials available, eNMS
       will use the `Type of Credential` and `Priority` properties as a tie
       breaker.
-    - `User Credentials` - Use the user's currently logged in credentials to
-      access the device.
-    - `Custom Credentials` - The user provides the credentials below:
+    - `Named Credentials`- Allows users to reference a specific credential for 
+      all targets. Selecting this option requires additional selections below.
+    - `Custom Credentials`- The user provides the credentials below:
 
-- `Custom Username` - User provided username.
+- `Custom Username`- User provided username.
 
-- `Custom Password` - User provided password.
+- `Custom Password`- User provided password.
 
-- `Start New Connection`: **Before the service runs**, the current
+- `Start New Connection`- **Before the service runs**, the current
   cached connection is discarded and a new one is started.
     
-- `Connection Name`: If changed to something other than `default`, the
+- `Connection Name`- If changed to something other than `default`, the
   connection will be cached as a separate connection to that same device.
   This allows for multiple simultaneous "named" connections to a single
-  device, as in this example:
+  device.
     
-- `Close Connection`: Once the service is done running, the current
+- `Close Connection`- Once the service is done running, the current
   connection will be closed.

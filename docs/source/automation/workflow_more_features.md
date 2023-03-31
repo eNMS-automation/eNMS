@@ -53,6 +53,34 @@ presents the user with a form to select:
     it to be used in a subsequent service, this will not work after using
     `Restart Workflow from Here`.
 
+## Disable a Service or Workflow
+
+The `Disabled` property, when checked, prevents a workflow or service from
+running from the UI or from the REST API.  This is useful when closed loop
+automations that are triggered through the REST API by another system need
+to be prevented from running. 
+
+The `Disabled` property is accessed in the UI in the Step 1 Service / Workflow
+Editor panel.  And when it is checked, the `Disabled Time & User` is captured
+in the UI in a read-only field. The property can also be toggled via the REST
+API instance endpoint `rest/instance/service` and passing a payload that looks
+like:
+
+```json
+{
+    "name": "service or workflow name",
+    "devices": [""],
+    "disabled": true
+}
+```
+
+!!! note
+
+    Disabling a service inside of a workflow prevents that service from running
+    with the Right-Mouse-Click->Run option. It does not prevent that service
+    from running when the entire workflow is run: use the Skip option to achieve
+    that functionality instead.
+
 ## Connection Cache
 
 When using netconf, netmiko, napalm, and scrapli services in a workflow,

@@ -14,11 +14,11 @@ functionality. Common forms are available on every service for defining
 device targets, iteration, retries, pre and post processing, result
 validation, notifications, etc.
 
-eNMS comes with a number of "built-in" service types based on network
+eNMS comes with a number of service types based on network
 automation frameworks such as `netmiko`, `napalm` and `ansible`, but
 custom service types can be created. Each service type must return a python
 dictionary as a result, and dictionaries are the primary means by which
-services exchange data.  See the [Builtin Service Types](../builtin_services/)
+services exchange data.  See the [Service Types](../service_types/)
 section for details on each of the different service types.
 
 ## Service Management Panel
@@ -32,19 +32,17 @@ duplicated, deleted, and existing services run.
 The Service Management Panel has a number of controls at the top for
 Filtering and Bulk operations:
 
--  `Columns` Selector - Choose which columns to display in the table.
--  `Display Services hierarchically` (using hyperlinks in the scope of
+- `Columns` Selector - Choose which columns to display in the table.
+- `Display Services hierarchically` (using hyperlinks in the scope of
    the workflow that they are contained in) or Display All Services.
--  `Refresh` the Table.
--  `Advanced Search:` for complex filtering of the table.
--  `Clear Search` criteria.
--  `Copy the Selection` of currently displayed Services to the clipboard.
--  `Back navigation and Forward navigation`: For drilling into nested
-   workflows with subworkflows and back out.
--  `New`: Create Service with Service Type pull-down Selector: This opens
+- `Refresh` the Table.
+- `Advanced Search:` for complex filtering of the table.
+- `Clear Search` criteria.
+- `Copy the Selection` of currently displayed Services to the clipboard.
+- `New`: Create Service with Service Type pull-down Selector: This opens
    the Service Editor Panel discussed below with a new instance of the 
    selected Service Type.
--  `Import Service`: Opens a panel to allow drag and drop of service
+- `Import Service`: Opens a panel to allow drag and drop of service
    .tgz files (created using the Export service feature) from the user's
    browser. One or multiple services can be uploaded / imported in this way.
    
@@ -62,34 +60,35 @@ Filtering and Bulk operations:
 The following features operate on Bulk Services that are currently
 filtered in the table display.
 
--  `Export Service as .TGZ`: Bulk export the filtered set of Services; stored on
+- `Export Service as .TGZ`: Bulk export the filtered set of Services; stored on
    the server in the `files/services` folder. 
--  `Bulk Edit`:  Makes the same config change to all currently filtered
+- `Bulk Edit`:  Makes the same config change to all currently filtered
    services in the table display.
--  `Export as CSV`: Export the current filtered list of services in the
+- `Export as CSV`: Export the current filtered list of services in the
    table display to a .csv file that downloads to the user's browser.
--  `Bulk Deletion`: Deletes all services that are currently filtered in the
+- `Bulk Deletion`: Deletes all services that are currently filtered in the
    table display.
 
 Below the top button bar are the Quick Filter controls for filtering the table.
 
-Each Service listed in the table has its own button bar on the right that
-includes:
+Each Service Name listed in the table is a hyperlink to the workflow builder panel
+for workflows, otherwise the standalone service name.  Each service has its own
+button bar on the right that includes:
 
--  `View Logs`: View the service logs.
--  `View Results`: View the service results.
--  `Edit Service`: Opens the Service Editor Panel with default parameters when
+- `View Logs`: View the service logs.
+- `View Results`: View the service results.
+- `Edit Service`: Opens the Service Editor Panel with default parameters when
    creating a new service and with saved service parameters when editing an
    existing service.
--  `Duplicate Service`: Opens the Service Editor Panel with all parameters
+- `Duplicate Service`: Opens the Service Editor Panel with all parameters
    duplicated to the original service; create a new Service Name to complete.
--  `Export Service`: Downloads that Service to the browser in a .tgz file
+- `Export Service`: Downloads that Service to the browser in a .tgz file
    containing a YAML file representation of the service profile. 
--  `Run Service`: with the saved parameters inside the Service.
--  `Parameterized Run`: Run the service after soliciting input fields from the
+- `Run Service`: with the saved parameters inside the Service.
+- `Parameterized Run`: Run the service after soliciting input fields from the
    user. Input field selection is controlled by the selection of parameters
-   in the Step 1 Service Panel Editor.
--  `Delete Service`: Deletes this service. 
+   in the Step 1 Service Editor Panel.
+- `Delete Service`: Deletes this service. 
 
 !!! Note
 
@@ -98,19 +97,9 @@ includes:
     directory. This is intended for administrators migrating services from
     one instance of eNMS to another when deploying multiple instances.
 
-### Bulk Edit example 
-
-!!! tip
-
-    When using the Bulk Edit to edit `Step 2, Specific` properties, one should use the 
-    Service Type pull-down to select the Service Type (e.g., Netmiko Commands Service)
-    and provide some appropriate filtering (e.g., `type -> netmiko_commands`).
-    
-    See the example below for changing the Timeout for several Netmiko Commands 
-    services.
-    
-![Bulk Edit Netmiko Commands Service](../_static/automation/services/bulk_edit_netmiko_validation.png)      
-    
+## Managing Service Access
+User maintained `Access Control` is available for service objects. This allows the `Owners` to select desired access.
+[Check out this page for more details on modifying `Access Control`.](../administration/overview.md)  
 
 ## Running a Service
 
@@ -125,6 +114,8 @@ Services can be run from the following locations:
   list of devices shown - for both the `Geographical View` and the `Network Builder`.
 - `Inventory` Devices and Pools tables: A service can be selected to run
   on a device, all filtered devices, a pool, or the filtered pools in the table.
+  This same table is also available from the `Dashboard` by clicking on a category
+  of devices in the graph.
 - Using the `REST API`: the same flexibility provided by the UI is also available 
   via a REST API. 
 
@@ -190,11 +181,11 @@ Results can be viewed in the following locations:
 Viewing device and service Logs is available at all the above 
 same results locations. The Log view panel automatically pops up when a service
 or workflow is manually initiated via the Services Management table or via
-Workflow Builder, and the log window automatically scroll as logs occur.
+Workflow Builder, and the log window automatically scrolls as logs occur.
 Logs for scheduled tasks or REST API initiated automation
-jobs produce logs, they but do not cause the Log view panel to open.
+jobs produce logs, but they do not cause the Log view panel to open.
 
-The Log view panel allows for the selection of a historical runtime to view logs
+The Log view panel allows for the selection of a historical runtimes to view logs
 for, and the panel has a `Download Logs` button to download the text logs to
 the user's browser.
 
@@ -202,3 +193,16 @@ the user's browser.
 
 To define additional, custom Service Types not included in the built-in eNMS Service 
 Types, please refer to [Customization](../../advanced/customization/#custom-service-types).
+
+### Bulk Edit example 
+
+!!! tip
+
+    When using the Bulk Edit to edit `Step 2, Specific` properties, one should use the 
+    Service Type pull-down to select the Service Type (e.g., Netmiko Commands Service)
+    and provide some appropriate filtering (e.g., `type -> netmiko_commands`).
+    
+    See the example below for changing the Timeout for several Netmiko Commands 
+    services.
+    
+![Bulk Edit Netmiko Commands Service](../_static/automation/services/bulk_edit_netmiko_validation.png)      

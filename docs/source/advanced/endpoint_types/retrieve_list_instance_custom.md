@@ -61,8 +61,10 @@ interface on each table.
   "type": "device",
     "columns": ["name", "ip_address", "configuration", "configuration_matches"],
     "maximum_return_records": 3,
-    "search_criteria": {"configuration_filter": "inclusion",
-                        "configuration": "loopback"}
+    "search_criteria": {
+      "configuration_filter": "inclusion",
+      "configuration": "loopback"
+    }
 }
 ```
 !!! Note
@@ -76,8 +78,10 @@ interface on each table.
   "type": "link",
     "columns": ["name", "source_name"],
     "maximum_return_records": 3,
-    "search_criteria": {"name_filter": "inclusion",
-                        "name": "name_of_link"}
+    "search_criteria": {
+      "name_filter": "inclusion",
+      "name": "name_of_link"
+    }
 }
 ```
 #
@@ -87,11 +91,11 @@ interface on each table.
   "type": "result",
   "columns": ["parent_runtime", "result"],
   "maximum_return_records": 1,
-  "search_criteria": {"workflow_name_filter": "inclusion",
-                      "workflow_name": "the_name_of_workflow"
-                      },
-  "order": [{"column": 0,
-             "dir": "desc"}]
+  "search_criteria": {
+    "workflow_name_filter": "inclusion",
+    "workflow_name": "the_name_of_workflow"
+  },
+  "order": [{"column": 0, "dir": "desc"}]
 }
 ```
 #
@@ -101,11 +105,11 @@ interface on each table.
   "type": "result",
   "columns": ["result", "parent_runtime", "service_name"],
   "maximum_return_records": 1,
-  "search_criteria": {"parent_runtime": "2021-04-19 04:09:05.424206", 
-                      "parent_service_name": "your_workflow"
-                      }
+  "search_criteria": {
+    "parent_runtime": "2021-04-19 04:09:05.424206", 
+    "parent_service_name": "your_workflow"
+  },
   "start": 1,
   "maximum_return_records": 100 
-   
 }
 ```

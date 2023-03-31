@@ -36,6 +36,10 @@ These actions apply to single link:
 - *Duplicate* - create a copy of this link.
 - *Delete* - delete this link.
 
+## Managing Link Access
+User maintained `Access Control` is available for this object. This allows the `Owners` to select desired access.
+[Check out this page for more details on modifying `Access Control`.](../administration/overview.md)  
+
 ## Showing Pools for a Link
 
 One can also view relationships for Link - i.e., the Pools, associated with a link.  

@@ -171,6 +171,7 @@
     Payload Recursive Conservation with Restart Mechanism: &id060 [-238, -178]
     Preprocessing and Postprocessing Mechanism: &id034 [-197, -37]
     Preprocessing and Postprocessing Mechanisms: [-155, 200]
+    Priority Mechanism: [-249, 62]
     RBAC Target Restriction: &id049 [-176, -144]
     'REST API: GET Endpoints': [-425, -25]
     'REST API: GET Endpoints is_alive, configuration and instance': *id024
@@ -657,6 +658,7 @@
     Payload Recursive Conservation with Restart Mechanism: &id151 [663, 12]
     Preprocessing and Postprocessing Mechanism: &id125 [619, 353]
     Preprocessing and Postprocessing Mechanisms: [635, 466]
+    Priority Mechanism: [582, 32]
     RBAC Target Restriction: &id140 [654, -133]
     'REST API: GET Endpoints': [500, 0]
     'REST API: GET Endpoints is_alive, configuration and instance': *id115
@@ -35735,7 +35737,7 @@
   preprocessing: ''
   priority: 10
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   rbac_run: []
   reply_to: ''
   report: ''
@@ -35849,7 +35851,7 @@
   preprocessing: ''
   priority: 10
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   rbac_run: []
   reply_to: ''
   report: ''
@@ -35945,7 +35947,7 @@
   preprocessing: ''
   priority: 9
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   rbac_run: []
   reply_to: ''
   report: ''
@@ -36061,7 +36063,7 @@
   preprocessing: ''
   priority: 10
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   rbac_run: []
   reply_to: ''
   report: ''
@@ -36182,7 +36184,7 @@
   preprocessing: ''
   priority: 10
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   rbac_run: []
   reply_to: ''
   report: ''
@@ -36280,7 +36282,7 @@
   preprocessing: ''
   priority: 10
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   rbac_run: []
   reply_to: ''
   report: ''
@@ -36395,7 +36397,7 @@
   preprocessing: ''
   priority: 10
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   rbac_run: []
   reply_to: ''
   report: ''
@@ -36498,7 +36500,7 @@
   preprocessing: ''
   priority: 10
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   rbac_run: []
   reply_to: ''
   report: ''
@@ -36609,7 +36611,7 @@
   preprocessing: ''
   priority: 10
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   rbac_run: []
   reply_to: ''
   report: '{{ "\n\n".join(dict_to_string(result["result"]) for result in get_result("Service",
@@ -36699,7 +36701,7 @@
   preprocessing: ''
   priority: 10
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   rbac_run: []
   reply_to: ''
   report: ''
@@ -36816,7 +36818,7 @@
   preprocessing: ''
   priority: 10
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   rbac_run: []
   reply_to: ''
   report: "<center>\r\n  <div>\r\n    <table>\r\n      <tr>\r\n        {% for header\
@@ -36912,7 +36914,7 @@
   preprocessing: ''
   priority: 10
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   rbac_run: []
   reply_to: ''
   report: ''
@@ -36931,6 +36933,573 @@
   source_code: "result = {\r\n    \"name\": device.name,\r\n    \"ip_address\": device.ip_address,\r\
     \n    \"port\": device.port\r\n}\r\nresults[\"success\"] = True\r\nresults[\"\
     result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- admin_only: false
+  category: Basics
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  custom_property: Default Value
+  default_uuid: 41463b93-2d3a-4ced-b4ae-37e190754f17
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  disabled: false
+  disabled_info: ''
+  display_only_failed_nodes: false
+  display_report: false
+  email_report: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    181b8927-2645-4554-86ad-f7852350d253:
+      alignment: left
+      content: Priority 14
+      positions: ['0', '0']
+      size: 14
+    48cc8c16-05aa-43bf-a328-10e9472881c9:
+      alignment: left
+      content: Priority 13
+      positions: ['0', '0']
+      size: 14
+    62272237-5361-4cec-98dc-428d0d10cc5d:
+      alignment: left
+      content: Priority 10
+      positions: ['0', '0']
+      size: 14
+    735cf3ec-a867-472e-b2ae-30722e45e3ad:
+      alignment: left
+      content: Priority 12
+      positions: ['0', '0']
+      size: 14
+    81efe644-8a97-4409-8233-ba7a2d026afb:
+      alignment: left
+      content: "This workflow tests the priority mechanism.\r\nServices with a higher\
+        \ priority run first.\r\nServices should run in the following order: 1 ->\
+        \ 2 -> 3 -> 4 -> 5."
+      positions: ['76.2530517578125', '286.5']
+      size: 14
+    c6835de8-96e6-49ec-be7d-8e80bd8b3177:
+      alignment: left
+      content: Priority 11
+      positions: ['0', '0']
+      size: 14
+  last_modified: '2023-03-30 13:43:57.532447'
+  last_modified_by: admin
+  log_level: 1
+  mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: device
+  mandatory_parameter: Default Value
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: Priority Mechanism
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: [admin]
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  rbac_edit: []
+  rbac_read: [Admin User]
+  rbac_run: []
+  reply_to: ''
+  report: ''
+  report_format: text
+  report_jinja2_template: false
+  reserved: false
+  restrict_to_owners: []
+  run_method: per_device
+  scoped_name: Priority Mechanism
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Priority Mechanism] Service 1', '[Priority
+      Mechanism] Service 2', '[Priority Mechanism] Service 3', '[Priority Mechanism]
+      Service 4', '[Priority Mechanism] Service 5']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: [PaloAlto]
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- admin_only: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_uuid: 07f91563-ae17-4992-93c5-3b80021a22cd
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  disabled: false
+  disabled_info: ''
+  display_only_failed_nodes: false
+  display_report: false
+  email_report: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2023-03-30 13:42:56.661672'
+  last_modified_by: admin
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parameter: Default Value
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Priority Mechanism] Service 1'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: [admin]
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  positions:
+    Priority Mechanism: [-116, -79]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 14
+  rbac_edit: []
+  rbac_read: [Admin User]
+  rbac_run: []
+  reply_to: ''
+  report: ''
+  report_format: text
+  report_jinja2_template: false
+  reserved: false
+  restrict_to_owners: []
+  run_method: per_device
+  scoped_name: Service 1
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- admin_only: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_uuid: 71327865-3d37-46b5-a34b-4543ca26f931
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  disabled: false
+  disabled_info: ''
+  display_only_failed_nodes: false
+  display_report: false
+  email_report: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2023-03-30 13:43:13.639630'
+  last_modified_by: admin
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parameter: Default Value
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Priority Mechanism] Service 2'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: [admin]
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  positions:
+    Priority Mechanism: [-11, 170]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 13
+  rbac_edit: []
+  rbac_read: [Admin User]
+  rbac_run: []
+  reply_to: ''
+  report: ''
+  report_format: text
+  report_jinja2_template: false
+  reserved: false
+  restrict_to_owners: []
+  run_method: per_device
+  scoped_name: Service 2
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- admin_only: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_uuid: f173e0bf-6638-48cb-ab73-77edeacb014a
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  disabled: false
+  disabled_info: ''
+  display_only_failed_nodes: false
+  display_report: false
+  email_report: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2023-03-30 13:43:37.804384'
+  last_modified_by: admin
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parameter: Default Value
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Priority Mechanism] Service 3'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: [admin]
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  positions:
+    Priority Mechanism: [128, -88]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 12
+  rbac_edit: []
+  rbac_read: [Admin User]
+  rbac_run: []
+  reply_to: ''
+  report: ''
+  report_format: text
+  report_jinja2_template: false
+  reserved: false
+  restrict_to_owners: []
+  run_method: per_device
+  scoped_name: Service 3
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- admin_only: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_uuid: 08e71ee9-607d-4909-b6bb-2a277c76b6f9
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  disabled: false
+  disabled_info: ''
+  display_only_failed_nodes: false
+  display_report: false
+  email_report: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2023-03-30 13:43:57.532447'
+  last_modified_by: admin
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parameter: Default Value
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Priority Mechanism] Service 4'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: [admin]
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  positions:
+    Priority Mechanism: [309, 169]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 11
+  rbac_edit: []
+  rbac_read: [Admin User]
+  rbac_run: []
+  reply_to: ''
+  report: ''
+  report_format: text
+  report_jinja2_template: false
+  reserved: false
+  restrict_to_owners: []
+  run_method: per_device
+  scoped_name: Service 4
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- admin_only: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_uuid: eaca9b61-dda3-4056-9be1-c867b86845e9
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  disabled: false
+  disabled_info: ''
+  display_only_failed_nodes: false
+  display_report: false
+  email_report: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2023-03-30 13:43:50.702928'
+  last_modified_by: admin
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parameter: Default Value
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Priority Mechanism] Service 5'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: [admin]
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  positions:
+    Priority Mechanism: [423, -95]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  rbac_edit: []
+  rbac_read: [Admin User]
+  rbac_run: []
+  reply_to: ''
+  report: ''
+  report_format: text
+  report_jinja2_template: false
+  reserved: false
+  restrict_to_owners: []
+  run_method: per_device
+  scoped_name: Service 5
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
   target_devices: []
   target_pools: []
   time_between_retries: 10

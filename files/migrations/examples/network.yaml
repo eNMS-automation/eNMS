@@ -23,7 +23,7 @@
   owners: []
   positions: {}
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   subtype: ''
   type: network
   vendor: ''
@@ -55,7 +55,7 @@
   owners: []
   positions: {}
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   subtype: ''
   type: network
   vendor: ''
@@ -87,7 +87,7 @@
     Subnetwork 2: [-15, 43]
     Subnetwork and Teleport Mechanism: *id001
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   subtype: ''
   type: network
   vendor: ''
@@ -125,7 +125,7 @@
   owners: []
   positions: {}
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   subtype: ''
   type: network
   vendor: ''
@@ -156,7 +156,7 @@
     Subnetwork 1: [-2, -48]
     Subnetwork and Teleport Mechanism: *id002
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   subtype: ''
   type: network
   vendor: ''
@@ -191,7 +191,7 @@
   owners: []
   positions: {}
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   subtype: ''
   type: network
   vendor: ''
@@ -215,7 +215,7 @@
     Duplication of Devices, Subnetworks and Top-level Networks: &id003 [135, 6]
     'Network 4: Duplication of Devices, Subnetworks and Top-level Networks': *id003
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   subtype: ''
   type: network
   vendor: ''
@@ -250,7 +250,7 @@
   owners: []
   positions: {}
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   subtype: ''
   type: network
   vendor: ''
@@ -278,7 +278,7 @@
   owners: []
   positions: {}
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   subtype: ''
   type: network
   vendor: ''
@@ -302,7 +302,7 @@
     'Network 6: Subsubnetwork and Subsubsubnetwork': &id004 [-27, -55]
     Subsubnetwork and Subsubsubnetwork: *id004
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   subtype: ''
   type: network
   vendor: ''
@@ -324,7 +324,7 @@
   owners: []
   positions: {}
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   subtype: ''
   type: network
   vendor: ''
@@ -346,7 +346,7 @@
   owners: []
   positions: {}
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   subtype: ''
   type: network
   vendor: ''
@@ -375,7 +375,7 @@
   owners: []
   positions: {}
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   subtype: ''
   type: network
   vendor: ''
@@ -415,7 +415,7 @@
   owners: []
   positions: {}
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   subtype: ''
   type: network
   vendor: ''
@@ -443,7 +443,7 @@
   owners: []
   positions: {}
   rbac_edit: []
-  rbac_read: []
+  rbac_read: [Admin User]
   subtype: ''
   type: network
   vendor: ''

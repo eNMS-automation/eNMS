@@ -1589,3 +1589,24 @@
   source: '[Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow
     targets', subtype: failure, type: workflow_edge, workflow: Skip Query with device
     in Run Once Mode}
+- {color: green, destination: '[Priority Mechanism] Service 1', label: success, name: '2023-03-30
+    12:53:40.959052', source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: Priority Mechanism}
+- {color: green, destination: '[Shared] End', label: success, name: '2023-03-30 12:53:49.183963',
+  source: '[Priority Mechanism] Service 5', subtype: success, type: workflow_edge,
+  workflow: Priority Mechanism}
+- {color: green, destination: '[Priority Mechanism] Service 3', label: success, name: '2023-03-30
+    13:41:38.733984', source: '[Priority Mechanism] Service 1', subtype: success,
+  type: workflow_edge, workflow: Priority Mechanism}
+- {color: green, destination: '[Priority Mechanism] Service 5', label: success, name: '2023-03-30
+    13:41:39.412249', source: '[Priority Mechanism] Service 3', subtype: success,
+  type: workflow_edge, workflow: Priority Mechanism}
+- {color: green, destination: '[Priority Mechanism] Service 2', label: success, name: '2023-03-30
+    13:41:41.168903', source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: Priority Mechanism}
+- {color: green, destination: '[Priority Mechanism] Service 4', label: success, name: '2023-03-30
+    13:41:42.052721', source: '[Priority Mechanism] Service 2', subtype: success,
+  type: workflow_edge, workflow: Priority Mechanism}
+- {color: green, destination: '[Shared] End', label: success, name: '2023-03-30 13:41:43.137452',
+  source: '[Priority Mechanism] Service 4', subtype: success, type: workflow_edge,
+  workflow: Priority Mechanism}

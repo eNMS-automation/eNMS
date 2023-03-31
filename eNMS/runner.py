@@ -740,7 +740,7 @@ class Runner:
         if self.send_notification_method == "mail":
             filename = self.runtime.replace(".", "").replace(":", "")
             status = "PASS" if results["success"] else "FAILED"
-            content = report if self.email_report else vs.dict_to_string(notification)
+            content = report if self.email_report else vs.dict_to_string(file_content)
             html_report = self.email_report and self.report_format == "html"
             result = env.send_email(
                 f"{status}: {self.service.name}",

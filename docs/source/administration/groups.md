@@ -17,9 +17,6 @@ Easily synonymous with teams, `Groups` are a collection of users. `Groups` defin
   access to all services. This is helpful for admin like `Groups` to be able to support other `Groups` help requests, 
   by always granting view access.  
 * **Users** - Members of this team
-* **LDAP Group Regex** - When users access the application using Lightweight Directory Access Protocol, this 
-  regular-expression can be used to evaluate if a user is a part of a team using the directory response. If the regex 
-  finds a match the user will be added to `Users` above. 
 
 
 <br/>

@@ -1,6 +1,6 @@
 # Service Types
 
-eNMS provides a rich, suite of Service Types for managing and interacting 
+eNMS provides a rich suite of Service Types for managing and interacting 
 with network equipment. 
 
 ## Ansible Playbook Service

@@ -185,7 +185,7 @@ Workflow Builder, and the log window automatically scrolls as logs occur.
 Logs for scheduled tasks or REST API initiated automation
 jobs produce logs, but they do not cause the Log view panel to open.
 
-The Log view panel allows for the selection of a historical runtimes to view logs
+The Log view panel allows for the selection of a historical runtime to view logs
 for, and the panel has a `Download Logs` button to download the text logs to
 the user's browser.
 

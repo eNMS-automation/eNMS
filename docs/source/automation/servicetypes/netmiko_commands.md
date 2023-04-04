@@ -32,7 +32,7 @@ Also included in Netmiko Advanced Parameters:
 
 ![Netmiko Configuration Advanced Parameters](../../_static/automation/service_types/netmiko_validation_advanced.png)
 
-- `Use TextFSM`- Causes Netmiko to try and match the command to a TextFSM
+- `Use TextFSM` - Causes Netmiko to try and match the command to a TextFSM
   template pointed to in the system by the `NET_TEXTFSM` environment
   variable. The Network to Code project maintains a repository of TextFSM
   templates for popular network devices [here](https://github.com/networktocode/ntc-templates).
@@ -42,7 +42,7 @@ Also included in Netmiko Advanced Parameters:
   mode.
 - `Strip command` - Remove the echo of the command from the output
   (default: True).
-- `Strip prompt`- Remove the trailing router prompt from the output
+- `Strip prompt` - Remove the trailing router prompt from the output
   (default: True).
 
 !!! note

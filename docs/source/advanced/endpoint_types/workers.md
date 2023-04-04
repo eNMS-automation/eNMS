@@ -26,8 +26,8 @@ Otherwise the response will look like
 **Parameters:** None <br />
 **Payload:** None <br />
 
-#
 # Examples
+
 ## Typical response
 ```json
 {

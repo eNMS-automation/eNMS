@@ -13,8 +13,6 @@ Used to create a new instance or modify an existing instance.
 
 # Examples
 
-#
-
 ## Disable (prevent execution) of a workflow.
 
 POST /rest/instance/service
@@ -24,8 +22,6 @@ POST /rest/instance/service
     "disabled": true
 }
 ```
-
-#
 
 ## Schedule a task from the REST API: This payload will create the task `test` or update it if it already exists.
 
@@ -42,8 +38,6 @@ POST /rest/instance/task
 !!! Note
      This task schedules the service `netmiko_check_vrf_test` to run at
     `20/06/2019 23:15:15` on the device whose name is `Baltimore`.
-
-#
 
 ## Update a device called DALLAS and change its IP address:
 

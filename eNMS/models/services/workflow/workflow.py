@@ -3,6 +3,7 @@ from heapq import heappop, heappush
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
 from sqlalchemy.schema import UniqueConstraint
+from wtforms.validators import NumberRange
 
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
@@ -28,7 +29,7 @@ class Workflow(Service):
     category = db.Column(db.SmallString)
     close_connection = db.Column(Boolean, default=False)
     labels = db.Column(db.Dict, info={"log_change": False})
-    man_minutes_type = db.Column(db.TinyString, default="device")
+    man_minutes_type = db.Column(db.TinyString, default="workflow")
     man_minutes = db.Column(Integer, default=0)
     man_minutes_total = db.Column(Integer, default=0)
     services = relationship(
@@ -246,12 +247,16 @@ class WorkflowForm(ServiceForm):
             ),
         ),
     )
-    man_minutes = IntegerField("Minutes to Complete Task Manually", default=0)
+    man_minutes = IntegerField(
+        "Minutes to Complete Task Manually",
+        [NumberRange(min=0)],
+        default=0
+    )
     man_minutes_type = SelectField(
         "Type of Minutes",
         choices=(
+            ("workflow", "For the whole workflow"),
             ("device", "Per Device"),
-            ("workflow", "For the whole Workflow"),
         ),
     )
     man_minutes_total = IntegerField(

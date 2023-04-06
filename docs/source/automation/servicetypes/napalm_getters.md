@@ -8,7 +8,7 @@ Configuration parameters for creating this service instance:
 
 - All [Napalm Service Common Parameters](napalm_common.md).
 
-- `Getters` - Choose one or more getters to retrieve. Napalm getters
+- `Getters`: Choose one or more getters to retrieve. Napalm getters
   (standard retrieval APIs) are documented 
   [here](https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix).
 

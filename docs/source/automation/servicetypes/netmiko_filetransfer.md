@@ -7,15 +7,15 @@ time for SCP file transfer.
 Configuration parameters for creating this service instance:
 
 - All [Netmiko Service Common Parameters](netmiko_common.md).
--   `Source File` - Source absolute path and filename of the file to send.
--   `Destination File` - Destination absolute path and filename to
+-   `Source File`: Source absolute path and filename of the file to send.
+-   `Destination File`: Destination absolute path and filename to
     send the file to.
--   `File System` - Mounted filesystem for storage on the default. For
+-   `File System`: Mounted filesystem for storage on the default. For
     example, disk1:
--   `Direction` - Upload or Download from the perspective of running on
+-   `Direction`: Upload or Download from the perspective of running on
     the device.
--   `Disable Md5` - Disable checksum validation following the transfer
--   `Inline Transfer` - Cisco-specific method of transferring files
+-   `Disable Md5`: Disable checksum validation following the transfer
+-   `Inline Transfer`: Cisco-specific method of transferring files
     between internal components of the device.
--   `Overwrite File` - If checked, overwrite the file at the destination
+-   `Overwrite File`: If checked, overwrite the file at the destination
     if it exists.

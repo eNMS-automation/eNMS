@@ -6,4 +6,4 @@ extra validations of a prior service's result later in a workflow.
 
 Configuration parameters for creating this service instance:
 
-- `Python Query`- a python query to retrieve data from the payload.
+- `Python Query`: a python query to retrieve data from the payload.

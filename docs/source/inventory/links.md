@@ -43,7 +43,7 @@ User maintained `Access Control` is available for this object. This allows the `
 ## Showing Pools for a Link
 
 One can also view relationships for Link - i.e., the Pools, associated with a link.  
-For example, to view the Pools for a device:
+For example, to view the Pools for a link:
 
 - select Pools the in the Columns pull-down, and,  
 - click on the Pools link.

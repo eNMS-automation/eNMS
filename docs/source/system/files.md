@@ -41,11 +41,11 @@ delete both folders and files from the database.
 
 ![Files - Folder Navigation](../_static/system/file_top_button_bar.png)
 
-- `Create New Folder` - create a new folder in the current folder
+- `Create New Folder`: create a new folder in the current folder
 
   ![Files - Folder Navigation](../_static/system/file_new_folder.png)
 
-- `Upload Files` - upload one or more files into the current folder 
+- `Upload Files`: upload one or more files into the current folder 
 
   - To start the upload: 
 
@@ -55,11 +55,11 @@ delete both folders and files from the database.
 
     ![Files - Files window](../_static/system/file_upload2.png)
 
-- `Scan Folder` - manually refresh the contents based on what is physically present in the folder location
+- `Scan Folder`: manually refresh the contents based on what is physically present in the folder location
 
   ![Files - Files window](../_static/system/file_scan_folder.png)
 
-- `Bulk Deletion` - delete all the displayed files/folders from the database only
+- `Bulk Deletion`: delete all the displayed files/folders from the database only
 
   ![Files - Folder Navigation](../_static/system/files_bulk_delete.PNG)
 
@@ -71,11 +71,11 @@ delete both folders and files from the database.
   
 These actions apply to each individual file or folder:
 
-- `Copy Path to Clipboard` - copy the absolute path to the file or folder to the clipboard
-- `Download File` - downloads a single file or a .TGZ file with contents of the entire folder 
-- `Upload Files in Folder` - only shown for a Folder, opens the Upload File window
-- `Edit` - edit the File or Folder details (e.g., Description)
-- `File Content` - only shown for a File, show the File - with option to save changes
-- `Delete` - remove file/folder from the database (not the file system)
+- `Copy Path to Clipboard`: copy the absolute path to the file or folder to the clipboard
+- `Download File`: downloads a single file or a .TGZ file with contents of the entire folder 
+- `Upload Files in Folder`: only shown for a Folder, opens the Upload File window
+- `Edit`: edit the File or Folder details (e.g., Description)
+- `File Content`: only shown for a File, show the File - with option to save changes
+- `Delete`: remove file/folder from the database (not the file system)
 
  

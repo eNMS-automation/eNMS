@@ -121,7 +121,7 @@ In summary, all `Cisco` devices with subtype `GATEWAY` or `PEER` whose name incl
 
 This pool enforces the intersection of the following conditions:
 
-- subtype: `Ethernet link` - Match is Equality; all Ethernet links will be
+- subtype: `Ethernet link`: Match is Equality; all Ethernet links will be
   selected.
 - source name: `sto` - Match is Inclusion; all links whose source
   name includes the string `sto` are matched, e.g. `Boston` and `Houston`.

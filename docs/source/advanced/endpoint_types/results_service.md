@@ -2,10 +2,10 @@
 
 Return results of a completed service, or the status of a service if currently running.
 
-**Method:** Get<br />
-**Address:** /rest/result/`service_name`/`runtime` <br />
-**Parameters:** None<br />
-**Payload:** None<br />
+**Method**: Get<br />
+**Address**: /rest/result/`service_name`/`runtime` <br />
+**Parameters**: None<br />
+**Payload**: None<br />
 
 !!! Note
     - The `service_name` must be URL encoded.  This replaces spaces and

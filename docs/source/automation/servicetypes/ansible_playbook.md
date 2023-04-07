@@ -19,7 +19,7 @@ Configuration parameters for creating this service instance:
     - `Device Credentials`: Currently, only the application managed device
        credentials are allowed to be passed to an ansible playbook.
   
-- `Options` Additional --extra-vars to be passed to the playbook
+- `Options`: Additional --extra-vars to be passed to the playbook
   using the syntax `{'key1':value1, 'key2': value2}`. All inventory
   properties are automatically passed to the playbook using
   --extra-vars (if pass_device_properties is selected above). These

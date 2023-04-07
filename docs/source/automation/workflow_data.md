@@ -15,13 +15,13 @@ the service used during execution.
 
 Examples:
 
-- `get_result("get_facts")` Get the top-level result for the service
+- `get_result("get_facts")`: Get the top-level result for the service
   `get_facts`.
-- `get_result("get_interfaces", device="Austin")` Get the result of
+- `get_result("get_interfaces", device="Austin")`: Get the result of
   the device `Austin` for the `get_interfaces` service.
-- `get_result("get_interfaces", device=device.name)` Get the result of
+- `get_result("get_interfaces", device=device.name)`: Get the result of
   the current device for the `get_interfaces` service.
-- `get_result("Payload editor")["runtime"]` Get the `runtime` key of
+- `get_result("Payload editor")["runtime"]`: Get the `runtime` key of
   the top-level result of the `Payload editor` service.
 
 The `get_result()` function works everywhere that python code is accepted.

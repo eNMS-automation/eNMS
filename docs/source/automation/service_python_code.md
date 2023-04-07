@@ -67,7 +67,7 @@ are made available to the user.
     - **Type**: Set of Database Objects.
     - **Available**: In service by service workflows.
 
--   `dict_to_string()` - convert a dictionary to a string form with
+-   `dict_to_string()`: convert a dictionary to a string form with
     indentation.
         **Type**: Function.
         **Available**: Always.

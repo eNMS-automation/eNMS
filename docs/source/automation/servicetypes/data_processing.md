@@ -21,12 +21,12 @@ following attributes:
     - `Apply TextFSM Template (list output)`.
     - `Apply TextFSM Template`.
     
-- `Regular Expression / TestFSM Template Text / Jinja2 Template / TTP Template`:
+- `Regular Expression / TestFSM Template Text / Jinja2 Template / TTP Template`-
   regular expression, TextFSM template, Jinja2 template, or TTP template
   depending on the value of the "Processing" field. The text of the expression
   or template goes here.
 
-- `Operation`- Choose the operation type: 
+- `Operation`-Choose the operation type: 
 
     - `Set/Replace`: Set the variable value.
     - `Append to a list`: Append the value to an existing list.

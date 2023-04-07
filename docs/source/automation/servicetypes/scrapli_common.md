@@ -7,20 +7,20 @@ Services.
 
 - `Driver`: Scrapli driver to use. Currently, it supports:
     - `Device Driver`: Use the driver assigned to the device in the application inventory
-    - `arista_eos`.
-    - `cisco_iosxe`.
-    - `cisco_iosxr`.
-    - `cisco_nxos`.
-    - `juniper_junos`.
+    - `arista_eos`
+    - `cisco_iosxe`
+    - `cisco_iosxr`
+    - `cisco_nxos`
+    - `juniper_junos`
 - `Is Configuration`:  Should the device be put in config mode before
   issuing the commands?
 - `Transport`: Supports using the following transport plugins:
     - `system`: Wrapper around OpenSSH/System available SSH binary.
     - `paramiko`: Wrapper around paramiko library.
     - `ssh2`: Wrapper around ssh2-python library.
-- `Socket Timeout`: When socket is created it is initially set with this timeout.
+- `Socket Timeout`: When the socket is created, it is initially set with this timeout.
 - `Transport Timeout`: When system transport is selected, this is the timeout used.
-If ssh2 or paramiko are the selected the timeouts for each respective library is used.
+If ssh2 or paramiko are selected, the timeouts for each respective library is used.
 - `Ops Timeout`: This timeout is used for individual operations (commands).
     
 ## Connection Parameters

@@ -9,7 +9,7 @@ This service uses Napalm to pull data from devices and store it in
 - All [Napalm Service Common Parameters](napalm_common.md) 
 
 - `Configuratioon Property to Update`: Choose the target property to backup.
-- `Local Path`: Specify the path of the file to store the backup data (the path is relative to the ien-ap directory.
+- `Local Path`: Specify the path of the file to store the backup data (the path is relative to the eNMS directory.
 - `Getters`: Choose the configuration getters to be used to back up the target property.
 
 !!! note

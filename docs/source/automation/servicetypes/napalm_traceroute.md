@@ -6,7 +6,7 @@ traceroute to another designated target.
 Configuration parameters for creating this service instance:
 
 - All [Napalm Service Common Parameters](napalm_common.md). 
-- `Destination IP`: The IP address of the the device to send the echo packet to.
+- `Destination IP`: The IP address of the device to which to send the echo packet.
 - `Source IP address`: Override the source IP address of the ping
   packet with this provided IP.
 - `Timeout`: Seconds to wait before declaring timeout.

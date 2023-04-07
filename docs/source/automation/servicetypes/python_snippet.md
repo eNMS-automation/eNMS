@@ -8,4 +8,4 @@ section of the docs are also available for use in the Python Snippet code.
 
 Configuration parameters for creating this service instance: 
 
-- `Source code` - Source code of the python script to run.
+- `Source code`: Source code of the python script to run.

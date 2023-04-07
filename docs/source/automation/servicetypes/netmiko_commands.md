@@ -24,7 +24,7 @@ Configuration parameters for creating this service instance:
 
 - `Commands`: Command(s) to be sent to the device, with each command on a separate line.
 
-- `Results as List` - If checked, store the command output as a list of 
+- `Results as List`: If checked, store the command output as a list of 
    individual string results. By default, all output is returned as a single string,
    with a COMMAND header prepended multiple commands are specified.
 
@@ -32,17 +32,17 @@ Also included in Netmiko Advanced Parameters:
 
 ![Netmiko Configuration Advanced Parameters](../../_static/automation/service_types/netmiko_validation_advanced.png)
 
-- `Use TextFSM` - Causes Netmiko to try and match the command to a TextFSM
+- `Use TextFSM`: Causes Netmiko to try and match the command to a TextFSM
   template pointed to in the system by the `NET_TEXTFSM` environment
   variable. The Network to Code project maintains a repository of TextFSM
   templates for popular network devices [here](https://github.com/networktocode/ntc-templates).
-- `Auto Find Prompt` - Tries to detect the prompt automatically. Mutually exclusive with `Expect String`.
-- `Expect String` - Regular expression that signifies the end of output.
-- `Config Mode Command` - The command that will be used to enter config
+- `Auto Find Prompt`: Tries to detect the prompt automatically. Mutually exclusive with `Expect String`.
+- `Expect String`: Regular expression that signifies the end of output.
+- `Config Mode Command`: The command that will be used to enter config
   mode.
-- `Strip command` - Remove the echo of the command from the output
+- `Strip command`: Remove the echo of the command from the output
   (default: True).
-- `Strip prompt` - Remove the trailing router prompt from the output
+- `Strip prompt`: Remove the trailing router prompt from the output
   (default: True).
 
 !!! note

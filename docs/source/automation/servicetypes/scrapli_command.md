@@ -14,10 +14,10 @@ Scrapli Project Documentation can be reviewed
 
 ## Main Parameters
 
-- `Commands` - Commands to be send to the device, each command on a separate line.
+- `Commands`: Commands to be send to the device, each command on a separate line.
 
-- `Interpret Commands as Jinja2 Template` - Tell the application to interpret the Commands text as a Jinja2 template. The output of the rendered template is used as the list of commands for execution.
+- `Interpret Commands as Jinja2 Template`: Tell the application to interpret the Commands text as a Jinja2 template. The output of the rendered template is used as the list of commands for execution.
 
-- `Results as List` - if checked, store the results of the commands as a list of 
+- `Results as List`: if checked, store the results of the commands as a list of 
    individual string results. If not checked, this is a single string.
     

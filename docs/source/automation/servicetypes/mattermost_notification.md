@@ -3,8 +3,8 @@ configured in the eNMS settings.
 
 ![Mattermost Notification Service](../../_static/automation/service_types/mattermost_notification.png)
 
-- `Channel`- The channel the message will be posted to.
-- `Body`- The body of the message that will be posted to the above
+- `Channel`: The channel the message will be posted to.
+- `Body`: The body of the message that will be posted to the above
   channel.
 
 !!! note

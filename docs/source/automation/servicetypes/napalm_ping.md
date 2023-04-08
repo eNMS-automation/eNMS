@@ -1,8 +1,8 @@
-Uses Napalm to connect to the selected target devices and performs a
-ping to a designated target. The output contains ping round trip time
+Uses Napalm to connect to the selected target device and performs a
+ping. The output contains ping round trip time
 statistics. 
 
-![Napalm Ping Service](../../_static/automation/builtin_service_types/napalm_ping.png)
+![Napalm Ping Service](../../_static/automation/service_types/napalm_ping.png)
 
     !!! note
 
@@ -12,11 +12,12 @@ Configuration parameters for creating this service instance:
 
 - All [Napalm Service Common Parameters](napalm_common.md).
 - `Count`: Number of ping packets to send.
-- `Size` Size of the ping packet payload to send in bytes.
-- `Source IP address` Override the source ip address of the ping
+- `Packet Size`: Size of the ping packet payload to send in bytes.
+- `Destination IP`: The IP address of the device to which to send the ping command.
+- `Source IP`: Override the source IP address of the ping
   packet with this provided IP.
-- `Ping Timeout` Seconds to wait before declaring a ping timeout.
-- `Ttl` Time to Live parameter, which tells routers when to discard
+- `Ping Timeout`: Seconds to wait before declaring a ping timeout.
+- `Ttl`: Time to Live parameter, which tells routers when to discard
   this packet because it has been in the network too long (too many
   hops).
-- `VRF` Ping a specific virtual routing and forwarding interface.
+- `VRF`: Ping a specific virtual routing and forwarding interface.

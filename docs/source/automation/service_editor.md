@@ -22,14 +22,13 @@ The Service Editor Panel is accessible from the following locations:
     enclosing workflow or unique among top-level services.
 -   `Full Name`: (**display only**) Fully qualified service name including all
     workflow nesting or a **\[Shared\]** tag.
--   `Default Access`: Role Based (Creator) Allows access by the user that
-    created the service and follows RBAC access using the Groups field.
-    `Public` Allows access to anyone. `Admin` Limits access to admin users.
--   `Groups` Specifies which user groups have access to this service.
--   `Owners` Further restricts service access to a list of owners.
--   `Owners Access` Restrict what owners can do: Run and/or Edit the service.
+-   `Creator`: User that created the service.
+-   `Admin Only`: Only admin users are allowed to edit or run.
 -   `Service Type`: (**display only**) The service type of the current
     service instance.
+-   `Disabled`: Prevents the workflow or service from running.
+-   `Disabled Time & User`: (**display only**) Shows the user and time that the
+    service was disabled.
 -   `Shared`: Checked for **Shared** services. 
 
 !!! Note
@@ -43,7 +42,7 @@ The Service Editor Panel is accessible from the following locations:
 	workflow. A standalone service exists outside of any workflow. A
 	superworkflow acts as a template or wrapper around another workflow and
 	allows for services to be run before and after the main workflow (which
-	exists inside the superworkflow as a Placeholder). Because multiple
+	exists inside the superworkflow as a `Placeholder`). Because multiple
 	workflows can specify the same superworkflow, the superworkflow acts as
 	if it is shared.
 
@@ -53,6 +52,9 @@ The Service Editor Panel is accessible from the following locations:
     services in the table.
 - `Initial Payload`: User-defined dictionary that can be used anywhere
     in the service.
+- `Parameterized Form is Mandatory`: Force display of the 
+    Parameterized Form before execution whenever the service is run
+    interactively.
 - `Parameterized Form`: (default is configurable in `setup/automation.json`)
     A user defined input form 
     that pops up before a Parameterized Run of the service. Values entered 
@@ -73,10 +75,7 @@ The Service Editor Panel is accessible from the following locations:
     | mail_recipient | string; comma-separated list of email addresses. |
     | send_notification | boolean; turn notification on/off. |
     | custom | Example:<br>`custom_field = StringField('Custom Field', default='desired_default_value')`<br><br>This field can be referenced via:<br> `payload["form"]["custom_field"]`<br> OR <br>you may refer directly to the variable name `custom_field` <br><br>Other WTForm components can be used to define a variety of properties. |
-    
-- `Parameterized Form is Mandatory`: Force display of the 
-    Parameterized Form before execution whenever the service is run
-    interactively.
+
 - `Priority`: (default: `1`) Allows the user to determine the order a
     service runs when two services are ready to run at the same time.
     The service with a higher priority number is run first.
@@ -114,7 +113,7 @@ The Service Editor Panel is accessible from the following locations:
 - `Update pools after running`: (default: False) Update all pools after
     this service runs. Note that updating all pools is performance intensive.
 
-#### Advanced Parameters 
+#### Workflow Parameters 
 
 While the parameters in this section can be used by stand-alone Services, they 
 generally provide more benefits for Service(s) that run inside of a Workflow. 
@@ -164,6 +163,13 @@ for example:
 
 		"help": "custom/impacting"
 
+#### Access Controls
+
+User maintained `Access Control` is available for services. This allows the
+`Owners` to select desired access.
+[Check out this page for more details on modifying `Access Control`.](../administration/overview.md)  
+
+
 ### Section `Step 2: Specific`
 
 This section contains all parameters that are specific to the service
@@ -175,7 +181,7 @@ the device.
 ![Service Editor Step2](../_static/automation/services/service_editor_step2.png)
 
 The content of this section is described for each service in the
-`Built-in Services` section of the docs.
+`Service Types` section of the docs.
 
 ### Section `Step 3: Targets`
 
@@ -187,7 +193,7 @@ time or a service at a time, and whether device targets are taken from the
 workflow or each service.
 
 `Run Method` on a service: Defines whether the service should run exactly once,
-or if it should run once per device. Most built-in services are designed to
+or if it should run once per device. Most service types are designed to
 run once per device.
 
 The run method, targets, and multiprocessing defined on a workflow and nested
@@ -250,10 +256,29 @@ services work together in a complex way.  The table below describes each combina
 
 </table>
 
-The python variables `device` and `devices` provide access to the current device
-and the full set of devices.  No concept of a current device exists for services
-with run method `Run the service once`; therefore the `device` variable may be
-`None`.
+- `Devices`: individually select devices from inventory to run on.
+
+!!! Note
+
+    The python variables `device` and `devices` provide access to the current device
+    and the full set of devices.  No concept of a current device exists for services
+    with run method `Run the service once`; therefore the `device` variable may be
+    `None`.
+
+- `Pools`: pools of Devices from inventory to run on.
+- `Update target pools before running`: Initiate a pool recalculation on the
+  target pools before running the automation.
+- `Device Query`: Use a python expression to identify the target devices.
+- `Query Property Type`: Does the above expression evaluate to Device Names or
+  IP Addresses.
+- `Multiprocessing`: Enables parallel processing on devices.
+- `Maximum number of processes`: The limit to control simultanous parallel
+  processes (configurable via settings.json).
+
+!!! Note
+
+    The above parameters are cumulative: the automation runs on the combined
+    list of targets from Devices, Pools and the Device Query.
 
 #### Iteration
 
@@ -268,12 +293,12 @@ target device.
     -   The service is run for each device as the target device,
         allowing operations against a set of devices related to the
         original target.
-    -   `Iteration Devices Property` Indicates whether iterable
+    -   `Iteration Devices Property`: Indicates whether iterable
         `Iteration Devices` contains IP addresses or names, for eNMS to
         look up actual devices from the inventory.
     -   NOTE: When using `Iteration Devices` and  `Skip Query` the skip query
         will evaluate both the service's targets from Targets/Devices and 
-	Targets/Iteration, if either is not skipped the workflow will
+	    Targets/Iteration, if either is not skipped the workflow will
     	attempt to follow the appropriate success or failure edge.
     -   NOTE: When using either `Preprocessing` or `Postprocessing` each
     	will be run using each of the `Iteration Devices` targets.	
@@ -319,8 +344,8 @@ the result for use in subsequent services.
     script is executed.
     -   `Always run`: The `Postprocessing` script will
         execute for each device.
-    -   `Run on success only` (**default**). 
-    -   `Run on failure only`.
+    -   `Run on success only`: (**default**) 
+    -   `Run on failure only` -
 -   `PostProcessing`: A python script to inspect or update the current
     result.
     -   Variable **results**.
@@ -341,12 +366,12 @@ the result for use in subsequent services.
 
 #### Validation
 
-Validation can consist of:
+Validation can consist of 
 
-**Text matching**: looking for a string in the result, or matching
+- **Text matching**: looking for a string in the result, or matching
 the result against a regular expression.
 
-**Dictionary matching**: Check that a dictionary is included or
+- **Dictionary matching**: Check that a dictionary is included or
 equal to the result.
 
 - `Validation Condition`: When to run Validation on the result:
@@ -364,9 +389,9 @@ equal to the result.
         in the result.
     -   `Validation by dictionary equality`: Check for equality against the
         dictionary provided in `Dictionary to Match Against`.
-- `Section to Validate` : (default: `results['result']`) Which part of the
+- `Section to Validate`: (default: `results['result']`) Which part of the
     payload dictionary to perform validation on.
-- `Content Match` : Text to Match against when `Validation by text match`
+- `Content Match`: Text to Match against when `Validation by text match`
     is selected above.
 - `Content Match is a regular expression`: Treat the match text as a regular
     expression for `Validation by text match`.
@@ -380,6 +405,25 @@ equal to the result.
     results: a success becomes a failure and
     vice-versa. This provides a simpler solution than using negative
     look-ahead regular expressions.
+
+#### Report
+The Report feature allows the developer to present a formatted report to the user
+at the end of execution.
+
+- `Report Template`: Copy the report from a predefined template.  By default `Empty report`
+   leaves the developer to define the report.  One sample template is provided (`report_results.j2`)
+   that produces an HTML report with one section for each device; once copied feel free to modify
+   this default as needed.
+- `Report Display Format`: Choose `Text` or `HTML` to specify the report output format.
+- `Interpret Report as Jinja2 Template`: When checked, the contents of the `Report` field are
+  processed as a Jinja2 template.
+- `Report`: Use text with variable substitution or a Jinja2 template to format the desired
+   report output.
+- `Display Report Instead of Results`: When checked, the report is displayed instead of
+   the results table at service completion.  While reports can be created on any service,
+   only the report from the top-level service or workflow can be displayed automatically.
+- `Send Report in Mail Notification`: When checked, the report will be included in any email
+   notification sent by the service.
 
 #### Notifications
 
@@ -398,12 +442,12 @@ Configure the following parameters:
 -   `Send Notification`: Enable sending results notification.
 -   `Notification Method`: Mail, Slack or Mattermost.
 -   `Notification Header`: A header displayed at the beginning of the
-    notification.
+    notification. (Variable Substitution is supported.)
 -   `Include Device Results`: for service (not workflow) level notifications.
 -   `Include Result Link in summary`: Whether the notification contains
     a link to the results.
 -   `Mail Recipients`: Must be a list of email addresses, separated by
-    comma.
+    comma.  (Variable Substitution is supported.)
 -   `Reply-to Email Address`: Must be a list of email addresses, separated by
     comma.
 -   `Display only failed nodes`: The notification will not include

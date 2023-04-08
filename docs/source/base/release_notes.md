@@ -73,7 +73,7 @@ Version 4.4.0: RBAC and Credentials
   edit panel to a service in netmiko "Expect String" field.
 - Fix bug where RBAC Edit access is needed to run a service
   Thread: "Edit Service/Device Needed for user using /rest/run_service"
-- Remove "settings" from global variables so that it cannot be overriden.
+- Remove "settings" from global variables so that it cannot be overridden.
   Thread: "Settings and security question"
 - Enable migration for files and folders.
 - When selection in builder changed, close deletion panel (wrong node / edge count)
@@ -186,7 +186,7 @@ Version 4.3.0
   Default landing page is configurable from settings.json > authentication > landing_page.
 - Add mechanism to show a single device status in workflow builder UI (logs filtering + service display)
 - Add mechanism to search for a string across all services of a workflow in the workflow builder, and
-  accross all nodes in the network builder.
+  across all nodes in the network builder.
 - Fix vertical alignment in all tables (cell content was not centered on y axis because of buttons height in
   the last column).
 - Add export service button in Workflow Builder.
@@ -288,7 +288,7 @@ Version 4.2.0
 - Always show security logs, even when logging is disabled. Add "allow_disable" (default: True) keyword argument
   to log function to prevent logs from being disabled if necessary.
 - Add new 'deactivate_rbac_on_read' property in rbac.json, under 'advanced' key. Set to true by default.
-  When true, eNMS no longers applies rbac for reading from the database. (=> better performances)
+  When true, eNMS no longer applies rbac for reading from the database. (=> better performances)
 - Make the vendor, operating_system and model properties a custom list for devices, links and services,
   and category for sites and workflows. The drop-down list choices can be configured in properties.json > property_list key.
 - Add support for renaming objects from the REST API (with key "new_name")
@@ -529,7 +529,7 @@ Version 4.0.0
     devices the credential can be used for.
   - User "groups" property is now a field. This field can be used to define user pools. Services have the same "groups" property.
     When creating a new service, the groups field will be automatically set to the user groups. This allows services to be automatically
-    added to the appriopriate pool of services, if the pool of services is defined based on that group property.
+    added to the appropriate pool of services, if the pool of services is defined based on that group property.
   - Credentials can be either "Read - Write" (default) or "Read only". In a top-level service, new "credential type" field
     to choose between "Any", "Read-only" and "Read-write" in order to define which credentials should be used when running
     the service.
@@ -828,13 +828,13 @@ Version 3.18
 ------------
 
 - Add Operational Data mechanism
-- Removed Clusterized and 3D View
+- Removed Clustered and 3D View
 - Changed configuration to be a .json file instead of env variables
 - Removed Custom config and PATH_CUSTOM_CONFIG
 - Remove Configuration comparison mechanism
 - Display the results of a workflow as a tree
 - Change the mechanism to add a service to a workflow to be a tree
-- Add the forward and backward control to the service managemet table.
+- Add the forward and backward control to the service management table.
 - Duplicate button at workflow level to duplicate any workflow as top-level workflow
 - Update to the operational data backup service to include rancid-like prefixes
 - Add new "run method" property to define how a service is running (once per device, or once for all devices),
@@ -853,7 +853,7 @@ Version 3.17.2
 --------------
 
 - Add Operational Data mechanism
-- Removed Clusterized and 3D View
+- Removed Clustered and 3D View
 - Changed configuration to be a .json file instead of env variables
 - Removed Custom config and PATH_CUSTOM_CONFIG
 - Remove Configuration comparison mechanism
@@ -944,7 +944,7 @@ Version 3.15.2
 - Front-end validation of all fields accepting a python query
 - check for substitution brackets ({{ }}) that the expression is valid with ast.parse
 - Add new regression test for the payload extraction and validation services
-- Payload extration refactoring
+- Payload extraction refactoring
 
   - Store variables in the payload global variable namespace
   - Add optional operation parameter for each variable: set / append / extend / update

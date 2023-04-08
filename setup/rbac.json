@@ -7,7 +7,7 @@
     "delete_requests"
   ],
   "menu": {
-    "Home": {
+    "System": {
       "icon": "home",
       "rbac": "all",
       "pages": {

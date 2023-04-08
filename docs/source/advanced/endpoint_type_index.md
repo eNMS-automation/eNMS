@@ -30,6 +30,8 @@ by eNMS. In a request, `<instance_type>` can be any of the following:
   Provides import/export functionality to migrate data between eNMS instances.
 - [Ping application](endpoint_types/ping.md) 
   Tests whether the application is running and responding.
+- [Get worker stats](endpoint_types/workers.md) 
+  Get information of workers and currently running services.
 - [Administrative](endpoint_types/admin.md) 
   Provides access to many endpoints found in the administration panel.
 

@@ -1,6 +1,6 @@
 Runs any python code.
 
-![Python Snippet Service](../../_static/automation/builtin_service_types/python_snippet.png)
+![Python Snippet Service](../../_static/automation/service_types/python_snippet.png)
 
 All variables and functions described in the
 [Using Python in the Service Editor](../service_python_code.md)

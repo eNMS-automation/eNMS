@@ -248,9 +248,7 @@ class WorkflowForm(ServiceForm):
         no_search=True,
     )
     man_minutes = IntegerField(
-        "Minutes to Complete Task Manually",
-        [NumberRange(min=0)],
-        default=0
+        "Minutes to Complete Task Manually", [NumberRange(min=0)], default=0
     )
     man_minutes_type = SelectField(
         "Type of Minutes",

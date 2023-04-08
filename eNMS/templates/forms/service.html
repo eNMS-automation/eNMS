@@ -202,8 +202,8 @@
               >
                 <div class="panel-body" style="background-color: #fafafa;">
                   {{ block_field(form, "owners") }} {% for property in
-                  form.rbac_properties %} {{ block_field(form, property) }} {% endfor
-                  %} {{ block_field(form, "restrict_to_owners") }}
+                  form.rbac_properties %} {{ block_field(form, property) }} {% endfor %}
+                  {{ block_field(form, "restrict_to_owners") }}
                 </div>
               </div>
             </div>

@@ -39,8 +39,8 @@
         </div>
         <div class="tab-pane fade" id="group-ui-access">
           {% for field in form %} {% if field.name in ("menu", "pages", "get_requests",
-          "post_requests", "delete_requests") %} {{ inline_field(form_type, field) }}
-          {% endif %} {% endfor %}
+          "post_requests", "delete_requests") %} {{ inline_field(form_type, field) }} {%
+          endif %} {% endfor %}
         </div>
         <div class="tab-pane fade" id="group-model-access">
           {% for field in form %} {% if field.name.split("_")[0] in rbac["rbac_models"]

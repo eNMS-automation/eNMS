@@ -44,8 +44,8 @@ const options = {
   },
   manipulation: {
     enabled: false,
-    addNode: function (data, callback) {},
-    addEdge: function (data, callback) {
+    addNode: function(data, callback) {},
+    addEdge: function(data, callback) {
       if (data.from.length == 36 || data.to.length == 36) {
         notify("You cannot use a label to draw an edge.", "error", 5);
       } else if (data.to == startId) {
@@ -57,7 +57,7 @@ const options = {
         saveEdge(data);
       }
     },
-    deleteNode: function (data, callback) {
+    deleteNode: function(data, callback) {
       data.nodes = data.nodes.filter((node) => !ends.has(node));
       callback(data);
     },
@@ -93,11 +93,11 @@ export function displayWorkflow(workflowData) {
     options
   );
   workflow.services.map(drawIterationEdge);
-  graph.on("click", function (event) {
+  graph.on("click", function(event) {
     const node = this.getNodeAt(event.pointer.DOM);
     if (currentMode != "motion" && !node) switchMode("motion", true);
   });
-  graph.on("doubleClick", function (event) {
+  graph.on("doubleClick", function(event) {
     event.event.preventDefault();
     let node = nodes.get(this.getNodeAt(event.pointer.DOM));
     if (["Placeholder", "Start", "End"].includes(node.name)) node = currentPlaceholder;
@@ -163,18 +163,24 @@ export function showServicePanel(type, id, mode, tableId) {
   const workflowId = id ? `#${type}-workflows-${id}` : `#${type}-workflows${postfix}`;
   if (id && mode == "duplicate") {
     const value = page == "workflow_builder" ? [workflow.name] : [];
-    $(workflowId).val(value).trigger("change");
+    $(workflowId)
+      .val(value)
+      .trigger("change");
   }
   if (!id && workflow && page == "workflow_builder") {
-    $(`#${type}-vendor`).val(workflow.vendor).trigger("change");
-    $(`#${type}-operating_system`).val(workflow.operating_system).trigger("change");
+    $(`#${type}-vendor`)
+      .val(workflow.vendor)
+      .trigger("change");
+    $(`#${type}-operating_system`)
+      .val(workflow.operating_system)
+      .trigger("change");
   }
-  $(field("report_template", type, id)).on("change", function () {
+  $(field("report_template", type, id)).on("change", function() {
     const isJinja2 = this.value.endsWith(".j2");
     field("report_jinja2_template", type, id).prop("checked", isJinja2);
     call({
       url: `/get_report_template/${this.value}`,
-      callback: function (template) {
+      callback: function(template) {
         field("report", type, id).val(template);
       },
     });
@@ -185,9 +191,9 @@ export function showServicePanel(type, id, mode, tableId) {
     enableAllSteps: true,
     keyNavigation: false,
     transitionEffect: "none",
-    onShowStep: function () {
+    onShowStep: function() {
       if (!editors[id]) return;
-      Object.keys(editors[id]).forEach(function (field) {
+      Object.keys(editors[id]).forEach(function(field) {
         editors[id][field].refresh();
       });
     },
@@ -196,7 +202,7 @@ export function showServicePanel(type, id, mode, tableId) {
   $(wizardId).smartWizard("fixHeight");
 }
 
-export const switchToWorkflow = function (path, direction, runtime, selection) {
+export const switchToWorkflow = function(path, direction, runtime, selection) {
   if (typeof path === "undefined") return;
   if (path.toString().includes(">")) {
     $("#up-arrow").removeClass("disabled");
@@ -208,7 +214,7 @@ export const switchToWorkflow = function (path, direction, runtime, selection) {
   call({
     url: `/get_service_state/${path}`,
     data: { display: runtimeDisplay, runtime: runtime || "latest" },
-    callback: function (result) {
+    callback: function(result) {
       workflow = result.service;
       currentRun = result.run;
       if (workflow?.superworkflow) {
@@ -242,7 +248,7 @@ function addServicesToWorkflow() {
   call({
     url: `/copy_service_in_workflow/${workflow.id}`,
     form: "add-services-form",
-    callback: function (result) {
+    callback: function(result) {
       instance.last_modified = result.update_time;
       $("#add_services_to_workflow").remove();
       result.services.map(updateWorkflowService);
@@ -254,7 +260,7 @@ function saveEdge(edge) {
   const param = `${workflow.id}/${edge.subtype}/${edge.from}/${edge.to}`;
   call({
     url: `/add_edge/${param}`,
-    callback: function (result) {
+    callback: function(result) {
       instance.last_modified = result.update_time;
       const newEdge = drawWorkflowEdge(result);
       edges.add(newEdge);
@@ -266,7 +272,7 @@ function saveEdge(edge) {
 
 function stopWorkflow() {
   if (!currentRun) notify("The workflow is not currently running.", "error", 5);
-  const stop = function () {
+  const stop = function() {
     call({
       url: `/stop_run/${currentRun.runtime}`,
       callback: (result) => {
@@ -420,13 +426,13 @@ function addServicePanel() {
   openPanel({
     name: "add_services_to_workflow",
     title: "Add Services to Workflow",
-    callback: function () {
+    callback: function() {
       $("#service-tree").jstree({
         core: {
           animation: 200,
           themes: { stripes: true },
           data: {
-            url: function (node) {
+            url: function(node) {
               const nodeId = node.id == "#" ? "all" : node.data.id;
               return `/get_workflow_services/${workflow.id}/${nodeId}`;
             },
@@ -457,10 +463,12 @@ function addServicePanel() {
         },
       });
       let timer = false;
-      $("#add-services-search").keyup(function (event) {
+      $("#add-services-search").keyup(function(event) {
         if (timer) clearTimeout(timer);
-        timer = setTimeout(function () {
-          $("#service-tree").jstree(true).search($("#add-services-search").val());
+        timer = setTimeout(function() {
+          $("#service-tree")
+            .jstree(true)
+            .search($("#add-services-search").val());
         }, 500);
       });
     },
@@ -527,7 +535,7 @@ function showRestartWorkflowPanel() {
     name: "restart_workflow",
     title: `Restart Workflow '${workflow.name}'`,
     id: workflow.id,
-    callback: function () {
+    callback: function() {
       $(`#restart_workflow-start_services-${workflow.id}`).val(
         graph
           .getSelectedNodes()
@@ -537,14 +545,16 @@ function showRestartWorkflowPanel() {
       call({
         url: `/get_runtimes/${workflow.id}`,
         data: { display: runtimeDisplay },
-        callback: function (runtimes) {
+        callback: function(runtimes) {
           const id = `#restart_workflow-restart_runtime-${workflow.id}`;
           let currentIndex = 0;
           runtimes.forEach((runtime, index) => {
             if (runtime[0] == currentRuntime) currentIndex = index;
             $(id).append(new Option(runtime[1], runtime[0]));
           });
-          $(id).val(runtimes[currentIndex]).selectpicker("refresh");
+          $(id)
+            .val(runtimes[currentIndex])
+            .selectpicker("refresh");
         },
       });
     },
@@ -555,7 +565,7 @@ function restartWorkflow() {
   call({
     url: `/run_service/${currentPath}`,
     form: `restart_workflow-form-${workflow.id}`,
-    callback: function (result) {
+    callback: function(result) {
       $(`#restart_workflow-${workflow.id}`).remove();
       runLogic(result);
     },
@@ -572,7 +582,7 @@ export function getServiceState(id, first) {
   call({
     url: `/get_service_state/${id}`,
     data: { display: runtimeDisplay },
-    callback: function (result) {
+    callback: function(result) {
       if (first || result.state?.status == "Running") {
         colorService(id, "#89CFF0");
         if (result.service && result.service.type === "workflow") {
@@ -701,7 +711,7 @@ export function getWorkflowState(periodic, first) {
         runtime: runtime,
         device: $("#device-filter").val(),
       },
-      callback: function (result) {
+      callback: function(result) {
         if (!Object.keys(result).length || result.service.id != workflow.id) return;
         currentRun = result.run;
         currentRuntime = result.runtime;
@@ -751,7 +761,7 @@ function compareWorkflowResults() {
     title: "Result Comparison",
     id: mainId,
     tableId: `full_result-${mainId}`,
-    callback: function () {
+    callback: function() {
       let constraints = {
         parent_service_id: currentPath.split(">")[0],
         parent_service_id_filter: "equality",
@@ -765,7 +775,9 @@ function compareWorkflowResults() {
 function filterDevice() {
   $("#device-filter-div").toggle();
   if (!$("#device-filter-div").is(":visible")) {
-    $("#device-filter").val(null).trigger("change");
+    $("#device-filter")
+      .val(null)
+      .trigger("change");
     getWorkflowState();
   }
 }

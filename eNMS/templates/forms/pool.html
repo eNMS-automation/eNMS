@@ -1,5 +1,5 @@
-{% from 'macros.html' import inline_field, block_field %}
-{% set filtering = form_type == "pool_filtering" %}
+{% from 'macros.html' import inline_field, block_field %} {% set filtering = form_type
+== "pool_filtering" %}
 <div class="modal-body">
   <form
     id="{{ form_type }}-form"
@@ -38,8 +38,8 @@
       <div class="tab-pane fade in active add-id" id="common-properties">
         {{ form.id(id='pool-id', class="add-id") }} {{ form.hidden_tag() }}
         <div class="form-group">
-          {% for field_name in ("name", "creator", "description", "admin_only", "manually_defined") %} {{
-            block_field(form, field_name) }} {% endfor %}
+          {% for field_name in ("name", "creator", "description", "admin_only",
+          "manually_defined") %} {{ block_field(form, field_name) }} {% endfor %}
         </div>
       </div>
       {% for model in form.models %}
@@ -54,19 +54,16 @@
             <tr>
               <th>Property</th>
               <th>Value</th>
-              
+
               <th style="width: 25%;">Match</th>
               <th style="width: 5%;">Invert</th>
-              
             </tr>
           </thead>
           {% endif %}
           <tbody>
             {% for property in form[model + "_properties"] %} {% set property_name =
-            "{}_{}".format(model, property) %}
-              {% if filtering %}
-                {{ block_field(form, property_name) }}
-              {% else %}
+            "{}_{}".format(model, property) %} {% if filtering %} {{ block_field(form,
+            property_name) }} {% else %}
             <tr>
               <td>
                 {{ names.get(property, property.replace("_", " ").capitalize() ) }}
@@ -87,20 +84,18 @@
                 </center>
               </td>
             </tr>
-            {% endif %}
-            {% endfor %}
+            {% endif %} {% endfor %}
           </tbody>
         </table>
       </div>
       {% endfor %}
       <div class="tab-pane fade add-id" id="custom-properties">
-        {% for property, values in form.custom_properties.items() %}
-          {{ block_field(form, property) }}
-        {% endfor %}
+        {% for property, values in form.custom_properties.items() %} {{
+        block_field(form, property) }} {% endfor %}
       </div>
       <div class="tab-pane fade add-id" id="rbac-properties">
-        {{ block_field(form, "owners") }} {% for property in
-        form.rbac_properties %} {{ block_field(form, property) }} {% endfor %}
+        {{ block_field(form, "owners") }} {% for property in form.rbac_properties %} {{
+        block_field(form, property) }} {% endfor %}
       </div>
     </div>
   </form>

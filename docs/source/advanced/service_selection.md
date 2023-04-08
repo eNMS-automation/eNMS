@@ -145,7 +145,7 @@ Validation Service:
 !!! note 
     
     The command is matched against the contents of the 
-    Network-to-Code 'index' file basd on the platform (netmiko driver) and the 
+    Network-to-Code 'index' file based on the platform (netmiko driver) and the 
     command.
     
 For example, this line in the index will use that textfsm file for `cisco_ios` devices 

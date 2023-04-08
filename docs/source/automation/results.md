@@ -9,7 +9,7 @@ one or more Device targets.
     container for individual Service and/or Device Results.   
      
     In the `Results table`, eNMS first displays the Run-level objects - which correlate
-    the start of an automation activity (i.e., running a service or worklow). 
+    the start of an automation activity (i.e., running a service or workflow). 
     By drilling down further, the Results Viewer will display the per-Service and/or 
     per-Device Results.
 

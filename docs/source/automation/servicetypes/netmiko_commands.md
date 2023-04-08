@@ -11,11 +11,11 @@ the `timeout` has elapsed.
 
 While output processing is simpler when a single command is specified,
 the service supports sending multiple commands as a single service.  The
-same configuration parameters are used for Each command.
+same configuration parameters are used for each command.
 
 By default, the output from all commands is returned as a single string.
 When multiple commands are specified, a header is prepended to the output
-to help identify what output is from which command.  Results from each command can also be returned as a list, using the
+to help identify which output is from which command.  Results from each command can also be returned as a list, using the
 `Results As List` option. 
 
 Configuration parameters for creating this service instance:
@@ -26,7 +26,7 @@ Configuration parameters for creating this service instance:
 
 - `Results as List`: If checked, store the command output as a list of 
    individual string results. By default, all output is returned as a single string,
-   with a COMMAND header prepended multiple commands are specified.
+   with a COMMAND header prepended when multiple commands are specified.
 
 Also included in Netmiko Advanced Parameters: 
 

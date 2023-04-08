@@ -159,8 +159,8 @@ results['result'] = revised
 In workflow design, there are two ways to retrieve the results of work done by 
 previous Services:
 
-- `get_var()` - Retrieve a variable previously stored using `set_var()`.
-- `get_result()` - Retrieve the result of a previous Service.
+- `get_var()`: Retrieve a variable previously stored using `set_var()`.
+- `get_result()`: Retrieve the result of a previous Service.
     
 For full descriptions of these functions, see the 
 [Variables section](../../automation/service_python_code/#variables).

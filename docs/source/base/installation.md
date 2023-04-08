@@ -723,7 +723,7 @@ load on eNMS.
 #### `ssh` section
 
 - `command` (default: `python3 -m flask run -h 0.0.0.0`): command used to start the SSH server.
-- `credentials` - which credential types to enable for the WebSSH connection feature.
+- `credentials`: which credential types to enable for the WebSSH connection feature.
    
     - `custom` (default: `true`).
     - `device` (default: `true`).

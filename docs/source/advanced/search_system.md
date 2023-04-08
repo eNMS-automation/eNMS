@@ -17,8 +17,8 @@ accessed using the dropdown button on the right side of the text box.
 The different search/filter options are available through the `Filter`
 dropdown list.  The options available are:
 
-- `Inclusion`: (**default**) Records where the column data includes 
-  the characters entered will be shown in the table.  This option is not 
+- `Inclusion`: (**default**) Records, where the column data includes 
+  the characters entered, will be shown in the table.  This option is not 
   case-sensitive.
 - `Equality`: This option will display records where the column data is an exact 
   match for the characters entered.  This option is not case-sensitive.
@@ -34,25 +34,25 @@ the characters or expression entered and the filter type selected.
 
 !!! Note
 	If several of these fields are populated with values the results will be 
-	based on all 	fields where input was provided. (i.e. it uses the Boolean 
+	based on all fields where input was provided. (i.e. it uses the Boolean 
 	operator `AND`).
  
 When changing the `Filter` type or `Invert` selection, the `Refresh` button 
 ![Refresh Button](../_static/advanced/search_system/refresh_button.png) in the 
-control components at the top of the display must be clicked . To clear all 
+control components at the top of the display must be clicked. To clear all 
 search/filter criteria click the `Clear Search` button 
-![Clear Seaarch Button](../_static/advanced/search_system/clear_search_button.png) 
+![Clear Search Button](../_static/advanced/search_system/clear_search_button.png) 
 in the same collection of controls.
 
 
 # Advanced search
 
-This search feature is relationship-based, it focuses on the relationships 
+This search feature is relationship-based; it focuses on the relationships 
 between objects.  It is accessed by clicking the `Advanced Search` button
 ![Advanced Search Button](../_static/advanced/search_system/adv_search_button.png)
 
 A dialog opens presenting criteria options based on the object type being
-searched.  Options for Device searches will be different than options for Pool
+searched.  Options for Device searches will be different from options for Pool
 searches.
 
 ![Advanced Search Criteria](../_static/advanced/search_system/adv_search_criteria.png)
@@ -63,12 +63,12 @@ Based on the `Property` identified in the first column, enter an appropriate
 show:
 
 - `Union`: Includes results where one or more of the criteria is met.  If two
-  device names are provide this selection will display results where either 
+  device names are provided, this selection will display results where either 
   device is present.
-- `Intersection`: Includes results where all criteria is met.  If two device
-  names are provided it will return results that contain both devices.
+- `Intersection`: Includes results where all criteria are met.  If two device
+  names are provided, it will return results that contain both devices.
 - `Empty`: Includes results where none of the criteria is met.  If two device
-  names are provided and this option is selected, the results will be where 
+  names are provided, and this option is selected, the results will be that 
   neither of the devices are present.
 
 

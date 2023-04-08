@@ -1,10 +1,10 @@
 # Migrate Between Application Instances
 Allows you to migrate the service from one application instance to another provided they are on the same release
 
-**Method:** Post<br />
-**Address:** /rest/migrate/export or /rest/migrate/import <br />
-**Parameters:** None <br />
-**Payload:** Pending
+**Method**: Post<br />
+**Address**: /rest/migrate/export or /rest/migrate/import <br />
+**Parameters**: None <br />
+**Payload**: Pending
 
 The body must contain the name of the project and the types of instances to
 import/export. The import endpoint supports an additional boolean parameter

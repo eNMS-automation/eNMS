@@ -22,22 +22,22 @@ at the bottom, center of the panel.
 The dropdown list has entries that are Python code files located on the server
 running the application. The options are:
 
-- `delete_corrupted_edges.py` - This code looks for any duplicate edges in
+- `delete_corrupted_edges.py`: This code looks for any duplicate edges in
 Workflows and removes any that it finds.
-- `duplicates_in_association_table.py` - Provides a straightforward way to reproduce the duplicate rows issue
+- `duplicates_in_association_table.py`: Provides a straightforward way to reproduce the duplicate rows issue
  in an association table.
-- `empty.py` - This file is empty and allows custom python code to be entered
+- `empty.py`: This file is empty and allows custom python code to be entered
 and executed.
-- `functions.py` - The code in this file tests the ability to create a device,
+- `functions.py`: The code in this file tests the ability to create a device,
 modify a device and delete a device from the application database.
-- `getsizeof.py` - This code collects the sizes of several controller variables
+- `getsizeof.py`: This code collects the sizes of several controller variables
 used for storing things like connections, logs, and run states.
-- `memory_profile.py` - This snippet of code collects the number of objects in
+- `memory_profile.py`: This snippet of code collects the number of objects in
 memory and sorts them from highest to lowest in terms of the amount of memory
 the object type occupies.  By default, the three object types consuming the most
 memory are displayed.  Also displayed are the three largest string and
 dictionary objects.
-- `sql_performances.py` - This code checks the performance time to create a
+- `sql_performances.py`: This code checks the performance time to create a
 number of devices (200 by default) one at a time, fetch those devices one at a
 time and delete each of those devices one at a time.  The results are displayed
 in the `Output` panel.

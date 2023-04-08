@@ -11,7 +11,7 @@ Configuration parameters for creating this service instance:
 - `Ports (TCP ping only)`: Which ports to ping (should be formatted as
     a list of ports separated by a comma, for example "22,23,49").
 - `Count`: Number of ping packets to send.
-- `Timeout`-Seconds to wait before declaring timeout.
+- `Timeout`: Seconds to wait before declaring timeout.
 - `Ttl`: Time to Live parameter, which tells routers when to discard
     this packet because it has been in the network too long (too many
     hops).

@@ -11,22 +11,22 @@ Scrapli Project Documentation can be reviewed
 
 - `Command`: Netconf operation to send to the device netconf interface.
 
-    - `Get`.
-    - `RPC`.
-    - `Get Configuration`.
-    - `Edit Configuration`.
-    - `Delete Configuration`.
-    - `Commit Configuration`.
-    - `Discard Configuration`.
-    - `Lock`.
-    - `Unlock`.
+    - `Get`
+    - `RPC`
+    - `Get Configuration`
+    - `Edit Configuration`
+    - `Delete Configuration`
+    - `Commit Configuration`
+    - `Discard Configuration`
+    - `Lock`
+    - `Unlock`
 
 - `Target`: Which device config to impact (only displayed for Get,Edit,Delete
   Configurations, Lock and Unlock).
 
-    - `Running Configuration`.
-    - `Startup Configuration`.
-    - `Candidate Configuration`.
+    - `Running Configuration`
+    - `Startup Configuration`
+    - `Candidate Configuration`
 
 - `Content`: XML content to send as a filter to the device.
 
@@ -41,8 +41,7 @@ Scrapli Project Documentation can be reviewed
 - `Credentials`: Select between:
     - `Device Credentials`: eNMS will select the most appropriate credential
       object for each device. If there are multiple credentials available, eNMS
-      will use the `Type of Credential` and `Priority` properties as a tie
-      breaker.
+      will use the `Type of Credential` and `Priority` properties as a tiebreaker.
     - `Named Credentials`: Allows users to reference a specific credential for 
       all targets. Selecting this option requires additional selections below.
     - `Custom Credentials`: The user provides the credentials below:

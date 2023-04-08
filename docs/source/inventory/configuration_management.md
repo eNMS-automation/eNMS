@@ -110,7 +110,7 @@ repository folder to a remote (if one is configured).
 
     To prevent this, the user can install a custom merge driver in the
     `network_data/` repo that allows git to automatically merge based on the
-    most recent commit, as detailed in the [Installation docs](../base/installation.md#network-data-merge-driver).
+    most recent commit.
     
 ### Git command support 
 

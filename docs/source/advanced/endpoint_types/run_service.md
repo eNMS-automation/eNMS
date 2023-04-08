@@ -2,24 +2,24 @@
 
 Initiate execution of a service passing in values to control its operation.
 
-**Method:** Post <br />
-**Address:** /rest/run_service <br />
-**Parameters:** None <br />
-**Payload:**
+**Method**: Post <br />
+**Address**: /rest/run_service <br />
+**Parameters**: None <br />
+**Payload**:
 
- - `name` Name of the service.
- - `devices` (default: `[]`) List of target device names. By default, the
+ - `name`: Name of the service.
+ - `devices`: (default: `[]`) List of target device names. By default, the
      service will run on the devices configured on the service.
- - `pools` (default: `[]`) Same as devices but for pools.
- - `ip_addresses` (default: `[]`) Same as devices but using ip_addresses.
- - `async` (default: `false`) boolean.
-     -   `false` eNMS runs the service and responds to your request
+ - `pools`: (default: `[]`) Same as devices but for pools.
+ - `ip_addresses`: (default: `[]`) Same as devices but using ip_addresses.
+ - `async`: (default: `false`) boolean.
+     -   `false`: eNMS runs the service and responds to your request
          when the service completes. The response contains
          the result of the service, but the connection might time out
          if the service takes too long to run.
-     -   `true` eNMS runs the service in a different thread and
+     -   `true`: eNMS runs the service in a different thread and
          immediately responds with the service ID. (Recommended)
- - user_created (optional) this could be list, dictionary, or string as
+ - user_created: (optional) this could be list, dictionary, or string as
    desired. pass in as many as needed. (see user_identified_key & aid in
    example).
 
@@ -45,7 +45,7 @@ Initiate execution of a service passing in values to control its operation.
     service.
     - For Postman, use the type `raw` for entering key/value pairs into
     the body. Body must also be formatted as application/JSON.
-    - The optional user_created values can be accessed within the serivce by
+    - The optional user_created values can be accessed within the service by
     referencing `payload["your_variable_name"]`.
     - Try `log('info', payload)` in pre-processing to view the objects the
     service knows about. 

@@ -5,9 +5,9 @@ These parameters are common to all Napalm Services.
 ## Napalm Parameters
 
 - `Driver`: Which Napalm driver to use when connecting to the device. If `Use Device Driver`is 
-   choosen, the driver defined at
+   chosen, the driver defined at
    device level (`napalm_driver` inventory property of the device) is used.
-   Otherwise the driver defined at service level (`Driver` property of
+   Otherwise, the driver defined at service level (`Driver` property of
    the service) is used.
 - `Optional arguments`: Napalm supports a number of optional arguments
    that are documented 

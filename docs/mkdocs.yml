@@ -134,7 +134,9 @@ extra:
     - 'REST API'
 extra_javascript:
   - https://code.jquery.com/jquery-2.2.4.min.js
+  - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
   - _static/js/hover_patch.js
+  - _static/js/tablesort.js
 markdown_extensions:
   - meta
   - toc

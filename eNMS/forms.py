@@ -178,9 +178,7 @@ class FormFactory:
                     model=related_model,
                 )
                 vs.relationships[f"{model}_filtering"][related_model] = relation
-            original_form_models = ("group", "pool", "service")
             relation_form = {
-                "template": model if model in original_form_models else "object",
                 "properties": sorted(relations),
                 "object_type": model,
                 "form_type": HiddenField(default=f"{model}_filtering"),

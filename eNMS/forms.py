@@ -975,6 +975,13 @@ class ServiceForm(BaseForm):
         )
 
 
+class SessionForm(BaseForm):
+    template = "object"
+    form_type = HiddenField(default="session")
+    timestamp = StringField("Timestamp")
+    user = StringField("User")
+
+
 class TaskForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="task")

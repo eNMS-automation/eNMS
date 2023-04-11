@@ -991,7 +991,7 @@ class Controller:
                             return "Error during import; service was not imported."
                         status = "Partial import (see logs)."
         db.session.commit()
-        if kwargs.get("service_import", False):
+        if kwargs.get("service_import", False) and len(service_instances) > 1:
             main_workflow = [
                 service for service in service_instances if not service.workflows
             ][0]

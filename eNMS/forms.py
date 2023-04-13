@@ -949,6 +949,8 @@ class UserProfileForm(BaseForm):
             (theme, values["name"]) for theme, values in vs.themes["themes"].items()
         ],
     )
+
+    zoom_sensitivity = FloatField("Zoom Sensitivity (0 to 1)", default=1)
     password = PasswordField("Password")
 
     def validate(self):
@@ -959,7 +961,15 @@ class UserProfileForm(BaseForm):
         )
         if invalid_password:
             self.password.errors.append("Changing user password is not allowed.")
-        return valid_form and not invalid_password
+
+        invalid_zoom_sensitivity = self.zoom_sensitivity.data and not (0 <= self.zoom_sensitivity.data <= 1)
+        if invalid_zoom_sensitivity:
+            self.zoom_sensitivity.errors.append("Value must be between 0 and 1")
+
+        return valid_form and not any([
+            invalid_password,
+            invalid_zoom_sensitivity
+        ])
 
 
 class WorkflowLabelForm(BaseForm):

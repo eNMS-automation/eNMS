@@ -977,6 +977,7 @@ class Runner:
         payload, device = _self.payload, locals.get("device")
         variables = {**locals, **payload.get("form", {})}
         variables.update(payload.get("variables", {}))
+        user = db.fetch("user", name=_self.main_run.creator)
         if device and "devices" in payload.get("variables", {}):
             variables.update(payload["variables"]["devices"].get(device.name, {}))
         variables.update(
@@ -1004,7 +1005,12 @@ class Runner:
                     "url": vs.server_url,
                 },
                 "set_var": _self.payload_helper,
+                # username is kept for backwards compatibility
                 "username": _self.main_run.creator,
+                "user": {
+                    "name": user.name,
+                    "email": user.email,
+                },
                 "workflow": _self.workflow,
             }
         )

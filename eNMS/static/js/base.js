@@ -269,8 +269,11 @@ export function createTooltips(panel) {
 
 export function loadTypes(model) {
   const subtypeModel = model == "edge" ? "link" : model;
+  const modelSubtypes = Object.fromEntries(
+    Object.entries(subtypes[subtypeModel]).sort(([, a], [, b]) => a.localeCompare(b))
+  );
   $(`#${model}-type-dd-list`).selectpicker({ liveSearch: true });
-  for (const [subtype, name] of Object.entries(subtypes[subtypeModel])) {
+  for (const [subtype, name] of Object.entries(modelSubtypes)) {
     if (page == "device_table" && subtype == "network") continue;
     $(`#${model}-type-dd-list`).append(new Option(name, subtype));
   }

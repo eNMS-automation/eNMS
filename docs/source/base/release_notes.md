@@ -25,6 +25,8 @@ Version 4.5.0
 - Remove pin to 1.4.46 for sqlalchemy in requirements (move to sqlalchemy v2)
 - Fix duplicated run name when running a service from the REST API bug
 - Order model drop down lists in the UI based on pretty name instead of tablename
+- Add user "last login" and "last request" properties
+  Commit: f2e4f2658ae0157020412684226e2a1a8cb58aa2
 
 Version 4.4.0: RBAC and Credentials
 -----------------------------------

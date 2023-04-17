@@ -24,6 +24,7 @@ Version 4.5.0
 - Remove pin to 2.0.1 for itsdangerous in requirements
 - Remove pin to 1.4.46 for sqlalchemy in requirements (move to sqlalchemy v2)
 - Fix duplicated run name when running a service from the REST API bug
+- Order model drop down lists in the UI based on pretty name instead of tablename
 
 Version 4.4.0: RBAC and Credentials
 -----------------------------------

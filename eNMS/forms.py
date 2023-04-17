@@ -1375,6 +1375,8 @@ class UserForm(RbacForm):
     )
     password = PasswordField("Password")
     is_admin = BooleanField(default=False)
+    last_login = StringField("Last Login", render_kw={"readonly": True})
+    last_request = StringField("Last Request", render_kw={"readonly": True})
 
 
 class ReplacementForm(FlaskForm):

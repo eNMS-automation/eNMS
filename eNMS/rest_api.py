@@ -92,6 +92,9 @@ class RestApi:
         if service.disabled:
             return {"error": "The workflow is disabled."}
         service.check_restriction_to_owners("run")
+        run_name = kwargs.get("form", {}).get("name")
+        if run_name and db.fetch("run", name=run_name, allow_none=True, rbac=None):
+            return {"error": "There is already a run with the same name."}
         handle_asynchronously = data.get("async", True)
         for device_name in data.get("devices", ""):
             device = db.fetch("device", name=device_name, allow_none=True)

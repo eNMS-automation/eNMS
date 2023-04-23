@@ -762,7 +762,7 @@ function buildBulkEditPanel(panel, type, tableId) {
     if (["name", "scoped_name", "type"].includes(property)) {
       $(`#${type}-${property}-${tableId}`).prop("readonly", true);
     } else {
-      $(`label[for='${property}']`).after(`
+      $(panel).find(`label[for='${property}']`).after(`
         <div class="item" style='float:right; margin-left: 15px'>
           <input
             id="bulk-edit-${property}-${tableId}"
@@ -865,7 +865,7 @@ function buildBulkFilterPanel(panel, type, formType, tableId) {
       $(`#${formType}-${property}-${tableId}`).attr("disabled", "disabled");
       continue;
     }
-    $(`label[for='${property}']`).after(`
+    $(panel).find(`label[for='${property}']`).after(`
       <div class="item" style='float:right; margin-left: 15px'>
         <input
           id="bulk-filter-${property}-${tableId}"

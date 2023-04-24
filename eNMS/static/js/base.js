@@ -165,10 +165,20 @@ export const call = function({ url, data, form, callback }) {
   $.ajax(params);
 };
 
-export function serializeForm(form, formDefault) {
+export function serializeForm(form, formDefault, bulkFilter) {
   const data = JSON.parse(JSON.stringify($(form).serializeArray()));
   let result = {};
+  let propertiesToKeep = [];
+  if (bulkFilter) {
+    $("input[name^='bulk-filter']").each(function(_, el) {
+      if ($(el).prop("checked")) {
+        const property = $(el).data("property");
+        propertiesToKeep.push(property, `${property}_filter`, `${property}_invert`);
+      }
+    });
+  }
   data.forEach((property) => {
+    if (bulkFilter && !propertiesToKeep.includes(property.name)) return;
     const propertyType = formProperties[formDefault]?.[property.name]?.type;
     if (propertyType && propertyType.includes("object")) {
       if (!(property.name in result)) result[property.name] = [];

@@ -379,10 +379,6 @@ export function initVisualization() {
   initLeaflet();
 }
 
-function displayFilteringPanel(model) {
-  showInstancePanel(model, null, "bulk-filter");
-}
-
 function clearSearch() {
   for (const table of ["device", "link"]) {
     $(`.search-input-${table},.search-list-${table}`).val("");
@@ -402,6 +398,5 @@ function clearSearch() {
 
 configureNamespace("visualization", [
   clearSearch,
-  displayFilteringPanel,
   displayNetwork,
 ]);

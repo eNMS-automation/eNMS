@@ -396,7 +396,4 @@ function clearSearch() {
   notify("Search parameters cleared.", "success", 5);
 }
 
-configureNamespace("visualization", [
-  clearSearch,
-  displayNetwork,
-]);
+configureNamespace("visualization", [clearSearch, displayNetwork]);

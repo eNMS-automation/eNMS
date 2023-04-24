@@ -805,7 +805,6 @@ function buildBulkFilterPanel(panel, type, formType, tableId) {
   $(`#${formType}-creator${tableSuffix}`).prop("readonly", false);
   for (const [property, value] of Object.entries(formProperties[formType])) {
     if (value.type == "object-list") {
-      console.log($(`#${formType}-${property}-property-div${tableSuffix}`).length)
       $(`#${formType}-${property}-property-div${tableSuffix}`).width("73%").before(`
           <div style="float:right; width: 26%; margin-top: 2px;">
             <select
@@ -878,8 +877,11 @@ function buildBulkFilterPanel(panel, type, formType, tableId) {
       </div>
     `);
   }
+  const filteringFunction = tableId
+    ? `eNMS.table.refreshTable('${tableId}', true, true)`
+    : `eNMS.visualization.displayNetwork()`;
   $(`#${formType}-action-btn${tableSuffix}`)
-    .attr("onclick", `eNMS.table.refreshTable('${tableId}', true, true)`)
+    .attr("onclick", filteringFunction)
     .text("Bulk Filter");
 }
 

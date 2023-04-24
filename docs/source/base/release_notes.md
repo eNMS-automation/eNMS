@@ -7,6 +7,9 @@ Version 4.5.0
 
 - Bulk Filtering mechanism
   - refactoring of the service template with new Jinja2 macro
+  - Existing caveats:
+    - Cannot filter service type specific properties
+    - Cannot be used for bulk edit
 - Round result size to 1 decimal when the result size is higher than 50% the maximum
   allowed size
 - Don't allow saving a workflow if the run method is set to Service x Service and the

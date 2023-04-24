@@ -331,21 +331,6 @@ function showFilteredTable(id, type, constraints) {
   });
 }
 
-function initFiltering() {
-  for (let type of ["device", "link"]) {
-    openPanel({
-      name: `${type}_filtering`,
-      type: type,
-      title: `${type.charAt(0).toUpperCase() + type.slice(1)} Filtering`,
-      size: "700 600",
-      onbeforeclose: function() {
-        $(this).css("visibility", "hidden");
-      },
-      css: { visibility: "hidden" },
-    });
-  }
-}
-
 export function initVisualization() {
   $("body").contextMenu({
     menuSelector: "#contextMenu",
@@ -391,12 +376,11 @@ export function initVisualization() {
       updateRightClickBindings(controls);
     },
   });
-  initFiltering();
   initLeaflet();
 }
 
-function displayFilteringPanel(type) {
-  $(`#${type}_filtering`).css("visibility", "visible");
+function displayFilteringPanel(model) {
+  showInstancePanel(model, null, "bulk-filter");
 }
 
 function clearSearch() {

@@ -799,12 +799,14 @@ function buildBulkEditPanel(panel, type, tableId) {
 }
 
 function buildBulkFilterPanel(panel, type, formType, tableId) {
+  const tableSuffix = tableId ? `-${tableId}` : "";
   type = type in subtypes.service ? "service" : type;
   panel.setHeaderTitle(`Filter all ${type}s in table`);
-  $(`#${formType}-creator-${tableId}`).prop("readonly", false);
+  $(`#${formType}-creator${tableSuffix}`).prop("readonly", false);
   for (const [property, value] of Object.entries(formProperties[formType])) {
     if (value.type == "object-list") {
-      $(`#${formType}-${property}-property-div-${tableId}`).width("73%").before(`
+      console.log($(`#${formType}-${property}-property-div${tableSuffix}`).length)
+      $(`#${formType}-${property}-property-div${tableSuffix}`).width("73%").before(`
           <div style="float:right; width: 26%; margin-top: 2px;">
             <select
               data-width="100%"
@@ -839,16 +841,16 @@ function buildBulkFilterPanel(panel, type, formType, tableId) {
       </select>`;
       if (
         value.type == "code" ||
-        $(`#${formType}-${property}-${tableId}`).prop("nodeName") == "TEXTAREA"
+        $(`#${formType}-${property}${tableSuffix}`).prop("nodeName") == "TEXTAREA"
       ) {
-        $(`#${formType}-${property}-property-div-${tableId}`).after(`
+        $(`#${formType}-${property}-property-div${tableSuffix}`).after(`
           <div style="margin-top: 8px;">
             <div style="float:left; width: 93%;">${modeSelectList}</div>
             <div style="float:left; width: 5%;">${invertCheckbox}</div>
           </div>
           `);
       } else {
-        $(`#${formType}-${property}-property-div-${tableId}`).width("73%").before(`
+        $(`#${formType}-${property}-property-div${tableSuffix}`).width("73%").before(`
           <center>
             <div style="float:right; width: 3%; margin-left: -5px; margin-right: 10px;">
               ${invertCheckbox}
@@ -859,16 +861,16 @@ function buildBulkFilterPanel(panel, type, formType, tableId) {
       }
       $(`#${tableId}-${property}-list`).selectpicker();
     } else if (value.type == "dict") {
-      $(`#${formType}-${property}-${tableId}`).prop("readonly", true);
+      $(`#${formType}-${property}${tableSuffix}`).prop("readonly", true);
       continue;
     } else if (value.type == "multiselect") {
-      $(`#${formType}-${property}-${tableId}`).attr("disabled", "disabled");
+      $(`#${formType}-${property}${tableSuffix}`).attr("disabled", "disabled");
       continue;
     }
     $(panel).find(`label[for='${property}']`).after(`
       <div class="item" style='float:right; margin-left: 15px'>
         <input
-          id="bulk-filter-${property}-${tableId}"
+          id="bulk-filter-${property}${tableSuffix}"
           name="bulk-filter-${property}"
           data-property="${property}"
           type="checkbox"
@@ -876,7 +878,7 @@ function buildBulkFilterPanel(panel, type, formType, tableId) {
       </div>
     `);
   }
-  $(`#${formType}-action-btn-${tableId}`)
+  $(`#${formType}-action-btn${tableSuffix}`)
     .attr("onclick", `eNMS.table.refreshTable('${tableId}', true, true)`)
     .text("Bulk Filter");
 }

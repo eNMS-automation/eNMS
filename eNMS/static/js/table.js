@@ -1396,6 +1396,7 @@ tables.credential = class CredentialTable extends Table {
     return [
       this.columnDisplay(),
       this.refreshTableButton(),
+      this.bulkFilteringButton(),
       this.clearSearchButton(),
       this.createNewButton(),
       this.bulkEditButton(),

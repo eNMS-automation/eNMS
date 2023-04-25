@@ -65,10 +65,7 @@ class Runner:
         self.main_run = db.fetch("run", runtime=self.parent_runtime, rbac=None)
         creator = db.fetch("user", name=self.main_run.creator, rbac=None)
         self.is_admin_run = creator.is_admin
-        self.creator_dict = {
-            "name": creator.name,
-            "email": creator.email,
-        }
+        self.creator_dict = {"name": creator.name, "email": creator.email}
         if not self.is_main_run:
             self.path = f"{run.path}>{self.service.id}"
         db.session.commit()
@@ -1009,8 +1006,6 @@ class Runner:
                     "url": vs.server_url,
                 },
                 "set_var": _self.payload_helper,
-                # username is kept for backwards compatibility
-                "username": _self.main_run.creator,
                 "user": _self.creator_dict,
                 "workflow": _self.workflow,
             }

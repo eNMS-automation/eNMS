@@ -8,7 +8,7 @@ from os.path import exists
 from traceback import format_exc
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
-from wtforms.validators import InputRequired
+from wtforms.validators import InputRequired, NumberRange
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
@@ -949,6 +949,11 @@ class UserProfileForm(BaseForm):
             (theme, values["name"]) for theme, values in vs.themes["themes"].items()
         ],
     )
+    zoom_sensitivity = FloatField(
+        "Zoom Sensitivity (0 to 1)",
+        [NumberRange(min=0, max=1, message="Value must be between 0 and 1")],
+        default="1",
+    )    
     password = PasswordField("Password")
 
     def validate(self):
@@ -960,7 +965,6 @@ class UserProfileForm(BaseForm):
         if invalid_password:
             self.password.errors.append("Changing user password is not allowed.")
         return valid_form and not invalid_password
-
 
 class WorkflowLabelForm(BaseForm):
     form_type = HiddenField(default="label")

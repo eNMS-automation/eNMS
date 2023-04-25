@@ -951,9 +951,9 @@ class UserProfileForm(BaseForm):
     )
     zoom_sensitivity = FloatField(
         "Zoom Sensitivity (0 to 1)",
-        [NumberRange(min=0, max=1, message="Value must be between 0 and 1")],
-        default="1",
-    )    
+        [NumberRange(min=0, max=1)],
+        default=1,
+    )
     password = PasswordField("Password")
 
     def validate(self):

@@ -114,7 +114,7 @@ class RestApi:
                 pools.append(pool.id)
             else:
                 errors.append(f"No pool with the name '{pool_name}'")
-        if errors:
+        if errors and not kwargs.get("ignore_invalid_targets"):
             return {"errors": errors}
         if devices or pools:
             data.update({"target_devices": devices, "target_pools": pools})

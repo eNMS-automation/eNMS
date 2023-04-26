@@ -62,8 +62,10 @@ class Runner:
         self.in_process = False if self.is_main_run else run.in_process
         device_progress = "iteration_device" if self.iteration_run else "device"
         self.progress_key = f"progress/{device_progress}"
-        self.is_admin_run = db.fetch("user", name=self.creator, rbac=None).is_admin
         self.main_run = db.fetch("run", runtime=self.parent_runtime, rbac=None)
+        creator = db.fetch("user", name=self.main_run.creator, rbac=None)
+        self.is_admin_run = creator.is_admin
+        self.creator_dict = {"name": creator.name, "email": creator.email}
         if not self.is_main_run:
             self.path = f"{run.path}>{self.service.id}"
         db.session.commit()
@@ -1000,7 +1002,7 @@ class Runner:
                     "url": vs.server_url,
                 },
                 "set_var": _self.payload_helper,
-                "username": _self.main_run.creator,
+                "user": _self.creator_dict,
                 "workflow": _self.workflow,
             }
         )

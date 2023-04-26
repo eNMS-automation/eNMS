@@ -5,7 +5,7 @@ from os import makedirs
 from os.path import exists, getmtime
 from passlib.hash import argon2
 from shutil import move
-from sqlalchemy import Boolean, ForeignKey, Integer
+from sqlalchemy import Boolean, ForeignKey, Integer, Float
 from sqlalchemy.orm import relationship
 from time import ctime
 
@@ -44,6 +44,7 @@ class User(AbstractBase, UserMixin):
     authentication = db.Column(db.TinyString, default="database")
     small_menu = db.Column(Boolean, default=False, info={"log_change": False})
     theme = db.Column(db.TinyString, default="default", info={"log_change": False})
+    zoom_sensitivity = db.Column(Float, default=1, info={"log_change": False})
     groups = relationship(
         "Group", secondary=db.user_group_table, back_populates="users"
     )

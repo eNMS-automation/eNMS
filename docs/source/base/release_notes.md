@@ -31,7 +31,10 @@ Version 4.5.0
 - Add user "last login" and "last request" properties
   Commit: f2e4f2658ae0157020412684226e2a1a8cb58aa2
 - Add zoom sensitivy control in user profile for Workflow Builder
-
+- Remove "username" variable from workflow global variables and add "user"
+  dictionary instead with name and email. Mandatory checks:
+  - wherever "username" is used, it must be replaced with user["name"]
+  - "user" must not be used in existing workflows
 
 Version 4.4.0: RBAC and Credentials
 -----------------------------------

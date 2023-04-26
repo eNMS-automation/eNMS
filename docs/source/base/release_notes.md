@@ -35,6 +35,8 @@ Version 4.5.0
   dictionary instead with name and email. Mandatory checks:
   - wherever "username" is used, it must be replaced with user["name"]
   - "user" must not be used in existing workflows
+- Add new "ignore_invalid_targets" parameter in run_service REST endpoint to run
+  even if there are invalid targets.
 
 Version 4.4.0: RBAC and Credentials
 -----------------------------------

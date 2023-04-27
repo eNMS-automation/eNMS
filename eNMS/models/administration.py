@@ -192,6 +192,7 @@ class File(AbstractBase):
     description = db.Column(db.LargeString)
     filename = db.Column(db.SmallString, index=True)
     path = db.Column(db.SmallString, unique=True)
+    full_path = db.Column(db.SmallString, unique=True)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     last_updated = db.Column(db.TinyString)
     status = db.Column(db.TinyString)
@@ -202,15 +203,16 @@ class File(AbstractBase):
     folder_path = db.Column(db.SmallString)
 
     def update(self, move_file=True, **kwargs):
-        old_path = self.path
+        old_path = self.full_path
         super().update(**kwargs)
-        if exists(str(old_path)) and not exists(self.path) and move_file:
-            move(old_path, self.path)
+        self.full_path = f"{vs.file_path}{self.path}"
+        if exists(str(old_path)) and not exists(self.full_path) and move_file:
+            move(old_path, self.full_path)
         self.name = self.path.replace("/", ">")
-        *split_folder_path, self.filename = self.path.split("/")
+        *split_folder_path, self.filename = self.full_path.split("/")
         self.folder_path = "/".join(split_folder_path)
-        self.folder = db.fetch("folder", path=self.folder_path, allow_none=True)
-        self.last_modified = datetime.strptime(ctime(getmtime(self.path)), "%c")
+        self.folder = db.fetch("folder", full_path=self.folder_path, allow_none=True)
+        self.last_modified = datetime.strptime(ctime(getmtime(self.full_path)), "%c")
         if not kwargs.get("migration_import"):
             self.last_updated = datetime.strptime(ctime(), "%c")
         self.status = "Updated"
@@ -233,6 +235,7 @@ class Folder(File):
     }
 
     def __init__(self, **kwargs):
-        if not exists(kwargs["path"]):
-            makedirs(kwargs["path"])
+        full_path = f"{vs.file_path}{kwargs['path']}"
+        if not exists(full_path):
+            makedirs(full_path)
         self.update(**kwargs)

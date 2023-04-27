@@ -670,9 +670,9 @@ class Controller:
             result[instance.category or "Other"].append(entry)
         return result
 
-    def scan_folder(self, path=None):
+    def scan_folder(self, path=""):
         env.log("info", "Starting Scan of Files")
-        path = env.file_path if not path else path.replace(">", "/")
+        path = f"{vs.file_path}{path.replace('>', '/')}"
         folders = {Path(path)}
         while folders:
             folder = folders.pop()
@@ -681,9 +681,10 @@ class Controller:
                     continue
                 if file.is_dir():
                     folders.add(file)
-                if db.fetch("file", path=str(file), allow_none=True):
+                scoped_path = str(file).replace(vs.file_path, "")
+                if db.fetch("file", path=scoped_path, allow_none=True):
                     continue
-                db.factory("folder" if file.is_dir() else "file", path=str(file))
+                db.factory("folder" if file.is_dir() else "file", path=scoped_path)
             db.session.commit()
         env.log("info", "Scan of Files Successful")
 
@@ -1424,7 +1425,8 @@ class Controller:
                 setattr(group, f"{property}_devices", devices)
 
     def upload_files(self, **kwargs):
-        kwargs["file"].save(f"{kwargs['folder']}/{kwargs['file'].filename}")
+        path = f"{vs.file_path}/{kwargs['folder']}/{kwargs['file'].filename}"
+        kwargs["file"].save(path)
 
     def update_pool(self, pool_id):
         db.fetch("pool", id=int(pool_id), rbac="edit").compute_pool()

@@ -19,8 +19,7 @@ import {
 } from "./base.js";
 import { refreshTable, tables } from "./table.js";
 
-export const defaultFolder = settings.paths.files || `${applicationPath}/files`;
-export let folderPath = localStorage.getItem("folderPath") || defaultFolder;
+export let folderPath = localStorage.getItem("folderPath") || "/files";
 
 function displayFiles() {
   if ($("#files").length || page == "file_table") {
@@ -62,7 +61,6 @@ export function displayFolderPath() {
     .slice(1)
     .forEach((folder) => {
       currentPath += `/${folder}`;
-      if (!currentPath.includes(defaultFolder)) return;
       htmlPath.push(`<b> / </b>
         <button type="button" class="btn btn-xs btn-primary"
         onclick="eNMS.administration.enterFolder({path: '${currentPath}'})">
@@ -86,7 +84,7 @@ function enterFolder({ folder, path }) {
   refreshTable("file");
   if (folder) {
     $("#upward-folder-btn").removeClass("disabled");
-  } else if (folderPath == defaultFolder) {
+  } else if (folderPath == "/files") {
     $("#upward-folder-btn").addClass("disabled");
   }
   displayFolderPath();
@@ -151,7 +149,7 @@ function migrationsExport() {
 
 function scanFolder() {
   call({
-    url: `/scan_folder/${folderPath.replace(/\//g, ">")}`,
+    url: `/scan_folder/${folderPath.slice(6).replace(/\//g, ">")}`,
     callback: function() {
       refreshTable("file");
       notify("Scan successful.", "success", 5, true);
@@ -302,7 +300,7 @@ function showFileUploadPanel(folder) {
         timeout: settings.files.upload_timeout,
       });
       $(`[id="dropzone-submit-${path}"]`).click(function() {
-        $(`[id="folder-${path}"]`).val(folder);
+        $(`[id="folder-${path}"]`).val(folder.slice(6));
         dropzone.processQueue();
       });
     },

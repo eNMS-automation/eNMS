@@ -442,7 +442,6 @@ class FileForm(BaseForm):
     path = StringField("Path", [InputRequired()])
     description = StringField(widget=TextArea(), render_kw={"rows": 8})
     filename = StringField("Filename", render_kw={"readonly": True})
-    name = StringField("Name", render_kw={"readonly": True})
     last_modified = StringField("Last Modified", render_kw={"readonly": True})
     last_updated = StringField("Last Updated", render_kw={"readonly": True})
     status = StringField("Status", render_kw={"readonly": True})
@@ -455,10 +454,10 @@ class FileForm(BaseForm):
         path_already_used = (not current_file or change_of_path) and path_taken
         if path_already_used:
             self.path.errors.append("There is already a file at the specified path.")
-        out_of_scope_path = not self.path.data.startswith(env.file_path)
+        out_of_scope_path = not self.path.data.startswith(vs.file_path)
         if out_of_scope_path:
             self.path.errors.append(
-                f"The path must be in the {env.file_path} directory."
+                f"The path must be in the {vs.file_path} directory."
             )
         return valid_form and not any([path_already_used, out_of_scope_path])
 

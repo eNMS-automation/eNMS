@@ -324,20 +324,20 @@ class Server(Flask):
         @blueprint.route("/download/<type>/<path:path>")
         @self.process_requests
         def download(type, path):
-            return_data, path = BytesIO(), f"/{path}"
+            return_data, full_path = BytesIO(), f"{vs.file_path}/{path}"
             if type == "folder":
-                with open_tar(f"{path}.tgz", "w:gz") as tar:
-                    tar.add(path, arcname="")
-                path = f"{path}.tgz"
-            with open(path, "rb") as file:
+                with open_tar(f"{full_path}.tgz", "w:gz") as tar:
+                    tar.add(full_path, arcname="")
+                full_path = f"{full_path}.tgz"
+            with open(full_path, "rb") as file:
                 return_data.write(file.read())
             return_data.seek(0)
             if type == "folder":
-                remove(path)
-                archive = db.fetch("folder", path=path, allow_none=True)
+                remove(full_path)
+                archive = db.fetch("folder", path=f"/{path}", allow_none=True)
                 if archive:
                     db.session.delete(archive)
-            return send_file(return_data, download_name=Path(path).name)
+            return send_file(return_data, download_name=Path(full_path).name)
 
         @blueprint.route("/export_service/<int:id>")
         @self.process_requests

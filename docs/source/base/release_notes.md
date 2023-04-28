@@ -37,6 +37,14 @@ Version 4.5.0
   - "user" must not be used in existing workflows
 - Add new "ignore_invalid_targets" parameter in run_service REST endpoint to run
   even if there are invalid targets.
+- Refactor the files mechanism to no longer display the full Unix path, only the path
+  from the files folder
+  - "files" displayed as breadcrumb even if the actual path does not include such a folder
+  - impact on migration: all paths in files must be truncated by removing the path
+  to the "files" folder
+
+Migration:
+- in file.yaml, remove path to "files" folder for all paths
 
 Version 4.4.0: RBAC and Credentials
 -----------------------------------

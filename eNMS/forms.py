@@ -454,12 +454,7 @@ class FileForm(BaseForm):
         path_already_used = (not current_file or change_of_path) and path_taken
         if path_already_used:
             self.path.errors.append("There is already a file at the specified path.")
-        out_of_scope_path = not self.path.data.startswith(vs.file_path)
-        if out_of_scope_path:
-            self.path.errors.append(
-                f"The path must be in the {vs.file_path} directory."
-            )
-        return valid_form and not any([path_already_used, out_of_scope_path])
+        return valid_form and not path_already_used
 
 
 class FolderForm(FileForm):

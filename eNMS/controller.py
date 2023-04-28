@@ -316,11 +316,12 @@ class Controller:
         return instance.last_modified
 
     def edit_file(self, filepath):
+        scoped_path = filepath.replace(">", "/")
         try:
-            with open(Path(filepath.replace(">", "/"))) as file:
+            with open(Path(f"{vs.file_path}{scoped_path}")) as file:
                 return file.read()
         except FileNotFoundError:
-            file = db.fetch("file", path=filepath.replace(">", "/"), allow_none=True)
+            file = db.fetch("file", path=scoped_path, allow_none=True)
             if file:
                 file.status = "Not Found"
             return {"error": "File not found on disk."}

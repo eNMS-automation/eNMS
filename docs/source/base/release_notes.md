@@ -42,6 +42,7 @@ Version 4.5.0
   - "files" displayed as breadcrumb even if the actual path does not include such a folder
   - impact on migration: all paths in files must be truncated by removing the path
   to the "files" folder
+  - everything about files is impacted and must be tested again
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

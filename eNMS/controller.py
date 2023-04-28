@@ -1189,11 +1189,11 @@ class Controller:
         )
 
     def save_file(self, filepath, **kwargs):
-        filepath, content = filepath.replace(">", "/"), None
+        scoped_path, content = filepath.replace(">", "/"), None
         if kwargs.get("file_content"):
-            with open(Path(filepath), "w") as file:
+            with open(Path(f"{vs.file_path}{scoped_path}"), "w") as file:
                 content = file.write(kwargs["file_content"])
-        db.fetch("file", path=filepath).update()
+        db.fetch("file", path=scoped_path).update()
         return content
 
     def save_positions(self, type, id, **kwargs):

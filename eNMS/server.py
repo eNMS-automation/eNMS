@@ -301,14 +301,8 @@ class Server(Flask):
             custom_template = service.parameterized_form_template
             render = render_template_string if custom_template else render_template
             return render(
-                custom_template or "forms/base.html",
-                **{
-                    "form_type": f"initial-{service_id}",
-                    "action": "eNMS.automation.submitInitialForm",
-                    "button_label": "Run Service",
-                    "button_class": "primary",
-                    "form": result(request.form),
-                },
+                custom_template or "forms/parameterized.html",
+                **{"form_type": f"initial-{service_id}", "form": result(request.form)},
             )
 
         @blueprint.route("/help/<path:path>")

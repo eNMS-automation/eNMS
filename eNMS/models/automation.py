@@ -77,6 +77,7 @@ class Service(AbstractBase):
     initial_payload = db.Column(db.Dict)
     mandatory_parametrization = db.Column(Boolean, default=False)
     parameterized_form = db.Column(db.LargeString)
+    parameterized_form_template = db.Column(db.LargeString)
     skip = db.Column(db.Dict)
     skip_query = db.Column(db.LargeString)
     skip_value = db.Column(db.SmallString, default="True")

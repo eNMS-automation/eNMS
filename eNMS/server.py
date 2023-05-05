@@ -6,6 +6,7 @@ from flask import (
     jsonify,
     redirect,
     render_template,
+    render_template_string,
     request,
     send_file,
     url_for,
@@ -293,11 +294,14 @@ class Server(Flask):
         @blueprint.route("/parameterized_form/<service_id>")
         @self.process_requests
         def parameterized_form(service_id):
+            service = db.fetch("service", id=service_id)
             result = form_factory.register_parameterized_form(service_id)
             if isinstance(result, str):
                 return result
-            return render_template(
-                "forms/base.html",
+            custom_template = service.parameterized_form_template
+            render = render_template_string if custom_template else render_template
+            return render(
+                custom_template or "forms/base.html",
                 **{
                     "form_type": f"initial-{service_id}",
                     "action": "eNMS.automation.submitInitialForm",

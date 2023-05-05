@@ -744,6 +744,7 @@ class ServiceForm(BaseForm):
         default="\n".join(vs.automation["parameterized_form"]),
         help="common/parameterized_form",
     )
+    parameterized_form_template = StringField(type="code", widget=TextArea())
     iteration_variable_name = StringField(
         "Iteration Variable Name", default="iteration_value"
     )
@@ -838,6 +839,7 @@ class ServiceForm(BaseForm):
             "operating_system",
             "initial_payload",
             "mandatory_parametrization",
+            "parameterized_form_template",
             "parameterized_form",
             "priority",
             "number_of_retries",

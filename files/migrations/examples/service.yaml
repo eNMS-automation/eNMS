@@ -50,6 +50,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Ansible Playbook Service: [-638, 93]
     (R) Combined Device & Target Iteration: &id003 [-458, -30]
@@ -537,6 +538,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Ansible Playbook Service: [512, 246]
     (R) Combined Device & Target Iteration: &id094 [-437, 191]
@@ -649,6 +651,7 @@
     POST Endpoint search: &id117 [576, 170]
     POST update, DELETE delete and GET & POST results: [503, 145]
     Parameterized Form (override labels & targets, add payload): &id138 [692, -112]
+    Parameterized Form with Custom Template: !!python/tuple [500, 0]
     Parameterized Multiprocessing: [615, 109]
     Parameterized Run with a Superworkflow: &id113 [565, -70]
     Parameterized Superworkflow Run: *id113
@@ -1038,6 +1041,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -1135,6 +1139,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Fork based on Success Value: &id184 [696, 185]
     Advanced Multiprocessing (admin): [-266, -204]
@@ -1247,6 +1252,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Configuration Properties Backup Services: [-299, 188]
     (R) Operational Data Backup Service: [-299, 188]
@@ -1360,6 +1366,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Netmiko Configuration and Validation Services: &id188 [-115, -70]
     'Miscellaneous: Netmiko Services, Connection Cache Management': [-38, -86]
@@ -1482,6 +1489,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Netmiko Configuration and Validation Services: &id190 [352, 7]
     Iteration Services Test Workflow: ['147', '-14']
@@ -1603,6 +1611,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Netmiko Configuration and Validation Services: &id192 [347, 119]
     'Miscellaneous: Netmiko Services, Connection Cache Management': [476, 119]
@@ -1726,6 +1735,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Fork based on Success Value: &id194 [-179, 259]
     (R) Netmiko Configuration and Validation Services: &id195 [-84, 184]
@@ -1841,6 +1851,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {verify: 'false'}
   payload:
     a: b
@@ -1974,6 +1985,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Fork based on Success Value: &id205 [-31, -43]
     Fork based on Result with Success & Failure Edges: *id205
@@ -2083,6 +2095,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Fork based on Success Value: &id209 [608, 46]
     Fork based on Result with Success & Failure Edges: *id209
@@ -2184,6 +2197,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Combined Device & Target Iteration: &id214 [-201, -15]
     Combined Device & Target Iteration: *id214
@@ -2309,6 +2323,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Netmiko Prompts Service: [22, -74]
     Netmiko Prompts: &id217 [22, -74]
@@ -2427,6 +2442,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Netmiko Prompts Service: [350, 108]
     Netmiko Prompts: &id218 [350, 108]
@@ -2521,6 +2537,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '(R) Functions: get_var, set_var, and get_result': &id219 [-376, -138]
     'Functions: get_var, set_var, and get_result': *id219
@@ -2613,6 +2630,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '(R) Functions: get_var, set_var, and get_result': &id220 [0, -144]
     'Functions: get_var, set_var, and get_result': *id220
@@ -2732,6 +2750,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '(R) Functions: get_var, set_var, and get_result': &id221 [474, -11]
     'Functions: get_var, set_var, and get_result': *id221
@@ -2853,6 +2872,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '(R) Functions: get_var, set_var, and get_result': &id222 [425, 190]
     'Functions: get_var, set_var, and get_result': *id222
@@ -2975,6 +2995,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '(R) Functions: get_var, set_var, and get_result': &id223 [-445, 128]
     'Functions: get_var, set_var, and get_result': *id223
@@ -3081,6 +3102,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Napalm Getters Service: &id224 [581, 136]
     (R) Payload Extraction with Operations: [-248, -175]
@@ -3201,6 +3223,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS-prod/files/playbooks/arista_show_version.yml
   positions:
@@ -3299,6 +3322,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS-prod/files/playbooks/arista_show_running_config.yml
   positions:
@@ -3396,6 +3420,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS-prod/files/playbooks/arista_show_running_config.yml
   positions:
@@ -3514,6 +3539,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Combined Device & Target Iteration: &id232 [214, 72]
     Combined Device & Target Iteration: *id232
@@ -3637,6 +3663,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Combined Device & Target Iteration: &id234 [633, 36]
     Combined Device & Target Iteration: *id234
@@ -3760,6 +3787,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Combined Device & Target Iteration: &id236 [468, 196]
     Combined Device & Target Iteration: *id236
@@ -3864,6 +3892,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {}
   positions:
@@ -3973,6 +4002,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow F S1: Subworkflow of Workflow': [200, -205]
   postprocessing: ''
@@ -4106,6 +4136,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow F: Workflow of Workflows': [-423, -31]
   postprocessing: ''
@@ -4236,6 +4267,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4343,6 +4375,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4460,6 +4493,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4594,6 +4628,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4700,6 +4735,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4847,6 +4883,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4971,6 +5008,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Configuration Properties Backup Services: [-25, 33]
     (R) Operational Data Backup Service: [-25, 33]
@@ -5085,6 +5123,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -5182,6 +5221,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     DxD and SxS Run Methods: &id241 [-296, -98]
     'Regression Workflow G: run methods (BFS)': *id241
@@ -5277,6 +5317,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {}
   positions:
@@ -5377,6 +5418,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     DxD and SxS Run Methods: &id243 [123, -96]
     'Regression Workflow G: run methods (BFS)': *id243
@@ -5472,6 +5514,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {}
   positions:
@@ -5572,6 +5615,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     DxD and SxS Run Methods: &id245 [622, -89]
     'Regression Workflow G: run methods (BFS)': *id245
@@ -5687,6 +5731,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '[DxD and SxS Run Methods] Workflow  in device by device mode': &id246 [248, -94]
     '[Regression Workflow G: run methods (BFS)] Workflow  in device by device mode': *id246
@@ -5807,6 +5852,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '[DxD and SxS Run Methods] Workflow in service by service mode (workflow targets)': &id247 [
       239, -108]
@@ -5928,6 +5974,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '[DxD and SxS Run Methods] Workflow in service targets mode': &id248 [234, -86]
     '[Regression Workflow G: run methods (BFS)] Workflow in service targets mode': *id248
@@ -6054,6 +6101,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -6148,6 +6196,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Shared Service in Multiple Subworkflows: &id250 [-241, 197]
     'Regression Workflow H: shared service in multiple subworkflows': &id249 [-241,
@@ -6247,6 +6296,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Shared Service in Multiple Subworkflows: &id252 [548, 48]
     'Regression Workflow H: shared service in multiple subworkflows': &id251 [548,
@@ -6363,6 +6413,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '[(R) Shared Service in Multiple Subworkflows] Subworkflow 1': &id253 [167, -185]
     '[(R) Shared Service in Multiple Subworkflows] Subworkflow 2': &id254 [243, -104]
@@ -6466,6 +6517,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   pass_device_properties: false
   playbook_path: /media/sf_shared/eNMS-prod/files/playbooks/simple_playbook.yml
   positions:
@@ -6587,6 +6639,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -6675,6 +6728,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Dictionary as Iteration Target Variable: &id257 [-209, -7]
     Advanced Iteration Targets: &id258 [132, -202]
@@ -6795,6 +6849,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Dictionary as Iteration Target Variable: &id259 [436, -6]
     Advanced Iteration Targets: &id260 [135, 100]
@@ -6939,6 +6994,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7028,6 +7084,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Iteration Mechanism: Workflow and Subworkflow Iteration': &id261 [-197, 268]
     'Regression Workflow J: Workflow and Subworkflow Iteration': [226, -76]
@@ -7126,6 +7183,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Iteration Mechanism: Workflow and Subworkflow Iteration': &id262 [-182, 477]
     'Regression Workflow J: Workflow and Subworkflow Iteration': [218, 171]
@@ -7217,6 +7275,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow Value Iteration': &id263 [
       231, -87]
@@ -7346,6 +7405,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7435,6 +7495,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Preprocessing and Postprocessing Mechanism: &id264 [-26, 123]
     Preprocessing and Postprocessing Mechanisms: [-97, 303]
@@ -7529,6 +7590,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Preprocessing and Postprocessing Mechanism: &id265 [558, 152]
     Preprocessing and Postprocessing Mechanisms: [612, 349]
@@ -7620,6 +7682,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Basic Superworkflow: [187, 18]
     'Regression Workflow L: superworkflow': &id266 [511, -111]
@@ -7720,6 +7783,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7820,6 +7884,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7915,6 +7980,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [-142, -11]
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id268 [
@@ -8020,6 +8086,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [-156, 196]
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id269 [
@@ -8123,6 +8190,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   ports: '22'
   positions:
     (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [126, -10]
@@ -8225,6 +8293,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8321,6 +8390,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': &id271 [
       113, -104]
@@ -8436,6 +8506,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [428, 74]
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id273 [
@@ -8539,6 +8610,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {verify: 'false'}
   payload:
     a: b
@@ -8659,6 +8731,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8784,6 +8857,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Configuration Properties Backup Services: [-550, 45]
     (R) Operational Data Backup Service: [-550, 45]
@@ -8894,6 +8968,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Configuration Properties Backup Services: [271, 209]
     (R) Operational Data Backup Service: [271, 209]
@@ -8987,6 +9062,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow L: superworkflow': &id277 [606, 47]
     'Regression Workflow: Specific Superworkflow': *id277
@@ -9085,6 +9161,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -9183,6 +9260,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Scrapli Service: &id278 [-33, -167]
     'Regression Workflow O: Scrapli': *id278
@@ -9287,6 +9365,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Scrapli Service: &id279 [402, -161]
     'Regression Workflow O: Scrapli': *id279
@@ -9391,6 +9470,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Scrapli Service: &id280 [6, 112]
     'Regression Workflow O: Scrapli': *id280
@@ -9495,6 +9575,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Scrapli Service: &id281 [373, 107]
     'Regression Workflow O: Scrapli': *id281
@@ -9610,6 +9691,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -9725,6 +9807,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Generic File Transfer Service: [-252, -10]
     Generic File Transfer: &id283 [-243, -73]
@@ -9830,6 +9913,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Generic File Transfer Service: [-121, 188]
     Generic File Transfer: &id285 [-120, 143]
@@ -9949,6 +10033,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Generic File Transfer Service: [204, 172]
     Generic File Transfer: &id287 [209, 155]
@@ -10057,6 +10142,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Generic File Transfer Service: [121, -24]
     Generic File Transfer: &id289 [126, -84]
@@ -10176,6 +10262,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Generic File Transfer Service: [463, -10]
     Generic File Transfer: &id291 [460, -83]
@@ -10281,6 +10368,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Generic File Transfer Service: [-423, 187]
     Generic File Transfer: &id293 [-385, 147]
@@ -10401,6 +10489,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -10489,6 +10578,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow R: Skip Services in SxS mode': &id294 [-124, -154]
     'Regression Workflow R: skip services in service by service mode': *id294
@@ -10588,6 +10678,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow R: Skip Services in SxS mode': &id296 [304, -102]
     'Regression Workflow R: skip services in service by service mode': *id296
@@ -10687,6 +10778,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow R: Skip Services in SxS mode': &id298 [12, 179]
     'Regression Workflow R: skip services in service by service mode': *id298
@@ -10828,6 +10920,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -10920,6 +11013,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Conditional Skip Query in Failed and Discard Modes: &id301 [38, 378]
     'Regression Workflow S: conditional skip query in failed and discard mode': &id300 [
@@ -11019,6 +11113,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Conditional Skip Query in Failed and Discard Modes: &id303 [450, 173]
     'Regression Workflow S: conditional skip query in failed and discard mode': &id302 [
@@ -11118,6 +11213,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Conditional Skip Query in Failed and Discard Modes: &id305 [519, 439]
     'Regression Workflow S: conditional skip query in failed and discard mode': &id304 [
@@ -11217,6 +11313,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Conditional Skip Query in Failed and Discard Modes: &id307 [324, 323]
     'Regression Workflow S: conditional skip query in failed and discard mode': &id306 [
@@ -11352,6 +11449,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -11441,6 +11539,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Link Neighbors Mechanism: &id308 [-291, 68]
     Link Neighbors Mechanism (device.get_neighbors function): *id308
@@ -11568,6 +11667,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {}
   positions:
@@ -11692,6 +11792,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Netmiko Prompts Service: [-291, -104]
     Netmiko Prompts: &id312 [-291, -104]
@@ -11825,6 +11926,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -11918,6 +12020,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Functions: factory, fetch, fetch_all, encrypt and get_result': [22, 32]
     Global Variables and post-run Pool Update Mechanism: &id313 [28, 6]
@@ -12019,6 +12122,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Functions: factory, fetch, fetch_all, encrypt and get_result': [568, 6]
     Global Variables and post-run Pool Update Mechanism: &id314 [568, 6]
@@ -12138,6 +12242,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Functions: factory, fetch, fetch_all, encrypt and get_result': [514, 220]
     Global Variables and post-run Pool Update Mechanism: &id315 [514, 220]
@@ -12236,6 +12341,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Conditional Skip Query in Failed and Discard Modes: &id317 [-335, 369]
     'Regression Workflow S: conditional skip query in failed and discard mode': &id316 [
@@ -12365,6 +12471,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -12462,6 +12569,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {verify: 'false'}
   payload:
     a: b
@@ -12567,6 +12675,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Fork based on value with Skip Discard Mechanism: &id322 [336, 89]
     'Regression Workflow U: fork based on value with skip discard mode': &id321 [
@@ -12663,6 +12772,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Fork based on value with Skip Discard Mechanism: &id324 [-434, 308]
     'Regression Workflow U: fork based on value with skip discard mode': &id323 [
@@ -12783,6 +12893,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Fork based on value with Skip Discard Mechanism: &id326 [548, 232]
     'Regression Workflow U: fork based on value with skip discard mode': &id325 [
@@ -12885,6 +12996,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {verify: 'false'}
   payload:
     a: b
@@ -13012,6 +13124,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -13108,6 +13221,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow V: skip query with device in run once mode': &id329 [-221,
       154]
@@ -13199,6 +13313,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow V: skip query with device in run once mode': &id330 [-31,
       3]
@@ -13292,6 +13407,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - workflow targets': &id331 [
       230, -19]
@@ -13414,6 +13530,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -13505,6 +13622,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow W: disable result creation mode': [-312, -10]
     'Regression Workflow W: skip, discard and disable result creation mechanism': &id332 [
@@ -13604,6 +13722,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow W: disable result creation mode': [-174, 154]
     'Regression Workflow W: skip, discard and disable result creation mechanism': &id333 [
@@ -13703,6 +13822,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow W: disable result creation mode': [442, 205]
     'Regression Workflow W: skip, discard and disable result creation mechanism': &id334 [
@@ -13796,6 +13916,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow W: disable result creation mode': [101, -37]
     'Regression Workflow W: skip, discard and disable result creation mechanism': &id335 [
@@ -13889,6 +14010,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': &id336 [
       224, -51]
@@ -13982,6 +14104,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS mode': &id337 [
       220, -28]
@@ -14097,6 +14220,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -14224,6 +14348,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -14336,6 +14461,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Credentials (Password & Key, Priority Mechanism): &id338 [220, 52]
     Credentials (Password & Key, Priority Mechanism): *id338
@@ -14450,6 +14576,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -14538,6 +14665,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Optional Prerequisite Services: &id339 [-342, 317]
     Optional Remediation Branch: [-342, 317]
@@ -14628,6 +14756,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Optional Prerequisite Services: &id340 [644, 318]
     Optional Remediation Branch: [644, 318]
@@ -14718,6 +14847,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Optional Prerequisite Services: &id341 [-214, -47]
     Optional Remediation Branch: [-214, -47]
@@ -14809,6 +14939,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Optional Prerequisite Services: &id342 [601, -27]
     Optional Remediation Branch: [601, -27]
@@ -14928,6 +15059,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -15016,6 +15148,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Device Iteration: &id343 [-151, 24]
     'Iteration Mechanism: Device Iteration': *id343
@@ -15113,6 +15246,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Iteration Mechanism: Workflow and Subworkflow Iteration': &id344 [233, 471]
     'Regression Workflow: Workflow and Subworkflow Iteration': [233, 471]
@@ -15210,6 +15344,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Iteration Mechanism: Workflow and Subworkflow Iteration': &id345 [628, 455]
     'Regression Workflow: Workflow and Subworkflow Iteration': [649, 409]
@@ -15301,6 +15436,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2': &id346 [
       233, -24]
@@ -15393,6 +15529,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow Device Iteration': &id347 [
       241, -26]
@@ -15485,6 +15622,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Functions: factory, fetch, fetch_all, encrypt and get_result': [-165, 199]
     Global Variables and post-run Pool Update Mechanism: &id348 [-165, 199]
@@ -15576,6 +15714,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Functions: factory, fetch, fetch_all, encrypt and get_result': [187, 156]
     Global Variables and post-run Pool Update Mechanism: &id349 [182, 132]
@@ -15687,6 +15826,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -15775,6 +15915,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     RBAC Target Restriction: &id350 [-162, 99]
     'Regression Workflow: RBAC Target Restriction': *id350
@@ -15865,6 +16006,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     RBAC Target Restriction: &id351 [181, 119]
     'Regression Workflow: RBAC Target Restriction': *id351
@@ -15955,6 +16097,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     RBAC Target Restriction: &id352 [590, 138]
     'Regression Workflow: RBAC Target Restriction': *id352
@@ -16069,6 +16212,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -16165,6 +16309,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Scrapli Netconf Service: [520, 102]
     'Regression Workflow: Scrapli Netconf Service': &id353 [479, -63]
@@ -16269,6 +16414,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Scrapli Netconf Service: [39, 57]
     'Regression Workflow: Scrapli Netconf Service': &id354 [20, -72]
@@ -16371,6 +16517,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Scrapli Netconf Service: [28, 228]
     'Regression Workflow: Scrapli Netconf Service': &id355 [510, 143]
@@ -16481,6 +16628,7 @@
   operating_system: ''
   owners: []
   parameterized_form: "interface = StringField(\"Interface\", default=\"Lo1\")\r\n"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -16594,6 +16742,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Labels and Custom Property: [-78, 122]
     Parameterized Form (override labels & targets, add payload): &id356 [-78, 122]
@@ -16725,6 +16874,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -16813,6 +16963,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow: Validation Section Mechanism': [-384, 34]
     Validation Mechanism: &id357 [-467, 119]
@@ -16907,6 +17058,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow: Validation Section Mechanism': [-39, -193]
     Validation Mechanism: &id358 [-55, 123]
@@ -17000,6 +17152,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow: Validation Section Mechanism': [77, 51]
     Validation Mechanism: &id359 [290, 124]
@@ -17114,6 +17267,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -17217,6 +17371,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) NCClient Netconf Service: &id360 [-414, 116]
     NCClient Netconf Service: *id360
@@ -17326,6 +17481,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) NCClient Netconf Service: &id361 [-132, -139]
     NCClient Netconf Service: *id361
@@ -17440,6 +17596,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) NCClient Netconf Service: &id362 [30, 126]
     NCClient Netconf Service: *id362
@@ -17549,6 +17706,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) NCClient Netconf Service: &id363 [249, -136]
     NCClient Netconf Service: *id363
@@ -17663,6 +17821,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) NCClient Netconf Service: &id364 [388, 123]
     NCClient Netconf Service: *id364
@@ -17790,6 +17949,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -17904,6 +18064,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Multiple parallel connections to same device: &id365 [-72, -122]
     Multiple parallel connections to same device: *id365
@@ -18024,6 +18185,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Multiple parallel connections to same device: &id366 [-219, 114]
     Multiple parallel connections to same device: *id366
@@ -18144,6 +18306,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Multiple parallel connections to same device: &id367 [454, -84]
     Multiple parallel connections to same device: *id367
@@ -18269,6 +18432,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -18358,6 +18522,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Mail Notifications: &id368 [-422, 198]
     Notification Mechanism: *id368
@@ -18451,6 +18616,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Mail Notifications: &id369 [-26, 64]
     Notification Mechanism: *id369
@@ -18544,6 +18710,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Mail Notifications: &id370 [384, 192]
     Notification Mechanism: *id370
@@ -18659,6 +18826,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -18773,6 +18941,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Netmiko File Transfer Service: &id371 [-346, 74]
     Netmiko File Transfer: *id371
@@ -18884,6 +19053,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Netmiko File Transfer Service: &id372 [-138, -122]
     Netmiko File Transfer: *id372
@@ -18999,6 +19169,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Netmiko File Transfer Service: &id373 [13, 69]
     Netmiko File Transfer: *id373
@@ -19118,6 +19289,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Netmiko File Transfer Service: &id374 [196, -120]
     Netmiko File Transfer: *id374
@@ -19237,6 +19409,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Netmiko File Transfer Service: &id375 [358, 66]
     Netmiko File Transfer: *id375
@@ -19368,6 +19541,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -19456,6 +19630,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '(R) Function: get_credential': &id376 [-315, 9]
     'Function: get_credential': *id376
@@ -19573,6 +19748,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '(R) Function: get_credential': &id377 [14, 146]
     'Function: get_credential': *id377
@@ -19675,6 +19851,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {}
   positions:
@@ -19801,6 +19978,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -19891,6 +20069,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow: SxS Service Targets with Run Once + Skip': &id379 [-361,
       360]
@@ -19983,6 +20162,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow: SxS Service Targets with Run Once + Skip': &id380 [267,
       355]
@@ -20074,6 +20254,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow: SxS Service Targets with Run Once + Skip': &id381 [-201,
       121]
@@ -20165,6 +20346,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Regression Workflow: SxS Service Targets with Run Once + Skip': &id382 [429,
       170]
@@ -20264,6 +20446,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -20355,6 +20538,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Data Extraction Service: &id383 [-521, 287]
     'Regression Workflow: Data Extraction Service': *id383
@@ -20457,6 +20641,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Data Extraction Service: &id384 [-410, 425]
     'Regression Workflow: Data Extraction Service': *id384
@@ -20559,6 +20744,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Data Extraction Service: &id385 [-102, 128]
     'Regression Workflow: Data Extraction Service': *id385
@@ -20661,6 +20847,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Data Extraction Service: &id386 [-201, 416]
     'Regression Workflow: Data Extraction Service': *id386
@@ -20763,6 +20950,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Data Extraction Service: &id387 [-307, 222]
     'Regression Workflow: Data Extraction Service': *id387
@@ -20865,6 +21053,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Data Extraction Service: &id388 [-1, 512]
     'Regression Workflow: Data Extraction Service': *id388
@@ -20967,6 +21156,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Data Extraction Service: &id389 [31, 308]
     'Regression Workflow: Data Extraction Service': *id389
@@ -21069,6 +21259,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Data Extraction Service: &id390 [159, 138]
     'Regression Workflow: Data Extraction Service': *id390
@@ -21162,6 +21353,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Data Extraction Service: &id391 [274, 366]
     'Regression Workflow: Data Extraction Service': *id391
@@ -21285,6 +21477,7 @@
     \ Type', choices=(('name', 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing\
     \ = BooleanField('Multiprocessing', default=False)\r\nmax_processes = IntegerField('Maximum\
     \ number of processes', default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -21373,6 +21566,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Parameterized Run with a Superworkflow: &id392 [142, -32]
     Parameterized Superworkflow Run: *id392
@@ -21476,6 +21670,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -21568,6 +21763,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {verify: 'false'}
   payload: {}
   positions:
@@ -21685,6 +21881,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Labels and Custom Property: [435, 130]
     Parameterized Form (override labels & targets, add payload): &id394 [435, 118]
@@ -21800,6 +21997,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -21913,6 +22111,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Netmiko Validation with TextFSM Option: &id395 [-132, -29]
     Netmiko TextFSM Option: *id395
@@ -22032,6 +22231,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Netmiko Validation with TextFSM Option: &id396 [-28, 186]
     Netmiko TextFSM Option: *id396
@@ -22151,6 +22351,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Netmiko Validation with TextFSM Option: &id397 [316, 137]
     Netmiko TextFSM Option: *id397
@@ -22270,6 +22471,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Netmiko Validation with TextFSM Option: &id398 [269, -27]
     Netmiko TextFSM Option: *id398
@@ -22389,6 +22591,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -22488,6 +22691,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) NAPALM Configuration and Rollback Services: [-374, -164]
     NAPALM Configuration and Rollback: &id399 [-374, -164]
@@ -22590,6 +22794,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) NAPALM Configuration and Rollback Services: [287, 136]
     NAPALM Configuration and Rollback: &id400 [287, 136]
@@ -22708,6 +22913,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) NAPALM Configuration and Rollback Services: [267, -146]
     NAPALM Configuration and Rollback: &id401 [267, -146]
@@ -22834,6 +23040,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) NAPALM Configuration and Rollback Services: [-348, 160]
     NAPALM Configuration and Rollback: &id402 [-348, 160]
@@ -22977,6 +23184,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -23076,6 +23284,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Napalm Getters Service: &id403 [-405, -99]
     Napalm Getters Validation: *id403
@@ -23186,6 +23395,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Napalm Getters Service: &id404 [18, -122]
     Napalm Getters Validation: *id404
@@ -23296,6 +23506,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Napalm Getters Service: &id405 [-45, 144]
     Napalm Getters Validation: *id405
@@ -23406,6 +23617,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Napalm Getters Service: &id406 [535, -147]
     Napalm Getters Validation: *id406
@@ -23555,6 +23767,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -23670,6 +23883,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Payload Extraction & Validation: &id407 [-18, -145]
     Payload Extraction & Validation: *id407
@@ -23791,6 +24005,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Payload Extraction & Validation: &id409 [-19, -26]
     Payload Extraction & Validation: *id409
@@ -23898,6 +24113,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Payload Extraction & Validation: &id411 [-362, 111]
     Payload Extraction & Validation: *id411
@@ -24001,6 +24217,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Payload Extraction & Validation: &id413 [-124, 296]
     Payload Extraction & Validation: *id413
@@ -24105,6 +24322,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Payload Extraction & Validation: &id415 [451, -43]
     Payload Extraction & Validation: *id415
@@ -24207,6 +24425,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Payload Extraction & Validation: &id417 [808, 157]
     Payload Extraction & Validation: *id417
@@ -24316,6 +24535,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -24405,6 +24625,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Payload Extraction with Operations: [314, -165]
     Payload Extraction with Operations: &id419 [118, -243]
@@ -24517,6 +24738,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Payload Extraction with Operations: [412, 90]
     Payload Extraction with Operations: &id420 [619, -236]
@@ -24623,6 +24845,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Payload Extraction with Operations: [-385, 81]
     Payload Extraction with Operations: &id421 [5, 75]
@@ -24734,6 +24957,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -24825,6 +25049,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Payload Recursive Conservation with Restart Mechanism: &id422 [-255, 25]
     Restart Mechanism, payload + results recursive conservation: *id422
@@ -24915,6 +25140,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Payload Recursive Conservation with Restart Mechanism: &id423 [36, -178]
     Restart Mechanism, payload + results recursive conservation: *id423
@@ -25004,6 +25230,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Payload Recursive Conservation with Restart Mechanism: &id424 [394, -170]
     Restart Mechanism, payload + results recursive conservation: *id424
@@ -25093,6 +25320,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Payload Recursive Conservation with Restart Mechanism: &id425 [77, 130]
     Restart Mechanism, payload + results recursive conservation: *id425
@@ -25182,6 +25410,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Payload Recursive Conservation with Restart Mechanism: &id426 [410, 129]
     Restart Mechanism, payload + results recursive conservation: *id426
@@ -25271,6 +25500,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Device Iteration: &id427 [245, 25]
     'Iteration Mechanism: Device Iteration': *id427
@@ -25367,6 +25597,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -25463,6 +25694,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -25550,6 +25782,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Basic Superworkflow: [5, -109]
   postprocessing: ''
@@ -25638,6 +25871,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Basic Superworkflow: [293, 159]
   postprocessing: ''
@@ -25726,6 +25960,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Interaction of Restart Mechanism and Superworkflow: &id428 [-9, -137]
     Restart From Feature and Superworkflow Interaction: *id428
@@ -25815,6 +26050,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Interaction of Restart Mechanism and Superworkflow: &id429 [149, -3]
     Restart From Feature and Superworkflow Interaction: *id429
@@ -25904,6 +26140,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Interaction of Restart Mechanism and Superworkflow: &id430 [305, 150]
     Restart From Feature and Superworkflow Interaction: *id430
@@ -26009,6 +26246,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -26099,6 +26337,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Functions: get_result and get_var': [-187, -139]
     'Global variables: get_result and get_var': [-187, -139]
@@ -26188,6 +26427,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Functions: get_result and get_var': [-172, 94]
     'Global variables: get_result and get_var': [-172, 94]
@@ -26285,6 +26525,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Functions: get_result and get_var': [194, -49]
     'Global variables: get_result and get_var': [194, -49]
@@ -26374,6 +26615,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Functions: get_result and get_var': [582, -169]
     'Global variables: get_result and get_var': [582, -169]
@@ -26466,6 +26708,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Functions: get_result and get_var': [438, 106]
     'Global variables: get_result and get_var': [579, 82]
@@ -26558,6 +26801,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '[Functions: get_result and get_var] Subworkflow': &id431 [228, -43]
     '[Global variables: get_result and get_var] Subworkflow': *id431
@@ -26692,6 +26936,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -26782,6 +27027,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Basic: Deletion (Device, Link, Service, Task)': &id432 [-119, 33]
     Deletion and Cascade Deletion: [-119, 33]
@@ -26872,6 +27118,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Basic: Deletion (Device, Link, Service, Task)': &id433 [380, 42]
     Deletion and Cascade Deletion: [380, 42]
@@ -26962,6 +27209,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Basic: Deletion (Device, Link, Service, Task)': &id434 [-204, 300]
     Deletion and Cascade Deletion: [-204, 300]
@@ -27052,6 +27300,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Basic: Deletion (Device, Link, Service, Task)': &id435 [33, 305]
     Deletion and Cascade Deletion: [33, 305]
@@ -27142,6 +27391,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Basic: Deletion (Device, Link, Service, Task)': &id436 [265, 307]
     Deletion and Cascade Deletion: [265, 307]
@@ -27232,6 +27482,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     'Basic: Deletion (Device, Link, Service, Task)': &id437 [530, 289]
     Deletion and Cascade Deletion: [530, 289]
@@ -27325,6 +27576,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   ports: '22'
   positions: {}
   postprocessing: ''
@@ -27442,6 +27694,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -27537,6 +27790,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {}
   positions:
@@ -27636,6 +27890,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {}
   positions:
@@ -27734,6 +27989,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {}
   positions:
@@ -27832,6 +28088,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {}
   positions:
@@ -27929,6 +28186,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {}
   positions:
@@ -28047,6 +28305,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -28140,6 +28399,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {}
   positions:
@@ -28240,6 +28500,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {}
   positions:
@@ -28338,6 +28599,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {}
   positions:
@@ -28465,6 +28727,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -28558,6 +28821,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload:
     columns: [name, configuration, ip_address]
@@ -28663,6 +28927,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload:
     columns: [name, operating_system, ip_address]
@@ -28766,6 +29031,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload:
     columns: [name, configuration_matches, ip_address]
@@ -28903,6 +29169,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -29000,6 +29267,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {name: NewDevice, property1: UPDATED}
   positions:
@@ -29098,6 +29366,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {name: NewDevice}
   positions:
@@ -29195,6 +29464,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {}
   positions:
@@ -29293,6 +29563,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {}
   positions:
@@ -29390,6 +29661,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload:
     columns: [result, parent_runtime, service_name]
@@ -29529,6 +29801,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -29641,6 +29914,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Gateway Mechanism (SSH Proxy with Netmiko): &id449 [-39, 41]
     (R) Gateway Mechanism (SSH Proxy with Paramiko): *id449
@@ -29762,6 +30036,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Gateway Mechanism (SSH Proxy with Netmiko): &id450 [301, 39]
     (R) Gateway Mechanism (SSH Proxy with Paramiko): *id450
@@ -29883,6 +30158,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Gateway Mechanism (SSH Proxy with Netmiko): &id451 [660, 34]
     (R) Gateway Mechanism (SSH Proxy with Paramiko): *id451
@@ -29994,6 +30270,7 @@
   owners: []
   parameterized_form: "multiprocessing = BooleanField('Multiprocessing', default=True)\r\
     \nmax_processes = IntegerField('Maximum number of processes', default=5)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -30081,6 +30358,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Parameterized Multiprocessing: [216, 129]
   postprocessing: ''
@@ -30206,6 +30484,7 @@
     \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
     \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
     \ 'Name'), ('ip_address', 'IP address')))"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -30292,6 +30571,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Parameterized Targets: [-49, 79]
   postprocessing: ''
@@ -30387,6 +30667,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow with Large Subworkflows: [-31, -134]
   postprocessing: ''
@@ -30488,6 +30769,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id452 [-201, -74]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id452
@@ -30580,6 +30862,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id453 [-198, -156]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id453
@@ -30672,6 +30955,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id454 [-44, -155]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id454
@@ -30764,6 +31048,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id455 [-42, -74]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id455
@@ -30856,6 +31141,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id456 [-39, 12]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id456
@@ -30948,6 +31234,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id457 [-46, 100]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id457
@@ -31040,6 +31327,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id458 [-197, 97]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id458
@@ -31132,6 +31420,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id459 [-195, 196]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id459
@@ -31224,6 +31513,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id460 [-35, 195]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id460
@@ -31316,6 +31606,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id461 [127, 192]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id461
@@ -31408,6 +31699,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id462 [125, 97]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id462
@@ -31500,6 +31792,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id463 [123, 9]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id463
@@ -31592,6 +31885,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id464 [122, -75]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id464
@@ -31684,6 +31978,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id465 [124, -155]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id465
@@ -31776,6 +32071,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id466 [281, -155]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id466
@@ -31868,6 +32164,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id467 [283, -74]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id467
@@ -31960,6 +32257,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id468 [282, 13]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id468
@@ -32052,6 +32350,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id469 [287, 100]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id469
@@ -32144,6 +32443,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id470 [296, 192]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id470
@@ -32236,6 +32536,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id471 [456, 194]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id471
@@ -32328,6 +32629,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id472 [457, 99]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id472
@@ -32420,6 +32722,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id473 [454, 12]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id473
@@ -32512,6 +32815,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id474 [448, -77]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id474
@@ -32604,6 +32908,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id475 [448, -158]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id475
@@ -32696,6 +33001,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id476 [617, -161]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id476
@@ -32788,6 +33094,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id477 [624, -76]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id477
@@ -32880,6 +33187,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id478 [625, 10]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id478
@@ -32972,6 +33280,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Workflow (30 services): &id479 [625, 100]
     '[Large Workflow with Large Subworkflows] Large Subworkflow': *id479
@@ -33085,6 +33394,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -33172,6 +33482,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Payload: &id480 [235, 103]
     Workflow with Large Payload: *id480
@@ -33276,6 +33587,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -33363,6 +33675,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Results: &id481 [241, 66]
     Workflow with Large Results: *id481
@@ -33468,6 +33781,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -33556,6 +33870,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Large Device Configuration and Operational Data: [222, 78]
   postprocessing: ''
@@ -33652,6 +33967,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -33743,6 +34059,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Slack and Mattermost Notifications: &id482 [236, -114]
     Slack and Mattermost notifications: *id482
@@ -33833,6 +34150,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Slack and Mattermost Notifications: &id483 [240, 143]
     Slack and Mattermost notifications: *id483
@@ -33943,6 +34261,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Configuration Properties Backup Services: [-531, 385]
     (R) Operational Data Backup Service: [-531, 385]
@@ -34072,6 +34391,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Configuration Properties Backup Services: [-93, 389]
     (R) Operational Data Backup Service: [-93, 389]
@@ -34221,6 +34541,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -34318,6 +34639,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Gateway Mechanism (SSH Proxy with Scrapli): [-43, 52]
   postprocessing: ''
@@ -34419,6 +34741,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Gateway Mechanism (SSH Proxy with Scrapli): [288, 43]
   postprocessing: ''
@@ -34520,6 +34843,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Gateway Mechanism (SSH Proxy with Scrapli): [669, 48]
   postprocessing: ''
@@ -34629,6 +34953,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -34730,6 +35055,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Data Extraction Jinja2 Template: [72, 107]
   postprocessing: ''
@@ -34822,6 +35148,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Data Extraction Jinja2 Template: [-266, 195]
   postprocessing: ''
@@ -34965,6 +35292,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -35066,6 +35394,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-274, 92]
   postprocessing: "is_string = isinstance(results[\"result\"], str)\r\nvalid_content\
@@ -35171,6 +35500,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Scrapli and Netmiko Multiple Commands and Jinja2: [-290, 222]
   postprocessing: "is_list = isinstance(results[\"result\"], list)\r\nvalid_content\
@@ -35292,6 +35622,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Scrapli and Netmiko Multiple Commands and Jinja2: [463, 96]
   postprocessing: "is_string = isinstance(results[\"result\"], str)\r\nvalid_commands\
@@ -35415,6 +35746,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Scrapli and Netmiko Multiple Commands and Jinja2: [441, 226]
   postprocessing: "is_list = isinstance(results[\"result\"], list)\r\nvalid_result\
@@ -35516,6 +35848,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   ports: '22'
   positions:
     (R) Unix Command & Chell, Ping Service, Jump on Connect mechanism: [155, 189]
@@ -35616,6 +35949,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Data Extraction Jinja2 Template: [80, 246]
   postprocessing: "results[\"success\"] = results[\"result\"][\"TTP value\"][\"value\"\
@@ -35731,6 +36065,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -35843,6 +36178,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '(R) Function: get_connection': &id484 [60, -76]
     'Function: get_connection': *id484
@@ -35937,6 +36273,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '(R) Function: get_connection': &id485 [599, 121]
     'Function: get_connection': *id485
@@ -36055,6 +36392,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     '(R) Function: get_connection': &id486 [19, 248]
     'Function: get_connection': *id486
@@ -36178,6 +36516,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -36272,6 +36611,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   params: {}
   payload: {}
   positions:
@@ -36389,6 +36729,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Credential Object Mechanism: &id488 [116, 106]
     (R) Named Credential Mechanism: *id488
@@ -36492,6 +36833,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     (R) Credential Object Mechanism: &id489 [430, 101]
     (R) Named Credential Mechanism: *id489
@@ -36605,6 +36947,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -36693,6 +37036,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     HTML Reports with Normal Templates: &id490 [187, 202]
     Text Reports with Normal Templates: *id490
@@ -36812,6 +37156,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -36905,6 +37250,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     HTML Reports with Jinja2 Templates: [126, 349]
     HTML Reports with Normal Templates: &id491 [187, 202]
@@ -37035,6 +37381,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions: {}
   postprocessing: ''
   postprocessing_mode: success
@@ -37123,6 +37470,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Priority Mechanism: [-116, -79]
   postprocessing: ''
@@ -37211,6 +37559,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Priority Mechanism: [-11, 170]
   postprocessing: ''
@@ -37299,6 +37648,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Priority Mechanism: [128, -88]
   postprocessing: ''
@@ -37387,6 +37737,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Priority Mechanism: [309, 169]
   postprocessing: ''
@@ -37475,6 +37826,7 @@
     \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
+  parameterized_form_template: ''
   positions:
     Priority Mechanism: [423, -95]
   postprocessing: ''
@@ -37504,6 +37856,118 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- admin_only: false
+  category: Parameterized Form
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  custom_property: Default Value
+  default_uuid: bb17b19d-c83b-4660-afec-36d65f3ac4b7
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  disabled: false
+  disabled_info: ''
+  display_only_failed_nodes: false
+  display_report: false
+  email_report: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2023-05-04 22:19:09.696304'
+  last_modified_by: admin
+  log_level: 1
+  mail_recipient: ''
+  man_minutes: 0
+  man_minutes_total: 0
+  man_minutes_type: workflow
+  mandatory_parameter: Default Value
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: Parameterized Form with Custom Template
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: [admin]
+  parameterized_form: "name = StringField(\"Name\", [InputRequired()])\r\nfield_a\
+    \ = StringField(\"Field A\")\r\nfield_b = StringField(\"Field B\")\r\nfield_c\
+    \ = StringField(\"Field C\")"
+  parameterized_form_template: "<form\r\n  id=\"{{ form_type }}-form\"\r\n  class=\"\
+    form-horizontal form-label-left add-id\"\r\n  method=\"post\"\r\n  autocomplete=\"\
+    off\"\r\n>\r\n  <div class=\"modal-body\">\r\n    <div class=\"form-group\">\r\
+    \n        <label class=\"control-label col-md-3 col-sm-3 col-xs-12\">Name</label>\r\
+    \n        <div class=\"col-md-9 col-sm-9 col-xs-12\">\r\n          {{ form.name(\r\
+    \n            id=\"{}-name\".format(form_type),\r\n            class=\"collapsed\
+    \ form-control add-id\"\r\n          ) }}\r\n        </div>\r\n        <br /><br\
+    \ />\r\n        <label class=\"control-label col-md-3 col-sm-3 col-xs-12\">Field\
+    \ A</label>\r\n        <div class=\"col-md-9 col-sm-9 col-xs-12\">\r\n       \
+    \   {{ form.field_a(\r\n            id=\"{}-field_a\".format(form_type),\r\n \
+    \           class=\"collapsed form-control add-id\"\r\n          ) }}\r\n    \
+    \    </div>\r\n        <br /><br />\r\n        <label class=\"control-label col-md-3\
+    \ col-sm-3 col-xs-12\">Field B</label>\r\n        <div class=\"col-md-9 col-sm-9\
+    \ col-xs-12\">\r\n          {{ form.field_b(\r\n            id=\"{}-field_b\"\
+    .format(form_type),\r\n            class=\"collapsed form-control add-id\"\r\n\
+    \          ) }}\r\n        </div>\r\n        <br /><br />\r\n        <label class=\"\
+    control-label col-md-3 col-sm-3 col-xs-12\">Field C</label>\r\n        <div class=\"\
+    col-md-9 col-sm-9 col-xs-12\">\r\n          {{ form.field_c(\r\n            id=\"\
+    {}-field_c\".format(form_type),\r\n            class=\"collapsed form-control\
+    \ add-id\"\r\n          ) }}\r\n        </div>\r\n    </div>\r\n    <center>\r\
+    \n      <button\r\n        id=\"{{ form_type }}-action-btn\"\r\n        type=\"\
+    button\"\r\n        class=\"btn btn-primary add-id btn-id\"\r\n        value=\"\
+    eNMS.automation.submitInitialForm\"\r\n      >\r\n        Run Service with Custom\
+    \ Parameterized Template\r\n      </button>\r\n    </center>\r\n  </div>\r\n</form>"
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 10
+  rbac_edit: []
+  rbac_read: [Admin User]
+  rbac_run: []
+  reply_to: ''
+  report: ''
+  report_format: text
+  report_jinja2_template: false
+  reserved: false
+  restrict_to_owners: []
+  run_method: per_device
+  scoped_name: Parameterized Form with Custom Template
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none

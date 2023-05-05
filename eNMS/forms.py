@@ -1080,6 +1080,7 @@ class UserProfileForm(BaseForm):
             self.password.errors.append("Changing user password is not allowed.")
         return valid_form and not invalid_password
 
+
 class WorkflowLabelForm(BaseForm):
     form_type = HiddenField(default="label")
     action = "eNMS.builder.createLabel"

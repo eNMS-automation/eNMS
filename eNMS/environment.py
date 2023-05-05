@@ -82,7 +82,9 @@ class Environment:
                 filetype = "folder" if event.is_directory else "file"
                 file = db.fetch(filetype, path=src_path, allow_none=True)
                 if event.event_type == "moved" and file:
-                    file.update(path=event.dest_path.replace(vs.file_path, ""), move_file=False)
+                    file.update(
+                        path=event.dest_path.replace(vs.file_path, ""), move_file=False
+                    )
                 elif event.event_type in ("created", "modified"):
                     file = db.factory(filetype, path=src_path)
                 elif event.event_type != "deleted" or not file:

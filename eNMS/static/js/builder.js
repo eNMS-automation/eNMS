@@ -65,7 +65,7 @@ export function configureGraph(newInstance, graph, options) {
   }
   network = new vis.Network(container, { nodes: nodes, edges: edges }, options);
   network.setOptions({ physics: false });
-  network.setOptions({ interaction: { zoomSpeed: user.zoom_sensitivity }});
+  network.setOptions({ interaction: { zoomSpeed: user.zoom_sensitivity } });
   for (const objectType of ["Node", "Edge"]) {
     network.on(`hover${objectType}`, function() {
       network.canvas.body.container.style.cursor = "pointer";

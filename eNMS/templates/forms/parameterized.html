@@ -11,7 +11,8 @@
       in field.widget|string else "" %}
       <div style="{{ style }}">
         {% set class = "form-control-bool" if field.type == "BooleanField" else
-        "form-control" %} {% if field.widget.input_type == 'hidden' %} {{ field(id=id) }} {% else %} 
+        "form-control" %} {% if field.widget.input_type == 'hidden' %} {{ field(id=id)
+        }} {% else %}
         <label class="control-label col-md-3 col-sm-3 col-xs-12"
           >{{ field.label }}</label
         >

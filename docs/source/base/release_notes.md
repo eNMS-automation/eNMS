@@ -43,6 +43,7 @@ Version 4.5.0
   - impact on migration: all paths in files must be truncated by removing the path
   to the "files" folder
   - everything about files is impacted and must be tested again
+- Update size of restart workflow from panel to fit to content
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

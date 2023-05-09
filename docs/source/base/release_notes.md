@@ -46,6 +46,11 @@ Version 4.5.0
 - Update size of restart workflow from panel to fit to content
 - Add device name to git history comparison panel title
 - Add task name to the run table ("Results" page)
+- Add custom parameterized form feature:
+  - new "Parameterized Form Template" field in service panel > step 1 for the HTML code
+  - supports JavaScript code inside <script></script> tag
+  - must follow the same template as the default parameterized form ("form_type" variable,
+  add-id / btn-id CSS class, eNMS.automation.submitInitialForm run function, etc...)
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

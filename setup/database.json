@@ -99,7 +99,7 @@
       "tasks",
       "users"
     ],
-    "file": ["id", "filename", "status"],
+    "file": ["id", "filename", "full_path", "status"],
     "folder": ["id", "filename", "status"],
     "link": [
       "id",

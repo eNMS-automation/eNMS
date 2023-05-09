@@ -37895,7 +37895,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2023-05-04 22:19:09.696304'
+  last_modified: '2023-05-09 12:18:49.681766'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -37940,7 +37940,9 @@
     \n      <button\r\n        id=\"{{ form_type }}-action-btn\"\r\n        type=\"\
     button\"\r\n        class=\"btn btn-primary add-id btn-id\"\r\n        value=\"\
     eNMS.automation.submitInitialForm\"\r\n      >\r\n        Run Service with Custom\
-    \ Parameterized Template\r\n      </button>\r\n    </center>\r\n  </div>\r\n</form>"
+    \ Parameterized Template\r\n      </button>\r\n    </center>\r\n  </div>\r\n</form>\r\
+    \n<script>\r\n  $('input[name=\"name\"]').focus();\r\n  $('input[name=\"field_a\"\
+    ]').val(\"Set programmatically with Javascript\");\r\n</script>"
   positions: {}
   postprocessing: ''
   postprocessing_mode: success

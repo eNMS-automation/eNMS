@@ -638,6 +638,7 @@ export const runService = function({ id, path, type, parametrization }) {
           callback: function(properties) {
             formProperties[`initial-${id}`] = properties;
             configureForm(`initial-${id}`, id);
+            $(`#parameterized_form-${id} script`).each((_, s) => eval(s.innerHTML));
           },
         });
       },

@@ -163,6 +163,7 @@
     POST Endpoint search: &id026 [-374, 42]
     POST update, DELETE delete and GET & POST results: [-359, 245]
     Parameterized Form (override labels & targets, add payload): &id047 [-262, -163]
+    Parameterized Form with Custom Template: [-218, 198]
     Parameterized Multiprocessing: [-169, 101]
     Parameterized Run with a Superworkflow: &id022 [-293, -76]
     Parameterized Superworkflow Run: *id022
@@ -651,7 +652,7 @@
     POST Endpoint search: &id117 [576, 170]
     POST update, DELETE delete and GET & POST results: [503, 145]
     Parameterized Form (override labels & targets, add payload): &id138 [692, -112]
-    Parameterized Form with Custom Template: !!python/tuple [500, 0]
+    Parameterized Form with Custom Template: [584, 193]
     Parameterized Multiprocessing: [615, 109]
     Parameterized Run with a Superworkflow: &id113 [565, -70]
     Parameterized Superworkflow Run: *id113
@@ -37894,8 +37895,30 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2023-05-09 12:18:49.681766'
+  labels:
+    3bb9c9f7-fc54-42c5-86e2-20070d80dd87:
+      alignment: left
+      content: "When running the workflow, the custom form pops up with:\r\n- focus\
+        \ set on the \"name\" field\r\n- field A is preset to \"Set programmatically\
+        \ with Javascript\"\r\n\r\nIn the workflow logs, the value of all 3 fields\
+        \ (A, B, C) should be displayed.\r\nThe name of the run should be whatever\
+        \ was set in the \"name\" field."
+      positions: ['361.2530517578125', '-25.2530517578125']
+      size: 14
+    4f778556-4d67-4635-af00-08763ae5d586:
+      alignment: left
+      content: "This workflow tests the custom parameterized form feature.\r\nIt uses\
+        \ the following HTML custom form (simplified version below):\r\n<form id=\"\
+        {{ form_type }}-form\">\r\n  <div class=\"modal-body\">\r\n      ... 4 fields:\
+        \ name of the run, field A, B, C ....\r\n    <center>\r\n      <button\r\n\
+        \        id=\"{{ form_type }}-action-btn\"\r\n        value=\"eNMS.automation.submitInitialForm\"\
+        \r\n      >\r\n        Run Service with Custom Parameterized Template\r\n\
+        \      </button>\r\n    </center>\r\n  </div>\r\n</form>\r\n<script>\r\n \
+        \ $('input[name=\"name\"]').focus();\r\n  $('input[name=\"field_a\"]').val(\"\
+        Set programmatically with Javascript\");\r\n</script>"
+      positions: ['-97.7469482421875', '17.7469482421875']
+      size: 14
+  last_modified: '2023-05-09 15:27:50.533966'
   last_modified_by: admin
   log_level: 1
   mail_recipient: ''
@@ -37903,7 +37926,7 @@
   man_minutes_total: 0
   man_minutes_type: workflow
   mandatory_parameter: Default Value
-  mandatory_parametrization: false
+  mandatory_parametrization: true
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
@@ -37944,7 +37967,9 @@
     \n<script>\r\n  $('input[name=\"name\"]').focus();\r\n  $('input[name=\"field_a\"\
     ]').val(\"Set programmatically with Javascript\");\r\n</script>"
   positions: {}
-  postprocessing: ''
+  postprocessing: "log(\"info\", payload)\r\nlog(\"info\", f\"Field A: {payload['field_a']}\"\
+    )\r\nlog(\"info\", f\"Field B: {payload['field_b']}\")\r\nlog(\"info\", f\"Field\
+    \ C: {payload['field_c']}\")"
   postprocessing_mode: success
   preprocessing: ''
   priority: 10
@@ -37957,7 +37982,7 @@
   report_jinja2_template: false
   reserved: false
   restrict_to_owners: []
-  run_method: per_device
+  run_method: per_service_with_service_targets
   scoped_name: Parameterized Form with Custom Template
   send_notification: false
   send_notification_method: mail

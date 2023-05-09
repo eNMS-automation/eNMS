@@ -1610,3 +1610,6 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2023-03-30 13:41:43.137452',
   source: '[Priority Mechanism] Service 4', subtype: success, type: workflow_edge,
   workflow: Priority Mechanism}
+- {color: green, destination: '[Shared] End', label: success, name: '2023-05-09 15:17:10.032956',
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: Parameterized
+    Form with Custom Template}

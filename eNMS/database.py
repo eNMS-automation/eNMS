@@ -212,22 +212,26 @@ class Database:
                 }
 
     def configure_model_events(self, env):
+        env.log_events = True
+
         @event.listens_for(self.base, "after_insert", propagate=True)
         def log_instance_creation(mapper, connection, target):
-            if not getattr(target, "log_change", True):
+            if not getattr(target, "log_change", True) or not env.log_events:
                 return
             if hasattr(target, "name") and target.type != "run":
                 env.log("info", f"CREATION: {target.type} '{target.name}'")
 
         @event.listens_for(self.base, "before_delete", propagate=True)
         def log_instance_deletion(mapper, connection, target):
-            if not getattr(target, "log_change", True):
+            if not getattr(target, "log_change", True) or not env.log_events:
                 return
             name = getattr(target, "name", str(target))
             env.log("info", f"DELETION: {target.type} '{name}'")
 
         @event.listens_for(self.base, "before_update", propagate=True)
         def log_instance_update(mapper, connection, target):
+            if not env.log_events:
+                return
             state, changelog = inspect(target), []
             for attr in state.attrs:
                 hist = state.get_history(attr.key, True)

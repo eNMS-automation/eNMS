@@ -906,28 +906,28 @@ class Controller:
 
     def migration_import(self, folder="migrations", **kwargs):
         env.log("info", "Starting Migration Import")
+        env.log_events = False
         status, models = "Import successful.", kwargs["import_export_types"]
         empty_database = kwargs.get("empty_database_before_import", False)
         if empty_database:
             db.delete_all(*models)
-        fetch_instance = {
-            "user": [current_user.name] if current_user else [],
-            "service": ["[Shared] Start", "[Shared] End", "[Shared] Placeholder"],
-        }
-        relations = defaultdict(lambda: defaultdict(dict))
-        service_instances = []
-        start_time = datetime.now()
+        relations, store = defaultdict(lambda: defaultdict(dict)), defaultdict(dict)
+        service_instances, start_time = [], datetime.now()
+        if current_user:
+            store["user"][current_user.name] = current_user
+        for service_name in ("Start", "End", "Placeholder"):
+            service = db.fetch("service", name=f"[Shared] {service_name}", allow_none=True)
+            if service:
+                store["service"][service_name] = service
         for model in models:
             path = vs.path / "files" / folder / kwargs["name"] / f"{model}.yaml"
             if not path.exists():
                 if kwargs.get("service_import") and model == "service":
                     raise Exception("Invalid archive provided in service import.")
                 continue
+            env.log("info", f"Creating {model}s")
             with open(path, "r") as migration_file:
                 instances = yaml.load(migration_file, Loader=yaml.CLoader)
-                now = datetime.now()
-                env.log("info", f"Loading {model}.yaml file (in {now - start_time}s)")
-                start_time = now
                 for instance in instances:
                     type, relation_dict = instance.pop("type", model), {}
                     for related_model, relation in vs.relationships[type].items():
@@ -938,11 +938,8 @@ class Controller:
                         if property in vs.private_properties_set
                     }
                     try:
-                        existing_instance = instance["name"] in fetch_instance.get(
-                            model, []
-                        )
-                        if kwargs.get("service_import", False) and existing_instance:
-                            instance = db.fetch(type, name=instance["name"], rbac=None)
+                        if instance["name"] in store[model]:
+                            instance = store[model][instance["name"]]
                         else:
                             instance = db.factory(
                                 type,
@@ -951,6 +948,10 @@ class Controller:
                                 import_mechanism=True,
                                 **instance,
                             )
+                            store[model][instance.name] = instance
+                            store[type][instance.name] = store[model][instance.name]
+                            if model in ("device", "network"):
+                                store["node"][instance.name] = store[model][instance.name]
                         if kwargs.get("service_import"):
                             if instance.type == "workflow":
                                 instance.edges = []
@@ -967,29 +968,19 @@ class Controller:
                         status = "Partial import (see logs)."
             db.session.commit()
         for model, instances in relations.items():
+            env.log("info", f"Setting up {model}s database relationships")
             for instance_name, related_models in instances.items():
                 for property, value in related_models.items():
                     if not value:
                         continue
                     relation = vs.relationships[model][property]
                     if relation["list"]:
-                        related_instances = (
-                            db.fetch(
-                                relation["model"], name=name, rbac=None, allow_none=True
-                            )
-                            for name in value
-                        )
+                        related_instances = (store[relation["model"]].get(name) for name in value)
                         value = list(filter(None, related_instances))
                     else:
-                        value = db.fetch(
-                            relation["model"], name=value, rbac=None, allow_none=True
-                        )
+                        value = store[relation["model"]].get(value)
                     try:
-                        setattr(
-                            db.fetch(model, name=instance_name, rbac=None),
-                            property,
-                            value,
-                        )
+                        setattr(store[model].get(instance_name), property, value)
                     except Exception:
                         info("\n".join(format_exc().splitlines()))
                         if kwargs.get("service_import", False):
@@ -1003,14 +994,17 @@ class Controller:
             ][0]
             main_workflow.recursive_update()
         if not kwargs.get("skip_model_update"):
+            env.log("info", "Starting model update")
             for model in ("user", "service", "network"):
-                for instance in db.fetch_all(model):
+                for instance in store[model].values():
                     instance.post_update()
         if not kwargs.get("skip_pool_update"):
-            for pool in db.fetch_all("pool"):
+            env.log("info", "Starting pool update")
+            for pool in store["pool"].values():
                 pool.compute_pool()
         db.session.commit()
-        env.log("info", status)
+        env.log_events = True
+        env.log("info", f"{status} (execution time: {datetime.now() - start_time}s")
         return status
 
     def multiselect_filtering(self, model, **params):

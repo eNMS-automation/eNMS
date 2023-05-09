@@ -916,6 +916,7 @@ class Controller:
         }
         relations = defaultdict(lambda: defaultdict(dict))
         service_instances = []
+        start_time = datetime.now()
         for model in models:
             path = vs.path / "files" / folder / kwargs["name"] / f"{model}.yaml"
             if not path.exists():
@@ -923,7 +924,10 @@ class Controller:
                     raise Exception("Invalid archive provided in service import.")
                 continue
             with open(path, "r") as migration_file:
-                instances = yaml.load(migration_file)
+                instances = yaml.load(migration_file, Loader=yaml.CLoader)
+                now = datetime.now()
+                env.log("info", f"Loading {model}.yaml file (in {now - start_time}s)")
+                start_time = now
                 for instance in instances:
                     type, relation_dict = instance.pop("type", model), {}
                     for related_model, relation in vs.relationships[type].items():

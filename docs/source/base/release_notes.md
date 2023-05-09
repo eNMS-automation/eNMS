@@ -51,6 +51,7 @@ Version 4.5.0
   - supports JavaScript code inside <script></script> tag
   - must follow the same template as the default parameterized form ("form_type" variable,
   add-id / btn-id CSS class, eNMS.automation.submitInitialForm run function, etc...)
+- Use CLoader to load migration files
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

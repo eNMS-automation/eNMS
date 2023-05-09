@@ -45,6 +45,7 @@ Version 4.5.0
   - everything about files is impacted and must be tested again
 - Update size of restart workflow from panel to fit to content
 - Add device name to git history comparison panel title
+- Add task name to the run table ("Results" page)
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

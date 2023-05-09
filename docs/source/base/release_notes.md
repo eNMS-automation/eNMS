@@ -44,6 +44,7 @@ Version 4.5.0
   to the "files" folder
   - everything about files is impacted and must be tested again
 - Update size of restart workflow from panel to fit to content
+- Add device name to git history comparison panel title
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

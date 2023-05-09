@@ -351,6 +351,7 @@ class Run(AbstractBase):
     start_service = relationship("Service", foreign_keys="Run.start_service_id")
     task_id = db.Column(Integer, ForeignKey("task.id", ondelete="SET NULL"))
     task = relationship("Task", foreign_keys="Run.task_id")
+    task_name = association_proxy("task", "name")
     state = db.Column(db.Dict, info={"log_change": False})
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
     model_properties = {"progress": "str", "service_properties": "dict"}

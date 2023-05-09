@@ -754,6 +754,13 @@
         "orderable": false
       },
       {
+        "data": "task_name",
+        "title": "Task",
+        "search": "text",
+        "orderable": false,
+        "visible": false
+      },
+      {
         "data": "server",
         "title": "Server",
         "search": "text",

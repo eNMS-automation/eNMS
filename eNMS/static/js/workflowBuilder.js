@@ -534,6 +534,7 @@ function showRestartWorkflowPanel() {
   openPanel({
     name: "restart_workflow",
     title: `Restart Workflow '${workflow.name}'`,
+    size: "900px auto",
     id: workflow.id,
     callback: function() {
       $(`#restart_workflow-start_services-${workflow.id}`).val(

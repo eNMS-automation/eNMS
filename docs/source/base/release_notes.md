@@ -51,7 +51,11 @@ Version 4.5.0
   - supports JavaScript code inside <script></script> tag
   - must follow the same template as the default parameterized form ("form_type" variable,
   add-id / btn-id CSS class, eNMS.automation.submitInitialForm run function, etc...)
-- Use CLoader to load migration files
+- Improve performances of migration import mechanism (~ x10)
+  - Use CLoader to load migration files
+  - Use a dictionary to store SQLAlchemy objects so that they are only fetched once
+  - Disable log events during import
+  - Commit: 9d2ceaee0784b25e203ac09ad44c38deab56a4e0 / 6fb025f981216de05b3db83b1912645a5dc60f59
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

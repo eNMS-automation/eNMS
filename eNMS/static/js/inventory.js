@@ -319,7 +319,7 @@ function showGitHistory(device) {
         openPanel({
           name: "git_history",
           id: device.id,
-          title: "Configuration",
+          title: `Configuration - Device '${device.name}'`,
           content: `
             <nav
               class="navbar navbar-default nav-controls"

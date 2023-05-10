@@ -66,7 +66,7 @@ class AbstractBase(db.base):
     def post_update(self):
         return self.get_properties()
 
-    def update(self, rbac="read", **kwargs):
+    def update(self, rbac="edit", **kwargs):
         self.filter_rbac_kwargs(kwargs)
         relation = vs.relationships[self.__tablename__]
         for property, value in kwargs.items():
@@ -77,7 +77,7 @@ class AbstractBase(db.base):
                 if relation[property]["list"]:
                     value = db.objectify(relation[property]["model"], value)
                 elif value:
-                    value = db.fetch(relation[property]["model"], id=value, rbac=rbac)
+                    value = db.fetch(relation[property]["model"], id=value, rbac="read")
             if property_type == "bool":
                 value = value not in (False, "false")
             elif property_type == "dict":

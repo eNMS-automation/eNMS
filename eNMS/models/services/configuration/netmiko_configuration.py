@@ -16,7 +16,7 @@ class NetmikoConfigurationService(ConnectionService):
     enable_mode = db.Column(Boolean, default=True)
     config_mode = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
-    timeout = db.Column(Integer, default=1.0)
+    read_timeout = db.Column(Float, default=10.0)
     commit_configuration = db.Column(Boolean, default=False)
     exit_config_mode = db.Column(Boolean, default=True)
     strip_prompt = db.Column(Boolean, default=False)
@@ -38,6 +38,7 @@ class NetmikoConfigurationService(ConnectionService):
             config.splitlines(),
             enter_config_mode=run.config_mode,
             exit_config_mode=False,
+            read_timeout=run.read_timeout,
             strip_prompt=run.strip_prompt,
             strip_command=run.strip_command,
             config_mode_command=run.config_mode_command,

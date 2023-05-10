@@ -26,7 +26,7 @@ class NetmikoBackupService(ConnectionService):
     enable_mode = db.Column(Boolean, default=True)
     config_mode = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
-    timeout = db.Column(Integer, default=10.0)
+    read_timeout = db.Column(Float, default=10.0)
     local_path = db.Column(db.SmallString, default="network_data")
     property = db.Column(db.SmallString)
     commands = db.Column(db.List)
@@ -63,7 +63,8 @@ class NetmikoBackupService(ConnectionService):
                 header = f"\n{' ' * 30}{title}\n" f"{' ' * 30}{'*' * len(title)}"
                 command_result = [f"{header}\n\n"] if self.add_header else []
                 for line in netmiko_connection.send_command(
-                    command["value"]
+                    command["value"],
+                    read_timeout=run.read_timeout,
                 ).splitlines():
                     if command["prefix"]:
                         line = f"{command['prefix']} - {line}"

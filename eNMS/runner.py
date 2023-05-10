@@ -1103,7 +1103,6 @@ class Runner:
             device_type=driver,
             ip=device.ip_address,
             port=device.port,
-            timeout=self.timeout,
             session_log=BytesIO(),
             global_cmd_verify=False,
             sock=sock,
@@ -1320,6 +1319,7 @@ class Runner:
                 send,
                 expect_string=expect,
                 auto_find_prompt=False,
+                read_timeout=self.read_timeout,
                 strip_prompt=False,
                 strip_command=True,
                 max_loops=150,
@@ -1335,6 +1335,7 @@ class Runner:
             exit_command,
             expect_string=prompt or None,
             auto_find_prompt=True,
+            read_timeout=self.read_timeout,
             strip_prompt=False,
             strip_command=True,
         )

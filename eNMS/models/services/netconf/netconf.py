@@ -25,7 +25,6 @@ class NetconfService(ConnectionService):
     test_option = db.Column(db.SmallString)
     error_option = db.Column(db.SmallString)
     xml_filter = db.Column(db.LargeString, default="")
-    timeout = db.Column(Integer, default=15)
     lock = db.Column(Boolean, default=False)
     unlock = db.Column(Boolean, default=False)
     commit_conf = db.Column(Boolean, default=False)
@@ -164,7 +163,6 @@ class NetconfForm(ConnectionForm):
         substitution=True,
     )
     commit_conf = BooleanField(label="Commit")
-    timeout = IntegerField(default=15)
     xml_conversion = BooleanField(
         label="Convert XML result to dictionary", default=True
     )

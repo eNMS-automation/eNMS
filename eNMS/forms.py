@@ -1226,7 +1226,7 @@ class NetmikoForm(ConnectionForm):
         "Config mode (See Advanced Parameters to override the config mode command)",
         default=False,
     )
-    timeout = FloatField(default=10.0)
+    read_timeout = FloatField(default=10.0)
     jump_on_connect = BooleanField(
         "Jump to remote device on connect",
         default=False,

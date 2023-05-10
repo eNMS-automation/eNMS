@@ -23,7 +23,6 @@ class NetmikoFileTransferService(ConnectionService):
     file_system = db.Column(db.SmallString)
     inline_transfer = db.Column(Boolean, default=False)
     overwrite_file = db.Column(Boolean, default=False)
-    timeout = db.Column(Integer, default=1)
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_file_transfer_service"}
 

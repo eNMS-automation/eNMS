@@ -17,7 +17,6 @@ class UnixShellScriptService(ConnectionService):
     enable_mode = db.Column(Boolean, default=False)
     config_mode = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
-    timeout = db.Column(Integer, default=10.0)
     expect_string = db.Column(db.SmallString)
     auto_find_prompt = db.Column(Boolean, default=True)
     strip_prompt = db.Column(Boolean, default=True)

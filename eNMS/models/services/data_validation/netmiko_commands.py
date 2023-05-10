@@ -49,7 +49,7 @@ class NetmikoValidationService(ConnectionService):
         netmiko_connection = run.netmiko_connection(device)
         try:
             prompt = run.enter_remote_device(netmiko_connection, device)
-            netmiko_connection.session_log.truncate(0)
+            netmiko_connection.session_log.session_log.truncate(0)
             run.log(
                 "info",
                 f"sending COMMAND '{commands}' with Netmiko",
@@ -79,7 +79,7 @@ class NetmikoValidationService(ConnectionService):
                 result = "\n".join(map(str, result))
             run.exit_remote_device(netmiko_connection, prompt, device)
         except Exception:
-            result = netmiko_connection.session_log.getvalue().decode().lstrip("\u0000")
+            result = netmiko_connection.session_log.session_log.getvalue().decode().lstrip("\u0000")
             return {
                 "commands": commands,
                 "error": format_exc(),

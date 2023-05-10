@@ -30,6 +30,7 @@ Version 4.5.0
   - delay_factor, global_delay_factor and fast_cli have been replaced with read_timeout.
   The value of read_timeout must be computed from these 3 properties and the migration
   files updated accordingly.
+  - check code related to session_log (was updated in netmiko 4.0)
   - relevant commits:
     - 3819dd3633ecb5ce5af3d2690a663b2b2733ee84
     - 88f0e9baad41a72349cd27f62e51976c2d99988f

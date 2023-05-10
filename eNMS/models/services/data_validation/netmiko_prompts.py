@@ -37,7 +37,7 @@ class NetmikoPromptsService(ConnectionService):
 
     def job(self, run, device):
         netmiko_connection = run.netmiko_connection(device)
-        netmiko_connection.session_log.truncate(0)
+        netmiko_connection.session_log.session_log.truncate(0)
         send_strings = (run.command, run.response1, run.response2, run.response3)
         expect_strings = (run.confirmation1, run.confirmation2, run.confirmation3, None)
         commands, confirmation, result = [], None, "No command sent"
@@ -64,7 +64,7 @@ class NetmikoPromptsService(ConnectionService):
             run.exit_remote_device(netmiko_connection, prompt, device)
         except Exception:
             result = (
-                netmiko_connection.session_log.getvalue()
+                netmiko_connection.session_log.session_log.getvalue()
                 .decode()
                 .lstrip("\u0000")
                 .replace(netmiko_connection.password, "********")

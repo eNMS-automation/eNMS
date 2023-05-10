@@ -60,6 +60,9 @@ Version 4.5.0
 Migration:
 - in file.yaml, remove path to "files" folder for all paths
 
+Tests:
+- Impact of migration import refactoring on migration files import and service import
+
 Version 4.4.0: RBAC and Credentials
 -----------------------------------
 

@@ -35,7 +35,7 @@ class User(AbstractBase, UserMixin):
     groups = db.Column(db.LargeString)
     is_admin = db.Column(Boolean, default=False)
     last_login = db.Column(db.SmallString)
-    last_request = db.Column(db.SmallString)
+    last_request = db.Column(db.SmallString, info={"log_change": False})
     email = db.Column(db.SmallString)
     landing_page = db.Column(
         db.SmallString, default=vs.settings["authentication"]["landing_page"]

@@ -1226,22 +1226,7 @@ class NetmikoForm(ConnectionForm):
         "Config mode (See Advanced Parameters to override the config mode command)",
         default=False,
     )
-    fast_cli = BooleanField()
     timeout = FloatField(default=10.0)
-    delay_factor = FloatField(
-        (
-            "Delay Factor (Changing from default of 1"
-            " will nullify Netmiko Timeout setting)"
-        ),
-        default=1.0,
-    )
-    global_delay_factor = FloatField(
-        (
-            "Global Delay Factor (Changing from default of 1"
-            " will nullify Netmiko Timeout setting)"
-        ),
-        default=1.0,
-    )
     jump_on_connect = BooleanField(
         "Jump to remote device on connect",
         default=False,
@@ -1289,10 +1274,7 @@ class NetmikoForm(ConnectionForm):
                 "driver",
                 "enable_mode",
                 "config_mode",
-                "fast_cli",
                 "timeout",
-                "delay_factor",
-                "global_delay_factor",
             ],
             "default": "expanded",
         },

@@ -22,10 +22,7 @@ class NetmikoPromptsService(ConnectionService):
     confirmation3 = db.Column(db.LargeString)
     response3 = db.Column(db.SmallString)
     driver = db.Column(db.SmallString)
-    fast_cli = db.Column(Boolean, default=False)
     timeout = db.Column(Integer, default=10.0)
-    delay_factor = db.Column(Float, default=1.0)
-    global_delay_factor = db.Column(Float, default=1.0)
     jump_on_connect = db.Column(Boolean, default=False)
     jump_command = db.Column(db.SmallString)
     jump_username = db.Column(db.SmallString)
@@ -61,7 +58,7 @@ class NetmikoPromptsService(ConnectionService):
                 )
                 confirmation = run.sub(expect_string, locals())
                 result = netmiko_connection.send_command(
-                    command, expect_string=confirmation, delay_factor=run.delay_factor
+                    command, expect_string=confirmation
                 )
                 results[command] = {"result": result, "match": confirmation}
             run.exit_remote_device(netmiko_connection, prompt, device)

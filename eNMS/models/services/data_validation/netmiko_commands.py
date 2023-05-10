@@ -22,10 +22,7 @@ class NetmikoValidationService(ConnectionService):
     driver = db.Column(db.SmallString)
     use_textfsm = db.Column(Boolean, default=False)
     use_genie = db.Column(Boolean, default=False)
-    fast_cli = db.Column(Boolean, default=False)
     timeout = db.Column(Float, default=10.0)
-    delay_factor = db.Column(Float, default=1.0)
-    global_delay_factor = db.Column(Float, default=1.0)
     expect_string = db.Column(db.SmallString)
     config_mode_command = db.Column(db.SmallString)
     auto_find_prompt = db.Column(Boolean, default=True)
@@ -65,7 +62,6 @@ class NetmikoValidationService(ConnectionService):
                     command,
                     use_textfsm=run.use_textfsm,
                     use_genie=run.use_genie,
-                    delay_factor=run.delay_factor,
                     expect_string=run.sub(run.expect_string, local_variables) or None,
                     auto_find_prompt=run.auto_find_prompt,
                     strip_prompt=run.strip_prompt,

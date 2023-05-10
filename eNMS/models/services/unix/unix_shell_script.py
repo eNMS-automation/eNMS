@@ -17,10 +17,7 @@ class UnixShellScriptService(ConnectionService):
     enable_mode = db.Column(Boolean, default=False)
     config_mode = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
-    fast_cli = db.Column(Boolean, default=False)
     timeout = db.Column(Integer, default=10.0)
-    delay_factor = db.Column(Float, default=1.0)
-    global_delay_factor = db.Column(Float, default=1.0)
     expect_string = db.Column(db.SmallString)
     auto_find_prompt = db.Column(Boolean, default=True)
     strip_prompt = db.Column(Boolean, default=True)
@@ -42,7 +39,6 @@ class UnixShellScriptService(ConnectionService):
         for command in command_list:
             output = netmiko_connection.send_command(
                 command,
-                delay_factor=run.delay_factor,
                 expect_string=expect_string or None,
                 auto_find_prompt=run.auto_find_prompt,
                 strip_prompt=run.strip_prompt,
@@ -52,7 +48,6 @@ class UnixShellScriptService(ConnectionService):
                 result = output
             return_code = netmiko_connection.send_command(
                 "echo $?",
-                delay_factor=run.delay_factor,
                 expect_string=expect_string or None,
                 auto_find_prompt=run.auto_find_prompt,
                 strip_prompt=run.strip_prompt,

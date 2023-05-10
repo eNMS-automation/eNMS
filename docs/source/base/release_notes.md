@@ -26,6 +26,10 @@ Version 4.5.0
 - Remove pin to 1.0.1 for flask_wtf in requirements
 - Remove pin to 2.0.1 for itsdangerous in requirements
 - Remove pin to 1.4.46 for sqlalchemy in requirements (move to sqlalchemy v2)
+- Remove pin to 3.4 for netmiko (move to netmiko 4+)
+  - delay_factor, global_delay_factor and fast_cli have been replaced with read_timeout.
+  The value of read_timeout must be computed from these 3 properties and the migration
+  files updated accordingly.
 - Fix duplicated run name when running a service from the REST API bug
 - Order model drop down lists in the UI based on pretty name instead of tablename
 - Add user "last login" and "last request" properties
@@ -62,6 +66,8 @@ Version 4.5.0
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths
+- in service.yaml, compute and add new "read_timeout" property based on fast_cli,
+  delay_factor and global_delay_factor
 
 Tests:
 - Impact of migration import refactoring on migration files import and service import

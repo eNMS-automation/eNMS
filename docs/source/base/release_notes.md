@@ -56,6 +56,7 @@ Version 4.5.0
   - Use a dictionary to store SQLAlchemy objects so that they are only fetched once
   - Disable log events during import
   - Commit: 9d2ceaee0784b25e203ac09ad44c38deab56a4e0 / 6fb025f981216de05b3db83b1912645a5dc60f59
+- Add "Last Run" property for services to indicate the last time it was run
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

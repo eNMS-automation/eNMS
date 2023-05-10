@@ -1274,7 +1274,7 @@ class NetmikoForm(ConnectionForm):
                 "driver",
                 "enable_mode",
                 "config_mode",
-                "timeout",
+                "read_timeout",
             ],
             "default": "expanded",
         },

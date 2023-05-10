@@ -30,12 +30,11 @@ Version 4.5.0
   - delay_factor, global_delay_factor and fast_cli have been replaced with read_timeout.
   The value of read_timeout must be computed from these 3 properties and the migration
   files updated accordingly.
-  - check code related to session_log (was updated in netmiko 4.0)
+  - check code related to session_log (2583795ff31357c85115f72559676b6eac29bc88)
   - relevant commits:
     - 3819dd3633ecb5ce5af3d2690a663b2b2733ee84
     - 88f0e9baad41a72349cd27f62e51976c2d99988f
     - f651b5c2a1dc8920a878668d72a6fcb07e9d8761
-    - 2583795ff31357c85115f72559676b6eac29bc88
 - Fix duplicated run name when running a service from the REST API bug
 - Order model drop down lists in the UI based on pretty name instead of tablename
 - Add user "last login" and "last request" properties

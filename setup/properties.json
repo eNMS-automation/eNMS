@@ -644,6 +644,12 @@
         "visible": false
       },
       {
+        "data": "last_run",
+        "title": "Last Run",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "status",
         "title": "Status",
         "search": "text",

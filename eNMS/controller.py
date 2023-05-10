@@ -1125,6 +1125,7 @@ class Controller:
             run_kwargs["restart_run"] = restart_run
             initial_payload = restart_run.payload
         run_kwargs["services"] = [service.id]
+        service.last_run = vs.get_time()
         run = db.factory(
             "run", service=service.id, commit=True, rbac=None, **run_kwargs
         )

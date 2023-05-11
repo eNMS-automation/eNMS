@@ -338,7 +338,7 @@ class Run(AbstractBase):
     path = db.Column(db.TinyString)
     parameterized_run = db.Column(Boolean, default=False)
     service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
-    service = relationship("Service", foreign_keys="Run.service_id")
+    service = relationship("Service", foreign_keys="Run.service_id", lazy="joined")
     service_name = db.Column(db.SmallString)
     target_devices = relationship(
         "Device", secondary=db.run_device_table, back_populates="runs"

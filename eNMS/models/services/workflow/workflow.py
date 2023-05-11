@@ -32,10 +32,10 @@ class Workflow(Service):
     man_minutes = db.Column(Integer, default=0)
     man_minutes_total = db.Column(Integer, default=0)
     services = relationship(
-        "Service", secondary=db.service_workflow_table, back_populates="workflows"
+        "Service", secondary=db.service_workflow_table, back_populates="workflows", lazy="joined"
     )
     edges = relationship(
-        "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan"
+        "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan", lazy="joined"
     )
     superworkflow_id = db.Column(
         Integer, ForeignKey("workflow.id", ondelete="SET NULL")
@@ -147,6 +147,7 @@ class Workflow(Service):
             heappush(services, (1 / service.priority, service))
         visited, restart_run = set(), run.restart_run
         tracking_bfs = run.run_method == "per_service_with_workflow_targets"
+        device_store = {device.name: device for device in start_targets}
         while services:
             if run.stop:
                 return {"payload": run.payload, "success": False, "result": "Aborted"}
@@ -175,9 +176,11 @@ class Workflow(Service):
                     "workflow_run_method": run.run_method,
                 }
                 if tracking_bfs or device:
-                    kwargs["target_devices"] = [
-                        db.fetch("device", name=name) for name in targets[service.name]
-                    ]
+                    kwargs["target_devices"] = []
+                    for name in targets[service.name]:
+                        if name not in device_store:
+                            device_store[name] = db.fetch("device", name=name)
+                        kwargs["target_devices"].append(device_store[name])
                 if run.parent_device:
                     kwargs["parent_device"] = run.parent_device
                 results = Runner(run, payload=run.payload, **kwargs).results
@@ -317,21 +320,21 @@ class WorkflowEdge(AbstractBase):
     subtype = db.Column(db.SmallString)
     source_id = db.Column(Integer, ForeignKey("service.id"))
     source = relationship(
-        "Service",
+        "Service", lazy="joined",
         primaryjoin="Service.id == WorkflowEdge.source_id",
         backref=backref("destinations", cascade="all, delete-orphan"),
         foreign_keys="WorkflowEdge.source_id",
     )
     destination_id = db.Column(Integer, ForeignKey("service.id"))
     destination = relationship(
-        "Service",
+        "Service", lazy="joined",
         primaryjoin="Service.id == WorkflowEdge.destination_id",
         backref=backref("sources", cascade="all, delete-orphan"),
         foreign_keys="WorkflowEdge.destination_id",
     )
     workflow_id = db.Column(Integer, ForeignKey("workflow.id"))
     workflow = relationship(
-        "Workflow", back_populates="edges", foreign_keys="WorkflowEdge.workflow_id"
+        "Workflow", back_populates="edges", foreign_keys="WorkflowEdge.workflow_id", lazy="joined"
     )
     __table_args__ = (
         UniqueConstraint(subtype, source_id, destination_id, workflow_id),

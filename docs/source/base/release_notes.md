@@ -68,6 +68,11 @@ Version 4.5.0
 - Add "Last Run" property for services to indicate the last time it was run
 - Revert update function default RBAC value back to "edit". For relationship update, required
   "read" access instead of "edit" access (7342db9e4261e8fbbed34e938c58b13943dff54d)
+- Reduce number of fetch when running a workflow:
+  - number of fetch / 10, execution time improved by 30%
+  - lazy join of run.service, workflow.services / edges, workflow edge source/destination/workflow
+  - new device store in workflow job function to avoid fetching devices multiple times
+  - Commit: b56feea372d852f3613b62d029b130e16c226a33
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

@@ -902,6 +902,7 @@ class Controller:
                         private_properties=kwargs["export_private_properties"],
                     ),
                     migration_file,
+                    default_style='"',
                 )
 
     def migration_import(self, folder="migrations", **kwargs):

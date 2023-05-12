@@ -32,10 +32,16 @@ class Workflow(Service):
     man_minutes = db.Column(Integer, default=0)
     man_minutes_total = db.Column(Integer, default=0)
     services = relationship(
-        "Service", secondary=db.service_workflow_table, back_populates="workflows", lazy="joined"
+        "Service",
+        secondary=db.service_workflow_table,
+        back_populates="workflows",
+        lazy="joined",
     )
     edges = relationship(
-        "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan", lazy="joined"
+        "WorkflowEdge",
+        back_populates="workflow",
+        cascade="all, delete-orphan",
+        lazy="joined",
     )
     superworkflow_id = db.Column(
         Integer, ForeignKey("workflow.id", ondelete="SET NULL")
@@ -316,21 +322,26 @@ class WorkflowEdge(AbstractBase):
     subtype = db.Column(db.SmallString)
     source_id = db.Column(Integer, ForeignKey("service.id"))
     source = relationship(
-        "Service", lazy="joined",
+        "Service",
         primaryjoin="Service.id == WorkflowEdge.source_id",
         backref=backref("destinations", cascade="all, delete-orphan"),
         foreign_keys="WorkflowEdge.source_id",
+        lazy="joined",
     )
     destination_id = db.Column(Integer, ForeignKey("service.id"))
     destination = relationship(
-        "Service", lazy="joined",
+        "Service",
         primaryjoin="Service.id == WorkflowEdge.destination_id",
         backref=backref("sources", cascade="all, delete-orphan"),
         foreign_keys="WorkflowEdge.destination_id",
+        lazy="joined",
     )
     workflow_id = db.Column(Integer, ForeignKey("workflow.id"))
     workflow = relationship(
-        "Workflow", back_populates="edges", foreign_keys="WorkflowEdge.workflow_id", lazy="joined"
+        "Workflow",
+        back_populates="edges",
+        foreign_keys="WorkflowEdge.workflow_id",
+        lazy="joined",
     )
     __table_args__ = (
         UniqueConstraint(subtype, source_id, destination_id, workflow_id),

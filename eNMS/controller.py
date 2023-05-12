@@ -917,7 +917,9 @@ class Controller:
         if current_user:
             store["user"][current_user.name] = current_user
         for service_name in ("Start", "End", "Placeholder"):
-            service = db.fetch("service", name=f"[Shared] {service_name}", allow_none=True)
+            service = db.fetch(
+                "service", name=f"[Shared] {service_name}", allow_none=True
+            )
             if service:
                 store["service"][service_name] = service
         for model in models:
@@ -952,7 +954,9 @@ class Controller:
                             store[model][instance.name] = instance
                             store[type][instance.name] = store[model][instance.name]
                             if model in ("device", "network"):
-                                store["node"][instance.name] = store[model][instance.name]
+                                store["node"][instance.name] = store[model][
+                                    instance.name
+                                ]
                         if kwargs.get("service_import"):
                             if instance.type == "workflow":
                                 instance.edges = []
@@ -976,7 +980,9 @@ class Controller:
                         continue
                     relation = vs.relationships[model][property]
                     if relation["list"]:
-                        related_instances = (store[relation["model"]].get(name) for name in value)
+                        related_instances = (
+                            store[relation["model"]].get(name) for name in value
+                        )
                         value = list(filter(None, related_instances))
                     else:
                         value = store[relation["model"]].get(value)

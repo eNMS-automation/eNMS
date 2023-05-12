@@ -1005,7 +1005,7 @@ class Controller:
                 pool.compute_pool()
         db.session.commit()
         env.log_events = True
-        env.log("info", f"{status} (execution time: {datetime.now() - start_time}s")
+        env.log("info", f"{status} (execution time: {datetime.now() - start_time}s)")
         return status
 
     def multiselect_filtering(self, model, **params):

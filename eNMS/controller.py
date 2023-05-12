@@ -544,7 +544,7 @@ class Controller:
         return {"result": result, "datetime": commit.committed_datetime}
 
     def get_migration_folders(self):
-        return listdir(vs.path / "files" / "migrations")
+        return listdir(Path(vs.settings["paths"]["migrations"]))
 
     def get_properties(self, model, id):
         return db.fetch(model, id=id).get_properties()
@@ -892,7 +892,7 @@ class Controller:
 
     def migration_export(self, **kwargs):
         for cls_name in kwargs["import_export_types"]:
-            path = vs.path / "files" / "migrations" / kwargs["name"]
+            path = Path(vs.settings["paths"]["migrations"]) / kwargs["name"]
             if not exists(path):
                 makedirs(path)
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
@@ -917,7 +917,10 @@ class Controller:
         relations = defaultdict(lambda: defaultdict(dict))
         service_instances = []
         for model in models:
-            path = vs.path / "files" / folder / kwargs["name"] / f"{model}.yaml"
+            if folder == "migrations":
+                path = Path(vs.settings["paths"]["migrations"]) / kwargs["name"] / f"{model}.yaml"
+            else:
+                path = vs.path / "files" / folder / kwargs["name"] / f"{model}.yaml"
             if not path.exists():
                 if kwargs.get("service_import") and model == "service":
                     raise Exception("Invalid archive provided in service import.")

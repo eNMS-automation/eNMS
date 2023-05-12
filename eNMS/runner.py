@@ -1115,6 +1115,7 @@ class Runner:
             if getattr(self, "config_mode_command", None):
                 kwargs["config_command"] = self.config_mode_command
             netmiko_connection.config_mode(**kwargs)
+        netmiko_connection.password = "*" * 8
         vs.connections_cache["netmiko"][self.parent_runtime].setdefault(
             device.name, {}
         )[self.connection_name] = netmiko_connection

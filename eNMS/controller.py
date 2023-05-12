@@ -922,7 +922,8 @@ class Controller:
         if empty_database:
             db.delete_all(*models)
         relations, store = defaultdict(lambda: defaultdict(dict)), defaultdict(dict)
-        service_instances, start_time = [], datetime.now()
+        start_time = datetime.now()
+        folder_path = vs.path / "files" / folder / kwargs["name"]
         if current_user:
             store["user"][current_user.name] = current_user
         for service_name in ("Start", "End", "Placeholder"):
@@ -932,7 +933,7 @@ class Controller:
             if service:
                 store["service"][service_name] = service
         for model in models:
-            path = vs.path / "files" / folder / kwargs["name"] / f"{model}.yaml"
+            path = folder_path / f"{model}.yaml"
             if not path.exists():
                 if kwargs.get("service_import") and model == "service":
                     raise Exception("Invalid archive provided in service import.")
@@ -968,8 +969,6 @@ class Controller:
                     if kwargs.get("service_import"):
                         if instance.type == "workflow":
                             instance.edges = []
-                        if model == "service":
-                            service_instances.append(instance)
                     relations[type][instance.name] = relation_dict
                     for property in instance_private_properties.items():
                         setattr(instance, *property)
@@ -1007,11 +1006,10 @@ class Controller:
                         status = "Partial import (see logs)."
             env.log("info", f"Relationships created in {datetime.now() - before_time}")
         db.session.commit()
-        if kwargs.get("service_import", False) and len(service_instances) > 1:
-            main_workflow = [
-                service for service in service_instances if not service.workflows
-            ][0]
-            main_workflow.recursive_update()
+        if kwargs.get("service_import", False):
+            with open(folder_path / "metadata.yaml", "r") as metadata_file:
+                metadata = yaml.load(metadata_file)
+            store["service"][metadata["service"]].recursive_update()
         if not kwargs.get("skip_model_update"):
             before_time = datetime.now()
             env.log("info", "Starting model update")

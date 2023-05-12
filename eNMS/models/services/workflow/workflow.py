@@ -150,7 +150,7 @@ class Workflow(Service):
         device_store = {device.name: device for device in start_targets}
         while services:
             if run.stop:
-                return {"payload": run.payload, "success": False, "result": "Aborted"}
+                return {"success": False, "result": "Aborted"}
             _, service = heappop(services)
             if number_of_runs[service.name] >= service.maximum_runs:
                 continue
@@ -209,13 +209,9 @@ class Workflow(Service):
         if tracking_bfs or device:
             failed = list(targets[start.name] - targets[end.name])
             summary = {"success": list(targets[end.name]), "failure": failed}
-            results = {
-                "payload": run.payload,
-                "success": not failed,
-                "summary": summary,
-            }
+            results = {"success": not failed, "summary": summary}
         else:
-            results = {"payload": run.payload, "success": end in visited}
+            results = {"success": end in visited}
         run.restart_run = restart_run
         if run.is_main_run and self.man_minutes:
             self.man_minutes_total += (

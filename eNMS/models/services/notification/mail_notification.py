@@ -25,7 +25,7 @@ class MailNotificationService(Service):
             run.sub(run.title, locals()),
             run.sub(run.body, locals()),
             sender=run.sender,
-            recipients=run.recipients,
+            recipients=run.sub(run.recipients, locals()),
             reply_to=run.replier,
         )
         return {"success": True, "result": {}}
@@ -35,7 +35,7 @@ class MailNotificationForm(ServiceForm):
     form_type = HiddenField(default="mail_notification_service")
     title = StringField(substitution=True)
     sender = StringField()
-    recipients = StringField()
+    recipients = StringField(substitution=True)
     replier = StringField("Reply-to Address")
     body = StringField(widget=TextArea(), render_kw={"rows": 5}, substitution=True)
 

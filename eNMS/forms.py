@@ -918,6 +918,15 @@ class ServiceForm(BaseForm):
             self.mail_recipient.errors.append(
                 "Please add at least one recipient for the mail notification."
             )
+        invalid_multiprocessing_error = (
+            self.multiprocessing.data
+            and self.run_method.data != "per_device"
+        )
+        if invalid_multiprocessing_error:
+            self.multiprocessing.errors.append(
+                "Multiprocessing can only be enabled if the run method"
+                " is set to 'Per Device'."
+            )
         forbidden_name_error = self.scoped_name.data in ("Start", "End", "Placeholder")
         if forbidden_name_error:
             self.name.errors.append("This name is not allowed.")
@@ -961,6 +970,7 @@ class ServiceForm(BaseForm):
         return (
             valid_form
             and not conversion_validation_mismatch
+            and not invalid_multiprocessing_error
             and not empty_validation
             and not forbidden_name_error
             and not no_recipient_error

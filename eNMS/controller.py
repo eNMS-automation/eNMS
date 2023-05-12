@@ -928,9 +928,10 @@ class Controller:
                 if kwargs.get("service_import") and model == "service":
                     raise Exception("Invalid archive provided in service import.")
                 continue
-            env.log("info", f"Creating {model}s")
             with open(path, "r") as migration_file:
                 instances = yaml.load(migration_file, Loader=yaml.CLoader)
+            before_time = datetime.now()
+            env.log("info", f"Creating {model}s")
             for instance in instances:
                 type, relation_dict = instance.pop("type", model), {}
                 for related_model, relation in vs.relationships[type].items():
@@ -972,8 +973,11 @@ class Controller:
                         return "Error during import; service was not imported."
                     status = "Partial import (see logs)."
             db.session.commit()
+            total_time = datetime.now() - before_time
+            env.log("info", f"{model.capitalize()}s created in {total_time}")
         for model, instances in relations.items():
             env.log("info", f"Setting up {model}s database relationships")
+            before_time = datetime.now()
             for instance_name, related_models in instances.items():
                 for property, value in related_models.items():
                     if not value:
@@ -994,6 +998,7 @@ class Controller:
                             db.session.rollback()
                             return "Error during import; service was not imported."
                         status = "Partial import (see logs)."
+            env.log("info", f"Relationships created in {datetime.now() - before_time}")
         db.session.commit()
         if kwargs.get("service_import", False) and len(service_instances) > 1:
             main_workflow = [
@@ -1001,14 +1006,18 @@ class Controller:
             ][0]
             main_workflow.recursive_update()
         if not kwargs.get("skip_model_update"):
+            before_time = datetime.now()
             env.log("info", "Starting model update")
             for model in ("user", "service", "network"):
                 for instance in store[model].values():
                     instance.post_update()
+            env.log("info", f"Model update done ({datetime.now() - before_time}s)")
         if not kwargs.get("skip_pool_update"):
+            before_time = datetime.now()
             env.log("info", "Starting pool update")
             for pool in store["pool"].values():
                 pool.compute_pool()
+            env.log("info", f"Pool update done ({datetime.now() - before_time}s)")
         db.session.commit()
         env.log_events = True
         env.log("info", f"{status} (execution time: {datetime.now() - start_time}s)")

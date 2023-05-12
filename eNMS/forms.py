@@ -11,7 +11,6 @@ from wtforms.validators import InputRequired, NumberRange
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
-from eNMS.environment import env
 from eNMS.fields import (
     BooleanField,
     HiddenField,

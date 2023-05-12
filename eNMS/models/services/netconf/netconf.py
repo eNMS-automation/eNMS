@@ -4,13 +4,7 @@ import xmltodict
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
-from eNMS.fields import (
-    BooleanField,
-    HiddenField,
-    IntegerField,
-    SelectField,
-    StringField,
-)
+from eNMS.fields import BooleanField, HiddenField, SelectField, StringField
 from eNMS.forms import ConnectionForm
 from eNMS.models.automation import ConnectionService
 

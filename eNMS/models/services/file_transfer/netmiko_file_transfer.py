@@ -1,5 +1,5 @@
 from netmiko import file_transfer
-from sqlalchemy import Boolean, Float, ForeignKey, Integer
+from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms.validators import InputRequired
 
 from eNMS.database import db

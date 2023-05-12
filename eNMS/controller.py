@@ -931,46 +931,46 @@ class Controller:
             env.log("info", f"Creating {model}s")
             with open(path, "r") as migration_file:
                 instances = yaml.load(migration_file, Loader=yaml.CLoader)
-                for instance in instances:
-                    type, relation_dict = instance.pop("type", model), {}
-                    for related_model, relation in vs.relationships[type].items():
-                        relation_dict[related_model] = instance.pop(related_model, [])
-                    instance_private_properties = {
-                        property: env.get_password(instance.pop(property))
-                        for property in list(instance)
-                        if property in vs.private_properties_set
-                    }
-                    try:
-                        if instance["name"] in store[model]:
-                            instance = store[model][instance["name"]]
-                        else:
-                            instance = db.factory(
-                                type,
-                                migration_import=True,
-                                no_fetch=empty_database,
-                                import_mechanism=True,
-                                **instance,
-                            )
-                            store[model][instance.name] = instance
-                            store[type][instance.name] = store[model][instance.name]
-                            if model in ("device", "network"):
-                                store["node"][instance.name] = store[model][
-                                    instance.name
-                                ]
-                        if kwargs.get("service_import"):
-                            if instance.type == "workflow":
-                                instance.edges = []
-                            if model == "service":
-                                service_instances.append(instance)
-                        relations[type][instance.name] = relation_dict
-                        for property in instance_private_properties.items():
-                            setattr(instance, *property)
-                    except Exception:
-                        info(f"{str(instance)} could not be imported:\n{format_exc()}")
-                        if kwargs.get("service_import", False):
-                            db.session.rollback()
-                            return "Error during import; service was not imported."
-                        status = "Partial import (see logs)."
+            for instance in instances:
+                type, relation_dict = instance.pop("type", model), {}
+                for related_model, relation in vs.relationships[type].items():
+                    relation_dict[related_model] = instance.pop(related_model, [])
+                instance_private_properties = {
+                    property: env.get_password(instance.pop(property))
+                    for property in list(instance)
+                    if property in vs.private_properties_set
+                }
+                try:
+                    if instance["name"] in store[model]:
+                        instance = store[model][instance["name"]]
+                    else:
+                        instance = db.factory(
+                            type,
+                            migration_import=True,
+                            no_fetch=empty_database,
+                            import_mechanism=True,
+                            **instance,
+                        )
+                        store[model][instance.name] = instance
+                        store[type][instance.name] = store[model][instance.name]
+                        if model in ("device", "network"):
+                            store["node"][instance.name] = store[model][
+                                instance.name
+                            ]
+                    if kwargs.get("service_import"):
+                        if instance.type == "workflow":
+                            instance.edges = []
+                        if model == "service":
+                            service_instances.append(instance)
+                    relations[type][instance.name] = relation_dict
+                    for property in instance_private_properties.items():
+                        setattr(instance, *property)
+                except Exception:
+                    info(f"{str(instance)} could not be imported:\n{format_exc()}")
+                    if kwargs.get("service_import", False):
+                        db.session.rollback()
+                        return "Error during import; service was not imported."
+                    status = "Partial import (see logs)."
             db.session.commit()
         for model, instances in relations.items():
             env.log("info", f"Setting up {model}s database relationships")

@@ -77,6 +77,9 @@ Version 4.5.0
 - Add string substitution support in the mail notification service fields (sender, recipients, reply-to)
 - Dont allow enabling multiprocessing if the run method is not set to per device
 - Remove password from netmiko connection object after opening connection
+- Add metadata file when doing migration or service import / export
+  - metadata includes export time, export version, and service name in case of service export
+  - fix shared workflow import bug (empty list => no way to detect main workflow)
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

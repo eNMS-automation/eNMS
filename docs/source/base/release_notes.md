@@ -54,7 +54,7 @@ Version 4.5.0
   - everything about files is impacted and must be tested again
 - Update size of restart workflow from panel to fit to content
 - Add device name to git history comparison panel title
-- Add task name to the run table ("Results" page)
+- Add task name, target devices and target pools to the run table ("Results" page)
 - Add custom parameterized form feature:
   - new "Parameterized Form Template" field in service panel > step 1 for the HTML code
   - supports JavaScript code inside <script></script> tag

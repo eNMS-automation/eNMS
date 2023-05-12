@@ -76,6 +76,7 @@ Version 4.5.0
 - Dont include payload in intermediate workflow results (1ae5a7b25a53d5ab00527fe7bb3e682cc6853fda)
 - Add string substitution support in the mail notification service fields (sender, recipients, reply-to)
 - Dont allow enabling multiprocessing if the run method is not set to per device
+- Remove password from netmiko connection object after opening connection
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

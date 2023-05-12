@@ -346,6 +346,13 @@ class Controller:
             edges = [edge.to_dict(export=True) for edge in service.deep_edges]
             with open(path / "workflow_edge.yaml", "w") as file:
                 yaml.dump(edges, file)
+        with open(path / "metadata.yaml", "w") as file:
+            metadata = {
+                "version": vs.version,
+                "export_time": datetime.now(),
+                "service": service.name,
+            }
+            yaml.dump(metadata, file)
         with open_tar(f"{path}.tgz", "w:gz") as tar:
             tar.add(path, arcname=service.filename)
         rmtree(path, ignore_errors=True)
@@ -957,9 +964,7 @@ class Controller:
                         store[model][instance.name] = instance
                         store[type][instance.name] = store[model][instance.name]
                         if model in ("device", "network"):
-                            store["node"][instance.name] = store[model][
-                                instance.name
-                            ]
+                            store["node"][instance.name] = store[model][instance.name]
                     if kwargs.get("service_import"):
                         if instance.type == "workflow":
                             instance.edges = []

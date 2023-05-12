@@ -919,8 +919,7 @@ class ServiceForm(BaseForm):
                 "Please add at least one recipient for the mail notification."
             )
         invalid_multiprocessing_error = (
-            self.multiprocessing.data
-            and self.run_method.data != "per_device"
+            self.multiprocessing.data and self.run_method.data != "per_device"
         )
         if invalid_multiprocessing_error:
             self.multiprocessing.errors.append(

@@ -904,6 +904,8 @@ class Controller:
                     migration_file,
                     default_style='"',
                 )
+        with open(path / "metadata.yaml", "w") as file:
+            yaml.dump({"version": vs.version, "export_time": datetime.now()}, file)
 
     def migration_import(self, folder="migrations", **kwargs):
         env.log("info", "Starting Migration Import")

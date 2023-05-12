@@ -917,7 +917,7 @@ class Controller:
     def migration_import(self, folder="migrations", **kwargs):
         env.log("info", "Starting Migration Import")
         env.log_events = False
-        status, models = "Import successful.", kwargs["import_export_types"]
+        status, models = "import successful", kwargs["import_export_types"]
         empty_database = kwargs.get("empty_database_before_import", False)
         if empty_database:
             db.delete_all(*models)
@@ -933,7 +933,7 @@ class Controller:
                 vs.automation["service_import"]["disallow_cross_version_import"]
                 and metadata["version"] != vs.version
             ):
-                raise Exception("Service import from an older version is not allowed.")
+                return {"alert": "service import from an older version is not allowed"}
         for service_name in ("Start", "End", "Placeholder"):
             service = db.fetch(
                 "service", name=f"[Shared] {service_name}", allow_none=True
@@ -985,7 +985,7 @@ class Controller:
                     if kwargs.get("service_import", False):
                         db.session.rollback()
                         return "Error during import; service was not imported."
-                    status = "Partial import (see logs)."
+                    status = {"alert": "partial import (see logs)."}
             db.session.commit()
             total_time = datetime.now() - before_time
             env.log("info", f"{model.capitalize()}s created in {total_time}")
@@ -1011,7 +1011,7 @@ class Controller:
                         if kwargs.get("service_import", False):
                             db.session.rollback()
                             return "Error during import; service was not imported."
-                        status = "Partial import (see logs)."
+                        status = {"alert": "partial import (see logs)."}
             env.log("info", f"Relationships created in {datetime.now() - before_time}")
         db.session.commit()
         if kwargs.get("service_import"):

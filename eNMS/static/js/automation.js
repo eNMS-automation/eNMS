@@ -865,9 +865,12 @@ function showImportServicesPanel() {
           file.previewElement.classList.add("dz-error");
         },
         success: function(file, message) {
-          const log = `File ${file.name} uploaded with response "${message}"`;
-          notify(log, "success", 5, true);
-          file.previewElement.classList.add("dz-success");
+          if (message.alert) {
+            notify(`File upload failed (${message.alert}).`, "error", 5, true);
+          } else {
+            notify(`File uploaded (${message}).`, "success", 5, true);
+          }
+          file.previewElement.classList.add(message.alert ? "dz-success" : "dz-error");
         },
         accept: function(file, done) {
           if (!file.name.toLowerCase().endsWith(".tgz")) {

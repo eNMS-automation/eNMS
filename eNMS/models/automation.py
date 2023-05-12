@@ -317,7 +317,7 @@ class ServiceReport(AbstractBase):
 
 class Run(AbstractBase):
     __tablename__ = type = "run"
-    private = True
+    log_change = False
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     restart_run_id = db.Column(Integer, ForeignKey("run.id", ondelete="SET NULL"))

@@ -1046,6 +1046,12 @@ tables.run = class RunTable extends Table {
       const rowLink = `/workflow_builder/${row.path}/${row.runtime}`;
       row.name = `<b><a href="${rowLink}">${row.name}</a></b>`;
     }
+    for (const model of ["device", "pool"]) {
+      row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+        '${model}', ${row.instance}, {parent: '${this.id}', from: 'runs',
+        to: 'target_${model}s'})">${model.charAt(0).toUpperCase() + model.slice(1)}s
+        </a></b>`;
+    }
     row.service = JSON.stringify(row.service_properties).replace(/"/g, "'");
     row.buttons = this.buttons(row);
     return row;

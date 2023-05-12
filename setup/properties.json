@@ -799,6 +799,18 @@
         "orderable": false
       },
       {
+        "data": "devices",
+        "title": "Devices",
+        "width": "100px",
+        "visible": false
+      },
+      {
+        "data": "pools",
+        "title": "Pools",
+        "width": "100px",
+        "visible": false
+      },
+      {
         "data": "buttons",
         "width": "90px",
         "orderable": false,

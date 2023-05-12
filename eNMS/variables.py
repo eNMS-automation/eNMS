@@ -45,6 +45,9 @@ class VariableStore:
             with open(setup_file, "r") as file:
                 setattr(self, setup_file.stem, load(file))
 
+        if not self.settings['paths']['migrations'].startswith('/'):
+            self.settings['paths']['migrations'] = str(self.path / self.settings['paths']['migrations'])
+
     def _set_automation_variables(self):
         self.ssh_sessions = {}
         self.netmiko_drivers = sorted(self.dualize(CLASS_MAPPER))

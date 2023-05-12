@@ -926,6 +926,14 @@ class Controller:
         folder_path = vs.path / "files" / folder / kwargs["name"]
         if current_user:
             store["user"][current_user.name] = current_user
+        if kwargs.get("service_import"):
+            with open(folder_path / "metadata.yaml", "r") as metadata_file:
+                metadata = yaml.load(metadata_file)
+            if (
+                vs.automation["service_import"]["disallow_cross_version_import"]
+                and metadata["version"] != vs.version
+            ):
+                raise Exception("Service import from an older version is not allowed.")
         for service_name in ("Start", "End", "Placeholder"):
             service = db.fetch(
                 "service", name=f"[Shared] {service_name}", allow_none=True
@@ -1006,9 +1014,7 @@ class Controller:
                         status = "Partial import (see logs)."
             env.log("info", f"Relationships created in {datetime.now() - before_time}")
         db.session.commit()
-        if kwargs.get("service_import", False):
-            with open(folder_path / "metadata.yaml", "r") as metadata_file:
-                metadata = yaml.load(metadata_file)
+        if kwargs.get("service_import"):
             store["service"][metadata["service"]].recursive_update()
         if not kwargs.get("skip_model_update"):
             before_time = datetime.now()

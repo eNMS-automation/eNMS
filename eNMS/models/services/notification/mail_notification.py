@@ -24,9 +24,9 @@ class MailNotificationService(Service):
         env.send_email(
             run.sub(run.title, locals()),
             run.sub(run.body, locals()),
-            sender=run.sender,
+            sender=run.sub(run.sender, locals()),
             recipients=run.sub(run.recipients, locals()),
-            reply_to=run.replier,
+            reply_to=run.sub(run.replier, locals()),
         )
         return {"success": True, "result": {}}
 
@@ -34,9 +34,9 @@ class MailNotificationService(Service):
 class MailNotificationForm(ServiceForm):
     form_type = HiddenField(default="mail_notification_service")
     title = StringField(substitution=True)
-    sender = StringField()
+    sender = StringField(substitution=True)
     recipients = StringField(substitution=True)
-    replier = StringField("Reply-to Address")
+    replier = StringField("Reply-to Address", substitution=True)
     body = StringField(widget=TextArea(), render_kw={"rows": 5}, substitution=True)
 
     def validate(self, **_):

@@ -1,1328 +1,2205 @@
-- admin_only: false
-  creator: ''
-  description: All objects
-  device_configuration: ''
-  device_configuration_invert: false
-  device_configuration_match: inclusion
-  device_creator: ''
-  device_creator_invert: false
-  device_creator_match: inclusion
-  device_description: ''
-  device_description_invert: false
-  device_description_match: inclusion
-  device_icon: ''
-  device_icon_invert: false
-  device_icon_match: inclusion
-  device_ip_address: ''
-  device_ip_address_invert: false
-  device_ip_address_match: inclusion
-  device_latitude: ''
-  device_latitude_invert: false
-  device_latitude_match: inclusion
-  device_location: ''
-  device_location_invert: false
-  device_location_match: inclusion
-  device_longitude: ''
-  device_longitude_invert: false
-  device_longitude_match: inclusion
-  device_model: ''
-  device_model_invert: false
-  device_model_match: inclusion
-  device_name: .*
-  device_name_invert: false
-  device_name_match: regex
-  device_napalm_driver: ''
-  device_napalm_driver_invert: false
-  device_napalm_driver_match: inclusion
-  device_netconf_driver: ''
-  device_netconf_driver_invert: false
-  device_netconf_driver_match: inclusion
-  device_netmiko_driver: ''
-  device_netmiko_driver_invert: false
-  device_netmiko_driver_match: inclusion
-  device_operating_system: ''
-  device_operating_system_invert: false
-  device_operating_system_match: inclusion
-  device_operational_data: ''
-  device_operational_data_invert: false
-  device_operational_data_match: inclusion
-  device_os_version: ''
-  device_os_version_invert: false
-  device_os_version_match: inclusion
-  device_port: ''
-  device_port_invert: false
-  device_port_match: inclusion
-  device_property1: ''
-  device_property1_invert: false
-  device_property1_match: inclusion
-  device_scrapli_driver: ''
-  device_scrapli_driver_invert: false
-  device_scrapli_driver_match: inclusion
-  device_specialized_data: ''
-  device_specialized_data_invert: false
-  device_specialized_data_match: inclusion
-  device_subtype: ''
-  device_subtype_invert: false
-  device_subtype_match: inclusion
-  device_vendor: ''
-  device_vendor_invert: false
-  device_vendor_match: inclusion
-  devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
-    Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
-    Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
-    SanFrancisco, Orange, Oakland, Denver, router5, router6, router7, router8, router9,
-    router10 (public), router11, router12, router13, router14, router15, router16,
-    router17, router18 (public), router19, router20 (admin), router21, router22, router23
-      (admin), router24, router25, router26, router27, router28, router29, router30,
-    router31, router32, router33, router34, router35, router36, router37, Server 2,
-    Aserver, Dallas-2, Dallas-3, Dallas-4, Austin-2, Austin-3, Jackson-2, Oakland-2,
-    Router 1, Router 2, Router 3, Router behind Gateway 1, Gateway 1, Gateway 2, Gateway
-      3, 'Router behind Gateway 1, 2 and 3', Subnetwork 1 - R1, Subnetwork 1 - R2,
-    Subnetwork 2 - G1, Subnetwork 2 - G2, Duplicate me 1, Duplication - G1, Duplication
-      - R1, Subnetwork 1 - R3, S5 R1, S5 R2, S5 R3, S5 R4, S6 L3 R1, S6 L3 R2]
-  last_modified: '2022-11-09 01:23:16.091556'
-  last_modified_by: admin
-  link_color: ''
-  link_color_invert: false
-  link_color_match: inclusion
-  link_creator: ''
-  link_creator_invert: false
-  link_creator_match: inclusion
-  link_description: ''
-  link_description_invert: false
-  link_description_match: inclusion
-  link_destination_name: ''
-  link_destination_name_invert: false
-  link_destination_name_match: inclusion
-  link_location: ''
-  link_location_invert: false
-  link_location_match: inclusion
-  link_model: ''
-  link_model_invert: false
-  link_model_match: inclusion
-  link_name: .*
-  link_name_invert: false
-  link_name_match: regex
-  link_source_name: ''
-  link_source_name_invert: false
-  link_source_name_match: inclusion
-  link_subtype: ''
-  link_subtype_invert: false
-  link_subtype_match: inclusion
-  link_vendor: ''
-  link_vendor_invert: false
-  link_vendor_match: inclusion
-  links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
-    link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27, europe-link4 (admin),
-    europe-link5, europe-link6, europe-link7, europe-link8, europe-link9, europe-link10,
-    europe-link11, europe-link12, europe-link13, europe-link14, europe-link15, europe-link16,
-    europe-link17, europe-link18, europe-link19, europe-link20, europe-link21, europe-link22,
-    europe-link23, europe-link24, europe-link25, europe-link26, europe-link27, europe-link28
-      (public), europe-link29, europe-link30, europe-link31 (public), europe-link32,
-    europe-link33, europe-link34, europe-link35, europe-link36, europe-link37, europe-link38,
-    europe-link39, europe-link40 (admin), europe-link41, europe-link42, europe-link43,
-    europe-link44, europe-link45, europe-link46, europe-link47, europe-link48, europe-link49,
-    europe-link50, europe-link51, europe-link52, atlantic-r26-boston-1, atlantic-r26-boston-2,
-    atlantic-r26-ny, atlantic-r26-washington, atlantic-r28-ny, atlantic-r28-washington,
-    atlantic-r20-boston-1, atlantic-r20-richmond-2, atlantic-r26-boston-3, atlantic-r20-boston-2,
-    atlantic-r20-richmond-1, europe-link30-2, europe-link31-2, europe-link35-2, europe-link35-3,
-    atlantic-r26-boston-4-inverted, link25-2, link25-3, link25-dallas2, link25-reversed,
-    link25-reversed-2, link13-2, R1 - R2, R2 - R3, R1 - R3, Subnetwork 1 - L1, Subnetwork
-      2 - L1, G1 - R1, Duplicate 1 - 2, Subnetwork 1 - L2, Subnetwork 1 - L3, R3 ->
-      R2 L1, R3 -> R2 L2, R3 -> R2 L3, R3 -> R2 L4, R3 Loopback 1, R1 Loopback 1,
-    R1 -> R2 L1, R1 -> R2 L2, R1 -> R2 L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1 L3,
-    R3 -> R1 L4, R2 -> R4 L1, R2 -> R4 L2, R4 -> R2 L3, R4 Loopback 1, R1 - R4, R3
-      -> R4 L1, R3 -> R4 L2, R3 -> R4 L3, R3 -> R4 L4, R4 -> R3 L5, R4 -> R3 L6, R4
-      -> R3 L7, R4 -> R3 L8, S6 L1]
-  manually_defined: false
-  name: Everything
-  owners: []
-  property1: CP
-  rbac_edit: []
-  rbac_group_rbac_configuration: []
-  rbac_group_rbac_connect: []
-  rbac_group_rbac_edit: []
-  rbac_group_rbac_read: []
-  rbac_group_rbac_target: []
-  rbac_read: [Admin User]
-  target_services: []
-  tasks: []
-  type: pool
-- admin_only: false
-  creator: ''
-  description: All devices
-  device_configuration: ''
-  device_configuration_invert: false
-  device_configuration_match: inclusion
-  device_creator: ''
-  device_creator_invert: false
-  device_creator_match: inclusion
-  device_description: ''
-  device_description_invert: false
-  device_description_match: inclusion
-  device_icon: ''
-  device_icon_invert: false
-  device_icon_match: inclusion
-  device_ip_address: ''
-  device_ip_address_invert: false
-  device_ip_address_match: inclusion
-  device_latitude: ''
-  device_latitude_invert: false
-  device_latitude_match: inclusion
-  device_location: ''
-  device_location_invert: false
-  device_location_match: inclusion
-  device_longitude: ''
-  device_longitude_invert: false
-  device_longitude_match: inclusion
-  device_model: ''
-  device_model_invert: false
-  device_model_match: inclusion
-  device_name: .*
-  device_name_invert: false
-  device_name_match: regex
-  device_napalm_driver: ''
-  device_napalm_driver_invert: false
-  device_napalm_driver_match: inclusion
-  device_netconf_driver: ''
-  device_netconf_driver_invert: false
-  device_netconf_driver_match: inclusion
-  device_netmiko_driver: ''
-  device_netmiko_driver_invert: false
-  device_netmiko_driver_match: inclusion
-  device_operating_system: ''
-  device_operating_system_invert: false
-  device_operating_system_match: inclusion
-  device_operational_data: ''
-  device_operational_data_invert: false
-  device_operational_data_match: inclusion
-  device_os_version: ''
-  device_os_version_invert: false
-  device_os_version_match: inclusion
-  device_port: ''
-  device_port_invert: false
-  device_port_match: inclusion
-  device_property1: ''
-  device_property1_invert: false
-  device_property1_match: inclusion
-  device_scrapli_driver: ''
-  device_scrapli_driver_invert: false
-  device_scrapli_driver_match: inclusion
-  device_specialized_data: ''
-  device_specialized_data_invert: false
-  device_specialized_data_match: inclusion
-  device_subtype: ''
-  device_subtype_invert: false
-  device_subtype_match: inclusion
-  device_vendor: ''
-  device_vendor_invert: false
-  device_vendor_match: inclusion
-  devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
-    Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
-    Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
-    SanFrancisco, Orange, Oakland, Denver, router5, router6, router7, router8, router9,
-    router10 (public), router11, router12, router13, router14, router15, router16,
-    router17, router18 (public), router19, router20 (admin), router21, router22, router23
-      (admin), router24, router25, router26, router27, router28, router29, router30,
-    router31, router32, router33, router34, router35, router36, router37, Server 2,
-    Aserver, Dallas-2, Dallas-3, Dallas-4, Austin-2, Austin-3, Jackson-2, Oakland-2,
-    Router 1, Router 2, Router 3, Router behind Gateway 1, Gateway 1, Gateway 2, Gateway
-      3, 'Router behind Gateway 1, 2 and 3', Subnetwork 1 - R1, Subnetwork 1 - R2,
-    Subnetwork 2 - G1, Subnetwork 2 - G2, Duplicate me 1, Duplication - G1, Duplication
-      - R1, Subnetwork 1 - R3, S5 R1, S5 R2, S5 R3, S5 R4, S6 L3 R1, S6 L3 R2]
-  last_modified: '2022-11-09 01:23:16.094359'
-  last_modified_by: admin
-  link_color: ''
-  link_color_invert: false
-  link_color_match: inclusion
-  link_creator: ''
-  link_creator_invert: false
-  link_creator_match: inclusion
-  link_description: ''
-  link_description_invert: false
-  link_description_match: inclusion
-  link_destination_name: ''
-  link_destination_name_invert: false
-  link_destination_name_match: inclusion
-  link_location: ''
-  link_location_invert: false
-  link_location_match: inclusion
-  link_model: ''
-  link_model_invert: false
-  link_model_match: inclusion
-  link_name: ''
-  link_name_invert: false
-  link_name_match: inclusion
-  link_source_name: ''
-  link_source_name_invert: false
-  link_source_name_match: inclusion
-  link_subtype: ''
-  link_subtype_invert: false
-  link_subtype_match: inclusion
-  link_vendor: ''
-  link_vendor_invert: false
-  link_vendor_match: inclusion
-  links: []
-  manually_defined: false
-  name: All Devices
-  owners: []
-  property1: CP
-  rbac_edit: []
-  rbac_group_rbac_configuration: []
-  rbac_group_rbac_connect: []
-  rbac_group_rbac_edit: []
-  rbac_group_rbac_read: []
-  rbac_group_rbac_target: []
-  rbac_read: [Admin User]
-  target_services: ['[Skip in SxS with service targets and Run Once services] Run
-      Once with Pool', Large Workflow (30 services), Large Device Configuration and
-      Operational Data]
-  tasks: []
-  type: pool
-- admin_only: false
-  creator: ''
-  description: All links
-  device_configuration: ''
-  device_configuration_invert: false
-  device_configuration_match: inclusion
-  device_creator: ''
-  device_creator_invert: false
-  device_creator_match: inclusion
-  device_description: ''
-  device_description_invert: false
-  device_description_match: inclusion
-  device_icon: ''
-  device_icon_invert: false
-  device_icon_match: inclusion
-  device_ip_address: ''
-  device_ip_address_invert: false
-  device_ip_address_match: inclusion
-  device_latitude: ''
-  device_latitude_invert: false
-  device_latitude_match: inclusion
-  device_location: ''
-  device_location_invert: false
-  device_location_match: inclusion
-  device_longitude: ''
-  device_longitude_invert: false
-  device_longitude_match: inclusion
-  device_model: ''
-  device_model_invert: false
-  device_model_match: inclusion
-  device_name: ''
-  device_name_invert: false
-  device_name_match: inclusion
-  device_napalm_driver: ''
-  device_napalm_driver_invert: false
-  device_napalm_driver_match: inclusion
-  device_netconf_driver: ''
-  device_netconf_driver_invert: false
-  device_netconf_driver_match: inclusion
-  device_netmiko_driver: ''
-  device_netmiko_driver_invert: false
-  device_netmiko_driver_match: inclusion
-  device_operating_system: ''
-  device_operating_system_invert: false
-  device_operating_system_match: inclusion
-  device_operational_data: ''
-  device_operational_data_invert: false
-  device_operational_data_match: inclusion
-  device_os_version: ''
-  device_os_version_invert: false
-  device_os_version_match: inclusion
-  device_port: ''
-  device_port_invert: false
-  device_port_match: inclusion
-  device_property1: ''
-  device_property1_invert: false
-  device_property1_match: inclusion
-  device_scrapli_driver: ''
-  device_scrapli_driver_invert: false
-  device_scrapli_driver_match: inclusion
-  device_specialized_data: ''
-  device_specialized_data_invert: false
-  device_specialized_data_match: inclusion
-  device_subtype: ''
-  device_subtype_invert: false
-  device_subtype_match: inclusion
-  device_vendor: ''
-  device_vendor_invert: false
-  device_vendor_match: inclusion
-  devices: []
-  last_modified: '2022-11-09 01:23:16.096983'
-  last_modified_by: admin
-  link_color: ''
-  link_color_invert: false
-  link_color_match: inclusion
-  link_creator: ''
-  link_creator_invert: false
-  link_creator_match: inclusion
-  link_description: ''
-  link_description_invert: false
-  link_description_match: inclusion
-  link_destination_name: ''
-  link_destination_name_invert: false
-  link_destination_name_match: inclusion
-  link_location: ''
-  link_location_invert: false
-  link_location_match: inclusion
-  link_model: ''
-  link_model_invert: false
-  link_model_match: inclusion
-  link_name: .*
-  link_name_invert: false
-  link_name_match: regex
-  link_source_name: ''
-  link_source_name_invert: false
-  link_source_name_match: inclusion
-  link_subtype: ''
-  link_subtype_invert: false
-  link_subtype_match: inclusion
-  link_vendor: ''
-  link_vendor_invert: false
-  link_vendor_match: inclusion
-  links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
-    link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27, europe-link4 (admin),
-    europe-link5, europe-link6, europe-link7, europe-link8, europe-link9, europe-link10,
-    europe-link11, europe-link12, europe-link13, europe-link14, europe-link15, europe-link16,
-    europe-link17, europe-link18, europe-link19, europe-link20, europe-link21, europe-link22,
-    europe-link23, europe-link24, europe-link25, europe-link26, europe-link27, europe-link28
-      (public), europe-link29, europe-link30, europe-link31 (public), europe-link32,
-    europe-link33, europe-link34, europe-link35, europe-link36, europe-link37, europe-link38,
-    europe-link39, europe-link40 (admin), europe-link41, europe-link42, europe-link43,
-    europe-link44, europe-link45, europe-link46, europe-link47, europe-link48, europe-link49,
-    europe-link50, europe-link51, europe-link52, atlantic-r26-boston-1, atlantic-r26-boston-2,
-    atlantic-r26-ny, atlantic-r26-washington, atlantic-r28-ny, atlantic-r28-washington,
-    atlantic-r20-boston-1, atlantic-r20-richmond-2, atlantic-r26-boston-3, atlantic-r20-boston-2,
-    atlantic-r20-richmond-1, europe-link30-2, europe-link31-2, europe-link35-2, europe-link35-3,
-    atlantic-r26-boston-4-inverted, link25-2, link25-3, link25-dallas2, link25-reversed,
-    link25-reversed-2, link13-2, R1 - R2, R2 - R3, R1 - R3, Subnetwork 1 - L1, Subnetwork
-      2 - L1, G1 - R1, Duplicate 1 - 2, Subnetwork 1 - L2, Subnetwork 1 - L3, R3 ->
-      R2 L1, R3 -> R2 L2, R3 -> R2 L3, R3 -> R2 L4, R3 Loopback 1, R1 Loopback 1,
-    R1 -> R2 L1, R1 -> R2 L2, R1 -> R2 L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1 L3,
-    R3 -> R1 L4, R2 -> R4 L1, R2 -> R4 L2, R4 -> R2 L3, R4 Loopback 1, R1 - R4, R3
-      -> R4 L1, R3 -> R4 L2, R3 -> R4 L3, R3 -> R4 L4, R4 -> R3 L5, R4 -> R3 L6, R4
-      -> R3 L7, R4 -> R3 L8, S6 L1]
-  manually_defined: false
-  name: All Links
-  owners: []
-  property1: CP
-  rbac_edit: []
-  rbac_group_rbac_configuration: []
-  rbac_group_rbac_connect: []
-  rbac_group_rbac_edit: []
-  rbac_group_rbac_read: []
-  rbac_group_rbac_target: []
-  rbac_read: [Admin User]
-  target_services: []
-  tasks: []
-  type: pool
-- admin_only: false
-  creator: ''
-  description: Datacenter San Francisco
-  device_configuration: ''
-  device_configuration_invert: false
-  device_configuration_match: inclusion
-  device_creator: ''
-  device_creator_invert: false
-  device_creator_match: inclusion
-  device_description: ''
-  device_description_invert: false
-  device_description_match: inclusion
-  device_icon: ''
-  device_icon_invert: false
-  device_icon_match: inclusion
-  device_ip_address: ''
-  device_ip_address_invert: false
-  device_ip_address_match: inclusion
-  device_latitude: ''
-  device_latitude_invert: false
-  device_latitude_match: inclusion
-  device_location: ''
-  device_location_invert: false
-  device_location_match: inclusion
-  device_longitude: ''
-  device_longitude_invert: false
-  device_longitude_match: inclusion
-  device_model: ''
-  device_model_invert: false
-  device_model_match: inclusion
-  device_name: e
-  device_name_invert: false
-  device_name_match: inclusion
-  device_napalm_driver: ''
-  device_napalm_driver_invert: false
-  device_napalm_driver_match: inclusion
-  device_netconf_driver: ''
-  device_netconf_driver_invert: false
-  device_netconf_driver_match: inclusion
-  device_netmiko_driver: ''
-  device_netmiko_driver_invert: false
-  device_netmiko_driver_match: inclusion
-  device_operating_system: ''
-  device_operating_system_invert: false
-  device_operating_system_match: inclusion
-  device_operational_data: ''
-  device_operational_data_invert: false
-  device_operational_data_match: inclusion
-  device_os_version: ''
-  device_os_version_invert: false
-  device_os_version_match: inclusion
-  device_port: ''
-  device_port_invert: false
-  device_port_match: inclusion
-  device_property1: ''
-  device_property1_invert: false
-  device_property1_match: inclusion
-  device_scrapli_driver: ''
-  device_scrapli_driver_invert: false
-  device_scrapli_driver_match: inclusion
-  device_specialized_data: ''
-  device_specialized_data_invert: false
-  device_specialized_data_match: inclusion
-  device_subtype: ''
-  device_subtype_invert: false
-  device_subtype_match: inclusion
-  device_vendor: ''
-  device_vendor_invert: false
-  device_vendor_match: inclusion
-  devices: [SanJose, SanDiego, Philadelphia, LosAngeles, Detroit, Baltimore, Cleveland,
-    Cambridge, Minneapolis, NewYork, Sacramento, Orange, Denver, router5, router6,
-    router7, router8, router9, router10 (public), router11, router12, router13, router14,
-    router15, router16, router17, router18 (public), router19, router20 (admin), router21,
-    router22, router23 (admin), router24, router25, router26, router27, router28,
-    router29, router30, router31, router32, router33, router34, router35, router36,
-    router37, Server 2, Aserver, Router 1, Router 2, Router 3, Router behind Gateway
-      1, Gateway 1, Gateway 2, Gateway 3, 'Router behind Gateway 1, 2 and 3', Subnetwork
-      1 - R1, Subnetwork 1 - R2, Subnetwork 2 - G1, Subnetwork 2 - G2, Duplicate me
-      1, Subnetwork 1 - R3]
-  last_modified: '2022-11-09 01:23:16.100427'
-  last_modified_by: admin
-  link_color: ''
-  link_color_invert: false
-  link_color_match: inclusion
-  link_creator: ''
-  link_creator_invert: false
-  link_creator_match: inclusion
-  link_description: ''
-  link_description_invert: false
-  link_description_match: inclusion
-  link_destination_name: ''
-  link_destination_name_invert: false
-  link_destination_name_match: inclusion
-  link_location: ''
-  link_location_invert: false
-  link_location_match: inclusion
-  link_model: ''
-  link_model_invert: false
-  link_model_match: inclusion
-  link_name: .*
-  link_name_invert: false
-  link_name_match: regex
-  link_source_name: ''
-  link_source_name_invert: false
-  link_source_name_match: inclusion
-  link_subtype: ''
-  link_subtype_invert: false
-  link_subtype_match: inclusion
-  link_vendor: ''
-  link_vendor_invert: false
-  link_vendor_match: inclusion
-  links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
-    link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27, europe-link4 (admin),
-    europe-link5, europe-link6, europe-link7, europe-link8, europe-link9, europe-link10,
-    europe-link11, europe-link12, europe-link13, europe-link14, europe-link15, europe-link16,
-    europe-link17, europe-link18, europe-link19, europe-link20, europe-link21, europe-link22,
-    europe-link23, europe-link24, europe-link25, europe-link26, europe-link27, europe-link28
-      (public), europe-link29, europe-link30, europe-link31 (public), europe-link32,
-    europe-link33, europe-link34, europe-link35, europe-link36, europe-link37, europe-link38,
-    europe-link39, europe-link40 (admin), europe-link41, europe-link42, europe-link43,
-    europe-link44, europe-link45, europe-link46, europe-link47, europe-link48, europe-link49,
-    europe-link50, europe-link51, europe-link52, atlantic-r26-boston-1, atlantic-r26-boston-2,
-    atlantic-r26-ny, atlantic-r26-washington, atlantic-r28-ny, atlantic-r28-washington,
-    atlantic-r20-boston-1, atlantic-r20-richmond-2, atlantic-r26-boston-3, atlantic-r20-boston-2,
-    atlantic-r20-richmond-1, europe-link30-2, europe-link31-2, europe-link35-2, europe-link35-3,
-    atlantic-r26-boston-4-inverted, link25-2, link25-3, link25-dallas2, link25-reversed,
-    link25-reversed-2, link13-2, R1 - R2, R2 - R3, R1 - R3, Subnetwork 1 - L1, Subnetwork
-      2 - L1, G1 - R1, Duplicate 1 - 2, Subnetwork 1 - L2, Subnetwork 1 - L3, R3 ->
-      R2 L1, R3 -> R2 L2, R3 -> R2 L3, R3 -> R2 L4, R3 Loopback 1, R1 Loopback 1,
-    R1 -> R2 L1, R1 -> R2 L2, R1 -> R2 L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1 L3,
-    R3 -> R1 L4, R2 -> R4 L1, R2 -> R4 L2, R4 -> R2 L3, R4 Loopback 1, R1 - R4, R3
-      -> R4 L1, R3 -> R4 L2, R3 -> R4 L3, R3 -> R4 L4, R4 -> R3 L5, R4 -> R3 L6, R4
-      -> R3 L7, R4 -> R3 L8, S6 L1]
-  manually_defined: false
-  name: Datacenter San Francisco
-  owners: []
-  property1: CP
-  rbac_edit: []
-  rbac_group_rbac_configuration: []
-  rbac_group_rbac_connect: []
-  rbac_group_rbac_edit: []
-  rbac_group_rbac_read: []
-  rbac_group_rbac_target: []
-  rbac_read: [Admin User]
-  target_services: [Parameterized Multiprocessing]
-  tasks: []
-  type: pool
-- admin_only: false
-  creator: ''
-  description: Datacenter New York
-  device_configuration: ''
-  device_configuration_invert: false
-  device_configuration_match: inclusion
-  device_creator: ''
-  device_creator_invert: false
-  device_creator_match: inclusion
-  device_description: ''
-  device_description_invert: false
-  device_description_match: inclusion
-  device_icon: ''
-  device_icon_invert: false
-  device_icon_match: inclusion
-  device_ip_address: ''
-  device_ip_address_invert: false
-  device_ip_address_match: inclusion
-  device_latitude: ''
-  device_latitude_invert: false
-  device_latitude_match: inclusion
-  device_location: ''
-  device_location_invert: false
-  device_location_match: inclusion
-  device_longitude: ''
-  device_longitude_invert: false
-  device_longitude_match: inclusion
-  device_model: ''
-  device_model_invert: false
-  device_model_match: inclusion
-  device_name: a
-  device_name_invert: false
-  device_name_match: inclusion
-  device_napalm_driver: ''
-  device_napalm_driver_invert: false
-  device_napalm_driver_match: inclusion
-  device_netconf_driver: ''
-  device_netconf_driver_invert: false
-  device_netconf_driver_match: inclusion
-  device_netmiko_driver: ''
-  device_netmiko_driver_invert: false
-  device_netmiko_driver_match: inclusion
-  device_operating_system: ''
-  device_operating_system_invert: false
-  device_operating_system_match: inclusion
-  device_operational_data: ''
-  device_operational_data_invert: false
-  device_operational_data_match: inclusion
-  device_os_version: ''
-  device_os_version_invert: false
-  device_os_version_match: inclusion
-  device_port: ''
-  device_port_invert: false
-  device_port_match: inclusion
-  device_property1: ''
-  device_property1_invert: false
-  device_property1_match: inclusion
-  device_scrapli_driver: ''
-  device_scrapli_driver_invert: false
-  device_scrapli_driver_match: inclusion
-  device_specialized_data: ''
-  device_specialized_data_invert: false
-  device_specialized_data_match: inclusion
-  device_subtype: ''
-  device_subtype_invert: false
-  device_subtype_match: inclusion
-  device_vendor: ''
-  device_vendor_invert: false
-  device_vendor_match: inclusion
-  devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
-    Philadelphia, LosAngeles, Atlanta, Baltimore, Cleveland, Cincinnati, Cambridge,
-    Minneapolis, Sacramento, SanFrancisco, Orange, Oakland, router20 (admin), router23
-      (admin), Aserver, Dallas-2, Dallas-3, Dallas-4, Austin-2, Austin-3, Jackson-2,
-    Oakland-2, Router behind Gateway 1, Gateway 1, Gateway 2, Gateway 3, 'Router behind
-      Gateway 1, 2 and 3', Duplicate me 1, Duplication - G1, Duplication - R1]
-  last_modified: '2022-11-09 01:23:16.103029'
-  last_modified_by: admin
-  link_color: ''
-  link_color_invert: false
-  link_color_match: inclusion
-  link_creator: ''
-  link_creator_invert: false
-  link_creator_match: inclusion
-  link_description: ''
-  link_description_invert: false
-  link_description_match: inclusion
-  link_destination_name: ''
-  link_destination_name_invert: false
-  link_destination_name_match: inclusion
-  link_location: ''
-  link_location_invert: false
-  link_location_match: inclusion
-  link_model: ''
-  link_model_invert: false
-  link_model_match: inclusion
-  link_name: .*
-  link_name_invert: false
-  link_name_match: regex
-  link_source_name: ''
-  link_source_name_invert: false
-  link_source_name_match: inclusion
-  link_subtype: ''
-  link_subtype_invert: false
-  link_subtype_match: inclusion
-  link_vendor: ''
-  link_vendor_invert: false
-  link_vendor_match: inclusion
-  links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
-    link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27, europe-link4 (admin),
-    europe-link5, europe-link6, europe-link7, europe-link8, europe-link9, europe-link10,
-    europe-link11, europe-link12, europe-link13, europe-link14, europe-link15, europe-link16,
-    europe-link17, europe-link18, europe-link19, europe-link20, europe-link21, europe-link22,
-    europe-link23, europe-link24, europe-link25, europe-link26, europe-link27, europe-link28
-      (public), europe-link29, europe-link30, europe-link31 (public), europe-link32,
-    europe-link33, europe-link34, europe-link35, europe-link36, europe-link37, europe-link38,
-    europe-link39, europe-link40 (admin), europe-link41, europe-link42, europe-link43,
-    europe-link44, europe-link45, europe-link46, europe-link47, europe-link48, europe-link49,
-    europe-link50, europe-link51, europe-link52, atlantic-r26-boston-1, atlantic-r26-boston-2,
-    atlantic-r26-ny, atlantic-r26-washington, atlantic-r28-ny, atlantic-r28-washington,
-    atlantic-r20-boston-1, atlantic-r20-richmond-2, atlantic-r26-boston-3, atlantic-r20-boston-2,
-    atlantic-r20-richmond-1, europe-link30-2, europe-link31-2, europe-link35-2, europe-link35-3,
-    atlantic-r26-boston-4-inverted, link25-2, link25-3, link25-dallas2, link25-reversed,
-    link25-reversed-2, link13-2, R1 - R2, R2 - R3, R1 - R3, Subnetwork 1 - L1, Subnetwork
-      2 - L1, G1 - R1, Duplicate 1 - 2, Subnetwork 1 - L2, Subnetwork 1 - L3, R3 ->
-      R2 L1, R3 -> R2 L2, R3 -> R2 L3, R3 -> R2 L4, R3 Loopback 1, R1 Loopback 1,
-    R1 -> R2 L1, R1 -> R2 L2, R1 -> R2 L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1 L3,
-    R3 -> R1 L4, R2 -> R4 L1, R2 -> R4 L2, R4 -> R2 L3, R4 Loopback 1, R1 - R4, R3
-      -> R4 L1, R3 -> R4 L2, R3 -> R4 L3, R3 -> R4 L4, R4 -> R3 L5, R4 -> R3 L6, R4
-      -> R3 L7, R4 -> R3 L8, S6 L1]
-  manually_defined: false
-  name: Datacenter New York
-  owners: []
-  property1: CP
-  rbac_edit: []
-  rbac_group_rbac_configuration: []
-  rbac_group_rbac_connect: []
-  rbac_group_rbac_edit: []
-  rbac_group_rbac_read: []
-  rbac_group_rbac_target: []
-  rbac_read: [Admin User]
-  target_services: []
-  tasks: []
-  type: pool
-- admin_only: false
-  creator: ''
-  description: Datacenter Chicago
-  device_configuration: ''
-  device_configuration_invert: false
-  device_configuration_match: inclusion
-  device_creator: ''
-  device_creator_invert: false
-  device_creator_match: inclusion
-  device_description: ''
-  device_description_invert: false
-  device_description_match: inclusion
-  device_icon: ''
-  device_icon_invert: false
-  device_icon_match: inclusion
-  device_ip_address: ''
-  device_ip_address_invert: false
-  device_ip_address_match: inclusion
-  device_latitude: ''
-  device_latitude_invert: false
-  device_latitude_match: inclusion
-  device_location: ''
-  device_location_invert: false
-  device_location_match: inclusion
-  device_longitude: ''
-  device_longitude_invert: false
-  device_longitude_match: inclusion
-  device_model: ''
-  device_model_invert: false
-  device_model_match: inclusion
-  device_name: i
-  device_name_invert: false
-  device_name_match: inclusion
-  device_napalm_driver: ''
-  device_napalm_driver_invert: false
-  device_napalm_driver_match: inclusion
-  device_netconf_driver: ''
-  device_netconf_driver_invert: false
-  device_netconf_driver_match: inclusion
-  device_netmiko_driver: ''
-  device_netmiko_driver_invert: false
-  device_netmiko_driver_match: inclusion
-  device_operating_system: ''
-  device_operating_system_invert: false
-  device_operating_system_match: inclusion
-  device_operational_data: ''
-  device_operational_data_invert: false
-  device_operational_data_match: inclusion
-  device_os_version: ''
-  device_os_version_invert: false
-  device_os_version_match: inclusion
-  device_port: ''
-  device_port_invert: false
-  device_port_match: inclusion
-  device_property1: ''
-  device_property1_invert: false
-  device_property1_match: inclusion
-  device_scrapli_driver: ''
-  device_scrapli_driver_invert: false
-  device_scrapli_driver_match: inclusion
-  device_specialized_data: ''
-  device_specialized_data_invert: false
-  device_specialized_data_match: inclusion
-  device_subtype: ''
-  device_subtype_invert: false
-  device_subtype_match: inclusion
-  device_vendor: ''
-  device_vendor_invert: false
-  device_vendor_match: inclusion
-  devices: [Austin, Washington, Chicago, SanDiego, Philadelphia, Detroit, Richmond,
-    Baltimore, Cincinnati, Cambridge, Minneapolis, SanFrancisco, router10 (public),
-    router18 (public), router20 (admin), router23 (admin), Austin-2, Austin-3, Router
-      behind Gateway 1, 'Router behind Gateway 1, 2 and 3', Duplicate me 1, Duplication
-      - G1, Duplication - R1]
-  last_modified: '2022-11-09 01:23:16.105525'
-  last_modified_by: admin
-  link_color: ''
-  link_color_invert: false
-  link_color_match: inclusion
-  link_creator: ''
-  link_creator_invert: false
-  link_creator_match: inclusion
-  link_description: ''
-  link_description_invert: false
-  link_description_match: inclusion
-  link_destination_name: ''
-  link_destination_name_invert: false
-  link_destination_name_match: inclusion
-  link_location: ''
-  link_location_invert: false
-  link_location_match: inclusion
-  link_model: ''
-  link_model_invert: false
-  link_model_match: inclusion
-  link_name: .*
-  link_name_invert: false
-  link_name_match: regex
-  link_source_name: ''
-  link_source_name_invert: false
-  link_source_name_match: inclusion
-  link_subtype: ''
-  link_subtype_invert: false
-  link_subtype_match: inclusion
-  link_vendor: ''
-  link_vendor_invert: false
-  link_vendor_match: inclusion
-  links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
-    link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27, europe-link4 (admin),
-    europe-link5, europe-link6, europe-link7, europe-link8, europe-link9, europe-link10,
-    europe-link11, europe-link12, europe-link13, europe-link14, europe-link15, europe-link16,
-    europe-link17, europe-link18, europe-link19, europe-link20, europe-link21, europe-link22,
-    europe-link23, europe-link24, europe-link25, europe-link26, europe-link27, europe-link28
-      (public), europe-link29, europe-link30, europe-link31 (public), europe-link32,
-    europe-link33, europe-link34, europe-link35, europe-link36, europe-link37, europe-link38,
-    europe-link39, europe-link40 (admin), europe-link41, europe-link42, europe-link43,
-    europe-link44, europe-link45, europe-link46, europe-link47, europe-link48, europe-link49,
-    europe-link50, europe-link51, europe-link52, atlantic-r26-boston-1, atlantic-r26-boston-2,
-    atlantic-r26-ny, atlantic-r26-washington, atlantic-r28-ny, atlantic-r28-washington,
-    atlantic-r20-boston-1, atlantic-r20-richmond-2, atlantic-r26-boston-3, atlantic-r20-boston-2,
-    atlantic-r20-richmond-1, europe-link30-2, europe-link31-2, europe-link35-2, europe-link35-3,
-    atlantic-r26-boston-4-inverted, link25-2, link25-3, link25-dallas2, link25-reversed,
-    link25-reversed-2, link13-2, R1 - R2, R2 - R3, R1 - R3, Subnetwork 1 - L1, Subnetwork
-      2 - L1, G1 - R1, Duplicate 1 - 2, Subnetwork 1 - L2, Subnetwork 1 - L3, R3 ->
-      R2 L1, R3 -> R2 L2, R3 -> R2 L3, R3 -> R2 L4, R3 Loopback 1, R1 Loopback 1,
-    R1 -> R2 L1, R1 -> R2 L2, R1 -> R2 L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1 L3,
-    R3 -> R1 L4, R2 -> R4 L1, R2 -> R4 L2, R4 -> R2 L3, R4 Loopback 1, R1 - R4, R3
-      -> R4 L1, R3 -> R4 L2, R3 -> R4 L3, R3 -> R4 L4, R4 -> R3 L5, R4 -> R3 L6, R4
-      -> R3 L7, R4 -> R3 L8, S6 L1]
-  manually_defined: false
-  name: Datacenter Chicago
-  owners: []
-  property1: CP
-  rbac_edit: []
-  rbac_group_rbac_configuration: []
-  rbac_group_rbac_connect: []
-  rbac_group_rbac_edit: []
-  rbac_group_rbac_read: []
-  rbac_group_rbac_target: []
-  rbac_read: [Admin User]
-  target_services: []
-  tasks: []
-  type: pool
-- admin_only: false
-  creator: ''
-  description: ''
-  device_configuration: ''
-  device_configuration_invert: false
-  device_configuration_match: inclusion
-  device_creator: ''
-  device_creator_invert: false
-  device_creator_match: inclusion
-  device_description: ''
-  device_description_invert: false
-  device_description_match: inclusion
-  device_icon: ''
-  device_icon_invert: false
-  device_icon_match: inclusion
-  device_ip_address: ''
-  device_ip_address_invert: false
-  device_ip_address_match: inclusion
-  device_latitude: ''
-  device_latitude_invert: false
-  device_latitude_match: inclusion
-  device_location: ''
-  device_location_invert: false
-  device_location_match: inclusion
-  device_longitude: ''
-  device_longitude_invert: false
-  device_longitude_match: inclusion
-  device_model: ''
-  device_model_invert: false
-  device_model_match: inclusion
-  device_name: Washin.*
-  device_name_invert: false
-  device_name_match: regex
-  device_napalm_driver: ''
-  device_napalm_driver_invert: false
-  device_napalm_driver_match: inclusion
-  device_netconf_driver: ''
-  device_netconf_driver_invert: false
-  device_netconf_driver_match: inclusion
-  device_netmiko_driver: ''
-  device_netmiko_driver_invert: false
-  device_netmiko_driver_match: inclusion
-  device_operating_system: ''
-  device_operating_system_invert: false
-  device_operating_system_match: inclusion
-  device_operational_data: ''
-  device_operational_data_invert: false
-  device_operational_data_match: inclusion
-  device_os_version: ''
-  device_os_version_invert: false
-  device_os_version_match: inclusion
-  device_port: ''
-  device_port_invert: false
-  device_port_match: inclusion
-  device_property1: ''
-  device_property1_invert: false
-  device_property1_match: inclusion
-  device_scrapli_driver: ''
-  device_scrapli_driver_invert: false
-  device_scrapli_driver_match: inclusion
-  device_specialized_data: ''
-  device_specialized_data_invert: false
-  device_specialized_data_match: inclusion
-  device_subtype: ''
-  device_subtype_invert: false
-  device_subtype_match: inclusion
-  device_vendor: ''
-  device_vendor_invert: false
-  device_vendor_match: inclusion
-  devices: [Washington]
-  last_modified: '2022-11-09 01:23:16.108521'
-  last_modified_by: admin
-  link_color: ''
-  link_color_invert: false
-  link_color_match: inclusion
-  link_creator: ''
-  link_creator_invert: false
-  link_creator_match: inclusion
-  link_description: ''
-  link_description_invert: false
-  link_description_match: inclusion
-  link_destination_name: ''
-  link_destination_name_invert: false
-  link_destination_name_match: inclusion
-  link_location: ''
-  link_location_invert: false
-  link_location_match: inclusion
-  link_model: ''
-  link_model_invert: false
-  link_model_match: inclusion
-  link_name: ''
-  link_name_invert: false
-  link_name_match: inclusion
-  link_source_name: ''
-  link_source_name_invert: false
-  link_source_name_match: inclusion
-  link_subtype: ''
-  link_subtype_invert: false
-  link_subtype_match: inclusion
-  link_vendor: ''
-  link_vendor_invert: false
-  link_vendor_match: inclusion
-  links: []
-  manually_defined: false
-  name: Washington
-  owners: []
-  property1: CP
-  rbac_edit: []
-  rbac_group_rbac_configuration: []
-  rbac_group_rbac_connect: []
-  rbac_group_rbac_edit: []
-  rbac_group_rbac_read: []
-  rbac_group_rbac_target: []
-  rbac_read: [Admin User]
-  target_services: [Parameterized Targets, Parameterized Run with a Superworkflow]
-  tasks: []
-  type: pool
-- admin_only: false
-  creator: admin
-  description: Used for testing credentials
-  device_configuration: ''
-  device_configuration_invert: false
-  device_configuration_match: inclusion
-  device_creator: ''
-  device_creator_invert: false
-  device_creator_match: inclusion
-  device_description: ''
-  device_description_invert: false
-  device_description_match: inclusion
-  device_icon: ''
-  device_icon_invert: false
-  device_icon_match: inclusion
-  device_ip_address: ''
-  device_ip_address_invert: false
-  device_ip_address_match: inclusion
-  device_latitude: ''
-  device_latitude_invert: false
-  device_latitude_match: inclusion
-  device_location: ''
-  device_location_invert: false
-  device_location_match: inclusion
-  device_longitude: ''
-  device_longitude_invert: false
-  device_longitude_match: inclusion
-  device_model: ''
-  device_model_invert: false
-  device_model_match: inclusion
-  device_name: Austin
-  device_name_invert: false
-  device_name_match: inclusion
-  device_napalm_driver: ''
-  device_napalm_driver_invert: false
-  device_napalm_driver_match: inclusion
-  device_netconf_driver: ''
-  device_netconf_driver_invert: false
-  device_netconf_driver_match: inclusion
-  device_netmiko_driver: ''
-  device_netmiko_driver_invert: false
-  device_netmiko_driver_match: inclusion
-  device_operating_system: ''
-  device_operating_system_invert: false
-  device_operating_system_match: inclusion
-  device_operational_data: ''
-  device_operational_data_invert: false
-  device_operational_data_match: inclusion
-  device_os_version: ''
-  device_os_version_invert: false
-  device_os_version_match: inclusion
-  device_port: ''
-  device_port_invert: false
-  device_port_match: inclusion
-  device_property1: ''
-  device_property1_invert: false
-  device_property1_match: inclusion
-  device_scrapli_driver: ''
-  device_scrapli_driver_invert: false
-  device_scrapli_driver_match: inclusion
-  device_specialized_data: ''
-  device_specialized_data_invert: false
-  device_specialized_data_match: inclusion
-  device_subtype: ''
-  device_subtype_invert: false
-  device_subtype_match: inclusion
-  device_vendor: ''
-  device_vendor_invert: false
-  device_vendor_match: inclusion
-  devices: [Austin, Austin-2, Austin-3]
-  last_modified: '2022-11-09 01:23:16.111023'
-  last_modified_by: admin
-  link_color: ''
-  link_color_invert: false
-  link_color_match: inclusion
-  link_creator: ''
-  link_creator_invert: false
-  link_creator_match: inclusion
-  link_description: ''
-  link_description_invert: false
-  link_description_match: inclusion
-  link_destination_name: ''
-  link_destination_name_invert: false
-  link_destination_name_match: inclusion
-  link_location: ''
-  link_location_invert: false
-  link_location_match: inclusion
-  link_model: ''
-  link_model_invert: false
-  link_model_match: inclusion
-  link_name: ''
-  link_name_invert: false
-  link_name_match: inclusion
-  link_source_name: ''
-  link_source_name_invert: false
-  link_source_name_match: inclusion
-  link_subtype: ''
-  link_subtype_invert: false
-  link_subtype_match: inclusion
-  link_vendor: ''
-  link_vendor_invert: false
-  link_vendor_match: inclusion
-  links: []
-  manually_defined: false
-  name: Credentials pool - Austin devices
-  owners: []
-  property1: CP
-  rbac_edit: []
-  rbac_group_rbac_configuration: []
-  rbac_group_rbac_connect: []
-  rbac_group_rbac_edit: []
-  rbac_group_rbac_read: []
-  rbac_group_rbac_target: []
-  rbac_read: [Admin User]
-  target_services: ['(R) Credentials (Password & Key, Priority Mechanism)']
-  tasks: []
-  type: pool
-- admin_only: false
-  creator: admin
-  description: "Used for testing credentials\t"
-  device_configuration: ''
-  device_configuration_invert: false
-  device_configuration_match: inclusion
-  device_creator: ''
-  device_creator_invert: false
-  device_creator_match: inclusion
-  device_description: ''
-  device_description_invert: false
-  device_description_match: inclusion
-  device_icon: ''
-  device_icon_invert: false
-  device_icon_match: inclusion
-  device_ip_address: ''
-  device_ip_address_invert: false
-  device_ip_address_match: inclusion
-  device_latitude: ''
-  device_latitude_invert: false
-  device_latitude_match: inclusion
-  device_location: ''
-  device_location_invert: false
-  device_location_match: inclusion
-  device_longitude: ''
-  device_longitude_invert: false
-  device_longitude_match: inclusion
-  device_model: ''
-  device_model_invert: false
-  device_model_match: inclusion
-  device_name: Austin-3
-  device_name_invert: false
-  device_name_match: equality
-  device_napalm_driver: ''
-  device_napalm_driver_invert: false
-  device_napalm_driver_match: inclusion
-  device_netconf_driver: ''
-  device_netconf_driver_invert: false
-  device_netconf_driver_match: inclusion
-  device_netmiko_driver: ''
-  device_netmiko_driver_invert: false
-  device_netmiko_driver_match: inclusion
-  device_operating_system: ''
-  device_operating_system_invert: false
-  device_operating_system_match: inclusion
-  device_operational_data: ''
-  device_operational_data_invert: false
-  device_operational_data_match: inclusion
-  device_os_version: ''
-  device_os_version_invert: false
-  device_os_version_match: inclusion
-  device_port: ''
-  device_port_invert: false
-  device_port_match: inclusion
-  device_property1: ''
-  device_property1_invert: false
-  device_property1_match: inclusion
-  device_scrapli_driver: ''
-  device_scrapli_driver_invert: false
-  device_scrapli_driver_match: inclusion
-  device_specialized_data: ''
-  device_specialized_data_invert: false
-  device_specialized_data_match: inclusion
-  device_subtype: ''
-  device_subtype_invert: false
-  device_subtype_match: inclusion
-  device_vendor: ''
-  device_vendor_invert: false
-  device_vendor_match: inclusion
-  devices: [Austin-3]
-  last_modified: '2022-11-09 01:23:16.113643'
-  last_modified_by: admin
-  link_color: ''
-  link_color_invert: false
-  link_color_match: inclusion
-  link_creator: ''
-  link_creator_invert: false
-  link_creator_match: inclusion
-  link_description: ''
-  link_description_invert: false
-  link_description_match: inclusion
-  link_destination_name: ''
-  link_destination_name_invert: false
-  link_destination_name_match: inclusion
-  link_location: ''
-  link_location_invert: false
-  link_location_match: inclusion
-  link_model: ''
-  link_model_invert: false
-  link_model_match: inclusion
-  link_name: ''
-  link_name_invert: false
-  link_name_match: inclusion
-  link_source_name: ''
-  link_source_name_invert: false
-  link_source_name_match: inclusion
-  link_subtype: ''
-  link_subtype_invert: false
-  link_subtype_match: inclusion
-  link_vendor: ''
-  link_vendor_invert: false
-  link_vendor_match: inclusion
-  links: []
-  manually_defined: false
-  name: Credentials pool - Austin-3 alone
-  owners: []
-  property1: CP
-  rbac_edit: []
-  rbac_group_rbac_configuration: []
-  rbac_group_rbac_connect: []
-  rbac_group_rbac_edit: []
-  rbac_group_rbac_read: []
-  rbac_group_rbac_target: []
-  rbac_read: [Admin User]
-  target_services: []
-  tasks: []
-  type: pool
-- admin_only: false
-  creator: admin
-  description: ''
-  device_configuration: ''
-  device_configuration_invert: false
-  device_configuration_match: inclusion
-  device_creator: ''
-  device_creator_invert: false
-  device_creator_match: inclusion
-  device_description: ''
-  device_description_invert: false
-  device_description_match: inclusion
-  device_icon: ''
-  device_icon_invert: false
-  device_icon_match: inclusion
-  device_ip_address: ''
-  device_ip_address_invert: false
-  device_ip_address_match: inclusion
-  device_latitude: ''
-  device_latitude_invert: false
-  device_latitude_match: inclusion
-  device_location: ''
-  device_location_invert: false
-  device_location_match: inclusion
-  device_longitude: ''
-  device_longitude_invert: false
-  device_longitude_match: inclusion
-  device_model: ''
-  device_model_invert: false
-  device_model_match: inclusion
-  device_name: router.*
-  device_name_invert: false
-  device_name_match: regex
-  device_napalm_driver: ''
-  device_napalm_driver_invert: false
-  device_napalm_driver_match: inclusion
-  device_netconf_driver: ''
-  device_netconf_driver_invert: false
-  device_netconf_driver_match: inclusion
-  device_netmiko_driver: ''
-  device_netmiko_driver_invert: false
-  device_netmiko_driver_match: inclusion
-  device_operating_system: ''
-  device_operating_system_invert: false
-  device_operating_system_match: inclusion
-  device_operational_data: ''
-  device_operational_data_invert: false
-  device_operational_data_match: inclusion
-  device_os_version: ''
-  device_os_version_invert: false
-  device_os_version_match: inclusion
-  device_port: ''
-  device_port_invert: false
-  device_port_match: inclusion
-  device_property1: ''
-  device_property1_invert: false
-  device_property1_match: inclusion
-  device_scrapli_driver: ''
-  device_scrapli_driver_invert: false
-  device_scrapli_driver_match: inclusion
-  device_specialized_data: ''
-  device_specialized_data_invert: false
-  device_specialized_data_match: inclusion
-  device_subtype: ''
-  device_subtype_invert: false
-  device_subtype_match: inclusion
-  device_vendor: ''
-  device_vendor_invert: false
-  device_vendor_match: inclusion
-  devices: [router5, router6, router7, router8, router9, router10 (public), router11,
-    router12, router13, router14, router15, router16, router17, router18 (public),
-    router19, router20 (admin), router21, router22, router23 (admin), router24, router25,
-    router26, router27, router28, router29, router30, router31, router32, router33,
-    router34, router35, router36, router37]
-  last_modified: '2022-11-09 01:23:16.117719'
-  last_modified_by: admin
-  link_color: ''
-  link_color_invert: false
-  link_color_match: inclusion
-  link_creator: ''
-  link_creator_invert: false
-  link_creator_match: inclusion
-  link_description: ''
-  link_description_invert: false
-  link_description_match: inclusion
-  link_destination_name: ''
-  link_destination_name_invert: false
-  link_destination_name_match: inclusion
-  link_location: ''
-  link_location_invert: false
-  link_location_match: inclusion
-  link_model: ''
-  link_model_invert: false
-  link_model_match: inclusion
-  link_name: ''
-  link_name_invert: false
-  link_name_match: inclusion
-  link_source_name: ''
-  link_source_name_invert: false
-  link_source_name_match: inclusion
-  link_subtype: ''
-  link_subtype_invert: false
-  link_subtype_match: inclusion
-  link_vendor: ''
-  link_vendor_invert: false
-  link_vendor_match: inclusion
-  links: []
-  manually_defined: false
-  name: All routers in Europe
-  owners: []
-  property1: CP
-  rbac_edit: []
-  rbac_group_rbac_configuration: []
-  rbac_group_rbac_connect: []
-  rbac_group_rbac_edit: []
-  rbac_group_rbac_read: []
-  rbac_group_rbac_target: []
-  rbac_read: [Admin User]
-  target_services: []
-  tasks: []
-  type: pool
+- "admin_only": !!bool "false"
+  "creator": ""
+  "description": "All objects"
+  "device_configuration": ""
+  "device_configuration_invert": !!bool "false"
+  "device_configuration_match": "inclusion"
+  "device_creator": ""
+  "device_creator_invert": !!bool "false"
+  "device_creator_match": "inclusion"
+  "device_description": ""
+  "device_description_invert": !!bool "false"
+  "device_description_match": "inclusion"
+  "device_icon": ""
+  "device_icon_invert": !!bool "false"
+  "device_icon_match": "inclusion"
+  "device_ip_address": ""
+  "device_ip_address_invert": !!bool "false"
+  "device_ip_address_match": "inclusion"
+  "device_latitude": ""
+  "device_latitude_invert": !!bool "false"
+  "device_latitude_match": "inclusion"
+  "device_location": ""
+  "device_location_invert": !!bool "false"
+  "device_location_match": "inclusion"
+  "device_longitude": ""
+  "device_longitude_invert": !!bool "false"
+  "device_longitude_match": "inclusion"
+  "device_model": ""
+  "device_model_invert": !!bool "false"
+  "device_model_match": "inclusion"
+  "device_name": ".*"
+  "device_name_invert": !!bool "false"
+  "device_name_match": "regex"
+  "device_napalm_driver": ""
+  "device_napalm_driver_invert": !!bool "false"
+  "device_napalm_driver_match": "inclusion"
+  "device_netconf_driver": ""
+  "device_netconf_driver_invert": !!bool "false"
+  "device_netconf_driver_match": "inclusion"
+  "device_netmiko_driver": ""
+  "device_netmiko_driver_invert": !!bool "false"
+  "device_netmiko_driver_match": "inclusion"
+  "device_operating_system": ""
+  "device_operating_system_invert": !!bool "false"
+  "device_operating_system_match": "inclusion"
+  "device_operational_data": ""
+  "device_operational_data_invert": !!bool "false"
+  "device_operational_data_match": "inclusion"
+  "device_os_version": ""
+  "device_os_version_invert": !!bool "false"
+  "device_os_version_match": "inclusion"
+  "device_port": ""
+  "device_port_invert": !!bool "false"
+  "device_port_match": "inclusion"
+  "device_property1": ""
+  "device_property1_invert": !!bool "false"
+  "device_property1_match": "inclusion"
+  "device_scrapli_driver": ""
+  "device_scrapli_driver_invert": !!bool "false"
+  "device_scrapli_driver_match": "inclusion"
+  "device_specialized_data": ""
+  "device_specialized_data_invert": !!bool "false"
+  "device_specialized_data_match": "inclusion"
+  "device_subtype": ""
+  "device_subtype_invert": !!bool "false"
+  "device_subtype_match": "inclusion"
+  "device_vendor": ""
+  "device_vendor_invert": !!bool "false"
+  "device_vendor_match": "inclusion"
+  "devices":
+  - "Jackson"
+  - "PaloAlto"
+  - "Austin"
+  - "Washington"
+  - "Chicago"
+  - "SanJose"
+  - "SanDiego"
+  - "Dallas"
+  - "Philadelphia"
+  - "LosAngeles"
+  - "Detroit"
+  - "Richmond"
+  - "Atlanta"
+  - "Boston"
+  - "Houston"
+  - "Baltimore"
+  - "Cleveland"
+  - "Columbus"
+  - "Cincinnati"
+  - "Cambridge"
+  - "Minneapolis"
+  - "NewYork"
+  - "Sacramento"
+  - "SanFrancisco"
+  - "Orange"
+  - "Oakland"
+  - "Denver"
+  - "router5"
+  - "router6"
+  - "router7"
+  - "router8"
+  - "router9"
+  - "router10 (public)"
+  - "router11"
+  - "router12"
+  - "router13"
+  - "router14"
+  - "router15"
+  - "router16"
+  - "router17"
+  - "router18 (public)"
+  - "router19"
+  - "router20 (admin)"
+  - "router21"
+  - "router22"
+  - "router23 (admin)"
+  - "router24"
+  - "router25"
+  - "router26"
+  - "router27"
+  - "router28"
+  - "router29"
+  - "router30"
+  - "router31"
+  - "router32"
+  - "router33"
+  - "router34"
+  - "router35"
+  - "router36"
+  - "router37"
+  - "Server 2"
+  - "Aserver"
+  - "Dallas-2"
+  - "Dallas-3"
+  - "Dallas-4"
+  - "Austin-2"
+  - "Austin-3"
+  - "Jackson-2"
+  - "Oakland-2"
+  - "Router 1"
+  - "Router 2"
+  - "Router 3"
+  - "Router behind Gateway 1"
+  - "Gateway 1"
+  - "Gateway 2"
+  - "Gateway 3"
+  - "Router behind Gateway 1, 2 and 3"
+  - "Subnetwork 1 - R1"
+  - "Subnetwork 1 - R2"
+  - "Subnetwork 2 - G1"
+  - "Subnetwork 2 - G2"
+  - "Duplicate me 1"
+  - "Duplication - G1"
+  - "Duplication - R1"
+  - "Subnetwork 1 - R3"
+  - "S5 R1"
+  - "S5 R2"
+  - "S5 R3"
+  - "S5 R4"
+  - "S6 L3 R1"
+  - "S6 L3 R2"
+  "last_modified": "2022-11-09 01:23:16.091556"
+  "last_modified_by": "admin"
+  "link_color": ""
+  "link_color_invert": !!bool "false"
+  "link_color_match": "inclusion"
+  "link_creator": ""
+  "link_creator_invert": !!bool "false"
+  "link_creator_match": "inclusion"
+  "link_description": ""
+  "link_description_invert": !!bool "false"
+  "link_description_match": "inclusion"
+  "link_destination_name": ""
+  "link_destination_name_invert": !!bool "false"
+  "link_destination_name_match": "inclusion"
+  "link_location": ""
+  "link_location_invert": !!bool "false"
+  "link_location_match": "inclusion"
+  "link_model": ""
+  "link_model_invert": !!bool "false"
+  "link_model_match": "inclusion"
+  "link_name": ".*"
+  "link_name_invert": !!bool "false"
+  "link_name_match": "regex"
+  "link_source_name": ""
+  "link_source_name_invert": !!bool "false"
+  "link_source_name_match": "inclusion"
+  "link_subtype": ""
+  "link_subtype_invert": !!bool "false"
+  "link_subtype_match": "inclusion"
+  "link_vendor": ""
+  "link_vendor_invert": !!bool "false"
+  "link_vendor_match": "inclusion"
+  "links":
+  - "link0"
+  - "link1"
+  - "link2"
+  - "link3"
+  - "link4"
+  - "link5"
+  - "link6"
+  - "link7"
+  - "link8"
+  - "link9"
+  - "link10"
+  - "link11"
+  - "link12"
+  - "link13"
+  - "link14"
+  - "link15"
+  - "link16"
+  - "link17"
+  - "link18"
+  - "link19"
+  - "link20"
+  - "link21"
+  - "link22"
+  - "link23"
+  - "link24"
+  - "link25"
+  - "link26"
+  - "link27"
+  - "europe-link4 (admin)"
+  - "europe-link5"
+  - "europe-link6"
+  - "europe-link7"
+  - "europe-link8"
+  - "europe-link9"
+  - "europe-link10"
+  - "europe-link11"
+  - "europe-link12"
+  - "europe-link13"
+  - "europe-link14"
+  - "europe-link15"
+  - "europe-link16"
+  - "europe-link17"
+  - "europe-link18"
+  - "europe-link19"
+  - "europe-link20"
+  - "europe-link21"
+  - "europe-link22"
+  - "europe-link23"
+  - "europe-link24"
+  - "europe-link25"
+  - "europe-link26"
+  - "europe-link27"
+  - "europe-link28 (public)"
+  - "europe-link29"
+  - "europe-link30"
+  - "europe-link31 (public)"
+  - "europe-link32"
+  - "europe-link33"
+  - "europe-link34"
+  - "europe-link35"
+  - "europe-link36"
+  - "europe-link37"
+  - "europe-link38"
+  - "europe-link39"
+  - "europe-link40 (admin)"
+  - "europe-link41"
+  - "europe-link42"
+  - "europe-link43"
+  - "europe-link44"
+  - "europe-link45"
+  - "europe-link46"
+  - "europe-link47"
+  - "europe-link48"
+  - "europe-link49"
+  - "europe-link50"
+  - "europe-link51"
+  - "europe-link52"
+  - "atlantic-r26-boston-1"
+  - "atlantic-r26-boston-2"
+  - "atlantic-r26-ny"
+  - "atlantic-r26-washington"
+  - "atlantic-r28-ny"
+  - "atlantic-r28-washington"
+  - "atlantic-r20-boston-1"
+  - "atlantic-r20-richmond-2"
+  - "atlantic-r26-boston-3"
+  - "atlantic-r20-boston-2"
+  - "atlantic-r20-richmond-1"
+  - "europe-link30-2"
+  - "europe-link31-2"
+  - "europe-link35-2"
+  - "europe-link35-3"
+  - "atlantic-r26-boston-4-inverted"
+  - "link25-2"
+  - "link25-3"
+  - "link25-dallas2"
+  - "link25-reversed"
+  - "link25-reversed-2"
+  - "link13-2"
+  - "R1 - R2"
+  - "R2 - R3"
+  - "R1 - R3"
+  - "Subnetwork 1 - L1"
+  - "Subnetwork 2 - L1"
+  - "G1 - R1"
+  - "Duplicate 1 - 2"
+  - "Subnetwork 1 - L2"
+  - "Subnetwork 1 - L3"
+  - "R3 -> R2 L1"
+  - "R3 -> R2 L2"
+  - "R3 -> R2 L3"
+  - "R3 -> R2 L4"
+  - "R3 Loopback 1"
+  - "R1 Loopback 1"
+  - "R1 -> R2 L1"
+  - "R1 -> R2 L2"
+  - "R1 -> R2 L3"
+  - "R1 -> R3 L1"
+  - "R3 -> R1 L2"
+  - "R3 -> R1 L3"
+  - "R3 -> R1 L4"
+  - "R2 -> R4 L1"
+  - "R2 -> R4 L2"
+  - "R4 -> R2 L3"
+  - "R4 Loopback 1"
+  - "R1 - R4"
+  - "R3 -> R4 L1"
+  - "R3 -> R4 L2"
+  - "R3 -> R4 L3"
+  - "R3 -> R4 L4"
+  - "R4 -> R3 L5"
+  - "R4 -> R3 L6"
+  - "R4 -> R3 L7"
+  - "R4 -> R3 L8"
+  - "S6 L1"
+  "manually_defined": !!bool "false"
+  "name": "Everything"
+  "owners": []
+  "property1": "CP"
+  "rbac_edit": []
+  "rbac_group_rbac_configuration": []
+  "rbac_group_rbac_connect": []
+  "rbac_group_rbac_edit": []
+  "rbac_group_rbac_read": []
+  "rbac_group_rbac_target": []
+  "rbac_read":
+  - "Admin User"
+  "target_services": []
+  "tasks": []
+  "type": "pool"
+- "admin_only": !!bool "false"
+  "creator": ""
+  "description": "All devices"
+  "device_configuration": ""
+  "device_configuration_invert": !!bool "false"
+  "device_configuration_match": "inclusion"
+  "device_creator": ""
+  "device_creator_invert": !!bool "false"
+  "device_creator_match": "inclusion"
+  "device_description": ""
+  "device_description_invert": !!bool "false"
+  "device_description_match": "inclusion"
+  "device_icon": ""
+  "device_icon_invert": !!bool "false"
+  "device_icon_match": "inclusion"
+  "device_ip_address": ""
+  "device_ip_address_invert": !!bool "false"
+  "device_ip_address_match": "inclusion"
+  "device_latitude": ""
+  "device_latitude_invert": !!bool "false"
+  "device_latitude_match": "inclusion"
+  "device_location": ""
+  "device_location_invert": !!bool "false"
+  "device_location_match": "inclusion"
+  "device_longitude": ""
+  "device_longitude_invert": !!bool "false"
+  "device_longitude_match": "inclusion"
+  "device_model": ""
+  "device_model_invert": !!bool "false"
+  "device_model_match": "inclusion"
+  "device_name": ".*"
+  "device_name_invert": !!bool "false"
+  "device_name_match": "regex"
+  "device_napalm_driver": ""
+  "device_napalm_driver_invert": !!bool "false"
+  "device_napalm_driver_match": "inclusion"
+  "device_netconf_driver": ""
+  "device_netconf_driver_invert": !!bool "false"
+  "device_netconf_driver_match": "inclusion"
+  "device_netmiko_driver": ""
+  "device_netmiko_driver_invert": !!bool "false"
+  "device_netmiko_driver_match": "inclusion"
+  "device_operating_system": ""
+  "device_operating_system_invert": !!bool "false"
+  "device_operating_system_match": "inclusion"
+  "device_operational_data": ""
+  "device_operational_data_invert": !!bool "false"
+  "device_operational_data_match": "inclusion"
+  "device_os_version": ""
+  "device_os_version_invert": !!bool "false"
+  "device_os_version_match": "inclusion"
+  "device_port": ""
+  "device_port_invert": !!bool "false"
+  "device_port_match": "inclusion"
+  "device_property1": ""
+  "device_property1_invert": !!bool "false"
+  "device_property1_match": "inclusion"
+  "device_scrapli_driver": ""
+  "device_scrapli_driver_invert": !!bool "false"
+  "device_scrapli_driver_match": "inclusion"
+  "device_specialized_data": ""
+  "device_specialized_data_invert": !!bool "false"
+  "device_specialized_data_match": "inclusion"
+  "device_subtype": ""
+  "device_subtype_invert": !!bool "false"
+  "device_subtype_match": "inclusion"
+  "device_vendor": ""
+  "device_vendor_invert": !!bool "false"
+  "device_vendor_match": "inclusion"
+  "devices":
+  - "Jackson"
+  - "PaloAlto"
+  - "Austin"
+  - "Washington"
+  - "Chicago"
+  - "SanJose"
+  - "SanDiego"
+  - "Dallas"
+  - "Philadelphia"
+  - "LosAngeles"
+  - "Detroit"
+  - "Richmond"
+  - "Atlanta"
+  - "Boston"
+  - "Houston"
+  - "Baltimore"
+  - "Cleveland"
+  - "Columbus"
+  - "Cincinnati"
+  - "Cambridge"
+  - "Minneapolis"
+  - "NewYork"
+  - "Sacramento"
+  - "SanFrancisco"
+  - "Orange"
+  - "Oakland"
+  - "Denver"
+  - "router5"
+  - "router6"
+  - "router7"
+  - "router8"
+  - "router9"
+  - "router10 (public)"
+  - "router11"
+  - "router12"
+  - "router13"
+  - "router14"
+  - "router15"
+  - "router16"
+  - "router17"
+  - "router18 (public)"
+  - "router19"
+  - "router20 (admin)"
+  - "router21"
+  - "router22"
+  - "router23 (admin)"
+  - "router24"
+  - "router25"
+  - "router26"
+  - "router27"
+  - "router28"
+  - "router29"
+  - "router30"
+  - "router31"
+  - "router32"
+  - "router33"
+  - "router34"
+  - "router35"
+  - "router36"
+  - "router37"
+  - "Server 2"
+  - "Aserver"
+  - "Dallas-2"
+  - "Dallas-3"
+  - "Dallas-4"
+  - "Austin-2"
+  - "Austin-3"
+  - "Jackson-2"
+  - "Oakland-2"
+  - "Router 1"
+  - "Router 2"
+  - "Router 3"
+  - "Router behind Gateway 1"
+  - "Gateway 1"
+  - "Gateway 2"
+  - "Gateway 3"
+  - "Router behind Gateway 1, 2 and 3"
+  - "Subnetwork 1 - R1"
+  - "Subnetwork 1 - R2"
+  - "Subnetwork 2 - G1"
+  - "Subnetwork 2 - G2"
+  - "Duplicate me 1"
+  - "Duplication - G1"
+  - "Duplication - R1"
+  - "Subnetwork 1 - R3"
+  - "S5 R1"
+  - "S5 R2"
+  - "S5 R3"
+  - "S5 R4"
+  - "S6 L3 R1"
+  - "S6 L3 R2"
+  "last_modified": "2022-11-09 01:23:16.094359"
+  "last_modified_by": "admin"
+  "link_color": ""
+  "link_color_invert": !!bool "false"
+  "link_color_match": "inclusion"
+  "link_creator": ""
+  "link_creator_invert": !!bool "false"
+  "link_creator_match": "inclusion"
+  "link_description": ""
+  "link_description_invert": !!bool "false"
+  "link_description_match": "inclusion"
+  "link_destination_name": ""
+  "link_destination_name_invert": !!bool "false"
+  "link_destination_name_match": "inclusion"
+  "link_location": ""
+  "link_location_invert": !!bool "false"
+  "link_location_match": "inclusion"
+  "link_model": ""
+  "link_model_invert": !!bool "false"
+  "link_model_match": "inclusion"
+  "link_name": ""
+  "link_name_invert": !!bool "false"
+  "link_name_match": "inclusion"
+  "link_source_name": ""
+  "link_source_name_invert": !!bool "false"
+  "link_source_name_match": "inclusion"
+  "link_subtype": ""
+  "link_subtype_invert": !!bool "false"
+  "link_subtype_match": "inclusion"
+  "link_vendor": ""
+  "link_vendor_invert": !!bool "false"
+  "link_vendor_match": "inclusion"
+  "links": []
+  "manually_defined": !!bool "false"
+  "name": "All Devices"
+  "owners": []
+  "property1": "CP"
+  "rbac_edit": []
+  "rbac_group_rbac_configuration": []
+  "rbac_group_rbac_connect": []
+  "rbac_group_rbac_edit": []
+  "rbac_group_rbac_read": []
+  "rbac_group_rbac_target": []
+  "rbac_read":
+  - "Admin User"
+  "target_services":
+  - "[Skip in SxS with service targets and Run Once services] Run Once with Pool"
+  - "Large Workflow (30 services)"
+  - "Large Device Configuration and Operational Data"
+  "tasks": []
+  "type": "pool"
+- "admin_only": !!bool "false"
+  "creator": ""
+  "description": "All links"
+  "device_configuration": ""
+  "device_configuration_invert": !!bool "false"
+  "device_configuration_match": "inclusion"
+  "device_creator": ""
+  "device_creator_invert": !!bool "false"
+  "device_creator_match": "inclusion"
+  "device_description": ""
+  "device_description_invert": !!bool "false"
+  "device_description_match": "inclusion"
+  "device_icon": ""
+  "device_icon_invert": !!bool "false"
+  "device_icon_match": "inclusion"
+  "device_ip_address": ""
+  "device_ip_address_invert": !!bool "false"
+  "device_ip_address_match": "inclusion"
+  "device_latitude": ""
+  "device_latitude_invert": !!bool "false"
+  "device_latitude_match": "inclusion"
+  "device_location": ""
+  "device_location_invert": !!bool "false"
+  "device_location_match": "inclusion"
+  "device_longitude": ""
+  "device_longitude_invert": !!bool "false"
+  "device_longitude_match": "inclusion"
+  "device_model": ""
+  "device_model_invert": !!bool "false"
+  "device_model_match": "inclusion"
+  "device_name": ""
+  "device_name_invert": !!bool "false"
+  "device_name_match": "inclusion"
+  "device_napalm_driver": ""
+  "device_napalm_driver_invert": !!bool "false"
+  "device_napalm_driver_match": "inclusion"
+  "device_netconf_driver": ""
+  "device_netconf_driver_invert": !!bool "false"
+  "device_netconf_driver_match": "inclusion"
+  "device_netmiko_driver": ""
+  "device_netmiko_driver_invert": !!bool "false"
+  "device_netmiko_driver_match": "inclusion"
+  "device_operating_system": ""
+  "device_operating_system_invert": !!bool "false"
+  "device_operating_system_match": "inclusion"
+  "device_operational_data": ""
+  "device_operational_data_invert": !!bool "false"
+  "device_operational_data_match": "inclusion"
+  "device_os_version": ""
+  "device_os_version_invert": !!bool "false"
+  "device_os_version_match": "inclusion"
+  "device_port": ""
+  "device_port_invert": !!bool "false"
+  "device_port_match": "inclusion"
+  "device_property1": ""
+  "device_property1_invert": !!bool "false"
+  "device_property1_match": "inclusion"
+  "device_scrapli_driver": ""
+  "device_scrapli_driver_invert": !!bool "false"
+  "device_scrapli_driver_match": "inclusion"
+  "device_specialized_data": ""
+  "device_specialized_data_invert": !!bool "false"
+  "device_specialized_data_match": "inclusion"
+  "device_subtype": ""
+  "device_subtype_invert": !!bool "false"
+  "device_subtype_match": "inclusion"
+  "device_vendor": ""
+  "device_vendor_invert": !!bool "false"
+  "device_vendor_match": "inclusion"
+  "devices": []
+  "last_modified": "2022-11-09 01:23:16.096983"
+  "last_modified_by": "admin"
+  "link_color": ""
+  "link_color_invert": !!bool "false"
+  "link_color_match": "inclusion"
+  "link_creator": ""
+  "link_creator_invert": !!bool "false"
+  "link_creator_match": "inclusion"
+  "link_description": ""
+  "link_description_invert": !!bool "false"
+  "link_description_match": "inclusion"
+  "link_destination_name": ""
+  "link_destination_name_invert": !!bool "false"
+  "link_destination_name_match": "inclusion"
+  "link_location": ""
+  "link_location_invert": !!bool "false"
+  "link_location_match": "inclusion"
+  "link_model": ""
+  "link_model_invert": !!bool "false"
+  "link_model_match": "inclusion"
+  "link_name": ".*"
+  "link_name_invert": !!bool "false"
+  "link_name_match": "regex"
+  "link_source_name": ""
+  "link_source_name_invert": !!bool "false"
+  "link_source_name_match": "inclusion"
+  "link_subtype": ""
+  "link_subtype_invert": !!bool "false"
+  "link_subtype_match": "inclusion"
+  "link_vendor": ""
+  "link_vendor_invert": !!bool "false"
+  "link_vendor_match": "inclusion"
+  "links":
+  - "link0"
+  - "link1"
+  - "link2"
+  - "link3"
+  - "link4"
+  - "link5"
+  - "link6"
+  - "link7"
+  - "link8"
+  - "link9"
+  - "link10"
+  - "link11"
+  - "link12"
+  - "link13"
+  - "link14"
+  - "link15"
+  - "link16"
+  - "link17"
+  - "link18"
+  - "link19"
+  - "link20"
+  - "link21"
+  - "link22"
+  - "link23"
+  - "link24"
+  - "link25"
+  - "link26"
+  - "link27"
+  - "europe-link4 (admin)"
+  - "europe-link5"
+  - "europe-link6"
+  - "europe-link7"
+  - "europe-link8"
+  - "europe-link9"
+  - "europe-link10"
+  - "europe-link11"
+  - "europe-link12"
+  - "europe-link13"
+  - "europe-link14"
+  - "europe-link15"
+  - "europe-link16"
+  - "europe-link17"
+  - "europe-link18"
+  - "europe-link19"
+  - "europe-link20"
+  - "europe-link21"
+  - "europe-link22"
+  - "europe-link23"
+  - "europe-link24"
+  - "europe-link25"
+  - "europe-link26"
+  - "europe-link27"
+  - "europe-link28 (public)"
+  - "europe-link29"
+  - "europe-link30"
+  - "europe-link31 (public)"
+  - "europe-link32"
+  - "europe-link33"
+  - "europe-link34"
+  - "europe-link35"
+  - "europe-link36"
+  - "europe-link37"
+  - "europe-link38"
+  - "europe-link39"
+  - "europe-link40 (admin)"
+  - "europe-link41"
+  - "europe-link42"
+  - "europe-link43"
+  - "europe-link44"
+  - "europe-link45"
+  - "europe-link46"
+  - "europe-link47"
+  - "europe-link48"
+  - "europe-link49"
+  - "europe-link50"
+  - "europe-link51"
+  - "europe-link52"
+  - "atlantic-r26-boston-1"
+  - "atlantic-r26-boston-2"
+  - "atlantic-r26-ny"
+  - "atlantic-r26-washington"
+  - "atlantic-r28-ny"
+  - "atlantic-r28-washington"
+  - "atlantic-r20-boston-1"
+  - "atlantic-r20-richmond-2"
+  - "atlantic-r26-boston-3"
+  - "atlantic-r20-boston-2"
+  - "atlantic-r20-richmond-1"
+  - "europe-link30-2"
+  - "europe-link31-2"
+  - "europe-link35-2"
+  - "europe-link35-3"
+  - "atlantic-r26-boston-4-inverted"
+  - "link25-2"
+  - "link25-3"
+  - "link25-dallas2"
+  - "link25-reversed"
+  - "link25-reversed-2"
+  - "link13-2"
+  - "R1 - R2"
+  - "R2 - R3"
+  - "R1 - R3"
+  - "Subnetwork 1 - L1"
+  - "Subnetwork 2 - L1"
+  - "G1 - R1"
+  - "Duplicate 1 - 2"
+  - "Subnetwork 1 - L2"
+  - "Subnetwork 1 - L3"
+  - "R3 -> R2 L1"
+  - "R3 -> R2 L2"
+  - "R3 -> R2 L3"
+  - "R3 -> R2 L4"
+  - "R3 Loopback 1"
+  - "R1 Loopback 1"
+  - "R1 -> R2 L1"
+  - "R1 -> R2 L2"
+  - "R1 -> R2 L3"
+  - "R1 -> R3 L1"
+  - "R3 -> R1 L2"
+  - "R3 -> R1 L3"
+  - "R3 -> R1 L4"
+  - "R2 -> R4 L1"
+  - "R2 -> R4 L2"
+  - "R4 -> R2 L3"
+  - "R4 Loopback 1"
+  - "R1 - R4"
+  - "R3 -> R4 L1"
+  - "R3 -> R4 L2"
+  - "R3 -> R4 L3"
+  - "R3 -> R4 L4"
+  - "R4 -> R3 L5"
+  - "R4 -> R3 L6"
+  - "R4 -> R3 L7"
+  - "R4 -> R3 L8"
+  - "S6 L1"
+  "manually_defined": !!bool "false"
+  "name": "All Links"
+  "owners": []
+  "property1": "CP"
+  "rbac_edit": []
+  "rbac_group_rbac_configuration": []
+  "rbac_group_rbac_connect": []
+  "rbac_group_rbac_edit": []
+  "rbac_group_rbac_read": []
+  "rbac_group_rbac_target": []
+  "rbac_read":
+  - "Admin User"
+  "target_services": []
+  "tasks": []
+  "type": "pool"
+- "admin_only": !!bool "false"
+  "creator": ""
+  "description": "Datacenter San Francisco"
+  "device_configuration": ""
+  "device_configuration_invert": !!bool "false"
+  "device_configuration_match": "inclusion"
+  "device_creator": ""
+  "device_creator_invert": !!bool "false"
+  "device_creator_match": "inclusion"
+  "device_description": ""
+  "device_description_invert": !!bool "false"
+  "device_description_match": "inclusion"
+  "device_icon": ""
+  "device_icon_invert": !!bool "false"
+  "device_icon_match": "inclusion"
+  "device_ip_address": ""
+  "device_ip_address_invert": !!bool "false"
+  "device_ip_address_match": "inclusion"
+  "device_latitude": ""
+  "device_latitude_invert": !!bool "false"
+  "device_latitude_match": "inclusion"
+  "device_location": ""
+  "device_location_invert": !!bool "false"
+  "device_location_match": "inclusion"
+  "device_longitude": ""
+  "device_longitude_invert": !!bool "false"
+  "device_longitude_match": "inclusion"
+  "device_model": ""
+  "device_model_invert": !!bool "false"
+  "device_model_match": "inclusion"
+  "device_name": "e"
+  "device_name_invert": !!bool "false"
+  "device_name_match": "inclusion"
+  "device_napalm_driver": ""
+  "device_napalm_driver_invert": !!bool "false"
+  "device_napalm_driver_match": "inclusion"
+  "device_netconf_driver": ""
+  "device_netconf_driver_invert": !!bool "false"
+  "device_netconf_driver_match": "inclusion"
+  "device_netmiko_driver": ""
+  "device_netmiko_driver_invert": !!bool "false"
+  "device_netmiko_driver_match": "inclusion"
+  "device_operating_system": ""
+  "device_operating_system_invert": !!bool "false"
+  "device_operating_system_match": "inclusion"
+  "device_operational_data": ""
+  "device_operational_data_invert": !!bool "false"
+  "device_operational_data_match": "inclusion"
+  "device_os_version": ""
+  "device_os_version_invert": !!bool "false"
+  "device_os_version_match": "inclusion"
+  "device_port": ""
+  "device_port_invert": !!bool "false"
+  "device_port_match": "inclusion"
+  "device_property1": ""
+  "device_property1_invert": !!bool "false"
+  "device_property1_match": "inclusion"
+  "device_scrapli_driver": ""
+  "device_scrapli_driver_invert": !!bool "false"
+  "device_scrapli_driver_match": "inclusion"
+  "device_specialized_data": ""
+  "device_specialized_data_invert": !!bool "false"
+  "device_specialized_data_match": "inclusion"
+  "device_subtype": ""
+  "device_subtype_invert": !!bool "false"
+  "device_subtype_match": "inclusion"
+  "device_vendor": ""
+  "device_vendor_invert": !!bool "false"
+  "device_vendor_match": "inclusion"
+  "devices":
+  - "SanJose"
+  - "SanDiego"
+  - "Philadelphia"
+  - "LosAngeles"
+  - "Detroit"
+  - "Baltimore"
+  - "Cleveland"
+  - "Cambridge"
+  - "Minneapolis"
+  - "NewYork"
+  - "Sacramento"
+  - "Orange"
+  - "Denver"
+  - "router5"
+  - "router6"
+  - "router7"
+  - "router8"
+  - "router9"
+  - "router10 (public)"
+  - "router11"
+  - "router12"
+  - "router13"
+  - "router14"
+  - "router15"
+  - "router16"
+  - "router17"
+  - "router18 (public)"
+  - "router19"
+  - "router20 (admin)"
+  - "router21"
+  - "router22"
+  - "router23 (admin)"
+  - "router24"
+  - "router25"
+  - "router26"
+  - "router27"
+  - "router28"
+  - "router29"
+  - "router30"
+  - "router31"
+  - "router32"
+  - "router33"
+  - "router34"
+  - "router35"
+  - "router36"
+  - "router37"
+  - "Server 2"
+  - "Aserver"
+  - "Router 1"
+  - "Router 2"
+  - "Router 3"
+  - "Router behind Gateway 1"
+  - "Gateway 1"
+  - "Gateway 2"
+  - "Gateway 3"
+  - "Router behind Gateway 1, 2 and 3"
+  - "Subnetwork 1 - R1"
+  - "Subnetwork 1 - R2"
+  - "Subnetwork 2 - G1"
+  - "Subnetwork 2 - G2"
+  - "Duplicate me 1"
+  - "Subnetwork 1 - R3"
+  "last_modified": "2022-11-09 01:23:16.100427"
+  "last_modified_by": "admin"
+  "link_color": ""
+  "link_color_invert": !!bool "false"
+  "link_color_match": "inclusion"
+  "link_creator": ""
+  "link_creator_invert": !!bool "false"
+  "link_creator_match": "inclusion"
+  "link_description": ""
+  "link_description_invert": !!bool "false"
+  "link_description_match": "inclusion"
+  "link_destination_name": ""
+  "link_destination_name_invert": !!bool "false"
+  "link_destination_name_match": "inclusion"
+  "link_location": ""
+  "link_location_invert": !!bool "false"
+  "link_location_match": "inclusion"
+  "link_model": ""
+  "link_model_invert": !!bool "false"
+  "link_model_match": "inclusion"
+  "link_name": ".*"
+  "link_name_invert": !!bool "false"
+  "link_name_match": "regex"
+  "link_source_name": ""
+  "link_source_name_invert": !!bool "false"
+  "link_source_name_match": "inclusion"
+  "link_subtype": ""
+  "link_subtype_invert": !!bool "false"
+  "link_subtype_match": "inclusion"
+  "link_vendor": ""
+  "link_vendor_invert": !!bool "false"
+  "link_vendor_match": "inclusion"
+  "links":
+  - "link0"
+  - "link1"
+  - "link2"
+  - "link3"
+  - "link4"
+  - "link5"
+  - "link6"
+  - "link7"
+  - "link8"
+  - "link9"
+  - "link10"
+  - "link11"
+  - "link12"
+  - "link13"
+  - "link14"
+  - "link15"
+  - "link16"
+  - "link17"
+  - "link18"
+  - "link19"
+  - "link20"
+  - "link21"
+  - "link22"
+  - "link23"
+  - "link24"
+  - "link25"
+  - "link26"
+  - "link27"
+  - "europe-link4 (admin)"
+  - "europe-link5"
+  - "europe-link6"
+  - "europe-link7"
+  - "europe-link8"
+  - "europe-link9"
+  - "europe-link10"
+  - "europe-link11"
+  - "europe-link12"
+  - "europe-link13"
+  - "europe-link14"
+  - "europe-link15"
+  - "europe-link16"
+  - "europe-link17"
+  - "europe-link18"
+  - "europe-link19"
+  - "europe-link20"
+  - "europe-link21"
+  - "europe-link22"
+  - "europe-link23"
+  - "europe-link24"
+  - "europe-link25"
+  - "europe-link26"
+  - "europe-link27"
+  - "europe-link28 (public)"
+  - "europe-link29"
+  - "europe-link30"
+  - "europe-link31 (public)"
+  - "europe-link32"
+  - "europe-link33"
+  - "europe-link34"
+  - "europe-link35"
+  - "europe-link36"
+  - "europe-link37"
+  - "europe-link38"
+  - "europe-link39"
+  - "europe-link40 (admin)"
+  - "europe-link41"
+  - "europe-link42"
+  - "europe-link43"
+  - "europe-link44"
+  - "europe-link45"
+  - "europe-link46"
+  - "europe-link47"
+  - "europe-link48"
+  - "europe-link49"
+  - "europe-link50"
+  - "europe-link51"
+  - "europe-link52"
+  - "atlantic-r26-boston-1"
+  - "atlantic-r26-boston-2"
+  - "atlantic-r26-ny"
+  - "atlantic-r26-washington"
+  - "atlantic-r28-ny"
+  - "atlantic-r28-washington"
+  - "atlantic-r20-boston-1"
+  - "atlantic-r20-richmond-2"
+  - "atlantic-r26-boston-3"
+  - "atlantic-r20-boston-2"
+  - "atlantic-r20-richmond-1"
+  - "europe-link30-2"
+  - "europe-link31-2"
+  - "europe-link35-2"
+  - "europe-link35-3"
+  - "atlantic-r26-boston-4-inverted"
+  - "link25-2"
+  - "link25-3"
+  - "link25-dallas2"
+  - "link25-reversed"
+  - "link25-reversed-2"
+  - "link13-2"
+  - "R1 - R2"
+  - "R2 - R3"
+  - "R1 - R3"
+  - "Subnetwork 1 - L1"
+  - "Subnetwork 2 - L1"
+  - "G1 - R1"
+  - "Duplicate 1 - 2"
+  - "Subnetwork 1 - L2"
+  - "Subnetwork 1 - L3"
+  - "R3 -> R2 L1"
+  - "R3 -> R2 L2"
+  - "R3 -> R2 L3"
+  - "R3 -> R2 L4"
+  - "R3 Loopback 1"
+  - "R1 Loopback 1"
+  - "R1 -> R2 L1"
+  - "R1 -> R2 L2"
+  - "R1 -> R2 L3"
+  - "R1 -> R3 L1"
+  - "R3 -> R1 L2"
+  - "R3 -> R1 L3"
+  - "R3 -> R1 L4"
+  - "R2 -> R4 L1"
+  - "R2 -> R4 L2"
+  - "R4 -> R2 L3"
+  - "R4 Loopback 1"
+  - "R1 - R4"
+  - "R3 -> R4 L1"
+  - "R3 -> R4 L2"
+  - "R3 -> R4 L3"
+  - "R3 -> R4 L4"
+  - "R4 -> R3 L5"
+  - "R4 -> R3 L6"
+  - "R4 -> R3 L7"
+  - "R4 -> R3 L8"
+  - "S6 L1"
+  "manually_defined": !!bool "false"
+  "name": "Datacenter San Francisco"
+  "owners": []
+  "property1": "CP"
+  "rbac_edit": []
+  "rbac_group_rbac_configuration": []
+  "rbac_group_rbac_connect": []
+  "rbac_group_rbac_edit": []
+  "rbac_group_rbac_read": []
+  "rbac_group_rbac_target": []
+  "rbac_read":
+  - "Admin User"
+  "target_services":
+  - "Parameterized Multiprocessing"
+  "tasks": []
+  "type": "pool"
+- "admin_only": !!bool "false"
+  "creator": ""
+  "description": "Datacenter New York"
+  "device_configuration": ""
+  "device_configuration_invert": !!bool "false"
+  "device_configuration_match": "inclusion"
+  "device_creator": ""
+  "device_creator_invert": !!bool "false"
+  "device_creator_match": "inclusion"
+  "device_description": ""
+  "device_description_invert": !!bool "false"
+  "device_description_match": "inclusion"
+  "device_icon": ""
+  "device_icon_invert": !!bool "false"
+  "device_icon_match": "inclusion"
+  "device_ip_address": ""
+  "device_ip_address_invert": !!bool "false"
+  "device_ip_address_match": "inclusion"
+  "device_latitude": ""
+  "device_latitude_invert": !!bool "false"
+  "device_latitude_match": "inclusion"
+  "device_location": ""
+  "device_location_invert": !!bool "false"
+  "device_location_match": "inclusion"
+  "device_longitude": ""
+  "device_longitude_invert": !!bool "false"
+  "device_longitude_match": "inclusion"
+  "device_model": ""
+  "device_model_invert": !!bool "false"
+  "device_model_match": "inclusion"
+  "device_name": "a"
+  "device_name_invert": !!bool "false"
+  "device_name_match": "inclusion"
+  "device_napalm_driver": ""
+  "device_napalm_driver_invert": !!bool "false"
+  "device_napalm_driver_match": "inclusion"
+  "device_netconf_driver": ""
+  "device_netconf_driver_invert": !!bool "false"
+  "device_netconf_driver_match": "inclusion"
+  "device_netmiko_driver": ""
+  "device_netmiko_driver_invert": !!bool "false"
+  "device_netmiko_driver_match": "inclusion"
+  "device_operating_system": ""
+  "device_operating_system_invert": !!bool "false"
+  "device_operating_system_match": "inclusion"
+  "device_operational_data": ""
+  "device_operational_data_invert": !!bool "false"
+  "device_operational_data_match": "inclusion"
+  "device_os_version": ""
+  "device_os_version_invert": !!bool "false"
+  "device_os_version_match": "inclusion"
+  "device_port": ""
+  "device_port_invert": !!bool "false"
+  "device_port_match": "inclusion"
+  "device_property1": ""
+  "device_property1_invert": !!bool "false"
+  "device_property1_match": "inclusion"
+  "device_scrapli_driver": ""
+  "device_scrapli_driver_invert": !!bool "false"
+  "device_scrapli_driver_match": "inclusion"
+  "device_specialized_data": ""
+  "device_specialized_data_invert": !!bool "false"
+  "device_specialized_data_match": "inclusion"
+  "device_subtype": ""
+  "device_subtype_invert": !!bool "false"
+  "device_subtype_match": "inclusion"
+  "device_vendor": ""
+  "device_vendor_invert": !!bool "false"
+  "device_vendor_match": "inclusion"
+  "devices":
+  - "Jackson"
+  - "PaloAlto"
+  - "Austin"
+  - "Washington"
+  - "Chicago"
+  - "SanJose"
+  - "SanDiego"
+  - "Dallas"
+  - "Philadelphia"
+  - "LosAngeles"
+  - "Atlanta"
+  - "Baltimore"
+  - "Cleveland"
+  - "Cincinnati"
+  - "Cambridge"
+  - "Minneapolis"
+  - "Sacramento"
+  - "SanFrancisco"
+  - "Orange"
+  - "Oakland"
+  - "router20 (admin)"
+  - "router23 (admin)"
+  - "Aserver"
+  - "Dallas-2"
+  - "Dallas-3"
+  - "Dallas-4"
+  - "Austin-2"
+  - "Austin-3"
+  - "Jackson-2"
+  - "Oakland-2"
+  - "Router behind Gateway 1"
+  - "Gateway 1"
+  - "Gateway 2"
+  - "Gateway 3"
+  - "Router behind Gateway 1, 2 and 3"
+  - "Duplicate me 1"
+  - "Duplication - G1"
+  - "Duplication - R1"
+  "last_modified": "2022-11-09 01:23:16.103029"
+  "last_modified_by": "admin"
+  "link_color": ""
+  "link_color_invert": !!bool "false"
+  "link_color_match": "inclusion"
+  "link_creator": ""
+  "link_creator_invert": !!bool "false"
+  "link_creator_match": "inclusion"
+  "link_description": ""
+  "link_description_invert": !!bool "false"
+  "link_description_match": "inclusion"
+  "link_destination_name": ""
+  "link_destination_name_invert": !!bool "false"
+  "link_destination_name_match": "inclusion"
+  "link_location": ""
+  "link_location_invert": !!bool "false"
+  "link_location_match": "inclusion"
+  "link_model": ""
+  "link_model_invert": !!bool "false"
+  "link_model_match": "inclusion"
+  "link_name": ".*"
+  "link_name_invert": !!bool "false"
+  "link_name_match": "regex"
+  "link_source_name": ""
+  "link_source_name_invert": !!bool "false"
+  "link_source_name_match": "inclusion"
+  "link_subtype": ""
+  "link_subtype_invert": !!bool "false"
+  "link_subtype_match": "inclusion"
+  "link_vendor": ""
+  "link_vendor_invert": !!bool "false"
+  "link_vendor_match": "inclusion"
+  "links":
+  - "link0"
+  - "link1"
+  - "link2"
+  - "link3"
+  - "link4"
+  - "link5"
+  - "link6"
+  - "link7"
+  - "link8"
+  - "link9"
+  - "link10"
+  - "link11"
+  - "link12"
+  - "link13"
+  - "link14"
+  - "link15"
+  - "link16"
+  - "link17"
+  - "link18"
+  - "link19"
+  - "link20"
+  - "link21"
+  - "link22"
+  - "link23"
+  - "link24"
+  - "link25"
+  - "link26"
+  - "link27"
+  - "europe-link4 (admin)"
+  - "europe-link5"
+  - "europe-link6"
+  - "europe-link7"
+  - "europe-link8"
+  - "europe-link9"
+  - "europe-link10"
+  - "europe-link11"
+  - "europe-link12"
+  - "europe-link13"
+  - "europe-link14"
+  - "europe-link15"
+  - "europe-link16"
+  - "europe-link17"
+  - "europe-link18"
+  - "europe-link19"
+  - "europe-link20"
+  - "europe-link21"
+  - "europe-link22"
+  - "europe-link23"
+  - "europe-link24"
+  - "europe-link25"
+  - "europe-link26"
+  - "europe-link27"
+  - "europe-link28 (public)"
+  - "europe-link29"
+  - "europe-link30"
+  - "europe-link31 (public)"
+  - "europe-link32"
+  - "europe-link33"
+  - "europe-link34"
+  - "europe-link35"
+  - "europe-link36"
+  - "europe-link37"
+  - "europe-link38"
+  - "europe-link39"
+  - "europe-link40 (admin)"
+  - "europe-link41"
+  - "europe-link42"
+  - "europe-link43"
+  - "europe-link44"
+  - "europe-link45"
+  - "europe-link46"
+  - "europe-link47"
+  - "europe-link48"
+  - "europe-link49"
+  - "europe-link50"
+  - "europe-link51"
+  - "europe-link52"
+  - "atlantic-r26-boston-1"
+  - "atlantic-r26-boston-2"
+  - "atlantic-r26-ny"
+  - "atlantic-r26-washington"
+  - "atlantic-r28-ny"
+  - "atlantic-r28-washington"
+  - "atlantic-r20-boston-1"
+  - "atlantic-r20-richmond-2"
+  - "atlantic-r26-boston-3"
+  - "atlantic-r20-boston-2"
+  - "atlantic-r20-richmond-1"
+  - "europe-link30-2"
+  - "europe-link31-2"
+  - "europe-link35-2"
+  - "europe-link35-3"
+  - "atlantic-r26-boston-4-inverted"
+  - "link25-2"
+  - "link25-3"
+  - "link25-dallas2"
+  - "link25-reversed"
+  - "link25-reversed-2"
+  - "link13-2"
+  - "R1 - R2"
+  - "R2 - R3"
+  - "R1 - R3"
+  - "Subnetwork 1 - L1"
+  - "Subnetwork 2 - L1"
+  - "G1 - R1"
+  - "Duplicate 1 - 2"
+  - "Subnetwork 1 - L2"
+  - "Subnetwork 1 - L3"
+  - "R3 -> R2 L1"
+  - "R3 -> R2 L2"
+  - "R3 -> R2 L3"
+  - "R3 -> R2 L4"
+  - "R3 Loopback 1"
+  - "R1 Loopback 1"
+  - "R1 -> R2 L1"
+  - "R1 -> R2 L2"
+  - "R1 -> R2 L3"
+  - "R1 -> R3 L1"
+  - "R3 -> R1 L2"
+  - "R3 -> R1 L3"
+  - "R3 -> R1 L4"
+  - "R2 -> R4 L1"
+  - "R2 -> R4 L2"
+  - "R4 -> R2 L3"
+  - "R4 Loopback 1"
+  - "R1 - R4"
+  - "R3 -> R4 L1"
+  - "R3 -> R4 L2"
+  - "R3 -> R4 L3"
+  - "R3 -> R4 L4"
+  - "R4 -> R3 L5"
+  - "R4 -> R3 L6"
+  - "R4 -> R3 L7"
+  - "R4 -> R3 L8"
+  - "S6 L1"
+  "manually_defined": !!bool "false"
+  "name": "Datacenter New York"
+  "owners": []
+  "property1": "CP"
+  "rbac_edit": []
+  "rbac_group_rbac_configuration": []
+  "rbac_group_rbac_connect": []
+  "rbac_group_rbac_edit": []
+  "rbac_group_rbac_read": []
+  "rbac_group_rbac_target": []
+  "rbac_read":
+  - "Admin User"
+  "target_services": []
+  "tasks": []
+  "type": "pool"
+- "admin_only": !!bool "false"
+  "creator": ""
+  "description": "Datacenter Chicago"
+  "device_configuration": ""
+  "device_configuration_invert": !!bool "false"
+  "device_configuration_match": "inclusion"
+  "device_creator": ""
+  "device_creator_invert": !!bool "false"
+  "device_creator_match": "inclusion"
+  "device_description": ""
+  "device_description_invert": !!bool "false"
+  "device_description_match": "inclusion"
+  "device_icon": ""
+  "device_icon_invert": !!bool "false"
+  "device_icon_match": "inclusion"
+  "device_ip_address": ""
+  "device_ip_address_invert": !!bool "false"
+  "device_ip_address_match": "inclusion"
+  "device_latitude": ""
+  "device_latitude_invert": !!bool "false"
+  "device_latitude_match": "inclusion"
+  "device_location": ""
+  "device_location_invert": !!bool "false"
+  "device_location_match": "inclusion"
+  "device_longitude": ""
+  "device_longitude_invert": !!bool "false"
+  "device_longitude_match": "inclusion"
+  "device_model": ""
+  "device_model_invert": !!bool "false"
+  "device_model_match": "inclusion"
+  "device_name": "i"
+  "device_name_invert": !!bool "false"
+  "device_name_match": "inclusion"
+  "device_napalm_driver": ""
+  "device_napalm_driver_invert": !!bool "false"
+  "device_napalm_driver_match": "inclusion"
+  "device_netconf_driver": ""
+  "device_netconf_driver_invert": !!bool "false"
+  "device_netconf_driver_match": "inclusion"
+  "device_netmiko_driver": ""
+  "device_netmiko_driver_invert": !!bool "false"
+  "device_netmiko_driver_match": "inclusion"
+  "device_operating_system": ""
+  "device_operating_system_invert": !!bool "false"
+  "device_operating_system_match": "inclusion"
+  "device_operational_data": ""
+  "device_operational_data_invert": !!bool "false"
+  "device_operational_data_match": "inclusion"
+  "device_os_version": ""
+  "device_os_version_invert": !!bool "false"
+  "device_os_version_match": "inclusion"
+  "device_port": ""
+  "device_port_invert": !!bool "false"
+  "device_port_match": "inclusion"
+  "device_property1": ""
+  "device_property1_invert": !!bool "false"
+  "device_property1_match": "inclusion"
+  "device_scrapli_driver": ""
+  "device_scrapli_driver_invert": !!bool "false"
+  "device_scrapli_driver_match": "inclusion"
+  "device_specialized_data": ""
+  "device_specialized_data_invert": !!bool "false"
+  "device_specialized_data_match": "inclusion"
+  "device_subtype": ""
+  "device_subtype_invert": !!bool "false"
+  "device_subtype_match": "inclusion"
+  "device_vendor": ""
+  "device_vendor_invert": !!bool "false"
+  "device_vendor_match": "inclusion"
+  "devices":
+  - "Austin"
+  - "Washington"
+  - "Chicago"
+  - "SanDiego"
+  - "Philadelphia"
+  - "Detroit"
+  - "Richmond"
+  - "Baltimore"
+  - "Cincinnati"
+  - "Cambridge"
+  - "Minneapolis"
+  - "SanFrancisco"
+  - "router10 (public)"
+  - "router18 (public)"
+  - "router20 (admin)"
+  - "router23 (admin)"
+  - "Austin-2"
+  - "Austin-3"
+  - "Router behind Gateway 1"
+  - "Router behind Gateway 1, 2 and 3"
+  - "Duplicate me 1"
+  - "Duplication - G1"
+  - "Duplication - R1"
+  "last_modified": "2022-11-09 01:23:16.105525"
+  "last_modified_by": "admin"
+  "link_color": ""
+  "link_color_invert": !!bool "false"
+  "link_color_match": "inclusion"
+  "link_creator": ""
+  "link_creator_invert": !!bool "false"
+  "link_creator_match": "inclusion"
+  "link_description": ""
+  "link_description_invert": !!bool "false"
+  "link_description_match": "inclusion"
+  "link_destination_name": ""
+  "link_destination_name_invert": !!bool "false"
+  "link_destination_name_match": "inclusion"
+  "link_location": ""
+  "link_location_invert": !!bool "false"
+  "link_location_match": "inclusion"
+  "link_model": ""
+  "link_model_invert": !!bool "false"
+  "link_model_match": "inclusion"
+  "link_name": ".*"
+  "link_name_invert": !!bool "false"
+  "link_name_match": "regex"
+  "link_source_name": ""
+  "link_source_name_invert": !!bool "false"
+  "link_source_name_match": "inclusion"
+  "link_subtype": ""
+  "link_subtype_invert": !!bool "false"
+  "link_subtype_match": "inclusion"
+  "link_vendor": ""
+  "link_vendor_invert": !!bool "false"
+  "link_vendor_match": "inclusion"
+  "links":
+  - "link0"
+  - "link1"
+  - "link2"
+  - "link3"
+  - "link4"
+  - "link5"
+  - "link6"
+  - "link7"
+  - "link8"
+  - "link9"
+  - "link10"
+  - "link11"
+  - "link12"
+  - "link13"
+  - "link14"
+  - "link15"
+  - "link16"
+  - "link17"
+  - "link18"
+  - "link19"
+  - "link20"
+  - "link21"
+  - "link22"
+  - "link23"
+  - "link24"
+  - "link25"
+  - "link26"
+  - "link27"
+  - "europe-link4 (admin)"
+  - "europe-link5"
+  - "europe-link6"
+  - "europe-link7"
+  - "europe-link8"
+  - "europe-link9"
+  - "europe-link10"
+  - "europe-link11"
+  - "europe-link12"
+  - "europe-link13"
+  - "europe-link14"
+  - "europe-link15"
+  - "europe-link16"
+  - "europe-link17"
+  - "europe-link18"
+  - "europe-link19"
+  - "europe-link20"
+  - "europe-link21"
+  - "europe-link22"
+  - "europe-link23"
+  - "europe-link24"
+  - "europe-link25"
+  - "europe-link26"
+  - "europe-link27"
+  - "europe-link28 (public)"
+  - "europe-link29"
+  - "europe-link30"
+  - "europe-link31 (public)"
+  - "europe-link32"
+  - "europe-link33"
+  - "europe-link34"
+  - "europe-link35"
+  - "europe-link36"
+  - "europe-link37"
+  - "europe-link38"
+  - "europe-link39"
+  - "europe-link40 (admin)"
+  - "europe-link41"
+  - "europe-link42"
+  - "europe-link43"
+  - "europe-link44"
+  - "europe-link45"
+  - "europe-link46"
+  - "europe-link47"
+  - "europe-link48"
+  - "europe-link49"
+  - "europe-link50"
+  - "europe-link51"
+  - "europe-link52"
+  - "atlantic-r26-boston-1"
+  - "atlantic-r26-boston-2"
+  - "atlantic-r26-ny"
+  - "atlantic-r26-washington"
+  - "atlantic-r28-ny"
+  - "atlantic-r28-washington"
+  - "atlantic-r20-boston-1"
+  - "atlantic-r20-richmond-2"
+  - "atlantic-r26-boston-3"
+  - "atlantic-r20-boston-2"
+  - "atlantic-r20-richmond-1"
+  - "europe-link30-2"
+  - "europe-link31-2"
+  - "europe-link35-2"
+  - "europe-link35-3"
+  - "atlantic-r26-boston-4-inverted"
+  - "link25-2"
+  - "link25-3"
+  - "link25-dallas2"
+  - "link25-reversed"
+  - "link25-reversed-2"
+  - "link13-2"
+  - "R1 - R2"
+  - "R2 - R3"
+  - "R1 - R3"
+  - "Subnetwork 1 - L1"
+  - "Subnetwork 2 - L1"
+  - "G1 - R1"
+  - "Duplicate 1 - 2"
+  - "Subnetwork 1 - L2"
+  - "Subnetwork 1 - L3"
+  - "R3 -> R2 L1"
+  - "R3 -> R2 L2"
+  - "R3 -> R2 L3"
+  - "R3 -> R2 L4"
+  - "R3 Loopback 1"
+  - "R1 Loopback 1"
+  - "R1 -> R2 L1"
+  - "R1 -> R2 L2"
+  - "R1 -> R2 L3"
+  - "R1 -> R3 L1"
+  - "R3 -> R1 L2"
+  - "R3 -> R1 L3"
+  - "R3 -> R1 L4"
+  - "R2 -> R4 L1"
+  - "R2 -> R4 L2"
+  - "R4 -> R2 L3"
+  - "R4 Loopback 1"
+  - "R1 - R4"
+  - "R3 -> R4 L1"
+  - "R3 -> R4 L2"
+  - "R3 -> R4 L3"
+  - "R3 -> R4 L4"
+  - "R4 -> R3 L5"
+  - "R4 -> R3 L6"
+  - "R4 -> R3 L7"
+  - "R4 -> R3 L8"
+  - "S6 L1"
+  "manually_defined": !!bool "false"
+  "name": "Datacenter Chicago"
+  "owners": []
+  "property1": "CP"
+  "rbac_edit": []
+  "rbac_group_rbac_configuration": []
+  "rbac_group_rbac_connect": []
+  "rbac_group_rbac_edit": []
+  "rbac_group_rbac_read": []
+  "rbac_group_rbac_target": []
+  "rbac_read":
+  - "Admin User"
+  "target_services": []
+  "tasks": []
+  "type": "pool"
+- "admin_only": !!bool "false"
+  "creator": ""
+  "description": ""
+  "device_configuration": ""
+  "device_configuration_invert": !!bool "false"
+  "device_configuration_match": "inclusion"
+  "device_creator": ""
+  "device_creator_invert": !!bool "false"
+  "device_creator_match": "inclusion"
+  "device_description": ""
+  "device_description_invert": !!bool "false"
+  "device_description_match": "inclusion"
+  "device_icon": ""
+  "device_icon_invert": !!bool "false"
+  "device_icon_match": "inclusion"
+  "device_ip_address": ""
+  "device_ip_address_invert": !!bool "false"
+  "device_ip_address_match": "inclusion"
+  "device_latitude": ""
+  "device_latitude_invert": !!bool "false"
+  "device_latitude_match": "inclusion"
+  "device_location": ""
+  "device_location_invert": !!bool "false"
+  "device_location_match": "inclusion"
+  "device_longitude": ""
+  "device_longitude_invert": !!bool "false"
+  "device_longitude_match": "inclusion"
+  "device_model": ""
+  "device_model_invert": !!bool "false"
+  "device_model_match": "inclusion"
+  "device_name": "Washin.*"
+  "device_name_invert": !!bool "false"
+  "device_name_match": "regex"
+  "device_napalm_driver": ""
+  "device_napalm_driver_invert": !!bool "false"
+  "device_napalm_driver_match": "inclusion"
+  "device_netconf_driver": ""
+  "device_netconf_driver_invert": !!bool "false"
+  "device_netconf_driver_match": "inclusion"
+  "device_netmiko_driver": ""
+  "device_netmiko_driver_invert": !!bool "false"
+  "device_netmiko_driver_match": "inclusion"
+  "device_operating_system": ""
+  "device_operating_system_invert": !!bool "false"
+  "device_operating_system_match": "inclusion"
+  "device_operational_data": ""
+  "device_operational_data_invert": !!bool "false"
+  "device_operational_data_match": "inclusion"
+  "device_os_version": ""
+  "device_os_version_invert": !!bool "false"
+  "device_os_version_match": "inclusion"
+  "device_port": ""
+  "device_port_invert": !!bool "false"
+  "device_port_match": "inclusion"
+  "device_property1": ""
+  "device_property1_invert": !!bool "false"
+  "device_property1_match": "inclusion"
+  "device_scrapli_driver": ""
+  "device_scrapli_driver_invert": !!bool "false"
+  "device_scrapli_driver_match": "inclusion"
+  "device_specialized_data": ""
+  "device_specialized_data_invert": !!bool "false"
+  "device_specialized_data_match": "inclusion"
+  "device_subtype": ""
+  "device_subtype_invert": !!bool "false"
+  "device_subtype_match": "inclusion"
+  "device_vendor": ""
+  "device_vendor_invert": !!bool "false"
+  "device_vendor_match": "inclusion"
+  "devices":
+  - "Washington"
+  "last_modified": "2022-11-09 01:23:16.108521"
+  "last_modified_by": "admin"
+  "link_color": ""
+  "link_color_invert": !!bool "false"
+  "link_color_match": "inclusion"
+  "link_creator": ""
+  "link_creator_invert": !!bool "false"
+  "link_creator_match": "inclusion"
+  "link_description": ""
+  "link_description_invert": !!bool "false"
+  "link_description_match": "inclusion"
+  "link_destination_name": ""
+  "link_destination_name_invert": !!bool "false"
+  "link_destination_name_match": "inclusion"
+  "link_location": ""
+  "link_location_invert": !!bool "false"
+  "link_location_match": "inclusion"
+  "link_model": ""
+  "link_model_invert": !!bool "false"
+  "link_model_match": "inclusion"
+  "link_name": ""
+  "link_name_invert": !!bool "false"
+  "link_name_match": "inclusion"
+  "link_source_name": ""
+  "link_source_name_invert": !!bool "false"
+  "link_source_name_match": "inclusion"
+  "link_subtype": ""
+  "link_subtype_invert": !!bool "false"
+  "link_subtype_match": "inclusion"
+  "link_vendor": ""
+  "link_vendor_invert": !!bool "false"
+  "link_vendor_match": "inclusion"
+  "links": []
+  "manually_defined": !!bool "false"
+  "name": "Washington"
+  "owners": []
+  "property1": "CP"
+  "rbac_edit": []
+  "rbac_group_rbac_configuration": []
+  "rbac_group_rbac_connect": []
+  "rbac_group_rbac_edit": []
+  "rbac_group_rbac_read": []
+  "rbac_group_rbac_target": []
+  "rbac_read":
+  - "Admin User"
+  "target_services":
+  - "Parameterized Targets"
+  - "Parameterized Run with a Superworkflow"
+  "tasks": []
+  "type": "pool"
+- "admin_only": !!bool "false"
+  "creator": "admin"
+  "description": "Used for testing credentials"
+  "device_configuration": ""
+  "device_configuration_invert": !!bool "false"
+  "device_configuration_match": "inclusion"
+  "device_creator": ""
+  "device_creator_invert": !!bool "false"
+  "device_creator_match": "inclusion"
+  "device_description": ""
+  "device_description_invert": !!bool "false"
+  "device_description_match": "inclusion"
+  "device_icon": ""
+  "device_icon_invert": !!bool "false"
+  "device_icon_match": "inclusion"
+  "device_ip_address": ""
+  "device_ip_address_invert": !!bool "false"
+  "device_ip_address_match": "inclusion"
+  "device_latitude": ""
+  "device_latitude_invert": !!bool "false"
+  "device_latitude_match": "inclusion"
+  "device_location": ""
+  "device_location_invert": !!bool "false"
+  "device_location_match": "inclusion"
+  "device_longitude": ""
+  "device_longitude_invert": !!bool "false"
+  "device_longitude_match": "inclusion"
+  "device_model": ""
+  "device_model_invert": !!bool "false"
+  "device_model_match": "inclusion"
+  "device_name": "Austin"
+  "device_name_invert": !!bool "false"
+  "device_name_match": "inclusion"
+  "device_napalm_driver": ""
+  "device_napalm_driver_invert": !!bool "false"
+  "device_napalm_driver_match": "inclusion"
+  "device_netconf_driver": ""
+  "device_netconf_driver_invert": !!bool "false"
+  "device_netconf_driver_match": "inclusion"
+  "device_netmiko_driver": ""
+  "device_netmiko_driver_invert": !!bool "false"
+  "device_netmiko_driver_match": "inclusion"
+  "device_operating_system": ""
+  "device_operating_system_invert": !!bool "false"
+  "device_operating_system_match": "inclusion"
+  "device_operational_data": ""
+  "device_operational_data_invert": !!bool "false"
+  "device_operational_data_match": "inclusion"
+  "device_os_version": ""
+  "device_os_version_invert": !!bool "false"
+  "device_os_version_match": "inclusion"
+  "device_port": ""
+  "device_port_invert": !!bool "false"
+  "device_port_match": "inclusion"
+  "device_property1": ""
+  "device_property1_invert": !!bool "false"
+  "device_property1_match": "inclusion"
+  "device_scrapli_driver": ""
+  "device_scrapli_driver_invert": !!bool "false"
+  "device_scrapli_driver_match": "inclusion"
+  "device_specialized_data": ""
+  "device_specialized_data_invert": !!bool "false"
+  "device_specialized_data_match": "inclusion"
+  "device_subtype": ""
+  "device_subtype_invert": !!bool "false"
+  "device_subtype_match": "inclusion"
+  "device_vendor": ""
+  "device_vendor_invert": !!bool "false"
+  "device_vendor_match": "inclusion"
+  "devices":
+  - "Austin"
+  - "Austin-2"
+  - "Austin-3"
+  "last_modified": "2022-11-09 01:23:16.111023"
+  "last_modified_by": "admin"
+  "link_color": ""
+  "link_color_invert": !!bool "false"
+  "link_color_match": "inclusion"
+  "link_creator": ""
+  "link_creator_invert": !!bool "false"
+  "link_creator_match": "inclusion"
+  "link_description": ""
+  "link_description_invert": !!bool "false"
+  "link_description_match": "inclusion"
+  "link_destination_name": ""
+  "link_destination_name_invert": !!bool "false"
+  "link_destination_name_match": "inclusion"
+  "link_location": ""
+  "link_location_invert": !!bool "false"
+  "link_location_match": "inclusion"
+  "link_model": ""
+  "link_model_invert": !!bool "false"
+  "link_model_match": "inclusion"
+  "link_name": ""
+  "link_name_invert": !!bool "false"
+  "link_name_match": "inclusion"
+  "link_source_name": ""
+  "link_source_name_invert": !!bool "false"
+  "link_source_name_match": "inclusion"
+  "link_subtype": ""
+  "link_subtype_invert": !!bool "false"
+  "link_subtype_match": "inclusion"
+  "link_vendor": ""
+  "link_vendor_invert": !!bool "false"
+  "link_vendor_match": "inclusion"
+  "links": []
+  "manually_defined": !!bool "false"
+  "name": "Credentials pool - Austin devices"
+  "owners": []
+  "property1": "CP"
+  "rbac_edit": []
+  "rbac_group_rbac_configuration": []
+  "rbac_group_rbac_connect": []
+  "rbac_group_rbac_edit": []
+  "rbac_group_rbac_read": []
+  "rbac_group_rbac_target": []
+  "rbac_read":
+  - "Admin User"
+  "target_services":
+  - "(R) Credentials (Password & Key, Priority Mechanism)"
+  "tasks": []
+  "type": "pool"
+- "admin_only": !!bool "false"
+  "creator": "admin"
+  "description": "Used for testing credentials\t"
+  "device_configuration": ""
+  "device_configuration_invert": !!bool "false"
+  "device_configuration_match": "inclusion"
+  "device_creator": ""
+  "device_creator_invert": !!bool "false"
+  "device_creator_match": "inclusion"
+  "device_description": ""
+  "device_description_invert": !!bool "false"
+  "device_description_match": "inclusion"
+  "device_icon": ""
+  "device_icon_invert": !!bool "false"
+  "device_icon_match": "inclusion"
+  "device_ip_address": ""
+  "device_ip_address_invert": !!bool "false"
+  "device_ip_address_match": "inclusion"
+  "device_latitude": ""
+  "device_latitude_invert": !!bool "false"
+  "device_latitude_match": "inclusion"
+  "device_location": ""
+  "device_location_invert": !!bool "false"
+  "device_location_match": "inclusion"
+  "device_longitude": ""
+  "device_longitude_invert": !!bool "false"
+  "device_longitude_match": "inclusion"
+  "device_model": ""
+  "device_model_invert": !!bool "false"
+  "device_model_match": "inclusion"
+  "device_name": "Austin-3"
+  "device_name_invert": !!bool "false"
+  "device_name_match": "equality"
+  "device_napalm_driver": ""
+  "device_napalm_driver_invert": !!bool "false"
+  "device_napalm_driver_match": "inclusion"
+  "device_netconf_driver": ""
+  "device_netconf_driver_invert": !!bool "false"
+  "device_netconf_driver_match": "inclusion"
+  "device_netmiko_driver": ""
+  "device_netmiko_driver_invert": !!bool "false"
+  "device_netmiko_driver_match": "inclusion"
+  "device_operating_system": ""
+  "device_operating_system_invert": !!bool "false"
+  "device_operating_system_match": "inclusion"
+  "device_operational_data": ""
+  "device_operational_data_invert": !!bool "false"
+  "device_operational_data_match": "inclusion"
+  "device_os_version": ""
+  "device_os_version_invert": !!bool "false"
+  "device_os_version_match": "inclusion"
+  "device_port": ""
+  "device_port_invert": !!bool "false"
+  "device_port_match": "inclusion"
+  "device_property1": ""
+  "device_property1_invert": !!bool "false"
+  "device_property1_match": "inclusion"
+  "device_scrapli_driver": ""
+  "device_scrapli_driver_invert": !!bool "false"
+  "device_scrapli_driver_match": "inclusion"
+  "device_specialized_data": ""
+  "device_specialized_data_invert": !!bool "false"
+  "device_specialized_data_match": "inclusion"
+  "device_subtype": ""
+  "device_subtype_invert": !!bool "false"
+  "device_subtype_match": "inclusion"
+  "device_vendor": ""
+  "device_vendor_invert": !!bool "false"
+  "device_vendor_match": "inclusion"
+  "devices":
+  - "Austin-3"
+  "last_modified": "2022-11-09 01:23:16.113643"
+  "last_modified_by": "admin"
+  "link_color": ""
+  "link_color_invert": !!bool "false"
+  "link_color_match": "inclusion"
+  "link_creator": ""
+  "link_creator_invert": !!bool "false"
+  "link_creator_match": "inclusion"
+  "link_description": ""
+  "link_description_invert": !!bool "false"
+  "link_description_match": "inclusion"
+  "link_destination_name": ""
+  "link_destination_name_invert": !!bool "false"
+  "link_destination_name_match": "inclusion"
+  "link_location": ""
+  "link_location_invert": !!bool "false"
+  "link_location_match": "inclusion"
+  "link_model": ""
+  "link_model_invert": !!bool "false"
+  "link_model_match": "inclusion"
+  "link_name": ""
+  "link_name_invert": !!bool "false"
+  "link_name_match": "inclusion"
+  "link_source_name": ""
+  "link_source_name_invert": !!bool "false"
+  "link_source_name_match": "inclusion"
+  "link_subtype": ""
+  "link_subtype_invert": !!bool "false"
+  "link_subtype_match": "inclusion"
+  "link_vendor": ""
+  "link_vendor_invert": !!bool "false"
+  "link_vendor_match": "inclusion"
+  "links": []
+  "manually_defined": !!bool "false"
+  "name": "Credentials pool - Austin-3 alone"
+  "owners": []
+  "property1": "CP"
+  "rbac_edit": []
+  "rbac_group_rbac_configuration": []
+  "rbac_group_rbac_connect": []
+  "rbac_group_rbac_edit": []
+  "rbac_group_rbac_read": []
+  "rbac_group_rbac_target": []
+  "rbac_read":
+  - "Admin User"
+  "target_services": []
+  "tasks": []
+  "type": "pool"
+- "admin_only": !!bool "false"
+  "creator": "admin"
+  "description": ""
+  "device_configuration": ""
+  "device_configuration_invert": !!bool "false"
+  "device_configuration_match": "inclusion"
+  "device_creator": ""
+  "device_creator_invert": !!bool "false"
+  "device_creator_match": "inclusion"
+  "device_description": ""
+  "device_description_invert": !!bool "false"
+  "device_description_match": "inclusion"
+  "device_icon": ""
+  "device_icon_invert": !!bool "false"
+  "device_icon_match": "inclusion"
+  "device_ip_address": ""
+  "device_ip_address_invert": !!bool "false"
+  "device_ip_address_match": "inclusion"
+  "device_latitude": ""
+  "device_latitude_invert": !!bool "false"
+  "device_latitude_match": "inclusion"
+  "device_location": ""
+  "device_location_invert": !!bool "false"
+  "device_location_match": "inclusion"
+  "device_longitude": ""
+  "device_longitude_invert": !!bool "false"
+  "device_longitude_match": "inclusion"
+  "device_model": ""
+  "device_model_invert": !!bool "false"
+  "device_model_match": "inclusion"
+  "device_name": "router.*"
+  "device_name_invert": !!bool "false"
+  "device_name_match": "regex"
+  "device_napalm_driver": ""
+  "device_napalm_driver_invert": !!bool "false"
+  "device_napalm_driver_match": "inclusion"
+  "device_netconf_driver": ""
+  "device_netconf_driver_invert": !!bool "false"
+  "device_netconf_driver_match": "inclusion"
+  "device_netmiko_driver": ""
+  "device_netmiko_driver_invert": !!bool "false"
+  "device_netmiko_driver_match": "inclusion"
+  "device_operating_system": ""
+  "device_operating_system_invert": !!bool "false"
+  "device_operating_system_match": "inclusion"
+  "device_operational_data": ""
+  "device_operational_data_invert": !!bool "false"
+  "device_operational_data_match": "inclusion"
+  "device_os_version": ""
+  "device_os_version_invert": !!bool "false"
+  "device_os_version_match": "inclusion"
+  "device_port": ""
+  "device_port_invert": !!bool "false"
+  "device_port_match": "inclusion"
+  "device_property1": ""
+  "device_property1_invert": !!bool "false"
+  "device_property1_match": "inclusion"
+  "device_scrapli_driver": ""
+  "device_scrapli_driver_invert": !!bool "false"
+  "device_scrapli_driver_match": "inclusion"
+  "device_specialized_data": ""
+  "device_specialized_data_invert": !!bool "false"
+  "device_specialized_data_match": "inclusion"
+  "device_subtype": ""
+  "device_subtype_invert": !!bool "false"
+  "device_subtype_match": "inclusion"
+  "device_vendor": ""
+  "device_vendor_invert": !!bool "false"
+  "device_vendor_match": "inclusion"
+  "devices":
+  - "router5"
+  - "router6"
+  - "router7"
+  - "router8"
+  - "router9"
+  - "router10 (public)"
+  - "router11"
+  - "router12"
+  - "router13"
+  - "router14"
+  - "router15"
+  - "router16"
+  - "router17"
+  - "router18 (public)"
+  - "router19"
+  - "router20 (admin)"
+  - "router21"
+  - "router22"
+  - "router23 (admin)"
+  - "router24"
+  - "router25"
+  - "router26"
+  - "router27"
+  - "router28"
+  - "router29"
+  - "router30"
+  - "router31"
+  - "router32"
+  - "router33"
+  - "router34"
+  - "router35"
+  - "router36"
+  - "router37"
+  "last_modified": "2022-11-09 01:23:16.117719"
+  "last_modified_by": "admin"
+  "link_color": ""
+  "link_color_invert": !!bool "false"
+  "link_color_match": "inclusion"
+  "link_creator": ""
+  "link_creator_invert": !!bool "false"
+  "link_creator_match": "inclusion"
+  "link_description": ""
+  "link_description_invert": !!bool "false"
+  "link_description_match": "inclusion"
+  "link_destination_name": ""
+  "link_destination_name_invert": !!bool "false"
+  "link_destination_name_match": "inclusion"
+  "link_location": ""
+  "link_location_invert": !!bool "false"
+  "link_location_match": "inclusion"
+  "link_model": ""
+  "link_model_invert": !!bool "false"
+  "link_model_match": "inclusion"
+  "link_name": ""
+  "link_name_invert": !!bool "false"
+  "link_name_match": "inclusion"
+  "link_source_name": ""
+  "link_source_name_invert": !!bool "false"
+  "link_source_name_match": "inclusion"
+  "link_subtype": ""
+  "link_subtype_invert": !!bool "false"
+  "link_subtype_match": "inclusion"
+  "link_vendor": ""
+  "link_vendor_invert": !!bool "false"
+  "link_vendor_match": "inclusion"
+  "links": []
+  "manually_defined": !!bool "false"
+  "name": "All routers in Europe"
+  "owners": []
+  "property1": "CP"
+  "rbac_edit": []
+  "rbac_group_rbac_configuration": []
+  "rbac_group_rbac_connect": []
+  "rbac_group_rbac_edit": []
+  "rbac_group_rbac_read": []
+  "rbac_group_rbac_target": []
+  "rbac_read":
+  - "Admin User"
+  "target_services": []
+  "tasks": []
+  "type": "pool"

@@ -1,2362 +1,2497 @@
-- color: '#000000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: Dallas
-  last_modified: '2023-03-30 12:56:37.346613'
-  last_modified_by: admin
-  location: ''
-  model: 10G
-  name: link0
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Houston
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: Atlanta
-  last_modified: '2023-03-30 12:56:37.351307'
-  last_modified_by: admin
-  location: ''
-  model: 10G
-  name: link1
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Jackson
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: Washington
-  last_modified: '2023-03-30 12:56:37.355388'
-  last_modified_by: admin
-  location: ''
-  model: 10G
-  name: link2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Baltimore
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: Chicago
-  last_modified: '2023-03-30 12:56:37.359527'
-  last_modified_by: admin
-  location: ''
-  model: 10G
-  name: link3
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Cleveland
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: Columbus
-  last_modified: '2023-03-30 12:56:37.362856'
-  last_modified_by: admin
-  location: ''
-  model: 10G
-  name: link4
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Cleveland
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: Detroit
-  last_modified: '2023-03-30 12:56:37.366932'
-  last_modified_by: admin
-  location: ''
-  model: 10G
-  name: link5
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Cleveland
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 40G
-  destination: Cincinnati
-  last_modified: '2023-03-30 12:56:37.371031'
-  last_modified_by: admin
-  location: ''
-  model: 40G
-  name: link6
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Cleveland
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 40G
-  destination: NewYork
-  last_modified: '2023-03-30 12:56:37.375918'
-  last_modified_by: admin
-  location: ''
-  model: 40G
-  name: link7
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Cleveland
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#ff0000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 40G
-  destination: SanJose
-  last_modified: '2023-03-30 12:56:37.380350'
-  last_modified_by: admin
-  location: ''
-  model: 40G
-  name: link8
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: PaloAlto
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#ff0000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 40G
-  destination: NewYork
-  last_modified: '2023-03-30 12:56:37.385285'
-  last_modified_by: admin
-  location: ''
-  model: 40G
-  name: link9
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Cambridge
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#ff0000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 40G
-  destination: Chicago
-  last_modified: '2023-03-30 12:56:37.390548'
-  last_modified_by: admin
-  location: ''
-  model: 40G
-  name: link10
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Minneapolis
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#ff0000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 40G
-  destination: Philadelphia
-  last_modified: '2023-03-30 12:56:37.395073'
-  last_modified_by: admin
-  location: ''
-  model: 40G
-  name: link11
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: NewYork
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#ff0000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 40G
-  destination: Washington
-  last_modified: '2023-03-30 12:56:37.400171'
-  last_modified_by: admin
-  location: ''
-  model: 40G
-  name: link12
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: NewYork
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#ff0000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 40G
-  destination: Dallas
-  last_modified: '2023-03-30 12:56:37.405001'
-  last_modified_by: admin
-  location: ''
-  model: 40G
-  name: link13
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Austin
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#ff0000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: SanJose
-  last_modified: '2023-03-30 12:56:37.409504'
-  last_modified_by: admin
-  location: ''
-  model: 100G
-  name: link14
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Washington
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#ff0000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: Richmond
-  last_modified: '2023-03-30 12:56:37.413710'
-  last_modified_by: admin
-  location: ''
-  model: 100G
-  name: link15
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Washington
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#ff0000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: Atlanta
-  last_modified: '2023-03-30 12:56:37.418736'
-  last_modified_by: admin
-  location: ''
-  model: 100G
-  name: link16
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Washington
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#ff0000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: Oakland
-  last_modified: '2023-03-30 12:56:37.422894'
-  last_modified_by: admin
-  location: ''
-  model: 100G
-  name: link17
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Sacramento
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#ff0000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: Boston
-  last_modified: '2023-03-30 12:56:37.427013'
-  last_modified_by: admin
-  location: ''
-  model: 100G
-  name: link18
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Chicago
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#ff0000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: Denver
-  last_modified: '2023-03-30 12:56:37.431317'
-  last_modified_by: admin
-  location: ''
-  model: 100G
-  name: link19
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Chicago
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: LosAngeles
-  last_modified: '2023-03-30 12:56:37.436009'
-  last_modified_by: admin
-  location: ''
-  model: 100G
-  name: link20
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: SanJose
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 400G
-  destination: Oakland
-  last_modified: '2023-03-30 12:56:37.440153'
-  last_modified_by: admin
-  location: ''
-  model: 400G
-  name: link21
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: SanJose
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 400G
-  destination: LosAngeles
-  last_modified: '2023-03-30 12:56:37.444359'
-  last_modified_by: admin
-  location: ''
-  model: 400G
-  name: link22
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: SanDiego
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 400G
-  destination: Oakland
-  last_modified: '2023-03-30 12:56:37.448729'
-  last_modified_by: admin
-  location: ''
-  model: 400G
-  name: link23
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: SanFrancisco
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 400G
-  destination: LosAngeles
-  last_modified: '2023-03-30 12:56:37.453836'
-  last_modified_by: admin
-  location: ''
-  model: 400G
-  name: link24
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Dallas
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 400G
-  destination: Atlanta
-  last_modified: '2023-03-30 12:56:37.458745'
-  last_modified_by: admin
-  location: ''
-  model: 400G
-  name: link25
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Dallas
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 400G
-  destination: LosAngeles
-  last_modified: '2023-03-30 12:56:37.462998'
-  last_modified_by: admin
-  location: ''
-  model: 400G
-  name: link26
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Orange
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: ''
-  custom_property: CP
-  description: optical fiber 400G
-  destination: Denver
-  last_modified: '2023-03-30 12:56:37.467442'
-  last_modified_by: admin
-  location: ''
-  model: 400G
-  name: link27
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Oakland
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: router32
-  last_modified: '2023-03-30 12:56:37.473157'
-  last_modified_by: admin
-  location: spain
-  model: ''
-  name: europe-link4 (admin)
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router30
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: router31
-  last_modified: '2023-03-30 12:56:37.478557'
-  last_modified_by: admin
-  location: spain
-  model: ''
-  name: europe-link5
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router32
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: router33
-  last_modified: '2023-03-30 12:56:37.483226'
-  last_modified_by: admin
-  location: spain
-  model: ''
-  name: europe-link6
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router31
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: router35
-  last_modified: '2023-03-30 12:56:37.487777'
-  last_modified_by: admin
-  location: spain
-  model: ''
-  name: europe-link7
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router33
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: router36
-  last_modified: '2023-03-30 12:56:37.491480'
-  last_modified_by: admin
-  location: spain
-  model: ''
-  name: europe-link8
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router35
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: router31
-  last_modified: '2023-03-30 12:56:37.494972'
-  last_modified_by: admin
-  location: spain
-  model: ''
-  name: europe-link9
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router36
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: router28
-  last_modified: '2023-03-30 12:56:37.498849'
-  last_modified_by: admin
-  location: spain
-  model: ''
-  name: europe-link10
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router31
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: router29
-  last_modified: '2023-03-30 12:56:37.502050'
-  last_modified_by: admin
-  location: spain
-  model: ''
-  name: europe-link11
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router28
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: router36
-  last_modified: '2023-03-30 12:56:37.505094'
-  last_modified_by: admin
-  location: spain
-  model: ''
-  name: europe-link12
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router29
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: router30
-  last_modified: '2023-03-30 12:56:37.508402'
-  last_modified_by: admin
-  location: spain
-  model: ''
-  name: europe-link13
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router28
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: router27
-  last_modified: '2023-03-30 12:56:37.511856'
-  last_modified_by: admin
-  location: spain
-  model: ''
-  name: europe-link14
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router36
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: router17
-  last_modified: '2023-03-30 12:56:37.516024'
-  last_modified_by: admin
-  location: spain
-  model: ''
-  name: europe-link15
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router35
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: router17
-  last_modified: '2023-03-30 12:56:37.520961'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link16
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router27
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 10G
-  destination: router16
-  last_modified: '2023-03-30 12:56:37.525176'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link17
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router17
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router34
-  last_modified: '2023-03-30 12:56:37.529184'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link18
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router16
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router12
-  last_modified: '2023-03-30 12:56:37.533105'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link19
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router34
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router22
-  last_modified: '2023-03-30 12:56:37.537171'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link20
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router12
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router23 (admin)
-  last_modified: '2023-03-30 12:56:37.541331'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link21
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router22
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router24
-  last_modified: '2023-03-30 12:56:37.544954'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link22
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router23 (admin)
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router24
-  last_modified: '2023-03-30 12:56:37.548527'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link23
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router15
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router12
-  last_modified: '2023-03-30 12:56:37.552107'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link24
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router15
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router18 (public)
-  last_modified: '2023-03-30 12:56:37.555047'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link25
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router15
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router19
-  last_modified: '2023-03-30 12:56:37.558269'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link26
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router18 (public)
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router21
-  last_modified: '2023-03-30 12:56:37.561342'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link27
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router19
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router24
-  last_modified: '2023-03-30 12:56:37.564437'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link28 (public)
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router21
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router20 (admin)
-  last_modified: '2023-03-30 12:56:37.569162'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link29
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router19
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router18 (public)
-  last_modified: '2023-03-30 12:56:37.572622'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link30
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router20 (admin)
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router8
-  last_modified: '2023-03-30 12:56:37.576400'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link31 (public)
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router20 (admin)
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router8
-  last_modified: '2023-03-30 12:56:37.580237'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link32
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router14
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router12
-  last_modified: '2023-03-30 12:56:37.584338'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link33
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router14
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router13
-  last_modified: '2023-03-30 12:56:37.589098'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link34
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router12
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router11
-  last_modified: '2023-03-30 12:56:37.592339'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link35
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router13
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router10 (public)
-  last_modified: '2023-03-30 12:56:37.596054'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link36
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router11
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router16
-  last_modified: '2023-03-30 12:56:37.601025'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link37
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router10 (public)
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router7
-  last_modified: '2023-03-30 12:56:37.605976'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link38
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router10 (public)
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router6
-  last_modified: '2023-03-30 12:56:37.609714'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link39
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router13
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router8
-  last_modified: '2023-03-30 12:56:37.613525'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link40 (admin)
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router7
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router21
-  last_modified: '2023-03-30 12:56:37.618723'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link41
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router14
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router25
-  last_modified: '2023-03-30 12:56:37.621844'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link42
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router6
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router5
-  last_modified: '2023-03-30 12:56:37.624977'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link43
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router25
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router26
-  last_modified: '2023-03-30 12:56:37.629687'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link44
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router5
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router9
-  last_modified: '2023-03-30 12:56:37.639095'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link45
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router5
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router26
-  last_modified: '2023-03-30 12:56:37.645923'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link46
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router26
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router17
-  last_modified: '2023-03-30 12:56:37.654724'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link47
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router9
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router10 (public)
-  last_modified: '2023-03-30 12:56:37.661824'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link48
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router9
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router11
-  last_modified: '2023-03-30 12:56:37.669630'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link49
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router16
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router37
-  last_modified: '2023-03-30 12:56:37.676318'
-  last_modified_by: admin
-  location: spain
-  model: ''
-  name: europe-link50
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router32
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router33
-  last_modified: '2023-03-30 12:56:37.685918'
-  last_modified_by: admin
-  location: spain
-  model: ''
-  name: europe-link51
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router37
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: ''
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router25
-  last_modified: '2023-03-30 12:56:37.694411'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link52
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router26
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#FF7C01'
-  creator: ''
-  custom_property: CP
-  description: ''
-  destination: Boston
-  last_modified: '2023-03-30 12:56:37.703358'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: atlantic-r26-boston-1
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router26
-  subtype: ''
-  type: link
-  vendor: ''
-- color: '#FF7C01'
-  creator: ''
-  custom_property: CP
-  description: ''
-  destination: Boston
-  last_modified: '2023-03-30 12:56:37.711124'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: atlantic-r26-boston-2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router26
-  subtype: ''
-  type: link
-  vendor: ''
-- color: '#FF7C01'
-  creator: ''
-  custom_property: CP
-  description: ''
-  destination: NewYork
-  last_modified: '2023-03-30 12:56:37.720252'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: atlantic-r26-ny
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router26
-  subtype: ''
-  type: link
-  vendor: ''
-- color: '#FF7C01'
-  creator: ''
-  custom_property: CP
-  description: ''
-  destination: Washington
-  last_modified: '2023-03-30 12:56:37.728630'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: atlantic-r26-washington
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router26
-  subtype: ''
-  type: link
-  vendor: ''
-- color: '#FF7C01'
-  creator: ''
-  custom_property: CP
-  description: ''
-  destination: NewYork
-  last_modified: '2023-03-30 12:56:37.737275'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: atlantic-r28-ny
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router28
-  subtype: ''
-  type: link
-  vendor: ''
-- color: '#FF7C01'
-  creator: ''
-  custom_property: CP
-  description: ''
-  destination: Washington
-  last_modified: '2023-03-30 12:56:37.742736'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: atlantic-r28-washington
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router28
-  subtype: ''
-  type: link
-  vendor: ''
-- color: '#FF7C01'
-  creator: ''
-  custom_property: CP
-  description: ''
-  destination: Boston
-  last_modified: '2023-03-30 12:56:37.746146'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: atlantic-r20-boston-1
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router20 (admin)
-  subtype: ''
-  type: link
-  vendor: ''
-- color: '#FF7C01'
-  creator: ''
-  custom_property: CP
-  description: ''
-  destination: Richmond
-  last_modified: '2023-03-30 12:56:37.750094'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: atlantic-r20-richmond-2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router20 (admin)
-  subtype: ''
-  type: link
-  vendor: ''
-- color: '#FF7C01'
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: Boston
-  last_modified: '2023-03-30 12:56:37.754089'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: atlantic-r26-boston-3
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router26
-  subtype: ''
-  type: link
-  vendor: ''
-- color: '#FF7C01'
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: Boston
-  last_modified: '2023-03-30 12:56:37.757939'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: atlantic-r20-boston-2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router20 (admin)
-  subtype: ''
-  type: link
-  vendor: ''
-- color: '#FF7C01'
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: Richmond
-  last_modified: '2023-03-30 12:56:37.761573'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: atlantic-r20-richmond-1
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router20 (admin)
-  subtype: ''
-  type: link
-  vendor: ''
-- color: '#0000ff'
-  creator: admin
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router18 (public)
-  last_modified: '2023-03-30 12:56:37.765199'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link30-2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router20 (admin)
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: admin
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router8
-  last_modified: '2023-03-30 12:56:37.769784'
-  last_modified_by: admin
-  location: eastern europe
-  model: ''
-  name: europe-link31-2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router20 (admin)
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: admin
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router11
-  last_modified: '2023-03-30 12:56:37.773381'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link35-2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router13
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#0000ff'
-  creator: admin
-  custom_property: CP
-  description: optical fiber 100G
-  destination: router11
-  last_modified: '2023-03-30 12:56:37.778489'
-  last_modified_by: admin
-  location: france
-  model: ''
-  name: europe-link35-3
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: router13
-  subtype: OTU2
-  type: link
-  vendor: Ciena
-- color: '#FF7C01'
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: router26
-  last_modified: '2023-03-30 12:56:37.782280'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: atlantic-r26-boston-4-inverted
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Boston
-  subtype: ''
-  type: link
-  vendor: ''
-- color: '#000000 '
-  creator: admin
-  custom_property: CP
-  description: optical fiber 400G
-  destination: Atlanta
-  last_modified: '2023-03-30 12:56:37.787422'
-  last_modified_by: admin
-  location: ''
-  model: 400G
-  name: link25-2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Dallas
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: admin
-  custom_property: CP
-  description: optical fiber 400G
-  destination: Atlanta
-  last_modified: '2023-03-30 12:56:37.791250'
-  last_modified_by: admin
-  location: ''
-  model: 400G
-  name: link25-3
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Dallas
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: admin
-  custom_property: CP
-  description: optical fiber 400G
-  destination: Atlanta
-  last_modified: '2023-03-30 12:56:37.795398'
-  last_modified_by: admin
-  location: ''
-  model: 400G
-  name: link25-dallas2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Dallas-2
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: admin
-  custom_property: CP
-  description: optical fiber 400G
-  destination: Dallas-2
-  last_modified: '2023-03-30 12:56:37.800282'
-  last_modified_by: admin
-  location: ''
-  model: 400G
-  name: link25-reversed
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Atlanta
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#000000 '
-  creator: admin
-  custom_property: CP
-  description: optical fiber 400G
-  destination: Dallas-3
-  last_modified: '2023-03-30 12:56:37.804842'
-  last_modified_by: admin
-  location: ''
-  model: 400G
-  name: link25-reversed-2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Atlanta
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: '#ff0000 '
-  creator: admin
-  custom_property: CP
-  description: optical fiber 40G
-  destination: Dallas-3
-  last_modified: '2023-03-30 12:56:37.808690'
-  last_modified_by: admin
-  location: ''
-  model: 40G
-  name: link13-2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Austin-2
-  subtype: ODU2
-  type: link
-  vendor: Ciena
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: Router 2
-  last_modified: '2023-03-30 12:56:37.813558'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R1 - R2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Router 1
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: Router 3
-  last_modified: '2023-03-30 12:56:37.818608'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R2 - R3
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Router 2
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: Router 3
-  last_modified: '2023-03-30 12:56:37.822564'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R1 - R3
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Router 1
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: Subnetwork 1 - R2
-  last_modified: '2023-03-30 12:56:37.826150'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: Subnetwork 1 - L1
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Subnetwork 1 - R1
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: Subnetwork 2 - G2
-  last_modified: '2023-03-30 12:56:37.829419'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: Subnetwork 2 - L1
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Subnetwork 2 - G1
-  subtype: ''
-  type: link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: Duplication - R1
-  last_modified: '2023-03-30 12:56:37.833122'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: G1 - R1
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Duplication - G1
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: '#000000'
-  creator: ''
-  custom_property: CP
-  description: ''
-  last_modified: '2023-03-30 12:56:37.837571'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: Duplicate 1 - 2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Duplicate me 1
-  subtype: ''
-  type: link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: Subnetwork 1 - R3
-  last_modified: '2023-03-30 12:56:37.841284'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: Subnetwork 1 - L2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Subnetwork 1 - R1
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: Subnetwork 1 - R2
-  last_modified: '2023-03-30 12:56:37.844843'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: Subnetwork 1 - L3
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: Subnetwork 1 - R3
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R2
-  last_modified: '2023-03-30 12:56:37.848211'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R3 -> R2 L1
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R3
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R2
-  last_modified: '2023-03-30 12:56:37.852700'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R3 -> R2 L2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R3
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R2
-  last_modified: '2023-03-30 12:56:37.856671'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R3 -> R2 L3
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R3
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R2
-  last_modified: '2023-03-30 12:56:37.860409'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R3 -> R2 L4
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R3
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R3
-  last_modified: '2023-03-30 12:56:37.864028'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R3 Loopback 1
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R3
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R1
-  last_modified: '2023-03-30 12:56:37.868873'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R1 Loopback 1
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R1
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R2
-  last_modified: '2023-03-30 12:56:37.872149'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R1 -> R2 L1
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R1
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R2
-  last_modified: '2023-03-30 12:56:37.875829'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R1 -> R2 L2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R1
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R2
-  last_modified: '2023-03-30 12:56:37.879508'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R1 -> R2 L3
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R1
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R3
-  last_modified: '2023-03-30 12:56:37.883602'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R1 -> R3 L1
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R1
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R1
-  last_modified: '2023-03-30 12:56:37.888164'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R3 -> R1 L2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R3
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R1
-  last_modified: '2023-03-30 12:56:37.892165'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R3 -> R1 L3
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R3
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R1
-  last_modified: '2023-03-30 12:56:37.896519'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R3 -> R1 L4
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R3
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R4
-  last_modified: '2023-03-30 12:56:37.901638'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R2 -> R4 L1
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R2
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R4
-  last_modified: '2023-03-30 12:56:37.906286'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R2 -> R4 L2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R2
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R2
-  last_modified: '2023-03-30 12:56:37.910606'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R4 -> R2 L3
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R4
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R4
-  last_modified: '2023-03-30 12:56:37.914877'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R4 Loopback 1
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R4
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R4
-  last_modified: '2023-03-30 12:56:37.921521'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R1 - R4
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R1
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R4
-  last_modified: '2023-03-30 12:56:37.925875'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R3 -> R4 L1
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R3
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R4
-  last_modified: '2023-03-30 12:56:37.929623'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R3 -> R4 L2
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R3
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R4
-  last_modified: '2023-03-30 12:56:37.933935'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R3 -> R4 L3
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R3
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R4
-  last_modified: '2023-03-30 12:56:37.937843'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R3 -> R4 L4
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R3
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R3
-  last_modified: '2023-03-30 12:56:37.941115'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R4 -> R3 L5
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R4
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R3
-  last_modified: '2023-03-30 12:56:37.945131'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R4 -> R3 L6
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R4
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R3
-  last_modified: '2023-03-30 12:56:37.948823'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R4 -> R3 L7
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R4
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S5 R3
-  last_modified: '2023-03-30 12:56:37.952230'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: R4 -> R3 L8
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S5 R4
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
-- color: ''
-  creator: admin
-  custom_property: CP
-  description: ''
-  destination: S6 L3 R2
-  last_modified: '2023-03-30 12:56:37.955842'
-  last_modified_by: admin
-  location: ''
-  model: ''
-  name: S6 L1
-  owners: []
-  rbac_edit: []
-  rbac_read: [Admin User]
-  source: S6 L3 R1
-  speed: '22'
-  standard: 10BASE2
-  subtype: ''
-  type: ethernet_link
-  vendor: ''
+- "color": "#000000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "Dallas"
+  "last_modified": "2023-05-12 10:56:16.010630"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "10G"
+  "name": "link0"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Houston"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "Atlanta"
+  "last_modified": "2023-05-12 10:56:16.015290"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "10G"
+  "name": "link1"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Jackson"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "Washington"
+  "last_modified": "2023-05-12 10:56:16.018549"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "10G"
+  "name": "link2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Baltimore"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "Chicago"
+  "last_modified": "2023-05-12 10:56:16.021996"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "10G"
+  "name": "link3"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Cleveland"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "Columbus"
+  "last_modified": "2023-05-12 10:56:16.024966"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "10G"
+  "name": "link4"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Cleveland"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "Detroit"
+  "last_modified": "2023-05-12 10:56:16.028229"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "10G"
+  "name": "link5"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Cleveland"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 40G"
+  "destination": "Cincinnati"
+  "last_modified": "2023-05-12 10:56:16.033344"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "40G"
+  "name": "link6"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Cleveland"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 40G"
+  "destination": "NewYork"
+  "last_modified": "2023-05-12 10:56:16.037289"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "40G"
+  "name": "link7"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Cleveland"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#ff0000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 40G"
+  "destination": "SanJose"
+  "last_modified": "2023-05-12 10:56:16.041340"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "40G"
+  "name": "link8"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "PaloAlto"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#ff0000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 40G"
+  "destination": "NewYork"
+  "last_modified": "2023-05-12 10:56:16.045018"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "40G"
+  "name": "link9"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Cambridge"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#ff0000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 40G"
+  "destination": "Chicago"
+  "last_modified": "2023-05-12 10:56:16.052430"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "40G"
+  "name": "link10"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Minneapolis"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#ff0000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 40G"
+  "destination": "Philadelphia"
+  "last_modified": "2023-05-12 10:56:16.057667"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "40G"
+  "name": "link11"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "NewYork"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#ff0000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 40G"
+  "destination": "Washington"
+  "last_modified": "2023-05-12 10:56:16.062093"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "40G"
+  "name": "link12"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "NewYork"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#ff0000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 40G"
+  "destination": "Dallas"
+  "last_modified": "2023-05-12 10:56:16.067020"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "40G"
+  "name": "link13"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Austin"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#ff0000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "SanJose"
+  "last_modified": "2023-05-12 10:56:16.070794"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "100G"
+  "name": "link14"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Washington"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#ff0000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "Richmond"
+  "last_modified": "2023-05-12 10:56:16.074407"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "100G"
+  "name": "link15"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Washington"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#ff0000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "Atlanta"
+  "last_modified": "2023-05-12 10:56:16.077815"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "100G"
+  "name": "link16"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Washington"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#ff0000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "Oakland"
+  "last_modified": "2023-05-12 10:56:16.081070"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "100G"
+  "name": "link17"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Sacramento"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#ff0000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "Boston"
+  "last_modified": "2023-05-12 10:56:16.084959"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "100G"
+  "name": "link18"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Chicago"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#ff0000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "Denver"
+  "last_modified": "2023-05-12 10:56:16.089582"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "100G"
+  "name": "link19"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Chicago"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "LosAngeles"
+  "last_modified": "2023-05-12 10:56:16.093558"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "100G"
+  "name": "link20"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "SanJose"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 400G"
+  "destination": "Oakland"
+  "last_modified": "2023-05-12 10:56:16.097806"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "400G"
+  "name": "link21"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "SanJose"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 400G"
+  "destination": "LosAngeles"
+  "last_modified": "2023-05-12 10:56:16.103172"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "400G"
+  "name": "link22"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "SanDiego"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 400G"
+  "destination": "Oakland"
+  "last_modified": "2023-05-12 10:56:16.107289"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "400G"
+  "name": "link23"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "SanFrancisco"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 400G"
+  "destination": "LosAngeles"
+  "last_modified": "2023-05-12 10:56:16.110774"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "400G"
+  "name": "link24"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Dallas"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 400G"
+  "destination": "Atlanta"
+  "last_modified": "2023-05-12 10:56:16.115010"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "400G"
+  "name": "link25"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Dallas"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 400G"
+  "destination": "LosAngeles"
+  "last_modified": "2023-05-12 10:56:16.118706"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "400G"
+  "name": "link26"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Orange"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 400G"
+  "destination": "Denver"
+  "last_modified": "2023-05-12 10:56:16.122978"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "400G"
+  "name": "link27"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Oakland"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "router32"
+  "last_modified": "2023-05-12 10:56:16.135015"
+  "last_modified_by": "admin"
+  "location": "spain"
+  "model": ""
+  "name": "europe-link4 (admin)"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router30"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "router31"
+  "last_modified": "2023-05-12 10:56:16.139047"
+  "last_modified_by": "admin"
+  "location": "spain"
+  "model": ""
+  "name": "europe-link5"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router32"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "router33"
+  "last_modified": "2023-05-12 10:56:16.143182"
+  "last_modified_by": "admin"
+  "location": "spain"
+  "model": ""
+  "name": "europe-link6"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router31"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "router35"
+  "last_modified": "2023-05-12 10:56:16.147484"
+  "last_modified_by": "admin"
+  "location": "spain"
+  "model": ""
+  "name": "europe-link7"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router33"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "router36"
+  "last_modified": "2023-05-12 10:56:16.151655"
+  "last_modified_by": "admin"
+  "location": "spain"
+  "model": ""
+  "name": "europe-link8"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router35"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "router31"
+  "last_modified": "2023-05-12 10:56:16.155723"
+  "last_modified_by": "admin"
+  "location": "spain"
+  "model": ""
+  "name": "europe-link9"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router36"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "router28"
+  "last_modified": "2023-05-12 10:56:16.159657"
+  "last_modified_by": "admin"
+  "location": "spain"
+  "model": ""
+  "name": "europe-link10"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router31"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "router29"
+  "last_modified": "2023-05-12 10:56:16.163640"
+  "last_modified_by": "admin"
+  "location": "spain"
+  "model": ""
+  "name": "europe-link11"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router28"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "router36"
+  "last_modified": "2023-05-12 10:56:16.167876"
+  "last_modified_by": "admin"
+  "location": "spain"
+  "model": ""
+  "name": "europe-link12"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router29"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "router30"
+  "last_modified": "2023-05-12 10:56:16.171944"
+  "last_modified_by": "admin"
+  "location": "spain"
+  "model": ""
+  "name": "europe-link13"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router28"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "router27"
+  "last_modified": "2023-05-12 10:56:16.176366"
+  "last_modified_by": "admin"
+  "location": "spain"
+  "model": ""
+  "name": "europe-link14"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router36"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "router17"
+  "last_modified": "2023-05-12 10:56:16.180401"
+  "last_modified_by": "admin"
+  "location": "spain"
+  "model": ""
+  "name": "europe-link15"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router35"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "router17"
+  "last_modified": "2023-05-12 10:56:16.184639"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link16"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router27"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 10G"
+  "destination": "router16"
+  "last_modified": "2023-05-12 10:56:16.188889"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link17"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router17"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router34"
+  "last_modified": "2023-05-12 10:56:16.192669"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link18"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router16"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router12"
+  "last_modified": "2023-05-12 10:56:16.196304"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link19"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router34"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router22"
+  "last_modified": "2023-05-12 10:56:16.199427"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link20"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router12"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router23 (admin)"
+  "last_modified": "2023-05-12 10:56:16.202792"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link21"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router22"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router24"
+  "last_modified": "2023-05-12 10:56:16.206161"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link22"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router23 (admin)"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router24"
+  "last_modified": "2023-05-12 10:56:16.209675"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link23"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router15"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router12"
+  "last_modified": "2023-05-12 10:56:16.214072"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link24"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router15"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router18 (public)"
+  "last_modified": "2023-05-12 10:56:16.223155"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link25"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router15"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router19"
+  "last_modified": "2023-05-12 10:56:16.235040"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link26"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router18 (public)"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router21"
+  "last_modified": "2023-05-12 10:56:16.239246"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link27"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router19"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router24"
+  "last_modified": "2023-05-12 10:56:16.243513"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link28 (public)"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router21"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router20 (admin)"
+  "last_modified": "2023-05-12 10:56:16.247769"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link29"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router19"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router18 (public)"
+  "last_modified": "2023-05-12 10:56:16.251481"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link30"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router20 (admin)"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router8"
+  "last_modified": "2023-05-12 10:56:16.255174"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link31 (public)"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router20 (admin)"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router8"
+  "last_modified": "2023-05-12 10:56:16.259438"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link32"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router14"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router12"
+  "last_modified": "2023-05-12 10:56:16.263613"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link33"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router14"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router13"
+  "last_modified": "2023-05-12 10:56:16.267502"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link34"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router12"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router11"
+  "last_modified": "2023-05-12 10:56:16.270946"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link35"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router13"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router10 (public)"
+  "last_modified": "2023-05-12 10:56:16.274569"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link36"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router11"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router16"
+  "last_modified": "2023-05-12 10:56:16.277911"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link37"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router10 (public)"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router7"
+  "last_modified": "2023-05-12 10:56:16.281249"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link38"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router10 (public)"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router6"
+  "last_modified": "2023-05-12 10:56:16.284876"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link39"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router13"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router8"
+  "last_modified": "2023-05-12 10:56:16.288736"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link40 (admin)"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router7"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router21"
+  "last_modified": "2023-05-12 10:56:16.292638"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link41"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router14"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router25"
+  "last_modified": "2023-05-12 10:56:16.296634"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link42"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router6"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router5"
+  "last_modified": "2023-05-12 10:56:16.300194"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link43"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router25"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router26"
+  "last_modified": "2023-05-12 10:56:16.304097"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link44"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router5"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router9"
+  "last_modified": "2023-05-12 10:56:16.307632"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link45"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router5"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router26"
+  "last_modified": "2023-05-12 10:56:16.310763"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link46"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router26"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router17"
+  "last_modified": "2023-05-12 10:56:16.314166"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link47"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router9"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router10 (public)"
+  "last_modified": "2023-05-12 10:56:16.317493"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link48"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router9"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router11"
+  "last_modified": "2023-05-12 10:56:16.320903"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link49"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router16"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router37"
+  "last_modified": "2023-05-12 10:56:16.325120"
+  "last_modified_by": "admin"
+  "location": "spain"
+  "model": ""
+  "name": "europe-link50"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router32"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router33"
+  "last_modified": "2023-05-12 10:56:16.329642"
+  "last_modified_by": "admin"
+  "location": "spain"
+  "model": ""
+  "name": "europe-link51"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router37"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": ""
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router25"
+  "last_modified": "2023-05-12 10:56:16.333675"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link52"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router26"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#FF7C01"
+  "creator": ""
+  "custom_property": "CP"
+  "description": ""
+  "destination": "Boston"
+  "last_modified": "2023-05-12 10:56:16.338453"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "atlantic-r26-boston-1"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router26"
+  "subtype": ""
+  "type": "link"
+  "vendor": ""
+- "color": "#FF7C01"
+  "creator": ""
+  "custom_property": "CP"
+  "description": ""
+  "destination": "Boston"
+  "last_modified": "2023-05-12 10:56:16.342360"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "atlantic-r26-boston-2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router26"
+  "subtype": ""
+  "type": "link"
+  "vendor": ""
+- "color": "#FF7C01"
+  "creator": ""
+  "custom_property": "CP"
+  "description": ""
+  "destination": "NewYork"
+  "last_modified": "2023-05-12 10:56:16.346897"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "atlantic-r26-ny"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router26"
+  "subtype": ""
+  "type": "link"
+  "vendor": ""
+- "color": "#FF7C01"
+  "creator": ""
+  "custom_property": "CP"
+  "description": ""
+  "destination": "Washington"
+  "last_modified": "2023-05-12 10:56:16.350975"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "atlantic-r26-washington"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router26"
+  "subtype": ""
+  "type": "link"
+  "vendor": ""
+- "color": "#FF7C01"
+  "creator": ""
+  "custom_property": "CP"
+  "description": ""
+  "destination": "NewYork"
+  "last_modified": "2023-05-12 10:56:16.354803"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "atlantic-r28-ny"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router28"
+  "subtype": ""
+  "type": "link"
+  "vendor": ""
+- "color": "#FF7C01"
+  "creator": ""
+  "custom_property": "CP"
+  "description": ""
+  "destination": "Washington"
+  "last_modified": "2023-05-12 10:56:16.358782"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "atlantic-r28-washington"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router28"
+  "subtype": ""
+  "type": "link"
+  "vendor": ""
+- "color": "#FF7C01"
+  "creator": ""
+  "custom_property": "CP"
+  "description": ""
+  "destination": "Boston"
+  "last_modified": "2023-05-12 10:56:16.362928"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "atlantic-r20-boston-1"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router20 (admin)"
+  "subtype": ""
+  "type": "link"
+  "vendor": ""
+- "color": "#FF7C01"
+  "creator": ""
+  "custom_property": "CP"
+  "description": ""
+  "destination": "Richmond"
+  "last_modified": "2023-05-12 10:56:16.366913"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "atlantic-r20-richmond-2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router20 (admin)"
+  "subtype": ""
+  "type": "link"
+  "vendor": ""
+- "color": "#FF7C01"
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "Boston"
+  "last_modified": "2023-05-12 10:56:16.370646"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "atlantic-r26-boston-3"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router26"
+  "subtype": ""
+  "type": "link"
+  "vendor": ""
+- "color": "#FF7C01"
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "Boston"
+  "last_modified": "2023-05-12 10:56:16.374661"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "atlantic-r20-boston-2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router20 (admin)"
+  "subtype": ""
+  "type": "link"
+  "vendor": ""
+- "color": "#FF7C01"
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "Richmond"
+  "last_modified": "2023-05-12 10:56:16.378451"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "atlantic-r20-richmond-1"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router20 (admin)"
+  "subtype": ""
+  "type": "link"
+  "vendor": ""
+- "color": "#0000ff"
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router18 (public)"
+  "last_modified": "2023-05-12 10:56:16.382283"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link30-2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router20 (admin)"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router8"
+  "last_modified": "2023-05-12 10:56:16.386245"
+  "last_modified_by": "admin"
+  "location": "eastern europe"
+  "model": ""
+  "name": "europe-link31-2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router20 (admin)"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router11"
+  "last_modified": "2023-05-12 10:56:16.390014"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link35-2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router13"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#0000ff"
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": "optical fiber 100G"
+  "destination": "router11"
+  "last_modified": "2023-05-12 10:56:16.393647"
+  "last_modified_by": "admin"
+  "location": "france"
+  "model": ""
+  "name": "europe-link35-3"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "router13"
+  "subtype": "OTU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#FF7C01"
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "router26"
+  "last_modified": "2023-05-12 10:56:16.397364"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "atlantic-r26-boston-4-inverted"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Boston"
+  "subtype": ""
+  "type": "link"
+  "vendor": ""
+- "color": "#000000 "
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": "optical fiber 400G"
+  "destination": "Atlanta"
+  "last_modified": "2023-05-12 10:56:16.401025"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "400G"
+  "name": "link25-2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Dallas"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": "optical fiber 400G"
+  "destination": "Atlanta"
+  "last_modified": "2023-05-12 10:56:16.404892"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "400G"
+  "name": "link25-3"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Dallas"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": "optical fiber 400G"
+  "destination": "Atlanta"
+  "last_modified": "2023-05-12 10:56:16.408569"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "400G"
+  "name": "link25-dallas2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Dallas-2"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": "optical fiber 400G"
+  "destination": "Dallas-2"
+  "last_modified": "2023-05-12 10:56:16.412322"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "400G"
+  "name": "link25-reversed"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Atlanta"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#000000 "
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": "optical fiber 400G"
+  "destination": "Dallas-3"
+  "last_modified": "2023-05-12 10:56:16.416272"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "400G"
+  "name": "link25-reversed-2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Atlanta"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": "#ff0000 "
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": "optical fiber 40G"
+  "destination": "Dallas-3"
+  "last_modified": "2023-05-12 10:56:16.419683"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": "40G"
+  "name": "link13-2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Austin-2"
+  "subtype": "ODU2"
+  "type": "link"
+  "vendor": "Ciena"
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "Router 2"
+  "last_modified": "2023-05-12 10:56:16.424333"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R1 - R2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Router 1"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "Router 3"
+  "last_modified": "2023-05-12 10:56:16.428205"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R2 - R3"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Router 2"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "Router 3"
+  "last_modified": "2023-05-12 10:56:16.431923"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R1 - R3"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Router 1"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "Subnetwork 1 - R2"
+  "last_modified": "2023-05-12 10:56:16.435584"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "Subnetwork 1 - L1"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Subnetwork 1 - R1"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "Subnetwork 2 - G2"
+  "last_modified": "2023-05-12 10:56:16.439036"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "Subnetwork 2 - L1"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Subnetwork 2 - G1"
+  "subtype": ""
+  "type": "link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "Duplication - R1"
+  "last_modified": "2023-05-12 10:56:16.442838"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "G1 - R1"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Duplication - G1"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": "#000000"
+  "creator": ""
+  "custom_property": "CP"
+  "description": ""
+  "last_modified": "2023-05-12 10:56:16.446814"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "Duplicate 1 - 2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Duplicate me 1"
+  "subtype": ""
+  "type": "link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "Subnetwork 1 - R3"
+  "last_modified": "2023-05-12 10:56:16.450442"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "Subnetwork 1 - L2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Subnetwork 1 - R1"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "Subnetwork 1 - R2"
+  "last_modified": "2023-05-12 10:56:16.454425"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "Subnetwork 1 - L3"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "Subnetwork 1 - R3"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R2"
+  "last_modified": "2023-05-12 10:56:16.458041"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R3 -> R2 L1"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R3"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R2"
+  "last_modified": "2023-05-12 10:56:16.464964"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R3 -> R2 L2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R3"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R2"
+  "last_modified": "2023-05-12 10:56:16.472755"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R3 -> R2 L3"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R3"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R2"
+  "last_modified": "2023-05-12 10:56:16.481177"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R3 -> R2 L4"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R3"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R3"
+  "last_modified": "2023-05-12 10:56:16.488865"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R3 Loopback 1"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R3"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R1"
+  "last_modified": "2023-05-12 10:56:16.497565"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R1 Loopback 1"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R1"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R2"
+  "last_modified": "2023-05-12 10:56:16.505490"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R1 -> R2 L1"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R1"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R2"
+  "last_modified": "2023-05-12 10:56:16.513458"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R1 -> R2 L2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R1"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R2"
+  "last_modified": "2023-05-12 10:56:16.521009"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R1 -> R2 L3"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R1"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R3"
+  "last_modified": "2023-05-12 10:56:16.528253"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R1 -> R3 L1"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R1"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R1"
+  "last_modified": "2023-05-12 10:56:16.535779"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R3 -> R1 L2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R3"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R1"
+  "last_modified": "2023-05-12 10:56:16.543899"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R3 -> R1 L3"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R3"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R1"
+  "last_modified": "2023-05-12 10:56:16.549442"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R3 -> R1 L4"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R3"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R4"
+  "last_modified": "2023-05-12 10:56:16.552516"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R2 -> R4 L1"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R2"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R4"
+  "last_modified": "2023-05-12 10:56:16.555821"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R2 -> R4 L2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R2"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R2"
+  "last_modified": "2023-05-12 10:56:16.559167"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R4 -> R2 L3"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R4"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R4"
+  "last_modified": "2023-05-12 10:56:16.562128"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R4 Loopback 1"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R4"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R4"
+  "last_modified": "2023-05-12 10:56:16.565587"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R1 - R4"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R1"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R4"
+  "last_modified": "2023-05-12 10:56:16.568723"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R3 -> R4 L1"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R3"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R4"
+  "last_modified": "2023-05-12 10:56:16.572251"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R3 -> R4 L2"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R3"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R4"
+  "last_modified": "2023-05-12 10:56:16.576142"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R3 -> R4 L3"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R3"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R4"
+  "last_modified": "2023-05-12 10:56:16.579446"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R3 -> R4 L4"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R3"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R3"
+  "last_modified": "2023-05-12 10:56:16.582671"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R4 -> R3 L5"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R4"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R3"
+  "last_modified": "2023-05-12 10:56:16.585709"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R4 -> R3 L6"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R4"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R3"
+  "last_modified": "2023-05-12 10:56:16.588802"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R4 -> R3 L7"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R4"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S5 R3"
+  "last_modified": "2023-05-12 10:56:16.591799"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "R4 -> R3 L8"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S5 R4"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""
+- "color": ""
+  "creator": "admin"
+  "custom_property": "CP"
+  "description": ""
+  "destination": "S6 L3 R2"
+  "last_modified": "2023-05-12 10:56:16.595935"
+  "last_modified_by": "admin"
+  "location": ""
+  "model": ""
+  "name": "S6 L1"
+  "owners": []
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "source": "S6 L3 R1"
+  "speed": "22"
+  "standard": "10BASE2"
+  "subtype": ""
+  "type": "ethernet_link"
+  "vendor": ""

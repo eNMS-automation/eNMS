@@ -73,6 +73,7 @@ Version 4.5.0
   - lazy join of run.service, workflow.services / edges, workflow edge source/destination/workflow
   - new device store in workflow job function to avoid fetching devices multiple times
   - Commit: b56feea372d852f3613b62d029b130e16c226a33
+- Dont include payload in intermediate workflow results (1ae5a7b25a53d5ab00527fe7bb3e682cc6853fda)
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths
@@ -81,6 +82,7 @@ Migration:
 
 Tests:
 - Impact of migration import refactoring on migration files import and service import
+- Impact of removing payload in workflow results
 
 Version 4.4.0: RBAC and Credentials
 -----------------------------------

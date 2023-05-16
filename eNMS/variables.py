@@ -41,7 +41,7 @@ class VariableStore:
         self.server = getenv("SERVER_NAME", "Localhost")
         self.server_ip = getenv("SERVER_ADDR", "0.0.0.0")
         self.server_url = getenv("SERVER_URL", "https://0.0.0.0")
-        for setup_file in (self.path / "setup").iterdir():
+        for setup_file in Path(getenv("SETUP_DIR", self.path / "setup")).iterdir():
             with open(setup_file, "r") as file:
                 setattr(self, setup_file.stem, load(file))
 

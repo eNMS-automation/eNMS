@@ -81,6 +81,7 @@ Version 4.5.0
   - metadata includes export time, export version, and service name in case of service export
   - fix shared workflow import bug (empty list => no way to detect main workflow)
   - in automation.json, add new "disallow_cross_version_import" to disallow cross-version service import
+- Reduce number of fetch in the scan_folder function to improve performance
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

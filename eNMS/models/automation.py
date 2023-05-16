@@ -252,7 +252,7 @@ class Result(AbstractBase):
     parent_device = relationship("Device", uselist=False, foreign_keys=parent_device_id)
     parent_device_name = association_proxy("parent_device", "name")
     device_id = db.Column(Integer, ForeignKey("device.id", ondelete="cascade"))
-    device = relationship("Device", uselist=False, foreign_keys=device_id)
+    device = relationship("Device", uselist=False, foreign_keys=device_id, lazy="joined")
     device_name = association_proxy("device", "name")
     service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
     service = relationship("Service", foreign_keys="Result.service_id")

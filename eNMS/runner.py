@@ -464,16 +464,16 @@ class Runner:
             "parent_service_id": self.main_run.service.id,
             "path": self.path,
             "run_id": self.main_run.id,
-            "service": self.service.id,
+            "service_id": self.service.id,
             "labels": self.main_run.labels,
             "creator": self.main_run.creator,
         }
         if self.workflow:
-            result_kw["workflow"] = self.workflow.id
+            result_kw["workflow_id"] = self.workflow.id
         if self.parent_device:
-            result_kw["parent_device"] = self.parent_device.id
+            result_kw["parent_device_id"] = self.parent_device.id
         if device:
-            result_kw["device"] = device.id
+            result_kw["device_id"] = device.id
         if self.is_main_run and not device:
             self.payload = self.make_json_compliant(self.payload)
             results["payload"] = self.payload

@@ -682,6 +682,8 @@ class Controller:
         env.log("info", "Starting Scan of Files")
         path = f"{vs.file_path}{path.replace('>', '/')}"
         folders = {Path(path)}
+        file_paths = db.query("file", properties=["path"]).all()
+        files_set = set(file.path for file in file_paths)
         while folders:
             folder = folders.pop()
             for file in folder.iterdir():
@@ -690,7 +692,7 @@ class Controller:
                 if file.is_dir():
                     folders.add(file)
                 scoped_path = str(file).replace(vs.file_path, "")
-                if db.fetch("file", path=scoped_path, allow_none=True):
+                if scoped_path in files_set:
                     continue
                 db.factory("folder" if file.is_dir() else "file", path=scoped_path)
             db.session.commit()

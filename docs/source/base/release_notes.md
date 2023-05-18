@@ -84,6 +84,9 @@ Version 4.5.0
 - Reduce number of fetch in the scan_folder function to improve performance
 - Refactor get_workflow_results to speed up workflow results display
 - Refactor get_runtimes to no longer query the result table
+- Skip bug fix for run once service (from thread: "Skip query not respected")
+  Fix: if a "run once" service has targets and all targets are skipped, then
+  the service is not run.
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

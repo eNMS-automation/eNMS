@@ -87,6 +87,7 @@ Version 4.5.0
 - Skip bug fix for run once service (from thread: "Skip query not respected")
   Fix: if a "run once" service has targets and all targets are skipped, then
   the service is not run.
+- Make Result.service_id and Result.parent_runtime indices to speed up results display (filtering/result)
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

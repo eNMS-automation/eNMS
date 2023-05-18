@@ -222,6 +222,7 @@ class Runner:
         self.write_state("status", "Running")
         start = datetime.now().replace(microsecond=0)
         results = {"runtime": self.runtime, "success": True}
+        self.write_state("result/runtime", self.runtime)
         try:
             vs.service_run_count[self.service.id] += 1
             results.update(self.device_run())
@@ -253,6 +254,7 @@ class Runner:
                 self.service.status = "Idle"
             now = datetime.now().replace(microsecond=0)
             results["duration"] = str(now - start)
+            self.write_state("result/success", results["success"])
             if self.is_main_run:
                 state = self.main_run.get_state()
                 status = "Aborted" if self.stop else "Completed"

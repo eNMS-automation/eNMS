@@ -710,22 +710,14 @@ class Controller:
         state = run.state
 
         def rec(service, path):
-            results = db.fetch(
-                "result",
-                parent_runtime=runtime,
-                allow_none=True,
-                all_matches=True,
-                service_id=service.id,
-            )
-            if service.scoped_name in ("Start", "End") or not results:
+            if path not in state:
                 return
-            progress = state.get(path, {}).get("progress")
+            progress = state[path].get("progress")
             track_progress = progress and progress["device"]["total"]
             data = {"progress": progress["device"]} if track_progress else {}
-            success = all(result.success for result in results)
-            color = "32CD32" if success else "FF6666"
+            color = "32CD32" if state[path]["result"]["success"] else "FF6666"
             result = {
-                "runtime": min(result.runtime for result in results),
+                "runtime": state[path]["result"]["runtime"],
                 "data": {"properties": service.base_properties, **data},
                 "text": service.scoped_name,
                 "a_attr": {"style": f"color: #{color};width: 100%"},

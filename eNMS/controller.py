@@ -574,13 +574,14 @@ class Controller:
         return db.fetch("result", id=id).result
 
     def get_runtimes(self, id, display=None):
-        kwargs = {"allow_none": True, "all_matches": True, "service_id": id}
+        query = (
+            db.query("run", properties=["runtime"])
+            .join(vs.models["service"], vs.models["run"].services)
+            .filter(vs.models["service"].id == id)
+        )
         if display == "user":
-            kwargs["creator"] = current_user.name
-        results, runs = db.fetch("result", **kwargs), db.fetch("run", **kwargs)
-        results_runtimes = set((r.parent_runtime, r.run.name) for r in results)
-        run_runtimes = set((run.runtime, run.name) for run in runs)
-        return sorted(results_runtimes | run_runtimes, reverse=True)
+            query = query.filter(vs.models["run"].creator == current_user.name)
+        return sorted(((run.runtime, run.runtime) for run in query.all()), reverse=True)
 
     def get_service_logs(self, service, runtime, line=0, device=None):
         log_instance = db.fetch(

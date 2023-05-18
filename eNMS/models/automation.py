@@ -245,7 +245,7 @@ class Result(AbstractBase):
     creator = db.Column(db.SmallString)
     run_id = db.Column(Integer, ForeignKey("run.id", ondelete="cascade"))
     run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
-    parent_runtime = db.Column(db.TinyString)
+    parent_runtime = db.Column(db.TinyString, index=True)
     parent_service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
     parent_service = relationship("Service", foreign_keys="Result.parent_service_id")
     parent_service_name = association_proxy(
@@ -257,7 +257,7 @@ class Result(AbstractBase):
     device_id = db.Column(Integer, ForeignKey("device.id", ondelete="cascade"))
     device = relationship("Device", uselist=False, foreign_keys=device_id, lazy="joined")
     device_name = association_proxy("device", "name")
-    service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
+    service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"), index=True)
     service = relationship("Service", foreign_keys="Result.service_id")
     service_name = association_proxy(
         "service", "scoped_name", info={"name": "service_name"}

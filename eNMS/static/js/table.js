@@ -898,6 +898,9 @@ tables.service = class ServiceTable extends Table {
         to: 'target_${model}s'})">${model.charAt(0).toUpperCase() + model.slice(1)}s
         </a></b>`;
     }
+    row["runs"] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+      'run', ${row.instance}, {parent: '${this.id}', from: 'services',
+      to: 'runs'})">Runs</a></b>`;
     return row;
   }
 
@@ -1052,6 +1055,9 @@ tables.run = class RunTable extends Table {
         to: 'target_${model}s'})">${model.charAt(0).toUpperCase() + model.slice(1)}s
         </a></b>`;
     }
+    row[`services`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+      'service', ${row.instance}, {parent: '${this.id}', from: 'runs',
+      to: 'services'})">Services</a></b>`;
     row.service = JSON.stringify(row.service_properties).replace(/"/g, "'");
     row.buttons = this.buttons(row);
     return row;

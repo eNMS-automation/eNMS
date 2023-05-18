@@ -681,6 +681,12 @@
         "visible": false
       },
       {
+        "data": "runs",
+        "title": "Runs",
+        "width": "100px",
+        "visible": false
+      },
+      {
         "data": "buttons",
         "width": "310px",
         "orderable": false,
@@ -797,6 +803,12 @@
         "title": "Progress",
         "width": "150px",
         "orderable": false
+      },
+      {
+        "data": "services",
+        "title": "Services",
+        "width": "100px",
+        "visible": false
       },
       {
         "data": "devices",

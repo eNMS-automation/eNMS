@@ -63,6 +63,7 @@ class Runner:
         device_progress = "iteration_device" if self.iteration_run else "device"
         self.progress_key = f"progress/{device_progress}"
         self.main_run = db.fetch("run", runtime=self.parent_runtime, rbac=None)
+        self.main_run.services.append(self.service)
         creator = db.fetch("user", name=self.main_run.creator, rbac=None)
         self.is_admin_run = creator.is_admin
         self.creator_dict = {"name": creator.name, "email": creator.email}

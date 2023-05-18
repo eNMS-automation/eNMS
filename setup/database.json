@@ -234,6 +234,16 @@
           "foreign_key": "user"
         }
       },
+      "run_service": {
+        "model1": {
+          "column": "run_id",
+          "foreign_key": "run"
+        },
+        "model2": {
+          "column": "service_id",
+          "foreign_key": "service"
+        }
+      },
       "run_device": {
         "model1": {
           "column": "run_id",

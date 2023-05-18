@@ -50,6 +50,9 @@ class Service(AbstractBase):
     )
     device_query = db.Column(db.LargeString)
     device_query_property = db.Column(db.SmallString, default="ip_address")
+    runs = relationship(
+        "Run", secondary=db.run_service_table, back_populates="services"
+    )
     target_devices = relationship(
         "Device",
         secondary=db.service_target_device_table,
@@ -340,6 +343,9 @@ class Run(AbstractBase):
     service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
     service = relationship("Service", foreign_keys="Run.service_id", lazy="joined")
     service_name = db.Column(db.SmallString)
+    services = relationship(
+        "Service", secondary=db.run_service_table, back_populates="runs"
+    )
     target_devices = relationship(
         "Device", secondary=db.run_device_table, back_populates="runs"
     )

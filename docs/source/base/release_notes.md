@@ -82,6 +82,7 @@ Version 4.5.0
   - fix shared workflow import bug (empty list => no way to detect main workflow)
   - in automation.json, add new "disallow_cross_version_import" to disallow cross-version service import
 - Reduce number of fetch in the scan_folder function to improve performance
+- Refactor get_workflow_results to speed up workflow results display
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

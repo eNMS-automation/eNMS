@@ -97,6 +97,12 @@ Migration:
 Tests:
 - Impact of migration import refactoring on migration files import and service import
 - Impact of removing payload in workflow results
+- Test service form
+- Test runtimes displayed in WB and logs/results panel (get_runtimes function was refactored)
+- Test skip of run once services when all devices are skipped
+
+Todo:
+- Add context help for custom parameterized form
 
 Version 4.4.0: RBAC and Credentials
 -----------------------------------

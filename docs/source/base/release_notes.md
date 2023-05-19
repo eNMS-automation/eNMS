@@ -97,7 +97,7 @@ Migration:
 Tests:
 - Impact of migration import refactoring on migration files import and service import
 - Impact of removing payload in workflow results
-- Test service form
+- Test service form because of Jinja2 Template refactoring
 - Test runtimes displayed in WB and logs/results panel (get_runtimes function was refactored)
 - Test skip of run once services when all devices are skipped
 

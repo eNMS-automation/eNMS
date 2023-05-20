@@ -1589,7 +1589,7 @@ tables.file = class FileTable extends Table {
     return `
       <li>
         <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.base.copyToClipboard({text: '${row.path}' })"
+          onclick="eNMS.base.copyToClipboard({text: '${filePath}${row.path}' })"
           data-tooltip="Copy Path to clipboard"
         >
           <span class="glyphicon glyphicon-copy"></span>

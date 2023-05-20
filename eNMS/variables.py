@@ -146,6 +146,7 @@ class VariableStore:
     def set_template_context(self):
         self.template_context = {
             "application_path": str(self.path),
+            "file_path": self.file_path,
             "automation": self.automation,
             "configuration_properties": self.configuration_properties,
             "form_properties": self.form_properties,

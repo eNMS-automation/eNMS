@@ -49,6 +49,7 @@ Version 4.5.0
 - Refactor the files mechanism to no longer display the full Unix path, only the path
   from the files folder
   - "files" displayed as breadcrumb even if the actual path does not include such a folder
+  - the copy to clipboard mechanism still returns the full path so it can be used in e.g python scripts
   - impact on migration: all paths in files must be truncated by removing the path
   to the "files" folder
   - everything about files is impacted and must be tested again

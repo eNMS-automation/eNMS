@@ -112,6 +112,7 @@
     "custom_links": "",
     "custom_services": "",
     "files": "",
+    "migrations": "files/migrations",
     "playbooks": ""
   },
   "redis": {

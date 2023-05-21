@@ -376,6 +376,7 @@ class DatabaseDeletionForm(BaseForm):
 
 class DatabaseMigrationsForm(BaseForm):
     template = "database_migration"
+    migration_folder = vs.migration_path
     form_type = HiddenField(default="database_migration")
     empty_database_before_import = BooleanField("Empty Database before Import")
     skip_pool_update = BooleanField(

@@ -550,7 +550,7 @@ class Controller:
         return {"result": result, "datetime": commit.committed_datetime}
 
     def get_migration_folders(self):
-        return listdir(vs.path / "files" / "migrations")
+        return listdir(Path(vs.migration_path))
 
     def get_properties(self, model, id):
         return db.fetch(model, id=id).get_properties()
@@ -894,7 +894,7 @@ class Controller:
 
     def migration_export(self, **kwargs):
         for cls_name in kwargs["import_export_types"]:
-            path = vs.path / "files" / "migrations" / kwargs["name"]
+            path = Path(vs.migration_path) / kwargs["name"]
             if not exists(path):
                 makedirs(path)
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
@@ -918,7 +918,7 @@ class Controller:
             db.delete_all(*models)
         relations, store = defaultdict(lambda: defaultdict(dict)), defaultdict(dict)
         start_time = datetime.now()
-        folder_path = vs.path / "files" / folder / kwargs["name"]
+        folder_path = Path(vs.migration_path) / kwargs["name"] if folder == "migrations" else vs.file_path / folder / kwargs["name"]
         if current_user:
             store["user"][current_user.name] = current_user
         if kwargs.get("service_import"):

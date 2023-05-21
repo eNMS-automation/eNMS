@@ -918,7 +918,11 @@ class Controller:
             db.delete_all(*models)
         relations, store = defaultdict(lambda: defaultdict(dict)), defaultdict(dict)
         start_time = datetime.now()
-        folder_path = Path(vs.migration_path) / kwargs["name"] if folder == "migrations" else vs.file_path / folder / kwargs["name"]
+        folder_path = (
+            Path(vs.migration_path) / kwargs["name"]
+            if folder == "migrations"
+            else vs.file_path / folder / kwargs["name"]
+        )
         if current_user:
             store["user"][current_user.name] = current_user
         if kwargs.get("service_import"):

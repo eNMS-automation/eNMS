@@ -48,7 +48,9 @@ class VariableStore:
         self.server_ip = getenv("SERVER_ADDR", "0.0.0.0")
         self.server_url = getenv("SERVER_URL", "https://0.0.0.0")
         self.file_path = self.settings["paths"]["files"] or str(self.path / "files")
-        self.migration_path = self.settings['paths']['migration'] or f"{self.file_path}/migrations"
+        self.migration_path = (
+            self.settings["paths"]["migration"] or f"{self.file_path}/migrations"
+        )
 
     def _set_automation_variables(self):
         self.ssh_sessions = {}

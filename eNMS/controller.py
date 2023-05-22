@@ -1421,10 +1421,13 @@ class Controller:
             except Exception:
                 timestamps = {}
             for property in vs.configuration_properties:
+                no_update = False
                 for timestamp, value in timestamps.get(property, {}).items():
+                    if timestamp == "update":
+                        no_update = value == getattr(device, f"last_{property}_update")
                     setattr(device, f"last_{property}_{timestamp}", value)
                 filepath = Path(dir.path) / property
-                if not filepath.exists():
+                if not filepath.exists() or no_update:
                     continue
                 with open(filepath) as file:
                     setattr(device, property, file.read())

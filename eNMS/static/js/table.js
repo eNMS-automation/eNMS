@@ -905,8 +905,9 @@ tables.service = class ServiceTable extends Table {
   }
 
   get filteringConstraints() {
-    const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
-    return { workflows_filter: parentFiltering ? "empty" : "union" };
+    const relationFiltering = this.relation ? "false" : "true";
+    const parentFiltering = $("#parent-filtering").val() || relationFiltering;
+    return { workflows_filter: parentFiltering == "true" ? "empty" : "union" };
   }
 
   get controls() {
@@ -1032,6 +1033,10 @@ tables.service = class ServiceTable extends Table {
 
   postProcessing(...args) {
     let self = this;
+    if (this.relation)
+      $("#parent-filtering")
+        .val("false")
+        .selectpicker("refresh");
     super.postProcessing(...args);
     loadTypes("service");
     $("#parent-filtering")

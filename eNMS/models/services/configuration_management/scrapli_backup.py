@@ -71,17 +71,18 @@ class ScrapliBackupService(ConnectionService):
                 )
             device_with_deferred_data = (
                 db.query("device")
-                .options(load_only(self.property))
+                .options(load_only(getattr(vs.models["device"], self.property)))
                 .filter_by(id=device.id)
                 .one()
             )
-            setattr(device_with_deferred_data, self.property, result)
-            with open(path / self.property, "w") as file:
-                file.write(result)
             setattr(device, f"last_{self.property}_status", "Success")
             duration = f"{(datetime.now() - runtime).total_seconds()}s"
             setattr(device, f"last_{self.property}_duration", duration)
-            setattr(device, f"last_{self.property}_update", str(runtime))
+            if getattr(device_with_deferred_data, self.property) != result:
+                setattr(device_with_deferred_data, self.property, result)
+                with open(path / self.property, "w") as file:
+                    file.write(result)
+                setattr(device, f"last_{self.property}_update", str(runtime))
         except Exception:
             setattr(device, f"last_{self.property}_status", "Failure")
             setattr(device, f"last_{self.property}_failure", str(runtime))

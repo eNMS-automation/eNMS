@@ -93,6 +93,12 @@ Version 4.5.0
 - Add "SETUP_DIR" environment variable to set path to folder where json settings files are located
 - Add new "migration" key in setup.json > paths to set path to the folder where migration files
   are located
+- Dont update configuration properties if no change detected:
+  - Commit: 58798c182c4c61f53b943bb487d16688c225366e
+  - in backup service, don't write to local file, don't update value in database and don't
+  update "update" timestamp if the value hasn't changed
+  - in the "update database configuration from git", dont update the database configuration
+    if the "update" timestamp from git is the same as the one stored in the database.
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

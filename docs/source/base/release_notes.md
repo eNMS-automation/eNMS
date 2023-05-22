@@ -90,6 +90,8 @@ Version 4.5.0
   the service is not run.
 - Make Result.service_id and Result.parent_runtime indices to speed up results display (filtering/result)
 - Add "SETUP_DIR" environment variable to set path to folder where json settings files are located
+- Add new "migration" key in setup.json > paths to set path to the folder where migration files
+  are located
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

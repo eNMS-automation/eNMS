@@ -89,6 +89,7 @@ Version 4.5.0
   Fix: if a "run once" service has targets and all targets are skipped, then
   the service is not run.
 - Make Result.service_id and Result.parent_runtime indices to speed up results display (filtering/result)
+- Add "SETUP_DIR" environment variable to set path to folder where json settings files are located
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

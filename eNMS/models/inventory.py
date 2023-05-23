@@ -28,7 +28,8 @@ class Object(AbstractBase):
         super().update(**kwargs)
         if not hasattr(self, "class_type") or self.class_type == "network":
             return
-        self.update_last_modified_properties()
+        if not kwargs.get("migration_import"):
+            self.update_last_modified_properties()
 
     def delete(self):
         number = f"{self.class_type}_number"

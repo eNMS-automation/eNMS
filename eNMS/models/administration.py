@@ -212,7 +212,7 @@ class File(AbstractBase):
         *split_folder_path, self.filename = self.full_path.split("/")
         self.folder_path = "/".join(split_folder_path)
         self.folder = db.fetch("folder", full_path=self.folder_path, allow_none=True)
-        if exists(self.full_path):
+        if exists(self.full_path) and not kwargs.get("migration_import"):
             last_modified = datetime.strptime(ctime(getmtime(self.full_path)), "%c")
             self.last_modified = last_modified
         if not kwargs.get("migration_import"):

@@ -102,6 +102,7 @@ Version 4.5.0
     if the "update" timestamp from git is the same as the one stored in the database.
 - Add parameterized form properties in dedicated accordion in service edit panel
 - Display header and link before results in email notification
+- Don't scan the files folder when running the application for the first time
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

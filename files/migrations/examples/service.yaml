@@ -21196,9 +21196,9 @@
       "positions":
       - !!int "-329"
       - !!int "141"
-  "last_modified": "2022-12-07 15:53:59.908550"
+  "last_modified": "2023-05-23 17:10:39.542604"
   "last_modified_by": "admin"
-  "last_run": ""
+  "last_run": "2023-05-23 17:10:40.626316"
   "log_level": !!int "1"
   "mail_recipient": ""
   "man_minutes": !!int "0"
@@ -21272,7 +21272,7 @@
   "waiting_time": !!int "0"
 - "admin_only": !!bool "false"
   "auto_find_prompt": !!bool "true"
-  "close_connection": !!bool "false"
+  "close_connection": !!bool "true"
   "commands": "dir enms_files"
   "completion_time": !!int "1"
   "config_mode": !!bool "false"
@@ -21319,7 +21319,7 @@
   "jump_on_connect": !!bool "false"
   "jump_password": ""
   "jump_username": ""
-  "last_modified": "2022-11-09 01:23:32.920136"
+  "last_modified": "2023-05-23 17:10:39.542604"
   "last_modified_by": "admin"
   "last_run": ""
   "log_level": !!int "1"
@@ -21358,6 +21358,7 @@
   "rbac_edit":
   - "Full UI Read + Edit Access"
   "rbac_read":
+  - "Admin User"
   - "Full UI Read + Edit Access"
   "rbac_run":
   - "Full UI Read + Edit Access"
@@ -21403,7 +21404,7 @@
   "conversion_method": "none"
   "creator": "admin"
   "credential_type": "any"
-  "credentials": "device"
+  "credentials": "object"
   "custom_password": ""
   "custom_username": ""
   "default_uuid": "6051d502-e0d6-407e-a6f2-46d02f342983"
@@ -21434,7 +21435,7 @@
   "iteration_devices_property": "name"
   "iteration_values": ""
   "iteration_variable_name": "iteration_value"
-  "last_modified": "2022-12-07 15:53:59.908550"
+  "last_modified": "2023-05-23 17:10:12.704620"
   "last_modified_by": "admin"
   "last_run": ""
   "log_level": !!int "1"
@@ -21446,6 +21447,7 @@
   "maximum_runs": !!int "1"
   "multiprocessing": !!bool "false"
   "name": "[(R) Netmiko File Transfer Service] Transfer netmiko_file"
+  "named_credential": "Router Credentials - SSH Key"
   "negative_logic": !!bool "false"
   "notification_header": ""
   "number_of_retries": !!int "0"
@@ -21474,6 +21476,7 @@
   "rbac_edit":
   - "Full UI Read + Edit Access"
   "rbac_read":
+  - "Admin User"
   - "Full UI Read + Edit Access"
   "rbac_run":
   - "Full UI Read + Edit Access"

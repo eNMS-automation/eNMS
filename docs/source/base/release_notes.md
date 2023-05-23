@@ -103,6 +103,8 @@ Version 4.5.0
 - Add parameterized form properties in dedicated accordion in service edit panel
 - Display header and link before results in email notification
 - Don't scan the files folder when running the application for the first time
+- Prevent uploading the same file twice in the file upload panel (or another file
+  with the same name)
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

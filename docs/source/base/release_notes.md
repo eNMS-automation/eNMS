@@ -100,6 +100,7 @@ Version 4.5.0
   - in the "update database configuration from git", dont update the database configuration
     if the "update" timestamp from git is the same as the one stored in the database.
 - Add parameterized form properties in dedicated accordion in service edit panel
+- Display header and link before results in email notification
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

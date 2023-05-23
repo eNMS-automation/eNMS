@@ -82,7 +82,8 @@ Version 4.5.0
 - Add metadata file when doing migration or service import / export
   - metadata includes export time, export version, and service name in case of service export
   - fix shared workflow import bug (empty list => no way to detect main workflow)
-  - in automation.json, add new "disallow_cross_version_import" to disallow cross-version service import
+  - in settings.json, add new "import_version" to disallow importing older files (if the
+  version in the metadata is not the one from settings.json, the import fails)
 - Reduce number of fetch in the scan_folder function to improve performance
 - Refactor get_workflow_results to speed up workflow results display
 - Refactor get_runtimes to no longer query the result table

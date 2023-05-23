@@ -3,6 +3,7 @@
     "config_mode": "debug",
     "documentation_url": "https://enms.readthedocs.io/en/latest/",
     "git_repository": "git@github.com:afourmy/gitpython-test.git",
+    "import_version": 4.5,
     "max_content_length": 104857600,
     "plugin_path": "eNMS/plugins",
     "session_timeout_minutes": 30,

@@ -41,8 +41,7 @@
     }
   },
   "service_import": {
-    "timeout": 180000,
-    "disallow_cross_version_import": false
+    "timeout": 180000
   },
   "workflow": {
     "logs_refresh_rate": 1000,

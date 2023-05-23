@@ -348,7 +348,7 @@ class Controller:
                 yaml.dump(edges, file)
         with open(path / "metadata.yaml", "w") as file:
             metadata = {
-                "version": vs.version,
+                "version": vs.settings["app"]["import_version"],
                 "export_time": datetime.now(),
                 "service": service.name,
             }
@@ -907,7 +907,7 @@ class Controller:
                     default_style='"',
                 )
         with open(path / "metadata.yaml", "w") as file:
-            yaml.dump({"version": vs.version, "export_time": datetime.now()}, file)
+            yaml.dump({"version": vs.settings["app"]["import_version"], "export_time": datetime.now()}, file)
 
     def migration_import(self, folder="migrations", **kwargs):
         env.log("info", "Starting Migration Import")
@@ -923,16 +923,12 @@ class Controller:
             if folder == "migrations"
             else vs.file_path / folder / kwargs["name"]
         )
+        with open(folder_path / "metadata.yaml", "r") as metadata_file:
+            metadata = yaml.load(metadata_file)
+        if metadata["version"] != vs.settings["app"]["import_version"]:
+            return {"alert": "Import from an older version is not allowed"}
         if current_user:
             store["user"][current_user.name] = current_user
-        if kwargs.get("service_import"):
-            with open(folder_path / "metadata.yaml", "r") as metadata_file:
-                metadata = yaml.load(metadata_file)
-            if (
-                vs.automation["service_import"]["disallow_cross_version_import"]
-                and metadata["version"] != vs.version
-            ):
-                return {"alert": "service import from an older version is not allowed"}
         for service_name in ("Start", "End", "Placeholder"):
             service = db.fetch(
                 "service", name=f"[Shared] {service_name}", allow_none=True

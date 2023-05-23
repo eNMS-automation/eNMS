@@ -99,6 +99,7 @@ Version 4.5.0
   update "update" timestamp if the value hasn't changed
   - in the "update database configuration from git", dont update the database configuration
     if the "update" timestamp from git is the same as the one stored in the database.
+- Add parameterized form properties in dedicated accordion in service edit panel
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

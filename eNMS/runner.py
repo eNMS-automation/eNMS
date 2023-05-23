@@ -685,8 +685,6 @@ class Runner:
             "Runtime": self.runtime,
             "Status": "PASS" if results["success"] else "FAILED",
         }
-        if "result" in results:
-            notification["Results"] = results["result"]
         if self.notification_header:
             notification["Header"] = self.sub(self.notification_header, locals())
         if self.include_link_in_summary:
@@ -697,6 +695,8 @@ class Runner:
                 notification["FAILED"] = results["summary"]["failure"]
             if results["summary"]["success"] and not self.display_only_failed_nodes:
                 notification["PASSED"] = results["summary"]["success"]
+        if "result" in results:
+            notification["Results"] = results["result"]
         return notification
 
     def generate_report(self, results):

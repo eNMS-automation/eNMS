@@ -840,9 +840,6 @@ class ServiceForm(BaseForm):
             "vendor",
             "operating_system",
             "initial_payload",
-            "mandatory_parametrization",
-            "parameterized_form",
-            "parameterized_form_template",
             "priority",
             "number_of_retries",
             "time_between_retries",
@@ -853,6 +850,11 @@ class ServiceForm(BaseForm):
             "update_pools_after_running",
         ],
         "step1-2": [
+            "mandatory_parametrization",
+            "parameterized_form",
+            "parameterized_form_template",
+        ],
+        "step1-3": [
             "preprocessing",
             "skip_query",
             "skip_value",

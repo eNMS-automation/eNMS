@@ -297,6 +297,14 @@ function showFileUploadPanel(folder) {
           notify("Files successfully uploaded.", "success", 5, true);
           setTimeout(() => refreshTable("file"), 500);
         },
+        init: function() {
+          this.on("addedfile", function(file) {
+            if (dropzone.files.slice(0, -1).some((f) => f.name == file.name )) {
+              notify("There is already a file with the same name.", "error", 5);
+              dropzone.removeFile(file);
+            }
+          });
+        },
         timeout: settings.files.upload_timeout,
       });
       $(`[id="dropzone-submit-${path}"]`).click(function() {

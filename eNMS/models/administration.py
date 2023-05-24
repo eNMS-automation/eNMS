@@ -4,7 +4,8 @@ from itertools import chain
 from os import makedirs
 from os.path import exists, getmtime
 from passlib.hash import argon2
-from shutil import move
+from pathlib import Path
+from shutil import move, rmtree
 from sqlalchemy import Boolean, ForeignKey, Integer, Float
 from sqlalchemy.orm import relationship
 from time import ctime
@@ -221,7 +222,14 @@ class File(AbstractBase):
 
     def delete(self):
         trash = vs.settings["files"]["trash"]
-        if exists(self.full_path) and trash:
+        if not exists(self.full_path) or not trash:
+            return
+        if trash in self.full_path:
+            if self.type == "folder":
+                rmtree(self.full_path, ignore_errors=True)
+            else:
+                Path(self.full_path).unlink(missing_ok=True)
+        else:
             now = vs.get_time().replace(":", "-")
             move(self.full_path, f"{trash}/{now}-{self.filename}")
 

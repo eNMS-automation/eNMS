@@ -445,8 +445,9 @@ class Database:
     def objectify(self, model, object_list, **kwargs):
         return [self.fetch(model, id=object_id, **kwargs) for object_id in object_list]
 
-    def delete_instance(self, instance):
-        instance.delete()
+    def delete_instance(self, instance, call_delete=True):
+        if call_delete:
+            instance.delete()
         serialized_instance = instance.serialized
         self.session.delete(instance)
         return serialized_instance
@@ -454,7 +455,7 @@ class Database:
     def delete_all(self, *models):
         for model in models:
             for instance in self.fetch_all(model):
-                self.delete_instance(instance)
+                self.delete_instance(instance, call_delete=model != "file")
             self.session.commit()
 
     def export(self, model, private_properties=False):

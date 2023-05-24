@@ -73,13 +73,13 @@
     "session_table": "system/sessions/",
     "task_table": "automation/scheduling/",
     "user_table": "administration/users/",
-
     "workflow_builder": "automation/workflow_builder/"
   },
   "files": {
     "ignored_types": [".swp", ".tgz"],
     "upload_timeout": 600000,
-    "log_events": true
+    "log_events": true,
+    "trash": ""
   },
   "mail": {
     "port": 587,

@@ -116,6 +116,7 @@ Version 4.5.0
   - The path to the trash folder is configured in settings.json > "files" > "trash"
   - When importing migration files with "empty database" set to True, or running the mass
   deletion mechanism ("database deletion"), unix files are left untouched.
+- Detect missing files when running scan folder mechanism and mark them as "Not Found"
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

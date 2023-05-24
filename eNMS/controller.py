@@ -682,18 +682,26 @@ class Controller:
         env.log("info", "Starting Scan of Files")
         path = f"{vs.file_path}{path.replace('>', '/')}"
         folders = {Path(path)}
-        file_paths = db.query("file", properties=["path"]).all()
-        files_set = set(file.path for file in file_paths)
+        files_set = {
+            file
+            for file in db.session.query(vs.models["file"])
+            .filter(vs.models["file"].full_path.startswith(path))
+            .all()
+        }
+        for file in files_set:
+            if not exists(file.full_path):
+                file.status = "Not Found"
+        file_path_set = {file.full_path for file in files_set}
         while folders:
             folder = folders.pop()
             for file in folder.iterdir():
-                if file.suffix in vs.settings["files"]["ignored_types"]:
+                if str(file) in file_path_set:
                     continue
-                if file.is_dir():
+                elif file.suffix in vs.settings["files"]["ignored_types"]:
+                    continue
+                elif file.is_dir():
                     folders.add(file)
                 scoped_path = str(file).replace(vs.file_path, "")
-                if scoped_path in files_set:
-                    continue
                 db.factory("folder" if file.is_dir() else "file", path=scoped_path)
             db.session.commit()
         env.log("info", "Scan of Files Successful")
@@ -906,7 +914,13 @@ class Controller:
                     default_style='"',
                 )
         with open(path / "metadata.yaml", "w") as file:
-            yaml.dump({"version": vs.settings["app"]["import_version"], "export_time": datetime.now()}, file)
+            yaml.dump(
+                {
+                    "version": vs.settings["app"]["import_version"],
+                    "export_time": datetime.now(),
+                },
+                file,
+            )
 
     def migration_import(self, folder="migrations", **kwargs):
         env.log("info", "Starting Migration Import")

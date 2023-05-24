@@ -117,6 +117,7 @@ Version 4.5.0
   - When importing migration files with "empty database" set to True, or running the mass
   deletion mechanism ("database deletion"), unix files are left untouched.
 - Detect missing files when running scan folder mechanism and mark them as "Not Found"
+- Drag-n-drop the same file multiple times in upload panel no longer possible
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

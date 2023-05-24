@@ -219,6 +219,12 @@ class File(AbstractBase):
             self.last_updated = datetime.strptime(ctime(), "%c")
         self.status = "Updated"
 
+    def delete(self):
+        trash = vs.settings["files"]["trash"]
+        if exists(self.full_path) and trash:
+            now = vs.get_time().replace(":", "-")
+            move(self.full_path, f"{trash}/{now}-{self.filename}")
+
 
 class Folder(File):
     __tablename__ = "folder"

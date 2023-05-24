@@ -105,6 +105,17 @@ Version 4.5.0
 - Don't scan the files folder when running the application for the first time
 - Prevent uploading the same file twice in the file upload panel (or another file
   with the same name)
+- Add trash mechanism for files. Two options:
+  - 1) Put trash outside of files folder (not tracked by eNMS). When deleting a file, the database
+  object is deleted and the associated unix file is moved to the trash folder, with the current
+  time as prefix.
+  - 2) Put trash inside the files folder: the same mechanism applies, but the trash folder is
+  being tracked by eNMS. Files can be restored (by moving them from the trash folder to another
+  directory), and whenever a file in the trash folder is deleted, it is removed (rm) from the
+  filesystem.
+  - The path to the trash folder is configured in settings.json > "files" > "trash"
+  - When importing migration files with "empty database" set to True, or running the mass
+  deletion mechanism ("database deletion"), unix files are left untouched.
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

@@ -128,6 +128,7 @@ Tests:
 - Test service form because of Jinja2 Template refactoring
 - Test runtimes displayed in WB and logs/results panel (get_runtimes function was refactored)
 - Test skip of run once services when all devices are skipped
+- Test new trash mechanism for files
 
 Todo:
 - Add context help for custom parameterized form

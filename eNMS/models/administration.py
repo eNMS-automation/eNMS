@@ -231,7 +231,13 @@ class File(AbstractBase):
                 Path(self.full_path).unlink(missing_ok=True)
         else:
             now = vs.get_time().replace(":", "-")
-            move(self.full_path, f"{trash}/{now}-{self.filename}")
+            filename = f"{now}-{self.filename}"
+            if vs.file_path in trash:
+                trash_scoped_path = trash.replace(vs.file_path, "")
+                self.update(path=f"{trash_scoped_path}/{filename}")
+                return True
+            else:
+                move(self.full_path, f"{trash}/{filename}")
 
 
 class Folder(File):

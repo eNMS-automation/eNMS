@@ -446,10 +446,12 @@ class Database:
         return [self.fetch(model, id=object_id, **kwargs) for object_id in object_list]
 
     def delete_instance(self, instance, call_delete=True):
+        abort_delete = False
         if call_delete:
-            instance.delete()
+            abort_delete = instance.delete()
         serialized_instance = instance.serialized
-        self.session.delete(instance)
+        if not abort_delete:
+            self.session.delete(instance)
         return serialized_instance
 
     def delete_all(self, *models):

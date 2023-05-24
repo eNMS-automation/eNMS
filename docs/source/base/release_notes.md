@@ -112,7 +112,8 @@ Version 4.5.0
   - 2) Put trash inside the files folder: the same mechanism applies, but the trash folder is
   being tracked by eNMS. Files can be restored (by moving them from the trash folder to another
   directory), and whenever a file in the trash folder is deleted, it is removed (rm) from the
-  filesystem.
+  filesystem. Files are moved to trash via the "update" function so that the file metadata is
+  preserved.
   - The path to the trash folder is configured in settings.json > "files" > "trash"
   - When importing migration files with "empty database" set to True, or running the mass
   deletion mechanism ("database deletion"), unix files are left untouched.

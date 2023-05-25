@@ -681,6 +681,8 @@ class Controller:
     def scan_folder(self, path=""):
         env.log("info", "Starting Scan of Files")
         path = f"{vs.file_path}{path.replace('>', '/')}"
+        if not exists(path):
+            return {"alert": "This folder does not exist on the filesystem."}
         folders = {Path(path)}
         files_set = {
             file

@@ -1,6 +1,5 @@
 /*
 global
-applicationPath: false
 CodeMirror: false
 page: false
 settings: true

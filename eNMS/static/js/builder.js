@@ -3,6 +3,7 @@ global
 linkPath: false
 page: false
 subtypes: false
+user: false
 vis: false
 */
 

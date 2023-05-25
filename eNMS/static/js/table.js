@@ -1,5 +1,7 @@
 /*
 global
+applicationPath: false
+filePath: false
 settings: false
 tableProperties: false
 */
@@ -1033,10 +1035,11 @@ tables.service = class ServiceTable extends Table {
 
   postProcessing(...args) {
     let self = this;
-    if (this.relation)
+    if (this.relation) {
       $("#parent-filtering")
         .val("false")
         .selectpicker("refresh");
+    }
     super.postProcessing(...args);
     loadTypes("service");
     $("#parent-filtering")
@@ -1670,8 +1673,8 @@ tables.file = class FileTable extends Table {
     const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
     if (parentFiltering) {
       const fileFolderPath = settings.paths.files || applicationPath;
-      const full_path = `${fileFolderPath}${folderPath}`;
-      return { folder_path: full_path, folder_path_filter: "equality" };
+      const fullPath = `${fileFolderPath}${folderPath}`;
+      return { folder_path: fullPath, folder_path_filter: "equality" };
     } else {
       return {};
     }

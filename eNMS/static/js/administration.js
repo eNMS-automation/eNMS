@@ -299,7 +299,7 @@ function showFileUploadPanel(folder) {
         },
         init: function() {
           this.on("addedfile", function(file) {
-            if (dropzone.files.slice(0, -1).some((f) => f.name == file.name )) {
+            if (dropzone.files.slice(0, -1).some((f) => f.name == file.name)) {
               notify("There is already a file with the same name.", "error", 5);
               dropzone.removeFile(file);
             }

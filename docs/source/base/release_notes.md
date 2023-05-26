@@ -37,7 +37,7 @@ Version 4.5.0
     - f651b5c2a1dc8920a878668d72a6fcb07e9d8761
 - Fix duplicated run name when running a service from the REST API bug
 - Order model drop down lists in the UI based on pretty name instead of tablename
-- Add user "last login" and "last request" properties
+- Add user "last login" property (record time of latest login)
   Commit: f2e4f2658ae0157020412684226e2a1a8cb58aa2
 - Add zoom sensitivity control in user profile for Workflow Builder
 - Remove "username" variable from workflow global variables and add "user"

@@ -1106,12 +1106,6 @@
         "search": "text"
       },
       {
-        "data": "last_request",
-        "title": "Last Request",
-        "width": "150px",
-        "search": "text"
-      },
-      {
         "data": "groups",
         "title": "Groups",
         "width": "80px"

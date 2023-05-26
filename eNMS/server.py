@@ -135,8 +135,6 @@ class Server(Flask):
                 if user:
                     login_user(user)
             username = getattr(current_user, "name", "Unknown")
-            if current_user:
-                current_user.last_request = vs.get_time()[:-7]
             if not endpoint_rbac:
                 status_code = 404
             elif rest_request and endpoint_rbac != "none" and not user:

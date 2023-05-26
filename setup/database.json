@@ -154,7 +154,6 @@
       "pools",
       "groups",
       "last_login",
-      "last_request",
       "links",
       "menu",
       "delete_requests",

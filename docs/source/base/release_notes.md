@@ -46,14 +46,6 @@ Version 4.5.0
   - "user" must not be used in existing workflows
 - Add new "ignore_invalid_targets" parameter in run_service REST endpoint to run
   even if there are invalid targets.
-- Refactor the files mechanism to no longer display the full Unix path, only the path
-  from the files folder
-  - "files" displayed as breadcrumb even if the actual path does not include such a folder
-  - the copy to clipboard mechanism still returns the full path so it can be used in e.g python scripts
-  - allow both absolute and relative paths in generic and netmiko file transfer services
-  - impact on migration: all paths in files must be truncated by removing the path
-  to the "files" folder
-  - everything about files is impacted and must be tested again
 - Update size of restart workflow from panel to fit to content
 - Add device name to git history comparison panel title
 - Add task name, target devices and target pools to the run table ("Results" page)
@@ -102,23 +94,31 @@ Version 4.5.0
     if the "update" timestamp from git is the same as the one stored in the database.
 - Add parameterized form properties in dedicated accordion in service edit panel
 - Display header and link before results in email notification
-- Don't scan the files folder when running the application for the first time
-- Prevent uploading the same file twice in the file upload panel (or another file
-  with the same name)
-- Add trash mechanism for files. Two options:
-  - 1) Put trash outside of files folder (not tracked by eNMS). When deleting a file, the database
-  object is deleted and the associated unix file is moved to the trash folder, with the current
-  time as prefix.
-  - 2) Put trash inside the files folder: the same mechanism applies, but the trash folder is
-  being tracked by eNMS. Files can be restored (by moving them from the trash folder to another
-  directory), and whenever a file in the trash folder is deleted, it is removed (rm) from the
-  filesystem. Files are moved to trash via the "update" function so that the file metadata is
-  preserved.
-  - The path to the trash folder is configured in settings.json > "files" > "trash"
-  - When importing migration files with "empty database" set to True, or running the mass
-  deletion mechanism ("database deletion"), unix files are left untouched.
-- Detect missing files when running scan folder mechanism and mark them as "Not Found"
-- Drag-n-drop the same file multiple times in upload panel no longer possible
+- Files Improvements:
+  - Refactor the files mechanism to no longer display the full Unix path, only the path
+    from the files folder
+    - "files" displayed as breadcrumb even if the actual path does not include such a folder
+    - the copy to clipboard mechanism still returns the full path so it can be used in e.g python scripts
+    - allow both absolute and relative paths in generic and netmiko file transfer services
+    - impact on migration: all paths in files must be truncated by removing the path
+    to the "files" folder
+  - Don't scan the files folder when running the application for the first time
+  - Prevent uploading the same file twice in the file upload panel (or another file
+    with the same name)
+  - Add trash mechanism for files. Two options:
+    - 1) Put trash outside of files folder (not tracked by eNMS). When deleting a file, the database
+    object is deleted and the associated unix file is moved to the trash folder, with the current
+    time as prefix.
+    - 2) Put trash inside the files folder: the same mechanism applies, but the trash folder is
+    being tracked by eNMS. Files can be restored (by moving them from the trash folder to another
+    directory), and whenever a file in the trash folder is deleted, it is removed (rm) from the
+    filesystem. Files are moved to trash via the "update" function so that the file metadata is
+    preserved.
+    - The path to the trash folder is configured in settings.json > "files" > "trash"
+    - When importing migration files with "empty database" set to True, or running the mass
+    deletion mechanism ("database deletion"), unix files are left untouched.
+  - Detect missing files when running scan folder mechanism and mark them as "Not Found"
+  - Drag-n-drop the same file multiple times in upload panel no longer possible
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths
@@ -126,6 +126,7 @@ Migration:
   delay_factor and global_delay_factor
 
 Tests:
+- Everything about files is impacted and must be tested again
 - Impact of migration import refactoring on migration files import and service import
 - Impact of removing payload in workflow results
 - Test service form because of Jinja2 Template refactoring

@@ -939,7 +939,7 @@ class Controller:
             else vs.file_path / folder / kwargs["name"]
         )
         with open(folder_path / "metadata.yaml", "r") as metadata_file:
-            metadata = yaml.load(metadata_file)
+            metadata = yaml.load(metadata_file, Loader=yaml.SafeLoader)
         if metadata["version"] != vs.settings["app"]["import_version"]:
             return {"alert": "Import from an older version is not allowed"}
         if current_user:

@@ -2,8 +2,8 @@
 # Release Notes
 
 
-Version 4.5.0
--------------
+Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
+--------------------------------------------------------------------------
 
 - Bulk Filtering mechanism
   - refactoring of the service template with new Jinja2 macro

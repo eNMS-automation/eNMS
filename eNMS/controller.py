@@ -573,10 +573,11 @@ class Controller:
         return db.fetch("result", id=id).result
 
     def get_runtimes(self, id, display=None):
+        service_alias = aliased(vs.models["service"])
         query = (
             db.query("run", properties=["runtime"])
-            .join(vs.models["service"], vs.models["run"].services)
-            .filter(vs.models["service"].id == id)
+            .join(service_alias, vs.models["run"].services)
+            .filter(service_alias.id == id)
         )
         if display == "user":
             query = query.filter(vs.models["run"].creator == current_user.name)

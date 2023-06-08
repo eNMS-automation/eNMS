@@ -141,6 +141,7 @@ class VariableStore:
 
     def _set_run_variables(self):
         self.run_targets = {}
+        self.run_services = defaultdict(set)
         self.run_states = defaultdict(dict)
         self.run_logs = defaultdict(lambda: defaultdict(list))
         self.run_stop = defaultdict(bool)

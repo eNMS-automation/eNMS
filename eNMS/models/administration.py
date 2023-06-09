@@ -223,6 +223,8 @@ class File(AbstractBase):
         trash = vs.settings["files"]["trash"]
         if not exists(self.full_path) or not trash:
             return
+        if self.full_path == trash:
+            return {"log_level": "error", "log": "Cannot delete the 'trash' folder."}
         if trash in self.full_path:
             if self.type == "folder":
                 rmtree(self.full_path, ignore_errors=True)
@@ -234,7 +236,8 @@ class File(AbstractBase):
             if str(vs.file_path) in trash:
                 trash_scoped_path = trash.replace(str(vs.file_path), "")
                 self.update(path=f"{trash_scoped_path}/{filename}")
-                return True
+                log = f"File '{filename}' moved to 'trash' folder."
+                return {"log_level": "warning", "log": log}
             else:
                 move(self.full_path, f"{trash}/{filename}")
 

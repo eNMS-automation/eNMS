@@ -449,6 +449,8 @@ class Database:
         abort_delete = False
         if call_delete:
             abort_delete = instance.delete()
+            if abort_delete:
+                return {"delete_aborted": True, **abort_delete}
         serialized_instance = instance.serialized
         if not abort_delete:
             self.session.delete(instance)

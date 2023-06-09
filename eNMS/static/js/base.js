@@ -193,7 +193,8 @@ export function serializeForm(form, formDefault, bulkFilter) {
 const deleteInstance = function(type, id, tableId) {
   call({
     url: `/delete_instance/${type}/${id}`,
-    callback: function(name) {
+    callback: function(result) {
+      if (result.delete_aborted) return notify(result.log, result.log_level, 5, true)
       if (type in subtypes.service) {
         type = "service";
         const path = localStorage.getItem("path");
@@ -207,7 +208,7 @@ const deleteInstance = function(type, id, tableId) {
           .remove()
           .draw(false);
       }
-      notify(`${type.toUpperCase()} '${name}' deleted.`, "success", 5, true);
+      notify(`${type.toUpperCase()} '${result.name}' deleted.`, "success", 5, true);
     },
   });
 };

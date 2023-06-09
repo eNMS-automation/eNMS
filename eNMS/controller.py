@@ -288,7 +288,7 @@ class Controller:
 
     def delete_instance(self, model, instance_id):
         try:
-            return db.delete(model, id=instance_id).get("name", "")
+            return db.delete(model, id=instance_id)
         except Exception as exc:
             return {"alert": f"Unable to delete {model} ({exc})"}
 

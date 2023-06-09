@@ -18,7 +18,7 @@ import {
 } from "./base.js";
 import { refreshTable, tables } from "./table.js";
 
-export let folderPath = localStorage.getItem("folderPath") || "/files";
+export let folderPath = localStorage.getItem("folderPath") || "";
 
 function displayFiles() {
   if ($("#files").length || page == "file_table") {
@@ -55,11 +55,11 @@ function displayFiles() {
 export function displayFolderPath() {
   let currentPath = "";
   let htmlPath = [];
-  folderPath
+  `/files${folderPath}`
     .split("/")
     .slice(1)
     .forEach((folder) => {
-      currentPath += `/${folder}`;
+      currentPath += folder == "files" ? "" : `/${folder}`;
       htmlPath.push(`<b> / </b>
         <button type="button" class="btn btn-xs btn-primary"
         onclick="eNMS.administration.enterFolder({path: '${currentPath}'})">
@@ -70,20 +70,20 @@ export function displayFolderPath() {
   $("#current-folder-path").html(`<b>Current Folder :</b>${htmlPath.join("")}`);
 }
 
-function enterFolder({ folder, path }) {
-  if (path || folder) {
-    folderPath = path || `${folderPath}/${folder}`;
-  } else {
+function enterFolder({ folder, path, parent }) {
+  if (parent) {
     folderPath = folderPath
-      .split("/")
-      .slice(0, -1)
-      .join("/");
+    .split("/")
+    .slice(0, -1)
+    .join("/");
+  } else {
+    folderPath = path || folder ? path || `${folderPath}/${folder}` : "";
   }
   localStorage.setItem("folderPath", folderPath);
   refreshTable("file", null, null, true);
   if (folder) {
     $("#upward-folder-btn").removeClass("disabled");
-  } else if (folderPath == "/files") {
+  } else if (!folderPath) {
     $("#upward-folder-btn").addClass("disabled");
   }
   displayFolderPath();
@@ -148,7 +148,7 @@ function migrationsExport() {
 
 function scanFolder() {
   call({
-    url: `/scan_folder/${folderPath.slice(6).replace(/\//g, ">")}`,
+    url: `/scan_folder/${folderPath.replace(/\//g, ">")}`,
     callback: function() {
       refreshTable("file");
       notify("Scan successful.", "success", 5, true);

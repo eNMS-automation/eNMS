@@ -31,7 +31,7 @@ class NetmikoFileTransferService(ConnectionService):
         netmiko_connection = run.netmiko_connection(device)
         source = run.sub(run.source_file, locals())
         destination = run.sub(run.destination_file, locals())
-        if vs.file_path not in source:
+        if str(vs.file_path) not in source:
             source = f"{vs.file_path}{source}"
         run.log("info", f"Transferring file {source}", device)
         transfer_dict = file_transfer(

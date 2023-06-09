@@ -231,8 +231,8 @@ class File(AbstractBase):
         else:
             now = vs.get_time().replace(":", "-")
             filename = f"{now}-{self.filename}"
-            if vs.file_path in trash:
-                trash_scoped_path = trash.replace(vs.file_path, "")
+            if str(vs.file_path) in trash:
+                trash_scoped_path = trash.replace(str(vs.file_path), "")
                 self.update(path=f"{trash_scoped_path}/{filename}")
                 return True
             else:

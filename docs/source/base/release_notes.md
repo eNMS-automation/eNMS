@@ -91,7 +91,7 @@ Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
   - in backup service, don't write to local file, don't update value in database and don't
   update "update" timestamp if the value hasn't changed
   - in the "update database configuration from git", dont update the database configuration
-    if the "update" timestamp from git is the same as the one stored in the database.
+    if the "update" timestamp from git is the same as or older than the one stored in the database.
 - Add parameterized form properties in dedicated accordion in service edit panel
 - Display header and link before results in email notification
 - Files Improvements:

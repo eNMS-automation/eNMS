@@ -786,9 +786,10 @@ class Runner:
                 credential_type=credential_type,
                 optional=self.credentials != "device",
             )
+        if credential:
+            device_log = f" for '{device.name}'" if device else ""
+            self.log("info", f"Using '{credential.name}' credential{device_log}")
         if add_secret and device and credential:
-            log = f"Using '{credential.name}' credential for '{device.name}'"
-            self.log("info", log)
             result["secret"] = env.get_password(credential.enable_password)
         if self.credentials in ("device", "object"):
             result["username"] = credential.username

@@ -247,8 +247,8 @@ class VariableStore:
     def get_time(self):
         return str(datetime.now())
 
-    def str_to_date(self):
-        return 
+    def str_to_date(self, value):
+        return datetime.strptime(value, "%Y-%m-%d %H:%M:%S.%f")
 
     def strip_all(self, input):
         return input.translate(str.maketrans("", "", f"{punctuation} "))

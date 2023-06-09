@@ -966,6 +966,9 @@ class Runner:
         kwargs["rbac"] = "edit"
         return getattr(db, func)(model, username=self.creator, **kwargs)
 
+    def prepend_filepath(self, value):
+        return f"{vs.file_path}{value}"
+
     def get_credential(self, **kwargs):
         credential = db.get_credential(self.creator, **kwargs)
         credential_dict = {"username": credential.username}
@@ -1001,6 +1004,7 @@ class Runner:
                 "parent_device": _self.parent_device or device,
                 "payload": _self.payload,
                 "placeholder": _self.main_run.placeholder,
+                "prepend_filepath": _self.prepend_filepath,
                 "send_email": env.send_email,
                 "server": {
                     "ip_address": vs.server_ip,

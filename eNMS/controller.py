@@ -1436,7 +1436,8 @@ class Controller:
                 no_update = False
                 for timestamp, value in timestamps.get(property, {}).items():
                     if timestamp == "update":
-                        no_update = value == getattr(device, f"last_{property}_update")
+                        db_date = getattr(device, f"last_{property}_update")
+                        no_update = vs.str_to_date(value) <  vs.str_to_date(db_date)
                     setattr(device, f"last_{property}_{timestamp}", value)
                 filepath = Path(dir.path) / property
                 if not filepath.exists() or no_update:

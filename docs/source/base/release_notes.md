@@ -116,6 +116,8 @@ Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
     preserved.
     - The path to the trash folder is configured in settings.json > "files" > "trash"
     - The trash folder cannot be deleted from inside the application
+    - When a file is moved to the trash, the alert is changed to a warning that says the
+    file was moved to the trash folder
     - When importing migration files with "empty database" set to True, or running the mass
     deletion mechanism ("database deletion"), unix files are left untouched.
   - Detect missing files when running scan folder mechanism and mark them as "Not Found"

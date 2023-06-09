@@ -123,6 +123,7 @@ Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
   - Detect missing files when running scan folder mechanism and mark them as "Not Found"
   - Drag-n-drop the same file multiple times in upload panel no longer possible
 - Fix log not sent when add_secret is False or device is None in the get_credentials function bug
+- Add new 'prepend_filepath' function in workflow builder namespace to add path to file folder before a string
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

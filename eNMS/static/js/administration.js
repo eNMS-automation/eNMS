@@ -80,7 +80,7 @@ function enterFolder({ folder, path }) {
       .join("/");
   }
   localStorage.setItem("folderPath", folderPath);
-  refreshTable("file");
+  refreshTable("file", null, null, true);
   if (folder) {
     $("#upward-folder-btn").removeClass("disabled");
   } else if (folderPath == "/files") {

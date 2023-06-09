@@ -1718,9 +1718,10 @@ function exportTable(tableId) {
   refreshTable(tableId);
 }
 
-export const refreshTable = function(tableId, notification, updateParent) {
+export const refreshTable = function(tableId, notification, updateParent, firstPage) {
   if (!$(`#table-${tableId}`).length) return;
-  tableInstances[tableId].table.ajax.reload(null, false);
+  const table = tableInstances[tableId].table;
+  table.page(firstPage ? 0 : table.page()).ajax.reload(null, false);
   const parentTable = tableInstances[tableId].relation?.relation?.parent;
   if (updateParent && parentTable) refreshTable(parentTable);
   if (notification) notify("Table refreshed.", "success", 5);

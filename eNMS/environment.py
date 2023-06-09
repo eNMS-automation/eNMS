@@ -15,6 +15,7 @@ from logging.config import dictConfig
 from logging import getLogger, info
 from os import getenv, getpid
 from passlib.hash import argon2
+from pathlib import Path
 from psutil import Process
 from redis import Redis
 from redis.exceptions import ConnectionError, TimeoutError
@@ -65,6 +66,7 @@ class Environment:
         if vs.settings["automation"]["use_task_queue"]:
             self.init_dramatiq()
         self.init_connection_pools()
+        Path(vs.settings["files"]["trash"]).mkdir(parents=True, exist_ok=True)
         main_thread = Thread(target=self.monitor_filesystem)
         main_thread.daemon = True
         main_thread.start()

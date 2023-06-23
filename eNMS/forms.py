@@ -1069,7 +1069,7 @@ class UserProfileForm(BaseForm):
     action = "eNMS.administration.saveProfile"
     name = StringField("Name")
     email = StringField("Email")
-    landing_page = SelectField("Landing Page", validate_choice=False)
+    landing_page = SelectField("Landing Page", choices=[], validate_choice=False)
     theme = SelectField(
         "Theme",
         choices=[

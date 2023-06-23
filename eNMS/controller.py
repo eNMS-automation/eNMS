@@ -46,6 +46,7 @@ class Controller:
             import_export_types=db.import_export_models,
         )
         self.get_git_content()
+        self.scan_folder()
 
     def _register_endpoint(self, func):
         setattr(self, func.__name__, func)

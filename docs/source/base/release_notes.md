@@ -102,7 +102,6 @@ Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
     - allow both absolute and relative paths in generic and netmiko file transfer services
     - impact on migration: all paths in files must be truncated by removing the path
     to the "files" folder
-  - Don't scan the files folder when running the application for the first time
   - Prevent uploading the same file twice in the file upload panel (or another file
     with the same name)
   - Add trash mechanism for files. Two options:

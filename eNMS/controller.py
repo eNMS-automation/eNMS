@@ -1276,9 +1276,11 @@ class Controller:
                 continue
 
     def scan_playbook_folder(self):
-        path = vs.settings["paths"]["playbooks"] or vs.file_path / "playbooks"
         playbooks = [
-            [str(file) for file in Path(path).glob(extension)]
+            [
+                str(file).replace(str(vs.playbook_path), "")
+                for file in Path(vs.playbook_path).glob(extension)
+            ]
             for extension in ("*.yaml", "*.yml")
         ]
         return sorted(sum(playbooks, []))

@@ -3226,7 +3226,7 @@
     \ default=15)"
   parameterized_form_template: ''
   pass_device_properties: true
-  playbook_path: /media/sf_shared/eNMS-prod/files/playbooks/arista_show_version.yml
+  playbook_path: /arista_show_version.yml
   positions:
     (R) Ansible Playbook Service: [-305, 177]
     Ansible Playbook Service: &id227 [-305, 177]
@@ -3325,7 +3325,7 @@
     \ default=15)"
   parameterized_form_template: ''
   pass_device_properties: true
-  playbook_path: /media/sf_shared/eNMS-prod/files/playbooks/arista_show_running_config.yml
+  playbook_path: /arista_show_running_config.yml
   positions:
     (R) Ansible Playbook Service: [267, 283]
     Ansible Playbook Service: &id229 [267, 283]
@@ -3423,7 +3423,7 @@
     \ default=15)"
   parameterized_form_template: ''
   pass_device_properties: true
-  playbook_path: /media/sf_shared/eNMS-prod/files/playbooks/arista_show_running_config.yml
+  playbook_path: /arista_show_running_config.yml
   positions:
     (R) Ansible Playbook Service: [211, 148]
     Ansible Playbook Service: &id231 [211, 148]
@@ -6520,7 +6520,7 @@
     \ default=15)"
   parameterized_form_template: ''
   pass_device_properties: false
-  playbook_path: /media/sf_shared/eNMS-prod/files/playbooks/simple_playbook.yml
+  playbook_path: /simple_playbook.yml
   positions:
     (R) Ansible Playbook Service: [-640, 277]
     Ansible Playbook Service: &id256 [-640, 277]

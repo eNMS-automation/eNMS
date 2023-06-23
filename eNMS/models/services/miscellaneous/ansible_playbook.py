@@ -53,7 +53,7 @@ class AnsiblePlaybookService(Service):
             command.extend(["-e", dumps(extra_args)])
         if device:
             command.extend(["-i", device.ip_address + ","])
-        command.append(run.sub(run.playbook_path, locals()))
+        command.append(f"{vs.playbook_path}{run.playbook_path}")
         password = extra_args.get("password")
         full_command = " ".join(command + arguments)
         if password:
@@ -65,11 +65,7 @@ class AnsiblePlaybookService(Service):
             logger="security",
         )
         try:
-            result = check_output(
-                command + arguments,
-                cwd=vs.settings["paths"]["playbooks"]
-                or vs.path / "files" / "playbooks",
-            )
+            result = check_output(command + arguments, cwd=vs.playbook_path)
         except Exception:
             result = "\n".join(format_exc().splitlines())
             if password:

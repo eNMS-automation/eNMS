@@ -121,6 +121,7 @@ Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
     deletion mechanism ("database deletion"), unix files are left untouched.
   - Detect missing files when running scan folder mechanism and mark them as "Not Found"
   - Drag-n-drop the same file multiple times in upload panel no longer possible
+  - Use scoped path for playbooks in ansible service (impact on migration files)
 - Fix log not sent when add_secret is False or device is None in the get_credentials function bug
 - Add new 'prepend_filepath' function in workflow builder namespace to add path to file folder before a string
 - Add support for string substitution for the email notification feature (service step 4)
@@ -129,6 +130,9 @@ Migration:
 - in file.yaml, remove path to "files" folder for all paths
 - in service.yaml, compute and add new "read_timeout" property based on fast_cli,
   delay_factor and global_delay_factor
+- in service.yaml, ansible playbook services are now used the scoped path to the playbook
+  instead of the full path (path to playbook folder + scoped path). The path to the playbook
+  folder must be trimmed from all ansible services.
 
 Tests:
 - Everything about files is impacted and must be tested again
@@ -138,6 +142,7 @@ Tests:
 - Test runtimes displayed in WB and logs/results panel (get_runtimes function was refactored)
 - Test skip of run once services when all devices are skipped
 - Test new trash mechanism for files
+- Test ansible playbook service (scoped path instead of full path)
 
 Todo:
 - Add context help for custom parameterized form

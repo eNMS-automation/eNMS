@@ -124,6 +124,7 @@ Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
   - Drag-n-drop the same file multiple times in upload panel no longer possible
 - Fix log not sent when add_secret is False or device is None in the get_credentials function bug
 - Add new 'prepend_filepath' function in workflow builder namespace to add path to file folder before a string
+- Add support for string substitution for the email notification feature (service step 4)
 
 Migration:
 - in file.yaml, remove path to "files" folder for all paths

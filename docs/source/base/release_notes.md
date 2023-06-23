@@ -13,7 +13,7 @@ Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
 - Round result size to 1 decimal when the result size is higher than 50% the maximum
   allowed size
 - Don't allow saving a workflow if the run method is set to Service x Service and the
-  workflow has target devices or pools
+  workflow has target devices, pools, or a device query
 - Don't allow skipping services in a workflow if workflow edit is restricted to
   owners via RBAC access control
 - Remove all references to old "update_pools" mechanism (removed last release)

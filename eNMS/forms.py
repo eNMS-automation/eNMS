@@ -1356,7 +1356,7 @@ class ScrapliForm(ConnectionForm):
 class UserForm(RbacForm):
     template = "object"
     form_type = HiddenField(default="user")
-    last_login = StringField("Last Login", render_kw={"readonly": True})
+    last_login = StringField("Last Login", render_kw={"readonly": True}, dont_duplicate=True)
     groups = MultipleInstanceField("Groups", model="group")
     theme = SelectField(
         "Theme",

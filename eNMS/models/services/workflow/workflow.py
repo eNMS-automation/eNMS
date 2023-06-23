@@ -295,7 +295,11 @@ class WorkflowForm(ServiceForm):
             )
         invalid_targets_error = (
             self.run_method.data == "per_service_with_service_targets"
-            and (self.target_devices.data or self.target_pools.data or self.device_query.data)
+            and (
+                self.target_devices.data
+                or self.target_pools.data
+                or self.device_query.data
+            )
         )
         if invalid_targets_error:
             self.run_method.errors.append(

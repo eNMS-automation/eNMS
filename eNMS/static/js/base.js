@@ -964,7 +964,7 @@ function processData(type, id) {
   }
   if (type == "folder" && !id) {
     const filename = $("#folder-filename").val();
-    $("#folder-path").val(`${folderPath.slice(6)}/${filename}`);
+    $("#folder-path").val(`${folderPath}/${filename}`);
   }
   call({
     url: `/update/${type}`,

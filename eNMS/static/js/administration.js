@@ -278,14 +278,14 @@ function saveFile(file) {
 
 function showFileUploadPanel(folder) {
   if (!folder) folder = folderPath;
-  const path = folder.replace(/\//g, ">");
+  const pathId = folder.replace(/\//g, ">") || 1;
   openPanel({
     name: "upload_files",
     title: `Upload files to ${folder}`,
     size: "700 615",
-    id: path,
+    id: pathId,
     callback: () => {
-      const element = document.getElementById(`dropzone-${path}`);
+      const element = document.getElementById(`dropzone-${pathId}`);
       let dropzone = new Dropzone(element, {
         url: "/upload_files",
         autoProcessQueue: false,
@@ -306,8 +306,8 @@ function showFileUploadPanel(folder) {
         },
         timeout: settings.files.upload_timeout,
       });
-      $(`[id="dropzone-submit-${path}"]`).click(function() {
-        $(`[id="folder-${path}"]`).val(folder.slice(6));
+      $(`[id="dropzone-submit-${pathId}"]`).click(function() {
+        $(`[id="folder-${pathId}"]`).val(folder);
         dropzone.processQueue();
       });
     },

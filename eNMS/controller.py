@@ -1382,7 +1382,7 @@ class Controller:
                     info(f"{str(values)} could not be imported ({str(exc)})")
                     status = "Partial import (see logs)."
             db.session.commit()
-        for pool in db.fetch_all("pool"):
+        for pool in db.fetch_all("pool", rbac="edit"):
             pool.compute_pool()
         env.log("info", status)
         return status
@@ -1419,7 +1419,7 @@ class Controller:
             return {"alert": str(exc)}
 
     def update_all_pools(self):
-        for pool in db.fetch_all("pool"):
+        for pool in db.fetch_all("pool", rbac="edit"):
             pool.compute_pool()
 
     def update_database_configurations_from_git(self):

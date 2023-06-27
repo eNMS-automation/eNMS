@@ -1069,6 +1069,7 @@ class Controller:
     def import_services(self, **kwargs):
         file = kwargs["file"]
         filepath = vs.file_path / "services" / file.filename
+        (vs.file_path / "services").mkdir(parents=True, exist_ok=True)
         file.save(str(filepath))
         with open_tar(filepath) as tar_file:
             tar_file.extractall(path=vs.path / "files" / "services")
@@ -1081,7 +1082,7 @@ class Controller:
                 skip_pool_update=True,
                 skip_model_update=True,
             )
-        rmtree(vs.path / "files" / "services" / folder_name, ignore_errors=True)
+        rmtree(vs.file_path / "services" / folder_name, ignore_errors=True)
         if "Error during import" in status:
             raise Exception(status)
         return status

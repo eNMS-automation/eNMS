@@ -30,8 +30,8 @@ function run() {
     export REDIS_ADDR="192.168.56.103"
   fi
   export SERVER_NAME="eNMS Server"
-  export SERVER_ADDR="192.168.56.102"
-  export SERVER_URL="http://192.168.56.102"
+  export SERVER_ADDR="192.168.56.108"
+  export SERVER_URL="http://192.168.56.108:5000"
   export SCHEDULER_ADDR="http://192.168.56.103:5000"
   export LDAP_ADDR="192.168.56.104"
   export TACACS_ADDR="192.168.56.104"

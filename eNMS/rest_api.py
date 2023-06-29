@@ -82,7 +82,7 @@ class RestApi:
         return getattr(controller, f"migration_{direction}")(**kwargs)
 
     def query(self, instance_type, **kwargs):
-        results = db.fetch(instance_type, all_matches=True, **kwargs)
+        results = db.fetch(instance_type, allow_none=True, all_matches=True, **kwargs)
         return [result.get_properties(exclude=["positions"]) for result in results]
 
     def run_service(self, **kwargs):

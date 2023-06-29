@@ -99,7 +99,7 @@ class Controller:
         nodes = set(db.objectify("node", kwargs["nodes"]))
         links = set(db.objectify("link", kwargs["links"]))
         for pool in db.objectify("pool", kwargs["pools"]):
-            nodes |= set(pool.devices) | set(pool.networks)
+            nodes |= set(pool.devices)
             links |= set(pool.links)
         if kwargs["add_connected_nodes"]:
             for link in links:

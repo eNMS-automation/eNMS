@@ -1027,7 +1027,9 @@ class Controller:
             env.log("info", f"Relationships created in {datetime.now() - before_time}")
         db.session.commit()
         if kwargs.get("service_import"):
-            store["service"][metadata["service"]].recursive_update()
+            service = store["service"][metadata["service"]]
+            if service.type == "workflow":
+                service.recursive_update()
         if not kwargs.get("skip_model_update"):
             before_time = datetime.now()
             env.log("info", "Starting model update")

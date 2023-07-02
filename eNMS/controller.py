@@ -1010,14 +1010,22 @@ class Controller:
                         continue
                     relation = vs.relationships[model][property]
                     if relation["list"]:
-                        related_instances = (
-                            store[relation["model"]].get(name) for name in value
-                        )
-                        value = list(filter(None, related_instances))
+                        sql_value = []
+                        for name in value:
+                            if name not in store[relation["model"]]:
+                                store[relation["model"]][name] = db.fetch(
+                                    relation["model"], name=name, allow_none=True
+                                )
+                            if store[relation["model"]][name]:
+                                sql_value.append(store[relation["model"]][name])
                     else:
-                        value = store[relation["model"]].get(value)
+                        if value not in store[relation["model"]]:
+                            store[relation["model"]][value] = db.fetch(
+                                relation["model"], name=value, allow_none=True
+                            )
+                        sql_value = store[relation["model"]][value]
                     try:
-                        setattr(store[model].get(instance_name), property, value)
+                        setattr(store[model].get(instance_name), property, sql_value)
                     except Exception:
                         info("\n".join(format_exc().splitlines()))
                         if kwargs.get("service_import", False):

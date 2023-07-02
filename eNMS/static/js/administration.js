@@ -232,7 +232,7 @@ function scanCluster() {
   });
 }
 
-function editFile(filename, filepath) {
+function editFile(id, filename, filepath) {
   call({
     url: `/edit_file/${filename}`,
     callback: function(content) {
@@ -243,9 +243,9 @@ function editFile(filename, filepath) {
       openPanel({
         name: "file_editor",
         title: `Edit ${filepath}`,
-        id: filename,
+        id: id,
         callback: () => {
-          const display = document.getElementById(`file_content-${filename}`);
+          const display = document.getElementById(`file_content-${id}`);
           // eslint-disable-next-line new-cap
           let fileEditor = (editors[filename] = CodeMirror.fromTextArea(display, {
             lineWrapping: true,

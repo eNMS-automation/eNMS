@@ -1659,8 +1659,7 @@ tables.file = class FileTable extends Table {
           <li>
             <button type="button" class="btn btn-sm btn-primary"
             onclick="eNMS.administration.editFile(
-              '${row.id}', '${row.name}', '${row.path}')"
-            data-tooltip="File Content">
+              '${row.id}', '${row.name}', '${row.path}')" data-tooltip="File Content">
               <span class="glyphicon glyphicon-list"></span>
             </button>
           </li>

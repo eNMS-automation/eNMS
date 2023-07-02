@@ -951,7 +951,8 @@ class Controller:
                 "service", name=f"[Shared] {service_name}", allow_none=True
             )
             if service:
-                store["service"][service_name] = service
+                store["swiss_army_knife_service"][service.name] = service
+                store["service"][service.name] = service
         for model in models:
             path = folder_path / f"{model}.yaml"
             if not path.exists():

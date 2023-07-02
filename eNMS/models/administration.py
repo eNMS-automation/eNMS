@@ -56,7 +56,7 @@ class User(AbstractBase, UserMixin):
 
     def delete(self):
         if self.name == getattr(current_user, "name", False):
-            raise db.rbac_error("A user cannot be deleted while logged in.")
+            return {"log": "A user cannot be deleted while logged in."}
 
     def get_id(self):
         return self.name
@@ -224,7 +224,7 @@ class File(AbstractBase):
         if not exists(self.full_path) or not trash:
             return
         if self.full_path == trash:
-            return {"log_level": "error", "log": "Cannot delete the 'trash' folder."}
+            return {"log": "Cannot delete the 'trash' folder."}
         if trash in self.full_path:
             if self.type == "folder":
                 rmtree(self.full_path, ignore_errors=True)

@@ -130,7 +130,7 @@ class Service(AbstractBase):
 
     def delete(self):
         if self.name in ("[Shared] Start", "[Shared] End", "[Shared] Placeholder"):
-            raise db.rbac_error(f"It is not allowed to delete '{self.name}'.")
+            return {"log": f"It is not allowed to delete '{self.name}'."}
         self.check_restriction_to_owners("edit")
 
     def check_restriction_to_owners(self, mode):

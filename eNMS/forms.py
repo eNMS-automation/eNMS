@@ -827,8 +827,8 @@ class ServiceForm(BaseForm):
     )
     group_properties = {
         "step1-1": [
-            "name",
             "scoped_name",
+            "name",
             "creator",
             "admin_only",
             "type",

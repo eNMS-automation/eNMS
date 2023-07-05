@@ -717,11 +717,6 @@
         "search": "text"
       },
       {
-        "data": "devices",
-        "title": "Devices",
-        "width": "100px"
-      },
-      {
         "data": "links",
         "title": "Links",
         "width": "100px"

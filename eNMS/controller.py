@@ -1173,7 +1173,7 @@ class Controller:
         else:
             run_kwargs["start_service"] = service.id
         if restart_run:
-            run_kwargs["restart_run"] = restart_run
+            run_kwargs["restart_run"] = restart_run.id
             initial_payload = restart_run.payload
         run_kwargs["services"] = [service.id]
         service.last_run = vs.get_time()

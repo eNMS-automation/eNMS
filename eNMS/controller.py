@@ -1014,16 +1014,20 @@ class Controller:
                         sql_value = []
                         for name in value:
                             if name not in store[relation["model"]]:
-                                store[relation["model"]][name] = db.fetch(
+                                related_instance = db.fetch(
                                     relation["model"], name=name, allow_none=True
                                 )
-                            if store[relation["model"]][name]:
+                                if related_instance:
+                                    store[relation["model"]][name] = related_instance
+                            if name in store[relation["model"]]:
                                 sql_value.append(store[relation["model"]][name])
                     else:
                         if value not in store[relation["model"]]:
-                            store[relation["model"]][value] = db.fetch(
+                            related_instance = db.fetch(
                                 relation["model"], name=value, allow_none=True
                             )
+                            if related_instance:
+                                store[relation["model"]][value] = related_instance
                         sql_value = store[relation["model"]][value]
                     try:
                         setattr(store[model].get(instance_name), property, sql_value)

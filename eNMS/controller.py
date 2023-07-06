@@ -45,7 +45,7 @@ class Controller:
             name=vs.settings["app"].get("startup_migration", "default"),
             import_export_types=db.import_export_models,
         )
-        self.get_git_content()
+        self.get_git_content(force_update=True)
         self.scan_folder()
 
     def _register_endpoint(self, func):
@@ -502,7 +502,7 @@ class Controller:
         form_factory.register_parameterized_form(service_id)
         return vs.form_properties[f"initial-{service_id}"]
 
-    def get_git_content(self):
+    def get_git_content(self, force_update=False):
         env.log("info", "Starting Git Content Update")
         repo = vs.settings["app"]["git_repository"]
         if not repo:
@@ -517,7 +517,7 @@ class Controller:
         except Exception as exc:
             env.log("error", f"Git pull failed ({str(exc)})")
         try:
-            self.update_database_configurations_from_git()
+            self.update_database_configurations_from_git(force_update)
         except Exception as exc:
             env.log("error", f"Update of device configurations failed ({str(exc)})")
         env.log("info", "Git Content Update Successful")
@@ -1434,7 +1434,7 @@ class Controller:
         for pool in db.fetch_all("pool", rbac="edit"):
             pool.compute_pool()
 
-    def update_database_configurations_from_git(self):
+    def update_database_configurations_from_git(self, force_update=False):
         path = vs.path / "network_data"
         env.log("info", f"Updating device configurations with data from {path}")
         for dir in scandir(path):
@@ -1452,7 +1452,7 @@ class Controller:
                 for timestamp, value in timestamps.get(property, {}).items():
                     if timestamp == "update":
                         db_date = getattr(device, f"last_{property}_update")
-                        if db_date != "Never":
+                        if db_date != "Never" and not force_update:
                             no_update = vs.str_to_date(value) <= vs.str_to_date(db_date)
                     setattr(device, f"last_{property}_{timestamp}", value)
                 filepath = Path(dir.path) / property

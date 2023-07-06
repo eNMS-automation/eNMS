@@ -92,6 +92,8 @@ Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
   update "update" timestamp if the value hasn't changed
   - in the "update database configuration from git", dont update the database configuration
     if the "update" timestamp from git is the same as or older than the one stored in the database.
+  - Add "force_update" argument to "get git content" and "update database configuration
+  from git" functions (when the app runs for the first time, this argument is set to True)
 - Add parameterized form properties in dedicated accordion in service edit panel
 - Display header and link before results in email notification
 - Files Improvements:

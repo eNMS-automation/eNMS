@@ -1087,7 +1087,7 @@ class Controller:
         (vs.file_path / "services").mkdir(parents=True, exist_ok=True)
         file.save(str(filepath))
         with open_tar(filepath) as tar_file:
-            tar_file.extractall(path=vs.path / "files" / "services")
+            tar_file.extractall(path=vs.file_path / "services")
             folder_name = tar_file.getmembers()[0].name
             status = self.migration_import(
                 folder="services",

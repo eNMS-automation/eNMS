@@ -15,7 +15,7 @@ netmiko
 passlib
 psutil
 redis
-ruamel.yaml
+ruamel.yaml==0.17.21
 sqlalchemy
 watchdog
 wtforms

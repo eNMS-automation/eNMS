@@ -26,7 +26,6 @@ import { updateNetworkRightClickBindings } from "./networkBuilder.js";
 
 export let tables = {};
 export let tableInstances = {};
-let displayPagination = false;
 export const models = {};
 let waitForSearch = false;
 
@@ -47,6 +46,7 @@ export class Table {
     });
     this.id = `${this.type}${id ? `-${id}` : ""}`;
     this.model = this.modelFiltering || this.type;
+    this.displayPagination = false;
     tableInstances[this.id] = this;
     // eslint-disable-next-line new-cap
     this.table = $(`#table-${this.id}`).DataTable({
@@ -60,7 +60,7 @@ export class Table {
         $(".paginate_button > a").on("focus", function() {
           $(this).blur();
         });
-        if (!displayPagination) self.setPagination();
+        if (!self.displayPagination) self.setPagination();
         createTooltips();
       },
       sDom: "tilp",
@@ -144,7 +144,7 @@ export class Table {
           Object.assign(data, {
             export: self.csvExport,
             clipboard: self.copyClipboard,
-            pagination: displayPagination,
+            pagination: self.displayPagination,
             ...this.getFilteringData(),
           });
           Object.assign(data, self.filteringData);
@@ -1839,7 +1839,8 @@ function displayRelationTable(type, instance, relation) {
 }
 
 function togglePaginationDisplay(tableId) {
-  displayPagination = !displayPagination;
+  const table = tableInstances[tableId];
+  table.displayPagination = !table.displayPagination;
   refreshTable(tableId);
 }
 

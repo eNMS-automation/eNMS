@@ -62,7 +62,7 @@ const options = {
 
 export function switchToNetwork(path, direction) {
   if (typeof path === "undefined") return;
-  setPath(path.toString());
+  setPath(path);
   if (currentPath.includes(">")) {
     $("#up-arrow").removeClass("disabled");
   } else {

@@ -466,8 +466,9 @@ function displayLogs(service, runtime, change) {
 }
 
 function displayResultsTree(service, runtime) {
+  const path = currentPath.endsWith(service.id) ? currentPath : service.id;
   call({
-    url: `/get_workflow_results/${currentPath || service.id}/${runtime}`,
+    url: `/get_workflow_results/${path}/${runtime}`,
     callback: function(data) {
       $(`#result-tree-${service.id}`)
         .jstree("destroy")

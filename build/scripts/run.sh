@@ -49,6 +49,7 @@ function run() {
   if [ "$reload" = true ]; then
     if [ "$database" = "mysql" ]; then
       sudo mysql -u root --password=password -e "DROP DATABASE enms;CREATE DATABASE enms;"
+      sudo mysql -u root --password=password -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';"
     elif [ "$database" = "pgsql" ]; then
       sudo -u postgres psql -c "DROP DATABASE enms"
       sudo -u postgres psql -c "CREATE DATABASE enms;"

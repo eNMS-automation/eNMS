@@ -187,6 +187,13 @@ export function serializeForm(form, formDefault, bulkFilter) {
       result[property.name] = property.value;
     }
   });
+  if (bulkFilter) {
+    $(form).find("input:checkbox").each(function() {
+        if (propertiesToKeep.includes(this.name)) {
+          result[this.name] = $(this).is(":checked") ? "bool-true" : "bool-false";
+        }
+    });
+  }
   return result;
 }
 

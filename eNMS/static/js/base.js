@@ -188,11 +188,13 @@ export function serializeForm(form, formDefault, bulkFilter) {
     }
   });
   if (bulkFilter) {
-    $(form).find("input:checkbox").each(function() {
+    $(form)
+      .find("input:checkbox")
+      .each(function() {
         if (propertiesToKeep.includes(this.name)) {
           result[this.name] = $(this).is(":checked") ? "bool-true" : "bool-false";
         }
-    });
+      });
   }
   return result;
 }
@@ -201,7 +203,7 @@ const deleteInstance = function(type, id, tableId) {
   call({
     url: `/delete_instance/${type}/${id}`,
     callback: function(result) {
-      if (result.delete_aborted) return notify(result.log, result.log_level, 5, true)
+      if (result.delete_aborted) return notify(result.log, result.log_level, 5, true);
       if (type in subtypes.service) {
         type = "service";
         const path = localStorage.getItem("path");

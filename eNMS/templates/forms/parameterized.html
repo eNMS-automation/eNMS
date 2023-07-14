@@ -6,10 +6,10 @@
 >
   <div class="modal-body">
     <div class="form-group">
-      {% block form_content %}
-      {% for field in form %} {% set id = "{}-{}".format(form_type, field.name) %} {%
-      set style = "height: {}px".format(field.render_kw["rows"]*20 + 17) if "TextArea"
-      in field.widget|string else "" %}
+      {% block form_content %} {% for field in form %} {% set id =
+      "{}-{}".format(form_type, field.name) %} {% set style = "height:
+      {}px".format(field.render_kw["rows"]*20 + 17) if "TextArea" in field.widget|string
+      else "" %}
       <div style="{{ style }}">
         {% set class = "form-control-bool" if field.type == "BooleanField" else
         "form-control" %} {% if field.widget.input_type == 'hidden' %} {{ field(id=id)
@@ -24,8 +24,7 @@
         <br /><br />
         {% endif %}
       </div>
-      {% endfor %}
-      {% endblock form_content %}
+      {% endfor %} {% endblock form_content %}
     </div>
     <center>
       <button

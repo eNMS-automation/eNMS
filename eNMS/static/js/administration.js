@@ -73,9 +73,9 @@ export function displayFolderPath() {
 function enterFolder({ folder, path, parent }) {
   if (parent) {
     folderPath = folderPath
-    .split("/")
-    .slice(0, -1)
-    .join("/");
+      .split("/")
+      .slice(0, -1)
+      .join("/");
   } else {
     folderPath = path || folder ? path || `${folderPath}/${folder}` : "";
   }

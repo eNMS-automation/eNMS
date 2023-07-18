@@ -253,7 +253,8 @@ class VariableStore:
         return str(datetime.now())
 
     def str_to_date(self, value):
-        return datetime.strptime(value, "%Y-%m-%d %H:%M:%S.%f")
+        milliseconds = ".%f" if "." in value else ""
+        return datetime.strptime(value, f"%Y-%m-%d %H:%M:%S{milliseconds}")
 
     def strip_all(self, input):
         return input.translate(str.maketrans("", "", f"{punctuation} "))

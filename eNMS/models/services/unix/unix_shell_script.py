@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, ForeignKey, Integer
+from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
@@ -17,6 +17,11 @@ class UnixShellScriptService(ConnectionService):
     enable_mode = db.Column(Boolean, default=False)
     config_mode = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
+    conn_timeout = db.Column(Float, default=10.0)
+    auth_timeout = db.Column(Float)
+    banner_timeout = db.Column(Float, default=15.0)
+    fast_cli = db.Column(Boolean, default=False)
+    global_delay_factor = db.Column(Float, default=1.0)
     expect_string = db.Column(db.SmallString)
     auto_find_prompt = db.Column(Boolean, default=True)
     strip_prompt = db.Column(Boolean, default=True)

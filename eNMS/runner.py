@@ -1118,6 +1118,7 @@ class Runner:
             device_type=driver,
             ip=device.ip_address,
             port=device.port,
+            timeout=self.conn_timeout,
             conn_timeout=self.conn_timeout,
             auth_timeout=self.auth_timeout,
             banner_timeout=self.banner_timeout,

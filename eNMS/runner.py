@@ -1049,10 +1049,7 @@ class Runner:
         return "".join(input.split())
 
     def update_netmiko_connection(self, connection):
-        for property in ("fast_cli", "global_delay_factor"):
-            service_value = getattr(self.service, property)
-            if service_value:
-                setattr(connection, property, service_value)
+        setattr(connection, "global_delay_factor", self.service.global_delay_factor)
         try:
             if not hasattr(connection, "check_enable_mode"):
                 self.log("error", "Netmiko 'check_enable_mode' method is missing")

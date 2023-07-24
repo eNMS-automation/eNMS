@@ -1117,7 +1117,7 @@ class Runner:
             port=device.port,
             timeout=self.conn_timeout,
             conn_timeout=self.conn_timeout,
-            auth_timeout=self.auth_timeout,
+            auth_timeout=self.auth_timeout or None,
             banner_timeout=self.banner_timeout,
             fast_cli=self.fast_cli,
             global_delay_factor=self.global_delay_factor,

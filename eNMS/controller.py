@@ -341,11 +341,11 @@ class Controller:
             for service in services
         ]
         with open(path / "service.yaml", "w") as file:
-            yaml.dump(services, file)
+            yaml.dump(services, file, default_style='"')
         if service.type == "workflow":
             edges = [edge.to_dict(export=True) for edge in service.deep_edges]
             with open(path / "workflow_edge.yaml", "w") as file:
-                yaml.dump(edges, file)
+                yaml.dump(edges, file, default_style='"')
         with open(path / "metadata.yaml", "w") as file:
             metadata = {
                 "version": vs.settings["app"]["import_version"],

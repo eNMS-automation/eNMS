@@ -219,7 +219,7 @@ class VariableStore:
     def dualize(self, iterable):
         return [(element, element) for element in iterable]
 
-    def dict_to_string(self, input: str, depth=0):
+    def dict_to_string(self, input, depth=0):
         tab = "\t" * depth
         if isinstance(input, list):
             result = "\n"

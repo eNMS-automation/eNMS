@@ -219,7 +219,7 @@ class VariableStore:
     def dualize(self, iterable):
         return [(element, element) for element in iterable]
 
-    def dict_to_string(self, input, depth=0):
+    def dict_to_string(self, input: str, depth=0):
         tab = "\t" * depth
         if isinstance(input, list):
             result = "\n"
@@ -232,7 +232,10 @@ class VariableStore:
                 result += f"\n{tab}{key}: {self.dict_to_string(value, depth + 1)}"
             return result
         else:
-            return str(input)
+            input_lines = str(input).splitlines()
+            tab = "\t" * (max(depth, 1) - 1)
+            result = "\n".join([input_lines[0]] + [f"{tab}  {line}" for line in input_lines[1:]])
+            return result
 
     def dictionary_recursive_merge(self, old, new):
         for key, value in new.items():

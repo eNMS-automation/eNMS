@@ -13,6 +13,7 @@ from traceback import format_exc
 from warnings import warn
 from wtforms.validators import __all__ as all_validators
 from wtforms.widgets.core import __all__ as all_widgets
+from textwrap import indent
 
 try:
     from scrapli import Scrapli
@@ -232,10 +233,7 @@ class VariableStore:
                 result += f"\n{tab}{key}: {self.dict_to_string(value, depth + 1)}"
             return result
         else:
-            input_lines = str(input).splitlines()
-            tab = "\t" * (max(depth, 1) - 1)
-            result = "\n".join([input_lines[0]] + [f"{tab}  {line}" for line in input_lines[1:]])
-            return result
+            return f"\n{indent(str(input), tab)}" if "\n" in str(input) else str(input)
 
     def dictionary_recursive_merge(self, old, new):
         for key, value in new.items():

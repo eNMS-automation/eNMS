@@ -1122,7 +1122,6 @@ class Runner:
             fast_cli=self.fast_cli,
             global_delay_factor=self.global_delay_factor,
             session_log=BytesIO(),
-            global_cmd_verify=False,
             sock=sock,
             **self.get_credentials(device),
         )

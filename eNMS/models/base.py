@@ -75,9 +75,9 @@ class AbstractBase(db.base):
             property_type = vs.model_properties[self.__tablename__].get(property, None)
             if property in relation:
                 if relation[property]["list"]:
-                    value = db.objectify(relation[property]["model"], value)
+                    value = db.objectify(relation[property]["model"], value, rbac=None)
                 elif value:
-                    value = db.fetch(relation[property]["model"], id=value, rbac="read")
+                    value = db.fetch(relation[property]["model"], id=value, rbac=None)
             if property_type == "bool":
                 value = value not in (False, "false")
             elif property_type == "dict":

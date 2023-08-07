@@ -466,7 +466,7 @@ function displayLogs(service, runtime, change) {
 }
 
 function displayResultsTree(service, runtime) {
-  const path = currentPath.endsWith(service.id) ? currentPath : service.id;
+  const path = currentPath && currentPath.endsWith(service.id) ? currentPath : service.id;
   call({
     url: `/get_workflow_results/${path}/${runtime}`,
     callback: function(data) {

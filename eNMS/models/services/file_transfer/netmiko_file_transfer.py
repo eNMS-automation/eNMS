@@ -41,6 +41,7 @@ class NetmikoFileTransferService(ConnectionService):
         if run.direction == "get" and str(vs.file_path) not in destination:
             destination = f"{vs.file_path}{destination}"
         run.log("info", f"Transferring file {source}", device)
+        netmiko_connection.password = run.get_credentials(device)["password"]
         transfer_dict = file_transfer(
             netmiko_connection,
             source_file=source,
@@ -51,6 +52,7 @@ class NetmikoFileTransferService(ConnectionService):
             disable_md5=run.disable_md5,
             inline_transfer=run.inline_transfer,
         )
+        netmiko_connection.password = "*" * 8
         return {"success": True, "result": transfer_dict}
 
 

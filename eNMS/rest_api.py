@@ -83,7 +83,7 @@ class RestApi:
 
     def query(self, instance_type, **kwargs):
         for arg in ("allow_none", "all_matches", "rbac", "username"):
-            a = kwargs.pop(arg, None)
+            kwargs.pop(arg, None)
         results = db.fetch(instance_type, allow_none=True, all_matches=True, **kwargs)
         return [result.get_properties(exclude=["positions"]) for result in results]
 

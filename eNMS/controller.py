@@ -1262,7 +1262,7 @@ class Controller:
                 relation = db.fetch(relation_type, id=id, rbac=None)
                 relation.positions[instance.name] = new_position
             elif id in instance.labels:
-                instance.labels[id] = {"positions": new_position, **instance.labels[id]}
+                instance.labels[id] = {**instance.labels[id], "positions": new_position}
         return now
 
     def save_profile(self, **kwargs):

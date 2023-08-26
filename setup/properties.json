@@ -1147,7 +1147,8 @@
       {
         "data": "commit_sha",
         "title": "Commit SHA",
-        "search": "text"
+        "search": "text",
+        "visible": false
       },
       {
         "data": "weight",

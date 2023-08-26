@@ -1,6 +1,7 @@
 from copy import deepcopy
 from flask_login import current_user
 from functools import wraps
+from os import getpid
 from requests import get, post
 from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout
 from sqlalchemy import Boolean, case, ForeignKey, Integer
@@ -432,6 +433,7 @@ class Run(AbstractBase):
             return "N/A"
 
     def run(self):
+        worker = db.factory("worker", name=str(getpid()))
         env.update_worker_job(self.service.name)
         vs.run_targets[self.runtime] = set(
             device.id

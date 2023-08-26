@@ -27,6 +27,7 @@ except ImportError as exc:
 class VariableStore:
     def __init__(self):
         self._set_setup_variables()
+        self._set_server_variables()
         self._set_automation_variables()
         self._set_general_variables()
         self._set_custom_variables()
@@ -39,9 +40,6 @@ class VariableStore:
 
     def _set_setup_variables(self):
         self.path = Path.cwd()
-        self.server = getenv("SERVER_NAME", "Localhost")
-        self.server_ip = getenv("SERVER_ADDR", "0.0.0.0")
-        self.server_url = getenv("SERVER_URL", "https://0.0.0.0")
         for setup_file in Path(getenv("SETUP_DIR", self.path / "setup")).iterdir():
             with open(setup_file, "r") as file:
                 setattr(self, setup_file.stem, load(file))
@@ -54,6 +52,12 @@ class VariableStore:
         self.migration_path = (
             self.settings["paths"]["migration"] or f"{self.file_path}/migrations"
         )
+
+    def _set_server_variables(self):
+        self.server = getenv("SERVER_NAME", "Localhost")
+        self.server_ip = getenv("SERVER_ADDR", "0.0.0.0")
+        self.server_url = getenv("SERVER_URL", "https://0.0.0.0")
+        self.server_version = self.settings["app"]["version"]
 
     def _set_automation_variables(self):
         self.ssh_sessions = {}

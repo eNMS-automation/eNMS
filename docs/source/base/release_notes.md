@@ -2,6 +2,7 @@
 # Release Notes
 
 Version 4.6.0: Clustering
+-------------------------
 
 - Add one-to-many relationship between Run and Server class
 - Display server in run table as hyperlink to server edit panel

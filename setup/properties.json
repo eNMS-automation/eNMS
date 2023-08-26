@@ -1152,6 +1152,12 @@
         "search": "text"
       },
       {
+        "data": "location",
+        "title": "Location",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "version",
         "title": "Version",
         "search": "text"

@@ -23,6 +23,7 @@ class Server(AbstractBase):
     description = db.Column(db.LargeString)
     mac_address = db.Column(db.TinyString)
     ip_address = db.Column(db.TinyString)
+    location = db.Column(db.SmallString)
     version = db.Column(db.TinyString)
     commit_sha = db.Column(db.TinyString)
     weight = db.Column(Integer, default=1)

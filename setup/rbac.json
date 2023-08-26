@@ -39,15 +39,19 @@
         },
         "Groups": {
           "endpoint": "/group_table",
-          "rbac": "access"
+          "rbac": "admin"
         },
         "Servers": {
           "endpoint": "/server_table",
-          "rbac": "access"
+          "rbac": "admin"
+        },
+        "Workers": {
+          "endpoint": "/worker_table",
+          "rbac": "admin"
         },
         "Credentials": {
           "endpoint": "/credential_table",
-          "rbac": "access"
+          "rbac": "admin"
         }
       }
     },
@@ -169,7 +173,8 @@
     "/user_table": "admin",
     "/view_service_results": "access",
     "/workflow_builder": "access",
-    "/instance_tree_form": "access"
+    "/instance_tree_form": "access",
+    "/worker_table": "admin"
   },
   "post_requests": {
     "/add_edge": "access",
@@ -267,7 +272,7 @@
     "/web_connection": "access"
   },
   "admin_models": {
-    "read": ["session"],
+    "read": ["session", "server", "worker"],
     "edit": ["group", "user", "session"]
   },
   "rbac_models": {

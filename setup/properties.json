@@ -1359,6 +1359,14 @@
         "orderable": false,
         "export": false
       }
+    ],
+    "worker": [
+      {
+        "data": "name",
+        "title": "Name",
+        "search": "text",
+        "width": "250px"
+      }
     ]
   },
   "property_list": {

@@ -1703,6 +1703,26 @@ tables.file = class FileTable extends Table {
   }
 };
 
+tables.worker = class WorkerTable extends Table {
+  get controls() {
+    return [this.columnDisplay(), this.refreshTableButton(), this.clearSearchButton()];
+  }
+
+  buttons(row) {
+    return [
+      `
+      <ul class="pagination pagination-lg" style="margin: 0px;">
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showInstancePanel('server', '${row.id}')" data-tooltip="Edit"
+            ><span class="glyphicon glyphicon-edit"></span
+          ></button>
+        </li>
+      </ul>`,
+    ];
+  }
+};
+
 export const clearSearch = function(tableId, notification) {
   $(`.search-input-${tableId},.search-list-${tableId}`).val("");
   $(".search-relation-dd")

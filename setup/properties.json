@@ -768,7 +768,7 @@
         "visible": false
       },
       {
-        "data": "server_name",
+        "data": "server_link",
         "title": "Server",
         "search": "text",
         "visible": false,
@@ -1365,7 +1365,7 @@
   },
   "tables_additional": {
     "pool": ["device_number", "link_number"],
-    "run": ["path", "service_properties"],
+    "run": ["path", "server_properties", "service_properties"],
     "service": ["path", "scoped_name", "mandatory_parametrization"],
     "network": ["path", "scoped_name"],
     "result": ["service_name"],

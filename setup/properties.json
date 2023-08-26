@@ -1364,8 +1364,12 @@
       {
         "data": "name",
         "title": "Process ID",
-        "search": "text",
-        "width": "250px"
+        "search": "text"
+      },
+      {
+        "data": "subtype",
+        "title": "Type",
+        "search": "text"
       }
     ]
   },

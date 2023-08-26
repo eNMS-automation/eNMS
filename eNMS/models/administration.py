@@ -36,6 +36,7 @@ class Worker(AbstractBase):
     __tablename__ = type = "worker"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    subtype = db.Column(db.TinyString)
 
 
 class User(AbstractBase, UserMixin):

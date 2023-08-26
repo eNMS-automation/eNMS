@@ -8,6 +8,8 @@ Version 4.6.0: Clustering
 - Display server in run table as hyperlink to server edit panel
 - Add "runs" link in server table
 - Rename 'import_version' key to 'version' in settings.json > app
+- Add version and commit SHA properties to Server SQL table and Server table in the UI
+- Update both server version and commit SHA every time the application starts
 
 Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
 --------------------------------------------------------------------------

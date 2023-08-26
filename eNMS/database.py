@@ -116,6 +116,7 @@ class Database:
             name=vs.server,
             version=vs.server_version,
             commit_sha=vs.server_commit_sha,
+            last_restart=vs.get_time(),
         )
         vs.server_id = server.id
         for run in self.fetch(

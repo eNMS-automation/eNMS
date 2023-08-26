@@ -26,6 +26,7 @@ class Server(AbstractBase):
     location = db.Column(db.SmallString)
     version = db.Column(db.TinyString)
     commit_sha = db.Column(db.TinyString)
+    last_restart = db.Column(db.TinyString)
     weight = db.Column(Integer, default=1)
     status = db.Column(db.TinyString, default="down")
     runs = relationship("Run", back_populates="server")

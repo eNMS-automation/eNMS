@@ -1169,6 +1169,12 @@
         "visible": false
       },
       {
+        "data": "last_restart",
+        "title": "Last Restart",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "weight",
         "title": "Weight",
         "search": "text"

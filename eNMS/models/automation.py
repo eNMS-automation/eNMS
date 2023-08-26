@@ -369,7 +369,11 @@ class Run(AbstractBase):
     task_name = association_proxy("task", "name")
     state = db.Column(db.Dict, info={"log_change": False})
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
-    model_properties = {"progress": "str", "server_properties": "dict", "service_properties": "dict"}
+    model_properties = {
+        "progress": "str",
+        "server_properties": "dict",
+        "service_properties": "dict",
+    }
 
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or vs.get_time()

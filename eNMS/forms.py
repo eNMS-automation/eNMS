@@ -1244,7 +1244,7 @@ class NetmikoForm(ConnectionForm):
     auth_timeout = FloatField("Authentication Timeout", default=0.0)
     banner_timeout = FloatField("Banner Timeout", default=15.0)
     fast_cli = BooleanField("Fast CLI")
-    global_delay_factor = FloatField("Global Delay Factor",default=1.0)
+    global_delay_factor = FloatField("Global Delay Factor", default=1.0)
     jump_on_connect = BooleanField(
         "Jump to remote device on connect",
         default=False,

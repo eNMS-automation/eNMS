@@ -758,7 +758,8 @@
         "data": "service_name",
         "title": "Service",
         "search": "text",
-        "orderable": false
+        "orderable": false,
+        "width": "200px"
       },
       {
         "data": "task_name",

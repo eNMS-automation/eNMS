@@ -433,7 +433,9 @@ class Run(AbstractBase):
             return "N/A"
 
     def run(self):
-        worker = db.factory("worker", name=str(getpid()), subtype=environ.get("_", "").split("/")[-1])
+        worker = db.factory(
+            "worker", name=str(getpid()), subtype=environ.get("_", "").split("/")[-1]
+        )
         env.update_worker_job(self.service.name)
         vs.run_targets[self.runtime] = set(
             device.id

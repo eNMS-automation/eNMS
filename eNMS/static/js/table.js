@@ -1063,8 +1063,11 @@ tables.run = class RunTable extends Table {
     row[`services`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
       'service', ${row.instance}, {parent: '${this.id}', from: 'runs',
       to: 'services'})">Services</a></b>`;
-    row.server_link = `<b><a href="#" onclick="eNMS.base.showInstancePanel(
-      'server', '${row.server_properties.id}')">${row.server_properties.name}</a></b>`;
+    if (row.server_properties) {
+      row.server_link = `<b><a href="#" onclick="eNMS.base.showInstancePanel(
+        'server', '${row.server_properties.id}')">${row.server_properties.name}
+        </a></b>`;
+    }
     row.service = JSON.stringify(row.service_properties).replace(/"/g, "'");
     row.buttons = this.buttons(row);
     return row;

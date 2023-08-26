@@ -775,6 +775,18 @@
         "width": "120px"
       },
       {
+        "data": "server_version",
+        "title": "Version",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "server_commit_sha",
+        "title": "Commit",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "creator",
         "title": "User",
         "search": "text",

@@ -346,6 +346,8 @@ class Run(AbstractBase):
     server_id = db.Column(Integer, ForeignKey("server.id"))
     server = relationship("Server", back_populates="runs")
     server_name = association_proxy("server", "name")
+    server_version = db.Column(db.TinyString)
+    server_commit_sha = db.Column(db.TinyString)
     service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
     service = relationship("Service", foreign_keys="Run.service_id", lazy="joined")
     service_name = db.Column(db.SmallString)
@@ -371,7 +373,8 @@ class Run(AbstractBase):
 
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or vs.get_time()
-        self.server_id = vs.server_id
+        for property in ("id", "version", "commit_sha"):
+            setattr(self, f"server_{property}", getattr(vs, f"server_{property}"))
         super().__init__(**kwargs)
         if not self.name:
             self.name = f"{self.runtime} ({self.creator})"

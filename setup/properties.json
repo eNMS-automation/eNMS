@@ -1150,6 +1150,11 @@
         "search": "text"
       },
       {
+        "data": "runs",
+        "title": "Runs",
+        "width": "80px"
+      },
+      {
         "data": "buttons",
         "width": "130px",
         "orderable": false,

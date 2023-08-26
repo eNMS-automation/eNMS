@@ -1435,6 +1435,14 @@ tables.credential = class CredentialTable extends Table {
 };
 
 tables.server = class ServerTable extends Table {
+  addRow(kwargs) {
+    let row = super.addRow(kwargs);
+    row.runs = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+      'run', ${row.instance}, {parent: '${this.id}', from: 'groups', to: 'runs'})">
+      Runs</a></b>`;
+    return row;
+  }
+
   get controls() {
     return [
       this.columnDisplay(),

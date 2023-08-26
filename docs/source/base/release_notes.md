@@ -13,6 +13,7 @@ Version 4.6.0: Clustering
 - Add server version and commit SHA at the time of the run in Run table as string properties:
   - These properties are not updated when the server version / commit SHA is modified
   - These properties are not erased if the server object of the run is deleted
+- Add new Server "location" property, populated from SERVER_LOCATION environment variable
 
 Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
 --------------------------------------------------------------------------

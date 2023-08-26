@@ -10,6 +10,9 @@ Version 4.6.0: Clustering
 - Rename 'import_version' key to 'version' in settings.json > app
 - Add version and commit SHA properties to Server SQL table and Server table in the UI
 - Update both server version and commit SHA every time the application starts
+- Add server version and commit SHA at the time of the run in Run table as string properties:
+  - These properties are not updated when the server version / commit SHA is modified
+  - These properties are not erased if the server object of the run is deleted
 
 Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
 --------------------------------------------------------------------------

@@ -333,7 +333,6 @@ class Run(AbstractBase):
     )
     start_services = db.Column(db.List)
     creator = db.Column(db.SmallString, default="")
-    server = db.Column(db.SmallString)
     properties = db.Column(db.Dict)
     payload = deferred(db.Column(db.Dict))
     success = db.Column(Boolean, default=False)
@@ -344,6 +343,9 @@ class Run(AbstractBase):
     trigger = db.Column(db.TinyString)
     path = db.Column(db.TinyString)
     parameterized_run = db.Column(Boolean, default=False)
+    server_id = db.Column(Integer, ForeignKey("server.id"))
+    server = relationship("Server", back_populates="runs")
+    server_name = association_proxy("server", "name")
     service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
     service = relationship("Service", foreign_keys="Run.service_id", lazy="joined")
     service_name = db.Column(db.SmallString)
@@ -369,7 +371,7 @@ class Run(AbstractBase):
 
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or vs.get_time()
-        self.server = vs.server
+        self.server_id = vs.server_id
         super().__init__(**kwargs)
         if not self.name:
             self.name = f"{self.runtime} ({self.creator})"

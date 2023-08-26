@@ -768,7 +768,7 @@
         "visible": false
       },
       {
-        "data": "server",
+        "data": "server_name",
         "title": "Server",
         "search": "text",
         "visible": false,

@@ -110,6 +110,7 @@ class Database:
                 },
             )
         self.session.commit()
+        vs.server_id = db.fetch("server", name=vs.server).id
         for run in self.fetch(
             "run", all_matches=True, allow_none=True, status="Running"
         ):

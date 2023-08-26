@@ -5,6 +5,7 @@ Version 4.6.0: Clustering
 
 - Add one-to-many relationship between Run and Server class
 - Display server name in run table
+- Add "runs" link in server table
 
 Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
 --------------------------------------------------------------------------

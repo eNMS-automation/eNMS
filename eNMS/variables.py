@@ -1,5 +1,6 @@
 from collections import defaultdict
 from datetime import datetime
+from git import Repo
 from json import load
 from logging import error
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
@@ -58,6 +59,7 @@ class VariableStore:
         self.server_ip = getenv("SERVER_ADDR", "0.0.0.0")
         self.server_url = getenv("SERVER_URL", "https://0.0.0.0")
         self.server_version = self.settings["app"]["version"]
+        self.server_commit = Repo(search_parent_directories=True).head.object.hexsha
 
     def _set_automation_variables(self):
         self.ssh_sessions = {}

@@ -14,6 +14,7 @@ Version 4.6.0: Clustering
   - These properties are not updated when the server version / commit SHA is modified
   - These properties are not erased if the server object of the run is deleted
 - Add new Server "location" property, populated from SERVER_LOCATION environment variable
+- Add "Last Restart" property in server table: updated every time the application starts.
 
 Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
 --------------------------------------------------------------------------

@@ -614,6 +614,10 @@ class ServerForm(BaseForm):
     creator = StringField(render_kw={"readonly": True})
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     ip_address = StringField("IP address")
+    location = StringField("Location")
+    version = StringField("Version")
+    commit_sha = StringField("Commit SHA")
+    last_restart = StringField("Last Restart")
     weight = IntegerField("Weight", default=1)
 
 

@@ -348,7 +348,7 @@ class Controller:
                 yaml.dump(edges, file, default_style='"')
         with open(path / "metadata.yaml", "w") as file:
             metadata = {
-                "version": vs.settings["app"]["import_version"],
+                "version": vs.settings["app"]["version"],
                 "export_time": datetime.now(),
                 "service": service.name,
             }
@@ -920,7 +920,7 @@ class Controller:
         with open(path / "metadata.yaml", "w") as file:
             yaml.dump(
                 {
-                    "version": vs.settings["app"]["import_version"],
+                    "version": vs.settings["app"]["version"],
                     "export_time": datetime.now(),
                 },
                 file,
@@ -942,7 +942,7 @@ class Controller:
         )
         with open(folder_path / "metadata.yaml", "r") as metadata_file:
             metadata = yaml.load(metadata_file, Loader=yaml.SafeLoader)
-        if metadata["version"] != vs.settings["app"]["import_version"]:
+        if metadata["version"] != vs.settings["app"]["version"]:
             return {"alert": "Import from an older version is not allowed"}
         if current_user:
             store["user"][current_user.name] = current_user

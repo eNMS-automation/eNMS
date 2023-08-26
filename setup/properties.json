@@ -1140,6 +1140,16 @@
         "search": "text"
       },
       {
+        "data": "version",
+        "title": "Version",
+        "search": "text"
+      },
+      {
+        "data": "commit_sha",
+        "title": "Commit SHA",
+        "search": "text"
+      },
+      {
         "data": "weight",
         "title": "Weight",
         "search": "text"
@@ -1433,7 +1443,7 @@
       "trigger",
       "status"
     ],
-    "server": ["name", "description", "ip_address", "weight", "status"],
+    "server": ["name", "description", "ip_address", "version", "commit", "weight", "status"],
     "network": ["name", "description", "creator", "location"],
     "service": [
       "name",

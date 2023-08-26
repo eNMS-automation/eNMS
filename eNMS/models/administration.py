@@ -23,6 +23,8 @@ class Server(AbstractBase):
     description = db.Column(db.LargeString)
     mac_address = db.Column(db.TinyString)
     ip_address = db.Column(db.TinyString)
+    version = db.Column(db.TinyString)
+    commit_sha = db.Column(db.SmallString)
     weight = db.Column(Integer, default=1)
     status = db.Column(db.TinyString, default="down")
     runs = relationship("Run", back_populates="server")

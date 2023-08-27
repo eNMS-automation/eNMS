@@ -38,6 +38,7 @@ class Worker(AbstractBase):
     name = db.Column(db.SmallString, unique=True)
     subtype = db.Column(db.TinyString)
     last_update = db.Column(db.TinyString)
+    current_runs = db.Column(Integer, default=0)
 
     def update(self, **kwargs):
         self.last_update = vs.get_time()

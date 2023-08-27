@@ -436,6 +436,7 @@ class Run(AbstractBase):
         worker = db.factory(
             "worker", name=str(getpid()), subtype=environ.get("_", "").split("/")[-1]
         )
+        worker.current_runs = 1 if not worker.current_runs else worker.current_runs + 1
         env.update_worker_job(self.service.name)
         vs.run_targets[self.runtime] = set(
             device.id
@@ -462,6 +463,7 @@ class Run(AbstractBase):
             trigger=self.trigger,
         )
         self.payload = self.service_run.payload
+        worker.current_runs -= 1
         db.session.commit()
         vs.run_targets.pop(self.runtime)
         vs.run_services.pop(self.runtime)

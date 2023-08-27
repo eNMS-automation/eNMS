@@ -1383,6 +1383,12 @@
         "title": "Current Runs",
         "search": "text",
         "width": "120px"
+      },
+      {
+        "data": "buttons",
+        "width": "40px",
+        "orderable": false,
+        "export": false
       }
     ]
   },

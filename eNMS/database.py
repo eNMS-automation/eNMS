@@ -7,6 +7,7 @@ from json import loads
 from logging import error, info, warning
 from operator import attrgetter
 from os import getenv, getpid
+from os.path import exists
 from pathlib import Path
 from sqlalchemy import (
     Boolean,
@@ -118,6 +119,9 @@ class Database:
             commit_sha=vs.server_commit_sha,
             last_restart=vs.get_time(),
         )
+        for worker in server.workers:
+            if not exists(f"/proc/{worker.name}"):
+                db.delete_instance(worker)
         vs.server_id = server.id
         for run in self.fetch(
             "run", all_matches=True, allow_none=True, status="Running"

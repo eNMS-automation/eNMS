@@ -17,6 +17,7 @@ Version 4.6.0: Clustering
   - These properties are not erased if the server object of the run is deleted
 - Add new Server "location" property, populated from SERVER_LOCATION environment variable
 - Add "Last Restart" property in server table: updated every time the application starts.
+- Add "Current runs" property in server table: counts number of runs currently running on server.
 - Add new "Worker" table in database and UI (Administration menu)
   - A worker is created or updated whenever a job starts running
   - Add "subtype" based on the "_" environment variable (e.g python, gunicorn, dramatiq)

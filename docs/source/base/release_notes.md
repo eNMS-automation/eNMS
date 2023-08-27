@@ -29,7 +29,8 @@ Version 4.6.0: Clustering
 - When loading the application, check whether the server's workers are running and if not,
   delete them from the database
 - Refactor get_workers REST endpoint to use workers in the database instead of storing
-  worker data in the redis queue.
+  worker data in the redis queue
+- When a worker is deleted from the worker table, send SIGTERM signal to underlying process
 
 Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
 --------------------------------------------------------------------------

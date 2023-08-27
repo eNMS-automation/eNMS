@@ -29,6 +29,20 @@
         }
       }
     },
+    "Clustering": {
+      "icon": "users",
+      "rbac": "admin",
+      "pages": {
+        "Servers": {
+          "endpoint": "/server_table",
+          "rbac": "admin"
+        },
+        "Workers": {
+          "endpoint": "/worker_table",
+          "rbac": "admin"
+        }
+      }
+    },
     "Administration": {
       "icon": "users",
       "rbac": "access",
@@ -39,14 +53,6 @@
         },
         "Groups": {
           "endpoint": "/group_table",
-          "rbac": "admin"
-        },
-        "Servers": {
-          "endpoint": "/server_table",
-          "rbac": "admin"
-        },
-        "Workers": {
-          "endpoint": "/worker_table",
           "rbac": "admin"
         },
         "Credentials": {

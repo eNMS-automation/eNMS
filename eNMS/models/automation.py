@@ -448,7 +448,6 @@ class Run(AbstractBase):
         )
         worker.current_runs = 1 if not worker.current_runs else worker.current_runs + 1
         self.worker = worker
-        env.update_worker_job(self.service.name)
         vs.run_targets[self.runtime] = set(
             device.id
             for device in controller.filtering(
@@ -478,7 +477,6 @@ class Run(AbstractBase):
         db.session.commit()
         vs.run_targets.pop(self.runtime)
         vs.run_services.pop(self.runtime)
-        env.update_worker_job(self.service.name, mode="decr")
         return self.service_run.results
 
 

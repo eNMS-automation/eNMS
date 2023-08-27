@@ -621,6 +621,16 @@ class ServerForm(BaseForm):
     weight = IntegerField("Weight", default=1)
 
 
+class WorkerForm(BaseForm):
+    form_type = HiddenField(default="worker")
+    id = HiddenField()
+    name = StringField("Name", render_kw={"readonly": True})
+    description = StringField(widget=TextArea(), render_kw={"rows": 6})
+    subtype = StringField("Subtype", render_kw={"readonly": True})
+    last_update = StringField("Subtype", render_kw={"readonly": True})
+    current_runs = StringField("Subtype", render_kw={"readonly": True})
+
+
 class ServiceForm(BaseForm):
     template = "service"
     form_type = HiddenField(default="service")

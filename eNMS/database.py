@@ -121,7 +121,7 @@ class Database:
         )
         for worker in server.workers:
             if not exists(f"/proc/{worker.name}"):
-                db.delete_instance(worker)
+                db.delete_instance(worker, call_delete=False)
         vs.server_id = server.id
         for run in self.fetch(
             "run", all_matches=True, allow_none=True, status="Running"

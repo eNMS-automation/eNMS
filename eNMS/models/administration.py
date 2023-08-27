@@ -1,11 +1,12 @@
 from flask_login import current_user, UserMixin
 from datetime import datetime
 from itertools import chain
-from os import makedirs
+from os import kill, makedirs
 from os.path import exists, getmtime
 from passlib.hash import argon2
 from pathlib import Path
 from shutil import move, rmtree
+from signal import SIGTERM
 from sqlalchemy import Boolean, ForeignKey, Integer, Float
 from sqlalchemy.orm import relationship
 from time import ctime
@@ -51,6 +52,11 @@ class Worker(AbstractBase):
         self.last_update = vs.get_time()
         super().update(**kwargs)
 
+    def delete(self):
+        try:
+            kill(int(self.name), SIGTERM)
+        except Exception as exc:
+            return f"Failed to deleted process: {exc}"
     @property
     def server_properties(self):
         return self.server.base_properties

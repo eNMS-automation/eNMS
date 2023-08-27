@@ -1369,17 +1369,20 @@
       {
         "data": "subtype",
         "title": "Type",
-        "search": "text"
+        "search": "text",
+        "width": "100px"
       },
       {
         "data": "last_update",
         "title": "Last Update",
-        "search": "text"
+        "search": "text",
+        "width": "200px"
       },
       {
         "data": "current_runs",
         "title": "Current Runs",
-        "search": "text"
+        "search": "text",
+        "width": "120px"
       }
     ]
   },

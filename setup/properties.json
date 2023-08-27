@@ -1367,6 +1367,11 @@
         "search": "text"
       },
       {
+        "data": "description",
+        "title": "Description",
+        "search": "text"
+      },
+      {
         "data": "subtype",
         "title": "Type",
         "search": "text",

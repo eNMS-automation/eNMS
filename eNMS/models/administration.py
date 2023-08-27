@@ -36,6 +36,7 @@ class Worker(AbstractBase):
     __tablename__ = type = "worker"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    description = db.Column(db.LargeString)
     subtype = db.Column(db.TinyString)
     last_update = db.Column(db.TinyString)
     current_runs = db.Column(Integer, default=0)

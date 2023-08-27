@@ -12,6 +12,7 @@ from sqlalchemy.orm import relationship
 from time import ctime
 
 from eNMS.database import db
+from eNMS.environment import env
 from eNMS.models.base import AbstractBase
 from eNMS.variables import vs
 
@@ -54,6 +55,7 @@ class Worker(AbstractBase):
 
     def delete(self):
         try:
+            env.log("critical", f"Sending SIGTERM signal to process ID {self.name}")
             kill(int(self.name), SIGTERM)
         except Exception as exc:
             return f"Failed to deleted process: {exc}"

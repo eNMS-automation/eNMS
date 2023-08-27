@@ -39,6 +39,7 @@ class Worker(AbstractBase):
     description = db.Column(db.LargeString)
     subtype = db.Column(db.TinyString)
     last_update = db.Column(db.TinyString)
+    runs = relationship("Run", back_populates="worker")
     current_runs = db.Column(Integer, default=0)
 
     def update(self, **kwargs):

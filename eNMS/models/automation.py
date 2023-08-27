@@ -368,6 +368,8 @@ class Run(AbstractBase):
     task_id = db.Column(Integer, ForeignKey("task.id", ondelete="SET NULL"))
     task = relationship("Task", foreign_keys="Run.task_id")
     task_name = association_proxy("task", "name")
+    worker_id = db.Column(Integer, ForeignKey("worker.id"))
+    worker = relationship("Worker", back_populates="runs")
     state = db.Column(db.Dict, info={"log_change": False})
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
     model_properties = {
@@ -437,6 +439,7 @@ class Run(AbstractBase):
             "worker", name=str(getpid()), subtype=environ.get("_", "").split("/")[-1]
         )
         worker.current_runs = 1 if not worker.current_runs else worker.current_runs + 1
+        self.worker = worker
         env.update_worker_job(self.service.name)
         vs.run_targets[self.runtime] = set(
             device.id

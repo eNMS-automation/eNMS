@@ -1704,6 +1704,14 @@ tables.file = class FileTable extends Table {
 };
 
 tables.worker = class WorkerTable extends Table {
+  addRow(kwargs) {
+    let row = super.addRow(kwargs);
+    row.runs = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+      'run', ${row.instance}, {parent: '${this.id}', from: 'worker', to: 'runs'})">
+      Runs</a></b>`;
+    return row;
+  }
+
   get controls() {
     return [this.columnDisplay(), this.refreshTableButton(), this.clearSearchButton()];
   }

@@ -1390,6 +1390,11 @@
         "width": "140px"
       },
       {
+        "data": "runs",
+        "title": "Runs",
+        "width": "80px"
+      },
+      {
         "data": "buttons",
         "width": "40px",
         "orderable": false,

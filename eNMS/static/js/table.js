@@ -1450,6 +1450,9 @@ tables.server = class ServerTable extends Table {
     row.runs = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
       'run', ${row.instance}, {parent: '${this.id}', from: 'server', to: 'runs'})">
       Runs</a></b>`;
+    row.workers = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+      'worker', ${row.instance}, {parent: '${this.id}', from: 'server', to: 'workers'})">
+      Workers</a></b>`;
     return row;
   }
 

@@ -1193,6 +1193,11 @@
         "search": "text"
       },
       {
+        "data": "workers",
+        "title": "Workers",
+        "width": "80px"
+      },
+      {
         "data": "runs",
         "title": "Runs",
         "width": "80px"

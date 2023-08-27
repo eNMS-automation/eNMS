@@ -29,6 +29,7 @@ class Server(AbstractBase):
     last_restart = db.Column(db.TinyString)
     weight = db.Column(Integer, default=1)
     status = db.Column(db.TinyString, default="down")
+    current_runs = db.Column(Integer, default=0)
     runs = relationship("Run", back_populates="server")
     workers = relationship("Worker", back_populates="server")
 
@@ -40,10 +41,10 @@ class Worker(AbstractBase):
     description = db.Column(db.LargeString)
     subtype = db.Column(db.TinyString)
     last_update = db.Column(db.TinyString)
+    current_runs = db.Column(Integer, default=0)
     runs = relationship("Run", back_populates="worker")
     server_id = db.Column(Integer, ForeignKey("server.id"))
-    server = relationship("Server", back_populates="workers")
-    current_runs = db.Column(Integer, default=0)
+    server = relationship("Server", back_populates="workers", lazy="joined")
     model_properties = {"server_properties": "dict"}
 
     def update(self, **kwargs):

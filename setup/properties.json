@@ -1193,6 +1193,12 @@
         "search": "text"
       },
       {
+        "data": "current_runs",
+        "title": "Current Runs",
+        "search": "text",
+        "width": "140px"
+      },
+      {
         "data": "workers",
         "title": "Workers",
         "width": "80px"

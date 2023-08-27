@@ -17,8 +17,9 @@ Version 4.6.0: Clustering
 - Add "Last Restart" property in server table: updated every time the application starts.
 - Add new "Worker" table in database and UI (Administration menu)
   - A worker is created or updated whenever a job starts running
-  - Add subtype based on the "_" environment variable (e.g python, gunicorn, dramatiq)
-  - Add last_update property to show when the worker was last used / updated
+  - Add "subtype" based on the "_" environment variable (e.g python, gunicorn, dramatiq)
+  - Add "last_update" property to show when the worker was last used / updated
+  - Add "current_runs" property to show how many jobs the worker is currently running
 
 Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
 --------------------------------------------------------------------------

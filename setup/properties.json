@@ -1391,6 +1391,12 @@
         "width": "200px"
       },
       {
+        "data": "server_link",
+        "title": "Server",
+        "search": "text",
+        "width": "120px"
+      },
+      {
         "data": "current_runs",
         "title": "Current Runs",
         "search": "text",
@@ -1453,7 +1459,8 @@
     "service": ["path", "scoped_name", "mandatory_parametrization"],
     "network": ["path", "scoped_name"],
     "result": ["service_name"],
-    "task": ["frequency", "frequency_unit", "crontab_expression", "is_active"]
+    "task": ["frequency", "frequency_unit", "crontab_expression", "is_active"],
+    "worker": ["server_properties"]
   },
   "filtering": {
     "changelog": ["time", "user", "severity", "content"],

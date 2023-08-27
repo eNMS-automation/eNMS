@@ -44,10 +44,15 @@ class Worker(AbstractBase):
     server_id = db.Column(Integer, ForeignKey("server.id"))
     server = relationship("Server", back_populates="workers")
     current_runs = db.Column(Integer, default=0)
+    model_properties = {"server_properties": "dict"}
 
     def update(self, **kwargs):
         self.last_update = vs.get_time()
         super().update(**kwargs)
+
+    @property
+    def server_properties(self):
+        return self.server.base_properties
 
 
 class User(AbstractBase, UserMixin):

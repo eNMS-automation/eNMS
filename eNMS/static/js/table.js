@@ -1714,6 +1714,11 @@ tables.worker = class WorkerTable extends Table {
     row.runs = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
       'run', ${row.instance}, {parent: '${this.id}', from: 'worker', to: 'runs'})">
       Runs</a></b>`;
+    if (row.server_properties) {
+      row.server_link = `<b><a href="#" onclick="eNMS.base.showInstancePanel(
+        'server', '${row.server_properties.id}')">${row.server_properties.name}
+        </a></b>`;
+    }
     return row;
   }
 

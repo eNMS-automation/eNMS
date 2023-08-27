@@ -1387,7 +1387,7 @@
         "data": "current_runs",
         "title": "Current Runs",
         "search": "text",
-        "width": "120px"
+        "width": "140px"
       },
       {
         "data": "buttons",

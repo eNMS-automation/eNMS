@@ -1370,6 +1370,11 @@
         "data": "subtype",
         "title": "Type",
         "search": "text"
+      },
+      {
+        "data": "last_update",
+        "title": "Last Update",
+        "search": "text"
       }
     ]
   },

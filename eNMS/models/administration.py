@@ -37,6 +37,11 @@ class Worker(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     subtype = db.Column(db.TinyString)
+    last_update = db.Column(db.TinyString)
+
+    def update(self, **kwargs):
+        self.last_update = vs.get_time()
+        super().update(**kwargs)
 
 
 class User(AbstractBase, UserMixin):

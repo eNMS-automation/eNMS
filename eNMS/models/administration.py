@@ -30,6 +30,7 @@ class Server(AbstractBase):
     weight = db.Column(Integer, default=1)
     status = db.Column(db.TinyString, default="down")
     runs = relationship("Run", back_populates="server")
+    workers = relationship("Worker", back_populates="server")
 
 
 class Worker(AbstractBase):
@@ -40,6 +41,8 @@ class Worker(AbstractBase):
     subtype = db.Column(db.TinyString)
     last_update = db.Column(db.TinyString)
     runs = relationship("Run", back_populates="worker")
+    server_id = db.Column(Integer, ForeignKey("server.id"))
+    server = relationship("Server", back_populates="workers")
     current_runs = db.Column(Integer, default=0)
 
     def update(self, **kwargs):

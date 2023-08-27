@@ -436,7 +436,10 @@ class Run(AbstractBase):
 
     def run(self):
         worker = db.factory(
-            "worker", name=str(getpid()), subtype=environ.get("_", "").split("/")[-1], server_id=vs.server_id
+            "worker",
+            name=str(getpid()),
+            subtype=environ.get("_", "").split("/")[-1],
+            server_id=vs.server_id,
         )
         worker.current_runs = 1 if not worker.current_runs else worker.current_runs + 1
         self.worker = worker

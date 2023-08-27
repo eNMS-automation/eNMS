@@ -20,6 +20,8 @@ Version 4.6.0: Clustering
   - Add "subtype" based on the "_" environment variable (e.g python, gunicorn, dramatiq)
   - Add "last_update" property to show when the worker was last used / updated
   - Add "current_runs" property to show how many jobs the worker is currently running
+  - Add "runs" property: one-to-many relationship between worker <-> runs, and button in
+    worker table to display all runs executed by the worker.
 
 Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
 --------------------------------------------------------------------------

@@ -1443,7 +1443,7 @@ tables.server = class ServerTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
     row.runs = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-      'run', ${row.instance}, {parent: '${this.id}', from: 'groups', to: 'runs'})">
+      'run', ${row.instance}, {parent: '${this.id}', from: 'server', to: 'runs'})">
       Runs</a></b>`;
     return row;
   }

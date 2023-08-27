@@ -27,6 +27,8 @@ Version 4.6.0: Clustering
     worker table to display all runs executed by the worker.
 - When loading the application, check whether the server's workers are running and if not,
   delete them from the database
+- Refactor get_workers REST endpoint to use workers in the database instead of storing
+  worker data in the redis queue.
 
 Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
 --------------------------------------------------------------------------

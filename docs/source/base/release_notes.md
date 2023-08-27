@@ -6,6 +6,7 @@ Version 4.6.0: Clustering
 
 - Add new Clustering menu entry with "Server" and "Worker" pages
 - Add one-to-many relationship between Run and Server class
+- Add one-to-many relationship between Worker and Server class
 - Display server in run table as hyperlink to server edit panel
 - Add "runs" link in server table
 - Rename 'import_version' key to 'version' in settings.json > app

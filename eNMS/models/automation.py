@@ -376,6 +376,7 @@ class Run(AbstractBase):
         "progress": "str",
         "server_properties": "dict",
         "service_properties": "dict",
+        "worker_properties": "dict",
     }
 
     def __init__(self, **kwargs):
@@ -401,6 +402,10 @@ class Run(AbstractBase):
     @property
     def server_properties(self):
         return self.server.base_properties
+
+    @property
+    def worker_properties(self):
+        return self.worker.base_properties
 
     def get_state(self):
         if self.state:

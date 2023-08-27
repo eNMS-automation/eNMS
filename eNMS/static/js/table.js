@@ -1068,6 +1068,11 @@ tables.run = class RunTable extends Table {
         'server', '${row.server_properties.id}')">${row.server_properties.name}
         </a></b>`;
     }
+    if (row.worker_properties) {
+      row.worker_link = `<b><a href="#" onclick="eNMS.base.showInstancePanel(
+        'worker', '${row.worker_properties.id}')">${row.worker_properties.name}
+        </a></b>`;
+    }
     row.service = JSON.stringify(row.service_properties).replace(/"/g, "'");
     row.buttons = this.buttons(row);
     return row;

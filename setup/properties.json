@@ -788,6 +788,13 @@
         "visible": false
       },
       {
+        "data": "worker_link",
+        "title": "Worker",
+        "search": "text",
+        "visible": false,
+        "width": "120px"
+      },
+      {
         "data": "creator",
         "title": "User",
         "search": "text",
@@ -1442,7 +1449,7 @@
   },
   "tables_additional": {
     "pool": ["device_number", "link_number"],
-    "run": ["path", "server_properties", "service_properties"],
+    "run": ["path", "server_properties", "service_properties", "worker_properties"],
     "service": ["path", "scoped_name", "mandatory_parametrization"],
     "network": ["path", "scoped_name"],
     "result": ["service_name"],

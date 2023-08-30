@@ -308,7 +308,7 @@ class Controller:
             elif type == "network":
                 instance.nodes.remove(db.fetch("node", id=node_id))
             else:
-                service = db.fetch("service", id=node_id)
+                service = db.fetch("service", rbac="edit", id=node_id)
                 if not service.shared:
                     db.delete_instance(service)
                 else:

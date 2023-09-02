@@ -58,6 +58,7 @@ class VariableStore:
         self.server = getenv("SERVER_NAME", "Localhost")
         self.server_ip = getenv("SERVER_ADDR", "0.0.0.0")
         self.scheduler_address = getenv("SCHEDULER_ADDR", "0.0.0.0")
+        self.scheduler_active = bool(getenv("SCHEDULER_ACTIVE", "0"))
         self.server_url = getenv("SERVER_URL", "https://0.0.0.0")
         self.server_location = getenv("SERVER_LOCATION")
         self.server_version = self.settings["app"]["version"]

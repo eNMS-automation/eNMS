@@ -101,6 +101,7 @@ class Database:
                     "mac_address": str(getnode()),
                     "ip_address": vs.server_ip,
                     "scheduler_address": vs.scheduler_address,
+                    "scheduler_active": vs.scheduler_active,
                     "location": vs.server_location,
                     "status": "Up",
                 },

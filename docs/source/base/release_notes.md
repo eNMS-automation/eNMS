@@ -9,6 +9,8 @@ Version 4.6.0: Clustering
 - Add one-to-many relationship between Worker and Server class
 - Display server and worker in run table as hyperlink to the edit panel
 - Add "runs" and "workers" links in server table
+- Add "scheduler_address" and "scheduler_active" properties in Server table. These properties
+  are initialized with the SCHEDULER_ADDR and SCHEDULER_ACTIVE environment variable.
 - Rename 'import_version' key to 'version' in settings.json > app
 - Add version and commit SHA properties to Server SQL table and Server table in the UI
 - Update both server version and commit SHA every time the application starts

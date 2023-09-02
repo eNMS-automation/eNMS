@@ -59,6 +59,7 @@ class Worker(AbstractBase):
             kill(int(self.name), SIGTERM)
         except Exception as exc:
             return f"Failed to deleted process: {exc}"
+
     @property
     def server_properties(self):
         return self.server.base_properties

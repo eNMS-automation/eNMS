@@ -920,10 +920,11 @@ class ServiceForm(BaseForm):
             choices = vs.properties["property_list"]["service"][property]
             if choices:
                 vs.form_properties["service"][property] = {"type": "list"}
-                setattr(cls, property, SelectField(
-                        choices=vs.dualize(choices),
-                        validate_choice=False
-                    ))
+                setattr(
+                    cls,
+                    property,
+                    SelectField(choices=vs.dualize(choices), validate_choice=False),
+                )
             else:
                 vs.form_properties["service"][property] = {"type": "str"}
                 setattr(cls, property, StringField())

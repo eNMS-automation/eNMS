@@ -1192,14 +1192,6 @@ class DeviceForm(ObjectForm):
 
 class LinkForm(ObjectForm):
     form_type = HiddenField(default="link")
-    vendor = SelectField(
-        "Vendor",
-        choices=vs.dualize(vs.properties["property_list"]["link"]["vendor"]),
-    )
-    model = SelectField(
-        "Model",
-        choices=vs.dualize(vs.properties["property_list"]["link"]["model"]),
-    )
     source = InstanceField("Source", model="device")
     destination = InstanceField("Destination", model="device")
     color = StringField("Color")

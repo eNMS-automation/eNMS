@@ -1172,20 +1172,6 @@ class DeviceForm(ObjectForm):
     )
     ip_address = StringField("IP address")
     port = IntegerField("Port", default=22)
-    vendor = SelectField(
-        "Vendor",
-        choices=vs.dualize(vs.properties["property_list"]["device"]["vendor"]),
-    )
-    model = SelectField(
-        "Model",
-        choices=vs.dualize(vs.properties["property_list"]["device"]["model"]),
-    )
-    operating_system = SelectField(
-        "Operating System",
-        choices=vs.dualize(
-            vs.properties["property_list"]["device"]["operating_system"]
-        ),
-    )
     os_version = StringField("OS Version")
     latitude = StringField("Latitude", default=0.0)
     longitude = StringField("Longitude", default=0.0)

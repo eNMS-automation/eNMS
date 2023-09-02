@@ -1160,6 +1160,12 @@
         "search": "text"
       },
       {
+        "data": "scheduler_address",
+        "title": "Scheduler IP",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "location",
         "title": "Location",
         "search": "text",

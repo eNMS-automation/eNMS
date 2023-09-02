@@ -53,7 +53,6 @@ from eNMS.variables import vs
 
 class Environment:
     def __init__(self):
-        self.scheduler_address = getenv("SCHEDULER_ADDR")
         self.init_authentication()
         self.init_encryption()
         self.use_vault = vs.settings["vault"]["use_vault"]

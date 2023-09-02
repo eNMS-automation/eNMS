@@ -30,7 +30,7 @@
       }
     },
     "Clustering": {
-      "icon": "users",
+      "icon": "server",
       "rbac": "admin",
       "pages": {
         "Servers": {

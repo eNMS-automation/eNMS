@@ -1166,6 +1166,12 @@
         "visible": false
       },
       {
+        "data": "active_scheduler",
+        "title": "Scheduler Active",
+        "search": "bool",
+        "visible": false
+      },
+      {
         "data": "location",
         "title": "Location",
         "search": "text",

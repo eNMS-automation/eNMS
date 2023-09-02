@@ -38,6 +38,7 @@ class MetaForm(FormMeta):
             vs.rbac["get_requests"][f"/{form_type}_form"] = "access"
         if hasattr(form, "form_init"):
             form.form_init()
+        cls.register_property_list(form, form_type)
         if not hasattr(form, "custom_properties"):
             form.custom_properties = {}
         form.custom_properties = {
@@ -119,6 +120,22 @@ class MetaForm(FormMeta):
                 form.service_fields.extend(vs.form_properties[base_form_type])
             vs.form_properties[form_type].update(vs.form_properties[base_form_type])
         return form
+
+    @classmethod
+    def register_property_list(cls, form, form_type):
+        if form_type not in vs.properties["property_list"]:
+            return
+        for property, values in vs.properties["property_list"][form_type].items():
+            if values:
+                vs.form_properties[form_type][property] = {"type": "list"}
+                setattr(
+                    form,
+                    property,
+                    SelectField(choices=vs.dualize(values), validate_choice=False),
+                )
+            else:
+                vs.form_properties[form_type][property] = {"type": "str"}
+                setattr(form, property, StringField())
 
     def __setattr__(self, field, value):
         if hasattr(value, "field_class") and "multiselect" in value.field_class.type:
@@ -913,21 +930,6 @@ class ServiceForm(BaseForm):
             "display_only_failed_nodes",
         ],
     }
-
-    @classmethod
-    def form_init(cls):
-        for property in ("vendor", "operating_system"):
-            choices = vs.properties["property_list"]["service"][property]
-            if choices:
-                vs.form_properties["service"][property] = {"type": "list"}
-                setattr(
-                    cls,
-                    property,
-                    SelectField(choices=vs.dualize(choices), validate_choice=False),
-                )
-            else:
-                vs.form_properties["service"][property] = {"type": "str"}
-                setattr(cls, property, StringField())
 
     def validate(self, **_):
         valid_form = super().validate()

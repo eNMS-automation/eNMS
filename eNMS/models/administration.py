@@ -26,6 +26,7 @@ class Server(AbstractBase):
     mac_address = db.Column(db.TinyString)
     ip_address = db.Column(db.TinyString)
     scheduler_address = db.Column(db.TinyString)
+    active_scheduler = db.Column(Boolean, default=True)
     location = db.Column(db.SmallString)
     version = db.Column(db.TinyString)
     commit_sha = db.Column(db.TinyString)

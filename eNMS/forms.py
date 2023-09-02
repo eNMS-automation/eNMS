@@ -632,12 +632,13 @@ class ServerForm(BaseForm):
     name = StringField("Name", [InputRequired()])
     creator = StringField(render_kw={"readonly": True})
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
-    ip_address = StringField("IP address")
-    scheduler_address = StringField("Scheduler Address")
+    ip_address = StringField("IP address", render_kw={"readonly": True})
+    scheduler_address = StringField("Scheduler Address", render_kw={"readonly": True})
+    active_scheduler = BooleanField("Scheduler is Active", render_kw={"readonly": True})
     location = StringField("Location")
-    version = StringField("Version")
-    commit_sha = StringField("Commit SHA")
-    last_restart = StringField("Last Restart")
+    version = StringField("Version", render_kw={"readonly": True})
+    commit_sha = StringField("Commit SHA", render_kw={"readonly": True})
+    last_restart = StringField("Last Restart", render_kw={"readonly": True})
     weight = IntegerField("Weight", default=1)
 
 

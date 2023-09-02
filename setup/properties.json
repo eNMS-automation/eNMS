@@ -1161,7 +1161,7 @@
       },
       {
         "data": "scheduler_address",
-        "title": "Scheduler IP",
+        "title": "Scheduler Address",
         "search": "text",
         "visible": false
       },

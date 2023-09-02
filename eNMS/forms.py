@@ -732,18 +732,6 @@ class ServiceForm(BaseForm):
         help="common/skip_value",
         no_search=True,
     )
-    vendor = SelectField(
-        "Vendor",
-        choices=vs.dualize(vs.properties["property_list"]["service"]["vendor"]),
-        validate_choice=False,
-    )
-    operating_system = SelectField(
-        "Operating System",
-        choices=vs.dualize(
-            vs.properties["property_list"]["service"]["operating_system"]
-        ),
-        validate_choice=False,
-    )
     iteration_values = StringField(
         "Iteration Values", python=True, help="common/iteration_values"
     )
@@ -925,6 +913,20 @@ class ServiceForm(BaseForm):
             "display_only_failed_nodes",
         ],
     }
+
+    @classmethod
+    def form_init(cls):
+        for property in ("vendor", "operating_system"):
+            choices = vs.properties["property_list"]["service"][property]
+            if choices:
+                vs.form_properties["service"][property] = {"type": "list"}
+                setattr(cls, property, SelectField(
+                        choices=vs.dualize(choices),
+                        validate_choice=False
+                    ))
+            else:
+                vs.form_properties["service"][property] = {"type": "str"}
+                setattr(cls, property, StringField())
 
     def validate(self, **_):
         valid_form = super().validate()

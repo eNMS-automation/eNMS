@@ -634,7 +634,7 @@ class ServerForm(BaseForm):
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     ip_address = StringField("IP address", render_kw={"readonly": True})
     scheduler_address = StringField("Scheduler Address", render_kw={"readonly": True})
-    active_scheduler = BooleanField("Scheduler is Active", render_kw={"readonly": True})
+    scheduler_active = BooleanField("Scheduler is Active", render_kw={"readonly": True})
     location = StringField("Location")
     version = StringField("Version", render_kw={"readonly": True})
     commit_sha = StringField("Commit SHA", render_kw={"readonly": True})

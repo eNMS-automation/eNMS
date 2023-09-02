@@ -1166,7 +1166,7 @@
         "visible": false
       },
       {
-        "data": "active_scheduler",
+        "data": "scheduler_active",
         "title": "Scheduler Active",
         "search": "bool",
         "visible": false

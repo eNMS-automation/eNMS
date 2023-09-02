@@ -519,7 +519,7 @@ class Task(AbstractBase):
             self.schedule(mode="schedule" if self.is_active else "pause")
 
     def delete(self):
-        post(f"{env.scheduler_address}/delete_job/{self.id}")
+        post(f"{vs.scheduler_address}/delete_job/{self.id}")
 
     @hybrid_property
     def status(self):
@@ -545,19 +545,19 @@ class Task(AbstractBase):
     @_catch_request_exceptions
     def next_run_time(self):
         return get(
-            f"{env.scheduler_address}/next_runtime/{self.id}", timeout=0.01
+            f"{vs.scheduler_address}/next_runtime/{self.id}", timeout=0.01
         ).json()
 
     @property
     @_catch_request_exceptions
     def time_before_next_run(self):
-        return get(f"{env.scheduler_address}/time_left/{self.id}", timeout=0.01).json()
+        return get(f"{vs.scheduler_address}/time_left/{self.id}", timeout=0.01).json()
 
     @_catch_request_exceptions
     def schedule(self, mode="schedule"):
         try:
             payload = {"mode": mode, "task": self.get_properties()}
-            result = post(f"{env.scheduler_address}/schedule", json=payload).json()
+            result = post(f"{vs.scheduler_address}/schedule", json=payload).json()
             self.last_scheduled_by = current_user.name
         except ConnectionError:
             return {"alert": "Scheduler Unreachable: the task cannot be scheduled."}

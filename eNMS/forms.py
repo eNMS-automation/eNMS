@@ -126,6 +126,8 @@ class MetaForm(FormMeta):
         if form_type not in vs.properties["property_list"]:
             return
         for property, values in vs.properties["property_list"][form_type].items():
+            if property == "category":
+                continue
             if values:
                 vs.form_properties[form_type][property] = {"type": "list"}
                 setattr(

@@ -16,6 +16,7 @@ Version 4.6.0: Clustering
   - Add "location" property, populated from SERVER_LOCATION environment variable
   - Add "Last Restart" property in server table: updated every time the application starts.
   - Add "Current runs" property in server table: counts number of runs currently running on server.
+  - Add "Role" property to distinguish between "primary" and "standby" in the cluster
 - Rename 'import_version' key to 'version' in settings.json > app
 - Update both server version and commit SHA every time the application starts
 - Add server version and commit SHA at the time of the run in Run table as string properties:

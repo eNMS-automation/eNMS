@@ -1207,6 +1207,8 @@ class Controller:
         return result.getvalue()
 
     def run_service(self, path, **kwargs):
+        if "application" not in vs.server_data["allowed_automation"]:
+            return {"error": "Running services is not allowed on this server."}
         if isinstance(kwargs.get("start_services"), str):
             kwargs["start_services"] = kwargs["start_services"].split("-")
         service_id = str(path).split(">")[-1]

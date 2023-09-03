@@ -17,6 +17,10 @@ Version 4.6.0: Clustering
   - Add "Last Restart" property in server table: updated every time the application starts.
   - Add "Current runs" property in server table: counts number of runs currently running on server.
   - Add "Role" property to distinguish between "primary" and "standby" in the cluster
+  - Add properties to control allowed automation:
+    - "allow_scheduled_runs": server can run jobs from scheduler via "run_task" REST endpoint
+    - "allow_rest_api_runs": server can run jobs from REST API via "run_server" REST endpoint
+    - "allow_application_runs": server can run jobs from the UI via "run_service" controller endpoint
 - Rename 'import_version' key to 'version' in settings.json > app
 - Update both server version and commit SHA every time the application starts
 - Add server version and commit SHA at the time of the run in Run table as string properties:

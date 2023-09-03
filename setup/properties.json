@@ -1150,6 +1150,11 @@
         "search": "text"
       },
       {
+        "data": "role",
+        "title": "Role",
+        "search": "text"
+      },
+      {
         "data": "mac_address",
         "title": "MAC address",
         "search": "text"

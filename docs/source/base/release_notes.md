@@ -33,6 +33,7 @@ Version 4.6.0: Clustering
 - Refactor get_workers REST endpoint to use workers in the database instead of storing
   worker data in the redis queue
 - When a worker is deleted from the worker table, send SIGTERM signal to underlying process
+- Don't check for metadata version when doing migration import, only check for service import
 - Add mechanism to use a StringField for the properties in properties.json > "property_list":
   if the list is empty, will default to StringField instead of a SelectField.
 

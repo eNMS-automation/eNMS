@@ -641,9 +641,15 @@ class ServerForm(BaseForm):
     commit_sha = StringField("Commit SHA", render_kw={"readonly": True})
     last_restart = StringField("Last Restart", render_kw={"readonly": True})
     weight = IntegerField("Weight", default=1)
-    allow_scheduled_runs = BooleanField("Allow Scheduled Runs")
-    allow_rest_api_runs = BooleanField("Allow ReST API Runs")
-    allow_application_runs = BooleanField("Allow Application Runs")
+    allowed_automation = SelectMultipleField(
+        "Allowed Automation",
+        choices=(
+            ("schedule", "Scheduled Runs"),
+            ("rest", "ReST API Runs"),
+            ("app", "Allow Application Runs"),
+        ),
+        no_search=True,
+    )
 
 
 class WorkerForm(BaseForm):

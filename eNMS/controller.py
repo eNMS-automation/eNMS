@@ -931,6 +931,7 @@ class Controller:
         env.log_events = False
         status, models = "Import successful", kwargs["import_export_types"]
         empty_database = kwargs.get("empty_database_before_import", False)
+        service_import = kwargs.get("service_import", False)
         if empty_database:
             db.delete_all(*models)
         relations, store = defaultdict(lambda: defaultdict(dict)), defaultdict(dict)
@@ -942,7 +943,7 @@ class Controller:
         )
         with open(folder_path / "metadata.yaml", "r") as metadata_file:
             metadata = yaml.load(metadata_file, Loader=yaml.SafeLoader)
-        if metadata["version"] != vs.server_version:
+        if service_import and metadata["version"] != vs.server_version:
             return {"alert": "Import from an older version is not allowed"}
         if current_user:
             store["user"][current_user.name] = current_user
@@ -956,7 +957,7 @@ class Controller:
         for model in models:
             path = folder_path / f"{model}.yaml"
             if not path.exists():
-                if kwargs.get("service_import") and model == "service":
+                if service_import and model == "service":
                     raise Exception("Invalid archive provided in service import.")
                 continue
             with open(path, "r") as migration_file:
@@ -987,7 +988,7 @@ class Controller:
                         store[type][instance.name] = store[model][instance.name]
                         if model in ("device", "network"):
                             store["node"][instance.name] = store[model][instance.name]
-                    if kwargs.get("service_import"):
+                    if service_import:
                         if instance.type == "workflow":
                             instance.edges = []
                     relations[type][instance.name] = relation_dict
@@ -995,7 +996,7 @@ class Controller:
                         setattr(instance, *property)
                 except Exception:
                     info(f"{str(instance)} could not be imported:\n{format_exc()}")
-                    if kwargs.get("service_import", False):
+                    if service_import:
                         db.session.rollback()
                         return "Error during import; service was not imported."
                     status = {"alert": "partial import (see logs)."}
@@ -1033,13 +1034,13 @@ class Controller:
                         setattr(store[model].get(instance_name), property, sql_value)
                     except Exception:
                         info("\n".join(format_exc().splitlines()))
-                        if kwargs.get("service_import", False):
+                        if service_import:
                             db.session.rollback()
                             return "Error during import; service was not imported."
                         status = {"alert": "Partial Import (see logs)."}
             env.log("info", f"Relationships created in {datetime.now() - before_time}")
         db.session.commit()
-        if kwargs.get("service_import"):
+        if service_import:
             service = store["service"][metadata["service"]]
             if service.type == "workflow":
                 service.recursive_update()

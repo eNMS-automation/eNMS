@@ -98,6 +98,7 @@ class Database:
                 **{
                     "name": vs.server,
                     "description": vs.server,
+                    "role": vs.server_role,
                     "mac_address": str(getnode()),
                     "ip_address": vs.server_ip,
                     "scheduler_address": vs.scheduler_address,

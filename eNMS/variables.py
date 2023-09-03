@@ -57,6 +57,7 @@ class VariableStore:
     def _set_server_variables(self):
         self.server = getenv("SERVER_NAME", "Localhost")
         self.server_ip = getenv("SERVER_ADDR", "0.0.0.0")
+        self.server_role = getenv("SERVER_ROLE", "primary")
         self.scheduler_address = getenv("SCHEDULER_ADDR", "0.0.0.0")
         self.scheduler_active = getenv("SCHEDULER_ACTIVE", "1") == "1"
         self.server_url = getenv("SERVER_URL", "https://0.0.0.0")

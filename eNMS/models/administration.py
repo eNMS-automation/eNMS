@@ -23,6 +23,7 @@ class Server(AbstractBase):
     name = db.Column(db.SmallString, unique=True)
     creator = db.Column(db.SmallString)
     description = db.Column(db.LargeString)
+    role = db.Column(db.TinyString, default="primary")
     mac_address = db.Column(db.TinyString)
     ip_address = db.Column(db.TinyString)
     scheduler_address = db.Column(db.TinyString)

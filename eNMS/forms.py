@@ -632,6 +632,7 @@ class ServerForm(BaseForm):
     name = StringField("Name", [InputRequired()])
     creator = StringField(render_kw={"readonly": True})
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
+    role = StringField("Role")
     ip_address = StringField("IP address", render_kw={"readonly": True})
     scheduler_address = StringField("Scheduler Address", render_kw={"readonly": True})
     scheduler_active = BooleanField("Scheduler is Active", render_kw={"readonly": True})

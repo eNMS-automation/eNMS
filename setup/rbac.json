@@ -29,34 +29,6 @@
         }
       }
     },
-    "Clustering": {
-      "icon": "server",
-      "rbac": "admin",
-      "pages": {
-        "Servers": {
-          "endpoint": "/server_table",
-          "rbac": "admin"
-        },
-        "Workers": {
-          "endpoint": "/worker_table",
-          "rbac": "admin"
-        }
-      }
-    },
-    "Administration": {
-      "icon": "users",
-      "rbac": "access",
-      "pages": {
-        "Groups": {
-          "endpoint": "/group_table",
-          "rbac": "admin"
-        },
-        "Credentials": {
-          "endpoint": "/credential_table",
-          "rbac": "admin"
-        }
-      }
-    },
     "Inventory": {
       "icon": "database",
       "rbac": "access",

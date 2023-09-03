@@ -34,6 +34,7 @@
     "use_task_queue": false
   },
   "cluster": {
+    "allowed_automation": ["scheduled", "rest", "app"],
     "active": false,
     "id": true,
     "scan_protocol": "http",

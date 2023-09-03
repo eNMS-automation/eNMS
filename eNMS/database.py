@@ -104,6 +104,7 @@ class Database:
                     "scheduler_address": vs.scheduler_address,
                     "scheduler_active": vs.scheduler_active,
                     "location": vs.server_location,
+                    "allowed_automation": vs.settings["cluster"]["allowed_automation"],
                     "status": "Up",
                 },
             )

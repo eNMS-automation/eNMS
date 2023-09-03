@@ -89,7 +89,7 @@ class RestApi:
 
     def run_service(self, **kwargs):
         if "rest_api" not in vs.server_data["allowed_automation"]:
-            return {"error": "Runs from the REST API is not allowed on this server."}
+            return {"error": "Runs from the REST API are not allowed on this server."}
         data = {"trigger": "REST API", "creator": current_user.name, **kwargs}
         errors, devices, pools = [], [], []
         service = db.fetch("service", name=data.pop("name"), rbac="run")
@@ -133,6 +133,8 @@ class RestApi:
             return {**controller.run(service.id, **data), "errors": errors}
 
     def run_task(self, task_id):
+        if "scheduled" not in vs.server_data["allowed_automation"]:
+            return {"error": "Scheduled runs are not allowed on this server."}
         task = db.fetch("task", rbac="edit", id=task_id)
         data = {
             "trigger": "Scheduler",

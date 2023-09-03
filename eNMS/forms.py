@@ -644,7 +644,7 @@ class ServerForm(BaseForm):
     allowed_automation = SelectMultipleField(
         "Allowed Automation",
         choices=(
-            ("scheduled", "Scheduled Runs"),
+            ("scheduler", "Scheduled Runs"),
             ("rest_api", "ReST API Runs"),
             ("application", "Application Runs"),
         ),

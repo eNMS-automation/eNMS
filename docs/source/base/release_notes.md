@@ -18,7 +18,7 @@ Version 4.6.0: Clustering
   - Add "Current runs" property in server table: counts number of runs currently running on server.
   - Add "Role" property to distinguish between "primary" and "standby" in the cluster
   - Add "Allowed Automation" property to control allowed automation:
-    - "scheduled": server can run jobs from scheduler via "run_task" REST endpoint
+    - "scheduler": server can run jobs from scheduler via "run_task" REST endpoint
     - "rest_api": server can run jobs from REST API via "run_server" REST endpoint
     - "application": server can run jobs from the UI via "run_service" controller endpoint
   - "Allowed Automation" can be configured from settings.json > "cluster" > "allowed_automation"

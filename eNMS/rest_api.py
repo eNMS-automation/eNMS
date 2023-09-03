@@ -133,7 +133,7 @@ class RestApi:
             return {**controller.run(service.id, **data), "errors": errors}
 
     def run_task(self, task_id):
-        if "scheduled" not in vs.server_data["allowed_automation"]:
+        if "scheduler" not in vs.server_data["allowed_automation"]:
             return {"error": "Scheduled runs are not allowed on this server."}
         task = db.fetch("task", rbac="edit", id=task_id)
         data = {

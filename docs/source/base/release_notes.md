@@ -14,13 +14,13 @@ Version 4.6.0: Clustering
   - Add "runs" and "workers" links in server table
   - Add "version" and "commit SHA" properties
   - Add "location" property, populated from SERVER_LOCATION environment variable
+  - Add "Last Restart" property in server table: updated every time the application starts.
+  - Add "Current runs" property in server table: counts number of runs currently running on server.
 - Rename 'import_version' key to 'version' in settings.json > app
 - Update both server version and commit SHA every time the application starts
 - Add server version and commit SHA at the time of the run in Run table as string properties:
   - These properties are not updated when the server version / commit SHA is modified
   - These properties are not erased if the server object of the run is deleted
-- Add "Last Restart" property in server table: updated every time the application starts.
-- Add "Current runs" property in server table: counts number of runs currently running on server.
 - Add new "Worker" table in database and UI (Administration menu)
   - A worker is created or updated whenever a job starts running
   - Add "subtype" based on the "_" environment variable (e.g python, gunicorn, dramatiq)

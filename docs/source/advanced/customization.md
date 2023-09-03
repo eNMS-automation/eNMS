@@ -21,7 +21,7 @@ Custom properties accept these configuration elements:
    This function **must** be an attribute of CustomApp in custom.py.
 - `help` (**optional**): the path to a context-sensitive HTML help file for
    this property.
-- `log_change` (**optional**): false  - disables logging when a change is
+- `log_change` (**optional**): false - disables logging when a change is
    made to attribute.
 - `private` (**optional**): If `true`, the value is considered sensitive: it 
    will not be displayed in the UI. It will be encrypted in the database and
@@ -97,7 +97,7 @@ class CustomApp
 !!! note
 
     Some *optional* values for custom properties above are *changes* to the
-    default behavior.  i.e., "migrate" defaults to true, "private" defaults
+    default behavior. i.e "migrate" defaults to true, "private" defaults
     to false, etc.      
 
 !!! tip

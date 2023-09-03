@@ -88,6 +88,8 @@ class RestApi:
         return [result.get_properties(exclude=["positions"]) for result in results]
 
     def run_service(self, **kwargs):
+        if "rest_api" not in vs.server_data["allowed_automation"]:
+            return {"error": "Runs from the REST API is not allowed on this server."}
         data = {"trigger": "REST API", "creator": current_user.name, **kwargs}
         errors, devices, pools = [], [], []
         service = db.fetch("service", name=data.pop("name"), rbac="run")

@@ -646,7 +646,7 @@ class ServerForm(BaseForm):
         choices=(
             ("schedule", "Scheduled Runs"),
             ("rest", "ReST API Runs"),
-            ("app", "Allow Application Runs"),
+            ("app", "Application Runs"),
         ),
         no_search=True,
     )

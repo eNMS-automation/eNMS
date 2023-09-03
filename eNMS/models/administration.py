@@ -39,6 +39,10 @@ class Server(AbstractBase):
     runs = relationship("Run", back_populates="server")
     workers = relationship("Worker", back_populates="server")
 
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        vs.server_data = self.serialized
+
 
 class Worker(AbstractBase):
     __tablename__ = type = "worker"

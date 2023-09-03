@@ -6,110 +6,109 @@ site_dir: build
 site_name: eNMS
 nav:
   - Getting Started:
-    - Overview: index.md
-    - Features: base/features.md
-    - Installation: base/installation.md
-    - Release Notes: base/release_notes.md
+      - Overview: index.md
+      - Features: base/features.md
+      - Installation: base/installation.md
+      - Release Notes: base/release_notes.md
   - System:
-    - Changelog: system/changelog.md
-    - Dashboard: system/dashboard.md
-    - Files: system/files.md
-    - Sessions: system/sessions.md
+      - Changelog: system/changelog.md
+      - Dashboard: system/dashboard.md
+      - Files: system/files.md
+      - Sessions: system/sessions.md
   - Administration:
-    - Access:
-      - Overview: administration/overview.md
-      - Credentials: administration/credentials.md
-      - Groups: administration/groups.md
-      - Users: administration/users.md
-    - Servers: administration/servers.md
-    - Tools:
-      - Admin Panel: administration/admin_panel.md
-      - Debugging: administration/debug.md
+      - Access:
+          - Overview: administration/overview.md
+          - Credentials: administration/credentials.md
+          - Groups: administration/groups.md
+          - Users: administration/users.md
+      - Servers: administration/servers.md
+      - Tools:
+          - Admin Panel: administration/admin_panel.md
+          - Debugging: administration/debug.md
   - Inventory:
-    - Network Creation: inventory/network_creation.md
-    - Device Management:
-      - Devices: inventory/devices.md
-      - SSH Gateways: inventory/ssh_gateways.md
-      - WebSSH Connection: inventory/web_connection.md
-    - Configurations: inventory/configuration_management.md
-    - Links: inventory/links.md
-    - Pools: inventory/pools.md
-    - Networks: inventory/networks.md
+      - Network Creation: inventory/network_creation.md
+      - Device Management:
+          - Devices: inventory/devices.md
+          - SSH Gateways: inventory/ssh_gateways.md
+          - WebSSH Connection: inventory/web_connection.md
+      - Configurations: inventory/configuration_management.md
+      - Links: inventory/links.md
+      - Pools: inventory/pools.md
+      - Networks: inventory/networks.md
   - Visualization:
-    - Geographical View: visualization/geographical_view.md
-    - Network Builder: visualization/network_builder.md
+      - Geographical View: visualization/geographical_view.md
+      - Network Builder: visualization/network_builder.md
   - Automation:
-    - Services:
-      - Service Management: automation/services.md
-      - Service Editor: automation/service_editor.md
-      - Using Python in the Service Editor: automation/service_python_code.md
-    - Service Types:
-      - Service Type Index: automation/service_types.md
-      - Ansible Playbook Service: automation/servicetypes/ansible_playbook.md
-      - Data Processing Service: automation/servicetypes/data_processing.md
-      - Data Validation Service: automation/servicetypes/data_validation.md
-      - Generic File Transfer Service: automation/servicetypes/generic_filetransfer.md
-      - Git Action Service: automation/servicetypes/git_action.md
-      - ICMP TCP Ping Service: automation/servicetypes/icmptcp_ping.md
-      - Mail Notification Service: automation/servicetypes/mail_notification.md
-      - MatterMost Notification Service: automation/servicetypes/mattermost_notification.md
-      - Napalm Service Common Parameters: automation/servicetypes/napalm_common.md
-      - Napalm Configuration Service: automation/servicetypes/napalm_configuration.md
-      - Napalm Data Backup Service: automation/servicetypes/napalm_databackup.md
-      - Napalm Getters Service: automation/servicetypes/napalm_getters.md
-      - Napalm Ping Service: automation/servicetypes/napalm_ping.md
-      - Napalm Rollback Service: automation/servicetypes/napalm_rollback.md
-      - Napalm Traceroute Service: automation/servicetypes/napalm_traceroute.md
-      - Netconf (ncclient) Service: automation/servicetypes/netconf_ncclient.md
-      - Netmiko Service Common Parameters: automation/servicetypes/netmiko_common.md
-      - Netmiko Configuration Service: automation/servicetypes/netmiko_configuration.md
-      - Netmiko Data Backup Service: automation/servicetypes/netmiko_databackup.md
-      - Netmiko Filetransfer Service: automation/servicetypes/netmiko_filetransfer.md
-      - Netmiko Prompts Service: automation/servicetypes/netmiko_prompts.md
-      - Netmiko Commands Service: automation/servicetypes/netmiko_commands.md
-      - Python Snippet Service: automation/servicetypes/python_snippet.md
-      - REST Call Service: automation/servicetypes/rest_call.md
-      - Scrapli Common Parameters: automation/servicetypes/scrapli_common.md
-      - Scrapli Commands Service: automation/servicetypes/scrapli_command.md
-      - Scrapli Data Backup Service: automation/servicetypes/scrapli_databackup.md
-      - Scrapli Netconf Service: automation/servicetypes/scrapli_netconf.md
-      - Slack Notification Service: automation/servicetypes/slack_notification.md
-      - Topology Import Service: automation/servicetypes/topology_import.md
-      - UNIX Command Service: automation/servicetypes/unix_command.md
-      - UNIX Shell Script Service: automation/servicetypes/unix_shell.md
-      - Workflow (subworkflow) Service: automation/servicetypes/workflow.md
-    - Workflows:
-      - Workflow Builder: automation/workflow_builder.md
-      - Workflow Traversal: automation/workflow_traversal.md
-      - Sharing Data between Services: automation/workflow_data.md
-      - More Workflow Features: automation/workflow_more_features.md
-    - Results: automation/results.md
-    - Scheduling: automation/scheduling.md
+      - Services:
+          - Service Management: automation/services.md
+          - Service Editor: automation/service_editor.md
+          - Using Python in the Service Editor: automation/service_python_code.md
+      - Service Types:
+          - Service Type Index: automation/service_types.md
+          - Ansible Playbook Service: automation/servicetypes/ansible_playbook.md
+          - Data Processing Service: automation/servicetypes/data_processing.md
+          - Data Validation Service: automation/servicetypes/data_validation.md
+          - Generic File Transfer Service: automation/servicetypes/generic_filetransfer.md
+          - Git Action Service: automation/servicetypes/git_action.md
+          - ICMP TCP Ping Service: automation/servicetypes/icmptcp_ping.md
+          - Mail Notification Service: automation/servicetypes/mail_notification.md
+          - MatterMost Notification Service: automation/servicetypes/mattermost_notification.md
+          - Napalm Service Common Parameters: automation/servicetypes/napalm_common.md
+          - Napalm Configuration Service: automation/servicetypes/napalm_configuration.md
+          - Napalm Data Backup Service: automation/servicetypes/napalm_databackup.md
+          - Napalm Getters Service: automation/servicetypes/napalm_getters.md
+          - Napalm Ping Service: automation/servicetypes/napalm_ping.md
+          - Napalm Rollback Service: automation/servicetypes/napalm_rollback.md
+          - Napalm Traceroute Service: automation/servicetypes/napalm_traceroute.md
+          - Netconf (ncclient) Service: automation/servicetypes/netconf_ncclient.md
+          - Netmiko Service Common Parameters: automation/servicetypes/netmiko_common.md
+          - Netmiko Configuration Service: automation/servicetypes/netmiko_configuration.md
+          - Netmiko Data Backup Service: automation/servicetypes/netmiko_databackup.md
+          - Netmiko Filetransfer Service: automation/servicetypes/netmiko_filetransfer.md
+          - Netmiko Prompts Service: automation/servicetypes/netmiko_prompts.md
+          - Netmiko Commands Service: automation/servicetypes/netmiko_commands.md
+          - Python Snippet Service: automation/servicetypes/python_snippet.md
+          - REST Call Service: automation/servicetypes/rest_call.md
+          - Scrapli Common Parameters: automation/servicetypes/scrapli_common.md
+          - Scrapli Commands Service: automation/servicetypes/scrapli_command.md
+          - Scrapli Data Backup Service: automation/servicetypes/scrapli_databackup.md
+          - Scrapli Netconf Service: automation/servicetypes/scrapli_netconf.md
+          - Slack Notification Service: automation/servicetypes/slack_notification.md
+          - Topology Import Service: automation/servicetypes/topology_import.md
+          - UNIX Command Service: automation/servicetypes/unix_command.md
+          - UNIX Shell Script Service: automation/servicetypes/unix_shell.md
+          - Workflow (subworkflow) Service: automation/servicetypes/workflow.md
+      - Workflows:
+          - Workflow Builder: automation/workflow_builder.md
+          - Workflow Traversal: automation/workflow_traversal.md
+          - Sharing Data between Services: automation/workflow_data.md
+          - More Workflow Features: automation/workflow_more_features.md
+      - Results: automation/results.md
+      - Scheduling: automation/scheduling.md
   - Advanced:
-    - Search System: advanced/search_system.md
-    - Workflow and Service Design:
-      - Service Selection: advanced/service_selection.md
-      - Recommended Practices: advanced/recommended_practices.md
-    - REST API:
-      - Start here: advanced/endpoint_type_index.md
-      - Retrieve an instance: advanced/endpoint_types/retrieve_instance.md
-      - Delete an instance: advanced/endpoint_types/delete_instance.md
-      - Create or update an instance: advanced/endpoint_types/create_update_instance.md
-      - Retrieve a list of instances - simple: advanced/endpoint_types/retrieve_list_instance_simple.md
-      - Retrieve a list of instances - custom: advanced/endpoint_types/retrieve_list_instance_custom.md
-      - Run a service: advanced/endpoint_types/run_service.md
-      - Get status or results of service: advanced/endpoint_types/results_service.md
-      - Retrieve device configuration: advanced/endpoint_types/device_config.md
-      - Migrate between applications: advanced/endpoint_types/migrate.md
-      - Get worker stats: advanced/endpoint_types/workers.md
-      - Ping application: advanced/endpoint_types/ping.md
-      - Administrative: advanced/endpoint_types/admin.md
-    - CLI Commands: advanced/cli_commands.md
-    - Customization: advanced/customization.md
-    - Contributing: advanced/contributing.md
+      - Search System: advanced/search_system.md
+      - Workflow and Service Design:
+          - Service Selection: advanced/service_selection.md
+          - Recommended Practices: advanced/recommended_practices.md
+      - REST API:
+          - Start here: advanced/endpoint_type_index.md
+          - Retrieve an instance: advanced/endpoint_types/retrieve_instance.md
+          - Delete an instance: advanced/endpoint_types/delete_instance.md
+          - Create or update an instance: advanced/endpoint_types/create_update_instance.md
+          - Retrieve a list of instances - simple: advanced/endpoint_types/retrieve_list_instance_simple.md
+          - Retrieve a list of instances - custom: advanced/endpoint_types/retrieve_list_instance_custom.md
+          - Run a service: advanced/endpoint_types/run_service.md
+          - Get status or results of service: advanced/endpoint_types/results_service.md
+          - Retrieve device configuration: advanced/endpoint_types/device_config.md
+          - Migrate between applications: advanced/endpoint_types/migrate.md
+          - Get worker stats: advanced/endpoint_types/workers.md
+          - Ping application: advanced/endpoint_types/ping.md
+          - Administrative: advanced/endpoint_types/admin.md
+      - CLI Commands: advanced/cli_commands.md
+      - Customization: advanced/customization.md
+      - Contributing: advanced/contributing.md
 theme:
   name: material
-  custom_dir: theme_overrides
   features:
     - navigation.expand
     - navigation.instant
@@ -130,8 +129,8 @@ extra:
       link: mailto://contact@enms.io
   generator: false
   no_auto_expand:
-    - 'Service Types'
-    - 'REST API'
+    - "Service Types"
+    - "REST API"
 extra_javascript:
   - https://code.jquery.com/jquery-2.2.4.min.js
   - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js

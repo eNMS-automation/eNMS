@@ -9,7 +9,6 @@ from eNMS.models.automation import Service
 
 
 class GitService(Service):
-
     __tablename__ = "git_service"
     pretty_name = "Git Action"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)

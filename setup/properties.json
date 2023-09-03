@@ -572,18 +572,21 @@
       {
         "data": "devices",
         "title": "Devices",
-        "width": "80px"
+        "width": "80px",
+        "export": false
       },
       {
         "data": "links",
         "title": "Links",
-        "width": "80px"
+        "width": "80px",
+        "export": false
       },
       {
         "data": "objectNumber",
         "title": "Object Count",
         "width": "170px",
-        "orderable": false
+        "orderable": false,
+        "export": false
       },
       {
         "data": "buttons",
@@ -641,6 +644,12 @@
         "visible": false
       },
       {
+        "data": "last_run",
+        "title": "Last Run",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "status",
         "title": "Status",
         "search": "text",
@@ -668,6 +677,12 @@
       {
         "data": "pools",
         "title": "Target Pools",
+        "width": "100px",
+        "visible": false
+      },
+      {
+        "data": "runs",
+        "title": "Runs",
         "width": "100px",
         "visible": false
       },
@@ -700,11 +715,6 @@
         "data": "location",
         "title": "Location",
         "search": "text"
-      },
-      {
-        "data": "devices",
-        "title": "Devices",
-        "width": "100px"
       },
       {
         "data": "links",
@@ -748,11 +758,38 @@
         "data": "service_name",
         "title": "Service",
         "search": "text",
-        "orderable": false
+        "orderable": false,
+        "width": "200px"
       },
       {
-        "data": "server",
+        "data": "task_name",
+        "title": "Task",
+        "search": "text",
+        "orderable": false,
+        "visible": false
+      },
+      {
+        "data": "server_link",
         "title": "Server",
+        "search": "text",
+        "visible": false,
+        "width": "120px"
+      },
+      {
+        "data": "server_version",
+        "title": "Version",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "server_commit_sha",
+        "title": "Commit",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "worker_link",
+        "title": "Worker",
         "search": "text",
         "visible": false,
         "width": "120px"
@@ -781,6 +818,24 @@
         "title": "Progress",
         "width": "150px",
         "orderable": false
+      },
+      {
+        "data": "services",
+        "title": "Services",
+        "width": "100px",
+        "visible": false
+      },
+      {
+        "data": "devices",
+        "title": "Devices",
+        "width": "100px",
+        "visible": false
+      },
+      {
+        "data": "pools",
+        "title": "Pools",
+        "width": "100px",
+        "visible": false
       },
       {
         "data": "buttons",
@@ -945,7 +1000,7 @@
       },
       {
         "data": "buttons",
-        "width": "130px",
+        "width": "70px",
         "orderable": false,
         "export": false
       }
@@ -1060,6 +1115,12 @@
         "search": "text"
       },
       {
+        "data": "last_login",
+        "title": "Last Login",
+        "width": "150px",
+        "search": "text"
+      },
+      {
         "data": "groups",
         "title": "Groups",
         "width": "80px"
@@ -1089,6 +1150,11 @@
         "search": "text"
       },
       {
+        "data": "role",
+        "title": "Role",
+        "search": "text"
+      },
+      {
         "data": "mac_address",
         "title": "MAC address",
         "search": "text"
@@ -1099,6 +1165,41 @@
         "search": "text"
       },
       {
+        "data": "scheduler_address",
+        "title": "Scheduler Address",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "scheduler_active",
+        "title": "Scheduler Active",
+        "search": "bool",
+        "visible": false
+      },
+      {
+        "data": "location",
+        "title": "Location",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "version",
+        "title": "Version",
+        "search": "text"
+      },
+      {
+        "data": "commit_sha",
+        "title": "Commit SHA",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_restart",
+        "title": "Last Restart",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "weight",
         "title": "Weight",
         "search": "text"
@@ -1107,6 +1208,22 @@
         "data": "status",
         "title": "Status",
         "search": "text"
+      },
+      {
+        "data": "current_runs",
+        "title": "Current Runs",
+        "search": "text",
+        "width": "140px"
+      },
+      {
+        "data": "workers",
+        "title": "Workers",
+        "width": "80px"
+      },
+      {
+        "data": "runs",
+        "title": "Runs",
+        "width": "80px"
       },
       {
         "data": "buttons",
@@ -1277,6 +1394,53 @@
         "orderable": false,
         "export": false
       }
+    ],
+    "worker": [
+      {
+        "data": "name",
+        "title": "Process ID",
+        "search": "text"
+      },
+      {
+        "data": "description",
+        "title": "Description",
+        "search": "text"
+      },
+      {
+        "data": "subtype",
+        "title": "Type",
+        "search": "text",
+        "width": "100px"
+      },
+      {
+        "data": "last_update",
+        "title": "Last Update",
+        "search": "text",
+        "width": "200px"
+      },
+      {
+        "data": "server_link",
+        "title": "Server",
+        "search": "text",
+        "width": "120px"
+      },
+      {
+        "data": "current_runs",
+        "title": "Current Runs",
+        "search": "text",
+        "width": "140px"
+      },
+      {
+        "data": "runs",
+        "title": "Runs",
+        "width": "80px"
+      },
+      {
+        "data": "buttons",
+        "width": "80px",
+        "orderable": false,
+        "export": false
+      }
     ]
   },
   "property_list": {
@@ -1319,11 +1483,12 @@
   },
   "tables_additional": {
     "pool": ["device_number", "link_number"],
-    "run": ["path", "service_properties"],
+    "run": ["path", "server_properties", "service_properties", "worker_properties"],
     "service": ["path", "scoped_name", "mandatory_parametrization"],
     "network": ["path", "scoped_name"],
     "result": ["service_name"],
-    "task": ["frequency", "frequency_unit", "crontab_expression", "is_active"]
+    "task": ["frequency", "frequency_unit", "crontab_expression", "is_active"],
+    "worker": ["server_properties"]
   },
   "filtering": {
     "changelog": ["time", "user", "severity", "content"],
@@ -1387,7 +1552,7 @@
       "trigger",
       "status"
     ],
-    "server": ["name", "description", "ip_address", "weight", "status"],
+    "server": ["name", "description", "ip_address", "version", "commit", "weight", "status"],
     "network": ["name", "description", "creator", "location"],
     "service": [
       "name",

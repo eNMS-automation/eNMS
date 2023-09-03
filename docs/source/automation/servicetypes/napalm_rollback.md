@@ -1,6 +1,6 @@
 Use Napalm to rollback a configuration.
 
-![Napalm Rollback Service](../../_static/automation/builtin_service_types/napalm_rollback.png)
+![Napalm Rollback Service](../../_static/automation/service_types/napalm_rollback.png)
 
 Configuration parameters for creating this service instance:
 

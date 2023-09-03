@@ -7,6 +7,7 @@ from json import loads
 from logging import error, info, warning
 from operator import attrgetter
 from os import getenv, getpid
+from os.path import exists
 from pathlib import Path
 from sqlalchemy import (
     Boolean,
@@ -24,7 +25,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.exc import InvalidRequestError, OperationalError
-from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
+from sqlalchemy.ext.associationproxy import AssociationProxyExtensionType
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import (
@@ -97,8 +98,13 @@ class Database:
                 **{
                     "name": vs.server,
                     "description": vs.server,
+                    "role": vs.server_role,
                     "mac_address": str(getnode()),
                     "ip_address": vs.server_ip,
+                    "scheduler_address": vs.scheduler_address,
+                    "scheduler_active": vs.scheduler_active,
+                    "location": vs.server_location,
+                    "allowed_automation": vs.settings["cluster"]["allowed_automation"],
                     "status": "Up",
                 },
             )
@@ -110,6 +116,17 @@ class Database:
                 },
             )
         self.session.commit()
+        server = db.factory(
+            "server",
+            name=vs.server,
+            version=vs.server_version,
+            commit_sha=vs.server_commit_sha,
+            last_restart=vs.get_time(),
+        )
+        for worker in server.workers:
+            if not exists(f"/proc/{worker.name}"):
+                db.delete_instance(worker, call_delete=False)
+        vs.server_id = server.id
         for run in self.fetch(
             "run", all_matches=True, allow_none=True, status="Running"
         ):
@@ -150,9 +167,9 @@ class Database:
         if self.dialect == "postgresql":
             self.LargeString = Text
         else:
-            self.LargeString = Text(self.columns["length"]["large_string_length"])
-        self.SmallString = String(self.columns["length"]["small_string_length"])
-        self.TinyString = String(self.columns["length"]["tiny_string_length"])
+            self.LargeString = Text(self.columns["length"]["large_string"])
+        self.SmallString = String(self.columns["length"]["small_string"])
+        self.TinyString = String(self.columns["length"]["tiny_string"])
 
         default_ctypes = {
             self.Dict: {},
@@ -189,7 +206,8 @@ class Database:
                     }.get(type(col.type), "str")
                 vs.model_properties[name][col.key] = property_type
             for descriptor in inspect(model).all_orm_descriptors:
-                if descriptor.extension_type is ASSOCIATION_PROXY:
+                association_proxy = AssociationProxyExtensionType.ASSOCIATION_PROXY
+                if descriptor.extension_type is association_proxy:
                     property = (
                         descriptor.info.get("name")
                         or f"{descriptor.target_collection}_{descriptor.value_attr}"
@@ -211,24 +229,32 @@ class Database:
                 }
 
     def configure_model_events(self, env):
+        env.log_events = True
+
         @event.listens_for(self.base, "after_insert", propagate=True)
         def log_instance_creation(mapper, connection, target):
+            if not getattr(target, "log_change", True) or not env.log_events:
+                return
             if hasattr(target, "name") and target.type != "run":
                 env.log("info", f"CREATION: {target.type} '{target.name}'")
 
         @event.listens_for(self.base, "before_delete", propagate=True)
         def log_instance_deletion(mapper, connection, target):
+            if not getattr(target, "log_change", True) or not env.log_events:
+                return
             name = getattr(target, "name", str(target))
             env.log("info", f"DELETION: {target.type} '{name}'")
 
         @event.listens_for(self.base, "before_update", propagate=True)
         def log_instance_update(mapper, connection, target):
+            if not env.log_events:
+                return
             state, changelog = inspect(target), []
             for attr in state.attrs:
                 hist = state.get_history(attr.key, True)
                 if (
                     getattr(target, "private", False)
-                    or not getattr(target, "log_changes", True)
+                    or not getattr(target, "log_change", True)
                     or not getattr(state.class_, attr.key).info.get("log_change", True)
                     or attr.key in vs.private_properties_set
                     or not hist.has_changes()
@@ -436,16 +462,21 @@ class Database:
     def objectify(self, model, object_list, **kwargs):
         return [self.fetch(model, id=object_id, **kwargs) for object_id in object_list]
 
-    def delete_instance(self, instance):
-        instance.delete()
+    def delete_instance(self, instance, call_delete=True):
+        abort_delete = False
+        if call_delete:
+            abort_delete = instance.delete()
+            if abort_delete:
+                return {"delete_aborted": True, "log_level": "error", **abort_delete}
         serialized_instance = instance.serialized
-        self.session.delete(instance)
+        if not abort_delete:
+            self.session.delete(instance)
         return serialized_instance
 
     def delete_all(self, *models):
         for model in models:
             for instance in self.fetch_all(model):
-                self.delete_instance(instance)
+                self.delete_instance(instance, call_delete=model != "file")
             self.session.commit()
 
     def export(self, model, private_properties=False):
@@ -468,7 +499,7 @@ class Database:
                     _class, allow_none=True, rbac=rbac, **{property: kwargs[property]}
                 )
             if instance and not kwargs.get("must_be_new"):
-                instance.update(**kwargs)
+                instance.update(rbac=rbac, **kwargs)
             else:
                 instance = vs.models[_class](rbac=rbac, **kwargs)
                 self.session.add(instance)

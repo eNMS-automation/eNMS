@@ -20,7 +20,6 @@ from eNMS.models.automation import Service
 
 
 class RestCallService(Service):
-
     __tablename__ = "rest_call_service"
     pretty_name = "REST Call"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
@@ -91,7 +90,6 @@ class RestCallForm(ServiceForm):
         choices=(
             ("device", "Device Credentials"),
             ("object", "Named Credential"),
-            ("user", "User Credentials"),
             ("custom", "Custom Credentials"),
         ),
     )
@@ -99,7 +97,7 @@ class RestCallForm(ServiceForm):
     custom_username = StringField("Custom Username", substitution=True)
     custom_password = PasswordField("Custom Password", substitution=True)
 
-    def validate(self):
+    def validate(self, **_):
         valid_form = super().validate()
         device_credentials_error = (
             self.credentials.data == "device" and self.run_method.data == "once"

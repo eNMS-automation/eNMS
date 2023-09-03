@@ -3,6 +3,7 @@ from heapq import heappop, heappush
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
 from sqlalchemy.schema import UniqueConstraint
+from wtforms.validators import NumberRange
 
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
@@ -20,7 +21,6 @@ from eNMS.variables import vs
 
 
 class Workflow(Service):
-
     __tablename__ = "workflow"
     pretty_name = "Workflow"
     parent_type = "service"
@@ -28,14 +28,20 @@ class Workflow(Service):
     category = db.Column(db.SmallString)
     close_connection = db.Column(Boolean, default=False)
     labels = db.Column(db.Dict, info={"log_change": False})
-    man_minutes_type = db.Column(db.TinyString, default="device")
+    man_minutes_type = db.Column(db.TinyString, default="workflow")
     man_minutes = db.Column(Integer, default=0)
     man_minutes_total = db.Column(Integer, default=0)
     services = relationship(
-        "Service", secondary=db.service_workflow_table, back_populates="workflows"
+        "Service",
+        secondary=db.service_workflow_table,
+        back_populates="workflows",
+        lazy="joined",
     )
     edges = relationship(
-        "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan"
+        "WorkflowEdge",
+        back_populates="workflow",
+        cascade="all, delete-orphan",
+        lazy="joined",
     )
     superworkflow_id = db.Column(
         Integer, ForeignKey("workflow.id", ondelete="SET NULL")
@@ -55,6 +61,15 @@ class Workflow(Service):
         super().__init__(**kwargs)
         if not migration_import and self.name not in end.positions:
             end.positions[self.name] = (500, 0)
+
+    def recursive_update(self):
+        def rec(service):
+            service.post_update()
+            if service.type == "workflow":
+                for subservice in service.services:
+                    rec(subservice)
+
+        rec(self)
 
     def delete(self):
         for service in self.services:
@@ -106,6 +121,7 @@ class Workflow(Service):
                 )
             )
             db.session.commit()
+        clone.recursive_update()
         return clone
 
     @property
@@ -127,19 +143,20 @@ class Workflow(Service):
 
     def job(self, run, device=None):
         number_of_runs = defaultdict(int)
-        start = db.fetch("service", scoped_name="Start")
-        end = db.fetch("service", scoped_name="End")
+        start = db.fetch("service", scoped_name="Start", rbac=None)
+        end = db.fetch("service", scoped_name="End", rbac=None)
         services, targets = [], defaultdict(set)
         start_targets = [device] if device else run.target_devices
         for service_id in run.start_services or [start.id]:
-            service = db.fetch("service", id=service_id)
+            service = db.fetch("service", id=service_id, rbac=None)
             targets[service.name] |= {device.name for device in start_targets}
             heappush(services, (1 / service.priority, service))
         visited, restart_run = set(), run.restart_run
         tracking_bfs = run.run_method == "per_service_with_workflow_targets"
+        device_store = {device.name: device for device in start_targets}
         while services:
             if run.stop:
-                return {"payload": run.payload, "success": False, "result": "Aborted"}
+                return {"success": False, "result": "Aborted"}
             _, service = heappop(services)
             if number_of_runs[service.name] >= service.maximum_runs:
                 continue
@@ -165,9 +182,11 @@ class Workflow(Service):
                     "workflow_run_method": run.run_method,
                 }
                 if tracking_bfs or device:
-                    kwargs["target_devices"] = [
-                        db.fetch("device", name=name) for name in targets[service.name]
-                    ]
+                    kwargs["target_devices"] = []
+                    for name in targets[service.name]:
+                        if name not in device_store:
+                            device_store[name] = db.fetch("device", name=name)
+                        kwargs["target_devices"].append(device_store[name])
                 if run.parent_device:
                     kwargs["parent_device"] = run.parent_device
                 results = Runner(run, payload=run.payload, **kwargs).results
@@ -196,13 +215,9 @@ class Workflow(Service):
         if tracking_bfs or device:
             failed = list(targets[start.name] - targets[end.name])
             summary = {"success": list(targets[end.name]), "failure": failed}
-            results = {
-                "payload": run.payload,
-                "success": not failed,
-                "summary": summary,
-            }
+            results = {"success": not failed, "summary": summary}
         else:
-            results = {"payload": run.payload, "success": end in visited}
+            results = {"success": end in visited}
         run.restart_run = restart_run
         if run.is_main_run and self.man_minutes:
             self.man_minutes_total += (
@@ -235,13 +250,16 @@ class WorkflowForm(ServiceForm):
                 "Run the workflow service by service using service targets",
             ),
         ),
+        no_search=True,
     )
-    man_minutes = IntegerField("Minutes to Complete Task Manually", default=0)
+    man_minutes = IntegerField(
+        "Minutes to Complete Task Manually", [NumberRange(min=0)], default=0
+    )
     man_minutes_type = SelectField(
         "Type of Minutes",
         choices=(
+            ("workflow", "For the whole workflow"),
             ("device", "Per Device"),
-            ("workflow", "For the whole Workflow"),
         ),
     )
     man_minutes_total = IntegerField(
@@ -252,7 +270,7 @@ class WorkflowForm(ServiceForm):
         constraints={"children": ["[Shared] Placeholder"], "children_filter": "union"},
     )
 
-    def validate(self):
+    def validate(self, **_):
         valid_form = super().validate()
         invalid_man_minutes_error = (
             vs.automation["workflow"]["mandatory_man_minutes"]
@@ -275,13 +293,31 @@ class WorkflowForm(ServiceForm):
                     " with the 'Service Targets' Run Method."
                 )
             )
+        invalid_targets_error = (
+            self.run_method.data == "per_service_with_service_targets"
+            and (
+                self.target_devices.data
+                or self.target_pools.data
+                or self.device_query.data
+            )
+        )
+        if invalid_targets_error:
+            self.run_method.errors.append(
+                (
+                    "The workflow has device targets but the "
+                    "run method is set to 'Service by Service'."
+                )
+            )
         return valid_form and not any(
-            [invalid_man_minutes_type_error, invalid_man_minutes_error]
+            [
+                invalid_man_minutes_type_error,
+                invalid_man_minutes_error,
+                invalid_targets_error,
+            ]
         )
 
 
 class WorkflowEdge(AbstractBase):
-
     __tablename__ = type = class_type = "workflow_edge"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
@@ -294,6 +330,7 @@ class WorkflowEdge(AbstractBase):
         primaryjoin="Service.id == WorkflowEdge.source_id",
         backref=backref("destinations", cascade="all, delete-orphan"),
         foreign_keys="WorkflowEdge.source_id",
+        lazy="joined",
     )
     destination_id = db.Column(Integer, ForeignKey("service.id"))
     destination = relationship(
@@ -301,10 +338,14 @@ class WorkflowEdge(AbstractBase):
         primaryjoin="Service.id == WorkflowEdge.destination_id",
         backref=backref("sources", cascade="all, delete-orphan"),
         foreign_keys="WorkflowEdge.destination_id",
+        lazy="joined",
     )
     workflow_id = db.Column(Integer, ForeignKey("workflow.id"))
     workflow = relationship(
-        "Workflow", back_populates="edges", foreign_keys="WorkflowEdge.workflow_id"
+        "Workflow",
+        back_populates="edges",
+        foreign_keys="WorkflowEdge.workflow_id",
+        lazy="joined",
     )
     __table_args__ = (
         UniqueConstraint(subtype, source_id, destination_id, workflow_id),

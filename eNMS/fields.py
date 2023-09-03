@@ -30,8 +30,9 @@ class MetaField(type):
 
 class FieldMixin(metaclass=MetaField):
     def __init__(self, *args, **kwargs):
-        if "help" in kwargs:
-            kwargs.setdefault("render_kw", {})["help"] = kwargs.pop("help")
+        for property in ("help", "ui_name"):
+            if property in kwargs:
+                kwargs.setdefault("render_kw", {})[property] = kwargs.pop(property)
         kwargs.pop("dont_duplicate", None)
         super().__init__(*args, **kwargs)
 
@@ -82,9 +83,27 @@ class FloatField(FieldMixin, WtformsFloatField):
 class SelectField(FieldMixin, WtformsSelectField):
     type = "list"
 
+    def __init__(self, *args, **kwargs):
+        self.no_search = kwargs.pop("no_search", False)
+        super().__init__(*args, **kwargs)
+
+    def __call__(self, *args, **kwargs):
+        if self.no_search:
+            kwargs["class"] += " no-search"
+        return super().__call__(*args, **kwargs)
+
 
 class SelectMultipleField(FieldMixin, WtformsSelectMultipleField):
     type = "multiselect"
+
+    def __init__(self, *args, **kwargs):
+        self.no_search = kwargs.pop("no_search", False)
+        super().__init__(*args, **kwargs)
+
+    def __call__(self, *args, **kwargs):
+        if self.no_search:
+            kwargs["class"] += " no-search"
+        return super().__call__(*args, **kwargs)
 
 
 class FieldList(FieldMixin, WtformsFieldList):

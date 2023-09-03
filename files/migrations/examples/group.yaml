@@ -1,182 +1,556 @@
-- admin_only: false
-  creator: admin
-  credential_access: []
-  custom_property: CP
-  delete_requests: []
-  description: All users
-  device_access: []
-  email: ''
-  get_requests: []
-  link_access: []
-  menu: []
-  name: All users
-  network_access: []
-  pages: []
-  pool_access: []
-  post_requests: []
-  service_access: []
-  task_access: []
-  type: group
-  users: [admin, readonly, nadmin, demo]
-- admin_only: false
-  creator: admin
-  credential_access: []
-  custom_property: CP
-  delete_requests: []
-  description: Admin User
-  device_access: []
-  email: admin@enms.io
-  get_requests: []
-  link_access: []
-  menu: []
-  name: Admin User
-  network_access: []
-  pages: []
-  pool_access: []
-  post_requests: []
-  service_access: []
-  task_access: []
-  type: group
-  users: [admin]
-- admin_only: false
-  creator: admin
-  credential_access: []
-  custom_property: CP
-  delete_requests: [/rest/instance]
-  description: Full UI Read + Edit Access
-  device_access: []
-  email: ''
-  get_requests: [/changelog_table, /compare_form, /configuration_table, /confirmation_form,
-    /credential_table, /device_data_form, /device_table, /download, /event_table,
-    /export_service, /file_table, /files_form, /geographical_view, /git_history_form,
-    /group_table, /instance_deletion_form, /link_table, /network_builder, /logs_form,
-    /pool_table, /report_form, /rest/configuration, /rest/instance, /rest/query, /rest/result,
-    /rest/token, /result_comparison_form, /result_form, /run_table, /server_table,
-    /service_table, /network_table, /table_form, /task_table, /terminal, /tree_form,
-    /view_service_results, /workflow_builder, /instance_tree_form, /add_services_to_workflow_form,
-    /add_to_network_form, /administration_form, /changelog_form, /credential_form,
-    /database_deletion_form, /database_migration_form, /debug_form, /device_connection_form,
-    /excel_export_form, /excel_import_form, /file_form, /folder_form, /file_editor_form,
-    /import_services_form, /pool_form, /restart_workflow_form, /result_log_deletion_form,
-    /run_service_form, /server_form, /task_form, /upload_files_form, /profile_form,
-    /label_form, /workflow_edge_form, /device_form, /link_form, /parameters_form,
-    /netmiko_form, /scrapli_form, /user_form, /gateway_form, /network_form, /router_form,
-    /ethernet_link_form, /napalm_configuration_service_form, /napalm_rollback_service_form,
-    /netmiko_configuration_service_form, /napalm_backup_service_form, /netmiko_backup_service_form,
-    /scrapli_backup_service_form, /napalm_getters_service_form, /netmiko_commands_service_form,
-    /netmiko_prompts_service_form, /scrapli_service_form, /configure_bgp_service_form,
-    /example_service_form, /generic_file_transfer_service_form, /netmiko_file_transfer_service_form,
-    /ansible_playbook_service_form, /git_service_form, /rest_call_service_form, /swiss_army_knife_service_form,
-    /topology_import_service_form, /netconf_service_form, /scrapli_netconf_service_form,
-    /napalm_ping_service_form, /napalm_traceroute_service_form, /ping_service_form,
-    /mail_notification_service_form, /mattermost_notification_service_form, /slack_notification_service_form,
-    /unix_command_service_form, /unix_shell_script_service_form, /data_processing_service_form,
-    /data_validation_service_form, /python_snippet_service_form, /workflow_form, /changelog_relation_filtering_form,
-    /changelog_filtering_form, /credential_relation_filtering_form, /credential_filtering_form,
-    /device_relation_filtering_form, /device_filtering_form, /group_relation_filtering_form,
-    /group_filtering_form, /link_relation_filtering_form, /link_filtering_form, /pool_relation_filtering_form,
-    /pool_filtering_form, /run_relation_filtering_form, /run_filtering_form, /server_relation_filtering_form,
-    /server_filtering_form, /network_relation_filtering_form, /network_filtering_form,
-    /service_relation_filtering_form, /service_filtering_form, /session_relation_filtering_form,
-    /session_filtering_form, /result_relation_filtering_form, /result_filtering_form,
-    /task_relation_filtering_form, /task_filtering_form, /user_relation_filtering_form,
-    /user_filtering_form, /add_devices_form, /add_links_form, /add_users_form, /add_services_form]
-  link_access: []
-  menu: [Administration, Inventory, Visualization, Automation]
-  name: Full UI Read + Edit Access
-  network_access: []
-  pages: [Files, Changelog, Groups, Servers, Credentials, Devices, Configurations,
-    Links, Pools, Networks, Geographical View, Network Builder, Services, Workflow
-      Builder, Scheduling, Results]
-  pool_access: []
-  post_requests: [/add_edge, /add_instances_in_bulk, /add_objects_to_network, /bulk_deletion,
-    /bulk_edit, /bulk_removal, /copy_service_in_workflow, /clear_results, /clear_configurations,
-    /compare, /counters, /create_label, /delete_instance, /delete_builder_selection,
-    /desktop_connection, /export_service, /export_services, /topology_export, /edit_file,
-    /get, /get_cluster_status, /get_git_history, /get_device_network_data, /get_device_logs,
-    /get_git_network_data, /get_migration_folders, /get_service_logs, /get_report,
-    /get_report_template, /get_result, /get_view_topology, /get_service_state, /get_network_state,
-    /get_top_level_instances, /get_visualization_pools, /get_workflow_results, /get_workflow_services,
-    /get_instance_tree, /import_services, /remove_instance, /reset_status, /rest/create_pool,
-    /rest/get_cluster_status, /rest/get_git_content, /rest/instance, /rest/run_service,
-    /rest/run_task, /rest/search, /rest/topology, /rest/update_all_pools, /rest/update_database_configurations_from_git,
-    /result_log_deletion, /run_service, /run_service_on_targets, /save_file, /save_positions,
-    /save_profile, /scan_cluster, /scan_folder, /scan_playbook_folder, /search_builder,
-    /search_workflow_services, /skip_services, /stop_run, /scheduler_action, /task_action,
-    /topology_import, /update, /update_pool, /update_all_pools, /upload_files, /view_filtering,
-    /web_connection]
-  service_access: []
-  task_access: []
-  type: group
-  users: [nadmin]
-- admin_only: false
-  creator: admin
-  credential_access: []
-  custom_property: CP
-  delete_requests: [/rest/instance]
-  description: ''
-  device_access: []
-  email: ''
-  get_requests: [/changelog_table, /compare_form, /configuration_table, /confirmation_form,
-    /credential_table, /device_data_form, /device_table, /download, /event_table,
-    /export_service, /file_table, /files_form, /geographical_view, /git_history_form,
-    /group_table, /instance_deletion_form, /link_table, /network_builder, /logs_form,
-    /pool_table, /report_form, /rest/configuration, /rest/instance, /rest/query, /rest/result,
-    /rest/token, /result_comparison_form, /result_form, /run_table, /server_table,
-    /service_table, /network_table, /table_form, /task_table, /terminal, /tree_form,
-    /view_service_results, /workflow_builder, /instance_tree_form, /add_services_to_workflow_form,
-    /add_to_network_form, /administration_form, /changelog_form, /credential_form,
-    /database_deletion_form, /database_migration_form, /debug_form, /device_connection_form,
-    /excel_export_form, /excel_import_form, /file_form, /folder_form, /file_editor_form,
-    /import_services_form, /pool_form, /restart_workflow_form, /result_log_deletion_form,
-    /run_service_form, /server_form, /task_form, /upload_files_form, /profile_form,
-    /label_form, /workflow_edge_form, /device_form, /link_form, /parameters_form,
-    /netmiko_form, /scrapli_form, /user_form, /gateway_form, /network_form, /router_form,
-    /ethernet_link_form, /napalm_configuration_service_form, /napalm_rollback_service_form,
-    /netmiko_configuration_service_form, /napalm_backup_service_form, /netmiko_backup_service_form,
-    /scrapli_backup_service_form, /napalm_getters_service_form, /netmiko_commands_service_form,
-    /netmiko_prompts_service_form, /scrapli_service_form, /configure_bgp_service_form,
-    /example_service_form, /generic_file_transfer_service_form, /netmiko_file_transfer_service_form,
-    /ansible_playbook_service_form, /git_service_form, /rest_call_service_form, /swiss_army_knife_service_form,
-    /topology_import_service_form, /netconf_service_form, /scrapli_netconf_service_form,
-    /napalm_ping_service_form, /napalm_traceroute_service_form, /ping_service_form,
-    /mail_notification_service_form, /mattermost_notification_service_form, /slack_notification_service_form,
-    /unix_command_service_form, /unix_shell_script_service_form, /data_processing_service_form,
-    /data_validation_service_form, /python_snippet_service_form, /workflow_form, /changelog_relation_filtering_form,
-    /changelog_filtering_form, /credential_relation_filtering_form, /credential_filtering_form,
-    /device_relation_filtering_form, /device_filtering_form, /group_relation_filtering_form,
-    /group_filtering_form, /link_relation_filtering_form, /link_filtering_form, /pool_relation_filtering_form,
-    /pool_filtering_form, /run_relation_filtering_form, /run_filtering_form, /server_relation_filtering_form,
-    /server_filtering_form, /network_relation_filtering_form, /network_filtering_form,
-    /service_relation_filtering_form, /service_filtering_form, /session_relation_filtering_form,
-    /session_filtering_form, /result_relation_filtering_form, /result_filtering_form,
-    /task_relation_filtering_form, /task_filtering_form, /user_relation_filtering_form,
-    /user_filtering_form, /add_devices_form, /add_links_form, /add_users_form, /add_services_form]
-  link_access: []
-  menu: [Inventory, Visualization, Automation]
-  name: ny Group
-  network_access: []
-  pages: [Files, Changelog, Groups, Servers, Credentials, Devices, Configurations,
-    Links, Pools, Networks, Geographical View, Network Builder, Services, Workflow
-      Builder, Scheduling, Results]
-  pool_access: []
-  post_requests: [/add_edge, /add_instances_in_bulk, /add_objects_to_network, /bulk_deletion,
-    /bulk_edit, /bulk_removal, /copy_service_in_workflow, /clear_results, /clear_configurations,
-    /compare, /counters, /create_label, /delete_instance, /delete_builder_selection,
-    /desktop_connection, /export_service, /export_services, /topology_export, /edit_file,
-    /get, /get_cluster_status, /get_git_history, /get_device_network_data, /get_device_logs,
-    /get_git_network_data, /get_migration_folders, /get_service_logs, /get_report,
-    /get_report_template, /get_result, /get_view_topology, /get_service_state, /get_network_state,
-    /get_top_level_instances, /get_visualization_pools, /get_workflow_results, /get_workflow_services,
-    /get_instance_tree, /import_services, /remove_instance, /reset_status, /rest/create_pool,
-    /rest/get_cluster_status, /rest/get_git_content, /rest/instance, /rest/run_service,
-    /rest/run_task, /rest/search, /rest/topology, /rest/update_all_pools, /rest/update_database_configurations_from_git,
-    /result_log_deletion, /run_service, /run_service_on_targets, /save_file, /save_positions,
-    /save_profile, /scan_cluster, /scan_folder, /scan_playbook_folder, /search_builder,
-    /search_workflow_services, /skip_services, /stop_run, /scheduler_action, /task_action,
-    /topology_import, /update, /update_pool, /update_all_pools, /upload_files, /view_filtering,
-    /web_connection]
-  service_access: []
-  task_access: []
-  type: group
-  users: [ny]
+- "admin_only": !!bool "false"
+  "creator": "admin"
+  "credential_access": []
+  "custom_property": "CP"
+  "delete_requests": []
+  "description": "All users"
+  "device_access": []
+  "email": ""
+  "force_read_access": !!bool "false"
+  "get_requests": []
+  "link_access": []
+  "menu": []
+  "name": "All users"
+  "network_access": []
+  "pages": []
+  "pool_access": []
+  "post_requests": []
+  "service_access": []
+  "task_access": []
+  "type": "group"
+  "users":
+  - "admin"
+  - "readonly"
+  - "nadmin"
+  - "demo"
+- "admin_only": !!bool "false"
+  "creator": "admin"
+  "credential_access": []
+  "custom_property": "CP"
+  "delete_requests": []
+  "description": "Admin User"
+  "device_access": []
+  "email": "admin@enms.io"
+  "force_read_access": !!bool "true"
+  "get_requests": []
+  "link_access": []
+  "menu": []
+  "name": "Admin User"
+  "network_access": []
+  "pages": []
+  "pool_access": []
+  "post_requests": []
+  "service_access": []
+  "task_access": []
+  "type": "group"
+  "users":
+  - "admin"
+- "admin_only": !!bool "false"
+  "creator": "admin"
+  "credential_access": []
+  "custom_property": "CP"
+  "delete_requests":
+  - "/rest/instance"
+  "description": "Full UI Read + Edit Access"
+  "device_access": []
+  "email": ""
+  "force_read_access": !!bool "false"
+  "get_requests":
+  - "/changelog_table"
+  - "/compare_form"
+  - "/configuration_table"
+  - "/confirmation_form"
+  - "/credential_table"
+  - "/device_data_form"
+  - "/device_table"
+  - "/download"
+  - "/event_table"
+  - "/export_service"
+  - "/file_table"
+  - "/files_form"
+  - "/geographical_view"
+  - "/git_history_form"
+  - "/group_table"
+  - "/instance_deletion_form"
+  - "/link_table"
+  - "/network_builder"
+  - "/logs_form"
+  - "/pool_table"
+  - "/report_form"
+  - "/rest/configuration"
+  - "/rest/instance"
+  - "/rest/query"
+  - "/rest/result"
+  - "/rest/token"
+  - "/result_comparison_form"
+  - "/result_form"
+  - "/run_table"
+  - "/server_table"
+  - "/service_table"
+  - "/network_table"
+  - "/table_form"
+  - "/task_table"
+  - "/terminal"
+  - "/tree_form"
+  - "/view_service_results"
+  - "/workflow_builder"
+  - "/instance_tree_form"
+  - "/add_services_to_workflow_form"
+  - "/add_to_network_form"
+  - "/administration_form"
+  - "/changelog_form"
+  - "/credential_form"
+  - "/database_deletion_form"
+  - "/database_migration_form"
+  - "/debug_form"
+  - "/device_connection_form"
+  - "/excel_export_form"
+  - "/excel_import_form"
+  - "/file_form"
+  - "/folder_form"
+  - "/file_editor_form"
+  - "/import_services_form"
+  - "/pool_form"
+  - "/restart_workflow_form"
+  - "/result_log_deletion_form"
+  - "/run_service_form"
+  - "/server_form"
+  - "/task_form"
+  - "/upload_files_form"
+  - "/profile_form"
+  - "/label_form"
+  - "/workflow_edge_form"
+  - "/device_form"
+  - "/link_form"
+  - "/parameters_form"
+  - "/netmiko_form"
+  - "/scrapli_form"
+  - "/user_form"
+  - "/gateway_form"
+  - "/network_form"
+  - "/router_form"
+  - "/ethernet_link_form"
+  - "/napalm_configuration_service_form"
+  - "/napalm_rollback_service_form"
+  - "/netmiko_configuration_service_form"
+  - "/napalm_backup_service_form"
+  - "/netmiko_backup_service_form"
+  - "/scrapli_backup_service_form"
+  - "/napalm_getters_service_form"
+  - "/netmiko_commands_service_form"
+  - "/netmiko_prompts_service_form"
+  - "/scrapli_service_form"
+  - "/configure_bgp_service_form"
+  - "/example_service_form"
+  - "/generic_file_transfer_service_form"
+  - "/netmiko_file_transfer_service_form"
+  - "/ansible_playbook_service_form"
+  - "/git_service_form"
+  - "/rest_call_service_form"
+  - "/swiss_army_knife_service_form"
+  - "/topology_import_service_form"
+  - "/netconf_service_form"
+  - "/scrapli_netconf_service_form"
+  - "/napalm_ping_service_form"
+  - "/napalm_traceroute_service_form"
+  - "/ping_service_form"
+  - "/mail_notification_service_form"
+  - "/mattermost_notification_service_form"
+  - "/slack_notification_service_form"
+  - "/unix_command_service_form"
+  - "/unix_shell_script_service_form"
+  - "/data_processing_service_form"
+  - "/data_validation_service_form"
+  - "/python_snippet_service_form"
+  - "/workflow_form"
+  - "/changelog_relation_filtering_form"
+  - "/changelog_filtering_form"
+  - "/credential_relation_filtering_form"
+  - "/credential_filtering_form"
+  - "/device_relation_filtering_form"
+  - "/device_filtering_form"
+  - "/group_relation_filtering_form"
+  - "/group_filtering_form"
+  - "/link_relation_filtering_form"
+  - "/link_filtering_form"
+  - "/pool_relation_filtering_form"
+  - "/pool_filtering_form"
+  - "/run_relation_filtering_form"
+  - "/run_filtering_form"
+  - "/server_relation_filtering_form"
+  - "/server_filtering_form"
+  - "/network_relation_filtering_form"
+  - "/network_filtering_form"
+  - "/service_relation_filtering_form"
+  - "/service_filtering_form"
+  - "/session_relation_filtering_form"
+  - "/session_filtering_form"
+  - "/result_relation_filtering_form"
+  - "/result_filtering_form"
+  - "/task_relation_filtering_form"
+  - "/task_filtering_form"
+  - "/user_relation_filtering_form"
+  - "/user_filtering_form"
+  - "/add_devices_form"
+  - "/add_links_form"
+  - "/add_users_form"
+  - "/add_services_form"
+  "link_access": []
+  "menu":
+  - "Administration"
+  - "Inventory"
+  - "Visualization"
+  - "Automation"
+  "name": "Full UI Read + Edit Access"
+  "network_access": []
+  "pages":
+  - "Files"
+  - "Changelog"
+  - "Groups"
+  - "Servers"
+  - "Credentials"
+  - "Devices"
+  - "Configurations"
+  - "Links"
+  - "Pools"
+  - "Networks"
+  - "Geographical View"
+  - "Network Builder"
+  - "Services"
+  - "Workflow Builder"
+  - "Scheduling"
+  - "Results"
+  "pool_access": []
+  "post_requests":
+  - "/add_edge"
+  - "/add_instances_in_bulk"
+  - "/add_objects_to_network"
+  - "/bulk_deletion"
+  - "/bulk_edit"
+  - "/bulk_removal"
+  - "/copy_service_in_workflow"
+  - "/clear_results"
+  - "/clear_configurations"
+  - "/compare"
+  - "/counters"
+  - "/create_label"
+  - "/delete_instance"
+  - "/delete_builder_selection"
+  - "/desktop_connection"
+  - "/export_service"
+  - "/export_services"
+  - "/topology_export"
+  - "/edit_file"
+  - "/get"
+  - "/get_cluster_status"
+  - "/get_git_history"
+  - "/get_device_network_data"
+  - "/get_device_logs"
+  - "/get_git_network_data"
+  - "/get_migration_folders"
+  - "/get_service_logs"
+  - "/get_report"
+  - "/get_report_template"
+  - "/get_result"
+  - "/get_view_topology"
+  - "/get_service_state"
+  - "/get_network_state"
+  - "/get_top_level_instances"
+  - "/get_visualization_pools"
+  - "/get_workflow_results"
+  - "/get_workflow_services"
+  - "/get_instance_tree"
+  - "/import_services"
+  - "/remove_instance"
+  - "/reset_status"
+  - "/rest/create_pool"
+  - "/rest/get_cluster_status"
+  - "/rest/get_git_content"
+  - "/rest/instance"
+  - "/rest/run_service"
+  - "/rest/run_task"
+  - "/rest/search"
+  - "/rest/topology"
+  - "/rest/update_all_pools"
+  - "/rest/update_database_configurations_from_git"
+  - "/result_log_deletion"
+  - "/run_service"
+  - "/run_service_on_targets"
+  - "/save_file"
+  - "/save_positions"
+  - "/save_profile"
+  - "/scan_cluster"
+  - "/scan_folder"
+  - "/scan_playbook_folder"
+  - "/search_builder"
+  - "/search_workflow_services"
+  - "/skip_services"
+  - "/stop_run"
+  - "/scheduler_action"
+  - "/task_action"
+  - "/topology_import"
+  - "/update"
+  - "/update_pool"
+  - "/update_all_pools"
+  - "/upload_files"
+  - "/view_filtering"
+  - "/web_connection"
+  "service_access": []
+  "task_access": []
+  "type": "group"
+  "users":
+  - "nadmin"
+- "admin_only": !!bool "false"
+  "creator": "admin"
+  "credential_access": []
+  "custom_property": "CP"
+  "delete_requests":
+  - "/rest/instance"
+  "description": ""
+  "device_access": []
+  "email": ""
+  "force_read_access": !!bool "false"
+  "get_requests":
+  - "/changelog_table"
+  - "/compare_form"
+  - "/configuration_table"
+  - "/confirmation_form"
+  - "/credential_table"
+  - "/device_data_form"
+  - "/device_table"
+  - "/download"
+  - "/event_table"
+  - "/export_service"
+  - "/file_table"
+  - "/files_form"
+  - "/geographical_view"
+  - "/git_history_form"
+  - "/group_table"
+  - "/instance_deletion_form"
+  - "/link_table"
+  - "/network_builder"
+  - "/logs_form"
+  - "/pool_table"
+  - "/report_form"
+  - "/rest/configuration"
+  - "/rest/instance"
+  - "/rest/query"
+  - "/rest/result"
+  - "/rest/token"
+  - "/result_comparison_form"
+  - "/result_form"
+  - "/run_table"
+  - "/server_table"
+  - "/service_table"
+  - "/network_table"
+  - "/table_form"
+  - "/task_table"
+  - "/terminal"
+  - "/tree_form"
+  - "/view_service_results"
+  - "/workflow_builder"
+  - "/instance_tree_form"
+  - "/add_services_to_workflow_form"
+  - "/add_to_network_form"
+  - "/administration_form"
+  - "/changelog_form"
+  - "/credential_form"
+  - "/database_deletion_form"
+  - "/database_migration_form"
+  - "/debug_form"
+  - "/device_connection_form"
+  - "/excel_export_form"
+  - "/excel_import_form"
+  - "/file_form"
+  - "/folder_form"
+  - "/file_editor_form"
+  - "/import_services_form"
+  - "/pool_form"
+  - "/restart_workflow_form"
+  - "/result_log_deletion_form"
+  - "/run_service_form"
+  - "/server_form"
+  - "/task_form"
+  - "/upload_files_form"
+  - "/profile_form"
+  - "/label_form"
+  - "/workflow_edge_form"
+  - "/device_form"
+  - "/link_form"
+  - "/parameters_form"
+  - "/netmiko_form"
+  - "/scrapli_form"
+  - "/user_form"
+  - "/gateway_form"
+  - "/network_form"
+  - "/router_form"
+  - "/ethernet_link_form"
+  - "/napalm_configuration_service_form"
+  - "/napalm_rollback_service_form"
+  - "/netmiko_configuration_service_form"
+  - "/napalm_backup_service_form"
+  - "/netmiko_backup_service_form"
+  - "/scrapli_backup_service_form"
+  - "/napalm_getters_service_form"
+  - "/netmiko_commands_service_form"
+  - "/netmiko_prompts_service_form"
+  - "/scrapli_service_form"
+  - "/configure_bgp_service_form"
+  - "/example_service_form"
+  - "/generic_file_transfer_service_form"
+  - "/netmiko_file_transfer_service_form"
+  - "/ansible_playbook_service_form"
+  - "/git_service_form"
+  - "/rest_call_service_form"
+  - "/swiss_army_knife_service_form"
+  - "/topology_import_service_form"
+  - "/netconf_service_form"
+  - "/scrapli_netconf_service_form"
+  - "/napalm_ping_service_form"
+  - "/napalm_traceroute_service_form"
+  - "/ping_service_form"
+  - "/mail_notification_service_form"
+  - "/mattermost_notification_service_form"
+  - "/slack_notification_service_form"
+  - "/unix_command_service_form"
+  - "/unix_shell_script_service_form"
+  - "/data_processing_service_form"
+  - "/data_validation_service_form"
+  - "/python_snippet_service_form"
+  - "/workflow_form"
+  - "/changelog_relation_filtering_form"
+  - "/changelog_filtering_form"
+  - "/credential_relation_filtering_form"
+  - "/credential_filtering_form"
+  - "/device_relation_filtering_form"
+  - "/device_filtering_form"
+  - "/group_relation_filtering_form"
+  - "/group_filtering_form"
+  - "/link_relation_filtering_form"
+  - "/link_filtering_form"
+  - "/pool_relation_filtering_form"
+  - "/pool_filtering_form"
+  - "/run_relation_filtering_form"
+  - "/run_filtering_form"
+  - "/server_relation_filtering_form"
+  - "/server_filtering_form"
+  - "/network_relation_filtering_form"
+  - "/network_filtering_form"
+  - "/service_relation_filtering_form"
+  - "/service_filtering_form"
+  - "/session_relation_filtering_form"
+  - "/session_filtering_form"
+  - "/result_relation_filtering_form"
+  - "/result_filtering_form"
+  - "/task_relation_filtering_form"
+  - "/task_filtering_form"
+  - "/user_relation_filtering_form"
+  - "/user_filtering_form"
+  - "/add_devices_form"
+  - "/add_links_form"
+  - "/add_users_form"
+  - "/add_services_form"
+  "link_access": []
+  "menu":
+  - "Inventory"
+  - "Visualization"
+  - "Automation"
+  "name": "ny Group"
+  "network_access": []
+  "pages":
+  - "Files"
+  - "Changelog"
+  - "Groups"
+  - "Servers"
+  - "Credentials"
+  - "Devices"
+  - "Configurations"
+  - "Links"
+  - "Pools"
+  - "Networks"
+  - "Geographical View"
+  - "Network Builder"
+  - "Services"
+  - "Workflow Builder"
+  - "Scheduling"
+  - "Results"
+  "pool_access": []
+  "post_requests":
+  - "/add_edge"
+  - "/add_instances_in_bulk"
+  - "/add_objects_to_network"
+  - "/bulk_deletion"
+  - "/bulk_edit"
+  - "/bulk_removal"
+  - "/copy_service_in_workflow"
+  - "/clear_results"
+  - "/clear_configurations"
+  - "/compare"
+  - "/counters"
+  - "/create_label"
+  - "/delete_instance"
+  - "/delete_builder_selection"
+  - "/desktop_connection"
+  - "/export_service"
+  - "/export_services"
+  - "/topology_export"
+  - "/edit_file"
+  - "/get"
+  - "/get_cluster_status"
+  - "/get_git_history"
+  - "/get_device_network_data"
+  - "/get_device_logs"
+  - "/get_git_network_data"
+  - "/get_migration_folders"
+  - "/get_service_logs"
+  - "/get_report"
+  - "/get_report_template"
+  - "/get_result"
+  - "/get_view_topology"
+  - "/get_service_state"
+  - "/get_network_state"
+  - "/get_top_level_instances"
+  - "/get_visualization_pools"
+  - "/get_workflow_results"
+  - "/get_workflow_services"
+  - "/get_instance_tree"
+  - "/import_services"
+  - "/remove_instance"
+  - "/reset_status"
+  - "/rest/create_pool"
+  - "/rest/get_cluster_status"
+  - "/rest/get_git_content"
+  - "/rest/instance"
+  - "/rest/run_service"
+  - "/rest/run_task"
+  - "/rest/search"
+  - "/rest/topology"
+  - "/rest/update_all_pools"
+  - "/rest/update_database_configurations_from_git"
+  - "/result_log_deletion"
+  - "/run_service"
+  - "/run_service_on_targets"
+  - "/save_file"
+  - "/save_positions"
+  - "/save_profile"
+  - "/scan_cluster"
+  - "/scan_folder"
+  - "/scan_playbook_folder"
+  - "/search_builder"
+  - "/search_workflow_services"
+  - "/skip_services"
+  - "/stop_run"
+  - "/scheduler_action"
+  - "/task_action"
+  - "/topology_import"
+  - "/update"
+  - "/update_pool"
+  - "/update_all_pools"
+  - "/upload_files"
+  - "/view_filtering"
+  - "/web_connection"
+  "service_access": []
+  "task_access": []
+  "type": "group"
+  "users":
+  - "ny"

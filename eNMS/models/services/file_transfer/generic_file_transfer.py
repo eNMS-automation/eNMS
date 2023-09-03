@@ -19,10 +19,10 @@ from eNMS.fields import (
     StringField,
 )
 from eNMS.models.automation import Service
+from eNMS.variables import vs
 
 
 class GenericFileTransferService(Service):
-
     __tablename__ = "generic_file_transfer_service"
     pretty_name = "Generic File Transfer"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
@@ -52,6 +52,10 @@ class GenericFileTransferService(Service):
             ssh_client.load_system_host_keys()
         source = run.sub(run.source_file, locals())
         destination = run.sub(run.destination_file, locals())
+        if run.direction == "put" and str(vs.file_path) not in source:
+            source = f"{vs.file_path}{source}"
+        if run.direction == "get" and str(vs.file_path) not in destination:
+            destination = f"{vs.file_path}{destination}"
         credentials = run.get_credentials(device, add_secret=False)
         ssh_client.connect(device.ip_address, look_for_keys=False, **credentials)
         if run.source_file_includes_globbing:
@@ -97,7 +101,6 @@ class GenericFileTransferForm(ServiceForm):
         choices=(
             ("device", "Device Credentials"),
             ("object", "Named Credential"),
-            ("user", "User Credentials"),
             ("custom", "Custom Credentials"),
         ),
     )
@@ -105,7 +108,7 @@ class GenericFileTransferForm(ServiceForm):
     custom_username = StringField("Custom Username", substitution=True)
     custom_password = PasswordField("Custom Password", substitution=True)
 
-    def validate(self):
+    def validate(self, **_):
         valid_form = super().validate()
         invalid_direction = (
             self.source_file_includes_globbing.data and self.direction.data == "get"

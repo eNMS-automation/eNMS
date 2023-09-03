@@ -10,7 +10,6 @@ from eNMS.models.automation import ConnectionService
 
 
 class NetmikoValidationService(ConnectionService):
-
     __tablename__ = "netmiko_commands_service"
     pretty_name = "Netmiko Commands"
     parent_type = "connection_service"
@@ -23,9 +22,11 @@ class NetmikoValidationService(ConnectionService):
     driver = db.Column(db.SmallString)
     use_textfsm = db.Column(Boolean, default=False)
     use_genie = db.Column(Boolean, default=False)
+    read_timeout = db.Column(Float, default=10.0)
+    conn_timeout = db.Column(Float, default=10.0)
+    auth_timeout = db.Column(Float, default=0.0)
+    banner_timeout = db.Column(Float, default=15.0)
     fast_cli = db.Column(Boolean, default=False)
-    timeout = db.Column(Float, default=10.0)
-    delay_factor = db.Column(Float, default=1.0)
     global_delay_factor = db.Column(Float, default=1.0)
     expect_string = db.Column(db.SmallString)
     config_mode_command = db.Column(db.SmallString)
@@ -53,7 +54,7 @@ class NetmikoValidationService(ConnectionService):
         netmiko_connection = run.netmiko_connection(device)
         try:
             prompt = run.enter_remote_device(netmiko_connection, device)
-            netmiko_connection.session_log.truncate(0)
+            netmiko_connection.session_log.session_log.truncate(0)
             run.log(
                 "info",
                 f"sending COMMAND '{commands}' with Netmiko",
@@ -66,9 +67,9 @@ class NetmikoValidationService(ConnectionService):
                     command,
                     use_textfsm=run.use_textfsm,
                     use_genie=run.use_genie,
-                    delay_factor=run.delay_factor,
                     expect_string=run.sub(run.expect_string, local_variables) or None,
                     auto_find_prompt=run.auto_find_prompt,
+                    read_timeout=run.read_timeout,
                     strip_prompt=run.strip_prompt,
                     strip_command=run.strip_command,
                 )
@@ -83,7 +84,11 @@ class NetmikoValidationService(ConnectionService):
                 result = "\n".join(map(str, result))
             run.exit_remote_device(netmiko_connection, prompt, device)
         except Exception:
-            result = netmiko_connection.session_log.getvalue().decode().lstrip("\u0000")
+            result = (
+                netmiko_connection.session_log.session_log.getvalue()
+                .decode()
+                .lstrip("\u0000")
+            )
             return {
                 "commands": commands,
                 "error": format_exc(),
@@ -104,9 +109,9 @@ class NetmikoValidationForm(NetmikoForm):
     results_as_list = BooleanField("Results As List", default=False)
     use_textfsm = BooleanField("Use TextFSM", default=False)
     use_genie = BooleanField("Use Genie / PyATS", default=False)
+    auto_find_prompt = BooleanField(default=True, help="netmiko/auto_find_prompt")
     expect_string = StringField(substitution=True, help="netmiko/expect_string")
     config_mode_command = StringField(help="netmiko/config_mode_command")
-    auto_find_prompt = BooleanField(default=True, help="netmiko/auto_find_prompt")
     strip_prompt = BooleanField(default=True, help="netmiko/strip_prompt")
     strip_command = BooleanField(default=True, help="netmiko/strip_command")
     groups = {
@@ -119,9 +124,9 @@ class NetmikoValidationForm(NetmikoForm):
             "commands": [
                 "use_textfsm",
                 "use_genie",
+                "auto_find_prompt",
                 "expect_string",
                 "config_mode_command",
-                "auto_find_prompt",
                 "strip_prompt",
                 "strip_command",
             ],

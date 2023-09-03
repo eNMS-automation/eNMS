@@ -8,7 +8,6 @@ from eNMS.models.automation import ConnectionService
 
 
 class NetmikoPromptsService(ConnectionService):
-
     __tablename__ = "netmiko_prompts_service"
     pretty_name = "Netmiko Prompts"
     parent_type = "connection_service"
@@ -23,9 +22,11 @@ class NetmikoPromptsService(ConnectionService):
     confirmation3 = db.Column(db.LargeString)
     response3 = db.Column(db.SmallString)
     driver = db.Column(db.SmallString)
+    read_timeout = db.Column(Float, default=10.0)
+    conn_timeout = db.Column(Float, default=10.0)
+    auth_timeout = db.Column(Float, default=0.0)
+    banner_timeout = db.Column(Float, default=15.0)
     fast_cli = db.Column(Boolean, default=False)
-    timeout = db.Column(Integer, default=10.0)
-    delay_factor = db.Column(Float, default=1.0)
     global_delay_factor = db.Column(Float, default=1.0)
     jump_on_connect = db.Column(Boolean, default=False)
     jump_command = db.Column(db.SmallString)
@@ -41,7 +42,7 @@ class NetmikoPromptsService(ConnectionService):
 
     def job(self, run, device):
         netmiko_connection = run.netmiko_connection(device)
-        netmiko_connection.session_log.truncate(0)
+        netmiko_connection.session_log.session_log.truncate(0)
         send_strings = (run.command, run.response1, run.response2, run.response3)
         expect_strings = (run.confirmation1, run.confirmation2, run.confirmation3, None)
         commands, confirmation, result = [], None, "No command sent"
@@ -62,13 +63,13 @@ class NetmikoPromptsService(ConnectionService):
                 )
                 confirmation = run.sub(expect_string, locals())
                 result = netmiko_connection.send_command(
-                    command, expect_string=confirmation, delay_factor=run.delay_factor
+                    command, expect_string=confirmation, read_timeout=run.read_timeout
                 )
                 results[command] = {"result": result, "match": confirmation}
             run.exit_remote_device(netmiko_connection, prompt, device)
         except Exception:
             result = (
-                netmiko_connection.session_log.getvalue()
+                netmiko_connection.session_log.session_log.getvalue()
                 .decode()
                 .lstrip("\u0000")
                 .replace(netmiko_connection.password, "********")

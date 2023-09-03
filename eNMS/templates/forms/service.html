@@ -1,4 +1,4 @@
-{% from 'macros.html' import field_template %}
+{% from 'macros.html' import block_field %}
 <form
   id="{{ form_type }}-form"
   class="form-horizontal form-label-left add-id"
@@ -81,147 +81,41 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                <label for="scoped_name">Name</label>
-                <div class="form-group">
-                  {{ form.scoped_name(id=form_type + '-scoped_name', class="form-control
-                  add-id required") }}
-                </div>
-                <label for="name">Full</label>
-                {{ form.name.label(help="common/full_name") }}
-                <div class="form-group">
-                  {{ form.name(id=form_type + '-name', class="form-control add-id
-                  required") }}
-                </div>
-                <label for="creator">Creator</label>
-                <div class="form-group">
-                  {{ form.creator(id=form_type + '-creator', class="form-control add-id
-                  required") }}
-                </div>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-admin_only"
-                      name="admin_only"
-                      class="add-id"
-                      type="checkbox"
-                      value="y"
-                    />
-                    {{ form.admin_only.label() }}
-                  </div>
-                </fieldset>
-                {{ form.type.label() }}
-                <div class="form-group">
-                  {{ form.type(id=form_type + '-class', class="form-control add-id") }}
-                </div>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-shared"
-                      name="shared"
-                      class="add-id"
-                      type="checkbox"
-                      value="y"
-                    />
-                    {{ form.shared.label(help="common/shared") }}
-                  </div>
-                </fieldset>
-                <label for="workflows">Workflows</label>
-                <div class="form-group">
-                  {{ form.workflows(id=form_type + '-workflows', class="form-control
-                  add-id") }}
-                </div>
-                {{ form.description.label() }}
-                <div class="form-group">
-                  {{ form.description(id=form_type + '-description', class="form-control
-                  add-id") }}
-                </div>
-                {{ form.vendor.label() }}
-                <div class="form-group">
-                  {{ form.vendor(id=form_type + '-vendor', class="form-control add-id")
-                  }}
-                </div>
-                {{ form.operating_system.label() }}
-                <div class="form-group">
-                  {{ form.operating_system(id=form_type + '-operating_system',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.initial_payload.label(help="common/initial_payload") }}
-                <div class="form-group">
-                  {{ form.initial_payload(id=form_type + '-initial_payload',
-                  class="form-control add-id") }}
-                </div>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-mandatory_parametrization"
-                      name="mandatory_parametrization"
-                      type="checkbox"
-                      class="add-id"
-                      value="y"
-                    />
-                    {{
-                    form.mandatory_parametrization.label(help="common/mandatory_parametrization")
-                    }}
-                  </div>
-                </fieldset>
-                {{ form.parameterized_form.label(help="common/parameterized_form") }}
-                <div class="form-group">
-                  {{ form.parameterized_form(id=form_type + '-parameterized_form',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.priority.label(help="common/priority") }}
-                <div class="form-group">
-                  {{ form.priority(id=form_type + '-priority', class="form-control
-                  add-id") }}
-                </div>
-                {{ form.number_of_retries.label(help="common/number_of_retries") }}
-                <div class="form-group">
-                  {{ form.number_of_retries(id=form_type + '-number_of_retries',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.time_between_retries.label() }}
-                <div class="form-group">
-                  {{ form.time_between_retries(id=form_type + '-time_between_retries',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.max_number_of_retries.label() }}
-                <div class="form-group">
-                  {{ form.max_number_of_retries(id=form_type + '-max_number_of_retries',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.credential_type.label(help="common/type_of_credentials") }}
-                <div class="form-group">
-                  {{ form.credential_type(id=form_type + '-credential_type',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.log_level.label(help="common/logging") }}
-                <div class="form-group">
-                  {{ form.log_level(id=form_type + '-log_level', class="form-control
-                  add-id") }}
-                </div>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-disable_result_creation"
-                      name="disable_result_creation"
-                      class="add-id"
-                      type="checkbox"
-                    />
-                    {{ form.disable_result_creation.label() }}
-                  </div>
-                </fieldset>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-update_pools_after_running"
-                      name="update_pools_after_running"
-                      type="checkbox"
-                      class="add-id"
-                      value="y"
-                    />
-                    {{ form.update_pools_after_running.label() }}
-                  </div>
-                </fieldset>
+                {% for field_name in form.group_properties["step1-1"] %} {{
+                block_field(form, field_name) }} {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="panel" style="border-color: #000; position: relative;">
+            <a
+              class="doc-link"
+              style="position: absolute; top: 10px; right: 10px;"
+              href="automation/services/#parameterized-form"
+              target="_blank"
+              ><i
+                class="glyphicon glyphicon-info-sign fa-2x"
+                style="cursor: pointer;"
+              ></i
+            ></a>
+            <a
+              class="panel-heading collapsed"
+              role="tab"
+              id="heading-step1-2"
+              data-toggle="collapse"
+              href="#collapse-step1-2-{{ panel_id }}"
+            >
+              <h4 class="panel-title" style="color: #000;">
+                Parameterized Form
+              </h4>
+            </a>
+            <div
+              id="collapse-step1-2-{{ panel_id }}"
+              class="panel-collapse collapse in"
+              role="tabpanel"
+            >
+              <div class="panel-body" style="background-color: #fafafa;">
+                {% for field_name in form.group_properties["step1-2"] %} {{
+                block_field(form, field_name) }} {% endfor %}
               </div>
             </div>
           </div>
@@ -239,45 +133,22 @@
             <a
               class="panel-heading collapsed"
               role="tab"
-              id="heading-step1-2"
+              id="heading-step1-3"
               data-toggle="collapse"
-              href="#collapse-step1-2-{{ panel_id }}"
+              href="#collapse-step1-3-{{ panel_id }}"
             >
               <h4 class="panel-title" style="color: #000;">
                 Workflow Parameters
               </h4>
             </a>
             <div
-              id="collapse-step1-2-{{ panel_id }}"
+              id="collapse-step1-3-{{ panel_id }}"
               class="panel-collapse collapse in"
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {{ form.preprocessing.label(help="common/preprocessing") }}
-                <div class="form-group">
-                  {{ form.preprocessing(id=form_type + '-preprocessing',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.skip_query.label(help="common/skip_query") }}
-                <div class="form-group">
-                  {{ form.skip_query(id=form_type + '-skip_query', class="form-control
-                  add-id") }}
-                </div>
-                {{ form.skip_value.label(help="common/skip_value") }}
-                <div class="form-group">
-                  {{ form.skip_value(id=form_type + '-skip_value', class="form-control
-                  add-id") }}
-                </div>
-                {{ form.maximum_runs.label() }}
-                <div class="form-group">
-                  {{ form.maximum_runs(id=form_type + '-maximum_runs',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.waiting_time.label() }}
-                <div class="form-group">
-                  {{ form.waiting_time(id=form_type + '-waiting_time',
-                  class="form-control add-id") }}
-                </div>
+                {% for field_name in form.group_properties["step1-3"] %} {{
+                block_field(form, field_name) }} {% endfor %}
               </div>
             </div>
           </div>
@@ -363,10 +234,9 @@
                 role="tabpanel"
               >
                 <div class="panel-body" style="background-color: #fafafa;">
-                  {{ field_template(form_type, form["owners"]) }} {% for property in
-                  form.rbac_properties %} {% set field = form[property] %} {{
-                  field_template(form_type, field) }} {% endfor %} {{
-                  field_template(form_type, form["restrict_to_owners"]) }}
+                  {{ block_field(form, "owners") }} {% for property in
+                  form.rbac_properties %} {{ block_field(form, property) }} {% endfor %}
+                  {{ block_field(form, "restrict_to_owners") }}
                 </div>
               </div>
             </div>
@@ -412,52 +282,8 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {% for field_name in group.commands %}
-                <div id="{{ form_type }}-{{ field_name }}-div" class="add-id">
-                  {% set label %} {% if form[field_name].render_kw and "help" in
-                  form[field_name].render_kw %}
-                  <label
-                    help="{{ form[field_name].render_kw['help'] }}"
-                    property="{{ field_name }}"
-                  >
-                    {{ form[field_name].label }}
-                  </label>
-                  {% else %}
-                  <label>{{ form[field_name].label }}</label>
-                  {% endif %} {% endset %} {% if field_name == "run_method" or
-                  field_name == "form_type" %} {% elif form[field_name].type ==
-                  "BooleanField" %}
-                  <fieldset>
-                    <div class="item">
-                      {% if form[field_name].default %} {{
-                      form[field_name](id="{}-{}".format(form_type, field_name),
-                      class="add-id", checked=True) }} {% else %} {{
-                      form[field_name](id="{}-{}".format(form_type, field_name),
-                      class="add-id") }} {% endif %} {{ label }}
-                    </div>
-                  </fieldset>
-                  {% elif form[field_name].type == "FieldList" %} {% for entry in
-                  form[field_name] %}
-                  <fieldset>
-                    <legend style="font-weight: bold;">
-                      {{ field_name | capitalize() }} {{ loop.index }}
-                    </legend>
-                    {% for l in entry %} {% if l.widget.input_type != 'hidden' %}
-                    <label>{{ l.label }}</label>
-                    <div class="form-group">
-                      {{ l(id="{}-{}".format(form_type, l.name), class="form-control
-                      add-id") }}
-                    </div>
-                    {% endif %} {% endfor %}
-                  </fieldset>
-                  {% endfor %} {% else %} {{ label }}
-                  <div class="form-group">
-                    {{ form[field_name](id="{}-{}".format(form_type, field_name),
-                    class="form-control add-id") }}
-                  </div>
-                  {% endif %}
-                </div>
-                {% endfor %}
+                {% for field_name in group.commands %} {% if field_name != "run_method"
+                %} {{ block_field(form, field_name) }} {% endif %} {% endfor %}
               </div>
             </div>
           </div>
@@ -497,61 +323,8 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {{ form.run_method.label() }}
-                <div class="form-group">
-                  {{ form.run_method(id=form_type + '-run_method', class="form-control
-                  add-id no-search") }}
-                </div>
-                {{ form.target_devices.label() }}
-                <div class="form-group">
-                  {{ form.target_devices(id=form_type + '-target_devices',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.target_pools.label() }}
-                <div class="form-group">
-                  {{ form.target_pools(id=form_type + '-target_pools',
-                  class="form-control add-id") }}
-                </div>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-update_target_pools"
-                      name="update_target_pools"
-                      type="checkbox"
-                      class="add-id"
-                      value="y"
-                    />
-                    {{ form.update_target_pools.label() }}
-                  </div>
-                </fieldset>
-                <label>Device Query (define targets from a python query)</label>
-                {{ form.device_query.label(help="common/device_query") }}
-                <div class="form-group">
-                  {{ form.device_query(id=form_type + '-device_query',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.device_query_property.label() }}
-                <div class="form-group">
-                  {{ form.device_query_property(id=form_type + '-device_query_property',
-                  class="form-control add-id") }}
-                </div>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-multiprocessing"
-                      name="multiprocessing"
-                      class="add-id"
-                      type="checkbox"
-                      value="y"
-                    />
-                    {{ form.multiprocessing.label(help='common/multiprocessing') }}
-                  </div>
-                </fieldset>
-                {{ form.max_processes.label() }}
-                <div class="form-group">
-                  {{ form.max_processes(id=form_type + '-max_processes',
-                  class="form-control add-id") }}
-                </div>
+                {% for field_name in form.group_properties["step3-1"] %} {{
+                block_field(form, field_name) }} {% endfor %}
               </div>
             </div>
           </div>
@@ -583,26 +356,8 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {{ form.iteration_devices.label(help="common/iteration_devices") }}
-                <div class="form-group">
-                  {{ form.iteration_devices(id=form_type + '-iteration_devices',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.iteration_devices_property.label() }}
-                <div class="form-group">
-                  {{ form.iteration_devices_property(id=form_type +
-                  '-iteration_devices_property', class="form-control add-id") }}
-                </div>
-                {{ form.iteration_values.label(help="common/iteration_values") }}
-                <div class="form-group">
-                  {{ form.iteration_values(id=form_type + '-iteration_values',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.iteration_variable_name.label() }}
-                <div class="form-group">
-                  {{ form.iteration_variable_name(id=form_type +
-                  '-iteration_variable_name', class="form-control add-id") }}
-                </div>
+                {% for field_name in form.group_properties["step3-2"] %} {{
+                block_field(form, field_name) }} {% endfor %}
               </div>
             </div>
           </div>
@@ -643,21 +398,8 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {{ form.conversion_method.label() }}
-                <div class="form-group">
-                  {{ form.conversion_method(id=form_type + '-conversion_method',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.postprocessing_mode.label() }}
-                <div class="form-group">
-                  {{ form.postprocessing_mode(id=form_type + '-postprocessing_mode',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.postprocessing.label(help="common/postprocessing") }}
-                <div class="form-group">
-                  {{ form.postprocessing(id=form_type + '-postprocessing',
-                  class="form-control add-id") }}
-                </div>
+                {% for field_name in form.group_properties["step4-1"] %} {{
+                block_field(form, field_name) }} {% endfor %}
               </div>
             </div>
           </div>
@@ -689,67 +431,8 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {{ form.validation_condition.label() }}
-                <div class="form-group">
-                  {{ form.validation_condition(id=form_type + '-validation_condition',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.validation_method.label() }}
-                <div class="form-group">
-                  {{ form.validation_method(id=form_type + '-validation_method',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.validation_section.label() }}
-                <div class="form-group">
-                  {{ form.validation_section(id=form_type + '-validation_section',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.content_match.label() }}
-                <div class="form-group">
-                  {{ form.content_match(id=form_type + '-content_match',
-                  class="form-control add-id") }}
-                </div>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-content_match_regex"
-                      name="content_match_regex"
-                      class="add-id"
-                      type="checkbox"
-                      value="y"
-                    />
-                    {{ form.content_match_regex.label() }}
-                  </div>
-                </fieldset>
-                {{ form.dict_match.label() }}
-                <div class="form-group">
-                  {{ form.dict_match(id=form_type + '-dict_match', class="form-control
-                  add-id") }}
-                </div>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-delete_spaces_before_matching"
-                      name="delete_spaces_before_matching"
-                      class="add-id"
-                      type="checkbox"
-                      value="y"
-                    />
-                    {{ form.delete_spaces_before_matching.label() }}
-                  </div>
-                </fieldset>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-negative_logic"
-                      name="negative_logic"
-                      class="add-id"
-                      type="checkbox"
-                      value="y"
-                    />
-                    {{ form.negative_logic.label() }}
-                  </div>
-                </fieldset>
+                {% for field_name in form.group_properties["step4-2"] %} {{
+                block_field(form, field_name) }} {% endfor %}
               </div>
             </div>
           </div>
@@ -781,45 +464,8 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {{ form.report_template.label() }}
-                <div class="form-group">
-                  {{ form.report_template(id=form_type + '-report_template',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.report_format.label() }}
-                <div class="form-group">
-                  {{ form.report_format(id=form_type + '-report_format',
-                  class="form-control add-id") }}
-                </div>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-report_jinja2_template"
-                      name="report_jinja2_template"
-                      type="checkbox"
-                      class="add-id"
-                      value="y"
-                    />
-                    {{ form.report_jinja2_template.label() }}
-                  </div>
-                </fieldset>
-                {{ form.report.label() }}
-                <div class="form-group">
-                  {{ form.report(id=form_type + '-report', class="form-control add-id")
-                  }}
-                </div>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-display_report"
-                      name="display_report"
-                      type="checkbox"
-                      class="add-id"
-                      value="y"
-                    />
-                    {{ form.display_report.label() }}
-                  </div>
-                </fieldset>
+                {% for field_name in form.group_properties["step4-3"] %} {{
+                block_field(form, field_name) }} {% endfor %}
               </div>
             </div>
           </div>
@@ -851,74 +497,8 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-send_notification"
-                      name="send_notification"
-                      type="checkbox"
-                      class="add-id"
-                      value="y"
-                    />
-                    {{ form.send_notification.label() }}
-                  </div>
-                </fieldset>
-                <label>Send Notification Method</label>
-                <div class="form-group">
-                  {{ form.send_notification_method(id=form_type +
-                  '-send_notification_method', class="form-control add-id") }}
-                </div>
-                {{ form.notification_header.label(help="common/notification_header") }}
-                <div class="form-group">
-                  {{ form.notification_header(id=form_type + '-notification_header',
-                  class="form-control add-id") }}
-                </div>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-include_device_results"
-                      name="include_device_results"
-                      class="add-id"
-                      type="checkbox"
-                      value="y"
-                    />
-                    {{ form.include_device_results.label() }}
-                  </div>
-                </fieldset>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-include_link_in_summary"
-                      name="include_link_in_summary"
-                      class="add-id"
-                      type="checkbox"
-                      value="y"
-                    />
-                    {{ form.include_link_in_summary.label() }}
-                  </div>
-                </fieldset>
-                {{ form.mail_recipient.label() }}
-                <div class="form-group">
-                  {{ form.mail_recipient(id=form_type + '-mail_recipient',
-                  class="form-control add-id") }}
-                </div>
-                {{ form.reply_to.label() }}
-                <div class="form-group">
-                  {{ form.reply_to(id=form_type + '-reply_to', class="form-control
-                  add-id") }}
-                </div>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-display_only_failed_nodes"
-                      name="display_only_failed_nodes"
-                      class="add-id"
-                      type="checkbox"
-                      value="y"
-                    />
-                    {{ form.display_only_failed_nodes.label() }}
-                  </div>
-                </fieldset>
+                {% for field_name in form.group_properties["step4-4"] %} {{
+                block_field(form, field_name) }} {% endfor %}
               </div>
             </div>
           </div>

@@ -7,7 +7,6 @@ from eNMS.models.automation import ConnectionService
 
 
 class NapalmPingService(ConnectionService):
-
     __tablename__ = "napalm_ping_service"
     pretty_name = "NAPALM Ping"
     parent_type = "connection_service"

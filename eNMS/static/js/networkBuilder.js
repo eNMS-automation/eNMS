@@ -50,11 +50,11 @@ const options = {
   },
   manipulation: {
     enabled: false,
-    addNode: function (data, callback) {},
-    addEdge: function (data, callback) {
+    addNode: function(data, callback) {},
+    addEdge: function(data, callback) {
       saveLink(data);
     },
-    deleteNode: function (data, callback) {
+    deleteNode: function(data, callback) {
       callback(data);
     },
   },
@@ -62,7 +62,7 @@ const options = {
 
 export function switchToNetwork(path, direction) {
   if (typeof path === "undefined") return;
-  setPath(path.toString());
+  setPath(path);
   if (currentPath.includes(">")) {
     $("#up-arrow").removeClass("disabled");
   } else {
@@ -74,7 +74,7 @@ export function switchToNetwork(path, direction) {
   call({
     url: `/get/network/${networkId}`,
     data: { include: ["nodes", "networks", "links"] },
-    callback: function (newNetwork) {
+    callback: function(newNetwork) {
       network = newNetwork;
       localStorage.setItem("network_path", path);
       if (network) localStorage.setItem("network", JSON.stringify(network));
@@ -98,7 +98,7 @@ export function displayNetwork(network) {
     },
     options
   );
-  graph.on("doubleClick", function (event) {
+  graph.on("doubleClick", function(event) {
     event.event.preventDefault();
     const node = nodes.get(this.getNodeAt(event.pointer.DOM));
     const linkId = this.getEdgeAt(event.pointer.DOM);
@@ -141,7 +141,9 @@ export function drawNetworkNode(node) {
 export function updateNetworkPanel(type) {
   if (currentMode == "motion" && creationMode == "create_node") {
     $(`#${type}-networks`).append(new Option(network.name, network.name));
-    $(`#${type}-networks`).val(network.name).trigger("change");
+    $(`#${type}-networks`)
+      .val(network.name)
+      .trigger("change");
   }
 }
 
@@ -154,7 +156,7 @@ function saveLink(edge) {
   if (nodes.get(edge.from).type == "network" || nodes.get(edge.to).type == "network") {
     return notify("Cannot draw a link from or to a network", "error", 5);
   }
-  showInstancePanel($("#edge-type-list").val(), null, null, null, edge);
+  showInstancePanel($("#edge-type-dd-list").val(), null, null, null, edge);
 }
 
 export function showLinkPanel(type, id, edge) {
@@ -212,7 +214,7 @@ function addObjectsToNetwork() {
   call({
     url: `/add_objects_to_network/${network.id}`,
     form: "add_to_network-form",
-    callback: function (result) {
+    callback: function(result) {
       document.body.style.cursor = "progress";
       result.nodes.map((node) => nodes.update(drawNetworkNode(node)));
       result.links.map((link) => edges.update(drawNetworkEdge(link)));
@@ -263,7 +265,7 @@ export function getNetworkState(periodic, first) {
     call({
       url: `/get_network_state/${currentPath}`,
       data: { runtime: network.runtime },
-      callback: function (result) {
+      callback: function(result) {
         if (result.network.last_modified > instance.last_modified) {
           instance.last_modified = result.network.last_modified;
           displayNetwork(result.network);

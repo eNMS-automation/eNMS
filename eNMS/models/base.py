@@ -10,7 +10,6 @@ from eNMS.variables import vs
 
 
 class AbstractBase(db.base):
-
     __abstract__ = True
     model_properties = {}
 
@@ -67,7 +66,7 @@ class AbstractBase(db.base):
     def post_update(self):
         return self.get_properties()
 
-    def update(self, rbac="read", **kwargs):
+    def update(self, rbac="edit", **kwargs):
         self.filter_rbac_kwargs(kwargs)
         relation = vs.relationships[self.__tablename__]
         for property, value in kwargs.items():
@@ -76,9 +75,9 @@ class AbstractBase(db.base):
             property_type = vs.model_properties[self.__tablename__].get(property, None)
             if property in relation:
                 if relation[property]["list"]:
-                    value = db.objectify(relation[property]["model"], value)
+                    value = db.objectify(relation[property]["model"], value, rbac=None)
                 elif value:
-                    value = db.fetch(relation[property]["model"], id=value, rbac=rbac)
+                    value = db.fetch(relation[property]["model"], id=value, rbac=None)
             if property_type == "bool":
                 value = value not in (False, "false")
             elif property_type == "dict":
@@ -88,6 +87,11 @@ class AbstractBase(db.base):
                     if current_value:
                         value = {**current_value, **value}
             setattr(self, property, value)
+        if getattr(self, "class_type", None) not in vs.rbac["rbac_models"]:
+            return
+        for group in db.fetch_all("group", force_read_access=True, rbac=None):
+            if group not in self.rbac_read:
+                self.rbac_read.append(group)
 
     def update_last_modified_properties(self):
         self.last_modified = vs.get_time()
@@ -126,7 +130,8 @@ class AbstractBase(db.base):
         self.owners = [current_user]
         for group in current_user.groups:
             for access_type in getattr(group, f"{model}_access"):
-                getattr(self, access_type).append(group)
+                if group not in getattr(self, access_type):
+                    getattr(self, access_type).append(group)
 
     def delete(self):
         pass

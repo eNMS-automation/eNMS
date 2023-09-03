@@ -9,7 +9,6 @@ from eNMS.models.inventory import Device
 
 
 class Gateway(Device):
-
     __tablename__ = "gateway"
     __mapper_args__ = {"polymorphic_identity": "gateway"}
     pretty_name = "Gateway"

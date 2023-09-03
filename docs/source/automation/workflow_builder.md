@@ -53,10 +53,12 @@ The Workflow Builder's panel is organized into 3 blocks of controls:
       execution.
     - `Delete` selected service(s) or edges(s).
     - `Workflow tree`: display all services of the workflow in a tree structure.
+    - `Workflow Search`: search for services that contain text and highlight them.
     - `Zoom In`: makes the display aspect ratio larger (also achievable via the
        mouse wheel).
     - `Zoom Out`: makes the display aspect ratio smaller (also achievable via
        the mouse wheel).
+    - `Export Workflow`: to the user's browser as a .tgz file.
     - `Previous workflow`: functions like the Back-button of the browser.
     - `Switch to Parent workflow`: transitions back to the parent workflow if
       a subworkflow has been double-clicked for drill down.
@@ -72,7 +74,10 @@ The Workflow Builder's panel is organized into 3 blocks of controls:
     - `Personal or All Runtimes`: toggle between listing all runtimes for this
       workflow or only runtimes from the current user. This also controls
       which runtime is displayed when `Latest Runtime` is selected.
+    - `Device Filtering`: select a device to show its individual progress through
+      the workflow.
     - `View Logs` for the selected runtime.
+    - `View Report`: show the reports created from running this workflow.
     - `Results Tree`: show a tree of per-service results with buttons to view
       that service's logs or the per-device results table.
     - `Result Comparison`: visually compare results across runtimes, within the
@@ -82,7 +87,7 @@ The Workflow Builder's panel is organized into 3 blocks of controls:
       of its contained services.
     - `Parameterized Run`:  run the Workflow by first popping up a user input
       panel to prompt for select parameters (so that those parameters, such
-      as which device targets to run on, do not need to be saved inside the
+      as, which device targets to run on, do not need to be saved inside the
       workflow).  The list of parameters to prompt for are set in Step1 of
       the workflow editor.
     - `Stop the Workflow`:  the workflow will stop once the devices-in-progress

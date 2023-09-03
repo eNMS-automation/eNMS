@@ -6,10 +6,10 @@ from eNMS.database import db
 from eNMS.fields import BooleanField, HiddenField, SelectField, StringField
 from eNMS.forms import NetmikoForm
 from eNMS.models.automation import ConnectionService
+from eNMS.variables import vs
 
 
 class NetmikoFileTransferService(ConnectionService):
-
     __tablename__ = "netmiko_file_transfer_service"
     pretty_name = "Netmiko File Transfer"
     parent_type = "connection_service"
@@ -21,12 +21,14 @@ class NetmikoFileTransferService(ConnectionService):
     direction = db.Column(db.SmallString)
     disable_md5 = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
+    conn_timeout = db.Column(Float, default=10.0)
+    auth_timeout = db.Column(Float, default=0.0)
+    banner_timeout = db.Column(Float, default=15.0)
+    fast_cli = db.Column(Boolean, default=False)
+    global_delay_factor = db.Column(Float, default=1.0)
     file_system = db.Column(db.SmallString)
     inline_transfer = db.Column(Boolean, default=False)
     overwrite_file = db.Column(Boolean, default=False)
-    fast_cli = db.Column(Boolean, default=False)
-    timeout = db.Column(Integer, default=1)
-    global_delay_factor = db.Column(Float, default=1.0)
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_file_transfer_service"}
 
@@ -34,7 +36,12 @@ class NetmikoFileTransferService(ConnectionService):
         netmiko_connection = run.netmiko_connection(device)
         source = run.sub(run.source_file, locals())
         destination = run.sub(run.destination_file, locals())
+        if run.direction == "put" and str(vs.file_path) not in source:
+            source = f"{vs.file_path}{source}"
+        if run.direction == "get" and str(vs.file_path) not in destination:
+            destination = f"{vs.file_path}{destination}"
         run.log("info", f"Transferring file {source}", device)
+        netmiko_connection.password = run.get_credentials(device).get("password")
         transfer_dict = file_transfer(
             netmiko_connection,
             source_file=source,
@@ -45,6 +52,7 @@ class NetmikoFileTransferService(ConnectionService):
             disable_md5=run.disable_md5,
             inline_transfer=run.inline_transfer,
         )
+        netmiko_connection.password = "*" * 8
         return {"success": True, "result": transfer_dict}
 
 

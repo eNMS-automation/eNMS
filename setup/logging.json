@@ -43,6 +43,7 @@
     }
   },
   "external_loggers": {
+    "passlib": "info",
     "engineio": "error",
     "watchdog": "error",
     "requests": "info",

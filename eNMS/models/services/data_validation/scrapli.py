@@ -9,7 +9,6 @@ from eNMS.models.automation import ConnectionService
 
 
 class ScrapliService(ConnectionService):
-
     __tablename__ = "scrapli_service"
     pretty_name = "Scrapli Commands"
     parent_type = "connection_service"
@@ -41,11 +40,15 @@ class ScrapliService(ConnectionService):
             logger="security",
         )
         multi_response = getattr(run.scrapli_connection(device), function)(commands)
-        result = (
-            [resp.result for resp in multi_response]
-            if self.results_as_list
-            else multi_response.result
-        )
+        if self.results_as_list:
+            result = [response.result for response in multi_response]
+        elif len(commands) == 1:
+            result = multi_response.data[0].result
+        else:
+            result = "\n\n".join(
+                f"COMMAND: {response.channel_input}\n{response.result}"
+                for response in multi_response.data
+            )
         return {"commands": commands, "result": result}
 
 

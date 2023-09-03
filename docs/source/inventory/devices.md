@@ -41,6 +41,9 @@ These actions apply to a single device:
 - *Run Service* - run a service targeting this device. 
 - *Delete* - delete this device.
 
+## Managing Device Access
+User maintained `Access Control` is available for this object. This allows the `Owners` to select desired access.
+[Check out this page for more details on modifying `Access Control`.](../administration/overview.md)  
 
 ## Showing Pools, Tasks, or Services for a Device 
 

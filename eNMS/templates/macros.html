@@ -1,4 +1,4 @@
-{% macro field_template(form_type, field) %} {% set id = "{}-{}".format(form_type,
+{% macro inline_field(form_type, field) %} {% set id = "{}-{}".format(form_type,
 field.name) %} {% set style = "height: {}px".format(field.render_kw["rows"]*20 + 17) if
 "TextArea" in field.widget|string else "height: 40px" if field.type ==
 "MultipleInstanceField" else "" %}
@@ -23,6 +23,52 @@ field.name) %} {% set style = "height: {}px".format(field.render_kw["rows"]*20 +
     </div>
   </div>
   <br /><br />
+  {% endif %}
+</div>
+{% endmacro %} {% macro block_field(form, field_name) %} {% set id =
+"{}-{}".format(form.form_type.default, field_name) %} {% set render_kw =
+form[field_name].render_kw or {} %}
+<div id="{{ id }}-div" class="add-id">
+  {% set label %} {% if "help" in render_kw %}
+  <label help="{{ form[field_name].render_kw['help'] }}" property="{{ field_name }}">
+    {% if "ui_name" in render_kw %}
+    <label for="{{ field_name }}">{{ render_kw["ui_name"] }}</label>
+    {% else %} {{ render_kw.get("ui_name", form[field_name].label) }} {% endif %}
+  </label>
+  {% else %}
+  <label>
+    {% if "ui_name" in render_kw %}
+    <label for="{{ field_name }}">{{ render_kw["ui_name"] }}</label>
+    {% else %} {{ render_kw.get("ui_name", form[field_name].label) }} {% endif %}
+  </label>
+  {% endif %} {% endset %} {% if field_name == "form_type" %} {% elif
+  form[field_name].type == "BooleanField" %}
+  <fieldset>
+    <div class="item">
+      {% if form[field_name].default %} {{ form[field_name](id=id, class="add-id",
+      checked=True) }} {% else %} {{ form[field_name](id=id, class="add-id") }} {% endif
+      %} {{ label }}
+    </div>
+  </fieldset>
+  {% elif form[field_name].type == "FieldList" %} {% for entry in form[field_name] %}
+  <fieldset>
+    <legend style="font-weight: bold;">
+      {{ field_name | capitalize() }} {{ loop.index }}
+    </legend>
+    {% for subfield in entry %} {% if subfield.widget.input_type != 'hidden' %}
+    <label>{{ subfield.label }}</label>
+    <div class="form-group">
+      {{ subfield(id="{}-{}".format(form.form_type.default, subfield.name),
+      class="form-control add-id") }}
+    </div>
+    {% endif %} {% endfor %}
+  </fieldset>
+  {% endfor %} {% else %} {{ label }}
+  <div class="form-group">
+    <div id="{{ id }}-property-div" class="add-id">
+      {{ form[field_name](id=id, class="form-control add-id") }}
+    </div>
+  </div>
   {% endif %}
 </div>
 {% endmacro %}

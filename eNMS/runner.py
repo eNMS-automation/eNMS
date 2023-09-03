@@ -17,6 +17,7 @@ from paramiko import AutoAddPolicy, RSAKey, SFTPClient, SSHClient
 from re import compile, search
 from requests import post
 from scp import SCPClient
+from sys import getsizeof
 from threading import Thread
 from time import sleep
 from traceback import format_exc
@@ -61,8 +62,14 @@ class Runner:
         self.in_process = False if self.is_main_run else run.in_process
         device_progress = "iteration_device" if self.iteration_run else "device"
         self.progress_key = f"progress/{device_progress}"
-        self.is_admin_run = db.fetch("user", name=self.creator).is_admin
-        self.main_run = db.fetch("run", runtime=self.parent_runtime)
+        self.main_run = db.fetch("run", runtime=self.parent_runtime, rbac=None)
+        if self.service.id not in vs.run_services[self.parent_runtime]:
+            vs.run_services[self.parent_runtime].add(self.service.id)
+            if self.service not in self.main_run.services:
+                self.main_run.services.append(self.service)
+        creator = db.fetch("user", name=self.main_run.creator, rbac=None)
+        self.is_admin_run = creator.is_admin
+        self.creator_dict = {"name": creator.name, "email": creator.email}
         if not self.is_main_run:
             self.path = f"{run.path}>{self.service.id}"
         db.session.commit()
@@ -167,6 +174,7 @@ class Runner:
             if self.update_target_pools:
                 pool.compute_pool()
             devices |= set(pool.devices)
+        db.session.commit()
         restricted_devices = set(
             device
             for device in devices
@@ -218,6 +226,7 @@ class Runner:
         self.write_state("status", "Running")
         start = datetime.now().replace(microsecond=0)
         results = {"runtime": self.runtime, "success": True}
+        self.write_state("result/runtime", self.runtime)
         try:
             vs.service_run_count[self.service.id] += 1
             results.update(self.device_run())
@@ -234,13 +243,12 @@ class Runner:
                 self.log("error", error)
                 results.update({"success": False, "error": error})
             if self.update_pools_after_running:
-                for pool in db.fetch_all("pool"):
+                for pool in db.fetch_all("pool", username=self.creator, rbac="edit"):
                     pool.compute_pool()
-            if self.service.report:
-                self.generate_report(results)
+            report = self.generate_report(results) if self.service.report else ""
             if self.get("send_notification"):
                 try:
-                    results = self.notify(results)
+                    results = self.notify(results, report)
                 except Exception:
                     error = "\n".join(format_exc().splitlines())
                     self.log("error", f"Notification error: {error}")
@@ -250,6 +258,7 @@ class Runner:
                 self.service.status = "Idle"
             now = datetime.now().replace(microsecond=0)
             results["duration"] = str(now - start)
+            self.write_state("result/success", results["success"])
             if self.is_main_run:
                 state = self.main_run.get_state()
                 status = "Aborted" if self.stop else "Completed"
@@ -379,8 +388,11 @@ class Runner:
                 results.append(device_results)
             else:
                 non_skipped_targets.append(device)
+        all_skipped = self.target_devices and not non_skipped_targets
         self.target_devices = non_skipped_targets
         if self.run_method != "per_device":
+            if all_skipped:
+                return {"success": self.skip_value == "success", "summary": summary}
             results = self.get_results()
             if "summary" not in results:
                 summary_key = "success" if results["success"] else "failure"
@@ -434,37 +446,55 @@ class Runner:
                 "runtime": self.runtime,
             }
 
+    def check_size_before_commit(self, data, data_type):
+        column_type = "pickletype" if data_type == "result" else "large_string"
+        data_size = getsizeof(str(data))
+        max_allowed_size = vs.database["columns"]["length"][column_type]
+        if data_size >= max_allowed_size:
+            logs = (
+                f"The {data_type} is too large to be committed to the database\n"
+                f"Size: {data_size}B\nMaximum Allowed Size: {max_allowed_size}B"
+            )
+            self.log("critical", logs)
+            raise Exception(f"{data_type.capitalize()} Data Overflow")
+        else:
+            size_percentage = data_size / max_allowed_size * 100
+            log = f"The {data_type} is {size_percentage:.1f}% the maximum allowed size."
+            if size_percentage > 50:
+                self.log("warning", log)
+
     def create_result(self, results, device=None, commit=True, run_result=False):
         self.success = results["success"]
         result_kw = {
             "parent_runtime": self.parent_runtime,
             "parent_service_id": self.main_run.service.id,
+            "path": self.path,
             "run_id": self.main_run.id,
-            "service": self.service.id,
+            "service_id": self.service.id,
             "labels": self.main_run.labels,
             "creator": self.main_run.creator,
         }
         if self.workflow:
-            result_kw["workflow"] = self.workflow.id
+            result_kw["workflow_id"] = self.workflow.id
         if self.parent_device:
-            result_kw["parent_device"] = self.parent_device.id
+            result_kw["parent_device_id"] = self.parent_device.id
         if device:
-            result_kw["device"] = device.id
+            result_kw["device_id"] = device.id
         if self.is_main_run and not device:
             self.payload = self.make_json_compliant(self.payload)
             results["payload"] = self.payload
             services = list(vs.run_logs.get(self.parent_runtime, []))
             for service_id in services:
                 logs = env.log_queue(self.parent_runtime, service_id, mode="get")
-                try:
-                    db.factory(
-                        "service_log",
-                        runtime=self.parent_runtime,
-                        service=service_id,
-                        content="\n".join(logs or []),
-                    )
-                except Exception:
-                    self.log("error", f"Failed to commit service log:\n{format_exc()}")
+                content = "\n".join(logs or [])
+                self.check_size_before_commit(content, "log")
+                db.factory(
+                    "service_log",
+                    runtime=self.parent_runtime,
+                    service=service_id,
+                    content=content,
+                    rbac=None,
+                )
             if self.main_run.trigger == "REST API":
                 results["devices"] = {}
                 for result in self.main_run.results:
@@ -475,12 +505,16 @@ class Runner:
             results.pop("payload", None)
         create_failed_results = self.disable_result_creation and not self.success
         results = self.make_json_compliant(results)
+        self.check_size_before_commit(results, "result")
         if not self.disable_result_creation or create_failed_results or run_result:
             self.has_result = True
             try:
-                db.factory("result", result=results, commit=commit, **result_kw)
+                db.factory(
+                    "result", result=results, commit=commit, rbac=None, **result_kw
+                )
             except Exception:
                 self.log("critical", f"Failed to commit result:\n{format_exc()}")
+                db.session.rollback()
         return results
 
     def run_service_job(self, device):
@@ -654,8 +688,6 @@ class Runner:
             "Runtime": self.runtime,
             "Status": "PASS" if results["success"] else "FAILED",
         }
-        if "result" in results:
-            notification["Results"] = results["result"]
         if self.notification_header:
             notification["Header"] = self.sub(self.notification_header, locals())
         if self.include_link_in_summary:
@@ -666,13 +698,19 @@ class Runner:
                 notification["FAILED"] = results["summary"]["failure"]
             if results["summary"]["success"] and not self.display_only_failed_nodes:
                 notification["PASSED"] = results["summary"]["success"]
+        if "result" in results:
+            notification["Results"] = results["result"]
         return notification
 
     def generate_report(self, results):
         try:
             report = ""
             if self.service.report:
-                variables = {"service": self.service, **self.global_variables()}
+                variables = {
+                    "service": self.service,
+                    "results": results,
+                    **self.global_variables(),
+                }
                 if self.service.report_jinja2_template:
                     report = Template(self.service.report).render(variables)
                 else:
@@ -681,17 +719,17 @@ class Runner:
             report = "\n".join(format_exc().splitlines())
             self.log("error", f"Failed to build report:\n{report}")
         if report:
-            try:
-                db.factory(
-                    "service_report",
-                    runtime=self.parent_runtime,
-                    service=self.service.id,
-                    content=report,
-                )
-            except Exception:
-                self.log("error", f"Failed to commit report:\n{format_exc()}")
+            self.check_size_before_commit(report, "report")
+            db.factory(
+                "service_report",
+                runtime=self.parent_runtime,
+                service=self.service.id,
+                content=report,
+                rbac=None,
+            )
+        return report
 
-    def notify(self, results):
+    def notify(self, results, report):
         self.log("info", f"Sending {self.send_notification_method} notification...")
         notification = self.build_notification(results)
         file_content = deepcopy(notification)
@@ -710,13 +748,16 @@ class Runner:
         if self.send_notification_method == "mail":
             filename = self.runtime.replace(".", "").replace(":", "")
             status = "PASS" if results["success"] else "FAILED"
+            content = report if self.email_report else vs.dict_to_string(file_content)
+            html_report = self.email_report and self.report_format == "html"
             result = env.send_email(
                 f"{status}: {self.service.name}",
-                vs.dict_to_string(notification),
+                content,
                 recipients=self.sub(self.get("mail_recipient"), locals()),
-                reply_to=self.reply_to,
-                filename=f"results-{filename}.txt",
-                file_content=vs.dict_to_string(file_content),
+                reply_to=self.sub(self.get("reply_to"), locals()),
+                filename=f"results-{filename}.{'html' if html_report else 'txt'}",
+                file_content=content,
+                content_type="html" if html_report else "plain",
             )
         elif self.send_notification_method == "slack":
             result = WebClient(token=getenv("SLACK_TOKEN")).chat_postMessage(
@@ -746,9 +787,10 @@ class Runner:
                 credential_type=credential_type,
                 optional=self.credentials != "device",
             )
+        if credential:
+            device_log = f" for '{device.name}'" if device else ""
+            self.log("info", f"Using '{credential.name}' credential{device_log}")
         if add_secret and device and credential:
-            log = f"Using '{credential.name}' credential for '{device.name}'"
-            self.log("info", log)
             result["secret"] = env.get_password(credential.enable_password)
         if self.credentials in ("device", "object"):
             result["username"] = credential.username
@@ -757,10 +799,6 @@ class Runner:
             else:
                 private_key = env.get_password(credential.private_key)
                 result["pkey"] = RSAKey.from_private_key(StringIO(private_key))
-        elif self.credentials == "user":
-            user = db.fetch("user", name=self.creator)
-            result["username"] = user.name
-            result["password"] = env.get_password(user.password)
         else:
             result["username"] = self.sub(self.custom_username, locals())
             password = env.get_password(self.custom_password)
@@ -914,6 +952,9 @@ class Runner:
 
         return recursive_search(self.main_run)
 
+    def get_all_results(self):
+        return db.fetch_all("result", parent_runtime=self.parent_runtime)
+
     @staticmethod
     def _import(module, *args, **kwargs):
         if module in vs.settings["security"]["forbidden_python_libraries"]:
@@ -925,6 +966,9 @@ class Runner:
             raise db.rbac_error(f"Use of '{func}' not allowed on {model}s.")
         kwargs["rbac"] = "edit"
         return getattr(db, func)(model, username=self.creator, **kwargs)
+
+    def prepend_filepath(self, value):
+        return f"{vs.file_path}{value}"
 
     def get_credential(self, **kwargs):
         credential = db.get_credential(self.creator, **kwargs)
@@ -953,6 +997,7 @@ class Runner:
                 "factory": partial(_self.database_function, "factory"),
                 "fetch": partial(_self.database_function, "fetch"),
                 "fetch_all": partial(_self.database_function, "fetch_all"),
+                "get_all_results": _self.get_all_results,
                 "get_connection": _self.get_connection,
                 "get_result": _self.get_result,
                 "get_var": _self.get_var,
@@ -960,6 +1005,7 @@ class Runner:
                 "parent_device": _self.parent_device or device,
                 "payload": _self.payload,
                 "placeholder": _self.main_run.placeholder,
+                "prepend_filepath": _self.prepend_filepath,
                 "send_email": env.send_email,
                 "server": {
                     "ip_address": vs.server_ip,
@@ -967,7 +1013,7 @@ class Runner:
                     "url": vs.server_url,
                 },
                 "set_var": _self.payload_helper,
-                "username": _self.main_run.creator,
+                "user": _self.creator_dict,
                 "workflow": _self.workflow,
             }
         )
@@ -1003,10 +1049,7 @@ class Runner:
         return "".join(input.split())
 
     def update_netmiko_connection(self, connection):
-        for property in ("fast_cli", "timeout", "global_delay_factor"):
-            service_value = getattr(self.service, property)
-            if service_value:
-                setattr(connection, property, service_value)
+        setattr(connection, "global_delay_factor", self.service.global_delay_factor)
         try:
             if not hasattr(connection, "check_enable_mode"):
                 self.log("error", "Netmiko 'check_enable_mode' method is missing")
@@ -1072,11 +1115,13 @@ class Runner:
             device_type=driver,
             ip=device.ip_address,
             port=device.port,
+            timeout=self.conn_timeout,
+            conn_timeout=self.conn_timeout,
+            auth_timeout=self.auth_timeout or None,
+            banner_timeout=self.banner_timeout,
             fast_cli=self.fast_cli,
-            timeout=self.timeout,
             global_delay_factor=self.global_delay_factor,
             session_log=BytesIO(),
-            global_cmd_verify=False,
             sock=sock,
             **self.get_credentials(device),
         )
@@ -1087,6 +1132,7 @@ class Runner:
             if getattr(self, "config_mode_command", None):
                 kwargs["config_command"] = self.config_mode_command
             netmiko_connection.config_mode(**kwargs)
+        netmiko_connection.password = "*" * 8
         vs.connections_cache["netmiko"][self.parent_runtime].setdefault(
             device.name, {}
         )[self.connection_name] = netmiko_connection
@@ -1270,28 +1316,28 @@ class Runner:
             return
         connection.find_prompt()
         prompt = connection.base_prompt
-        commands = list(
-            filter(
-                None,
-                [
-                    self.sub(self.jump_command, locals()),
-                    self.sub(self.expect_username_prompt, locals()),
-                    self.sub(self.jump_username, locals()),
-                    self.sub(self.expect_password_prompt, locals()),
-                    self.sub(env.get_password(self.jump_password), locals()),
-                    self.sub(self.expect_prompt, locals()),
-                ],
-            )
-        )
-        for index, (send, expect) in enumerate(zip(commands[::2], commands[1::2])):
-            if not send or not expect:
+        password = self.sub(env.get_password(self.jump_password), locals())
+        commands = [
+            (
+                self.sub(self.jump_command, locals()),
+                self.sub(self.expect_username_prompt, locals()),
+            ),
+            (
+                self.sub(self.jump_username, locals()),
+                self.sub(self.expect_password_prompt, locals()),
+            ),
+            (password, self.sub(self.expect_prompt, locals())),
+        ]
+        for send, expect in commands:
+            if not send:
                 continue
-            command_sent = send if index != 4 else "jump on connect password"
-            self.log("info", f"Sent '{command_sent}', waiting for '{expect}'")
+            pwd = send if password and send != password else "jump on connect password"
+            self.log("info", f"Sent '{pwd}'" f", waiting for '{expect}'")
             connection.send_command(
                 send,
                 expect_string=expect,
                 auto_find_prompt=False,
+                read_timeout=self.read_timeout,
                 strip_prompt=False,
                 strip_command=True,
                 max_loops=150,
@@ -1307,6 +1353,7 @@ class Runner:
             exit_command,
             expect_string=prompt or None,
             auto_find_prompt=True,
+            read_timeout=self.read_timeout,
             strip_prompt=False,
             strip_command=True,
         )

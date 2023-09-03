@@ -1,4 +1,3 @@
-from copy import deepcopy
 from datetime import datetime
 from flask import request
 from flask_login import current_user
@@ -8,11 +7,10 @@ from os.path import exists
 from traceback import format_exc
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
-from wtforms.validators import InputRequired
+from wtforms.validators import InputRequired, NumberRange
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
-from eNMS.environment import env
 from eNMS.fields import (
     BooleanField,
     HiddenField,
@@ -40,6 +38,7 @@ class MetaForm(FormMeta):
             vs.rbac["get_requests"][f"/{form_type}_form"] = "access"
         if hasattr(form, "form_init"):
             form.form_init()
+        cls.register_property_list(form, form_type)
         if not hasattr(form, "custom_properties"):
             form.custom_properties = {}
         form.custom_properties = {
@@ -122,6 +121,24 @@ class MetaForm(FormMeta):
             vs.form_properties[form_type].update(vs.form_properties[base_form_type])
         return form
 
+    @classmethod
+    def register_property_list(cls, form, form_type):
+        if form_type not in vs.properties["property_list"]:
+            return
+        for property, values in vs.properties["property_list"][form_type].items():
+            if property == "category":
+                continue
+            if values:
+                vs.form_properties[form_type][property] = {"type": "list"}
+                setattr(
+                    form,
+                    property,
+                    SelectField(choices=vs.dualize(values), validate_choice=False),
+                )
+            else:
+                vs.form_properties[form_type][property] = {"type": "str"}
+                setattr(form, property, StringField())
+
     def __setattr__(self, field, value):
         if hasattr(value, "field_class") and "multiselect" in value.field_class.type:
             form_type = self.form_type.kwargs["default"]
@@ -159,65 +176,33 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
 
 class FormFactory:
     def _initialize(self):
-        self.generate_filtering_forms()
         self.generate_instance_insertion_forms()
         self.generate_rbac_forms()
         self.generate_service_forms()
+        self.generate_filtering_forms()
 
     def generate_filtering_forms(self):
-        for model, properties in vs.properties["filtering"].items():
-            relations = {}
+        for model in vs.properties["filtering"]:
+            if model not in vs.form_class:
+                continue
+            relations, model_form = {}, vs.form_class[model]
             for related_model, relation in vs.relationships[model].items():
+                if hasattr(model_form, related_model):
+                    continue
                 if related_model in ("edges", "results"):
                     continue
                 relations[related_model] = MultipleInstanceField(
-                    related_model, model=related_model
+                    " ".join(word.capitalize() for word in related_model.split("_")),
+                    model=related_model,
                 )
                 vs.relationships[f"{model}_filtering"][related_model] = relation
-                filtering_key = f"{model}_relation_filtering"
-                vs.relationships[filtering_key][related_model] = relation
             relation_form = {
-                "template": "filtering",
                 "properties": sorted(relations),
                 "object_type": model,
-                "form_type": HiddenField(default=f"{model}_relation_filtering"),
-                **{
-                    **relations,
-                    **{
-                        f"{relation}_filter": SelectField(
-                            choices=(
-                                ("union", "Union"),
-                                ("intersection", "Intersection"),
-                                ("empty", "Empty"),
-                            )
-                        )
-                        for relation in relations
-                    },
-                },
+                "form_type": HiddenField(default=f"{model}_filtering"),
+                **relations,
             }
-            type(f"{model}RelationshipFilteringForm", (BaseForm,), relation_form)
-            form, form_type = deepcopy(relation_form), f"{model}_filtering"
-            for property in properties:
-                vs.form_properties[form_type][f"{property}_filter"] = {"type": "list"}
-            form.update(
-                {
-                    "form_type": HiddenField(default=form_type),
-                    "properties": sorted(properties) + sorted(relations),
-                    **{property: StringField() for property in properties},
-                    **{
-                        f"{property}_filter": SelectField(
-                            choices=(
-                                ("inclusion", "Inclusion"),
-                                ("equality", "Equality"),
-                                ("regex", "Regular Expression"),
-                                ("empty", "Empty"),
-                            )
-                        )
-                        for property in properties
-                    },
-                }
-            )
-            type(f"{model}FilteringForm", (BaseForm,), form)
+            type(f"{model}FilteringForm", (model_form,), relation_form)
 
     def generate_instance_insertion_forms(self):
         for model in ("device", "link", "user", "service"):
@@ -245,6 +230,7 @@ class FormFactory:
             template = "group"
             form_type = HiddenField(default="group")
             admin_only = BooleanField("Admin Only", default=False)
+            force_read_access = BooleanField("Always set 'Read' access", default=False)
             users = MultipleInstanceField("Users", model="user")
             menu = SelectMultipleField("Menu", choices=vs.dualize(vs.rbac["menus"]))
             pages = SelectMultipleField("Pages", choices=vs.dualize(vs.rbac["pages"]))
@@ -388,7 +374,7 @@ class CredentialForm(BaseForm):
     private_key = StringField(widget=TextArea(), render_kw={"rows": 1})
     enable_password = PasswordField("'Enable' Password")
 
-    def validate(self):
+    def validate(self, **_):
         valid_form = super().validate()
         invalid_priority = not current_user.is_admin and self.priority.data > 1
         if invalid_priority:
@@ -409,6 +395,7 @@ class DatabaseDeletionForm(BaseForm):
 
 class DatabaseMigrationsForm(BaseForm):
     template = "database_migration"
+    migration_folder = vs.migration_path
     form_type = HiddenField(default="database_migration")
     empty_database_before_import = BooleanField("Empty Database before Import")
     skip_pool_update = BooleanField(
@@ -426,7 +413,7 @@ class DatabaseMigrationsForm(BaseForm):
 class DebugForm(BaseForm):
     template = "debug"
     form_type = HiddenField(default="debug")
-    snippets = SelectField(validate_choice=False)
+    snippets = SelectField(choices=(), validate_choice=False)
     code = StringField(
         "Python Code",
         type="code",
@@ -474,12 +461,11 @@ class FileForm(BaseForm):
     path = StringField("Path", [InputRequired()])
     description = StringField(widget=TextArea(), render_kw={"rows": 8})
     filename = StringField("Filename", render_kw={"readonly": True})
-    name = StringField("Name", render_kw={"readonly": True})
     last_modified = StringField("Last Modified", render_kw={"readonly": True})
     last_updated = StringField("Last Updated", render_kw={"readonly": True})
     status = StringField("Status", render_kw={"readonly": True})
 
-    def validate(self):
+    def validate(self, **_):
         valid_form = super().validate()
         current_file = db.fetch("file", id=self.id.data, allow_none=True)
         path_taken = exists(self.path.data)
@@ -487,12 +473,7 @@ class FileForm(BaseForm):
         path_already_used = (not current_file or change_of_path) and path_taken
         if path_already_used:
             self.path.errors.append("There is already a file at the specified path.")
-        out_of_scope_path = not self.path.data.startswith(env.file_path)
-        if out_of_scope_path:
-            self.path.errors.append(
-                f"The path must be in the {env.file_path} directory."
-            )
-        return valid_form and not any([path_already_used, out_of_scope_path])
+        return valid_form and not path_already_used
 
 
 class FolderForm(FileForm):
@@ -546,17 +527,21 @@ class PoolForm(BaseForm):
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
     creator = StringField(render_kw={"readonly": True})
-    admin_only = BooleanField("Pool visible to admin users only")
+    admin_only = BooleanField(ui_name="Admin only (only visible to admin users)")
     description = StringField(widget=TextArea(), render_kw={"rows": 8})
-    manually_defined = BooleanField("Manually defined (won't be automatically updated)")
+    manually_defined = BooleanField(
+        ui_name="Manually defined (will not be automatically updated)"
+    )
 
     @classmethod
     def form_init(cls):
         for model in cls.models:
             setattr(cls, f"{model}_properties", vs.properties["filtering"][model])
             for property in vs.properties["filtering"][model]:
-                setattr(cls, f"{model}_{property}", StringField(property))
+                name = " ".join(word.capitalize() for word in property.split("_"))
+                setattr(cls, f"{model}_{property}", StringField(property, ui_name=name))
                 setattr(cls, f"{model}_{property}_invert", BooleanField(property))
+                vs.form_properties["pool"][f"{model}_{property}"] = {"type": "str"}
                 vs.form_properties["pool"][f"{model}_{property}_match"] = {
                     "type": "list"
                 }
@@ -592,7 +577,7 @@ class RestartWorkflowForm(BaseForm):
     form_type = HiddenField(default="restart_workflow")
     start_services = HiddenField()
     restart_runtime = SelectField(
-        "Restart Runtime", [InputRequired()], validate_choice=False
+        "Restart Runtime", [InputRequired()], choices=(), validate_choice=False
     )
     targets = SelectField(
         "Targets",
@@ -616,6 +601,21 @@ class ResultLogDeletionForm(BaseForm):
     date_time = StringField(type="date", label="Delete Records before")
 
 
+class RunForm(BaseForm):
+    template = "object"
+    form_type = HiddenField(default="run")
+    id = HiddenField()
+    name = StringField("Name")
+    service_name = StringField("Service Name")
+    runtime = StringField("Runtime")
+    duration = StringField("Duration")
+    creator = StringField("Creator")
+    status = StringField("Status")
+    trigger = StringField("Trigger")
+    parameterized_run = BooleanField("Parameterized Run")
+    labels = StringField("Labels")
+
+
 class RunServiceForm(BaseForm):
     action = "eNMS.automation.runServicesOnTargets"
     button_label = "Run Service"
@@ -632,8 +632,34 @@ class ServerForm(BaseForm):
     name = StringField("Name", [InputRequired()])
     creator = StringField(render_kw={"readonly": True})
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
-    ip_address = StringField("IP address")
+    role = SelectField("Role", choices=(("primary", "Primary"), ("standby", "Standby")))
+    ip_address = StringField("IP address", render_kw={"readonly": True})
+    scheduler_address = StringField("Scheduler Address", render_kw={"readonly": True})
+    scheduler_active = BooleanField("Scheduler is Active", render_kw={"readonly": True})
+    location = StringField("Location")
+    version = StringField("Version", render_kw={"readonly": True})
+    commit_sha = StringField("Commit SHA", render_kw={"readonly": True})
+    last_restart = StringField("Last Restart", render_kw={"readonly": True})
     weight = IntegerField("Weight", default=1)
+    allowed_automation = SelectMultipleField(
+        "Allowed Automation",
+        choices=(
+            ("scheduler", "Scheduled Runs"),
+            ("rest_api", "ReST API Runs"),
+            ("application", "Application Runs"),
+        ),
+        no_search=True,
+    )
+
+
+class WorkerForm(BaseForm):
+    form_type = HiddenField(default="worker")
+    id = HiddenField()
+    name = StringField("Name", render_kw={"readonly": True})
+    description = StringField(widget=TextArea(), render_kw={"rows": 6})
+    subtype = StringField("Subtype", render_kw={"readonly": True})
+    last_update = StringField("Subtype", render_kw={"readonly": True})
+    current_runs = StringField("Subtype", render_kw={"readonly": True})
 
 
 class ServiceForm(BaseForm):
@@ -641,20 +667,29 @@ class ServiceForm(BaseForm):
     form_type = HiddenField(default="service")
     get_request_allowed = False
     id = HiddenField()
-    name = StringField("Name")
+    name = StringField("Name", help="common/full_name", ui_name="Full Name")
     creator = StringField(render_kw={"readonly": True})
     type = StringField("Service Type")
-    shared = BooleanField("Shared")
-    scoped_name = StringField("Scoped Name", [InputRequired()])
+    shared = BooleanField("Shared", help="common/shared")
+    scoped_name = StringField("Scoped Name", [InputRequired()], ui_name="Name")
     description = StringField("Description")
     device_query = StringField(
-        "Device Query", python=True, widget=TextArea(), render_kw={"rows": 2}
+        "Device Query",
+        python=True,
+        widget=TextArea(),
+        render_kw={"rows": 2},
+        help="common/device_query",
+        ui_name="Device Query (define targets from a python query)",
     )
     device_query_property = SelectField(
-        "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
+        "Query Property Type",
+        choices=(("name", "Name"), ("ip_address", "IP address")),
+        no_search=True,
     )
+    disabled = BooleanField("Disabled")
+    disabled_info = StringField("Disabled Time & User", render_kw={"readonly": True})
     restrict_to_owners = SelectMultipleField(
-        "Restrict to Owners", choices=(("edit", "Edit"), ("run", "Run"))
+        "Restrict to Owners", choices=(("edit", "Edit"), ("run", "Run")), no_search=True
     )
     target_devices = MultipleInstanceField("Devices", model="device")
     disable_result_creation = BooleanField("Save only failed results")
@@ -665,21 +700,28 @@ class ServiceForm(BaseForm):
     waiting_time = IntegerField(
         "Time to Wait before next service is started (in seconds)", default=0
     )
-    priority = IntegerField("Priority", default=10)
+    priority = IntegerField("Priority", default=10, help="common/priority")
     report_template = SelectField("Report Template", choices=(vs.dualize(vs.reports)))
     report = StringField(widget=TextArea(), render_kw={"rows": 8}, substitution=True)
     report_format = SelectField(
-        "Report Display Format", choices=(("text", "Text"), ("html", "HTML"))
+        "Report Display Format",
+        choices=(("text", "Text"), ("html", "HTML")),
+        no_search=True,
     )
     report_jinja2_template = BooleanField("Interpret Report as Jinja2 Template")
     display_report = BooleanField("Display Report instead of Results")
+    email_report = BooleanField("Send Report in Mail Notification")
     send_notification = BooleanField("Send a notification")
     send_notification_method = SelectField(
         "Notification Method",
         choices=(("mail", "Mail"), ("slack", "Slack"), ("mattermost", "Mattermost")),
+        no_search=True,
     )
     notification_header = StringField(
-        widget=TextArea(), render_kw={"rows": 8}, substitution=True
+        widget=TextArea(),
+        render_kw={"rows": 8},
+        substitution=True,
+        help="common/notification_header",
     )
     include_device_results = BooleanField("Include Device Results")
     include_link_in_summary = BooleanField("Include Result Link in Summary")
@@ -687,8 +729,10 @@ class ServiceForm(BaseForm):
     mail_recipient = StringField(
         "Mail Recipients (separated by comma)", substitution=True
     )
-    reply_to = StringField("Reply-to Email Address")
-    number_of_retries = IntegerField("Number of retries", default=0)
+    reply_to = StringField("Reply-to Email Address", substitution=True)
+    number_of_retries = IntegerField(
+        "Number of retries", default=0, help="common/number_of_retries"
+    )
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
     max_number_of_retries = IntegerField("Maximum number of retries", default=100)
     credential_type = SelectField(
@@ -698,10 +742,16 @@ class ServiceForm(BaseForm):
             ("read-write", "Read Write"),
             ("read-only", "Read Only"),
         ),
+        help="common/type_of_credentials",
+        no_search=True,
     )
     maximum_runs = IntegerField("Maximum number of runs", default=1)
     skip_query = StringField(
-        "Skip Query (Python)", python=True, widget=TextArea(), render_kw={"rows": 2}
+        "Skip Query (Python)",
+        python=True,
+        widget=TextArea(),
+        render_kw={"rows": 2},
+        help="common/skip_query",
     )
     skip_value = SelectField(
         "Skip Value",
@@ -710,52 +760,60 @@ class ServiceForm(BaseForm):
             ("failure", "Failure"),
             ("discard", "Discard"),
         ),
+        help="common/skip_value",
+        no_search=True,
     )
-    vendor = SelectField(
-        "Vendor",
-        choices=vs.dualize(vs.properties["property_list"]["service"]["vendor"]),
-        validate_choice=False,
+    iteration_values = StringField(
+        "Iteration Values", python=True, help="common/iteration_values"
     )
-    operating_system = SelectField(
-        "Operating System",
-        choices=vs.dualize(
-            vs.properties["property_list"]["service"]["operating_system"]
-        ),
-        validate_choice=False,
+    initial_payload = DictField(help="common/initial_payload")
+    mandatory_parametrization = BooleanField(
+        "Parameterized Form is Mandatory", help="common/mandatory_parametrization"
     )
-    iteration_values = StringField("Iteration Values", python=True)
-    initial_payload = DictField()
-    mandatory_parametrization = BooleanField("Parameterized Form is Mandatory")
     parameterized_form = StringField(
         type="code",
         python=True,
         widget=TextArea(),
         default="\n".join(vs.automation["parameterized_form"]),
+        help="common/parameterized_form",
+    )
+    parameterized_form_template = StringField(
+        "Parameterized Form HTML Template", type="code", widget=TextArea()
     )
     iteration_variable_name = StringField(
         "Iteration Variable Name", default="iteration_value"
     )
-    iteration_devices = StringField("Iteration Devices", python=True)
+    iteration_devices = StringField(
+        "Iteration Devices", python=True, help="common/iteration_devices"
+    )
     iteration_devices_property = SelectField(
         "Iteration Devices Property",
         choices=(("name", "Name"), ("ip_address", "IP address")),
+        no_search=True,
     )
-    preprocessing = StringField(type="code", python=True, widget=TextArea())
-    postprocessing = StringField(type="code", python=True, widget=TextArea())
+    preprocessing = StringField(
+        type="code", python=True, widget=TextArea(), help="common/preprocessing"
+    )
+    postprocessing = StringField(
+        type="code", python=True, widget=TextArea(), help="common/postprocessing"
+    )
     postprocessing_mode = SelectField(
         choices=(
             ("success", "Run on success only"),
             ("failure", "Run on failure only"),
             ("always", "Always run"),
-        )
+        ),
+        no_search=True,
     )
     admin_only = BooleanField("Admin Only", default=False)
     log_level = SelectField(
         "Logging",
         choices=(*enumerate(vs.log_levels), (-1, "Disable logging")),
         default=1,
+        help="common/logging",
+        no_search=True,
     )
-    multiprocessing = BooleanField("Multiprocessing")
+    multiprocessing = BooleanField("Multiprocessing", help="common/multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=15)
     validation_condition = SelectField(
         choices=(
@@ -763,7 +821,8 @@ class ServiceForm(BaseForm):
             ("success", "Run on success only"),
             ("failure", "Run on failure only"),
             ("always", "Always run"),
-        )
+        ),
+        no_search=True,
     )
     conversion_method = SelectField(
         choices=(
@@ -771,7 +830,8 @@ class ServiceForm(BaseForm):
             ("text", "Text"),
             ("json", "Json dictionary"),
             ("xml", "XML dictionary"),
-        )
+        ),
+        no_search=True,
     )
     validation_method = SelectField(
         "Validation Method",
@@ -780,6 +840,7 @@ class ServiceForm(BaseForm):
             ("dict_included", "Validation by dictionary inclusion"),
             ("dict_equal", "Validation by dictionary equality"),
         ),
+        no_search=True,
     )
     validation_section = StringField("Section to Validate", default="results['result']")
     content_match = StringField(
@@ -795,9 +856,96 @@ class ServiceForm(BaseForm):
             ("per_device", "Run the service once per device"),
             ("once", "Run the service once"),
         ),
+        no_search=True,
     )
+    group_properties = {
+        "step1-1": [
+            "scoped_name",
+            "name",
+            "creator",
+            "admin_only",
+            "type",
+            "disabled",
+            "disabled_info",
+            "shared",
+            "workflows",
+            "description",
+            "vendor",
+            "operating_system",
+            "initial_payload",
+            "priority",
+            "number_of_retries",
+            "time_between_retries",
+            "max_number_of_retries",
+            "credential_type",
+            "log_level",
+            "disable_result_creation",
+            "update_pools_after_running",
+        ],
+        "step1-2": [
+            "mandatory_parametrization",
+            "parameterized_form",
+            "parameterized_form_template",
+        ],
+        "step1-3": [
+            "preprocessing",
+            "skip_query",
+            "skip_value",
+            "maximum_runs",
+            "waiting_time",
+        ],
+        "step3-1": [
+            "run_method",
+            "target_devices",
+            "target_pools",
+            "update_target_pools",
+            "device_query",
+            "device_query_property",
+            "multiprocessing",
+            "max_processes",
+        ],
+        "step3-2": [
+            "iteration_devices",
+            "iteration_devices_property",
+            "iteration_values",
+            "iteration_variable_name",
+        ],
+        "step4-1": [
+            "conversion_method",
+            "postprocessing_mode",
+            "postprocessing",
+        ],
+        "step4-2": [
+            "validation_condition",
+            "validation_method",
+            "validation_section",
+            "content_match",
+            "content_match_regex",
+            "dict_match",
+            "delete_spaces_before_matching",
+            "negative_logic",
+        ],
+        "step4-3": [
+            "report_template",
+            "report_format",
+            "report_jinja2_template",
+            "report",
+            "display_report",
+            "email_report",
+        ],
+        "step4-4": [
+            "send_notification",
+            "send_notification_method",
+            "notification_header",
+            "include_device_results",
+            "include_link_in_summary",
+            "mail_recipient",
+            "reply_to",
+            "display_only_failed_nodes",
+        ],
+    }
 
-    def validate(self):
+    def validate(self, **_):
         valid_form = super().validate()
         no_recipient_error = (
             self.send_notification.data
@@ -807,6 +955,14 @@ class ServiceForm(BaseForm):
         if no_recipient_error:
             self.mail_recipient.errors.append(
                 "Please add at least one recipient for the mail notification."
+            )
+        invalid_multiprocessing_error = (
+            self.multiprocessing.data and self.run_method.data != "per_device"
+        )
+        if invalid_multiprocessing_error:
+            self.multiprocessing.errors.append(
+                "Multiprocessing can only be enabled if the run method"
+                " is set to 'Per Device'."
             )
         forbidden_name_error = self.scoped_name.data in ("Start", "End", "Placeholder")
         if forbidden_name_error:
@@ -851,12 +1007,20 @@ class ServiceForm(BaseForm):
         return (
             valid_form
             and not conversion_validation_mismatch
+            and not invalid_multiprocessing_error
             and not empty_validation
             and not forbidden_name_error
             and not no_recipient_error
             and not shared_service_error
             and not too_many_threads_error
         )
+
+
+class SessionForm(BaseForm):
+    template = "object"
+    form_type = HiddenField(default="session")
+    timestamp = StringField("Timestamp")
+    user = StringField("User")
 
 
 class TaskForm(BaseForm):
@@ -889,7 +1053,7 @@ class TaskForm(BaseForm):
     pools = MultipleInstanceField("Pools", model="pool")
     service = InstanceField("Service", model="service")
 
-    def validate(self):
+    def validate(self, **_):
         valid_form = super().validate()
         if self.name.data == "Bulk Edit":
             return valid_form
@@ -938,18 +1102,29 @@ class UserProfileForm(BaseForm):
     action = "eNMS.administration.saveProfile"
     name = StringField("Name")
     email = StringField("Email")
-    landing_page = SelectField("Landing Page", validate_choice=False)
+    landing_page = SelectField("Landing Page", choices=[], validate_choice=False)
     theme = SelectField(
         "Theme",
         choices=[
             (theme, values["name"]) for theme, values in vs.themes["themes"].items()
         ],
     )
+    zoom_sensitivity = FloatField(
+        "Zoom Sensitivity (0 to 1)",
+        [NumberRange(min=0, max=1)],
+        default=1,
+    )
+    password = PasswordField("Password")
 
-    @classmethod
-    def form_init(cls):
-        if vs.settings["authentication"]["show_password_in_profile"]:
-            cls.password = PasswordField("Password")
+    def validate(self, **_):
+        valid_form = super().validate()
+        invalid_password = self.password.data and (
+            not vs.settings["authentication"]["allow_password_change"]
+            or current_user.authentication != "database"
+        )
+        if invalid_password:
+            self.password.errors.append("Changing user password is not allowed.")
+        return valid_form and not invalid_password
 
 
 class WorkflowLabelForm(BaseForm):
@@ -979,7 +1154,6 @@ class ConnectionForm(ServiceForm):
         choices=(
             ("device", "Device Credentials"),
             ("object", "Named Credential"),
-            ("user", "User Credentials"),
             ("custom", "Custom Credentials"),
         ),
     )
@@ -1012,20 +1186,6 @@ class DeviceForm(ObjectForm):
     )
     ip_address = StringField("IP address")
     port = IntegerField("Port", default=22)
-    vendor = SelectField(
-        "Vendor",
-        choices=vs.dualize(vs.properties["property_list"]["device"]["vendor"]),
-    )
-    model = SelectField(
-        "Model",
-        choices=vs.dualize(vs.properties["property_list"]["device"]["model"]),
-    )
-    operating_system = SelectField(
-        "Operating System",
-        choices=vs.dualize(
-            vs.properties["property_list"]["device"]["operating_system"]
-        ),
-    )
     os_version = StringField("OS Version")
     latitude = StringField("Latitude", default=0.0)
     longitude = StringField("Longitude", default=0.0)
@@ -1046,14 +1206,6 @@ class DeviceForm(ObjectForm):
 
 class LinkForm(ObjectForm):
     form_type = HiddenField(default="link")
-    vendor = SelectField(
-        "Vendor",
-        choices=vs.dualize(vs.properties["property_list"]["link"]["vendor"]),
-    )
-    model = SelectField(
-        "Model",
-        choices=vs.dualize(vs.properties["property_list"]["link"]["model"]),
-    )
     source = InstanceField("Source", model="device")
     destination = InstanceField("Destination", model="device")
     color = StringField("Color")
@@ -1098,22 +1250,12 @@ class NetmikoForm(ConnectionForm):
         "Config mode (See Advanced Parameters to override the config mode command)",
         default=False,
     )
-    fast_cli = BooleanField()
-    timeout = FloatField(default=10.0)
-    delay_factor = FloatField(
-        (
-            "Delay Factor (Changing from default of 1"
-            " will nullify Netmiko Timeout setting)"
-        ),
-        default=1.0,
-    )
-    global_delay_factor = FloatField(
-        (
-            "Global Delay Factor (Changing from default of 1"
-            " will nullify Netmiko Timeout setting)"
-        ),
-        default=1.0,
-    )
+    read_timeout = FloatField(default=10.0)
+    conn_timeout = FloatField("Connection Timeout", default=10.0)
+    auth_timeout = FloatField("Authentication Timeout", default=0.0)
+    banner_timeout = FloatField("Banner Timeout", default=15.0)
+    fast_cli = BooleanField("Fast CLI")
+    global_delay_factor = FloatField("Global Delay Factor", default=1.0)
     jump_on_connect = BooleanField(
         "Jump to remote device on connect",
         default=False,
@@ -1161,14 +1303,21 @@ class NetmikoForm(ConnectionForm):
                 "driver",
                 "enable_mode",
                 "config_mode",
-                "fast_cli",
-                "timeout",
-                "delay_factor",
-                "global_delay_factor",
+                "read_timeout",
             ],
             "default": "expanded",
         },
         **ConnectionForm.groups,
+        "Netmiko Connection Parameters": {
+            "commands": [
+                "conn_timeout",
+                "auth_timeout",
+                "banner_timeout",
+                "fast_cli",
+                "global_delay_factor",
+            ],
+            "default": "hidden",
+        },
         "Jump on connect Parameters": {
             "commands": [
                 "jump_on_connect",
@@ -1183,6 +1332,24 @@ class NetmikoForm(ConnectionForm):
             "default": "hidden",
         },
     }
+
+    def validate(self, **_):
+        valid_form = super().validate()
+        if not hasattr(self, "auto_find_prompt") or not hasattr(self, "expect_string"):
+            return valid_form
+        invalid_prompt_configuration = (
+            self.auto_find_prompt.data
+            and self.expect_string.data
+            or not self.auto_find_prompt.data
+            and not self.expect_string.data
+        )
+        if invalid_prompt_configuration:
+            self.auto_find_prompt.errors.append(
+                "'Auto Find Prompt' and 'Expect String' are mutually exclusive:"
+                "If 'Auto Find Prompt' is checked, 'Expect String' must be empty, "
+                "and if it is unchecked, 'Expect String' cannot be left empty."
+            )
+        return valid_form and not invalid_prompt_configuration
 
 
 class ScrapliForm(ConnectionForm):
@@ -1213,7 +1380,11 @@ class ScrapliForm(ConnectionForm):
 
 
 class UserForm(RbacForm):
+    template = "object"
     form_type = HiddenField(default="user")
+    last_login = StringField(
+        "Last Login", render_kw={"readonly": True}, dont_duplicate=True
+    )
     groups = MultipleInstanceField("Groups", model="group")
     theme = SelectField(
         "Theme",

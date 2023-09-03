@@ -15,6 +15,7 @@ from logging.config import dictConfig
 from logging import getLogger, info
 from os import getenv, getpid
 from passlib.hash import argon2
+from pathlib import Path
 from psutil import Process
 from redis import Redis
 from redis.exceptions import ConnectionError, TimeoutError
@@ -52,7 +53,6 @@ from eNMS.variables import vs
 
 class Environment:
     def __init__(self):
-        self.scheduler_address = getenv("SCHEDULER_ADDR")
         self.init_authentication()
         self.init_encryption()
         self.use_vault = vs.settings["vault"]["use_vault"]
@@ -65,7 +65,7 @@ class Environment:
         if vs.settings["automation"]["use_task_queue"]:
             self.init_dramatiq()
         self.init_connection_pools()
-        self.file_path = vs.settings["paths"]["files"] or str(vs.path / "files")
+        Path(vs.settings["files"]["trash"]).mkdir(parents=True, exist_ok=True)
         main_thread = Thread(target=self.monitor_filesystem)
         main_thread.daemon = True
         main_thread.start()
@@ -74,22 +74,27 @@ class Environment:
     def monitor_filesystem(self):
         class Handler(FileSystemEventHandler):
             def on_any_event(self, event):
+                src_path = event.src_path.replace(str(vs.file_path), "")
                 if any(
-                    event.src_path.endswith(extension)
+                    src_path.endswith(extension)
                     for extension in vs.settings["files"]["ignored_types"]
                 ):
                     return
                 filetype = "folder" if event.is_directory else "file"
-                file = db.fetch(filetype, path=event.src_path, allow_none=True)
+                file = db.fetch(filetype, path=src_path, allow_none=True)
                 if event.event_type == "moved" and file:
-                    file.update(path=event.dest_path, move_file=False)
+                    file.update(
+                        path=event.dest_path.replace(str(vs.file_path), ""),
+                        move_file=False,
+                    )
                 elif event.event_type in ("created", "modified"):
-                    file = db.factory(filetype, path=event.src_path)
+                    file = db.factory(filetype, path=src_path)
                 elif event.event_type != "deleted" or not file:
                     return
                 file.status = event.event_type.capitalize()
-                log = f"File {event.src_path} {event.event_type} (watchdog)."
-                env.log("info", log, change_log=True)
+                if vs.settings["files"]["log_events"]:
+                    log = f"File {src_path} {event.event_type} (watchdog)."
+                    env.log("info", log, change_log=True)
                 try:
                     db.session.commit()
                 except (StaleDataError, IntegrityError):
@@ -97,7 +102,7 @@ class Environment:
 
         event_handler = Handler()
         observer = PollingObserver()
-        observer.schedule(event_handler, path=self.file_path, recursive=True)
+        observer.schedule(event_handler, path=str(vs.file_path), recursive=True)
         observer.start()
 
     def authenticate_user(self, **kwargs):
@@ -119,10 +124,8 @@ class Environment:
         elif method == "database":
             if not user:
                 return False
-            hash = vs.settings["security"]["hash_user_passwords"]
-            verify = argon2.verify if hash else str.__eq__
             user_password = self.get_password(user.password)
-            success = user and user_password and verify(password, user_password)
+            success = user and user_password and argon2.verify(password, user_password)
             return user if success else False
         else:
             authentication_function = getattr(vs.custom, f"{method}_authentication")
@@ -230,26 +233,7 @@ class Environment:
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 
     def get_workers(self):
-        if not self.redis_queue:
-            return {"error": "This endpoint requires the use of a Redis queue."}
-        workers = defaultdict(lambda: {"jobs": {}, "info": {}})
-        keys = env.redis("keys", "workers/*")
-        if not keys:
-            return {"error": "No data available in the Redis queue."}
-        data = dict(zip(keys, env.redis("mget", *keys)))
-        for key, value in data.items():
-            if not value or value == "0":
-                continue
-            process_id, category, inner_key = key.split("/")[1:]
-            workers[process_id][category][inner_key] = value
-        return workers
-
-    def update_worker_job(self, job, mode="incr"):
-        if not self.redis_queue:
-            return
-        key = f"workers/{getpid()}"
-        self.redis("set", f"{key}/info/memory", f"{Process().memory_percent()}%")
-        self.redis(mode, f"{key}/jobs/{job}", 1)
+        return {worker.name: worker.to_dict() for worker in db.fetch_all("worker")}
 
     def log(self, severity, content, user=None, change_log=True, logger="root"):
         logger_settings = vs.logging["loggers"].get(logger, {})
@@ -299,6 +283,7 @@ class Environment:
         sender=None,
         filename=None,
         file_content=None,
+        content_type="plain",
     ):
         sender = sender or vs.settings["mail"]["sender"]
         message = MIMEMultipart()
@@ -307,7 +292,7 @@ class Environment:
         message["Date"] = formatdate(localtime=True)
         message["Subject"] = subject
         message.add_header("reply-to", reply_to or vs.settings["mail"]["reply_to"])
-        message.attach(MIMEText(content))
+        message.attach(MIMEText(content, content_type))
         if filename:
             attached_file = MIMEApplication(file_content, Name=filename)
             attached_file["Content-Disposition"] = f'attachment; filename="{filename}"'

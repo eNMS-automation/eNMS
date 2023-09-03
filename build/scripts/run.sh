@@ -30,8 +30,8 @@ function run() {
     export REDIS_ADDR="192.168.56.103"
   fi
   export SERVER_NAME="eNMS Server"
-  export SERVER_ADDR="192.168.56.102"
-  export SERVER_URL="http://192.168.56.102"
+  export SERVER_ADDR="192.168.56.108"
+  export SERVER_URL="http://192.168.56.108:5000"
   export SCHEDULER_ADDR="http://192.168.56.103:5000"
   export LDAP_ADDR="192.168.56.104"
   export TACACS_ADDR="192.168.56.104"
@@ -49,6 +49,8 @@ function run() {
   if [ "$reload" = true ]; then
     if [ "$database" = "mysql" ]; then
       sudo mysql -u root --password=password -e "DROP DATABASE enms;CREATE DATABASE enms;"
+      sudo mysql -u root --password=password -e "ALTER USER 'root'@'localhost'\
+        IDENTIFIED WITH mysql_native_password BY 'password';"
     elif [ "$database" = "pgsql" ]; then
       sudo -u postgres psql -c "DROP DATABASE enms"
       sudo -u postgres psql -c "CREATE DATABASE enms;"
@@ -59,7 +61,7 @@ function run() {
   if [ "$gunicorn" = true ]; then
     gunicorn --config gunicorn.py app:app
   else
-    python3.8 -m flask run -h 0.0.0.0 --no-reload
+    python3 -m flask run -h 0.0.0.0 --no-reload
   fi
 }
 

@@ -75,11 +75,11 @@ it is recommended to run the application with the following command:
 
 ### Dramatiq
 
-Dramatiq, a distributed task queue, can be used for executing automations:
+[Dramatiq](https://dramatiq.io/), a distributed task queue, can be used for executing automations:
 
 1. In setup/settings.json set `"use_task_queue": true`
-2. Set the `REDIS_ADDR` environment variable and run `dramatiq eNMS` from the project root.
-
+2. Set the `REDIS_ADDR` environment variable and run `dramatiq eNMS` from the project root. 
+    - The number of worker processes and threads can be configured (among other things). Run `dramatiq --help` to see the full list of dramatiq's command-line options.
 ### Hashicorp Vault
 
 All credentials should be stored in a Hashicorp Vault: the settings
@@ -190,6 +190,59 @@ exported from Unix and include:
     ExecStart=/opt/python3-virtualenv/bin/bin/gunicorn --pid /run/gunicorn/enms.gunicorn.pid --worker-tmp-dir /tmpfs-gunicorn --bind unix:/run/gunicorn/enms.gunicorn.socket --chdir /home/centos/enms --config /home/centos/enms/gunicorn.py app:app
     ExecReload=/bin/kill -s HUP $MAINPID
     ExecStop=/bin/kill -s TERM $MAINPID
+    TimeoutStopSec=60
+    LimitNOFILE=100000
+
+    [Install]
+    WantedBy=multi-user.target
+
+### enms.dramatiq.service
+    [Unit]
+    Description=Dramatiq instance to run workers
+    After=network.target
+    After=mysqld.service
+    After=vault.service
+
+
+    [Service]
+    PermissionsStartOnly=true
+    User=centos
+    Group=centos
+    WorkingDirectory=/home/centos/eNMS
+    # Add the virtualenv to the PATH
+    Environment="PATH=/opt/python3-virtualenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:."
+    ExecStartPre=/bin/echo Setting application PATH to $PATH
+    Environment="http_proxy=http://proxy.company.com:80/"
+    Environment="https_proxy=http://proxy.company.com:80/"
+    Environment="NO_PROXY=localhost,127.0.0.1,169.254.169.254,.company.com,W.X.Y.Z/8,A.B.C.D/16"
+    Environment="HOSTNAME=HOSTNAME_CHANGEME"
+    Environment="SECRET_KEY=SECRET_KEY_CHANGEME"
+    Environment="VAULT_ADDR=http://127.0.0.1:8200"
+    Environment="VAULT_LOG_LEVEL=info"
+    Environment="VAULT_TOKEN=VAULT_TOKEN_CHANGEME"
+    Environment="UNSEAL_VAULT_KEY1=VAULT_KEY1_CHANGEME"
+    Environment="UNSEAL_VAULT_KEY2=VAULT_KEY2_CHANGEME"
+    Environment="UNSEAL_VAULT_KEY3=VAULT_KEY3_CHANGEME"
+    Environment="SCHEDULER_ADDR=http://127.0.0.1:8000"
+    # To indicate which server a service was run from in Automation/Run table
+    Environment="SERVER_NAME=CHANGE_ME"
+    Environment="SERVER_ADDR=CHANGE_ME"
+    # Use Fernet Key additional encryption for stored passwords - not compatible with loading
+    Environment="FERNET_KEY=SOME_FERNET_VALID_KEY"
+    Environment="ENMS_ADDR=https://127.0.0.1"
+    Environment="ENMS_PASSWORD=ENMS_PASSWORD_CHANGEME"
+    Environment="REDIS_ADDR=127.0.0.1"
+    Environment="LDAP_ADDR=ldap://MYCOMPANY_CHANGEME"
+    Environment="LDAP_USERDN=MYCOMPANY_CHANGEME"
+    Environment="LDAP_BASEDN=DC=my,DC=ad,DC=company,DC=com"
+    Environment="TACACS_PASSWORD=CHANGEME"
+    Environment="MAIL_PASSWORD=CHANGEME"
+    Environment="SLACK_TOKEN=CHANGEME"
+    # PATH to TextFSM repo for Netmiko: https://pynet.twb-tech.com/blog/automation/netmiko-textfsm.html
+    Environment="NET_TEXTFSM=/home/centos/ntc_textfsm/"
+    Environment="DATABASE_URL=mariadb+mysqldb://root:PASSWORD@localhost/enms?charset=utf8mb4"
+    ExecStart=/opt/python3-virtualenv/bin/dramatiq eNMS
+    ExecReload=/bin/kill -s HUP $MAINPID
     TimeoutStopSec=60
     LimitNOFILE=100000
 
@@ -377,10 +430,12 @@ Key parameters to be aware of:
   persistently in [SQL Alchemy pool](https://docs.sqlalchemy.org/en/13/core/pooling.html#sqlalchemy.pool.QueuePool/).
 - `max_overflow` (default: `10`) Maximum overflow size of the connection
   pool.
-- `tiny_string_length` (default: `64`) Length of a tiny string in the database.
-- `small_string_length` (default: `255`) Length of a small string in the
+- `tiny_string` (default: `64`) Length of a tiny string in the database.
+- `small_string` (default: `255`) Length of a small string in the
   database.
-- `small_string_length` (default: `32768`) Length of a large string in the
+- `large_string` (default: `429496729`) Length of a large string in the
+  database.
+- `pickletype` (default: `16777215`) Length of a list or dictionary in the
   database.
 
 
@@ -550,6 +605,7 @@ ldap active directory system, etc.
 #### `automation` section
 
 - `max_process` limit on multiprocessing (default: 15).
+- `use_task_queue` use dramatiq for service execution (default: false).
 
 #### `cluster` section
 Section used for detecting other running instances of eNMS.
@@ -564,6 +620,20 @@ Section used for detecting other running instances of eNMS.
 This section is used to configure which pages in the documentation to open
 for some of the embedded information (help) links.  This should not need to be 
 changed.
+
+#### `dashboard` section
+Define how the charts are displayed in the dashboard section in the user interface. The apache echarts javascript package is used to render these charts and the value in this section are set as the charts' option. Documentation on echart options [here](https://echarts.apache.org/en/option.html).
+
+- `label` (default `{"normal": {"formatter":"{b} ({c})"}}`)
+- `series` (default `[{"type": "pie"}]`)
+- `tooltip` (default `{"formatter": "{b} : {c} ({d}%)"}`)
+
+#### `files` section
+Control how the app tracks files on the filesystem.
+
+- `ignored_types` file extensions to exclude from tracking (default: `[".swp"," .tgz"]`)
+- `upload_timeout` (default: `600000`)
+- `log_events` log changes (modify/update/delete) of tracked files to both the console and changelog (defalt: `true`)
 
 #### `mail` section
 
@@ -580,6 +650,20 @@ changed.
   `"https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w"`).
 - `channel` (default: `""`).
 - `verify_certificate` (default: `true`).
+
+#### `notification` section
+This section is covered in depth in the [administration panel](../administration/admin_panel.md#notification-banner) portion of the docs. Below are the default values.
+
+- `active` default (`false`)
+- `deactivate_on_restart ` default (`true`)
+- `properties`
+    - `autoclose ` default (`"30s"`)
+    - `content ` default (`"<center>The Server is <b>restarting at 3:30 UTC.</b><br>Contact <b>adress@domain.com</b> for more information.</center>"`)
+    - `contentSize ` default (`"600 auto"`)
+    - `header` default (`false`)
+    - `opacity ` default (`0.85`)
+    - `position` default (`"center-bottom 0 -10 up"`)
+    - `theme ` default (`"danger filleddark"`)
 
 #### `paths` section
 
@@ -624,8 +708,6 @@ load on eNMS.
 
 #### `security` section
 
-- `hash_user_passwords` (default: `true`) All user passwords are
-  automatically hashed by default.
 - `forbidden_python_libraries` (default:
   `["eNMS","os","subprocess","sys"]`) There are a number of places in
   the UI where the user is allowed to run custom python scripts. The user
@@ -639,7 +721,7 @@ load on eNMS.
 #### `ssh` section
 
 - `command` (default: `python3 -m flask run -h 0.0.0.0`): command used to start the SSH server.
-- `credentials` - which credential types to enable for the WebSSH connection feature.
+- `credentials`: which credential types to enable for the WebSSH connection feature.
    
     - `custom` (default: `true`).
     - `device` (default: `true`).

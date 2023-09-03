@@ -8,7 +8,6 @@ from eNMS.models.automation import ConnectionService
 
 
 class ScrapliNetconfService(ConnectionService):
-
     __tablename__ = "scrapli_netconf_service"
     pretty_name = "Scrapli Netconf"
     parent_type = "connection_service"

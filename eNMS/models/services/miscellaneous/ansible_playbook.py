@@ -18,7 +18,6 @@ from eNMS.variables import vs
 
 
 class AnsiblePlaybookService(Service):
-
     __tablename__ = "ansible_playbook_service"
     pretty_name = "Ansible Playbook"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
@@ -54,7 +53,7 @@ class AnsiblePlaybookService(Service):
             command.extend(["-e", dumps(extra_args)])
         if device:
             command.extend(["-i", device.ip_address + ","])
-        command.append(run.sub(run.playbook_path, locals()))
+        command.append(f"{vs.playbook_path}{run.playbook_path}")
         password = extra_args.get("password")
         full_command = " ".join(command + arguments)
         if password:
@@ -66,11 +65,7 @@ class AnsiblePlaybookService(Service):
             logger="security",
         )
         try:
-            result = check_output(
-                command + arguments,
-                cwd=vs.settings["paths"]["playbooks"]
-                or vs.path / "files" / "playbooks",
-            )
+            result = check_output(command + arguments, cwd=vs.playbook_path)
         except Exception:
             result = "\n".join(format_exc().splitlines())
             if password:
@@ -89,7 +84,7 @@ class AnsiblePlaybookService(Service):
 
 class AnsiblePlaybookForm(ServiceForm):
     form_type = HiddenField(default="ansible_playbook_service")
-    playbook_path = SelectField("Playbook Path", validate_choice=False)
+    playbook_path = SelectField("Playbook Path", choices=(), validate_choice=False)
     arguments = StringField(
         "Arguments (Ansible command line options)",
         substitution=True,
@@ -101,10 +96,7 @@ class AnsiblePlaybookForm(ServiceForm):
     )
     credentials = SelectField(
         "Credentials",
-        choices=(
-            ("device", "Device Credentials"),
-            ("user", "User Credentials"),
-        ),
+        choices=(("device", "Device Credentials"),),
     )
     options = DictField(
         "Options (passed to ansible as -e extra args)",

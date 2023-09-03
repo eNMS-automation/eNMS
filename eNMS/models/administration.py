@@ -1,35 +1,79 @@
 from flask_login import current_user, UserMixin
 from datetime import datetime
 from itertools import chain
-from os import makedirs
+from os import kill, makedirs
 from os.path import exists, getmtime
 from passlib.hash import argon2
 from pathlib import Path
 from shutil import move, rmtree
-from sqlalchemy import Boolean, ForeignKey, Integer
+from signal import SIGTERM
+from sqlalchemy import Boolean, ForeignKey, Integer, Float
 from sqlalchemy.orm import relationship
 from time import ctime
 
 from eNMS.database import db
+from eNMS.environment import env
 from eNMS.models.base import AbstractBase
 from eNMS.variables import vs
 
 
 class Server(AbstractBase):
-
     __tablename__ = type = "server"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     creator = db.Column(db.SmallString)
     description = db.Column(db.LargeString)
+    role = db.Column(db.TinyString, default="primary")
     mac_address = db.Column(db.TinyString)
     ip_address = db.Column(db.TinyString)
+    scheduler_address = db.Column(db.TinyString)
+    scheduler_active = db.Column(Boolean, default=True)
+    location = db.Column(db.SmallString)
+    version = db.Column(db.TinyString)
+    commit_sha = db.Column(db.TinyString)
+    last_restart = db.Column(db.TinyString)
     weight = db.Column(Integer, default=1)
+    allowed_automation = db.Column(db.List)
     status = db.Column(db.TinyString, default="down")
+    current_runs = db.Column(Integer, default=0)
+    runs = relationship("Run", back_populates="server")
+    workers = relationship("Worker", back_populates="server")
+
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        vs.server_data = self.serialized
+
+
+class Worker(AbstractBase):
+    __tablename__ = type = "worker"
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    description = db.Column(db.LargeString)
+    subtype = db.Column(db.TinyString)
+    last_update = db.Column(db.TinyString)
+    current_runs = db.Column(Integer, default=0)
+    runs = relationship("Run", back_populates="worker")
+    server_id = db.Column(Integer, ForeignKey("server.id"))
+    server = relationship("Server", back_populates="workers", lazy="joined")
+    model_properties = {"server_properties": "dict"}
+
+    def update(self, **kwargs):
+        self.last_update = vs.get_time()
+        super().update(**kwargs)
+
+    def delete(self):
+        try:
+            env.log("critical", f"Sending SIGTERM signal to process ID {self.name}")
+            kill(int(self.name), SIGTERM)
+        except Exception as exc:
+            return f"Failed to deleted process: {exc}"
+
+    @property
+    def server_properties(self):
+        return self.server.base_properties
 
 
 class User(AbstractBase, UserMixin):
-
     __tablename__ = type = class_type = "user"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
@@ -37,6 +81,7 @@ class User(AbstractBase, UserMixin):
     description = db.Column(db.LargeString)
     groups = db.Column(db.LargeString)
     is_admin = db.Column(Boolean, default=False)
+    last_login = db.Column(db.SmallString)
     email = db.Column(db.SmallString)
     landing_page = db.Column(
         db.SmallString, default=vs.settings["authentication"]["landing_page"]
@@ -45,6 +90,7 @@ class User(AbstractBase, UserMixin):
     authentication = db.Column(db.TinyString, default="database")
     small_menu = db.Column(Boolean, default=False, info={"log_change": False})
     theme = db.Column(db.TinyString, default="default", info={"log_change": False})
+    zoom_sensitivity = db.Column(Float, default=1, info={"log_change": False})
     groups = relationship(
         "Group", secondary=db.user_group_table, back_populates="users"
     )
@@ -56,7 +102,7 @@ class User(AbstractBase, UserMixin):
 
     def delete(self):
         if self.name == getattr(current_user, "name", False):
-            raise db.rbac_error("A user cannot be deleted while logged in.")
+            return {"log": "A user cannot be deleted while logged in."}
 
     def get_id(self):
         return self.name
@@ -66,11 +112,7 @@ class User(AbstractBase, UserMixin):
         return self.get_properties()
 
     def update(self, **kwargs):
-        if (
-            vs.settings["security"]["hash_user_passwords"]
-            and kwargs.get("password")
-            and not kwargs["password"].startswith("$argon2i")
-        ):
+        if kwargs.get("password") and not kwargs["password"].startswith("$argon2i"):
             kwargs["password"] = argon2.hash(kwargs["password"])
         super().update(**kwargs)
 
@@ -83,12 +125,12 @@ class User(AbstractBase, UserMixin):
 
 
 class Group(AbstractBase):
-
     __tablename__ = type = class_type = "group"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     creator = db.Column(db.SmallString)
     admin_only = db.Column(Boolean, default=False)
+    force_read_access = db.Column(Boolean, default=False)
     description = db.Column(db.LargeString)
     email = db.Column(db.SmallString)
     users = relationship("User", secondary=db.user_group_table, back_populates="groups")
@@ -132,7 +174,6 @@ class Group(AbstractBase):
 
 
 class Credential(AbstractBase):
-
     __tablename__ = type = class_type = "credential"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
@@ -166,7 +207,6 @@ class Credential(AbstractBase):
 
 
 class Changelog(AbstractBase):
-
     __tablename__ = "changelog"
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "changelog", "polymorphic_on": type}
@@ -181,7 +221,6 @@ class Changelog(AbstractBase):
 
 
 class Parameters(AbstractBase):
-
     __tablename__ = type = "parameters"
     id = db.Column(Integer, primary_key=True)
     banner_active = db.Column(Boolean)
@@ -190,8 +229,8 @@ class Parameters(AbstractBase):
 
 
 class File(AbstractBase):
-
     __tablename__ = type = class_type = "file"
+    log_change = vs.settings["files"]["log_events"]
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "file", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
@@ -199,6 +238,7 @@ class File(AbstractBase):
     description = db.Column(db.LargeString)
     filename = db.Column(db.SmallString, index=True)
     path = db.Column(db.SmallString, unique=True)
+    full_path = db.Column(db.SmallString, unique=True)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     last_updated = db.Column(db.TinyString)
     status = db.Column(db.TinyString)
@@ -209,22 +249,46 @@ class File(AbstractBase):
     folder_path = db.Column(db.SmallString)
 
     def update(self, move_file=True, **kwargs):
-        old_path = self.path
+        old_path = self.full_path
         super().update(**kwargs)
-        if exists(str(old_path)) and not exists(self.path) and move_file:
-            move(old_path, self.path)
+        self.full_path = f"{vs.file_path}{self.path}"
+        if exists(str(old_path)) and not exists(self.full_path) and move_file:
+            move(old_path, self.full_path)
         self.name = self.path.replace("/", ">")
-        *split_folder_path, self.filename = self.path.split("/")
+        *split_folder_path, self.filename = self.full_path.split("/")
         self.folder_path = "/".join(split_folder_path)
-        self.folder = db.fetch("folder", path=self.folder_path, allow_none=True)
-        self.last_modified = datetime.strptime(ctime(getmtime(self.path)), "%c")
+        self.folder = db.fetch("folder", full_path=self.folder_path, allow_none=True)
+        if exists(self.full_path) and not kwargs.get("migration_import"):
+            last_modified = datetime.strptime(ctime(getmtime(self.full_path)), "%c")
+            self.last_modified = last_modified
         if not kwargs.get("migration_import"):
             self.last_updated = datetime.strptime(ctime(), "%c")
         self.status = "Updated"
 
+    def delete(self):
+        trash = vs.settings["files"]["trash"]
+        if not exists(self.full_path) or not trash:
+            return
+        if self.full_path == trash:
+            return {"log": "Cannot delete the 'trash' folder."}
+        if trash in self.full_path:
+            if self.type == "folder":
+                rmtree(self.full_path, ignore_errors=True)
+            else:
+                Path(self.full_path).unlink(missing_ok=True)
+        else:
+            now = vs.get_time().replace(":", "-")
+            filename = f"{now}-{self.filename}"
+            if str(vs.file_path) in trash:
+                trash_scoped_path = trash.replace(str(vs.file_path), "")
+                self.update(path=f"{trash_scoped_path}/{filename}")
+                log = f"File '{filename}' moved to 'trash' folder."
+                return {"log_level": "warning", "log": log}
+            else:
+                move(self.full_path, f"{trash}/{filename}")
+
 
 class Folder(File):
-
     __tablename__ = "folder"
     pretty_name = "Folder"
     parent_type = "file"
@@ -241,6 +305,7 @@ class Folder(File):
     }
 
     def __init__(self, **kwargs):
-        if not exists(kwargs["path"]):
-            makedirs(kwargs["path"])
+        full_path = f"{vs.file_path}{kwargs['path']}"
+        if not exists(full_path) and not kwargs.get("migration_import"):
+            makedirs(full_path)
         self.update(**kwargs)

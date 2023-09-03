@@ -14,10 +14,13 @@ to do with a scheduled task, the user may need to provide data for several param
 Below are all the input fields that can be filled, with brief descriptions of 
 what they do:
 
+![](../_static/automation/scheduling/scheduling_common_properties.png)
+
 | Field | Required? | Description |
 | - | - | - |
 | Name | Yes | The name by which eNMS will refer to the task |
-| Default Access | Yes | Used to determine which users can make changes to the task; defaults to "Creator Only" |
+| Creator | (Read-only) | User that created this Task |
+| Admin Only | No | True to allow only admins to view, edit, or run/pause the Task  |
 | Scheduling Mode | Yes | Either "Standard" or "Crontab"; see [Scheduling Modes](#scheduling-modes) for more |
 | Description | No | A brief description of what the task does |
 | Start Date | Only in [Standard Mode](#standard-scheduling) | the calendar date on which the task will begin running at the specified interval |
@@ -26,15 +29,20 @@ what they do:
 | Frequency Unit | Yes | Assigns a unit of time to the Frequency field. Can be "Seconds", "Minutes", "Hours", or "Days", and defaults to "Seconds" |
 | Crontab Expression | Only in [Crontab Mode](#crontab-scheduling) | the expression used to calculate the frequency of the task |
 | Payload | No | The initial payload to be supplied to the scheduled service at runtime; more information can be found [in the Services documentation.](./services.md) |
-| Devices | No | A selection of individual devices the Service will be called on each time the task is triggered |
-| Pools | No | A group (or groups) of devices the Service will be called on each time the task is triggered - useful for large selections of devices |  
-| Service | Yes | The Service that the task will call at its specified time or frequency |
+| Devices | No | A selection of individual devices the Service will be run on each time the task is triggered |
+| Pools | No | A group (or groups) of devices the Service will be run on each time the task is triggered - useful for large selections of devices |  
+| Service | Yes | The Service that the task will run at its specified time or frequency |
 
 !!! note
 
     If both the Devices and Pools fields are left empty, the service will run using its own 
     default targets. Otherwise, the task targets (all selected devices, plus all devices
     of all selected pools) override the service targets when the service runs.
+
+![](../_static/automation/scheduling/scheduling_access_control.png)
+
+User maintained `Access Control` is available for this object. This allows the `Owners` to select desired access.
+[Check out this page for more details on modifying `Access Control`.](../administration/overview.md) 
 
 ## Scheduling Modes
 
@@ -66,7 +74,7 @@ and Thursdays (`2,4`):
 
 All tasks can be paused and resumed using the controls in the task table.
 **Newly created tasks are set to paused by default.** Active tasks display 
-the date that they will next be run by the scheduler, as well as the amount 
+the date that they will be run next by the scheduler, as well as the amount 
 of time left until then.
 
 | ![](../_static/automation/scheduling/task_table.png) |

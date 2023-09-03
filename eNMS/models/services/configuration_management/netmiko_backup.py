@@ -19,7 +19,6 @@ from eNMS.variables import vs
 
 
 class NetmikoBackupService(ConnectionService):
-
     __tablename__ = "netmiko_backup_service"
     pretty_name = "Netmiko Data Backup"
     parent_type = "connection_service"
@@ -27,8 +26,11 @@ class NetmikoBackupService(ConnectionService):
     enable_mode = db.Column(Boolean, default=True)
     config_mode = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
+    read_timeout = db.Column(Float, default=10.0)
+    conn_timeout = db.Column(Float, default=10.0)
+    auth_timeout = db.Column(Float, default=0.0)
+    banner_timeout = db.Column(Float, default=15.0)
     fast_cli = db.Column(Boolean, default=False)
-    timeout = db.Column(Integer, default=10.0)
     global_delay_factor = db.Column(Float, default=1.0)
     local_path = db.Column(db.SmallString, default="network_data")
     property = db.Column(db.SmallString)
@@ -66,7 +68,8 @@ class NetmikoBackupService(ConnectionService):
                 header = f"\n{' ' * 30}{title}\n" f"{' ' * 30}{'*' * len(title)}"
                 command_result = [f"{header}\n\n"] if self.add_header else []
                 for line in netmiko_connection.send_command(
-                    command["value"]
+                    command["value"],
+                    read_timeout=run.read_timeout,
                 ).splitlines():
                     if command["prefix"]:
                         line = f"{command['prefix']} - {line}"
@@ -79,17 +82,18 @@ class NetmikoBackupService(ConnectionService):
                 )
             device_with_deferred_data = (
                 db.query("device")
-                .options(load_only(self.property))
+                .options(load_only(getattr(vs.models["device"], self.property)))
                 .filter_by(id=device.id)
                 .one()
             )
-            setattr(device_with_deferred_data, self.property, result)
-            with open(path / self.property, "w") as file:
-                file.write(result)
             setattr(device, f"last_{self.property}_status", "Success")
             duration = f"{(datetime.now() - runtime).total_seconds()}s"
             setattr(device, f"last_{self.property}_duration", duration)
-            setattr(device, f"last_{self.property}_update", str(runtime))
+            if getattr(device_with_deferred_data, self.property) != result:
+                setattr(device_with_deferred_data, self.property, result)
+                with open(path / self.property, "w") as file:
+                    file.write(result)
+                setattr(device, f"last_{self.property}_update", str(runtime))
         except Exception as exc:
             setattr(device, f"last_{self.property}_status", "Failure")
             setattr(device, f"last_{self.property}_failure", str(runtime))
@@ -108,6 +112,8 @@ class NetmikoBackupForm(NetmikoForm):
     commands = FieldList(FormField(CommandsForm), min_entries=12)
     replacements = FieldList(FormField(ReplacementForm), min_entries=12)
     add_header = BooleanField("Add header for each command", default=True)
+    auto_find_prompt = BooleanField(default=True, help="netmiko/auto_find_prompt")
+    expect_string = StringField(substitution=True, help="netmiko/expect_string")
     groups = {
         "Target property and commands": {
             "commands": ["property", "local_path", "add_header", "commands"],
@@ -118,4 +124,11 @@ class NetmikoBackupForm(NetmikoForm):
             "default": "expanded",
         },
         **NetmikoForm.groups,
+        "Advanced Netmiko Parameters": {
+            "commands": [
+                "auto_find_prompt",
+                "expect_string",
+            ],
+            "default": "hidden",
+        },
     }

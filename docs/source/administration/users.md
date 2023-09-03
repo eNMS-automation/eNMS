@@ -1,27 +1,21 @@
+
 # Users
 
-Table of users. Depending on application configuration, the `Groups` column
-can be used to enhance Role Based Access (RBAC).
+Table of users, presently restricted to admin users only. Depending on application configuration, the `Groups` column
+can be used to enhance Role Based Access Control (RBAC).
 
-- **Username**: Identifies the user within the application.
+<h4>User Details</h4> 
+![User Details](../_static/administration/user.png)
 
-- **Description**: Display-only information regarding the user.
-
-- **Groups**: A comma separated list of arbitrary names available for matching
-  a Pool.
-
-    - RBAC manages collections of users using `Pools`.  User membership in a
-      pool is based on filters and available for any User property, including
-      `Groups` (See [Pools](../inventory/pools.md) for more information).
-
-    - Pools are also used to determine levels of `Access` and available
-      `Credentials`.
-
-    - When a user creates a service, that user's `Groups` supply the default
-      `Groups` assigned to the service; meaning users in their group also get
-      access. 
-
-- **Email Address**: The user's email address.
-
-- **Pools**: Clicking this provides a table of all the `Pools` in which this
-  user is a member.
+* **Name**: Identifies the user within the application
+* **Creator**: Auto Populated field based on the user who built the credential
+* **Description**: Text field for storing notes 
+* **Email Address**: The user's email address  
+* **Groups**: Group(s) to which this user belongs
+* **Theme**: Choose between light or dark themes
+* **Authentication**
+> * **LDAP**: Uses Lightweight Directory Access Protocol to determine if the user can access the application 
+> * **TACACS+**: Uses Terminal Access Controller Access-Control System to determine if the user can access the application 
+> * **Local**: Uses the local database to determine if the user can access the application
+* **Password**: If `Authentication` type `Local` is selected, a user password is required
+* **Is Admin**: Checking this box allows the user to bypass Role Based Access controls

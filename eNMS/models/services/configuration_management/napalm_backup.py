@@ -20,7 +20,6 @@ from eNMS.variables import vs
 
 
 class NapalmBackupService(ConnectionService):
-
     __tablename__ = "napalm_backup_service"
     pretty_name = "NAPALM Data Backup"
     parent_type = "connection_service"
@@ -61,7 +60,7 @@ class NapalmBackupService(ConnectionService):
             result = vs.dict_to_string(result)
             device_with_deferred_data = (
                 db.query("device")
-                .options(load_only(self.property))
+                .options(load_only(getattr(vs.models["device"], self.property)))
                 .filter_by(id=device.id)
                 .one()
             )

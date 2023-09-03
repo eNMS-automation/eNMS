@@ -1,104 +1,134 @@
-- category: Display
-  creator: admin
-  description: ''
-  icon: network
-  labels:
-    22ddf544-3151-4361-940b-7516b78c179a:
-      alignment: left
-      content: "Basic site with three devices: Router 1 is of type \"device\" and\
+- "category": "Display"
+  "creator": "admin"
+  "description": ""
+  "icon": "network"
+  "labels":
+    "22ddf544-3151-4361-940b-7516b78c179a":
+      "alignment": "left"
+      "content": "Basic site with three devices: Router 1 is of type \"device\" and\
         \ the other two are \"router\".\r\nAll three links are Ethernet links.\r\n\
         Router 1 should be displayed as a router, Router 2 as a host and Router 3\
         \ as an optical switch.\r\nThe icon of a device is decoupled from its type."
-      positions: [19, -70]
-  last_modified: '2022-01-13 14:58:18.207435'
-  last_modified_by: ''
-  latitude: '0.0'
-  links: [R1 - R2, R2 - R3, R1 - R3]
-  location: ''
-  longitude: '1.0'
-  model: ''
-  name: Top-level Devices and Links
-  networks: []
-  nodes: [Router 1, Router 2, Router 3]
-  owners: []
-  positions: {}
-  rbac_edit: []
-  rbac_read: []
-  subtype: ''
-  type: network
-  vendor: ''
-- category: Subnetwork
-  creator: admin
-  description: ''
-  icon: network
-  labels:
-    ebac22df-1242-4dcd-90b0-fbeeee517991:
-      alignment: left
-      content: "- Enter subnetwork 1 and subnetwork 2 and make sure all of them have\
-        \ the expected content.\r\n- Test the backward, forward and upward navigation\
+      "positions":
+      - !!int "19"
+      - !!int "-70"
+  "last_modified": "2022-01-13 14:58:18.207435"
+  "last_modified_by": ""
+  "latitude": "0.0"
+  "links":
+  - "R1 - R2"
+  - "R2 - R3"
+  - "R1 - R3"
+  "location": ""
+  "longitude": "1.0"
+  "model": ""
+  "name": "Top-level Devices and Links"
+  "networks": []
+  "nodes":
+  - "Router 1"
+  - "Router 2"
+  - "Router 3"
+  "owners": []
+  "positions": {}
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "subtype": ""
+  "type": "network"
+  "vendor": ""
+- "category": "Subnetwork"
+  "creator": "admin"
+  "description": ""
+  "icon": "network"
+  "labels":
+    "ebac22df-1242-4dcd-90b0-fbeeee517991":
+      "alignment": "left"
+      "content": "- Enter subnetwork 1 and subnetwork 2 and make sure all of them\
+        \ have the expected content.\r\n- Test the backward, forward and upward navigation\
         \ buttons.\r\n- Test the Network Tree to select any node, including a node\
         \ that is in a different network:\r\nthe view should immediately switch to\
         \ the network of the selected node.\r\n- Test using network as a teleport:\
         \ Subnetwork 1 contains Subnetwork 2 and vice-versa,\r\nto switch from one\
         \ to the other and back."
-      positions: [-310, -212]
-  last_modified: '2022-01-13 14:59:24.690428'
-  last_modified_by: ''
-  latitude: '0.0'
-  links: []
-  location: ''
-  longitude: '0.0'
-  model: ''
-  name: Subnetwork and Teleport Mechanism
-  networks: []
-  nodes: [Subnetwork 2, Subnetwork 1]
-  owners: []
-  positions: {}
-  rbac_edit: []
-  rbac_read: []
-  subtype: ''
-  type: network
-  vendor: ''
-- category: ''
-  creator: admin
-  description: ''
-  icon: network
-  labels:
-    6eb6d97f-31c8-4a2a-8142-8c1427cea64d:
-      alignment: left
-      content: "This subnetwork should contain\r\n- three routers, \"Subnetwork 1\
-        \ - R1-3\"\r\n- three links between each pair of routers, \"Subnetwork 1 -\
-        \ L1-3\""
-      positions: [51, -231]
-  last_modified: '2022-01-03 12:55:19.074280'
-  last_modified_by: ''
-  latitude: '0.0'
-  links: [Subnetwork 1 - L1, Subnetwork 1 - L2, Subnetwork 1 - L3]
-  location: ''
-  longitude: '0.0'
-  model: ''
-  name: Subnetwork 1
-  networks: [Subnetwork and Teleport Mechanism, Subnetwork 2]
-  nodes: [Subnetwork 2, Subnetwork 1 - R1, Subnetwork 1 - R2, Subnetwork 1 - R3]
-  owners: []
-  positions:
-    'Network 2: Subnetwork': &id001 [-558, -27]
-    'Network 2: Subnetwork and Teleport Mechanism': *id001
-    Subnetwork 2: [-15, 43]
-    Subnetwork and Teleport Mechanism: *id001
-  rbac_edit: []
-  rbac_read: []
-  subtype: ''
-  type: network
-  vendor: ''
-- category: Editing
-  creator: admin
-  description: ''
-  icon: network
-  labels:
-    6bc3e996-eb39-4d52-9294-15cdd7d10f92:
-      alignment: left
-      content: "Tests the creation, editing and deletion of networks and the nodes\
+      "positions":
+      - !!int "-310"
+      - !!int "-212"
+  "last_modified": "2022-01-13 14:59:24.690428"
+  "last_modified_by": ""
+  "latitude": "0.0"
+  "links": []
+  "location": ""
+  "longitude": "0.0"
+  "model": ""
+  "name": "Subnetwork and Teleport Mechanism"
+  "networks": []
+  "nodes":
+  - "Subnetwork 2"
+  - "Subnetwork 1"
+  "owners": []
+  "positions": {}
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "subtype": ""
+  "type": "network"
+  "vendor": ""
+- "category": ""
+  "creator": "admin"
+  "description": ""
+  "icon": "network"
+  "labels":
+    "6eb6d97f-31c8-4a2a-8142-8c1427cea64d":
+      "alignment": "left"
+      "content": "This subnetwork should contain\r\n- three routers, \"Subnetwork\
+        \ 1 - R1-3\"\r\n- three links between each pair of routers, \"Subnetwork 1\
+        \ - L1-3\""
+      "positions":
+      - !!int "51"
+      - !!int "-231"
+  "last_modified": "2022-01-03 12:55:19.074280"
+  "last_modified_by": ""
+  "latitude": "0.0"
+  "links":
+  - "Subnetwork 1 - L1"
+  - "Subnetwork 1 - L2"
+  - "Subnetwork 1 - L3"
+  "location": ""
+  "longitude": "0.0"
+  "model": ""
+  "name": "Subnetwork 1"
+  "networks":
+  - "Subnetwork and Teleport Mechanism"
+  - "Subnetwork 2"
+  "nodes":
+  - "Subnetwork 2"
+  - "Subnetwork 1 - R1"
+  - "Subnetwork 1 - R2"
+  - "Subnetwork 1 - R3"
+  "owners": []
+  "positions":
+    "Network 2: Subnetwork": &id001
+    - !!int "-558"
+    - !!int "-27"
+    "Network 2: Subnetwork and Teleport Mechanism": *id001
+    "Subnetwork 2":
+    - !!int "-15"
+    - !!int "43"
+    "Subnetwork and Teleport Mechanism": *id001
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "subtype": ""
+  "type": "network"
+  "vendor": ""
+- "category": "Editing"
+  "creator": "admin"
+  "description": ""
+  "icon": "network"
+  "labels":
+    "6bc3e996-eb39-4d52-9294-15cdd7d10f92":
+      "alignment": "left"
+      "content": "Tests the creation, editing and deletion of networks and the nodes\
         \ inside it.\r\n- Create three devices: 1 Device, 1 Router and 1 Gateway.\
         \ The default icon for the Device and Router should be a router,\r\nbut it\
         \ should a host (computer) for the Gateway.\r\n- Create links between them,\
@@ -111,63 +141,79 @@
         \ from a network should not delete the original objects.\r\n- Use the right-click\
         \ multiple selection rectangle to delete the remaining objects.\r\n- Delete\
         \ the network itself from the Network table."
-      positions: [227, -507]
-  last_modified: '2022-01-13 14:59:33.685691'
-  last_modified_by: ''
-  latitude: '0.0'
-  links: []
-  location: ''
-  longitude: '0.0'
-  model: ''
-  name: Creation, Edit and Deletion
-  networks: []
-  nodes: []
-  owners: []
-  positions: {}
-  rbac_edit: []
-  rbac_read: []
-  subtype: ''
-  type: network
-  vendor: ''
-- category: ''
-  creator: admin
-  description: ''
-  icon: network
-  labels:
-    56c77f3e-481c-476d-a045-1120b3cb0cc2:
-      alignment: left
-      content: "This subnetwork should contain\r\n- two gateways, \"Subnetwork 2 -\
-        \ G1-2\"\r\n- one link between them, \"Subnetwork 2 - L1\""
-      positions: [4, -181]
-  last_modified: '2022-01-03 12:55:37.570662'
-  last_modified_by: ''
-  latitude: '0.0'
-  links: [Subnetwork 2 - L1]
-  location: ''
-  longitude: '0.0'
-  model: ''
-  name: Subnetwork 2
-  networks: [Subnetwork and Teleport Mechanism, Subnetwork 1]
-  nodes: [Subnetwork 1, Subnetwork 2 - G1, Subnetwork 2 - G2]
-  owners: []
-  positions:
-    'Network 2: Subnetwork': &id002 [-144, -36]
-    'Network 2: Subnetwork and Teleport Mechanism': *id002
-    Subnetwork 1: [-2, -48]
-    Subnetwork and Teleport Mechanism: *id002
-  rbac_edit: []
-  rbac_read: []
-  subtype: ''
-  type: network
-  vendor: ''
-- category: Editing
-  creator: admin
-  description: ''
-  icon: network
-  labels:
-    0a8dc15c-8f31-4fe2-b84d-1b2e9680876e:
-      alignment: left
-      content: "Tests the duplication of devices, subnetworks and top-level networks.\r\
+      "positions":
+      - !!int "227"
+      - !!int "-507"
+  "last_modified": "2022-01-13 14:59:33.685691"
+  "last_modified_by": ""
+  "latitude": "0.0"
+  "links": []
+  "location": ""
+  "longitude": "0.0"
+  "model": ""
+  "name": "Creation, Edit and Deletion"
+  "networks": []
+  "nodes": []
+  "owners": []
+  "positions": {}
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "subtype": ""
+  "type": "network"
+  "vendor": ""
+- "category": ""
+  "creator": "admin"
+  "description": ""
+  "icon": "network"
+  "labels":
+    "56c77f3e-481c-476d-a045-1120b3cb0cc2":
+      "alignment": "left"
+      "content": "This subnetwork should contain\r\n- two gateways, \"Subnetwork 2\
+        \ - G1-2\"\r\n- one link between them, \"Subnetwork 2 - L1\""
+      "positions":
+      - !!int "4"
+      - !!int "-181"
+  "last_modified": "2022-01-03 12:55:37.570662"
+  "last_modified_by": ""
+  "latitude": "0.0"
+  "links":
+  - "Subnetwork 2 - L1"
+  "location": ""
+  "longitude": "0.0"
+  "model": ""
+  "name": "Subnetwork 2"
+  "networks":
+  - "Subnetwork and Teleport Mechanism"
+  - "Subnetwork 1"
+  "nodes":
+  - "Subnetwork 1"
+  - "Subnetwork 2 - G1"
+  - "Subnetwork 2 - G2"
+  "owners": []
+  "positions":
+    "Network 2: Subnetwork": &id002
+    - !!int "-144"
+    - !!int "-36"
+    "Network 2: Subnetwork and Teleport Mechanism": *id002
+    "Subnetwork 1":
+    - !!int "-2"
+    - !!int "-48"
+    "Subnetwork and Teleport Mechanism": *id002
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "subtype": ""
+  "type": "network"
+  "vendor": ""
+- "category": "Editing"
+  "creator": "admin"
+  "description": ""
+  "icon": "network"
+  "labels":
+    "0a8dc15c-8f31-4fe2-b84d-1b2e9680876e":
+      "alignment": "left"
+      "content": "Tests the duplication of devices, subnetworks and top-level networks.\r\
         \n- Duplicate \"Duplicate me 1\": the duplicated device should be immediately\
         \ added to the network.\r\nRefresh and check that it is still displayed at\
         \ the same position.\r\n- Duplicate \"Duplicate me 2\": the duplicate subnetwork\
@@ -177,273 +223,398 @@
         \ the two devices and the link between them,\r\nas well as the two subnetworks,\r\
         \nCheck that the content of the subnetworks is the same as that of the original\
         \ top-level network."
-      positions: [-47, -187]
-  last_modified: '2022-01-13 14:59:46.234188'
-  last_modified_by: ''
-  latitude: '0.0'
-  links: [Duplicate 1 - 2]
-  location: ''
-  longitude: '0.0'
-  model: ''
-  name: Duplication of Devices, Subnetworks and Top-level Networks
-  networks: []
-  nodes: [Duplicate me 2, Duplicate me 1]
-  owners: []
-  positions: {}
-  rbac_edit: []
-  rbac_read: []
-  subtype: ''
-  type: network
-  vendor: ''
-- category: ''
-  creator: admin
-  description: ''
-  icon: network
-  labels: {}
-  last_modified: '2022-01-01 11:55:14.172281'
-  last_modified_by: ''
-  latitude: '0.0'
-  links: [G1 - R1]
-  location: ''
-  longitude: '0.0'
-  model: ''
-  name: Duplicate me 2
-  networks: ['Duplication of Devices, Subnetworks and Top-level Networks']
-  nodes: [Duplication - G1, Duplication - R1]
-  owners: []
-  positions:
-    Duplication of Devices, Subnetworks and Top-level Networks: &id003 [135, 6]
-    'Network 4: Duplication of Devices, Subnetworks and Top-level Networks': *id003
-  rbac_edit: []
-  rbac_read: []
-  subtype: ''
-  type: network
-  vendor: ''
-- category: Display
-  creator: admin
-  description: ''
-  icon: network
-  labels:
-    65702104-28b9-4392-9472-727f6f3bf273:
-      alignment: left
-      content: "Tests the display of loopback and parallel links:\r\n- One loopback\
+      "positions":
+      - !!int "-47"
+      - !!int "-187"
+  "last_modified": "2022-01-13 14:59:46.234188"
+  "last_modified_by": ""
+  "latitude": "0.0"
+  "links":
+  - "Duplicate 1 - 2"
+  "location": ""
+  "longitude": "0.0"
+  "model": ""
+  "name": "Duplication of Devices, Subnetworks and Top-level Networks"
+  "networks": []
+  "nodes":
+  - "Duplicate me 2"
+  - "Duplicate me 1"
+  "owners": []
+  "positions": {}
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "subtype": ""
+  "type": "network"
+  "vendor": ""
+- "category": ""
+  "creator": "admin"
+  "description": ""
+  "icon": "network"
+  "labels": {}
+  "last_modified": "2022-01-01 11:55:14.172281"
+  "last_modified_by": ""
+  "latitude": "0.0"
+  "links":
+  - "G1 - R1"
+  "location": ""
+  "longitude": "0.0"
+  "model": ""
+  "name": "Duplicate me 2"
+  "networks":
+  - "Duplication of Devices, Subnetworks and Top-level Networks"
+  "nodes":
+  - "Duplication - G1"
+  - "Duplication - R1"
+  "owners": []
+  "positions":
+    "Duplication of Devices, Subnetworks and Top-level Networks": &id003
+    - !!int "135"
+    - !!int "6"
+    "Network 4: Duplication of Devices, Subnetworks and Top-level Networks": *id003
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "subtype": ""
+  "type": "network"
+  "vendor": ""
+- "category": "Display"
+  "creator": "admin"
+  "description": ""
+  "icon": "network"
+  "labels":
+    "65702104-28b9-4392-9472-727f6f3bf273":
+      "alignment": "left"
+      "content": "Tests the display of loopback and parallel links:\r\n- One loopback\
         \ link for each device.\r\n- Odd number (3) of same direction links between\
         \ R1 and R2\r\n- Even number (4) of different direction links (3 / 1) between\
         \ R1 and R3\r\n- Odd number (3) of different direction links (2 / 1) between\
         \ R2 and R4\r\n- Even number (8) of different direction links (4 / 4) between\
         \ R3 and R4\r\n- One link between R1 and R4"
-      positions: [-499, 98]
-  last_modified: '2022-01-13 14:59:54.526299'
-  last_modified_by: ''
-  latitude: '0.0'
-  links: [R3 -> R2 L1, R3 -> R2 L2, R3 -> R2 L3, R3 -> R2 L4, R3 Loopback 1, R1 Loopback
-      1, R1 -> R2 L1, R1 -> R2 L2, R1 -> R2 L3, R1 -> R3 L1, R3 -> R1 L2, R3 -> R1
-      L3, R3 -> R1 L4, R2 -> R4 L1, R2 -> R4 L2, R4 -> R2 L3, R4 Loopback 1, R1 -
-      R4, R3 -> R4 L1, R3 -> R4 L2, R3 -> R4 L3, R3 -> R4 L4, R4 -> R3 L5, R4 -> R3
-      L6, R4 -> R3 L7, R4 -> R3 L8]
-  location: ''
-  longitude: '0.0'
-  model: ''
-  name: Loopback and Parallel Links
-  networks: []
-  nodes: [S5 R1, S5 R2, S5 R3, S5 R4]
-  owners: []
-  positions: {}
-  rbac_edit: []
-  rbac_read: []
-  subtype: ''
-  type: network
-  vendor: ''
-- category: Subnetwork
-  creator: admin
-  description: ''
-  icon: network
-  labels:
-    df3da1e5-33a3-46e4-baed-ee59a432c773:
-      alignment: left
-      content: "Tests multiple levels of nested subnetworks, in particular:\r\n- The\
-        \ upward navigation button\r\n- The Tree View to switch between levels\r\n\
-        - The Duplication: all subnetworks down to the last should be duplicated."
-      positions: [40, -173]
-  last_modified: '2022-01-13 15:00:11.686882'
-  last_modified_by: ''
-  latitude: '0.0'
-  links: []
-  location: ''
-  longitude: '0.0'
-  model: ''
-  name: Subsubnetwork and Subsubsubnetwork
-  networks: []
-  nodes: [L1 Network]
-  owners: []
-  positions: {}
-  rbac_edit: []
-  rbac_read: []
-  subtype: ''
-  type: network
-  vendor: ''
-- category: ''
-  creator: admin
-  description: ''
-  icon: network
-  labels: {}
-  last_modified: '2022-01-02 12:46:03.753457'
-  last_modified_by: ''
-  latitude: '0.0'
-  links: []
-  location: ''
-  longitude: '0.0'
-  model: ''
-  name: L1 Network
-  networks: [Subsubnetwork and Subsubsubnetwork]
-  nodes: [L2 Network]
-  owners: []
-  positions:
-    'Network 6: Subsubnetwork and Subsubsubnetwork': &id004 [-27, -55]
-    Subsubnetwork and Subsubsubnetwork: *id004
-  rbac_edit: []
-  rbac_read: []
-  subtype: ''
-  type: network
-  vendor: ''
-- category: ''
-  creator: admin
-  description: ''
-  icon: network
-  labels: {}
-  last_modified: '2022-01-02 12:46:14.439473'
-  last_modified_by: ''
-  latitude: '0.0'
-  links: []
-  location: ''
-  longitude: '0.0'
-  model: ''
-  name: L2 Network
-  networks: [L1 Network]
-  nodes: [L3 Network]
-  owners: []
-  positions: {}
-  rbac_edit: []
-  rbac_read: []
-  subtype: ''
-  type: network
-  vendor: ''
-- category: ''
-  creator: admin
-  description: ''
-  icon: network
-  labels: {}
-  last_modified: '2022-01-02 12:47:02.746851'
-  last_modified_by: ''
-  latitude: '0.0'
-  links: [S6 L1]
-  location: ''
-  longitude: '0.0'
-  model: ''
-  name: L3 Network
-  networks: [L2 Network]
-  nodes: [S6 L3 R1, S6 L3 R2]
-  owners: []
-  positions: {}
-  rbac_edit: []
-  rbac_read: []
-  subtype: ''
-  type: network
-  vendor: ''
-- category: Display
-  creator: admin
-  description: ''
-  icon: network
-  labels:
-    40db70f9-22d1-4497-8834-52ef5b1bf369:
-      alignment: left
-      content: "- Import the pool \"All routers in Europe\" with the option \"Add\
+      "positions":
+      - !!int "-499"
+      - !!int "98"
+  "last_modified": "2022-01-13 14:59:54.526299"
+  "last_modified_by": ""
+  "latitude": "0.0"
+  "links":
+  - "R3 -> R2 L1"
+  - "R3 -> R2 L2"
+  - "R3 -> R2 L3"
+  - "R3 -> R2 L4"
+  - "R3 Loopback 1"
+  - "R1 Loopback 1"
+  - "R1 -> R2 L1"
+  - "R1 -> R2 L2"
+  - "R1 -> R2 L3"
+  - "R1 -> R3 L1"
+  - "R3 -> R1 L2"
+  - "R3 -> R1 L3"
+  - "R3 -> R1 L4"
+  - "R2 -> R4 L1"
+  - "R2 -> R4 L2"
+  - "R4 -> R2 L3"
+  - "R4 Loopback 1"
+  - "R1 - R4"
+  - "R3 -> R4 L1"
+  - "R3 -> R4 L2"
+  - "R3 -> R4 L3"
+  - "R3 -> R4 L4"
+  - "R4 -> R3 L5"
+  - "R4 -> R3 L6"
+  - "R4 -> R3 L7"
+  - "R4 -> R3 L8"
+  "location": ""
+  "longitude": "0.0"
+  "model": ""
+  "name": "Loopback and Parallel Links"
+  "networks": []
+  "nodes":
+  - "S5 R1"
+  - "S5 R2"
+  - "S5 R3"
+  - "S5 R4"
+  "owners": []
+  "positions": {}
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "subtype": ""
+  "type": "network"
+  "vendor": ""
+- "category": "Subnetwork"
+  "creator": "admin"
+  "description": ""
+  "icon": "network"
+  "labels":
+    "df3da1e5-33a3-46e4-baed-ee59a432c773":
+      "alignment": "left"
+      "content": "Tests multiple levels of nested subnetworks, in particular:\r\n\
+        - The upward navigation button\r\n- The Tree View to switch between levels\r\
+        \n- The Duplication: all subnetworks down to the last should be duplicated."
+      "positions":
+      - !!int "40"
+      - !!int "-173"
+  "last_modified": "2022-01-13 15:00:11.686882"
+  "last_modified_by": ""
+  "latitude": "0.0"
+  "links": []
+  "location": ""
+  "longitude": "0.0"
+  "model": ""
+  "name": "Subsubnetwork and Subsubsubnetwork"
+  "networks": []
+  "nodes":
+  - "L1 Network"
+  "owners": []
+  "positions": {}
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "subtype": ""
+  "type": "network"
+  "vendor": ""
+- "category": ""
+  "creator": "admin"
+  "description": ""
+  "icon": "network"
+  "labels": {}
+  "last_modified": "2022-01-02 12:46:03.753457"
+  "last_modified_by": ""
+  "latitude": "0.0"
+  "links": []
+  "location": ""
+  "longitude": "0.0"
+  "model": ""
+  "name": "L1 Network"
+  "networks":
+  - "Subsubnetwork and Subsubsubnetwork"
+  "nodes":
+  - "L2 Network"
+  "owners": []
+  "positions":
+    "Network 6: Subsubnetwork and Subsubsubnetwork": &id004
+    - !!int "-27"
+    - !!int "-55"
+    "Subsubnetwork and Subsubsubnetwork": *id004
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "subtype": ""
+  "type": "network"
+  "vendor": ""
+- "category": ""
+  "creator": "admin"
+  "description": ""
+  "icon": "network"
+  "labels": {}
+  "last_modified": "2022-01-02 12:46:14.439473"
+  "last_modified_by": ""
+  "latitude": "0.0"
+  "links": []
+  "location": ""
+  "longitude": "0.0"
+  "model": ""
+  "name": "L2 Network"
+  "networks":
+  - "L1 Network"
+  "nodes":
+  - "L3 Network"
+  "owners": []
+  "positions": {}
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "subtype": ""
+  "type": "network"
+  "vendor": ""
+- "category": ""
+  "creator": "admin"
+  "description": ""
+  "icon": "network"
+  "labels": {}
+  "last_modified": "2022-01-02 12:47:02.746851"
+  "last_modified_by": ""
+  "latitude": "0.0"
+  "links":
+  - "S6 L1"
+  "location": ""
+  "longitude": "0.0"
+  "model": ""
+  "name": "L3 Network"
+  "networks":
+  - "L2 Network"
+  "nodes":
+  - "S6 L3 R1"
+  - "S6 L3 R2"
+  "owners": []
+  "positions": {}
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "subtype": ""
+  "type": "network"
+  "vendor": ""
+- "category": "Display"
+  "creator": "admin"
+  "description": ""
+  "icon": "network"
+  "labels":
+    "40db70f9-22d1-4497-8834-52ef5b1bf369":
+      "alignment": "left"
+      "content": "- Import the pool \"All routers in Europe\" with the option \"Add\
         \ connected links\"\r\n- Click on the \"Automatic Layout\" button: the network\
         \ should be displayed in a near-optimal layout almost instantly.\r\n- Select\
         \ everything and delete it."
-      positions: [63, -168]
-  last_modified: '2022-01-13 15:01:16.843061'
-  last_modified_by: ''
-  latitude: '0.0'
-  links: []
-  location: ''
-  longitude: '0.0'
-  model: ''
-  name: Layout of Large Graph
-  networks: []
-  nodes: []
-  owners: []
-  positions: {}
-  rbac_edit: []
-  rbac_read: []
-  subtype: ''
-  type: network
-  vendor: ''
-- category: Editing
-  creator: admin
-  description: ''
-  icon: network
-  labels:
-    9d96833e-cf92-45e4-8c54-f2b145b5e542:
-      alignment: left
-      content: "- Add nodes \"Dallas\" and \"Atlanta\" without option: the nodes should\
-        \ be added without any links.\r\n- Delete them\r\n- Add \"Washington\" and\
-        \ \"Austin\" with the \"Add Connected Links\" option: no link should be created.\r\
-        \n- Add \"Dallas\" and \"Atlanta\" with the \"Add Connected Links\" option:\r\
-        \nit should create one link between \"Washington\" and \"Atlanta\" (link16),\r\
-        \none link between \"Dallas\" and \"Austin\" (link13),\r\nand three links\
-        \ between \"Dallas\" and \"Atlanta\" (link25, 25-2 and 25-3)\r\n- Add \"Dallas-2\"\
-        \ with the \"Add Connected Links\" option:\r\nit should add \"Dallas-2\" along\
-        \ with two links:\r\n\"link25-reversed\" and \"link25-dallas2\"\r\n- Delete\
-        \ everything\r\n- Add \"link25\" with no option: nothing should be added (missing\
-        \ end nodes).\r\n- Add \"link25\" with the \"Add Connected Nodes\" option:\
-        \ \"Dallas\" and \"Atlanta\" should be added along with \"link25\".\r\n- Add\
-        \ \"link25-2\" with the \"Add Connected Nodes\" option: the link should be\
-        \ added but the two ends are already here.\r\n- Add \"link25-3\" without any\
-        \ option: the link should be added between \"Dallas\" and \"Atlanta\"."
-      positions: [110, -18]
-  last_modified: '2022-01-13 15:00:20.775721'
-  last_modified_by: ''
-  latitude: '0.0'
-  links: []
-  location: ''
-  longitude: '0.0'
-  model: ''
-  name: Import with Add Connected Nodes and Links
-  networks: []
-  nodes: []
-  owners: []
-  positions: {}
-  rbac_edit: []
-  rbac_read: []
-  subtype: ''
-  type: network
-  vendor: ''
-- category: Display
-  creator: admin
-  description: ''
-  icon: network
-  labels: {}
-  last_modified: '2022-05-23 11:06:26.816309'
-  last_modified_by: ''
-  latitude: '0.0'
-  links: [link22, link13, link20, link0, link5, link23, link19, link21, link7, link18,
-    link15, link3, link4, link17, link10, link27, link25-3, link14, link16, link25-reversed,
-    link9, link25-reversed-2, link25-dallas2, link8, link1, link26, link25, link24,
-    link2, link13-2, link25-2, link11, link12, link6]
-  location: ''
-  longitude: '0.0'
-  model: ''
-  name: Large Network Display
-  networks: []
-  nodes: [Oakland, Columbus, Austin, Houston, Austin-2, Washington, Orange, Dallas-3,
-    Baltimore, PaloAlto, SanJose, Cleveland, Jackson, Richmond, Cambridge, Chicago,
-    Philadelphia, Cincinnati, NewYork, Minneapolis, SanFrancisco, Atlanta, Detroit,
-    Denver, Sacramento, SanDiego, LosAngeles, Boston, Dallas-2, Dallas]
-  owners: []
-  positions: {}
-  rbac_edit: []
-  rbac_read: []
-  subtype: ''
-  type: network
-  vendor: ''
+      "positions":
+      - !!int "63"
+      - !!int "-168"
+  "last_modified": "2022-01-13 15:01:16.843061"
+  "last_modified_by": ""
+  "latitude": "0.0"
+  "links": []
+  "location": ""
+  "longitude": "0.0"
+  "model": ""
+  "name": "Layout of Large Graph"
+  "networks": []
+  "nodes": []
+  "owners": []
+  "positions": {}
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "subtype": ""
+  "type": "network"
+  "vendor": ""
+- "category": "Editing"
+  "creator": "admin"
+  "description": ""
+  "icon": "network"
+  "labels":
+    "9d96833e-cf92-45e4-8c54-f2b145b5e542":
+      "alignment": "left"
+      "content": "- Add nodes \"Dallas\" and \"Atlanta\" without option: the nodes\
+        \ should be added without any links.\r\n- Delete them\r\n- Add \"Washington\"\
+        \ and \"Austin\" with the \"Add Connected Links\" option: no link should be\
+        \ created.\r\n- Add \"Dallas\" and \"Atlanta\" with the \"Add Connected Links\"\
+        \ option:\r\nit should create one link between \"Washington\" and \"Atlanta\"\
+        \ (link16),\r\none link between \"Dallas\" and \"Austin\" (link13),\r\nand\
+        \ three links between \"Dallas\" and \"Atlanta\" (link25, 25-2 and 25-3)\r\
+        \n- Add \"Dallas-2\" with the \"Add Connected Links\" option:\r\nit should\
+        \ add \"Dallas-2\" along with two links:\r\n\"link25-reversed\" and \"link25-dallas2\"\
+        \r\n- Delete everything\r\n- Add \"link25\" with no option: nothing should\
+        \ be added (missing end nodes).\r\n- Add \"link25\" with the \"Add Connected\
+        \ Nodes\" option: \"Dallas\" and \"Atlanta\" should be added along with \"\
+        link25\".\r\n- Add \"link25-2\" with the \"Add Connected Nodes\" option: the\
+        \ link should be added but the two ends are already here.\r\n- Add \"link25-3\"\
+        \ without any option: the link should be added between \"Dallas\" and \"Atlanta\"\
+        ."
+      "positions":
+      - !!int "110"
+      - !!int "-18"
+  "last_modified": "2022-01-13 15:00:20.775721"
+  "last_modified_by": ""
+  "latitude": "0.0"
+  "links": []
+  "location": ""
+  "longitude": "0.0"
+  "model": ""
+  "name": "Import with Add Connected Nodes and Links"
+  "networks": []
+  "nodes": []
+  "owners": []
+  "positions": {}
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "subtype": ""
+  "type": "network"
+  "vendor": ""
+- "category": "Display"
+  "creator": "admin"
+  "description": ""
+  "icon": "network"
+  "labels": {}
+  "last_modified": "2022-05-23 11:06:26.816309"
+  "last_modified_by": ""
+  "latitude": "0.0"
+  "links":
+  - "link22"
+  - "link13"
+  - "link20"
+  - "link0"
+  - "link5"
+  - "link23"
+  - "link19"
+  - "link21"
+  - "link7"
+  - "link18"
+  - "link15"
+  - "link3"
+  - "link4"
+  - "link17"
+  - "link10"
+  - "link27"
+  - "link25-3"
+  - "link14"
+  - "link16"
+  - "link25-reversed"
+  - "link9"
+  - "link25-reversed-2"
+  - "link25-dallas2"
+  - "link8"
+  - "link1"
+  - "link26"
+  - "link25"
+  - "link24"
+  - "link2"
+  - "link13-2"
+  - "link25-2"
+  - "link11"
+  - "link12"
+  - "link6"
+  "location": ""
+  "longitude": "0.0"
+  "model": ""
+  "name": "Large Network Display"
+  "networks": []
+  "nodes":
+  - "Oakland"
+  - "Columbus"
+  - "Austin"
+  - "Houston"
+  - "Austin-2"
+  - "Washington"
+  - "Orange"
+  - "Dallas-3"
+  - "Baltimore"
+  - "PaloAlto"
+  - "SanJose"
+  - "Cleveland"
+  - "Jackson"
+  - "Richmond"
+  - "Cambridge"
+  - "Chicago"
+  - "Philadelphia"
+  - "Cincinnati"
+  - "NewYork"
+  - "Minneapolis"
+  - "SanFrancisco"
+  - "Atlanta"
+  - "Detroit"
+  - "Denver"
+  - "Sacramento"
+  - "SanDiego"
+  - "LosAngeles"
+  - "Boston"
+  - "Dallas-2"
+  - "Dallas"
+  "owners": []
+  "positions": {}
+  "rbac_edit": []
+  "rbac_read":
+  - "Admin User"
+  "subtype": ""
+  "type": "network"
+  "vendor": ""

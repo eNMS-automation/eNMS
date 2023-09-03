@@ -35,19 +35,6 @@
         Authentication with device credentials
       </label>
     </div>
-    {% endif %} {% if settings["ssh"]["credentials"]["user"] %}
-    <div class="radio">
-      <label>
-        <input
-          type="radio"
-          value="user"
-          id="user-credentials"
-          name="credentials"
-          class="add-id"
-        />
-        Authentication with user credentials
-      </label>
-    </div>
     {% endif %} {% if settings["ssh"]["credentials"]["custom"] %}
     <div class="radio">
       <label>

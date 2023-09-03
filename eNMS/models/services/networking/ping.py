@@ -9,7 +9,6 @@ from eNMS.models.automation import Service
 
 
 class PingService(Service):
-
     __tablename__ = "ping_service"
     pretty_name = "ICMP / TCP Ping"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
@@ -91,8 +90,9 @@ class PingForm(ServiceForm):
     form_type = HiddenField(default="ping_service")
     protocol = SelectField(choices=(("ICMP", "ICMP Ping"), ("TCP", "TCP Ping")))
     ip_address = StringField(
-        "IP Address (defaults to the device IP address if left empty)",
+        "IP Address",
         substitution=True,
+        ui_name="IP Address (defaults to the device IP address if left empty)",
     )
     ports = StringField("Ports (TCP ping only)", default=22)
     count = IntegerField(default=5)
@@ -100,7 +100,7 @@ class PingForm(ServiceForm):
     ttl = IntegerField(default=60)
     packet_size = IntegerField(default=56)
 
-    def validate(self):
+    def validate(self, **_):
         valid_form = super().validate()
         invalid_tcp_port = self.protocol.data == "TCP" and not self.ports.data
         if invalid_tcp_port:

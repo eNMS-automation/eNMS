@@ -20,8 +20,8 @@ along the workflow from service to service. So, using eNMS, the user will
 spend a lot of time considering how to either retrieve structured data
 directly from the device or most-easily convert unstructured or semi-structured
 data from the device to structured data.  This section will discuss and rate
-the available built-in service types according to how work-intensive they are
-for obtaining structured data. The user can refer to these rating when
+the available service types according to how work-intensive they are
+for obtaining structured data. The user can refer to these ratings when
 considering which service to use for a particular action in the workflow.
 
 ## Structured Data - Options 
@@ -50,13 +50,13 @@ to obtain structured data from a device interaction.
 This is often a very personal choice.  Here are some questions to keep in mind that 
 could affect your decisions:
 
-- Does your device command support JSON/XML output directly?
+- Does your device interface support JSON/XML output directly?
 - Is there a Napalm driver for your device, and what data can it obtain via its 
   Getters?
 - Is there already an existing OpenSource or Vendor template (TextFSM, TTP) that will 
   parse the command output?
 - Are you spending more time parsing command output than building other logic?
-- Is there a lot of detail in the command output and you think you might like to be 
+- Is there a lot of detail in the command output, and you think you might like to be 
   able to put all of that into a structured form?
 - Are you comfortable working with a command parser like TextFSM to develop your 
   own template(s)?    
@@ -65,10 +65,10 @@ could affect your decisions:
 
 In the case where the device is capable of giving a fully-structured data
 response, there is no additional parsing needed. This is often the best solution
-possible - and is available when the target device command supports JSON or XML output.
+possible and is available when the target device command supports JSON or XML output.
 
 This is most often possible with the 
-[Netmiko Commands Service](../automation/servicetypes/netmiko_commands/) - and 
+[Netmiko Commands Service](../automation/servicetypes/netmiko_commands.md) - and 
 the availability of this option depends on the device operating system and
 the specific command(s) used.
  
@@ -120,7 +120,7 @@ this is also easy to re-use.
 Writing a Custom Service that runs several commands and operates on their results for a
 device type: 
 
-- can reduce the number of duplicated service and/or custom parsing/filtering logic 
+- can reduce the number of duplicated services and/or custom parsing/filtering logic 
   for complex device interactions.
 - can also be a great deal of work to get started.
 
@@ -132,7 +132,7 @@ TextFSM (or TTP).
 ### Using TextFSM with a Netmiko Commands Service 
 
 This should use the TextFSM templates installed from the Network-to-Code repository 
-listed below with the following environment variable set: 
+listed below with the following environment variable set (see installation section): 
 ```
 export NET_TEXTFSM=/path/to/ntc-templates/templates/
 ```  
@@ -140,12 +140,12 @@ export NET_TEXTFSM=/path/to/ntc-templates/templates/
 In this case, one only has to **check** the `Use TextFSM` option with the Netmiko 
 Validation Service:
 
-![Netmiko Commands Service - Use TextFSM](../_static/automation/builtin_service_types/netmiko_validation_advanced.png)
+![Netmiko Commands Service - Use TextFSM](../_static/automation/service_types/netmiko_validation_advanced.png)
 
 !!! note 
     
     The command is matched against the contents of the 
-    Network-to-Code 'index' file basd on the platform (netmiko driver) and the 
+    Network-to-Code 'index' file based on the platform (netmiko driver) and the 
     command.
     
 For example, this line in the index will use that textfsm file for `cisco_ios` devices 
@@ -162,10 +162,10 @@ protocol - using the NETCONF Service (ncclient) or the Scrapli NETCONF Service.
 ### NETCONF Service (ncclient)
 
 Since NETCONF is XML based, retrieving configuration data using NETCONF can
-easily be converted to structured data by converting the response to an XML 
+easily be converted to structured data by converting the XML response to a 
 dictionary:
 
-![Netconf Get Full Config](../_static/automation/builtin_service_types/netconf_getfullconfig.png)
+![Netconf Get Full Config](../_static/automation/service_types/netconf_getfullconfig.png)
 
 ### Scrapli NETCONF Service
 
@@ -173,27 +173,26 @@ This is another option for using NETCONF.
 
 ## Multiple commands - Scrapli
 
-A relatively new addition to eNMS, the [Scrapli Command Service](../automation/servicetypes/scrapli_command/) 
+The [Scrapli Command Service](../automation/servicetypes/scrapli_command.md) 
 provides the ability to send multiple commands (and to received multiple responses).
+Scrapli is an alternative to Netmiko and is sometimes faster to connect and
+retrieve data. Refer to the [Scrapli API](#more-information-scrapli) for more
+information.
 
-While the eNMS [Scrapli Command Service](../automation/servicetypes/scrapli_command/)
-does not support it today, the lower-level [Scrapli API](#more-information-scrapli) 
-supports using TextFSM templates.
+## Using TextFSM with a Data Processing Service 
 
-## Using TextFSM with a Data Extraction Service 
-
-If you write your own TextFSM templates (i.e., without installing them per above),
-the Data Extraction Service is another option to consider.  You can use TextFSM 
-to parse previous command results and extract desired information.
+If you write your own TextFSM templates (i.e., without installing them into the
+platform), the Data Processing Service is another option to consider.  You can
+use TextFSM to parse previous command results and extract desired information.
 
 In this example is a simple TextFSM template (from the Network-to-Code repository)
-that shows how the Data Extraction Service works:
+that shows how the Data Processing Service works:
 
-![Data Extraction with TextFSM](../_static/advanced/service_selection/data_extraction_service_textfsm.png)
+![Data Processing with TextFSM](../_static/advanced/service_selection/data_processing_service_textfsm.png)
 
 That produces the following Service result: 
 
-![Data Extraction with TextFSM Result](../_static/advanced/service_selection/data_extraction_service_textfsm_result.png)
+![Data Processing with TextFSM Result](../_static/advanced/service_selection/data_processing_service_textfsm_result.png)
  
 
 ## Python Snippet (or Postprocessing) with a Parser (TextFSM, TTP, or Other)
@@ -207,8 +206,9 @@ This is still less work than manual parsing - if you already have the [TextFSM](
 
 ### TTP Example - using programmatically 
 
-There is not yet an automatic approach for using TTP with eNMS.  So, if you want to use 
-TTP templates, this is the approach to take.
+This is an alternative to automatically using TTP with the Data Processing Service.  
+
+The other approaches are likely better; this is included for completeness.
 
 ```python
 from ttp import ttp
@@ -228,7 +228,7 @@ results["result"] = parsed_data
 ### TextFSM Example - using programmatically    
 
 This is an alternative to automatically using TextFSM with the Netmiko Commands Service
-or to using a Data Extraction Service.  
+or to using a Data Processing Service.  
 
 The other approaches are likely better; this is included for completeness.
 
@@ -250,7 +250,7 @@ results["headers"] = parser.header  # just for documentation
 ## Manual Parsing 
 
 Any manual decoding/parsing of the text results of a previous command (e.g., from 
-a [Netmiko Commands Service](../automation/servicetypes/netmiko_commands/))
+a [Netmiko Commands Service](../automation/servicetypes/netmiko_commands.md))
 falls into this category.
 
 This can use any parsing technique - including functions like `str.split()` or

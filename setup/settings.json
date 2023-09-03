@@ -6,12 +6,13 @@
     "max_content_length": 104857600,
     "plugin_path": "eNMS/plugins",
     "session_timeout_minutes": 30,
-    "startup_migration": "examples"
+    "startup_migration": "examples",
+    "version": 4.6
   },
   "authentication": {
     "default": "database",
     "landing_page": "/dashboard",
-    "show_password_in_profile": true,
+    "allow_password_change": true,
     "force_authentication_method": false,
     "methods": {
       "database": {
@@ -33,6 +34,7 @@
     "use_task_queue": false
   },
   "cluster": {
+    "allowed_automation": ["scheduler", "rest_api", "application"],
     "active": false,
     "id": true,
     "scan_protocol": "http",
@@ -56,25 +58,29 @@
   },
   "docs": {
     "administration": "base/installation/",
-    "changelog_table": "advanced/administration/",
+    "changelog_table": "system/changelog/",
     "configuration_table": "inventory/configuration_management/",
-    "dashboard": "",
+    "credential_table": "administration/credentials/",
+    "dashboard": "system/dashboard/",
     "device_table": "inventory/network_creation/",
-    "event_table": "automation/scheduling/",
-    "geographical_view": "inventory/network_visualization/#geographic-view",
-    "link_table": "inventory/network_creation/",
+    "file_table": "system/files/",
+    "geographical_view": "visualization/geographical_view/",
+    "link_table": "inventory/links/",
+    "network_builder": "visualization/network_builder/",
+    "network_table": "visualization/network_builder/",
     "pool_table": "inventory/pools/",
-    "run_table": "automation/services/",
+    "run_table": "automation/results/",
     "service_table": "automation/services/",
+    "session_table": "system/sessions/",
     "task_table": "automation/scheduling/",
-    "user_table": "advanced/administration/",
-    "view_table": "inventory/network_visualization/",
-    "workflow_builder": "automation/workflows/",
-    "workflow_builder_table": "automation/workflows/"
+    "user_table": "administration/users/",
+    "workflow_builder": "automation/workflow_builder/"
   },
   "files": {
     "ignored_types": [".swp", ".tgz"],
-    "upload_timeout": 600000
+    "upload_timeout": 600000,
+    "log_events": true,
+    "trash": ""
   },
   "mail": {
     "port": 587,
@@ -108,6 +114,7 @@
     "custom_links": "",
     "custom_services": "",
     "files": "",
+    "migration": "",
     "playbooks": ""
   },
   "redis": {
@@ -134,8 +141,7 @@
     }
   },
   "security": {
-    "forbidden_python_libraries": ["eNMS", "os", "subprocess", "sys"],
-    "hash_user_passwords": true
+    "forbidden_python_libraries": ["eNMS", "os", "subprocess", "sys"]
   },
   "slack": {
     "channel": "random"
@@ -145,8 +151,7 @@
     "command": "python3 -m flask run -h 0.0.0.0",
     "credentials": {
       "custom": true,
-      "device": true,
-      "user": true
+      "device": true
     },
     "end_port": 9100,
     "port": -1,

@@ -1,7 +1,6 @@
 {
   "engine": {
     "common": {
-      "convert_unicode": true,
       "pool_pre_ping": true,
       "pool_recycle": 3600
     },
@@ -18,9 +17,10 @@
   },
   "columns": {
     "length": {
-      "tiny_string_length": 64,
-      "small_string_length": 255,
-      "large_string_length": 4294967295
+      "tiny_string": 64,
+      "small_string": 255,
+      "large_string": 4294967295,
+      "pickletype": 16777215
     }
   },
   "transactions": {
@@ -94,12 +94,13 @@
       "destination_id",
       "pools",
       "networks",
+      "runs",
       "target_services",
       "tasks",
       "users"
     ],
-    "file": ["id", "filename", "status"],
-    "folder": ["id", "filename", "status"],
+    "file": ["id", "filename", "folder_path", "full_path", "status"],
+    "folder": ["id", "filename", "folder_path", "full_path", "status"],
     "link": [
       "id",
       "pools",
@@ -115,6 +116,7 @@
       "device_number",
       "id",
       "link_number",
+      "runs",
       "service_number",
       "services",
       "network_number",
@@ -127,6 +129,7 @@
       "destinations",
       "named_credential_id",
       "path",
+      "runs",
       "status",
       "superworkflow_id",
       "tasks",
@@ -149,6 +152,7 @@
       "devices",
       "pools",
       "groups",
+      "last_login",
       "links",
       "menu",
       "delete_requests",
@@ -229,6 +233,16 @@
         "model2": {
           "column": "user_id",
           "foreign_key": "user"
+        }
+      },
+      "run_service": {
+        "model1": {
+          "column": "run_id",
+          "foreign_key": "run"
+        },
+        "model2": {
+          "column": "service_id",
+          "foreign_key": "service"
         }
       },
       "run_device": {

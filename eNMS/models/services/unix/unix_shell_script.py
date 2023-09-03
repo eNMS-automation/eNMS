@@ -9,7 +9,6 @@ from eNMS.variables import vs
 
 
 class UnixShellScriptService(ConnectionService):
-
     __tablename__ = "unix_shell_script_service"
     pretty_name = "Unix Shell"
     parent_type = "connection_service"
@@ -18,9 +17,10 @@ class UnixShellScriptService(ConnectionService):
     enable_mode = db.Column(Boolean, default=False)
     config_mode = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
+    conn_timeout = db.Column(Float, default=10.0)
+    auth_timeout = db.Column(Float, default=0.0)
+    banner_timeout = db.Column(Float, default=15.0)
     fast_cli = db.Column(Boolean, default=False)
-    timeout = db.Column(Integer, default=10.0)
-    delay_factor = db.Column(Float, default=1.0)
     global_delay_factor = db.Column(Float, default=1.0)
     expect_string = db.Column(db.SmallString)
     auto_find_prompt = db.Column(Boolean, default=True)
@@ -43,7 +43,6 @@ class UnixShellScriptService(ConnectionService):
         for command in command_list:
             output = netmiko_connection.send_command(
                 command,
-                delay_factor=run.delay_factor,
                 expect_string=expect_string or None,
                 auto_find_prompt=run.auto_find_prompt,
                 strip_prompt=run.strip_prompt,
@@ -53,7 +52,6 @@ class UnixShellScriptService(ConnectionService):
                 result = output
             return_code = netmiko_connection.send_command(
                 "echo $?",
-                delay_factor=run.delay_factor,
                 expect_string=expect_string or None,
                 auto_find_prompt=run.auto_find_prompt,
                 strip_prompt=run.strip_prompt,
@@ -89,16 +87,16 @@ class UnixShellScriptForm(NetmikoForm):
             "fi\n"
         ),
     )
-    expect_string = StringField(substitution=True)
     auto_find_prompt = BooleanField(default=True)
+    expect_string = StringField(substitution=True)
     strip_prompt = BooleanField(default=True)
     strip_command = BooleanField(default=True)
     groups = {
         "Main Parameters": {"commands": ["source_code"], "default": "expanded"},
         "Advanced Netmiko Parameters": {
             "commands": [
-                "expect_string",
                 "auto_find_prompt",
+                "expect_string",
                 "strip_prompt",
                 "strip_command",
             ],

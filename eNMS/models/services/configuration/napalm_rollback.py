@@ -7,7 +7,6 @@ from eNMS.models.automation import ConnectionService
 
 
 class NapalmRollbackService(ConnectionService):
-
     __tablename__ = "napalm_rollback_service"
     pretty_name = "NAPALM Rollback"
     parent_type = "connection_service"

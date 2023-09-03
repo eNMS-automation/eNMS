@@ -19,7 +19,6 @@ from eNMS.models.automation import Service
 
 
 class DataProcessingService(Service):
-
     __tablename__ = "data_processing_service"
     pretty_name = "Data Processing"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)

@@ -6,6 +6,7 @@ from flask import (
     jsonify,
     redirect,
     render_template,
+    render_template_string,
     request,
     send_file,
     url_for,
@@ -15,8 +16,10 @@ from flask_login import current_user, LoginManager, login_user, logout_user, log
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
 from importlib import import_module
+from io import BytesIO
 from logging import info
-from os import getenv
+from os import getenv, remove
+from pathlib import Path
 from tarfile import open as open_tar
 from traceback import format_exc
 from werkzeug.exceptions import Forbidden, NotFound
@@ -30,7 +33,6 @@ from eNMS.variables import vs
 
 
 class Server(Flask):
-
     status_log_level = {
         200: "info",
         401: "warning",
@@ -42,7 +44,7 @@ class Server(Flask):
     status_error_message = {
         401: "Wrong Credentials.",
         403: "Not Authorized.",
-        404: "Invalid POST request.",
+        404: "Not Found.",
         500: "Internal Server Error.",
     }
 
@@ -91,7 +93,7 @@ class Server(Flask):
 
         @login_manager.user_loader
         def user_loader(name):
-            return db.fetch("user", allow_none=True, name=name)
+            return db.fetch("user", allow_none=True, name=name, rbac=None)
 
     def configure_context_processor(self):
         @self.context_processor
@@ -215,6 +217,8 @@ class Server(Flask):
                     user = env.authenticate_user(**kwargs)
                     if user:
                         login_user(user, remember=False)
+                        user.last_login = vs.get_time()[:-7]
+                        db.session.commit()
                         session.permanent = True
                         success, log = True, f"USER '{username}' logged in"
                     else:
@@ -288,18 +292,15 @@ class Server(Flask):
         @blueprint.route("/parameterized_form/<service_id>")
         @self.process_requests
         def parameterized_form(service_id):
+            service = db.fetch("service", id=service_id)
             result = form_factory.register_parameterized_form(service_id)
             if isinstance(result, str):
                 return result
-            return render_template(
-                "forms/base.html",
-                **{
-                    "form_type": f"initial-{service_id}",
-                    "action": "eNMS.automation.submitInitialForm",
-                    "button_label": "Run Service",
-                    "button_class": "primary",
-                    "form": result(request.form),
-                },
+            custom_template = service.parameterized_form_template
+            render = render_template_string if custom_template else render_template
+            return render(
+                custom_template or "forms/parameterized.html",
+                **{"form_type": f"initial-{service_id}", "form": result(request.form)},
             )
 
         @blueprint.route("/help/<path:path>")
@@ -319,11 +320,20 @@ class Server(Flask):
         @blueprint.route("/download/<type>/<path:path>")
         @self.process_requests
         def download(type, path):
+            return_data, full_path = BytesIO(), f"{vs.file_path}/{path}"
             if type == "folder":
-                with open_tar(f"/{path}.tgz", "w:gz") as tar:
-                    tar.add(f"/{path}", arcname="")
-                path = f"/{path}.tgz"
-            return send_file(f"/{path}", as_attachment=True)
+                with open_tar(f"{full_path}.tgz", "w:gz") as tar:
+                    tar.add(full_path, arcname="")
+                full_path = f"{full_path}.tgz"
+            with open(full_path, "rb") as file:
+                return_data.write(file.read())
+            return_data.seek(0)
+            if type == "folder":
+                remove(full_path)
+                archive = db.fetch("folder", path=f"/{path}", allow_none=True)
+                if archive:
+                    db.session.delete(archive)
+            return send_file(return_data, download_name=Path(full_path).name)
 
         @blueprint.route("/export_service/<int:id>")
         @self.process_requests

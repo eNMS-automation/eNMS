@@ -1,0 +1,40 @@
+<form
+  id="{{ form_type }}-form"
+  class="form-horizontal form-label-left add-id"
+  method="post"
+  autocomplete="off"
+>
+  <div class="modal-body">
+    <div class="form-group">
+      {% block form_content %} {% for field in form %} {% set id =
+      "{}-{}".format(form_type, field.name) %} {% set style = "height:
+      {}px".format(field.render_kw["rows"]*20 + 17) if "TextArea" in field.widget|string
+      else "" %}
+      <div style="{{ style }}">
+        {% set class = "form-control-bool" if field.type == "BooleanField" else
+        "form-control" %} {% if field.widget.input_type == 'hidden' %} {{ field(id=id)
+        }} {% else %}
+        <label class="control-label col-md-3 col-sm-3 col-xs-12"
+          >{{ field.label }}</label
+        >
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          {{ field(id=id, class="collapsed {} add-id".format(class),
+          checked=field.default) }}
+        </div>
+        <br /><br />
+        {% endif %}
+      </div>
+      {% endfor %} {% endblock form_content %}
+    </div>
+    <center>
+      <button
+        id="{{ form_type }}-action-btn"
+        type="button"
+        class="btn btn-primary add-id btn-id"
+        value="eNMS.automation.submitInitialForm"
+      >
+        Run Service
+      </button>
+    </center>
+  </div>
+</form>

@@ -1,7 +1,8 @@
-{% from 'macros.html' import field_template %}
+{% from 'macros.html' import inline_field, block_field %} {% set filtering = form_type
+== "pool_filtering" %}
 <div class="modal-body">
   <form
-    id="pool-form"
+    id="{{ form_type }}-form"
     class="form-horizontal form-label-left add-id"
     method="post"
     autocomplete="off"
@@ -27,7 +28,7 @@
           >Custom Properties</a
         >
       </li>
-      <li class="nav-item add-id" id="rbac-nav" style="display: none;">
+      <li class="nav-item add-id" id="rbac-nav">
         <a class="nav-link href-id" data-toggle="tab" href="#rbac-properties"
           >Access Control</a
         >
@@ -37,32 +38,8 @@
       <div class="tab-pane fade in active add-id" id="common-properties">
         {{ form.id(id='pool-id', class="add-id") }} {{ form.hidden_tag() }}
         <div class="form-group">
-          <label>Name</label>
-          <div class="form-group">
-            {{ form.name(id="pool-name", class="form-control required add-id",
-            placeholder="Name") }}
-          </div>
-          <label>Creator</label>
-          <div class="form-group">
-            {{ form.creator(id="pool-creator", class="form-control required add-id") }}
-          </div>
-          <label>Description</label>
-          <div class="form-group">
-            {{ form.description(id="pool-description", class="form-control add-id",
-            placeholder="Description") }}
-          </div>
-          <fieldset>
-            <div class="item">
-              {{ form.admin_only(id="pool-admin_only", class="add-id") }}
-              <label>Admin only (pool is only visible to admin users)</label>
-            </div>
-          </fieldset>
-          <fieldset>
-            <div class="item">
-              {{ form.manually_defined(id="pool-manually_defined", class="add-id") }}
-              <label>Manually defined (will not be automatically updated)</label>
-            </div>
-          </fieldset>
+          {% for field_name in ("name", "creator", "description", "admin_only",
+          "manually_defined") %} {{ block_field(form, field_name) }} {% endfor %}
         </div>
       </div>
       {% for model in form.models %}
@@ -72,17 +49,21 @@
           cellspacing="0"
           width="100%"
         >
+          {% if not filtering %}
           <thead>
             <tr>
               <th>Property</th>
               <th>Value</th>
+
               <th style="width: 25%;">Match</th>
               <th style="width: 5%;">Invert</th>
             </tr>
           </thead>
+          {% endif %}
           <tbody>
             {% for property in form[model + "_properties"] %} {% set property_name =
-            "{}_{}".format(model, property) %}
+            "{}_{}".format(model, property) %} {% if filtering %} {{ block_field(form,
+            property_name) }} {% else %}
             <tr>
               <td>
                 {{ names.get(property, property.replace("_", " ").capitalize() ) }}
@@ -103,44 +84,18 @@
                 </center>
               </td>
             </tr>
-            {% endfor %}
+            {% endif %} {% endfor %}
           </tbody>
         </table>
       </div>
       {% endfor %}
       <div class="tab-pane fade add-id" id="custom-properties">
-        <div class="x_title">
-          <h3>Custom Properties</h3>
-        </div>
-        <table
-          class="table table-striped table-bordered dt-responsive nowrap"
-          cellspacing="0"
-          width="100%"
-        >
-          <thead>
-            <tr>
-              <th>Custom Property</th>
-              <th>Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for property, values in form.custom_properties.items() %}
-            <tr>
-              <td>
-                {{ values["pretty_name"] }}
-              </td>
-              <td>
-                {{ form[property](id="pool-" + property, class="form-control add-id") }}
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+        {% for property, values in form.custom_properties.items() %} {{
+        block_field(form, property) }} {% endfor %}
       </div>
       <div class="tab-pane fade add-id" id="rbac-properties">
-        {{ field_template(form_type, form["owners"]) }} {% for property in
-        form.rbac_properties %} {% set field = form[property] %} {{
-        field_template(form_type, field) }} {% endfor %}
+        {{ block_field(form, "owners") }} {% for property in form.rbac_properties %} {{
+        block_field(form, property) }} {% endfor %}
       </div>
     </div>
   </form>

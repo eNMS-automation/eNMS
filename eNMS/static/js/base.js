@@ -73,7 +73,7 @@ const panelThemes = {
 };
 
 $.ajaxSetup({
-  beforeSend: function (xhr, settings) {
+  beforeSend: function(xhr, settings) {
     if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
       xhr.setRequestHeader("X-CSRFToken", csrf_token);
     }
@@ -81,14 +81,14 @@ $.ajaxSetup({
       document.body.style.cursor = "progress";
     }
   },
-  complete: function () {
+  complete: function() {
     document.body.style.cursor = "default";
   },
 });
 
 function loadScript(url, id) {
   let script = document.createElement("script");
-  script.onload = function () {
+  script.onload = function() {
     try {
       job(id);
     } catch (e) {
@@ -136,14 +136,14 @@ export function observeMutations(container, target, callback) {
   }).observe(container, { childList: true, subtree: true });
 }
 
-export const call = function ({ url, data, form, callback }) {
+export const call = function({ url, data, form, callback }) {
   let params = {
     type: "POST",
     url: url,
-    success: function (results) {
+    success: function(results) {
       processResults(callback, results);
     },
-    error: function (error) {
+    error: function(error) {
       let message = `Error HTTP ${error.status}: ${error.statusText}.`;
       if (error.status == 400) {
         message += " Your session might have expired, try refreshing the page.";
@@ -165,10 +165,20 @@ export const call = function ({ url, data, form, callback }) {
   $.ajax(params);
 };
 
-export function serializeForm(form, formDefault) {
+export function serializeForm(form, formDefault, bulkFilter) {
   const data = JSON.parse(JSON.stringify($(form).serializeArray()));
   let result = {};
+  let propertiesToKeep = [];
+  if (bulkFilter) {
+    $("input[name^='bulk-filter']").each(function(_, el) {
+      if ($(el).prop("checked")) {
+        const property = $(el).data("property");
+        propertiesToKeep.push(property, `${property}_filter`, `${property}_invert`);
+      }
+    });
+  }
   data.forEach((property) => {
+    if (bulkFilter && !propertiesToKeep.includes(property.name)) return;
     const propertyType = formProperties[formDefault]?.[property.name]?.type;
     if (propertyType && propertyType.includes("object")) {
       if (!(property.name in result)) result[property.name] = [];
@@ -177,13 +187,23 @@ export function serializeForm(form, formDefault) {
       result[property.name] = property.value;
     }
   });
+  if (bulkFilter) {
+    $(form)
+      .find("input:checkbox")
+      .each(function() {
+        if (propertiesToKeep.includes(this.name)) {
+          result[this.name] = $(this).is(":checked") ? "bool-true" : "bool-false";
+        }
+      });
+  }
   return result;
 }
 
-const deleteInstance = function (type, id, tableId) {
+const deleteInstance = function(type, id, tableId) {
   call({
     url: `/delete_instance/${type}/${id}`,
-    callback: function (name) {
+    callback: function(result) {
+      if (result.delete_aborted) return notify(result.log, result.log_level, 5, true);
       if (type in subtypes.service) {
         type = "service";
         const path = localStorage.getItem("path");
@@ -197,7 +217,7 @@ const deleteInstance = function (type, id, tableId) {
           .remove()
           .draw(false);
       }
-      notify(`${type.toUpperCase()} '${name}' deleted.`, "success", 5, true);
+      notify(`${type.toUpperCase()} '${result.name}' deleted.`, "success", 5, true);
     },
   });
 };
@@ -206,7 +226,7 @@ function removeInstance(tableId, instance, relation) {
   call({
     url: "/remove_instance",
     data: { instance, relation },
-    callback: function () {
+    callback: function() {
       refreshTable(tableId, false, true);
       notify(
         `${instance.type.toUpperCase()} '${instance.name}' removed from
@@ -241,8 +261,10 @@ export function downloadFile(name, content, type) {
 export function createTooltips(panel) {
   $(panel || "html")
     .find("[data-tooltip]")
-    .each(function () {
-      const id = `tooltip-${$(this).attr("data-tooltip").replace(/\s/g, "")}`;
+    .each(function() {
+      const id = `tooltip-${$(this)
+        .attr("data-tooltip")
+        .replace(/\s/g, "")}`;
       jsPanel.tooltip.create({
         id: id,
         borderRadius: "10px",
@@ -267,12 +289,15 @@ export function createTooltips(panel) {
 
 export function loadTypes(model) {
   const subtypeModel = model == "edge" ? "link" : model;
-  $(`#${model}-type-list`).selectpicker({ liveSearch: true });
-  for (const [subtype, name] of Object.entries(subtypes[subtypeModel])) {
+  const modelSubtypes = Object.fromEntries(
+    Object.entries(subtypes[subtypeModel]).sort(([, a], [, b]) => a.localeCompare(b))
+  );
+  $(`#${model}-type-dd-list`).selectpicker({ liveSearch: true });
+  for (const [subtype, name] of Object.entries(modelSubtypes)) {
     if (page == "device_table" && subtype == "network") continue;
-    $(`#${model}-type-list`).append(new Option(name, subtype));
+    $(`#${model}-type-dd-list`).append(new Option(name, subtype));
   }
-  $(`#${model}-type-list`).selectpicker("refresh");
+  $(`#${model}-type-dd-list`).selectpicker("refresh");
 }
 
 function createNotificationBanner() {
@@ -329,7 +354,7 @@ export function openPanel({
     },
     resizeit: {
       containment: 0,
-      stop: function () {
+      stop: function() {
         if (tableId) refreshTable(tableId);
       },
     },
@@ -340,7 +365,7 @@ export function openPanel({
   } else {
     kwargs.contentAjax = {
       url: url || `/${name}_form`,
-      done: function (_, panel) {
+      done: function(_, panel) {
         panel.content.innerHTML = this.responseText;
         preprocessForm(panel, id, type, duplicate);
         configureForm(name, id, panelId);
@@ -379,7 +404,7 @@ export function showConfirmationPanel({
     size: "auto",
     checkRbac: false,
   });
-  $(".confirmAction").click(function () {
+  $(".confirmAction").click(function() {
     onConfirm();
     $(`#confirmation-${id}`).remove();
   });
@@ -418,7 +443,7 @@ export function createTooltip({
     } else {
       kwargs.contentAjax = {
         url: url,
-        done: function (_, panel) {
+        done: function(_, panel) {
           panel.content.innerHTML = this.responseText;
           preprocessForm(panel);
           configureForm(name, undefined, `tooltip-${name}`);
@@ -432,13 +457,13 @@ export function createTooltip({
       kwargs.header = false;
     }
     if (persistent) {
-      kwargs.onbeforeclose = function () {
+      kwargs.onbeforeclose = function() {
         $(this).hide();
       };
     }
     jsPanel.tooltip.create(kwargs);
     if (persistent) {
-      $(target).on("click", function () {
+      $(target).on("click", function() {
         $(`#tooltip-${name}`).show();
       });
     }
@@ -490,11 +515,12 @@ export function preprocessForm(panel, id, type, duplicate) {
     $(el).attr("href", `${settings.app.documentation_url}${$(el).attr("href")}`);
   });
   panel.querySelectorAll("[help]").forEach((el) => {
+    if ($(el).prop("nodeName") != "LABEL") return;
     const button = $(`
       <button class="icon-button" type="button">
         <span class="glyphicon glyphicon-info-sign"></span>
       </button>
-    `).on("click", function () {
+    `).on("click", function() {
       const helpUrl = $(el).attr("help");
       const propertyName = helpUrl.split("/").at(-1);
       openPanel({
@@ -502,7 +528,7 @@ export function preprocessForm(panel, id, type, duplicate) {
         title: propertyName.replace("_", " "),
         size: "600px auto",
         url: `/help/${helpUrl}`,
-        callback: function (helpPanel) {
+        callback: function(helpPanel) {
           helpPanel.querySelectorAll(".help-snippet").forEach((el) => {
             const editor = CodeMirror.fromTextArea(el, {
               lineNumbers: true,
@@ -553,7 +579,7 @@ export function initSelect(el, model, parentId, single, constraints) {
       type: "POST",
       delay: 250,
       contentType: "application/json",
-      data: function (params) {
+      data: function(params) {
         return JSON.stringify({
           term: params.term || "",
           page: params.page || 1,
@@ -561,7 +587,7 @@ export function initSelect(el, model, parentId, single, constraints) {
           multiple: !single,
         });
       },
-      processResults: function (data, params) {
+      processResults: function(data, params) {
         params.page = params.page || 1;
         return {
           results: data.items,
@@ -598,7 +624,7 @@ export function configureForm(form, id, panelId) {
       });
     } else if (field.type == "json") {
       let editor = new JSONEditor(el.next()[0], {
-        onChange: function () {
+        onChange: function() {
           $(el).val(JSON.stringify(editor.get()));
         },
       });
@@ -666,15 +692,16 @@ function addInstancesToRelation(type, id) {
 }
 
 export function showInstancePanel(type, id, mode, tableId, edge) {
+  const formType = mode == "bulk-filter" ? `${type}_filtering` : type;
   openPanel({
-    name: type,
+    name: formType,
     id: id || tableId,
     footerToolbar: `
       <div style="width: 100%; height: 40px; display: flex;
         align-items: center; justify-content: center;">
         <button
           style="width: 100px"
-          id="${type}-action-btn"
+          id="${formType}-action-btn"
           type="button"
           class="btn btn-success btn-id add-id"
           value="eNMS.base.processData"
@@ -682,8 +709,8 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
           Save
         </button>
       </div>`,
-    callback: function (panel) {
-      const isService = type in subtypes.service;
+    callback: function(panel) {
+      const isService = type == "service" || type in subtypes.service;
       const isNode = type in subtypes.node;
       const isLink = type in subtypes.link;
       if (isService) showServicePanel(type, id, mode, tableId);
@@ -694,32 +721,33 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
       if (id) {
         call({
           url: `/get/${type}/${id}`,
-          callback: function (instance) {
+          callback: function(instance) {
             const ownersNames = instance.owners
               ? instance.owners.map((user) => user.name)
               : [];
-            if (user.is_admin || ownersNames.includes(user.name)) {
-              $(`#rbac-nav-${id}`).show();
-            } else {
-              $(`#rbac-nav-${id},#rbac-properties-${id}`).remove();
-            }
+            const allowedUser = user.is_admin || ownersNames.includes(user.name);
+            $(`#rbac-properties-${id} *`).prop("disabled", !allowedUser);
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
             processInstance(type, instance);
-            if (isService) loadScript(`../static/js/services/${type}.js`, id);
+            if (isService) loadScript(`/static/js/services/${type}.js`, id);
           },
         });
-      } else if (mode == "bulk") {
-        buildBulkPanel(panel, type, tableId);
+      } else if (mode == "bulk-edit") {
+        buildBulkEditPanel(panel, type, tableId);
+      } else if (mode == "bulk-filter") {
+        buildBulkFilterPanel(panel, type, formType, tableId);
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
         if (page == "workflow_builder" && creationMode == "create_service") {
           $(`#${type}-workflows`).append(new Option(instance.name, instance.name));
-          $(`#${type}-workflows`).val(instance.name).trigger("change");
+          $(`#${type}-workflows`)
+            .val(instance.name)
+            .trigger("change");
         }
         if (page == "network_builder") updateNetworkPanel(type);
       }
-      if (isService && !id) loadScript(`../static/js/services/${type}.js`);
+      if (isService && !id) loadScript(`/static/js/services/${type}.js`);
       const property = isService
         ? "scoped_name"
         : type == "folder"
@@ -732,8 +760,7 @@ export function showInstancePanel(type, id, mode, tableId, edge) {
   });
 }
 
-function buildBulkPanel(panel, type, tableId) {
-  $("#rbac-nav").show();
+function buildBulkEditPanel(panel, type, tableId) {
   const model = type in subtypes.service ? "service" : type;
   for (const [property, value] of Object.entries(formProperties[type])) {
     if (value.type == "object-list") {
@@ -755,7 +782,7 @@ function buildBulkPanel(panel, type, tableId) {
     if (["name", "scoped_name", "type"].includes(property)) {
       $(`#${type}-${property}-${tableId}`).prop("readonly", true);
     } else {
-      $(`label[for='${property}']`).after(`
+      $(panel).find(`label[for='${property}']`).after(`
         <div class="item" style='float:right; margin-left: 15px'>
           <input
             id="bulk-edit-${property}-${tableId}"
@@ -775,7 +802,7 @@ function buildBulkPanel(panel, type, tableId) {
   call({
     url: `/filtering/${model}`,
     data: { form: form, bulk: "id", rbac: rbac },
-    callback: function (instances) {
+    callback: function(instances) {
       $(`#${type}-id-${tableId}`).val(instances.join("-"));
       $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val("Bulk Edit");
       const number = instances.length;
@@ -789,6 +816,93 @@ function buildBulkPanel(panel, type, tableId) {
         .text("Bulk Edit");
     },
   });
+}
+
+function buildBulkFilterPanel(panel, type, formType, tableId) {
+  const tableSuffix = tableId ? `-${tableId}` : "";
+  type = type in subtypes.service ? "service" : type;
+  panel.setHeaderTitle(`Filter all ${type}s in table`);
+  $(`#${formType}-creator${tableSuffix}`).prop("readonly", false);
+  for (const [property, value] of Object.entries(formProperties[formType])) {
+    if (value.type == "object-list") {
+      $(`#${formType}-${property}-property-div${tableSuffix}`).width("73%").before(`
+          <div style="float:right; width: 26%; margin-top: 2px;">
+            <select
+              data-width="100%"
+              id="${tableId}-${property}-list"
+              name="${property}_filter"
+            >
+              <option value="union">Union</option>
+              <option value="intersection">Intersection</option>
+              <option value="empty">Empty</option>
+            </select>
+          </div>
+        `);
+      $(`#${tableId}-${property}-list`).selectpicker();
+    } else if (["str", "integer", "code"].includes(value.type)) {
+      const invertCheckbox = `
+        <input
+        class="collapsed form-control-bool"
+        name="${property}_invert"
+        type="checkbox"
+        title="Invert Search"
+      />`;
+      const modeSelectList = `
+        <select
+        data-width="100%"
+        id="${tableId}-${property}-list"
+        name="${property}_filter"
+      >
+        <option value="inclusion">Inclusion</option>
+        <option value="equality">Equality</option>
+        <option value="regex">Regular Expression</option>
+        <option value="empty">Empty</option>
+      </select>`;
+      if (
+        value.type == "code" ||
+        $(`#${formType}-${property}${tableSuffix}`).prop("nodeName") == "TEXTAREA"
+      ) {
+        $(`#${formType}-${property}-property-div${tableSuffix}`).after(`
+          <div style="margin-top: 8px;">
+            <div style="float:left; width: 93%;">${modeSelectList}</div>
+            <div style="float:left; width: 5%;">${invertCheckbox}</div>
+          </div>
+          `);
+      } else {
+        $(`#${formType}-${property}-property-div${tableSuffix}`).width("73%").before(`
+          <center>
+            <div style="float:right; width: 3%; margin-left: -5px; margin-right: 10px;">
+              ${invertCheckbox}
+            </div>
+          </center>
+          <div style="float:right; width: 22%;">${modeSelectList}</div>
+        `);
+      }
+      $(`#${tableId}-${property}-list`).selectpicker();
+    } else if (value.type == "dict") {
+      $(`#${formType}-${property}${tableSuffix}`).prop("readonly", true);
+      continue;
+    } else if (value.type == "multiselect") {
+      $(`#${formType}-${property}${tableSuffix}`).attr("disabled", "disabled");
+      continue;
+    }
+    $(panel).find(`label[for='${property}']`).after(`
+      <div class="item" style='float:right; margin-left: 15px'>
+        <input
+          id="bulk-filter-${property}${tableSuffix}"
+          name="bulk-filter-${property}"
+          data-property="${property}"
+          type="checkbox"
+        />
+      </div>
+    `);
+  }
+  const filteringFunction = tableId
+    ? `eNMS.table.refreshTable('${tableId}', true, true)`
+    : `eNMS.visualization.displayNetwork()`;
+  $(`#${formType}-action-btn${tableSuffix}`)
+    .attr("onclick", filteringFunction)
+    .text("Bulk Filter");
 }
 
 function updateProperty(instance, el, property, value, type) {
@@ -845,7 +959,8 @@ export function processInstance(type, instance) {
     const el = $(
       instance ? `#${type}-${property}-${instance.id}` : `#${type}-${property}`
     );
-    if (!el.length) continue;
+    const isList = formProperties?.[type]?.[property]?.type == "field-list";
+    if (!el.length && !isList) continue;
     updateProperty(instance, el, property, value, type);
   }
 }
@@ -882,12 +997,12 @@ function processData(type, id) {
   });
 }
 
-(function ($) {
+(function($) {
   "use strict";
 
-  $.jstree.plugins.html_row = function (options, parent) {
+  $.jstree.plugins.html_row = function(options, parent) {
     // eslint-disable-next-line
-    this.redraw_node = function (nodeId, ...args) {
+    this.redraw_node = function(nodeId, ...args) {
       let el = parent.redraw_node.apply(this, [nodeId, ...args]);
       if (el) {
         let node = this._model.data[nodeId];
@@ -932,10 +1047,10 @@ export function setTriggerMenu(value) {
   triggerMenu = value;
 }
 
-(function ($, window) {
-  $.fn.contextMenu = function (settings) {
-    return this.each(function () {
-      $(this).on("contextmenu", function (e) {
+(function($, window) {
+  $.fn.contextMenu = function(settings) {
+    return this.each(function() {
+      $(this).on("contextmenu", function(e) {
         if (e.ctrlKey || !triggerMenu) return;
         const $menu = $(settings.menuSelector)
           .show()
@@ -945,22 +1060,30 @@ export function setTriggerMenu(value) {
             top: getMenuPosition(e.clientY, "height", "scrollTop") + 60,
           })
           .off("click")
-          .on("click", "a", function (e) {
+          .on("click", "a", function(e) {
             $menu.hide();
             const $selectedMenu = $(e.target);
             settings.menuSelected.call(this, $selectedMenu);
           });
         return false;
       });
-      $(".dropdown-submenu a.menu-submenu").on("click", function (e) {
-        const isHidden = $(this).next("ul").is(":hidden");
-        $(".dropdown-submenu a.menu-submenu").next("ul").hide();
-        $(this).next("ul").toggle(isHidden);
+      $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
+        const isHidden = $(this)
+          .next("ul")
+          .is(":hidden");
+        $(".dropdown-submenu a.menu-submenu")
+          .next("ul")
+          .hide();
+        $(this)
+          .next("ul")
+          .toggle(isHidden);
         e.stopPropagation();
         e.preventDefault();
       });
-      $("body").click(function () {
-        $(".dropdown-submenu a.menu-submenu").next("ul").hide();
+      $("body").click(function() {
+        $(".dropdown-submenu a.menu-submenu")
+          .next("ul")
+          .hide();
         $(settings.menuSelector).hide();
       });
     });
@@ -1143,20 +1266,28 @@ function switchTheme(theme) {
 function initSidebar() {
   $("#sidebar-menu")
     .find("a")
-    .on("click", function () {
+    .on("click", function() {
       let $li = $(this).parent();
       if ($li.is(".active")) {
         $li.removeClass("active active-sm");
         $("ul:first", $li).slideUp();
       } else {
         if (!$li.parent().is(".child_menu")) {
-          $("#sidebar-menu").find("li").removeClass("active active-sm");
-          $("#sidebar-menu").find("li ul").slideUp();
+          $("#sidebar-menu")
+            .find("li")
+            .removeClass("active active-sm");
+          $("#sidebar-menu")
+            .find("li ul")
+            .slideUp();
         } else {
           if ($("body").is(".nav-sm")) {
             if (!$li.parent().is(".child_menu")) {
-              $("#sidebar-menu").find("li").removeClass("active active-sm");
-              $("#sidebar-menu").find("li ul").slideUp();
+              $("#sidebar-menu")
+                .find("li")
+                .removeClass("active active-sm");
+              $("#sidebar-menu")
+                .find("li ul")
+                .slideUp();
             }
           }
         }
@@ -1165,24 +1296,39 @@ function initSidebar() {
       }
     });
 
-  let switchMenu = function () {
+  let switchMenu = function() {
     if ($("body").hasClass("nav-sm")) {
       $("#eNMS").css({ "font-size": "17px" });
       $("#eNMS-version").css({ "font-size": "15px" });
-      $("#sidebar-menu").find("li.active ul").hide();
-      $("#sidebar-menu").find("li.active").addClass("active-sm");
-      $("#sidebar-menu").find("li.active").removeClass("active");
+      $("#sidebar-menu")
+        .find("li.active ul")
+        .hide();
+      $("#sidebar-menu")
+        .find("li.active")
+        .addClass("active-sm");
+      $("#sidebar-menu")
+        .find("li.active")
+        .removeClass("active");
     } else {
       $("#eNMS").css({ "font-size": "30px" });
       $("#eNMS-version").css({ "font-size": "20px" });
-      $("#sidebar-menu").find("li.active-sm ul").show();
-      $("#sidebar-menu").find("li.active-sm").addClass("active");
-      $("#sidebar-menu").find("li.active-sm").removeClass("active-sm");
+      $("#sidebar-menu")
+        .find("li.active-sm ul")
+        .show();
+      $("#sidebar-menu")
+        .find("li.active-sm")
+        .addClass("active");
+      $("#sidebar-menu")
+        .find("li.active-sm")
+        .removeClass("active-sm");
       const url = "a[href='" + currentUrl + "']";
-      $("#sidebar-menu").find(url).parent("li").addClass("current-page");
+      $("#sidebar-menu")
+        .find(url)
+        .parent("li")
+        .addClass("current-page");
       $("#sidebar-menu")
         .find("a")
-        .filter(function () {
+        .filter(function() {
           return this.href == currentUrl;
         })
         .parent("li")
@@ -1192,13 +1338,15 @@ function initSidebar() {
         .parent()
         .addClass("active");
     }
-    $(".dataTable").each(function () {
-      $(this).dataTable().fnDraw();
+    $(".dataTable").each(function() {
+      $(this)
+        .dataTable()
+        .fnDraw();
     });
   };
 
   switchMenu();
-  $("#menu_toggle").on("click", function () {
+  $("#menu_toggle").on("click", function() {
     call({ url: `/switch_menu/${user.id}` });
     $("body").toggleClass("nav-md nav-sm");
     $("#server-time").hide();
@@ -1206,8 +1354,8 @@ function initSidebar() {
   });
 }
 
-$(document).ready(function () {
-  $("#eNMS").on("click", function (event) {
+$(document).ready(function() {
+  $("#eNMS").on("click", function(event) {
     if (!event.altKey || !event.shiftKey || !user.is_admin) return;
     openDebugPanel();
   });
@@ -1236,7 +1384,7 @@ $(document).ready(function () {
   createNotificationBanner();
 });
 
-$(window).load(function () {
+$(window).load(function() {
   NProgress.done();
 });
 

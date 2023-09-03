@@ -9,7 +9,6 @@ from eNMS.models.automation import Service
 
 
 class PythonSnippetService(Service):
-
     __tablename__ = "python_snippet_service"
     pretty_name = "Python Snippet"
 
@@ -19,7 +18,6 @@ class PythonSnippetService(Service):
     __mapper_args__ = {"polymorphic_identity": "python_snippet_service"}
 
     def job(self, run, device=None):
-
         try:
             code_object = compile(run.source_code, "user_python_code", "exec")
         except Exception as exc:

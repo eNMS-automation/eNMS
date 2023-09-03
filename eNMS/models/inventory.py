@@ -1,6 +1,5 @@
 from re import search, sub
 from sqlalchemy import and_, Boolean, event, ForeignKey, Integer, or_
-from sqlalchemy.sql.expression import literal
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, deferred, relationship
 from sqlalchemy.schema import UniqueConstraint
@@ -12,7 +11,6 @@ from eNMS.variables import vs
 
 
 class Object(AbstractBase):
-
     __tablename__ = "object"
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
@@ -30,7 +28,8 @@ class Object(AbstractBase):
         super().update(**kwargs)
         if not hasattr(self, "class_type") or self.class_type == "network":
             return
-        self.update_last_modified_properties()
+        if not kwargs.get("migration_import"):
+            self.update_last_modified_properties()
 
     def delete(self):
         number = f"{self.class_type}_number"
@@ -41,7 +40,6 @@ class Object(AbstractBase):
 
 
 class Node(Object):
-
     __tablename__ = "node"
     __mapper_args__ = {"polymorphic_identity": "node"}
     parent_type = "object"
@@ -64,7 +62,6 @@ class Node(Object):
 
 
 class Device(Node):
-
     __tablename__ = class_type = export_type = "device"
     __mapper_args__ = {"polymorphic_identity": "device"}
     pretty_name = "Device"
@@ -157,7 +154,7 @@ class Device(Node):
             else:
                 result = []
                 content, visited = getattr(self, property).splitlines(), set()
-                for (index, line) in enumerate(content):
+                for index, line in enumerate(content):
                     match_lines, merge = [], index - context - 1 in visited
                     if (
                         not search(data, line)
@@ -215,7 +212,6 @@ class Device(Node):
 
 
 class Link(Object):
-
     __tablename__ = class_type = export_type = "link"
     __mapper_args__ = {"polymorphic_identity": "link"}
     pretty_name = "Link"
@@ -275,7 +271,6 @@ class Link(Object):
 
 
 class Pool(AbstractBase):
-
     __tablename__ = type = class_type = "pool"
     models = ("device", "link")
     id = db.Column(Integer, primary_key=True)
@@ -391,7 +386,6 @@ class Pool(AbstractBase):
 
 
 class Session(AbstractBase):
-
     __tablename__ = type = "session"
     private = True
     id = db.Column(Integer, primary_key=True)

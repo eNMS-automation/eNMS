@@ -1,6 +1,191 @@
 
 # Release Notes
 
+Version 4.6.0: Clustering
+-------------------------
+
+- Add new Clustering menu entry with "Server" and "Worker" pages
+- Add one-to-many relationship between Run and Server class
+- Add one-to-many relationship between Worker and Server class
+- Display server and worker in run table as hyperlink to the edit panel
+- In Server SQL table and Server table in the UI:
+  - Add "scheduler_address" and "scheduler_active" properties in Server table. These properties
+    are initialized with the SCHEDULER_ADDR and SCHEDULER_ACTIVE environment variable.
+  - Add "runs" and "workers" links in server table
+  - Add "version" and "commit SHA" properties
+  - Add "location" property, populated from SERVER_LOCATION environment variable
+  - Add "Last Restart" property in server table: updated every time the application starts.
+  - Add "Current runs" property in server table: counts number of runs currently running on server.
+  - Add "Role" property to distinguish between "primary" and "standby" in the cluster
+  - Add "Allowed Automation" property to control allowed automation:
+    - "scheduler": server can run jobs from scheduler via "run_task" REST endpoint
+    - "rest_api": server can run jobs from REST API via "run_server" REST endpoint
+    - "application": server can run jobs from the UI via "run_service" controller endpoint
+  - "Allowed Automation" can be configured from settings.json > "cluster" > "allowed_automation"
+- Rename 'import_version' key to 'version' in settings.json > app
+- Update both server version and commit SHA every time the application starts
+- Add server version and commit SHA at the time of the run in Run table as string properties:
+  - These properties are not updated when the server version / commit SHA is modified
+  - These properties are not erased if the server object of the run is deleted
+- Add new "Worker" table in database and UI (Administration menu)
+  - A worker is created or updated whenever a job starts running
+  - Add "subtype" based on the "_" environment variable (e.g python, gunicorn, dramatiq)
+  - Add "last_update" property to show when the worker was last used / updated
+  - Add "server" hyperlink to the edit panel of worker's server
+  - Add "current_runs" property to show how many jobs the worker is currently running
+  - Add "runs" property: one-to-many relationship between worker <-> runs, and button in
+    worker table to display all runs executed by the worker.
+- When loading the application, check whether the server's workers are running and if not,
+  delete them from the database
+- Refactor get_workers REST endpoint to use workers in the database instead of storing
+  worker data in the redis queue
+- When a worker is deleted from the worker table, send SIGTERM signal to underlying process
+- Don't check for metadata version when doing migration import, only check for service import
+- Add mechanism to use a StringField for the properties in properties.json > "property_list":
+  if the list is empty, will default to StringField instead of a SelectField.
+
+Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
+--------------------------------------------------------------------------
+
+- Bulk Filtering mechanism
+  - refactoring of the service template with new Jinja2 macro
+  - Existing caveats:
+    - Cannot filter service type or device type specific properties
+    - Cannot be used for bulk editing
+- Round result size to 1 decimal when the result size is higher than 50% the maximum
+  allowed size
+- Don't allow saving a workflow if the run method is set to Service x Service and the
+  workflow has target devices, pools, or a device query
+- Don't allow skipping services in a workflow if workflow edit is restricted to
+  owners via RBAC access control
+- Remove all references to old "update_pools" mechanism (removed last release)
+  Commit: 14e57286f731dcd5e8302abe327ef5d9d5c2dfbf
+- Add new "no_search" keyword argument in SelectField and MultipleSelectField
+  to disable search box (in service form)
+- Remove `hash_user_passwords` options from settings.json (always hash passwords)
+  Remove ability to use user passwords for automation & web SSH.
+- Remove pin to 2.3.3 for wtforms in requirements
+- Remove pin to 1.0.1 for flask_wtf in requirements
+- Remove pin to 2.0.1 for itsdangerous in requirements
+- Remove pin to 1.4.46 for sqlalchemy in requirements (move to sqlalchemy v2)
+- Remove pin to 3.4 for netmiko (move to netmiko 4+)
+  - remove delay_factor and add read_timeout property.
+- Fix duplicated run name when running a service from the REST API bug
+- Order model drop down lists in the UI based on pretty name instead of tablename
+- Add user "last login" property (record time of latest login)
+  Commit: f2e4f2658ae0157020412684226e2a1a8cb58aa2
+- Add zoom sensitivity control in user profile for Workflow Builder
+- Remove "username" variable from workflow global variables and add "user"
+  dictionary instead with name and email. Mandatory checks:
+  - wherever "username" is used, it must be replaced with user["name"]
+  - "user" must not be used in existing workflows
+- Add new "ignore_invalid_targets" parameter in run_service REST endpoint to run
+  even if there are invalid targets.
+- Update size of restart workflow from panel to fit to content
+- Add device name to git history comparison panel title
+- Add task name, target devices and target pools to the run table ("Results" page)
+- Add custom parameterized form feature:
+  - new "Parameterized Form Template" field in service panel > step 1 for the HTML code
+  - supports JavaScript code inside <script></script> tag
+  - must follow the same template as the default parameterized form ("form_type" variable,
+  add-id / btn-id CSS class, eNMS.automation.submitInitialForm run function, etc...)
+- Improve performances of migration import mechanism (~ x10)
+  - Use CLoader to load migration files
+  - Use a dictionary to store SQLAlchemy objects so that they are only fetched once
+  - Disable log events during import
+  - Commit: 9d2ceaee0784b25e203ac09ad44c38deab56a4e0 / 6fb025f981216de05b3db83b1912645a5dc60f59
+- Add "Last Run" property for services to indicate the last time it was run
+- Revert update function default RBAC value back to "edit". For relationship update, required
+  "read" access instead of "edit" access (7342db9e4261e8fbbed34e938c58b13943dff54d)
+- Reduce number of fetch when running a workflow:
+  - number of fetch / 10, execution time improved by 30%
+  - lazy join of run.service, workflow.services / edges, workflow edge source/destination/workflow
+  - new device store in workflow job function to avoid fetching devices multiple times
+  - Commit: b56feea372d852f3613b62d029b130e16c226a33
+- Dont include payload in intermediate workflow results (1ae5a7b25a53d5ab00527fe7bb3e682cc6853fda)
+- Add string substitution support in the mail notification service fields (sender, recipients, reply-to)
+- Dont allow enabling multiprocessing if the run method is not set to per device
+- Remove password from netmiko connection object after opening connection
+- Add metadata file when doing migration or service import / export
+  - metadata includes export time, export version, and service name in case of service export
+  - fix shared workflow import bug (empty list => no way to detect main workflow)
+  - in settings.json, add new "import_version" to disallow importing older files (if the
+  version in the metadata is not the one from settings.json, the import fails)
+- Reduce number of fetch in the scan_folder function to improve performance
+- Refactor get_workflow_results to speed up workflow results display
+- Refactor get_runtimes to no longer query the result table
+- Skip bug fix for run once service (from thread: "Skip query not respected")
+  Fix: if a "run once" service has targets and all targets are skipped, then
+  the service is not run.
+- Make Result.service_id and Result.parent_runtime indices to speed up results display (filtering/result)
+- Add "SETUP_DIR" environment variable to set path to folder where json settings files are located
+- Add new "migration" key in setup.json > paths to set path to the folder where migration files
+  are located
+- Dont update configuration properties if no change detected:
+  - Commit: 58798c182c4c61f53b943bb487d16688c225366e
+  - in backup service, don't write to local file, don't update value in database and don't
+  update "update" timestamp if the value hasn't changed
+  - in the "update database configuration from git", dont update the database configuration
+    if the "update" timestamp from git is the same as or older than the one stored in the database.
+  - Add "force_update" argument to "get git content" and "update database configuration
+  from git" functions (when the app runs for the first time, this argument is set to True)
+- Add parameterized form properties in dedicated accordion in service edit panel
+- Display header and link before results in email notification
+- Files Improvements:
+  - Refactor the files mechanism to no longer display the full Unix path, only the path
+    from the files folder
+    - "files" displayed as breadcrumb even if the actual path does not include such a folder
+    - the copy to clipboard mechanism still returns the full path so it can be used in e.g python scripts
+    - allow both absolute and relative paths in generic and netmiko file transfer services
+    - impact on migration: all paths in files must be truncated by removing the path
+    to the "files" folder
+  - Prevent uploading the same file twice in the file upload panel (or another file
+    with the same name)
+  - Add trash mechanism for files. Two options:
+    - 1) Put trash outside of files folder (not tracked by eNMS). When deleting a file, the database
+    object is deleted and the associated unix file is moved to the trash folder, with the current
+    time as prefix.
+    - 2) Put trash inside the files folder: the same mechanism applies, but the trash folder is
+    being tracked by eNMS. Files can be restored (by moving them from the trash folder to another
+    directory), and whenever a file in the trash folder is deleted, it is removed (rm) from the
+    filesystem. Files are moved to trash via the "update" function so that the file metadata is
+    preserved.
+    - The path to the trash folder is configured in settings.json > "files" > "trash"
+    - The trash folder cannot be deleted from inside the application
+    - When a file is moved to the trash, the alert is changed to a warning that says the
+    file was moved to the trash folder
+    - When importing migration files with "empty database" set to True, or running the mass
+    deletion mechanism ("database deletion"), unix files are left untouched.
+  - Detect missing files when running scan folder mechanism and mark them as "Not Found"
+  - Drag-n-drop the same file multiple times in upload panel no longer possible
+  - Use scoped path for playbooks in ansible service (impact on migration files)
+- Fix log not sent when add_secret is False or device is None in the get_credentials function bug
+- Add new 'prepend_filepath' function in workflow builder namespace to add path to file folder before a string
+- Add support for string substitution for the email notification feature (service step 4)
+- Limit update all pools mechanism (in pool table and as a service option) to the pools a user
+  has "edit" access to
+
+Migration:
+- in file.yaml, remove path to "files" folder for all paths
+- in service.yaml, compute and add new "read_timeout" property based on fast_cli,
+  delay_factor and global_delay_factor
+- in service.yaml, ansible playbook services are now used the scoped path to the playbook
+  instead of the full path (path to playbook folder + scoped path). The path to the playbook
+  folder must be trimmed from all ansible services.
+
+Tests:
+- Everything about files is impacted and must be tested again
+- Impact of migration import refactoring on migration files import and service import
+- Impact of removing payload in workflow results
+- Test service form because of Jinja2 Template refactoring
+- Test runtimes displayed in WB and logs/results panel (get_runtimes function was refactored)
+- Test skip of run once services when all devices are skipped
+- Test new trash mechanism for files
+- Test ansible playbook service (scoped path instead of full path)
+
+Todo:
+- Add context help for custom parameterized form
+
 Version 4.4.0: RBAC and Credentials
 -----------------------------------
 
@@ -50,7 +235,7 @@ Version 4.4.0: RBAC and Credentials
   edit panel to a service in netmiko "Expect String" field.
 - Fix bug where RBAC Edit access is needed to run a service
   Thread: "Edit Service/Device Needed for user using /rest/run_service"
-- Remove "settings" from global variables so that it cannot be overriden.
+- Remove "settings" from global variables so that it cannot be overridden.
   Thread: "Settings and security question"
 - Enable migration for files and folders.
 - When selection in builder changed, close deletion panel (wrong node / edge count)
@@ -68,17 +253,28 @@ Version 4.4.0: RBAC and Credentials
   - Report template can use python substitution or Jinja 2
   - Report output can be either text-based or HTML
   - Option to display the report when the run is over instead of the service results.
+  - Option to send report as part of the email notification
   - Report can be used for any services in a workflow, not just the workflow itself.
   - In get_result, new "all_matches" keyword to get all results.
   - New "files" / "reports" folder to store predefined templates that are used to
     populate the "report" field in the service edit panel.
+  - Add new "get_all_results" function in the global variables
 - Add support for distributed task queue for automation with Dramatiq.
 - Return an error in the UI if the commit of workflow logs, report or result
-  fails (e.g data too long db error because of payload data for the results)
+  fails (e.g data too long db error because of payload data for the results),
+  don't commit if the size of the data is higher than the maximum column size
+  configured in database.json, and emit warning if it is than 50%
 - Fix "List index out of range" bug in Jump on Connect mechanism
   Commit 457f46dd2c496757e924d922f3455626d35a3784
 - Add RBAC support to credentials
 - Fix Netmiko exit_config_mode bug (to be called after commit)
+- Add new "log_events" key under settings.json > files to control whether file changes
+  must be logged as unix log and changelog.
+- Add new "Disable Workflow" feature:
+  - New property "Disabled" in service form to disable a workflow
+  - When a service / workflow is disabled, it cannot be run from the UI or the REST API
+  - New property "Disabled Time & User": if the workflow is disabled, indicates when the
+  service was disabled and by whom; empty otherwise.
 
 RBAC Refactoring:
 - Service export: owners and RBAC read / edit / etc are exported in the service
@@ -152,7 +348,7 @@ Version 4.3.0
   Default landing page is configurable from settings.json > authentication > landing_page.
 - Add mechanism to show a single device status in workflow builder UI (logs filtering + service display)
 - Add mechanism to search for a string across all services of a workflow in the workflow builder, and
-  accross all nodes in the network builder.
+  across all nodes in the network builder.
 - Fix vertical alignment in all tables (cell content was not centered on y axis because of buttons height in
   the last column).
 - Add export service button in Workflow Builder.
@@ -175,7 +371,7 @@ Version 4.3.0
   A non-default connection can be retrieved from the cache by passing the keyword argument "name".
 - Support custom ip address in ping service (new IP address field, defaults to device IP if empty).
 - Add new "mandatory" keyword in custom properties to make the field required to submit the form.
-- Add new "show_password_in_profile" keyword in settings > authentication to configure whether the user
+- Add new "allow_password_change" keyword in settings > authentication to configure whether the user
   profile lets users change their own password (if `false`, the password field is not shown)
 - Add new "force_authentication_method" to force users to log in with the authentication method saved in
   the database (e.g first authentication method used)
@@ -237,7 +433,7 @@ Version 4.2.0
 - Always show security logs, even when logging is disabled. Add "allow_disable" (default: True) keyword argument
   to log function to prevent logs from being disabled if necessary.
 - Add new 'deactivate_rbac_on_read' property in rbac.json, under 'advanced' key. Set to true by default.
-  When true, eNMS no longers applies rbac for reading from the database. (=> better performances)
+  When true, eNMS no longer applies rbac for reading from the database. (=> better performances)
 - Make the vendor, operating_system and model properties a custom list for devices, links and services,
   and category for sites and workflows. The drop-down list choices can be configured in properties.json > property_list key.
 - Add support for renaming objects from the REST API (with key "new_name")
@@ -466,7 +662,7 @@ Version 4.0.0
     devices the credential can be used for.
   - User "groups" property is now a field. This field can be used to define user pools. Services have the same "groups" property.
     When creating a new service, the groups field will be automatically set to the user groups. This allows services to be automatically
-    added to the appriopriate pool of services, if the pool of services is defined based on that group property.
+    added to the appropriate pool of services, if the pool of services is defined based on that group property.
   - Credentials can be either "Read - Write" (default) or "Read only". In a top-level service, new "credential type" field
     to choose between "Any", "Read-only" and "Read-write" in order to define which credentials should be used when running
     the service.
@@ -765,13 +961,13 @@ Version 3.18
 ------------
 
 - Add Operational Data mechanism
-- Removed Clusterized and 3D View
+- Removed Clustered and 3D View
 - Changed configuration to be a .json file instead of env variables
 - Removed Custom config and PATH_CUSTOM_CONFIG
 - Remove Configuration comparison mechanism
 - Display the results of a workflow as a tree
 - Change the mechanism to add a service to a workflow to be a tree
-- Add the forward and backward control to the service managemet table.
+- Add the forward and backward control to the service management table.
 - Duplicate button at workflow level to duplicate any workflow as top-level workflow
 - Update to the operational data backup service to include rancid-like prefixes
 - Add new "run method" property to define how a service is running (once per device, or once for all devices),
@@ -790,7 +986,7 @@ Version 3.17.2
 --------------
 
 - Add Operational Data mechanism
-- Removed Clusterized and 3D View
+- Removed Clustered and 3D View
 - Changed configuration to be a .json file instead of env variables
 - Removed Custom config and PATH_CUSTOM_CONFIG
 - Remove Configuration comparison mechanism
@@ -881,7 +1077,7 @@ Version 3.15.2
 - Front-end validation of all fields accepting a python query
 - check for substitution brackets ({{ }}) that the expression is valid with ast.parse
 - Add new regression test for the payload extraction and validation services
-- Payload extration refactoring
+- Payload extraction refactoring
 
   - Store variables in the payload global variable namespace
   - Add optional operation parameter for each variable: set / append / extend / update

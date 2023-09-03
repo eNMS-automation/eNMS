@@ -1,11 +1,16 @@
 This service uses Napalm to pull data from devices and store it in
 `Inventory -> Configuration` for later comparison and for historical tracking.
 
-![Napalm Data Backup Service](../../_static/automation/builtin_service_types/napalm_databackup.png)
+![Napalm Data Backup Service](../../_static/automation/service_types/napalm_databackup.png)
+
+
+## Configuration parameters for creating this service instance:
 
 - All [Napalm Service Common Parameters](napalm_common.md) 
 
-- `Configuration Getters` - Choose the configuration getter named 'Configuration'.
+- `Configuratioon Property to Update`: Choose the target property to backup.
+- `Local Path`: Specify the path of the file to store the backup data (the path is relative to the eNMS directory.
+- `Getters`: Choose the configuration getters to be used to back up the target property.
 
 !!! note
  

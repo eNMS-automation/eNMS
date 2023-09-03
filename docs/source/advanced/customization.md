@@ -39,7 +39,7 @@ Custom properties accept these configuration elements:
 - `merge_update` (**optional**): `false` - *only for JSON property* - whether
    the JSON value is overridden or updated when setting a new value from the
    REST API.
--  `render_kw` (**optional**): dictionary which provides default keywords 
+- `render_kw` (**optional**): dictionary which provides default keywords 
     to the WTForm widget at render time.
 
 Example for a Device property:
@@ -110,10 +110,25 @@ class CustomApp
 
 ### Dashboard Configuration
 
-Dashboard parameter and widget visibility can be controlled.
-
 The `"dashboard"` key in `properties.json` defines the model data (e.g.,
 `"device"`) and properties to display in the eNMS Dashboard.
+
+This data associated with this key allows determines how the [Dashboard](../system/dashboard.md):
+1. chooses which object types (Devices, Links, etc.) to display, and  
+2. applies a filter for each object type in each chart (`model`, `vendor`, etc.)
+
+Example of a possible dashboard configuration:
+
+```json
+  "dashboard": {
+    "device": ["model", "vendor", "subtype","operating_system"],
+    "link": ["model", "vendor", "subtype", "location"],
+    "service": ["vendor","operating_system","creator"],
+    "workflow": ["vendor","operating_system","creator"],
+    "task": ["status", "creator", "last_scheduled_by", "scheduling_mode"],
+    "user": ["is_admin", "authentication", "groups"]
+  },
+```
 
 ### Table Columns
 
@@ -159,14 +174,14 @@ ability to import these modules.
 
 ## Custom Service Types
 
-In addition to the built-in service types provided by eNMS, custom Service
+In addition to the service types provided by eNMS, custom Service
 Types can be created. When the application starts, it loads all Python
 files in the `eNMS/services` folder. Custom service types are then 
 loaded from the folder specified in eNMS `settings.json`, section `paths`.
 
 Creating a Service Type means adding a new Python file in that folder 
 (creating sub-folders are fine to organize the custom services; they are
-automatically detected). Just like all the built-in service types, each
+automatically detected). Just like all the service types, each
 custom Service file must contain:
 
 -   A **job()** function: that handles the action to be performed.
@@ -180,7 +195,7 @@ which causes the resulting schema for the custom service type(s) to be mapped
 into the database by the SQLAlchemy ORM. Then, the new custom Service type
 will appear in the Service Type pull-down in the UI.
 
-An example custom Service file exists in `eNMS/services/examples/example.py`
+An example custom Service file exists in `eNMS/models/services/examples/example.py`
 
 !!! tip
 

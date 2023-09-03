@@ -9,7 +9,6 @@ from eNMS.variables import vs
 
 
 class SwissArmyKnifeService(Service):
-
     __tablename__ = "swiss_army_knife_service"
     pretty_name = "Swiss Army Knife"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)

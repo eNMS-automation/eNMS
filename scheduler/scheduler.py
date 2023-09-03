@@ -12,7 +12,6 @@ from requests.auth import HTTPBasicAuth
 
 
 class Scheduler(Flask):
-
     days = {
         "0": "sun",
         "1": "mon",

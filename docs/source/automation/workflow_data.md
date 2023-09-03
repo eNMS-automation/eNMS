@@ -15,13 +15,13 @@ the service used during execution.
 
 Examples:
 
-- `get_result("get_facts")` Get the top-level result for the service
+- `get_result("get_facts")`: Get the top-level result for the service
   `get_facts`.
-- `get_result("get_interfaces", device="Austin")` Get the result of
+- `get_result("get_interfaces", device="Austin")`: Get the result of
   the device `Austin` for the `get_interfaces` service.
-- `get_result("get_interfaces", device=device.name)` Get the result of
+- `get_result("get_interfaces", device=device.name)`: Get the result of
   the current device for the `get_interfaces` service.
-- `get_result("Payload editor")["runtime"]` Get the `runtime` key of
+- `get_result("Payload editor")["runtime"]`: Get the `runtime` key of
   the top-level result of the `Payload editor` service.
 
 The `get_result()` function works everywhere that python code is accepted.
@@ -32,7 +32,7 @@ The user can define variables in the payload with the `set_var()` function,
 and retrieve those variables' data from the payload with the `get_var()`
 function using the first positional argument (the variable name) and the
 same optional arguments defined in `set_var`. If neither of the optional
-arguments are used the variable is global.
+arguments are used, the variable is global.
 
 - The first argument for set_var is positional and names the variable
   being set.
@@ -65,7 +65,7 @@ The user can retrieve the list of links to and from the target device
 as well as the neighboring devices at the ends of those links with the
 `device.get_neighbors()` function. The function requires a mandatory
 parameter `device` or `link` and optional parameters for the 
-`direction=source` or `direction=destionation` as well as any of the parameters
+`direction=source` or `direction=destination` as well as any of the parameters
 of the Link object.
 
 Examples:
@@ -83,7 +83,7 @@ Examples:
 
 The `device.get_neighbors()` function works everywhere that the target device
 is defined and is dependent on the run method selected (see `Run Method` above
-and in the Services section.
+and in the Services section).
 
 ### Retrieve a Credential from the Vault: `get_credential()`
 

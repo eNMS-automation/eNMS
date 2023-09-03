@@ -11,7 +11,6 @@ from eNMS.variables import vs
 
 
 class RestApi:
-
     rest_endpoints = {
         "GET": {
             "configuration": "get_configuration",
@@ -83,14 +82,23 @@ class RestApi:
         return getattr(controller, f"migration_{direction}")(**kwargs)
 
     def query(self, instance_type, **kwargs):
-        results = db.fetch(instance_type, all_matches=True, **kwargs)
+        for arg in ("allow_none", "all_matches", "rbac", "username"):
+            kwargs.pop(arg, None)
+        results = db.fetch(instance_type, allow_none=True, all_matches=True, **kwargs)
         return [result.get_properties(exclude=["positions"]) for result in results]
 
     def run_service(self, **kwargs):
+        if "rest_api" not in vs.server_data["allowed_automation"]:
+            return {"error": "Runs from the REST API are not allowed on this server."}
         data = {"trigger": "REST API", "creator": current_user.name, **kwargs}
         errors, devices, pools = [], [], []
         service = db.fetch("service", name=data.pop("name"), rbac="run")
+        if service.disabled:
+            return {"error": "The workflow is disabled."}
         service.check_restriction_to_owners("run")
+        run_name = kwargs.get("form", {}).get("name")
+        if run_name and db.fetch("run", name=run_name, allow_none=True, rbac=None):
+            return {"error": "There is already a run with the same name."}
         handle_asynchronously = data.get("async", True)
         for device_name in data.get("devices", ""):
             device = db.fetch("device", name=device_name, allow_none=True)
@@ -110,7 +118,7 @@ class RestApi:
                 pools.append(pool.id)
             else:
                 errors.append(f"No pool with the name '{pool_name}'")
-        if errors:
+        if errors and not kwargs.get("ignore_invalid_targets"):
             return {"errors": errors}
         if devices or pools:
             data.update({"target_devices": devices, "target_pools": pools})
@@ -125,6 +133,8 @@ class RestApi:
             return {**controller.run(service.id, **data), "errors": errors}
 
     def run_task(self, task_id):
+        if "scheduler" not in vs.server_data["allowed_automation"]:
+            return {"error": "Scheduled runs are not allowed on this server."}
         task = db.fetch("task", rbac="edit", id=task_id)
         data = {
             "trigger": "Scheduler",
@@ -177,7 +187,6 @@ class RestApi:
             try:
                 new_name = instance.pop("new_name", None)
                 object_data = controller.objectify(instance_type, instance)
-                object_data["update_pools"] = instance.get("update_pools", True)
                 instance = db.factory(instance_type, **object_data)
                 if new_name:
                     instance.name = new_name

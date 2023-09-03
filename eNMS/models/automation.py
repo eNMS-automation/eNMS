@@ -1,6 +1,7 @@
 from copy import deepcopy
 from flask_login import current_user
 from functools import wraps
+from os import environ, getpid
 from requests import get, post
 from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout
 from sqlalchemy import Boolean, case, ForeignKey, Integer
@@ -19,7 +20,6 @@ from eNMS.variables import vs
 
 
 class Service(AbstractBase):
-
     __tablename__ = class_type = export_type = "service"
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
@@ -32,6 +32,7 @@ class Service(AbstractBase):
     scoped_name = db.Column(db.SmallString, index=True)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     last_modified_by = db.Column(db.SmallString, info={"log_change": False})
+    last_run = db.Column(db.SmallString, info={"log_change": False})
     description = db.Column(db.LargeString)
     priority = db.Column(Integer, default=10)
     number_of_retries = db.Column(Integer, default=0)
@@ -50,6 +51,9 @@ class Service(AbstractBase):
     )
     device_query = db.Column(db.LargeString)
     device_query_property = db.Column(db.SmallString, default="ip_address")
+    runs = relationship(
+        "Run", secondary=db.run_service_table, back_populates="services"
+    )
     target_devices = relationship(
         "Device",
         secondary=db.service_target_device_table,
@@ -63,7 +67,10 @@ class Service(AbstractBase):
     report = db.Column(db.LargeString)
     report_format = db.Column(db.TinyString, default="text")
     report_jinja2_template = db.Column(Boolean, default=False)
+    disabled = db.Column(Boolean, default=False)
+    disabled_info = db.Column(db.TinyString)
     display_report = db.Column(Boolean, default=False)
+    email_report = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.TinyString, default="mail")
     notification_header = db.Column(db.LargeString)
@@ -75,6 +82,7 @@ class Service(AbstractBase):
     initial_payload = db.Column(db.Dict)
     mandatory_parametrization = db.Column(Boolean, default=False)
     parameterized_form = db.Column(db.LargeString)
+    parameterized_form_template = db.Column(db.LargeString)
     skip = db.Column(db.Dict)
     skip_query = db.Column(db.LargeString)
     skip_value = db.Column(db.SmallString, default="True")
@@ -123,16 +131,20 @@ class Service(AbstractBase):
 
     def delete(self):
         if self.name in ("[Shared] Start", "[Shared] End", "[Shared] Placeholder"):
-            raise db.rbac_error(f"It is not allowed to delete '{self.name}'.")
+            return {"log": f"It is not allowed to delete '{self.name}'."}
         self.check_restriction_to_owners("edit")
 
     def check_restriction_to_owners(self, mode):
-        if not getattr(current_user, "is_admin", True) and any(
-            mode in getattr(workflow, "restrict_to_owners")
-            and current_user not in workflow.owners
-            for workflow in self.get_ancestors()
+        if (
+            not getattr(current_user, "is_admin", True)
+            and not self.shared
+            and any(
+                mode in getattr(workflow, "restrict_to_owners")
+                and current_user not in workflow.owners
+                for workflow in self.get_ancestors()
+            )
         ):
-            raise db.rbac_error("Deletion forbidden because restricted to owners.")
+            raise db.rbac_error("Not Authorized (restricted to owners).")
 
     def post_update(self):
         if len(self.workflows) == 1 and not self.shared:
@@ -143,11 +155,16 @@ class Service(AbstractBase):
         return self.to_dict(include=["services", "workflows"])
 
     def update(self, **kwargs):
+        old_disabled_status = self.disabled
         if self.path:
             self.check_restriction_to_owners("edit")
         if self.positions and "positions" in kwargs:
             kwargs["positions"] = {**self.positions, **kwargs["positions"]}
         super().update(**kwargs)
+        if self.disabled and not old_disabled_status:
+            self.disabled_info = f"Disabled at {vs.get_time()} by {current_user}"
+        elif not self.disabled:
+            self.disabled_info = ""
         if not kwargs.get("migration_import"):
             self.set_name()
             self.update_last_modified_properties()
@@ -172,7 +189,7 @@ class Service(AbstractBase):
             name = f"[{workflow.name}] {scoped_name}" if workflow else scoped_name
             if not db.fetch("service", allow_none=True, name=name):
                 service = super().duplicate(
-                    name=name, scoped_name=scoped_name, shared=False, update_pools=True
+                    name=name, scoped_name=scoped_name, shared=False
                 )
                 break
             index += 1
@@ -201,7 +218,6 @@ class Service(AbstractBase):
 
 
 class ConnectionService(Service):
-
     __tablename__ = "connection_service"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
     parent_type = "service"
@@ -217,11 +233,11 @@ class ConnectionService(Service):
 
 
 class Result(AbstractBase):
-
     __tablename__ = type = "result"
     private = True
     log_change = False
     id = db.Column(Integer, primary_key=True)
+    path = db.Column(db.SmallString)
     success = db.Column(Boolean, default=False)
     labels = db.Column(db.LargeString)
     runtime = db.Column(db.TinyString)
@@ -230,7 +246,7 @@ class Result(AbstractBase):
     creator = db.Column(db.SmallString)
     run_id = db.Column(Integer, ForeignKey("run.id", ondelete="cascade"))
     run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
-    parent_runtime = db.Column(db.TinyString)
+    parent_runtime = db.Column(db.TinyString, index=True)
     parent_service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
     parent_service = relationship("Service", foreign_keys="Result.parent_service_id")
     parent_service_name = association_proxy(
@@ -240,9 +256,13 @@ class Result(AbstractBase):
     parent_device = relationship("Device", uselist=False, foreign_keys=parent_device_id)
     parent_device_name = association_proxy("parent_device", "name")
     device_id = db.Column(Integer, ForeignKey("device.id", ondelete="cascade"))
-    device = relationship("Device", uselist=False, foreign_keys=device_id)
+    device = relationship(
+        "Device", uselist=False, foreign_keys=device_id, lazy="joined"
+    )
     device_name = association_proxy("device", "name")
-    service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
+    service_id = db.Column(
+        Integer, ForeignKey("service.id", ondelete="cascade"), index=True
+    )
     service = relationship("Service", foreign_keys="Result.service_id")
     service_name = association_proxy(
         "service", "scoped_name", info={"name": "service_name"}
@@ -257,9 +277,9 @@ class Result(AbstractBase):
         return self.result[key]
 
     def __init__(self, **kwargs):
-        self.success = kwargs["result"]["success"]
-        self.runtime = kwargs["result"]["runtime"]
-        self.duration = kwargs["result"]["duration"]
+        for key in ("duration", "runtime", "success"):
+            setattr(self, key, kwargs["result"][key])
+        self.path = kwargs["path"]
         super().__init__(**kwargs)
 
     def __repr__(self):
@@ -276,7 +296,6 @@ class Result(AbstractBase):
 
 
 class ServiceLog(AbstractBase):
-
     __tablename__ = type = "service_log"
     private = True
     log_change = False
@@ -291,7 +310,6 @@ class ServiceLog(AbstractBase):
 
 
 class ServiceReport(AbstractBase):
-
     __tablename__ = type = "service_report"
     private = True
     log_change = False
@@ -306,9 +324,8 @@ class ServiceReport(AbstractBase):
 
 
 class Run(AbstractBase):
-
     __tablename__ = type = "run"
-    private = True
+    log_change = False
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     restart_run_id = db.Column(Integer, ForeignKey("run.id", ondelete="SET NULL"))
@@ -317,7 +334,6 @@ class Run(AbstractBase):
     )
     start_services = db.Column(db.List)
     creator = db.Column(db.SmallString, default="")
-    server = db.Column(db.SmallString)
     properties = db.Column(db.Dict)
     payload = deferred(db.Column(db.Dict))
     success = db.Column(Boolean, default=False)
@@ -328,9 +344,17 @@ class Run(AbstractBase):
     trigger = db.Column(db.TinyString)
     path = db.Column(db.TinyString)
     parameterized_run = db.Column(Boolean, default=False)
+    server_id = db.Column(Integer, ForeignKey("server.id"))
+    server = relationship("Server", back_populates="runs")
+    server_name = association_proxy("server", "name")
+    server_version = db.Column(db.TinyString)
+    server_commit_sha = db.Column(db.TinyString)
     service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
-    service = relationship("Service", foreign_keys="Run.service_id")
+    service = relationship("Service", foreign_keys="Run.service_id", lazy="joined")
     service_name = db.Column(db.SmallString)
+    services = relationship(
+        "Service", secondary=db.run_service_table, back_populates="runs"
+    )
     target_devices = relationship(
         "Device", secondary=db.run_device_table, back_populates="runs"
     )
@@ -343,13 +367,22 @@ class Run(AbstractBase):
     start_service = relationship("Service", foreign_keys="Run.start_service_id")
     task_id = db.Column(Integer, ForeignKey("task.id", ondelete="SET NULL"))
     task = relationship("Task", foreign_keys="Run.task_id")
+    task_name = association_proxy("task", "name")
+    worker_id = db.Column(Integer, ForeignKey("worker.id"))
+    worker = relationship("Worker", back_populates="runs")
     state = db.Column(db.Dict, info={"log_change": False})
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
-    model_properties = {"progress": "str", "service_properties": "dict"}
+    model_properties = {
+        "progress": "str",
+        "server_properties": "dict",
+        "service_properties": "dict",
+        "worker_properties": "dict",
+    }
 
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or vs.get_time()
-        self.server = vs.server
+        for property in ("id", "version", "commit_sha"):
+            setattr(self, f"server_{property}", getattr(vs, f"server_{property}"))
         super().__init__(**kwargs)
         if not self.name:
             self.name = f"{self.runtime} ({self.creator})"
@@ -365,6 +398,14 @@ class Run(AbstractBase):
     @property
     def service_properties(self):
         return self.service.base_properties
+
+    @property
+    def server_properties(self):
+        return self.server.base_properties
+
+    @property
+    def worker_properties(self):
+        return self.worker.base_properties
 
     def get_state(self):
         if self.state:
@@ -399,7 +440,16 @@ class Run(AbstractBase):
             return "N/A"
 
     def run(self):
-        env.update_worker_job(self.service.name)
+        worker = db.factory(
+            "worker",
+            name=str(getpid()),
+            subtype=environ.get("_", "").split("/")[-1],
+            server_id=vs.server_id,
+        )
+        server = db.fetch("server", id=vs.server_id)
+        worker.current_runs = 1 if not worker.current_runs else worker.current_runs + 1
+        server.current_runs += 1
+        self.worker = worker
         vs.run_targets[self.runtime] = set(
             device.id
             for device in controller.filtering(
@@ -425,14 +475,15 @@ class Run(AbstractBase):
             trigger=self.trigger,
         )
         self.payload = self.service_run.payload
+        worker.current_runs -= 1
+        server.current_runs -= 1
         db.session.commit()
         vs.run_targets.pop(self.runtime)
-        env.update_worker_job(self.service.name, mode="decr")
+        vs.run_services.pop(self.runtime)
         return self.service_run.results
 
 
 class Task(AbstractBase):
-
     __tablename__ = type = class_type = "task"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
@@ -468,7 +519,7 @@ class Task(AbstractBase):
             self.schedule(mode="schedule" if self.is_active else "pause")
 
     def delete(self):
-        post(f"{env.scheduler_address}/delete_job/{self.id}")
+        post(f"{vs.scheduler_address}/delete_job/{self.id}")
 
     @hybrid_property
     def status(self):
@@ -476,7 +527,7 @@ class Task(AbstractBase):
 
     @status.expression
     def status(cls):  # noqa: N805
-        return case([(cls.is_active, "Active")], else_="Inactive")
+        return case((cls.is_active, "Active"), else_="Inactive")
 
     def _catch_request_exceptions(func):  # noqa: N805
         @wraps(func)
@@ -494,19 +545,19 @@ class Task(AbstractBase):
     @_catch_request_exceptions
     def next_run_time(self):
         return get(
-            f"{env.scheduler_address}/next_runtime/{self.id}", timeout=0.01
+            f"{vs.scheduler_address}/next_runtime/{self.id}", timeout=0.01
         ).json()
 
     @property
     @_catch_request_exceptions
     def time_before_next_run(self):
-        return get(f"{env.scheduler_address}/time_left/{self.id}", timeout=0.01).json()
+        return get(f"{vs.scheduler_address}/time_left/{self.id}", timeout=0.01).json()
 
     @_catch_request_exceptions
     def schedule(self, mode="schedule"):
         try:
             payload = {"mode": mode, "task": self.get_properties()}
-            result = post(f"{env.scheduler_address}/schedule", json=payload).json()
+            result = post(f"{vs.scheduler_address}/schedule", json=payload).json()
             self.last_scheduled_by = current_user.name
         except ConnectionError:
             return {"alert": "Scheduler Unreachable: the task cannot be scheduled."}

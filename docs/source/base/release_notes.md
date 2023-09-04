@@ -42,7 +42,11 @@ Version 4.6.0: Clustering
 - When a worker is deleted from the worker table, send SIGTERM signal to underlying process
 - Don't check for metadata version when doing migration import, only check for service import
 - Add mechanism to use a StringField for the properties in properties.json > "property_list":
-  if the list is empty, will default to StringField instead of a SelectField.
+  - if the list is empty, will default to StringField instead of a SelectField.
+  - new format in case of a SelectField: must provide all wtforms keyword arguments
+
+Migration:
+- Update properties.json > "properly_list" with new format
 
 Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
 --------------------------------------------------------------------------

@@ -1445,40 +1445,52 @@
   },
   "property_list": {
     "device": {
-      "model": ["Arista", "Cisco", "Linux", "Juniper"],
-      "operating_system": ["IOS", "IOS-XE", "IOS-XR", "Junos", "EOS", "Linux"],
-      "vendor": ["Arista", "Cisco", "Juniper", "Linux"]
+      "model": {
+        "choices": [["Arista", "Arista"], ["Cisco", "Cisco"], ["Linux", "Linux"], ["Juniper", "Juniper"]],
+        "validate_choice": false
+      },
+      "operating_system": {
+        "choices": [["IOS", "IOS"], ["IOS-XE", "IOS-XE"], ["IOS-XR", "IOS-XR"], ["Junos", "Junos"], ["EOS", "EOS"], ["Linux", "Linux"]],
+        "validate_choice": false
+      },
+      "vendor": {
+        "choices": [["Arista", "Arista"], ["Cisco", "Cisco"], ["Juniper", "Juniper"], ["Linux", "Linux"]],
+        "validate_choice": false
+      }
     },
     "link": {
-      "model": ["10G", "40G", "100G", "400G"],
-      "vendor": ["Ciena", "Cisco"]
+      "model": {
+        "choices": [["10G", "10G"], ["40G", "40G"], ["100G", "100G"], ["400G", "400G"]],
+        "validate_choice": false
+      },
+      "vendor": {
+        "choices": [["Ciena", "Ciena"], ["Cisco", "Cisco"]],
+        "validate_choice": false
+      }
     },
     "network": {
-      "category": ["Display", "Editing", "Other", "Subnetwork"]
+      "category": {
+        "choices": [["Display", "Display"], ["Editing", "Editing"], ["Other", "Other"], ["Subnetwork", "Subnetwork"]],
+        "validate_choice": false,
+        "default": "Other"
+      }
     },
     "service": {
-      "operating_system": ["IOS", "IOS-XE", "IOS-XR", "Junos", "EOS", "Linux"],
-      "vendor": ["Arista", "Cisco", "Juniper", "Linux"]
+      "operating_system": {
+        "choices": [["IOS", "IOS"], ["IOS-XE", "IOS-XE"], ["IOS-XR", "IOS-XR"], ["Junos", "Junos"], ["EOS", "EOS"], ["Linux", "Linux"]],
+        "validate_choice": false
+      },
+      "vendor": {
+        "choices": [["Arista", "Arista"], ["Cisco", "Cisco"], ["Juniper", "Juniper"], ["Linux", "Linux"]],
+        "validate_choice": false
+      }
     },
     "workflow": {
-      "category": [
-        "Basics",
-        "Global Variables",
-        "Iteration Mechanism",
-        "Notification Mechanism",
-        "Other",
-        "Parameterized Form",
-        "Payload",
-        "RBAC",
-        "REST API",
-        "Reports",
-        "Run Methods",
-        "SSH Connection",
-        "Scalability",
-        "Services",
-        "Skip Mechanism",
-        "Superworkflows"
-      ]
+      "category": {
+        "choices": [["Basics", "Basics"], ["Global Variables", "Global Variables"], ["Iteration Mechanism", "Iteration Mechanism"], ["Notification Mechanism", "Notification Mechanism"], ["Other", "Other"], ["Parameterized Form", "Parameterized Form"], ["Payload", "Payload"], ["RBAC", "RBAC"], ["REST API", "REST API"], ["Reports", "Reports"], ["Run Methods", "Run Methods"], ["SSH Connection", "SSH Connection"], ["Scalability", "Scalability"], ["Services", "Services"], ["Skip Mechanism", "Skip Mechanism"], ["Superworkflows", "Superworkflows"]],
+        "validate_choice": false,
+        "default": "Other"
+      }
     }
   },
   "tables_additional": {

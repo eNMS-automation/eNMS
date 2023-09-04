@@ -62,12 +62,7 @@ class NetworkForm(BaseForm):
     id = HiddenField()
     name = StringField("Name")
     creator = StringField(render_kw={"readonly": True})
-    category = SelectField(
-        "Category",
-        choices=vs.dualize(vs.properties["property_list"]["network"]["category"]),
-        validate_choice=False,
-        default="Other",
-    )
+    category = SelectField("Category")
     latitude = StringField("Latitude", default=0.0)
     longitude = StringField("Longitude", default=0.0)
     networks = MultipleInstanceField("Networks", model="network")

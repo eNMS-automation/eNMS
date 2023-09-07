@@ -37,6 +37,8 @@ Version 4.6.0: Clustering
     worker table to display all runs executed by the worker.
 - When loading the application, check whether the server's workers are running and if not,
   delete them from the database
+- Workers are created when they are detected by the application, ie when a service is run
+  by the worker
 - Refactor get_workers REST endpoint to use workers in the database instead of storing
   worker data in the redis queue
 - When a worker is deleted from the worker table, send SIGTERM signal to underlying process

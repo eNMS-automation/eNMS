@@ -465,7 +465,9 @@ class Controller:
 
     def get(self, model, id, **kwargs):
         if not kwargs:
-            get_model = "service" if model == "workflow" or "service" in model else model
+            get_model = (
+                "service" if model == "workflow" or "service" in model else model
+            )
             kwargs = vs.properties["serialized"]["get"].get(get_model, {})
         func = "get_properties" if kwargs.pop("properties_only", None) else "to_dict"
         return getattr(db.fetch(model, id=id), func)(**kwargs)

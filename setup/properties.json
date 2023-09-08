@@ -199,6 +199,9 @@
       },
       "user": {
         "include": ["groups"]
+      },
+      "service": {
+        "exclude": ["runs"]
       }
     }
   },

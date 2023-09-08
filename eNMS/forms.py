@@ -656,8 +656,8 @@ class WorkerForm(BaseForm):
     name = StringField("Name", render_kw={"readonly": True})
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     subtype = StringField("Subtype", render_kw={"readonly": True})
-    last_update = StringField("Subtype", render_kw={"readonly": True})
-    current_runs = StringField("Subtype", render_kw={"readonly": True})
+    last_update = StringField("Last Update", render_kw={"readonly": True})
+    current_runs = StringField("Current Runs", render_kw={"readonly": True})
 
 
 class ServiceForm(BaseForm):

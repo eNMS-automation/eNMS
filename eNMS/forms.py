@@ -4,6 +4,7 @@ from flask_login import current_user
 from flask_wtf import FlaskForm
 from importlib.util import module_from_spec, spec_from_file_location
 from os.path import exists
+from pathlib import Path
 from traceback import format_exc
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
@@ -471,7 +472,11 @@ class FileForm(BaseForm):
         path_already_used = (not current_file or change_of_path) and path_taken
         if path_already_used:
             self.path.errors.append("There is already a file at the specified path.")
-        return valid_form and not path_already_used
+        resolved_path = str(Path(f"{vs.file_path}{self.path.data}").resolve())
+        invalid_path = not resolved_path.startswith(str(vs.file_path))
+        if invalid_path:
+            self.path.errors.append("The path resolves outside of the files folder.")
+        return valid_form and not invalid_path and not path_already_used
 
 
 class FolderForm(FileForm):

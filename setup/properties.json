@@ -1449,15 +1449,15 @@
   "property_list": {
     "device": {
       "model": {
-        "choices": [["Arista", "Arista"], ["Cisco", "Cisco"], ["Linux", "Linux"], ["Juniper", "Juniper"]],
+        "choices": [["Arista", "Arista"], ["Cisco", "Cisco"],  ["Fortigate", "Fortigate"], ["Linux", "Linux"], ["Juniper", "Juniper"], ["Vyatta", "Vyatta"]],
         "validate_choice": false
       },
       "operating_system": {
-        "choices": [["IOS", "IOS"], ["IOS-XE", "IOS-XE"], ["IOS-XR", "IOS-XR"], ["Junos", "Junos"], ["EOS", "EOS"], ["Linux", "Linux"]],
+        "choices": [["FortiOS", "FortiOS"], ["IOS", "IOS"], ["IOS-XE", "IOS-XE"], ["IOS-XR", "IOS-XR"], ["Junos", "Junos"], ["EOS", "EOS"], ["Linux", "Linux"], ["Vyos", "Vyos"]],
         "validate_choice": false
       },
       "vendor": {
-        "choices": [["Arista", "Arista"], ["Cisco", "Cisco"], ["Juniper", "Juniper"], ["Linux", "Linux"]],
+        "choices": [["Arista", "Arista"], ["Cisco", "Cisco"], ["Fortinet", "Fortinet"], ["Juniper", "Juniper"], ["Linux", "Linux"], ["Ciena", "Ciena"]],
         "validate_choice": false
       }
     },

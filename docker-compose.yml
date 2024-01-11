@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  enms:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: enms
+#    image: saneisaya/enms:latest
+    restart: always
+#    environment:
+#      - VAULT_ADDRESS=${VAULT_ADDRESS}
+#      - VAULT_TOKEN=${VAULT_TOKEN}
+#      - UNSEAL_VAULT_KEY1=${UNSEAL_VAULT_KEY1}
+#      - UNSEAL_VAULT_KEY2=${UNSEAL_VAULT_KEY2}
+    volumes:
+      - /data/docker/projects:/root/projects
+      - /opt/docker/docker-enms/eNMS:/eNMS
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.enms.rule=Host(`server ip address`)"
+      - "traefik.http.routers.enms.entrypoints=enms"
+#      - "traefik.http.routers.enms.tls.certresolver=myresolver"
+      - "traefik.http.services.enms.loadbalancer.server.port=5000"
+    networks:
+      - traefik_proxy
+    depends_on:
+      db:
+        condition: service_started
+  db:
+    image: mariadb:10.5
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_DATABASE=enms
+      - MYSQL_USER=enms
+      - MYSQL_PASSWORD=enms_password
+    volumes:
+      - /data/docker/db_data:/var/lib/mysql
+networks:
+  traefik_proxy:
+    external: true

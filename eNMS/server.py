@@ -229,7 +229,11 @@ class Server(Flask):
                     env.log("info" if success else "warning", log, logger="security")
                     if success:
                         url = url_for("blueprint.route", page=current_user.landing_page)
-                        return redirect(request.args.get("next_url", url))
+                        if "next_url" in request.args:
+                            url = request.args.get("next_url")
+                            if not url.startswith(request.url_root):
+                                abort(404)
+                        return redirect(url)
                     else:
                         abort(403)
             if not current_user.is_authenticated:

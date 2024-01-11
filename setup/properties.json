@@ -432,7 +432,8 @@
         "search": "bool",
         "search_labels": { "true": "Success", "false": "Failure" },
         "width": "80px",
-        "orderable": false
+        "orderable": false,
+        "html": true
       },
       {
         "data": "buttons",
@@ -442,12 +443,14 @@
       {
         "data": "v1",
         "title": "V1",
-        "orderable": false
+        "orderable": false,
+        "html": true
       },
       {
         "data": "v2",
         "title": "V2",
-        "orderable": false
+        "orderable": false,
+        "html": true
       }
     ],
     "link": [
@@ -918,7 +921,8 @@
         "search": "bool",
         "search_labels": { "true": "Success", "false": "Failure" },
         "width": "80px",
-        "orderable": false
+        "orderable": false,
+        "html": true
       },
       {
         "data": "buttons",
@@ -928,12 +932,14 @@
       {
         "data": "v1",
         "title": "V1",
-        "orderable": false
+        "orderable": false,
+        "html": true
       },
       {
         "data": "v2",
         "title": "V2",
-        "orderable": false
+        "orderable": false,
+        "html": true
       }
     ],
     "device_result": [
@@ -977,7 +983,8 @@
         "title": "Status",
         "search": "bool",
         "width": "80px",
-        "orderable": false
+        "orderable": false,
+        "html": true
       },
       {
         "data": "buttons",
@@ -987,12 +994,14 @@
       {
         "data": "v1",
         "title": "V1",
-        "orderable": false
+        "orderable": false,
+        "html": true
       },
       {
         "data": "v2",
         "title": "V2",
-        "orderable": false
+        "orderable": false,
+        "html": true
       }
     ],
     "group": [

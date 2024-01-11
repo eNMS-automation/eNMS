@@ -116,5 +116,5 @@ You can follow us on _[Twitter](https://twitter.com/AutomationEnms)_ or _[Linked
     Log in (default credentials: admin / admin)
     
 ## Docker Install
-    Installation instructions are in the wiki on this repo 
-    [https://github.com/SaneiSaya/docker-eNMS/wiki](https://github.com/SaneiSaya/docker-eNMS/wiki)
+Installation instructions are in the wiki on this repo 
+[https://github.com/SaneiSaya/docker-eNMS/wiki](https://github.com/SaneiSaya/docker-eNMS/wiki)

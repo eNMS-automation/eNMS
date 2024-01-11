@@ -114,3 +114,6 @@ You can follow us on _[Twitter](https://twitter.com/AutomationEnms)_ or _[Linked
     export FLASK_APP=app.py
     flask run --host=0.0.0.0
     Log in (default credentials: admin / admin)
+    
+## Docker Install
+    Installation instructions are in the wiki on this repo [https://github.com/SaneiSaya/docker-eNMS/wiki](https://github.com/SaneiSaya/docker-eNMS/wiki)

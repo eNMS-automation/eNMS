@@ -99,6 +99,18 @@ function loadScript(url, id) {
   document.head.appendChild(script);
 }
 
+export function sanitize(input) {
+  const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#x27;',
+      "/": '&#x2F;',
+  };
+  return input.replace(/[&<>"'/]/ig, (match) => (map[match]));
+}
+
 export function openUrl(url) {
   let win = window.open(url, "_blank");
   win.focus();

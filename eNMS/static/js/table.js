@@ -16,6 +16,7 @@ import {
   loadTypes,
   notify,
   openPanel,
+  sanitize,
   serializeForm,
   showConfirmationPanel,
   userIsActive,
@@ -43,6 +44,7 @@ export class Table {
     this.columns.forEach((column) => {
       if (visibleColumns) column.visible = visibleColumns.includes(column.data);
       column.name = column.data;
+      if (!column.html) column.render = $.fn.dataTable.render.text();
     });
     this.id = `${this.type}${id ? `-${id}` : ""}`;
     this.model = this.modelFiltering || this.type;
@@ -589,7 +591,8 @@ tables.device = class DeviceTable extends Table {
 tables.network = class NetworkTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
-    row.name = `<b><a href="/network_builder/${row.path}">${row.name}</a></b>`;
+    const rowName = sanitize(row.name);
+    row.name = `<b><a href="/network_builder/${row.path}">${rowName}</a></b>`;
     row.links = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
       'link', ${row.instance}, {parent: '${this.id}', from: 'networks',
       to: 'links'})">Links</a></b>`;
@@ -889,7 +892,8 @@ tables.service = class ServiceTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
     if (row.type == "workflow") {
-      row.name = `<b><a href="/workflow_builder/${row.path}">${row.name}</a></b>`;
+      const rowName = sanitize(row.name);
+      row.name = `<b><a href="/workflow_builder/${row.path}">${rowName}</a></b>`;
     }
     for (const model of ["device", "pool"]) {
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(

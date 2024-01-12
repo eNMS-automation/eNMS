@@ -1187,7 +1187,7 @@ function getAlerts(preview) {
           <span class="time" style="font-size: ${fontSize}">
             ${alert[3]}
           </span><br />
-          <span>${alert[0]}</span>
+          <span>${sanitize(alert[0])}</span>
           </a>
         </li>`;
       } else {
@@ -1195,7 +1195,7 @@ function getAlerts(preview) {
         <tr>
           <td>${alert[3]}</td>
           <td>${alert[1]}</td>
-          <td>${alert[0]}</td>
+          <td>${sanitize(alert[0])}</td>
         </tr>`;
       }
     })

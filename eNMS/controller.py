@@ -1494,7 +1494,7 @@ class Controller:
 
     def upload_files(self, **kwargs):
         path = f"{vs.file_path}/{kwargs['folder']}/{kwargs['file'].filename}"
-        if not str(Path(path).resolve()).startswith(str(vs.file_path)):
+        if not str(Path(path).resolve()).startswith(f"{vs.file_path}/"):
             return {"error": "The path resolves outside of the files folder."}
         kwargs["file"].save(path)
 

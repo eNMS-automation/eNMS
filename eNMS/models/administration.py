@@ -251,7 +251,7 @@ class File(AbstractBase):
     def update(self, move_file=True, **kwargs):
         old_path = self.full_path
         self.full_path = f"{vs.file_path}{kwargs['path']}"
-        if not str(Path(self.full_path).resolve()).startswith(str(vs.file_path)):
+        if not str(Path(self.full_path).resolve()).startswith(f"{vs.file_path}/"):
             raise Exception("The path resolves outside of the files folder.")
         super().update(**kwargs)
         if exists(str(old_path)) and not exists(self.full_path) and move_file:

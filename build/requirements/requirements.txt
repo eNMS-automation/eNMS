@@ -11,7 +11,7 @@ gunicorn
 itsdangerous==2.0.1
 napalm
 ncclient
-netmiko==3.4.0
+netmiko
 passlib
 psutil
 redis

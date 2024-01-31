@@ -36,6 +36,46 @@ services:
       - MYSQL_PASSWORD=enms_password
     volumes:
       - /data/docker/db_data:/var/lib/mysql
+  enms-scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: enms-scheduler
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - ENMS_ADDR=http://enms:5000
+      - ENMS_PASSWORD=admin
+      - ENMS_USER=admin
+      - VERIFY_CERTIFICATE=0
+      - REDIS_ADDR=enms
+      - SCHEDULER_ADDR=http://enms-scheduler:8000
+      - GUNICORN_ACCESS_LOG=/home/centos/enms/logs/access_scheduler.log
+      - GUNICORN_LOG_LEVEL=info
+      - DATABASE_URL=mysql://root:PASSWORD@localhost/enms?charset=utf8
+    volumes:
+      - /data/docker/projects/enms/enms-scheduler:/root/projects
+      - /opt/docker/docker-enms/eNMS-Scheduler/eNMS:/eNMS
+      - /opt/docker/docker-enms/eNMS-Scheduler/eNMS/scheduler:/scheduler
+      - ./logs:/home/centos/enms/logs
+    networks:
+      - traefik_proxy
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.5
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_DATABASE=enms
+      - MYSQL_USER=enms
+      - MYSQL_PASSWORD=enms_password
+    volumes:
+      - /data/docker/db_data:/var/lib/mysql
+    networks:
+      - traefik_proxy
 networks:
   traefik_proxy:
     external: true

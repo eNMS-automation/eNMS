@@ -290,25 +290,29 @@
         "data": "services",
         "title": "Target Services",
         "width": "80px",
-        "visible": false
+        "visible": false,
+        "html": true
       },
       {
         "data": "tasks",
         "title": "Tasks",
         "width": "80px",
-        "visible": false
+        "visible": false,
+        "html": true
       },
       {
         "data": "pools",
         "title": "Pools",
         "width": "80px",
-        "visible": false
+        "visible": false,
+        "html": true
       },
       {
         "data": "buttons",
         "width": "270px",
         "orderable": false,
-        "export": false
+        "export": false,
+        "html": true
       }
     ],
     "configuration": [
@@ -376,7 +380,8 @@
         "data": "buttons",
         "width": "130px",
         "orderable": false,
-        "export": false
+        "export": false,
+        "html": true
       }
     ],
     "full_result": [
@@ -427,7 +432,8 @@
         "search": "bool",
         "search_labels": { "true": "Success", "false": "Failure" },
         "width": "80px",
-        "orderable": false
+        "orderable": false,
+        "html": true
       },
       {
         "data": "buttons",
@@ -437,12 +443,14 @@
       {
         "data": "v1",
         "title": "V1",
-        "orderable": false
+        "orderable": false,
+        "html": true
       },
       {
         "data": "v2",
         "title": "V2",
-        "orderable": false
+        "orderable": false,
+        "html": true
       }
     ],
     "link": [
@@ -519,13 +527,15 @@
         "data": "pools",
         "title": "Pools",
         "width": "80px",
-        "visible": false
+        "visible": false,
+        "html": true
       },
       {
         "data": "buttons",
         "width": "130px",
         "orderable": false,
-        "export": false
+        "export": false,
+        "html": true
       }
     ],
     "pool": [
@@ -576,13 +586,15 @@
         "data": "devices",
         "title": "Devices",
         "width": "80px",
-        "export": false
+        "export": false,
+        "html": true
       },
       {
         "data": "links",
         "title": "Links",
         "width": "80px",
-        "export": false
+        "export": false,
+        "html": true
       },
       {
         "data": "objectNumber",
@@ -595,7 +607,8 @@
         "data": "buttons",
         "width": "200px",
         "orderable": false,
-        "export": false
+        "export": false,
+        "html": true
       }
     ],
     "service": [
@@ -604,7 +617,8 @@
         "width": "600px",
         "title": "Name",
         "search": "text",
-        "className": "dt-body-left"
+        "className": "dt-body-left",
+        "html": true
       },
       {
         "data": "type",
@@ -675,25 +689,29 @@
         "data": "devices",
         "title": "Target Devices",
         "width": "100px",
-        "visible": false
+        "visible": false,
+        "html": true
       },
       {
         "data": "pools",
         "title": "Target Pools",
         "width": "100px",
-        "visible": false
+        "visible": false,
+        "html": true
       },
       {
         "data": "runs",
         "title": "Runs",
         "width": "100px",
-        "visible": false
+        "visible": false,
+        "html": true
       },
       {
         "data": "buttons",
         "width": "310px",
         "orderable": false,
-        "export": false
+        "export": false,
+        "html": true
       }
     ],
     "network": [
@@ -702,7 +720,8 @@
         "width": "400px",
         "title": "Name",
         "search": "text",
-        "className": "dt-body-left"
+        "className": "dt-body-left",
+        "html": true
       },
       {
         "data": "description",
@@ -722,13 +741,15 @@
       {
         "data": "links",
         "title": "Links",
-        "width": "100px"
+        "width": "100px",
+        "html": true
       },
       {
         "data": "buttons",
         "width": "120px",
         "orderable": false,
-        "export": false
+        "export": false,
+        "html": true
       }
     ],
     "run": [
@@ -736,7 +757,8 @@
         "data": "name",
         "title": "Name",
         "search": "text",
-        "width": "250px"
+        "width": "250px",
+        "html": true
       },
       {
         "data": "runtime",
@@ -776,7 +798,8 @@
         "title": "Server",
         "search": "text",
         "visible": false,
-        "width": "120px"
+        "width": "120px",
+        "html": true
       },
       {
         "data": "server_version",
@@ -795,7 +818,8 @@
         "title": "Worker",
         "search": "text",
         "visible": false,
-        "width": "120px"
+        "width": "120px",
+        "html": true
       },
       {
         "data": "creator",
@@ -826,19 +850,22 @@
         "data": "services",
         "title": "Services",
         "width": "100px",
-        "visible": false
+        "visible": false,
+        "html": true
       },
       {
         "data": "devices",
         "title": "Devices",
         "width": "100px",
-        "visible": false
+        "visible": false,
+        "html": true
       },
       {
         "data": "pools",
         "title": "Pools",
         "width": "100px",
-        "visible": false
+        "visible": false,
+        "html": true
       },
       {
         "data": "buttons",
@@ -894,7 +921,8 @@
         "search": "bool",
         "search_labels": { "true": "Success", "false": "Failure" },
         "width": "80px",
-        "orderable": false
+        "orderable": false,
+        "html": true
       },
       {
         "data": "buttons",
@@ -904,12 +932,14 @@
       {
         "data": "v1",
         "title": "V1",
-        "orderable": false
+        "orderable": false,
+        "html": true
       },
       {
         "data": "v2",
         "title": "V2",
-        "orderable": false
+        "orderable": false,
+        "html": true
       }
     ],
     "device_result": [
@@ -953,7 +983,8 @@
         "title": "Status",
         "search": "bool",
         "width": "80px",
-        "orderable": false
+        "orderable": false,
+        "html": true
       },
       {
         "data": "buttons",
@@ -963,12 +994,14 @@
       {
         "data": "v1",
         "title": "V1",
-        "orderable": false
+        "orderable": false,
+        "html": true
       },
       {
         "data": "v2",
         "title": "V2",
-        "orderable": false
+        "orderable": false,
+        "html": true
       }
     ],
     "group": [
@@ -999,7 +1032,8 @@
       {
         "data": "users",
         "title": "Users",
-        "width": "80px"
+        "width": "80px",
+        "html": true
       },
       {
         "data": "buttons",
@@ -1078,13 +1112,15 @@
         "data": "devices",
         "title": "Devices",
         "width": "100px",
-        "visible": false
+        "visible": false,
+        "html": true
       },
       {
         "data": "pools",
         "title": "Pools",
         "width": "100px",
-        "visible": false
+        "visible": false,
+        "html": true
       },
       {
         "data": "buttons",
@@ -1126,7 +1162,8 @@
       {
         "data": "groups",
         "title": "Groups",
-        "width": "80px"
+        "width": "80px",
+        "html": true
       },
       {
         "data": "buttons",
@@ -1221,12 +1258,14 @@
       {
         "data": "workers",
         "title": "Workers",
-        "width": "80px"
+        "width": "80px",
+        "html": true
       },
       {
         "data": "runs",
         "title": "Runs",
-        "width": "80px"
+        "width": "80px",
+        "html": true
       },
       {
         "data": "buttons",
@@ -1327,7 +1366,8 @@
         "data": "filename",
         "title": "Filename",
         "search": "text",
-        "className": "dt-body-left"
+        "className": "dt-body-left",
+        "html": true
       },
       {
         "data": "name",
@@ -1436,7 +1476,8 @@
       {
         "data": "runs",
         "title": "Runs",
-        "width": "80px"
+        "width": "80px",
+        "html": true
       },
       {
         "data": "buttons",

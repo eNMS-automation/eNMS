@@ -99,6 +99,18 @@ function loadScript(url, id) {
   document.head.appendChild(script);
 }
 
+export function sanitize(input) {
+  const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#x27;',
+      "/": '&#x2F;',
+  };
+  return input.replace(/[&<>"'/]/ig, (match) => (map[match]));
+}
+
 export function openUrl(url) {
   let win = window.open(url, "_blank");
   win.focus();
@@ -1175,7 +1187,7 @@ function getAlerts(preview) {
           <span class="time" style="font-size: ${fontSize}">
             ${alert[3]}
           </span><br />
-          <span>${alert[0]}</span>
+          <span>${sanitize(alert[0])}</span>
           </a>
         </li>`;
       } else {
@@ -1183,7 +1195,7 @@ function getAlerts(preview) {
         <tr>
           <td>${alert[3]}</td>
           <td>${alert[1]}</td>
-          <td>${alert[0]}</td>
+          <td>${sanitize(alert[0])}</td>
         </tr>`;
       }
     })

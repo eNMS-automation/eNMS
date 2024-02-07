@@ -64,18 +64,6 @@ services:
     depends_on:
       - db
 
-  db:
-    image: mariadb:10.5
-    restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=root_password
-      - MYSQL_DATABASE=enms
-      - MYSQL_USER=enms
-      - MYSQL_PASSWORD=enms_password
-    volumes:
-      - /data/docker/db_data:/var/lib/mysql
-    networks:
-      - traefik_proxy
 networks:
   traefik_proxy:
     external: true

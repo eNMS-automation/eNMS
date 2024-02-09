@@ -7,7 +7,7 @@
     "plugin_path": "eNMS/plugins",
     "session_timeout_minutes": 30,
     "startup_migration": "examples",
-    "version": 4.7.1
+    "version": 4.7
   },
   "authentication": {
     "default": "database",

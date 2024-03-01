@@ -169,6 +169,7 @@ class Environment:
         try:
             if ldap_address:
                 self.ldap_server = Server(getenv("LDAP_ADDR"))
+                self.user_dn =
             if tacacs_address:
                 self.tacacs_client = TACACSClient(
                     getenv("TACACS_ADDR"), 49, getenv("TACACS_PASSWORD")

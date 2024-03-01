@@ -17,7 +17,7 @@ class CustomApp:
             env.log("error", "LDAP authentication failed: no server configured")
             return False
         try:
-            conn = Connection(env.ldap_server, user=(env.ldap_binduser + env.ldap_userdn),
+            conn = Connection(env.ldap_server, user=(env.ldap_binduser + "@" + env.ldap_userdn),
                               password=env.ldap_bindpassword, auto_bind=True)
             conn.search(env.ldap_basedn, '(sAMAccountName={})'.format(name))
             if len(conn.entries) == 1:

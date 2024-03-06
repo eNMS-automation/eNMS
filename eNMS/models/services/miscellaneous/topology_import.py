@@ -89,6 +89,7 @@ class TopologyImportService(Service):
         devices = http_get(
             f"{self.librenms_address}/api/v0/devices",
             headers={"X-Auth-Token": env.get_password(self.librenms_token)},
+            verify=False,
         ).json()["devices"]
         for device in devices:
             db.factory(

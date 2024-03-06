@@ -169,10 +169,10 @@ class Environment:
         try:
             if ldap_address:
                 self.ldap_server = Server(getenv("LDAP_ADDR"))
-                self.ldap_binduser = Server(getenv("LDAP_BINDUSER"))
-                self.ldap_userdn = Server(getenv("LDAP_USERDN"))
-                self.ldap_bindpassword = Server(getenv("LDAP_BINDPASSWORD"))
-                self.ldap_basedn = Server(getenv("LDAP_BASEDN"))
+                self.ldap_binduser = getenv("LDAP_BINDUSER")
+                self.ldap_userdn = getenv("LDAP_USERDN")
+                self.ldap_bindpassword = getenv("LDAP_BINDPASSWORD")
+                self.ldap_basedn = getenv("LDAP_BASEDN")
             if tacacs_address:
                 self.tacacs_client = TACACSClient(
                     getenv("TACACS_ADDR"), 49, getenv("TACACS_PASSWORD")

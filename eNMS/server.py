@@ -324,7 +324,7 @@ class Server(Flask):
         @blueprint.route("/download/<type>/<path:path>")
         @self.process_requests
         def download(type, path):
-            db_file = db.fetch(type, path=path, allow_none=True)
+            db_file = db.fetch(type, path=f"/{path}", allow_none=True)
             if not db_file:
                 return {"error": "File not found in database."}
             return_data, full_path = BytesIO(), f"{vs.file_path}/{path}"

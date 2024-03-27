@@ -1,13 +1,18 @@
 version: '3.8'
 services:
+services:
   enms:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: enms
-#    image: saneisaya/enms:latest
+#    image: saneisaya/docker-enms:latest
     restart: always
-#    environment:
+    environment:
+      - GITHUB_API_TOKEN=${GITHUB_API_TOKEN}
+      - GIT_USER_NAME=${GIT_USER_NAME}
+      - GIT_USER_EMAIL=${GIT_USER_EMAIL}
+      - SCHEDULER_ADDR=http://enms-scheduler:8000
 #      - VAULT_ADDRESS=${VAULT_ADDRESS}
 #      - VAULT_TOKEN=${VAULT_TOKEN}
 #      - UNSEAL_VAULT_KEY1=${UNSEAL_VAULT_KEY1}
@@ -15,17 +20,10 @@ services:
     volumes:
       - /data/docker/projects:/root/projects
       - /opt/docker/docker-enms/eNMS:/eNMS
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.enms.rule=Host(`server ip address`)"
-      - "traefik.http.routers.enms.entrypoints=enms"
-#      - "traefik.http.routers.enms.tls.certresolver=myresolver"
-      - "traefik.http.services.enms.loadbalancer.server.port=5000"
     networks:
-      - traefik_proxy
+      - nginx_proxy
     depends_on:
-      db:
-        condition: service_started
+      - db
   db:
     image: mariadb:10.5
     restart: always
@@ -36,6 +34,23 @@ services:
       - MYSQL_PASSWORD=enms_password
     volumes:
       - /data/docker/db_data:/var/lib/mysql
+      
+    vault-server:
+    image: hashicorp/vault:latest
+    container_name: vault-server
+    ports:
+      - "8200:8200"
+    restart: always
+    volumes:
+      - /opt/docker/vault/logs:/vault/logs
+      - /opt/docker/vault/file:/vault/file
+      - /opt/docker/vault/config:/vault/config
+    cap_add:
+      - IPC_LOCK
+    entrypoint: vault server -config=/vault/config/vault.json
+    networks:
+      - nginx_proxy
+      
   enms-scheduler:
     build:
       context: .
@@ -60,10 +75,18 @@ services:
       - /opt/docker/docker-enms/eNMS-Scheduler/eNMS/scheduler:/scheduler
       - ./logs:/home/centos/enms/logs
     networks:
-      - traefik_proxy
+      - nginx_proxy
     depends_on:
-      - db
-
+      - mysqld
+    # eNMS-Scheduler mysqld
+  mysqld:
+    image: mysql:latest
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=PASSWORD
+      - MYSQL_DATABASE=enms
+    volumes:
+      - /data/docker/mysql_data_schedulers:/var/lib/mysql
 networks:
-  traefik_proxy:
+  nginx_proxy:
     external: true

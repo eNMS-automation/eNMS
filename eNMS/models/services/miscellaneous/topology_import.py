@@ -34,9 +34,13 @@ class TopologyImportService(Service):
     def job(self, run):
         getattr(self, f"query_{self.import_type}")()
         return {"success": True}
-
-    def query_netbox(self):
+        
+    def query_netbox(self): #Line 39
+        import requests
+        session = requests.Session()
+        session.verify = False
         nb = netbox_api(self.netbox_address, env.get_password(self.netbox_token))
+        nb.http_session = session
         for device in nb.dcim.devices.all():
             device_ip = device.primary_ip4 or device.primary_ip6
             db.factory(

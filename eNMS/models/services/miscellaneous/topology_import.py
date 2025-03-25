@@ -48,7 +48,7 @@ class TopologyImportService(Service):
                 **{
                     "name": device.name,
                     "ip_address": str(device_ip).split("/")[0],
-                    "subtype": str(device.device_role),
+                    "subtype": str(device.role),
                     "model": str(device.device_type),
                     "location": str(device.site),
                     "vendor": str(device.device_type.manufacturer),

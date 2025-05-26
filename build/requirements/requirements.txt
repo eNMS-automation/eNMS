@@ -1,25 +1,2 @@
-apscheduler
-argon2-cffi
-dicttoxml
-dramatiq[redis, watch]
-flask
-flask_login
-flask-socketio
-flask_wtf
-gitpython
-gunicorn
-itsdangerous
-napalm
-ncclient
-netmiko
-passlib
-psutil
-redis
-ruamel.yaml==0.17.21
-sqlalchemy
-watchdog
-wtforms
-xlrd
-xlwt
-xmltodict
+
 

@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: "npm" # Use "yarn" if you're using Yarn instead of npm.
+    directory: "/" # Location of the `package.json` file, adjust this if it's in a subdirectory.
+    schedule:
+      interval: "daily" # Checks for updates daily, you can set it to weekly or monthly.
+    commit-message:
+      prefix: "deps"
+    open-pull-requests-limit: 10 # Limit the number of open PRs Dependabot will create.

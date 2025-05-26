@@ -1,2 +1,2 @@
-mysqlclient
-psycopg2
+mysqlclient==2.2.4
+# psycopg2

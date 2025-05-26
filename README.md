@@ -1,6 +1,9 @@
 <h1 align="center">eNMS</h1>
 <h2 align="center">An enterprise-grade vendor-agnostic network automation platform.</h2>
 
+## If you are looking for Docker Intructions go here [https://github.com/SaneiSaya/docker-eNMS/wiki](https://github.com/SaneiSaya/docker-eNMS/wiki)
+
+
 # Introduction
 
 eNMS is a vendor-agnostic NMS designed for building workflow-based network automation solutions.
@@ -114,3 +117,7 @@ You can follow us on _[Twitter](https://twitter.com/AutomationEnms)_ or _[Linked
     export FLASK_APP=app.py
     flask run --host=0.0.0.0
     Log in (default credentials: admin / admin)
+    
+## Docker Install
+Installation instructions are in the wiki on this repo 
+[https://github.com/SaneiSaya/docker-eNMS/wiki](https://github.com/SaneiSaya/docker-eNMS/wiki)

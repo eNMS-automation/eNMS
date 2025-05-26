@@ -1,7 +1,7 @@
-black
-flake8
-flake8-print
-mkdocs
-mkdocs-material
-pep8-naming
-pympler
+# black
+# flake8
+# flake8-print
+# mkdocs
+# mkdocs-material
+# pep8-naming
+# pympler

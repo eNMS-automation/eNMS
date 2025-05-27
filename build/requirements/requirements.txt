@@ -24,7 +24,7 @@ gitdb
 GitPython
 greenlet
 gunicorn
-h11==
+h11
 hvac
 idna
 importlib-resources

@@ -33,7 +33,7 @@ services:
     volumes:
       - /data/docker/db_data:/var/lib/mysql
       
-    vault-server:
+  vault-server:
     image: hashicorp/vault:latest
     container_name: vault-server
     ports:

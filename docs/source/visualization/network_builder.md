@@ -16,10 +16,12 @@ Button controls exist for the following functionality:
   from inventory to add to this Network.
 - `Create a Label` on the diagram.
 - `Delete` devices and/or links from the diagram.
-- `Network Tree` displays a hierarchical tree diagram of included devices.
+- `Changelogs` Display the current network changelogs
 - `Run a service or workflow` against all the devices in this Network diagram
-- `Network Search` for devices and/or links from the diagram.
+- `Network Tree` displays a hierarchical tree diagram of included devices.
 - `Zoom in / Zoom out`.
+- `Network Search` for devices and/or links from the diagram, either by names
+  or with a search across all properties.
 - `Auto-arrange the Network` diagram: toggle this button to turn auto-arrange
   on and off.
 - `Back navigation and Forward navigation`: For drilling into nested networks

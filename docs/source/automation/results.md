@@ -18,6 +18,11 @@ one or more Device targets.
 The table has selectable columns for browsing the Run properties like Name, Duration, 
 Service, User, Trigger, Status and Progress.
 
+In the top menu:
+
+- The first button (with "single vs. multiple users" icons) allows users to switch between viewing all runs (from any user) and viewing only their own runs.
+- The last button (with a "calendar" icon) opens a calendar showing the start times of all runs.
+
 ## Displaying and Filtering Results
 
 Use the Columns pull-down to select which table columns to display.

@@ -19,7 +19,7 @@ accessible by users with admin privileges:
 
 #### Notification Banner
 A notification banner can be used to let users know of application-wide
-information. There are a handful of parameters that can be used to display
+information. There are a handful of parameters that can be used for display,
 found in either the `Parameters` section of the `Admin Panel` or in
 `settings.json`. 
 
@@ -45,6 +45,7 @@ found in either the `Parameters` section of the `Admin Panel` or in
           with a space and you should stick to this sequence in order to
           prevent problems. Values for minLeft, maxLeft, maxTop, minTop and
           modify are not supported in shorthand strings.
+
     - `theme`: Set the color theme of the banner.
 
 ## Database: Migration, Backup and Restore
@@ -102,9 +103,9 @@ services, workflows and pools. This feature works with the Import/Export
 migration system to transfer the living content of services/workflows to
 another instance that might have a different inventory of devices and links.
 
-## `Delete Results/Logs`
+## `Delete Old Instances`
 
-Deletes historical results, logs, and changelogs
+Deletes historical results, and changelogs
   
 ## Inventory Import/Export
 

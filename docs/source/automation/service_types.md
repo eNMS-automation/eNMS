@@ -69,8 +69,8 @@ parameters for all Napalm services:
 
 And the specifics for each Napalm service are in their own sections:
 
-- [Napalm Data Backup Service](servicetypes/napalm_databackup.md).
 - [Napalm Configuration Service](servicetypes/napalm_configuration.md).
+- [Napalm Data Backup Service](servicetypes/napalm_databackup.md).
 - [Napalm Getters Service](servicetypes/napalm_getters.md).
 - [Napalm Ping Service](servicetypes/napalm_ping.md).
 - [Napalm Rollback Service](servicetypes/napalm_rollback.md).
@@ -92,9 +92,9 @@ Netmiko service:
 
 And the specifics for each Netmiko service are in their own sections:
 
-- [Netmiko Data Backup Service](servicetypes/netmiko_databackup.md).
 - [Netmiko Commands Service](servicetypes/netmiko_commands.md).
 - [Netmiko Configuration Service](servicetypes/netmiko_configuration.md).
+- [Netmiko Data Backup Service](servicetypes/netmiko_databackup.md).
 - [Netmiko File Transfer Service](servicetypes/netmiko_filetransfer.md).
 - [Netmiko Prompts Service](servicetypes/netmiko_prompts.md).
 
@@ -108,15 +108,15 @@ Runs any python code:
 
 Send a REST call (GET, POST, PUT or DELETE) to a URL with optional
 payload. The output can be validated with a command / pattern mechanism,
-like the `Netmiko Commands Service`:
+similar to the `Netmiko Commands Service`:
 
 - [REST Call Service](servicetypes/rest_call.md).
 
 ## Scrapli Services
  
-The Netmiko services provide the ability to perform multiple CLI actions
-through an SSH connection. The following are the values common to every
-Netmiko service:
+As a possibly faster alternative to Netmiko, the Scrapli services provide the ability
+to perform multiple CLI actions through an SSH connection. The following are the values
+common to every Scrapli service:
 
 - [Scrapli Common Parameters](servicetypes/scrapli_common.md).
 

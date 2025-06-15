@@ -1,8 +1,7 @@
-
 # Release Notes
 
-Version 4.6.0: Clustering
--------------------------
+Version 5.0: Clustering
+-----------------------
 
 - Add new Clustering menu entry with "Server" and "Worker" pages
 - Add one-to-many relationship between Run and Server class
@@ -19,7 +18,7 @@ Version 4.6.0: Clustering
   - Add "Role" property to distinguish between "primary" and "standby" in the cluster
   - Add "Allowed Automation" property to control allowed automation:
     - "scheduler": server can run jobs from scheduler via "run_task" REST endpoint
-    - "rest_api": server can run jobs from REST API via "run_server" REST endpoint
+    - "rest_api": server can run jobs from REST API via "run_service" REST endpoint
     - "application": server can run jobs from the UI via "run_service" controller endpoint
   - "Allowed Automation" can be configured from settings.json > "cluster" > "allowed_automation"
 - Rename 'import_version' key to 'version' in settings.json > app
@@ -29,7 +28,10 @@ Version 4.6.0: Clustering
   - These properties are not erased if the server object of the run is deleted
 - Add new "Worker" table in database and UI (Administration menu)
   - A worker is created or updated whenever a job starts running
-  - Add "subtype" based on the "_" environment variable (e.g python, gunicorn, dramatiq)
+  - The worker name is built as server name + process ID to guarantee that it is unique
+    across servers
+  - Add "process_id" property (populated with getpid())
+  - Add "subtype" based on the "_" environment variable (e.g. python, gunicorn, dramatiq)
   - Add "last_update" property to show when the worker was last used / updated
   - Add "server" hyperlink to the edit panel of worker's server
   - Add "current_runs" property to show how many jobs the worker is currently running
@@ -46,7 +48,51 @@ Version 4.6.0: Clustering
 - Add mechanism to use a StringField for the properties in properties.json > "property_list":
   - if the list is empty, will default to StringField instead of a SelectField.
   - new format in case of a SelectField: must provide all wtforms keyword arguments
-- Fix RTD integration webhook
+- Add mechanism to compare configuration properties between two devices:
+  - New drop-down list in configuration table to choose configuration property
+  - New "v1" and "v2" column to choose which devices to compare
+- Add setting to control whether or not to monitor changes system in
+  settings.json > "files" > "monitor_filesystem"
+- Add new "name" field to the "Parameters" class so it can be updated from the REST API
+- Add support for BCC in the send email mechanism (service step 4 and email notification service)
+- Add new "Secrets" mechanism for the user to associate a secret value to a key, and decide via
+  RBAC which users can view, edit and use them in a workflow.
+- Make 'runtime' property of Run class unique at database level ("unique = True")
+- Add new "Sender" field for the email notification mechanism (service Step 4)
+- Add new snippet to delete corrupted services ("delete_corrupted_services.py")
+- Make pool 'fast compute' mechanism optional via new "pool" > "fast_compute" boolean
+  property in settings.json (default: true)
+- Add new try_set function to retry updating a property in case of deadlock
+- Add new key in automation.json: "advanced" > "always_commit_result" set to False by default.
+  If set to True, results are always committed as soon as they are created to avoid deadlocks.
+- Refactor "service run count" mechanism to work with the redis queue and correctly update
+  the service status ("Idle" / "Running") at the end of the run
+- Refactor netmiko backup service and scrapli backup service to retry the configuration
+  update transaction in case of deadlocks
+- Forbid redirecting outside of the base URL in the login redirection mechanism
+- Prevent active HTML / JavaScript in the cells of a table by default, and add the `html`
+  keyword in properties.json to allow it wherever necessary.
+- Add `sanitize` function to sanitize user input in the HTML-enabled cells of a table
+- Validate that the path of a file is inside the "files" folder when renaming a file object
+  or uploading a file.
+- Move v1/v2 in config table after the configuration properties columns
+- Move v1/v2 in all results table before the table buttons
+- Add runtime in traceback when a run fails in controller.run function
+- Add try_set and try_commit to run global variables
+- Add new timeout when trying to close connection with multithreading. Timeout is configured
+  under automation.json > "advanced" > "disconnect_thread_timeout" (default: 10s)
+- Append 3-digits postfix to all runtimes to prevent name and runtime collisions for
+  runs that start at the same time (replaces jitter mechanism)
+- Refactor the end of run transaction and cleanup mechanism after a run is interrupted by
+  a critical exception or application reload:
+  - Trigger end of run transaction to have results and logs available
+  - Remove the run data from the redis queue (if a redis queue is used)
+  - Close connections to device (in case of an interruption by critical exception)
+- Make the value of a Secret a private property
+- Major logging update to prevent stuck workflow with dramatiq processes > 2:
+  - Add support for multiprocessing capable logging handlers
+  - New "use_multiprocessing_handlers" key in logging.json to decide whether to use
+  the multiprocessing capable logging handlers
 
 Migration:
 - Update properties.json > "properly_list" with new format
@@ -142,7 +188,7 @@ Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
   - Refactor the files mechanism to no longer display the full Unix path, only the path
     from the files folder
     - "files" displayed as breadcrumb even if the actual path does not include such a folder
-    - the copy to clipboard mechanism still returns the full path so it can be used in e.g python scripts
+    - the copy to clipboard mechanism still returns the full path so it can be used in e.g. python scripts
     - allow both absolute and relative paths in generic and netmiko file transfer services
     - impact on migration: all paths in files must be truncated by removing the path
     to the "files" folder
@@ -180,25 +226,12 @@ Migration:
   instead of the full path (path to playbook folder + scoped path). The path to the playbook
   folder must be trimmed from all ansible services.
 
-Tests:
-- Everything about files is impacted and must be tested again
-- Impact of migration import refactoring on migration files import and service import
-- Impact of removing payload in workflow results
-- Test service form because of Jinja2 Template refactoring
-- Test runtimes displayed in WB and logs/results panel (get_runtimes function was refactored)
-- Test skip of run once services when all devices are skipped
-- Test new trash mechanism for files
-- Test ansible playbook service (scoped path instead of full path)
-
-Todo:
-- Add context help for custom parameterized form
-
 Version 4.4.0: RBAC and Credentials
 -----------------------------------
 
 - Remove settings from UI upper menu (doesn't work with multiple gunicorn workers)
-- Add post_update function (60350ede71f6a5146bab9f42a87f7fef0360b98e) after db flush in controller udpate function to compute pool only after the ID has been set, and
-  determine what properties to return (e.g not serialized object but only what is needed)
+- Add post_update function (60350ede71f6a5146bab9f42a87f7fef0360b98e) after db flush in controller update function to compute pool only after the ID has been set, and
+  determine what properties to return (e.g. not serialized object but only what is needed)
   Return default serialized properties in controller update instead of all serialized relationship for scalability with > 50K devices.
 - Refactor freeze edit / run mechanism (pure python check instead of SQL query with originals)
 - New Bulk Edit option for appending / removing to a multiple instance list (dropdown list on the right of the field).
@@ -268,7 +301,7 @@ Version 4.4.0: RBAC and Credentials
   - Add new "get_all_results" function in the global variables
 - Add support for distributed task queue for automation with Dramatiq.
 - Return an error in the UI if the commit of workflow logs, report or result
-  fails (e.g data too long db error because of payload data for the results),
+  fails (e.g. data too long db error because of payload data for the results),
   don't commit if the size of the data is higher than the maximum column size
   configured in database.json, and emit warning if it is than 50%
 - Fix "List index out of range" bug in Jump on Connect mechanism
@@ -334,7 +367,7 @@ Version 4.3.0
   * Add new option to parse TextFSM as JSON object
   * Add new option to support Jinja2 Template conversion
   * Add new option to support Template Text Parser conversion
-- Fix bulk deletion and bulk removal from a filtered table (e.g dashboard bulk deletion deletes everything,
+- Fix bulk deletion and bulk removal from a filtered table (e.g. dashboard bulk deletion deletes everything,
   not just the objects displayed in the table).
 - New feature to align nodes in Network Builder and Workflow Builder:
   - Horizontal and vertical alignment
@@ -381,7 +414,7 @@ Version 4.3.0
 - Add new "allow_password_change" keyword in settings > authentication to configure whether the user
   profile lets users change their own password (if `false`, the password field is not shown)
 - Add new "force_authentication_method" to force users to log in with the authentication method saved in
-  the database (e.g first authentication method used)
+  the database (e.g. first authentication method used)
 - Add new 'Man Minutes' feature to compute time saved per workflow
   * Only for top-level workflows
   * Man Minutes can be defined per device or for the whole workflow
@@ -398,6 +431,23 @@ Version 4.3.0
 - Add new settings "max_content_length" in settings.json > "app" (Flask parameter)
 - Add new timeout setting for file import in settings.json > "files"
 
+Migration
+- check "username" and "server" variables in workflow aren't in conflict with existing workflows.
+- dashboard is now controlled by RBAC: dashboard access must be explicitly granted via access pages, GET and
+  POST requests.
+- "download_file" endpoint -> "download" (add support for downloading folders)
+- the "driver" property must be updated for all netmiko, napalm and scrapli via the migration script
+- update services to use server IP and address from global variables and not from settings.
+- the napalm_ping_service added a `ping_timeout` property. If desired, set both
+  values to be at least the defaults (2 for `ping_timeout`, 10 for napalm's `timeout`)
+
+To be tested:
+- bulk deletion and bulk removal (from dashboard and other tables too)
+- mail notification
+- web ssh
+- service logging mechanism, including disable logging
+- netmiko commands service: test old services still work + new multi commands / results as list option
+
 Version 4.2.0
 -------------
 
@@ -406,7 +456,7 @@ Version 4.2.0
 - Extend Devices and Links with subclass / custom properties and a separate tab in the UI, the same way services work.
 - Remove deep_services function used for export, use service.children relationship instead.
 - Dont subclass SQLAlchemy Column following advice of SQLAlchemy creator.
-- Make corrupted edges deletion mechanism a troublehooting snippet instead of a button in the admin panel.
+- Make corrupted edges deletion mechanism a troubleshooting snippet instead of a button in the admin panel.
 - Move redis configuration in settings.json > "redis" key
 - Add new mechanism to limit results in server-side drop-down list with filtering constraints.
 - Limit superworkflow selection to workflows that contains the shared Placeholder service.
@@ -435,7 +485,7 @@ Version 4.2.0
 - Change default priority to 10 for services. Update of migration files required.
 - Add new check box "Approved by an Admin user" in the Unix Command service. That box must be ticked by
   an admin user for the service to be allowed to run. A non-admin user cannot save a service if it is
-  ticked, meaning that each time a Unix Command service is edited, it must be re-appproved.
+  ticked, meaning that each time a Unix Command service is edited, it must be re-approved.
 - Add new timeout parameters for Scrapli service
 - Always show security logs, even when logging is disabled. Add "allow_disable" (default: True) keyword argument
   to log function to prevent logs from being disabled if necessary.
@@ -463,6 +513,18 @@ Version 4.2.0
   "network_data" folder)
 - Update slack notification service to use newest slack_sdk library (instead of slackclient<2)
 - Make scrapli connection arguments configurable from automation.json / scrapli / connection_args
+
+Migration:
+
+  - Update all access with new GET / POST endpoints
+  - Doc link in settings.json to be updated with custom doc links.
+  - Refresh rates in settings.json to be updated (e.g. 10s instead of 3 if RBAC is used)
+  - Redis config in settings.json
+  - In migration files, replace "default_access: admin" with "admin_only: true"
+  - Warn user about REST API run service endpoint new default (True)
+  - Update service priority to "current priority + 9" (see migration script in files / script)
+  - Update credentials of REST Call services (custom_username, custom_password)
+  - Add SSH command in settings.json / ssh section
 
 Version 4.1.0
 -------------
@@ -524,9 +586,9 @@ Version 4.1.0
 - Separate controller (handling HTTP POST requests) from main application (gluing everything together)
 - Add new "ip_address" field in settings.json > app section
 - Add paging for REST API search endpoint: new integer parameter "start" to request results from "start"
-- Add server time at the bottom of the menu (e.g for scheduling tasks / ease of use)
+- Add server time at the bottom of the menu (e.g. for scheduling tasks / ease of use)
 - Add button in service table to export services in bulk (export all displayed services as .tgz)
-- Ability to paste device list (comma or space separated) into a multiple instance field (e.g service device and pool targets)
+- Ability to paste device list (comma or space separated) into a multiple instance field (e.g. service device and pool targets)
 - Re-add current Run counter to 'Service' and 'Workflow' on the dashboard banner + Active tasks
 - Ability to download result as json file + new copy result path to clipboard button in result json editor panel
 - Ability to download logs as text file
@@ -544,7 +606,7 @@ Version 4.1.0
 - Add new "connection_name" mechanism to open multiple parallel connections to the same device in the
   same workflow
 - Add new "get_credential" global variable in workflow builder. Used to get a password or a passphrase
-  for a netmiko validaiton command or rest call service. For obfuscation purposes.
+  for a netmiko validation command or rest call service. For obfuscation purposes.
   mail: Obfuscate Credentials passed into Netmiko Command Line
 - Fix data extraction service and operation keyword in set_var
 - Don't set status of currently running services to "Aborted" when using a flask CLI command
@@ -572,8 +634,8 @@ Version 4.0.1
 
 - Change of rbac.json structure: list becomes dict, each line can have one of three values:
 
-  - "admin" (not part of RBAC, only admin have access, e.g admin panel, migration etc)
-  - "all" (not part of RBAC, everyone has access, e.g dashboard, login, logout etc)
+  - "admin" (not part of RBAC, only admin have access, e.g. admin panel, migration etc)
+  - "all" (not part of RBAC, everyone has access, e.g. dashboard, login, logout etc)
   - "access" (access restricted by RBAC, used to populate access form)
 
 - Add RBAC support for nested submenus
@@ -608,18 +670,18 @@ Version 4.0.0
   - Add run service in bulk on all currently displayed devices mechanism
 
 - Move all visualization settings from settings.json > "visualization" to dedicated visualization.json
-- Make the error page colors confiurable per theme (move css colors to theme specific CSS file)
+- Make the error page colors configurable per theme (move css colors to theme specific CSS file)
 - Use the log level of the parameterized run instead of always using the service log level
 - Change field syntax for context help to be 'help="path"' instead of using render_kw={"help": ...}
 - Don't update the "creator" field when an existing object is edited
 - Add new function "get_neighbors" to retrieve neighboring devices or links of a device
 - Refactor the migration import mechanism to better handle class relationships
 - Web / Desktop connection to a device is now restrictable to make the users provide their own credentials
-  => e.g to prevent inventory device credentials from being used to connect to devices
+  => e.g. to prevent inventory device credentials from being used to connect to devices
 - Configuration git diff: indicate which is V1 and which is V2. Option to display more context lines, including all of it.
 - Improve display of Json property in form (make them collapsed by default)
 - Update to new version of Vis.Js (potential workflow builder impact)
-- Add mechanism to save only failed results (e.g for config collection workflow)
+- Add mechanism to save only failed results (e.g. for config collection workflow)
 - New database.json to define engine parameters, import / export properties, many to many relationship, etc.
 - Fork based on string value instead of just True / False: new discard mode for the skip mechanism. When using discard, devices do not follow any edge after the skipped service.
 - Refactor skip property so that it is no longer a property of the service to avoid side effect of skipping shared services.
@@ -747,7 +809,7 @@ Version 3.22
 - Add Dark mode and theme mechanism
 - Make search endpoint work with result to retrieve device results
 - Allow dictionary and json as custom properties. For json properties, use jsoneditor to let the user edit them.
-- Add placeholder as a global variable in a workflow (e.g to be used in the superworkflow)
+- Add placeholder as a global variable in a workflow (e.g. to be used in the superworkflow)
 - Add mechanism for creating custom configuration property
 - Refactor data backup services with custom configuration properties. Implement "Operational Data" as
   an example custom property.
@@ -770,7 +832,7 @@ Version 3.21.3
 - Fix wrong jump password when using a Vault
 - Fix workflow results recursive display no path in results bug
 - Improve "Get Result" REST endpoint: returns 404 error if no run found, run status if a run is found but there are
-  no results (e.g job still running), and the results if the job is done.
+  no results (e.g. job still running), and the results if the job is done.
 - Remove wtforms email validator in example service following wtforms 2.3 release
 
 Version 3.21.2
@@ -867,7 +929,7 @@ Version 3.21
   This means you can first add your own loggers in logging.json, then log to them from a workflow.
 - Remove CLI fetch, update and delete endpoint (curl to be used instead if you need it from the VM)
 - Improve workflow stop mechanism: now hitting stop will try to stop ASAP, not just after the on-going
-  service but also after the on-going device, or after the on-going retry (e.g many retries...).
+  service but also after the on-going device, or after the on-going retry (e.g. many retries...).
   Besides stop should now work from subworkflow too.
 
 Version 3.20.1
@@ -1132,7 +1194,7 @@ Version 3.15
   if async run_job was invoked, you can use the runtime returned in the REST response to collect the results
   after completion via a GET request to /result/name/runtime
 - New Run Management window:
-- Slashes are now forbidden from services and worklfow names (conflict with Unix path)
+- Slashes are now forbidden from services and workflow names (conflict with Unix path)
 - The command sent to a device is now displayed in the results
 - Credentials are now hidden when using gotty.
 - Job Parametrization.

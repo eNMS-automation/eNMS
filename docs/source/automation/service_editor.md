@@ -5,7 +5,7 @@ The Service Editor Panel is accessible from the following locations:
 ![Service Editor Panel](../_static/automation/services/service_editor.png)
 
 - `Automation -> Services` button bar for existing services.
-- `Automation -> Workflow Builder` by double clicking an existing service
+- `Automation -> Workflow Builder` by double-clicking an existing service
   or using the `Edit` button to edit a workflow (Workflows are services too).
   Also right mouse click on an existing Service, and then select `Edit`.
 - `+` button in both `Automation -> Services` and `Workflow Builder` to create
@@ -23,7 +23,6 @@ The Service Editor Panel is accessible from the following locations:
 -   `Full Name`: (**display only**) Fully qualified service name including all
     workflow nesting or a **\[Shared\]** tag.
 -   `Creator`: User that created the service.
--   `Admin Only`: Only admin users are allowed to edit or run.
 -   `Service Type`: (**display only**) The service type of the current
     service instance.
 -   `Disabled`: Prevents the workflow or service from running.
@@ -48,34 +47,13 @@ The Service Editor Panel is accessible from the following locations:
 
 - `Workflows`: (**display only**) Displays the list of workflows that
     reference the service.
+- `Version`: User defined version of the service or workflow for tracking.
 - `Description` / `Vendor` / `Operating System`: Useful for filtering
-    services in the table.
+    services in the table. Note that Vendor and Operating System assume that the
+    service applies to only one Vendor or one Operating System, again, only for
+    classification and filtering purposes.
 - `Initial Payload`: User-defined dictionary that can be used anywhere
     in the service.
-- `Parameterized Form is Mandatory`: Force display of the 
-    Parameterized Form before execution whenever the service is run
-    interactively.
-- `Parameterized Form`: (default is configurable in `setup/automation.json`)
-    A user defined input form 
-    that pops up before a Parameterized Run of the service. Values entered 
-    to this form at runtime are available within running services and can
-    override properties of the "Run" class.  Forms defined on nested
-    services or subworkflows are not displayed.
-    
-    The following properties can be overridden using Parameterized Form:
-    
-    | Property | Description |
-    | - | - |
-    | target_devices | list of target devices names. |
-    | target_pools | list of target pool names. |
-    | device_query | string; Python expression for which devices to select. |
-    | device_query_property | string; either `"name"` or `"ip_address"`. |
-    | max_processes | integer; how many threads to run, cannot exceed recommended max. |
-    | multiprocessing | boolean; turn multiprocessing on/off. |
-    | mail_recipient | string; comma-separated list of email addresses. |
-    | send_notification | boolean; turn notification on/off. |
-    | custom | Example:<br>`custom_field = StringField('Custom Field', default='desired_default_value')`<br><br>This field can be referenced via:<br> `payload["form"]["custom_field"]`<br> OR <br>you may refer directly to the variable name `custom_field` <br><br>Other WTForm components can be used to define a variety of properties. |
-
 - `Priority`: (default: `1`) Allows the user to determine the order a
     service runs when two services are ready to run at the same time.
     The service with a higher priority number is run first.
@@ -98,7 +76,7 @@ The Service Editor Panel is accessible from the following locations:
 	first retry. If D2 succeeds and D3 fails, the second and last retry will
 	run on D3 only.    
     
-- `Type of Credentials`: (default: Any) Allows the user to limit the type
+- `Type of Credentials`: (default: Read Write) Allows the user to limit the type
     of credential used when running the 
     service to Read versus Read-Write credentials, assuming both credentials
     are accessible by the user. 
@@ -113,16 +91,80 @@ The Service Editor Panel is accessible from the following locations:
 - `Update pools after running`: (default: False) Update all pools after
     this service runs. Note that updating all pools is performance intensive.
 
+#### Parameterized Form Parameters
+
+- `Parameterized Form is Mandatory`: Force display of the
+    Parameterized Form before execution whenever the service is run
+    interactively.
+- `Parameterized Form`: (default is configurable in `setup/automation.json`)
+    A user defined input form
+    that pops up before a Parameterized Run of the service. Values entered
+    to this form at runtime are available within running services and can
+    override properties of the "Run" class.  Forms defined on nested
+    services or subworkflows are not displayed.
+
+    The following properties can be overridden using Parameterized Form:
+
+    | Property | Description |
+    | - | - |
+    | target_devices | list of target devices names. |
+    | target_pools | list of target pool names. |
+    | device_query | string; Python expression for which devices to select. |
+    | device_query_property | string; either `"name"` or `"ip_address"`. |
+    | dry_run | boolean; turn on/off dry run mode. |
+    | max_processes | integer; how many threads to run, cannot exceed recommended max. |
+    | multiprocessing | boolean; turn multiprocessing on/off. |
+    | mail_recipient | string; comma-separated list of email addresses. |
+    | send_notification | boolean; turn notification on/off. |
+
+    Additionally, any custom field can be defined from the parameterized form. This field can then be referenced:
+
+    - via `payload["form"]["custom_field"]`
+    - directly as a global variable `custom_field`
+
+    The `current_user` global variable is also available in the parameterized form field.
+
+    Other WTForm components can be used to define a variety of properties. A user can also define custom
+    `InstanceField` and `MultipleInstanceField` fields with specific constraints such as:
+
+    ```
+    custom_devices = MultipleInstanceField(
+        "Devices",
+        model="device",
+        constraints={
+            "name": "user_name",
+            "name_filter": "inclusion"
+        },
+        order={
+            "property": "name",
+            "direction": "asc"
+        },
+    )
+    custom_run = InstanceField(
+        "Run",
+        model="run",
+        constraints={
+            "service_name": "service name"
+        }
+    )
+    ```
+- `Parameterized Form HTML Template`: HTML used to optionally render the Parameterized Form fields.
+  Additionally, a Jinja2 template can be used for rendering as well. The context help 'i' icon for
+  this field has examples of the various templates.
+
 #### Workflow Parameters 
 
 While the parameters in this section can be used by stand-alone Services, they 
-generally provide more benefits for Service(s) that run inside of a Workflow. 
+generally provide more benefits for Service(s) that run inside a Workflow. 
 
+-   `Dry Run`: Run the workflow in test mode which prevents connections to target
+    devices. By setting fake device results in the variable space (see set_var()),
+    the workflow's conditional traversal logic can be tested.
 -   `Preprocessing`: A python script that
     runs before the service is executed. If the service has device
     targets, the code will be executed for each device independently,
     and a `device` global variable is available. Preprocessing is
-    executed for standalone services and for those within a workflow. This
+    executed for stand-alone services and for those within a workflow. This
     feature is useful for setting initial condition variables using
     `set_var()` that can be used for conditional processing within the
     service or workflow elsewhere; for example using the same workflow
@@ -139,7 +181,7 @@ generally provide more benefits for Service(s) that run inside of a Workflow.
 -   `Skip Value`: Defines the success value of the service when skipped
     (in a workflow, the success value defines whether to follow the
     success path (success edge), the failure path (failure edge), or be
-    discarded (in which case no result is created and the workflow graph
+    discarded (in which case no result is created, and the workflow graph
     will not proceed for that device). Note that another parallel part of
     the workflow might still generate a result for the device if discarded
     in one path (when parallel paths are used in the workflow).
@@ -158,7 +200,7 @@ included in the [Custom Properties section](../../advanced/customization/#custom
 Additional information for these fields
 may be available using the help icon next to the field label.
 
-The location for the help files can specified in the `setup/properties.json`,
+The location for the help files can be specified in the `setup/properties.json`,
 for example:
 
 		"help": "custom/impacting"
@@ -175,7 +217,7 @@ User maintained `Access Control` is available for services. This allows the
 This section contains all parameters that are specific to the service
 type. For instance, the "Netmiko Configuration" service that uses
 Netmiko to push a configuration will display Netmiko parameters (delay
-factor, timeout, etc) and a field to enter the configuration to push to
+factor, timeout, etc.) and a field to enter the configuration to push to
 the device.
 
 ![Service Editor Step2](../_static/automation/services/service_editor_step2.png)
@@ -272,7 +314,7 @@ services work together in a complex way.  The table below describes each combina
 - `Query Property Type`: Does the above expression evaluate to Device Names or
   IP Addresses.
 - `Multiprocessing`: Enables parallel processing on devices.
-- `Maximum number of processes`: The limit to control simultanous parallel
+- `Maximum number of processes`: The limit to control simultaneous parallel
   processes (configurable via settings.json).
 
 !!! Note
@@ -296,7 +338,7 @@ target device.
     -   `Iteration Devices Property`: Indicates whether iterable
         `Iteration Devices` contains IP addresses or names, for eNMS to
         look up actual devices from the inventory.
-    -   NOTE: When using `Iteration Devices` and  `Skip Query` the skip query
+    -   NOTE: When using `Iteration Devices` and `Skip Query` the skip query
         will evaluate both the service's targets from Targets/Devices and 
 	    Targets/Iteration, if either is not skipped the workflow will
     	attempt to follow the appropriate success or failure edge.
@@ -340,7 +382,7 @@ Python can be used to inspect or modify the service result. This is
 typically used to perform complex validation or to extract values from
 the result for use in subsequent services.
 
--   `Postprocessing Mode`: Control whether or not the `Postprocessing`
+-   `Postprocessing Mode`: Control whether the `Postprocessing`
     script is executed.
     -   `Always run`: The `Postprocessing` script will
         execute for each device.
@@ -410,7 +452,7 @@ equal to the result.
 The Report feature allows the developer to present a formatted report to the user
 at the end of execution.
 
-- `Report Template`: Copy the report from a predefined template.  By default `Empty report`
+- `Report Template`: Copy the report from a predefined template. By default, `Empty report`
    leaves the developer to define the report.  One sample template is provided (`report_results.j2`)
    that produces an HTML report with one section for each device; once copied feel free to modify
    this default as needed.
@@ -448,6 +490,9 @@ Configure the following parameters:
     a link to the results.
 -   `Mail Recipients`: Must be a list of email addresses, separated by
     comma.  (Variable Substitution is supported.)
+    `Mail Subject` Subject of the mails. If the subject is left empty, it defaults
+    to `PASS/FAIL + service name`
+    `Sender`: Email address of the sender.
 -   `Reply-to Email Address`: Must be a list of email addresses, separated by
     comma.
 -   `Display only failed nodes`: The notification will not include

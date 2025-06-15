@@ -58,6 +58,10 @@ The Workflow Builder's panel is organized into 3 blocks of controls:
        mouse wheel).
     - `Zoom Out`: makes the display aspect ratio smaller (also achievable via
        the mouse wheel).
+    - `Search`: allows the user to:
+      - Search for specific services by name or search based on a specific string
+        across all properties of the workflow's services.
+      - Filter the display and results/logs based on a specific device.
     - `Export Workflow`: to the user's browser as a .tgz file.
     - `Previous workflow`: functions like the Back-button of the browser.
     - `Switch to Parent workflow`: transitions back to the parent workflow if
@@ -85,12 +89,12 @@ The Workflow Builder's panel is organized into 3 blocks of controls:
       same device or different devices.
     - `Run the Workflow`: using its saved parameters and the saved parameters
       of its contained services.
-    - `Parameterized Run`:  run the Workflow by first popping up a user input
+    - `Parameterized Run`: run the Workflow by first popping up a user input
       panel to prompt for select parameters (so that those parameters, such
       as, which device targets to run on, do not need to be saved inside the
       workflow).  The list of parameters to prompt for are set in Step1 of
       the workflow editor.
-    - `Stop the Workflow`:  the workflow will stop once the devices-in-progress
+    - `Stop the Workflow`: the workflow will stop once the devices-in-progress
       finish their current service. This feature is also available from a button
       in the `Automation -> Results` table alongside each result status.
 

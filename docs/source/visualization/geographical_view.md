@@ -1,7 +1,7 @@
 
 # Geographical View
 
-All data in this visualization mode is rendered on a 2D map .
+All data in this visualization mode is rendered on a 2D map.
 
 ## Visualization Controls
 

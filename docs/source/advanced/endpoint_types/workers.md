@@ -1,66 +1,79 @@
 # Get Worker Status
+
 Show worker processes and services they're currently running. This endpoint will return an error response if redis is not used.
 
-A successful response is in the format of 
+**Method**: Get <br />
+**Address:**: /rest/workers <br />
+**Parameters**: None<br />
+**Payload**: None<br />
+
+A successful response is in the format of
+
 ```json
 {
-    <pid>: {
-        "info": {
-            "memory": <percent memory>%
-        },
-        "jobs": {
-            <service name A>: <number currently running>,
-            <service name B>: <number currently running>
-        }
+    <server-name-pid>: {
+ 
+        "admin_only":false,
+        "current_run":<number>,
+        "description":"",
+        "id":<id>,
+        "last_update": <date>,
+        "name": <server-name-pid>,
+        "owners":[],
+        "process_id":<id>,
+        "rba_read": [],
+        "runs":[],
+        "servers":{}
     }
 }
 ```
 
 Otherwise the response will look like
+
 ```json
 { "error": <error detail> }
 ```
 
-**Method:** Get<br />
-**Address:** /rest/workers <br />
-**Parameters:** None <br />
-**Payload:** None <br />
-
 # Examples
 
 ## Typical response
+
 ```json
 {
-    "574677": {
-        "info": {
-            "memory": "1.1055756400082297%"
+   "app - 1515859": {
+        "admin_only": false,
+        "current_runs": 0,
+        "description": "",
+        "id": 89769,
+        "last_update": "2024-11-16 05:19:12.637478",
+        "name": "app - 1515859",
+        "owners":[...],
+        "process_id": 1515859,
+        "rbac_read":[...],
+        "runs":[...],
+        "server": {...},
+        "server_id":1,
+        "server_name": "app",
+        "server_properties": {
+            "id": 1,
+            "name": "app",
+            "type": "server"
         },
-        "jobs": {}
-    },
-    "574678": {
-        "info": {
-            "memory": "0.41382545141032046%"
-        },
-        "jobs": {
-            "Basic Superworkflow": "1",
-            "Data Processing Service": "3",
-        }
-    },
-    "574680": {
-        "info": {
-            "memory": "0.9065742291978954%"
-        },
-        "jobs": {}
-    }
+        "subtype": "gunicorn",
+        "type": "worker"
 }
 ```
+
 ## Redis isn't being used
+
 ```json
 {
     "error": "This endpoint requires the use of a Redis queue."
 }
 ```
+
 ## No information available
+
 ```json
 {
     "error": "No data available in the Redis queue."

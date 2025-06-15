@@ -17,6 +17,7 @@ the instance. `Access Control` also allows the owner(s) to determine the type of
 When viewing or editing a service `Step 1`, contains an `Access Control` panel that has the following properties: 
 
 * **Owners**: Users allowed to modify this `Access Control` panel
+* **Admin Only** If enabled, only admin users can view or edit this instance
 * **Read**: `Groups` allowed to view this instance
 * **Edit**: `Groups` allowed to modify this instance
 * **Run**: `Groups` allowed to use this service
@@ -33,6 +34,7 @@ When viewing or editing a device, there are two selectable tabs near the top: `C
 `Access Control` tab has the following properties: 
 
 * **Owners**: Users allowed to modify this `Access Control` instance
+* **Admin Only** If enabled, only admin users can view or edit this instance
 * **Read**: `Groups` allowed to view this instance.
 * **Configuration**: `Groups` allowed to view the configuration attribute of a device instance. 
 * **Edit` - `Groups** allowed to modify this instance.
@@ -48,5 +50,6 @@ When viewing or editing a link, network, or pool there are two selectable tabs n
 `Access Control` tab has the following properties: 
 
 * **Owners**: Users allowed to modify this `Access Control` instance
+* **Admin Only** If enabled, only admin users can view or edit this instance
 * **Read**: `Groups` allowed to view this instance
 * **Edit**: `Groups` allowed to modify this instance

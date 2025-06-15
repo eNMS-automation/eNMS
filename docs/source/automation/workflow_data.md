@@ -10,7 +10,7 @@ dictionary that is returned by the `job()` function of the service, and
 calling `get_result()` will return that dictionary. There are two types of
 results: top-level and per-device. If a service runs on 5 devices, 6
 results will be created: one for each device and one top-level result
-for the service itself. The top-level results contains the parameters that
+for the service itself. The top-level results contain the parameters that
 the service used during execution.
 
 Examples:
@@ -23,6 +23,10 @@ Examples:
   the current device for the `get_interfaces` service.
 - `get_result("Payload editor")["runtime"]`: Get the `runtime` key of
   the top-level result of the `Payload editor` service.
+- `get_result("get_interfaces", device=device.name, runtime="2024-07-15 05:18:35.48611572025")`:
+  Get the result for the current device for the `get_interfaces` service, for the runtime
+  `2024-07-15 05:18:35.48611572025`. By default, when no runtime is specified, the results for
+  the current runtime are retrieved.
 
 The `get_result()` function works everywhere that python code is accepted.
 
@@ -58,6 +62,23 @@ Examples:
     get_var("iteration_simple", section="pools")
     set_var("iteration_device", devices, section="pools", device=device.name)
     get_var("iteration_device", section="pools", device=device.name)
+
+### Update an object property: `try_set`
+
+`try_set` can be called to update an object's property and commit it to the database. If the commit fails for any reason (database unavailable, deadlock, etc.), `try_set` will automatically roll back and attempt to commit again. The number of retries is configured in database.json.
+
+- The first argument of try_set is the SQLAlchemy object to update.
+- The second argument is the name of the property to update (as a string).
+- The third argument is the value of that property.
+
+### Commit a transaction: `try_commit`
+
+`try_commit` can be called to run a function and attempt to commit the transaction at the end. If the commit fails for any reason (database unavailable, deadlock, etc.), `try_commit` will automatically roll back and attempt to commit again. The number of retries is configured in database.json.
+
+- The first argument of try_commit is the function to run (the SQL transaction)
+- The following arguments, *args and **kwargs, are passed to the function
+
+Typical usage: `try_commit(transaction, *args, **kwargs)`
 
 ### Retrieving Links and neighboring Devices: `get_neighbors()`
 

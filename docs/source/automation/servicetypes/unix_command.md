@@ -7,10 +7,15 @@ permissions prior to using a file in a workflow.
 Configuration parameters for creating this service instance: 
 
 - `Command`: UNIX command to run on the server.
-- `Approved by an Admin user`:  That box must be ticked by an admin user for
-  the service to be allowed to run. A non-admin user cannot save a service if
-  it is ticked, meaning that each time a Unix Command service is edited, it
-  must be re-approved.
+- `Approved by an Admin user`: A Unix Command service can only be run if this box
+  is checked. Whenever a Unix Command service is edited or duplicated by a non-admin user,
+  it must be re-approved.
+
+!!! note
+
+    When a non-admin user edits via the edit panel, the "Approved by admin" checkbox
+    must be unchecked to validate the form. When a Unix Command service is deep-copied
+    into a workflow, that property will be automatically unchecked.
 
 !!! note
 

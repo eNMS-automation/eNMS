@@ -9,7 +9,7 @@ Configuration parameters for creating this service instance:
     the target device(s).
 - `Commit Configuration`: Calls netmiko `commit` function after applying
     the configuration.
-- `Exit config mode`: Determines whether or not to exit config mode
+- `Exit config mode`: Determines whether to exit config mode
     after completion.
 - `Config Mode Command`: The command that will be used to enter config
     mode.
@@ -22,6 +22,8 @@ Configuration parameters for creating this service instance:
     (default: True).
 -   `Strip prompt`: Remove the trailing router prompt from the output
     (default: True).
+-   `Command Verify`: Enable to verify command echo for each command in the configuration set
+    (default: False).
 
 !!! note
 

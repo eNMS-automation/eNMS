@@ -15,11 +15,11 @@ Configuration parameters for creating this service instance:
 - `Protocol`: Use SCP or SFTP to perform the transfer.
 - `Source file`: For Get, source file is the path-plus-filename on the
   device to retrieve to the eNMS server. For Put, source file is the
-  path-plus-filename on the eNMS server to send to the device.
+  path-plus-filename on the eNMS server to send to the device. **When Direction=Put, the application's files location will be prepended to this field**
 - `Destination file`: For Get, destination file is the
   path-plus-filename on the eNMS server to store the file to. For Put,
   destination file is the path-plus-filename on the device to store
-  the file to.
+  the file to. **When Direction=Get, the application's files location will be prepended to this field**
 - `Missing Host Key Policy`: If checked, auto-add the host key policy
   on the ssh connection.
 - `Load Known Host Keys`: If checked, load host keys on the eNMS server

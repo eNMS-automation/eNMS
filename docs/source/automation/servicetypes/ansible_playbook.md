@@ -25,7 +25,7 @@ Configuration parameters for creating this service instance:
   --extra-vars (if pass_device_properties is selected above). These
   options are appended.
 - Ansible itself supports a number of standard return codes; these are
-  returned in the results of the service and include:
+  returned to the results of the service and include:
     -   0 : OK or no hosts matched.
     -   1 : Error.
     -   2 : One or more hosts failed.

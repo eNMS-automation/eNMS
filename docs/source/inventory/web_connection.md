@@ -32,6 +32,8 @@ of the following options:
 - `Automatically authenticate`: (SSH only) eNMS uses one of these sets of 
   credentials to automatically authenticate to the network device:
     - `device credentials`: (default) credentials stored in the inventory.
+    - `named credential`: selected by the user in the connection dialog from
+      existing credential instances
     - `custom credentials`: provided by the user in the connection dialog
       directly to the device.
 - `Protocol`: `SSH` or `Telnet`.

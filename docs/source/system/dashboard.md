@@ -18,11 +18,11 @@ The dashboard shows an additional detail at the top for each of these objects:
 
 - `Devices`: The count of device in the inventory.
 - `Links`: The count of links in the inventory.
-- `Services`:  The number of created services on this instance. The number of
+- `Services`: The number of created services on this instance. The number of
    running services is shown in parentheses.
-- `Tasks`:  The number of created Tasks on this instance. The number of active 
+- `Tasks`: The number of created Tasks on this instance. The number of active 
    tasks is shown in parentheses.  
-- `Workflows`:  The number of created workflows on this instance. The number of
+- `Workflows`: The number of created workflows on this instance. The number of
    running workflows is shown in parentheses.  
 
 [Dashboard - Devices by Model](../_static/system/dashboard.PNG)
@@ -37,7 +37,7 @@ object type.
 ## Show Details 
 
 The individual sections of the pie chart are also clickable, and when clicked, the 
-system will open a table view showing that filter applied.
+system will open a table view with that filter applied.
 
 This example shows how to display the details for a specific value shown in the dashboard 
 chart for Devices:

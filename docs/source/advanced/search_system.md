@@ -71,4 +71,15 @@ show:
   names are provided, and this option is selected, the results will be that 
   neither of the devices are present.
 
+# Global Property Search
 
+For devices and services, a special "property search" is available in the table
+by clicking the following icon:
+
+![Global Property Search](../_static/advanced/search_system/property_search.png)
+
+This global search filters the table by looking for a specific keyword in any
+property of any instance.
+
+Example use-case: in the service table, search for a specific Python variable across
+all Python fields (pre-processing, Python snippet services, post-processing).

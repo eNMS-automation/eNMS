@@ -22,12 +22,15 @@ at the bottom, center of the panel.
 The dropdown list has entries that are Python code files located on the server
 running the application. The options are:
 
+- `delete_corrupted_services.py`: This code looks for and deletes any services that were once a part of a workflow but still has a stale association.
 - `delete_corrupted_edges.py`: This code looks for any duplicate edges in
 Workflows and removes any that it finds.
+- `delete_soft_deleted_objects`: Delete all soft-deleted workflow edges and services.
 - `duplicates_in_association_table.py`: Provides a straightforward way to reproduce the duplicate rows issue
  in an association table.
 - `empty.py`: This file is empty and allows custom python code to be entered
 and executed.
+- `end_query_monitoring.py` - "end" query monitoring to analyze what SQL queries are sent to the database and how long they take to execute (only active in "debug" mode).
 - `functions.py`: The code in this file tests the ability to create a device,
 modify a device and delete a device from the application database.
 - `getsizeof.py`: This code collects the sizes of several controller variables
@@ -41,6 +44,8 @@ dictionary objects.
 number of devices (200 by default) one at a time, fetch those devices one at a
 time and delete each of those devices one at a time.  The results are displayed
 in the `Output` panel.
+- `start_query_monitoring.py`: - "start" query monitoring to analyze what SQL queries are sent to the database and how long they take to execute (only active in "debug" mode).
+
 
 Select the desired option in the dropdown list to view and/or edit the code of
 the selected file.  Execute the code by clicking the `Run Code` button.  Any

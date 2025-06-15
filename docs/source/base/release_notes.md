@@ -94,9 +94,6 @@ Version 5.0: Clustering
   - New "use_multiprocessing_handlers" key in logging.json to decide whether to use
   the multiprocessing capable logging handlers
 
-Migration:
-- Update properties.json > "properly_list" with new format
-
 Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
 --------------------------------------------------------------------------
 
@@ -218,14 +215,6 @@ Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
 - Limit update all pools mechanism (in pool table and as a service option) to the pools a user
   has "edit" access to
 
-Migration:
-- in file.yaml, remove path to "files" folder for all paths
-- in service.yaml, compute and add new "read_timeout" property based on fast_cli,
-  delay_factor and global_delay_factor
-- in service.yaml, ansible playbook services are now used the scoped path to the playbook
-  instead of the full path (path to playbook folder + scoped path). The path to the playbook
-  folder must be trimmed from all ansible services.
-
 Version 4.4.0: RBAC and Credentials
 -----------------------------------
 
@@ -315,28 +304,6 @@ Version 4.4.0: RBAC and Credentials
   - When a service / workflow is disabled, it cannot be run from the UI or the REST API
   - New property "Disabled Time & User": if the workflow is disabled, indicates when the
   service was disabled and by whom; empty otherwise.
-
-RBAC Refactoring:
-- Service export: owners and RBAC read / edit / etc are exported in the service
-  .yaml file. If the importing user doesn't have access to the service based on
-  how RBAC is set up, the service will not be visible after export.
-
-Migration:
-- The credential file must be updated to use groups instead of pools
-  ("user_pools" -> "groups"). The appropriate groups must be created first.
-- In migration files, check that the "settings" variable isn't used in
-  any workflow. If the server IP, name or URL is used, the "server" variable
-  should be used instead.
-- "get_all" and "get_properties" controller functions have been removed.
-  Check that they are not used anywhere in custom code (plugin, custom.py, etc)
-
-Test (besides what is in release notes):
-- the notification mechanism hasn't been impacted (in particular notification header
-  option + devices results)
-- Jump on connect mechanism
-- RBAC
-  - new mechanism
-  - Freeze Edit / Run mechanism (refactored)
 
 Version 4.3.0
 -------------
@@ -431,23 +398,6 @@ Version 4.3.0
 - Add new settings "max_content_length" in settings.json > "app" (Flask parameter)
 - Add new timeout setting for file import in settings.json > "files"
 
-Migration
-- check "username" and "server" variables in workflow aren't in conflict with existing workflows.
-- dashboard is now controlled by RBAC: dashboard access must be explicitly granted via access pages, GET and
-  POST requests.
-- "download_file" endpoint -> "download" (add support for downloading folders)
-- the "driver" property must be updated for all netmiko, napalm and scrapli via the migration script
-- update services to use server IP and address from global variables and not from settings.
-- the napalm_ping_service added a `ping_timeout` property. If desired, set both
-  values to be at least the defaults (2 for `ping_timeout`, 10 for napalm's `timeout`)
-
-To be tested:
-- bulk deletion and bulk removal (from dashboard and other tables too)
-- mail notification
-- web ssh
-- service logging mechanism, including disable logging
-- netmiko commands service: test old services still work + new multi commands / results as list option
-
 Version 4.2.0
 -------------
 
@@ -513,18 +463,6 @@ Version 4.2.0
   "network_data" folder)
 - Update slack notification service to use newest slack_sdk library (instead of slackclient<2)
 - Make scrapli connection arguments configurable from automation.json / scrapli / connection_args
-
-Migration:
-
-  - Update all access with new GET / POST endpoints
-  - Doc link in settings.json to be updated with custom doc links.
-  - Refresh rates in settings.json to be updated (e.g. 10s instead of 3 if RBAC is used)
-  - Redis config in settings.json
-  - In migration files, replace "default_access: admin" with "admin_only: true"
-  - Warn user about REST API run service endpoint new default (True)
-  - Update service priority to "current priority + 9" (see migration script in files / script)
-  - Update credentials of REST Call services (custom_username, custom_password)
-  - Add SSH command in settings.json / ssh section
 
 Version 4.1.0
 -------------

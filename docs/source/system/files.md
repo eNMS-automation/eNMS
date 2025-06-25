@@ -4,8 +4,7 @@ The Files management provides information about a specific folder (local or netw
 and provides a mechanism to interact with files and folders in that location.
 
 A routine file watcher will detect and add new files and folders as they are created,
-and it will also update their modified date when they change.  It will also mark files 
-and folders as Deleted if they are removed.   A manual "Scan Folder" option also 
+and it will also update their modified date when they change. A manual "Scan Folder" option also 
 provides a way to reload the file and folder data in a specific folder.
 
 The Files information can be viewed either from:
@@ -21,9 +20,7 @@ The Files information can be viewed either from:
 
 ## Folder Navigation  
 
-Opening a specific folder will show the Files and Folders contained inside.
-
-Click on the any Folder to open it and view the Files (and Folders) that it contains.
+Click on any Folder to open it and view the Files (and Folders) that it contains.
 The top of the page will display the Current Folder.
 
 To navigate between folders: 
@@ -59,15 +56,6 @@ delete both folders and files from the database.
 
   ![Files - Files window](../_static/system/file_scan_folder.png)
 
-- `Bulk Deletion`: delete all the displayed files/folders from the database only
-
-  ![Files - Folder Navigation](../_static/system/files_bulk_delete.PNG)
-
-!!! Note
-
-	Today the Delete button does not physically remove files - for safety reasons.
-	Unless removed from the underlying location(s), a Scan Folder will restore 
-	them in this view.
   
 These actions apply to each individual file or folder:
 

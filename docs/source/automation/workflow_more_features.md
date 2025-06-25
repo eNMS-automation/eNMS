@@ -29,7 +29,7 @@ previous run. This is useful if:
     b) there is simply not enough time to re-run all the previous
        services.
   
-Selecting `Restart Workflow from Here` by right clicking on a service 
+Selecting `Restart Workflow from Here` by right-clicking on a service 
 presents the user with a form to select:
 
 - `Restart Runtime`: The previous runtime to use as the payload for
@@ -84,8 +84,18 @@ like:
 ## Connection Cache
 
 When using netconf, netmiko, napalm, and scrapli services in a workflow,
-eNMS will cache and reuse the connection automatically. In the Step2
-`Connection Parameters` section of a service, there are some properties to
+eNMS will cache and reuse the connection automatically. The number of open connections
+for each library is displayed in the workflow builder as the workflow progresses.
+
+A connection threshold can be defined in the automation.json file to limit the number
+of concurrent connections. It is configured with the following parameters:
+
+- `enforce_threshold`: Activates the threshold mechanism (default: `false`)
+- `threshold`: Maximum number of connections (default: `100`)
+- `log_level`: Log level of the warning (default: `warning`)
+- `raise_exception`: Prevents new connections from being created when the threshold is reached
+
+In the Step2 `Connection Parameters` section of a service, there are some properties to
 change this behavior :
 
 - `Start New Connection`: **before the service runs**, the current
@@ -147,3 +157,65 @@ In the superworkflow definition in Workflow Builder, the
 position of the main workflow is designated by adding the `Placeholder`
 service to the graph. And in the main workflow definition, the
 superworkflow must be selected from the list of existing workflows.
+
+## Workflow Tree
+
+A special "tree" display is available in the workflow builder to help manage workflows with many services or multiple subworkflows.
+
+Enable the tree display by clicking the "tree" icon in the middle menu of the workflow builder.
+
+![Workflow Tree Icon](../_static/automation/workflows/workflow_tree_icon.png)  
+
+The tree will appear on the right side of the builder.
+
+![Workflow Tree Display](../_static/automation/workflows/workflow_tree_display.png)  
+
+The tree automatically tracks the current workflow:
+
+- Only the services on the path of the displayed workflow are open by default.
+- The currently displayed workflow is highlighted in blue in the tree.
+
+Double-clicking a service will automatically select and focus on that service. If the service is in another workflow, it will switch to that workflow.
+
+When a workflow has a superworkflow, it is displayed as part of the tree.
+
+## Runtime Notes
+
+Labels in a workflow are always displayed, whether in "Normal Display" mode or when viewing a specific runtime. However, a specific type of label, referred to as "notes," can be created and deleted during a runtime in Python.
+
+Notes can be created with the `set_note` function: `set_note(-10.24, 22.5, "note1")`. The first two parameters are the position, and the third is the content of the note. Notes can be removed with the `remove_note` function: `remove_note(-10.24, 22.5)`.
+
+A position in the workflow builder can be obtained from the right-click menu ("Reference" / "Position"):
+
+![Workflow Builder Position](../_static/automation/workflows/get_position.png)  
+
+If a note is not removed by the end of the run, it will be permanently displayed when viewing that specific runtime in the workflow builder.
+
+## Dry Run
+
+"Dry Run" is a mechanism that allows a service to return results as part of a run without actually executing the service. This is useful when building a workflow with services that connect to network devices, as it enables testing without hitting the network.
+
+"Dry Run" is a service property configured in the service's Edit Panel, step 3, under the "Workflow Parameters" section.
+
+![Dry Run Property](../_static/automation/workflows/dry_run_property.png)
+
+While the service itself does not run, the string substitution mechanism is applied, giving the user an idea of the parameters the service would use if it weren't in "Dry Run" mode.
+
+A global variable, `dry_run` (set to True if the service is in Dry Run mode, and False otherwise), is available for users to tweak the results of a service in "Dry Run" mode. This variable can be used to change the service results only if "Dry Run" is enabled. These results can then be used by subsequent services.
+
+Example use-case: A netmiko service is configured to retrieve a device's configuration. In normal mode, it connects to the device and runs the command to get the configuration. In "Dry Run" mode (`if dry_run`), the configuration is manually defined in the post-processing section. Subsequent services using this configuration will function as if the netmiko service had actually connected to the device, resulting in faster execution speed.
+
+![Dry Run Variable](../_static/automation/workflows/dry_run_variable.png)
+
+The `dry_run` variable can be configured in the parameterized form, allowing the user to specify for each run whether the service or workflow should operate in "Dry Run" mode or not.
+
+Services in Dry Run mode are displayed with a special green color to distinguish them from other services.
+
+![Dry Run Color](../_static/automation/workflows/dry_run_color.png)
+
+This color has different meanings depending on the display mode in the workflow builder:
+
+- In "Normal Display" mode, the green color indicates that the service is configured to run in Dry Run mode (the "Dry Run" property is enabled in the service parameters).
+- When viewing a specific runtime, the green color indicates that the service ran in Dry Run mode during that runtime.
+
+When the "Dry Run" property is enabled in a workflow, it cascades to everything within that workflow. Any service in the workflow will be considered to be in "Dry Run" mode, making the entire workflow effectively operate in "Dry Run" mode.

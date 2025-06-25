@@ -50,10 +50,11 @@ Default access for user created objects.
 * **Link Access**: Corresponding to the Access Control menu on a `Link` object. Options: Read/Edit.
 * **Network Access**: Corresponding to the Access Control menu on a `Network` object. Options: Read/Edit.
 * **Pool Access**: Corresponding to the Access Control menu on a `Pool` object. Options: Read/Edit.
-* **Service Access**: Corresponding to the left sidebar, selections here define a base level of access.
+* **Service Access**: Corresponding to the left sidebar, selections here define a base level of access. **NOTE**: User
+  must have Run Access to get results via API. 
 > * **Read**: `Groups` allowed to view this instance
 > * **Edit**: `Groups` allowed to modify this instance
-> * **Run**: `Groups` allowed to use this service  
+> * **Run**: `Groups` allowed to use this service
 * **Task Access**: Corresponding to the Access Control menu on a `Task` object. Options: Read/Edit.
 
 

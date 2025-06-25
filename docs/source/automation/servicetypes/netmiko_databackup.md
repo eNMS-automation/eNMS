@@ -5,7 +5,7 @@ devices.
 
 ## Target Property and Commands
 
--   Property to update (e.g `Configuration, Operational Data, Specialized Data`).
+-   Property to update (e.g. `Configuration, Operational Data, Specialized Data`).
 -   `Commands`: This is a series of twelve commands that are used to
     pull data from the device.
 -   `Label`: This is the label the data will be given in the results.

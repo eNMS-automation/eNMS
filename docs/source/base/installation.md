@@ -79,13 +79,18 @@ it is recommended to run the application with the following command:
 
 1. In setup/settings.json set `"use_task_queue": true`
 2. Set the `REDIS_ADDR` environment variable and run `dramatiq eNMS` from the project root. 
-    - The number of worker processes and threads can be configured (among other things). Run `dramatiq --help` to see the full list of dramatiq's command-line options.
+    - The number of worker processes and threads can be configured (among other things). Run `dramatiq --help` to see the full list of Dramatiq's command-line options.
+
+### WebSSH
+
+The SSH_URL can be set to specify which web address to use when connecting to network devices through web-based SSH.
+
 ### Hashicorp Vault
 
 All credentials should be stored in a Hashicorp Vault: the settings
 variable `use_vault : true` under the `vault` section of the
-`setup/settings.json` file tells eNMS that a vault has been setup.
-Follow the manufacturer instructions and options for how to setup a
+`setup/settings.json` file tells eNMS that a vault has been set up.
+Follow the manufacturer instructions and options for how to set up a
 [Hashicorp Vault](https://www.vaultproject.io/)
 
 Tell eNMS how to connect to the Vault with environment variables:
@@ -419,6 +424,22 @@ of the parameterized run form for workflows, the default arguments used to
 open a Scrapli connection, and the models that one can access or create
 from the workflow builder global variables.
 
+Key parameters to be aware of:
+
+- `always_commit` (default: `false`) Always commit results and logs immediately
+  after they are created when a service is running. This can help prevent various
+  database issues that arise during a run.
+- `disconnect_thread_timeout` (default: `10` (seconds)) This parameter sets the timeout value
+  used when attempting to close all open connections at the end of a workflow.
+  Multiple threads are spawned to close all connections as quickly as possible,
+  and this timeout is passed to each thread.
+- `truncate_logs`: (default: `false` with a `maximum_size` of `200000000`) This parameter
+  determines whether to trim the logs of a service before saving them to the database if
+  they exceed a certain size limit (`maximum_size`).
+- `connection_args`: These parameters are sent to the Netmiko or Scrapli connection handler
+  before establishing the connection. To see which parameters are supported, you should
+  check the Netmiko or Scrapli documentation.
+
 ### `database.json`
 The `setup/database.json` file contains database and schema configuration
 parameters.  Make sure to include a new database engine section here if
@@ -445,6 +466,13 @@ file is directly passed into the Python Logging library, so it uses the
 Python3 logger file configuration syntax for the user's version of Python3.
 Using this file, the administrator can configure additional loggers and
 logger destinations as needed for workflows.
+
+Key advanced parameters to be aware of:
+
+- `use_multiprocessing_handlers` (default: `true`) Tell the application to
+  use a specific handler called `MultiProcessingLoggingHandler` for logging.
+  This handler helps prevent issues related to concurrent access to logs
+  from multiple threads during a service run.
 
 By default, the two loggers are configured:
 
@@ -592,6 +620,10 @@ back to settings.json file` is selected.
     -   One can set the migration to `"default"` instead, in which case
         eNMS will only load what is required for the application to
         function properly.
+-   `name` Choose the application name that will appear on the login page,
+    in the upper left corner after logging in, and in the browser tab.
+-   `theme` Select the default theme that will be automatically applied
+    when creating new user accounts.
 
 #### `authentication` section
 
@@ -602,10 +634,37 @@ environments, `eNMS/custom.py` allows the user to customize how the
 authentication needs to occur. It can be modified to fit a company's
 ldap active directory system, etc.
 
+For LDAP authentication, by default, the application looks for the LDAP_ADDR
+environment variable and initializes a single LDAP server.
+If that variable is not set, it looks for the `servers` key under
+`authentication` > `methods` > `ldap`. The servers key is a dictionary that maps
+LDAP server IPs/URLs to their keyword parameters, based on the syntax
+supported by the `ldap3` Python library.
+
+Example syntax for LDAP:
+
+```
+"ldap": {
+  "display_name": "LDAP",
+  "enabled": true,
+  "servers": {
+    "192.168.56.104": {
+      "port": 636,
+      "use_ssl": true
+    }
+  }
+},
+```
+
 #### `automation` section
 
 - `max_process` limit on multiprocessing (default: 15).
 - `use_task_queue` use dramatiq for service execution (default: false).
+
+#### `cache` section
+
+- `config`: settings given to `flask_caching.Cache` (default: `{"CACHE_TYPE": "SimpleCache"}`)
+- `timeout`: time limit (in seconds) set for the `cached` decorator, after which a stored page is removed from the cache (default: `500`)
 
 #### `cluster` section
 Section used for detecting other running instances of eNMS.
@@ -631,9 +690,11 @@ Define how the charts are displayed in the dashboard section in the user interfa
 #### `files` section
 Control how the app tracks files on the filesystem.
 
+- `monitor_filesystem` manages the monitoring of file changes on the system
 - `ignored_types` file extensions to exclude from tracking (default: `[".swp"," .tgz"]`)
 - `upload_timeout` (default: `600000`)
-- `log_events` log changes (modify/update/delete) of tracked files to both the console and changelog (defalt: `true`)
+- `log_events` log changes (modify/update/delete) of tracked files to both the console and changelog (default: `true`)
+- `trash` path to the "trash" folder where deleted files are moved
 
 #### `mail` section
 
@@ -676,6 +737,11 @@ This section is covered in depth in the [administration panel](../administration
   services in the Automation Panel when building services and workflows.
 - `playbooks` (default: `""`) Path to where Ansible playbooks are
   stored so that they are selectable in the Ansible Playbook service.
+
+#### `pool` section
+
+- `fast_compute` (default:`true`) use raw SQL queries to empty and insert
+  the object IDs in the pool in order to speed up the pool update mechanism
 
 #### `redis` section
 
@@ -876,7 +942,7 @@ during automatic synchronizations with the shared remote repository.
 To prevent this, a git merge driver can be used to programmatically
 resolve merge conflicts. Such drivers typically utilize a combination of git
 attributes, configuration instructions, and custom scripts to function.
-Below are all of the components of a proposed driver for the Network Data
+Below are all the components of a proposed driver for the Network Data
 repositories:
 
 ### `network_data/.gitattributes`
@@ -923,3 +989,173 @@ The shell script defines the logic and commands to run when the merge driver
 is called. In this case it compares the timestamps from `git log` commands on
 the local `master` branch and the contents of `FETCH_HEAD`, accepting the most
 recent result.
+
+## Galera Cluster Deployment on Rocky Linux
+
+A clustered deployment (pictured below) makes use of [galera](https://mariadb.com/kb/en/getting-started-with-mariadb-galera-cluster/), [vault HA](https://developer.hashicorp.com/vault/docs/concepts/ha) with a [mysql storage backend](https://developer.hashicorp.com/vault/docs/configuration/storage/mysql), and [redis-sentinel](https://redis.io/docs/latest/operate/oss_and_stack/management/sentinel/) to keep the application instances in sync. It's recommended to deploy application instances in odd numbers (3,5,7 etc.) to avoid a split-brain situation with galera. A Load Balancer like HAProxy can utilize either an existing REST API endpoint or add a custom one for the application to identify instances that are ready to be used. Additionally, connecting to REDIS through the Load Balancer can simplify the REDIS client configuration.
+
+
+
+![eNMS Cluster Overview](../_static/cluster_overview.PNG)
+
+### Step 1: System Update
+
+```bash
+sudo dnf update -y
+```
+
+### Step 2: Build MariaDB Connector
+
+```bash
+sudo dnf groupinstall "Development Tools" -y
+sudo dnf install cmake openssl-devel -y
+tar -xzvf mariadb-connector-c-3.3.8-src.tar.gz
+cd mariadb-connector-c-3.3.8-src
+mkdir build
+cd build
+cmake ..
+make
+sudo make install
+
+# This gives the path /usr/local/lib to the right connector
+find /usr/local -name "libmariadb.so*"
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+export LIBRARY_PATH=/usr/local/lib:$LIBRARY_PATH
+export C_INCLUDE_PATH=/usr/local/include/mariadb:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=/usr/local/include/mariadb:$CPLUS_INCLUDE_PATH
+
+echo 'export LD_LIBRARY_PATH=/usr/local/lib/mariadb:$LD_LIBRARY_PATH' >> ~/.bashrc
+echo 'export LIBRARY_PATH=/usr/local/lib/mariadb:$LIBRARY_PATH' >> ~/.bashrc
+echo 'export C_INCLUDE_PATH=/usr/local/include/mariadb:$C_INCLUDE_PATH' >> ~/.bashrc
+echo 'export CPLUS_INCLUDE_PATH=/usr/local/include/mariadb:$CPLUS_INCLUDE_PATH' >> ~/.bashrc
+source ~/.bashrc
+
+echo "/usr/local/lib/mariadb" | sudo tee /etc/ld.so.conf.d/mariadb.conf
+sudo ldconfig
+python3 -m pip install --force-reinstall mariadb
+```
+
+### Step 3: Install MariaDB Server
+
+```bash
+sudo dnf install mariadb-server -y
+sudo systemctl start mariadb
+sudo systemctl enable mariadb
+sudo mysql_secure_installation
+```
+
+### Step 4: Install Galera Cluster
+
+```bash
+sudo dnf install -y mariadb-server-galera
+sudo firewall-cmd --permanent --add-service=galera
+sudo firewall-cmd --reload
+```
+
+### Step 5: Configure Galera
+
+Edit the configuration file:
+
+```bash
+sudo nano /etc/my.cnf.d/mariadb-server.cnf
+```
+
+and add the following configuration:
+
+```bash
+wsrep_on=ON
+wsrep_cluster_address="gcomm://192.168.56.103,192.168.56.104"
+binlog_format=row
+wsrep_node_address="192.168.56.104"
+wsrep_cluster_name="my_galera_cluster"
+wsrep_sst_auth="sstuser:password"
+wsrep_sst_method=rsync
+bind-address=0.0.0.0
+```
+
+### Step 6: Create 'sstuser' in database
+
+```bash
+sudo mysql -u root -p
+CREATE USER 'sstuser'@'%' IDENTIFIED BY 'password';
+GRANT RELOAD, LOCK TABLES, PROCESS, REPLICATION CLIENT ON *.* TO 'sstuser'@'%';
+FLUSH PRIVILEGES;
+```
+
+### Step 7: Start Galera Cluster
+
+On VM1:
+
+```bash
+sudo galera_new_cluster
+sudo systemctl start mariadb
+sudo mysql -u root -p -e "SHOW STATUS LIKE 'wsrep_cluster_size';"
+```
+
+Expected output:
+
+```bash
++--------------------+-------+
+| Variable_name      | Value |
++--------------------+-------+
+| wsrep_cluster_size | 1     |
++--------------------+-------+
+```
+
+On VM2:
+
+```bash
+sudo systemctl restart mariadb
+sudo mysql -u root -p -e "SHOW STATUS LIKE 'wsrep_cluster_size';"
+```
+
+Expected output:
+
+```bash
++--------------------+-------+
+| Variable_name      | Value |
++--------------------+-------+
+| wsrep_cluster_size | 2     |
++--------------------+-------+
+```
+
+## Cluster Management Script
+
+This script (`build/script/cluster.sh`)provides several commands to manage the Galera cluster.
+
+### cluster -s | --start
+
+Starts a new Galera cluster:
+
+- Stops the MariaDB service.
+- Initializes a new Galera cluster.
+- Starts and enables the MariaDB service.
+- Checks the status of the MariaDB service and the cluster.
+
+To be used on the **first** node of the cluster, not for joining an existing cluster.
+
+### cluster -c | --check
+
+Checks the status of the MariaDB service and various Galera cluster parameters:
+
+- MariaDB service status.
+- Cluster size.
+- Node state and connection status.
+- Provider and version details.
+- IP addresses of cluster nodes.
+
+### cluster -d | --delete
+
+Uninstalls MariaDB and deletes data and configuration files.
+
+### cluster -i | --install
+
+Installs MariaDB and Galera:
+
+- Installs MariaDB server and Galera.
+- Starts and enables MariaDB service.
+- Runs the secure installation script.
+
+### cluster -r | --restart
+
+Restarts the MariaDB service.

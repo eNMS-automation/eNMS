@@ -22,6 +22,13 @@ Configuration parameters for creating this service instance:
 -   `Response3`: Response to the third confirmation question prompted by the
     device.
 
+## Advanced Netmiko Parameters
+
+![Netmiko Prompts Advanced Parameters](../../_static/automation/service_types/netmiko_prompts_advancedparameters.png)
+
+-   `Command Verify`: Enable to verify command echo for each command in the configuration set
+    (default: False).
+
 !!! note
 
     This service supports variable substitution in all input fields of its

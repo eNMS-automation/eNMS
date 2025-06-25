@@ -9,7 +9,7 @@ information from devices.
 
 ![Scrapli Data Backup Service](../../_static/automation/service_types/scrapli_databackup.png)
 
--   `Property to update`: Which property to update with collected data (e.g `Configuration`)
+-   `Property to update`: Which property to update with collected data (e.g. `Configuration`)
 -   `Commands`: This is a series of twelve commands that are used to
     pull data from the device.
 -   `Label`: This is the label the data will be given in the results

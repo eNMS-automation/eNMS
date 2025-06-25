@@ -1,4 +1,4 @@
-This a placeholder for the ability to add a subworkflow to an existing
+This allows for the addition of a subworkflow to an existing
 workflow as a service.
 
 ![Subworkflow Service](../../_static/automation/service_types/workflow.png)

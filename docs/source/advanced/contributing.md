@@ -50,14 +50,14 @@ Concerning documentation updates, one can build a local version of
 the docs like so:
 
 ```
-mkdocs html
+mkdocs build
 ```
 
 If mkdocs is already initialized in one's environment, the following command
 will launch a local documentation server:
 
 ```
-mkdocs serve
+mkdocs serve -a 0.0.0.0:8000
 ```
 
 This server will automatically update and refresh whenever any filesystem

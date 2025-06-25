@@ -21,7 +21,7 @@ Custom properties accept these configuration elements:
    This function **must** be an attribute of CustomApp in custom.py.
 - `help` (**optional**): the path to a context-sensitive HTML help file for
    this property.
-- `log_change` (**optional**): false - disables logging when a change is
+- `log_change` (**optional**): false  - disables logging when a change is
    made to attribute.
 - `private` (**optional**): If `true`, the value is considered sensitive: it 
    will not be displayed in the UI. It will be encrypted in the database and
@@ -78,8 +78,8 @@ Example of a default_function attribute:
 # eNMS/custom.py
 from uuid import uuid4
 
-class CustomApp
-  def gererate_uuid(self):
+class CustomApp:
+  def generate_uuid(self):
     return str(uuid4())
 ```
 
@@ -97,7 +97,7 @@ class CustomApp
 !!! note
 
     Some *optional* values for custom properties above are *changes* to the
-    default behavior. i.e "migrate" defaults to true, "private" defaults
+    default behavior.  i.e., "migrate" defaults to true, "private" defaults
     to false, etc.      
 
 !!! tip
@@ -143,11 +143,35 @@ added here.
 Example of this configuration data:  
   
 - `"data": "device_status"`, *attribute created in custom device above*.
+- `"html": false`, *if true, the content will be interpreted as HTML code*.
 - `"title": "Device Status"`, *name to display in table*.
 - `"search": "text"`, *search type*.
 - `"width": "80%"`, *optional - text alignment, other example: "width":"130px",*.
 - `"visible": false`, *default display option*.
 - `"orderable": false`, *allow user to order by this attribute*.
+
+### Property List
+
+Some properties are displayed as a drop-down list in the UI, allowing the user to select a value from a predefined list. These values are defined in properties.json under the `property_list` key.
+
+For example, the `model` property of a device can be defined as follows:
+
+```json
+"device": {
+  "model": {
+    "choices": [
+      "Arista",
+      "Cisco", 
+      "Linux", 
+      "Juniper"
+    ],
+    "validate_choice": false
+  }
+}
+```
+
+- The `validate_choice` key determines whether the application enforces that the selected value in the form must be from the drop-down list. If `validate_choice` is set to False and the value is empty, the application will not require the user to select a value from the drop-down list, thus preventing the user from editing the object.
+- If the list is left empty, the field will default to a WTForms StringField instead of a SelectField. In the UI, it will appear as a free-form text field.
 
 ### Table Filtering
 
@@ -200,8 +224,7 @@ An example custom Service file exists in `eNMS/models/services/examples/example.
 !!! tip
 
     Plugins can also define Custom Service Types.
-     
-     
+
 ## Plugins
 
 A Plugin represents a more advanced form of customization - that can include new data 

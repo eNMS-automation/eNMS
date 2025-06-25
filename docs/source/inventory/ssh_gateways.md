@@ -10,7 +10,7 @@ configuration. This feature *only* works with Netmiko services using SSH.
 
 ## Create a Gateway
 
-From `Inventory -> Devices`, use the device type drop down to select a device of type 
+From `Inventory -> Devices`, use the device type drop-down to select a device of type 
 `Gateway`. The `Gateway` is created and can be used by services in the same way as other
 device types. 
 

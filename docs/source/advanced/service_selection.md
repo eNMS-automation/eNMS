@@ -26,7 +26,7 @@ considering which service to use for a particular action in the workflow.
 
 ## Structured Data - Options 
 
-The following image highlights some of the options for getting structured data 
+The following image highlights some options for getting structured data 
 from services that interact with devices.  In many cases, there is a conversion from 
 the device command output (text) into something that a service or workflow can use 
 to make decisions, generate a report, or send additional device commands.    

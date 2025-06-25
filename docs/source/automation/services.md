@@ -35,7 +35,12 @@ Filtering and Bulk operations:
 - `Columns` Selector - Choose which columns to display in the table.
 - `Display Services hierarchically` (using hyperlinks in the scope of
    the workflow that they are contained in) or Display All Services.
+- `Changelog` Displays all changelogs linked to services
+- `Creator` Allows users to switch between viewing all services (created by any user)
+   and viewing only the services that they created.
 - `Refresh` the Table.
+- `Global Search` Allows users to search for a specific string across all
+   properties of all services
 - `Advanced Search:` for complex filtering of the table.
 - `Clear Search` criteria.
 - `Copy the Selection` of currently displayed Services to the clipboard.
@@ -62,7 +67,7 @@ filtered in the table display.
 
 - `Export Service as .TGZ`: Bulk export the filtered set of Services; stored on
    the server in the `files/services` folder. 
-- `Bulk Edit`:  Makes the same config change to all currently filtered
+- `Bulk Edit`: Makes the same config change to all currently filtered
    services in the table display.
 - `Export as CSV`: Export the current filtered list of services in the
    table display to a .csv file that downloads to the user's browser.
@@ -75,6 +80,7 @@ Each Service Name listed in the table is a hyperlink to the workflow builder pan
 for workflows, otherwise the standalone service name.  Each service has its own
 button bar on the right that includes:
 
+- `View Changelogs`: View the service modifications.
 - `View Logs`: View the service logs.
 - `View Results`: View the service results.
 - `Edit Service`: Opens the Service Editor Panel with default parameters when
@@ -110,7 +116,7 @@ Services can be run from the following locations:
   the entire workflow, or right mouse click menu `Run` or `Parameterized Run`.
 - `Automation -> Scheduling`: Activated services will run when their scheduled
   time arrives.
-- `Visualization`:  A service can be selected to run on the filtered
+- `Visualization`: A service can be selected to run on the filtered
   list of devices shown - for both the `Geographical View` and the `Network Builder`.
 - `Inventory` Devices and Pools tables: A service can be selected to run
   on a device, all filtered devices, a pool, or the filtered pools in the table.
@@ -205,4 +211,4 @@ Types, please refer to [Customization](../../advanced/customization/#custom-serv
     See the example below for changing the Timeout for several Netmiko Commands 
     services.
     
-![Bulk Edit Netmiko Commands Service](../_static/automation/services/bulk_edit_netmiko_validation.png)      
+![Bulk Edit Netmiko Commands Service](../_static/automation/services/bulk_edit_netmiko_commands.png)      

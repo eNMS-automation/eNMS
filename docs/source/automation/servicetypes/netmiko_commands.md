@@ -24,6 +24,10 @@ Configuration parameters for creating this service instance:
 
 - `Commands`: Command(s) to be sent to the device, with each command on a separate line.
 
+- `Interpret Commands as Jinja2 Template`: If checked, the service will expect that the commands are embedded
+   in a Jinja2 template in the Commands field. The system will render that Jinja2 template using device
+   properties to obtain the set of Commands. This is useful when iterating commands over properties of the device, such as
+   its interfaces.
 - `Results as List`: If checked, store the command output as a list of 
    individual string results. By default, all output is returned as a single string,
    with a COMMAND header prepended when multiple commands are specified.
@@ -32,10 +36,20 @@ Also included in Netmiko Advanced Parameters:
 
 ![Netmiko Configuration Advanced Parameters](../../_static/automation/service_types/netmiko_validation_advanced.png)
 
-- `Use TextFSM`: Causes Netmiko to try and match the command to a TextFSM
+- `Use TextFSM` (for automatic parsing): Causes Netmiko to try and match the command to a TextFSM
   template pointed to in the system by the `NET_TEXTFSM` environment
   variable. The Network to Code project maintains a repository of TextFSM
-  templates for popular network devices [here](https://github.com/networktocode/ntc-templates).
+  templates for popular network devices [here](https://github.com/networktocode/ntc-templates) in
+  the ntc_templates/templates folder [here](https://github.com/networktocode/ntc-templates/tree/master/ntc_templates/templates)
+  If the command is found to match an existing template, the system will automatically convert
+  unstructured results data to structured/dictionary data for you. This saves the user from 
+  having to parse the result data.
+- `Use Genie / PyATS` (for automatic parsing): Causes Netmiko to try and match the command to a Cisco Genie/PyATS
+  template in the system. The Cisco Genie/PyATS supported hardware vendors, models and commands can
+  be referenced [here](https://developer.cisco.com/docs/genie-docs/) by clicking on 'Available APIs'.
+  If the command is found to match an existing Genie/PyATS API, the system will automatically
+  convert unstructured results data to structured/dictionary data for you. This saves the user from
+  having to parse the result data.
 - `Auto Find Prompt`: Tries to detect the prompt automatically. Mutually exclusive with `Expect String`.
 - `Expect String`: Regular expression that signifies the end of output.
 - `Config Mode Command`: The command that will be used to enter config

@@ -52,11 +52,9 @@ services:
   enms-scheduler:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-Scheduler
     container_name: enms-scheduler
     restart: always
-    ports:
-      - "8000:8000"
     environment:
       - ENMS_ADDR=http://enms:5000
       - ENMS_PASSWORD=admin

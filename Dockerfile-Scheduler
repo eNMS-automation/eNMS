@@ -1,0 +1,28 @@
+FROM python:3.9
+
+# Install required packages
+RUN apt-get update && apt-get install -y git supervisor wget && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set the working directory in the container
+WORKDIR /eNMS
+
+# Copy the scheduler code and any necessary files into the container
+COPY . /eNMS
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r build/requirements/requirements.txt
+
+# Install gunicorn
+RUN pip install gunicorn
+
+# Expose the port that the scheduler uses
+#EXPOSE 8000
+
+# Set the working directory to the scheduler directory
+# Ensure this is the correct path where your scheduler application is located
+WORKDIR /eNMS/scheduler
+
+# Command to run the scheduler
+# Adjust the path to gunicorn.py if necessary
+CMD ["gunicorn", "-c", "/eNMS/scheduler/gunicorn.py", "scheduler:scheduler"]

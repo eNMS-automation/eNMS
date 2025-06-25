@@ -17,7 +17,7 @@ dramatiq
 Flask
 Flask-Login
 Flask-SocketIO
-Flask-WTF==1.0.1
+Flask-WTF
 future
 gevent
 gitdb

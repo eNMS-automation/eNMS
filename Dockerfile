@@ -20,6 +20,7 @@ COPY build/requirements/requirements_dev.txt /tmp/requirements_dev.txt
 COPY build/requirements/requirements_optional.txt /tmp/requirements_optional.txt
 
 # Install Python dependencies
+RUN python -m pip install --upgrade pip
 RUN pip install -r /tmp/requirements.txt
 RUN pip install -r /tmp/requirements_db.txt
 RUN pip install -r /tmp/requirements_dev.txt

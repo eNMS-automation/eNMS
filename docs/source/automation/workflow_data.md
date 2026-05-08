@@ -10,7 +10,7 @@ dictionary that is returned by the `job()` function of the service, and
 calling `get_result()` will return that dictionary. There are two types of
 results: top-level and per-device. If a service runs on 5 devices, 6
 results will be created: one for each device and one top-level result
-for the service itself. The top-level results contains the parameters that
+for the service itself. The top-level results contain the parameters that
 the service used during execution.
 
 Examples:

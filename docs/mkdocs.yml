@@ -27,6 +27,7 @@ nav:
       - Workers: administration/workers.md
     - Tools:
       - Admin Panel: administration/admin_panel.md
+      - Snippets: administration/snippets.md
       - Debugging: administration/debug.md
   - Inventory:
     - Network Creation: inventory/network_creation.md
@@ -37,6 +38,7 @@ nav:
     - Configurations: inventory/configuration_management.md
     - Links: inventory/links.md
     - Pools: inventory/pools.md
+    - Data Store: inventory/datastore.md
     - Networks: inventory/networks.md
   - Visualization:
     - Geographical View: visualization/geographical_view.md

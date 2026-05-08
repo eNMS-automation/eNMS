@@ -22,14 +22,19 @@ import {
   showConfirmationPanel,
   userIsActive,
 } from "./base.js";
-import { displayFolderPath, folderPath } from "./administration.js";
-import { exportServices } from "./automation.js";
+import {
+  currentStore,
+  displayFolderPath,
+  displayStorePath,
+  folderPath,
+} from "./administration.js";
 import { updateNetworkRightClickBindings } from "./networkBuilder.js";
 
 export let tables = {};
 export let tableInstances = {};
 export const models = {};
 let waitForSearch = false;
+let debounceTimer;
 
 $.fn.dataTable.ext.errMode = "none";
 
@@ -60,8 +65,8 @@ export class Table {
       scrollX: true,
       order: this.tableOrdering,
       pagingType: "simple",
-      drawCallback: function () {
-        $(".paginate_button > a").on("focus", function () {
+      drawCallback: function() {
+        $(".paginate_button > a").on("focus", function() {
           $(this).blur();
         });
         if (!self.displayPagination) self.setPagination();
@@ -70,10 +75,10 @@ export class Table {
       sDom: "tilp",
       columns: this.columns,
       columnDefs: [{ className: "dt-center", targets: "_all" }],
-      initComplete: function () {
+      initComplete: function() {
         this.api()
           .columns()
-          .every(function (index) {
+          .every(function(index) {
             const data = self.columns[index];
             let element;
             const elementId = `${self.type}_filtering-${data.data}`;
@@ -123,17 +128,25 @@ export class Table {
                 </div>`;
             }
             const eventType = data.search == "text" ? "keyup" : "change";
+            const sendAlert = settings.tables.search.notification;
             $(element)
-              .appendTo($(this.header()))
-              .on(eventType, function () {
-                if (waitForSearch) return;
+            .appendTo($(this.header()))
+            .on(eventType, function () {
+              if (waitForSearch) return;
+              clearTimeout(debounceTimer);
+              debounceTimer = setTimeout(function () {
                 waitForSearch = true;
-                setTimeout(function () {
-                  self.table.page(0).ajax.reload(null, false);
+                if (sendAlert) notify("Searching...", "success", 5, true);
+                self.table.page(0).ajax.reload(function () {
+                  if (sendAlert) notify("Search completed successfully", "success", 5, true);
                   waitForSearch = false;
-                }, 500);
+                }, false);
+              }, settings.tables.search.timer);
               })
-              .on("click", function (e) {
+              .on("keydown", function(e) {
+                if (e.key === "Enter") e.preventDefault();
+              })
+              .on("click", function(e) {
                 e.stopPropagation();
               });
           });
@@ -145,17 +158,19 @@ export class Table {
         type: "POST",
         contentType: "application/json",
         data: (data) => {
+          this.data = Object.keys(tableSearch).length
+            ?  tableSearch
+            : { ...this.getFilteringData(), ...self.filteringData };
           Object.assign(data, {
             export: self.csvExport,
             clipboard: self.copyClipboard,
             pagination: self.displayPagination,
-            ...this.getFilteringData(),
+            ...this.data,
           });
-          Object.assign(data, self.filteringData);
           self.copyClipboard = false;
           return JSON.stringify(data);
         },
-        dataSrc: function (result) {
+        dataSrc: function(result) {
           if (result.error) {
             notify(result.error, "error", 5);
             return [];
@@ -212,7 +227,7 @@ export class Table {
       : `#search-form-${this.id}`;
     let form = serializeForm(serializedForm, `${this.model}_filtering`, bulkFiltering);
     for (const [key, value] of Object.entries(form)) {
-      if (key.includes("_invert")) form[key] = ["y", "on"].includes(value);
+      if (key.includes("_invert")) form[key] = ["y", "on", "bool-true"].includes(value);
     }
     Object.assign(data, {
       form: form,
@@ -241,9 +256,13 @@ export class Table {
       );
     });
     $(`#column-display-${this.id}`).selectpicker("refresh");
-    $(`#column-display-${this.id}`).on("change", function () {
+    $(`#column-display-${this.id}`).on("change", function() {
       self.columns.forEach((col) => {
-        const isVisible = $(this).val() && $(this).val().includes(col.data);
+        const isVisible =
+          $(this).val() &&
+          $(this)
+            .val()
+            .includes(col.data);
         self.table.column(`${col.name}:name`).visible(isVisible);
       });
       self.table.ajax.reload(null, false);
@@ -264,7 +283,9 @@ export class Table {
             >Load Table Count</a>
         </li>
       </ul>`;
-    $(`#table-${this.id}_wrapper > .dataTables_info`).html(button).show();
+    $(`#table-${this.id}_wrapper > .dataTables_info`)
+      .html(button)
+      .show();
   }
 
   createfilteringTooltip(property) {
@@ -430,15 +451,28 @@ export class Table {
       </button>`;
   }
 
-  displayChangelogButton() {
+  displayChangelogButton(type) {
+    const typeVariable = type === undefined ? undefined : `'${type}'`;
     return `
       <button
         class="btn btn-info"
-        onclick="eNMS.table.showTableChangelogPanel('${this.id}')"
+        onclick="eNMS.table.showTableChangelogPanel('${this.id}', ${typeVariable})"
         data-tooltip="Changelog"
         type="button"
       >
         <span class="glyphicon glyphicon-wrench"></span>
+      </button>`;
+  }
+
+  copySearchLinkButton() {
+    return `
+      <button
+        class="btn btn-info"
+        onclick="eNMS.table.copySearchLinkToClipboard('${this.id}')"
+        data-tooltip="Copy to Clipboard Hyperlink to Current Search"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-link"></span>
       </button>`;
   }
 
@@ -530,19 +564,6 @@ export class Table {
           style="font-family:Arial, FontAwesome;
           height: 30px; margin-top: 5px"
         >
-        <span class="input-group-btn" style="width: 10px">
-          <button
-            id="${this.type}_filtering-serialized-search"
-            class="btn btn-default pull-right"
-            type="button"
-            style="height: 30px; margin-top: 5px">
-              <span
-                class="glyphicon glyphicon-center glyphicon-menu-down"
-                aria-hidden="true"
-                style="font-size: 10px">
-              </span>
-          </button>
-        </span>
       </div>`;
   }
 
@@ -590,6 +611,7 @@ tables.device = class DeviceTable extends Table {
       `
       <button
         class="btn btn-info"
+        id="device-serialized-search-btn"
         onclick="eNMS.table.serializedSearch('device')"
         data-tooltip="Search across all properties"
         type="button"
@@ -597,6 +619,7 @@ tables.device = class DeviceTable extends Table {
         <span class="glyphicon glyphicon-search"></span>
       </button>`,
       this.bulkFilteringButton(),
+      this.copySearchLinkButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
       this.createNewButton(),
@@ -679,7 +702,7 @@ tables.device = class DeviceTable extends Table {
     let self = this;
     super.postProcessing(...args);
     let timer = false;
-    document.getElementById("serialized-search").addEventListener("keyup", function () {
+    document.getElementById("serialized-search").addEventListener("keyup", function() {
       if (timer) clearTimeout(timer);
       timer = setTimeout(() => {
         self.table.page(0).ajax.reload(null, false);
@@ -709,7 +732,7 @@ tables.network = class NetworkTable extends Table {
     updateNetworkRightClickBindings();
     $("#parent-filtering")
       .selectpicker()
-      .on("change", function () {
+      .on("change", function() {
         self.table.page(0).ajax.reload(null, false);
       });
   }
@@ -735,6 +758,7 @@ tables.network = class NetworkTable extends Table {
       this.displayChangelogButton(),
       this.refreshTableButton(),
       this.bulkFilteringButton(),
+      this.copySearchLinkButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
       this.createNewButton(),
@@ -808,7 +832,7 @@ tables.configuration = class ConfigurationTable extends Table {
         formatter: (value) => `Lines of context: ${value}`,
         tooltip: "always",
       })
-      .on("change", function () {
+      .on("change", function() {
         refreshTable("configuration");
       });
   }
@@ -824,11 +848,12 @@ tables.configuration = class ConfigurationTable extends Table {
       >`,
       this.refreshTableButton(),
       this.bulkFilteringButton("device"),
+      this.copySearchLinkButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
       ` <button
         class="btn btn-info"
-        onclick="eNMS.automation.displayDiff('configuration', 'none')"
+        onclick="eNMS.base.displayDiff('configuration', 'none')"
         data-tooltip="Compare"
         type="button"
       >
@@ -896,6 +921,7 @@ tables.link = class LinkTable extends Table {
       this.displayChangelogButton(),
       this.refreshTableButton(),
       this.bulkFilteringButton(),
+      this.copySearchLinkButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
       this.createNewButton(),
@@ -964,6 +990,7 @@ tables.pool = class PoolTable extends Table {
       this.displayChangelogButton(),
       this.refreshTableButton(),
       this.bulkFilteringButton(),
+      this.copySearchLinkButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
       this.createNewButton(),
@@ -1028,17 +1055,7 @@ tables.pool = class PoolTable extends Table {
 tables.service = class ServiceTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
-    if (row.type == "workflow") {
-      row.name = `<b><a href="/workflow_builder/${row.path}">${sanitize(
-        row.name
-      )}</a></b>`;
-    } else if (!row.shared && row.workflow_path) {
-      row.name =
-        row.name.substring(0, row.name.lastIndexOf(row.scoped_name)) +
-        `<b><a href="/workflow_builder/${row.workflow_path}">${sanitize(
-          row.scoped_name
-        )}</a></b>`;
-    }
+    row.name = buildServiceLink(row);
     for (const model of ["device", "pool"]) {
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
         '${model}', ${row.instance}, {parent: '${this.id}', from: 'target_services',
@@ -1093,6 +1110,7 @@ tables.service = class ServiceTable extends Table {
       `
       <button
         class="btn btn-info"
+        id="service-serialized-search-btn"
         onclick="eNMS.table.serializedSearch('service')"
         data-tooltip="Search across all properties"
         type="button"
@@ -1100,6 +1118,7 @@ tables.service = class ServiceTable extends Table {
         <span class="glyphicon glyphicon-search"></span>
       </button>`,
       this.bulkFilteringButton(),
+      this.copySearchLinkButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
       this.createNewButton(),
@@ -1110,23 +1129,6 @@ tables.service = class ServiceTable extends Table {
         type="button"
       >
         <select id="service-type-dd-list" class="form-control"></select>
-      </button>`,
-      `<button
-        class="btn btn-primary"
-        onclick="eNMS.automation.showImportServicesPanel()"
-        data-tooltip="Import Service"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-import"></span>
-      </button>`,
-      `
-      <button
-        class="btn btn-primary"
-        onclick="eNMS.table.showBulkServiceExportPanel('${this.id}')"
-        data-tooltip="Export Services as .tgz"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-export"></span>
       </button>`,
       this.bulkEditButton(),
       this.exportTableButton(),
@@ -1170,13 +1172,6 @@ tables.service = class ServiceTable extends Table {
           <span class="glyphicon glyphicon-duplicate"></span></button>
         </li>
         <li>
-          <button type="button" class="btn btn-sm btn-primary"
-          onclick="location.href='/export_service/${row.id}'"
-          data-tooltip="Export Service as .tgz"
-            ><span class="glyphicon glyphicon-export"></span
-          ></button>
-        </li>
-        <li>
           <button type="button" class="btn btn-sm btn-success"
           onclick="eNMS.automation.runService({id: '${row.id}',
           parametrization: ${row.mandatory_parametrization}})"
@@ -1198,13 +1193,15 @@ tables.service = class ServiceTable extends Table {
   postProcessing(...args) {
     let self = this;
     if (this.relation) {
-      $("#parent-filtering").val("false").selectpicker("refresh");
+      $("#parent-filtering")
+        .val("false")
+        .selectpicker("refresh");
     }
     this.createfilteringTooltip("serialized");
     super.postProcessing(...args);
     loadTypes("service");
     let timer = false;
-    document.getElementById("serialized-search").addEventListener("keyup", function () {
+    document.getElementById("serialized-search").addEventListener("keyup", function() {
       if (timer) clearTimeout(timer);
       timer = setTimeout(() => {
         self.table.page(0).ajax.reload(null, false);
@@ -1212,7 +1209,7 @@ tables.service = class ServiceTable extends Table {
     });
     $("#parent-filtering")
       .selectpicker()
-      .on("change", function () {
+      .on("change", function() {
         self.table.page(0).ajax.reload(null, false);
       });
   }
@@ -1222,7 +1219,7 @@ tables.run = class RunTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
     if (row.service_properties.type == "workflow") {
-      const rowLink = `/workflow_builder/${row.path}/${row.runtime}`;
+      const rowLink = `/workflow_builder/${row.url}/${row.runtime}`;
       row.name = `<b><a href="${rowLink}">${row.name}</a></b>`;
     }
     for (const model of ["device", "pool"]) {
@@ -1255,6 +1252,7 @@ tables.run = class RunTable extends Table {
       this.userFilteringButton(),
       this.refreshTableButton(),
       this.bulkFilteringButton(),
+      this.copySearchLinkButton(),
       this.clearSearchButton(),
       ` <button
         class="btn btn-info"
@@ -1264,6 +1262,7 @@ tables.run = class RunTable extends Table {
       >
         <span class="glyphicon glyphicon-calendar"></span>
       </button>`,
+      this.exportTableButton(),
     ];
   }
 
@@ -1339,13 +1338,14 @@ tables.result = class ResultTable extends Table {
       this.columnDisplay(),
       `<button
         class="btn btn-info"
-        onclick="eNMS.automation.displayDiff('${this.type}', ${id})"
+        onclick="eNMS.base.displayDiff('${this.type}', ${id})"
         data-tooltip="Compare"
         type="button"
       >
         <span class="glyphicon glyphicon-adjust"></span>
       </button>`,
       this.refreshTableButton(),
+      this.copySearchLinkButton(),
       this.clearSearchButton(),
     ];
   }
@@ -1409,6 +1409,10 @@ tables.task = class TaskTable extends Table {
         '${model}', ${row.instance}, {parent: '${this.id}', from: 'tasks',
         to: '${model}s'})">${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
     }
+    row["runs"] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+      'run', ${row.instance}, {parent: '${this.id}', from: 'task',
+      to: 'runs'})">Runs</a></b>`;
+    row.service_name = buildServiceLink(row.service_properties);
     return row;
   }
 
@@ -1419,6 +1423,7 @@ tables.task = class TaskTable extends Table {
       this.userFilteringButton(),
       this.refreshTableButton(),
       this.bulkFilteringButton(),
+      this.copySearchLinkButton(),
       this.clearSearchButton(),
       ` <button
         class="btn btn-info"
@@ -1430,6 +1435,7 @@ tables.task = class TaskTable extends Table {
       </button>`,
       this.createNewButton(),
       this.bulkEditButton(),
+      this.exportTableButton(),
       ` <button
         type="button"
         class="btn btn-success"
@@ -1503,6 +1509,7 @@ tables.group = class GroupTable extends Table {
       this.columnDisplay(),
       this.displayChangelogButton(),
       this.refreshTableButton(),
+      this.copySearchLinkButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
       this.createNewButton(),
@@ -1561,6 +1568,7 @@ tables.user = class UserTable extends Table {
       this.displayChangelogButton(),
       this.refreshTableButton(),
       this.bulkFilteringButton(),
+      this.copySearchLinkButton(),
       this.clearSearchButton(),
       this.copyTableButton(),
       this.createNewButton(),
@@ -1601,6 +1609,7 @@ tables.credential = class CredentialTable extends Table {
       this.displayChangelogButton(),
       this.refreshTableButton(),
       this.bulkFilteringButton(),
+      this.copySearchLinkButton(),
       this.clearSearchButton(),
       this.createNewButton(),
       this.bulkEditButton(),
@@ -1632,14 +1641,88 @@ tables.credential = class CredentialTable extends Table {
   }
 };
 
-tables.secret = class SecretTable extends Table {
+tables.data = class DataTable extends Table {
+  get controls() {
+    const status = currentStore ? "" : "disabled";
+    return [
+      this.columnDisplay(),
+      this.displayChangelogButton("data"),
+      this.refreshTableButton(),
+      this.clearSearchButton(),
+      `
+      <a
+        id="upward-store-btn"
+        class="btn btn-info ${status}"
+        onclick="eNMS.administration.enterStore({parent: true})"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-chevron-up"></span>
+      </a>`,
+      this.createNewButton(),
+      this.bulkEditButton(),
+      this.exportTableButton(),
+      this.bulkDeletionButton(),
+      `<div id="current-store-path" style="margin-top: 9px; margin-left: 9px"></div>`,
+    ];
+  }
+
+  buttons(row) {
+    return [
+      `
+      <ul class="pagination pagination-lg" style="margin: 0px;">
+        ${this.rowButtons(row).join("")}
+      </ul>`,
+    ];
+  }
+
+  rowButtons(row) {
+    return [
+      `<li>
+        <button type="button" class="btn btn-sm btn-info"
+          onclick="eNMS.base.copyToClipboard({text: '${row.persistent_id}' })"
+          data-tooltip="Copy Persistent ID to clipboard"
+        >
+          <span class="glyphicon glyphicon-copy"></span>
+        </button>
+      </li>`,
+      `<li>
+        <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showInstancePanel('${row.type}', '${row.id}')"
+          data-tooltip="Edit"
+        >
+          <span class="glyphicon glyphicon-edit"></span>
+        </button>
+      </li>`,
+      this.deleteInstanceButton(row),
+    ];
+  }
+
+  postProcessing(...args) {
+    super.postProcessing(...args);
+    displayStorePath();
+  }
+};
+
+tables.snippet = class SnippetTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
+      this.displayChangelogButton(),
       this.refreshTableButton(),
-      this.bulkFilteringButton(),
+      this.copySearchLinkButton(),
       this.clearSearchButton(),
       this.createNewButton(),
+      this.bulkEditButton(),
+      this.exportTableButton(),
+      `
+      <button
+        class="btn btn-success"
+        onclick="eNMS.administration.openDebugPanel()"
+        data-tooltip="Run Debug Snippet"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-play"></span>
+      </button>`,
       this.bulkDeletionButton(),
     ];
   }
@@ -1648,16 +1731,26 @@ tables.secret = class SecretTable extends Table {
     return [
       `
       <ul class="pagination pagination-lg" style="margin: 0px;">
+        ${this.changelogButton(row)}
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showInstancePanel('secret', '${row.id}')"
-          data-tooltip="Edit"><span class="glyphicon glyphicon-edit"></span></button>
+          onclick="eNMS.base.showInstancePanel('snippet', '${
+            row.id
+          }')" data-tooltip="Edit"
+            ><span class="glyphicon glyphicon-edit"></span
+          ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showInstancePanel('secret', '${row.id}', 'duplicate')"
+          onclick="eNMS.base.showInstancePanel('snippet', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-success"
+          onclick="eNMS.administration.runDebugCode(${row.id})"
+          data-tooltip="Run Snippet"><span class="glyphicon glyphicon-play"></span
           ></button>
         </li>
         ${this.deleteInstanceButton(row)}
@@ -1672,6 +1765,9 @@ tables.server = class ServerTable extends Table {
     row.runs = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
       'run', ${row.instance}, {parent: '${this.id}', from: 'server', to: 'runs'})">
       Runs</a></b>`;
+    row.sessions = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+      'session', ${row.instance}, {parent: '${this.id}', from: 'server', to: 'sessions'})">
+      Sessions</a></b>`;
     row.workers = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
       'worker', ${row.instance}, {parent: '${this.id}', from: 'server', to: 'workers'})">
       Workers</a></b>`;
@@ -1683,6 +1779,7 @@ tables.server = class ServerTable extends Table {
       this.columnDisplay(),
       this.displayChangelogButton(),
       this.refreshTableButton(),
+      this.copySearchLinkButton(),
       this.clearSearchButton(),
       this.createNewButton(),
       this.bulkEditButton(),
@@ -1725,6 +1822,7 @@ tables.changelog = class ChangelogTable extends Table {
       this.columnDisplay(),
       this.refreshTableButton(),
       this.bulkFilteringButton(),
+      this.copySearchLinkButton(),
       this.clearSearchButton(),
       this.createNewButton(),
       this.exportTableButton(),
@@ -1736,21 +1834,24 @@ tables.changelog = class ChangelogTable extends Table {
   }
 
   buttons(row) {
-    const isReversible = row.history && row.author;
     return [
       `
       <ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
-          <button
-            type="button"
-            class="btn btn-sm btn-${isReversible ? "danger" : "dark"}"
-            ${isReversible ? "" : "disabled"}
-            onclick="eNMS.administration.revertChange(${
-              row.id
-            })" data-tooltip="Revert Change"
-            >
-              <span class="fa fa-undo"></span>
-            </button>
+          <button type="button" class="btn btn-sm btn-info"
+          onclick="eNMS.administration.showChangelogDiff(${row.id})"
+          data-tooltip="Diff"
+            ><span class="glyphicon glyphicon-adjust"></span
+          ></button>
+        </li>
+        <li>
+          <button ${row.target_id ? "" : "disabled"} type="button"
+          class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showInstancePanel('${row.target_type}', '${
+        row.target_id
+      }')" data-tooltip="Edit"
+            ><span class="glyphicon glyphicon-edit"></span
+          ></button>
         </li>
       </ul>`,
     ];
@@ -1761,9 +1862,29 @@ tables.session = class SessionTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
+      `<input
+        name="context-lines"
+        id="slider"
+        class="slider"
+        style="width: 200px"
+      >`,
       this.refreshTableButton("session"),
       this.bulkFilteringButton(),
     ];
+  }
+
+  postProcessing(...args) {
+    super.postProcessing(...args);
+    $("#slider")
+      .bootstrapSlider({
+        value: 0,
+        ticks: [...Array(6).keys()],
+        formatter: (value) => `Lines of context: ${value}`,
+        tooltip: "always",
+      })
+      .on("change", function() {
+        refreshTable("session");
+      });
   }
 
   buttons(row) {
@@ -1775,6 +1896,11 @@ tables.session = class SessionTable extends Table {
           onclick="eNMS.inventory.showSessionLog(${row.id})" data-tooltip="Session Log"
             ><span class="glyphicon glyphicon-list"></span
           ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showInstancePanel('session', '${row.id}')"
+          data-tooltip="Edit"><span class="glyphicon glyphicon-edit"></span></button>
         </li>
       </ul>`,
     ];
@@ -1818,6 +1944,7 @@ tables.file = class FileTable extends Table {
         </select>
       </button>`,
       this.refreshTableButton("file"),
+      this.copySearchLinkButton(),
       this.clearSearchButton(),
       `
       <a
@@ -1853,6 +1980,8 @@ tables.file = class FileTable extends Table {
       >
         <span class="glyphicon glyphicon-flash"></span>
       </button>`,
+      this.bulkEditButton(),
+      this.bulkDeletionButton(),
       `<div id="current-folder-path" style="margin-top: 9px; margin-left: 9px"></div>`,
     ];
   }
@@ -1861,7 +1990,7 @@ tables.file = class FileTable extends Table {
     return `
       <li>
         <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.base.copyToClipboard({text: '${filePath}${row.path}' })"
+          onclick="eNMS.base.copyToClipboard({text: '${row.path}' })"
           data-tooltip="Copy Path to clipboard"
         >
           <span class="glyphicon glyphicon-copy"></span>
@@ -1952,7 +2081,7 @@ tables.file = class FileTable extends Table {
     displayFolderPath(folderPath);
     $("#parent-filtering")
       .selectpicker()
-      .on("change", function () {
+      .on("change", function() {
         self.table.page(0).ajax.reload(null, false);
         $("#current-folder-path,.parent-filtering").toggle();
       });
@@ -1995,10 +2124,14 @@ tables.worker = class WorkerTable extends Table {
   }
 };
 
-export const clearSearch = function (tableId, notification) {
+export const clearSearch = function(tableId, notification) {
   $(`.search-input-${tableId},.search-list-${tableId}`).val("");
-  $(".search-relation-dd").val("any").selectpicker("refresh");
-  $(".search-relation").val([]).trigger("change");
+  $(".search-relation-dd")
+    .val("any")
+    .selectpicker("refresh");
+  $(".search-relation")
+    .val([])
+    .trigger("change");
   $(`.search-select-${tableId}`).val("inclusion");
   if ($("#serialized-search-div").is(":visible")) {
     $("#serialized-search").val("");
@@ -2012,6 +2145,30 @@ function copySelectionToClipboard(tableId) {
   let table = tableInstances[tableId];
   table.copyClipboard = true;
   refreshTable(tableId);
+}
+
+function copySearchLinkToClipboard(tableId) {
+  const { columns, ...data } = tableInstances[tableId].data;
+  const query = new URLSearchParams({ search: JSON.stringify(data) }).toString();
+  const fullUrl = `${window.location.origin}${window.location.pathname}?${query}`;
+  copyToClipboard({ text: fullUrl, includeText: false });
+}
+
+function buildServiceLink(service) {
+  if (service.type == "workflow") {
+    return `<b><a href="/workflow_builder/${service.builder_link}">${sanitize(
+      service.name
+    )}</a></b>`;
+  } else if (service.builder_link) {
+    return (
+      service.name.substring(0, service.name.lastIndexOf(service.scoped_name)) +
+      `<b><a href="/workflow_builder/${service.builder_link}">${sanitize(
+        service.scoped_name
+      )}</a></b>`
+    );
+  } else {
+    return service.name;
+  }
 }
 
 function exportTable(tableId) {
@@ -2028,13 +2185,13 @@ function userFilteringDisplay(tableId) {
   refreshTable(tableId);
 }
 
-function showTableChangelogPanel(tableId) {
-  const type = tableInstances[tableId].type;
+function showTableChangelogPanel(tableId, tableType) {
+  const type = tableType || tableInstances[tableId].type;
   const constraints = { [`${type}_filter`]: "empty", [`${type}_invert`]: true };
   showChangelogPanel(tableId, constraints);
 }
 
-export const refreshTable = function (tableId, notification, updateParent, firstPage) {
+export const refreshTable = function(tableId, notification, updateParent, firstPage) {
   if (!$(`#table-${tableId}`).length) return;
   const table = tableInstances[tableId].table;
   table.page(firstPage ? 0 : table.page()).ajax.reload(null, false);
@@ -2044,7 +2201,7 @@ export const refreshTable = function (tableId, notification, updateParent, first
 };
 
 function refreshTablePeriodically(tableId, interval, first) {
-  if (userIsActive && !first) refreshTable(tableId, false);
+  if (userIsActive && document.hasFocus() && !first) refreshTable(tableId, false);
   setTimeout(() => refreshTablePeriodically(tableId, interval), interval);
 }
 
@@ -2056,17 +2213,6 @@ function showBulkDeletionPanel(tableId, model) {
       currently displayed in the table ?`,
     confirmButton: "Delete",
     onConfirm: () => bulkDeletion(tableId, model),
-  });
-}
-
-function showBulkServiceExportPanel(tableId) {
-  showConfirmationPanel({
-    id: "bulk-tgz-export",
-    title: "Bulk .tgz Export (all services in table)",
-    message: `Are you sure you want to export all services
-      in the table as .tgz (this process might take a long time ?)`,
-    confirmButton: "Export",
-    onConfirm: () => exportServices(tableId),
   });
 }
 
@@ -2085,7 +2231,7 @@ function bulkDeletion(tableId, model) {
   call({
     url: `/bulk_deletion/${model}`,
     data: tableInstances[tableId].getFilteringData(),
-    callback: function (number) {
+    callback: function(number) {
       refreshTable(tableId, false, true);
       notify(`${number} items deleted.`, "success", 5, true);
     },
@@ -2097,7 +2243,7 @@ function bulkRemoval(tableId, model, instance) {
   call({
     url: `/bulk_removal/${model}/${relation}`,
     data: tableInstances[tableId].getFilteringData(),
-    callback: function (number) {
+    callback: function(number) {
       refreshTable(tableId, false, true);
       notify(
         `${number} ${model}s removed from ${instance.type} '${instance.name}'.`,
@@ -2113,7 +2259,7 @@ function bulkEdit(formId, model, tableId) {
   call({
     url: `/bulk_edit/${model}`,
     form: `${formId}-form-${tableId}`,
-    callback: function (number) {
+    callback: function(number) {
       refreshTable(tableId);
       $(`#${formId}-${tableId}`).remove();
       notify(`${number} items modified.`, "success", 5, true);
@@ -2149,7 +2295,7 @@ function displayRelationTable(type, instance, relation) {
     size: "1300 600",
     title: `${instance.name} - ${type}s`,
     tableId: `${type}-${instance.id}`,
-    callback: function () {
+    callback: function() {
       const constraints = { [`${relation.from}`]: [instance.name] };
       // eslint-disable-next-line new-cap
       new tables[type](instance.id, constraints, { relation, ...instance });
@@ -2159,6 +2305,7 @@ function displayRelationTable(type, instance, relation) {
 
 function serializedSearch(type) {
   $("#serialized-search-div").toggle();
+  $(`#${type}-serialized-search-btn`).toggleClass("btn-pressed");
   if (!$("#serialized-search-div").is(":visible")) {
     $("#serialized-search").val("");
     refreshTable(type);
@@ -2184,13 +2331,13 @@ configureNamespace("table", [
   bulkRemoval,
   clearSearch,
   copySelectionToClipboard,
+  copySearchLinkToClipboard,
   displayRelationTable,
   exportTable,
   refreshTable,
   serializedSearch,
   showBulkDeletionPanel,
   showBulkEditPanel,
-  showBulkServiceExportPanel,
   showTableChangelogPanel,
   togglePaginationDisplay,
   userFilteringDisplay,

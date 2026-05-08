@@ -1,0 +1,36 @@
+[
+  {
+    "admin_only": false,
+    "creation_time": "2025-02-16 18:40:32.115450",
+    "creator": "admin",
+    "description": "",
+    "last_modified": "",
+    "last_modified_by": "",
+    "name": ">JSON>JSON 1",
+    "path": "/JSON/JSON 1",
+    "persistent_id": "kpSBMNi61Vk",
+    "scoped_name": "JSON 1",
+    "value": {
+      "test": 3
+    }
+  },
+  {
+    "admin_only": false,
+    "creation_time": "2025-02-16 18:41:18.724962",
+    "creator": "admin",
+    "description": "",
+    "last_modified": "",
+    "last_modified_by": "",
+    "name": ">JSON>JSON 2",
+    "path": "/JSON/JSON 2",
+    "persistent_id": "qK8xmi0SBB0",
+    "scoped_name": "JSON 2",
+    "value": {
+      "key1": 1,
+      "key2": 2,
+      "subdict": {
+        "key3": 3
+      }
+    }
+  }
+]

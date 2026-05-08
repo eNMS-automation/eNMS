@@ -1,7 +1,7 @@
 <div class="modal-body">
   <div>
-    The <b>skip query</b> parameter is a python expression that skips the service if the
-    boolean result is True. Skip is evaluated on a per device basis.
+    The <b>skip query</b> parameter is a python expression that causes the service to be
+    skipped if the boolean result is True. Skip is evaluated on a per device basis.
     <p></p>
     <p>
       This expression is evaluated to determine what to SKIP. If the expression
@@ -21,17 +21,16 @@
     </p>
 
     <p>
-      Example, run only for Cisco Transport devices (choose the match, then negate it to
-      skip those devices that do NOT match).
-      <textarea class="help-snippet" style="height: fit-content">
-not ("TRANSPORT" in device.subtype.upper()
-and "IOS-XE" == device.operating_system.strip().upper()
+      Example: run only for Cisco Transport devices (skip if not matching).
+      <textarea class="help-snippet" style="height: fit-content;">
+not ("TRANSPORT" in device.subtype.upper()\
+and "IOS-XE" == device.operating_system.strip().upper()\
 and "CISCO" == device.vendor.strip().upper())</textarea
       >
     </p>
 
     <p>
-      Example using get_var:
+      Example: using get_var:
       <textarea class="help-snippet" style="height: fit-content">
 not get_var("upgrade_needed", device=device.name)
       </textarea>

@@ -1,6 +1,6 @@
 Perform a GIT action on a set of files used or created by a workflow.
 
-![GIT Action Service](../../_static/automation/service_types/git_action.png)
+![GIT Action Service](../../_static/automation/service_types/git_action.jpg)
 
 - `Actions`: Select between:
 

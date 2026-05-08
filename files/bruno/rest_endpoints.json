@@ -1,0 +1,209 @@
+{
+  "name": "eNMS",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "Get Configuration",
+      "filename": "Get Configuration.bru",
+      "seq": 2,
+      "settings": {},
+      "tags": [],
+      "request": {
+        "url": "http://192.168.64.2:5000/rest/configuration",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get Instance",
+      "filename": "Get Instance.bru",
+      "seq": 3,
+      "settings": {},
+      "tags": [],
+      "request": {
+        "url": "http://192.168.64.2:5000/rest/instance",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Is Alive",
+      "filename": "Is Alive.bru",
+      "seq": 1,
+      "settings": {},
+      "tags": [],
+      "request": {
+        "url": "http://192.168.64.2:5000/rest/is_alive",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Migrate",
+      "filename": "Migrate.bru",
+      "seq": 4,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "request": {
+        "url": "http://192.168.64.2:5000/rest/migrate/json/import",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\"name\": \"examples\"}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Run",
+      "filename": "Run.bru",
+      "seq": 6,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "request": {
+        "url": "http://192.168.64.2:5000/rest/run_service",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\"runtime\": \"2025-11-14 17:56:07.64532683769\", \"target_devices\": [\"Washington\"], \"name\": \"Workflow and Subworkflow Iteration\"}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Scan Folder",
+      "filename": "Scan Folder.bru",
+      "seq": 7,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "request": {
+        "url": "http://192.168.64.2:5000/rest/scan_folder",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    }
+  ],
+  "environments": [],
+  "root": {
+    "request": {
+      "auth": {
+        "mode": "basic",
+        "basic": {
+          "username": "admin",
+          "password": "admin"
+        }
+      }
+    }
+  },
+  "brunoConfig": {
+    "version": "1",
+    "name": "eNMS",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0.0006694793701171875,
+    "filesCount": 5
+  }
+}

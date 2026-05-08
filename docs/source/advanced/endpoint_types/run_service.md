@@ -7,6 +7,9 @@ Initiate execution of a service passing in values to control its operation.
 **Parameters**: None <br />
 **Payload**:
 
+ - `persistent_id`: Persistent ID of the service. This endpoint supports
+    using the persistent ID instead of the name, ensuring that REST calls
+    remain valid even if the name changes.
  - `name`: Name of the service.
  - `devices`: (default: `[]`) List of target device names. By default, the
      service will run on the devices configured on the service.

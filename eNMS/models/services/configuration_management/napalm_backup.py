@@ -3,18 +3,18 @@ from flask_wtf import FlaskForm
 from pathlib import Path
 from re import M, sub
 from sqlalchemy import ForeignKey, Integer
-from sqlalchemy.orm import load_only
+from traceback import format_exc
 from wtforms import FormField
 
 from eNMS.database import db
-from eNMS.forms import NapalmForm
 from eNMS.fields import (
+    FieldList,
     HiddenField,
     SelectField,
-    StringField,
     SelectMultipleField,
-    FieldList,
+    StringField,
 )
+from eNMS.forms import NapalmForm
 from eNMS.models.automation import ConnectionService
 from eNMS.variables import vs
 
@@ -27,22 +27,24 @@ class NapalmBackupService(ConnectionService):
     driver = db.Column(db.SmallString)
     timeout = db.Column(Integer, default=60)
     optional_args = db.Column(db.Dict)
-    local_path = db.Column(db.SmallString, default="network_data")
+    local_path = db.Column(
+        db.SmallString, default=vs.automation["configuration_backup"]["folder"]
+    )
     property = db.Column(db.SmallString)
     getters = db.Column(db.List)
     replacements = db.Column(db.List)
 
     __mapper_args__ = {"polymorphic_identity": "napalm_backup_service"}
 
+    @staticmethod
     def job(self, run, device):
         local_path = run.sub(run.local_path, locals())
         if run.dry_run:
             return {"local_path": local_path}
         path = Path.cwd() / local_path / device.name
         path.mkdir(parents=True, exist_ok=True)
+        kwargs = {"success": True, "runtime": datetime.now()}
         try:
-            runtime = datetime.now()
-            setattr(device, f"last_{self.property}_runtime", str(runtime))
             napalm_connection = run.napalm_connection(device)
             run.log("info", f"Fetching getters: {', '.join(run.getters)}", device)
             result = {}
@@ -60,26 +62,21 @@ class NapalmBackupService(ConnectionService):
                 except Exception as exc:
                     result[getter] = f"{getter} failed because of {exc}"
             result = vs.dict_to_string(result)
-            device_with_deferred_data = (
-                db.query("device", user=run.creator)
-                .options(load_only(getattr(vs.models["device"], self.property)))
-                .filter_by(id=device.id)
-                .one()
+        except Exception:
+            result, kwargs["success"] = format_exc(), False
+        kwargs["result"] = result
+        with db.session_scope(remove=run.high_performance and run.in_process):
+            write_config = run.configuration_transaction(
+                self.property, device, **kwargs
             )
-            setattr(device_with_deferred_data, self.property, result)
+        if write_config:
             with open(path / self.property, "w") as file:
                 file.write(result)
-            setattr(device, f"last_{self.property}_status", "Success")
-            duration = f"{(datetime.now() - runtime).total_seconds()}s"
-            setattr(device, f"last_{self.property}_duration", duration)
-            setattr(device, f"last_{self.property}_update", str(runtime))
+        if kwargs["success"]:
             run.update_configuration_properties(path, self.property, device)
-        except Exception as exc:
-            setattr(device, f"last_{self.property}_status", "Failure")
-            setattr(device, f"last_{self.property}_failure", str(runtime))
-            run.update_configuration_properties(path, self.property, device)
-            return {"success": False, "result": str(exc)}
-        return {"success": True}
+            return {"success": True}
+        else:
+            return {key: kwargs[key] for key in ("success", "result")}
 
 
 class ReplacementForm(FlaskForm):
@@ -93,7 +90,11 @@ class NapalmBackupForm(NapalmForm):
         "Configuration Property to Update",
         choices=list(vs.configuration_properties.items()),
     )
-    local_path = StringField("Local Path", default="network_data", substitution=True)
+    local_path = StringField(
+        "Local Path",
+        default=vs.automation["configuration_backup"]["folder"],
+        substitution=True,
+    )
     getters = SelectMultipleField(choices=vs.automation["napalm"]["getters"])
     replacements = FieldList(FormField(ReplacementForm), min_entries=3)
     groups = {

@@ -1,0 +1,1209 @@
+[
+  {
+    "add_header": true,
+    "admin_only": false,
+    "builder_link": "INN-WJSlXIg",
+    "close_connection": false,
+    "commands": [
+      {
+        "prefix": "",
+        "value": "show run"
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      }
+    ],
+    "completion_time": 1,
+    "connection_name": "default",
+    "content_match": "",
+    "content_match_regex": false,
+    "conversion_method": "none",
+    "creation_time": "",
+    "creator": "admin",
+    "credential_type": "any",
+    "credentials": "device",
+    "custom_password": "",
+    "custom_username": "",
+    "default_uuid": "4de20190-9371-47a0-a25f-eacf7c8b4f70",
+    "definition": "Definition",
+    "delete_spaces_before_matching": false,
+    "description": "",
+    "device_query": "",
+    "device_query_property": "name",
+    "dict_match": {},
+    "disable_result_creation": false,
+    "disabled": false,
+    "disabled_info": "",
+    "display_only_failed_nodes": false,
+    "display_report": false,
+    "driver": "device",
+    "dry_run": false,
+    "email_report": false,
+    "high_performance": false,
+    "impacting": true,
+    "include_device_results": false,
+    "include_link_in_summary": false,
+    "initial_payload": {},
+    "is_configuration": false,
+    "iteration_devices": "",
+    "iteration_devices_property": "name",
+    "iteration_values": "",
+    "iteration_variable_name": "iteration_value",
+    "last_modified": "2022-11-09 01:23:33.461188",
+    "last_modified_by": "admin",
+    "last_run": "",
+    "local_path": "network_data",
+    "log_level": 1,
+    "mail_bcc": "",
+    "mail_recipient": "",
+    "mail_sender": "",
+    "mail_subject": "",
+    "mandatory_parameter": "Default Value",
+    "mandatory_parametrization": false,
+    "max_number_of_retries": 100,
+    "max_processes": 15,
+    "maximum_runs": 1,
+    "multiprocessing": false,
+    "name": "[(R) Configuration Properties Backup Services] Get Configuration with Scrapli",
+    "negative_logic": false,
+    "notification_header": "",
+    "number_of_retries": 0,
+    "operating_system": "",
+    "parameterized_form": "name = StringField('Name', [InputRequired()])\ninitial_payload = DictField()\ntarget_devices = MultipleInstanceField('Devices', model='device')\ntarget_pools = MultipleInstanceField('Pools', model='pool')\ndevice_query = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows': 2})\ndevice_query_property = SelectField('Query Property Type', choices=(('name', 'Name'), ('ip_address', 'IP address')))\nmultiprocessing = BooleanField('Multiprocessing', default=False)\nmax_processes = IntegerField('Maximum number of processes', default=15)",
+    "parameterized_form_template": "",
+    "persistent_id": "tVW5hBjfMDk",
+    "postprocessing": "",
+    "postprocessing_mode": "success",
+    "preprocessing": "",
+    "priority": 10,
+    "property": "configuration",
+    "replacements": [
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      }
+    ],
+    "reply_to": "",
+    "report": "",
+    "report_format": "text",
+    "report_jinja2_template": false,
+    "reserved": false,
+    "restrict_to_owners": [],
+    "run_method": "per_device",
+    "scoped_name": "Get Configuration with Scrapli",
+    "send_notification": false,
+    "send_notification_method": "mail",
+    "shared": false,
+    "show_user_logs": true,
+    "skip": {},
+    "skip_query": "",
+    "skip_value": "success",
+    "soft_deleted": false,
+    "start_new_connection": false,
+    "time_between_retries": 10,
+    "timeout_ops": 30.0,
+    "timeout_socket": 15.0,
+    "timeout_transport": 30.0,
+    "transport": "system",
+    "update_target_pools": false,
+    "validation_condition": "none",
+    "validation_method": "text",
+    "validation_section": "results['result']",
+    "vendor": "",
+    "version": "",
+    "waiting_time": 0
+  },
+  {
+    "add_header": true,
+    "admin_only": false,
+    "builder_link": "INN-WJSlXIg",
+    "close_connection": false,
+    "commands": [
+      {
+        "prefix": "shusers",
+        "value": "show users"
+      },
+      {
+        "prefix": "shipintbr",
+        "value": "show ip interface brief"
+      },
+      {
+        "prefix": "",
+        "value": "show vrf"
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      }
+    ],
+    "completion_time": 1,
+    "connection_name": "default",
+    "content_match": "",
+    "content_match_regex": false,
+    "conversion_method": "none",
+    "creation_time": "",
+    "creator": "admin",
+    "credential_type": "any",
+    "credentials": "device",
+    "custom_password": "",
+    "custom_username": "",
+    "default_uuid": "1bfe82cc-e465-419e-96c1-1405332bc8d2",
+    "definition": "Definition",
+    "delete_spaces_before_matching": false,
+    "description": "",
+    "device_query": "",
+    "device_query_property": "name",
+    "dict_match": {},
+    "disable_result_creation": false,
+    "disabled": false,
+    "disabled_info": "",
+    "display_only_failed_nodes": false,
+    "display_report": false,
+    "driver": "device",
+    "dry_run": false,
+    "email_report": false,
+    "high_performance": false,
+    "impacting": true,
+    "include_device_results": false,
+    "include_link_in_summary": false,
+    "initial_payload": {},
+    "is_configuration": false,
+    "iteration_devices": "",
+    "iteration_devices_property": "name",
+    "iteration_values": "",
+    "iteration_variable_name": "iteration_value",
+    "last_modified": "2022-11-09 01:23:33.464936",
+    "last_modified_by": "admin",
+    "last_run": "",
+    "local_path": "network_data",
+    "log_level": 1,
+    "mail_bcc": "",
+    "mail_recipient": "",
+    "mail_sender": "",
+    "mail_subject": "",
+    "mandatory_parameter": "Default Value",
+    "mandatory_parametrization": false,
+    "max_number_of_retries": 100,
+    "max_processes": 15,
+    "maximum_runs": 1,
+    "multiprocessing": false,
+    "name": "[(R) Configuration Properties Backup Services] Get Operational Data with Scrapli",
+    "negative_logic": false,
+    "notification_header": "",
+    "number_of_retries": 0,
+    "operating_system": "",
+    "parameterized_form": "name = StringField('Name', [InputRequired()])\ninitial_payload = DictField()\ntarget_devices = MultipleInstanceField('Devices', model='device')\ntarget_pools = MultipleInstanceField('Pools', model='pool')\ndevice_query = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows': 2})\ndevice_query_property = SelectField('Query Property Type', choices=(('name', 'Name'), ('ip_address', 'IP address')))\nmultiprocessing = BooleanField('Multiprocessing', default=False)\nmax_processes = IntegerField('Maximum number of processes', default=15)",
+    "parameterized_form_template": "",
+    "persistent_id": "65-2LTi_raY",
+    "postprocessing": "",
+    "postprocessing_mode": "success",
+    "preprocessing": "",
+    "priority": 10,
+    "property": "operational_data",
+    "replacements": [
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      }
+    ],
+    "reply_to": "",
+    "report": "",
+    "report_format": "text",
+    "report_jinja2_template": false,
+    "reserved": false,
+    "restrict_to_owners": [],
+    "run_method": "per_device",
+    "scoped_name": "Get Operational Data with Scrapli",
+    "send_notification": false,
+    "send_notification_method": "mail",
+    "shared": false,
+    "show_user_logs": true,
+    "skip": {},
+    "skip_query": "",
+    "skip_value": "success",
+    "soft_deleted": false,
+    "start_new_connection": false,
+    "time_between_retries": 10,
+    "timeout_ops": 30.0,
+    "timeout_socket": 15.0,
+    "timeout_transport": 30.0,
+    "transport": "system",
+    "update_target_pools": false,
+    "validation_condition": "none",
+    "validation_method": "text",
+    "validation_section": "results['result']",
+    "vendor": "",
+    "version": "",
+    "waiting_time": 0
+  },
+  {
+    "add_header": true,
+    "admin_only": false,
+    "builder_link": "snXYzvp4vfQ",
+    "close_connection": false,
+    "commands": [
+      {
+        "prefix": "",
+        "value": "show vrf {{ integer_variable }}"
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      }
+    ],
+    "completion_time": 1,
+    "connection_name": "default",
+    "content_match": "",
+    "content_match_regex": false,
+    "conversion_method": "none",
+    "creation_time": "",
+    "creator": "admin",
+    "credential_type": "any",
+    "credentials": "device",
+    "custom_password": "",
+    "custom_username": "",
+    "default_uuid": "57a92baf-07ba-4a48-8900-9397545f14f2",
+    "definition": "Definition",
+    "delete_spaces_before_matching": false,
+    "description": "",
+    "device_query": "",
+    "device_query_property": "name",
+    "dict_match": {},
+    "disable_result_creation": false,
+    "disabled": false,
+    "disabled_info": "",
+    "display_only_failed_nodes": false,
+    "display_report": false,
+    "driver": "device",
+    "dry_run": true,
+    "email_report": false,
+    "high_performance": false,
+    "impacting": true,
+    "include_device_results": false,
+    "include_link_in_summary": false,
+    "initial_payload": {},
+    "is_configuration": false,
+    "iteration_devices": "",
+    "iteration_devices_property": "name",
+    "iteration_values": "",
+    "iteration_variable_name": "iteration_value",
+    "last_modified": "2024-02-19 06:05:47.242605",
+    "last_modified_by": "admin",
+    "last_run": "",
+    "local_path": "network_data",
+    "log_level": 1,
+    "mail_bcc": "",
+    "mail_recipient": "",
+    "mail_sender": "",
+    "mail_subject": "",
+    "mandatory_parameter": "Default Value",
+    "mandatory_parametrization": false,
+    "max_number_of_retries": 100,
+    "max_processes": 15,
+    "maximum_runs": 1,
+    "multiprocessing": false,
+    "name": "[Dry Run: Scrapli Services] Backup",
+    "negative_logic": false,
+    "notification_header": "",
+    "number_of_retries": 0,
+    "operating_system": "",
+    "parameterized_form": "name = StringField('Name', [InputRequired()])\ninitial_payload = DictField()\ntarget_devices = MultipleInstanceField('Devices', model='device')\ntarget_pools = MultipleInstanceField('Pools', model='pool')\ndevice_query = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows': 2})\ndevice_query_property = SelectField('Query Property Type', choices=(('name', 'Name'), ('ip_address', 'IP address')))\nmultiprocessing = BooleanField('Multiprocessing', default=False)\nmax_processes = IntegerField('Maximum number of processes', default=15)",
+    "parameterized_form_template": "",
+    "persistent_id": "7EfkwJUMEV0",
+    "postprocessing": "",
+    "postprocessing_mode": "success",
+    "preprocessing": "",
+    "priority": 10,
+    "property": "configuration",
+    "replacements": [
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      }
+    ],
+    "reply_to": "",
+    "report": "",
+    "report_format": "text",
+    "report_jinja2_template": false,
+    "reserved": false,
+    "restrict_to_owners": [],
+    "run_method": "per_device",
+    "scoped_name": "Backup",
+    "send_notification": false,
+    "send_notification_method": "mail",
+    "shared": false,
+    "show_user_logs": true,
+    "skip": {
+      "Dry Run: Top-level Workflow Dry Run": false
+    },
+    "skip_query": "",
+    "skip_value": "success",
+    "soft_deleted": false,
+    "start_new_connection": false,
+    "time_between_retries": 10,
+    "timeout_ops": 30.0,
+    "timeout_socket": 15.0,
+    "timeout_transport": 30.0,
+    "transport": "system",
+    "update_target_pools": false,
+    "validation_condition": "none",
+    "validation_method": "text",
+    "validation_section": "results['result']",
+    "vendor": "",
+    "version": "",
+    "waiting_time": 0
+  },
+  {
+    "add_header": true,
+    "admin_only": false,
+    "builder_link": "5U7Q8CzSELU",
+    "close_connection": false,
+    "commands": [
+      {
+        "prefix": "",
+        "value": "show vrf {{ integer_variable }}"
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      }
+    ],
+    "completion_time": 1,
+    "connection_name": "default",
+    "content_match": "",
+    "content_match_regex": false,
+    "conversion_method": "none",
+    "creation_time": "",
+    "creator": "admin",
+    "credential_type": "any",
+    "credentials": "device",
+    "custom_password": "",
+    "custom_username": "",
+    "default_uuid": "57a92baf-07ba-4a48-8900-9397545f14f2",
+    "definition": "Definition",
+    "delete_spaces_before_matching": false,
+    "description": "",
+    "device_query": "",
+    "device_query_property": "name",
+    "dict_match": {},
+    "disable_result_creation": false,
+    "disabled": false,
+    "disabled_info": "",
+    "display_only_failed_nodes": false,
+    "display_report": false,
+    "driver": "device",
+    "dry_run": false,
+    "email_report": false,
+    "high_performance": false,
+    "impacting": true,
+    "include_device_results": false,
+    "include_link_in_summary": false,
+    "initial_payload": {},
+    "is_configuration": false,
+    "iteration_devices": "",
+    "iteration_devices_property": "name",
+    "iteration_values": "",
+    "iteration_variable_name": "iteration_value",
+    "last_modified": "2024-03-11 07:38:37.128373",
+    "last_modified_by": "admin",
+    "last_run": "",
+    "local_path": "network_data",
+    "log_level": 1,
+    "mail_bcc": "",
+    "mail_recipient": "",
+    "mail_sender": "",
+    "mail_subject": "",
+    "mandatory_parameter": "Default Value",
+    "mandatory_parametrization": false,
+    "max_number_of_retries": 100,
+    "max_processes": 15,
+    "maximum_runs": 1,
+    "multiprocessing": false,
+    "name": "[Dry Run: Top-level Workflow Dry Run] Backup",
+    "negative_logic": false,
+    "notification_header": "",
+    "number_of_retries": 0,
+    "operating_system": "",
+    "parameterized_form": "name = StringField('Name', [InputRequired()])\ninitial_payload = DictField()\ntarget_devices = MultipleInstanceField('Devices', model='device')\ntarget_pools = MultipleInstanceField('Pools', model='pool')\ndevice_query = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows': 2})\ndevice_query_property = SelectField('Query Property Type', choices=(('name', 'Name'), ('ip_address', 'IP address')))\nmultiprocessing = BooleanField('Multiprocessing', default=False)\nmax_processes = IntegerField('Maximum number of processes', default=15)",
+    "parameterized_form_template": "",
+    "persistent_id": "HuqndgWJTOY",
+    "postprocessing": "",
+    "postprocessing_mode": "success",
+    "preprocessing": "",
+    "priority": 10,
+    "property": "configuration",
+    "replacements": [
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      }
+    ],
+    "reply_to": "",
+    "report": "",
+    "report_format": "text",
+    "report_jinja2_template": false,
+    "reserved": false,
+    "restrict_to_owners": [],
+    "run_method": "per_device",
+    "scoped_name": "Backup",
+    "send_notification": false,
+    "send_notification_method": "mail",
+    "shared": false,
+    "show_user_logs": true,
+    "skip": {
+      "Dry Run: Top-level Workflow Dry Run": false,
+      "[Dry Run: Subservice and Subworkflow level Dry Run] Dry Run: Top-level Workflow Dry Run": false
+    },
+    "skip_query": "",
+    "skip_value": "success",
+    "soft_deleted": false,
+    "start_new_connection": false,
+    "time_between_retries": 10,
+    "timeout_ops": 30.0,
+    "timeout_socket": 15.0,
+    "timeout_transport": 30.0,
+    "transport": "system",
+    "update_target_pools": false,
+    "validation_condition": "none",
+    "validation_method": "text",
+    "validation_section": "results['result']",
+    "vendor": "",
+    "version": "",
+    "waiting_time": 0
+  },
+  {
+    "add_header": true,
+    "admin_only": false,
+    "builder_link": "erDXQQXAp2A>rh68m9WCIQw",
+    "close_connection": false,
+    "commands": [
+      {
+        "prefix": "",
+        "value": "show vrf {{ integer_variable }}"
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      }
+    ],
+    "completion_time": 1,
+    "connection_name": "default",
+    "content_match": "",
+    "content_match_regex": false,
+    "conversion_method": "none",
+    "creation_time": "",
+    "creator": "admin",
+    "credential_type": "any",
+    "credentials": "device",
+    "custom_password": "",
+    "custom_username": "",
+    "default_uuid": "57a92baf-07ba-4a48-8900-9397545f14f2",
+    "definition": "Definition",
+    "delete_spaces_before_matching": false,
+    "description": "",
+    "device_query": "",
+    "device_query_property": "name",
+    "dict_match": {},
+    "disable_result_creation": false,
+    "disabled": false,
+    "disabled_info": "",
+    "display_only_failed_nodes": false,
+    "display_report": false,
+    "driver": "device",
+    "dry_run": false,
+    "email_report": false,
+    "high_performance": false,
+    "impacting": true,
+    "include_device_results": false,
+    "include_link_in_summary": false,
+    "initial_payload": {},
+    "is_configuration": false,
+    "iteration_devices": "",
+    "iteration_devices_property": "name",
+    "iteration_values": "",
+    "iteration_variable_name": "iteration_value",
+    "last_modified": "2024-03-11 07:59:00.761821",
+    "last_modified_by": "admin",
+    "last_run": "",
+    "local_path": "network_data",
+    "log_level": 1,
+    "mail_bcc": "",
+    "mail_recipient": "",
+    "mail_sender": "",
+    "mail_subject": "",
+    "mandatory_parameter": "Default Value",
+    "mandatory_parametrization": false,
+    "max_number_of_retries": 100,
+    "max_processes": 15,
+    "maximum_runs": 1,
+    "multiprocessing": false,
+    "name": "[[Dry Run: Subservice and Subworkflow level Dry Run] DR Subworkflow] Backup",
+    "negative_logic": false,
+    "notification_header": "",
+    "number_of_retries": 0,
+    "operating_system": "",
+    "parameterized_form": "name = StringField('Name', [InputRequired()])\ninitial_payload = DictField()\ntarget_devices = MultipleInstanceField('Devices', model='device')\ntarget_pools = MultipleInstanceField('Pools', model='pool')\ndevice_query = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows': 2})\ndevice_query_property = SelectField('Query Property Type', choices=(('name', 'Name'), ('ip_address', 'IP address')))\nmultiprocessing = BooleanField('Multiprocessing', default=False)\nmax_processes = IntegerField('Maximum number of processes', default=15)",
+    "parameterized_form_template": "",
+    "persistent_id": "vh2EUj5hqe4",
+    "postprocessing": "",
+    "postprocessing_mode": "success",
+    "preprocessing": "",
+    "priority": 10,
+    "property": "configuration",
+    "replacements": [
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      }
+    ],
+    "reply_to": "",
+    "report": "",
+    "report_format": "text",
+    "report_jinja2_template": false,
+    "reserved": false,
+    "restrict_to_owners": [],
+    "run_method": "per_device",
+    "scoped_name": "Backup",
+    "send_notification": false,
+    "send_notification_method": "mail",
+    "shared": false,
+    "show_user_logs": true,
+    "skip": {
+      "Dry Run: Top-level Workflow Dry Run": false,
+      "[Dry Run: Subservice and Subworkflow level Dry Run] Dry Run: Top-level Workflow Dry Run": false,
+      "[Dry Run: Subservice and Subworkflow level Dry Run] Non-DR Subworkflow": false
+    },
+    "skip_query": "",
+    "skip_value": "success",
+    "soft_deleted": false,
+    "start_new_connection": false,
+    "time_between_retries": 10,
+    "timeout_ops": 30.0,
+    "timeout_socket": 15.0,
+    "timeout_transport": 30.0,
+    "transport": "system",
+    "update_target_pools": false,
+    "validation_condition": "none",
+    "validation_method": "text",
+    "validation_section": "results['result']",
+    "vendor": "",
+    "version": "",
+    "waiting_time": 0
+  },
+  {
+    "add_header": true,
+    "admin_only": false,
+    "builder_link": "erDXQQXAp2A>mjXc8JOvKAY",
+    "close_connection": false,
+    "commands": [
+      {
+        "prefix": "",
+        "value": "show vrf {{ integer_variable }}"
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      }
+    ],
+    "completion_time": 1,
+    "connection_name": "default",
+    "content_match": "",
+    "content_match_regex": false,
+    "conversion_method": "none",
+    "creation_time": "",
+    "creator": "admin",
+    "credential_type": "any",
+    "credentials": "device",
+    "custom_password": "",
+    "custom_username": "",
+    "default_uuid": "57a92baf-07ba-4a48-8900-9397545f14f2",
+    "definition": "Definition",
+    "delete_spaces_before_matching": false,
+    "description": "",
+    "device_query": "",
+    "device_query_property": "name",
+    "dict_match": {},
+    "disable_result_creation": false,
+    "disabled": false,
+    "disabled_info": "",
+    "display_only_failed_nodes": false,
+    "display_report": false,
+    "driver": "device",
+    "dry_run": false,
+    "email_report": false,
+    "high_performance": false,
+    "impacting": true,
+    "include_device_results": false,
+    "include_link_in_summary": false,
+    "initial_payload": {},
+    "is_configuration": false,
+    "iteration_devices": "",
+    "iteration_devices_property": "name",
+    "iteration_values": "",
+    "iteration_variable_name": "iteration_value",
+    "last_modified": "2024-03-11 08:02:13.945463",
+    "last_modified_by": "admin",
+    "last_run": "",
+    "local_path": "network_data",
+    "log_level": 1,
+    "mail_bcc": "",
+    "mail_recipient": "",
+    "mail_sender": "",
+    "mail_subject": "",
+    "mandatory_parameter": "Default Value",
+    "mandatory_parametrization": false,
+    "max_number_of_retries": 100,
+    "max_processes": 15,
+    "maximum_runs": 1,
+    "multiprocessing": false,
+    "name": "[[Dry Run: Subservice and Subworkflow level Dry Run] Non-DR Subworkflow] Backup",
+    "negative_logic": false,
+    "notification_header": "",
+    "number_of_retries": 0,
+    "operating_system": "",
+    "parameterized_form": "name = StringField('Name', [InputRequired()])\ninitial_payload = DictField()\ntarget_devices = MultipleInstanceField('Devices', model='device')\ntarget_pools = MultipleInstanceField('Pools', model='pool')\ndevice_query = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows': 2})\ndevice_query_property = SelectField('Query Property Type', choices=(('name', 'Name'), ('ip_address', 'IP address')))\nmultiprocessing = BooleanField('Multiprocessing', default=False)\nmax_processes = IntegerField('Maximum number of processes', default=15)",
+    "parameterized_form_template": "",
+    "persistent_id": "1dinsb4J4UE",
+    "postprocessing": "",
+    "postprocessing_mode": "success",
+    "preprocessing": "",
+    "priority": 10,
+    "property": "configuration",
+    "replacements": [
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      }
+    ],
+    "reply_to": "",
+    "report": "",
+    "report_format": "text",
+    "report_jinja2_template": false,
+    "reserved": false,
+    "restrict_to_owners": [],
+    "run_method": "per_device",
+    "scoped_name": "Backup",
+    "send_notification": false,
+    "send_notification_method": "mail",
+    "shared": false,
+    "show_user_logs": true,
+    "skip": {
+      "Dry Run: Top-level Workflow Dry Run": false,
+      "[Dry Run: Subservice and Subworkflow level Dry Run] Dry Run: Top-level Workflow Dry Run": false,
+      "[Dry Run: Subservice and Subworkflow level Dry Run] Non-DR Subworkflow": false
+    },
+    "skip_query": "",
+    "skip_value": "success",
+    "soft_deleted": false,
+    "start_new_connection": false,
+    "time_between_retries": 10,
+    "timeout_ops": 30.0,
+    "timeout_socket": 15.0,
+    "timeout_transport": 30.0,
+    "transport": "system",
+    "update_target_pools": false,
+    "validation_condition": "none",
+    "validation_method": "text",
+    "validation_section": "results['result']",
+    "vendor": "",
+    "version": "",
+    "waiting_time": 0
+  }
+]

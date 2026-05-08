@@ -2,15 +2,14 @@ from datetime import datetime
 from pathlib import Path
 from re import M, sub
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
-from sqlalchemy.orm import load_only
+from traceback import format_exc
 from wtforms import FormField
 
 from eNMS.database import db
-from eNMS.forms import ScrapliForm, CommandsForm, ReplacementForm
 from eNMS.fields import BooleanField, FieldList, HiddenField, SelectField, StringField
+from eNMS.forms import CommandsForm, ReplacementForm, ScrapliForm
 from eNMS.models.automation import ConnectionService
 from eNMS.variables import vs
-from traceback import format_exc
 
 
 class ScrapliBackupService(ConnectionService):
@@ -25,7 +24,9 @@ class ScrapliBackupService(ConnectionService):
     timeout_socket = db.Column(Float, default=15.0)
     timeout_transport = db.Column(Float, default=30.0)
     timeout_ops = db.Column(Float, default=30.0)
-    local_path = db.Column(db.SmallString, default="network_data")
+    local_path = db.Column(
+        db.SmallString, default=vs.automation["configuration_backup"]["folder"]
+    )
     property = db.Column(db.SmallString)
     commands = db.Column(db.List)
     replacements = db.Column(db.List)
@@ -33,6 +34,7 @@ class ScrapliBackupService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "scrapli_backup_service"}
 
+    @staticmethod
     def job(self, run, device):
         local_path = run.sub(run.local_path, locals())
         commands = run.sub(self.commands, locals())
@@ -40,9 +42,8 @@ class ScrapliBackupService(ConnectionService):
             return {"local_path": local_path, "commands": commands}
         path = Path.cwd() / local_path / device.name
         path.mkdir(parents=True, exist_ok=True)
+        kwargs = {"success": True, "runtime": datetime.now()}
         try:
-            runtime = datetime.now()
-            setattr(device, f"last_{self.property}_runtime", str(runtime))
             scrapli_connection = run.scrapli_connection(device)
             result = []
             for command in commands:
@@ -71,20 +72,16 @@ class ScrapliBackupService(ConnectionService):
                 result = sub(
                     replacement["pattern"], replacement["replace_with"], result, flags=M
                 )
-            deferred_device = (
-                db.query("device", user=run.creator)
-                .options(load_only(getattr(vs.models["device"], self.property)))
-                .filter_by(id=device.id)
-                .one()
-            )
-            if getattr(deferred_device, self.property) != result:
-                with open(path / self.property, "w") as file:
-                    file.write(result)
-            kwargs = {"deferred_device": deferred_device, "success": True}
         except Exception:
-            result, kwargs = format_exc(), {"success": False}
-        kwargs.update({"result": result, "runtime": runtime})
-        db.try_commit(run.configuration_transaction, self.property, device, **kwargs)
+            result, kwargs["success"] = format_exc(), False
+        kwargs["result"] = result
+        with db.session_scope(remove=run.high_performance and run.in_process):
+            write_config = run.configuration_transaction(
+                self.property, device, **kwargs
+            )
+        if write_config:
+            with open(path / self.property, "w") as file:
+                file.write(result)
         if kwargs["success"]:
             run.update_configuration_properties(path, self.property, device)
             return {"success": True}
@@ -98,7 +95,11 @@ class ScrapliBackupForm(ScrapliForm):
         "Configuration Property to Update",
         choices=list(vs.configuration_properties.items()),
     )
-    local_path = StringField("Local Path", default="network_data", substitution=True)
+    local_path = StringField(
+        "Local Path",
+        default=vs.automation["configuration_backup"]["folder"],
+        substitution=True,
+    )
     commands = FieldList(FormField(CommandsForm), min_entries=12)
     replacements = FieldList(FormField(ReplacementForm), min_entries=12)
     add_header = BooleanField("Add header for each command", default=True)

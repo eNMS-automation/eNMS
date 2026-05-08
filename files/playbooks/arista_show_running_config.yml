@@ -2,22 +2,20 @@
 - name: EOS Show Commands
   hosts: all
   gather_facts: false
-  connection: local
+  connection: network_cli
 
   vars:
-    cli:
-      host: "{{ ip_address }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
-      authorize: true
-      transport: cli
+    ansible_network_os: eos
+    ansible_user: "{{ username }}"
+    ansible_password: "{{ password }}"
+    ansible_become: true
+    ansible_become_method: enable
 
   tasks:
     - name: eos show commands
       eos_command:
         commands:
           - show running-config
-        provider: "{{ cli }}"
       register: output
 
     - name: show output

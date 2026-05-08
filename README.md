@@ -18,10 +18,6 @@ a form in the UI for the script input parameters.
   - **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically with CRON.
   - **Event-driven automation**: Services and workflows can be triggered from the REST API.
 
-# Architecture
-
-[![eNMS System Overview](docs/source/_static/eNMS_overview.PNG)](https://enms.readthedocs.io/en/latest/)
-
 ___
 
 # Main features
@@ -91,23 +87,89 @@ Services can also be executed programmatically: eNMS has a REST API and a CLI in
 
 ___
 
-# Getting started
 
-## Online content
+# Open Core vs Enterprise Edition
 
-You can follow us on _[Twitter](https://twitter.com/AutomationEnms)_ or _[Linkedin](https://www.linkedin.com/company/enms-automation)_ to receive notifications about new training content and releases.
+eNMS is available in two versions: an **Open Core** version (this repository), and an **Enterprise Edition** with advanced features for production deployments.
 
-## Training Videos
+<div align="center">
 
-- _[eNMS Installation](https://www.youtube.com/watch?v=Zu2iLNaZDQc)_
-- _[Overview of eNMS](https://www.youtube.com/watch?v=XwU0yom_aY0&t=1205s)_
+| Feature | Open Core | Enterprise Edition |
+|:-------:|:---------:|:------------------:|
+| Workflow Automation | ✓ | ✓ |
+| Configuration Management | ✓ | ✓ |
+| Network Visualization | ✓ | ✓ |
+| REST API | ✓ | ✓ |
+| **Multi-User Authentication** | ✗ | ✓ |
+| **Role-Based Access Control** | ✗ | ✓ |
+| **Advanced Scheduler** | ✗ | ✓ |
+| **TACACS+ / LDAP / Duo 2FA** | ✗ | ✓ |
+| **Service Import / Export** | ✗ | ✓ |
+| **Migration Mechanism** | ✗ | ✓ |
+| **Change Revert / Audit Trail** | ✗ | ✓ |
+| **Administration Panel** | ✗ | ✓ |
+| **Production Scripts & Tools** | ✗ | ✓ |
+| **Professional Support** | ✗ | ✓ |
 
-## Podcasts
+</div>
 
-- A _[podcast about eNMS and network automation](https://www.pythonpodcast.com/enms-network-automation-episode-232/)_
+## Enterprise Edition
 
-## Quick Install
-    Install python 3.8+ (earlier versions not supported)
+The Enterprise Edition is ideal for organizations deploying eNMS in production environments where security, compliance, multi-tenancy, and professional support are critical requirements.
+
+### Security & Authentication
+
+- **Multi-User Authentication System**: Full login page with secure session management
+- **Enterprise Authentication**: Support for TACACS+, LDAP, and Duo 2FA integration
+- **Role-Based Access Control (RBAC)**: Configure granular permissions per user or group
+  - Control who can view, edit, or run specific workflows and services (per user or per team)
+  - Define access levels for devices, configurations, and network resources
+- **User & Group Management**: Comprehensive administrative interface for managing teams and permissions
+
+### Advanced Automation
+
+- **Scheduler Application**: Advanced scheduling capabilities for workflow automation
+  - Schedule with crontab expressions or specific date/time
+  - Centralized view and control of scheduled tasks (with calendar interface)
+- **Service Import / Export**: Package services and workflows as `.tgz` archives
+  - Share automation solutions between different eNMS instances
+  - Create backup archives of critical workflows
+  - Transfer workflows between dev and production environments
+- **Change Tracking & Revert**: Complete audit trail with rollback capability
+  - Every modification is logged (who changed what and when)
+  - One-click revert to any previous state
+
+### Enterprise Administration
+
+- **Administration Panel**: Centralized dashboard for system management
+  - Server health monitoring and performance metrics
+  - Worker process management and load balancing
+- **Migration Mechanism**: Seamless backup and migration mechanism for upgrading between eNMS versions
+  - Export / import your entire database in YAML or JSON format
+  - Version-controlled migrations ensure data integrity during upgrades
+- **Production Utilities**: Enterprise-grade maintenance scripts and tools
+  - Database optimization and backup management
+  - Advanced SQL debugging and log analysis
+
+### Professional Support
+
+- **Expert Technical Support**: Direct access to eNMS developers
+- **Priority Bug Fixes**: Expedited resolution of critical issues
+- **Implementation Assistance**: Help with deployment, customization, and best practices
+- **Regular Updates**: Access to security patches and feature updates
+
+**Interested in upgrading?** Visit [www.enms.io](https://www.enms.io) or contact us at [contact@enms.io](mailto:contact@enms.io) for pricing and licensing information.
+
+___
+
+# Architecture
+
+[![eNMS System Overview](docs/source/_static/eNMS_overview.PNG)](https://enms.readthedocs.io/en/latest/)
+
+___
+
+# Quick Install
+    Install python 3.12+ (earlier versions not supported)
     git clone https://github.com/afourmy/eNMS.git
     cd eNMS
     pip3 install -r build/requirements/requirements.txt

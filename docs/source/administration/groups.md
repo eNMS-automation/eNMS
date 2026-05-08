@@ -10,6 +10,8 @@ Easily synonymous with teams, `Groups` are a collection of users. `Groups` defin
 
 * **Name**: Unique identification for team name
 * **Creator**: Auto Populated field based on the user who built the team
+* **Last Modified**: The date and time when the object was last updated.
+* **Last Modified By**: The user who last updated the object.
 * **Description**: Text field for storing notes  
 * **Email**: Team email address
 * **Admin Only**: An override of `Access Control`, which prevents non-admin users from viewing or editing this object.  

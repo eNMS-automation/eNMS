@@ -165,6 +165,71 @@
     "user": ["is_admin", "groups"]
   },
   "tables": {
+    "cable": [
+      {
+        "data": "scoped_name",
+        "title": "Name",
+        "search": "text",
+        "width": "200px"
+      },
+      {
+        "data": "persistent_id",
+        "title": "Persistent ID",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "description",
+        "title": "Description",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "creation_time",
+        "title": "Creation Time",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "source_port_name",
+        "title": "Source Port",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "destination_port_name",
+        "title": "Destination Port",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "label",
+        "title": "Label",
+        "search": "text"
+      },
+      {
+        "data": "color",
+        "title": "Color",
+        "search": "text"
+      },
+      {
+        "data": "length",
+        "title": "Length",
+        "search": "text"
+      },
+      {
+        "data": "buttons",
+        "width": "130px",
+        "orderable": false,
+        "export": false
+      }
+    ],
     "device": [
       {
         "data": "name",
@@ -181,6 +246,12 @@
       {
         "data": "creator",
         "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "creation_time",
+        "title": "Creation Time",
         "search": "text",
         "visible": false
       },
@@ -355,6 +426,44 @@
         "html": true
       }
     ],
+    "json": [
+      {
+        "data": "scoped_name",
+        "title": "Name",
+        "search": "text",
+        "width": "200px"
+      },
+      {
+        "data": "persistent_id",
+        "title": "Persistent ID",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "description",
+        "title": "Description",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "creation_time",
+        "title": "Creation Time",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "buttons",
+        "width": "160px",
+        "orderable": false,
+        "export": false
+      }
+    ],
     "full_result": [
       {
         "data": "parent_runtime",
@@ -463,6 +572,12 @@
         "visible": false
       },
       {
+        "data": "creation_time",
+        "title": "Creation Time",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "last_modified",
         "title": "Last Modified",
         "search": "text",
@@ -541,6 +656,12 @@
         "visible": false
       },
       {
+        "data": "creation_time",
+        "title": "Creation Time",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "last_modified",
         "title": "Last Modified",
         "search": "text",
@@ -604,11 +725,17 @@
     "service": [
       {
         "data": "name",
-        "width": "600px",
+        "width": "500px",
         "title": "Name",
         "search": "text",
         "className": "dt-body-left",
         "html": true
+      },
+      {
+        "data": "persistent_id",
+        "title": "Persistent ID",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "type",
@@ -628,6 +755,12 @@
         "visible": false
       },
       {
+        "data": "version",
+        "title": "Version",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "vendor",
         "title": "Vendor",
         "search": "text",
@@ -643,6 +776,12 @@
         "data": "creator",
         "title": "Creator",
         "search": "text"
+      },
+      {
+        "data": "creation_time",
+        "title": "Creation Time",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "last_modified",
@@ -756,18 +895,18 @@
     ],
     "run": [
       {
-        "data": "name",
-        "title": "Name",
-        "search": "text",
-        "width": "250px",
-        "html": true
-      },
-      {
         "data": "runtime",
         "title": "Runtime",
         "search": "text",
         "width": "200px",
         "visible": false
+      },
+      {
+        "data": "name",
+        "title": "Name",
+        "search": "text",
+        "width": "250px",
+        "html": true
       },
       {
         "data": "is_async",
@@ -1054,6 +1193,24 @@
         "visible": false
       },
       {
+        "data": "creation_time",
+        "title": "Creation Time",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified_by",
+        "title": "Last Modified By",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "admin_only",
         "title": "Admin Only",
         "search": "bool",
@@ -1096,6 +1253,24 @@
         "visible": false
       },
       {
+        "data": "creation_time",
+        "title": "Creation Time",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified_by",
+        "title": "Last Modified By",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "last_scheduled_by",
         "title": "Last scheduled by",
         "search": "text",
@@ -1105,7 +1280,8 @@
         "data": "service_name",
         "title": "Service",
         "search": "text",
-        "orderable": false
+        "orderable": false,
+        "html": true
       },
       {
         "data": "status",
@@ -1159,6 +1335,13 @@
         "html": true
       },
       {
+        "data": "runs",
+        "title": "Runs",
+        "width": "100px",
+        "visible": false,
+        "html": true
+      },
+      {
         "data": "buttons",
         "width": "230px",
         "orderable": false,
@@ -1175,6 +1358,24 @@
       {
         "data": "creator",
         "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "creation_time",
+        "title": "Creation Time",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified_by",
+        "title": "Last Modified By",
         "search": "text",
         "visible": false
       },
@@ -1208,6 +1409,59 @@
         "export": false
       }
     ],
+    "snippet": [
+      {
+        "data": "category",
+        "title": "Category",
+        "search": "text"
+      },
+      {
+        "data": "name",
+        "title": "Name",
+        "search": "text",
+        "width": "200px"
+      },
+      {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "creation_time",
+        "title": "Creation Time",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified_by",
+        "title": "Last Modified By",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "description",
+        "title": "Description",
+        "search": "text"
+      },
+      {
+        "data": "version",
+        "title": "Version",
+        "search": "text"
+      },
+      {
+        "data": "buttons",
+        "width": "200px",
+        "orderable": false,
+        "export": false
+      }
+    ],
     "server": [
       {
         "data": "name",
@@ -1217,6 +1471,24 @@
       {
         "data": "creator",
         "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "creation_time",
+        "title": "Creation Time",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified_by",
+        "title": "Last Modified By",
         "search": "text",
         "visible": false
       },
@@ -1288,7 +1560,6 @@
       {
         "data": "current_runs",
         "title": "Current Runs",
-        "search": "text",
         "width": "140px"
       },
       {
@@ -1302,6 +1573,13 @@
         "title": "Runs",
         "width": "80px",
         "html": true
+      },
+      {
+        "data": "sessions",
+        "title": "Sessions",
+        "width": "80px",
+        "html": true,
+        "visible": false
       },
       {
         "data": "buttons",
@@ -1326,6 +1604,12 @@
         "data": "admin_only",
         "title": "Admin Only",
         "search": "bool",
+        "visible": false
+      },
+      {
+        "data": "creation_time",
+        "title": "Creation Time",
+        "search": "text",
         "visible": false
       },
       {
@@ -1379,15 +1663,20 @@
         "data": "author",
         "title": "Author",
         "search": "text",
-        "width": "100px",
-        "orderable": false
+        "width": "100px"
+      },
+      {
+        "data": "is_revertible",
+        "title": "Revertible",
+        "search": "bool",
+        "width": "40px",
+        "visible": false
       },
       {
         "data": "severity",
         "title": "Severity",
         "search": "text",
-        "width": "80px",
-        "orderable": false
+        "width": "80px"
       },
       {
         "data": "target_type",
@@ -1417,7 +1706,7 @@
       },
       {
         "data": "buttons",
-        "width": "50px",
+        "width": "120px",
         "orderable": false,
         "export": false
       }
@@ -1442,6 +1731,12 @@
         "search": "text"
       },
       {
+        "data": "creation_time",
+        "title": "Creation Time",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "last_modified",
         "title": "Last Modified",
         "search": "text",
@@ -1450,6 +1745,11 @@
       {
         "data": "last_updated",
         "title": "Last Updated",
+        "search": "text"
+      },
+      {
+        "data": "size",
+        "title": "Size",
         "search": "text"
       },
       {
@@ -1464,15 +1764,90 @@
         "export": false
       }
     ],
-    "secret": [
+    "port": [
       {
-        "data": "name",
+        "data": "scoped_name",
         "title": "Name",
-        "search": "text"
+        "search": "text",
+        "width": "200px"
+      },
+      {
+        "data": "persistent_id",
+        "title": "Persistent ID",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "creator",
         "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "description",
+        "title": "Description",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "creation_time",
+        "title": "Creation Time",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "device_name",
+        "title": "Device",
+        "search": "text",
+        "width": "120px",
+        "orderable": false
+      },
+      {
+        "data": "label",
+        "title": "Label",
+        "search": "text"
+      },
+      {
+        "data": "speed",
+        "title": "Speed",
+        "search": "text"
+      },
+      {
+        "data": "connected",
+        "title": "Connected",
+        "search": "bool"
+      },
+      {
+        "data": "buttons",
+        "width": "130px",
+        "orderable": false,
+        "export": false
+      }
+    ],
+    "store": [
+      {
+        "data": "scoped_name",
+        "title": "Name",
+        "className": "dt-body-left",
+        "search": "text",
+        "width": "200px",
+        "html": true
+      },
+      {
+        "data": "persistent_id",
+        "title": "Persistent ID",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "creation_time",
+        "title": "Creation Time",
         "search": "text",
         "visible": false
       },
@@ -1501,18 +1876,121 @@
         "export": false
       }
     ],
+    "secret": [
+      {
+        "data": "scoped_name",
+        "title": "Name",
+        "search": "text",
+        "width": "200px"
+      },
+      {
+        "data": "persistent_id",
+        "title": "Persistent ID",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "creation_time",
+        "title": "Creation Time",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_modified_by",
+        "title": "Last Modified By",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "description",
+        "title": "Description",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "buttons",
+        "width": "130px",
+        "orderable": false,
+        "export": false
+      }
+    ],
+    "ip_address": [
+      {
+        "data": "scoped_name",
+        "title": "Name",
+        "search": "text",
+        "width": "200px"
+      },
+      {
+        "data": "persistent_id",
+        "title": "Persistent ID",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "description",
+        "title": "Description",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "creation_time",
+        "title": "Creation Time",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "address",
+        "title": "IP Address",
+        "search": "text"
+      },
+      {
+        "data": "role",
+        "title": "Role",
+        "search": "text"
+      },
+      {
+        "data": "vrf_instance",
+        "title": "VRF Instance",
+        "search": "text"
+      },
+      {
+        "data": "buttons",
+        "width": "130px",
+        "orderable": false,
+        "export": false
+      }
+    ],
     "session": [
       {
         "data": "timestamp",
         "title": "Timestamp",
         "search": "text",
-        "width": "200px"
+        "width": "130px"
       },
       {
         "data": "device_name",
         "title": "Device",
         "search": "text",
-        "width": "150px",
+        "width": "100px",
         "orderable": false
       },
       {
@@ -1523,15 +2001,84 @@
         "orderable": false
       },
       {
+        "data": "server_name",
+        "title": "Server",
+        "search": "text",
+        "width": "100px",
+        "orderable": false
+      },
+      {
+        "data": "content",
+        "title": "Session",
+        "search": "text",
+        "width": "600px",
+        "orderable": false,
+        "html": true
+      },
+      {
         "data": "name",
         "title": "Session UUID",
         "search": "text",
         "width": "300px",
-        "orderable": false
+        "orderable": false,
+        "visible": false
       },
       {
         "data": "buttons",
-        "width": "40px",
+        "width": "80px",
+        "orderable": false,
+        "export": false
+      }
+    ],
+    "vlan": [
+      {
+        "data": "scoped_name",
+        "title": "Name",
+        "search": "text",
+        "width": "200px"
+      },
+      {
+        "data": "persistent_id",
+        "title": "Persistent ID",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "description",
+        "title": "Description",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "creation_time",
+        "title": "Creation Time",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "vlan_id",
+        "title": "VLAN ID",
+        "search": "text"
+      },
+      {
+        "data": "role",
+        "title": "Role",
+        "search": "text"
+      },
+      {
+        "data": "group",
+        "title": "Group",
+        "search": "text"
+      },
+      {
+        "data": "buttons",
+        "width": "130px",
         "orderable": false,
         "export": false
       }
@@ -1574,7 +2121,6 @@
       {
         "data": "current_runs",
         "title": "Current Runs",
-        "search": "text",
         "width": "140px"
       },
       {
@@ -1681,6 +2227,7 @@
           ["Basics", "Basics"],
           ["Dry Run", "Dry Run"],
           ["Global Variables", "Global Variables"],
+          ["Graph Traversal", "Graph Traversal"],
           ["Iteration Mechanism", "Iteration Mechanism"],
           ["Notification Mechanism", "Notification Mechanism"],
           ["Other", "Other"],
@@ -1702,13 +2249,20 @@
     }
   },
   "tables_additional": {
-    "changelog": ["history"],
+    "changelog": ["history", "target_id"],
+    "data": ["persistent_id"],
     "pool": ["device_number", "link_number"],
     "run": ["path", "server_properties", "service_properties", "worker_properties"],
-    "service": ["path", "scoped_name", "mandatory_parametrization"],
+    "service": ["builder_link", "path", "scoped_name", "mandatory_parametrization"],
     "network": ["path", "scoped_name"],
     "result": ["service_name"],
-    "task": ["frequency", "frequency_unit", "crontab_expression", "is_active"],
+    "task": [
+      "frequency",
+      "frequency_unit",
+      "crontab_expression",
+      "is_active",
+      "service_properties"
+    ],
     "worker": ["server_properties"]
   },
   "filtering": {
@@ -1721,6 +2275,7 @@
       "username",
       "priority"
     ],
+    "data": ["name", "description", "creator"],
     "device": [
       "name",
       "description",
@@ -1805,5 +2360,10 @@
       "status"
     ],
     "user": ["name", "description", "groups", "email"]
+  },
+  "update": {
+    "device": ["networks"],
+    "network": ["networks", "devices"],
+    "service": ["services", "workflows", "edges"]
   }
 }

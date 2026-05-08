@@ -22,6 +22,7 @@ class NapalmTracerouteService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "napalm_traceroute_service"}
 
+    @staticmethod
     def job(self, run, device):
         source = run.sub(run.source_ip, locals())
         destination = run.sub(run.destination_ip, locals())
@@ -44,7 +45,7 @@ class NapalmTracerouteForm(NapalmForm):
     destination_ip = StringField(substitution=True)
     source_ip = StringField(substitution=True)
     ttl = IntegerField(default=255)
-    vrf = StringField(label="VRF", substitution=True)
+    vrf = StringField(label="VRF", substitution=True, help="napalm/vrf")
     groups = {
         "Traceroute Parameters": {
             "commands": ["destination_ip", "source_ip", "timeout", "ttl", "vrf"],

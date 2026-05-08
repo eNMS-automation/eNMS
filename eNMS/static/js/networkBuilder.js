@@ -21,8 +21,10 @@ import {
   currentMode,
   currentPath,
   edges,
+  idToPid,
   instance,
   nodes,
+  pidToId,
   setPath,
   savePositions,
   showBuilderChangelogPanel,
@@ -53,11 +55,12 @@ const options = {
   },
   manipulation: {
     enabled: false,
-    addNode: function (data, callback) {},
-    addEdge: function (data, callback) {
+    addNode: function(data, callback) {}, // eslint-disable-line no-unused-vars
+    addEdge: function(data, callback) {
+      // eslint-disable-line no-unused-vars
       saveLink(data);
     },
-    deleteNode: function (data, callback) {
+    deleteNode: function(data, callback) {
       callback(data);
     },
   },
@@ -77,7 +80,7 @@ export function switchToNetwork(path, direction) {
   call({
     url: `/get_network_state/${networkId}`,
     data: { get_tree: treeIsDisplayed },
-    callback: function (result) {
+    callback: function(result) {
       network = result.network;
       localStorage.setItem("network_path", path);
       if (network) localStorage.setItem("network", JSON.stringify(network));
@@ -93,6 +96,8 @@ export function displayNetwork(result) {
   ) {
     return notify("The network contains too many nodes to be displayed.", "error", 5);
   }
+  pidToId[result.network.persistent_id] = result.network.id;
+  idToPid[result.network.id] = result.network.persistent_id;
   drawTree(null, result.tree);
   parallelLinks = {};
   graph = configureGraph(
@@ -104,7 +109,7 @@ export function displayNetwork(result) {
     },
     options
   );
-  graph.on("doubleClick", function (event) {
+  graph.on("doubleClick", function(event) {
     event.event.preventDefault();
     const node = nodes.get(this.getNodeAt(event.pointer.DOM));
     const linkId = this.getEdgeAt(event.pointer.DOM);
@@ -139,15 +144,17 @@ export function drawNetworkNode(node) {
     type: node.type,
     image: displayImage ? `/static/img/network/default/${node.icon}.gif` : undefined,
     shape: displayImage ? "image" : "ellipse",
-    x: node.positions[network.name] ? node.positions[network.name][0] : 0,
-    y: node.positions[network.name] ? node.positions[network.name][1] : 0,
+    x: network.positions?.[node.name]?.[0] ?? 0,
+    y: network.positions?.[node.name]?.[1] ?? 0,
   };
 }
 
 export function updateNetworkPanel(type) {
   if (currentMode == "motion" && creationMode == "create_device") {
     $(`#${type}-networks`).append(new Option(network.name, network.name));
-    $(`#${type}-networks`).val(network.name).trigger("change");
+    $(`#${type}-networks`)
+      .val(network.name)
+      .trigger("change");
   }
 }
 
@@ -218,7 +225,7 @@ function addObjectsToNetwork() {
   call({
     url: `/add_objects_to_network/${network.id}`,
     form: "add_to_network-form",
-    callback: function (result) {
+    callback: function(result) {
       document.body.style.cursor = "progress";
       result.devices.map((node) => nodes.update(drawNetworkNode(node)));
       result.links.map((link) => edges.update(drawNetworkEdge(link)));
@@ -267,7 +274,7 @@ function displayNetworkState(state) {
   );
   if (!state.highlight) return;
   nodes.update(
-    state.highlight.map(nodeId => {
+    state.highlight.map((nodeId) => {
       if (!nodes.get(nodeId)) return;
       const icon = nodes.get(nodeId).icon;
       const image = `/static/img/network/red/${icon}.gif`;
@@ -277,7 +284,7 @@ function displayNetworkState(state) {
 }
 
 export function getNetworkState(periodic, first) {
-  if (userIsActive && network?.id && !first) {
+  if (userIsActive && document.hasFocus() && network?.id && !first) {
     call({
       url: `/get_network_state/${currentPath}`,
       data: {
@@ -286,7 +293,8 @@ export function getNetworkState(periodic, first) {
         search_mode: $("#tree-search-mode").val(),
         search_value: $("#tree-search").val(),
       },
-      callback: function (result) {
+      callback: function(result) {
+        if (!instance) return;
         if (result.network.last_modified > instance.last_modified) {
           instance.last_modified = result.network.last_modified;
           displayNetwork(result);

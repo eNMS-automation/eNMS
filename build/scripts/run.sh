@@ -20,7 +20,7 @@ function run() {
   if [[ -n "$path" ]]; then cd $path; fi
   if [ "$scheduler" = true ]; then
     cd scheduler
-    export ENMS_ADDR="http://192.168.56.101:5000"
+    export ENMS_ADDR="http://192.168.64.2:5000"
     export ENMS_USER="admin"
     export ENMS_PASSWORD="admin"
     gunicorn --config gunicorn.py scheduler:scheduler
@@ -30,9 +30,9 @@ function run() {
     export REDIS_ADDR="127.0.0.1"
   fi
   export SERVER_NAME="eNMS Server"
-  export SERVER_ADDR="192.168.56.101"
-  export SERVER_URL="http://192.168.56.101:5000"
-  export SCHEDULER_ADDR="http://192.168.56.102:5000"
+  export SERVER_ADDR="192.168.64.2"
+  export SERVER_URL="http://192.168.64.2:5000"
+  export SCHEDULER_ADDR="http://192.168.64.2:5001"
   export LDAP_ADDR="192.168.56.104"
   export TACACS_ADDR="192.168.56.104"
   export TACACS_PASSWORD="testing123"
@@ -56,6 +56,7 @@ function run() {
     elif [ "$database" = "pgsql" ]; then
       sudo -u postgres psql -c "DROP DATABASE enms"
       sudo -u postgres psql -c "CREATE DATABASE enms;"
+      sudo -u postgres psql -c "ALTER DATABASE enms OWNER TO root;"
     elif [ "$database" = "mariadb" ]; then
       mysql -u root -e "DROP DATABASE IF EXISTS enms;"
       mysql -u root -e "CREATE DATABASE enms;"
@@ -63,16 +64,20 @@ function run() {
       rm /$HOME/database.db
     fi
   fi
-  if [ "$gunicorn" = true ]; then
+  if [ "$file_watcher" = true ]; then
+    export FILE_WATCHER=1
+    python3 app.py
+  elif [ "$gunicorn" = true ]; then
     gunicorn --config gunicorn.py app:app
   else
     python3 -m flask run -h 0.0.0.0 --no-reload
   fi
 }
 
-while getopts h?grqstvp:d: opt; do
+while getopts h?fgrqstvp:d: opt; do
     case "$opt" in
       d) database=$OPTARG;;
+      f) file_watcher=true;;
       g) gunicorn=true;;
       p) path=$OPTARG;;
       r) reload=true;;

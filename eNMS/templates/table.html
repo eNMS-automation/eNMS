@@ -1,19 +1,21 @@
 {% extends "base_site.html" %} {% block stylesheets %} {{ super() }} {% endblock
 stylesheets %} {% block left_frame %}
-<form id="search-form-{{ type }}" style="padding: 12px 17px; width: 100%">
-  <div id="tooltip-overlay" class="overlay"></div>
-  <nav
-    id="controls-{{ type }}"
-    class="navbar navbar-default nav-controls"
-    role="navigation"
-  ></nav>
-  <table
-    id="table-{{ type }}"
-    style="margin-top: 10px"
-    class="table table-striped table-bordered table-hover add-id"
-    cellspacing="0"
-    width="100%"
-  ></table>
-</form>
+<div id="table-div" style="width: 100%; height: 100%">
+  <form id="search-form-{{ type }}" style="padding: 12px 17px; width: 100%">
+    <div id="tooltip-overlay" class="overlay"></div>
+    <nav
+      id="controls-{{ type }}"
+      class="navbar navbar-default nav-controls"
+      role="navigation"
+    ></nav>
+    <table
+      id="table-{{ type }}"
+      style="margin-top: 10px"
+      class="table table-striped table-bordered table-hover add-id"
+      cellspacing="0"
+      width="100%"
+    ></table>
+  </form>
+</div>
 {% endblock left_frame %} {% block javascripts %} {{ super() }} {% endblock javascripts
 %}

@@ -1,0 +1,982 @@
+[
+    [
+        "(R) Ansible Playbook Service",
+        "Chicago"
+    ],
+    [
+        "(R) Ansible Playbook Service",
+        "Washington"
+    ],
+    [
+        "(R) Combined Device & Target Iteration",
+        "Austin"
+    ],
+    [
+        "(R) Combined Device & Target Iteration",
+        "Washington"
+    ],
+    [
+        "(R) Configuration Properties Backup Services",
+        "Washington"
+    ],
+    [
+        "(R) Credentials (Password & Key, Priority Mechanism)",
+        "Washington"
+    ],
+    [
+        "(R) Dictionary as Iteration Target Variable",
+        "Washington"
+    ],
+    [
+        "(R) Dry Run: Results modified in Postprocessing",
+        "Router 1"
+    ],
+    [
+        "(R) Dry Run: Results modified in Postprocessing",
+        "Washington"
+    ],
+    [
+        "(R) Fork based on Success Value",
+        "Dummy1"
+    ],
+    [
+        "(R) Fork based on Success Value",
+        "Dummy2"
+    ],
+    [
+        "(R) Fork based on Success Value",
+        "Washington"
+    ],
+    [
+        "(R) Function: get_connection",
+        "Washington"
+    ],
+    [
+        "(R) Function: get_credential",
+        "Austin"
+    ],
+    [
+        "(R) Function: get_credential",
+        "PaloAlto"
+    ],
+    [
+        "(R) Function: get_credential",
+        "Washington"
+    ],
+    [
+        "(R) Functions: factory, fetch, fetch_all, encrypt and get_result",
+        "PaloAlto"
+    ],
+    [
+        "(R) Functions: factory, fetch, fetch_all, encrypt and get_result",
+        "Washington"
+    ],
+    [
+        "(R) Functions: get_var, set_var, and get_result",
+        "Chicago"
+    ],
+    [
+        "(R) Functions: get_var, set_var, and get_result",
+        "Washington"
+    ],
+    [
+        "(R) Generic File Transfer Service",
+        "Washington"
+    ],
+    [
+        "(R) Labels and Custom Property",
+        "Dallas"
+    ],
+    [
+        "(R) Labels and Custom Property",
+        "SanDiego"
+    ],
+    [
+        "(R) Multiple parallel connections to same device",
+        "Washington"
+    ],
+    [
+        "(R) NAPALM Configuration and Rollback Services",
+        "Washington"
+    ],
+    [
+        "(R) NCClient Netconf Service",
+        "Washington"
+    ],
+    [
+        "(R) Named Credential Mechanism",
+        "Washington"
+    ],
+    [
+        "(R) Napalm Getters Service",
+        "Baltimore"
+    ],
+    [
+        "(R) Napalm Getters Service",
+        "Washington"
+    ],
+    [
+        "(R) Netmiko Configuration and Validation Services",
+        "Austin"
+    ],
+    [
+        "(R) Netmiko Configuration with Jinja2 template",
+        "Washington"
+    ],
+    [
+        "(R) Netmiko File Transfer Service",
+        "Washington"
+    ],
+    [
+        "(R) Netmiko Prompts Service",
+        "Washington"
+    ],
+    [
+        "(R) Netmiko Validation with TextFSM Option",
+        "Washington"
+    ],
+    [
+        "(R) Payload Extraction & Validation",
+        "Washington"
+    ],
+    [
+        "(R) Payload Extraction with Operations",
+        "Washington"
+    ],
+    [
+        "(R) Scrapli Netconf Service",
+        "Washington"
+    ],
+    [
+        "(R) Scrapli Service",
+        "Washington"
+    ],
+    [
+        "(R) Scrapli and Netmiko Multiple Commands and Jinja2",
+        "Washington"
+    ],
+    [
+        "(R) Shared Service in Multiple Subworkflows",
+        "PaloAlto"
+    ],
+    [
+        "Colored Per-Device Display based on Results",
+        "Austin"
+    ],
+    [
+        "Colored Per-Device Display based on Results",
+        "Washington"
+    ],
+    [
+        "Conditional Skip Query in Failed and Discard Modes",
+        "Austin"
+    ],
+    [
+        "Conditional Skip Query in Failed and Discard Modes",
+        "PaloAlto"
+    ],
+    [
+        "Conditional Skip Query in Failed and Discard Modes",
+        "Washington"
+    ],
+    [
+        "Conditional Skip Query in Failed and Discard Modes",
+        "router5"
+    ],
+    [
+        "Conditional Skip Query in Failed and Discard Modes",
+        "router6"
+    ],
+    [
+        "Conditional Skip Query in Failed and Discard Modes",
+        "router7"
+    ],
+    [
+        "Connect to Router with Device Credentials",
+        "Washington"
+    ],
+    [
+        "Data Extraction Service",
+        "PaloAlto"
+    ],
+    [
+        "Device Iteration",
+        "Dallas"
+    ],
+    [
+        "Device Iteration",
+        "SanDiego"
+    ],
+    [
+        "Dry Run: Email, Mattermost and Slack Notification Services",
+        "Router 1"
+    ],
+    [
+        "Dry Run: File Transfer, Ansible, Git and REST Services",
+        "Router 1"
+    ],
+    [
+        "Dry Run: Napalm Services",
+        "Router 1"
+    ],
+    [
+        "Dry Run: Netmiko Services",
+        "Router 1"
+    ],
+    [
+        "Dry Run: Parameterized Form Dry Run",
+        "Router 1"
+    ],
+    [
+        "Dry Run: Scrapli Services",
+        "Router 1"
+    ],
+    [
+        "Dry Run: Subservice and Subworkflow level Dry Run",
+        "Router 1"
+    ],
+    [
+        "Dry Run: Top-level Workflow Dry Run",
+        "Router 1"
+    ],
+    [
+        "Dry Run: Topology Import, Netconf, and Ping Services",
+        "Router 1"
+    ],
+    [
+        "Dry Run: Unix Command, Unix Shell and Python Snippet Services",
+        "Router 1"
+    ],
+    [
+        "DxD and SxS Run Methods",
+        "Austin"
+    ],
+    [
+        "DxD and SxS Run Methods",
+        "Washington"
+    ],
+    [
+        "Fork based on value with Skip Discard Mechanism",
+        "Austin"
+    ],
+    [
+        "Fork based on value with Skip Discard Mechanism",
+        "Baltimore"
+    ],
+    [
+        "Fork based on value with Skip Discard Mechanism",
+        "Cambridge"
+    ],
+    [
+        "Fork based on value with Skip Discard Mechanism",
+        "Cincinnati"
+    ],
+    [
+        "Fork based on value with Skip Discard Mechanism",
+        "Washington"
+    ],
+    [
+        "Functions: get_result and Restart Run with recursive access to previous results",
+        "Austin"
+    ],
+    [
+        "Functions: get_result and Restart Run with recursive access to previous results",
+        "Chicago"
+    ],
+    [
+        "Functions: get_result and Restart Run with recursive access to previous results",
+        "PaloAlto"
+    ],
+    [
+        "Functions: get_result and Restart Run with recursive access to previous results",
+        "Washington"
+    ],
+    [
+        "Functions: get_result and get_var",
+        "Austin"
+    ],
+    [
+        "Functions: get_result and get_var",
+        "Washington"
+    ],
+    [
+        "GET Endpoints is_alive, configuration and instance",
+        "Washington"
+    ],
+    [
+        "GET Endpoints query and token",
+        "Washington"
+    ],
+    [
+        "Global Variables: get_data (Data Store)",
+        "Washington"
+    ],
+    [
+        "Global Variables: trigger and user",
+        "Washington"
+    ],
+    [
+        "Global Variables: try_set, try_commit, and get_secret",
+        "Router 2"
+    ],
+    [
+        "HTML Reports with Jinja2 Templates",
+        "Austin"
+    ],
+    [
+        "HTML Reports with Jinja2 Templates",
+        "Jackson"
+    ],
+    [
+        "HTML Reports with Jinja2 Templates",
+        "PaloAlto"
+    ],
+    [
+        "Interaction of Restart Mechanism and Superworkflow",
+        "Dallas"
+    ],
+    [
+        "Interaction of Restart Mechanism and Superworkflow",
+        "SanDiego"
+    ],
+    [
+        "Interaction of Restart Mechanism and Superworkflow",
+        "SanJose"
+    ],
+    [
+        "Large Payload",
+        "Austin"
+    ],
+    [
+        "Large Payload",
+        "Chicago"
+    ],
+    [
+        "Large Payload",
+        "Dallas"
+    ],
+    [
+        "Large Payload",
+        "Jackson"
+    ],
+    [
+        "Large Payload",
+        "LosAngeles"
+    ],
+    [
+        "Large Payload",
+        "PaloAlto"
+    ],
+    [
+        "Large Payload",
+        "Philadelphia"
+    ],
+    [
+        "Large Payload",
+        "SanDiego"
+    ],
+    [
+        "Large Payload",
+        "SanJose"
+    ],
+    [
+        "Large Payload",
+        "Washington"
+    ],
+    [
+        "Large Results",
+        "Austin"
+    ],
+    [
+        "Large Results",
+        "Chicago"
+    ],
+    [
+        "Large Results",
+        "Dallas"
+    ],
+    [
+        "Large Results",
+        "Jackson"
+    ],
+    [
+        "Large Results",
+        "LosAngeles"
+    ],
+    [
+        "Large Results",
+        "PaloAlto"
+    ],
+    [
+        "Large Results",
+        "Philadelphia"
+    ],
+    [
+        "Large Results",
+        "SanDiego"
+    ],
+    [
+        "Large Results",
+        "SanJose"
+    ],
+    [
+        "Large Results",
+        "Washington"
+    ],
+    [
+        "Large Workflow (30 Netmiko Services)",
+        "Washington"
+    ],
+    [
+        "Large Workflow (30 services)",
+        "Austin"
+    ],
+    [
+        "Link Neighbors Mechanism (device.get_neighbors function)",
+        "Dallas"
+    ],
+    [
+        "Mail Notifications",
+        "Austin"
+    ],
+    [
+        "Mail Notifications",
+        "PaloAlto"
+    ],
+    [
+        "Mail Notifications",
+        "Washington"
+    ],
+    [
+        "Multiprocessing in DxD mode",
+        "Austin"
+    ],
+    [
+        "Multiprocessing in DxD mode",
+        "Baltimore"
+    ],
+    [
+        "Multiprocessing in DxD mode",
+        "Chicago"
+    ],
+    [
+        "Multiprocessing in DxD mode",
+        "Cincinnati"
+    ],
+    [
+        "Multiprocessing in DxD mode",
+        "Cleveland"
+    ],
+    [
+        "Multiprocessing in DxD mode",
+        "Dallas"
+    ],
+    [
+        "Multiprocessing in DxD mode",
+        "Denver"
+    ],
+    [
+        "Multiprocessing in DxD mode",
+        "Houston"
+    ],
+    [
+        "Multiprocessing in DxD mode",
+        "Jackson"
+    ],
+    [
+        "Multiprocessing in DxD mode",
+        "Minneapolis"
+    ],
+    [
+        "Multiprocessing in DxD mode",
+        "Oakland"
+    ],
+    [
+        "Multiprocessing in DxD mode",
+        "PaloAlto"
+    ],
+    [
+        "Multiprocessing in DxD mode",
+        "Sacramento"
+    ],
+    [
+        "Multiprocessing in DxD mode",
+        "SanDiego"
+    ],
+    [
+        "Multiprocessing in DxD mode",
+        "SanFrancisco"
+    ],
+    [
+        "Multiprocessing in DxD mode",
+        "SanJose"
+    ],
+    [
+        "Multiprocessing in DxD mode",
+        "Washington"
+    ],
+    [
+        "Open File Descriptors Leak (public)",
+        "Baltimore"
+    ],
+    [
+        "Open File Descriptors Leak (public)",
+        "Boston"
+    ],
+    [
+        "Open File Descriptors Leak (public)",
+        "Cambridge"
+    ],
+    [
+        "Open File Descriptors Leak (public)",
+        "Chicago"
+    ],
+    [
+        "Open File Descriptors Leak (public)",
+        "Cincinnati"
+    ],
+    [
+        "Open File Descriptors Leak (public)",
+        "Cleveland"
+    ],
+    [
+        "Open File Descriptors Leak (public)",
+        "Columbus"
+    ],
+    [
+        "Optional Remediation Branch",
+        "Austin"
+    ],
+    [
+        "Optional Remediation Branch",
+        "Jackson"
+    ],
+    [
+        "Optional Remediation Branch",
+        "PaloAlto"
+    ],
+    [
+        "Optional Remediation Branch",
+        "Washington"
+    ],
+    [
+        "Outgoing Edge Mechanism",
+        "Dummy1"
+    ],
+    [
+        "Outgoing Edge Mechanism",
+        "Dummy2"
+    ],
+    [
+        "Outgoing Edge Mechanism",
+        "Dummy3"
+    ],
+    [
+        "Outgoing Edge Mechanism",
+        "Dummy4"
+    ],
+    [
+        "Outgoing Edge Mechanism",
+        "Dummy5"
+    ],
+    [
+        "Outgoing Edge Mechanism",
+        "Dummy6"
+    ],
+    [
+        "POST Endpoint search",
+        "Washington"
+    ],
+    [
+        "Parameterized Run with a Superworkflow",
+        "Austin"
+    ],
+    [
+        "Parameterized Run with a Superworkflow",
+        "PaloAlto"
+    ],
+    [
+        "Parameterized Targets",
+        "Austin"
+    ],
+    [
+        "Payload Recursive Conservation with Restart Mechanism",
+        "Chicago"
+    ],
+    [
+        "Payload Recursive Conservation with Restart Mechanism",
+        "Jackson"
+    ],
+    [
+        "Preprocessing and Postprocessing Mechanisms",
+        "Chicago"
+    ],
+    [
+        "Preprocessing and Postprocessing Mechanisms",
+        "Washington"
+    ],
+    [
+        "Priority Mechanism",
+        "PaloAlto"
+    ],
+    [
+        "Rest Call Service: Substitution Type Mechanism",
+        "Washington"
+    ],
+    [
+        "Runtime Notes Mechanism",
+        "Washington"
+    ],
+    [
+        "Skip Query with device in Run Once Mode",
+        "Austin"
+    ],
+    [
+        "Skip Query with device in Run Once Mode",
+        "PaloAlto"
+    ],
+    [
+        "Skip Query with device in Run Once Mode",
+        "Washington"
+    ],
+    [
+        "Skip in SxS with WF targets mode",
+        "Austin"
+    ],
+    [
+        "Skip in SxS with WF targets mode",
+        "PaloAlto"
+    ],
+    [
+        "Skip in SxS with WF targets mode",
+        "Washington"
+    ],
+    [
+        "Skip, Discard and Disable Result Creation Mechanism",
+        "Austin"
+    ],
+    [
+        "Skip, Discard and Disable Result Creation Mechanism",
+        "PaloAlto"
+    ],
+    [
+        "Skip, Discard and Disable Result Creation Mechanism",
+        "Washington"
+    ],
+    [
+        "Slack and Mattermost Notifications",
+        "Jackson"
+    ],
+    [
+        "Slack and Mattermost Notifications",
+        "PaloAlto"
+    ],
+    [
+        "Specific Superworkflow",
+        "SanDiego"
+    ],
+    [
+        "Specific Superworkflow",
+        "SanJose"
+    ],
+    [
+        "Target Restriction Mechanism",
+        "Boston"
+    ],
+    [
+        "Target Restriction Mechanism",
+        "Washington"
+    ],
+    [
+        "Text Reports with Normal Templates",
+        "Austin"
+    ],
+    [
+        "Text Reports with Normal Templates",
+        "Jackson"
+    ],
+    [
+        "Text Reports with Normal Templates",
+        "PaloAlto"
+    ],
+    [
+        "Validation Mechanism",
+        "Chicago"
+    ],
+    [
+        "Workflow and Subworkflow Iteration",
+        "Washington"
+    ],
+    [
+        "[(R) Ansible Playbook Service] Ansible Workflow: Arista show version",
+        "Washington"
+    ],
+    [
+        "[(R) Combined Device & Target Iteration] Iteration Target Workflow - Test 2",
+        "Austin"
+    ],
+    [
+        "[(R) Combined Device & Target Iteration] Iteration Target Workflow - Test 2",
+        "Washington"
+    ],
+    [
+        "[(R) Combined Device & Target Iteration] Iteration Targets Workflow - Test 1",
+        "Austin"
+    ],
+    [
+        "[(R) Combined Device & Target Iteration] Iteration Targets Workflow - Test 1",
+        "Washington"
+    ],
+    [
+        "[(R) Functions: get_var, set_var, and get_result] Modify payload (per device)",
+        "Chicago"
+    ],
+    [
+        "[(R) Functions: get_var, set_var, and get_result] Modify payload (per device)",
+        "Washington"
+    ],
+    [
+        "[(R) Gateway Mechanism (SSH Proxy with Netmiko)] Both",
+        "Router behind Gateway 1"
+    ],
+    [
+        "[(R) Gateway Mechanism (SSH Proxy with Netmiko)] Both",
+        "Router behind Gateway 1, 2 and 3"
+    ],
+    [
+        "[(R) Gateway Mechanism (SSH Proxy with Netmiko)] Gateway 1",
+        "Router behind Gateway 1"
+    ],
+    [
+        "[(R) Gateway Mechanism (SSH Proxy with Netmiko)] Gateway 3, 2 then 1",
+        "Router behind Gateway 1, 2 and 3"
+    ],
+    [
+        "[(R) Gateway Mechanism (SSH Proxy with Scrapli)] Both",
+        "Router behind Gateway 1"
+    ],
+    [
+        "[(R) Gateway Mechanism (SSH Proxy with Scrapli)] Both",
+        "Router behind Gateway 1, 2 and 3"
+    ],
+    [
+        "[(R) Gateway Mechanism (SSH Proxy with Scrapli)] Gateway 1",
+        "Router behind Gateway 1"
+    ],
+    [
+        "[(R) Gateway Mechanism (SSH Proxy with Scrapli)] Gateway 3, 2 then 1",
+        "Router behind Gateway 1, 2 and 3"
+    ],
+    [
+        "[(R) Generic File Transfer Service] Delete all transferred files",
+        "Washington"
+    ],
+    [
+        "[(R) Generic File Transfer Service] Transfer bc.bin and bd.bin with glob option",
+        "Washington"
+    ],
+    [
+        "[(R) Netmiko Configuration and Validation Services] netmiko_check_vrf_test",
+        "Austin"
+    ],
+    [
+        "[(R) Netmiko Configuration and Validation Services] netmiko_check_vrf_test",
+        "Washington"
+    ],
+    [
+        "[(R) Netmiko Configuration and Validation Services] netmiko_create_vrf_test",
+        "Austin"
+    ],
+    [
+        "[(R) Netmiko Configuration and Validation Services] netmiko_create_vrf_test",
+        "Washington"
+    ],
+    [
+        "[(R) Netmiko Configuration and Validation Services] netmiko_delete_vrf_test",
+        "Austin"
+    ],
+    [
+        "[(R) Netmiko Configuration and Validation Services] netmiko_delete_vrf_test",
+        "Washington"
+    ],
+    [
+        "[(R) Netmiko Prompts Service] Test Netmiko Prompt Service",
+        "Washington"
+    ],
+    [
+        "[(R) Unix Command & Chell, Ping Service, Jump on Connect mechanism] Ping Washington",
+        "Washington"
+    ],
+    [
+        "[(R) Unix Command & Chell, Ping Service, Jump on Connect mechanism] Unix command: ps -ef | grep test",
+        "LosAngeles"
+    ],
+    [
+        "[(R) Unix Command & Chell, Ping Service, Jump on Connect mechanism] Unix command: ps -ef | grep test",
+        "Washington"
+    ],
+    [
+        "[(R) Unix Command & Chell, Ping Service, Jump on Connect mechanism] Unix shell: ping eNMS server from remote server",
+        "Server 2"
+    ],
+    [
+        "[(R) Unix Command & Chell, Ping Service, Jump on Connect mechanism] Validation: jump on server 2 from Washington",
+        "Washington"
+    ],
+    [
+        "[Deletion and Cascade Deletion] Service1",
+        "SanJose"
+    ],
+    [
+        "[Deletion and Cascade Deletion] Service2",
+        "router14"
+    ],
+    [
+        "[Deletion and Cascade Deletion] Service2",
+        "router15"
+    ],
+    [
+        "[Functions: get_result and get_var] After Run Once",
+        "Austin"
+    ],
+    [
+        "[Functions: get_result and get_var] After Run Once",
+        "Washington"
+    ],
+    [
+        "[Functions: get_result and get_var] After Run Per Device",
+        "Austin"
+    ],
+    [
+        "[Functions: get_result and get_var] After Run Per Device",
+        "Washington"
+    ],
+    [
+        "[Functions: get_result and get_var] Before Run Once",
+        "Austin"
+    ],
+    [
+        "[Functions: get_result and get_var] Before Run Once",
+        "Washington"
+    ],
+    [
+        "[Functions: get_result and get_var] Before Run Per Device",
+        "Austin"
+    ],
+    [
+        "[Functions: get_result and get_var] Before Run Per Device",
+        "Washington"
+    ],
+    [
+        "[Functions: get_result and get_var] Subworkflow",
+        "Austin"
+    ],
+    [
+        "[Functions: get_result and get_var] Subworkflow",
+        "Washington"
+    ],
+    [
+        "[Shared] Example Service (does nothing)",
+        "Washington"
+    ],
+    [
+        "[Shared] NAPALM: Get Facts",
+        "Austin"
+    ],
+    [
+        "[Shared] NAPALM: Get Facts",
+        "Washington"
+    ],
+    [
+        "[Shared] NAPALM: Get interfaces",
+        "Austin"
+    ],
+    [
+        "[Shared] NAPALM: Get interfaces",
+        "Washington"
+    ],
+    [
+        "[Shared] Netmiko: Check VRF (Telecom1) does not exist",
+        "Austin"
+    ],
+    [
+        "[Shared] Netmiko: Check VRF (Telecom1) does not exist",
+        "Philadelphia"
+    ],
+    [
+        "[Shared] Netmiko: Check VRF (Telecom1) does not exist",
+        "Washington"
+    ],
+    [
+        "[Shared] REST API: call *is_alive* endpoint",
+        "Columbus"
+    ],
+    [
+        "[Skip in SxS with service targets and Run Once services] Once per device",
+        "Austin"
+    ],
+    [
+        "[Skip in SxS with service targets and Run Once services] Once per device",
+        "Chicago"
+    ],
+    [
+        "[Skip in SxS with service targets and Run Once services] Once per device",
+        "PaloAlto"
+    ],
+    [
+        "[Skip in SxS with service targets and Run Once services] Once per device",
+        "Washington"
+    ],
+    [
+        "[Skip in SxS with service targets and Run Once services] Skip Query",
+        "Dallas"
+    ],
+    [
+        "[Skip in SxS with service targets and Run Once services] Skip Query",
+        "NewYork"
+    ],
+    [
+        "[Skip in SxS with service targets and Run Once services] Skip Query",
+        "SanDiego"
+    ],
+    [
+        "[Skip in SxS with service targets and Run Once services] Skip Query",
+        "Washington"
+    ],
+    [
+        "[Specific Superworkflow] REST API: call to placeholder property",
+        "Columbus"
+    ],
+    [
+        "[Target Restriction Mechanism] Direct Target",
+        "Boston"
+    ],
+    [
+        "[Target Restriction Mechanism] Direct Target",
+        "Washington"
+    ],
+    [
+        "[Target Restriction Mechanism] Iteration Targets",
+        "Boston"
+    ],
+    [
+        "[Target Restriction Mechanism] Iteration Targets",
+        "Washington"
+    ],
+    [
+        "[[DxD and SxS Run Methods] Workflow in service targets mode] Validation show VRF",
+        "LosAngeles"
+    ],
+    [
+        "[[DxD and SxS Run Methods] Workflow in service targets mode] Validation show VRF",
+        "Philadelphia"
+    ],
+    [
+        "[[Functions: get_result and get_var] Subworkflow] Subservice",
+        "Austin"
+    ],
+    [
+        "[[Functions: get_result and get_var] Subworkflow] Subservice",
+        "Washington"
+    ]
+]

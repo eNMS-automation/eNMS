@@ -16,8 +16,8 @@ from sqlalchemy import (
     Column,
     create_engine,
     event,
-    ForeignKey,
     Float,
+    ForeignKey,
     inspect,
     Integer,
     PickleType,
@@ -25,7 +25,7 @@ from sqlalchemy import (
     Table,
     Text,
 )
-from sqlalchemy.dialects.mysql.base import MSMediumBlob
+from sqlalchemy.dialects.mysql.base import LONGTEXT, MEDIUMTEXT, MSMediumBlob
 from sqlalchemy.exc import IntegrityError, InvalidRequestError, OperationalError
 from sqlalchemy.ext.associationproxy import AssociationProxyExtensionType
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
@@ -39,7 +39,7 @@ from sqlalchemy.orm import (
 from sqlalchemy.orm.collections import InstrumentedList
 from sqlalchemy.types import JSON
 from time import sleep
-from traceback import format_exc
+from traceback import extract_stack, format_exc
 from uuid import getnode
 
 from eNMS.variables import vs
@@ -86,7 +86,7 @@ class Database:
             error(f"Error during metadata creation (PID {getpid()}):\n{format_exc()}")
         configure_mappers()
         self.configure_model_events(env)
-        if env.detect_cli():
+        if env.detect_cli() or env.file_watcher:
             return
         first_init = not self.fetch("user", allow_none=True, rbac=None, name="admin")
         if first_init:
@@ -143,23 +143,105 @@ class Database:
         self.session.commit()
         return first_init
 
-    def create_metabase(self):
-        class SubDeclarativeMeta(DeclarativeMeta):
-            def __init__(cls, *args):  # noqa: N805
-                DeclarativeMeta.__init__(cls, *args)
-                if hasattr(cls, "database_init") and "database_init" in cls.__dict__:
-                    cls.database_init()
-                self.set_custom_properties(cls)
-                self.set_rbac_properties(cls)
+    def cleanup(self):
+        self.engine.dispose()
 
-        return SubDeclarativeMeta
-
-    @staticmethod
-    def dict_conversion(input):
-        try:
-            return literal_eval(input)
-        except Exception:
-            return loads(input)
+    def configure_associations(self):
+        self.associations = {}
+        for name, association in self.relationships["associations"].items():
+            model1, model2 = association["model1"], association["model2"]
+            table = Table(
+                f"{name}_association",
+                self.base.metadata,
+                Column(
+                    model1["column"],
+                    Integer,
+                    ForeignKey(
+                        f"{model1['foreign_key']}.id", **model1.get("kwargs", {})
+                    ),
+                    primary_key=True,
+                ),
+                Column(
+                    model2["column"],
+                    Integer,
+                    ForeignKey(
+                        f"{model2['foreign_key']}.id", **model2.get("kwargs", {})
+                    ),
+                    primary_key=True,
+                ),
+            )
+            setattr(self, f"{name}_table", table)
+            self.associations[f"{name}_table"] = {"table": table, **association}
+        for model, properties in vs.rbac["rbac_models"].items():
+            table = Table(
+                f"{model}_owner_association",
+                self.base.metadata,
+                Column(
+                    f"{model}_id",
+                    Integer,
+                    ForeignKey(f"{model}.id"),
+                    primary_key=True,
+                ),
+                Column("user_id", Integer, ForeignKey("user.id"), primary_key=True),
+            )
+            association = {
+                "model1": {"foreign_key": model},
+                "model2": {"foreign_key": "user"},
+            }
+            self.associations[f"{model}_owner_table"] = {"table": table, **association}
+            setattr(self, f"{model}_owner_table", table)
+            for property in properties:
+                table = Table(
+                    f"{model}_{property}_association",
+                    self.base.metadata,
+                    Column(
+                        f"{model}_id",
+                        Integer,
+                        ForeignKey(f"{model}.id"),
+                        primary_key=True,
+                    ),
+                    Column(
+                        "group_id",
+                        Integer,
+                        ForeignKey("group.id"),
+                        primary_key=True,
+                    ),
+                )
+                association = {
+                    "model1": {"foreign_key": model},
+                    "model2": {"foreign_key": "group"},
+                }
+                self.associations[f"{model}_{property}_table"] = {
+                    "table": table,
+                    **association,
+                }
+                setattr(self, f"{model}_{property}_table", table)
+        for property in vs.rbac["rbac_models"]["device"]:
+            table = Table(
+                f"pool_group_{property}_association",
+                self.base.metadata,
+                Column(
+                    "pool_id",
+                    Integer,
+                    ForeignKey("pool.id"),
+                    primary_key=True,
+                ),
+                Column(
+                    "group_id",
+                    Integer,
+                    ForeignKey("group.id"),
+                    primary_key=True,
+                ),
+            )
+            association = {
+                "model1": {"foreign_key": "pool"},
+                "model2": {"foreign_key": "group"},
+            }
+            self.associations[f"pool_group_{property}_table"] = {
+                "table": table,
+                **association,
+            }
+            setattr(self, f"pool_group_{property}_table", table)
 
     def configure_columns(self):
         class CustomPickleType(PickleType):
@@ -172,8 +254,12 @@ class Database:
         if self.dialect == "postgresql":
             self.LargeString = self.MediumString = Text
         else:
-            self.LargeString = Text(self.columns["length"]["large_string"])
-            self.MediumString = Text(self.columns["length"]["medium_string"])
+            self.LargeString = Text(
+                self.columns["length"]["large_string"]
+            ).with_variant(LONGTEXT, "mysql", "mariadb")
+            self.MediumString = Text(
+                self.columns["length"]["medium_string"]
+            ).with_variant(MEDIUMTEXT, "mysql", "mariadb")
         self.SmallString = String(self.columns["length"]["small_string"])
         self.TinyString = String(self.columns["length"]["tiny_string"])
 
@@ -243,7 +329,11 @@ class Database:
 
         @event.listens_for(self.base, "after_insert", propagate=True)
         def log_instance_creation(mapper, connection, target):
-            if not getattr(target, "log_change", True) or not env.log_events:
+            if (
+                not getattr(target, "log_change", True)
+                or not env.log_events
+                or connection.info.get("ignore")
+            ):
                 return
             if hasattr(target, "name") and target.type != "run":
                 properties = target.get_properties(logging=True)
@@ -252,14 +342,18 @@ class Database:
 
         @event.listens_for(self.base, "before_delete", propagate=True)
         def log_instance_deletion(mapper, connection, target):
-            if not getattr(target, "log_change", True) or not env.log_events:
+            if (
+                not getattr(target, "log_change", True)
+                or not env.log_events
+                or connection.info.get("ignore")
+            ):
                 return
             name = getattr(target, "name", str(target))
             env.log("info", f"DELETION: {target.type} '{name}'")
 
         @event.listens_for(self.base, "before_update", propagate=True)
         def log_instance_update(mapper, connection, target):
-            if not env.log_events:
+            if not env.log_events or connection.info.get("ignore"):
                 return
             state, changelog, history = inspect(target), [], defaultdict(dict)
             for attr in state.attrs:
@@ -295,15 +389,20 @@ class Database:
                         ),
                     }
                     if deleted:
-                        change += f"REMOVED: {deleted}"
+                        change += f" - Removed: {deleted}"
                     if added:
-                        change += f"{' / ' if deleted else ''}ADDED: {added}"
+                        change += f" - Added: {added}"
+                    history["properties"][attr.key] = {
+                        "old": "\n".join(map(str, deleted)),
+                        "new": "\n".join(map(str, added)),
+                    }
                 else:
                     if deleted:
                         if hasattr(deleted[0], "class_type"):
                             history["scalars"][attr.key] = deleted[0].base_properties
                         else:
-                            history["properties"][attr.key] = deleted[0]
+                            change_dict = {"old": deleted[0], "new": added[0]}
+                            history["properties"][attr.key] = change_dict
                     change += (
                         f"'{deleted[0] if deleted else None}' => "
                         f"'{added[0] if added else None}'"
@@ -312,9 +411,9 @@ class Database:
             if changelog:
                 name, changes = (
                     getattr(target, "name", target.id),
-                    " | ".join(changelog),
+                    "\n- " + "\n- ".join(changelog),
                 )
-                log_content = f"UPDATE: {target.type} '{name}': ({changes})"
+                log_content = f"UPDATE: {target.type} '{name}':\n{changes}"
                 env.log(
                     "info",
                     log_content,
@@ -350,173 +449,51 @@ class Database:
         if vs.settings["app"]["config_mode"].lower() == "debug":
             self.orm_statements = Counter()
             self.orm_statements_runtime = defaultdict(timedelta)
+            self.orm_statements_tracebacks = defaultdict(lambda: defaultdict(int))
+
             self.monitor_orm_statements = False
 
-            @event.listens_for(self.session, "do_orm_execute")
-            def _do_orm_execute(orm_execute_state):
+            @event.listens_for(self.engine, "before_cursor_execute")
+            def before_cursor_execute(*args):
                 if not self.monitor_orm_statements:
                     return
-                statement = str(orm_execute_state.statement)
+                args[4]._start = datetime.now()
+
+            @event.listens_for(self.engine, "after_cursor_execute")
+            def after_cursor_execute(*args):
+                statement, context = args[2], args[4]
+                if not self.monitor_orm_statements or not hasattr(context, "_start"):
+                    return
+                runtime = datetime.now() - context._start
                 self.orm_statements[statement] += 1
-                start = datetime.now()
-                orm_execute_state.invoke_statement()
-                self.orm_statements_runtime[statement] += datetime.now() - start
-
-    def configure_associations(self):
-        for name, association in self.relationships["associations"].items():
-            model1, model2 = association["model1"], association["model2"]
-            setattr(
-                self,
-                f"{name}_table",
-                Table(
-                    f"{name}_association",
-                    self.base.metadata,
-                    Column(
-                        model1["column"],
-                        Integer,
-                        ForeignKey(
-                            f"{model1['foreign_key']}.id", **model1.get("kwargs", {})
-                        ),
-                        primary_key=True,
-                    ),
-                    Column(
-                        model2["column"],
-                        Integer,
-                        ForeignKey(
-                            f"{model2['foreign_key']}.id", **model2.get("kwargs", {})
-                        ),
-                        primary_key=True,
-                    ),
-                ),
-            )
-        for model, properties in vs.rbac["rbac_models"].items():
-            setattr(
-                self,
-                f"{model}_owner_table",
-                Table(
-                    f"{model}_owner_association",
-                    self.base.metadata,
-                    Column(
-                        f"{model}_id",
-                        Integer,
-                        ForeignKey(f"{model}.id"),
-                        primary_key=True,
-                    ),
-                    Column("user_id", Integer, ForeignKey("user.id"), primary_key=True),
-                ),
-            )
-            for property in properties:
-                setattr(
-                    self,
-                    f"{model}_{property}_table",
-                    Table(
-                        f"{model}_{property}_association",
-                        self.base.metadata,
-                        Column(
-                            f"{model}_id",
-                            Integer,
-                            ForeignKey(f"{model}.id"),
-                            primary_key=True,
-                        ),
-                        Column(
-                            "group_id",
-                            Integer,
-                            ForeignKey("group.id"),
-                            primary_key=True,
-                        ),
-                    ),
+                self.orm_statements_runtime[statement] += runtime
+                traceback = "\n".join(
+                    f"{frame.filename}:{frame.lineno} in {frame.name}"
+                    for frame in extract_stack()
+                    if "enms" in frame.filename.lower()
                 )
-        for property in vs.rbac["rbac_models"]["device"]:
-            setattr(
-                self,
-                f"pool_group_{property}_table",
-                Table(
-                    f"pool_group_{property}_association",
-                    self.base.metadata,
-                    Column(
-                        "pool_id",
-                        Integer,
-                        ForeignKey("pool.id"),
-                        primary_key=True,
-                    ),
-                    Column(
-                        "group_id",
-                        Integer,
-                        ForeignKey("group.id"),
-                        primary_key=True,
-                    ),
-                ),
-            )
+                self.orm_statements_tracebacks[statement][traceback] += 1
 
-    def query(self, model, rbac="read", user=None, properties=None):
-        if properties:
-            entity = [getattr(vs.models[model], property) for property in properties]
-        else:
-            entity = [vs.models[model]]
-        query = self.session.query(*entity)
-        if rbac:
-            if not current_user and not user:
-                raise self.rbac_error
-            user = (
-                current_user
-                or self.session.query(vs.models["user"]).filter_by(name=user).first()
-            )
-            if not user:
-                return
-            if user.is_authenticated and not user.is_admin:
-                if model in vs.rbac["admin_models"].get(rbac, []):
-                    raise self.rbac_error
-                query = vs.models[model].rbac_filter(query, rbac, user)
-        return query
+    def create_metabase(self):
+        class SubDeclarativeMeta(DeclarativeMeta):
+            def __init__(cls, *args):  # noqa: N805
+                DeclarativeMeta.__init__(cls, *args)
+                if hasattr(cls, "database_init") and "database_init" in cls.__dict__:
+                    cls.database_init()
+                self.set_custom_properties(cls)
+                self.set_rbac_properties(cls)
 
-    def fetch(
-        self,
-        instance_type,
-        allow_none=False,
-        all_matches=False,
-        rbac="read",
-        user=None,
-        **kwargs,
-    ):
-        query = self.query(instance_type, rbac, user=user)
-        if not query:
-            return
-        query = query.filter(
-            *(
-                getattr(vs.models[instance_type], key) == value
-                for key, value in kwargs.items()
-            )
-        )
-        for index in range(self.retry_fetch_number):
-            try:
-                result = query.all() if all_matches else query.first()
-                break
-            except Exception as exc:
-                self.session.rollback()
-                if index == self.retry_fetch_number - 1:
-                    error(f"Fetch n°{index} failed ({format_exc()})")
-                    raise exc
-                else:
-                    warning(f"Fetch n°{index} failed ({str(exc)})")
-                sleep(self.retry_fetch_time * (index + 1))
-        if result or allow_none:
-            return result
-        else:
-            raise self.rbac_error(
-                f"There is no {instance_type} in the database with the following "
-                f"characteristics: {kwargs}. Either the record does not exist "
-                "or the user does not have access"
-            )
+        return SubDeclarativeMeta
 
     def delete(self, model, **kwargs):
         instance = self.fetch(model, **{"rbac": "edit", **kwargs})
         return self.delete_instance(instance)
 
-    def fetch_all(self, model, **kwargs):
-        return self.fetch(model, allow_none=True, all_matches=True, **kwargs)
-
-    def objectify(self, model, object_list, **kwargs):
-        return [self.fetch(model, id=object_id, **kwargs) for object_id in object_list]
+    def delete_all(self, *models):
+        for model in models:
+            for instance in self.fetch_all(model):
+                self.delete_instance(instance, call_delete=model != "file")
+            self.session.commit()
 
     def delete_instance(self, instance, call_delete=True):
         abort_delete = False
@@ -524,16 +501,17 @@ class Database:
             abort_delete = instance.delete()
             if abort_delete:
                 return {"delete_aborted": True, "log_level": "error", **abort_delete}
-        serialized_instance = instance.to_dict()
+        serialized_instance = instance.get_properties()
         if not abort_delete:
             self.session.delete(instance)
         return serialized_instance
 
-    def delete_all(self, *models):
-        for model in models:
-            for instance in self.fetch_all(model):
-                self.delete_instance(instance, call_delete=model != "file")
-            self.session.commit()
+    @staticmethod
+    def dict_conversion(input):
+        try:
+            return literal_eval(input)
+        except Exception:
+            return loads(input)
 
     def export(self, model, private_properties=False):
         kwargs = {}
@@ -543,35 +521,6 @@ class Database:
             instance.to_dict(export=True, private_properties=private_properties)
             for instance in self.fetch_all(model, **kwargs)
         ]
-
-    def try_commit(self, transaction, *args, **kwargs):
-        for index in range(self.retry_commit_number):
-            try:
-                result = transaction(*args, **kwargs)
-                self.session.commit()
-                break
-            except (ValueError, IntegrityError, self.rbac_error):
-                raise
-            except Exception as exc:
-                self.session.rollback()
-                if (
-                    index == self.retry_commit_number - 1
-                    or isinstance(exc, IntegrityError)
-                    and "Duplicate entry" in str(exc)
-                    and "for key 'name'" in str(exc)
-                ):
-                    error(f"Commit n°{index + 1} failed ({format_exc()})")
-                    raise exc
-                else:
-                    warning(f"Commit n°{index + 1} failed ({str(exc)})")
-                sleep(self.retry_commit_time * (index + 1))
-        return result
-
-    def try_set(self, instance, property, value):
-        def transaction():
-            setattr(instance, property, value)
-
-        self.try_commit(transaction)
 
     def factory(
         self, _class, commit=False, no_fetch=False, rbac="edit", user=None, **kwargs
@@ -608,19 +557,68 @@ class Database:
             instance = self.try_commit(transaction, _class, **kwargs)
         return instance
 
+    def fetch(
+        self,
+        instance_type,
+        allow_none=False,
+        all_matches=False,
+        properties=None,
+        rbac="read",
+        user=None,
+        **kwargs,
+    ):
+        query = self.query(instance_type, rbac, user=user, properties=properties)
+        if not query:
+            return
+        query = query.filter(
+            *(
+                (
+                    getattr(vs.models[instance_type], key[:-3]).in_(value)
+                    if key.endswith("_in")
+                    else getattr(vs.models[instance_type], key) == value
+                )
+                for key, value in kwargs.items()
+            )
+        )
+        for index in range(self.retry_fetch_number):
+            try:
+                result = query.all() if all_matches else query.first()
+                break
+            except Exception as exc:
+                self.session.rollback()
+                if index == self.retry_fetch_number - 1:
+                    error(f"Fetch #{index} failed ({format_exc()})")
+                    raise exc
+                else:
+                    warning(f"Fetch #{index} failed ({str(exc)})")
+                sleep(self.retry_fetch_time * (index + 1))
+        if result or allow_none:
+            return result
+        else:
+            raise self.rbac_error(
+                f"There is no {instance_type} in the database with the following "
+                f"characteristics: {kwargs}. Either the record does not exist "
+                "or the user does not have access"
+            )
+
+    def fetch_all(self, instance_type, **kwargs):
+        if (
+            "name_in" in kwargs
+            and not kwargs["name_in"]
+            or "id_in" in kwargs
+            and not kwargs["id_in"]
+        ):
+            return []
+        return self.fetch(instance_type, allow_none=True, all_matches=True, **kwargs)
+
     def get_credential(
         self, username, name=None, device=None, credential_type="any", optional=False
     ):
-        query = (
-            self.session.query(vs.models["credential"])
-            .join(vs.models["group"], vs.models["credential"].groups)
-            .join(vs.models["user"], vs.models["group"].users)
-        )
+        query = db.query("credential", rbac="use", user=username)
         if device:
             query = query.join(
                 vs.models["pool"], vs.models["credential"].device_pools
             ).join(vs.models["device"], vs.models["pool"].devices)
-        query = query.filter(vs.models["user"].name == username)
         if name:
             query = query.filter(vs.models["credential"].name == name)
         if device:
@@ -632,17 +630,28 @@ class Database:
             raise Exception(f"No matching credentials found for DEVICE '{device.name}'")
         return credentials
 
+    def query(self, model, rbac="read", user=None, properties=None):
+        if properties:
+            entity = [getattr(vs.models[model], property) for property in properties]
+        else:
+            entity = [vs.models[model]]
+        query = self.session.query(*entity)
+        return query
+
     def register_custom_models(self):
-        for model in ("device", "link", "service"):
-            paths = [vs.path / "eNMS" / "models" / f"{model}s"]
-            load_examples = vs.settings["app"].get("startup_migration") == "examples"
-            if vs.settings["paths"][f"custom_{model}s"]:
-                paths.append(Path(vs.settings["paths"][f"custom_{model}s"]))
+        for model in ("device", "link", "service", "data"):
+            folder_name = "datastore" if model == "data" else f"{model}s"
+            paths = [vs.path / "eNMS" / "models" / folder_name]
+            if vs.settings["paths"][f"custom_{folder_name}"]:
+                paths.append(Path(vs.settings["paths"][f"custom_{folder_name}"]))
             for path in paths:
                 for file in path.glob("**/*.py"):
                     if "init" in str(file):
                         continue
-                    if not load_examples and "examples" in str(file):
+                    if (
+                        "notification" in str(file)
+                        and file.stem.split("_")[0] not in vs.automation["notification"]
+                    ):
                         continue
                     info(f"Loading {model}: {file}")
                     spec = spec_from_file_location(file.stem, str(file))
@@ -651,16 +660,47 @@ class Database:
                     except InvalidRequestError:
                         error(f"Error loading {model} '{file}'\n{format_exc()}")
 
+    def try_commit(self, transaction, *args, **kwargs):
+        for index in range(self.retry_commit_number):
+            try:
+                result = transaction(*args, **kwargs)
+                self.session.commit()
+                break
+            except (AttributeError, ValueError, IntegrityError, self.rbac_error):
+                raise
+            except Exception as exc:
+                self.session.rollback()
+                if (
+                    index == self.retry_commit_number - 1
+                    or isinstance(exc, IntegrityError)
+                    and "Duplicate entry" in str(exc)
+                    and "for key 'name'" in str(exc)
+                ):
+                    error(f"Commit #{index + 1} failed ({format_exc()})")
+                    raise exc
+                else:
+                    warning(f"Commit #{index + 1} failed ({str(exc)})")
+                sleep(self.retry_commit_time * (index + 1))
+        return result
+
+    def try_set(self, instance, property, value):
+        def transaction():
+            setattr(instance, property, value)
+
+        self.try_commit(transaction)
+
     @contextmanager
-    def session_scope(self):
+    def session_scope(self, commit=False, remove=False):
         try:
             yield self.session
-            self.session.commit()
+            if commit:
+                self.session.commit()
         except Exception:
             self.session.rollback()
             raise
         finally:
-            self.session.close()
+            if remove:
+                self.session.remove()
 
     def set_custom_properties(self, table):
         model = getattr(table, "__tablename__", None)
@@ -703,7 +743,7 @@ class Database:
                     table,
                     f"user_{rbac_model}s",
                     relationship(
-                        rbac_model.capitalize(),
+                        "".join(word.capitalize() for word in rbac_model.split("_")),
                         secondary=getattr(self, f"{rbac_model}_owner_table"),
                         back_populates="owners",
                     ),
@@ -731,9 +771,6 @@ class Database:
                     back_populates=f"{property}_{model}s",
                 ),
             )
-
-    def cleanup(self):
-        self.engine.dispose()
 
 
 db = Database()

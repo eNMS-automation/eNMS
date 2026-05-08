@@ -1,0 +1,440 @@
+- "category": "Profiling"
+  "code": |
+    # The data can be sorted by:
+    # - "count": how many times a function was called
+    # - "average_time": how much time does the function take on average
+    # - "combined_time": how much time did the function take in total
+    SORT_BY = "count"
+
+    # The data can be filtered by origin:
+    # - If the origin is "", all the data is displayed
+    # - Possible origins include: "Environment", "Controller",
+    # "Runner", "CustomApp", "RestApi"
+    ORIGIN = ""
+
+    # Number of entries to display
+    # By default, we only display the 20 largest entries
+    LIMIT = 20
+
+    data = sorted(
+        [
+            (name, entry)
+            for name, entry in vs.profiling.items()
+            if entry["class"].startswith(ORIGIN)
+        ],
+        key=lambda item: item[1][SORT_BY],
+        reverse=True,
+    )[:LIMIT]
+
+    print(
+        "\n\n".join(
+            f"Function '{name}':\n {vs.dict_to_string(data, depth=2)}"
+            for name, data in data
+        )
+    )
+  "creation_time": "2025-07-25 11:49:14.990787"
+  "creator": "admin"
+  "description": "Sort and display the profiling data stored in vs.profiling"
+  "last_modified": "2025-07-26 15:26:50.963870"
+  "last_modified_by": "admin"
+  "logs": []
+  "name": "Display Profiling Data"
+  "type": "snippet"
+  "version": ""
+- "category": "Database Tests"
+  "code": |
+    # Factory: create a new instance
+
+    device = db.factory("generic_device", name="test", model="IOS", commit=True)
+    print(f"Device '{device}' has been created")
+
+    # Fetch: retrieve instance from database
+
+    device = db.fetch("device", name="test")
+    print(f"Device '{device}' retrieved from database")
+
+    # Factory: edit existing instance
+    # We use factory to update the "model" property of Washington
+
+    print(f"Old model: {device.model}")
+    device = db.factory("generic_device", name="test", model="EOS")
+    print(f"New model: {device.model}")
+
+    # Delete: erase instance from database
+
+    db.delete("device", name="test")
+    db.session.commit()
+
+    get_deleted_device = db.fetch("device", name="test", allow_none=True)
+
+    if get_deleted_device is None:
+        print("Device has been deleted")
+  "creation_time": "2025-07-26 09:08:08.597839"
+  "creator": "admin"
+  "description": "Tests factory (for creating and editing), fetch, and delete"
+  "last_modified": "2025-07-26 15:29:30.909815"
+  "last_modified_by": "admin"
+  "logs": []
+  "name": "Functions provided by eNMS"
+  "type": "snippet"
+  "version": ""
+- "category": "Scalability"
+  "code": |
+    from pathlib import Path
+
+    path_folder = vs.file_path / "test"
+    path_folder.mkdir(exist_ok=True)
+
+    for i in range(10000):
+        file_path = path_folder / f"file{i}"
+        file_path.touch()
+  "creation_time": "2025-07-26 09:11:08.608881"
+  "creator": "admin"
+  "description": |-
+    This snippet is used to optimize the "scan_folder" function.
+    It creates 10K files in a subfolder "test" of the "files" folder
+  "last_modified": "2025-07-26 15:29:46.001197"
+  "last_modified_by": "admin"
+  "logs": []
+  "name": "Create 10K files"
+  "type": "snippet"
+  "version": ""
+- "category": "Query Monitoring"
+  "code": |
+    db.monitor_orm_statements = True
+    db.orm_statements.clear()
+    db.orm_statements_runtime.clear()
+    db.orm_statements_tracebacks.clear()
+  "creation_time": "2025-07-26 09:12:38.966690"
+  "creator": "admin"
+  "description": "This snippet starts the monitoring mechanism for SQL queries and
+    clears the content of the dict used for the analysis."
+  "last_modified": "2025-07-26 15:29:13.826759"
+  "last_modified_by": "admin"
+  "logs": []
+  "name": "Start Monitoring"
+  "type": "snippet"
+  "version": ""
+- "category": "Scalability"
+  "code": |
+    from itertools import batched
+
+    entry = ("changelog", "content", "admin", vs.get_time())
+    query = "INSERT INTO changelog (type, content, author, time) VALUES (?, ?, ?, ?)"
+    batch_size = vs.database["transactions"]["batch_size"]
+    log_size = 50_000_000
+
+    env.log("info", f"Starting to create Fake Changelogs ({log_size} logs)")
+
+    with env.timer("Create Fake Changelogs"):
+        changelogs = (entry for _ in range(log_size))
+        cursor = db.session.connection().connection.cursor()
+        for batch in batched(changelogs, batch_size):
+            cursor.executemany(query, batch)
+        db.session.commit()
+  "creation_time": "2025-07-26 09:14:56.501843"
+  "creator": "admin"
+  "description": "Uses low-level SQL to create many changelogs (50M by default)"
+  "last_modified": "2025-07-26 15:29:55.729400"
+  "last_modified_by": "admin"
+  "logs": []
+  "name": "Create 50M Changelogs"
+  "type": "snippet"
+  "version": ""
+- "category": "Scalability"
+  "code": |
+    from datetime import datetime
+
+    device_number = 200
+
+    factory_time = datetime.now()
+    for index in range(device_number):
+        db.factory("generic_device", name=str(index), commit=True)
+    print(f"'db.factory' time: {datetime.now() - factory_time}")
+
+    fetch_time = datetime.now()
+    for index in range(device_number):
+        db.fetch("device", name=str(index))
+    print(f"'db.fetch' time: {datetime.now() - fetch_time}")
+
+    delete_time = datetime.now()
+    for index in range(device_number):
+        db.delete("device", name=str(index))
+        db.session.commit()
+    print(f"'db.delete' time: {datetime.now() - delete_time}")
+
+    print(f"Total duration: {datetime.now() - factory_time}")
+  "creation_time": "2025-07-26 09:15:33.006728"
+  "creator": "admin"
+  "description": "Uses eNMS fetch, factory and delete function to measure eNMS performances
+    when querying the database."
+  "last_modified": "2025-07-26 15:29:50.911662"
+  "last_modified_by": "admin"
+  "logs": []
+  "name": "Tests fetch, factory and delete performance"
+  "type": "snippet"
+  "version": ""
+- "category": "Database Cleanup"
+  "code": |
+    for service in db.fetch_all("service", shared=False):
+        if service.workflows or service.name == service.scoped_name:
+            continue
+        print(f"Deleting '{service}'")
+        db.session.delete(service)
+    db.session.commit()
+  "creation_time": "2025-07-26 12:18:25.993536"
+  "creator": "admin"
+  "description": |-
+    Corrupted services are services that used to belong to a workflow and were removed from the workflow relationship without being deleted.
+    They have the following characteristics:
+    - They don't belong to a workflow
+    - They are not shared
+    - Their scoped name differ from their name
+  "last_modified": "2025-07-26 15:27:43.729597"
+  "last_modified_by": "admin"
+  "logs": []
+  "name": "Delete corrupted services"
+  "type": "snippet"
+  "version": ""
+- "category": "Database Cleanup"
+  "code": |
+    from collections import defaultdict
+
+    edges = set(db.fetch_all("workflow_edge"))
+    duplicated_edges, number_of_corrupted_edges = defaultdict(list), 0
+    for edge in list(edges):
+        services = getattr(edge.workflow, "services", [])
+        if (
+            not edge.source
+            or not edge.destination
+            or not edge.workflow
+            or edge.source not in services
+            or edge.destination not in services
+            or edge.soft_deleted
+        ):
+            edges.remove(edge)
+            db.session.delete(edge)
+            number_of_corrupted_edges += 1
+    db.session.commit()
+    for edge in edges:
+        duplicated_edges[
+            (
+                edge.source.name,
+                edge.destination.name,
+                edge.workflow.name,
+                edge.subtype,
+            )
+        ].append(edge)
+    for duplicates in duplicated_edges.values():
+        for duplicate in duplicates[1:]:
+            db.session.delete(duplicate)
+            number_of_corrupted_edges += 1
+
+    print(f"Number of corrupted edges deleted: {number_of_corrupted_edges}")
+  "creation_time": "2025-07-26 12:19:21.777448"
+  "creator": "admin"
+  "description": |-
+    Corrupted edges can be:
+    - edges missing a source, destinaton or a workflow
+    - edges whose source or destination is not in the workflow's services
+    - duplicated edges i.e with same source, destination, workflow and subtype
+  "last_modified": "2025-07-26 15:27:47.855430"
+  "last_modified_by": "admin"
+  "logs": []
+  "name": "Delete corrupted edges"
+  "type": "snippet"
+  "version": ""
+- "category": "Memory"
+  "code": |
+    from sys import getsizeof
+
+    VARIABLES = {
+        "connections_cache": "Network Connections Cache",
+        "service_run_count": "Service Run cache",
+        "run_states": "Run State Cache",
+        "run_logs": "Run Logs Cache",
+    }
+
+    print("MEMORY USAGE :", end="\n\n")
+    for variable, function in VARIABLES.items():
+        size = getsizeof(getattr(app, variable))
+        print(f"{function} ({variable}): {size} bytes")
+  "creation_time": "2025-07-26 14:18:08.306994"
+  "creator": "admin"
+  "description": |-
+    This snippet monitors the memory usage of a few controller variables used for storing data, like the network connections cache (stores netmiko, napalm and scrapli connections) and the logs cache (stores service logs).
+    Memory usage of these variables should not grow over time are their content is supposed to be deleted when no longer useful.
+  "last_modified": "2025-07-26 15:28:32.540100"
+  "last_modified_by": "admin"
+  "logs": []
+  "name": "Monitor memory usage"
+  "type": "snippet"
+  "version": ""
+- "category": "Memory"
+  "code": |
+    from operator import itemgetter
+    from pympler import muppy, summary
+
+
+    max_results = 3
+    all_objects = muppy.get_objects()
+
+
+    def format_size(size):
+        for unit in ["B", "KiB", "MiB", "GiB"]:
+            if size < 1024.0 or unit == "GiB":
+                break
+            size /= 1024.0
+        return f"{size:.2f} {unit}"
+
+
+    profile = sorted(
+        (object_ for object_ in summary.summarize(all_objects)),
+        key=itemgetter(2),
+        reverse=True,
+    )
+
+    for object_ in profile[:max_results]:
+        print(f"Name: {object_[0]}")
+        print(f"Number of objects: {object_[1]}")
+        print(f"Total size: {format_size(object_[2])}", end="\n\n")
+
+
+    for type in (str, dict):
+        print(f"Last {max_results} {type} objects in memory", end="\n\n")
+        latest_objects = muppy.filter(all_objects, Type=type)[-max_results:]
+        print("\n".join(map(str, latest_objects)))
+  "creation_time": "2025-07-26 14:19:23.331444"
+  "creator": "admin"
+  "description": |-
+    Uses the "pympler" module for profiling memory. By default, objects are sorted by their size in memory.
+    The order can be changed to sorting by number of objects in memory by replacing "itemgetter(2)" with "itemgetter(1)".
+    The "max_results" variable limits the output to the first max_results results.
+  "last_modified": "2025-07-26 15:28:43.992949"
+  "last_modified_by": "admin"
+  "logs": []
+  "name": "Profiling with pymler"
+  "type": "snippet"
+  "version": ""
+- "category": "Query Monitoring"
+  "code": |
+    print(f"Number of Queries: {db.orm_statements.total()}\n")
+
+    for query, count in db.orm_statements.most_common():
+        print(f"{count}: {query}\n")
+        query_time = db.orm_statements_runtime[query]
+        print(f"Execution time ({count} query): {query_time}\n")
+        tracebacks = "\n\n".join(
+            f"{count}: {traceback}"
+            for traceback, count in db.orm_statements_tracebacks[query].items()
+        )
+        print(f"Tracebacks:\n{tracebacks}\n\n")
+
+    db.monitor_orm_statements = False
+  "creation_time": "2025-07-26 14:22:25.418046"
+  "creator": "admin"
+  "description": "This snippet use the SQLAlchemy _do_orm_execute event to analyze
+    what SQL queries were executed (SQL statement) and how much time each query took."
+  "last_modified": "2025-07-26 15:29:02.708790"
+  "last_modified_by": "admin"
+  "logs": []
+  "name": "End Monitoring"
+  "type": "snippet"
+  "version": ""
+- "category": "Profiling"
+  "code": |
+    vs.profiling = {}
+  "creation_time": "2025-07-26 14:22:56.470569"
+  "creator": "admin"
+  "description": "Empty the profiling data dictionary"
+  "last_modified": "2025-07-26 15:27:25.933840"
+  "last_modified_by": "admin"
+  "logs": []
+  "name": "Empty Data"
+  "type": "snippet"
+  "version": ""
+- "category": "Database Tests"
+  "code": |
+    pool = db.factory("pool", name="A pool")
+    pool.devices = [db.fetch("device", name="Washington") for _ in range(5)]
+    db.session.commit()
+  "creation_time": "2025-07-26 14:25:50.993599"
+  "creator": "admin"
+  "description": |-
+    Provides a straightforward way to reproduce the duplicate rows issue in an association table.
+    Prevents deleting both part of the association.
+    Expected error: "sqlalchemy.orm.exc.StaleDataError: DELETE statement on table 'pool_device_association' expected to delete 1 row(s); Only 5 were matched."
+  "last_modified": "2025-07-26 15:29:36.529611"
+  "last_modified_by": "admin"
+  "logs": []
+  "name": "Trigger Duplicates Error"
+  "type": "snippet"
+  "version": ""
+- "category": "Database Cleanup"
+  "code": |
+    controller.delete_soft_deleted_objects()
+    print(f"Soft-deleted objects successfully deleted")
+  "creation_time": "2025-07-26 14:26:32.632192"
+  "creator": "admin"
+  "description": "Delete all soft-deleted workflow edges and services"
+  "last_modified": "2025-07-26 15:27:31.441771"
+  "last_modified_by": "admin"
+  "logs": []
+  "name": "Delete Soft-Deleted Objects"
+  "type": "snippet"
+  "version": ""
+- "category": "Scalability"
+  "code": |-
+    from random import choices
+    from sqlalchemy import text
+    from string import ascii_lowercase
+
+    configuration = "\n".join(
+      "".join(choices(ascii_lowercase, k=50))
+      for _ in range(1_000)
+    )
+
+    db.session.execute(
+        text("UPDATE device SET configuration = :config"),
+        {"config": configuration}
+    )
+    db.session.commit()
+  "creation_time": "2025-07-26 16:57:04.606507"
+  "creator": "admin"
+  "description": |-
+    We create a configuration of 1K lines, 50 characters per line.
+    Then we set all devices to that configuration with low-level SQL.
+  "last_modified": "2025-07-26 18:35:25.150912"
+  "last_modified_by": "admin"
+  "logs": []
+  "name": "Set Large Configurations"
+  "type": "snippet"
+  "version": ""
+- "category": "Database Cleanup"
+  "code": |-
+    MODELS = [
+        "data",
+        "user",
+        "group",
+        "device",
+        "file",
+        "link",
+        "server",
+        "service",
+        "workflow_edge",
+        "task",
+        "credential",
+        "pool"
+    ]
+
+    for model in MODELS:
+        db.delete_all(model)
+  "creation_time": "2025-08-01 12:34:15.428301"
+  "creator": "admin"
+  "description": "Delete all instances of the specified models"
+  "last_modified": "2025-08-01 12:34:15.428204"
+  "last_modified_by": "admin"
+  "logs": []
+  "name": "Database Mass Deletion"
+  "type": "snippet"
+  "version": ""

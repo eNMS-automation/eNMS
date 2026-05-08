@@ -111,7 +111,7 @@
           class="version unselectable"
           style="font-size: {{ version_size }}px;"
         >
-          v{{ version }}
+          v{{ version }} {% if queries %} ({{ queries }}) {% endif %}
         </h3>
       </center>
       <div id="sidebar-menu" class="hidden-print main_menu">
@@ -156,7 +156,7 @@
         class="server-time"
       ></div>
       <div class="sidebar-footer hidden-small">
-        <a onclick="eNMS.administration.showProfile()" title="Profile">
+        <a title="Profile">
           <span class="glyphicon glyphicon-user"></span>
         </a>
         <a
@@ -210,11 +210,6 @@
                     <span class="fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li>
-                      <a onclick="eNMS.administration.showProfile()"
-                        ><i class="fa fa-user pull-right"></i>Profile</a
-                      >
-                    </li>
                     <li>
                       <a href="/logout"
                         ><i class="fa fa-sign-out pull-right"></i>Log out</a
@@ -287,36 +282,20 @@
                     &nbsp;Files
                   </a>
                 </li>
-                {% if user.is_admin %}
-                <li class="nav-item">
-                  <a
-                    onclick="eNMS.base.openPanel({
-                      name: 'administration', title: 'Administration Panel', size: 'auto'
-                      })"
-                    style="cursor: pointer"
-                  >
-                    <img
-                      src="{{ url_for('static', filename='img/administration.png') }}"
-                      height="25"
-                      width="25"
-                    />
-                    &nbsp;Admin
-                  </a>
-                </li>
-                {% endif %}
               </ul>
             </nav>
           </div>
         </div>
       </div>
-      {% endblock header %} {% cache settings["cache"]["timeout"], endpoint %}
+      {% endblock header %}
       <div class="main_frame">
         <div class="left_frame">{% block left_frame %} {% endblock left_frame %}</div>
-        <div class="right_frame">
+        {% set width = 600 if current_user.display_tree and endpoint in
+        ["network_builder", "workflow_builder"] else 0 %}
+        <div class="right_frame" style="width: {{ width }}px">
           {% block right_frame %} {% endblock right_frame %}
         </div>
       </div>
-      {% endcache %}
     </div>
     {% endblock body %} {% block javascripts %} {% cache settings["cache"]["timeout"] %}
     <script src="{{ url_for('static', filename='lib/jquery/jquery.min.js') }}"></script>
@@ -372,9 +351,15 @@
       const theme = {{ themes|tojson|safe }}.themes?.[user.theme];
       const linkPath = {{ link_path|d("")|tojson|safe }};
       const linkRuntime = {{ link_runtime|d("")|tojson|safe }};
+      const tableSearch = {{ search | default({}) | tojson | safe }};
       let csrfToken = "{{ csrf_token() }}";
     </script>
     <script type="module" src="{{ url_for('static', filename='js/base.js') }}"></script>
-    {% endblock %}
+    {% for file in datastore_files %}
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/datastore/' ~ file) }}"
+    ></script>
+    {% endfor %} {% endblock %}
   </body>
 </html>

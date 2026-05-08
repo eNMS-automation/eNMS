@@ -30,6 +30,7 @@ class NetconfService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "netconf_service"}
 
+    @staticmethod
     def job(self, run, device=None):
         xml_filter = run.sub(run.xml_filter, locals())
         if run.dry_run:

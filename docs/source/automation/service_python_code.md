@@ -59,6 +59,7 @@ are made available to the user.
           collection).
         - [Custom device properties, if implemented](custom_device_properties.md).
 
+
 - `devices`
     - **Meaning**: The set of target devices for the service or workflow,
         i.e., the union of devices, pools, and the device query. Device by
@@ -100,7 +101,7 @@ are made available to the user.
     -   **Available**: Always.
 
 - `encrypt()`
-    -   **Meaning**: Encrypt a password string so it can be used in one of the
+    -   **Meaning**: Encrypt a password string so that it can be used in one of the
         password field (and automatically decrypted)
     -   **Type**: Function.
     -   **Available**: Always.
@@ -149,6 +150,23 @@ are made available to the user.
         - Model properties: (**optional**) Filter values to limit the set of
           returned objects: vendor="Cisco".
 
+- `filtering()`
+    -   **Meaning**: Allows filtering objects in the database of a given type
+        based on constraints.
+    -   **Type**: Function.
+    -   **Available**: Always.
+    -   **Return Type**: List of Database Objects or SQLAlchemy Row if the `properties` argument
+        is used.
+    -   **Parameters**:
+        -   `model`: (**mandatory string**) `device`, `link`, etc.
+        -   `properties`: List of properties, when the query is expected to return
+            a row of properties and not the SQLAlchemy objects (better performances).
+            Example: `properties=["id", "scoped_name"]`
+        -   `constraints`: Dictionary of properties, expected values and type
+            of search. Examples:
+            - Objects whose model is `Cisco`: `{"model": "Cisco"}`
+            - Non-shared services that do no belong to any workflow: `{"workflows_filter": "empty", "type": "service", "shared": "bool-false"}`
+
 - `get_neighbors()`
     -   **Meaning**: Used to return links or devices connected to the target
         device.
@@ -166,7 +184,7 @@ are made available to the user.
         -   `model`.
         -   `source_name` (source device name).
         -   `destination_name` (destination device name).
-        -   [Custom link properties, if implemented](custom_link_properties.md).
+        -   See also: [Custom link properties](custom_link_properties.md).
 
 - `get_all_results()`
     -   **Meaning**: Fetch all results for the current runtime. Typically used at
@@ -201,7 +219,7 @@ are made available to the user.
             subworkflows, a subworkflow can be specified to get the
             result of the service for a specific subworkflow.
         -   `all_matches`: (**optional**, default=False) When True, returns
-            a list with results for all devices.  Otherwise only the first
+            a list with results for all devices. Otherwise, only the first
             result is returned.
 
 - `get_secret()`
@@ -293,6 +311,11 @@ are made available to the user.
     -   **Type**: Dictionary.
     -   **Available**: After a service has run.
 
+- `runtime`
+    -   **Meaning**: The runtime of the current run (parent runtime).
+    -   **Type**: String.
+    -   **Available**: Always.
+
 - `send_email()` allows for sending an email with optional attached file. It
     takes the following parameters:
 
@@ -356,9 +379,36 @@ are made available to the user.
         -   `section`: (**optional**) The value is stored in a specific
             "section".
 
-- `settings`
+-   `send_email()` allows for sending an email with optional attached file. It
+    takes the following parameters:
 
-    -   **Meaning**: eNMS settings, editable from the top-level `Settings`
+    -   `title`: (**string, mandatory**).
+    -   `content`: (**string, mandatory**).
+    -   `sender`: (**string, optional**) Email address of the sender.
+        Defaults to the sender address in eNMS settings.
+    -   `recipients`: (**string, optional**) Mail addresses of the
+        recipients, separated by comma. Defaults to the recipients'
+        addresses in eNMS settings.
+    -   `reply_to`: (**string, optional**) Single mail address for
+        replies to notifications.
+    -   `filename`: (**string, optional**) Name of the attached file.
+    -   `file_content`: (**string, optional**) Content of the attached
+        file.
+
+    ``` 
+    send_email(
+        title,
+        content,
+        sender=sender,
+        recipients=recipients,
+        reply_to=reply_to,
+        filename=filename,
+        file_content=file_content
+    )
+    ```
+-   `settings`
+
+    -   **Meaning**: App settings, editable from the top-level `Settings`
         Icon. It is initially set to the content of `settings.json`, and
         it stays synchronized if the option to write changes back to 
         `settings.json` is used.
@@ -393,10 +443,12 @@ are made available to the user.
         -   `property`: property to update (string).
         -   `value`: value of that property.
 
-- `username`
-    -   **Meaning**: The username that created the run
-    -   **Type**: string
-    -   **Available**: Always
+- `user`
+    -   **Meaning**: a dictionary with data about the user that created the run; 
+        e.g., `{ "name": "<username>", "email": "<email>"} ` This is the replacement for 
+        `username`.
+    -   **Type**: Dictionary.
+    -   **Available**: Always.
             
 - `workflow`
 

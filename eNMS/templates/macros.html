@@ -18,7 +18,14 @@ field.name) %} {% set style = "height: {}px".format(field.render_kw["rows"]*20 +
   {% endif %}
   <div class="col-md-9 col-sm-9 col-xs-12">
     <div id="{{ id }}-property-div" class="add-id">
-      {{ field(id=id, class="collapsed {} add-id".format(class), checked=field.default) }}
+      {% if field.render_kw and "layout" in field.render_kw %} {% set layout =
+      field.render_kw["layout"] %}
+      <div>
+        {{ layout | safe | replace("{field}", field(id=id, class="collapsed {}
+        add-id".format(class), checked=field.default)) }}
+      </div>
+      {% else %} {{ field(id=id, class="collapsed {} add-id".format(class),
+      checked=field.default) }} {% endif %}
     </div>
   </div>
   <br /><br />

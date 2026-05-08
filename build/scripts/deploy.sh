@@ -26,7 +26,7 @@ function install() {
     # export VAULT_TOKEN=token
     # vault secrets enable -version=1 -path=secret kv
   elif [ "$install" = "mysql" ]; then
-    sudo apt install -y mysql-server libmysqlclient-dev python3-mysqldb
+    sudo apt install -y pkg-config mysql-server libmysqlclient-dev python3-mysqldb
     sudo pip3 install mysqlclient
     sudo mysql -u root --password=password -e 'CREATE DATABASE enms;'
     sudo mysql -u root --password=password -e 'set global max_connections = 2000;'
@@ -35,10 +35,12 @@ function install() {
     # ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
   elif [ "$install" = "postgresql" ]; then
     sudo apt-get install -y postgresql libpq-dev postgresql-client
+    sudo apt-get install build-essential python3-dev libpq-dev
     sudo pip3 install psycopg2
     sudo -u postgres psql -c "CREATE DATABASE enms;"
     sudo -u postgres psql -c "CREATE USER root WITH PASSWORD 'password';"
     sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE enms TO root;"
+    sudo -u postgres psql -c "ALTER DATABASE enms OWNER TO root;"
   elif [ "$install" = "enms" ]; then
     sudo apt-get install -y python3-pip sshpass npm
     for file in build/requirements/*; do pip3 install -r $file; done

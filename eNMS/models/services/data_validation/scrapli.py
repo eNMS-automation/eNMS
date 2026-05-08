@@ -1,5 +1,5 @@
 from jinja2 import StrictUndefined, Template
-from sqlalchemy import Boolean, ForeignKey, Integer, Float
+from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
@@ -25,6 +25,7 @@ class ScrapliService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "scrapli_service"}
 
+    @staticmethod
     def job(self, run, device):
         local_variables = locals()
         if self.jinja2_template:
@@ -40,7 +41,7 @@ class ScrapliService(ConnectionService):
         function = "send_configs" if run.is_configuration else "send_commands"
         run.log(
             "info",
-            f"sending COMMANDS {log_commands} with Scrapli",
+            f"sending COMMANDS '{log_commands}' with Scrapli",
             device,
             logger="security",
         )

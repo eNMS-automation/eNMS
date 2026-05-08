@@ -1,0 +1,282 @@
+[
+  [
+    "Duplicate 1 - 2",
+    "Duplication of Devices, Subnetworks and Top-level Networks"
+  ],
+  [
+    "G1 - R1",
+    "Duplicate me 2"
+  ],
+  [
+    "R1 - R2",
+    "Top-level Devices and Links"
+  ],
+  [
+    "R1 - R3",
+    "Top-level Devices and Links"
+  ],
+  [
+    "R1 - R4",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R1 -> R2 L1",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R1 -> R2 L2",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R1 -> R2 L3",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R1 -> R3 L1",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R1 Loopback 1",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R2 - R3",
+    "Top-level Devices and Links"
+  ],
+  [
+    "R2 -> R4 L1",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R2 -> R4 L2",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R3 -> R1 L2",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R3 -> R1 L3",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R3 -> R1 L4",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R3 -> R2 L1",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R3 -> R2 L2",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R3 -> R2 L3",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R3 -> R2 L4",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R3 -> R4 L1",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R3 -> R4 L2",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R3 -> R4 L3",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R3 -> R4 L4",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R3 Loopback 1",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R4 -> R2 L3",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R4 -> R3 L5",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R4 -> R3 L6",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R4 -> R3 L7",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R4 -> R3 L8",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "R4 Loopback 1",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "S6 L1",
+    "L3 Network"
+  ],
+  [
+    "Subnetwork 1 - L1",
+    "Subnetwork 1"
+  ],
+  [
+    "Subnetwork 1 - L2",
+    "Subnetwork 1"
+  ],
+  [
+    "Subnetwork 1 - L3",
+    "Subnetwork 1"
+  ],
+  [
+    "Subnetwork 2 - L1",
+    "Subnetwork 2"
+  ],
+  [
+    "link0",
+    "Large Network Display"
+  ],
+  [
+    "link1",
+    "Large Network Display"
+  ],
+  [
+    "link10",
+    "Large Network Display"
+  ],
+  [
+    "link11",
+    "Large Network Display"
+  ],
+  [
+    "link12",
+    "Large Network Display"
+  ],
+  [
+    "link13",
+    "Large Network Display"
+  ],
+  [
+    "link13-2",
+    "Large Network Display"
+  ],
+  [
+    "link14",
+    "Large Network Display"
+  ],
+  [
+    "link15",
+    "Large Network Display"
+  ],
+  [
+    "link16",
+    "Large Network Display"
+  ],
+  [
+    "link17",
+    "Large Network Display"
+  ],
+  [
+    "link18",
+    "Large Network Display"
+  ],
+  [
+    "link19",
+    "Large Network Display"
+  ],
+  [
+    "link2",
+    "Large Network Display"
+  ],
+  [
+    "link20",
+    "Large Network Display"
+  ],
+  [
+    "link21",
+    "Large Network Display"
+  ],
+  [
+    "link22",
+    "Large Network Display"
+  ],
+  [
+    "link23",
+    "Large Network Display"
+  ],
+  [
+    "link24",
+    "Large Network Display"
+  ],
+  [
+    "link25",
+    "Large Network Display"
+  ],
+  [
+    "link25-2",
+    "Large Network Display"
+  ],
+  [
+    "link25-3",
+    "Large Network Display"
+  ],
+  [
+    "link25-dallas2",
+    "Large Network Display"
+  ],
+  [
+    "link25-reversed",
+    "Large Network Display"
+  ],
+  [
+    "link25-reversed-2",
+    "Large Network Display"
+  ],
+  [
+    "link26",
+    "Large Network Display"
+  ],
+  [
+    "link27",
+    "Large Network Display"
+  ],
+  [
+    "link3",
+    "Large Network Display"
+  ],
+  [
+    "link4",
+    "Large Network Display"
+  ],
+  [
+    "link5",
+    "Large Network Display"
+  ],
+  [
+    "link6",
+    "Large Network Display"
+  ],
+  [
+    "link7",
+    "Large Network Display"
+  ],
+  [
+    "link8",
+    "Large Network Display"
+  ],
+  [
+    "link9",
+    "Large Network Display"
+  ]
+]

@@ -9,8 +9,8 @@ the task is repeated.
 ## Creating Tasks
 
 Instead of having to run services on-demand, they can be scheduled by
-creating a task from `Automation / Scheduling`. Depending on what one would like 
-to do with a scheduled task, the user may need to provide data for several parameters.
+creating a task from `Automation / Scheduling`. Depending on the purpose of  
+a scheduled task, the user may need to provide data for several parameters.
 Below are all the input fields that can be filled, with brief descriptions of 
 what they do:
 

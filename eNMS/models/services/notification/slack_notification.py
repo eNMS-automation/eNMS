@@ -10,8 +10,8 @@ except ImportError as exc:
     warn(f"Couldn't import slack_sdk module ({exc})")
 
 from eNMS.database import db
-from eNMS.forms import ServiceForm
 from eNMS.fields import HiddenField, StringField
+from eNMS.forms import ServiceForm
 from eNMS.models.automation import Service
 from eNMS.variables import vs
 
@@ -26,6 +26,7 @@ class SlackNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "slack_notification_service"}
 
+    @staticmethod
     def job(self, run, device=None):
         channel = run.sub(run.channel, locals()) or vs.settings["slack"]["channel"]
         message = run.sub(run.body, locals())

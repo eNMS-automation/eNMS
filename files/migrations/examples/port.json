@@ -1,0 +1,32 @@
+[
+  {
+    "admin_only": false,
+    "connected": true,
+    "creation_time": "2025-02-22 20:34:47.998703",
+    "creator": "admin",
+    "description": "10BASE-T / Connected",
+    "label": "P1",
+    "last_modified": "",
+    "last_modified_by": "",
+    "name": ">DCIM>Ports>Port 1",
+    "path": "/DCIM/Ports/Port 1",
+    "persistent_id": "3Se-z2S1kTo",
+    "scoped_name": "Port 1",
+    "speed": "10BASE-T"
+  },
+  {
+    "admin_only": false,
+    "connected": false,
+    "creation_time": "2025-02-22 20:35:09.017748",
+    "creator": "admin",
+    "description": "1000BASE-T / Not Connected",
+    "label": "P2",
+    "last_modified": "",
+    "last_modified_by": "",
+    "name": ">DCIM>Ports>Port 2",
+    "path": "/DCIM/Ports/Port 2",
+    "persistent_id": "-GF5oHyBc60",
+    "scoped_name": "Port 2",
+    "speed": "1000BASE-T"
+  }
+]

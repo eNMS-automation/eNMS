@@ -1,8 +1,9 @@
-<div class="modal-body" style="height: 90vh;">
+<div class="modal-body" style="height: 90vh">
   <div>
     <p>
-      The <b>Parameterized Form Template</b> Contains the html used to render the Parameterized Form.
-      Below are some examples that use the below parameterized form fields:
+      The <b>Parameterized Form Template</b> Contains the html used to render the
+      Parameterized Form. Below are some examples that use the below parameterized form
+      fields:
     </p>
     <textarea class="help-snippet">
 target_devices = MultipleInstanceField('Devices', model='device')
@@ -17,22 +18,33 @@ f = StringField("F")
     </textarea>
   </div>
   <div>
-    <p>Using 
+    <p>
+      Using
       <b>
-        <a href="https://jinja.palletsprojects.com/en/3.1.x/templates/#template-inheritance" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://jinja.palletsprojects.com/en/3.1.x/templates/#template-inheritance"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Jinja template inheritance,
-        </a>
-      </b>the form_content block of the "forms/parameterized.html" template can be overridden. The {% raw %}{{form}} {% endraw %} variable is a
+        </a> </b
+      >the form_content block of the "forms/parameterized.html" template can be
+      overridden. The {% raw %}{{form}} {% endraw %} variable is a
       <b>
-        <a href="https://wtforms.readthedocs.io/en/2.3.x/crash_course/?highlight=jinja#rendering-fields" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://wtforms.readthedocs.io/en/2.3.x/crash_course/?highlight=jinja#rendering-fields"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           WTform
         </a>
       </b>
-        instance and can be rendered using a jinja template.
+      instance and can be rendered using a jinja template.
     </p>
     <ul>
       <li>
-        <p><b>Basic Example</b>
+        <p>
+          <b>Basic Example</b>
           <textarea class="help-snippet">
 {%- raw -%}
 {% extends "forms/parameterized.html" %}
@@ -52,7 +64,8 @@ f = StringField("F")
         </p>
       </li>
       <li>
-        <p><b>Table-based Form Example</b>
+        <p>
+          <b>Table-based Form Example</b>
           <textarea class="help-snippet">
 {%- raw -%}
 {% extends "forms/parameterized.html" %}
@@ -95,7 +108,11 @@ f = StringField("F")
         </p>
       </li>
       <li>
-        <p><b>The "forms/parameterized.html" template, which is referenced in the above examples and its content being overridden</b>
+        <p>
+          <b
+            >The "forms/parameterized.html" template, which is referenced in the above
+            examples and its content being overridden</b
+          >
           <textarea class="help-snippet">
 {%- raw -%}
 <form

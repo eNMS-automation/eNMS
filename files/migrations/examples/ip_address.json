@@ -1,0 +1,32 @@
+[
+  {
+    "address": "192.168.0.1",
+    "admin_only": false,
+    "creation_time": "2025-02-11 20:09:36.620932",
+    "creator": "admin",
+    "description": "",
+    "last_modified": "",
+    "last_modified_by": "",
+    "name": ">IPAM>IP Address>IP Address 1",
+    "path": "/IPAM/IP Address/IP Address 1",
+    "persistent_id": "wLUaLqeKqOY",
+    "role": "loopback",
+    "scoped_name": "IP Address 1",
+    "vrf_instance": ""
+  },
+  {
+    "address": "10.0.0.156",
+    "admin_only": false,
+    "creation_time": "2025-02-11 20:10:04.188487",
+    "creator": "admin",
+    "description": "",
+    "last_modified": "",
+    "last_modified_by": "",
+    "name": ">IPAM>IP Address>IP Address 2",
+    "path": "/IPAM/IP Address/IP Address 2",
+    "persistent_id": "QTVleMy9ItE",
+    "role": "anycast",
+    "scoped_name": "IP Address 2",
+    "vrf_instance": "Test VRF"
+  }
+]

@@ -1,6 +1,7 @@
 apscheduler
 argon2-cffi
-dramatiq[redis, watch]
+black
+dramatiq
 flask
 flask_caching
 flask_login
@@ -9,6 +10,7 @@ flask_wtf
 gitpython
 gunicorn
 netmiko
+orjson
 passlib
 redis
 requests

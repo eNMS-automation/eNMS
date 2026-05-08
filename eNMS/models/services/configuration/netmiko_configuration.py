@@ -1,3 +1,4 @@
+from jinja2 import StrictUndefined, Template
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms.widgets import TextArea
 
@@ -13,16 +14,15 @@ class NetmikoConfigurationService(ConnectionService):
     parent_type = "connection_service"
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     content = db.Column(db.LargeString)
+    jinja2_template = db.Column(Boolean, default=False)
     enable_mode = db.Column(Boolean, default=True)
     config_mode = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
     read_timeout = db.Column(Float, default=10.0)
-    read_timeout_override = db.Column(Float, default=0.0)
     conn_timeout = db.Column(Float, default=10.0)
     auth_timeout = db.Column(Float, default=0.0)
     banner_timeout = db.Column(Float, default=15.0)
-    fast_cli = db.Column(Boolean, default=False)
-    global_delay_factor = db.Column(Float, default=1.0)
+    global_delay_factor = db.Column(Float, default=0.1)
     commit_configuration = db.Column(Boolean, default=False)
     exit_config_mode = db.Column(Boolean, default=True)
     strip_prompt = db.Column(Boolean, default=False)
@@ -32,8 +32,15 @@ class NetmikoConfigurationService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_configuration_service"}
 
+    @staticmethod
     def job(self, run, device):
-        config = run.sub(run.content, locals())
+        local_variables = locals()
+        if self.jinja2_template:
+            config = Template(run.content, undefined=StrictUndefined).render(
+                {**local_variables, **run.global_variables(**local_variables)}
+            )
+        else:
+            config = run.sub(run.content, local_variables)
         log_config = run.safe_log(run.content, config)
         if run.dry_run:
             return {"configuration": log_config}
@@ -65,6 +72,11 @@ class NetmikoConfigurationForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_configuration_service")
     config_mode = BooleanField("Config mode", default=True)
     content = StringField(widget=TextArea(), render_kw={"rows": 5}, substitution=True)
+    jinja2_template = BooleanField(
+        "Interpret Commands as Jinja2 Template",
+        default=False,
+        help="common/commands_jinja",
+    )
     commit_configuration = BooleanField()
     exit_config_mode = BooleanField(default=True)
     strip_prompt = BooleanField()
@@ -75,6 +87,7 @@ class NetmikoConfigurationForm(NetmikoForm):
         "Main Parameters": {
             "commands": [
                 "content",
+                "jinja2_template",
                 "commit_configuration",
                 "exit_config_mode",
                 "config_mode_command",

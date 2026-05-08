@@ -1,6 +1,7 @@
 /*
 global
 action: false
+automation: false
 linkRuntime: false
 page: false
 subtypes: false
@@ -36,9 +37,11 @@ import {
   drawTree,
   edges,
   highlightNode,
+  idToPid,
   instance,
   mousePosition,
   nodes,
+  pidToId,
   setPath,
   showBuilderChangelogPanel,
   showLabelPanel,
@@ -56,8 +59,9 @@ const options = {
   },
   manipulation: {
     enabled: false,
-    addNode: function (data, callback) {},
-    addEdge: function (data, callback) {
+    addNode: function(data, callback) {}, // eslint-disable-line no-unused-vars
+    addEdge: function(data, callback) {
+      // eslint-disable-line no-unused-vars
       if (data.from.length == 36 || data.to.length == 36) {
         notify("You cannot use a label to draw an edge.", "error", 5);
       } else if (data.to == startId) {
@@ -69,7 +73,7 @@ const options = {
         saveEdge(data);
       }
     },
-    deleteNode: function (data, callback) {
+    deleteNode: function(data, callback) {
       data.nodes = data.nodes.filter((node) => !ends.has(node));
       callback(data);
     },
@@ -85,6 +89,7 @@ export let graph;
 let currentRun;
 let currentPlaceholder;
 let discardNextRefresh;
+let edgeRoundness;
 let placeholder;
 let isSuperworkflow;
 let startId;
@@ -93,8 +98,12 @@ let endId;
 export function displayWorkflow(workflowData, workflowSwitch) {
   workflow = workflowData.service;
   placeholder = null;
-  currentPlaceholder = workflowData.state?.[currentPath]?.placeholder;
+  pidToId[workflow.persistent_id] = workflow.id;
+  idToPid[workflow.id] = workflow.persistent_id;
+  const statePath = currentPath.split(">").map(id => idToPid[id]).join(">");
+  currentPlaceholder = workflowData.state?.[statePath]?.placeholder;
   isSuperworkflow = false;
+  edgeRoundness = new Map();
   graph = configureGraph(
     workflow,
     {
@@ -104,11 +113,11 @@ export function displayWorkflow(workflowData, workflowSwitch) {
     options
   );
   workflow.services.map(drawIterationEdge);
-  graph.on("click", function (event) {
+  graph.on("click", function(event) {
     const node = this.getNodeAt(event.pointer.DOM);
     if (currentMode != "motion" && !node) switchMode("motion", true);
   });
-  graph.on("doubleClick", function (event) {
+  graph.on("doubleClick", function(event) {
     event.event.preventDefault();
     let node = nodes.get(this.getNodeAt(event.pointer.DOM));
     if (["Placeholder", "Start", "End"].includes(node.name)) node = currentPlaceholder;
@@ -135,7 +144,8 @@ export function updateRuntimeVariable(runtime) {
 }
 
 function updateRuntimes(result) {
-  currentPlaceholder = result.state?.[currentPath]?.placeholder;
+  const statePath = currentPath.split(">").map(id => idToPid[id]).join(">");
+  currentPlaceholder = result.state?.[statePath]?.placeholder;
   if (!currentRuntime) currentRuntime = $("#current-runtime").val();
   const displayedRuntimes = result.runtimes.map((runtime) => runtime[0]);
   if (
@@ -158,7 +168,17 @@ function updateRuntimes(result) {
     });
   }
   $("#current-runtime").val(currentRuntime || "latest");
+  const menu = $("#current-runtime").siblings(".dropdown-menu");
+  const scrollPosition = menu.find(".inner").scrollTop();
   $("#current-runtime").selectpicker("refresh");
+  menu.find(".bs-searchbox input").trigger("input");
+  menu.find(".inner").scrollTop(scrollPosition);
+}
+
+export function servicePanelUpdate(type, id) {
+  $(`#${type}-workflows-${id}`)
+    .val(page == "workflow_builder" ? [workflow.name] : [])
+    .trigger("change")
 }
 
 export function showServicePanel(type, id, mode, tableId) {
@@ -169,20 +189,20 @@ export function showServicePanel(type, id, mode, tableId) {
   $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
   if (id && mode == "duplicate" && type == "workflow") $(`#copy-${id}`).val(id);
   const workflowId = id ? `#${type}-workflows-${id}` : `#${type}-workflows${postfix}`;
-  if (id && mode == "duplicate") {
-    const value = page == "workflow_builder" ? [workflow.name] : [];
-    $(workflowId).val(value).trigger("change");
-  }
   if (!id && workflow && page == "workflow_builder") {
-    $(`#${type}-vendor`).val(workflow.vendor).trigger("change");
-    $(`#${type}-operating_system`).val(workflow.operating_system).trigger("change");
+    $(`#${type}-vendor`)
+      .val(workflow.vendor)
+      .trigger("change");
+    $(`#${type}-operating_system`)
+      .val(workflow.operating_system)
+      .trigger("change");
   }
-  $(field("report_template", type, id)).on("change", function () {
+  $(field("report_template", type, id)).on("change", function() {
     const isJinja2 = this.value.endsWith(".j2");
     field("report_jinja2_template", type, id).prop("checked", isJinja2);
     call({
       url: `/get_report_template/${this.value}`,
-      callback: function (template) {
+      callback: function(template) {
         field("report", type, id).val(template);
       },
     });
@@ -193,9 +213,9 @@ export function showServicePanel(type, id, mode, tableId) {
     enableAllSteps: true,
     keyNavigation: false,
     transitionEffect: "none",
-    onShowStep: function () {
+    onShowStep: function() {
       if (!editors[id]) return;
-      Object.keys(editors[id]).forEach(function (field) {
+      Object.keys(editors[id]).forEach(function(field) {
         editors[id][field].refresh();
       });
     },
@@ -204,7 +224,7 @@ export function showServicePanel(type, id, mode, tableId) {
   $(wizardId).smartWizard("fixHeight");
 }
 
-export const switchToWorkflow = function (path, direction, runtime, selection) {
+export const switchToWorkflow = function(path, direction, runtime, selection) {
   if (typeof path === "undefined") return;
   if (path.toString().includes(">")) {
     $("#up-arrow").removeClass("disabled");
@@ -220,7 +240,7 @@ export const switchToWorkflow = function (path, direction, runtime, selection) {
       get_tree: treeIsDisplayed,
       runtime: runtime || $("#current-runtime").val() || "latest",
     },
-    callback: function (result) {
+    callback: function(result) {
       workflow = result.service;
       currentRun = result.run;
       if (workflow?.superworkflow) {
@@ -234,7 +254,7 @@ export const switchToWorkflow = function (path, direction, runtime, selection) {
         localStorage.setItem("workflow", JSON.stringify(workflow));
       }
       displayWorkflow(result, true);
-      if (selection) highlightNode(selection);
+      if (selection) setTimeout(() => highlightNode(selection), 200);
       switchMode(currentMode, true);
     },
   });
@@ -254,7 +274,7 @@ function addServicesToWorkflow() {
   call({
     url: `/copy_service_in_workflow/${workflow.id}`,
     form: "add-services-form",
-    callback: function (result) {
+    callback: function(result) {
       instance.last_modified = result.update_time;
       $("#add_services_to_workflow").remove();
       result.services.map(updateWorkflowService);
@@ -266,7 +286,7 @@ function saveEdge(edge) {
   const param = `${workflow.id}/${edge.subtype}/${edge.from}/${edge.to}`;
   call({
     url: `/add_edge/${param}`,
-    callback: function (result) {
+    callback: function(result) {
       instance.last_modified = result.update_time;
       const newEdge = drawWorkflowEdge(result);
       edges.add(newEdge);
@@ -278,16 +298,12 @@ function saveEdge(edge) {
 
 function stopWorkflow() {
   if (!currentRun) notify("The workflow is not currently running.", "error", 5);
-  const stop = function () {
+  const stop = function() {
     call({
       url: `/stop_run/${currentRun.runtime}`,
-      callback: (result) => {
-        if (!result) {
-          notify("The workflow is not currently running.", "error", 5);
-        } else {
-          const log = `Workflow ${workflow.name} will stop after current service.`;
-          notify(log, "success", 5, true);
-        }
+      callback: () => {
+        const log = `Workflow '${workflow.name}' will stop after current service.`;
+        notify(log, "success", 5, true);
       },
     });
   };
@@ -353,6 +369,8 @@ export function drawWorkflowNode(service) {
     placeholder = service;
   }
   const defaultService = ["Start", "End"].includes(service.scoped_name);
+  pidToId[service.persistent_id] = service.id;
+  idToPid[service.id] = service.persistent_id;
   if (defaultService) {
     ends.add(service.id);
     if (service.scoped_name == "Start") {
@@ -386,8 +404,8 @@ export function drawWorkflowNode(service) {
     label: getServiceLabel(service),
     name: service.scoped_name,
     type: service.type,
-    x: service.x,
-    y: service.y,
+    x: workflow.positions?.[service.name]?.[0] ?? 0,
+    y: workflow.positions?.[service.name]?.[1] ?? 0,
   };
 }
 
@@ -421,6 +439,9 @@ export function drawIterationEdge(service) {
 }
 
 export function drawWorkflowEdge(edge) {
+  const key = `${edge.source_id}->${edge.destination_id}`;
+  const index = edgeRoundness.get(key) || 0;
+  edgeRoundness.set(key, index + 1);
   return {
     id: edge.id,
     label: edge.label,
@@ -429,7 +450,7 @@ export function drawWorkflowEdge(edge) {
     to: edge.destination_id,
     smooth: {
       type: "curvedCW",
-      roundness: edge.subtype == "success" ? 0.1 : edge.subtype == "failure" ? -0.1 : 0,
+      roundness: (-1) ** (index - 1) * 0.1 * Math.ceil(index / 2),
     },
     color: {
       color: edge.color,
@@ -438,51 +459,50 @@ export function drawWorkflowEdge(edge) {
   };
 }
 
+function drawServiceTree(search) {
+  $("#service-tree").jstree({
+    core: {
+      animation: 200,
+      themes: { stripes: true },
+      data: {
+        url: function(node) {
+          const nodeId = node.id == "#" ? "all" : node.data.id;
+          return `/get_workflow_services/${workflow.id}/${nodeId}`;
+        },
+        data: {search: search},
+        type: "POST",
+      },
+    },
+    plugins: ["checkbox", "search", "types", "wholerow"],
+    checkbox: {
+      three_state: false,
+    },
+    types: {
+      category: {
+        icon: "fa fa-folder",
+      },
+      default: {
+        icon: "glyphicon glyphicon-file",
+      },
+      workflow: {
+        icon: "fa fa-sitemap fa-rotate-270",
+      },
+    },
+  });
+}
+
 function addServicePanel() {
   openPanel({
     name: "add_services_to_workflow",
     title: "Add Services to Workflow",
-    callback: function () {
-      $("#service-tree").jstree({
-        core: {
-          animation: 200,
-          themes: { stripes: true },
-          data: {
-            url: function (node) {
-              const nodeId = node.id == "#" ? "all" : node.data.id;
-              return `/get_workflow_services/${workflow.id}/${nodeId}`;
-            },
-            type: "POST",
-          },
-        },
-        plugins: ["checkbox", "search", "types", "wholerow"],
-        checkbox: {
-          three_state: false,
-        },
-        search: {
-          show_only_matches: true,
-          ajax: {
-            type: "POST",
-            url: "/search_workflow_services",
-          },
-        },
-        types: {
-          category: {
-            icon: "fa fa-folder",
-          },
-          default: {
-            icon: "glyphicon glyphicon-file",
-          },
-          workflow: {
-            icon: "fa fa-sitemap",
-          },
-        },
-      });
+    callback: function() {
+      drawServiceTree();
       let timer = false;
-      $("#add-services-search").keyup(function (event) {
+      $("#add-services-search").keyup(function() {
         if (timer) clearTimeout(timer);
-        timer = setTimeout(function () {
-          $("#service-tree").jstree(true).search($("#add-services-search").val());
+        timer = setTimeout(function() {
+          $("#service-tree").jstree("destroy").empty();
+          drawServiceTree($("#add-services-search").val());
         }, 500);
       });
     },
@@ -503,9 +523,14 @@ function getResultLink(service, device) {
 function getWorkflowLink(includeRuntime) {
   const baseUrl =
     serverUrl || `${window.location.protocol}//${window.location.hostname}`;
-  let link = `${baseUrl}/workflow_builder/${currentPath}`;
-  if (includeRuntime) link += `/${currentRuntime}`;
-  copyToClipboard({ text: encodeURI(link) });
+  call({
+    url: `/get_workflow_path/${currentPath}`,
+    callback: function(persistentPath) {
+      let link = `${baseUrl}/workflow_builder/${persistentPath}`;
+      if (includeRuntime) link += `/${currentRuntime}`;
+      copyToClipboard({ text: encodeURI(link) });
+    },
+  });
 }
 
 export function updateWorkflowRightClickBindings() {
@@ -538,7 +563,7 @@ export function updateWorkflowRightClickBindings() {
     "Edit Edge": (edge) => {
       showInstancePanel("workflow_edge", edge.id);
     },
-    "Skip / Unskip": () => skipServices(),
+    "Skip - Unskip": () => skipServices(),
   });
 }
 
@@ -560,7 +585,7 @@ function showRestartWorkflowPanel() {
     title: `Restart Workflow '${workflow.name}'`,
     size: "900px auto",
     id: workflow.id,
-    callback: function () {
+    callback: function() {
       $(`#restart_workflow-start_services-${workflow.id}`).val(
         graph
           .getSelectedNodes()
@@ -570,14 +595,16 @@ function showRestartWorkflowPanel() {
       call({
         url: `/get_runtimes/${workflow.id}`,
         data: { display: runtimeDisplay },
-        callback: function (runtimes) {
+        callback: function(runtimes) {
           const id = `#restart_workflow-restart_runtime-${workflow.id}`;
           let currentIndex = 0;
           runtimes.forEach((runtime, index) => {
             if (runtime[0] == currentRuntime) currentIndex = index;
             $(id).append(new Option(runtime[1], runtime[0]));
           });
-          $(id).val(runtimes[currentIndex]).selectpicker("refresh");
+          $(id)
+            .val(runtimes[currentIndex])
+            .selectpicker("refresh");
         },
       });
     },
@@ -588,7 +615,7 @@ function restartWorkflow() {
   call({
     url: `/run_service/${currentPath}`,
     form: `restart_workflow-form-${workflow.id}`,
-    callback: function (result) {
+    callback: function(result) {
       $(`#restart_workflow-${workflow.id}`).remove();
       runLogic(result);
     },
@@ -605,14 +632,15 @@ export function getServiceState(id, first) {
   call({
     url: `/get_service_state/${id}`,
     data: { display: runtimeDisplay },
-    callback: function (result) {
+    callback: function(result) {
       if (first || result.state?.status == "Running") {
         colorService(id, "#89CFF0");
         if (result.service && result.service.type === "workflow") {
           localStorage.setItem("workflow_path", id);
           localStorage.setItem("workflow", JSON.stringify(result.service));
         }
-        setTimeout(() => getServiceState(id), 5000);
+        const minRefreshRate = automation.workflow.builder_refresh_rate.min;
+        setTimeout(() => getServiceState(id), minRefreshRate);
       } else {
         colorService(id, "#D2E5FF");
       }
@@ -625,22 +653,28 @@ function displayWorkflowState(result, workflowSwitch) {
   resetWorkflowDisplay();
   updateRuntimes(result);
   if (workflowSwitch) {
-    $("#workflow-tree-services").jstree("destroy").empty();
+    $("#workflow-tree-services")
+      .jstree("destroy")
+      .empty();
     $(".hidden-scrollbar").scrollTop(0);
   }
   drawTree(null, result.tree);
+  let nodeUpdates = [];
+  let edgeUpdates = [];
   if (result.highlight) {
-    result.highlight.forEach((node) => colorService(node, "#EFFD5F"));
+    result.highlight.forEach((node) => {
+      nodeUpdates.push({ id: node, color: "#EFFD5F" });
+    })
   }
   if (!nodes || !edges || !result.state) return;
   if (result.device_state) {
-    for (const [serviceId, status] of Object.entries(result.device_state)) {
-      colorService(parseInt(serviceId), status ? "#32CD32" : "#FF6666");
+    for (const [serviceId, color] of Object.entries(result.device_state)) {
+      if (!nodes.get(parseInt(serviceId))) continue;
+      nodeUpdates.push({ id: parseInt(serviceId), color: color });
     }
+    nodes.update(nodeUpdates);
     return;
   }
-  let nodeUpdates = [];
-  let edgeUpdates = [];
   const cache = result.state?.connections || {};
   Object.entries(cache).forEach(([library, connections]) => {
     if (connections === 0) delete cache[library];
@@ -651,14 +685,15 @@ function displayWorkflowState(result, workflowSwitch) {
     const connectionText = Object.entries(cache)
       .map(([library, number]) => `${library} (${number})`)
       .join(" / ");
-    $("#connections-div").show().html(`<p>Open Connections: ${connectionText}</p>`);
+    $("#connections-div")
+      .show()
+      .html(`<p>Open Connections: ${connectionText}</p>`);
   }
   const serviceIds = workflow.services.map((s) => s.id);
   for (let [path, state] of Object.entries(result.state)) {
-    const id = parseInt(path.split(">").slice(-1)[0]);
+    const id = pidToId[path.split(">").slice(-1)[0]];
     if (ends.has(id) || !serviceIds.includes(id)) continue;
     let label = `<b>${nodes.get(id).name}</b>\n`;
-    colorService(id, state.dry_run ? "#EDC582" : state.success ? "#32CD32" : "#FF6666");
     let first = true;
     for (const progressKey of ["device", "iteration_device"]) {
       if (state.progress?.[progressKey]) {
@@ -666,9 +701,9 @@ function displayWorkflowState(result, workflowSwitch) {
         const success = parseInt(state.progress?.[progressKey]?.success) || 0;
         const skipped = parseInt(state.progress?.[progressKey]?.skipped) || 0;
         const failure = parseInt(state.progress?.[progressKey]?.failure) || 0;
-        colorService(
-          id,
-          state.status == "Skipped" || (total && skipped == total)
+        nodeUpdates.push({
+          id: id,
+          color: state.status == "Skipped" || (total && skipped == total)
             ? "#D3D3D3"
             : success + failure + skipped < total
             ? "#89CFF0"
@@ -679,7 +714,7 @@ function displayWorkflowState(result, workflowSwitch) {
             : state.success === true
             ? "#32CD32"
             : "#00CCFF"
-        );
+        });
         if (total) {
           const prefix = progressKey == "device" ? "Devices" : "Iteration";
           let progressLabel = `${prefix} - ${success + failure + skipped}/${total}`;
@@ -689,14 +724,15 @@ function displayWorkflowState(result, workflowSwitch) {
           if (success) progressInfo.push(`${success} passed`);
           if (failure) progressInfo.push(`${failure} failed`);
           if (skipped) progressInfo.push(`${skipped} skipped`);
-          const detailedLabel = ` (${progressInfo.join(", ")})${first ? "\n" : ""}`;
-          if (progressInfo.length) label += detailedLabel;
+          if (progressInfo.length) label += ` (${progressInfo.join(", ")})`;
+          label += `${first ? "\n" : ""}`;
           first = false;
         }
       }
     }
     nodeUpdates.push({
       id: id,
+      color: state.dry_run ? "#EDC582" : state.success ? "#32CD32" : "#FF6666",
       label: label,
     });
   }
@@ -713,9 +749,8 @@ function displayWorkflowState(result, workflowSwitch) {
     });
   }
   nodes.update(nodeUpdates);
-  const state = result.state[currentPath];
-  if (state?.edges) {
-    for (let [id, devices] of Object.entries(state.edges)) {
+  if (result.state?.edges) {
+    for (let [id, devices] of Object.entries(result.state.edges)) {
       if (!edges.get(parseInt(id))) continue;
       edgeUpdates.push({
         id: parseInt(id),
@@ -765,7 +800,7 @@ export function resetWorkflowDisplay() {
 
 export function getWorkflowState(periodic, first) {
   const startTime = new Date().getTime();
-  if (userIsActive && workflow?.id && !first) {
+  if (userIsActive && document.hasFocus() && workflow?.id && !first) {
     call({
       url: `/get_service_state/${currentPath}`,
       data: {
@@ -775,13 +810,14 @@ export function getWorkflowState(periodic, first) {
         device: $("#device-filter").val(),
         search_mode: $("#tree-search-mode").val(),
         search_value: $("#tree-search").val(),
+        display_all: $("#tree-display-all-services").prop("checked"),
+        regex_search: $("#tree-regex-search").prop("checked"),
       },
-      callback: function (result) {
-        const updateDisplay = (
-          !discardNextRefresh
-          && Object.keys(result).length
-          && result.service.id == workflow.id
-        );
+      callback: function(result) {
+        const updateDisplay =
+          !discardNextRefresh &&
+          Object.keys(result).length &&
+          result.service.id == workflow.id;
         if (updateDisplay) {
           currentRun = result.run;
           currentRuntime = result.runtime;
@@ -796,15 +832,15 @@ export function getWorkflowState(periodic, first) {
         const refreshSettings = automation.workflow.builder_refresh_rate;
         const endTime = new Date().getTime();
         const delay = Math.min(
-          refreshSettings.max, Math.max(
-            refreshSettings.min, (endTime - startTime) * refreshSettings.factor
-          )
+          refreshSettings.max,
+          Math.max(refreshSettings.min, (endTime - startTime) * refreshSettings.factor)
         );
         if (periodic) setTimeout(() => getWorkflowState(true), delay);
       },
     });
   } else if (periodic) {
-    setTimeout(() => getWorkflowState(true), 5000);
+    const minRefreshRate = automation.workflow.builder_refresh_rate.min;
+    setTimeout(() => getWorkflowState(true), minRefreshRate);
   }
 }
 
@@ -843,7 +879,7 @@ function compareWorkflowResults() {
     title: "Result Comparison",
     id: mainId,
     tableId: `full_result-${mainId}`,
-    callback: function () {
+    callback: function() {
       let constraints = {
         parent_service_id: currentPath.split(">")[0],
         parent_service_id_filter: "equality",

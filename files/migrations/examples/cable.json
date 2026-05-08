@@ -1,0 +1,32 @@
+[
+  {
+    "admin_only": false,
+    "color": "red",
+    "creation_time": "2025-02-23 13:39:34.468753",
+    "creator": "admin",
+    "description": "Port 1 - Port 2",
+    "label": "P1 -> P2",
+    "last_modified": "",
+    "last_modified_by": "",
+    "length": 10.5,
+    "name": ">DCIM>Cables>Cable 1",
+    "path": "/DCIM/Cables/Cable 1",
+    "persistent_id": "zU7kQ0etx7I",
+    "scoped_name": "Cable 1"
+  },
+  {
+    "admin_only": false,
+    "color": "BLUE",
+    "creation_time": "2025-02-23 13:40:17.716208",
+    "creator": "admin",
+    "description": "Port 2 to Port 1",
+    "label": "P2 -> P1",
+    "last_modified": "",
+    "last_modified_by": "",
+    "length": -1.0,
+    "name": ">DCIM>Cables>Cable 2",
+    "path": "/DCIM/Cables/Cable 2",
+    "persistent_id": "JL6c6KobJ5Q",
+    "scoped_name": "Cable 2"
+  }
+]

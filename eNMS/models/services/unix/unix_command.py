@@ -1,10 +1,10 @@
 from flask_login import current_user
-from subprocess import run as sub_run
 from sqlalchemy import Boolean, ForeignKey, Integer
+from subprocess import run as sub_run
 
 from eNMS.database import db
-from eNMS.forms import ServiceForm
 from eNMS.fields import BooleanField, HiddenField, StringField
+from eNMS.forms import ServiceForm
 from eNMS.models.automation import Service
 
 
@@ -22,6 +22,7 @@ class UnixCommandService(Service):
             kwargs["approved_by_admin"] = False
         super().update(**kwargs)
 
+    @staticmethod
     def job(self, run, device=None):
         command = run.sub(run.command, locals())
         log_command = run.safe_log(run.command, command)
@@ -48,7 +49,6 @@ class UnixCommandForm(ServiceForm):
 
     def validate(self, **_):
         valid_form = super().validate()
-        service = db.fetch("service", id=self.id.data, allow_none=True)
         rbac_error = self.approved_by_admin.data and not current_user.is_admin
         if rbac_error:
             self.approved_by_admin.errors.append(

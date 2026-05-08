@@ -25,7 +25,7 @@
         },
         "Sessions": {
           "endpoint": "/session_table",
-          "rbac": "admin"
+          "rbac": "access"
         }
       }
     },
@@ -47,10 +47,6 @@
       "icon": "users",
       "rbac": "access",
       "pages": {
-        "Users": {
-          "endpoint": "/user_table",
-          "rbac": "admin"
-        },
         "Groups": {
           "endpoint": "/group_table",
           "rbac": "admin"
@@ -59,9 +55,9 @@
           "endpoint": "/credential_table",
           "rbac": "admin"
         },
-        "Secrets": {
-          "endpoint": "/secret_table",
-          "rbac": "access"
+        "Snippets": {
+          "endpoint": "/snippet_table",
+          "rbac": "admin"
         }
       }
     },
@@ -75,6 +71,10 @@
         },
         "Configurations": {
           "endpoint": "/configuration_table",
+          "rbac": "access"
+        },
+        "Data Store": {
+          "endpoint": "/store_table",
           "rbac": "access"
         },
         "Links": {
@@ -135,12 +135,14 @@
     "/": "none",
     "/alerts_table_form": "all",
     "/calendar_form": "all",
+    "/changelog_diff_form": "access",
     "/changelog_table": "access",
     "/compare_form": "access",
     "/configuration_table": "access",
     "/confirmation_form": "access",
     "/credential_table": "access",
     "/dashboard": "all",
+    "/data_table": "access",
     "/device_data_form": "access",
     "/device_table": "access",
     "/download": "access",
@@ -171,17 +173,19 @@
     "/result_comparison_form": "access",
     "/result_form": "access",
     "/run_table": "access",
+    "/script_form": "admin",
     "/search_form": "access",
     "/server_table": "access",
     "/service_table": "access",
-    "/session_log_form": "admin",
-    "/session_table": "admin",
+    "/session_log_form": "access",
+    "/session_table": "access",
+    "/snippet_table": "admin",
+    "/store_table": "access",
     "/network_table": "access",
     "/table_form": "access",
     "/task_table": "access",
     "/terminal": "access",
     "/tree_form": "access",
-    "/secret_table": "access",
     "/user_table": "admin",
     "/view_service_results": "access",
     "/workflow_builder": "access",
@@ -197,13 +201,11 @@
     "/bulk_removal": "access",
     "/copy_service_in_workflow": "access",
     "/calendar_init": "all",
-    "/clear_results": "access",
     "/clear_configurations": "access",
     "/compare": "access",
     "/counters": "access",
     "/count_models": "all",
     "/create_label": "access",
-    "/database_deletion": "admin",
     "/delete_instance": "access",
     "/delete_builder_selection": "access",
     "/desktop_connection": "access",
@@ -212,17 +214,19 @@
     "/topology_export": "access",
     "/edit_file": "access",
     "/filtering": "all",
+    "/format_code_with_black": "access",
     "/get": "access",
     "/get_builder_children": "access",
+    "/get_changelog_history": "access",
     "/get_cluster_status": "access",
     "/get_git_history": "access",
     "/get_device_network_data": "access",
-    "/get_device_logs": "access",
     "/get_form_properties": "all",
     "/get_git_network_data": "access",
     "/get_git_content": "admin",
     "/get_migration_folders": "access",
     "/get_network_state": "access",
+    "/get_profiling_data": "admin",
     "/get_service_logs": "access",
     "/get_report": "access",
     "/get_report_template": "access",
@@ -230,18 +234,19 @@
     "/get_runtimes": "all",
     "/get_view_topology": "access",
     "/get_service_state": "access",
-    "/get_session_log": "admin",
+    "/get_session_log": "access",
+    "/get_store": "access",
     "/get_time": "access",
     "/get_top_level_instances": "access",
     "/get_visualization_pools": "access",
+    "/get_workflow_path": "access",
     "/get_workflow_services": "access",
     "/get_instance_tree": "access",
     "/import_services": "access",
     "/import_topology": "admin",
-    "/load_debug_snippets": "admin",
+    "/json_migration_export": "admin",
+    "/json_migration_import": "admin",
     "/login": "none",
-    "/migration_export": "admin",
-    "/migration_import": "admin",
     "/multiselect_filtering": "all",
     "/remove_instance": "access",
     "/rest/instance": "access",
@@ -259,10 +264,8 @@
     "/save_positions": "access",
     "/save_profile": "access",
     "/save_settings": "admin",
-    "/scan_cluster": "access",
     "/scan_folder": "access",
     "/scan_playbook_folder": "access",
-    "/search_workflow_services": "access",
     "/skip_services": "access",
     "/stop_run": "access",
     "/switch_menu": "all",
@@ -276,31 +279,34 @@
     "/update_device_rbac": "admin",
     "/upload_files": "access",
     "/view_filtering": "access",
-    "/web_connection": "access"
+    "/web_connection": "access",
+    "/yaml_migration_export": "admin",
+    "/yaml_migration_import": "admin"
   },
   "rest_endpoints": {
     "GET": {
-        "configuration": "get_configuration",
-        "instance": "get_instance",
-        "is_alive": "is_alive",
-        "query": "query",
-        "result": "get_result",
-        "workers": "get_workers"
+      "configuration": "get_configuration",
+      "instance": "get_instance",
+      "is_alive": "is_alive",
+      "query": "query",
+      "result": "get_result",
+      "workers": "get_workers"
     },
     "POST": {
-        "instance": "update_instance",
-        "migrate": "migrate",
-        "run_service": "run_service",
-        "run_task": "run_task",
-        "search": "search",
-        "topology": "topology"
+      "instance": "update_instance",
+      "migrate": "migrate",
+      "run_service": "run_service",
+      "run_task": "run_task",
+      "search": "search",
+      "topology": "topology"
     },
     "DELETE": {
-        "instance": "delete_instance"
+      "instance": "delete_instance"
     }
   },
   "allowed_rest_endpoints": {
     "add_instances_in_bulk": "access",
+    "scan_folder": "admin",
     "get_cluster_status": "access",
     "get_git_content": "access",
     "update_all_pools": "access",
@@ -308,13 +314,14 @@
     "update_device_rbac": "access"
   },
   "admin_models": {
-    "read": ["session"],
+    "read": [],
     "edit": ["group", "server", "session", "user", "worker"]
   },
   "rbac_models": {
     "credential": {
       "rbac_read": "Read",
-      "rbac_edit": "Edit"
+      "rbac_edit": "Edit",
+      "rbac_use": "Use"
     },
     "device": {
       "rbac_read": "Read",
@@ -327,20 +334,19 @@
       "rbac_read": "Read",
       "rbac_edit": "Edit"
     },
-    "network": {
-      "rbac_read": "Read",
-      "rbac_edit": "Edit"
-    },
     "pool": {
       "rbac_read": "Read",
       "rbac_edit": "Edit"
     },
-    "secret": {
+    "data": {
       "rbac_read": "Read",
       "rbac_edit": "Edit",
       "rbac_use": "Use"
     },
     "server": {
+      "rbac_read": "Read"
+    },
+    "session": {
       "rbac_read": "Read"
     },
     "service": {
@@ -355,5 +361,8 @@
     "worker": {
       "rbac_read": "Read"
     }
+  },
+  "admin_only_bypass": {
+    "credential": ["use"]
   }
 }

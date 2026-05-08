@@ -51,11 +51,13 @@ let builderTreeData;
 export let creationMode;
 export let currentMode = "motion";
 export let currentPath = page.includes("builder") && savedPath;
+export let idToPid = {};
 export let instance;
 export let edges;
 export let mousePosition;
 export let nodes;
-export let treeIsDisplayed;
+export let pidToId = {};
+export let treeIsDisplayed = user.display_tree;
 export let triggerMenu;
 
 export function configureGraph(newInstance, graph, options) {
@@ -69,20 +71,21 @@ export function configureGraph(newInstance, graph, options) {
   network.setOptions({ physics: false });
   network.setOptions({ interaction: { zoomSpeed: user.zoom_sensitivity } });
   for (const objectType of ["Node", "Edge"]) {
-    network.on(`hover${objectType}`, function () {
+    network.on(`hover${objectType}`, function() {
       network.canvas.body.container.style.cursor = "pointer";
     });
-    network.on(`blur${objectType}`, function () {
+    network.on(`blur${objectType}`, function() {
       network.canvas.body.container.style.cursor = "default";
     });
   }
-  network.on("select", function () {
+  network.on("select", function() {
     $("#confirmation-builder_deletion").remove();
   });
   network.on("dragStart", () => {
+    network.selectNodes(network.getSelectedNodes());
     $("#confirmation-builder_deletion").remove();
   });
-  network.on("oncontext", function (properties) {
+  network.on("oncontext", function(properties) {
     if (triggerMenu) {
       properties.event.preventDefault();
       mousePosition = properties.pointer.canvas;
@@ -108,7 +111,7 @@ export function configureGraph(newInstance, graph, options) {
       properties.event.preventDefault();
     }
   });
-  network.on("doubleClick", function (event) {
+  network.on("doubleClick", function(event) {
     mousePosition = event.pointer.canvas;
   });
   if (!$(`#current-${instance.type} option[value='${instance.id}']`).length) {
@@ -117,7 +120,9 @@ export function configureGraph(newInstance, graph, options) {
       `<option value="${instance.id}">${name}</option>`
     );
   }
-  $(`#current-${instance.type}`).val(instance.id).selectpicker("refresh");
+  $(`#current-${instance.type}`)
+    .val(instance.id)
+    .selectpicker("refresh");
   network.on("dragEnd", (event) => {
     if (network.getNodeAt(event.pointer.DOM)) savePositions();
   });
@@ -130,16 +135,24 @@ export function drawTree(service, data, resultsPanel) {
   const noUpdate = builderTreeData == JSON.stringify(data);
   if (!data) {
     builderTreeData = null;
-    $(treeId).jstree("destroy").off().empty();
+    $(treeId)
+      .jstree("destroy")
+      .off()
+      .empty();
     if (!noUpdate) $(treeId).text("No Results Found.");
     return;
   }
   if (noUpdate && !resultsPanel && $(treeId).children().length > 0) return;
   if ($(treeId).jstree(true) && !resultsPanel) {
     $(treeId).jstree(true).settings.core.data = data;
-    $(treeId).jstree(true).refresh();
+    $(treeId)
+      .jstree(true)
+      .refresh();
   } else {
-    $(treeId).jstree("destroy").off().empty();
+    $(treeId)
+      .jstree("destroy")
+      .off()
+      .empty();
     let tree = $(treeId).jstree({
       core: {
         animation: 100,
@@ -148,8 +161,10 @@ export function drawTree(service, data, resultsPanel) {
       },
       plugins: ["html_row", "types", "wholerow"],
       html_row: {
-        default: function (el, node) {
+        default: function(el, node) {
           if (!node) return;
+          pidToId[node.data.properties.persistent_id] = node.data.properties.id;
+          idToPid[node.data.properties.id] = node.data.properties.persistent_id;
           const runtime = $(
             service ? `#runtimes-tree-${service}` : "#current-runtime"
           ).val();
@@ -219,7 +234,9 @@ export function drawTree(service, data, resultsPanel) {
             >
               <span class="glyphicon glyphicon-edit"></span>
             </button>`;
-          $(el).find("a").first().append(`
+          $(el)
+            .find("a")
+            .first().append(`
                 ${progressSummary}
                 <div style="position: absolute; top: 0px; right: 20px">
                   <button
@@ -243,11 +260,11 @@ export function drawTree(service, data, resultsPanel) {
           icon: "glyphicon glyphicon-file",
         },
         workflow: {
-          icon: "fa fa-sitemap",
+          icon: "fa fa-sitemap fa-rotate-270",
         },
       },
     });
-    tree.on("contextmenu", ".jstree-anchor", function (event) {
+    tree.on("contextmenu", ".jstree-anchor", function(event) {
       const tree = $(treeId).jstree(true);
       selectedObject = tree.get_node(event.target).data.properties;
       $(`.menu-entry,.${type}-selection`).hide();
@@ -259,16 +276,27 @@ export function drawTree(service, data, resultsPanel) {
         network.selectNodes([]);
       }
     });
-    tree.unbind("dblclick").on("dblclick", function (event) {
-      highlightNode($(treeId).jstree(true).get_node(event.target).data);
+    tree.on("select_node.jstree", function(_, data) {
+      network.selectNodes(
+        data.selected
+          .map((path) => parseInt(path.split(">").pop()))
+          .filter((id) => nodes.get(id))
+      );
     });
-    tree.bind("loaded.jstree", function (e, data) {
+    tree.unbind("dblclick").on("dblclick", function(event) {
+      highlightNode(
+        $(treeId)
+          .jstree(true)
+          .get_node(event.target).data
+      );
+    });
+    tree.bind("loaded.jstree", function() {
       createTooltips();
       if (resultsPanel) tree.jstree("open_all");
     });
     $(`#builder,${treeId}`).contextMenu({
       menuSelector: "#contextMenu",
-      menuSelected: function (selectedMenu) {
+      menuSelected: function(selectedMenu) {
         const row = selectedMenu.text();
         action[row](selectedObject);
       },
@@ -278,7 +306,7 @@ export function drawTree(service, data, resultsPanel) {
 }
 
 export function highlightNode(node) {
-  const nodePath = node.path.split(">");
+  const nodePath = node.path.split(">").map((pid) => pidToId[pid]);
   const [containerId, nodeId] = nodePath.slice(-2);
   const selection = { nodes: [parseInt(nodeId)], edges: [] };
   if (containerId != instance.id) {
@@ -298,8 +326,9 @@ export function savePositions() {
   call({
     url: `/save_positions/${instance.type}/${instance.id}`,
     data: network.getPositions(),
-    callback: function (updateTime) {
+    callback: function([updateTime, newPositions]) {
       if (updateTime) instance.last_modified = updateTime;
+      instance.positions = newPositions;
       nodes.update(
         Object.entries(positions).map(([id, position]) => ({
           id: isNaN(id) ? id : parseInt(id),
@@ -314,7 +343,7 @@ export function showBuilderChangelogPanel(model, global) {
   if (global) {
     call({
       url: `/get_builder_children/${model}/${instance.id}`,
-      callback: function (children) {
+      callback: function(children) {
         const subModel = model == "workflow" ? "service" : "device";
         const constraints = {
           [`${subModel}`]: children,
@@ -326,7 +355,8 @@ export function showBuilderChangelogPanel(model, global) {
   } else {
     const selectedNode = network.getSelectedNodes()[0];
     const classType = model == "workflow" ? "service" : nodes.get(selectedNode).type;
-    showChangelogPanel(instance.id, { [`${classType}_id`]: selectedNode });
+    const serviceName = [nodes.get(selectedNode).full_name]
+    showChangelogPanel(instance.id, { [`${classType}`]: serviceName });
   }
 }
 
@@ -343,7 +373,7 @@ function showBuilderSearchPanel() {
   const filteringType = type == "workflow" ? "Service" : "Device";
   openPanel({
     name: "search",
-    size: `500 ${type == "workflow" ? "240" : "160"}`,
+    size: `500 ${type == "workflow" ? "310" : "230"}`,
     content: `
       <form id="search-form-${instance.id}" style="margin: 15px">
         <fieldset class="custom-fieldset">
@@ -360,8 +390,17 @@ function showBuilderSearchPanel() {
               name="search_value"
               placeholder="&#xF002;"
               class="form-control"
-              style="font-family: Arial, FontAwesome;"
+              style="font-family: Arial, FontAwesome; margin-bottom: 5px"
             />
+            <label for="tree-display-all-services">
+              <input type="checkbox" id="tree-display-all-services" />
+                Include Non-Matching Services in Workflow Tree
+            </label>
+
+            <label for="tree-regex-search">
+              <input type="checkbox" id="tree-regex-search" />
+                Regular Expression Search
+            </label>
         </fieldset>
         ${bottomField}
       </form>`,
@@ -370,10 +409,15 @@ function showBuilderSearchPanel() {
     callback: () => {
       const func = type == "workflow" ? getWorkflowState : getNetworkState;
       initSelect($(`#device-filter`), "device", null, true);
-      $("#device-filter").on("change", func);
-      $("#tree-search-mode").selectpicker().on("change", func);
+      $("#device-filter,#tree-display-all-services,#tree-regex-search").on(
+        "change",
+        func
+      );
+      $("#tree-search-mode")
+        .selectpicker()
+        .on("change", func);
       let timer = false;
-      document.getElementById("tree-search").addEventListener("keyup", function () {
+      document.getElementById("tree-search").addEventListener("keyup", function() {
         if (timer) clearTimeout(timer);
         timer = setTimeout(func, 500);
       });
@@ -391,7 +435,9 @@ export function showLabelPanel({ label, usePosition }) {
       if (label) {
         $("#label-text").val(label.label);
         $("#label-size").val(label.font.size);
-        $("#label-alignment").val(label.font.align).selectpicker("refresh");
+        $("#label-alignment")
+          .val(label.font.align)
+          .selectpicker("refresh");
         currentLabel = label;
       } else {
         currentLabel = null;
@@ -407,7 +453,7 @@ function createLabel() {
   call({
     url: `/create_label/${labelUrl}/${pos[0]}/${pos[1]}/${currentLabel?.id}`,
     form: "label-form",
-    callback: function (result) {
+    callback: function(result) {
       drawLabel(result.id, result);
       $("#label").remove();
       notify("Label created.", "success", 5);
@@ -444,9 +490,10 @@ function deleteSelection() {
   call({
     url: `/delete_builder_selection/${type}/${instance.id}`,
     data: selection,
-    callback: function (updateTime) {
+    callback: function(updateTime) {
       network.deleteSelected();
       network.setSelection({ nodes: [], edges: [] });
+      network.interactionHandler.drag.selection = [];
       const edgeType = type == "network" ? "links" : "edges";
       instance[`${nodeType}s`] = instance[`${nodeType}s`].filter(
         (n) => !selection.nodes.includes(n.id)
@@ -464,18 +511,22 @@ function deleteSelection() {
 
 function openDeletionPanel() {
   if (!instance) return notify(`No ${type} has been created yet.`, "error", 5);
-  const nodeSelection = network.getSelectedNodes().length;
+  const nodes = network.getSelectedNodes();
+  const labelSelection = nodes.filter((node) => typeof node === "string").length;
+  const nodeSelection = nodes.filter(Number.isInteger).length;
   const edgeSelection = network.getSelectedEdges().length;
-  if (!nodeSelection && !edgeSelection) {
+  if (!nodeSelection && !edgeSelection && !labelSelection) {
     notify("Nothing has been selected for deletion.", "error", 5);
   } else {
     const edgeType = type == "network" ? "link" : "edge";
+    const nodeType = type == "network" ? "device" : "service";
     showConfirmationPanel({
       id: "builder_deletion",
       title: `Deletion from ${type}`,
       message: `Are you sure you want to delete the current selection
-      (<b>${nodeSelection} node${nodeSelection > 1 ? "s" : ""}
-      and ${edgeSelection} ${edgeType}${edgeSelection > 1 ? "s" : ""}</b>) ?`,
+      (<b>${nodeSelection} ${nodeType}${nodeSelection > 1 ? "s" : ""},
+      ${edgeSelection} ${edgeType}${edgeSelection > 1 ? "s" : ""},
+      ${labelSelection} label${labelSelection > 1 ? "s" : ""}</b>) ?`,
       confirmButton: "Delete",
       onConfirm: deleteSelection,
     });
@@ -528,14 +579,17 @@ export function updateBuilderBindings(action) {
     Backward: () => switchTo(history[historyPosition - 1], "left"),
     Forward: () => switchTo(history[historyPosition + 1], "right"),
     Upward: () => {
-      const parentPath = currentPath.split(">").slice(0, -1).join(">");
+      const parentPath = currentPath
+        .split(">")
+        .slice(0, -1)
+        .join(">");
       if (parentPath) switchTo(parentPath);
     },
     Changelog: () => showBuilderChangelogPanel(type),
   });
   $("#builder").contextMenu({
     menuSelector: "#contextMenu",
-    menuSelected: function (selectedMenu) {
+    menuSelected: function(selectedMenu) {
       const row = selectedMenu.text();
       action[row](selectedObject);
     },
@@ -573,7 +627,7 @@ export const rectangleSelection = (container, graph, nodes) => {
     );
   };
 
-  container.on("mousedown", function ({ which, pageX, pageY }) {
+  container.on("mousedown", function({ which, pageX, pageY }) {
     const startX = pageX - this.offsetLeft + offsetLeft;
     const startY = pageY - this.offsetTop + offsetTop;
     if (which === 3) {
@@ -587,7 +641,7 @@ export const rectangleSelection = (container, graph, nodes) => {
     }
   });
 
-  container.on("mousemove", function ({ which, pageX, pageY }) {
+  container.on("mousemove", function({ which, pageX, pageY }) {
     if (which === 0 && drag) {
       drag = false;
       graph.redraw();
@@ -600,7 +654,7 @@ export const rectangleSelection = (container, graph, nodes) => {
     }
   });
 
-  container.on("mouseup", function ({ which }) {
+  container.on("mouseup", function({ which }) {
     if (which === 3) {
       drag = false;
       graph.redraw();
@@ -652,14 +706,18 @@ export function switchMode(mode, noNotification) {
   const newLinkMode = type == "network" ? "create_link" : $("#edge-type-dd-list").val();
   currentMode = mode || (currentMode == "motion" ? newLinkMode : "motion");
   if ((oldMode == "motion" || currentMode == "motion") && oldMode != currentMode) {
-    $("#mode-icon").toggleClass("glyphicon-move").toggleClass("glyphicon-random");
+    $("#mode-icon")
+      .toggleClass("glyphicon-move")
+      .toggleClass("glyphicon-random");
   }
   let notification;
+  if (!network) return;
   if (currentMode == "motion") {
     network.addNodeMode();
     notification = "Mode: Motion.";
   } else {
     network.setSelection({ nodes: [], edges: [] });
+    network.interactionHandler.drag.selection = [];
     network.addEdgeMode();
     const linkLog = type == "network" ? "link" : `'${currentMode}' Edge.`;
     notification = `Mode: Creation of ${linkLog}.`;
@@ -671,19 +729,30 @@ export function processBuilderData(newInstance) {
   if (instance) instance.last_modified = newInstance.last_modified;
   if (newInstance.id == instance?.id) {
     instance = newInstance;
-    $(`#current-${type} option:selected`).text(newInstance.name).trigger("change");
+    $(`#current-${type} option:selected`)
+      .text(newInstance.name)
+      .trigger("change");
   }
   if ([`create_${type}`, `duplicate_${type}`].includes(creationMode)) {
     $(`#current-${type}`).append(
       `<option value="${newInstance.id}">${newInstance.name}</option>`
     );
-    $(`#current-${type}`).val(newInstance.id).trigger("change");
+    $(`#current-${type}`)
+      .val(newInstance.id)
+      .trigger("change");
     creationMode = null;
     switchTo(`${newInstance.id}`);
   } else if (
-    (type == "workflow" && !instance.type) ||
+    (type == "workflow" && newInstance.type == "workflow_edge") ||
     (type == "network" && newInstance.type in subtypes.link)
   ) {
+    const property = type == "network" ? "links" : "edges";
+    let index = instance[property].findIndex((s) => s.id == newInstance.id);
+    if (index == -1) {
+      instance[property].push(newInstance);
+    } else {
+      instance[property][index] = newInstance;
+    }
     edges.update(drawEdge(newInstance));
     network.addEdgeMode();
   } else if (
@@ -693,12 +762,14 @@ export function processBuilderData(newInstance) {
     if (!newInstance[`${type}s`].some((w) => w.id == instance.id)) return;
     const property = type == "network" ? "devices" : "services";
     let index = instance[property].findIndex((s) => s.id == newInstance.id);
-    nodes.update(drawNode(newInstance));
     if (index == -1) {
       instance[property].push(newInstance);
     } else {
+      const oldRecordName = instance[property][index].name;
+      instance.positions[newInstance.name] = instance.positions[oldRecordName];
       instance[property][index] = newInstance;
     }
+    nodes.update(drawNode(newInstance));
     if (type == "workflow") drawIterationEdge(instance);
     switchMode("motion");
   }
@@ -715,7 +786,7 @@ function updateRightClickBindings() {
 }
 
 export function initBuilder() {
-  vis.Network.prototype.zoom = function (scale) {
+  vis.Network.prototype.zoom = function(scale) {
     const animationOptions = {
       scale: this.getScale() + scale,
       animation: { duration: 300 },
@@ -724,7 +795,7 @@ export function initBuilder() {
   };
   $("#edge-type-dd-list")
     .selectpicker()
-    .on("change", function () {
+    .on("change", function() {
       switchMode(this.value);
     });
   if (type == "network") {
@@ -737,7 +808,7 @@ export function initBuilder() {
   $("#left-arrow,#right-arrow").addClass("disabled");
   call({
     url: `/get_top_level_instances/${type}`,
-    callback: function (result) {
+    callback: function(result) {
       const instanceIds = new Set();
       if (result.Other && Object.keys(result).length == 1) {
         const instances = result.Other.sort((a, b) => a.name.localeCompare(b.name));
@@ -772,9 +843,12 @@ export function initBuilder() {
           notify(`No ${type} has been created yet.`, "error", 5);
         }
       }
-      $(`#current-${type},#current-runtime`).selectpicker({ liveSearch: true });
+      $(`#current-${type},#current-runtime`).selectpicker({
+        liveSearch: true,
+        virtualScroll: false
+      });
       if (type == "workflow") {
-        $("#current-runtime").on("change", function () {
+        $("#current-runtime").on("change", function() {
           getWorkflowState();
         });
         getWorkflowState(true, true);
@@ -783,7 +857,7 @@ export function initBuilder() {
       }
     },
   });
-  $(`#current-${type}`).on("change", function () {
+  $(`#current-${type}`).on("change", function() {
     if (!instance || this.value != instance.id) switchTo(this.value);
   });
   updateRightClickBindings();
@@ -802,7 +876,6 @@ function toggleTree() {
         complete: () => {
           $("#run-navbar")
             .appendTo(`#${type}-tree-control`)
-            .css({ left: "60px" })
             .show();
           (type == "workflow" ? getWorkflowState : getNetworkState)();
         },
@@ -816,7 +889,9 @@ function toggleTree() {
       {
         ...kwargs,
         complete: () => {
-          $("#run-navbar").appendTo(`#${type}-controls`).css({ left: "0px" }).show();
+          $("#run-navbar")
+            .appendTo(`#${type}-controls`)
+            .show();
           $(`#${type}-tree`).hide();
         },
       }
@@ -824,6 +899,10 @@ function toggleTree() {
   }
   $(`#${type}-tree-btn`).toggleClass("active");
   treeIsDisplayed = !treeIsDisplayed;
+  call({
+    url: "/save_profile",
+    data: { id: user.id, display_tree: treeIsDisplayed },
+  });
 }
 
 configureNamespace("builder", [

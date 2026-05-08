@@ -23,12 +23,10 @@ class NetmikoValidationService(ConnectionService):
     use_textfsm = db.Column(Boolean, default=False)
     use_genie = db.Column(Boolean, default=False)
     read_timeout = db.Column(Float, default=10.0)
-    read_timeout_override = db.Column(Float, default=0.0)
     conn_timeout = db.Column(Float, default=10.0)
     auth_timeout = db.Column(Float, default=0.0)
     banner_timeout = db.Column(Float, default=15.0)
-    fast_cli = db.Column(Boolean, default=False)
-    global_delay_factor = db.Column(Float, default=1.0)
+    global_delay_factor = db.Column(Float, default=0.1)
     expect_string = db.Column(db.SmallString)
     config_mode_command = db.Column(db.SmallString)
     auto_find_prompt = db.Column(Boolean, default=True)
@@ -45,6 +43,7 @@ class NetmikoValidationService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_commands_service"}
 
+    @staticmethod
     def job(self, run, device):
         local_variables = locals()
         if self.jinja2_template:
@@ -80,15 +79,16 @@ class NetmikoValidationService(ConnectionService):
                 )
                 for command in commands.splitlines()
             ]
-            if len(result) == 1:
-                (result,) = result
-            elif not run.results_as_list:
-                for index in range(len(result)):
-                    prefix = "{}COMMAND :".format("\n" if index else "")
-                    result[index] = (
-                        prefix + log_commands_list[index] + "\n\n" + result[index]
-                    )
-                result = "\n".join(map(str, result))
+            if not run.results_as_list:
+                if len(result) == 1:
+                    (result,) = result
+                else:
+                    for index in range(len(result)):
+                        prefix = "{}COMMAND :".format("\n" if index else "")
+                        result[index] = (
+                            prefix + log_commands_list[index] + "\n\n" + result[index]
+                        )
+                    result = "\n".join(map(str, result))
             run.exit_remote_device(netmiko_connection, prompt, device)
         except Exception:
             run.log("error", format_exc(), device)

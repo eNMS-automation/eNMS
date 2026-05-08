@@ -5,6 +5,7 @@ from flask_wtf import FlaskForm
 from importlib.util import module_from_spec, spec_from_file_location
 from os.path import exists
 from pathlib import Path
+from re import compile, error as re_error
 from traceback import format_exc
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
@@ -14,9 +15,9 @@ from wtforms.widgets import TextArea
 from eNMS.database import db
 from eNMS.fields import (
     BooleanField,
-    HiddenField,
     DictField,
     FloatField,
+    HiddenField,
     InstanceField,
     IntegerField,
     JsonField,
@@ -108,6 +109,8 @@ class MetaForm(FormMeta):
                 and field_name not in vs.private_properties_set
             ):
                 vs.private_properties_set.add(field_name)
+            if field.kwargs.get("python"):
+                properties[field_name]["python"] = True
         vs.form_properties[form_type].update(properties)
         for base in form.__bases__:
             if not hasattr(base, "form_type"):
@@ -159,7 +162,12 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
             if field["type"] in ("object-list", "multiselect"):
                 value = form_data.getlist(property)
                 if field["type"] == "object-list":
-                    value = [db.fetch(field["model"], name=name).id for name in value]
+                    value = [
+                        row.id
+                        for row in db.fetch_all(
+                            field["model"], name_in=value, properties=["id"]
+                        )
+                    ]
                 data[property] = value
             elif field["type"] == "object":
                 data[property] = form_data.get(property)
@@ -285,6 +293,8 @@ class FormFactory:
             spec.loader.exec_module(module_from_spec(spec))
 
     def register_parameterized_form(self, service_id):
+        if f"initial-{service_id}" in vs.form_properties:
+            vs.form_properties[f"initial-{service_id}"].clear()
         global_variables = {
             "form": None,
             "BaseForm": BaseForm,
@@ -361,6 +371,8 @@ class CredentialForm(BaseForm):
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
     creator = StringField(render_kw={"readonly": True})
+    last_modified = StringField("Last Modified", render_kw={"readonly": True})
+    last_modified_by = StringField("Last Modified By", render_kw={"readonly": True})
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     role = SelectField(
         "Role",
@@ -374,7 +386,6 @@ class CredentialForm(BaseForm):
         choices=(("password", "Username / Password"), ("key", "SSH Key")),
     )
     device_pools = MultipleInstanceField("Devices", model="pool")
-    groups = MultipleInstanceField("Groups", model="group")
     priority = IntegerField("Priority", default=1)
     username = StringField("Username")
     password = PasswordField("Password")
@@ -391,34 +402,37 @@ class CredentialForm(BaseForm):
         return valid_form and not invalid_priority
 
 
-class DatabaseDeletionForm(BaseForm):
-    action = "eNMS.administration.databaseDeletion"
-    form_type = HiddenField(default="database_deletion")
-    deletion_types = SelectMultipleField(
-        "Instances to delete", choices=db.import_export_models
-    )
-
-
-class DatabaseMigrationsForm(BaseForm):
-    template = "database_migration"
+class JsonMigrationForm(BaseForm):
+    template = "json_migration"
     migration_folder = vs.migration_path
-    form_type = HiddenField(default="database_migration")
-    empty_database_before_import = BooleanField("Empty Database before Import")
-    skip_pool_update = BooleanField(
-        "Skip the Pool update after Import", default="checked"
+    form_type = HiddenField(default="json_migration")
+    export_format = SelectField(
+        "Export Format",
+        choices=[
+            ("structured", "Structured Format (2 spaces, ordered)"),
+            ("bytestring", "Bytestring Format"),
+        ],
+        no_search=True,
     )
-    export_private_properties = BooleanField(
-        "Include private properties", default="checked"
-    )
-    import_export_types = SelectMultipleField(
-        "Instances to migrate", choices=db.import_export_models
-    )
+
+
+class DataForm(BaseForm):
+    template = "object"
+    form_type = HiddenField(default="data")
+    id = HiddenField()
+    scoped_name = StringField("Name", [InputRequired()])
+    path = StringField(render_kw={"readonly": True})
+    creator = StringField(render_kw={"readonly": True})
+    persistent_id = StringField("Persistent ID", render_kw={"readonly": True})
+    description = StringField(widget=TextArea(), render_kw={"rows": 3})
+    creation_time = StringField("Creation Time", render_kw={"readonly": True})
+    last_modified = StringField("Last Modified", render_kw={"readonly": True})
+    last_modified_by = StringField("Last Modified By", render_kw={"readonly": True})
 
 
 class DebugForm(BaseForm):
     template = "debug"
     form_type = HiddenField(default="debug")
-    snippets = SelectField(choices=(), validate_choice=False)
     code = StringField(
         "Python Code",
         type="code",
@@ -449,27 +463,17 @@ class DeviceDataForm(BaseForm):
     data_type = SelectField("Display", choices=vs.configuration_properties)
 
 
-class ExcelExportForm(BaseForm):
-    action = "eNMS.inventory.exportTopology"
-    form_type = HiddenField(default="excel_export")
-    export_filename = StringField("Filename")
-
-
-class ExcelImportForm(BaseForm):
-    template = "topology_import"
-    form_type = HiddenField(default="excel_import")
-    replace = BooleanField("Replace Existing Topology")
-
-
 class FileForm(BaseForm):
     form_type = HiddenField(default="file")
     id = HiddenField()
     path = StringField("Path", [InputRequired()])
     description = StringField(widget=TextArea(), render_kw={"rows": 8})
     filename = StringField("Filename", render_kw={"readonly": True})
+    creation_time = StringField("Creation Time", render_kw={"readonly": True})
     last_modified = StringField("Last Modified", render_kw={"readonly": True})
     last_updated = StringField("Last Updated", render_kw={"readonly": True})
-    status = StringField("Status", render_kw={"readonly": True})
+    size = StringField("Size", render_kw={"readonly": True})
+    status = StringField("Status")
 
     def validate(self, **_):
         valid_form = super().validate()
@@ -484,6 +488,10 @@ class FileForm(BaseForm):
         if invalid_path:
             self.path.errors.append("The path resolves outside of the files folder.")
         return valid_form and not invalid_path and not path_already_used
+
+
+class GenericFileForm(FileForm):
+    form_type = HiddenField(default="generic_file")
 
 
 class FolderForm(FileForm):
@@ -525,7 +533,11 @@ class ObjectForm(BaseForm):
     id = HiddenField()
     name = StringField("Name")
     creator = StringField(render_kw={"readonly": True})
+    creation_time = StringField("Creation Time", render_kw={"readonly": True})
+    last_modified = StringField("Last Modified", render_kw={"readonly": True})
+    last_modified_by = StringField("Last Modified By", render_kw={"readonly": True})
     type = StringField("Type")
+    persistent_id = StringField("Persistent ID", render_kw={"readonly": True})
     description = StringField(widget=TextArea(), render_kw={"rows": 3})
     subtype = StringField("Subtype")
     location = StringField("Location")
@@ -538,6 +550,8 @@ class PoolForm(BaseForm):
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
     creator = StringField(render_kw={"readonly": True})
+    last_modified = StringField("Last Modified", render_kw={"readonly": True})
+    last_modified_by = StringField("Last Modified By", render_kw={"readonly": True})
     description = StringField(widget=TextArea(), render_kw={"rows": 8})
     manually_defined = BooleanField(
         ui_name="Manually defined (will not be automatically updated)"
@@ -572,6 +586,23 @@ class PoolForm(BaseForm):
                     ),
                 )
 
+    def validate(self, **_):
+        valid_form = super().validate()
+        for model in self.models:
+            for property in vs.properties["filtering"][model]:
+                regexp_field = getattr(self, f"{model}_{property}")
+                if getattr(self, f"{model}_{property}_match").data != "regex":
+                    continue
+                try:
+                    compile(regexp_field.data)
+                except re_error as exc:
+                    valid_form = False
+                    regexp_field.errors.append(
+                        f"Invalid regular expression for property '{property}'"
+                        f" (input: '{regexp_field.data}', exception: '{exc}')."
+                    )
+        return valid_form
+
 
 class RbacForm(BaseForm):
     form_type = HiddenField(default="rbac")
@@ -579,6 +610,8 @@ class RbacForm(BaseForm):
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
     creator = StringField(render_kw={"readonly": True})
+    last_modified = StringField("Last Modified", render_kw={"readonly": True})
+    last_modified_by = StringField("Last Modified By", render_kw={"readonly": True})
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     email = StringField("Email")
 
@@ -600,21 +633,6 @@ class RestartWorkflowForm(BaseForm):
     )
     restart_devices = MultipleInstanceField("Devices", model="device")
     restart_pools = MultipleInstanceField("Pools", model="pool")
-
-
-class OldInstancesDeletionForm(BaseForm):
-    action = "eNMS.administration.oldInstancesDeletion"
-    form_type = HiddenField(default="old_instances_deletion")
-    deletion_types = SelectMultipleField(
-        "Instances to Delete",
-        choices=[
-            ("run", "Result"),
-            ("changelog", "Changelog"),
-            ("service", "Soft Deleted Services"),
-            ("workflow_edge", "Soft Deleted Edges"),
-        ],
-    )
-    date_time = StringField("Older Than", [InputRequired()], type="date")
 
 
 class RunForm(BaseForm):
@@ -642,13 +660,33 @@ class RunServiceForm(BaseForm):
     service = InstanceField("Services", model="service")
 
 
-class SecretForm(BaseForm):
+class SnippetForm(BaseForm):
     template = "object"
-    form_type = HiddenField(default="secret")
+    form_type = HiddenField(default="snippet")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+    category = StringField("Category")
+    version = StringField("Version")
     description = StringField(widget=TextArea(), render_kw={"rows": 3})
-    secret_value = PasswordField("Value", widget=TextArea(), render_kw={"rows": 6})
+    code = StringField(
+        type="code",
+        python=True,
+        widget=TextArea(),
+        render_kw={"rows": 6},
+        layout="<div style='margin-top:10px'>{field}</div>",
+    )
+    creator = StringField(render_kw={"readonly": True})
+    creation_time = StringField("Creation Time", render_kw={"readonly": True})
+    last_modified = StringField("Last Modified", render_kw={"readonly": True})
+    last_modified_by = StringField("Last Modified By", render_kw={"readonly": True})
+    properties = [
+        "creator",
+        "creation_time",
+        "description",
+        "last_modified",
+        "last_modified_by",
+        "version",
+    ]
 
 
 class ServerForm(BaseForm):
@@ -657,6 +695,9 @@ class ServerForm(BaseForm):
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
     creator = StringField(render_kw={"readonly": True})
+    creation_time = StringField("Creation Time", render_kw={"readonly": True})
+    last_modified = StringField("Last Modified", render_kw={"readonly": True})
+    last_modified_by = StringField("Last Modified By", render_kw={"readonly": True})
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     role = SelectField(
         "Role", choices=(("primary", "Primary"), ("secondary", "Secondary"))
@@ -698,10 +739,14 @@ class ServiceForm(BaseForm):
     id = HiddenField()
     name = StringField("Name", help="common/full_name", ui_name="Full Name")
     creator = StringField(render_kw={"readonly": True})
+    last_modified = StringField("Last Modified", render_kw={"readonly": True})
+    last_modified_by = StringField("Last Modified By", render_kw={"readonly": True})
     type = StringField("Service Type")
+    persistent_id = StringField("Persistent ID", render_kw={"readonly": True})
     shared = BooleanField("Shared", help="common/shared")
     scoped_name = StringField("Scoped Name", [InputRequired()], ui_name="Name")
     version = StringField("Version")
+    high_performance = BooleanField("High Performance")
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     device_query = StringField(
         "Device Query",
@@ -726,7 +771,6 @@ class ServiceForm(BaseForm):
     disable_result_creation = BooleanField("Save only failed results")
     target_pools = MultipleInstanceField("Pools", model="pool")
     update_target_pools = BooleanField("Update target pools before running")
-    update_pools_after_running = BooleanField("Update pools after running")
     workflows = MultipleInstanceField("Workflows", model="workflow")
     waiting_time = IntegerField(
         "Time to Wait before next service is started (in seconds)", default=0
@@ -745,7 +789,7 @@ class ServiceForm(BaseForm):
     send_notification = BooleanField("Send a notification")
     send_notification_method = SelectField(
         "Notification Method",
-        choices=(("mail", "Mail"), ("slack", "Slack"), ("mattermost", "Mattermost")),
+        choices=vs.automation["notification"].items(),
         no_search=True,
     )
     notification_header = StringField(
@@ -846,6 +890,7 @@ class ServiceForm(BaseForm):
         help="common/logging",
         no_search=True,
     )
+    show_user_logs = BooleanField("Always Show User-Defined Logs", default=True)
     multiprocessing = BooleanField("Multiprocessing", help="common/multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=15)
     validation_condition = SelectField(
@@ -896,7 +941,11 @@ class ServiceForm(BaseForm):
             "scoped_name",
             "name",
             "creator",
+            "last_modified",
+            "last_modified_by",
             "type",
+            "persistent_id",
+            "high_performance",
             "disabled",
             "disabled_info",
             "shared",
@@ -912,8 +961,8 @@ class ServiceForm(BaseForm):
             "max_number_of_retries",
             "credential_type",
             "log_level",
+            "show_user_logs",
             "disable_result_creation",
-            "update_pools_after_running",
         ],
         "step1-2": [
             "mandatory_parametrization",
@@ -1027,13 +1076,14 @@ class ServiceForm(BaseForm):
                 f"The validation method is set to '{self.validation_method.data}'"
                 f" and the matching value is empty: these do no match."
             )
-        too_many_threads_error = (
-            self.max_processes.data > vs.settings["automation"]["max_process"]
+        max_process = vs.settings["automation"]["max_process"] * (
+            10 if self.high_performance.data else 1
         )
+        too_many_threads_error = self.max_processes.data > max_process
         if too_many_threads_error:
             self.max_processes.errors.append(
                 "The number of threads used for multiprocessing must be "
-                f"less than {vs.settings['automation']['max_process']}."
+                f"less than {max_process}."
             )
         shared_service_error = not self.shared.data and len(self.workflows.data) > 1
         if shared_service_error:
@@ -1056,9 +1106,9 @@ class ServiceForm(BaseForm):
 class SessionForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="session")
-    timestamp = StringField("Timestamp")
-    username = StringField("User")
-    content = StringField("Content")
+    id = HiddenField()
+    timestamp = StringField("Timestamp", render_kw={"readonly": True})
+    username = StringField("User", render_kw={"readonly": True})
 
 
 class TaskForm(BaseForm):
@@ -1067,6 +1117,8 @@ class TaskForm(BaseForm):
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
     creator = StringField(render_kw={"readonly": True})
+    last_modified = StringField("Last Modified", render_kw={"readonly": True})
+    last_modified_by = StringField("Last Modified By", render_kw={"readonly": True})
     scheduling_mode = SelectField(
         "Scheduling Mode",
         choices=(("cron", "Crontab Scheduling"), ("standard", "Standard Scheduling")),
@@ -1178,6 +1230,7 @@ class WorkflowLabelForm(BaseForm):
 class WorkflowEdgeForm(BaseForm):
     form_type = HiddenField(default="workflow_edge")
     id = HiddenField()
+    subtype = StringField()
     label = StringField()
     color = StringField()
     last_modified = StringField("Last Modified", render_kw={"readonly": True})
@@ -1229,16 +1282,25 @@ class DeviceForm(ObjectForm):
     latitude = StringField("Latitude", default=0.0)
     longitude = StringField("Longitude", default=0.0)
     napalm_driver = SelectField(
-        "NAPALM Driver", choices=vs.napalm_drivers, default="ios"
+        "NAPALM Driver", choices=vs.napalm_drivers, default="ios", validate_choice=False
     )
     netmiko_driver = SelectField(
-        "Netmiko Driver", choices=vs.netmiko_drivers, default="cisco_ios"
+        "Netmiko Driver",
+        choices=vs.netmiko_drivers,
+        default="cisco_ios",
+        validate_choice=False,
     )
     scrapli_driver = SelectField(
-        "Scrapli Driver", choices=vs.scrapli_drivers, default="cisco_iosxe"
+        "Scrapli Driver",
+        choices=vs.scrapli_drivers,
+        default="cisco_iosxe",
+        validate_choice=False,
     )
     netconf_driver = SelectField(
-        "Netconf Driver", choices=vs.netconf_drivers, default="default"
+        "Netconf Driver",
+        choices=vs.netconf_drivers,
+        default="default",
+        validate_choice=False,
     )
     gateways = MultipleInstanceField("Gateways", model="gateway")
     networks = MultipleInstanceField("Networks", model="network")
@@ -1297,12 +1359,10 @@ class NetmikoForm(ConnectionForm):
         default=False,
     )
     read_timeout = FloatField(default=10.0)
-    read_timeout_override = FloatField(default=0.0)
     conn_timeout = FloatField("Connection Timeout", default=10.0)
     auth_timeout = FloatField("Authentication Timeout", default=0.0)
     banner_timeout = FloatField("Banner Timeout", default=15.0)
-    fast_cli = BooleanField("Fast CLI")
-    global_delay_factor = FloatField("Global Delay Factor", default=1.0)
+    global_delay_factor = FloatField("Global Delay Factor", default=0.1)
     jump_on_connect = BooleanField(
         "Jump to remote device on connect",
         default=False,
@@ -1351,7 +1411,6 @@ class NetmikoForm(ConnectionForm):
                 "enable_mode",
                 "config_mode",
                 "read_timeout",
-                "read_timeout_override",
             ],
             "default": "expanded",
         },
@@ -1361,7 +1420,6 @@ class NetmikoForm(ConnectionForm):
                 "conn_timeout",
                 "auth_timeout",
                 "banner_timeout",
-                "fast_cli",
                 "global_delay_factor",
             ],
             "default": "hidden",

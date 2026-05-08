@@ -2,7 +2,117 @@
 {% block stylesheets %} {{ super() }}
 <link href="{{ url_for('static', filename='lib/vis/vis.min.css') }}" rel="stylesheet" />
 <link href="{{ url_for('static', filename='css/builder.css') }}" rel="stylesheet" />
-{% endblock stylesheets %} {% block left_frame %}
+{% endblock stylesheets %} {% set run_navbar %}
+<nav
+  id="run-navbar"
+  class="navbar navbar-default navbar-custom navbar-color"
+  style="padding-bottom: 2px; margin-left: 10px"
+  role="navigation"
+>
+  <div style="width: 100%">
+    <select id="current-runtime" class="form-control" data-size="20"></select>
+  </div>
+  <ul class="pagination" style="margin: 0px; padding-top: 10px">
+    <li
+      id="workflow-tree-btn"
+      {%
+      if
+      current_user.display_tree
+      %}
+      class="active"
+      {%
+      endif
+      %}
+    >
+      <a
+        onclick="eNMS.builder.toggleTree()"
+        data-tooltip="Workflow Tree"
+        style="cursor: pointer"
+        ><span class="fa fa-sitemap fa-rotate-270"></span
+      ></a>
+    </li>
+    <li
+      id="resize-tree-li"
+      {%
+      if
+      not
+      current_user.display_tree
+      %}style="display: none"
+      {%
+      endif
+      %}
+    >
+      <a
+        onclick="action['Expand Tree']()"
+        data-tooltip="Expand Tree"
+        style="cursor: pointer"
+        ><span class="glyphicon glyphicon-resize-full"></span
+      ></a>
+    </li>
+    <li>
+      <a
+        onclick="action['Runtimes Display']()"
+        data-tooltip="Personal or All Runtimes"
+        style="cursor: pointer"
+        ><span id="user-filtering-icon-run" class="fa fa-user"></span
+      ></a>
+    </li>
+    <li>
+      <a onclick="action['Workflow Logs']()" data-tooltip="Logs" style="cursor: pointer"
+        ><span class="glyphicon glyphicon-list"></span
+      ></a>
+    </li>
+    <li>
+      <a
+        onclick="action['Workflow Report']()"
+        data-tooltip="Report"
+        style="cursor: pointer"
+        ><span class="glyphicon glyphicon-modal-window"></span
+      ></a>
+    </li>
+    <li>
+      <a
+        onclick="action['Workflow Result Tree']()"
+        data-tooltip="Results"
+        style="cursor: pointer"
+        ><span class="glyphicon glyphicon-list-alt"></span
+      ></a>
+    </li>
+    <li>
+      <a
+        onclick="action['Workflow Result Comparison']()"
+        data-tooltip="Result Comparison"
+        style="cursor: pointer"
+        ><span class="fa fa-adjust"></span
+      ></a>
+    </li>
+    <li>
+      <a
+        onclick="action['Run Workflow']()"
+        data-tooltip="Run Workflow"
+        style="cursor: pointer"
+        ><span class="glyphicon glyphicon-play"></span
+      ></a>
+    </li>
+    <li>
+      <a
+        onclick="action['Parameterized Workflow Run']()"
+        data-tooltip="Parameterized Run"
+        style="cursor: pointer"
+        ><span class="glyphicon glyphicon-play-circle"></span
+      ></a>
+    </li>
+    <li>
+      <a
+        onclick="action['Stop Workflow']()"
+        data-tooltip="Stop Workflow"
+        style="cursor: pointer"
+        ><span class="glyphicon glyphicon-stop"></span
+      ></a>
+    </li>
+  </ul>
+</nav>
+{% endset %} {% block left_frame %}
 <div id="workflow-controls" class="controls">
   <div class="controls_mode navbar navbar-default navbar-color">
     <table class="table" cellspacing="0" style="margin: 0px" width="100%">
@@ -103,7 +213,10 @@
         ></a>
       </li>
       <li>
-        <a onclick="action['Skip / Unskip']()" data-tooltip="Skip / Unskip" style="cursor: pointer"
+        <a
+          onclick="action['Skip - Unskip']()"
+          data-tooltip="Skip - Unskip"
+          style="cursor: pointer"
           ><span class="glyphicon glyphicon-ban-circle"></span
         ></a>
       </li>
@@ -176,98 +289,7 @@
       </li>
     </ul>
   </nav>
-  <nav
-    id="run-navbar"
-    class="navbar navbar-default navbar-custom navbar-color"
-    style="padding-bottom: 2px; margin-left: 10px"
-    role="navigation"
-  >
-    <div style="width: 100%">
-      <select id="current-runtime" class="form-control" data-size="20"></select>
-    </div>
-    <ul class="pagination" style="margin: 0px; padding-top: 10px">
-      <li id="workflow-tree-btn">
-        <a
-          onclick="eNMS.builder.toggleTree()"
-          data-tooltip="Workflow Tree"
-          style="cursor: pointer"
-          ><span class="fa fa-sitemap" style="transform: rotate(270deg)"></span
-        ></a>
-      </li>
-      <li id="resize-tree-li" style="display: none">
-        <a
-          onclick="action['Expand Tree']()"
-          data-tooltip="Expand Tree"
-          style="cursor: pointer"
-          ><span class="glyphicon glyphicon-resize-full"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Runtimes Display']()"
-          data-tooltip="Personal or All Runtimes"
-          style="cursor: pointer"
-          ><span id="user-filtering-icon-run" class="fa fa-user"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Workflow Logs']()"
-          data-tooltip="Logs"
-          style="cursor: pointer"
-          ><span class="glyphicon glyphicon-list"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Workflow Report']()"
-          data-tooltip="Report"
-          style="cursor: pointer"
-          ><span class="glyphicon glyphicon-modal-window"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Workflow Result Tree']()"
-          data-tooltip="Results"
-          style="cursor: pointer"
-          ><span class="glyphicon glyphicon-list-alt"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Workflow Result Comparison']()"
-          data-tooltip="Result Comparison"
-          style="cursor: pointer"
-          ><span class="fa fa-adjust"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Run Workflow']()"
-          data-tooltip="Run Workflow"
-          style="cursor: pointer"
-          ><span class="glyphicon glyphicon-play"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Parameterized Workflow Run']()"
-          data-tooltip="Parameterized Run"
-          style="cursor: pointer"
-          ><span class="glyphicon glyphicon-play-circle"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Stop Workflow']()"
-          data-tooltip="Stop Workflow"
-          style="cursor: pointer"
-          ><span class="glyphicon glyphicon-stop"></span
-        ></a>
-      </li>
-    </ul>
-  </nav>
+  {% if not current_user.display_tree %} {{ run_navbar }} {% endif %}
 </div>
 <div id="builder"></div>
 <div id="connections-div" style="position: absolute; bottom: 0px; display: none"></div>
@@ -284,7 +306,7 @@
     ></a>
     <ul class="dropdown-menu">
       <li><a tabindex="-1" href="#">Duplicate</a></li>
-      <li><a tabindex="-1" href="#">Skip / Unskip</a></li>
+      <li><a tabindex="-1" href="#">Skip - Unskip</a></li>
       <li class="menu-entry divider node-selection">&nbsp</li>
       <li><a tabindex="-1" href="#">Delete</a></li>
     </ul>
@@ -385,19 +407,29 @@
   </li>
 </ul>
 {% endblock left_frame %} {% block right_frame %}
-<div id="workflow-tree" style="display: none">
-  <div style="display: flex; flex-direction: column">
-    <div id="workflow-tree-control" style="margin-top: 10px; margin-left: 30px"></div>
+<div
+  id="workflow-tree"
+  {%
+  if
+  not
+  current_user.display_tree
+  %}style="display: none"
+  {%
+  endif
+  %}
+>
+  <div style="display: flex; flex-direction: column; height: calc(100vh - 70px)">
+    <div id="workflow-tree-control" style="margin-top: 10px; margin-left: 90px;">
+      {% if current_user.display_tree %} {{ run_navbar }} {% endif %}
+    </div>
     <div
       class="hidden-scrollbar"
-      style="padding: 10px 5px 20px 2px; overflow: auto; height: 70vh"
+      style="padding: 10px 5px 20px 2px; overflow: auto; height: 100%"
     >
-      <div style="height: 10000px">
-        <div
-          id="workflow-tree-services"
-          style="padding-left: 10px; padding-right: 10px"
-        ></div>
-      </div>
+      <div
+        id="workflow-tree-services"
+        style="padding-left: 10px; padding-right: 10px"
+      ></div>
     </div>
     <input type="hidden" name="services" id="services" />
   </div>

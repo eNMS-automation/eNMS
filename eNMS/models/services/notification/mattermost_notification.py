@@ -3,8 +3,8 @@ from sqlalchemy import ForeignKey, Integer
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
-from eNMS.forms import ServiceForm
 from eNMS.fields import HiddenField, StringField
+from eNMS.forms import ServiceForm
 from eNMS.models.automation import Service
 from eNMS.variables import vs
 
@@ -18,6 +18,7 @@ class MattermostNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "mattermost_notification_service"}
 
+    @staticmethod
     def job(self, run, device=None):
         channel = run.sub(run.channel, locals()) or vs.settings["mattermost"]["channel"]
         message = run.sub(run.body, locals())

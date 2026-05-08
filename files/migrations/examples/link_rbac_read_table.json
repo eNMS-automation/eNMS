@@ -1,0 +1,542 @@
+[
+  [
+    "Duplicate 1 - 2",
+    "Admin User"
+  ],
+  [
+    "G1 - R1",
+    "Admin User"
+  ],
+  [
+    "R1 - R2",
+    "Admin User"
+  ],
+  [
+    "R1 - R3",
+    "Admin User"
+  ],
+  [
+    "R1 - R4",
+    "Admin User"
+  ],
+  [
+    "R1 -> R2 L1",
+    "Admin User"
+  ],
+  [
+    "R1 -> R2 L2",
+    "Admin User"
+  ],
+  [
+    "R1 -> R2 L3",
+    "Admin User"
+  ],
+  [
+    "R1 -> R3 L1",
+    "Admin User"
+  ],
+  [
+    "R1 Loopback 1",
+    "Admin User"
+  ],
+  [
+    "R2 - R3",
+    "Admin User"
+  ],
+  [
+    "R2 -> R4 L1",
+    "Admin User"
+  ],
+  [
+    "R2 -> R4 L2",
+    "Admin User"
+  ],
+  [
+    "R3 -> R1 L2",
+    "Admin User"
+  ],
+  [
+    "R3 -> R1 L3",
+    "Admin User"
+  ],
+  [
+    "R3 -> R1 L4",
+    "Admin User"
+  ],
+  [
+    "R3 -> R2 L1",
+    "Admin User"
+  ],
+  [
+    "R3 -> R2 L2",
+    "Admin User"
+  ],
+  [
+    "R3 -> R2 L3",
+    "Admin User"
+  ],
+  [
+    "R3 -> R2 L4",
+    "Admin User"
+  ],
+  [
+    "R3 -> R4 L1",
+    "Admin User"
+  ],
+  [
+    "R3 -> R4 L2",
+    "Admin User"
+  ],
+  [
+    "R3 -> R4 L3",
+    "Admin User"
+  ],
+  [
+    "R3 -> R4 L4",
+    "Admin User"
+  ],
+  [
+    "R3 Loopback 1",
+    "Admin User"
+  ],
+  [
+    "R4 -> R2 L3",
+    "Admin User"
+  ],
+  [
+    "R4 -> R3 L5",
+    "Admin User"
+  ],
+  [
+    "R4 -> R3 L6",
+    "Admin User"
+  ],
+  [
+    "R4 -> R3 L7",
+    "Admin User"
+  ],
+  [
+    "R4 -> R3 L8",
+    "Admin User"
+  ],
+  [
+    "R4 Loopback 1",
+    "Admin User"
+  ],
+  [
+    "S6 L1",
+    "Admin User"
+  ],
+  [
+    "Subnetwork 1 - L1",
+    "Admin User"
+  ],
+  [
+    "Subnetwork 1 - L2",
+    "Admin User"
+  ],
+  [
+    "Subnetwork 1 - L3",
+    "Admin User"
+  ],
+  [
+    "Subnetwork 2 - L1",
+    "Admin User"
+  ],
+  [
+    "atlantic-r20-boston-1",
+    "Admin User"
+  ],
+  [
+    "atlantic-r20-boston-2",
+    "Admin User"
+  ],
+  [
+    "atlantic-r20-richmond-1",
+    "Admin User"
+  ],
+  [
+    "atlantic-r20-richmond-2",
+    "Admin User"
+  ],
+  [
+    "atlantic-r26-boston-1",
+    "Admin User"
+  ],
+  [
+    "atlantic-r26-boston-2",
+    "Admin User"
+  ],
+  [
+    "atlantic-r26-boston-3",
+    "Admin User"
+  ],
+  [
+    "atlantic-r26-boston-4-inverted",
+    "Admin User"
+  ],
+  [
+    "atlantic-r26-ny",
+    "Admin User"
+  ],
+  [
+    "atlantic-r26-washington",
+    "Admin User"
+  ],
+  [
+    "atlantic-r28-ny",
+    "Admin User"
+  ],
+  [
+    "atlantic-r28-washington",
+    "Admin User"
+  ],
+  [
+    "europe-link10",
+    "Admin User"
+  ],
+  [
+    "europe-link11",
+    "Admin User"
+  ],
+  [
+    "europe-link12",
+    "Admin User"
+  ],
+  [
+    "europe-link13",
+    "Admin User"
+  ],
+  [
+    "europe-link14",
+    "Admin User"
+  ],
+  [
+    "europe-link15",
+    "Admin User"
+  ],
+  [
+    "europe-link16",
+    "Admin User"
+  ],
+  [
+    "europe-link17",
+    "Admin User"
+  ],
+  [
+    "europe-link18",
+    "Admin User"
+  ],
+  [
+    "europe-link19",
+    "Admin User"
+  ],
+  [
+    "europe-link20",
+    "Admin User"
+  ],
+  [
+    "europe-link21",
+    "Admin User"
+  ],
+  [
+    "europe-link22",
+    "Admin User"
+  ],
+  [
+    "europe-link23",
+    "Admin User"
+  ],
+  [
+    "europe-link24",
+    "Admin User"
+  ],
+  [
+    "europe-link25",
+    "Admin User"
+  ],
+  [
+    "europe-link26",
+    "Admin User"
+  ],
+  [
+    "europe-link27",
+    "Admin User"
+  ],
+  [
+    "europe-link28 (public)",
+    "Admin User"
+  ],
+  [
+    "europe-link29",
+    "Admin User"
+  ],
+  [
+    "europe-link30",
+    "Admin User"
+  ],
+  [
+    "europe-link30-2",
+    "Admin User"
+  ],
+  [
+    "europe-link31 (public)",
+    "Admin User"
+  ],
+  [
+    "europe-link31-2",
+    "Admin User"
+  ],
+  [
+    "europe-link32",
+    "Admin User"
+  ],
+  [
+    "europe-link33",
+    "Admin User"
+  ],
+  [
+    "europe-link34",
+    "Admin User"
+  ],
+  [
+    "europe-link35",
+    "Admin User"
+  ],
+  [
+    "europe-link35-2",
+    "Admin User"
+  ],
+  [
+    "europe-link35-3",
+    "Admin User"
+  ],
+  [
+    "europe-link36",
+    "Admin User"
+  ],
+  [
+    "europe-link37",
+    "Admin User"
+  ],
+  [
+    "europe-link38",
+    "Admin User"
+  ],
+  [
+    "europe-link39",
+    "Admin User"
+  ],
+  [
+    "europe-link4 (admin)",
+    "Admin User"
+  ],
+  [
+    "europe-link40 (admin)",
+    "Admin User"
+  ],
+  [
+    "europe-link41",
+    "Admin User"
+  ],
+  [
+    "europe-link42",
+    "Admin User"
+  ],
+  [
+    "europe-link43",
+    "Admin User"
+  ],
+  [
+    "europe-link44",
+    "Admin User"
+  ],
+  [
+    "europe-link45",
+    "Admin User"
+  ],
+  [
+    "europe-link46",
+    "Admin User"
+  ],
+  [
+    "europe-link47",
+    "Admin User"
+  ],
+  [
+    "europe-link48",
+    "Admin User"
+  ],
+  [
+    "europe-link49",
+    "Admin User"
+  ],
+  [
+    "europe-link5",
+    "Admin User"
+  ],
+  [
+    "europe-link50",
+    "Admin User"
+  ],
+  [
+    "europe-link51",
+    "Admin User"
+  ],
+  [
+    "europe-link52",
+    "Admin User"
+  ],
+  [
+    "europe-link6",
+    "Admin User"
+  ],
+  [
+    "europe-link7",
+    "Admin User"
+  ],
+  [
+    "europe-link8",
+    "Admin User"
+  ],
+  [
+    "europe-link9",
+    "Admin User"
+  ],
+  [
+    "link0",
+    "Admin User"
+  ],
+  [
+    "link1",
+    "Admin User"
+  ],
+  [
+    "link10",
+    "Admin User"
+  ],
+  [
+    "link11",
+    "Admin User"
+  ],
+  [
+    "link12",
+    "Admin User"
+  ],
+  [
+    "link13",
+    "Admin User"
+  ],
+  [
+    "link13-2",
+    "Admin User"
+  ],
+  [
+    "link14",
+    "Admin User"
+  ],
+  [
+    "link15",
+    "Admin User"
+  ],
+  [
+    "link16",
+    "Admin User"
+  ],
+  [
+    "link17",
+    "Admin User"
+  ],
+  [
+    "link18",
+    "Admin User"
+  ],
+  [
+    "link19",
+    "Admin User"
+  ],
+  [
+    "link2",
+    "Admin User"
+  ],
+  [
+    "link20",
+    "Admin User"
+  ],
+  [
+    "link21",
+    "Admin User"
+  ],
+  [
+    "link22",
+    "Admin User"
+  ],
+  [
+    "link23",
+    "Admin User"
+  ],
+  [
+    "link24",
+    "Admin User"
+  ],
+  [
+    "link25",
+    "Admin User"
+  ],
+  [
+    "link25-2",
+    "Admin User"
+  ],
+  [
+    "link25-3",
+    "Admin User"
+  ],
+  [
+    "link25-dallas2",
+    "Admin User"
+  ],
+  [
+    "link25-reversed",
+    "Admin User"
+  ],
+  [
+    "link25-reversed-2",
+    "Admin User"
+  ],
+  [
+    "link26",
+    "Admin User"
+  ],
+  [
+    "link27",
+    "Admin User"
+  ],
+  [
+    "link3",
+    "Admin User"
+  ],
+  [
+    "link4",
+    "Admin User"
+  ],
+  [
+    "link5",
+    "Admin User"
+  ],
+  [
+    "link6",
+    "Admin User"
+  ],
+  [
+    "link7",
+    "Admin User"
+  ],
+  [
+    "link8",
+    "Admin User"
+  ],
+  [
+    "link9",
+    "Admin User"
+  ]
+]

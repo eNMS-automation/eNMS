@@ -78,8 +78,8 @@ Example of a default_function attribute:
 # eNMS/custom.py
 from uuid import uuid4
 
-class CustomApp
-  def gererate_uuid(self):
+class CustomApp:
+  def generate_uuid(self):
     return str(uuid4())
 ```
 
@@ -160,10 +160,10 @@ For example, the `model` property of a device can be defined as follows:
 "device": {
   "model": {
     "choices": [
-      ["Arista", "Arista"],
-      ["Cisco", "Cisco"],
-      ["Linux", "Linux"],
-      ["Juniper", "Juniper"]
+      "Arista",
+      "Cisco", 
+      "Linux", 
+      "Juniper"
     ],
     "validate_choice": false
   }

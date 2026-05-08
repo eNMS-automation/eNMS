@@ -79,7 +79,7 @@ it is recommended to run the application with the following command:
 
 1. In setup/settings.json set `"use_task_queue": true`
 2. Set the `REDIS_ADDR` environment variable and run `dramatiq eNMS` from the project root. 
-    - The number of worker processes and threads can be configured (among other things). Run `dramatiq --help` to see the full list of dramatiq's command-line options.
+    - The number of worker processes and threads can be configured (among other things). Run `dramatiq --help` to see the full list of Dramatiq's command-line options.
 
 ### WebSSH
 
@@ -89,8 +89,8 @@ The SSH_URL can be set to specify which web address to use when connecting to ne
 
 All credentials should be stored in a Hashicorp Vault: the settings
 variable `use_vault : true` under the `vault` section of the
-`setup/settings.json` file tells eNMS that a vault has been setup.
-Follow the manufacturer instructions and options for how to setup a
+`setup/settings.json` file tells eNMS that a vault has been set up.
+Follow the manufacturer instructions and options for how to set up a
 [Hashicorp Vault](https://www.vaultproject.io/)
 
 Tell eNMS how to connect to the Vault with environment variables:
@@ -426,19 +426,22 @@ from the workflow builder global variables.
 
 Key parameters to be aware of:
 
-- `always_commit` (default: `false`) Always commit results and logs immediately
+- `always_commit`: (default: `false`) Always commit results and logs immediately
   after they are created when a service is running. This can help prevent various
   database issues that arise during a run.
-- `disconnect_thread_timeout` (default: `10` (seconds)) This parameter sets the timeout value
-  used when attempting to close all open connections at the end of a workflow.
-  Multiple threads are spawned to close all connections as quickly as possible,
-  and this timeout is passed to each thread.
-- `truncate_logs`: (default: `false` with a `maximum_size` of `200000000`) This parameter
-  determines whether to trim the logs of a service before saving them to the database if
-  they exceed a certain size limit (`maximum_size`).
 - `connection_args`: These parameters are sent to the Netmiko or Scrapli connection handler
   before establishing the connection. To see which parameters are supported, you should
   check the Netmiko or Scrapli documentation.
+- `disconnect_thread_timeout`: (default: `10` (seconds)) This parameter sets the timeout value
+  used when attempting to close all open connections at the end of a workflow.
+  Multiple threads are spawned to close all connections as quickly as possible,
+  and this timeout is passed to each thread.
+- `notification`: This parameter determines which notification mechanisms are available in Step 4
+  of the Service Panel, as well as in the service type drop-down lists in the Workflow Builder
+  and Service Table. By default, all notification mechanisms (email, Slack, and Mattermost) are enabled.
+- `truncate_logs`: (default: `false` with a `maximum_size` of `200000000`) This parameter
+  determines whether to trim the logs of a service before saving them to the database if
+  they exceed a certain size limit (`maximum_size`).
 
 ### `database.json`
 The `setup/database.json` file contains database and schema configuration
@@ -656,6 +659,21 @@ Example syntax for LDAP:
 },
 ```
 
+DUO two-factor authentication can be configured through the settings in `authentication` > `duo` (client ID, host, and redirect URI) and the `DUO_SECRET` environment variable.
+
+Example syntax for DUO authentication:
+
+```
+"duo": {
+  "config": {
+    "client_id": "DIRUY3ZRHXYYHVOZDMIW",
+    "host": "api-58bbe24c.duosecurity.com",
+    "redirect_uri": "https://enms:5000/duo-callback"
+  },
+  "enabled": false
+},
+```
+
 #### `automation` section
 
 - `max_process` limit on multiprocessing (default: 15).
@@ -693,7 +711,7 @@ Control how the app tracks files on the filesystem.
 - `monitor_filesystem` manages the monitoring of file changes on the system
 - `ignored_types` file extensions to exclude from tracking (default: `[".swp"," .tgz"]`)
 - `upload_timeout` (default: `600000`)
-- `log_events` log changes (modify/update/delete) of tracked files to both the console and changelog (defalt: `true`)
+- `log_events` log changes (modify/update/delete) of tracked files to both the console and changelog (default: `true`)
 - `trash` path to the "trash" folder where deleted files are moved
 
 #### `mail` section
@@ -741,7 +759,7 @@ This section is covered in depth in the [administration panel](../administration
 #### `pool` section
 
 - `fast_compute` (default:`true`) use raw SQL queries to empty and insert
-  the object IDs in the pool in order to speed up the pool udpate mechanism
+  the object IDs in the pool in order to speed up the pool update mechanism
 
 #### `redis` section
 
@@ -942,7 +960,7 @@ during automatic synchronizations with the shared remote repository.
 To prevent this, a git merge driver can be used to programmatically
 resolve merge conflicts. Such drivers typically utilize a combination of git
 attributes, configuration instructions, and custom scripts to function.
-Below are all of the components of a proposed driver for the Network Data
+Below are all the components of a proposed driver for the Network Data
 repositories:
 
 ### `network_data/.gitattributes`
@@ -991,6 +1009,12 @@ the local `master` branch and the contents of `FETCH_HEAD`, accepting the most
 recent result.
 
 ## Galera Cluster Deployment on Rocky Linux
+
+A clustered deployment (pictured below) makes use of [galera](https://mariadb.com/kb/en/getting-started-with-mariadb-galera-cluster/), [vault HA](https://developer.hashicorp.com/vault/docs/concepts/ha) with a [mysql storage backend](https://developer.hashicorp.com/vault/docs/configuration/storage/mysql), and [redis-sentinel](https://redis.io/docs/latest/operate/oss_and_stack/management/sentinel/) to keep the application instances in sync. It's recommended to deploy application instances in odd numbers (3,5,7 etc.) to avoid a split-brain situation with galera. A Load Balancer like HAProxy can utilize either an existing REST API endpoint or add a custom one for the application to identify instances that are ready to be used. Additionally, connecting to REDIS through the Load Balancer can simplify the REDIS client configuration.
+
+
+
+![eNMS Cluster Overview](../_static/cluster_overview.PNG)
 
 ### Step 1: System Update
 

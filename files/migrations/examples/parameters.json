@@ -1,0 +1,16 @@
+[
+  {
+    "banner_active": false,
+    "banner_deactivate_on_restart": true,
+    "banner_properties": {
+      "autoclose": "30s",
+      "content": "<center>The Server is <b>restarting at 3:30 UTC.</b><br>Contact <b>adress@domain.com</b> for more information.</center>",
+      "contentSize": "600 auto",
+      "header": false,
+      "opacity": 0.85,
+      "position": "center-bottom 0 -10 up",
+      "theme": "danger filleddark"
+    },
+    "name": ""
+  }
+]

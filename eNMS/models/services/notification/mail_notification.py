@@ -21,6 +21,7 @@ class MailNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "mail_notification_service"}
 
+    @staticmethod
     def job(self, run, device=None):
         title, body = run.sub(run.title, locals()), run.sub(run.body, locals())
         kwargs = {

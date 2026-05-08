@@ -20,6 +20,7 @@ class ScrapliNetconfService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "scrapli_netconf_service"}
 
+    @staticmethod
     def job(self, run, device):
         content, kwargs = run.sub(run.content, locals()), {}
         if run.dry_run:

@@ -1,15 +1,18 @@
 Uses Netmiko to send a list of commands to be configured on the devices.
 
-![Netmiko Configuration Service](../../_static/automation/service_types/netmiko_configuration.png)
+![Netmiko Configuration Service](../../_static/automation/service_types/netmiko_configuration.jpg)
 
 Configuration parameters for creating this service instance:
 
 - All [Netmiko Service Common Parameters](netmiko_common.md).
 - `Content`: Paste a configuration block of text here for applying to
     the target device(s).
+- `Interpret Commands as Jinja2 Template`: Tell the application to interpret the "Content"
+    text as a Jinja2 template. The output of the rendered template is used as the configuration
+    that is sent to the device.
 - `Commit Configuration`: Calls netmiko `commit` function after applying
     the configuration.
-- `Exit config mode`: Determines whether or not to exit config mode
+- `Exit config mode`: Determines whether to exit config mode
     after completion.
 - `Config Mode Command`: The command that will be used to enter config
     mode.
@@ -22,6 +25,8 @@ Configuration parameters for creating this service instance:
     (default: True).
 -   `Strip prompt`: Remove the trailing router prompt from the output
     (default: True).
+-   `Command Verify`: Enable to verify command echo for each command in the configuration set
+    (default: False).
 
 !!! note
 

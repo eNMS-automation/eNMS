@@ -1,10 +1,10 @@
 from socket import error, gaierror, socket, timeout
-from subprocess import run as sub_run
 from sqlalchemy import ForeignKey, Integer
+from subprocess import run as sub_run
 
 from eNMS.database import db
-from eNMS.forms import ServiceForm
 from eNMS.fields import HiddenField, IntegerField, SelectField, StringField
+from eNMS.forms import ServiceForm
 from eNMS.models.automation import Service
 
 
@@ -22,6 +22,7 @@ class PingService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "ping_service"}
 
+    @staticmethod
     def job(self, run, device=None):
         ip_address = run.sub(run.ip_address, locals()) or device.ip_address
         if run.dry_run:

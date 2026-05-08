@@ -1,0 +1,369 @@
+- "admin_only": !!bool "false"
+  "creation_time": "2025-02-07 08:09:20.748904"
+  "creator": "admin"
+  "data_type": "secret"
+  "description": ""
+  "last_modified": ""
+  "last_modified_by": ""
+  "name": ">Secrets"
+  "owners": []
+  "path": "/Secrets"
+  "persistent_id": "sGTmso7JX4Y"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "scoped_name": "Secrets"
+  "type": "store"
+- "admin_only": !!bool "false"
+  "creation_time": "2025-02-10 23:13:27.003346"
+  "creator": "admin"
+  "data_type": "store"
+  "description": ""
+  "last_modified": ""
+  "last_modified_by": ""
+  "name": ">IPAM"
+  "owners":
+  - "admin"
+  "path": "/IPAM"
+  "persistent_id": "S7lO1QYqpgQ"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "scoped_name": "IPAM"
+  "type": "store"
+- "admin_only": !!bool "false"
+  "creation_time": "2025-02-10 23:16:29.024809"
+  "creator": "admin"
+  "data_type": "ip_address"
+  "description": ""
+  "last_modified": ""
+  "last_modified_by": ""
+  "name": ">IPAM>IP Address"
+  "owners":
+  - "admin"
+  "path": "/IPAM/IP Address"
+  "persistent_id": "o6ETxLfRDw0"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "scoped_name": "IP Address"
+  "store": ">IPAM"
+  "type": "store"
+- "admin_only": !!bool "false"
+  "creation_time": "2025-02-10 23:16:59.194400"
+  "creator": "admin"
+  "data_type": "vlan"
+  "description": ""
+  "last_modified": ""
+  "last_modified_by": ""
+  "name": ">IPAM>VLAN"
+  "owners":
+  - "admin"
+  "path": "/IPAM/VLAN"
+  "persistent_id": "KO2LR1NX1JM"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "scoped_name": "VLAN"
+  "store": ">IPAM"
+  "type": "store"
+- "admin_only": !!bool "false"
+  "creation_time": "2025-02-16 18:38:01.388729"
+  "creator": "admin"
+  "data_type": "json"
+  "description": ""
+  "last_modified": ""
+  "last_modified_by": ""
+  "name": ">JSON"
+  "owners":
+  - "admin"
+  "path": "/JSON"
+  "persistent_id": "MlA4sizm3tM"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "scoped_name": "JSON"
+  "type": "store"
+- "admin_only": !!bool "false"
+  "creation_time": "2025-02-22 20:10:26.687861"
+  "creator": "admin"
+  "data_type": "store"
+  "description": ""
+  "last_modified": ""
+  "last_modified_by": ""
+  "name": ">DCIM"
+  "owners":
+  - "admin"
+  "path": "/DCIM"
+  "persistent_id": "K-9RdU52xg0"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "scoped_name": "DCIM"
+  "type": "store"
+- "admin_only": !!bool "false"
+  "creation_time": "2025-02-22 20:28:13.396152"
+  "creator": "admin"
+  "data_type": "port"
+  "description": ""
+  "last_modified": ""
+  "last_modified_by": ""
+  "name": ">DCIM>Ports"
+  "owners":
+  - "admin"
+  "path": "/DCIM/Ports"
+  "persistent_id": "Q9zG7tMkTCE"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "scoped_name": "Ports"
+  "store": ">DCIM"
+  "type": "store"
+- "admin_only": !!bool "false"
+  "creation_time": "2025-02-23 12:46:38.458208"
+  "creator": "admin"
+  "data_type": "cable"
+  "description": ""
+  "last_modified": ""
+  "last_modified_by": ""
+  "name": ">DCIM>Cables"
+  "owners":
+  - "admin"
+  "path": "/DCIM/Cables"
+  "persistent_id": "rxogHXGNNpw"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "scoped_name": "Cables"
+  "store": ">DCIM"
+  "type": "store"
+- "admin_only": !!bool "false"
+  "creation_time": ""
+  "creator": "admin"
+  "description": |-
+    Used in the workflow:
+    "Global Variables: try_set, try_commit, and get_secret"
+    Clear-text value should be: "Correct123!:)$@"
+  "last_modified": "2024-03-01 08:37:21.492852"
+  "last_modified_by": "admin"
+  "name": ">Secrets>Secret 1"
+  "owners":
+  - "admin"
+  "path": "/Secrets/Secret 1"
+  "persistent_id": "8Fqgdd6nGcY"
+  "rbac_edit":
+  - "All users"
+  "rbac_read":
+  - "All users"
+  "rbac_use": []
+  "scoped_name": "Secret 1"
+  "secret_value": "Q29ycmVjdDEyMyE6KSRA"
+  "store": ">Secrets"
+  "type": "secret"
+- "admin_only": !!bool "false"
+  "creation_time": "2025-02-16 18:40:32.115450"
+  "creator": "admin"
+  "description": ""
+  "last_modified": ""
+  "last_modified_by": ""
+  "name": ">JSON>JSON 1"
+  "owners":
+  - "admin"
+  "path": "/JSON/JSON 1"
+  "persistent_id": "kpSBMNi61Vk"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "scoped_name": "JSON 1"
+  "store": ">JSON"
+  "type": "json"
+  "value":
+    "test": !!int "3"
+- "admin_only": !!bool "false"
+  "creation_time": "2025-02-16 18:41:18.724962"
+  "creator": "admin"
+  "description": ""
+  "last_modified": ""
+  "last_modified_by": ""
+  "name": ">JSON>JSON 2"
+  "owners":
+  - "admin"
+  "path": "/JSON/JSON 2"
+  "persistent_id": "qK8xmi0SBB0"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "scoped_name": "JSON 2"
+  "store": ">JSON"
+  "type": "json"
+  "value":
+    "key1": !!int "1"
+    "key2": !!int "2"
+    "subdict":
+      "key3": !!int "3"
+- "admin_only": !!bool "false"
+  "connected": !!bool "true"
+  "creation_time": "2025-02-22 20:34:47.998703"
+  "creator": "admin"
+  "description": "10BASE-T / Connected"
+  "device": "Austin-2"
+  "label": "P1"
+  "last_modified": ""
+  "last_modified_by": ""
+  "name": ">DCIM>Ports>Port 1"
+  "owners":
+  - "admin"
+  "path": "/DCIM/Ports/Port 1"
+  "persistent_id": "3Se-z2S1kTo"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "scoped_name": "Port 1"
+  "speed": "10BASE-T"
+  "store": ">DCIM>Ports"
+  "type": "port"
+- "admin_only": !!bool "false"
+  "connected": !!bool "false"
+  "creation_time": "2025-02-22 20:35:09.017748"
+  "creator": "admin"
+  "description": "1000BASE-T / Not Connected"
+  "device": "Washington"
+  "label": "P2"
+  "last_modified": ""
+  "last_modified_by": ""
+  "name": ">DCIM>Ports>Port 2"
+  "owners":
+  - "admin"
+  "path": "/DCIM/Ports/Port 2"
+  "persistent_id": "-GF5oHyBc60"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "scoped_name": "Port 2"
+  "speed": "1000BASE-T"
+  "store": ">DCIM>Ports"
+  "type": "port"
+- "admin_only": !!bool "false"
+  "color": "red"
+  "creation_time": "2025-02-23 13:39:34.468753"
+  "creator": "admin"
+  "description": "Port 1 - Port 2"
+  "destination_port": ">DCIM>Ports>Port 2"
+  "label": "P1 -> P2"
+  "last_modified": ""
+  "last_modified_by": ""
+  "length": !!float "10.5"
+  "name": ">DCIM>Cables>Cable 1"
+  "owners":
+  - "admin"
+  "path": "/DCIM/Cables/Cable 1"
+  "persistent_id": "zU7kQ0etx7I"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "scoped_name": "Cable 1"
+  "source_port": ">DCIM>Ports>Port 1"
+  "store": ">DCIM>Cables"
+  "type": "cable"
+- "admin_only": !!bool "false"
+  "color": "BLUE"
+  "creation_time": "2025-02-23 13:40:17.716208"
+  "creator": "admin"
+  "description": "Port 2 to Port 1"
+  "destination_port": ">DCIM>Ports>Port 1"
+  "label": "P2 -> P1"
+  "last_modified": ""
+  "last_modified_by": ""
+  "length": !!float "-1.0"
+  "name": ">DCIM>Cables>Cable 2"
+  "owners":
+  - "admin"
+  "path": "/DCIM/Cables/Cable 2"
+  "persistent_id": "JL6c6KobJ5Q"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "scoped_name": "Cable 2"
+  "source_port": ">DCIM>Ports>Port 2"
+  "store": ">DCIM>Cables"
+  "type": "cable"
+- "admin_only": !!bool "false"
+  "creation_time": "2025-02-16 16:19:15.457798"
+  "creator": "admin"
+  "description": ""
+  "group": "Group 1"
+  "last_modified": ""
+  "last_modified_by": ""
+  "name": ">IPAM>VLAN>Vlan 1"
+  "owners":
+  - "admin"
+  "path": "/IPAM/VLAN/Vlan 1"
+  "persistent_id": "2qyq9Ajs97s"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "role": "Default VLAN"
+  "scoped_name": "Vlan 1"
+  "store": ">IPAM>VLAN"
+  "type": "vlan"
+  "vlan_id": !!int "1"
+- "admin_only": !!bool "false"
+  "creation_time": "2025-02-16 16:19:30.224797"
+  "creator": "admin"
+  "description": ""
+  "group": "Group B"
+  "last_modified": ""
+  "last_modified_by": ""
+  "name": ">IPAM>VLAN>Vlan 2"
+  "owners":
+  - "admin"
+  "path": "/IPAM/VLAN/Vlan 2"
+  "persistent_id": "85rTbsNxuZg"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "role": "Vlan 2"
+  "scoped_name": "Vlan 2"
+  "store": ">IPAM>VLAN"
+  "type": "vlan"
+  "vlan_id": !!int "2"
+- "address": "192.168.0.1"
+  "admin_only": !!bool "false"
+  "creation_time": "2025-02-11 20:09:36.620932"
+  "creator": "admin"
+  "description": ""
+  "last_modified": ""
+  "last_modified_by": ""
+  "name": ">IPAM>IP Address>IP Address 1"
+  "owners":
+  - "admin"
+  "path": "/IPAM/IP Address/IP Address 1"
+  "persistent_id": "wLUaLqeKqOY"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "role": "loopback"
+  "scoped_name": "IP Address 1"
+  "store": ">IPAM>IP Address"
+  "type": "ip_address"
+  "vrf_instance": ""
+- "address": "10.0.0.156"
+  "admin_only": !!bool "false"
+  "creation_time": "2025-02-11 20:10:04.188487"
+  "creator": "admin"
+  "description": ""
+  "last_modified": ""
+  "last_modified_by": ""
+  "name": ">IPAM>IP Address>IP Address 2"
+  "owners":
+  - "admin"
+  "path": "/IPAM/IP Address/IP Address 2"
+  "persistent_id": "QTVleMy9ItE"
+  "rbac_edit": []
+  "rbac_read": []
+  "rbac_use": []
+  "role": "anycast"
+  "scoped_name": "IP Address 2"
+  "store": ">IPAM>IP Address"
+  "type": "ip_address"
+  "vrf_instance": "Test VRF"

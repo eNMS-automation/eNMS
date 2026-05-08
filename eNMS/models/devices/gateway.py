@@ -1,11 +1,11 @@
 from sqlalchemy import ForeignKey, Integer
 from sqlalchemy.orm import relationship
 
-from eNMS.database import db, vs
-from eNMS.fields import MultipleInstanceField
+from eNMS.database import db
+from eNMS.fields import HiddenField, IntegerField, MultipleInstanceField, SelectField
 from eNMS.forms import DeviceForm
-from eNMS.fields import HiddenField, IntegerField, SelectField
 from eNMS.models.inventory import Device
+from eNMS.variables import vs
 
 
 class Gateway(Device):

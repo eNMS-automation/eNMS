@@ -1,4 +1,5 @@
-from collections import Counter, defaultdict
+from black import format_str, Mode
+from collections import defaultdict
 from contextlib import redirect_stdout
 from datetime import datetime
 from difflib import unified_diff
@@ -7,23 +8,23 @@ from flask_login import current_user
 from functools import wraps
 from git import Repo
 from io import BytesIO, StringIO
-from ipaddress import IPv4Network
+from itertools import batched
 from json import dump, load
-from logging import info, error
-from operator import attrgetter, itemgetter
+from logging import error, info
+from operator import itemgetter
+from orjson import dumps, loads, OPT_INDENT_2, OPT_SORT_KEYS
 from os import getenv, listdir, makedirs, scandir
-from os.path import exists
+from os.path import exists, splitext
 from pathlib import Path
-from re import search, sub
-from requests import get as http_get
-from shutil import rmtree
-from sqlalchemy import and_, cast, or_, String
+from re import compile, search, sub
+from sqlalchemy import and_, cast, func, insert, or_, select, String, update
 from sqlalchemy.exc import IntegrityError, OperationalError
+from sqlalchemy.inspection import inspect
 from sqlalchemy.orm import aliased
 from sqlalchemy.orm.attributes import ScalarObjectAttributeImpl as ScalarAttr
+from sqlalchemy.orm.strategies import DeferredColumnLoader
 from sqlalchemy.sql.expression import true
 from subprocess import Popen
-from tarfile import open as open_tar
 from threading import Thread
 from traceback import format_exc
 from uuid import uuid4
@@ -32,21 +33,21 @@ from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
 from eNMS.database import db
-from eNMS.forms import form_factory
 from eNMS.environment import env
+from eNMS.forms import form_factory
 from eNMS.variables import vs
 
 
-class Controller:
+class Controller(vs.TimingMixin):
     def _initialize(self, first_init):
         if not first_init:
             return
-        self.migration_import(
-            name=vs.settings["app"].get("startup_migration", "default"),
-            import_export_types=db.import_export_models,
-        )
-        self.get_git_content(force_update=True)
-        self.scan_folder()
+        import_folder = vs.settings["app"].get("startup_migration", "default")
+        self.json_migration_import(name=import_folder)
+        if vs.settings.get("on_startup", {}).get("get_git_content"):
+            self.get_git_content(force_update=True)
+        if vs.settings.get("on_startup", {}).get("scan_folder"):
+            self.scan_folder()
 
     def _register_endpoint(self, func):
         setattr(self, func.__name__, func)
@@ -95,13 +96,14 @@ class Controller:
         if target.type == "pool" and not target.manually_defined:
             return {"alert": "Adding objects to a dynamic pool is not allowed."}
         model, property = kwargs["model"], kwargs["property"]
-        instances = set(db.objectify(model, kwargs.get("instances", [])))
+        instances = set(db.fetch_all(model, id_in=kwargs.get("instances", [])))
         if kwargs["names"]:
-            for name in [instance.strip() for instance in kwargs["names"].split(",")]:
-                instance = db.fetch(model, allow_none=True, name=name)
-                if not instance:
-                    return {"alert": f"{model.capitalize()} '{name}' does not exist."}
-                instances.add(instance)
+            names = [instance.strip() for instance in kwargs["names"].split(",")]
+            instance_objects = set(db.fetch_all(model, name_in=names))
+            object_names = {instance.name for instance in instance_objects}
+            if diff := set(names) - object_names:
+                return {"alert": f"These {model}s do not exist: {', '.join(diff)}."}
+            instances |= instance_objects
         instances = instances - set(getattr(target, property))
         for instance in instances:
             getattr(target, property).append(instance)
@@ -112,9 +114,9 @@ class Controller:
     def add_objects_to_network(self, network_id, **kwargs):
         network = db.fetch("network", id=network_id)
         result = {"devices": [], "links": []}
-        devices = set(db.objectify("device", kwargs["devices"]))
-        links = set(db.objectify("link", kwargs["links"]))
-        for pool in db.objectify("pool", kwargs["pools"]):
+        devices = set(db.fetch_all("device", id_in=kwargs["devices"]))
+        links = set(db.fetch_all("link", id_in=kwargs["links"]))
+        for pool in db.fetch_all("pool", id_in=kwargs["pools"]):
             devices |= set(pool.devices)
             links |= set(pool.links)
         if kwargs["add_connected_devices"]:
@@ -126,7 +128,7 @@ class Controller:
         for device in devices:
             if not device or device in network.devices or device == network:
                 continue
-            result["devices"].append(device.to_dict())
+            result["devices"].append(device.get_properties())
             network.devices.append(device)
         for link in links:
             if link in network.links:
@@ -136,7 +138,7 @@ class Controller:
                 or link.destination not in network.devices
             ):
                 continue
-            result["links"].append(link.to_dict())
+            result["links"].append(link.get_properties())
             network.links.append(link)
         return result
 
@@ -159,7 +161,7 @@ class Controller:
                 else:
                     current_value = getattr(instance, property)
                     related_model = vs.relationships[table][property]["model"]
-                    objects = db.objectify(related_model, value)
+                    objects = db.fetch_all(related_model, id_in=value)
                     if edit_mode == "set":
                         setattr(instance, property, objects)
                     else:
@@ -208,14 +210,11 @@ class Controller:
             results[instance.name] = {"start": start, **instance_properties}
         return results
 
-    def clear_results(self, service_id):
-        for result in db.fetch(
-            "run", all_matches=True, allow_none=True, service_id=service_id
-        ):
-            db.session.delete(result)
-
     def compare(self, type, id, v1, v2, context_lines):
-        if id == "none":
+        if type == "changelog":
+            properties = db.fetch("changelog", id=id).history["properties"][v1]
+            first, second, v1, v2 = properties["old"], properties["new"], "Old", "New"
+        elif id == "none":
             first = getattr(db.fetch("device", id=v1), type)
             second = getattr(db.fetch("device", id=v2), type)
         elif type in ("result", "device_result"):
@@ -229,8 +228,8 @@ class Controller:
             first, second = result1["result"][type], result2["result"][type]
         return "\n".join(
             unified_diff(
-                first.splitlines(),
-                second.splitlines(),
+                str(first).splitlines(),
+                str(second).splitlines(),
                 fromfile=f"V1 ({v1})",
                 tofile=f"V2 ({v2})",
                 lineterm="",
@@ -240,7 +239,7 @@ class Controller:
 
     def copy_service_in_workflow(self, workflow_id, **kwargs):
         service_sets = list(set(kwargs["services-to-copy"].split(",")))
-        service_instances = db.objectify("service", service_sets)
+        service_instances = db.fetch_all("service", id_in=service_sets)
         workflow = db.fetch("workflow", id=workflow_id, rbac="edit")
         services, errors, shallow_copy = [], [], kwargs["mode"] == "shallow"
         for service in service_instances:
@@ -261,7 +260,7 @@ class Controller:
         workflow.update_last_modified_properties()
         db.session.commit()
         return {
-            "services": [service.to_dict() for service in services],
+            "services": [service.get_properties() for service in services],
             "update_time": workflow.last_modified,
         }
 
@@ -279,7 +278,9 @@ class Controller:
             },
             "active": {
                 "service": active_service,
-                "task": len(db.fetch_all("task", rbac=None, is_active=True)),
+                "task": len(
+                    db.fetch_all("task", properties=["id"], rbac=None, is_active=True)
+                ),
                 "workflow": active_workflow,
             },
             "properties": {
@@ -289,7 +290,11 @@ class Controller:
         }
 
     def counters(self, property, model):
-        return Counter(v for v, in db.query(model, properties=[property], rbac=None))
+        return dict(
+            db.query(model, rbac=None)
+            .with_entities(getattr(vs.models[model], property), func.count())
+            .group_by(getattr(vs.models[model], property))
+        )
 
     def create_label(self, type, id, x, y, label_id, **kwargs):
         workflow = db.fetch(type, id=id, rbac="edit")
@@ -307,17 +312,6 @@ class Controller:
             instance=workflow,
         )
         return {"id": label_id, **label}
-
-    def database_deletion(self, **kwargs):
-        db.delete_all(*kwargs["deletion_types"])
-
-    def delete_instance(self, model, instance_id):
-        try:
-            return db.delete(model, id=instance_id)
-        except db.rbac_error:
-            return {"alert": "Error 403 - Not Authorized."}
-        except Exception as exc:
-            return {"alert": f"Unable to delete {model} ({exc})"}
 
     def delete_builder_selection(self, type, id, **selection):
         instance = db.fetch(type, id=id)
@@ -348,6 +342,71 @@ class Controller:
         env.log("info", f"Removed from '{instance}': {log}", instance=instance)
         return instance.last_modified
 
+    def delete_corrupted_objects(self):
+        number_of_corrupted_services = 0
+        for service in db.fetch_all("service", shared=False):
+            if service.workflows or service.name == service.scoped_name:
+                continue
+            db.session.delete(service)
+            number_of_corrupted_services += 1
+        db.session.commit()
+        env.log(
+            "warning",
+            f"Number of corrupted services deleted: {number_of_corrupted_services}",
+        )
+        edges = set(db.fetch_all("workflow_edge"))
+        duplicated_edges, number_of_corrupted_edges = defaultdict(list), 0
+        for edge in list(edges):
+            services = getattr(edge.workflow, "services", [])
+            if (
+                not edge.source
+                or not edge.destination
+                or not edge.workflow
+                or edge.source not in services
+                or edge.destination not in services
+                or edge.soft_deleted
+            ):
+                edges.remove(edge)
+                db.session.delete(edge)
+                number_of_corrupted_edges += 1
+        db.session.commit()
+        for edge in edges:
+            duplicated_edges[
+                (
+                    edge.source.name,
+                    edge.destination.name,
+                    edge.workflow.name,
+                    edge.subtype,
+                )
+            ].append(edge)
+        for duplicates in duplicated_edges.values():
+            for duplicate in duplicates[1:]:
+                db.session.delete(duplicate)
+                number_of_corrupted_edges += 1
+        db.session.commit()
+        env.log(
+            "warning", f"Number of corrupted edges deleted: {number_of_corrupted_edges}"
+        )
+
+    def delete_instance(self, model, instance_id):
+        try:
+            return db.delete(model, id=instance_id)
+        except db.rbac_error:
+            return {"alert": "Error 403 - Not Authorized."}
+        except Exception as exc:
+            return {"alert": f"Unable to delete {model} ({exc})"}
+
+    def delete_soft_deleted_objects(self):
+        soft_deleted_edges = db.fetch_all("workflow_edge", soft_deleted=True)
+        for edge in soft_deleted_edges:
+            db.delete_instance(edge)
+        db.session.commit()
+        soft_deleted_services = db.fetch_all("service", soft_deleted=True)
+        for service in soft_deleted_services:
+            db.delete_instance(service)
+        db.session.commit()
+        env.log("warning", "Soft-deleted objects successfully deleted")
+
     def edit_file(self, filepath):
         scoped_path = filepath.replace(">", "/")
         file = db.fetch("file", path=scoped_path)
@@ -360,48 +419,70 @@ class Controller:
         except UnicodeDecodeError:
             return {"error": "Cannot read file (unsupported type)."}
 
-    def export_service(self, service_id):
-        service = db.fetch("service", id=service_id)
-        path = Path(vs.path / "files" / "services" / service.filename)
-        path.mkdir(parents=True, exist_ok=True)
-        services = (
-            set(service.deep_services) if service.type == "workflow" else [service]
-        )
-        exclude = ("target_devices", "target_pools", "pools", "events")
-        services = [
-            service.to_dict(
-                export=True, private_properties=True, exclude_relations=exclude
+    def filtering(
+        self, model, bulk=False, rbac="read", user=None, properties=None, **kwargs
+    ):
+        table, pagination = vs.models[model], kwargs.get("pagination")
+        query = db.query(model, rbac, user, properties=properties)
+        total_records, filtered_records = (10**6,) * 2
+        if pagination and not bulk and not properties:
+            total_records = query.with_entities(table.id).count()
+        constraints = self.filtering_base_constraints(model, **kwargs)
+        constraints.extend(table.filtering_constraints(**kwargs))
+        constraints.extend(kwargs.get("sql_contraints", []))
+        query = self.filtering_relationship_constraints(query, model, **kwargs)
+        query = query.filter(and_(*constraints))
+        if bulk or properties:
+            instances = query.all()
+            if bulk == "object" or properties:
+                return instances
+            else:
+                return [getattr(instance, bulk) for instance in instances]
+        if pagination:
+            filtered_records = query.with_entities(table.id).count()
+        data = kwargs["columns"][int(kwargs["order"][0]["column"])]["data"]
+        ordering = getattr(getattr(table, data, None), kwargs["order"][0]["dir"], None)
+        if ordering:
+            query = query.order_by(ordering())
+        try:
+            query_data = (
+                query.limit(int(kwargs["length"])).offset(int(kwargs["start"])).all()
             )
-            for service in services
-        ]
-        yaml = vs.custom.get_yaml_instance()
-        with open(path / "service.yaml", "w") as file:
-            yaml.dump(services, file)
-        if service.type == "workflow":
-            edges = [edge.to_dict(export=True) for edge in service.deep_edges]
-            with open(path / "workflow_edge.yaml", "w") as file:
-                yaml.dump(edges, file)
-        with open(path / "metadata.yaml", "w") as file:
-            metadata = {
-                "version": vs.server_version,
-                "export_time": datetime.now(),
-                "service": service.name,
-            }
-            yaml.dump(metadata, file)
-        with open_tar(f"{path}.tgz", "w:gz") as tar:
-            tar.add(path, arcname=service.filename)
-        rmtree(path, ignore_errors=True)
-        return path
-
-    def export_services(self, **kwargs):
-        if kwargs["parent-filtering"] == "true":
-            kwargs["workflows_filter"] = "empty"
-        for service in self.filtering("service", properties=["id"], form=kwargs):
-            self.export_service(service.id)
+        except OperationalError:
+            return {"error": "Invalid regular expression as search parameter."}
+        table_result = {
+            "draw": int(kwargs["draw"]),
+            "recordsTotal": total_records,
+            "recordsFiltered": filtered_records,
+            "data": [obj.table_properties(**kwargs) for obj in query_data],
+        }
+        if kwargs.get("export"):
+            table_result["full_result"] = [
+                obj.table_properties(**kwargs) for obj in query.all()
+            ]
+        if kwargs.get("clipboard"):
+            table_result["clipboard"] = ",".join(obj.name for obj in query.all())
+        return table_result
 
     def filtering_base_constraints(self, model, **kwargs):
         table, constraints = vs.models[model], []
         constraint_dict = {**kwargs.get("form", {}), **kwargs.get("constraints", {})}
+        if serialized := constraint_dict.get("serialized"):
+            deferred_columns = {
+                attr.key
+                for attr in inspect(table).column_attrs
+                if isinstance(attr.strategy, DeferredColumnLoader)
+            }
+            constraints.append(
+                or_(
+                    *(
+                        column.ilike(f"%{serialized}%")
+                        for column in inspect(table).columns
+                        if isinstance(column.type, String)
+                        and column.name not in deferred_columns
+                    )
+                )
+            )
         for property in vs.model_properties[model]:
             value, row = constraint_dict.get(property), getattr(table, property)
             filter_value = constraint_dict.get(f"{property}_filter")
@@ -458,50 +539,8 @@ class Controller:
             ).filter(intersect_table.id == constraint_dict["intersect"]["id"])
         return query
 
-    def filtering(
-        self, model, bulk=False, rbac="read", user=None, properties=None, **kwargs
-    ):
-        table, pagination = vs.models[model], kwargs.get("pagination")
-        query = db.query(model, rbac, user, properties=properties)
-        total_records, filtered_records = (10**6,) * 2
-        if pagination and not bulk and not properties:
-            total_records = query.with_entities(table.id).count()
-        constraints = self.filtering_base_constraints(model, **kwargs)
-        constraints.extend(table.filtering_constraints(**kwargs))
-        constraints.extend(kwargs.get("sql_contraints", []))
-        query = self.filtering_relationship_constraints(query, model, **kwargs)
-        query = query.filter(and_(*constraints))
-        if bulk or properties:
-            instances = query.all()
-            if bulk == "object" or properties:
-                return instances
-            else:
-                return [getattr(instance, bulk) for instance in instances]
-        if pagination:
-            filtered_records = query.with_entities(table.id).count()
-        data = kwargs["columns"][int(kwargs["order"][0]["column"])]["data"]
-        ordering = getattr(getattr(table, data, None), kwargs["order"][0]["dir"], None)
-        if ordering:
-            query = query.order_by(ordering())
-        try:
-            query_data = (
-                query.limit(int(kwargs["length"])).offset(int(kwargs["start"])).all()
-            )
-        except OperationalError:
-            return {"error": "Invalid regular expression as search parameter."}
-        table_result = {
-            "draw": int(kwargs["draw"]),
-            "recordsTotal": total_records,
-            "recordsFiltered": filtered_records,
-            "data": [obj.table_properties(**kwargs) for obj in query_data],
-        }
-        if kwargs.get("export"):
-            table_result["full_result"] = [
-                obj.table_properties(**kwargs) for obj in query.all()
-            ]
-        if kwargs.get("clipboard"):
-            table_result["clipboard"] = ",".join(obj.name for obj in query.all())
-        return table_result
+    def format_code_with_black(self, content):
+        return format_str(content, mode=Mode())
 
     def get(self, model, id, **kwargs):
         func = "get_properties" if kwargs.pop("properties_only", None) else "to_dict"
@@ -509,6 +548,24 @@ class Controller:
             kwargs["include"] = list(vs.form_properties[model])
             kwargs["include_relations"] = list(vs.form_properties[model])
         return getattr(db.fetch(model, id=id), func)(**kwargs)
+
+    def get_builder_children(self, type, instance_id):
+        instance = db.fetch(type, id=instance_id)
+        children = {instance.name}
+        child_property = "services" if type == "workflow" else "devices"
+
+        def rec(instance):
+            for sub_instance in getattr(instance, child_property):
+                children.add(sub_instance.name)
+                if sub_instance.type == type:
+                    rec(sub_instance)
+
+        rec(instance)
+        return list(children)
+
+    def get_changelog_history(self, changelog_id):
+        changelog = db.fetch("changelog", id=changelog_id)
+        return {"content": changelog.content, "history": changelog.history}
 
     def get_cluster_status(self):
         return [server.status for server in db.fetch_all("server")]
@@ -526,14 +583,6 @@ class Controller:
                 return
             return credential.username, env.get_password(credential.password)
 
-    def get_device_logs(self, device_id):
-        device_logs = [
-            log.name
-            for log in db.fetch_all("log")
-            if log.source == db.fetch("device", id=device_id).ip_address
-        ]
-        return "\n".join(device_logs)
-
     def get_device_network_data(self, device_id):
         device = db.fetch("device", id=device_id, rbac="configuration")
         return {
@@ -550,7 +599,7 @@ class Controller:
         repo = vs.settings["app"]["git_repository"]
         if not repo:
             return
-        local_path = vs.path / "network_data"
+        local_path = vs.path / vs.automation["configuration_backup"]["folder"]
         try:
             if exists(local_path):
                 Repo(local_path).remotes.origin.pull()
@@ -567,8 +616,9 @@ class Controller:
 
     def get_git_history(self, device_id):
         device = db.fetch("device", id=device_id, rbac="configuration")
-        repo = Repo(vs.path / "network_data")
-        path = vs.path / "network_data" / device.name
+        folder = vs.automation["configuration_backup"]["folder"]
+        repo = Repo(vs.path / folder)
+        path = vs.path / folder / device.name
         return {
             data_type: [
                 {"hash": str(commit), "date": commit.committed_datetime}
@@ -578,7 +628,8 @@ class Controller:
         }
 
     def get_git_network_data(self, device_name, hash):
-        commit, result = Repo(vs.path / "network_data").commit(hash), {}
+        folder = vs.automation["configuration_backup"]["folder"]
+        commit, result = Repo(vs.path / folder).commit(hash), {}
         device = db.fetch("device", name=device_name, rbac="configuration")
         for property in vs.configuration_properties:
             try:
@@ -592,8 +643,169 @@ class Controller:
                 result[property] = ""
         return {"result": result, "datetime": commit.committed_datetime}
 
+    def get_instance_tree(self, type, full_path, runtime=None, **kwargs):
+        path_id = full_path.split(">")
+        path_pid = [db.fetch(type, id=id, rbac=None).persistent_id for id in path_id]
+        full_ppath = ">".join(path_pid)
+        run = db.fetch("run", runtime=runtime) if runtime else None
+        state = {}
+        if "state" in kwargs:
+            state = kwargs["state"]
+        elif run:
+            state = run.state or run.get_state()
+        highlight = []
+
+        def match(instance, **kwargs):
+            is_regex_search = kwargs.get("regex_search", False)
+            name = getattr(instance, "name" if type == "network" else "scoped_name")
+            value = kwargs["search_value"]
+            if kwargs["search_mode"] == "names":
+                is_match = (
+                    search(value, name)
+                    if is_regex_search
+                    else value.lower() in name.lower()
+                )
+            else:
+                serialized = str(instance.get_properties().values())
+                is_match = (
+                    search(value, serialized)
+                    if is_regex_search
+                    else value.lower() in serialized.lower()
+                )
+            if is_match:
+                highlight.append(instance.id)
+            return is_match
+
+        def rec(instance, path):
+            if run and path not in state:
+                return
+            local_path_ids = path.split(">")
+            if (
+                getattr(instance, "run_method", None) == "per_device"
+                and "device_state" in kwargs
+                and instance.id not in kwargs["device_state"]
+            ):
+                return
+            style, active_search = "", kwargs.get("search_value")
+            if type == "workflow":
+                if instance.scoped_name in ("Start", "End"):
+                    return
+                elif instance.scoped_name == "Placeholder" and len(path_id) > 1:
+                    instance = db.fetch(type, id=path_id[1])
+                    path = f"{path.split('>')[0]}>{instance.persistent_id}"
+            if active_search and instance.type != type:
+                if match(instance, **kwargs):
+                    style = "font-weight: bold; color: #BABA06"
+                elif not kwargs["display_all"]:
+                    return
+            children = False
+            if instance.type == type:
+                instances = (
+                    instance.exclude_soft_deleted("services")
+                    if type == "workflow"
+                    else instance.devices
+                )
+                children_results = []
+                for child in instances:
+                    if str(child.persistent_id) in local_path_ids:
+                        continue
+                    if run and child.scoped_name == "Placeholder" and run.placeholder:
+                        child = run.placeholder
+                    child_results = rec(child, f"{path}>{child.persistent_id}")
+                    if run and not child_results:
+                        continue
+                    children_results.append(child_results)
+                children = sorted(
+                    filter(None, children_results),
+                    key=(
+                        itemgetter("runtime")
+                        if run
+                        else lambda node: node["text"].lower()
+                    ),
+                )
+                if active_search:
+                    is_match = match(instance, **kwargs)
+                    if not children and not is_match and not kwargs["display_all"]:
+                        return
+                    elif is_match:
+                        style = "font-weight: bold; color: #BABA06"
+            progress_data = {}
+            if run and "device_state" not in kwargs:
+                progress = state[path].get("progress")
+                if progress and progress["device"]["total"]:
+                    progress_data = {"progress": progress["device"]}
+            if instance.id in kwargs.get("device_state", {}):
+                color = kwargs["device_state"][instance.id]
+            elif run:
+                if state[path].get("dry_run"):
+                    color = "#E09E2F"
+                elif "success" in state[path]:
+                    color = "#32CD32" if state[path]["success"] else "#FF6666"
+                else:
+                    color = "#25B6FA"
+            else:
+                color = (
+                    "#FF1694"
+                    if getattr(instance, "shared", False)
+                    else "#E09E2F" if getattr(instance, "dry_run", False) else "#6666FF"
+                )
+            text = instance.scoped_name if type == "workflow" else instance.name
+            attr_class = "jstree-wholerow-clicked" if full_ppath == path else ""
+            runtime = state[path].get("runtime") if state else None
+            return {
+                "runtime": runtime,
+                "data": {
+                    "path": path,
+                    "properties": instance.base_properties,
+                    **progress_data,
+                },
+                "id": path,
+                "state": {"opened": full_ppath.startswith(path)},
+                "text": text if len(text) < 45 else f"{text[:45]}...",
+                "children": children,
+                "a_attr": {
+                    "class": f"no_checkbox {attr_class}",
+                    "style": f"color: {color}; width: 100%; {style}",
+                },
+                "type": instance.type,
+            }
+
+        # In a standard run, the top-level service in the path has run so we use it
+        # as root of the tree. In case of restart run from a subworkflow or from a
+        # workflow that has a superworkflow, we use the last service as root.
+        if run:
+            has_root_state = str(path_pid[0]) in state
+            root_id = path_id[0] if has_root_state else path_id[-1]
+            root_path = str(path_pid[0]) if has_root_state else full_ppath
+        else:
+            root_id, root_path = path_id[0], str(path_pid[0])
+        return {
+            "tree": rec(db.fetch(type, id=root_id), root_path),
+            "highlight": highlight,
+        }
+
     def get_migration_folders(self):
         return listdir(Path(vs.migration_path))
+
+    def get_network_state(self, path, **kwargs):
+        network = db.fetch("network", id=path.split(">")[-1], allow_none=True)
+        if not network:
+            raise db.rbac_error
+        results = db.fetch_all("result", parent_runtime=kwargs.get("runtime"))
+        output = {
+            "network": network.to_dict(include_relations=["devices", "links"]),
+            "device_results": {
+                result.device_id: result.success
+                for result in results
+                if result.device_id
+            },
+        }
+        if kwargs.get("get_tree") or kwargs.get("search_value"):
+            output.update(self.get_instance_tree("network", path, **kwargs))
+        return output
+
+    def get_profiling_data(self):
+        return vs.profiling
 
     def get_properties(self, model, id):
         return db.fetch(model, id=id).get_properties()
@@ -627,7 +839,7 @@ class Controller:
             query = query.filter(vs.models["run"].creator == current_user.name)
         return sorted(((run.runtime, run.name) for run in query.all()), reverse=True)
 
-    def get_service_logs(self, service, runtime, line=0, device=None):
+    def get_service_logs(self, service, runtime, line=0, device=None, search=None):
         log_instance = db.fetch(
             "service_log", allow_none=True, runtime=runtime, service_id=service
         )
@@ -642,8 +854,10 @@ class Controller:
         if device:
             device_name = db.fetch("device", id=device).name
             lines = [line for line in lines if f"DEVICE {device_name}" in line]
+        if search:
+            lines = [line for line in lines if search.lower() in line.lower()]
         return {
-            "logs": "\n".join(lines),
+            "logs": "\n" + "\n".join(lines) if lines else "",
             "refresh": not log_instance,
             "line": int(line) + number_of_lines,
         }
@@ -658,7 +872,7 @@ class Controller:
             path_id = path.split(">")
         if not service:
             raise db.rbac_error
-        runs = db.query("run", rbac=None).filter(
+        runs = db.query("run", properties=["name", "runtime"], rbac=None).filter(
             vs.models["run"].service_id.in_(path_id)
         )
         if display == "user":
@@ -666,18 +880,24 @@ class Controller:
         runs = runs.all()
         if runtime != "normal" and runs:
             if runtime == "latest":
-                run = sorted(runs, key=attrgetter("runtime"), reverse=True)[0]
-            else:
-                run = db.fetch("run", allow_none=True, runtime=runtime)
-            state = run.get_state() if run else None
+                runtime = sorted(run.runtime for run in runs)[-1]
+            run = db.fetch("run", allow_none=True, runtime=runtime)
+            state = kwargs["state"] = run.get_state() if run else None
         if kwargs.get("device") and run:
             output["device_state"] = kwargs["device_state"] = {
-                result.service_id: result.success
+                result.service_id: result.result.get(
+                    "color", "#32CD32" if result.success else "#FF6666"
+                )
                 for result in db.fetch_all(
                     "result", parent_runtime=run.runtime, device_id=kwargs.get("device")
                 )
             }
         kwargs["runtime"] = getattr(run, "runtime", None)
+        if kwargs.get("search_value") and kwargs.get("regex_search"):
+            try:
+                compile(kwargs["search_value"])
+            except Exception as exc:
+                return {"alert": f"Invalid Regular Expression ('{exc}')"}
         if kwargs.get("get_tree") or kwargs.get("search_value"):
             output.update(self.get_instance_tree("workflow", path, **kwargs))
         serialized_service = service.to_dict(include_relations=["superworkflow"])
@@ -690,8 +910,6 @@ class Controller:
             serialized_service["services"] = []
             for subservice in service.exclude_soft_deleted("services"):
                 properties = subservice.get_properties(include=service_properties)
-                subservice_positions = subservice.positions.get(service.name, [0, 0])
-                properties["x"], properties["y"] = subservice_positions
                 serialized_service["services"].append(properties)
         return {
             "service": serialized_service,
@@ -704,24 +922,18 @@ class Controller:
         }
 
     def get_session_log(self, session_id):
-        return db.fetch("session", id=session_id).content
+        session = db.fetch("session", id=session_id)
+        return session.content, session.device_name
 
-    def get_network_state(self, path, **kwargs):
-        network = db.fetch("network", id=path.split(">")[-1], allow_none=True)
-        if not network:
-            raise db.rbac_error
-        results = db.fetch_all("result", parent_runtime=kwargs.get("runtime"))
-        output = {
-            "network": network.to_dict(include_relations=["devices", "links"]),
-            "device_results": {
-                result.device_id: result.success
-                for result in results
-                if result.device_id
-            },
-        }
-        if kwargs.get("get_tree") or kwargs.get("search_value"):
-            output.update(self.get_instance_tree("network", path, **kwargs))
-        return output
+    def get_store(self, **kwargs):
+        store = None
+        if "id" in kwargs:
+            store = db.fetch("store", id=kwargs["id"])
+        elif kwargs.get("path"):
+            store = db.fetch("store", path=kwargs["path"])
+        elif kwargs.get("parent") and kwargs["store"]["store_id"]:
+            store = db.fetch("store", id=kwargs["store"]["store_id"])
+        return store.get_properties() if store else None
 
     def get_time(self):
         return vs.get_time()
@@ -739,187 +951,26 @@ class Controller:
             result[instance.category or "Other"].append(entry)
         return result
 
-    def scan_folder(self, path=""):
-        env.log("info", "Starting Scan of Files")
-        path = f"{vs.file_path}{path.replace('>', '/')}"
-        if not exists(path):
-            return {"alert": "This folder does not exist on the filesystem."}
-        elif not str(Path(path).resolve()).startswith(f"{vs.file_path}"):
-            return {"error": "The path resolves outside of the files folder."}
-        folders = {Path(path)}
-        files_set = {
-            file
-            for file in db.session.query(vs.models["file"])
-            .filter(vs.models["file"].full_path.startswith(path))
-            .all()
-        }
-        for file in files_set:
-            if not exists(file.full_path):
-                file.status = "Not Found"
-        file_path_set = {file.full_path for file in files_set}
-        while folders:
-            folder = folders.pop()
-            for file in folder.iterdir():
-                if str(file) in file_path_set:
-                    continue
-                elif file.suffix in vs.settings["files"]["ignored_types"]:
-                    continue
-                elif file.is_dir():
-                    folders.add(file)
-                scoped_path = str(file).replace(str(vs.file_path), "")
-                filetype = "folder" if file.is_dir() else "file"
-                db.factory(filetype, commit=True, path=scoped_path)
-        env.log("info", "Scan of Files Successful")
-
     def get_visualization_pools(self, view):
         has_device = vs.models["pool"].devices.any()
         has_link = vs.models["pool"].links.any()
         pools = db.query("pool").filter(or_(has_device, has_link)).all()
         return [pool.base_properties for pool in pools]
 
-    def get_builder_children(self, type, instance_id):
-        instance = db.fetch(type, id=instance_id)
-        children = {instance.name}
-        child_property = "services" if type == "workflow" else "devices"
+    def get_workflow_path(self, path):
+        return ">".join(
+            db.fetch("service", id=id).persistent_id for id in path.split(">")
+        )
 
-        def rec(instance):
-            for sub_instance in getattr(instance, child_property):
-                children.add(sub_instance.name)
-                if sub_instance.type == type:
-                    rec(sub_instance)
-
-        rec(instance)
-        return list(children)
-
-    def get_instance_tree(self, type, full_path, runtime=None, **kwargs):
-        path_id = full_path.split(">")
-        run = db.fetch("run", runtime=runtime) if runtime else None
-        state = (run.state or run.get_state()) if run else {}
-        highlight = []
-
-        def match(instance, **kwargs):
-            name = getattr(instance, "name" if type == "network" else "scoped_name")
-            is_match = not (
-                kwargs["search_mode"] == "names"
-                and kwargs["search_value"].lower() not in name.lower()
-                or kwargs["search_mode"] == "properties"
-                and kwargs["search_value"].lower() not in instance.serialized
-            )
-            if is_match:
-                highlight.append(instance.id)
-            return is_match
-
-        def rec(instance, path):
-            if run and path not in state:
-                return
-            local_path_ids = path.split(">")
-            if (
-                getattr(instance, "run_method", None) == "per_device"
-                and "device_state" in kwargs
-                and instance.id not in kwargs["device_state"]
-            ):
-                return
-            style, active_search = "", kwargs.get("search_value")
-            if type == "workflow":
-                if instance.scoped_name in ("Start", "End"):
-                    return
-                elif instance.scoped_name == "Placeholder" and len(path_id) > 1:
-                    instance = db.fetch(type, id=path_id[1])
-                    path = f"{path.split('>')[0]}>{path_id[1]}"
-            if active_search and instance.type != type:
-                if match(instance, **kwargs):
-                    style = "font-weight: bold;"
-                else:
-                    return
-            children = False
-            if instance.type == type:
-                instances = (
-                    instance.exclude_soft_deleted("services")
-                    if type == "workflow"
-                    else instance.devices
-                )
-                children_results = []
-                for child in instances:
-                    if str(child.id) in local_path_ids:
-                        continue
-                    if run and child.scoped_name == "Placeholder":
-                        child = run.placeholder
-                    child_results = rec(child, f"{path}>{child.id}")
-                    if run and not child_results:
-                        continue
-                    children_results.append(child_results)
-                children = sorted(
-                    filter(None, children_results),
-                    key=(
-                        itemgetter("runtime")
-                        if run
-                        else lambda node: node["text"].lower()
-                    ),
-                )
-                if active_search:
-                    is_match = match(instance, **kwargs)
-                    if not children and not is_match:
-                        return
-                    elif is_match:
-                        style = "font-weight: bold;"
-            progress_data = {}
-            if run and "device_state" not in kwargs:
-                progress = state[path].get("progress")
-                if progress and progress["device"]["total"]:
-                    progress_data = {"progress": progress["device"]}
-            if instance.id in kwargs.get("device_state", {}):
-                color = "32CD32" if kwargs["device_state"][instance.id] else "FF6666"
-            elif run:
-                if state[path].get("dry_run"):
-                    color = "E09E2F"
-                elif "success" in state[path]["result"]:
-                    color = "32CD32" if state[path]["result"]["success"] else "FF6666"
-                else:
-                    color = "25B6FA"
-            else:
-                color = (
-                    "FF1694"
-                    if getattr(instance, "shared", False)
-                    else "E09E2F"
-                    if getattr(instance, "dry_run", False)
-                    else "6666FF"
-                )
-            text = instance.scoped_name if type == "workflow" else instance.name
-            attr_class = "jstree-wholerow-clicked" if full_path == path else ""
-            return {
-                "runtime": state[path]["result"]["runtime"] if state else None,
-                "data": {
-                    "path": path,
-                    "properties": instance.base_properties,
-                    **progress_data,
-                },
-                "id": path,
-                "state": {"opened": full_path.startswith(path)},
-                "text": text if len(text) < 45 else f"{text[:45]}...",
-                "children": children,
-                "a_attr": {
-                    "class": f"no_checkbox {attr_class}",
-                    "style": f"color: #{color}; width: 100%; {style}",
-                },
-                "type": instance.type,
-            }
-
-        # In a standard run, the top-level service in the path has run so we use it
-        # as root of the tree. In case of restart run from a subworkflow or from a
-        # workflow that has a superworkflow, we use the last service as root.
-        has_root_state = str(path_id[0]) in state
-        root_id = path_id[0] if has_root_state else path_id[-1]
-        root_path = str(path_id[0]) if has_root_state else full_path
-        return {
-            "tree": rec(db.fetch(type, id=root_id), root_path),
-            "highlight": highlight,
+    def get_workflow_services(self, id, node, search=None):
+        parents = {
+            workflow.name for workflow in db.fetch("workflow", id=id).get_ancestors()
         }
-
-    def get_workflow_services(self, id, node):
-        parents = db.fetch("workflow", id=id).get_ancestors()
-        if node == "all":
+        if node == "all" and not search:
             workflows = self.filtering(
-                "workflow", bulk="object", constraints={"workflows_filter": "empty"}
+                "workflow",
+                properties=["id", "name"],
+                constraints={"workflows_filter": "empty"},
             )
             return (
                 [
@@ -958,9 +1009,11 @@ class Controller:
                             "text": workflow.name,
                             "children": True,
                             "type": "workflow",
-                            "state": {"disabled": workflow in parents},
+                            "state": {"disabled": workflow.name in parents},
                             "a_attr": {
-                                "class": "no_checkbox" if workflow in parents else "",
+                                "class": (
+                                    "no_checkbox" if workflow.name in parents else ""
+                                ),
                                 "style": "color: #6666FF; width: 100%",
                             },
                         }
@@ -969,9 +1022,60 @@ class Controller:
                     key=itemgetter("text"),
                 )
             )
+        elif node == "all" and search:
+            services = self.filtering(
+                "service",
+                properties=["id", "scoped_name", "type", "name", "shared"],
+                constraints={"name": search, "soft_deleted": "bool-false"},
+            )
+            result = defaultdict(list)
+            for service in services:
+                if service.type != "workflow" and service.shared:
+                    result["Shared services"].append(service)
+                elif service.type != "workflow" and service.name == service.scoped_name:
+                    result["Standalone services"].append(service)
+                else:
+                    if service.name != service.scoped_name:
+                        name = service.name.replace(f" {service.scoped_name}", "")[1:-1]
+                    else:
+                        name = service.name
+                    result[name].append(service)
+            return [
+                {
+                    "text": key,
+                    "type": "category",
+                    "state": {"opened": True, "disabled": True},
+                    "a_attr": {"class": "no_checkbox"},
+                    "children": [
+                        {
+                            "id": service.name,
+                            "data": {"id": service.id},
+                            "text": service.scoped_name,
+                            "a_attr": {
+                                "style": (
+                                    f"color: #{'FF1694' if service.shared else '6666FF'}"
+                                    "; width: 100%"
+                                ),
+                            },
+                            "type": (
+                                "workflow" if service.type == "workflow" else "service"
+                            ),
+                        }
+                        for service in services
+                    ],
+                }
+                for key, services in result.items()
+            ]
         elif node == "standalone":
-            constraints = {"workflows_filter": "empty", "type": "service"}
-            services = self.filtering("service", bulk="object", constraints=constraints)
+            services = self.filtering(
+                "service",
+                properties=["id", "scoped_name"],
+                constraints={
+                    "workflows_filter": "empty",
+                    "type": "service",
+                    "shared": "bool-false",
+                },
+            )
             return sorted(
                 (
                     {
@@ -984,8 +1088,11 @@ class Controller:
                 key=itemgetter("text"),
             )
         elif node == "shared":
-            constraints = {"shared": "bool-true"}
-            services = self.filtering("service", bulk="object", constraints=constraints)
+            services = self.filtering(
+                "service",
+                properties=["id", "scoped_name"],
+                constraints={"shared": "bool-true"},
+            )
             return sorted(
                 (
                     {
@@ -1022,189 +1129,188 @@ class Controller:
                 key=itemgetter("text"),
             )
 
-    def load_debug_snippets(self):
-        snippets = {}
-        for path in Path(vs.file_path / "snippets").glob("**/*.py"):
-            with open(path, "r") as file:
-                snippets[path.name] = file.read()
-        return snippets
+    def import_topology(self, **kwargs):
+        file = kwargs["file"]
+        if kwargs["replace"]:
+            db.delete_all("device")
+        result = self.topology_import(file)
+        info("Inventory import: Done.")
+        return result
 
-    def migration_export(self, **kwargs):
-        yaml = vs.custom.get_yaml_instance()
-        for cls_name in kwargs["import_export_types"]:
-            path = Path(vs.migration_path) / kwargs["name"]
-            if not exists(path):
-                makedirs(path)
-            with open(path / f"{cls_name}.yaml", "w") as migration_file:
-                yaml.dump(
-                    db.export(
-                        cls_name,
-                        private_properties=kwargs["export_private_properties"],
-                    ),
-                    migration_file,
-                )
-        with open(path / "metadata.yaml", "w") as file:
-            yaml.dump(
-                {
-                    "version": vs.server_version,
-                    "export_time": datetime.now(),
-                },
-                file,
+    def json_export_association(self, association_name, path, option):
+        association_table = db.associations[association_name]
+        table = association_table["table"]
+        model1 = association_table["model1"]["foreign_key"]
+        model2 = association_table["model2"]["foreign_key"]
+        cls1 = aliased(vs.models[model1])
+        cls2 = aliased(vs.models[model2])
+        statement = select(getattr(cls1, "name"), getattr(cls2, "name")).select_from(
+            table.join(cls1, getattr(table.c, f"{model1}_id") == cls1.id).join(
+                cls2, getattr(table.c, f"{model2}_id") == cls2.id
             )
-
-    def migration_import(self, folder="migrations", **kwargs):
-        env.log("info", "Starting Migration Import")
-        env.log_events = False
-        status, models = "Import successful", kwargs["import_export_types"]
-        empty_database = kwargs.get("empty_database_before_import", False)
-        service_import = kwargs.get("service_import", False)
-        if empty_database:
-            db.delete_all(*models)
-        relations, store = defaultdict(lambda: defaultdict(dict)), defaultdict(dict)
-        start_time = datetime.now()
-        folder_path = (
-            Path(vs.migration_path) / kwargs["name"]
-            if folder == "migrations"
-            else vs.file_path / folder / kwargs["name"]
         )
-        yaml = vs.custom.get_yaml_instance()
-        with open(folder_path / "metadata.yaml", "r") as metadata_file:
-            metadata = yaml.load(metadata_file)
-        if service_import and metadata["version"] != vs.server_version:
-            return {"alert": "Import from an older version is not allowed"}
-        if current_user:
-            store["user"][current_user.name] = current_user
-        for service_name in ("Start", "End", "Placeholder"):
-            service = db.fetch(
-                "service", name=f"[Shared] {service_name}", allow_none=True, rbac=None
-            )
-            if service:
-                store["swiss_army_knife_service"][service.name] = service
-                store["service"][service.name] = service
-        for model in models:
-            path = folder_path / f"{model}.yaml"
-            if not path.exists():
-                if service_import and model == "service":
-                    raise Exception("Invalid archive provided in service import.")
+        result = sorted((row[0], row[1]) for row in db.session.execute(statement).all())
+        if not result:
+            return
+        with open(path / f"{association_name}.json", "wb") as file:
+            file.write(dumps(result, option=option))
+
+    def json_export_properties(self, cls_name, path, option):
+        cls = vs.models[cls_name]
+        export_type = getattr(cls, "export_type", cls.type)
+        excluded_properties = set(
+            db.json_migration["dont_migrate"].get(export_type, [])
+        ) | {"type"}
+        excluded_properties |= set(getattr(cls, "model_properties", {}))
+        properties_to_export = [
+            property
+            for property in vs.model_properties[cls_name]
+            if property not in excluded_properties
+        ]
+        instances = [
+            dict(row._mapping)
+            for row in db.query(
+                cls_name, properties=properties_to_export, rbac=None
+            ).all()
+        ]
+        if not instances:
+            return
+        if not exists(path):
+            makedirs(path)
+        with open(path / f"{cls_name}.json", "wb") as file:
+            file.write(dumps(instances, option=option))
+
+    def json_export_scalar(self, cls_name, path, option):
+        for property, relation in vs.relationships[cls_name].items():
+            if relation["list"]:
                 continue
-            with open(path, "r") as migration_file:
-                instances = yaml.load(migration_file)
-            before_time = datetime.now()
-            env.log("info", f"Creating {model}s")
-            for instance in instances:
-                type, relation_dict = instance.pop("type", model), {}
-                for related_model, relation in vs.relationships[type].items():
-                    relation_dict[related_model] = instance.pop(related_model, [])
-                instance_private_properties = {
-                    property: env.get_password(instance.pop(property))
-                    for property in list(instance)
-                    if property in vs.private_properties_set
+            if f"{cls_name}_{property}" in db.json_migration["no_export"]:
+                continue
+            cls = vs.models[cls_name]
+            alias = aliased(vs.models[relation["model"]], flat=True)
+            statement = (
+                select(getattr(cls, "name"), getattr(alias, "name"))
+                .select_from(cls)
+                .join(alias, getattr(cls, f"{property}_id") == getattr(alias, "id"))
+            )
+            result = dict(db.session.execute(statement).all())
+            filepath = path / f"{cls_name}_{property}.json"
+            if not result and not exists(filepath):
+                continue
+            with open(filepath, "wb") as file:
+                file.write(dumps(result, option=option))
+
+    def json_import_associations(self, association_name, name_to_id, path):
+        properties = db.associations[association_name]
+        filepath = path / f"{association_name}.json"
+        if not exists(filepath):
+            return
+        with open(filepath, "rb") as file:
+            data = loads(file.read())
+        model1 = properties["model1"]["foreign_key"]
+        model2 = properties["model2"]["foreign_key"]
+        export_model1 = getattr(vs.models[model1], "export_type", model1)
+        export_model2 = getattr(vs.models[model2], "export_type", model2)
+        for batch in batched(
+            (
+                {
+                    f"{model1}_id": name_to_id[export_model1][name1],
+                    f"{model2}_id": name_to_id[export_model2][name2],
                 }
-                try:
-                    if instance["name"] in store[model]:
-                        if instance["name"] in (
-                            "[Shared] Start",
-                            "[Shared] End",
-                            "[Shared] Placeholder",
-                        ):
-                            store[model][instance["name"]].positions = {
-                                **instance["positions"],
-                                **store[model][instance["name"]].positions,
-                            }
-                        instance = store[model][instance["name"]]
-                    else:
-                        instance = db.factory(
-                            type,
-                            rbac=None,
-                            migration_import=True,
-                            no_fetch=empty_database,
-                            import_mechanism=True,
-                            **instance,
-                        )
-                        store[model][instance.name] = instance
-                        store[type][instance.name] = store[model][instance.name]
-                    if service_import:
-                        if instance.type == "workflow":
-                            instance.edges = []
-                    relations[type][instance.name] = relation_dict
-                    for property in instance_private_properties.items():
-                        setattr(instance, *property)
-                except Exception:
-                    info(f"{str(instance)} could not be imported:\n{format_exc()}")
-                    if service_import:
-                        db.session.rollback()
-                        return "Error during import; service was not imported."
-                    status = {"alert": "partial import (see logs)."}
+                for name1, name2 in data
+            ),
+            vs.database["transactions"]["batch_size"],
+        ):
+            db.session.execute(properties["table"].insert(), batch)
+
+    def json_import_properties(self, cls_name, path):
+        filepath = path / f"{cls_name}.json"
+        if cls_name in db.json_migration["no_export"] or not exists(filepath):
+            return
+        with open(filepath, "rb") as file:
+            instances = loads(file.read())
+        for batch in batched(instances, vs.database["transactions"]["batch_size"]):
+            db.session.execute(insert(vs.models[cls_name]), batch)
+
+    def json_import_scalar(self, cls_name, name_to_id, path):
+        updates = defaultdict(dict)
+        export_model1 = getattr(vs.models[cls_name], "export_type", cls_name)
+        for property, relation in vs.relationships[cls_name].items():
+            filepath = path / f"{cls_name}_{property}.json"
+            if relation["list"] or not exists(filepath):
+                continue
+            with open(filepath, "rb") as file:
+                relations = loads(file.read())
+            export_model2 = getattr(
+                vs.models[relation["model"]], "export_type", relation["model"]
+            )
+            for source, destination in relations.items():
+                source_id = name_to_id[export_model1][source]
+                destination_id = name_to_id[export_model2][destination]
+                updates[source_id][f"{property}_id"] = destination_id
+        for batch in batched(
+            ({"id": id, **values} for id, values in updates.items()),
+            vs.database["transactions"]["batch_size"],
+        ):
+            db.session.execute(update(vs.models[cls_name]), list(batch))
+
+    def json_migration_export(self, **kwargs):
+        export_models = [
+            class_name
+            for class_name in vs.models
+            if class_name not in db.json_migration["no_export"]
+        ]
+        option = (
+            OPT_INDENT_2 | OPT_SORT_KEYS
+            if kwargs.get("export_format") == "structured"
+            else None
+        )
+        path = Path(vs.migration_path) / kwargs["name"]
+        for cls_name in export_models:
+            self.json_export_properties(cls_name, path, option)
+            self.json_export_scalar(cls_name, path, option)
+        for association_name in db.associations:
+            self.json_export_association(association_name, path, option)
+        with open("metadata.json", "wb") as file:
+            metadata = {"version": vs.server_version, "export_time": datetime.now()}
+            file.write(dumps(metadata))
+
+    def json_migration_import(self, **kwargs):
+        export_models = [
+            class_name
+            for class_name in vs.models
+            if class_name not in db.json_migration["no_export"]
+        ]
+        with env.timer("Clean Database Before Importing"):
+            for table_properties in db.associations.values():
+                db.session.execute(table_properties["table"].delete())
+            for cls_name in export_models:
+                db.session.execute(vs.models[cls_name].__table__.delete())
+            for cls_name in db.json_migration["clear_on_import"]:
+                db.session.execute(vs.models[cls_name].__table__.delete())
             db.session.commit()
-            total_time = datetime.now() - before_time
-            env.log("info", f"{model.capitalize()}s created in {total_time}")
-        for model, instances in relations.items():
-            env.log("info", f"Setting up {model}s database relationships")
-            before_time = datetime.now()
-            for instance_name, related_models in instances.items():
-                for property, value in related_models.items():
-                    if not value:
-                        continue
-                    relation = vs.relationships[model][property]
-                    if relation["list"]:
-                        sql_value = []
-                        for name in value:
-                            if name not in store[relation["model"]]:
-                                related_instance = db.fetch(
-                                    relation["model"],
-                                    name=name,
-                                    allow_none=True,
-                                    rbac=None,
-                                )
-                                if related_instance:
-                                    store[relation["model"]][name] = related_instance
-                            if name in store[relation["model"]]:
-                                sql_value.append(store[relation["model"]][name])
-                    else:
-                        if value not in store[relation["model"]]:
-                            related_instance = db.fetch(
-                                relation["model"],
-                                name=value,
-                                allow_none=True,
-                                rbac=None,
-                            )
-                            if related_instance:
-                                store[relation["model"]][value] = related_instance
-                            else:
-                                error(f"Skipping association of {value}")
-                                continue
-                        sql_value = store[relation["model"]][value]
-                    try:
-                        setattr(store[model].get(instance_name), property, sql_value)
-                    except Exception:
-                        info("\n".join(format_exc().splitlines()))
-                        if service_import:
-                            db.session.rollback()
-                            return "Error during import; service was not imported."
-                        status = {"alert": "Partial Import (see logs)."}
-            env.log("info", f"Relationships created in {datetime.now() - before_time}")
+        path = Path(vs.migration_path) / kwargs["name"]
+        with env.timer("Import Properties"):
+            for cls_name in vs.models:
+                self.json_import_properties(cls_name, path)
+            db.session.commit()
+        with env.timer("Name to ID Assocation"):
+            name_to_id = {}
+            for cls_name in db.json_migration["import_export_models"]:
+                cls = vs.models[cls_name]
+                name_to_id[cls_name] = dict(
+                    db.session.execute(select(cls.name, cls.id)).all()
+                )
+        with env.timer("Import Scalar Properties"):
+            for cls_name in vs.models:
+                self.json_import_scalar(cls_name, name_to_id, path)
+        with env.timer("Import Associations"):
+            for association_name in db.associations:
+                self.json_import_associations(association_name, name_to_id, path)
         db.session.commit()
-        if service_import:
-            service = store["service"][metadata["service"]]
-            if service.type == "workflow":
-                service.recursive_update()
-        if not kwargs.get("skip_model_update"):
-            before_time = datetime.now()
-            env.log("info", "Starting model update")
-            for model in ("user", "service", "network"):
-                for instance in store[model].values():
-                    instance.post_update()
-            env.log("info", f"Model update done ({datetime.now() - before_time}s)")
-        if not kwargs.get("skip_pool_update"):
-            before_time = datetime.now()
-            env.log("info", "Starting pool update")
-            for pool in store["pool"].values():
-                pool.compute_pool()
-            env.log("info", f"Pool update done ({datetime.now() - before_time}s)")
-        db.session.commit()
-        env.log_events = True
-        env.log("info", f"{status} (execution time: {datetime.now() - start_time}s)")
-        return status
+        server = db.fetch("server", name=vs.server, rbac=None, allow_none=True)
+        vs.server_id = getattr(server, "id", None)
+        return "Import successful."
 
     def multiselect_filtering(self, model, **params):
         table = vs.models[model]
@@ -1230,51 +1336,6 @@ class Controller:
             "total_count": query.count(),
         }
 
-    def import_services(self, **kwargs):
-        file = kwargs["file"]
-        filepath = vs.file_path / "services" / file.filename
-        (vs.file_path / "services").mkdir(parents=True, exist_ok=True)
-        file.save(str(filepath))
-        with open_tar(filepath) as tar_file:
-            folder_name = tar_file.getmembers()[0].name
-            rmtree(vs.file_path / "services" / folder_name, ignore_errors=True)
-            tar_file.extractall(path=vs.file_path / "services")
-            status = self.migration_import(
-                folder="services",
-                name=folder_name,
-                import_export_types=["service", "workflow_edge"],
-                service_import=True,
-                skip_pool_update=True,
-                skip_model_update=True,
-            )
-        rmtree(vs.file_path / "services" / folder_name, ignore_errors=True)
-        if "Error during import" in status:
-            raise Exception(status)
-        return status
-
-    def import_topology(self, **kwargs):
-        file = kwargs["file"]
-        if kwargs["replace"]:
-            db.delete_all("device")
-        result = self.topology_import(file)
-        info("Inventory import: Done.")
-        return result
-
-    def objectify(self, model, instance):
-        for property, relation in vs.relationships[model].items():
-            if property not in instance:
-                continue
-            elif relation["list"]:
-                instance[property] = [
-                    db.fetch(relation["model"], name=name).id
-                    for name in instance[property]
-                ]
-            else:
-                instance[property] = db.fetch(
-                    relation["model"], name=instance[property]
-                ).id
-        return instance
-
     def remove_instance(self, **kwargs):
         instance = db.fetch(kwargs["instance"]["type"], id=kwargs["instance"]["id"])
         target = db.fetch(kwargs["relation"]["type"], id=kwargs["relation"]["id"])
@@ -1286,102 +1347,61 @@ class Controller:
         else:
             return {"alert": f"{instance.name} is not associated with {target.name}."}
 
-    def old_instances_deletion(self, **kwargs):
-        date_time_object = datetime.strptime(kwargs["date_time"], "%d/%m/%Y %H:%M:%S")
-        date_time_string = date_time_object.strftime("%Y-%m-%d %H:%M:%S.%f")
-        for model in kwargs["deletion_types"]:
-            row = {
-                "run": "runtime",
-                "changelog": "time",
-                "service": "last_modified",
-                "workflow_edge": "last_modified",
-            }[model]
-            conditions = [getattr(vs.models[model], row) < date_time_string]
-            if model in ("service", "workflow_edge"):
-                conditions.append(vs.models[model].soft_deleted == True)
-            session_query = db.session.query(vs.models[model]).filter(and_(*conditions))
-            if model in ("service", "workflow_edge"):
-                for obj in session_query.all():
-                    db.delete_instance(obj)
-            else:
-                session_query.delete(synchronize_session=False)
-            db.session.commit()
-
     @staticmethod
     @actor(max_retries=0, time_limit=float("inf"))
     def run(service, **kwargs):
-        try:
-            start = datetime.now().replace(microsecond=0)
-            run_object, runtime, user = None, kwargs["runtime"], kwargs["creator"]
-            if "path" not in kwargs:
-                kwargs["path"] = str(service)
-            keys = list(vs.model_properties["run"]) + list(vs.relationships["run"])
-            run_kwargs = {key: kwargs.pop(key) for key in keys if kwargs.get(key)}
-            run_kwargs["is_async"] = kwargs.get("async", True)
-            for property in ("name", "labels"):
-                if property in kwargs.get("form", {}):
-                    run_kwargs[property] = kwargs["form"][property]
-            service = db.fetch("service", id=service, rbac="run", user=user)
-            service.status = "Running"
-            initial_payload = {
-                **service.initial_payload,
-                **kwargs.get("form", {}).get("initial_payload", {}),
-            }
-            restart_runtime = kwargs.get("restart_runtime")
-            restart_run = db.fetch(
-                "run", allow_none=True, runtime=restart_runtime, user=user
-            )
-            if service.type == "workflow" and service.superworkflow and not restart_run:
-                run_kwargs["placeholder"] = run_kwargs["start_service"] = service.id
-                run_kwargs["path"] = str(service.superworkflow.id)
-                service = service.superworkflow
-                initial_payload.update(service.initial_payload)
+        run_object, user = None, kwargs["creator"]
+        if "path" not in kwargs:
+            kwargs["path"] = str(service)
+        keys = list(vs.model_properties["run"]) + list(vs.relationships["run"])
+        run_kwargs = {key: kwargs.pop(key) for key in keys if kwargs.get(key)}
+        run_kwargs["is_async"] = kwargs.get("async", True)
+        for property in ("name", "labels"):
+            if property in kwargs.get("form", {}):
+                run_kwargs[property] = kwargs["form"][property]
             else:
-                run_kwargs["start_service"] = service.id
-            if restart_run:
-                run_kwargs["restart_run"] = restart_run.id
-                initial_payload = restart_run.payload
-            run_kwargs["services"] = [service.id]
-            run_object = db.factory(
-                "run",
-                service=service.id,
-                commit=True,
-                must_be_new=True,
-                rbac=None,
-                **run_kwargs,
-            )
-            db.try_set(service, "status", "Running")
-            db.try_set(service, "last_run", vs.get_time())
-            run_object.properties = kwargs
-            run_object.payload = {**initial_payload, **kwargs}
-            return run_object.run()
-        except Exception:
-            db.session.rollback()
-            env.log("critical", f"{runtime} - {format_exc()}")
-            if run_object:
-                run_object.service_run.log("critical", format_exc())
-                db.try_set(run_object, "status", "Failed")
-                results = {
-                    "success": False,
-                    "result": format_exc(),
-                    "duration": str(datetime.now().replace(microsecond=0) - start),
-                    "runtime": runtime,
-                }
-                db.try_commit(run_object.service_run.end_of_run_transaction, results)
-                try:
-                    run_object.service_run.create_result(results, run_result=True)
-                except Exception:
-                    env.log("critical", f"{runtime} - {format_exc()}")
-                run_object.service_run.end_of_run_cleanup()
-            db.session.commit()
-            return {"success": False, "result": format_exc()}
+                run_kwargs.pop(property, None)
+        service = db.fetch("service", id=service, rbac="run", user=user)
+        initial_payload = {
+            **service.initial_payload,
+            **kwargs.get("form", {}).get("initial_payload", {}),
+        }
+        restart_runtime = kwargs.get("restart_runtime")
+        restart_run = db.fetch(
+            "run", allow_none=True, runtime=restart_runtime, user=user
+        )
+        if service.type == "workflow" and service.superworkflow and not restart_run:
+            run_kwargs["placeholder"] = service.id
+            run_kwargs["path"] = str(service.superworkflow.id)
+            service = service.superworkflow
+            initial_payload.update(service.initial_payload)
+        if restart_run:
+            run_kwargs["restart_run"] = restart_run.id
+            initial_payload = restart_run.payload
+        run_kwargs["services"] = [service.id]
+        run_object = db.factory(
+            "run",
+            service=service.id,
+            commit=True,
+            must_be_new=True,
+            rbac=None,
+            **run_kwargs,
+        )
+        db.try_set(service, "status", "Running")
+        db.try_set(service, "last_run", vs.get_time())
+        run_object.properties = kwargs
+        run_object.payload = {**initial_payload, **kwargs}
+        return run_object.run()
 
-    def run_debug_code(self, **kwargs):
+    def run_debug_code(self, snippet_id=None, **kwargs):
+        if not current_user.is_admin:
+            return
+        code = db.fetch("snippet", id=snippet_id).code if snippet_id else kwargs["code"]
         result = StringIO()
         with redirect_stdout(result):
             try:
                 exec(
-                    kwargs["code"],
+                    code,
                     {
                         "controller": self,
                         "env": env,
@@ -1415,14 +1435,14 @@ class Controller:
         if run_name and db.fetch("run", name=run_name, allow_none=True, rbac=None):
             return {"error": "There is already a run with the same name."}
         if kwargs.get("asynchronous", True):
-            if vs.settings["automation"]["use_task_queue"]:
+            if vs.settings["automation"]["task_queue"] == "dramatiq":
                 self.run.send(service_id, **kwargs)
             else:
                 Thread(target=self.run, args=(service_id,), kwargs=kwargs).start()
         else:
             service.run(runtime=runtime)
         return {
-            "service": service.to_dict(),
+            "service": service.to_dict(include_relations=["superworkflow"]),
             "runtime": runtime,
             "restart": "restart_runtime" in kwargs,
             "user": current_user.name,
@@ -1446,20 +1466,20 @@ class Controller:
         if not instance:
             return
         relation_type = "device" if type == "network" else "service"
+        id_to_name = {
+            str(obj.id): obj.name
+            for obj in db.fetch_all(relation_type, id_in=kwargs.keys())
+        }
         for id, position in kwargs.items():
             new_position = [position["x"], position["y"]]
-            if "-" not in id:
-                relation = db.fetch(relation_type, id=id, rbac=None)
-                relation.positions[instance.name] = new_position
+            if "-" not in id and id in id_to_name:
+                instance.positions[id_to_name[id]] = new_position
             elif id in instance.labels:
                 instance.labels[id] = {**instance.labels[id], "positions": new_position}
         instance.last_modified = vs.get_time()
-        return instance.last_modified
+        return instance.last_modified, instance.positions
 
     def save_profile(self, **kwargs):
-        allow_password_change = vs.settings["authentication"]["allow_password_change"]
-        if not allow_password_change or current_user.authentication != "database":
-            kwargs.pop("password", None)
         current_user.update(**kwargs)
 
     def save_settings(self, **kwargs):
@@ -1468,19 +1488,61 @@ class Controller:
             with open(vs.path / "setup" / "settings.json", "w") as file:
                 dump(kwargs["settings"], file, indent=2)
 
-    def scan_cluster(self, **kwargs):
-        protocol = vs.settings["cluster"]["scan_protocol"]
-        for ip_address in IPv4Network(vs.settings["cluster"]["scan_subnet"]):
-            try:
-                server = http_get(
-                    f"{protocol}://{ip_address}/rest/is_alive",
-                    timeout=vs.settings["cluster"]["scan_timeout"],
-                ).json()
-                if vs.settings["cluster"]["id"] != server.pop("cluster_id"):
-                    continue
-                db.factory("server", **{**server, **{"ip_address": str(ip_address)}})
-            except ConnectionError:
+    def scan_folder(self, path=""):
+        env.log("info", "Starting Scan of Files")
+        path = f"{vs.file_path}{path.replace('>', '/')}"
+        if not exists(path):
+            return {"alert": "This folder does not exist on the filesystem."}
+        elif not str(Path(path).resolve()).startswith(f"{vs.file_path}"):
+            return {"error": "The path resolves outside of the files folder."}
+        files_set = {
+            file
+            for file in db.session.query(vs.models["file"])
+            .filter(vs.models["file"].full_path.startswith(path))
+            .all()
+        }
+        for file in files_set:
+            if exists(file.full_path):
                 continue
+            if vs.settings["files"]["delete_if_not_found"]:
+                db.session.delete(file)
+            else:
+                file.status = "Not Found"
+        file_path_set = {file.full_path for file in files_set}
+        ignored_types = vs.settings["files"]["ignored_types"]
+        creation_time = vs.get_time()
+        insert_data, stack = defaultdict(list), [path]
+        while stack:
+            folder = stack.pop()
+            with scandir(folder) as entries:
+                for entry in entries:
+                    if entry.is_dir():
+                        stack.append(entry.path)
+                    if entry.path in file_path_set:
+                        continue
+                    elif splitext(entry.name)[1] in ignored_types:
+                        continue
+                    scoped_path = entry.path.replace(str(vs.file_path), "")
+                    stat_info = entry.stat()
+                    last_modified = str(datetime.fromtimestamp(stat_info.st_mtime))
+                    model = "folder" if entry.is_dir() else "generic_file"
+                    insert_data[model].append(
+                        {
+                            "creation_time": creation_time,
+                            "type": model,
+                            "filename": entry.name,
+                            "folder_path": folder,
+                            "full_path": entry.path,
+                            "last_modified": last_modified,
+                            "name": scoped_path.replace("/", ">"),
+                            "path": scoped_path,
+                            "size": stat_info.st_size,
+                        }
+                    )
+        for model, batch in insert_data.items():
+            for batch in batched(batch, vs.database["transactions"]["batch_size"]):
+                db.session.execute(insert(vs.models[model]), batch)
+        env.log("info", "Scan of Files Successful")
 
     def scan_playbook_folder(self):
         playbooks = [
@@ -1496,20 +1558,8 @@ class Controller:
         for task in self.filtering("task", properties=["id"], form=kwargs):
             self.task_action(mode, task.id)
 
-    def search_workflow_services(self, **kwargs):
-        service_alias = aliased(vs.models["service"])
-        workflows = [
-            workflow.name
-            for workflow in db.query("workflow", properties=["name"])
-            .join(service_alias, vs.models["workflow"].services)
-            .filter(service_alias.scoped_name.contains(kwargs["str"].lower()))
-            .distinct()
-            .all()
-        ]
-        return ["standalone", "shared", *workflows]
-
     def skip_services(self, workflow_id, service_ids):
-        services = [db.fetch("service", id=id) for id in service_ids.split("-")]
+        services = db.fetch_all("service", id_in=service_ids.split("-"))
         workflow = db.fetch("workflow", id=workflow_id, rbac="edit")
         workflow.check_restriction_to_owners("edit")
         skip = not all(service.skip.get(workflow.name) for service in services)
@@ -1525,13 +1575,15 @@ class Controller:
         }
 
     def stop_run(self, runtime):
-        run = db.fetch("run", allow_none=True, runtime=runtime)
-        if run and run.status == "Running":
-            if env.redis_queue:
-                env.redis("set", f"stop/{runtime}", "true")
-            else:
-                vs.run_stop[runtime] = True
-            return True
+        run = db.fetch("run", allow_none=True, rbac="run", runtime=runtime)
+        if not run:
+            return {"alert": "You don't have permission to stop this workflow."}
+        elif run.status != "Running":
+            return {"alert": "The service is not currently running."}
+        elif env.redis_queue:
+            env.redis("set", f"stop/{runtime}", "true")
+        else:
+            vs.run_stop[runtime] = True
 
     def switch_menu(self, user_id):
         user = db.fetch("user", rbac=None, id=user_id)
@@ -1556,7 +1608,7 @@ class Controller:
                 sheet.write(0, index, property)
                 for obj_index, obj in enumerate(db.fetch_all(obj_type), 1):
                     value = getattr(obj, property)
-                    if type(value) == bytes:
+                    if isinstance(value, bytes):
                         value = str(env.decrypt(value), "utf-8")
                     sheet.write(obj_index, index, str(value))
         workbook.save(vs.file_path / "spreadsheets" / filename)
@@ -1579,53 +1631,13 @@ class Controller:
                     func = db.field_conversion[property_type]
                     values[property] = func(sheet.row_values(row_index)[index])
                 try:
-                    db.factory(obj_type, **values).to_dict()
+                    db.factory(obj_type, **values)
                 except Exception as exc:
                     info(f"{str(values)} could not be imported ({str(exc)})")
                     status = "Partial import (see logs)."
             db.session.commit()
-        for pool in db.fetch_all("pool", rbac="edit"):
-            pool.compute_pool()
         env.log("info", status)
         return status
-
-    def revert_change(self, log_id):
-        log = db.fetch("changelog", id=log_id)
-        if not log.history or not log.author:
-            return {"alert": "This changelog is not reversible."}
-        target = db.fetch(
-            log.target_type, name=log.target_name, rbac="edit", allow_none=True
-        )
-        if target is None:
-            return {"alert": "The target object no longer exists."}
-        if log.history.get("creation"):
-            return db.delete_instance(target)
-        for relationship, history in log.history.get("lists", {}).items():
-            target_value = getattr(target, relationship)
-            for value in history["deleted"]:
-                instance = (
-                    value
-                    if history["type"] == "str"
-                    else db.fetch(history["type"], id=value, allow_none=True)
-                )
-                if instance and instance not in target_value:
-                    target_value.append(instance)
-            for value in history["added"]:
-                instance = (
-                    value
-                    if history["type"] == "str"
-                    else db.fetch(history["type"], id=value, allow_none=True)
-                )
-                if instance and instance in target_value:
-                    target_value.remove(instance)
-        for property, values in log.history.get("scalars", {}).items():
-            related_instance = db.fetch(values["type"], id=values["id"])
-            setattr(target, property, related_instance)
-        if "properties" in log.history:
-            target.update(**log.history["properties"])
-        key = f"update_{target.type}_{target.name}"
-        db.session.connection().info[key] = "Change Reverted"
-        db.session.commit()
 
     def update(self, type, **kwargs):
         try:
@@ -1642,9 +1654,13 @@ class Controller:
                     builder_id = kwargs[f"{builder_type}s"][0]
                     db.fetch(builder_type, id=builder_id, rbac="edit")
             instance = db.factory(type, commit=True, **kwargs)
+            if hasattr(instance, "post_update"):
+                instance.post_update()
             if kwargs.get("copy"):
                 db.fetch(type, id=kwargs["copy"]).duplicate(clone=instance)
-            return instance.post_update()
+            if relations := vs.properties["update"].get(instance.class_type):
+                return instance.to_dict(include_relations=relations)
+            return instance.get_properties()
         except db.rbac_error:
             return {"alert": "Error 403 - Not Authorized."}
         except Exception as exc:
@@ -1656,10 +1672,10 @@ class Controller:
 
     def update_all_pools(self):
         for pool in db.fetch_all("pool", rbac="edit"):
-            pool.compute_pool()
+            pool.compute_pool(commit=True)
 
     def update_database_configurations_from_git(self, force_update=False):
-        path = vs.path / "network_data"
+        path = vs.path / vs.automation["configuration_backup"]["folder"]
         env.log("info", f"Updating device configurations with data from {path}")
         for dir in scandir(path):
             user = "admin" if force_update else current_user.name
@@ -1681,12 +1697,13 @@ class Controller:
                             no_update = vs.str_to_date(value) <= vs.str_to_date(db_date)
                     setattr(device, f"last_{property}_{timestamp}", value)
                 filepath = Path(dir.path) / property
+                no_update = no_update and getattr(device, property)
                 if not filepath.exists() or no_update:
                     continue
                 with open(filepath) as file:
                     setattr(device, property, file.read())
             db.session.commit()
-        for pool in db.fetch_all("pool"):
+        for pool in db.fetch_all("pool", rbac=None):
             if any(
                 getattr(pool, f"device_{property}")
                 for property in vs.configuration_properties
@@ -1708,14 +1725,14 @@ class Controller:
                 setattr(group, f"{property}_devices", devices)
                 db.session.commit()
 
+    def update_pool(self, pool_id):
+        db.fetch("pool", id=int(pool_id), rbac="edit").compute_pool()
+
     def upload_files(self, **kwargs):
         path = f"{vs.file_path}/{kwargs['folder']}/{kwargs['file'].filename}"
         if not str(Path(path).resolve()).startswith(f"{vs.file_path}/"):
             return {"error": "The path resolves outside of the files folder."}
         kwargs["file"].save(path)
-
-    def update_pool(self, pool_id):
-        db.fetch("pool", id=int(pool_id), rbac="edit").compute_pool()
 
     def view_filtering(self, **kwargs):
         return {
@@ -1746,6 +1763,7 @@ class Controller:
             "PORT": str(device.port),
             "PROTOCOL": kwargs["protocol"],
             "REDIRECTION": str(vs.settings["ssh"]["port_redirection"]),
+            "SERVER": vs.server,
             "USER": current_user.name,
         }
         if "authentication" in kwargs:

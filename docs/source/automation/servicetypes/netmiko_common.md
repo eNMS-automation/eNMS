@@ -21,19 +21,12 @@ These are the Netmiko Common Parameters for all Netmiko Services.
     mode on the device before running the command or applying the
     configuration block. For the Linux driver, this means root/sudo.
 -   `Config mode`: If checked, Netmiko should enter config mode.
--   `Fast CLI`: If checked, Netmiko will disable internal wait states and
-    delays in order to execute the service as fast as possible.
 -   `Read Timeout`: Netmiko internal timeout in seconds to wait for a
     connection or response before declaring failure.
--   `Read Timeout Override` Overrides the Read Timeout.
--   `Global delay factor`: Netmiko multiplier used to increase internal
-    delays (defaults to 1). Global delay factor affects delays
-    beyond Netmiko send_command. Increase this for devices that have
-    trouble buffering and responding quickly. Practical max value is 5.
 
 ## Connection Parameters
 
-![Netmiko Connection Parameters](../../_static/automation/service_types/netmiko_connection_parameters.png)
+![Connection Parameters](../../_static/automation/service_types/connection_parameters.png)
 
 - `Credentials`: Select between:
     - `Device Credentials`: The application will select the most appropriate credential
@@ -64,6 +57,22 @@ These are the Netmiko Common Parameters for all Netmiko Services.
     
 - `Close Connection`: Once the service is done running, the current
   connection will be closed.
+
+## Netmiko Connection Parameters
+
+![Netmiko Connection Parameters](../../_static/automation/service_types/netmiko_connection_parameters.png)
+
+-   `Connection Timeout`: In addition to the Netmiko Read Timeout above, this parameter is passed to the 
+   underlying Paramiko library as the TCP connection timeout at connect time.
+-   `Authentication Timeout`: This timeout value is passed to the underlying Paramiko library as auth_timeout
+   at connect time.
+-   `Banner Timeout`: This timeout value is passed to the underlying Paramiko library as banner_timeout at
+   connect time.
+-   `Global delay factor`: Netmiko multiplier used to increase internal
+    delays in device communication (defaults to 0.1 for best performance). For slow devices or devices
+    connected via slow backhaul links, increase this value starting with 0.2 and increasing up to 5.0 until
+    device communication is stable. Since this value affects all devices in a target pool, consider putting
+    slow devices in a separate pool that uses a service with a larger Global delay factor. 
 
 ## Jump on connect Parameters
 

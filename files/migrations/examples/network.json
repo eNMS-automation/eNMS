@@ -1,0 +1,1263 @@
+[
+  {
+    "admin_only": false,
+    "category": "Display",
+    "creation_time": "",
+    "creator": "admin",
+    "custom_json": {
+      "a": "c",
+      "b": [
+        1,
+        2,
+        "3"
+      ]
+    },
+    "custom_multiselect": [
+      "a",
+      "c"
+    ],
+    "custom_select": "b",
+    "description": "",
+    "down": false,
+    "icon": "network",
+    "ip_address": "",
+    "labels": {
+      "22ddf544-3151-4361-940b-7516b78c179a": {
+        "alignment": "left",
+        "content": "Basic site with three devices: Router 1 is of type \"device\" and the other two are \"router\".\nAll three links are Ethernet links.\nRouter 1 should be displayed as a router, Router 2 as a host and Router 3 as an optical switch.\nThe icon of a device is decoupled from its type.",
+        "positions": [
+          19,
+          -70
+        ]
+      }
+    },
+    "last_configuration_duration": "Never",
+    "last_configuration_failure": "Never",
+    "last_configuration_runtime": "Never",
+    "last_configuration_status": "Never",
+    "last_configuration_success": "Never",
+    "last_configuration_update": "Never",
+    "last_modified": "2022-01-13 14:58:18.207435",
+    "last_modified_by": "",
+    "last_operational_data_duration": "Never",
+    "last_operational_data_failure": "Never",
+    "last_operational_data_runtime": "Never",
+    "last_operational_data_status": "Never",
+    "last_operational_data_success": "Never",
+    "last_operational_data_update": "Never",
+    "last_specialized_data_duration": "Never",
+    "last_specialized_data_failure": "Never",
+    "last_specialized_data_runtime": "Never",
+    "last_specialized_data_status": "Never",
+    "last_specialized_data_success": "Never",
+    "last_specialized_data_update": "Never",
+    "latitude": "0.0",
+    "location": "",
+    "longitude": "1.0",
+    "model": "",
+    "name": "Top-level Devices and Links",
+    "napalm_driver": "ios",
+    "netconf_driver": "default",
+    "netmiko_driver": "cisco_ios",
+    "operating_system": "",
+    "os_version": "",
+    "path": "92",
+    "persistent_id": "EaQLu-raQ9c",
+    "port": 22,
+    "positions": {
+      "Router 1": [
+        -314,
+        42
+      ],
+      "Router 2": [
+        -59,
+        267
+      ],
+      "Router 3": [
+        310,
+        56
+      ]
+    },
+    "property1": "10.145.14.1",
+    "property2": "CP",
+    "property3": "",
+    "reachable": true,
+    "scrapli_driver": "cisco_iosxe",
+    "subtype": "",
+    "vendor": ""
+  },
+  {
+    "admin_only": false,
+    "category": "Subnetwork",
+    "creation_time": "",
+    "creator": "admin",
+    "custom_json": {
+      "a": "c",
+      "b": [
+        1,
+        2,
+        "3"
+      ]
+    },
+    "custom_multiselect": [
+      "a",
+      "c"
+    ],
+    "custom_select": "b",
+    "description": "",
+    "down": false,
+    "icon": "network",
+    "ip_address": "",
+    "labels": {
+      "ebac22df-1242-4dcd-90b0-fbeeee517991": {
+        "alignment": "left",
+        "content": "- Enter subnetwork 1 and subnetwork 2 and make sure all of them have the expected content.\n- Test the backward, forward and upward navigation buttons.\n- Test the Network Tree to select any node, including a node that is in a different network:\nthe view should immediately switch to the network of the selected node.\n- Test using network as a teleport: Subnetwork 1 contains Subnetwork 2 and vice-versa,\nto switch from one to the other and back.",
+        "positions": [
+          -310,
+          -212
+        ]
+      }
+    },
+    "last_configuration_duration": "Never",
+    "last_configuration_failure": "Never",
+    "last_configuration_runtime": "Never",
+    "last_configuration_status": "Never",
+    "last_configuration_success": "Never",
+    "last_configuration_update": "Never",
+    "last_modified": "2022-01-13 14:59:24.690428",
+    "last_modified_by": "",
+    "last_operational_data_duration": "Never",
+    "last_operational_data_failure": "Never",
+    "last_operational_data_runtime": "Never",
+    "last_operational_data_status": "Never",
+    "last_operational_data_success": "Never",
+    "last_operational_data_update": "Never",
+    "last_specialized_data_duration": "Never",
+    "last_specialized_data_failure": "Never",
+    "last_specialized_data_runtime": "Never",
+    "last_specialized_data_status": "Never",
+    "last_specialized_data_success": "Never",
+    "last_specialized_data_update": "Never",
+    "latitude": "0.0",
+    "location": "",
+    "longitude": "0.0",
+    "model": "",
+    "name": "Subnetwork and Teleport Mechanism",
+    "napalm_driver": "ios",
+    "netconf_driver": "default",
+    "netmiko_driver": "cisco_ios",
+    "operating_system": "",
+    "os_version": "",
+    "path": "93",
+    "persistent_id": "XExpMhViPJg",
+    "port": 22,
+    "positions": {},
+    "property1": "10.145.14.1",
+    "property2": "CP",
+    "property3": "",
+    "reachable": true,
+    "scrapli_driver": "cisco_iosxe",
+    "subtype": "",
+    "vendor": ""
+  },
+  {
+    "admin_only": false,
+    "category": "",
+    "creation_time": "",
+    "creator": "admin",
+    "custom_json": {
+      "a": "c",
+      "b": [
+        1,
+        2,
+        "3"
+      ]
+    },
+    "custom_multiselect": [
+      "a",
+      "c"
+    ],
+    "custom_select": "b",
+    "description": "",
+    "down": false,
+    "icon": "network",
+    "ip_address": "",
+    "labels": {
+      "6eb6d97f-31c8-4a2a-8142-8c1427cea64d": {
+        "alignment": "left",
+        "content": "This subnetwork should contain\n- three routers, \"Subnetwork 1 - R1-3\"\n- three links between each pair of routers, \"Subnetwork 1 - L1-3\"",
+        "positions": [
+          51,
+          -231
+        ]
+      }
+    },
+    "last_configuration_duration": "Never",
+    "last_configuration_failure": "Never",
+    "last_configuration_runtime": "Never",
+    "last_configuration_status": "Never",
+    "last_configuration_success": "Never",
+    "last_configuration_update": "Never",
+    "last_modified": "2022-01-03 12:55:19.074280",
+    "last_modified_by": "",
+    "last_operational_data_duration": "Never",
+    "last_operational_data_failure": "Never",
+    "last_operational_data_runtime": "Never",
+    "last_operational_data_status": "Never",
+    "last_operational_data_success": "Never",
+    "last_operational_data_update": "Never",
+    "last_specialized_data_duration": "Never",
+    "last_specialized_data_failure": "Never",
+    "last_specialized_data_runtime": "Never",
+    "last_specialized_data_status": "Never",
+    "last_specialized_data_success": "Never",
+    "last_specialized_data_update": "Never",
+    "latitude": "0.0",
+    "location": "",
+    "longitude": "0.0",
+    "model": "",
+    "name": "Subnetwork 1",
+    "napalm_driver": "ios",
+    "netconf_driver": "default",
+    "netmiko_driver": "cisco_ios",
+    "operating_system": "",
+    "os_version": "",
+    "path": "94",
+    "persistent_id": "9qDDU6lu1D4",
+    "port": 22,
+    "positions": {
+      "Subnetwork 1 - R1": [
+        -284,
+        -105
+      ],
+      "Subnetwork 1 - R2": [
+        298,
+        -122
+      ],
+      "Subnetwork 1 - R3": [
+        -8,
+        136
+      ]
+    },
+    "property1": "10.145.14.1",
+    "property2": "CP",
+    "property3": "",
+    "reachable": true,
+    "scrapli_driver": "cisco_iosxe",
+    "subtype": "",
+    "vendor": ""
+  },
+  {
+    "admin_only": false,
+    "category": "Editing",
+    "creation_time": "",
+    "creator": "admin",
+    "custom_json": {
+      "a": "c",
+      "b": [
+        1,
+        2,
+        "3"
+      ]
+    },
+    "custom_multiselect": [
+      "a",
+      "c"
+    ],
+    "custom_select": "b",
+    "description": "",
+    "down": false,
+    "icon": "network",
+    "ip_address": "",
+    "labels": {
+      "6bc3e996-eb39-4d52-9294-15cdd7d10f92": {
+        "alignment": "left",
+        "content": "Tests the creation, editing and deletion of networks and the nodes inside it.\n- Create three devices: 1 Device, 1 Router and 1 Gateway. The default icon for the Device and Router should be a router,\nbut it should a host (computer) for the Gateway.\n- Create links between them, including Ethernet Link and Link.\n- Edit the name of a node and the name of a link: the name must be instantly\nupdated.\n- Edit the name of the network and refresh: check that the positions are the same (the \"update\" position of the Network class is replacing old with new positions).\n- Delete a device: check that the two connected links are also deleted from the network.\n Check that these objects still exist in the inventory: deleting from a network should not delete the original objects.\n- Use the right-click multiple selection rectangle to delete the remaining objects.\n- Delete the network itself from the Network table.",
+        "positions": [
+          227,
+          -507
+        ]
+      }
+    },
+    "last_configuration_duration": "Never",
+    "last_configuration_failure": "Never",
+    "last_configuration_runtime": "Never",
+    "last_configuration_status": "Never",
+    "last_configuration_success": "Never",
+    "last_configuration_update": "Never",
+    "last_modified": "2022-01-13 14:59:33.685691",
+    "last_modified_by": "",
+    "last_operational_data_duration": "Never",
+    "last_operational_data_failure": "Never",
+    "last_operational_data_runtime": "Never",
+    "last_operational_data_status": "Never",
+    "last_operational_data_success": "Never",
+    "last_operational_data_update": "Never",
+    "last_specialized_data_duration": "Never",
+    "last_specialized_data_failure": "Never",
+    "last_specialized_data_runtime": "Never",
+    "last_specialized_data_status": "Never",
+    "last_specialized_data_success": "Never",
+    "last_specialized_data_update": "Never",
+    "latitude": "0.0",
+    "location": "",
+    "longitude": "0.0",
+    "model": "",
+    "name": "Creation, Edit and Deletion",
+    "napalm_driver": "ios",
+    "netconf_driver": "default",
+    "netmiko_driver": "cisco_ios",
+    "operating_system": "",
+    "os_version": "",
+    "path": "95",
+    "persistent_id": "AZOG2powCd4",
+    "port": 22,
+    "positions": {},
+    "property1": "10.145.14.1",
+    "property2": "CP",
+    "property3": "",
+    "reachable": true,
+    "scrapli_driver": "cisco_iosxe",
+    "subtype": "",
+    "vendor": ""
+  },
+  {
+    "admin_only": false,
+    "category": "",
+    "creation_time": "",
+    "creator": "admin",
+    "custom_json": {
+      "a": "c",
+      "b": [
+        1,
+        2,
+        "3"
+      ]
+    },
+    "custom_multiselect": [
+      "a",
+      "c"
+    ],
+    "custom_select": "b",
+    "description": "",
+    "down": false,
+    "icon": "network",
+    "ip_address": "",
+    "labels": {
+      "56c77f3e-481c-476d-a045-1120b3cb0cc2": {
+        "alignment": "left",
+        "content": "This subnetwork should contain\n- two gateways, \"Subnetwork 2 - G1-2\"\n- one link between them, \"Subnetwork 2 - L1\"",
+        "positions": [
+          4,
+          -181
+        ]
+      }
+    },
+    "last_configuration_duration": "Never",
+    "last_configuration_failure": "Never",
+    "last_configuration_runtime": "Never",
+    "last_configuration_status": "Never",
+    "last_configuration_success": "Never",
+    "last_configuration_update": "Never",
+    "last_modified": "2022-01-03 12:55:37.570662",
+    "last_modified_by": "",
+    "last_operational_data_duration": "Never",
+    "last_operational_data_failure": "Never",
+    "last_operational_data_runtime": "Never",
+    "last_operational_data_status": "Never",
+    "last_operational_data_success": "Never",
+    "last_operational_data_update": "Never",
+    "last_specialized_data_duration": "Never",
+    "last_specialized_data_failure": "Never",
+    "last_specialized_data_runtime": "Never",
+    "last_specialized_data_status": "Never",
+    "last_specialized_data_success": "Never",
+    "last_specialized_data_update": "Never",
+    "latitude": "0.0",
+    "location": "",
+    "longitude": "0.0",
+    "model": "",
+    "name": "Subnetwork 2",
+    "napalm_driver": "ios",
+    "netconf_driver": "default",
+    "netmiko_driver": "cisco_ios",
+    "operating_system": "",
+    "os_version": "",
+    "path": "96",
+    "persistent_id": "lX36rYej06g",
+    "port": 22,
+    "positions": {
+      "Subnetwork 2 - G1": [
+        -213,
+        -57
+      ],
+      "Subnetwork 2 - G2": [
+        202,
+        -63
+      ]
+    },
+    "property1": "10.145.14.1",
+    "property2": "CP",
+    "property3": "",
+    "reachable": true,
+    "scrapli_driver": "cisco_iosxe",
+    "subtype": "",
+    "vendor": ""
+  },
+  {
+    "admin_only": false,
+    "category": "Editing",
+    "creation_time": "",
+    "creator": "admin",
+    "custom_json": {
+      "a": "c",
+      "b": [
+        1,
+        2,
+        "3"
+      ]
+    },
+    "custom_multiselect": [
+      "a",
+      "c"
+    ],
+    "custom_select": "b",
+    "description": "",
+    "down": false,
+    "icon": "network",
+    "ip_address": "",
+    "labels": {
+      "0a8dc15c-8f31-4fe2-b84d-1b2e9680876e": {
+        "alignment": "left",
+        "content": "Tests the duplication of devices, subnetworks and top-level networks.\n\n- Duplicate \"Duplicate me 1\": the duplicated device should be immediately added to the network.\nRefresh and check that it is still displayed at the same position.\n- Duplicate \"Duplicate me 2\": the duplicate subnetwork should be immediately added to the network.\nDouble-click on it to check that the content is the same as \"Duplicate me 2\".\n- Create a link between the two devices.\n- Duplicate the top-level network: check that it contains the two devices and the link between them,\nas well as the two subnetworks,\n\nCheck that the content of the subnetworks is the same as that of the original top-level network.",
+        "positions": [
+          -47,
+          -187
+        ]
+      }
+    },
+    "last_configuration_duration": "Never",
+    "last_configuration_failure": "Never",
+    "last_configuration_runtime": "Never",
+    "last_configuration_status": "Never",
+    "last_configuration_success": "Never",
+    "last_configuration_update": "Never",
+    "last_modified": "2022-01-13 14:59:46.234188",
+    "last_modified_by": "",
+    "last_operational_data_duration": "Never",
+    "last_operational_data_failure": "Never",
+    "last_operational_data_runtime": "Never",
+    "last_operational_data_status": "Never",
+    "last_operational_data_success": "Never",
+    "last_operational_data_update": "Never",
+    "last_specialized_data_duration": "Never",
+    "last_specialized_data_failure": "Never",
+    "last_specialized_data_runtime": "Never",
+    "last_specialized_data_status": "Never",
+    "last_specialized_data_success": "Never",
+    "last_specialized_data_update": "Never",
+    "latitude": "0.0",
+    "location": "",
+    "longitude": "0.0",
+    "model": "",
+    "name": "Duplication of Devices, Subnetworks and Top-level Networks",
+    "napalm_driver": "ios",
+    "netconf_driver": "default",
+    "netmiko_driver": "cisco_ios",
+    "operating_system": "",
+    "os_version": "",
+    "path": "97",
+    "persistent_id": "GpZcrJXTgpQ",
+    "port": 22,
+    "positions": {
+      "Duplicate me 1": [
+        -356,
+        0
+      ]
+    },
+    "property1": "10.145.14.1",
+    "property2": "CP",
+    "property3": "",
+    "reachable": true,
+    "scrapli_driver": "cisco_iosxe",
+    "subtype": "",
+    "vendor": ""
+  },
+  {
+    "admin_only": false,
+    "category": "",
+    "creation_time": "",
+    "creator": "admin",
+    "custom_json": {
+      "a": "c",
+      "b": [
+        1,
+        2,
+        "3"
+      ]
+    },
+    "custom_multiselect": [
+      "a",
+      "c"
+    ],
+    "custom_select": "b",
+    "description": "",
+    "down": false,
+    "icon": "network",
+    "ip_address": "",
+    "labels": {},
+    "last_configuration_duration": "Never",
+    "last_configuration_failure": "Never",
+    "last_configuration_runtime": "Never",
+    "last_configuration_status": "Never",
+    "last_configuration_success": "Never",
+    "last_configuration_update": "Never",
+    "last_modified": "2022-01-01 11:55:14.172281",
+    "last_modified_by": "",
+    "last_operational_data_duration": "Never",
+    "last_operational_data_failure": "Never",
+    "last_operational_data_runtime": "Never",
+    "last_operational_data_status": "Never",
+    "last_operational_data_success": "Never",
+    "last_operational_data_update": "Never",
+    "last_specialized_data_duration": "Never",
+    "last_specialized_data_failure": "Never",
+    "last_specialized_data_runtime": "Never",
+    "last_specialized_data_status": "Never",
+    "last_specialized_data_success": "Never",
+    "last_specialized_data_update": "Never",
+    "latitude": "0.0",
+    "location": "",
+    "longitude": "0.0",
+    "model": "",
+    "name": "Duplicate me 2",
+    "napalm_driver": "ios",
+    "netconf_driver": "default",
+    "netmiko_driver": "cisco_ios",
+    "operating_system": "",
+    "os_version": "",
+    "path": "97>98",
+    "persistent_id": "SqRxTdEpH4Y",
+    "port": 22,
+    "positions": {
+      "Duplication - G1": [
+        -127,
+        -54
+      ],
+      "Duplication - R1": [
+        127,
+        87
+      ]
+    },
+    "property1": "10.145.14.1",
+    "property2": "CP",
+    "property3": "",
+    "reachable": true,
+    "scrapli_driver": "cisco_iosxe",
+    "subtype": "",
+    "vendor": ""
+  },
+  {
+    "admin_only": false,
+    "category": "Display",
+    "creation_time": "",
+    "creator": "admin",
+    "custom_json": {
+      "a": "c",
+      "b": [
+        1,
+        2,
+        "3"
+      ]
+    },
+    "custom_multiselect": [
+      "a",
+      "c"
+    ],
+    "custom_select": "b",
+    "description": "",
+    "down": false,
+    "icon": "network",
+    "ip_address": "",
+    "labels": {
+      "65702104-28b9-4392-9472-727f6f3bf273": {
+        "alignment": "left",
+        "content": "Tests the display of loopback and parallel links:\n- One loopback link for each device.\n- Odd number (3) of same direction links between R1 and R2\n- Even number (4) of different direction links (3 / 1) between R1 and R3\n- Odd number (3) of different direction links (2 / 1) between R2 and R4\n- Even number (8) of different direction links (4 / 4) between R3 and R4\n- One link between R1 and R4",
+        "positions": [
+          -499,
+          98
+        ]
+      }
+    },
+    "last_configuration_duration": "Never",
+    "last_configuration_failure": "Never",
+    "last_configuration_runtime": "Never",
+    "last_configuration_status": "Never",
+    "last_configuration_success": "Never",
+    "last_configuration_update": "Never",
+    "last_modified": "2022-01-13 14:59:54.526299",
+    "last_modified_by": "",
+    "last_operational_data_duration": "Never",
+    "last_operational_data_failure": "Never",
+    "last_operational_data_runtime": "Never",
+    "last_operational_data_status": "Never",
+    "last_operational_data_success": "Never",
+    "last_operational_data_update": "Never",
+    "last_specialized_data_duration": "Never",
+    "last_specialized_data_failure": "Never",
+    "last_specialized_data_runtime": "Never",
+    "last_specialized_data_status": "Never",
+    "last_specialized_data_success": "Never",
+    "last_specialized_data_update": "Never",
+    "latitude": "0.0",
+    "location": "",
+    "longitude": "0.0",
+    "model": "",
+    "name": "Loopback and Parallel Links",
+    "napalm_driver": "ios",
+    "netconf_driver": "default",
+    "netmiko_driver": "cisco_ios",
+    "operating_system": "",
+    "os_version": "",
+    "path": "99",
+    "persistent_id": "rey5c9X1aKo",
+    "port": 22,
+    "positions": {
+      "S5 R1": [
+        -765,
+        312
+      ],
+      "S5 R2": [
+        -345,
+        194
+      ],
+      "S5 R3": [
+        -325,
+        426
+      ],
+      "S5 R4": [
+        243,
+        271
+      ]
+    },
+    "property1": "10.145.14.1",
+    "property2": "CP",
+    "property3": "",
+    "reachable": true,
+    "scrapli_driver": "cisco_iosxe",
+    "subtype": "",
+    "vendor": ""
+  },
+  {
+    "admin_only": false,
+    "category": "Subnetwork",
+    "creation_time": "",
+    "creator": "admin",
+    "custom_json": {
+      "a": "c",
+      "b": [
+        1,
+        2,
+        "3"
+      ]
+    },
+    "custom_multiselect": [
+      "a",
+      "c"
+    ],
+    "custom_select": "b",
+    "description": "",
+    "down": false,
+    "icon": "network",
+    "ip_address": "",
+    "labels": {
+      "df3da1e5-33a3-46e4-baed-ee59a432c773": {
+        "alignment": "left",
+        "content": "Tests multiple levels of nested subnetworks, in particular:\n - The upward navigation button\n- The Tree View to switch between levels\n\n- The Duplication: all subnetworks down to the last should be duplicated.",
+        "positions": [
+          40,
+          -173
+        ]
+      }
+    },
+    "last_configuration_duration": "Never",
+    "last_configuration_failure": "Never",
+    "last_configuration_runtime": "Never",
+    "last_configuration_status": "Never",
+    "last_configuration_success": "Never",
+    "last_configuration_update": "Never",
+    "last_modified": "2022-01-13 15:00:11.686882",
+    "last_modified_by": "",
+    "last_operational_data_duration": "Never",
+    "last_operational_data_failure": "Never",
+    "last_operational_data_runtime": "Never",
+    "last_operational_data_status": "Never",
+    "last_operational_data_success": "Never",
+    "last_operational_data_update": "Never",
+    "last_specialized_data_duration": "Never",
+    "last_specialized_data_failure": "Never",
+    "last_specialized_data_runtime": "Never",
+    "last_specialized_data_status": "Never",
+    "last_specialized_data_success": "Never",
+    "last_specialized_data_update": "Never",
+    "latitude": "0.0",
+    "location": "",
+    "longitude": "0.0",
+    "model": "",
+    "name": "Subsubnetwork and Subsubsubnetwork",
+    "napalm_driver": "ios",
+    "netconf_driver": "default",
+    "netmiko_driver": "cisco_ios",
+    "operating_system": "",
+    "os_version": "",
+    "path": "100",
+    "persistent_id": "zrlZqruMCkI",
+    "port": 22,
+    "positions": {},
+    "property1": "10.145.14.1",
+    "property2": "CP",
+    "property3": "",
+    "reachable": true,
+    "scrapli_driver": "cisco_iosxe",
+    "subtype": "",
+    "vendor": ""
+  },
+  {
+    "admin_only": false,
+    "category": "",
+    "creation_time": "",
+    "creator": "admin",
+    "custom_json": {
+      "a": "c",
+      "b": [
+        1,
+        2,
+        "3"
+      ]
+    },
+    "custom_multiselect": [
+      "a",
+      "c"
+    ],
+    "custom_select": "b",
+    "description": "",
+    "down": false,
+    "icon": "network",
+    "ip_address": "",
+    "labels": {},
+    "last_configuration_duration": "Never",
+    "last_configuration_failure": "Never",
+    "last_configuration_runtime": "Never",
+    "last_configuration_status": "Never",
+    "last_configuration_success": "Never",
+    "last_configuration_update": "Never",
+    "last_modified": "2022-01-02 12:46:03.753457",
+    "last_modified_by": "",
+    "last_operational_data_duration": "Never",
+    "last_operational_data_failure": "Never",
+    "last_operational_data_runtime": "Never",
+    "last_operational_data_status": "Never",
+    "last_operational_data_success": "Never",
+    "last_operational_data_update": "Never",
+    "last_specialized_data_duration": "Never",
+    "last_specialized_data_failure": "Never",
+    "last_specialized_data_runtime": "Never",
+    "last_specialized_data_status": "Never",
+    "last_specialized_data_success": "Never",
+    "last_specialized_data_update": "Never",
+    "latitude": "0.0",
+    "location": "",
+    "longitude": "0.0",
+    "model": "",
+    "name": "L1 Network",
+    "napalm_driver": "ios",
+    "netconf_driver": "default",
+    "netmiko_driver": "cisco_ios",
+    "operating_system": "",
+    "os_version": "",
+    "path": "100>101",
+    "persistent_id": "0DUI2zNaEqM",
+    "port": 22,
+    "positions": {},
+    "property1": "10.145.14.1",
+    "property2": "CP",
+    "property3": "",
+    "reachable": true,
+    "scrapli_driver": "cisco_iosxe",
+    "subtype": "",
+    "vendor": ""
+  },
+  {
+    "admin_only": false,
+    "category": "",
+    "creation_time": "",
+    "creator": "admin",
+    "custom_json": {
+      "a": "c",
+      "b": [
+        1,
+        2,
+        "3"
+      ]
+    },
+    "custom_multiselect": [
+      "a",
+      "c"
+    ],
+    "custom_select": "b",
+    "description": "",
+    "down": false,
+    "icon": "network",
+    "ip_address": "",
+    "labels": {},
+    "last_configuration_duration": "Never",
+    "last_configuration_failure": "Never",
+    "last_configuration_runtime": "Never",
+    "last_configuration_status": "Never",
+    "last_configuration_success": "Never",
+    "last_configuration_update": "Never",
+    "last_modified": "2022-01-02 12:46:14.439473",
+    "last_modified_by": "",
+    "last_operational_data_duration": "Never",
+    "last_operational_data_failure": "Never",
+    "last_operational_data_runtime": "Never",
+    "last_operational_data_status": "Never",
+    "last_operational_data_success": "Never",
+    "last_operational_data_update": "Never",
+    "last_specialized_data_duration": "Never",
+    "last_specialized_data_failure": "Never",
+    "last_specialized_data_runtime": "Never",
+    "last_specialized_data_status": "Never",
+    "last_specialized_data_success": "Never",
+    "last_specialized_data_update": "Never",
+    "latitude": "0.0",
+    "location": "",
+    "longitude": "0.0",
+    "model": "",
+    "name": "L2 Network",
+    "napalm_driver": "ios",
+    "netconf_driver": "default",
+    "netmiko_driver": "cisco_ios",
+    "operating_system": "",
+    "os_version": "",
+    "path": "100>101>102",
+    "persistent_id": "vuMHC8RTgZw",
+    "port": 22,
+    "positions": {},
+    "property1": "10.145.14.1",
+    "property2": "CP",
+    "property3": "",
+    "reachable": true,
+    "scrapli_driver": "cisco_iosxe",
+    "subtype": "",
+    "vendor": ""
+  },
+  {
+    "admin_only": false,
+    "category": "",
+    "creation_time": "",
+    "creator": "admin",
+    "custom_json": {
+      "a": "c",
+      "b": [
+        1,
+        2,
+        "3"
+      ]
+    },
+    "custom_multiselect": [
+      "a",
+      "c"
+    ],
+    "custom_select": "b",
+    "description": "",
+    "down": false,
+    "icon": "network",
+    "ip_address": "",
+    "labels": {},
+    "last_configuration_duration": "Never",
+    "last_configuration_failure": "Never",
+    "last_configuration_runtime": "Never",
+    "last_configuration_status": "Never",
+    "last_configuration_success": "Never",
+    "last_configuration_update": "Never",
+    "last_modified": "2022-01-02 12:47:02.746851",
+    "last_modified_by": "",
+    "last_operational_data_duration": "Never",
+    "last_operational_data_failure": "Never",
+    "last_operational_data_runtime": "Never",
+    "last_operational_data_status": "Never",
+    "last_operational_data_success": "Never",
+    "last_operational_data_update": "Never",
+    "last_specialized_data_duration": "Never",
+    "last_specialized_data_failure": "Never",
+    "last_specialized_data_runtime": "Never",
+    "last_specialized_data_status": "Never",
+    "last_specialized_data_success": "Never",
+    "last_specialized_data_update": "Never",
+    "latitude": "0.0",
+    "location": "",
+    "longitude": "0.0",
+    "model": "",
+    "name": "L3 Network",
+    "napalm_driver": "ios",
+    "netconf_driver": "default",
+    "netmiko_driver": "cisco_ios",
+    "operating_system": "",
+    "os_version": "",
+    "path": "100>101>102>103",
+    "persistent_id": "uaAsiI4FonE",
+    "port": 22,
+    "positions": {
+      "S6 L3 R1": [
+        -181,
+        -10
+      ],
+      "S6 L3 R2": [
+        170,
+        -14
+      ]
+    },
+    "property1": "10.145.14.1",
+    "property2": "CP",
+    "property3": "",
+    "reachable": true,
+    "scrapli_driver": "cisco_iosxe",
+    "subtype": "",
+    "vendor": ""
+  },
+  {
+    "admin_only": false,
+    "category": "Display",
+    "creation_time": "",
+    "creator": "admin",
+    "custom_json": {
+      "a": "c",
+      "b": [
+        1,
+        2,
+        "3"
+      ]
+    },
+    "custom_multiselect": [
+      "a",
+      "c"
+    ],
+    "custom_select": "b",
+    "description": "",
+    "down": false,
+    "icon": "network",
+    "ip_address": "",
+    "labels": {
+      "40db70f9-22d1-4497-8834-52ef5b1bf369": {
+        "alignment": "left",
+        "content": "- Import the pool \"All routers in Europe\" with the option \"Add connected links\"\n- Click on the \"Automatic Layout\" button: the network should be displayed in a near-optimal layout almost instantly.\n- Select everything and delete it.",
+        "positions": [
+          63,
+          -168
+        ]
+      }
+    },
+    "last_configuration_duration": "Never",
+    "last_configuration_failure": "Never",
+    "last_configuration_runtime": "Never",
+    "last_configuration_status": "Never",
+    "last_configuration_success": "Never",
+    "last_configuration_update": "Never",
+    "last_modified": "2022-01-13 15:01:16.843061",
+    "last_modified_by": "",
+    "last_operational_data_duration": "Never",
+    "last_operational_data_failure": "Never",
+    "last_operational_data_runtime": "Never",
+    "last_operational_data_status": "Never",
+    "last_operational_data_success": "Never",
+    "last_operational_data_update": "Never",
+    "last_specialized_data_duration": "Never",
+    "last_specialized_data_failure": "Never",
+    "last_specialized_data_runtime": "Never",
+    "last_specialized_data_status": "Never",
+    "last_specialized_data_success": "Never",
+    "last_specialized_data_update": "Never",
+    "latitude": "0.0",
+    "location": "",
+    "longitude": "0.0",
+    "model": "",
+    "name": "Layout of Large Graph",
+    "napalm_driver": "ios",
+    "netconf_driver": "default",
+    "netmiko_driver": "cisco_ios",
+    "operating_system": "",
+    "os_version": "",
+    "path": "104",
+    "persistent_id": "dOeEWhvftm4",
+    "port": 22,
+    "positions": {},
+    "property1": "10.145.14.1",
+    "property2": "CP",
+    "property3": "",
+    "reachable": true,
+    "scrapli_driver": "cisco_iosxe",
+    "subtype": "",
+    "vendor": ""
+  },
+  {
+    "admin_only": false,
+    "category": "Editing",
+    "creation_time": "",
+    "creator": "admin",
+    "custom_json": {
+      "a": "c",
+      "b": [
+        1,
+        2,
+        "3"
+      ]
+    },
+    "custom_multiselect": [
+      "a",
+      "c"
+    ],
+    "custom_select": "b",
+    "description": "",
+    "down": false,
+    "icon": "network",
+    "ip_address": "",
+    "labels": {
+      "9d96833e-cf92-45e4-8c54-f2b145b5e542": {
+        "alignment": "left",
+        "content": "- Add nodes \"Dallas\" and \"Atlanta\" without option: the nodes should be added without any links.\n- Delete them\n- Add \"Washington\" and \"Austin\" with the \"Add Connected Links\" option: no link should be created.\n- Add \"Dallas\" and \"Atlanta\" with the \"Add Connected Links\" option:\nit should create one link between \"Washington\" and \"Atlanta\" (link16),\none link between \"Dallas\" and \"Austin\" (link13),\nand three links between \"Dallas\" and \"Atlanta\" (link25, 25-2 and 25-3)\n - Add \"Dallas-2\" with the \"Add Connected Links\" option:\nit should add \"Dallas-2\" along with two links:\n\"link25-reversed\" and \"link25-dallas2\"\n- Delete everything\n- Add \"link25\" with no option: nothing should be added (missing end nodes).\n- Add \"link25\" with the \"Add Connected Nodes\" option: \"Dallas\" and \"Atlanta\" should be added along with \"link25\".\n- Add \"link25-2\" with the \"Add Connected Nodes\" option: the link should be added but the two ends are already here.\n- Add \"link25-3\" without any option: the link should be added between \"Dallas\" and \"Atlanta\".",
+        "positions": [
+          110,
+          -18
+        ]
+      }
+    },
+    "last_configuration_duration": "Never",
+    "last_configuration_failure": "Never",
+    "last_configuration_runtime": "Never",
+    "last_configuration_status": "Never",
+    "last_configuration_success": "Never",
+    "last_configuration_update": "Never",
+    "last_modified": "2022-01-13 15:00:20.775721",
+    "last_modified_by": "",
+    "last_operational_data_duration": "Never",
+    "last_operational_data_failure": "Never",
+    "last_operational_data_runtime": "Never",
+    "last_operational_data_status": "Never",
+    "last_operational_data_success": "Never",
+    "last_operational_data_update": "Never",
+    "last_specialized_data_duration": "Never",
+    "last_specialized_data_failure": "Never",
+    "last_specialized_data_runtime": "Never",
+    "last_specialized_data_status": "Never",
+    "last_specialized_data_success": "Never",
+    "last_specialized_data_update": "Never",
+    "latitude": "0.0",
+    "location": "",
+    "longitude": "0.0",
+    "model": "",
+    "name": "Import with Add Connected Nodes and Links",
+    "napalm_driver": "ios",
+    "netconf_driver": "default",
+    "netmiko_driver": "cisco_ios",
+    "operating_system": "",
+    "os_version": "",
+    "path": "105",
+    "persistent_id": "dPiUWSwc8Uk",
+    "port": 22,
+    "positions": {},
+    "property1": "10.145.14.1",
+    "property2": "CP",
+    "property3": "",
+    "reachable": true,
+    "scrapli_driver": "cisco_iosxe",
+    "subtype": "",
+    "vendor": ""
+  },
+  {
+    "admin_only": false,
+    "category": "Display",
+    "creation_time": "",
+    "creator": "admin",
+    "custom_json": {
+      "a": "c",
+      "b": [
+        1,
+        2,
+        "3"
+      ]
+    },
+    "custom_multiselect": [
+      "a",
+      "c"
+    ],
+    "custom_select": "b",
+    "description": "",
+    "down": false,
+    "icon": "network",
+    "ip_address": "",
+    "labels": {},
+    "last_configuration_duration": "Never",
+    "last_configuration_failure": "Never",
+    "last_configuration_runtime": "Never",
+    "last_configuration_status": "Never",
+    "last_configuration_success": "Never",
+    "last_configuration_update": "Never",
+    "last_modified": "2022-05-23 11:06:26.816309",
+    "last_modified_by": "",
+    "last_operational_data_duration": "Never",
+    "last_operational_data_failure": "Never",
+    "last_operational_data_runtime": "Never",
+    "last_operational_data_status": "Never",
+    "last_operational_data_success": "Never",
+    "last_operational_data_update": "Never",
+    "last_specialized_data_duration": "Never",
+    "last_specialized_data_failure": "Never",
+    "last_specialized_data_runtime": "Never",
+    "last_specialized_data_status": "Never",
+    "last_specialized_data_success": "Never",
+    "last_specialized_data_update": "Never",
+    "latitude": "0.0",
+    "location": "",
+    "longitude": "0.0",
+    "model": "",
+    "name": "Large Network Display",
+    "napalm_driver": "ios",
+    "netconf_driver": "default",
+    "netmiko_driver": "cisco_ios",
+    "operating_system": "",
+    "os_version": "",
+    "path": "106",
+    "persistent_id": "qeVi2922sdE",
+    "port": 22,
+    "positions": {
+      "Atlanta": [
+        427,
+        535
+      ],
+      "Austin": [
+        253,
+        413
+      ],
+      "Austin-2": [
+        1231,
+        770
+      ],
+      "Baltimore": [
+        289,
+        127
+      ],
+      "Boston": [
+        -1213,
+        935
+      ],
+      "Cambridge": [
+        -367,
+        811
+      ],
+      "Chicago": [
+        -1073,
+        540
+      ],
+      "Cincinnati": [
+        -1404,
+        258
+      ],
+      "Cleveland": [
+        -993,
+        184
+      ],
+      "Columbus": [
+        -1099,
+        -216
+      ],
+      "Dallas": [
+        562,
+        157
+      ],
+      "Dallas-2": [
+        285,
+        905
+      ],
+      "Dallas-3": [
+        851,
+        631
+      ],
+      "Denver": [
+        -770,
+        169
+      ],
+      "Detroit": [
+        -1351,
+        -44
+      ],
+      "Houston": [
+        951,
+        21
+      ],
+      "Jackson": [
+        621,
+        908
+      ],
+      "LosAngeles": [
+        351,
+        -244
+      ],
+      "Minneapolis": [
+        -1467,
+        680
+      ],
+      "NewYork": [
+        -537,
+        433
+      ],
+      "Oakland": [
+        -519,
+        -222
+      ],
+      "Orange": [
+        686,
+        -483
+      ],
+      "PaloAlto": [
+        -387,
+        104
+      ],
+      "Philadelphia": [
+        -686,
+        820
+      ],
+      "Richmond": [
+        93,
+        -32
+      ],
+      "Sacramento": [
+        -382,
+        -610
+      ],
+      "SanDiego": [
+        333,
+        -657
+      ],
+      "SanFrancisco": [
+        -740,
+        -568
+      ],
+      "SanJose": [
+        -92,
+        -121
+      ],
+      "Washington": [
+        -47,
+        331
+      ]
+    },
+    "property1": "10.145.14.1",
+    "property2": "CP",
+    "property3": "",
+    "reachable": true,
+    "scrapli_driver": "cisco_iosxe",
+    "subtype": "",
+    "vendor": ""
+  }
+]

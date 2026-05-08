@@ -1,0 +1,1430 @@
+[
+  [
+    "(R) Ansible Playbook Service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Combined Device & Target Iteration",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Configuration Properties Backup Services",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Credentials (Password & Key, Priority Mechanism)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Dictionary as Iteration Target Variable",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Fork based on Success Value",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Function: get_connection",
+    "Admin User"
+  ],
+  [
+    "(R) Function: get_credential",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Functions: factory, fetch, fetch_all, encrypt and get_result",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Functions: get_var, set_var, and get_result",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Gateway Mechanism (SSH Proxy with Netmiko)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Gateway Mechanism (SSH Proxy with Scrapli)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Generic File Transfer Service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Labels and Custom Property",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Multiple parallel connections to same device",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) NAPALM Configuration and Rollback Services",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) NCClient Netconf Service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Named Credential Mechanism",
+    "Admin User"
+  ],
+  [
+    "(R) Napalm Getters Service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Netmiko Configuration and Validation Services",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Netmiko File Transfer Service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Netmiko Prompts Service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Netmiko Validation with TextFSM Option",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Payload Extraction & Validation",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Payload Extraction with Operations",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Scrapli Netconf Service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Scrapli Service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Scrapli and Netmiko Multiple Commands and Jinja2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Shared Service in Multiple Subworkflows",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "(R) Unix Command & Chell, Ping Service, Jump on Connect mechanism",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Basic Superworkflow",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Conditional Skip Query in Failed and Discard Modes",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Connect to Router with Device Credentials",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Data Extraction Jinja2 Template",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Data Extraction Service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Deletion and Cascade Deletion",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Device Iteration",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "DxD and SxS Run Methods",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Fork based on value with Skip Discard Mechanism",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Functions: get_result and get_var",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "GET Endpoints is_alive, configuration and instance",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "GET Endpoints query and token",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Global Variables: try_set, try_commit, and get_secret",
+    "All users"
+  ],
+  [
+    "HTML Reports with Jinja2 Templates",
+    "Admin User"
+  ],
+  [
+    "ICMP Ping",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Interaction of Restart Mechanism and Superworkflow",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Large Device Configuration and Operational Data",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Large Payload",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Large Results",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Large Workflow (30 Netmiko Services)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Large Workflow (30 services)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Link Neighbors Mechanism (device.get_neighbors function)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Mail Notifications",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Multiprocessing in DxD mode",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Open File Descriptors Leak (public)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Optional Remediation Branch",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "POST Endpoint search",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "POST update, DELETE delete and GET & POST results",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Parameterized Form with Custom Template",
+    "Admin User"
+  ],
+  [
+    "Parameterized Multiprocessing",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Parameterized Run with a Superworkflow",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Parameterized Targets",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Payload Recursive Conservation with Restart Mechanism",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Preprocessing and Postprocessing Mechanisms",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Priority Mechanism",
+    "Admin User"
+  ],
+  [
+    "Skip Query with device in Run Once Mode",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Skip in SxS with WF targets mode",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Skip in SxS with service targets and Run Once services",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Skip, Discard and Disable Result Creation Mechanism",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Slack and Mattermost Notifications",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Specific Superworkflow",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Superworkflow in SxS w WT with Run Once service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Target Restriction Mechanism",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Target Restriction Mechanism",
+    "ny Group"
+  ],
+  [
+    "Text Reports with Normal Templates",
+    "Admin User"
+  ],
+  [
+    "Topology Import Services",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Validation Mechanism",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Workflow and Subworkflow Iteration",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Workflow with large Iteration Query",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Ansible Playbook Service] Ansible Workflow: Arista show configuration (dict match)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Ansible Playbook Service] Ansible Workflow: Arista show configuration (regex match)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Ansible Playbook Service] Ansible Workflow: Arista show version",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Ansible Playbook Service] Simple Playbook",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Combined Device & Target Iteration] Iteration Target Workflow - Test 2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Combined Device & Target Iteration] Iteration Target Workflow - Test 3",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Combined Device & Target Iteration] Iteration Targets Workflow - Test 1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Combined Device & Target Iteration] Iteration Targets Workflow - Test 4",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Configuration Properties Backup Services] Configuration Backup (NAPALM)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Configuration Properties Backup Services] Get Configuration with Netmiko",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Configuration Properties Backup Services] Get Configuration with Scrapli",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Configuration Properties Backup Services] Get Operational Data with Netmiko",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Configuration Properties Backup Services] Get Operational Data with Scrapli",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Configuration Properties Backup Services] Push Configurations to Git",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Credentials (Password & Key, Priority Mechanism)] Show interfaces with netmiko",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Dictionary as Iteration Target Variable] Set Variables for Iteration",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Dictionary as Iteration Target Variable] Show VRF with iteration",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Function: get_connection] Open default connection",
+    "Admin User"
+  ],
+  [
+    "[(R) Function: get_connection] Open special connection",
+    "Admin User"
+  ],
+  [
+    "[(R) Function: get_connection] Use both connections in python",
+    "Admin User"
+  ],
+  [
+    "[(R) Function: get_credential] Get device credential",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Function: get_credential] Rest Call with get_credential",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Function: get_credential] Show interface via get_credential",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Functions: factory, fetch, fetch_all, encrypt and get_result] Credentials encryption",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Functions: factory, fetch, fetch_all, encrypt and get_result] Delete function: delete new device",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Functions: factory, fetch, fetch_all, encrypt and get_result] Factory function: Create new device",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Functions: factory, fetch, fetch_all, encrypt and get_result] Functions fetch and fetch_all",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Functions: factory, fetch, fetch_all, encrypt and get_result] Show vrf with custom encrypted credentials",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Functions: get_var, set_var, and get_result] Modify payload (no device)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Functions: get_var, set_var, and get_result] Modify payload (per device)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Functions: get_var, set_var, and get_result] Show vrf with payload helper",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Functions: get_var, set_var, and get_result] Show vrf with python query",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Functions: get_var, set_var, and get_result] show runtime with get_result helper",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Gateway Mechanism (SSH Proxy with Netmiko)] Both",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Gateway Mechanism (SSH Proxy with Netmiko)] Gateway 1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Gateway Mechanism (SSH Proxy with Netmiko)] Gateway 3, 2 then 1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Gateway Mechanism (SSH Proxy with Scrapli)] Both",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Gateway Mechanism (SSH Proxy with Scrapli)] Gateway 1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Gateway Mechanism (SSH Proxy with Scrapli)] Gateway 3, 2 then 1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Generic File Transfer Service] Check that test file does not exist",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Generic File Transfer Service] Check that the files are on the disk",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Generic File Transfer Service] Delete all transferred files",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Generic File Transfer Service] Transfer a.bin",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Generic File Transfer Service] Transfer bc.bin and bd.bin with glob option",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Generic File Transfer Service] Transfer non-existing file",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Labels and Custom Property] Show inteface as global variable",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Labels and Custom Property] Show interface from initial form (default: Lo1)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Multiple parallel connections to same device] Show VRF with connection connection2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Multiple parallel connections to same device] Show VRF with default connection",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Multiple parallel connections to same device] Show users with connection2 and close",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) NAPALM Configuration and Rollback Services] Check VRF exists with Netmiko",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) NAPALM Configuration and Rollback Services] Check VRF is not configured with Netmiko",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) NAPALM Configuration and Rollback Services] Create a VRF with NAPALM",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) NAPALM Configuration and Rollback Services] Rollback Configuration with NAPALM",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) NCClient Netconf Service] Check ZZZZ is not in Config",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) NCClient Netconf Service] Check for ZZZZ in Config",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) NCClient Netconf Service] Erase Lo3 Description",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) NCClient Netconf Service] Get Full Config",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) NCClient Netconf Service] Set Description of Lo3 to ZZZZ",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Named Credential Mechanism] Napalm - get interfaces -",
+    "Admin User"
+  ],
+  [
+    "[(R) Named Credential Mechanism] Netmiko - show run -",
+    "Admin User"
+  ],
+  [
+    "[(R) Named Credential Mechanism] REST Call",
+    "Admin User"
+  ],
+  [
+    "[(R) Napalm Getters Service] Getters Workflow: MAC address",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Napalm Getters Service] Getters Workflow: get facts",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Napalm Getters Service] Getters Workflow: get facts failed match",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Napalm Getters Service] Getters Workflow: is alive",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Netmiko Configuration and Validation Services] netmiko_check_vrf_test",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Netmiko Configuration and Validation Services] netmiko_create_vrf_test",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Netmiko Configuration and Validation Services] netmiko_delete_vrf_test",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Netmiko File Transfer Service] Check file in directory",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Netmiko File Transfer Service] Check netmiko_file is deleted",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Netmiko File Transfer Service] Check no file in enms_files directory",
+    "Admin User"
+  ],
+  [
+    "[(R) Netmiko File Transfer Service] Check no file in enms_files directory",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Netmiko File Transfer Service] Delete netmiko_file",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Netmiko File Transfer Service] Transfer netmiko_file",
+    "Admin User"
+  ],
+  [
+    "[(R) Netmiko File Transfer Service] Transfer netmiko_file",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Netmiko Prompts Service] Check VRF (NOVRF) exists",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Netmiko Prompts Service] Test Netmiko Prompt Service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Netmiko Prompts Service] Test netmiko prompts pass",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Netmiko Validation with TextFSM Option] show arp",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Netmiko Validation with TextFSM Option] show ip int brief",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Netmiko Validation with TextFSM Option] show lldp neighbor",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Payload Extraction & Validation] Payload Extraction",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Payload Extraction & Validation] Validate dict via payload",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Payload Extraction & Validation] Validate text via payload",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Payload Extraction & Validation] Validate text via results",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Payload Extraction & Validation] Validation dict via results",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Payload Extraction & Validation] netmiko_show_ip_interface_brief",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Payload Extraction with Operations] Payload Workflow: Add initial variables",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Payload Extraction with Operations] Payload Workflow: Extraction 1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Payload Extraction with Operations] Validation 1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Scrapli Netconf Service] Delete Loopback3 description",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Scrapli Netconf Service] Edit Interface Loopback 3",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Scrapli Netconf Service] Get Running Configuration",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Scrapli Service] Check running configuration",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Scrapli Service] Check that TEST-VRF is configured",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Scrapli Service] Configure VRF TEST-VRF",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Scrapli Service] Decommission VRF TEST-VRF",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Netmiko Jinja 2 conversion (list)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Netmiko Jinja 2 conversion (text)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Scrapli Multiple Commands (list)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Scrapli and Netmiko Multiple Commands and Jinja2] Scrapli Multiple Commands (text)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Shared Service in Multiple Subworkflows] Subworkflow 1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Shared Service in Multiple Subworkflows] Subworkflow 2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Unix Command & Chell, Ping Service, Jump on Connect mechanism] Ping Custom IP",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Unix Command & Chell, Ping Service, Jump on Connect mechanism] Ping Washington",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Unix Command & Chell, Ping Service, Jump on Connect mechanism] Unix command: ps -ef | grep test",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Unix Command & Chell, Ping Service, Jump on Connect mechanism] Unix shell: ping eNMS server from remote server",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[(R) Unix Command & Chell, Ping Service, Jump on Connect mechanism] Validation: jump on server 2 from Washington",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Basic Superworkflow] After Placeholder",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Basic Superworkflow] Before Placeholder",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Conditional Skip Query in Failed and Discard Modes] Final service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Conditional Skip Query in Failed and Discard Modes] Post-failure service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Conditional Skip Query in Failed and Discard Modes] Post-success service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Conditional Skip Query in Failed and Discard Modes] Skip Washington with Skip value == False",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Conditional Skip Query in Failed and Discard Modes] Skip router5-7 in discard mode",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Data Extraction Jinja2 Template] Apply TTP Template",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Data Extraction Jinja2 Template] Apply jinja2 Template",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Data Extraction Jinja2 Template] Define Input Variables",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Data Extraction Service] Dict Definition",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Data Extraction Service] Dict Update",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Data Extraction Service] Initialize Variables",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Data Extraction Service] List Append",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Data Extraction Service] List Definition",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Data Extraction Service] List Extend",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Data Extraction Service] Operation via set_var",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Data Extraction Service] String Extraction",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Data Extraction Service] String Replacement",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Deletion and Cascade Deletion] Deletion of SanJose",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Deletion and Cascade Deletion] Deletion of Service2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Deletion and Cascade Deletion] Link Deletion",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Deletion and Cascade Deletion] Service1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Deletion and Cascade Deletion] Service2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Deletion and Cascade Deletion] Task Deletion",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Device Iteration] Hard-coded iteration devices",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Device Iteration] Iteration Devices from Predefined Variable",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[DxD and SxS Run Methods] Service in Run once per device mode",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[DxD and SxS Run Methods] Service in run once mode",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[DxD and SxS Run Methods] Workflow  in device by device mode",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[DxD and SxS Run Methods] Workflow in service by service mode (workflow targets)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[DxD and SxS Run Methods] Workflow in service targets mode",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Fork based on value with Skip Discard Mechanism] Arista devices",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Fork based on value with Skip Discard Mechanism] Juniper devices",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Fork based on value with Skip Discard Mechanism] REST API: call *is_alive* endpoint",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Fork based on value with Skip Discard Mechanism] Show VRF",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Fork based on value with Skip Discard Mechanism] is_alive endpoint 2: Skipped",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Functions: get_result and get_var] After Run Once",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Functions: get_result and get_var] After Run Per Device",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Functions: get_result and get_var] Before Run Once",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Functions: get_result and get_var] Before Run Per Device",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Functions: get_result and get_var] Subworkflow",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[GET Endpoints is_alive, configuration and instance] configuration",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[GET Endpoints is_alive, configuration and instance] instance - device",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[GET Endpoints is_alive, configuration and instance] instance - user",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[GET Endpoints is_alive, configuration and instance] is_alive",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[GET Endpoints is_alive, configuration and instance] operational_data",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[GET Endpoints query and token] Query Device - NonExisting",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[GET Endpoints query and token] Query Device - OS EOS",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[GET Endpoints query and token] Query Device - Washington",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[HTML Reports with Jinja2 Templates] Service",
+    "Admin User"
+  ],
+  [
+    "[Interaction of Restart Mechanism and Superworkflow] Service 1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Interaction of Restart Mechanism and Superworkflow] Service 2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Interaction of Restart Mechanism and Superworkflow] Service 3",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Device Configuration and Operational Data] Set Large Configuration and Operational Data",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Payload] Create Large Payload",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Results] Create Large Result",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S10",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S11",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S12",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S13",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S14",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S15",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S16",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S17",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S18",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S19",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S20",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S21",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S22",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S23",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S24",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S25",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S26",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S27",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S28",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S3",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S4",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S5",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S6",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S7",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S8",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Large Workflow (30 services)] S9",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Link Neighbors Mechanism (device.get_neighbors function)] Iterate over neighbors of workflow device",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Link Neighbors Mechanism (device.get_neighbors function)] Test get_neighbors function",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Mail Notifications] Notification 1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Mail Notifications] Notification 2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Mail Notifications] Notification 3",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Optional Remediation Branch] Dispatch Devices",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Optional Remediation Branch] Failure case",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Optional Remediation Branch] Last Service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Optional Remediation Branch] Remediation",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[POST Endpoint search] Configuration with regex no s.*",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[POST Endpoint search] Devices with i",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[POST Endpoint search] First 5 devices",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[POST update, DELETE delete and GET & POST results] DELETE NewDevice",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[POST update, DELETE delete and GET & POST results] GET result",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[POST update, DELETE delete and GET & POST results] POST Create NewDevice",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[POST update, DELETE delete and GET & POST results] POST Search Result",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[POST update, DELETE delete and GET & POST results] POST Update NewDevice property1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Parameterized Multiprocessing] Empty Service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Parameterized Run with a Superworkflow] Service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Parameterized Targets] Empty Service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Payload Recursive Conservation with Restart Mechanism] Get Payload 1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Payload Recursive Conservation with Restart Mechanism] Get Payload 2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Payload Recursive Conservation with Restart Mechanism] Get Result 1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Payload Recursive Conservation with Restart Mechanism] Get Result 2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Payload Recursive Conservation with Restart Mechanism] Set Payload and Result",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Preprocessing and Postprocessing Mechanisms] Preprocessing",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Preprocessing and Postprocessing Mechanisms] Service preprocessing and postprocessing",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Priority Mechanism] Service 1",
+    "Admin User"
+  ],
+  [
+    "[Priority Mechanism] Service 2",
+    "Admin User"
+  ],
+  [
+    "[Priority Mechanism] Service 3",
+    "Admin User"
+  ],
+  [
+    "[Priority Mechanism] Service 4",
+    "Admin User"
+  ],
+  [
+    "[Priority Mechanism] Service 5",
+    "Admin User"
+  ],
+  [
+    "[Shared] End",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Shared] Example Service (does nothing)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Shared] Getters Workflow: Interface IP",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Shared] Modify Payload for Iteration",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Shared] NAPALM: Get Facts",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Shared] NAPALM: Get interfaces",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Shared] Netmiko: Check VRF (Telecom1) does not exist",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Shared] Placeholder",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Shared] REST API: call *is_alive* endpoint",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Shared] Shared Service used Twice in Workflow",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Shared] Start",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Skip Query with device in Run Once Mode] Python service in run once mode",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow targets",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Skip in SxS with WF targets mode] Globally Skipped Service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Skip in SxS with WF targets mode] Partial failure (Washington)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Skip in SxS with WF targets mode] Query Skipped Service",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Skip in SxS with service targets and Run Once services] Global Skip",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Skip in SxS with service targets and Run Once services] Once per device",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Skip in SxS with service targets and Run Once services] Run Once with Pool",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Skip in SxS with service targets and Run Once services] Skip Query",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Skip, Discard and Disable Result Creation Mechanism] Pre-service with result creation disabled",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Skip, Discard and Disable Result Creation Mechanism] Service in run once mode",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD mode",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS mode",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Slack and Mattermost Notifications] Notification in general, once",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Slack and Mattermost Notifications] Slack in random, per device",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Specific Superworkflow] Post Placeholder Processing",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Specific Superworkflow] REST API: call to placeholder property",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Superworkflow in SxS w WT with Run Once service] Call to is_alive, Run Once",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Target Restriction Mechanism] Device Targets",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Target Restriction Mechanism] Direct Target",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Target Restriction Mechanism] Iteration Targets",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Text Reports with Normal Templates] Service",
+    "Admin User"
+  ],
+  [
+    "[Topology Import Services] OpenNMS Import",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Validation Mechanism] Dict Equality Validation of default path",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Validation Mechanism] Dict Inclusion Validation of new key",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Validation Mechanism] Nested Result String Validation",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Workflow and Subworkflow Iteration] Subworkflow Device Iteration",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Workflow and Subworkflow Iteration] Subworkflow Value Iteration",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[Workflow and Subworkflow Iteration] Test Iteration",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[[DxD and SxS Run Methods] Workflow  in device by device mode] Validation show VRF",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[[DxD and SxS Run Methods] Workflow in service by service mode (workflow targets)] Validation show VRF",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[[DxD and SxS Run Methods] Workflow in service targets mode] Validation show VRF",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[[Functions: get_result and get_var] Subworkflow] Subservice",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[[Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow targets] Fail Austin",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[[Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD mode] Fail Austin",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[[Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS mode] Fail PaloAlto",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[[Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2] Service that does nothing",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[[Workflow and Subworkflow Iteration] Subworkflow Device Iteration] Service that does nothing",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "[[Workflow and Subworkflow Iteration] Subworkflow Value Iteration] Test Iteration",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "cluster_monitoring",
+    "Full UI Read + Edit Access"
+  ]
+]

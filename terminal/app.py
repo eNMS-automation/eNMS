@@ -43,6 +43,7 @@ class Server(Flask):
                     "content": request.json,
                     "device": getenv("DEVICE"),
                     "name": str(uuid4()),
+                    "server": getenv("SERVER"),
                     "timestamp": str(datetime.now()),
                     "user": getenv("USER"),
                     "username": getenv("USER"),

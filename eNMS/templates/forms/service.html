@@ -226,8 +226,8 @@
                 role="tabpanel"
               >
                 <div class="panel-body" style="background-color: #fafafa">
-                  {{ block_field(form, "admin_only")
-                  }} {{ block_field(form, "owners") }} {% for property in form.rbac_properties %} {{ block_field(form,
+                  {{ block_field(form, "admin_only") }} {{ block_field(form, "owners")
+                  }} {% for property in form.rbac_properties %} {{ block_field(form,
                   property) }} {% endfor %} {{ block_field(form, "restrict_to_owners")
                   }}
                 </div>

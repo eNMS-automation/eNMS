@@ -1,0 +1,74 @@
+[
+  [
+    ">DCIM",
+    "admin"
+  ],
+  [
+    ">DCIM>Cables",
+    "admin"
+  ],
+  [
+    ">DCIM>Cables>Cable 1",
+    "admin"
+  ],
+  [
+    ">DCIM>Cables>Cable 2",
+    "admin"
+  ],
+  [
+    ">DCIM>Ports",
+    "admin"
+  ],
+  [
+    ">DCIM>Ports>Port 1",
+    "admin"
+  ],
+  [
+    ">DCIM>Ports>Port 2",
+    "admin"
+  ],
+  [
+    ">IPAM",
+    "admin"
+  ],
+  [
+    ">IPAM>IP Address",
+    "admin"
+  ],
+  [
+    ">IPAM>IP Address>IP Address 1",
+    "admin"
+  ],
+  [
+    ">IPAM>IP Address>IP Address 2",
+    "admin"
+  ],
+  [
+    ">IPAM>VLAN",
+    "admin"
+  ],
+  [
+    ">IPAM>VLAN>Vlan 1",
+    "admin"
+  ],
+  [
+    ">IPAM>VLAN>Vlan 2",
+    "admin"
+  ],
+  [
+    ">JSON",
+    "admin"
+  ],
+  [
+    ">JSON>JSON 1",
+    "admin"
+  ],
+  [
+    ">JSON>JSON 2",
+    "admin"
+  ],
+  [
+    ">Secrets>Secret 1",
+    "admin"
+  ]
+]

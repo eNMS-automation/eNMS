@@ -13,8 +13,8 @@ except ImportError as exc:
     warn(f"Couldn't import ttp module ({exc})")
 
 from eNMS.database import db
-from eNMS.forms import ServiceForm
 from eNMS.fields import HiddenField, SelectField, StringField
+from eNMS.forms import ServiceForm
 from eNMS.models.automation import Service
 
 
@@ -40,6 +40,7 @@ class DataProcessingService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "data_processing_service"}
 
+    @staticmethod
     def job(self, run, device=None):
         result, success = {}, True
         for index in range(1, 4):

@@ -10,8 +10,8 @@ from wtforms import (
     IntegerField as WtformsIntegerField,
     PasswordField as WtformsPasswordField,
     SelectField as WtformsSelectField,
-    StringField as WtformsStringField,
     SelectMultipleField as WtformsSelectMultipleField,
+    StringField as WtformsStringField,
 )
 from wtforms.validators import ValidationError
 from wtforms.widgets import html_params
@@ -30,7 +30,7 @@ class MetaField(type):
 
 class FieldMixin(metaclass=MetaField):
     def __init__(self, *args, **kwargs):
-        for property in ("help", "ui_name"):
+        for property in ("help", "ui_name", "layout"):
             if property in kwargs:
                 kwargs.setdefault("render_kw", {})[property] = kwargs.pop(property)
         kwargs.pop("dont_duplicate", None)
@@ -167,12 +167,15 @@ class JsonField(FieldMixin, WtformsField):
 
     def __init__(self, *args, **kwargs):
         self.name = kwargs.get("_name")
+        self.collapse = kwargs.pop("collapse", True)
+        self.div_properties = kwargs.pop("div_properties", "")
         super().__init__(*args, **kwargs)
 
     def __call__(self, **kwargs):
-        class_ = "add-id collapsed" if "collapsed" in kwargs["class"] else "add-id"
+        class_ = "add-id collapsed" if self.collapse else "add-id"
         html_kwargs = {"id": kwargs["id"], "class_": class_, "name": self.name}
-        return Markup(f"<input {html_params(**html_kwargs)} hidden><div></div>")
+        div = f"<div {self.div_properties}></div>"
+        return Markup(f"<input {html_params(**html_kwargs)} hidden>{div}")
 
 
 class InstanceField(SelectField):
@@ -201,11 +204,8 @@ class MultipleInstanceField(FieldMixin, WtformsSelectMultipleField):
         self.choices = ()
 
     def pre_validate(self, _):
-        not_found = [
-            name
-            for name in self.data
-            if not db.fetch(self.model, rbac=None, name=name, allow_none=True)
-        ]
+        rows = db.fetch_all(self.model, name_in=self.data, properties=["name"])
+        not_found = set(self.data) - {instance.name for instance in rows}
         if len(set(self.data)) != len(self.data):
             raise ValidationError(f"Duplicated {self.model}s selected.")
         if not_found:

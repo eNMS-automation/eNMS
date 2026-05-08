@@ -3,7 +3,7 @@
 
 ## Overview 
 
-A Pool is a collection of device and/or link objects. When defining a Pool, 
+A Pool is a collection of device objects and/or link objects. When defining a Pool, 
 a combination of selection properties are specified that define a match based on
 inclusion, equality, or regular expression; this match determines which
 devices and links are included in the Pool. If the properties of an object
@@ -16,7 +16,7 @@ the `Geographic View` and in the `Network Builder` `Visualization` panels.
 
 Pools are used in several parts of the application:
 
-- Targets of a Service or Workflow:  Devices can be added to a
+- Targets of a Service or Workflow: Devices can be added to a
   pool, which is then selected as the execution target for a Service or Workflow
   automation to run on.
     - Pools can also be specified as the execution targets of a Scheduled Task.
@@ -33,7 +33,7 @@ Pools are used in several parts of the application:
     pools of devices and links (as well as individual devices and links) to be
     added to the currently displayed Network. 
 
-- Advanced Search / Relationship Based Filtering:  Pools can be targets for the 
+- Advanced Search / Relationship Based Filtering: Pools can be targets for the 
 union, intersection, or empty match in order to filter a table in the application.
 
 ## Pool Management
@@ -71,7 +71,7 @@ filtering or advanced search criteria:
   
 - New: Create a new Pool of objects.
 
-- Export:  Export the list of Pools as a .csv file that is downloaded to the 
+- Export: Export the list of Pools as a .csv file that is downloaded to the 
   user's browser.
  
 - Update All Pools: Recalculate pool membership for all Pools.
@@ -79,7 +79,7 @@ filtering or advanced search criteria:
 - Run Service on All Pools in the Table: Run a Service or Workflow using all
   the pools in the table as the combined set of execution targets. 
   
-- Bulk Deletion:  Delete all pools currently displayed in the table.
+- Bulk Deletion: Delete all pools currently displayed in the table.
 
 ## Managing Pool Access
 User maintained `Access Control` is available for this object. This allows the `Owners` to select desired access.
@@ -139,7 +139,7 @@ Three pools are created by default in eNMS:
 
 ## Pools Based on Configuration
 
-Pools can be created by searching the configuration data collected from all of
+Pools can be created by searching the configuration data collected from all
 the devices, rather than just the Inventory parameters for each device.
 Configuration collection must be first configured, and then allowed to run at
 least once before the data exists for pool matching.
@@ -190,7 +190,7 @@ To manually update a Pool:
 Initially, by default, the devices and links within a pool are
 determined automatically based on the pool properties. To disable automatic 
 recalculations for a Pool, first edit the pool and set `Manually Defined` to
-enabled.  
+"enabled".  
 
 ![Manual definition of a pool](../_static/inventory/pools/manual_definition.png)
 
@@ -215,7 +215,7 @@ be specified, and the service will run against all specified objects.
     
     Tip: the `Bulk Delete` button will clear a manually defined pool.
     
-![Clearing a manuallly defined pool](../_static/inventory/pools/manual_clear.png)    
+![Clearing a manually defined pool](../_static/inventory/pools/manual_clear.png)    
      
 ## `Include Networks`
 

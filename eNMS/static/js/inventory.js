@@ -1,17 +1,18 @@
 /*
 global
 configurationProperties: false
+echarts: false
 formProperties: false
 serverUrl: false
 settings: true
-echarts: false
+sshUrl: false
 theme: false
 */
 
-import { displayDiff } from "./automation.js";
 import {
   call,
   configureNamespace,
+  displayDiff,
   downloadFile,
   initCodeMirror,
   notify,
@@ -51,14 +52,14 @@ function drawDiagrams(type, objects, property) {
   });
   diagrams[type].setOption(options);
   if (diagrams[type]._$handlers.click) return;
-  diagrams[type].on("click", function (params) {
+  diagrams[type].on("click", function(params) {
     const id = Date.now();
     const property = $(`#${type}-properties`).val();
     const tableType = type == "workflow" ? "service" : type;
     let value = params.data.name;
     openPanel({
       name: "table",
-      size: "1250 500",
+      size: "1250 650",
       content: `
         <div class="modal-body">
           <div id="tooltip-overlay" class="overlay"></div>
@@ -83,7 +84,7 @@ function drawDiagrams(type, objects, property) {
       id: id,
       tableId: `${tableType}-${id}`,
       title: `All ${tableType}s with ${property} set to "${value}"`,
-      callback: function () {
+      callback: function() {
         if (formProperties[tableType][property]?.type == "bool") {
           value = `bool-${value}`;
         }
@@ -106,16 +107,16 @@ export function showConnectionPanel(device) {
     id: device.id,
     callback: () => {
       $(`#address-${device.id}`).selectpicker();
-      $(`#custom-credentials-${device.id}`).change(function () {
+      $(`#custom-credentials-${device.id}`).change(function() {
         $(`#custom-credentials-fields-${device.id}`).show();
         $(`#named-credentials-fields-${device.id}`).hide();
       });
-      $(`#named-credentials-${device.id}`).change(function () {
+      $(`#named-credentials-${device.id}`).change(function() {
         $(`#named-credentials-fields-${device.id}`).show();
         $(`#custom-credentials-fields-${device.id}`).hide();
       });
       $(`#device-credentials-${device.id},#user-credentials-${device.id}`).change(
-        function () {
+        function() {
           $(`#custom-credentials-fields-${device.id}`).hide();
           $(`#named-credentials-fields-${device.id}`).hide();
         }
@@ -135,7 +136,7 @@ export function initDashboard() {
   };
   call({
     url: "/count_models",
-    callback: function (result) {
+    callback: function(result) {
       for (const type of Object.keys(defaultProperties)) {
         let counterText = result.counters[type].toString();
         if (["service", "task", "workflow"].includes(type)) {
@@ -153,11 +154,11 @@ export function initDashboard() {
   Object.keys(defaultProperties).forEach((type) => {
     $(`#${type}-properties`)
       .selectpicker()
-      .on("change", function () {
+      .on("change", function() {
         const property = this.value;
         call({
           url: `/counters/${property}/${type}`,
-          callback: function (objects) {
+          callback: function(objects) {
             drawDiagrams(type, objects, property);
           },
         });
@@ -169,9 +170,11 @@ function webConnection(id) {
   call({
     url: `/web_connection/${id}`,
     form: `connection-parameters-form-${id}`,
-    callback: function (result) {
+    callback: function(result) {
       const url =
-        sshUrl || serverUrl || `${window.location.protocol}//${window.location.hostname}`;
+        sshUrl ||
+        serverUrl ||
+        `${window.location.protocol}//${window.location.hostname}`;
       const link = result.redirection
         ? `${url}/terminal${result.port}`
         : `${url.match(/https?:\/\/[^:\/]+/)[0]}:${result.port}`;
@@ -194,7 +197,7 @@ function updatePools(pool) {
   const endpoint = pool ? `/update_pool/${pool}` : "/update_all_pools";
   call({
     url: endpoint,
-    callback: function () {
+    callback: function() {
       tableInstances.pool.table.ajax.reload(null, false);
       notify("Pool Update successful.", "success", 5, true);
     },
@@ -204,7 +207,7 @@ function updatePools(pool) {
 function showSessionLog(sessionId) {
   call({
     url: `/get_session_log/${sessionId}`,
-    callback: (log) => {
+    callback: ([log, device]) => {
       if (!log) {
         notify(
           "No log stored (e.g device unreachable or authentication error).",
@@ -216,9 +219,9 @@ function showSessionLog(sessionId) {
         openPanel({
           name: "session_log",
           content: `<div id="content-${sessionId}" style="height:100%"></div>`,
-          title: "Session log",
+          title: `Session Log - Device '${device}'`,
           id: sessionId,
-          callback: function () {
+          callback: function() {
             const editor = initCodeMirror(`content-${sessionId}`, "network");
             editor.setValue(log.replace(ansiEscapeRegex, ""));
           },
@@ -231,7 +234,9 @@ function showSessionLog(sessionId) {
 function downloadNetworkData(id, name) {
   downloadFile(
     `${$(`#data-type-${id}`).val()}-${name}`,
-    $(`#content-${id}`).data("CodeMirrorInstance").getValue(),
+    $(`#content-${id}`)
+      .data("CodeMirrorInstance")
+      .getValue(),
     "txt"
   );
 }
@@ -266,11 +271,13 @@ function displayNetworkData({ type, name, id, result, datetime }) {
       </div>`,
     title: `Network Data - Device '${name}'`,
     id: id,
-    callback: function () {
-      $(`#data-type-${id}`).val(type).selectpicker("refresh");
+    callback: function() {
+      $(`#data-type-${id}`)
+        .val(type)
+        .selectpicker("refresh");
       const editor = initCodeMirror(`content-${id}`, "network");
       $(`#data-type-${id}`)
-        .on("change", function () {
+        .on("change", function() {
           editor.setValue(result[this.value]);
           editor.refresh();
         })
@@ -283,7 +290,7 @@ function openObjectPanel(model) {
   showInstancePanel($(`#${model}-type-dd-list`).val());
 }
 
-export const showDeviceData = function (device) {
+export const showDeviceData = function(device) {
   call({
     url: `/get_device_network_data/${device.id}`,
     callback: (result) => {
@@ -378,12 +385,12 @@ function showGitHistory(device) {
               .order([0, "desc"])
               .draw();
             $(`#data-type-${device.id}`)
-              .on("change", function () {
+              .on("change", function() {
                 const configurationProperty = this.value;
                 table.clear();
                 $(`#compare-${device.id}-btn`)
                   .unbind("click")
-                  .on("click", function () {
+                  .on("click", function() {
                     displayDiff(configurationProperty, device.id);
                   });
                 commits[configurationProperty].forEach((commit) => {
@@ -453,7 +460,7 @@ export function showDeviceResultsPanel(device) {
     type: "device_result",
     title: `Results - ${device.name}`,
     tableId: `device_result-${device.id}`,
-    callback: function () {
+    callback: function() {
       // eslint-disable-next-line new-cap
       new tables["device_result"](device.id, {
         device_id: device.id,
@@ -463,49 +470,8 @@ export function showDeviceResultsPanel(device) {
   });
 }
 
-function showImportTopologyPanel() {
-  openPanel({
-    name: "excel_import",
-    title: "Import Topology as an Excel file",
-    callback: () => {
-      document.getElementById("file").onchange = function () {
-        importTopology();
-      };
-    },
-  });
-}
-
-function exportTopology() {
-  notify("Topology export starting...", "success", 5, true);
-  call({
-    url: "/topology_export",
-    form: "excel_export-form",
-    callback: function () {
-      notify("Topology successfully exported.", "success", 5, true);
-    },
-  });
-}
-
-function importTopology() {
-  notify("Topology import: starting...", "success", 5, true);
-  const formData = new FormData($("#import-form")[0]);
-  $.ajax({
-    type: "POST",
-    url: "/import_topology",
-    dataType: "json",
-    data: formData,
-    contentType: false,
-    processData: false,
-    async: true,
-    success: function (result) {
-      notify(result, "success", 5, true);
-    },
-  });
-}
-
 configureNamespace("inventory", [
   downloadNetworkData,
-  exportTopology,
   openObjectPanel,
   showConnectionPanel,
   webConnection,
@@ -514,6 +480,5 @@ configureNamespace("inventory", [
   showDeviceData,
   showDeviceResultsPanel,
   showGitConfiguration,
-  showImportTopologyPanel,
   showSessionLog,
 ]);

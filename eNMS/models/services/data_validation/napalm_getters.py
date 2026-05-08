@@ -1,8 +1,8 @@
 from sqlalchemy import ForeignKey, Integer
 
 from eNMS.database import db
-from eNMS.forms import NapalmForm
 from eNMS.fields import HiddenField, SelectMultipleField
+from eNMS.forms import NapalmForm
 from eNMS.models.automation import ConnectionService
 from eNMS.variables import vs
 
@@ -19,6 +19,7 @@ class NapalmGettersService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "napalm_getters_service"}
 
+    @staticmethod
     def job(self, run, device):
         if run.dry_run:
             return {}

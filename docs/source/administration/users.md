@@ -9,6 +9,8 @@ can be used to enhance Role Based Access Control (RBAC).
 
 * **Name**: Identifies the user within the application
 * **Creator**: Auto Populated field based on the user who built the credential
+* **Last Modified**: The date and time when the object was last updated.
+* **Last Modified By**: The user who last updated the object.
 * **Description**: Text field for storing notes 
 * **Email Address**: The user's email address  
 * **Groups**: Group(s) to which this user belongs

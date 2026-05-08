@@ -24,6 +24,7 @@ class NapalmPingService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "napalm_ping_service"}
 
+    @staticmethod
     def job(self, run, device):
         source = run.sub(run.source_ip, locals())
         destination = run.sub(run.destination_ip, locals())
@@ -51,7 +52,7 @@ class NapalmPingForm(NapalmForm):
     source_ip = StringField(substitution=True)
     ping_timeout = IntegerField(default=2)
     ttl = IntegerField(default=255)
-    vrf = StringField(label="VRF", substitution=True)
+    vrf = StringField(label="VRF", substitution=True, help="napalm/vrf")
     groups = {
         "Ping Parameters": {
             "commands": [

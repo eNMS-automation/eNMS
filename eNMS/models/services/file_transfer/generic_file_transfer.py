@@ -1,13 +1,12 @@
 from glob import glob
 from os.path import split
+from paramiko import AutoAddPolicy, SSHClient
 from pathlib import Path
-from paramiko import SSHClient, AutoAddPolicy
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from sqlalchemy.orm import relationship
 from wtforms.validators import InputRequired
 
 from eNMS.database import db
-from eNMS.forms import ServiceForm
 from eNMS.fields import (
     BooleanField,
     FloatField,
@@ -18,6 +17,7 @@ from eNMS.fields import (
     SelectField,
     StringField,
 )
+from eNMS.forms import ServiceForm
 from eNMS.models.automation import Service
 from eNMS.variables import vs
 
@@ -31,24 +31,26 @@ class GenericFileTransferService(Service):
     source_file = db.Column(db.SmallString)
     destination_file = db.Column(db.SmallString)
     missing_host_key_policy = db.Column(Boolean, default=False)
-    load_known_host_keys = db.Column(Boolean, default=False)
     source_file_includes_globbing = db.Column(Boolean, default=False)
     max_transfer_size = db.Column(Integer, default=2**30)
     window_size = db.Column(Integer, default=2**30)
     timeout = db.Column(Float, default=10.0)
     credentials = db.Column(db.SmallString, default="device")
-    named_credential_id = db.Column(Integer, ForeignKey("credential.id"))
+    named_credential_id = db.Column(
+        Integer, ForeignKey("credential.id", ondelete="SET NULL")
+    )
     named_credential = relationship("Credential")
     custom_username = db.Column(db.SmallString)
     custom_password = db.Column(db.SmallString)
 
     __mapper_args__ = {"polymorphic_identity": "generic_file_transfer_service"}
 
+    @staticmethod
     def job(self, run, device):
         ssh_client = SSHClient()
         if run.missing_host_key_policy:
             ssh_client.set_missing_host_key_policy(AutoAddPolicy())
-        if run.load_known_host_keys:
+        if vs.automation["file_transfer"]["load_known_host_keys"]:
             ssh_client.load_system_host_keys()
         source = run.sub(run.source_file, locals())
         destination = run.sub(run.destination_file, locals())
@@ -93,7 +95,6 @@ class GenericFileTransferForm(ServiceForm):
     source_file = StringField(validators=[InputRequired()], substitution=True)
     destination_file = StringField(validators=[InputRequired()], substitution=True)
     missing_host_key_policy = BooleanField()
-    load_known_host_keys = BooleanField()
     source_file_includes_globbing = BooleanField("Source file includes glob pattern")
     max_transfer_size = IntegerField(default=2**30)
     window_size = IntegerField(default=2**30)

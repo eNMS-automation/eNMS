@@ -1,0 +1,24 @@
+name: ceos
+
+mgmt:
+  network: fixedips
+  ipv4-subnet: 172.100.100.0/24
+  ipv6-subnet: 3fff:172:100:100::/80
+
+topology:
+  nodes:
+    ceos-1:
+      kind: arista_ceos
+      image: ceos:4.34.1F
+      startup-config: /mnt/shared/eNMS-prod2/files/lab/router1.cfg
+      mgmt-ipv4: 172.100.100.11
+      mgmt-ipv6: 3fff:172:100:100::11
+    ceos-2:
+      kind: arista_ceos
+      image: ceos:4.34.1F
+      startup-config: /mnt/shared/eNMS-prod2/files/lab/router2.cfg
+      mgmt-ipv4: 172.100.100.12
+      mgmt-ipv6: 3fff:172:100:100::12
+
+  links:
+    - endpoints: ["ceos-1:eth1", "ceos-2:eth1"]

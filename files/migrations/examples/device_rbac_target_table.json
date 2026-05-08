@@ -1,0 +1,370 @@
+[
+  [
+    "Aserver",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Atlanta",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Austin",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Austin-2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Austin-3",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Baltimore",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Boston",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Cambridge",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Chicago",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Cincinnati",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Cleveland",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Columbus",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Dallas",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Dallas-2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Dallas-3",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Dallas-4",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Denver",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Detroit",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Duplicate me 1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Duplication - G1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Duplication - R1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Gateway 1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Gateway 2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Gateway 3",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Houston",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Jackson",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Jackson-2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "LosAngeles",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Minneapolis",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "NewYork",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Oakland",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Oakland-2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Orange",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "PaloAlto",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Philadelphia",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Richmond",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Router 1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Router 2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Router 3",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Router behind Gateway 1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Router behind Gateway 1, 2 and 3",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "S5 R1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "S5 R2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "S5 R3",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "S5 R4",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "S6 L3 R1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "S6 L3 R2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Sacramento",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "SanDiego",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "SanFrancisco",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "SanJose",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Server 2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Subnetwork 1 - R1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Subnetwork 1 - R2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Subnetwork 1 - R3",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Subnetwork 2 - G1",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Subnetwork 2 - G2",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Washington",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "Washington",
+    "ny Group"
+  ],
+  [
+    "router10 (public)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router11",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router12",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router13",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router14",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router15",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router16",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router17",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router18 (public)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router19",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router20 (admin)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router21",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router22",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router23 (admin)",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router24",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router25",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router26",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router27",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router28",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router29",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router30",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router31",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router32",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router33",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router34",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router35",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router36",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router37",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router5",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router6",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router7",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router8",
+    "Full UI Read + Edit Access"
+  ],
+  [
+    "router9",
+    "Full UI Read + Edit Access"
+  ]
+]

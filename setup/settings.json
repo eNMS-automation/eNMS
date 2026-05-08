@@ -6,16 +6,29 @@
     "git_repository": "git@github.com:afourmy/gitpython-test.git",
     "max_content_length": 104857600,
     "plugin_path": "eNMS/plugins",
+    "profiling": false,
     "session_timeout_minutes": 30,
     "startup_migration": "examples",
     "theme": "default",
     "version": 5.1
+  },
+  "on_startup": {
+    "get_git_content": false,
+    "scan_folder": false
   },
   "authentication": {
     "default": "database",
     "landing_page": "/dashboard",
     "allow_password_change": true,
     "force_authentication_method": false,
+    "duo": {
+      "config": {
+        "client_id": "DIRUY3ZRHXYYHVOZDMIW",
+        "host": "api-58bbe24c.duosecurity.com",
+        "redirect_uri": "https://enms:5000/duo-callback"
+      },
+      "enabled": false
+    },
     "methods": {
       "database": {
         "display_name": "Local User",
@@ -38,8 +51,8 @@
     }
   },
   "automation": {
-    "max_process": 15,
-    "use_task_queue": false
+    "max_process": 50,
+    "task_queue": false
   },
   "cache": {
     "config": {
@@ -91,8 +104,9 @@
     "workflow_builder": "automation/workflow_builder/"
   },
   "files": {
-    "monitor_filesystem": true,
-    "ignored_types": [".swp", ".tgz"],
+    "delete_if_not_found": true,
+    "ignored_types": [".swp", ".tgz", "yaml"],
+    "polling_interval": 1,
     "upload_timeout": 600000,
     "log_events": true,
     "trash": ""
@@ -125,6 +139,7 @@
   },
   "paths": {
     "custom_code": "",
+    "custom_datastore": "",
     "custom_devices": "",
     "custom_links": "",
     "custom_services": "",
@@ -135,9 +150,22 @@
   "pool": {
     "fast_compute": true
   },
+  "rate_limiter": {
+    "requests": {
+      "global": {
+        "window_size": 60,
+        "max_requests": 50
+      },
+      "rest": {
+        "window_size": 60,
+        "max_requests": 6,
+        "rest_api": true
+      }
+    },
+    "runs": 5
+  },
   "redis": {
     "config": {
-      "charset": "utf-8",
       "db": 0,
       "decode_responses": true,
       "port": 6379,
@@ -166,7 +194,7 @@
   },
   "ssh": {
     "bypass_key_prompt": true,
-    "command": "python3 -m flask run -h 0.0.0.0",
+    "command": "/home/afourmy/venvs/venv/bin/python3 -m flask run -h 0.0.0.0",
     "credentials": {
       "custom": true,
       "named": true,
@@ -188,6 +216,10 @@
       "run": 5000,
       "service": 3000,
       "task": 3000
+    },
+    "search": {
+      "notification": false,
+      "timer": 300
     }
   },
   "vault": {

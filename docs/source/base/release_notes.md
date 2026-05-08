@@ -1,5 +1,934 @@
-
 # Release Notes
+
+Version 5.3: JSON Migration, High Performance Mode and other Performance Improvements
+-------------------------------------------------------------------------------------
+
+- Add new JSON migration mechanism
+  - Add new "Generic Device" class and convert all devices of type "device" to this new
+    "generic_device" type (impact on migration files)
+  - Add new "Generic Link" class and convert all devices of type "link" to this new
+    "generic_link" type (impact on migration files)
+  - Add new "Generic File" class and convert all devices of type "file" to this new
+    "generic_file" type (impact on migration files)
+  - Add ondelete="SET NULL" constraint for the following foreign keys:
+    - Changelog.model_id for all models
+    - Data.store_id
+    - ConnectionService.named_credential_id
+    - LinK.source_id and Link.destination_id
+    - RestCallService.named_credential_id
+    - WorkflowEdge.workflow_id
+    - Commit: 801da3b267df05a3474547330a356577526b8b78
+  - Add cascade delete between file and folder to fix json migration import for mysql
+    Commit: bc9fe7e3b7bc6938f9ecbc20fb2254d3a4ee6898
+  - Refactor runs and results to store state with persistent ID instead of ID to be able to
+    persist the state when exporting runs and results as JSON
+    Commit: c81c3aceb345134a20c33a389de3eda2fac0cb15 (update state to use persistent ID)
+    Commit: e6cac0d8439442ba858d764b135057b8e8b63f9a (move edges to top-level state)
+  - Replace legacy bulk_update_mappings and bulk_insert_mappings with new SQLAlchemy syntax
+    Commit: 76e9d55829b31ed39ca96cbc62bfb6fb9f54ee29
+  - Add batch mechanism for creating and updating DB records in batches during the migration import
+    Configured via database.json > "transactions" > "batch_size" (default: 1000)
+    Commit: 80e11132115e76c4eab2aa0a5cd0f8361d3c0adc
+  - Separate JSON and YAML migration forms
+    Commit: 783ad217d188766e767c80b9c5e3b19b7acc4145
+  - Update 'migrate' REST endpoint to support new 'import_type' argument (yaml or json) to select the
+    corresponding function for import export
+    Commit: 1ccfaaf4123276c9ba4c3c9a4d3935c8f5dcb897
+- Make Service.name a SmallString, otherwise mysql fails to initialize with the following error:
+  "MySQLdb.OperationalError: (1170, BLOB/TEXT column 'name' used in key specification without a key length)"
+  Commit: 82154c0830f1cae60ea7a81732478c302767145b
+- Increase size of 'payload' field in Rest Call Service
+  Commit: c586d0b852a60576c9d0cec5ec134bfc91c04035
+- Performance Optimization
+  - Update "counters" function to improve dashboard display time
+    - Use low-level SQL query to compute Count dictionaries for each model property
+      Commit: a01d175e5f4c66c29d250de67fe24cc0b530ec38
+    - Get task ID instead of SQLAlchemy objects to get total number of active tasks
+      Commit: 975aeadaba5f75af26f62a6b7e1c232a1ccbdae2
+  - Update pool mechanism optimization:
+    - Replace "db.session.execute(table.insert().values(values))" with
+      "db.session.execute(table.insert(), values)" (the update can fail with first option)
+      Commit: 94d3ee1828d8ec4b51cd97eb154ed9b15528d4c0
+  - Update "get_workflow_services" function (used to copy existing services into a workflow)
+    - Use orjson.dumps instead of flask.jsonify to increase function call response time when
+      transfering a lot of data to the front-end (e.g 'get_workflow_services' endpoint)
+      Commit: 8442ac89436a2802698f12e47b559ef57ce4dda0
+    - Query properties ("id", "name", "scoped_name") instead of bulk objects to speed up database
+      query execution time
+      Commit: 299a85c52ad6749155b1acab215d30f9ec4241da
+    - Remove lazy join of Workflow.services and Workflow.edges to speed up db.fetch("workflow") query
+      Commit: 0932e2eb7281a6b3755d9a21c7f124b4555c1287
+    - Refactor the search to no longer use jstree search mechanism (one ajax call per workflow match), and
+      remove the associated "search_workflow_services" function
+      Commit: e5b70fb411cfe1d8f1dd42df324a275eb2404946 + 9c62edd8a58cb9dc3a748044a31b0eaa8c26c3d6
+  - Optimize call to "filtering/run" when loading the results table, or the device results table
+    by removing the lazy joining of Devices in the Result class (Result.device)
+    Commit: 9a543b326d83ec3be08e5f98d9be8ee10680d00b
+  - Optimize call to "run_service" (slow response when many runs (>1k) because of 'to_dict()' call
+    without argument)
+    Commit: ecc22a0fecd18c559db9d2414e6c968dca6efd93
+  - Update 'save_positions' function to no longer make one SQL query per service / device when saving positions
+    Commit: 49eb0e18862efaacf61f415ac45295038283b1cc
+  - Bug Fix: Optimize the workflow builder refresh mechanism to update service color in bulk via nodeUpdates
+    When refreshing a large workflow with a set runtime (i.e not in Normal Display), the update would
+    cause the UI to freeze for a few seconds. Should be instantaneous now.
+    Commit: 5476991c10f91b0e8a3836d3ace7cbbc102616ea
+  - Optimize 'add_instances_in_bulk' to use name_in SQL query to add instances by name instead of db.fetch
+    in a loop and return the list of all objects whose name is not found, not just the first one
+    Commit: c44abaa30936d347afd3bbd64188153c0006787d
+  - Update skip_services endpoint to not fetch services in a loop
+    Commit: a03720c560496e98a3fa061a5ea5088436c20431
+  - Update "get_service_state" function:
+    - Optimize the function when a workflow has many runs by only fetching the runs name and runtime
+      properties, not the full SQLalchemy objects for all runs (fetch the SQL object only for
+      currently displayed runtime instead)
+      Commit: 7fe70bc8cf5f453bb45d75878fa070e9800f9edb
+  - File Optimizations:
+    - Add missing index on File.folder_path column (used for file table hierarchical filtering) to make the display faster
+      Commit: 949c5ab9f398027acdd8c5c7e93a2b1b3de7f206
+    - Speed up the "Scan Folder" mechanism:
+      - Remove the SQL relationship between File and Folder (rely on folder_path only to display the table)
+      - Refactor the "scan_folder" function to use os.scandir to gather file data, then create new files
+        and flders in bulk with a low-level SQL query
+      Commit: 52c6ad85f61392177044b98bb3f5be1555736220
+  - Optimize the workflow duplication mechanism:
+    - Don't return anything in the post_update function, and update the 'controller.update' function to not
+      rely on the post_update function to return the instance properties and relations
+      Commit:
+        - e590b0b512a9e904dc3dc6d2a52632d78815ba48
+        - c48059f8182e0fa0bf915c11c1ea822b31415006
+    - Only call the 'recursive_update' function from the top-level workflow
+      Commit: e83dcc7739f12406ea802295afab684d2d7ad001
+    - Avoid creating changelogs during the workflow duplication mechanism
+      Commit: 370b580602ed47bde69f3bbe83deccb541876215
+    - Allow passing SQLAlchemy object in Base.update (via factory) to reduce the number of fetch queries
+      Commit: 217ad4517477fab06f26b91d845fffb51ea20178
+    - Don't create changelog objects in SQL creation and deletion de detection events if connection info set to ignore
+      Commit: a58b79edbbd621548abb27112f1f0686d548e431
+  - Remove calls to "to_dict()" with empty parameters (gets all relationships - not scalable)
+    - Update to the Excel topology import mechanism:
+      - Don't call to_dict() after creating an object
+      - Don't update pools after the topology import
+      Commit: 52243ef833579e31ff631d9b70b739aa5ce201ac
+    - Use 'get_properties' instead of 'to_dict()' in the add_objects_to_network function
+      Commit: 2747699d47a6443e712ce2f4490c06536c7daed7
+    - Use 'get_properties' instead of 'to_dict()' in copy_service_in_workflow function
+      Commit: 00603dac5d6131c6c3289de764ee98d4db4af866
+    - Call 'get_properties' instead of 'to_dict()' in db.delete_instance (and therefore db.delete)
+      Commit: 84acd8d02c69bdb8bc75daf44771cec72a202c2c
+  - Other SQL optimizations:
+    - Remove Run.service lazy join (workflows run slightly faster)
+      Commit: c1525d9295bf70d14b192d6cb942cf299a60c9f9
+    - Reduce numnber of unnecessary calls to db.fetch in Runner initialization
+      Commit: c7847256a06b7c12207a6db7b8f60719ff8f2403
+  - Changelog Display:
+    - Add python snippet to create many fake changelogs with low-level SQL (50M by default)
+      Commit: a302b25ed825dc967c4db61a29f32367ee4ccf33
+    - Add an index for all changelog models
+      Commit: 25a719efe5659e633710917f0e9ccf9744ddc6e7
+      Impact: creating 50M is about 5x slower, but changelog table performance issue is fixed
+    - Update SQL constraints when opening service changelog panel from RC menu in the Workflow Builder
+      to make it faster
+      Commit: b7eae51e4fe7a3076a7c94ea9a78ee2a659de0ee
+- Minor update to configureNamespace function
+  Commit: 891c255945ab85cf8e7c970805c4498a0adfa081
+- Refactor the SQL query monitoring mechanism:
+  - Compute the query duration without executing it twice
+    Commit: 65fe27e2f97cb79828ef5d35a4d69f01dda6c2ea
+  - Add traceback to find out which line of code sent the query
+    Commit: 4becbb44f6194be2ecdd9e68eb1a94f074d98f4e
+  - Display number of queries in the UI for easier monitoring (after eNMS version)
+    Commit: bc6a5840070bac30262c4f8392179e44ef096c4d
+- Remove lazy join for workflow edges and servers
+    - WorkflowEdge.source, WorkflowEdge.destination, WorkflowEdge.workflow
+    - Server.workers
+  Commit: df2b92f8de2a1b23b1387f4596c07379a8c6e450
+- Run Targets Devices and Pools association and Run Allowed Targets Update:
+  - Rename "vs.run_targets" to "vs.run_allowed_targets": Commit 267a3fe7abd2bf196139d2cc8828e864acc7ce46
+  - Move the restricted target computation outside of the compute_devices query so it works for
+    workflow targets and iteration targets too
+    Commit: 29c07275f935dae159eff80fff298e5dcdcde31d + 9bb96827e7f5bd09c79834b68b31cc3943165a24
+- Remove update all pools after running option (unused, not scalable)
+  Commit: 0e0192e48819890de590d83f494ef9a05d5b8e17
+- Set netmiko log level to 'info' in logging.json > 'external_loggers'
+  Commit: 0fd78af2824b8e2c6904085f27387a53824d44d1
+- Set scrapli and paramiko.transport log level to 'info' in logging.json > 'external_loggers'
+  Commit: 0bb00e8de45da0cb88777f0fc5df3bc2323b0986
+- Increase maximum number of threads to 1000
+- Make the orjson library mandatory (move from requirements_optional.txt to requirement.txt)
+  Commit: 9f30e17d5c5a2d52b7a63bcb2b7b0a3068a36fce
+- Refactor netmiko and scrapli backup services to move the 'last_property_runtime update in the SQL transaction
+  Commit: 2f3071e4bddf26a9c7ffbc56950d819b0328f96f
+- Refactoring of objectify:
+  - Add support for properties in fetch function
+  - Use 'in_' query to convert names to ID in form_postprocessing function
+    Commit: 14664e221fc19829ef6f0e39ed3c41d9becea241
+  - Update fetch to support 'in_' queries (syntax: "property_in=[p1, p2, ...]")
+  - Update objectify to use 'in_' query via fetch_all instead of fetch in a loop
+  - Don't call objectify in Base.update if value is empty
+    Commit: 53a24913d886c0e6ce96aa747802b6c51b30604f
+  - In form MultipleInstanceField validation, use in_ query instead of fetching objects in a loop
+    Commit: 956f796b6e282fe31d446d5022f17858b646d719
+    Performance speedup: edit object ("Save" button in Edit Panel) about 10x faster for a workflow
+    with 1k target devices
+  - Remove all references to objectify and replace them with 'fetch_all' with 'in_' query
+    Commit: c6a070a45816b1146cb9fc3ec3b5930e404c685f
+  - Refactor the update_instance REST endpoint: move controller.objectify in update_instance function and use
+    db.fetch_all with 'in_' query instead of fetch in a loop
+    Commit: fbfdf587b0ed5a2c99246cc85ee87ed517b696de
+- Move the 'runtime' property to the first column of the Run ('Results') table so that runs are always
+  sorted by runtime, even when they have custom names via parameterized form.
+  Commit: b7839556dc70844af5efe3c851e2b69ee41ec0eb
+- Change memory_size from an Integer to a String in database (to avoid integer overflow issue)
+  Commit: 9d4ff3f4e78a2db97c7c2937160a65f91f07737c
+- Rename function in runner.py
+  - get_results: run_job_and_collect_results
+  - compute_devices: compute_run_targets
+  - get_device_result: get_device_result_in_process
+  - device_run: compute_targets_and_collect_results
+- Add new "scan_folder_on_startup" option to make calling "scan_folder" on first app init optional
+  Commit: 0378806a6d42aa1ab6fc349e37dd3389bcf8f722
+- Remove 'get_device_logs' endpoint in rbac.json and in controller code (unused, no longer relevant)
+  Commit: 636cf96ed26dd3ff9fdd411fad27b61e4fc11633
+- Remove 'clear_results' endpoint in rbac.json and in controller code (unused, no longer relevant)
+  Commit: 7e65a387d4b2dffa0423fcffe67a750d6da6717e
+- Update bulk edit mechanism to take the bulk filtering form into account when filtering (previously,
+  bulk edit does not work with relationship filtering, e.g find all services that belong to a workflow
+  then bulk edit filtered services)
+  Commit: ca721c4b4ce9036cd006e72e04e12ddc4096ea17
+- Fix display bug in the Network / Workflow builder when moving a node, then switching to the edge creation
+  mode, then dragging the background of the canvas: the first node is moved instead of the canvas because
+  of a vis.js bug that does not properly clear the internal state of the canvas dragging mechanism
+  Commit: a48091f61033c5e4cd0c98b842e62a5561a1fcc9
+- Make 'get_git_content' and 'scan_folder' optional on app startup with new optional "on_startup" key
+  in settings.json
+  Commit: 4341a0feebed970625e677a85c52a7a0f29d6d7a
+- Allow raising custom 403 alerts in the UI from a plugin or any controller function, instead of the standard
+  'Not Authorized' message
+  Commit: 67cd0ce9e51a1202d9132c3f1d2993bbfced4ba8
+- Changelog Diff Improvements:
+  - Make 'Side by Side' the default visualization mode and increase panel width
+    Commit: c5e0af196abe701e8480e4109edb26c2f7603797
+  - Remove the newline in the content of a changelog before 'Added' and 'Removed' so it can be searched in the changelog
+    table, and add the diff in Changelog.history so that updates to an object relationships can be displayed in the git
+    diff panel of a changelog
+    Commit: ccf6d7a4de6490689e5a094c351e273ccfe150fb
+- Refactoring of "Last Modified" properties:
+  - Add 'Last Modified' and 'Last Modified By' properties to the User, Group and Server classes
+    Commit: 2e8f4196411ade6b37e0c63039af1c0d9879f8ea
+  - Add 'Last Modified' and 'Last Modified By' properties to the Credential and Pool classes and move last modified update in Base.update
+    Commit: 88254128498d50d015070d9eacdf8819c0669999
+  - Add 'Last Modified' and 'Last Modified By' to service and task forms, as well as group, task, user and server tables
+    Commit: 26c547bc025a682c1aad887b3d044adf49fc9b7b
+- Fix edge display (workflow edge in workflow builder and link in network builder) not updated after either name or
+  color is modified bug
+  Commit: 45596d6a40314d57c6aaf6538c4bc6bc61b04877
+- Fix bug in workflow builder: if user selects node A (single left click), then drags node B (without selecting it),
+  then drag node A again, node B is being dragged instead of node A. to fix it, when dragStart is emitted, we check
+  whether the node being dragged is selected or not; if it is not, we select it
+  Commit: 45de53534d0095bf719e5652febdf7d782db0edd
+- Refactor REST Call Service to store payload as string instead of JSON
+  - Convert payload field to StringField instead of DictField
+  - Add a new property "Substitution Type":
+    - String Substitution: the payload is not a valid dict in itself: it will be substituted first, then converted from a
+      string to an actual dictionary with ast.literal_eval before using it as "json" argument
+    - Dict Substitution: the payload is a valid dictionary represented as a string: it is first converted to an actual
+      dictionary with json.loads, then it is substituted (ensures backward-compatiblity)
+    By default, the property is set to String Substitution, but migrated services are using the Dict Substitution option.
+  Key commit: 0dd36637610853ebd6a47058602736d11740a55f
+  - If the 'Subtitution Type' is set to 'Dict Substitution', validate the payload field by converting it to a JSON object
+    with json.loads (replaces the "json_only" option of DictField previously)
+    Commiy: 49874c2282fd443fa6be65321c84309e483bbc74
+  - NOTE: check whether Dict Substitution is truly needed, or if legacy REST services can be
+    made to use string substitution instead; if it works, dict substitution can be removed.
+- Outgoing Edge Mechanism:
+  - Refactor the graph traversal algorithm to allow for edges other than success and failure: the user can define
+    an "outgoing_edge" variable in python (e.g in post-processing) to decide which edge to follow next
+    Commit: b8c37c1bdb0e2b1c0775b475366de7965a2e8f7a
+  - Update the Workflow Builder to support displaying multiple edges between two services
+    Commit: 8efa2d41165b285083544695d5a6bbb44908fbda
+  - Add new regression workflow: "Outgoing Edge Mechanism"
+- Add 'Export as CSV' buttons in Runs table (Results page) and Tasks table (Scheduling page)
+  Commit: 007c96d5a9635f60faa99e15cfbb1d8169dcf529
+- Add 'Copy Search to Clipboard' feature:
+  - Add new button in the top-level menu of a table to copy a link to a table with the current search
+    parameters (either per-column search from the table, or bulk filter including relationships search
+    from the bulk filter form)
+    Commit: 62a790a3b1363ff705ace6a1a382dcfa0c25492a
+  - Don't include columns data (which columns are visiblles and not visibles) in hyperlink to keep hyperlink
+    length small (nginx issue with long links)
+    Commit: b32b9a6a7b2325df134324a70ae39a241efd3ce9
+- Configure the folder name for configuration backup in automation.json 'configuration_backup' / 'folder' instead of
+  hardcoding it
+  Commit: 17ebe08db3a63a55483a81ed6f83f9457baf0200
+- Add 'creation_time' property to Server class, form and table
+  Commit: 672c80df874465cd26dbace8e247573bff3935f0
+- Fix bug where service targets are not copied when duplicating a workflow (e.g a workflow in SxS service targets mode)
+  Commit: 4f4cbf22d937e228412cda61133b6731c9ccdc2f
+- Remove charset utf-8 from redis configuration in settings.json (no longer supported)
+  Commit: 85fb006a5d3a476f88693f8228b2115c9f1d051c
+- When refreshing logs with a redis queue, don't always fetch all logs from redis, only fetch the logs up to start_line
+  as provided by the front-end (fixes the wrong implementation in a6660f78805d9475d68441c0b042d67ce03925e6 and the
+  associated issue 541)
+  Commit: 0a382bf07126fd8a5b3af420e692278761adb636
+- Add new "size" property to Files to see filesize on disk in form and table
+  Commit: 0e0bd259d6267cc1c2a7f0bd618fb14067a985b9
+- Normalize strings in the front-end during form serialization to remove windows and mac line endings so that changelogs
+  don't get created for line ending changes
+  Commit: 480e044ed214102154bac1f6b8db5bb8f7a531bf
+- Add new Rate Limiter Feature:
+  - Limit the number of on-going runs in parallel allowed for each user (configured from
+    settings.json / "rate_limiter" / "runs")
+    Commit: 2db5c5d74c9962a11c202009c8122dcf37c74667
+  - Limit the number of HTTP requests a user can make with configurable fixed windows:
+    - Configured from settings.json / "rate_limiter" / "requests"
+    - A window is defined with the following parameters:
+      - "window_size": duration of the window (in seconds)
+      - "max_requests": maximum number of requests allowed during the window
+      - "rest_api" (bool): the window applies to REST requests only
+- Improve the JS table search code to prevent sending multiple searches in parallel to the server:
+  - Always wait until the on-going search completes
+    Commit: 0a6bbb43555913b5fdd50351d0ee16e456fa4e93
+  - Add refresh settings in settings.json to configure search behavior
+    - "timer": debounce timer (search start X ms after last keystroke)
+    - "notification": send notification in the UI to let the user know that the start started / completed
+    Commit: 0f8e011f71a13e03cff8382aa0b972a6c7b147db
+- Don't create changelog for the 'last_{property}_{timestamp}' properties in Device class to prevent logging
+  too many changes
+  Commit: 395a34dcdb13a10d61fc8131b26eea04828e34f3
+- Refactor Device.serialized and Service.serialized to no longer store the serialized string in the database
+  to avoid data duplication:
+  - Instead use get_properties() in the workflow builder search, and a combination
+  of ilike filter on all string properties in the table search
+  Commit: 0fa9e72200c2347ec0421513488f1621c04daf55
+  - Exclude deferred properties from the serialized search in ilike filter
+    Commit: 06fdb14a12bc1969ebfd0e337f597d75980f09aa
+- Remove start_service_id from Run class (unused, legacy code)
+  Commit: fb75b72be870420fbc9d6388c07f209d5761a6ad
+- New Snippet Mechanism:
+  - Create a new "Snippet" model for the admin users to run custom python snippets for app troubleshooting
+    and maintenance
+  - Convert all the python snippets that were previously stored in the "snippets" folder to Snippet object
+    (stored in the database)
+  - Remove the "Per Type Database Deletion" mechanism from the admin panel and replace it with a snippet
+    called "Database Mass Deletion"
+    Commit: 39081e98a3127fb825bcf6d44c7a437d6518e89d
+- Add one-to-many Server - Session relationship to identify which Server handled which Session, and
+  update the Session (resp. Server) table with a 'Server Name' (resp. 'Sessions') column
+  Commit: 2650f509a77107e7795915ecb408b9f75814b2c9
+- Add new 'delete_if_not_found' option for files so that a file is deleted during the scan folder mechanism
+  if it is not found on disk (configured from settings.json / "files" / "delete_if_not_found" (default: true))
+  Commit: 4290d0e38b3c53563e96952f9503d116ecc8e9f1
+- Remove device connection dict from 'connection_cache' in disconnect function if there are no other connections
+  for that given, otherwise the connection count in 'check_connection_numbers' is wrong
+  Commit: e60f90986732aae7e1943662f1553a05fe75b5c2
+- Fix JS error in console when skipping or unskipping services because of slash in tooltip: replace slash with dash
+  Commit: 0d6cf0fb599f72064f1a46a3bff113ceb8d35945
+- Add new 'polling_interval' setting to configure the polling interval of the file monitoring mechanism with
+  watchdog PollingObserver
+  Commit: 259549c2355cd113e82a7e083baf31165c428ba0
+- Decouple the File Monitoring process with watchdog from the main app:
+  - The File Monitoring process must be started independently from the main app, with the FILE_WATCHER
+    environment variable set to 1
+  - Remove the "monitor_filesystem" variable from settings.json
+  Commit: 080f5ca9b3dcae041a73736199403e7f6ef8222b
+- Don't trigger UI refresh if the tab does not have focus (for table refresh, network builder refresh and
+  workflow builder refresh)
+  Commit: 75939e4c8f98895b3f4a77e8b025a4f38db67391
+- Add new 'result_dict' variable in the results that contain the 'results' before post processing (useful to get 
+  device output in services like netmiko commands in case post-processing is failing because the 'result' variable
+  then becomes the stacktrace) (reported in support slack channel)
+  Commit: 890cf5cc213b87a944d75333ee695820ffcb6f2e
+- Update 'db.fetch_all': rename the first argument from 'model' to 'instance_type' so that it can be used to fetch
+  all devices based on their 'model' property (no more conflict between 'model' first argument and 'model' coming
+  from **kwargs)
+  Commit: 301fdba13afe9f6c526582c03f1a8b221d4eb2a6
+- Update netmiko command service to always return the result as a list if 'Results as List' option is checked,
+  even if there is a single command
+  Commit: fe812c22b2325f2cbec16d100eb508ed2087780d
+- Make Device.ip_address an indexed column
+  Commit: 2ea2722573f58440a18447d79a7250db87cc0cc4
+- Fix bug #568 where a service that fails at compute target device query step is marked as success in the workflow
+  builder (update how 'runtime' and 'success' are stored in the state)
+  Commit: 3fe31e330ab3cb8b28d4a8c146bf26f7ee2d5f81
+- Fix bug #569: when there are already device objects in a query field, return them immediately
+  Commit: 30c458c5f7f6285bd8a9b91ed2f068b988718f49
+- Fix bug where 'last_scheduled_by' remains empty when its not set and the task is scheduled by an admin user
+  Commit: a448f00f4730f9c4a625bcd5294e6db39a028527
+- Fix blank space in bootstrap selectpicker list in the workflow or network builder when there are many entries
+  Commit: 05a2810722ac4d585f4902c94725e8d53c630cb3
+- Fix return carriage bug in 'Device - Iteration' progress label of a service in the workflow builder
+  Commit: f6893cb6f8c150c696236b8ae5e308d57742f3fe
+- Fix bug wrong device result display with specific color: empty vis.js node coming from the top-level workflow bug
+  Commit: 8076b25f2df876d4fde81f4d42c31c676be0f281
+- Add new "allow_redirects" option in REST Call Service
+  Commit: 8dd630c906f44635e503b416cd03cab826c3f89d
+- Refactor "Stop Run" mechanism:
+  - Require "run" RBAC access for a user to be allowed to stop a workflow
+  - Add new "You don't have permission to stop this workflow." alert in the UI
+  Commit: 40589d9e2dffa2b2672ce8415bb8ba20facdc019
+- Update the REST Call Service with new "proxies" option
+  Commit: 6da2c403abe466522968ba0ea38393f8e4d74e08
+- Make "Scan Folder" mechanism available to admin users via REST ("scan_folder" POST endpoint)
+  Commit: 74d9894b807a7984fb667f644517a74af9f7933a
+- Fix bug label and color of the edges not preserved when duplicating a workflow
+  Commit: 075bf450767ee1cdba3aa7919415dd6e9ffa2d12
+- Fix bug freeze after duplicating task with admin user when the task was created by a
+  non-admin user because of RBAC relationships (email "Scheduling issue - causing lockup")
+  Commit: 9b9684adf160607fc002f8983871e8b8bd6635e
+- Add session scope when trying to create worker to avoid race conditions when running many
+  concurrent calls in parallel
+  Commit: ec6e4b3f8dfb312128714436088dadfa24e4c62f
+
+Key Ideas about the refactoring of runner.py and "High Performance":
+- Committing changes one by one takes more time (in particular, every result is created and committed in its
+  own transaction)
+- Every commit during a run makes the SQLAlchemy session expires, along with all objects attached to that session:
+  - The next time an object is used (e.g "device.id", "device.name"), a SQL query is sent to the database
+    under the hood to refetch the object. The number of refetch during a run becomes
+    "number of commit" * "number of objects used"
+  - If multithreading is used, the commit of a shared session will result in "Out of Session" errors and cause
+    the workflow to fail
+  - For a single run with ~ 1000 device targets, we can get up to 1M SQL query to the database
+- Users should not have access to SQLAlchemy objects (e.g device via the substitution mechanism or any of the
+  python field), because they can then modify them in a way that we cannot control ("device.property = ...")
+- Separate the code that pertains to the main run (executed only for the top-level instance of Runner, therefore
+  it makes more sense for it to belong to the Run class) from the code that is executed for every instance of Runner.
+- The threaded SQL ("refetch after fork") causes two major issues:
+  - It limits the number of threads that can be spawned (must be less than currently available pool connections).
+  - Pool connections are not properly released after a thread ends, so a "QueuePool limit reached" exception is
+    raised after multithreading has exhausted all connections. The number of available connections in the SQL
+    connection pool should not determine the number of threads that can be used in multiprocessing mode.
+  - Objects attached to a session expire on commit (default SQLAlchemy setting),but they don't expire on remove,
+    so fetching an object, calling db.session.remove() and accessing object properties should not trigger a refetch.
+    In refetch after fork with "High Performance" enabled, we refetch the devices, then remove the session; everything else
+    is a namespace
+- In "No SQL mode", every transaction that happens after forking should have a clear beginning and end, otherwise the
+  session is never closed until the end of the thread, and a workflow that uses 25 threads will use 25 SQL session
+  until the end of the wokrflow.
+
+Main Commits of the Run Refactoring:
+- Part 1: Generate the workflow topology graph at the beginning and reuse in
+  workflow job function to reduce the number of SQL queries, and remove the neighbors SQL
+  query to get next services in Dijkstra.
+  Commit:
+    - 6adb7b7cded5484a83de497757edcd2bf6313e55
+    - bf4293d49690429ec1b4c74f6289d652fddf89f4
+    - f8182fcda6c2a97db0429173a2d35942834373f5
+    - d55771ef9a515f76ab04df6f248ab78733c6a23c
+  Side-effect: Because the workflow topology is saved when the workflow runs, any changes made
+  afterward (such as removing an edge or a service) won't affect that workflow run.
+- Part 2 (High Performance Mode only): Store results in a dict and create them in the end of run transaction.
+  Only active when the "High Performance" option is checked.
+  Commit: 1dce0d1494fe3c3689d27acd68d8e620b49675b0
+- Part 3 (High Performance Mode only):
+  - Use service namespace instead of service SQL object for Runner.service
+  - Convert all jobs to @staticmethod so it can be called without service SQL object
+  - Add Target Devices and Target Pools as namespaces to the topology store (SxS with Service Targets)
+  - Move the run_service_table update in the end_of_run_cleanup function and use try_commit along with low level SQL to make it faster
+  - In the workflow, fetch the service with db.fetch or use the service namespace depending on the value of "High Performance"
+  Commit: c4110615e6c36832d183ad0edf37a595cbc39ea6
+- Part 4:
+  - All Services are Namespaces
+  - All Devices are SQLAlchemy objects
+  Commit: 71bf1a7b7a226eb48aa015cc07ed3deff7978b1e
+- Part 5:
+  - Refactor "Compute Target Pools" mechanism: pools are updated before the main run starts for all services "High Performance"
+  - Make commit optional and False by default in compute_pool
+  Commit: 1e47b0aef2587055e02f849c45f96a294aff62e9
+- Part 6: Use itertools.batched for creating results in batch with bulk insert at the end of a run
+  Configured via database.json > "transactions" > "batch_size" (default: 1000)
+  Commit: 3fe07068a483175b02a5c16b3bd5663f84d359e6
+- Part 7: Remove task from the argument of Runner (no longer used)
+  Commit: 99bbad31b0791a71cf61a223c2facfab600572cf
+- Part 8 (High Performance Mode only): Create all reports after the main run in the Run class in
+  "High Performance" mode
+  Commit: 24bd32010b1c94f12680dda13bbf481430fb3e09
+- Part 9 (High Performance Mode only): Implement in-memory get transient result function and convert devices to
+  namespace in topology cache
+  Commit: 1b403f8b2f93e0ab37baea5738b36ad9493612f1
+- Part 10: Move the initialization of the main run cache in the Run class
+  Commit: eb66e66689e8e39ab523575e79badb379b3ed370
+- Part 11 (High Performance Mode only): Update Runner.log and env.log to not create a changelog object with factory
+  during a run if the run is in no SQL mode (logs are stored in memory in vs.service_changelog)
+  Commit: c2bb5b7698c63a938a020bd7b6f6302486f2035d
+- Part 12: Move 'close_remaining_connections' function in the Run class (it is executed after the
+  main run has done running)
+  Commit: 3ba8f7ee6c5c7cb874e80c7d28b6f253605ebc46
+- Part 13: Close the threaded session used to refetch after fork immediately after refetching to
+  avoid blocking the session until the end of the thread
+  Commit: 8d62843fb91525a7a4569b42d2e5382029859d4f
+- Part 14 (High Performance Mode only): In no SQL mode, pass a namespace of the Run object instead of the Run itself,
+  and remove the placeholder argument
+  Commit: 6fce929592b61e6314b437b4de4566ea33d9ea3e
+- Part 15 (High Performance Mode only): Don't refetch after fork in "High Performance" mode
+  Commit: f4b1f8e7f1b78bbcb81b35c81b31d34fb2af9be0
+- Part 16:
+  - (High Performance Mode only) Don't pass reference to restart_run as Runner arg in no SQL mode
+  - Remove references to restart_run in Workflow.job
+  - (High Performance Mode only) Compute targets at the end of run in no SQL mode
+  Commit: 54e548559fa8722580c934858547a852b237ccda
+- Part 17: Call db.session.remove at the end of Controller.run to release the SQLAlchemy connection
+  to the connection pool
+  Commit: 265dee6193b907a7f85f361916379a6eede5a826
+- Part 18 (no SQL only, major issue): Add db.session.remove() after calling db.get_credential to close the SQLAconnection
+  after fetching the credential object in a thread, and prevent leaking SQLAlchemy connections when the connection
+  setup fails (only applicable if multiprocessing is enabled)
+  Commit: 0522ca6131d6679f827b6a8ff18b536960ec1766
+- Part 19 (High Performance Mode only): Fetch device with selectinload gateways to prevent refetch in connection functions 
+  Commit: e04d7a334c135cd9a73e65c49c6421e4429481e5
+- Part 20 (High Performance Mode only): Refactor the "compute devices" mechanism and "get_target_property" so that targets are
+  computed in the Run class whenever possible (e.g parameterized form, restart run, etc)
+  Commit: 5929b7ed82aa0c4f56c08a64182c6040319e8e5b
+- Part 21: Move all the global variables function in their own class, parent class of Runner
+  Commit: 80684829483cdb8157993087d80b2ab960195201
+- Part 22: Move the 'space_deleter' function to the Variable Store
+  Commit: 0f124252bb253de4d826162fd3610233db745741
+- Part 23: Move Runner._initialize in the Run class and refactor the aborted run logs and results creation process
+  Commit: dec10325858094969cefb6e1931987729ac04aac
+- Part 24: Fix run_services association and subsequent creation of subservice logs in case a run is interrupted by app reload
+  Commit: b851cd930490cf589520edc70135256af8f4399d
+- Part 25: Store transient results in the redis queue if there is one, and recreate all results from the redis queue
+  (even if the run is interrupted by application reload)
+  Commit: a153abc049f28e998bf7a40648c85c5ce23bea46
+- Part 26: Remove 'trigger' property from the results
+  Commit: f0396da7ad4a64bc53dfb0bf955c4c355773e30f
+- Part 27: return results in 'start_run' instead of storing them in 'self.results' and add the device
+  results to the main results in the Run class (in case the trigger is REST API and mode is no SQL)
+  Commit: b559794d79e9d3599631f2b8a409a90d78911f30
+- Part 28: in 'High Performance' mode, increase the maximum number of threads allowed to 'max_process' * 10
+  Commit: f26ee4f41310de0d488f548afb8476efe6674f0c
+- Part 29: (High Performance Mode only) Refactor 'compute_devices_from_query':
+  - Use a 'in_' query to fetch the devices, which reduces the number of SQL queries made during the run
+    Commit: 4840ab57130c7a189be846da83cb210991fdf622
+  - Add db.session_scope context manager to release the SQL session when multiprocessing is enabled
+    Commit: 27f4652e12427dfb9409e7e7bc71cd06e8240e8b
+- Part 30: Refactor netmiko and scrapli backup services to handle all SQL operations in a single function, and remove the
+  session at the end if in high performance and in a thread
+  Commit: 5cb6f847650dfb00173e69ee674ecf
+- Part 31: (High Performance Mode only) In the Ansible Playbook Service, refetch the device object before
+  calling 'get_properties', otherwise we get out of session exceptions because get_properties causes SQLAlchemy
+  to trigger SQL queries to get some of the device properties
+  Commit: 293e09d11ab1eabc831aca40d4d03ae8f5c94f71
+- Part 32: Update to the session_scope context manager:
+  - Call session.remove() instead of session.close() (because db.session is a scoped_session)
+    Commit: 659cbc3302f769e425fd103aff3e3877669d8e38
+  - Use session_scope in runner code to remove session after fetch
+    Commit: b2e827b832c0470527f0f66ebe188995fe1727fd
+  - Update 'get_data' to return data as a namespace instead of a SQL alchemy object, and add session_scope
+    context_manager to remove SQLAlchemy session in no SQL mode for 'get_data' and 'get_credential'
+    global functions
+    Commit: 82f5add1f5e1a465561857a1ab6ea218b1bbb00e
+  - Refactor 'get_result' to use db.session_scope to remove the SQL session after fetching the results
+    in no SQL mode
+    Commit: 90e5405e465da2f9e3b8a12fdeb8ac29e40ce828
+  - Update 'get_secret' to use a session_scope to fetch the secret object
+    Commit: 9fa66c3842d55ca1c0ff0235ebb399d1f46164f9
+  - Add session_scope context_manager in internal_function (factory, fetch, fetch_all and delete) in
+    no SQL mode
+    Commit: 737bfb4ecb3297c1113d23440341e39e8bd07383
+
+Related Commits:
+- Cache the 'global_variables' dict once at the beginning of a run to avoid recomputing it every
+  time the 'global_variables' function is called.
+  Commit:
+    - fd356528ca691e263be0ced18cdf5038a237d752
+    - 2f2786f38eb29ba75ac9e2d4eb616c0c7aeef2b4
+- Don't compute "target_devices" if it has already been defined as an argument of the Runner class
+  Commit: d46230319af9e3a76313584a93e59ac8835efedb
+- Replace / rename "target_devices" with "run_targets" in Runner to prevent confusion between
+  run.service.target_devices and run.target_devices.
+  Commit: 2d7cafc22f08f2d93b383888a6c47c0ec7dfcdb0
+- Move all functions related to the main run in the Run class (end of run transaction,
+  end of run cleanup, etc)
+  Commit: 6b0c37bcfc2f1ee3c99006331c9a3de9e5885b7f
+- Remove duplicate progress function in Runner class and use Persistent ID to retrieve device progress
+  Commit: 4ac0d4ce9f0f2113e1a5dfd8d3f242f70c520718
+
+Benchmark (comparison last release versus new release) needed for:
+- Workflow runs duration
+  - Workflow with 5 empty python snippet services, 10k target devices
+  - Configuration Backup Workflow:
+    - Compare performance new and last release with same number of threads
+    - Try to raise the number of threads to 300, 500
+- Update pool:
+  - Update 1 pool with 50k devices
+  - Update all pools (the pools must be the same in last release and new release)
+- Workflow Duplication: try to duplicate large workflows
+- JSON Import Export Mechanism:
+  - Compare speed of YAML versus JSON, for both Import and Export
+  - Compare Speed of JSON Import with Structured Data versus Bytestring Data
+- Compare Speed to display Changelog panel:
+  - In the Changelog page in the menu (display ALL changelogs)
+  - In every table in the application (display changelogs related to a specific object):
+    need to test every table to make sure no index is missing
+  - In the Workflow Builder (resp. Network Builder):
+    - For a specific service (resp. device) from the RC menu (Display / Changelogs)
+    - For the workflow (resp. network) in the top-level menu: the changelog of a workflow (resp. network)
+      should be the union of all services (resp. devices) changelogs, including the changelogs in
+      subworkflows (resp. subnetworks)
+- Compare Speed to display the Dashboard, specifically the following endpoints:
+  - "count_models" (called when loading the dashboard page)
+  - "counters" (called when changing entry in one of the property list in the dashboard)
+- Compare the "Add Services to Workflow" speed ("get_workflow_services" endpoint), both with and without an active search
+- Compare speed to load the Results table (including the 'All Results' panel)
+- Compare speed of "run_service" endpoint (time between click on "Run" button and the run actually starting)
+- Compare speed of calls to "save_positions" endpoint (e.g triggered when moving a service in the Workflow Builder)
+- Compare speed of the "Add Instances in Bulk" mechanism (when adding many objects, for example 10k devices to a pool)
+- Compare speed of "get_service_state" endpoint (called every few seconds to refresh Workflow Builder) on large workflows:
+  - In both "Normal Display" and "Runtime Display"
+  - Both with Workflow Tree open and closed
+- Compare Speed for File Mechanism:
+  - File Table Display (calls to "filtering/file"): both in "Hierarchical" and "Flat" display
+  - Scan Folder mechanism
+- Compare Speed of Workflow Duplication (for workflows of different sizes)
+- Compare Speed of Service / Workflow Editing ("update/{service_type}" endpoint)
+- Compare Speed of Log Refresh when running a workflow (calls to "get_service_logs" endpoint)
+
+Previous Release:
+- Workflow with 5 empty python snippet services, 1k target devices
+  - DxD: 60s
+  - SxS WT: 2s
+- Update a pool with 10k devices: 190ms / 50k devices: 850ms
+- Add 10k devices to a manually defined pool (Add instances in Bulk): 3.9s
+- Calls to "save_positions" endpoint in "Large Workflow": 30ms
+- Time of Workflow Duplication for "Large Workflow": 370ms
+- Large Workflow (30 python snippet) running on 100 devices:
+  - Query Count: 26523
+  - Duration: 18s
+
+New Release:
+- Workflow with 5 empty python snippet services, 1k target devices
+  - DxD: (Normal Mode) 34s - (High Performance Mode) 750ms
+  - SxS WT: (Normal Mode) 2s - (High Performance Mode) 600ms
+- Update a pool with 10k devices: 110ms / 50k devices: 250ms
+- Add 10k devices to a manually defined pool (Add instances in Bulk): 2.2s
+- Calls to "save_positions" endpoint in "Large Workflow": 20ms
+- Time of Workflow Duplication for "Large Workflow": 140ms
+- Large Workflow (30 python snippet) running on 100 devices:
+  - Normal Mode:
+    - Query Count: 23293
+    - Duration: 9s
+  - High Performance Mode:
+    - Query Count: 184
+    - Duration: 120ms
+
+Migration:
+- Run migration script to:
+  - Convert all devices from type "device" to "generic_device"
+  - Convert all links from type "link" to "generic_link"
+  - Convert all files from type "file" to "generic_file"
+- All custom services must be updated:
+  - The job function can become either a classmethod if the function need to use class attributes (see
+    Ansible Playbook Service), or a staticmethod (see any other services)
+  - All custom services that make database update (e.g using db.fetch, db.factory, device.property = value, etc)
+    must be updated to use the session_scope so that the SQLAlchemy session is removed at the end of the
+    transaction
+- All REST Call Services must be updated:
+  - The "payload" property, previously stored as JSON, must be converted to a string with json.dumps
+  - The new "substitution_type" must be set to "dict"
+- The "migrate" endpoint has been modified with a new mandatory "import_type" argument. All REST calls to "migrate"
+  must be updated accordingly.
+- Performance optimization of user code in workflows: the new "properties" keyword argument must be used whenever
+  "fetch_all" (or "fetch(all_matches=True)") is called and only a subset of properties are needed, so that the workflow
+  does not fetch the SQLAlchemy objects
+- Update for Netmiko Commands Services: if a service uses a single command, and "Results as list" option is checked, the
+  results will now be returned as a list. To preserve backward compatibility, the option must be uncheckd (set to False) in
+  the migration files for all netmiko services with a single command, the "Results as list" set to True.
+  Note: Update migration script to trim empty lines before setting results_as_list to false
+  Commit: c50cee1f1f67b69d8306d6b6d33b377da5f4f350
+- In automation.json, change "use_task_queue" to "task_queue" (false or "dramatiq")
+
+Documentation Update:
+- Removed extra "Admin Only" property for Credentials (meant to override the "Access Control" admin only ?) If this "Admin Only" property still exists outside of eNMS, it must be added as a deviation.
+
+Tests:
+- Test everything about the "Add services to workflow" mechanism (everything has changed, especially the
+  Search mechanism)
+- Check that all services have a unique persistent ID across all services (mandatory now that results display
+  rely on persistent ID instead of ID previously)
+- Test the Ansible Playbook Service (exit codes no longer available directly)
+- Test Workflow with a superworkflow
+- Test running services from the REST API with both devices and pools
+- Test that all device connections are properly closed at the end of a run
+- Test Parameterized Runs (with and without custom targets)
+- Test Restart Run, specifically that new runs can fetch the results from old runs
+- Test the "Update Target Pools" mechanism
+- Test that the get_result function work like it used to with all possible combinations of parameters
+  (with device, without device, with scoped name and full name for the service, with "all_matches" set
+  to True and False) regardless of the value of "High Performance"
+  The output of "get_result" should be the same regardless of the value of "High Performance"
+- Test that the "Report" mechanism works correctly regardless of the value of "High Performance"
+- Test the Restart From mechanism, with all possible target origins, with both "High Performance" enabled and disabled
+- Test the Ansible Playbook Service
+- Test the "update_instance" REST endpoint, specifically the update of a relationship by passing it the names of the
+  related model (for example, update the target devices of a service)
+- Test that the number of threads allowed depends on whether High Performance is checked or not (* 10)
+- Test that the display of an edge in the workflow builder and a link in the network builder is properly updated after
+  editing the edge (name or color)
+- Test that all relevant forms and tables have the "Last Modified", "Last Modified By" and "Creation Time" properties
+- Test that the Netmiko services that uses to have a single line command and "Results as list" checked are still working
+  and the result is still returned as a string (because the option as unchecked during migration)
+- Tests what happens when dramatiq triggers the same jobs twice (in previous release, logs and results were disappearing because created twice)
+
+Notes:
+- Everything in the "Tests" section should be tested with both "High Performance" checked and unchecked
+- The "High Performance" flag comes from the superworkflow if there is one.
+- Modifying a workflow (updating services, removing or adding edges, etc) will no longer affect on-going runs as the topology is saved before the run begins
+- In "High Performance" mode, results cannot be read from the UI until the workflow has completed.
+- It is no longer possible to set device attribute from a python snippet or python code by doing
+  "device.property = value". The factory function must be used instead:
+  "factory("device", name=device.name, property=value)"
+- In "High Performance" mode, the "fetch" global function in the workflow builder returns namespaces instead of objects. It can no longer be used to fetch associated objects (e.g "pool.devices")
+
+Version 5.2.0: Data Store and Various Improvements
+--------------------------------------------------
+
+- Clean up table filters in the "Files" table when entering a folder (PR)
+- Add search mechanism to the session table
+  - Make Device.table_properties use the table_properties function from Base class
+  - Add new "Session" column to the session table: allows searching through session content
+    just like in the Configuration table
+  - Add slider to the Session table to select number of lines of context to display
+- Store the positions of services in a workflow in the workflow itself, instead of storing
+  them at service level. Motivation for the change
+  - When exporting a workflow, we are exporting start and end services, including the positions
+  of the start and end services in all workflows (not needed)
+  - When importing a workflow, we need to merge the positions dictionary of Start and End services
+  being imported into the existing ones
+- Store the positions of network nodes at network level
+- Make workflow link persistent across releases (with a new property "persistent_id" different
+  from the database ID and exported in the migration files / generated with urlsafe_b64encode
+  so the persistent ID can be safely used in URL)
+- Add options for all fields accepting python code to automatically format the code with black.
+  Move black to requirements.txt (from requirements_dev.txt)
+- Remove "refetch_after_process_fork" option (always refetch after process fork)
+- Fix bug when entering enter when searching a property like server_name on a table (e.g worker table)
+- Display service color in Workflow Builder and Workflow Tree based on "color" key in the device
+  results if it exists
+- Workflow Tree updates:
+  - Add yellow color to services that match a workflow search in the workflow tree
+  - In the workflow search panel, add an option to include all services in the workflow tree:
+    - When the option is disabled, services that do not match are filtered out.
+    - When the option is enabled, services that do match are highlighted and services
+    that don't are displayed normally.
+  - In Tree Search, add support for regular expression search
+  - Update 'serialized' property to be case sensitive for network and workflow search, and remove the
+    relationships from serialized
+- When device filtering is enabled, limit results displayed in result table to the filtered device
+  (note: device filtering is not compatible with the "Only save failed results" option)
+- Fix table form filtering bug: invert checkbox constraint in table filtering not enforced previously
+- Upgrade JQuery to the latest version v3.7.1
+- Select node in workflow builder from tree left-click selection and allow for multiple selection
+  via the tree
+- Use full name instead of scoped name in run table
+- Add 'name' property to changelog to remove special case in to_dict from bug fix in
+  bcdb8cb051d8b0d131a2826da093e3643203e6dd (error 500 when returning an object from the REST API)
+  Commit: 1fe9217b0deb4f23ff6546af6d1a290ad44ab10c
+- When double-clicking on a service in another workflow in the workflow tree, introduce a 200ms delay
+  before zooming on a service in that workflow otherwise the zoom does not occur.
+- Fix sqlalchemy warnings about implicitly combining columns ("SAWarning: Implicitly combining column
+  device.icon with column network.icon" and same warning for admin_only)
+  (email: "gunicorn startup messages")
+- Remove "network" from the rbac.json "rbac_models" and make it inherit its RBAC properties from device
+- Make the icon default to "network" in the Network form instead of "router"
+- Reinstate the log lines in the multithreaded disconnect function at the end of a run. Cache the log_level
+  to prevent PendingRollbackError errors (see slack thread)
+  Commit: 2b624a314d112388b6974e1cd71e8a972366de18
+- Update eslint (and package.json) to work with the latest node.js / eslint version
+- Rotate all fa-sitemap icons to 270 degrees with "fa-rotate-270" class, including in the workflow tree
+  and the "Add Services" panel
+- Refactor credentials to use the RBAC 'Use' section instead of the old 'User Groups'
+  - For consistency with the way RBAC work in general (credentials didn't have RBAC before as they were
+    "admin only")
+  - For consistency with secrets (being allowed to use a secret is controlled via RBAC 'Use')
+- Update select2 library to v4.1.0 (the 'Select {model}s' text disappeared after jquery update)
+- During workflow duplication, commit once after creating all edges instead of commiting after each
+  edge creation to speed up process
+  Commit: dcd119a9e7c19ceb2bd786fd8e25419cdfeceaea
+- Update to the logs window:
+  - Fix wrong spacing after 'Gathering logs for' log in logs window when running a service
+    Commit: d847bb39f3f33be684f83f7b7e13215a01d196b3
+  - Add a new search feature in the logs window to filter the displayed logs
+  - Move logs and report control panel in header so that it stays visible at all times (e.g for searching
+  and switching runtimes while autoscroll to bottom is on)
+    Commit: fcd6af69afa8ce030ecf1b2a2d639db5f15a5295
+  - Add a new 'Autoscroll' feature to the logs window, allowing users to disable automatic scrolling to
+  the bottom while logs refresh (to read the logs without being pulled back to the end)
+- Fix bug where the in-workflow "fetch" function in runner.py could not work when filtering by
+  model because one of the mandatory variable was named model (conflict with model from kwargs)
+  Commit: 40be7555172b6da9db2be294cef548d8e28a1ae8
+- Update the service neighbors query used in the workflow traversal algorithm to use a SQL query to
+  get workflow edges instead of a python generator to speed up workflow execution in DxD mode
+  Commit: c79fdbe4f8f5ab84e5944006017cad7e66b23854
+- Prevent run.get_state from getting called twice when displaying the workflow tree while a workflow
+  is running
+  Commit: a4a31cca7a4e87bcf60c74ca9189a956b7385bea
+- Don't export soft_deleted relationship objects via "to_dict" to prevent migration import errors
+  Commit: fef814960881b48841e4928c5032427769cc8af0
+- Force global_delay_factor to 0.1 in update_netmiko_connection function when fast CLI is enabled
+  Commit: 03323f1fb46c9d6b8ce1337da552f4f03ed3d7d4
+- Update the bulk export feature to export services to the user's browser as a .tgz archive instead
+  of exporting them to the server
+- Fix refresh dropdown bug in the workflow builder (an active search was only working up until the
+  next refresh because we empty and rebuild the dropdown list at each refresh)
+  Commit: bcb6bb77e55f938f15b8751853f00158c5849847
+- Fast CLI update:
+  - Remove fast_cli from all Netmiko services and from the UI
+  - Pass fast_cli=False to Netmiko ConnectHandler object
+  - Have Global Delay Factor default to 0.1 (for new services)
+- Add "version" property in service table (via properties.json)
+- Make "controller.filtering" function available in the workflow builder global variables
+  - Typical usage: "filtering("device", constraints={"model": "Cisco"})"
+  - Allow filtering to be used in the Device Query field to define the targets of a service / workflow
+  - Add regression test workflow "Functions: filtering"
+- Profiling mechanism:
+  - Monitor the performances of each function of the application, specifically:
+    - "count": how many times a function has been called
+    - "average_time": how long does the function take to execute on average
+    - "combined_time": total time spent running the function
+  - Add a troubleshooting snippet to display the results for each function, with the ability to filter
+    per type (count, average time, or combined time), class (e.g Controller, Environment, Runner, etc)
+    and to limit the number of results.
+  - Add a troubleshooting snippet to empty the profiling data
+  - Add mechanism in admin panel to download the profiling data as .json file
+- Fix bug 'Object of type datetime is not JSON serializable' when upadting a local file tracked by the
+  "monitor_filesystem" function
+  Commit: 3e96705dde1869179f0c3e1997949d13479008e7
+- Always consider min refresh rate value when refreshing workflow (previously hardcoded to 5000 in a few
+  places such as refreshService)
+  Commit: f27898da8fbf25a2cbbb5c9bceb6e68e39b3b5bb
+- Fix prettier linting configuration and lint all files with prettier
+  Commit: 073c63625995701825d81d97d76aa305bcfa4f9a
+- Improve how errors in user code are returned in workflow logs and results
+  - In Python Snippet Services: Commit 1215ca90f3cbf2587c8312bf9cb680ef8cf2919f
+  - In substitions / eval (python field and "{{ }}" queries): Commit ece3355fd6ebbf08b36547aee6cba72517c820d5
+- Set rbac to None in workflow builder "get_all_results" to bypass rbac (PR)
+- Add support for Duo Authentication
+  - Configuration in settings.json > "authentication" > "duo" (client ID, host, redirect URI)
+  - Secret configured via "DUO_SECRET" environment variable
+- Add 'Runs' link to run relation table in task table
+- Add RBAC to sessions
+  - Previously "admin only", sessions are now RBAC controlled ("read" access only)
+  - By default, the user initiating a session is set as owner of the session object, and the "Read"
+    access field is left empty (no groups)
+  - Add an edit button to the session panel to edit RBAC (the other fields are "read only")
+- Fix NProgress bug ("done()" called before "start()": loading never ends)
+  Commit: 65c0972610f39871f06c5707b540669468bd0844
+- Add Jinja2 support to the Netmiko Configuration Service
+  - Commit: 4caed99b575aa35b06e7c2e0a6e0ee096e7db81c
+  - Add regression workflow "(R) Netmiko Configuration with Jinja2 template"
+- Make 'load_known_host_keys' a property in automation.json instead of a service property
+  to remove one of the deviations
+  - Property can be configured in automation.json > "file_transfer" > "load_known_host_keys" (default: false)
+  - Commit: 577f16d1830c7dba1c94e4f3285faa74d0319051
+- Improve deletion message in builder to distinguish services/devices and labels
+  Commit: 06b4c8057da254a30f55685fcb03fd4e8fff62a4
+- Update "Copy to Clipboard" mechanism in File Table to copy relative path instead of full path
+  Commit: 152a1bcf7dcab8f3a12c0702b9c33677efef7217
+- Add substitution mechanism to the Git Service 'commit_message' property
+  Commit: 43367981162d2719bb4dc4fadc19fc6ea5342b0e
+- Make service column in task table a hyperlink to the workflow builder (when applicable)
+- Replace 'n°' with '#' for numbering fetch, commit, and retry operations
+- Prevent saving the pool form if it contains an invalid regex
+  Commit: 37d5cb64738dffd5d698ba4f8a07e84e262d2a51
+- Add new "creation_time" property for the following models: device, link, pool, service, user, credential,
+  file, secret, group, task
+  Commit: 6a750a008e28b5dae68da04fbe549a771c0ac8a5
+- Add new "notification" key in automation.json to configure which notification mechanisms
+  are available in Step 4 of the service panel, as well as in the drop-down list of service
+  types in the Workflow Builder and Service Table
+  Commit: 86a5f40dafb4bc08fe8a171ff4f8b236506a13b3
+- Enable the "run_service" endpoint in the REST API to support using Persistent ID instead of name
+  so that REST calls don't break if the service name changes.
+  Commit: 8260e0954647c8283b335bdf9dcfb4b2c6e5f91c
+- Prevent a user from setting a workflow to be its own superworkflow.
+  Commit: f44001a8642f59e2085ce440204a65d435b2ab4a
+- Remove hyperlink for single object select list (panel would pop up unexpectedly)
+  Commit: a8fa8adb875fbdaf373f48bccdee078d81e1f5b3
+- In the workflow builder drop-down list of runtimes:
+  - Update the refresh mechanism so that an active search in the runtime drop down list
+    is still considered after refresh
+  - Restore the scroll positition is maintained after triggering the active search
+    with trigger('input')
+  Commit: 9f29eab326616b1c63c27e3c9604bcd3f29a393e
+- Add "runtime" (the parent runtime) to the list of available variables when running
+  a workflow ("global_variables" function)
+  Commit: 25435861f72ff7f6e7259daacd8ba80a8f47c311
+- Make Service Logs and Service Reports available via the REST API
+  Commit: dc7d3195b85a03d92532c4844cac9f04a2bce169
+- Add new "Show User Logs" option in the service panel (step 1) to only display the logs that
+  are user defined (logs that come from the global "log" function available in python fields),
+  regardless of their actual log level
+- Don't update the "Last Scheduled By" property of a task when it is paused and resumed by an admin
+  user (e.g., for maintenance):
+    - Prevent the original scheduler's permissions from being affected
+    - The changelog should still display that the task was paused and resumed by the admin user
+  Commit: 84b3cc6de47253310704d0c2db6f460a510ad72e
+- Add information about the sending server in all notifications to quickly identify
+  which server is sending the notification (IP address, name, URL, and role)
+  Commit: 9c01f4eb0f19cdc7684225d9a3c1579aefea0e2b
+- Fix duplicate 'STARTING' / 'FINISHED' logs in workflow logs when multiprocessing is enabled
+  Commit: 83fdd0c128a3488b7845d474bd609bd004fa7adb
+- Update to the changelog table
+  - Make 'author' and 'severity' properties orderable (3436cc545594b4e9379219cf5651170a8acff892)
+  - Add new 'Revertible' boolean property (af0886d0df5f1c807b353d4f191d8ee9faeddeac)
+  - Add git diff panel for changelog that describes an object update (with non-empty "history" dict)
+- Display the network/workflow tree by default if it was previously activated.
+  The setting is stored in the database and used to automatically show the tree in the HTML template.
+  Commit: 0513847d23e9bfd31fbfd22cdfe9137faf5de6a0
+- Added new Data Store feature:
+  - A new "Data Store" page in the inventory menu.
+  - "Data" is a new model for storing various types of information (e.g., text, secret values,
+    JSON objects, - spreadsheets, and DCIM/IPAM data like IP addresses, VLANs, cables, etc.).
+  - A "secret," as defined in the previous version, is now a subclass of Data. Secrets must
+    be migrated using the data.yml migration file (secret.yml no longer exists).
+  - New models can be added as needed: to add a model, create a subclass of Data with custom properties.
+    The Python file should be placed in the "models/datastore" folder, and the associated UI table
+    should be defined in JavaScript within the "static/datastore" folder.
+  - A "Store" is a model designed to contain data. Each store has a "data_type" property that specifies
+    the type of data it holds (e.g., a store for IP addresses will only contain IP addresses).
+  - A "Store" is also a subclass of Data and can contain other stores (if its data_type is set to
+    "store"), similar to how a folder can contain subfolders.
+  - The Data Type of a Store can only be selected at creation time. The Data Type of an existing Store
+    is set to read-only in the form.
+  - The Store of a Data can be modified, but only to a Store of the same Data Type (for example, a
+    data of type "A" can only have a store whose Data Type is set to "A")
+  - Navigating the data store is similar to navigating files: the current path of stores is displayed
+    as a sequence of hyperlinks, each linking to a store in the path.
+  - Add new persistent ID to all data types so that data can be seamlessly referenced within
+    workflows across releases. The persistent ID can be copied to the clipboard using a button
+    in the data store table.
+  - Add new JSON object type, with a "value" property to store the JSON object:
+    - the JSON object can be edited from the edit panel
+    - the JSON object can be downloaded as a JSON file from the JSON table
+  - Implement "Get Next in Sequence" mechanism:
+      - Add a new "layout" keyword argument to customize the layout of a field, such as adding a button
+        to the left or right side of a specific field in the edit panel.
+      - Provide an example using the VLAN class: add a button next to the "VLAN ID" field in the form that
+        auto-fills the field with the next available VLAN ID when clicked.
+  - Implement various models to demonstrate different implementations:
+    - VLAN model to show a "Get Next in Sequence" mechanism.
+    - Port model to show a SQL relationship with an internal eNMS model ("Device").
+    - Cable model to show SQL relationships with a custom Datastore model ("Port").
+  - Add "get_data" global function in the workflow builder to retrieve a data in python, either
+    by its path or by its persistent ID
+- Update to the REST API "update" POST endoint: commit and call the post_update function after the 
+  instances have been created or updated (e.g compute pool, update service / file / datastore path, etc)
+  Commit: aa9d56c25b5b411195e12da70ffbc637a3765ff2
+- Fix worker deletion mechanism (kill process and log message in case or error)
+  Commit: e6bf0506aea88f3a5c43bc00fdd59bae2decfbfb
+- Add new 'admin_only_bypass' mechanism in rbac.json and rbac_filter to ignore 'admin_only' flag
+  for specific properties and models (mainly Credential 'use' section)
+  Commit: 3cd8743e2a02646ccda276c34ad49b185a08f42a
+- Add 'last_success' property for the configuration backup services
+
+Migration
+- Run the script to collect all services position and store them in workflows, and do the same for
+  nodes and networks
+- Run the script to convert credential "groups" property into "rbac_use" (can be done manually by renaming
+  "groups" -> "rbac_use" in credential.yaml too)
+- Migrate secrets from secret.yaml to data.yaml
 
 Version 5.1.0: Changelog & Workflow Tree
 ----------------------------------------
@@ -16,7 +945,7 @@ Version 5.1.0: Changelog & Workflow Tree
     - Soft Deletion for non-shared services and edges in Workflow Builder
   - Add changelog support in workflow builder.
     - The changelog of a workflow includes
-      - the changes to the worklfow itself
+      - the changes to the workflow itself
       - the changes to any service in that workflow (including services in subworkflows, etc)
       - adding, editing and deleting labels
       - adding and removing services and workflow edges
@@ -28,7 +957,7 @@ Version 5.1.0: Changelog & Workflow Tree
       When a selection is active, the changelog entry will only display changelogs for
       the subset of services that are selected (similar to skip mechanism).
   - Add changelog button to all tables to display:
-    - all changelogs about a specific type of object in table controls (e.g all device changelogs)
+    - all changelogs about a specific type of object in table controls (e.g. all device changelogs)
     - all changes about a specific object via link to "Changelog" relation table in every row
   - Add changelog support in network builder
   - Add script (snippet) to permanently delete all soft-deleted edges and services
@@ -136,9 +1065,10 @@ Version 5.1.0: Changelog & Workflow Tree
   - The results of a service in Dry Run mode contains the properties of the service that
   are affected by the substitution mechanism
   - The global variables contain a new "dry_run" property in order to determine in python
-  (e.g preprocessing, post-processing, python snippet service) whether the service is
+  (e.g. preprocessing, post-processing, python snippet service) whether the service is
   currently running in Dry Run mode or not
-  - A workflow also has a "Dry Run" property: when turned on, everything inside the workflow (including subworkflows) will be considered as running in dry run mode
+  - A workflow also has a "Dry Run" property: when turned on, everything inside the workflow
+    (including subworkflows) will be considered as running in dry run mode
   - Add support for using "Dry Run" mode from the parameterized form
   - Add special color for services in "Dry Run" mode:
     - In "Normal display": whether the "Dry Run" mode is enabled for a service
@@ -151,10 +1081,10 @@ Version 5.1.0: Changelog & Workflow Tree
 - Add new freeform "version" property in the service class and form (edit panel step 1)
 - Unpin ruamel version:
   - Add quotes as "default_style"
-  - Add custom representer to fix bug where line are broken inside a return carriage (\r...\n): all strings that contain a line break are now
-    treated as a literal block.
+  - Add custom representer to fix bug where line are broken inside a return carriage (\r...\n): all strings
+    that contain a line break are now treated as a literal block.
   - Preserve order in object properties (OrderedDict) and relationships (sorted)
-  - Forbid references (e.g &id000) in yaml files with representer.ignore_aliases to avoid change of id number
+  - Forbid references (e.g. &id000) in yaml files with representer.ignore_aliases to avoid change of id number
   - Refactor get_yaml_instance to use the "typ='safe'" keyword because of database corruption issue by ruamel
     when it isn't used
   - Add a representer for tuples because service positions can be stored in the database as a tuple
@@ -193,7 +1123,7 @@ Version 5.1.0: Changelog & Workflow Tree
   - If that variable is not set, the app looks for the "servers" key in
     settings.json > "authentication" > "methods" > "ldap". Servers is a dict that associates LDAP server
     IP/URL to its keyword parameters (see ldap3 python libraries)
-- Fix bug that prevented uploading files to a folder when the folder name starts with a number (e.g "1test")
+- Fix bug that prevented uploading files to a folder when the folder name starts with a number (e.g. "1test")
 - Use "class" key in handler config in logging.json to have the same syntax regardless of whether
   "use_multiprocessing_handlers" is set to true or false
 - Allow custom subject for emails (in email notification - step 4). If the subject is left empty, it defaults
@@ -238,7 +1168,7 @@ Version 5.1.0: Changelog & Workflow Tree
 - Add new "memory_size" property for a run class that shows how much memory a run takes in database.
   This number is the sum of the size (obtained via "getsizeof") of all results and all logs saved to
   the database during the run
-- Remove "Save" button in server panel when accesed from left side menu lower bar
+- Remove "Save" button in server panel when accessed from left side menu lower bar
 - Add log obfuscation feature: if an input field uses either get_secret or get_credential, it must be obfuscated
   in the logs and results. Otherwise, it appears as it is after substitution.
 - Add runtime name and search box in logs, report and results panel
@@ -251,10 +1181,12 @@ Version 5.1.0: Changelog & Workflow Tree
   - Add new parameters in automation.json / "workflow" / "builder_refresh_rate" to configure
     min, max and factor used to compute refresh rate based on elapsed time
 - Add new settings "allow_file_deletion" in settings.json / "files" to explicitly allow deleting local files that
-  are located in the trash foler. Set to false by default.
+  are located in the trash folder. Set to false by default.
 - Defer Service.positions to improve run performance
 - Always set the positions as a list instead of a tuple to remove the need for a specific constructor
   for tuples in the migration files
+- Exclude Start and End services from the changelog table when displaying the changeog of a workflow
+  Commit: d757ae648df5529a699567e370ebcfcebeb43307
 
 Deviations:
 - Deviation 1 (5f51ad98c843f776c46c42faf3fe904b02bc37fd): Database.configure_events service subclass check: 
@@ -320,10 +1252,6 @@ Deviations:
 - Deviation 25: custom branding (see release notes above)
   Partial merge of original deviation
 
-Deviations not merged:
-- Database._initialize "if env.detect_cli(additional_apps=["dramatiq"]):": missing "additional_apps"
-  in original detect_cli function
-
 Migration:
 - network.yaml must be merge into device.yaml:
   - replace "nodes" with "devices"
@@ -369,7 +1297,7 @@ Version 5.0: Clustering
   - The worker name is built as server name + process ID to guarantee that it is unique
     across servers
   - Add "process_id" property (populated with getpid())
-  - Add "subtype" based on the "_" environment variable (e.g python, gunicorn, dramatiq)
+  - Add "subtype" based on the "_" environment variable (e.g. python, gunicorn, dramatiq)
   - Add "last_update" property to show when the worker was last used / updated
   - Add "server" hyperlink to the edit panel of worker's server
   - Add "current_runs" property to show how many jobs the worker is currently running
@@ -434,13 +1362,6 @@ Version 5.0: Clustering
 
 Migration:
 - Update properties.json > "properly_list" with new format
-
-Test:
-- Test that the new configuration properties diff mechanism hasn't impacted the
-  existing diff:
-  - Diff between different commits of a configuration property
-  - Diff between two results
-- Test that logs and results are always available when a run is interrupted
 
 Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
 --------------------------------------------------------------------------
@@ -533,7 +1454,7 @@ Version 4.5.0: Custom Parameterized Form, Bulk Filtering & File Management
   - Refactor the files mechanism to no longer display the full Unix path, only the path
     from the files folder
     - "files" displayed as breadcrumb even if the actual path does not include such a folder
-    - the copy to clipboard mechanism still returns the full path so it can be used in e.g python scripts
+    - the copy to clipboard mechanism still returns the full path so it can be used in e.g. python scripts
     - allow both absolute and relative paths in generic and netmiko file transfer services
     - impact on migration: all paths in files must be truncated by removing the path
     to the "files" folder
@@ -571,25 +1492,12 @@ Migration:
   instead of the full path (path to playbook folder + scoped path). The path to the playbook
   folder must be trimmed from all ansible services.
 
-Tests:
-- Everything about files is impacted and must be tested again
-- Impact of migration import refactoring on migration files import and service import
-- Impact of removing payload in workflow results
-- Test service form because of Jinja2 Template refactoring
-- Test runtimes displayed in WB and logs/results panel (get_runtimes function was refactored)
-- Test skip of run once services when all devices are skipped
-- Test new trash mechanism for files
-- Test ansible playbook service (scoped path instead of full path)
-
-Todo:
-- Add context help for custom parameterized form
-
 Version 4.4.0: RBAC and Credentials
 -----------------------------------
 
 - Remove settings from UI upper menu (doesn't work with multiple gunicorn workers)
-- Add post_update function (60350ede71f6a5146bab9f42a87f7fef0360b98e) after db flush in controller udpate function to compute pool only after the ID has been set, and
-  determine what properties to return (e.g not serialized object but only what is needed)
+- Add post_update function (60350ede71f6a5146bab9f42a87f7fef0360b98e) after db flush in controller update function to compute pool only after the ID has been set, and
+  determine what properties to return (e.g. not serialized object but only what is needed)
   Return default serialized properties in controller update instead of all serialized relationship for scalability with > 50K devices.
 - Refactor freeze edit / run mechanism (pure python check instead of SQL query with originals)
 - New Bulk Edit option for appending / removing to a multiple instance list (dropdown list on the right of the field).
@@ -659,7 +1567,7 @@ Version 4.4.0: RBAC and Credentials
   - Add new "get_all_results" function in the global variables
 - Add support for distributed task queue for automation with Dramatiq.
 - Return an error in the UI if the commit of workflow logs, report or result
-  fails (e.g data too long db error because of payload data for the results),
+  fails (e.g. data too long db error because of payload data for the results),
   don't commit if the size of the data is higher than the maximum column size
   configured in database.json, and emit warning if it is than 50%
 - Fix "List index out of range" bug in Jump on Connect mechanism
@@ -725,7 +1633,7 @@ Version 4.3.0
   * Add new option to parse TextFSM as JSON object
   * Add new option to support Jinja2 Template conversion
   * Add new option to support Template Text Parser conversion
-- Fix bulk deletion and bulk removal from a filtered table (e.g dashboard bulk deletion deletes everything,
+- Fix bulk deletion and bulk removal from a filtered table (e.g. dashboard bulk deletion deletes everything,
   not just the objects displayed in the table).
 - New feature to align nodes in Network Builder and Workflow Builder:
   - Horizontal and vertical alignment
@@ -772,13 +1680,7 @@ Version 4.3.0
 - Add new "allow_password_change" keyword in settings > authentication to configure whether the user
   profile lets users change their own password (if `false`, the password field is not shown)
 - Add new "force_authentication_method" to force users to log in with the authentication method saved in
-  the database (e.g first authentication method used)
-- Add new 'Man Minutes' feature to compute time saved per workflow
-  * Only for top-level workflows
-  * Man Minutes can be defined per device or for the whole workflow
-  * Per Device is only allowed if the workflow run method is DxD or SxS with workflow targets
-  * The workflow must be a success (or per device success) to be counted in the total man minutes
-  * Man Minutes can be made mandatory via 'mandatory_man_minutes' key in automation.json > workflow
+  the database (e.g. first authentication method used)
 - Remove unused parent and parent_device relationship on the Run class.
 - Import Services:
   * The timeout for the Import_services endpoint is configurable in "automation.json" under
@@ -814,7 +1716,7 @@ Version 4.2.0
 - Extend Devices and Links with subclass / custom properties and a separate tab in the UI, the same way services work.
 - Remove deep_services function used for export, use service.children relationship instead.
 - Dont subclass SQLAlchemy Column following advice of SQLAlchemy creator.
-- Make corrupted edges deletion mechanism a troublehooting snippet instead of a button in the admin panel.
+- Make corrupted edges deletion mechanism a troubleshooting snippet instead of a button in the admin panel.
 - Move redis configuration in settings.json > "redis" key
 - Add new mechanism to limit results in server-side drop-down list with filtering constraints.
 - Limit superworkflow selection to workflows that contains the shared Placeholder service.
@@ -843,7 +1745,7 @@ Version 4.2.0
 - Change default priority to 10 for services. Update of migration files required.
 - Add new check box "Approved by an Admin user" in the Unix Command service. That box must be ticked by
   an admin user for the service to be allowed to run. A non-admin user cannot save a service if it is
-  ticked, meaning that each time a Unix Command service is edited, it must be re-appproved.
+  ticked, meaning that each time a Unix Command service is edited, it must be re-approved.
 - Add new timeout parameters for Scrapli service
 - Always show security logs, even when logging is disabled. Add "allow_disable" (default: True) keyword argument
   to log function to prevent logs from being disabled if necessary.
@@ -876,7 +1778,7 @@ Migration:
 
   - Update all access with new GET / POST endpoints
   - Doc link in settings.json to be updated with custom doc links.
-  - Refresh rates in settings.json to be udpated (e.g 10s instead of 3 if RBAC is used)
+  - Refresh rates in settings.json to be updated (e.g. 10s instead of 3 if RBAC is used)
   - Redis config in settings.json
   - In migration files, replace "default_access: admin" with "admin_only: true"
   - Warn user about REST API run service endpoint new default (True)
@@ -944,9 +1846,9 @@ Version 4.1.0
 - Separate controller (handling HTTP POST requests) from main application (gluing everything together)
 - Add new "ip_address" field in settings.json > app section
 - Add paging for REST API search endpoint: new integer parameter "start" to request results from "start"
-- Add server time at the bottom of the menu (e.g for scheduling tasks / ease of use)
+- Add server time at the bottom of the menu (e.g. for scheduling tasks / ease of use)
 - Add button in service table to export services in bulk (export all displayed services as .tgz)
-- Ability to paste device list (comma or space separated) into a multiple instance field (e.g service device and pool targets)
+- Ability to paste device list (comma or space separated) into a multiple instance field (e.g. service device and pool targets)
 - Re-add current Run counter to 'Service' and 'Workflow' on the dashboard banner + Active tasks
 - Ability to download result as json file + new copy result path to clipboard button in result json editor panel
 - Ability to download logs as text file
@@ -964,7 +1866,7 @@ Version 4.1.0
 - Add new "connection_name" mechanism to open multiple parallel connections to the same device in the
   same workflow
 - Add new "get_credential" global variable in workflow builder. Used to get a password or a passphrase
-  for a netmiko validaiton command or rest call service. For obfuscation purposes.
+  for a netmiko validation command or rest call service. For obfuscation purposes.
   mail: Obfuscate Credentials passed into Netmiko Command Line
 - Fix data extraction service and operation keyword in set_var
 - Don't set status of currently running services to "Aborted" when using a flask CLI command
@@ -992,8 +1894,8 @@ Version 4.0.1
 
 - Change of rbac.json structure: list becomes dict, each line can have one of three values:
 
-  - "admin" (not part of RBAC, only admin have access, e.g admin panel, migration etc)
-  - "all" (not part of RBAC, everyone has access, e.g dashboard, login, logout etc)
+  - "admin" (not part of RBAC, only admin have access, e.g. admin panel, migration etc)
+  - "all" (not part of RBAC, everyone has access, e.g. dashboard, login, logout etc)
   - "access" (access restricted by RBAC, used to populate access form)
 
 - Add RBAC support for nested submenus
@@ -1028,18 +1930,18 @@ Version 4.0.0
   - Add run service in bulk on all currently displayed devices mechanism
 
 - Move all visualization settings from settings.json > "visualization" to dedicated visualization.json
-- Make the error page colors confiurable per theme (move css colors to theme specific CSS file)
+- Make the error page colors configurable per theme (move css colors to theme specific CSS file)
 - Use the log level of the parameterized run instead of always using the service log level
 - Change field syntax for context help to be 'help="path"' instead of using render_kw={"help": ...}
 - Don't update the "creator" field when an existing object is edited
 - Add new function "get_neighbors" to retrieve neighboring devices or links of a device
 - Refactor the migration import mechanism to better handle class relationships
 - Web / Desktop connection to a device is now restrictable to make the users provide their own credentials
-  => e.g to prevent inventory device credentials from being used to connect to devices
+  => e.g. to prevent inventory device credentials from being used to connect to devices
 - Configuration git diff: indicate which is V1 and which is V2. Option to display more context lines, including all of it.
 - Improve display of Json property in form (make them collapsed by default)
 - Update to new version of Vis.Js (potential workflow builder impact)
-- Add mechanism to save only failed results (e.g for config collection workflow)
+- Add mechanism to save only failed results (e.g. for config collection workflow)
 - New database.json to define engine parameters, import / export properties, many to many relationship, etc.
 - Fork based on string value instead of just True / False: new discard mode for the skip mechanism. When using discard, devices do not follow any edge after the skipped service.
 - Refactor skip property so that it is no longer a property of the service to avoid side effect of skipping shared services.
@@ -1167,7 +2069,7 @@ Version 3.22
 - Add Dark mode and theme mechanism
 - Make search endpoint work with result to retrieve device results
 - Allow dictionary and json as custom properties. For json properties, use jsoneditor to let the user edit them.
-- Add placeholder as a global variable in a workflow (e.g to be used in the superworkflow)
+- Add placeholder as a global variable in a workflow (e.g. to be used in the superworkflow)
 - Add mechanism for creating custom configuration property
 - Refactor data backup services with custom configuration properties. Implement "Operational Data" as
   an example custom property.
@@ -1190,7 +2092,7 @@ Version 3.21.3
 - Fix wrong jump password when using a Vault
 - Fix workflow results recursive display no path in results bug
 - Improve "Get Result" REST endpoint: returns 404 error if no run found, run status if a run is found but there are
-  no results (e.g job still running), and the results if the job is done.
+  no results (e.g. job still running), and the results if the job is done.
 - Remove wtforms email validator in example service following wtforms 2.3 release
 
 Version 3.21.2
@@ -1256,7 +2158,7 @@ Version 3.21
 - Syntax highlight option: ability to highlight certain keywords based on regular expression match,
   defined in eNMS/static/lib/codemirror/logsMode. Can be customized.
 - New logging property to configure log level for a service or disable logging.
-- Fix bug when typing invalid regex for table search (eg "(" )
+- Fix bug when typing invalid regex for table search (eg "(" ))
 - Dont display Start / End services in service table
 - Make configuration search case-insensitive for inclusion ("Search" REST endpoint + UI)
 - Use log level of top-level workflow for all services.
@@ -1287,7 +2189,7 @@ Version 3.21
   This means you can first add your own loggers in logging.json, then log to them from a workflow.
 - Remove CLI fetch, update and delete endpoint (curl to be used instead if you need it from the VM)
 - Improve workflow stop mechanism: now hitting stop will try to stop ASAP, not just after the on-going
-  service but also after the on-going device, or after the on-going retry (e.g many retries...).
+  service but also after the on-going device, or after the on-going retry (e.g. many retries...).
   Besides stop should now work from subworkflow too.
 
 Version 3.20.1
@@ -1552,7 +2454,7 @@ Version 3.15
   if async run_job was invoked, you can use the runtime returned in the REST response to collect the results
   after completion via a GET request to /result/name/runtime
 - New Run Management window:
-- Slashes are now forbidden from services and worklfow names (conflict with Unix path)
+- Slashes are now forbidden from services and workflow names (conflict with Unix path)
 - The command sent to a device is now displayed in the results
 - Credentials are now hidden when using gotty.
 - Job Parametrization.

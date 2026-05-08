@@ -5,7 +5,6 @@ from subprocess import check_output
 from traceback import format_exc
 
 from eNMS.database import db
-from eNMS.forms import ServiceForm
 from eNMS.fields import (
     BooleanField,
     DictField,
@@ -13,6 +12,7 @@ from eNMS.fields import (
     SelectField,
     StringField,
 )
+from eNMS.forms import ServiceForm
 from eNMS.models.automation import Service
 from eNMS.variables import vs
 
@@ -40,17 +40,23 @@ class AnsiblePlaybookService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "ansible_playbook_service"}
 
-    def job(self, run, device=None):
+    @classmethod
+    def job(cls, self, run, device=None):
         arguments = run.sub(run.arguments, locals()).split()
         command, extra_args = ["ansible-playbook"], {}
         if run.pass_device_properties:
             credentials = run.get_credentials(device)
             credentials.pop("pkey", None)
-            extra_args = {**device.get_properties(), **credentials}
+            if run.high_performance:
+                with db.session_scope(remove=run.in_process):
+                    device_object = db.fetch("device", name=device.name, rbac=None)
+                    extra_args = {**device_object.get_properties(), **credentials}
+            else:
+                extra_args = {**device.get_properties(), **credentials}
         if run.options:
             extra_args.update(run.sub(run.options, locals()))
         if extra_args:
-            command.extend(["-e", f"'{dumps(extra_args)}'"])
+            command.extend(["-e", f"{dumps(extra_args)}"])
         if device:
             command.extend(["-i", device.ip_address + ","])
         command.append(f"{vs.playbook_path}{run.playbook_path}")
@@ -67,15 +73,17 @@ class AnsiblePlaybookService(Service):
             logger="security",
         )
         try:
-            result = check_output(command + arguments, cwd=vs.playbook_path)
-        except Exception:
+            result = check_output(command + arguments, cwd=vs.playbook_path, text=True)
+        except Exception as exc:
             result = "\n".join(format_exc().splitlines())
+            if hasattr(exc, "output"):
+                result += f"\n\n{exc.output}"
             if password:
                 result = result.replace(password, "*" * 10)
             results = {"success": False, "result": result, "command": full_command}
             exit_code = search(r"exit status (\d+)", result)
             if exit_code:
-                results["exit_code"] = self.exit_codes[exit_code.group(1)]
+                results["exit_code"] = cls.exit_codes[exit_code.group(1)]
             return results
         try:
             result = result.decode("utf-8")

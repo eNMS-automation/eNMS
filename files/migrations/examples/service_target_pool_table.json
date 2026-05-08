@@ -1,0 +1,34 @@
+[
+  [
+    "(R) Credentials (Password & Key, Priority Mechanism)",
+    "Credentials pool - Austin devices"
+  ],
+  [
+    "(R) Netmiko Configuration and Validation Services",
+    "Washington"
+  ],
+  [
+    "Large Device Configuration and Operational Data",
+    "All Devices"
+  ],
+  [
+    "Parameterized Multiprocessing",
+    "Datacenter San Francisco"
+  ],
+  [
+    "Parameterized Run with a Superworkflow",
+    "Washington"
+  ],
+  [
+    "Parameterized Targets",
+    "Washington"
+  ],
+  [
+    "Workflow with large Iteration Query",
+    "Datacenter New York"
+  ],
+  [
+    "[Skip in SxS with service targets and Run Once services] Run Once with Pool",
+    "All Devices"
+  ]
+]

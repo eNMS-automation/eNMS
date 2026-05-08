@@ -20,6 +20,7 @@ class NapalmConfigurationService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "napalm_configuration_service"}
 
+    @staticmethod
     def job(self, run, device):
         config = "\n".join(run.sub(run.content, locals()).splitlines())
         log_config = run.safe_log(run.content, config)

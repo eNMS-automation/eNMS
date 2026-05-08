@@ -3,8 +3,8 @@ from pathlib import Path
 from sqlalchemy import Boolean, ForeignKey, Integer
 
 from eNMS.database import db
-from eNMS.forms import ServiceForm
 from eNMS.fields import BooleanField, HiddenField, SelectMultipleField, StringField
+from eNMS.forms import ServiceForm
 from eNMS.models.automation import Service
 
 
@@ -20,6 +20,7 @@ class GitService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "git_service"}
 
+    @staticmethod
     def job(self, run, device=None):
         local_path = run.sub(run.local_repository, locals())
         remote_path = run.sub(run.remote_repository, locals())
@@ -39,7 +40,7 @@ class GitService(Service):
         if "add_commit" in self.actions:
             repo.git.add(A=True)
             if repo.head.commit.diff():
-                repo.git.commit(m=f'"{self.commit_message}"')
+                repo.git.commit(m=f'"{run.sub(run.commit_message, locals())}"')
             else:
                 run.log("info", "Commit was aborted: nothing to commit", device)
         if "pull" in self.actions:
@@ -63,4 +64,4 @@ class GitForm(ServiceForm):
     local_repository = StringField("Path to Local Git Repository", substitution=True)
     relative_path = BooleanField("Path is relative to the main application directory")
     remote_repository = StringField("Path to Remote Git Repository", substitution=True)
-    commit_message = StringField("Commit Message")
+    commit_message = StringField("Commit Message", substitution=True)

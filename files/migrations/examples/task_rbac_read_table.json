@@ -1,0 +1,14 @@
+[
+  [
+    "Cluster Monitoring (admin)",
+    "Admin User"
+  ],
+  [
+    "Configuration Poller",
+    "Admin User"
+  ],
+  [
+    "Scrapli RBAC scheduling (public)",
+    "Admin User"
+  ]
+]

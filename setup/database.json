@@ -13,7 +13,7 @@
       "connect_args": {
         "check_same_thread": false
       },
-      "pool_size": 20,
+      "pool_size": 100,
       "max_overflow": 40
     }
   },
@@ -27,6 +27,7 @@
     }
   },
   "transactions": {
+    "batch_size": 1000,
     "retry": {
       "commit": {
         "number": 10,
@@ -39,6 +40,7 @@
     }
   },
   "import_export_models": [
+    "data",
     "user",
     "group",
     "device",
@@ -46,14 +48,157 @@
     "link",
     "server",
     "service",
+    "snippet",
     "workflow_edge",
     "task",
     "credential",
-    "pool",
-    "secret"
+    "pool"
   ],
+  "json_migration": {
+    "import_export_models": [
+      "data",
+      "user",
+      "group",
+      "device",
+      "file",
+      "link",
+      "result",
+      "run",
+      "server",
+      "service",
+      "snippet",
+      "workflow_edge",
+      "task",
+      "credential",
+      "pool"
+    ],
+    "no_export": [
+      "changelog",
+      "connection_service",
+      "data",
+      "device",
+      "file",
+      "link",
+      "object",
+      "service",
+      "service_log",
+      "service_report",
+      "session",
+      "worker",
+      "run_worker"
+    ],
+    "clear_on_import": [
+      "connection_service",
+      "data",
+      "device",
+      "file",
+      "link",
+      "service",
+      "worker"
+    ],
+    "dont_migrate": {
+      "credential": ["id"],
+      "data": [
+        "id",
+        "store_id",
+        "device_name",
+        "device_id",
+        "source_port_id",
+        "source_port_name",
+        "destination_port_id",
+        "destination_port_name"
+      ],
+      "group": [
+        "id",
+        "worker_access"
+      ],
+      "device": [
+        "id",
+        "configuration",
+        "operational_data",
+        "specialized_data",
+        "source_id",
+        "destination_id"
+      ],
+      "file": [
+        "id",
+        "status",
+        "folder_id"
+      ],
+      "link": [
+        "id",
+        "destination_id",
+        "destination_name",
+        "source_id",
+        "source_name"
+      ],
+      "pool": [
+        "id"
+      ],
+      "parameters": ["id"],
+      "result": [
+        "id",
+        "run_id",
+        "parent_service_id",
+        "parent_device_id",
+        "device_id",
+        "service_id",
+        "workflow_id",
+        "parent_service_name",
+        "parent_device_name",
+        "device_name",
+        "service_name",
+        "workflow_name"
+      ],
+      "run": [
+        "id",
+        "restart_run_id",
+        "start_services",
+        "server_id",
+        "service_id",
+        "service_name",
+        "placeholder_id",
+        "task_id",
+        "worker_id",
+        "server_name",
+        "task_name",
+        "worker_name"
+      ],
+      "server": ["id", "status"],
+      "service": [
+        "id",
+        "named_credential_id",
+        "path",
+        "status",
+        "superworkflow_id"
+      ],
+      "snippet": [
+        "id"
+      ],
+      "task": [
+        "id",
+        "service_name",
+        "service_id",
+        "next_run_time",
+        "is_active",
+        "time_before_next_run",
+        "status"
+      ],
+      "user": [
+        "id",
+        "last_login"
+      ],
+      "workflow_edge": [
+        "id",
+        "source_id",
+        "destination_id",
+        "workflow_id"
+      ]
+    }
+  },
   "changelog_models": {
     "credential": "Credential",
+    "data": "Data",
     "device": "Device",
     "file": "File",
     "group": "Group",
@@ -62,12 +207,25 @@
     "pool": "Pool",
     "server": "Server",
     "service": "Service",
+    "snippet": "Snippet",
     "task": "Task",
     "user": "User",
     "workflow_edge": "WorkflowEdge"
   },
   "dont_migrate": {
     "credential": ["id", "logs"],
+    "data": [
+      "id",
+      "logs",
+      "store_id",
+      "data",
+      "device_name",
+      "device_id",
+      "source_port_id",
+      "source_port_name",
+      "destination_port_id",
+      "destination_port_name"
+    ],
     "group": [
       "id",
       "credentials",
@@ -75,6 +233,7 @@
       "rbac_configuration_devices",
       "rbac_connect_devices",
       "rbac_edit_credentials",
+      "rbac_edit_datas",
       "rbac_edit_devices",
       "rbac_edit_files",
       "rbac_edit_links",
@@ -89,6 +248,7 @@
       "rbac_pool_rbac_read",
       "rbac_pool_rbac_target",
       "rbac_read_credentials",
+      "rbac_read_datas",
       "rbac_read_devices",
       "rbac_read_files",
       "rbac_read_links",
@@ -103,6 +263,8 @@
       "rbac_schedule_services",
       "rbac_schedule_tasks",
       "rbac_target_devices",
+      "rbac_use_credentials",
+      "rbac_use_datas",
       "rbac_use_files",
       "rbac_use_secrets",
       "worker_access"
@@ -126,8 +288,24 @@
       "users",
       "logs"
     ],
-    "file": ["id", "filename", "folder_path", "full_path", "status", "logs"],
-    "folder": ["id", "filename", "folder_path", "full_path", "status", "logs"],
+    "file": [
+      "id",
+      "filename",
+      "folder_path",
+      "full_path",
+      "status",
+      "logs",
+      "folder_id"
+    ],
+    "folder": [
+      "id",
+      "filename",
+      "folder_path",
+      "full_path",
+      "status",
+      "logs",
+      "folder_id"
+    ],
     "link": [
       "id",
       "pools",
@@ -171,6 +349,9 @@
       "service_changelogs",
       "soft_deleted"
     ],
+    "snippet": [
+      "id"
+    ],
     "network": [
       "id",
       "device_changelogs",
@@ -192,13 +373,13 @@
       "users",
       "logs"
     ],
-    "secret": ["id"],
     "task": [
       "id",
       "service_name",
       "service_id",
       "next_run_time",
       "is_active",
+      "runs",
       "time_before_next_run",
       "status",
       "logs"
@@ -217,6 +398,7 @@
       "services",
       "pages",
       "user_credentials",
+      "user_datas",
       "user_devices",
       "user_files",
       "user_links",
@@ -269,7 +451,8 @@
         "model2": {
           "column": "gateway_id",
           "foreign_key": "gateway"
-        }
+        },
+        "export": true
       },
       "link_network": {
         "model1": {
@@ -279,7 +462,8 @@
         "model2": {
           "column": "network_id",
           "foreign_key": "network"
-        }
+        },
+        "export": true
       },
       "device_network": {
         "model1": {
@@ -289,7 +473,8 @@
         "model2": {
           "column": "network_id",
           "foreign_key": "network"
-        }
+        },
+        "export": true
       },
       "pool_device": {
         "model1": {
@@ -301,7 +486,8 @@
           "column": "device_id",
           "foreign_key": "device",
           "property": "device"
-        }
+        },
+        "export": true
       },
       "pool_link": {
         "model1": {
@@ -311,7 +497,8 @@
         "model2": {
           "column": "link_id",
           "foreign_key": "link"
-        }
+        },
+        "export": true
       },
       "user_group": {
         "model1": {
@@ -321,7 +508,8 @@
         "model2": {
           "column": "user_id",
           "foreign_key": "user"
-        }
+        },
+        "export": true
       },
       "run_service": {
         "model1": {
@@ -356,26 +544,6 @@
           "foreign_key": "pool"
         }
       },
-      "service_device": {
-        "model1": {
-          "column": "service_id",
-          "foreign_key": "service"
-        },
-        "model2": {
-          "column": "device_id",
-          "foreign_key": "device"
-        }
-      },
-      "service_pool": {
-        "model1": {
-          "column": "service_id",
-          "foreign_key": "service"
-        },
-        "model2": {
-          "column": "pool_id",
-          "foreign_key": "pool"
-        }
-      },
       "service_workflow": {
         "model1": {
           "column": "service_id",
@@ -384,7 +552,8 @@
         "model2": {
           "column": "workflow_id",
           "foreign_key": "workflow"
-        }
+        },
+        "export": true
       },
       "task_device": {
         "model1": {
@@ -394,7 +563,8 @@
         "model2": {
           "column": "device_id",
           "foreign_key": "device"
-        }
+        },
+        "export": true
       },
       "task_pool": {
         "model1": {
@@ -404,7 +574,8 @@
         "model2": {
           "column": "pool_id",
           "foreign_key": "pool"
-        }
+        },
+        "export": true
       },
       "service_target_device": {
         "model1": {
@@ -414,7 +585,8 @@
         "model2": {
           "column": "device_id",
           "foreign_key": "device"
-        }
+        },
+        "export": true
       },
       "service_target_pool": {
         "model1": {
@@ -424,7 +596,8 @@
         "model2": {
           "column": "pool_id",
           "foreign_key": "pool"
-        }
+        },
+        "export": true
       },
       "credential_device": {
         "model1": {
@@ -434,17 +607,8 @@
         "model2": {
           "column": "pool_id",
           "foreign_key": "pool"
-        }
-      },
-      "credential_group": {
-        "model1": {
-          "column": "credential_id",
-          "foreign_key": "credential"
         },
-        "model2": {
-          "column": "group_id",
-          "foreign_key": "group"
-        }
+        "export": true
       }
     }
   },

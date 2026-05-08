@@ -1,0 +1,222 @@
+[
+  [
+    "Atlanta",
+    "Large Network Display"
+  ],
+  [
+    "Austin",
+    "Large Network Display"
+  ],
+  [
+    "Austin-2",
+    "Large Network Display"
+  ],
+  [
+    "Baltimore",
+    "Large Network Display"
+  ],
+  [
+    "Boston",
+    "Large Network Display"
+  ],
+  [
+    "Cambridge",
+    "Large Network Display"
+  ],
+  [
+    "Chicago",
+    "Large Network Display"
+  ],
+  [
+    "Cincinnati",
+    "Large Network Display"
+  ],
+  [
+    "Cleveland",
+    "Large Network Display"
+  ],
+  [
+    "Columbus",
+    "Large Network Display"
+  ],
+  [
+    "Dallas",
+    "Large Network Display"
+  ],
+  [
+    "Dallas-2",
+    "Large Network Display"
+  ],
+  [
+    "Dallas-3",
+    "Large Network Display"
+  ],
+  [
+    "Denver",
+    "Large Network Display"
+  ],
+  [
+    "Detroit",
+    "Large Network Display"
+  ],
+  [
+    "Duplicate me 1",
+    "Duplication of Devices, Subnetworks and Top-level Networks"
+  ],
+  [
+    "Duplicate me 2",
+    "Duplication of Devices, Subnetworks and Top-level Networks"
+  ],
+  [
+    "Duplication - G1",
+    "Duplicate me 2"
+  ],
+  [
+    "Duplication - R1",
+    "Duplicate me 2"
+  ],
+  [
+    "Houston",
+    "Large Network Display"
+  ],
+  [
+    "Jackson",
+    "Large Network Display"
+  ],
+  [
+    "L1 Network",
+    "Subsubnetwork and Subsubsubnetwork"
+  ],
+  [
+    "L2 Network",
+    "L1 Network"
+  ],
+  [
+    "L3 Network",
+    "L2 Network"
+  ],
+  [
+    "LosAngeles",
+    "Large Network Display"
+  ],
+  [
+    "Minneapolis",
+    "Large Network Display"
+  ],
+  [
+    "NewYork",
+    "Large Network Display"
+  ],
+  [
+    "Oakland",
+    "Large Network Display"
+  ],
+  [
+    "Orange",
+    "Large Network Display"
+  ],
+  [
+    "PaloAlto",
+    "Large Network Display"
+  ],
+  [
+    "Philadelphia",
+    "Large Network Display"
+  ],
+  [
+    "Richmond",
+    "Large Network Display"
+  ],
+  [
+    "Router 1",
+    "Top-level Devices and Links"
+  ],
+  [
+    "Router 2",
+    "Top-level Devices and Links"
+  ],
+  [
+    "Router 3",
+    "Top-level Devices and Links"
+  ],
+  [
+    "S5 R1",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "S5 R2",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "S5 R3",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "S5 R4",
+    "Loopback and Parallel Links"
+  ],
+  [
+    "S6 L3 R1",
+    "L3 Network"
+  ],
+  [
+    "S6 L3 R2",
+    "L3 Network"
+  ],
+  [
+    "Sacramento",
+    "Large Network Display"
+  ],
+  [
+    "SanDiego",
+    "Large Network Display"
+  ],
+  [
+    "SanFrancisco",
+    "Large Network Display"
+  ],
+  [
+    "SanJose",
+    "Large Network Display"
+  ],
+  [
+    "Subnetwork 1",
+    "Subnetwork 2"
+  ],
+  [
+    "Subnetwork 1",
+    "Subnetwork and Teleport Mechanism"
+  ],
+  [
+    "Subnetwork 1 - R1",
+    "Subnetwork 1"
+  ],
+  [
+    "Subnetwork 1 - R2",
+    "Subnetwork 1"
+  ],
+  [
+    "Subnetwork 1 - R3",
+    "Subnetwork 1"
+  ],
+  [
+    "Subnetwork 2",
+    "Subnetwork 1"
+  ],
+  [
+    "Subnetwork 2",
+    "Subnetwork and Teleport Mechanism"
+  ],
+  [
+    "Subnetwork 2 - G1",
+    "Subnetwork 2"
+  ],
+  [
+    "Subnetwork 2 - G2",
+    "Subnetwork 2"
+  ],
+  [
+    "Washington",
+    "Large Network Display"
+  ]
+]

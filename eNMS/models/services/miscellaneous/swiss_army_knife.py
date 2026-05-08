@@ -2,8 +2,8 @@ from requests import get
 from sqlalchemy import ForeignKey, Integer
 
 from eNMS.database import db
-from eNMS.forms import ServiceForm
 from eNMS.fields import HiddenField
+from eNMS.forms import ServiceForm
 from eNMS.models.automation import Service
 from eNMS.variables import vs
 
@@ -15,6 +15,7 @@ class SwissArmyKnifeService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "swiss_army_knife_service"}
 
+    @staticmethod
     def job(self, *args, **kwargs):
         return getattr(self, self.scoped_name)(*args, **kwargs)
 

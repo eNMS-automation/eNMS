@@ -38,7 +38,7 @@
       <div class="tab-pane fade in active add-id" id="common-properties">
         {{ form.id(id='pool-id', class="add-id") }} {{ form.hidden_tag() }}
         <div class="form-group">
-          {% for field_name in ("name", "creator", "description", "manually_defined",
+          {% for field_name in ("name", "creator", "last_modified", "last_modified_by", "description", "manually_defined",
           "include_networks") %} {{ block_field(form, field_name) }} {% endfor %}
         </div>
       </div>

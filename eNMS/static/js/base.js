@@ -4,6 +4,7 @@ alertify: false
 CodeMirror: false
 settings: true
 csrfToken: false
+Diff2HtmlUI: false
 eNMS: true
 formProperties: false
 job: false
@@ -20,10 +21,12 @@ user: false
 */
 
 import {
+  currentStore,
   folderPath,
   openDebugPanel,
   showCredentialPanel,
   showFolderPanel,
+  showStorePanel,
 } from "./administration.js";
 import { creationMode, initBuilder, instance, processBuilderData } from "./builder.js";
 import { initDashboard } from "./inventory.js";
@@ -34,7 +37,7 @@ import {
   showDevicePanel,
   updateNetworkPanel,
 } from "./networkBuilder.js";
-import { showServicePanel } from "./workflowBuilder.js";
+import { servicePanelUpdate, showServicePanel } from "./workflowBuilder.js";
 
 const currentUrl = `${location.origin}/${page}`;
 const pageHistory = ["workflow_builder", "service_table", "network_table"];
@@ -72,13 +75,15 @@ export function detectUserInactivity() {
 
 const panelThemes = {
   "report-text": { bgContent: "#1B1B1B" },
+  "snippet-code": { bgContent: "#1B1B1B" },
   logs: { bgContent: "#1B1B1B" },
+  changelog_diff: { bgContent: "#1B1B1B" },
   device_data: { bgContent: "#1B1B1B" },
   file_editor: { bgContent: "#1B1B1B" },
 };
 
 $.ajaxSetup({
-  beforeSend: function (xhr, settings) {
+  beforeSend: function(xhr, settings) {
     if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
       xhr.setRequestHeader("X-CSRFToken", csrfToken);
     }
@@ -86,14 +91,14 @@ $.ajaxSetup({
       document.body.style.cursor = "progress";
     }
   },
-  complete: function () {
+  complete: function() {
     document.body.style.cursor = "default";
   },
 });
 
 function loadScript(url, id) {
   let script = document.createElement("script");
-  script.onload = function () {
+  script.onload = function() {
     try {
       job(id);
     } catch (e) {
@@ -109,7 +114,7 @@ export function sanitize(input) {
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
-    '"': "&quot;",
+    '"': "&quot;" /* eslint-disable-line quotes */,
     "'": "&#x27;",
     "/": "&#x2F;",
   };
@@ -153,19 +158,22 @@ export function observeMutations(container, target, callback) {
   }).observe(container, { childList: true, subtree: true });
 }
 
-export const call = function ({ url, data, form, callback }) {
+export const call = function({ url, data, form, callback, errorCallback }) {
   let params = {
     type: "POST",
     url: url,
-    success: function (results) {
+    success: function(results) {
       processResults(callback, results);
     },
-    error: function (error) {
+    error: function(error) {
       let message = `Error HTTP ${error.status}: ${error.statusText}.`;
       if (error.status == 400) {
         message += " Your session might have expired, try refreshing the page.";
       } else if (error.status == 403) {
-        message = "Error 403 - Not Authorized.";
+        message = error.responseJSON.alert;
+      }
+      if (errorCallback) {
+        errorCallback(error);
       }
       notify(message, "error", 5);
     },
@@ -178,6 +186,13 @@ export const call = function ({ url, data, form, callback }) {
     });
   } else if (form) {
     params.data = $(`[id="${form}"]`).serialize();
+    const formArray = $(`[id="${form}"]`).serializeArray();
+    formArray.forEach(item => {
+      if (typeof item.value === 'string') {
+        item.value = item.value.replace(/\r\n?/g, '\n');
+      }
+    });
+    params.data = $.param(formArray);
   }
   $.ajax(params);
 };
@@ -187,7 +202,7 @@ export function serializeForm(form, formDefault, bulkFilter) {
   let result = {};
   let propertiesToKeep = [];
   if (bulkFilter) {
-    $("input[name^='bulk-filter']").each(function (_, el) {
+    $("input[name^='bulk-filter']").each(function(_, el) {
       if ($(el).prop("checked")) {
         const property = $(el).data("property");
         propertiesToKeep.push(property, `${property}_filter`, `${property}_invert`);
@@ -207,7 +222,7 @@ export function serializeForm(form, formDefault, bulkFilter) {
   if (bulkFilter) {
     $(form)
       .find("input:checkbox")
-      .each(function () {
+      .each(function() {
         if (propertiesToKeep.includes(this.name)) {
           result[this.name] = $(this).is(":checked") ? "bool-true" : "bool-false";
         }
@@ -216,10 +231,10 @@ export function serializeForm(form, formDefault, bulkFilter) {
   return result;
 }
 
-const deleteInstance = function (type, id, tableId) {
+const deleteInstance = function(type, id, tableId) {
   call({
     url: `/delete_instance/${type}/${id}`,
-    callback: function (result) {
+    callback: function(result) {
       if (result.delete_aborted) return notify(result.log, result.log_level, 5, true);
       if (type in subtypes.service) {
         type = "service";
@@ -243,7 +258,7 @@ function removeInstance(tableId, instance, relation) {
   call({
     url: "/remove_instance",
     data: { instance, relation },
-    callback: function () {
+    callback: function() {
       refreshTable(tableId, false, true);
       notify(
         `${instance.type.toUpperCase()} '${instance.name}' removed from
@@ -278,8 +293,10 @@ export function downloadFile(name, content, type) {
 export function createTooltips(panel) {
   $(panel || "html")
     .find("[data-tooltip]")
-    .each(function () {
-      const id = `tooltip-${$(this).attr("data-tooltip").replace(/\s/g, "")}`;
+    .each(function() {
+      const id = `tooltip-${$(this)
+        .attr("data-tooltip")
+        .replace(/\s/g, "")}`;
       jsPanel.tooltip.create({
         id: id,
         borderRadius: "10px",
@@ -332,18 +349,11 @@ export function openPanel({
   tableId,
   url,
   css,
+  headerStyle,
   checkRbac = true,
   ...other
 }) {
   const endpoint = url || `/${name}_form`;
-  if (
-    checkRbac &&
-    !user.is_admin &&
-    !user.get_requests.includes(endpoint) &&
-    rbac.get_requests[endpoint] != "all"
-  ) {
-    return notify("Error 403 - Not Authorized.", "error", 5);
-  }
   const panelId = id ? `${name}-${id}` : name;
   if ($(`#${panelId}`).length) {
     $(`#${panelId}`).css("zIndex", ++topZ);
@@ -369,7 +379,7 @@ export function openPanel({
     },
     resizeit: {
       containment: 0,
-      stop: function () {
+      stop: function() {
         if (tableId) refreshTable(tableId);
       },
     },
@@ -380,7 +390,7 @@ export function openPanel({
   } else {
     kwargs.contentAjax = {
       url: url || `/${name}_form`,
-      done: function (_, panel) {
+      done: function(_, panel) {
         panel.content.innerHTML = this.responseText;
         preprocessForm(panel, id, type, duplicate);
         configureForm(name, id, panelId);
@@ -389,6 +399,7 @@ export function openPanel({
     };
   }
   const panel = jsPanel.create(kwargs);
+  panel.headertoolbar.style = headerStyle;
   if (callback && content) callback(content);
   createTooltips(panel);
   const position = { top: `${50 + $(window).scrollTop()}px`, position: "absolute" };
@@ -419,7 +430,7 @@ export function showConfirmationPanel({
     size: "auto",
     checkRbac: false,
   });
-  $(".confirmAction").click(function () {
+  $(".confirmAction").click(function() {
     onConfirm();
     $(`#confirmation-${id}`).remove();
   });
@@ -437,7 +448,6 @@ export function createTooltip({
   content,
   callback,
   size,
-  ...other
 }) {
   if ($(target).length) {
     let kwargs = {
@@ -458,7 +468,7 @@ export function createTooltip({
     } else {
       kwargs.contentAjax = {
         url: url,
-        done: function (_, panel) {
+        done: function(_, panel) {
           panel.content.innerHTML = this.responseText;
           preprocessForm(panel);
           configureForm(name, undefined, `tooltip-${name}`);
@@ -472,13 +482,13 @@ export function createTooltip({
       kwargs.header = false;
     }
     if (persistent) {
-      kwargs.onbeforeclose = function () {
+      kwargs.onbeforeclose = function() {
         $(this).hide();
       };
     }
     jsPanel.tooltip.create(kwargs);
     if (persistent) {
-      $(target).on("click", function () {
+      $(target).on("click", function() {
         $(`#tooltip-${name}`).show();
       });
     }
@@ -535,7 +545,7 @@ export function preprocessForm(panel, id, type, duplicate) {
       <button class="icon-button" type="button">
         <span class="glyphicon glyphicon-info-sign"></span>
       </button>
-    `).on("click", function () {
+    `).on("click", function() {
       const helpUrl = $(el).attr("help");
       const propertyName = helpUrl.split("/").at(-1);
       openPanel({
@@ -543,7 +553,7 @@ export function preprocessForm(panel, id, type, duplicate) {
         title: propertyName.replace("_", " "),
         size: "600px auto",
         url: `/help/${helpUrl}`,
-        callback: function (helpPanel) {
+        callback: function(helpPanel) {
           helpPanel.querySelectorAll(".help-snippet").forEach((el) => {
             const editor = CodeMirror.fromTextArea(el, {
               lineNumbers: true,
@@ -596,7 +606,7 @@ export function initSelect(el, model, parentId, single, field) {
       type: "POST",
       delay: 250,
       contentType: "application/json",
-      data: function (params) {
+      data: function(params) {
         return JSON.stringify({
           term: params.term || "",
           page: params.page || 1,
@@ -605,7 +615,7 @@ export function initSelect(el, model, parentId, single, field) {
           multiple: !single,
         });
       },
-      processResults: function (data, params) {
+      processResults: function(data, params) {
         params.page = params.page || 1;
         return {
           results: data.items,
@@ -642,7 +652,9 @@ export function configureForm(form, id, panelId) {
       });
     } else if (field.type == "json") {
       let editor = new JSONEditor(el.next()[0], {
-        onChange: function () {
+        mode: "code",
+        modes: ["code", "view"],
+        onChange: function() {
           $(el).val(JSON.stringify(editor.get()));
         },
       });
@@ -666,6 +678,27 @@ export function configureForm(form, id, panelId) {
       editor.on("change", () => editor.save());
       if (!editors[id]) editors[id] = {};
       editors[id][property] = editor;
+      if (!field.python) continue;
+      const blackButton = $(`
+        <button type="button" style="margin-left: auto">Auto-format</button>
+      `);
+      blackButton.on("click", function() {
+        call({
+          url: "/format_code_with_black",
+          data: { content: editor.getValue() },
+          callback: (result) => {
+            editor.setValue(result);
+            notify("Code formatted with black.", "success", 5);
+          },
+        });
+      });
+      $(`#${panelId} label[help="${el.attr("help")}"]`)
+        .css({
+          display: "flex",
+          "justify-content": "space-between",
+          "align-items": "center",
+        })
+        .append(blackButton);
     } else if (["object", "object-list"].includes(field.type)) {
       let model;
       if (relationships?.[form]?.[property]?.model) {
@@ -734,8 +767,11 @@ export function showChangelogPanel(id, constraints) {
     id: id,
     tableId: `changelog-${id}`,
     title: "Changelog",
-    callback: function () {
+    callback: function() {
       // eslint-disable-next-line new-cap
+      constraints.service = constraints.service?.filter(
+        service => !["[Shared] Start", "[Shared] End"].includes(service)
+      );
       new tables["changelog"](id, constraints);
     },
   });
@@ -746,7 +782,9 @@ export function showInstancePanel(type, id, mode, tableId, edge, hideButton) {
   openPanel({
     name: formType,
     id: id || tableId,
-    footerToolbar: hideButton ? "" : `
+    footerToolbar: hideButton
+      ? ""
+      : `
       <div style="width: 100%; height: 40px; display: flex;
         align-items: center; justify-content: center;">
         <button
@@ -759,28 +797,41 @@ export function showInstancePanel(type, id, mode, tableId, edge, hideButton) {
           Save
         </button>
       </div>`,
-    callback: function (panel) {
+    callback: function(panel) {
+      let uiType = type;
       const isService = type == "service" || type in subtypes.service;
       const isDevice = type in subtypes.device;
       const isLink = type in subtypes.link;
-      if (isService) showServicePanel(type, id, mode, tableId);
+      const isData = type in subtypes.data;
+      if (isService) {
+        if (type !== "workflow") uiType = `${subtypes.service[type]} Service`;
+        showServicePanel(type, id, mode, tableId);
+      }
+      if (isData && currentStore && !id) {
+        var newOption = new Option(currentStore.path, currentStore.id, true, true);
+        $(`#${type}-store`)
+          .append(newOption)
+          .trigger("change");
+      }
       if (isDevice) showDevicePanel(type, id, mode, tableId);
       if (isLink) showLinkPanel(type, id, edge);
       if (type == "credential") showCredentialPanel(id);
-      if (type == "folder") showFolderPanel(id); 
+      if (type == "folder") showFolderPanel(id);
+      if (type == "store") showStorePanel(id);
       if (id) {
         call({
           url: `/get/${type}/${id}`,
-          data: { relation_properties: ["id", "type", "name"] },
-          callback: function (instance) {
+          data: { relation_properties: ["id", "type", "name", "ui_name"] },
+          callback: function(instance) {
             const ownersNames = instance.owners
               ? instance.owners.map((user) => user.name)
               : [];
             const allowedUser = user.is_admin || ownersNames.includes(user.name);
             $(`#rbac-properties-${id} *`).prop("disabled", !allowedUser);
             const action = mode ? mode.toUpperCase() : "EDIT";
-            panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
-            processInstance(type, instance);
+            panel.setHeaderTitle(`${action} ${uiType} - ${instance.name}`);
+            processInstance(type, instance, mode);
+            if (isService && mode == "duplicate") servicePanelUpdate(type, id);
             if (isService) loadScript(`/static/js/services/${type}.js`, id);
             if (!user.is_admin) $("[name='admin_only']").prop("disabled", true);
           },
@@ -790,20 +841,19 @@ export function showInstancePanel(type, id, mode, tableId, edge, hideButton) {
       } else if (mode == "bulk-filter") {
         buildBulkFilterPanel(panel, type, formType, tableId);
       } else {
-        panel.setHeaderTitle(`Create a New ${type}`);
+        panel.setHeaderTitle(`Create a New ${uiType}`);
         if (page == "workflow_builder" && creationMode == "create_service") {
           $(`#${type}-workflows`).append(new Option(instance.name, instance.name));
-          $(`#${type}-workflows`).val(instance.name).trigger("change");
+          $(`#${type}-workflows`)
+            .val(instance.name)
+            .trigger("change");
         }
         if (!user.is_admin) $("[name='admin_only']").prop("disabled", true);
         if (page == "network_builder") updateNetworkPanel(type);
       }
       if (isService && !id) loadScript(`/static/js/services/${type}.js`);
-      const property = isService
-        ? "scoped_name"
-        : type == "folder"
-        ? "filename"
-        : "name";
+      const property =
+        isService || isData ? "scoped_name" : type == "folder" ? "filename" : "name";
       $(`#${type}-${property}`).focus();
     },
     type: type,
@@ -844,16 +894,10 @@ function buildBulkEditPanel(panel, type, tableId) {
       `);
     }
   }
-  const form = {
-    ...serializeForm(`#search-form-${tableId}`, `${model}_filtering`),
-    ...tableInstances[tableId].constraints,
-    ...tableInstances[tableId].filteringConstraints,
-  };
-  const rbac = tableId.includes("configuration") ? "configuration" : "read";
   call({
     url: `/filtering/${model}`,
-    data: { form: form, bulk: "id", rbac: rbac },
-    callback: function (instances) {
+    data: { ...tableInstances[tableId].getFilteringData(), bulk: "id" },
+    callback: function(instances) {
       $(`#${type}-id-${tableId}`).val(instances.join("-"));
       $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val("Bulk Edit");
       const number = instances.length;
@@ -956,6 +1000,119 @@ function buildBulkFilterPanel(panel, type, formType, tableId) {
     .text("Bulk Filter");
 }
 
+export function displayDiff(type, instanceId, properties) {
+  const objectType =
+    instanceId == "none"
+      ? $("#configuration-property-diff").val()
+      : type.includes("result")
+      ? "result"
+      : type;
+  const postfix = instanceId == "none" ? "" : `-${type}-${instanceId}`;
+  let v1 = $(`input[name=v1${postfix}]:checked`).val();
+  let v2 = $(`input[name=v2${postfix}]:checked`).val();
+  if (type == "changelog") [v1, v2] = [Object.keys(properties)[0], "none"];
+  if (!v1 || !v2) {
+    notify("Select two versions to compare first.", "error", 5);
+  } else if (v1 == v2) {
+    notify("You must select two distinct versions.", "error", 5);
+  } else {
+    const diffId = type == "changelog" ? instanceId : cantorPairing(parseInt(v1), parseInt(v2));
+    const changelogSelect = type === "changelog" ? `
+      <div style="margin-top: 15px">
+        <select
+          id="changelog-properties-${diffId}"
+          name="changelog-properties"
+          class="form-control"
+        ></select>
+      </div>
+    ` : "";
+    openPanel({
+      name: "compare",
+      title: `Compare ${objectType}`,
+      id: diffId,
+      size: "1200 600",
+      content: `
+        <nav
+          class="navbar navbar-default nav-controls"
+          role="navigation"
+          style="margin-top: 30px"
+        >
+          <input
+            id="diff-type-${diffId}"
+            type="checkbox"
+            data-onstyle="info"
+            data-offstyle="primary"
+          >
+          <input
+            name="diff-context-lines"
+            id="slider-${diffId}"
+            class="slider"
+          >
+          ${changelogSelect}
+        </nav>
+        <div class="modal-body">
+          <div id="content-${diffId}" style="height:100%"></div>
+        </div>`,
+      callback: () => {
+        $(`#diff-type-${diffId}`).prop("checked", true).bootstrapToggle({
+          on: "Side by side",
+          off: "Line by line",
+          width: "120px",
+        });
+        if (type == "changelog") {
+          for (const property of Object.keys(properties)) {
+            $(`#changelog-properties-${diffId}`).append(
+              `<option value="${property}">${property}</option>`
+            );
+          }
+          $(`#changelog-properties-${diffId}`)
+            .selectpicker("refresh")
+            .change(function() {
+              v1 = $(this).val();
+              $(`#slider-${diffId}`).trigger("change");
+          });
+        }
+        const valueToLabel = { 0: 1, 1: 3, 2: 10, 3: 100, 4: "All" };
+        $(`#slider-${diffId}`)
+          .bootstrapSlider({
+            value: 1,
+            ticks: [...Array(5).keys()],
+            ticks_labels: Object.values(valueToLabel),
+            formatter: (value) => `Lines of context: ${valueToLabel[value]}`,
+            tooltip: "always",
+          })
+          .change(function() {
+            let value = valueToLabel[this.value];
+            if (value == "All") value = 999999;
+            call({
+              url: `/compare/${objectType}/${instanceId}/${v1}/${v2}/${value}`,
+              callback: (result) => {
+                if (!result) {
+                  $(`#content-${diffId}`).text("No difference found.");
+                  return;
+                }
+                let diff2htmlUi = new Diff2HtmlUI({ diff: result });
+                $(`#diff-type-${diffId}`)
+                  .on("change", function() {
+                    diff2htmlUi.draw(`#content-${diffId}`, {
+                      matching: "lines",
+                      drawFileList: true,
+                      outputFormat: $(this).prop("checked")
+                        ? "side-by-side"
+                        : "line-by-line",
+                    });
+                    $(".d2h-tag").hide();
+                  })
+                  .change();
+              },
+            });
+          })
+          .trigger("change");
+      },
+    });
+  }
+}
+
 function updateProperty(instance, el, property, value, type) {
   let propertyType;
   if (formProperties[type][property]) {
@@ -975,22 +1132,23 @@ function updateProperty(instance, el, property, value, type) {
     }
     el.selectpicker("val", value).trigger("change");
     el.selectpicker("render");
-  } else if (["object-list", "object"].includes(propertyType)) {
-    if (propertyType == "object") value = [value];
-    const idProperty = propertyType == "object" ? "id" : "name";
+  } else if (propertyType == "object") {
+    el.append(new Option(value.ui_name || value.name, value.id));
+    el.val(value.id).trigger("change");
+  } else if (propertyType == "object-list") {
     value.forEach((o) => {
       const uiLink = `
       <button type="button" title="" class="btn btn-link btn-select2"
       onclick="eNMS.base.showInstancePanel('${o.type}', '${o.id}')">
       ${o.ui_name || o.name}</button>`;
-      el.append(new Option(uiLink, o[idProperty]));
+      el.append(new Option(uiLink, o.name));
     });
-    el.val(value.map((p) => p[idProperty])).trigger("change");
+    el.val(value.map((p) => p.name)).trigger("change");
   } else if (propertyType == "json") {
     el.val(JSON.stringify(value));
     const editor = jsonEditors[instance.id][property];
     if (editor) editor.set(value);
-    if (el.attr("class").includes("collapse")) editor.collapseAll();
+    if (el.attr("class").includes("collapse")) editor.collapseAll?.();
   } else if (propertyType == "code") {
     const editor = editors[instance.id][property];
     if (editor) editor.setValue(value);
@@ -1005,7 +1163,7 @@ function updateProperty(instance, el, property, value, type) {
   }
 }
 
-export function processInstance(type, instance) {
+export function processInstance(type, instance, mode) {
   for (const [property, value] of Object.entries(instance)) {
     const el = $(
       instance ? `#${type}-${property}-${instance.id}` : `#${type}-${property}`
@@ -1014,6 +1172,7 @@ export function processInstance(type, instance) {
     if (!el.length && !isList) continue;
     updateProperty(instance, el, property, value, type);
   }
+  if (mode == "duplicate") $(`#${type}-persistent_id-${instance.id}`).val("");
 }
 
 function processData(type, id) {
@@ -1026,12 +1185,17 @@ function processData(type, id) {
     const filename = $("#folder-filename").val();
     $("#folder-path").val(`${folderPath}/${filename}`);
   }
+  if (type == "store") $(`#store-data_type-${id}`).prop("disabled", false);
   call({
     url: `/update/${type}`,
     form: id ? `${type}-form-${id}` : `${type}-form`,
     callback: (instance) => {
       if (page.includes("table")) {
-        refreshTable(page.split("_")[0]);
+        const tableId =
+          page != "store_table"
+            ? page.split("_")[0]
+            : `${type}${currentStore ? `-${currentStore.id}` : ""}`;
+        refreshTable(tableId);
       } else if (page.includes("builder")) {
         processBuilderData(instance, id);
       }
@@ -1048,12 +1212,12 @@ function processData(type, id) {
   });
 }
 
-(function ($) {
+(function($) {
   "use strict";
 
-  $.jstree.plugins.html_row = function (options, parent) {
+  $.jstree.plugins.html_row = function(options, parent) {
     // eslint-disable-next-line
-    this.redraw_node = function (nodeId, ...args) {
+    this.redraw_node = function(nodeId, ...args) {
       let el = parent.redraw_node.apply(this, [nodeId, ...args]);
       if (el) {
         let node = this._model.data[nodeId];
@@ -1099,10 +1263,10 @@ export function setTriggerMenu(value) {
   triggerMenu = value;
 }
 
-(function ($, window) {
-  $.fn.contextMenu = function (settings) {
-    return this.each(function () {
-      $(this).on("contextmenu", function (e) {
+(function($, window) {
+  $.fn.contextMenu = function(settings) {
+    return this.each(function() {
+      $(this).on("contextmenu", function(e) {
         if (e.ctrlKey || !triggerMenu) return;
         const $menu = $(settings.menuSelector)
           .show()
@@ -1112,22 +1276,30 @@ export function setTriggerMenu(value) {
             top: getMenuPosition(e.clientY, "height", "scrollTop"),
           })
           .off("click")
-          .on("click", "a", function (e) {
+          .on("click", "a", function(e) {
             $menu.hide();
             const $selectedMenu = $(e.target);
             settings.menuSelected.call(this, $selectedMenu);
           });
         return false;
       });
-      $(".dropdown-submenu a.menu-submenu").on("click", function (e) {
-        const isHidden = $(this).next("ul").is(":hidden");
-        $(".dropdown-submenu a.menu-submenu").next("ul").hide();
-        $(this).next("ul").toggle(isHidden);
+      $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
+        const isHidden = $(this)
+          .next("ul")
+          .is(":hidden");
+        $(".dropdown-submenu a.menu-submenu")
+          .next("ul")
+          .hide();
+        $(this)
+          .next("ul")
+          .toggle(isHidden);
         e.stopPropagation();
         e.preventDefault();
       });
-      $("body").click(function () {
-        $(".dropdown-submenu a.menu-submenu").next("ul").hide();
+      $("body").click(function() {
+        $(".dropdown-submenu a.menu-submenu")
+          .next("ul")
+          .hide();
         $(settings.menuSelector).hide();
       });
     });
@@ -1160,7 +1332,7 @@ export function notify(...args) {
     const alert = alerts.length + 1 > 99 ? "99+" : alerts.length + 1;
     $("#alert-number").text(alert);
   }
-  alertify.notify(...args);
+  return alertify.notify(...args);
 }
 
 function showAllAlerts() {
@@ -1262,7 +1434,7 @@ export function createAlerts() {
 }
 
 export function configureNamespace(namespace, functions) {
-  eNMS[namespace] = {};
+  eNMS[namespace] ??= {};
   functions.forEach((f) => (eNMS[namespace][f.name] = f));
 }
 
@@ -1310,20 +1482,28 @@ function switchTheme(theme) {
 function initSidebar() {
   $("#sidebar-menu")
     .find("a")
-    .on("click", function () {
+    .on("click", function() {
       let $li = $(this).parent();
       if ($li.is(".active")) {
         $li.removeClass("active active-sm");
         $("ul:first", $li).slideUp();
       } else {
         if (!$li.parent().is(".child_menu")) {
-          $("#sidebar-menu").find("li").removeClass("active active-sm");
-          $("#sidebar-menu").find("li ul").slideUp();
+          $("#sidebar-menu")
+            .find("li")
+            .removeClass("active active-sm");
+          $("#sidebar-menu")
+            .find("li ul")
+            .slideUp();
         } else {
           if ($("body").is(".nav-sm")) {
             if (!$li.parent().is(".child_menu")) {
-              $("#sidebar-menu").find("li").removeClass("active active-sm");
-              $("#sidebar-menu").find("li ul").slideUp();
+              $("#sidebar-menu")
+                .find("li")
+                .removeClass("active active-sm");
+              $("#sidebar-menu")
+                .find("li ul")
+                .slideUp();
             }
           }
         }
@@ -1332,24 +1512,39 @@ function initSidebar() {
       }
     });
 
-  let switchMenu = function () {
+  let switchMenu = function() {
     if ($("body").hasClass("nav-sm")) {
       $("#eNMS").css({ "font-size": "17px" });
       $("#eNMS-version").css({ "font-size": "15px" });
-      $("#sidebar-menu").find("li.active ul").hide();
-      $("#sidebar-menu").find("li.active").addClass("active-sm");
-      $("#sidebar-menu").find("li.active").removeClass("active");
+      $("#sidebar-menu")
+        .find("li.active ul")
+        .hide();
+      $("#sidebar-menu")
+        .find("li.active")
+        .addClass("active-sm");
+      $("#sidebar-menu")
+        .find("li.active")
+        .removeClass("active");
     } else {
       $("#eNMS").css({ "font-size": "30px" });
       $("#eNMS-version").css({ "font-size": "20px" });
-      $("#sidebar-menu").find("li.active-sm ul").show();
-      $("#sidebar-menu").find("li.active-sm").addClass("active");
-      $("#sidebar-menu").find("li.active-sm").removeClass("active-sm");
+      $("#sidebar-menu")
+        .find("li.active-sm ul")
+        .show();
+      $("#sidebar-menu")
+        .find("li.active-sm")
+        .addClass("active");
+      $("#sidebar-menu")
+        .find("li.active-sm")
+        .removeClass("active-sm");
       const url = "a[href='" + currentUrl + "']";
-      $("#sidebar-menu").find(url).parent("li").addClass("current-page");
+      $("#sidebar-menu")
+        .find(url)
+        .parent("li")
+        .addClass("current-page");
       $("#sidebar-menu")
         .find("a")
-        .filter(function () {
+        .filter(function() {
           return this.href == currentUrl;
         })
         .parent("li")
@@ -1359,13 +1554,15 @@ function initSidebar() {
         .parent()
         .addClass("active");
     }
-    $(".dataTable").each(function () {
-      $(this).dataTable().fnDraw();
+    $(".dataTable").each(function() {
+      $(this)
+        .dataTable()
+        .fnDraw();
     });
   };
 
   switchMenu();
-  $("#menu_toggle").on("click", function () {
+  $("#menu_toggle").on("click", function() {
     menuIsToggled = !menuIsToggled;
     call({ url: `/switch_menu/${user.id}` });
     $("body").toggleClass("nav-md nav-sm");
@@ -1381,8 +1578,8 @@ export function hideMenu() {
   menuIsHidden = !menuIsHidden;
 }
 
-$(document).ready(function () {
-  $("#eNMS").on("click", function (event) {
+$(document).ready(function() {
+  $("#eNMS").on("click", function(event) {
     if (!event.altKey || !event.shiftKey || !user.is_admin) return;
     openDebugPanel();
   });
@@ -1409,9 +1606,6 @@ $(document).ready(function () {
   detectUserInactivity();
   createTooltips();
   createNotificationBanner();
-});
-
-$(window).load(function () {
   NProgress.done();
 });
 
@@ -1421,6 +1615,7 @@ configureNamespace("base", [
   clearAlerts,
   copyToClipboard,
   createAlerts,
+  displayDiff,
   fullScreen,
   hideMenu,
   loadScript,

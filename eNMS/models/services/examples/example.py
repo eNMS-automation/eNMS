@@ -66,9 +66,7 @@ class ExampleService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "example_service"}
 
-    # Some services will take action or interrogate a device. The job method
-    # can also take device as a parameter for these types of services.
-    # def job(self, device, payload):
+    @staticmethod
     def job(self, run, device=None):
         run.log("info", "Logs displayed in real-time as service runs", device)
         # The "job" function is called when the service is executed.
@@ -157,8 +155,8 @@ class ExampleForm(ServiceForm):
             )
         ],
     )
-    an_integer = IntegerField()
-    a_float = FloatField()
+    an_integer = IntegerField(validators=[InputRequired()])
+    a_float = FloatField(validators=[InputRequired()])
 
     # If validator the user input is more complex, you can create a python function
     # to implement the validation mechanism.
@@ -167,7 +165,7 @@ class ExampleForm(ServiceForm):
     # That function will check that the custom integer value is superior to the product
     # of "an_integer" and "a_float".
     # You must raise a "ValidationError" when the validation fails.
-    custom_integer = IntegerField("Custom Integer")
+    custom_integer = IntegerField("Custom Integer", validators=[InputRequired()])
 
     # A SelectMultipleField will be displayed as a drop-down list that allows
     # multiple selection.
@@ -178,7 +176,7 @@ class ExampleForm(ServiceForm):
 
     # A BooleanField is displayed as a check box.
     boolean1 = BooleanField()
-    boolean2 = BooleanField("Boolean N°1")
+    boolean2 = BooleanField("Boolean #2")
 
     def validate_custom_integer(self, field):
         product = self.an_integer.data * self.a_float.data

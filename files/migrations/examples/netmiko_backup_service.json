@@ -1,0 +1,629 @@
+[
+  {
+    "add_header": true,
+    "admin_only": false,
+    "auth_timeout": 0.0,
+    "banner_timeout": 15.0,
+    "builder_link": "INN-WJSlXIg",
+    "close_connection": true,
+    "commands": [
+      {
+        "prefix": "shusers",
+        "value": "show users"
+      },
+      {
+        "prefix": "shipintbr",
+        "value": "show ip interface brief"
+      },
+      {
+        "prefix": "",
+        "value": "show vrf"
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      }
+    ],
+    "completion_time": 1,
+    "config_mode": false,
+    "conn_timeout": 10.0,
+    "connection_name": "default",
+    "content_match": "",
+    "content_match_regex": false,
+    "conversion_method": "none",
+    "creation_time": "",
+    "creator": "admin",
+    "credential_type": "any",
+    "credentials": "device",
+    "custom_password": "",
+    "custom_username": "",
+    "default_uuid": "7b2d3e3f-1444-4317-9ae8-cb9dd65c21f3",
+    "definition": "Definition",
+    "delete_spaces_before_matching": false,
+    "description": "",
+    "device_query": "",
+    "device_query_property": "name",
+    "dict_match": {},
+    "disable_result_creation": false,
+    "disabled": false,
+    "disabled_info": "",
+    "display_only_failed_nodes": false,
+    "display_report": false,
+    "driver": "device",
+    "dry_run": false,
+    "email_report": false,
+    "enable_mode": true,
+    "exit_command": "",
+    "expect_password_prompt": "",
+    "expect_prompt": "",
+    "expect_username_prompt": "",
+    "global_delay_factor": 0.1,
+    "high_performance": false,
+    "impacting": true,
+    "include_device_results": true,
+    "include_link_in_summary": false,
+    "initial_payload": {},
+    "iteration_devices": "",
+    "iteration_devices_property": "name",
+    "iteration_values": "",
+    "iteration_variable_name": "iteration_value",
+    "jump_command": "",
+    "jump_on_connect": false,
+    "jump_password": "",
+    "jump_username": "",
+    "last_modified": "2022-11-09 01:23:32.402678",
+    "last_modified_by": "admin",
+    "last_run": "",
+    "local_path": "network_data",
+    "log_level": 1,
+    "mail_bcc": "",
+    "mail_recipient": "",
+    "mail_sender": "",
+    "mail_subject": "",
+    "mandatory_parameter": "Default Value",
+    "mandatory_parametrization": false,
+    "max_number_of_retries": 100,
+    "max_processes": 15,
+    "maximum_runs": 1,
+    "multiprocessing": false,
+    "name": "[(R) Configuration Properties Backup Services] Get Operational Data with Netmiko",
+    "negative_logic": false,
+    "notification_header": "",
+    "number_of_retries": 0,
+    "operating_system": "",
+    "parameterized_form": "name = StringField('Name', [InputRequired()])\ninitial_payload = DictField()\ntarget_devices = MultipleInstanceField('Devices', model='device')\ntarget_pools = MultipleInstanceField('Pools', model='pool')\ndevice_query = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows': 2})\ndevice_query_property = SelectField('Query Property Type', choices=(('name', 'Name'), ('ip_address', 'IP address')))\nmultiprocessing = BooleanField('Multiprocessing', default=False)\nmax_processes = IntegerField('Maximum number of processes', default=15)",
+    "parameterized_form_template": "",
+    "persistent_id": "dMkHCPAc-Zo",
+    "postprocessing": "",
+    "postprocessing_mode": "always",
+    "preprocessing": "",
+    "priority": 11,
+    "property": "operational_data",
+    "read_timeout": 10.0,
+    "replacements": [
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      }
+    ],
+    "reply_to": "",
+    "report": "",
+    "report_format": "text",
+    "report_jinja2_template": false,
+    "reserved": false,
+    "restrict_to_owners": [],
+    "run_method": "per_device",
+    "scoped_name": "Get Operational Data with Netmiko",
+    "send_notification": false,
+    "send_notification_method": "mail",
+    "shared": false,
+    "show_user_logs": true,
+    "skip": {},
+    "skip_query": "",
+    "skip_value": "success",
+    "soft_deleted": false,
+    "start_new_connection": false,
+    "time_between_retries": 10,
+    "update_target_pools": false,
+    "validation_condition": "none",
+    "validation_method": "text",
+    "validation_section": "results['result']",
+    "vendor": "",
+    "version": "",
+    "waiting_time": 0
+  },
+  {
+    "add_header": true,
+    "admin_only": false,
+    "auth_timeout": 0.0,
+    "banner_timeout": 15.0,
+    "builder_link": "INN-WJSlXIg",
+    "close_connection": false,
+    "commands": [
+      {
+        "prefix": "",
+        "value": "show run"
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      }
+    ],
+    "completion_time": 1,
+    "config_mode": false,
+    "conn_timeout": 10.0,
+    "connection_name": "default",
+    "content_match": "",
+    "content_match_regex": false,
+    "conversion_method": "none",
+    "creation_time": "",
+    "creator": "admin",
+    "credential_type": "any",
+    "credentials": "device",
+    "custom_password": "",
+    "custom_username": "",
+    "default_uuid": "88af9ac4-7eb7-451e-869f-bf60eac5c9b1",
+    "definition": "Definition",
+    "delete_spaces_before_matching": false,
+    "description": "",
+    "device_query": "",
+    "device_query_property": "name",
+    "dict_match": {},
+    "disable_result_creation": false,
+    "disabled": false,
+    "disabled_info": "",
+    "display_only_failed_nodes": false,
+    "display_report": false,
+    "driver": "device",
+    "dry_run": false,
+    "email_report": false,
+    "enable_mode": true,
+    "exit_command": "",
+    "expect_password_prompt": "",
+    "expect_prompt": "",
+    "expect_username_prompt": "",
+    "global_delay_factor": 0.1,
+    "high_performance": false,
+    "impacting": true,
+    "include_device_results": false,
+    "include_link_in_summary": false,
+    "initial_payload": {},
+    "iteration_devices": "",
+    "iteration_devices_property": "name",
+    "iteration_values": "",
+    "iteration_variable_name": "iteration_value",
+    "jump_command": "",
+    "jump_on_connect": false,
+    "jump_password": "",
+    "jump_username": "",
+    "last_modified": "2022-11-09 01:23:32.556841",
+    "last_modified_by": "admin",
+    "last_run": "",
+    "local_path": "network_data",
+    "log_level": 1,
+    "mail_bcc": "",
+    "mail_recipient": "",
+    "mail_sender": "",
+    "mail_subject": "",
+    "mandatory_parameter": "Default Value",
+    "mandatory_parametrization": false,
+    "max_number_of_retries": 100,
+    "max_processes": 15,
+    "maximum_runs": 1,
+    "multiprocessing": false,
+    "name": "[(R) Configuration Properties Backup Services] Get Configuration with Netmiko",
+    "negative_logic": false,
+    "notification_header": "",
+    "number_of_retries": 0,
+    "operating_system": "",
+    "parameterized_form": "name = StringField('Name', [InputRequired()])\ninitial_payload = DictField()\ntarget_devices = MultipleInstanceField('Devices', model='device')\ntarget_pools = MultipleInstanceField('Pools', model='pool')\ndevice_query = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows': 2})\ndevice_query_property = SelectField('Query Property Type', choices=(('name', 'Name'), ('ip_address', 'IP address')))\nmultiprocessing = BooleanField('Multiprocessing', default=False)\nmax_processes = IntegerField('Maximum number of processes', default=15)",
+    "parameterized_form_template": "",
+    "persistent_id": "ZjOTdhjdZqY",
+    "postprocessing": "",
+    "postprocessing_mode": "always",
+    "preprocessing": "",
+    "priority": 11,
+    "property": "configuration",
+    "read_timeout": 10.0,
+    "replacements": [
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      }
+    ],
+    "reply_to": "",
+    "report": "",
+    "report_format": "text",
+    "report_jinja2_template": false,
+    "reserved": false,
+    "restrict_to_owners": [],
+    "run_method": "per_device",
+    "scoped_name": "Get Configuration with Netmiko",
+    "send_notification": false,
+    "send_notification_method": "mail",
+    "shared": false,
+    "show_user_logs": true,
+    "skip": {},
+    "skip_query": "",
+    "skip_value": "success",
+    "soft_deleted": false,
+    "start_new_connection": false,
+    "time_between_retries": 10,
+    "update_target_pools": false,
+    "validation_condition": "none",
+    "validation_method": "text",
+    "validation_section": "results['result']",
+    "vendor": "",
+    "version": "",
+    "waiting_time": 0
+  },
+  {
+    "add_header": true,
+    "admin_only": false,
+    "auth_timeout": 0.0,
+    "banner_timeout": 15.0,
+    "builder_link": "PblTtswsUWQ",
+    "close_connection": false,
+    "commands": [
+      {
+        "prefix": "V1",
+        "value": "show vrf {{ variable1 }}"
+      },
+      {
+        "prefix": "V2",
+        "value": "show vrf {{ variable2 }}"
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      },
+      {
+        "prefix": "",
+        "value": ""
+      }
+    ],
+    "completion_time": 1,
+    "config_mode": false,
+    "conn_timeout": 10.0,
+    "connection_name": "default",
+    "content_match": "",
+    "content_match_regex": false,
+    "conversion_method": "none",
+    "creation_time": "",
+    "creator": "admin",
+    "credential_type": "any",
+    "credentials": "device",
+    "custom_password": "",
+    "custom_username": "",
+    "default_uuid": "b2291d69-4520-4d16-aa99-64ec08195a05",
+    "definition": "Definition",
+    "delete_spaces_before_matching": false,
+    "description": "",
+    "device_query": "",
+    "device_query_property": "name",
+    "dict_match": {},
+    "disable_result_creation": false,
+    "disabled": false,
+    "disabled_info": "",
+    "display_only_failed_nodes": false,
+    "display_report": false,
+    "driver": "device",
+    "dry_run": true,
+    "email_report": false,
+    "enable_mode": true,
+    "exit_command": "exit",
+    "expect_password_prompt": "password",
+    "expect_prompt": "admin.*$",
+    "expect_username_prompt": "username:",
+    "global_delay_factor": 0.1,
+    "high_performance": false,
+    "impacting": true,
+    "include_device_results": false,
+    "include_link_in_summary": false,
+    "initial_payload": {},
+    "iteration_devices": "",
+    "iteration_devices_property": "name",
+    "iteration_values": "",
+    "iteration_variable_name": "iteration_value",
+    "jump_command": "ssh jump_server_IP",
+    "jump_on_connect": false,
+    "jump_password": "",
+    "jump_username": "",
+    "last_modified": "2024-02-07 06:18:13.595438",
+    "last_modified_by": "admin",
+    "last_run": "",
+    "local_path": "network_data",
+    "log_level": 1,
+    "mail_bcc": "",
+    "mail_recipient": "",
+    "mail_sender": "",
+    "mail_subject": "",
+    "mandatory_parameter": "Default Value",
+    "mandatory_parametrization": false,
+    "max_number_of_retries": 100,
+    "max_processes": 15,
+    "maximum_runs": 1,
+    "multiprocessing": false,
+    "name": "[Dry Run: Netmiko Services] Backup",
+    "negative_logic": false,
+    "notification_header": "",
+    "number_of_retries": 0,
+    "operating_system": "",
+    "parameterized_form": "name = StringField('Name', [InputRequired()])\ninitial_payload = DictField()\ntarget_devices = MultipleInstanceField('Devices', model='device')\ntarget_pools = MultipleInstanceField('Pools', model='pool')\ndevice_query = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows': 2})\ndevice_query_property = SelectField('Query Property Type', choices=(('name', 'Name'), ('ip_address', 'IP address')))\nmultiprocessing = BooleanField('Multiprocessing', default=False)\nmax_processes = IntegerField('Maximum number of processes', default=15)",
+    "parameterized_form_template": "",
+    "persistent_id": "3McrIDlKWyM",
+    "postprocessing": "",
+    "postprocessing_mode": "success",
+    "preprocessing": "",
+    "priority": 10,
+    "property": "configuration",
+    "read_timeout": 10.0,
+    "replacements": [
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      },
+      {
+        "pattern": "",
+        "replace_with": ""
+      }
+    ],
+    "reply_to": "",
+    "report": "",
+    "report_format": "text",
+    "report_jinja2_template": false,
+    "reserved": false,
+    "restrict_to_owners": [],
+    "run_method": "per_device",
+    "scoped_name": "Backup",
+    "send_notification": false,
+    "send_notification_method": "mail",
+    "shared": false,
+    "show_user_logs": true,
+    "skip": {},
+    "skip_query": "",
+    "skip_value": "success",
+    "soft_deleted": false,
+    "start_new_connection": false,
+    "time_between_retries": 10,
+    "update_target_pools": false,
+    "validation_condition": "none",
+    "validation_method": "text",
+    "validation_section": "results['result']",
+    "vendor": "",
+    "version": "",
+    "waiting_time": 0
+  }
+]

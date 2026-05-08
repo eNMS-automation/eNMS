@@ -1,0 +1,15 @@
+[
+  {
+    "admin_only": false,
+    "creation_time": "2025-02-07 08:09:20.748904",
+    "creator": "admin",
+    "data_type": "secret",
+    "description": "",
+    "last_modified": "",
+    "last_modified_by": "",
+    "name": ">Secrets",
+    "path": "/Secrets",
+    "persistent_id": "sGTmso7JX4Y",
+    "scoped_name": "Secrets"
+  }
+]

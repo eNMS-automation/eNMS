@@ -4,12 +4,12 @@
 
 The eNMS changelog is found under `System / Changelog`
 
-![Changelogs](../_static/system/changelog.png)
+![Changelogs](../_static/system/changelog.jpg)
 
 Changelog contains the following searchable information:
 
 -   Object creation, deletion, and modification activity.
--   Running of services / workflows; when they ran, who ran them.
+-   Running of services / workflows; when they are run, who ran them.
 -   Various administration logs, such as database migration,
     parameter updates, etc.
 -   Custom logs, defined by users in services / workflows.
@@ -17,9 +17,13 @@ Changelog contains the following searchable information:
 ## Object Changelogs
 
 Some changelogs are linked to specific objects, detailing how they were created, updated, or deleted.
-In the changelogs table, you can enable the "target type" and "target name" columns to see which object each changelog pertains to.
+In the changelogs table, you can enable the "Target Type" and "Target Name" columns to see which object each changelog pertains to.
 
 A change linked to a specific object can sometimes be reverted or undone. The "Revert" icon on the right side of the changelogs table allows you to do this. If the icon is greyed out, the "Revert" action is not available.
+
+When the changelog relates to an object update, a "Diff" panel allows you to select any of the properties that have changed. For each property, it displays a git-style diff showing the value before and after the change, making it easy to track modifications, especially for large textfields like python code in a service pre/post-processing.
+
+![Changelogs Diff](../_static/system/changelog_diff.jpg)
 
 ## Filtering Changelogs
 
@@ -79,13 +83,13 @@ From the Workflow Builder, you can:
 
 ![Accessing Changelogs from the Workflow Builder](../_static/system/changelog_workflow_builder.png)
 
-Note that when more than one service is selected in the Workflow Builder, the "Changelog" entry in the menu will display changelogs for all selected services.
+Note that when more than one service is selected in the Workflow Builder, the "Changelog" entry in the menu (right click -> "Display" / "Changelog") will display changelogs for all selected services.
 
 For the Network Builder, the same options described above for the Workflow Builder are also available.
 
 From a table, you can:
 
-- Access all changelogs for the table's type of object by clicking the wrench icon in the upper menu.
+- Access all changelogs for the table's type of objects by clicking the wrench icon in the upper menu.
 - Access the changelog for a specific object by clicking the same icon in the object's row.
 
 ![Accessing Changelogs from Any Table](../_static/system/changelog_table.png)

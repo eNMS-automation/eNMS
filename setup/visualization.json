@@ -25,6 +25,7 @@
     "antenna": "Antenna",
     "firewall": "Firewall",
     "host": "Host",
+    "network": "Network",
     "optical_switch": "Optical switch",
     "regenerator": "Regenerator",
     "router": "Router",

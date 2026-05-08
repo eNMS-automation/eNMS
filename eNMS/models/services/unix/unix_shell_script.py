@@ -2,8 +2,8 @@ from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
-from eNMS.forms import NetmikoForm
 from eNMS.fields import BooleanField, HiddenField, StringField
+from eNMS.forms import NetmikoForm
 from eNMS.models.automation import ConnectionService
 from eNMS.variables import vs
 
@@ -17,12 +17,11 @@ class UnixShellScriptService(ConnectionService):
     enable_mode = db.Column(Boolean, default=False)
     config_mode = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
-    read_timeout_override = db.Column(Float, default=0.0)
+    read_timeout = db.Column(Float, default=10.0)
     conn_timeout = db.Column(Float, default=10.0)
     auth_timeout = db.Column(Float, default=0.0)
     banner_timeout = db.Column(Float, default=15.0)
-    fast_cli = db.Column(Boolean, default=False)
-    global_delay_factor = db.Column(Float, default=1.0)
+    global_delay_factor = db.Column(Float, default=0.1)
     expect_string = db.Column(db.SmallString)
     auto_find_prompt = db.Column(Boolean, default=True)
     strip_prompt = db.Column(Boolean, default=True)
@@ -30,12 +29,13 @@ class UnixShellScriptService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "unix_shell_script_service"}
 
+    @staticmethod
     def job(self, run, device):
         source_code = run.sub(run.source_code, locals())
         if run.dry_run:
             return {"source_code": source_code}
         netmiko_connection = run.netmiko_connection(device)
-        script_file_name = f"{run.space_deleter(vs.get_time())}.sh"
+        script_file_name = f"{vs.space_deleter(vs.get_time())}.sh"
         run.log("info", f"Sending shell script '{script_file_name}'", device)
         expect_string = run.sub(run.expect_string, locals())
         command_list = (

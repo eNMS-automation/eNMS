@@ -1,0 +1,26 @@
+[
+  {
+    "admin_only": false,
+    "allowed_automation": [
+      "scheduler",
+      "rest_api",
+      "application"
+    ],
+    "commit_sha": "1d840d49aca531b99f79e71ab5165ccafbf6d1d8",
+    "creation_time": "",
+    "creator": "",
+    "description": "eNMS Server",
+    "ip_address": "192.168.56.108:5000",
+    "last_modified": "2025-07-21 19:03:53.070384",
+    "last_modified_by": "admin",
+    "last_restart": "2025-07-21 19:03:53.069594",
+    "location": "",
+    "mac_address": "50548062756104",
+    "name": "eNMS Server",
+    "role": "primary",
+    "scheduler_active": true,
+    "scheduler_address": "http://192.168.56.103:5000",
+    "version": "5.1",
+    "weight": 3
+  }
+]

@@ -67,6 +67,14 @@ The Workflow Builder's panel is organized into 3 blocks of controls:
     - `Switch to Parent workflow`: transitions back to the parent workflow if
       a subworkflow has been double-clicked for drill down.
     - `Next workflow`: functions like the Next-button of the browser.
+      
+!!! note
+
+    **Shared Service**
+
+    A pink shadow around a service node visually indicates that the service is shared.
+
+![Shared Service](../_static/automation/workflows/workflow_builder_ss.png)
 
 -   Section 3: Run or Stop the workflow, Browse Logs and Results
 
@@ -89,12 +97,12 @@ The Workflow Builder's panel is organized into 3 blocks of controls:
       same device or different devices.
     - `Run the Workflow`: using its saved parameters and the saved parameters
       of its contained services.
-    - `Parameterized Run`:  run the Workflow by first popping up a user input
+    - `Parameterized Run`: run the Workflow by first popping up a user input
       panel to prompt for select parameters (so that those parameters, such
       as, which device targets to run on, do not need to be saved inside the
       workflow).  The list of parameters to prompt for are set in Step1 of
       the workflow editor.
-    - `Stop the Workflow`:  the workflow will stop once the devices-in-progress
+    - `Stop the Workflow`: the workflow will stop once the devices-in-progress
       finish their current service. This feature is also available from a button
       in the `Automation -> Results` table alongside each result status.
 

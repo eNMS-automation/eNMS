@@ -7,11 +7,12 @@ Services.
 
 - `Driver`: Scrapli driver to use. Currently, it supports:
     - `Device Driver`: Use the driver assigned to the device in the application inventory
-    - `arista_eos`
-    - `cisco_iosxe`
-    - `cisco_iosxr`
-    - `cisco_nxos`
-    - `juniper_junos`
+    - The base Scrapli installation comes with support for Arista, Cisco XE, XR and NXOS, and
+      Juniper devices. Installing the optional Scrapli Community repository currently 
+      [here](https://github.com/scrapli/scrapli_community/tree/main)
+      adds support for Aethra, Alcatel, Aruba, additional Cisco, Cumulus, Datacom, Dell, Dlink,
+      Edgecore, Eltex, Fortinet, HP, Huawei, Mikrotik, Nokia, Paloalto, Raisecom, Ruckus,
+      Siemens, Versa, Vyos, and Zyxel/dslam devices.
 - `Is Configuration`:  Should the device be put in config mode before
   issuing the commands?
 - `Transport`: Supports using the following transport plugins:
@@ -25,7 +26,7 @@ If ssh2 or paramiko are selected, the timeouts for each respective library is us
     
 ## Connection Parameters
 
-![Scrapli Common Parameters](../../_static/automation/service_types/netmiko_connection_parameters.png)
+![Scrapli Common Parameters](../../_static/automation/service_types/connection_parameters.png)
 
 - `Credentials`: Select between:
     - `Device Credentials`: The application will select the most appropriate credential

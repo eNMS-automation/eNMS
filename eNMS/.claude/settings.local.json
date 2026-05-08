@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(python3:*)",
+      "Bash(grep:*)",
+      "Bash(git log:*)",
+      "Bash(for commit in ece9eb379 9938b9408 8e45607e3 3e543a93f 2acd300bc e44753273 006be13fe 37dee6932)",
+      "Bash(do echo \"=== $commit ===\")",
+      "Bash(done)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(psql:*)",
+      "Bash(brew list:*)",
+      "Bash(lsof:*)",
+      "Bash(awk:*)",
+      "Bash(xxd:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

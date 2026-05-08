@@ -1,0 +1,32 @@
+[
+  {
+    "admin_only": false,
+    "creation_time": "2025-02-16 16:19:15.457798",
+    "creator": "admin",
+    "description": "",
+    "group": "Group 1",
+    "last_modified": "",
+    "last_modified_by": "",
+    "name": ">IPAM>VLAN>Vlan 1",
+    "path": "/IPAM/VLAN/Vlan 1",
+    "persistent_id": "2qyq9Ajs97s",
+    "role": "Default VLAN",
+    "scoped_name": "Vlan 1",
+    "vlan_id": 1
+  },
+  {
+    "admin_only": false,
+    "creation_time": "2025-02-16 16:19:30.224797",
+    "creator": "admin",
+    "description": "",
+    "group": "Group B",
+    "last_modified": "",
+    "last_modified_by": "",
+    "name": ">IPAM>VLAN>Vlan 2",
+    "path": "/IPAM/VLAN/Vlan 2",
+    "persistent_id": "85rTbsNxuZg",
+    "role": "Vlan 2",
+    "scoped_name": "Vlan 2",
+    "vlan_id": 2
+  }
+]

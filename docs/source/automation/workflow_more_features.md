@@ -29,7 +29,7 @@ previous run. This is useful if:
     b) there is simply not enough time to re-run all the previous
        services.
   
-Selecting `Restart Workflow from Here` by right clicking on a service 
+Selecting `Restart Workflow from Here` by right-clicking on a service 
 presents the user with a form to select:
 
 - `Restart Runtime`: The previous runtime to use as the payload for
@@ -178,6 +178,27 @@ The tree automatically tracks the current workflow:
 Double-clicking a service will automatically select and focus on that service. If the service is in another workflow, it will switch to that workflow.
 
 When a workflow has a superworkflow, it is displayed as part of the tree.
+
+## Workflow Search
+
+The workflow search mechanism is designed to operate along both the Workflow Builder and the Workflow Tree.
+You can click the magnifying glass icon to open the Search panel.
+
+![Workflow Tree Display](../_static/automation/workflows/workflow_search.jpg) 
+
+The Search panel provides the following options:
+
+- Type of Search
+    - `Search by name`: Searches based on service names.
+    - `Search across all properties`: Searches across all properties, including python fields (e.g preprocessing, postprocessing, source code of a python snippet service, etc). This is especially useful when looking for a specific variable or python function to see where it is used throughout the workflow.
+
+- `Include Non-Matching Services in Workflow Tree`: This option only affects the workflow tree and does not impact the workflow builder (in the workflow builder, services are highlighted in yellow if they are a match)
+    - **Unchecked** (default): Only matching services are displayed in the workflow tree.
+    - **Checked**: All services are displayed, but matching ones are highlighted in yellow.
+
+- `Regular Expression Search`: When enabled, the text string entered is treated as a regular expression.
+
+- `Device Filtering`: Limits the display of success / failure colors to a specific device. This option is only applicable in runtime mode (the selected device must be one of the target devices for that runtime).
 
 ## Runtime Notes
 

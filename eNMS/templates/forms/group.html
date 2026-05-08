@@ -36,7 +36,7 @@
       <div class="tab-content">
         <div class="tab-pane fade in active" id="group-properties">
           <div id="content" class="add-id" style="height: 100%"></div>
-          {% for field in form if field.name in ("name", "creator", "admin_only",
+          {% for field in form if field.name in ("name", "creator", "last_modified", "last_modified_by", "admin_only",
           "force_read_access", "description", "email", "users") or field.name in
           form.custom_properties %} {{ block_field(form, field.name) }} {% endfor %}
         </div>
@@ -47,7 +47,7 @@
           endif %} {% endfor %}
         </div>
         <div class="tab-pane fade" id="group-model-access">
-          {% for field in form %} {% if field.name.split("_")[0] in rbac["rbac_models"]
+          {% for field in form %} {% if field.name.split("_access")[0] in rbac["rbac_models"]
           %} {{ inline_field(form_type, field) }} {% endif %} {% endfor %}
         </div>
         {% endif %}

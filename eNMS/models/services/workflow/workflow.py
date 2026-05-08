@@ -1,13 +1,10 @@
 from collections import defaultdict
 from heapq import heappop, heappush
 from sqlalchemy import Boolean, ForeignKey, Integer
-from sqlalchemy.orm import backref, relationship
+from sqlalchemy.orm import backref, deferred, relationship
 from sqlalchemy.schema import UniqueConstraint
-from wtforms.validators import NumberRange
 
 from eNMS.database import db
-from eNMS.models.base import AbstractBase
-from eNMS.forms import ServiceForm
 from eNMS.fields import (
     BooleanField,
     HiddenField,
@@ -15,7 +12,9 @@ from eNMS.fields import (
     IntegerField,
     SelectField,
 )
+from eNMS.forms import ServiceForm
 from eNMS.models.automation import Service
+from eNMS.models.base import AbstractBase
 from eNMS.runner import Runner
 from eNMS.variables import vs
 
@@ -28,20 +27,16 @@ class Workflow(Service):
     category = db.Column(db.SmallString)
     close_connection = db.Column(Boolean, default=False)
     labels = db.Column(db.Dict, info={"log_change": False})
-    man_minutes_type = db.Column(db.TinyString, default="workflow")
-    man_minutes = db.Column(Integer, default=0)
-    man_minutes_total = db.Column(Integer, default=0)
+    positions = deferred(db.Column(db.Dict, default={}, info={"log_change": False}))
     services = relationship(
         "Service",
         secondary=db.service_workflow_table,
         back_populates="workflows",
-        lazy="joined",
     )
     edges = relationship(
         "WorkflowEdge",
         back_populates="workflow",
         cascade="all, delete-orphan",
-        lazy="joined",
     )
     superworkflow_id = db.Column(
         Integer, ForeignKey("workflow.id", ondelete="SET NULL")
@@ -64,9 +59,10 @@ class Workflow(Service):
             start = db.fetch("service", scoped_name="Start", rbac=None)
             end = db.fetch("service", scoped_name="End", rbac=None)
             self.services.extend([start, end])
+            self.positions = {}
         super().__init__(**kwargs)
-        if not migration_import and self.name not in end.positions:
-            end.positions[self.name] = [500, 0]
+        if not migration_import and "[Shared] End" not in self.positions:
+            self.positions["[Shared] End"] = [500, 0]
 
     def recursive_update(self):
         def rec(service):
@@ -87,19 +83,22 @@ class Workflow(Service):
         old_name = self.name
         super().set_name(name)
         for service in self.services:
+            old_service_name = service.name
             if not service.shared:
                 service.set_name()
-            if old_name in service.positions:
-                service.positions[self.name] = service.positions[old_name]
+            if old_service_name in self.positions:
+                self.positions[service.name] = self.positions[old_service_name]
         for edge in self.edges:
             edge.name.replace(old_name, self.name)
 
     def duplicate(self, workflow=None, clone=None):
+        db.session.connection().info["ignore"] = True
         if not clone:
             clone = super().duplicate(workflow)
         clone.labels = self.labels
         clone_services = {}
         db.session.commit()
+        db.session.connection().info["ignore"] = True
         for service in self.exclude_soft_deleted("services"):
             if service.shared:
                 service_clone = service
@@ -107,27 +106,31 @@ class Workflow(Service):
                     clone.services.append(service)
             else:
                 service_clone = service.duplicate(clone)
-            service_clone.positions[clone.name] = service.positions.get(
-                self.name, [0, 0]
+            clone.positions[service_clone.name] = self.positions.get(
+                service.name, [0, 0]
             )
             service_clone.skip[clone.name] = service.skip.get(self.name, False)
             clone_services[service.id] = service_clone
         db.session.commit()
+        db.session.connection().info["ignore"] = True
         for edge in self.exclude_soft_deleted("edges"):
             clone.edges.append(
                 db.factory(
                     "workflow_edge",
                     rbac=None,
                     **{
-                        "workflow": clone.id,
+                        "workflow": clone,
+                        "color": edge.color,
+                        "label": edge.label,
                         "subtype": edge.subtype,
-                        "source": clone_services[edge.source.id].id,
-                        "destination": clone_services[edge.destination.id].id,
+                        "source": clone_services[edge.source.id],
+                        "destination": clone_services[edge.destination.id],
                     },
                 )
             )
-            db.session.commit()
-        clone.recursive_update()
+        db.session.commit()
+        if not workflow:
+            clone.recursive_update()
         return clone
 
     @property
@@ -147,90 +150,83 @@ class Workflow(Service):
         ]
         return sum(edges, [])
 
+    @staticmethod
     def job(self, run, device=None):
         number_of_runs = defaultdict(int)
-        start = db.fetch("service", scoped_name="Start", rbac=None)
-        end = db.fetch("service", scoped_name="End", rbac=None)
+        topology = run.cache["topology"]
+        start = topology["name_to_dict"]["services"]["[Shared] Start"]
+        end = topology["name_to_dict"]["services"]["[Shared] End"]
         services, targets = [], defaultdict(set)
-        start_targets = [device] if device else run.target_devices
+        start_targets = [device] if device else run.run_targets
         for service_id in run.start_services or [start.id]:
-            service = db.fetch("service", id=service_id, rbac=None)
+            service = topology["services"][int(service_id)]
             targets[service.name] |= {device.name for device in start_targets}
-            heappush(services, (1 / service.priority, service))
-        visited, restart_run = set(), run.restart_run
+            heappush(services, (1 / service.priority, service.id))
+        visited = set()
         tracking_bfs = run.run_method == "per_service_with_workflow_targets"
+        SxS = not (tracking_bfs or device)
         device_store = {device.name: device for device in start_targets}
         while services:
             if run.stop:
                 return {"success": False, "result": "Aborted"}
-            _, service = heappop(services)
+            _, service_id = heappop(services)
+            service = topology["services"][service_id]
             if number_of_runs[service.name] >= service.maximum_runs:
                 continue
             number_of_runs[service.name] += 1
-            visited.add(service)
+            visited.add(service_id)
             if service in (start, end) or service.skip.get(self.name, False):
                 success = service.skip_value == "success"
                 results = {"result": "skipped", "success": success}
-                if tracking_bfs or device:
-                    results["summary"] = {
-                        "success": targets[service.name],
-                        "failure": [],
-                    }
+                if not SxS:
+                    results["summary"] = defaultdict(
+                        list, success=targets[service.name]
+                    )
             else:
+                service_kw = service
+                if not run.high_performance:
+                    service_kw = db.fetch("service", id=service_id, rbac=None)
                 kwargs = {
-                    "service": (
-                        run.placeholder
-                        if service.scoped_name == "Placeholder"
-                        else service
-                    ),
+                    "service": service_kw,
                     "workflow": self,
-                    "restart_run": restart_run,
                     "parent": run,
                     "parent_runtime": run.parent_runtime,
                     "workflow_run_method": run.run_method,
                 }
-                if tracking_bfs or device:
-                    kwargs["target_devices"] = []
+                if not SxS:
+                    kwargs["run_targets"] = []
                     for name in targets[service.name]:
                         if name not in device_store:
                             device_store[name] = db.fetch("device", name=name)
-                        kwargs["target_devices"].append(device_store[name])
+                        kwargs["run_targets"].append(device_store[name])
                 if run.parent_device:
                     kwargs["parent_device"] = run.parent_device
                 service_run = Runner(run, payload=run.payload, **kwargs)
-                service_run.start_run()
-                results = service_run.results
+                results = service_run.start_run()
                 if not results:
                     continue
             status = "success" if results["success"] else "failure"
+            next_edge = results.get("outgoing_edge", status)
             summary = results.get("summary", {})
             if not tracking_bfs and not device:
-                run.write_state(f"progress/service/{status}", 1, "increment")
-            for edge_type in ("success", "failure"):
-                if not tracking_bfs and edge_type != status:
+                run.write_state(f"progress/service/{next_edge}", 1, "increment")
+            for edge_id, successor_id in topology["neighbors"][(self.id, service_id)]:
+                edge = topology["edges"][edge_id]
+                successor = topology["services"][successor_id]
+                next_targets = summary.get(edge.subtype)
+                if not next_targets and (not SxS or edge.subtype != next_edge):
                     continue
-                if (tracking_bfs or device) and not summary.get(edge_type):
-                    continue
-                for edge in service.neighbors(self, edge_type):
-                    successor = edge.destination
-                    if successor.soft_deleted:
-                        continue
-                    if tracking_bfs or device:
-                        targets[successor.name] |= set(summary[edge_type])
-                    heappush(services, ((1 / successor.priority, successor)))
-                    if tracking_bfs or device:
-                        run.write_state(
-                            f"edges/{edge.id}", len(summary[edge_type]), "increment"
-                        )
-                    else:
-                        run.write_state(f"edges/{edge.id}", "DONE")
-        if tracking_bfs or device:
+                if not SxS:
+                    targets[successor.name] |= set(next_targets)
+                heappush(services, ((1 / successor.priority, successor.id)))
+                edge_state = ("Done",) if SxS else (len(next_targets), "increment")
+                run.write_state(f"edges/{edge_id}", *edge_state, top_level=True)
+        if SxS:
+            results = {"success": end.id in visited}
+        else:
             failed = list(targets[start.name] - targets[end.name])
             summary = {"success": list(targets[end.name]), "failure": failed}
             results = {"success": not failed, "summary": summary}
-        else:
-            results = {"success": end in visited}
-        run.restart_run = restart_run
         return results
 
 
@@ -253,19 +249,6 @@ class WorkflowForm(ServiceForm):
         ),
         no_search=True,
     )
-    man_minutes = IntegerField(
-        "Minutes to Complete Task Manually", [NumberRange(min=0)], default=0
-    )
-    man_minutes_type = SelectField(
-        "Type of Minutes",
-        choices=(
-            ("workflow", "For the whole workflow"),
-            ("device", "Per Device"),
-        ),
-    )
-    man_minutes_total = IntegerField(
-        "Total Number of Minutes", default=0, render_kw={"readonly": True}
-    )
     superworkflow = InstanceField(
         "Superworkflow",
         constraints={"children": ["[Shared] Placeholder"], "children_filter": "union"},
@@ -273,26 +256,10 @@ class WorkflowForm(ServiceForm):
 
     def validate(self, **_):
         valid_form = super().validate()
-        invalid_man_minutes_error = (
-            vs.automation["workflow"]["mandatory_man_minutes"]
-            and not self.workflows.data
-            and not self.man_minutes.data
-        )
-        if invalid_man_minutes_error:
-            self.man_minutes.errors.append(
-                "The 'Man Minutes' Parameter cannot be set to 0."
-            )
-        invalid_man_minutes_type_error = (
-            self.man_minutes.data
-            and self.run_method.data == "per_service_with_service_targets"
-            and self.man_minutes_type.data == "device"
-        )
-        if invalid_man_minutes_type_error:
-            self.man_minutes_type.errors.append(
-                (
-                    "'Per Device' Man Minutes Type is not compatible"
-                    " with the 'Service Targets' Run Method."
-                )
+        invalid_superworkflow = str(self.id.data) == str(self.superworkflow.data)
+        if invalid_superworkflow:
+            self.superworkflow.errors.append(
+                "You cannot set a workflow to be its own superworkflow."
             )
         invalid_targets_error = (
             self.run_method.data == "per_service_with_service_targets"
@@ -311,8 +278,7 @@ class WorkflowForm(ServiceForm):
             )
         return valid_form and not any(
             [
-                invalid_man_minutes_type_error,
-                invalid_man_minutes_error,
+                invalid_superworkflow,
                 invalid_targets_error,
             ]
         )
@@ -322,6 +288,7 @@ class WorkflowEdge(AbstractBase):
     __tablename__ = type = class_type = "workflow_edge"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    creation_time = db.Column(db.TinyString)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     last_modified_by = db.Column(db.SmallString, info={"log_change": False})
     soft_deleted = db.Column(Boolean, default=False)
@@ -334,7 +301,6 @@ class WorkflowEdge(AbstractBase):
         primaryjoin="Service.id == WorkflowEdge.source_id",
         backref=backref("destinations", cascade="all, delete-orphan"),
         foreign_keys="WorkflowEdge.source_id",
-        lazy="joined",
     )
     destination_id = db.Column(Integer, ForeignKey("service.id"))
     destination = relationship(
@@ -342,14 +308,12 @@ class WorkflowEdge(AbstractBase):
         primaryjoin="Service.id == WorkflowEdge.destination_id",
         backref=backref("sources", cascade="all, delete-orphan"),
         foreign_keys="WorkflowEdge.destination_id",
-        lazy="joined",
     )
-    workflow_id = db.Column(Integer, ForeignKey("workflow.id"))
+    workflow_id = db.Column(Integer, ForeignKey("workflow.id", ondelete="SET NULL"))
     workflow = relationship(
         "Workflow",
         back_populates="edges",
         foreign_keys="WorkflowEdge.workflow_id",
-        lazy="joined",
     )
     logs = relationship("Changelog", back_populates="workflow_edge")
     __table_args__ = (
@@ -364,8 +328,6 @@ class WorkflowEdge(AbstractBase):
     def update(self, **kwargs):
         super().update(**kwargs)
         self.set_name(kwargs.get("name"))
-        if not kwargs.get("migration_import"):
-            self.update_last_modified_properties()
 
     def set_name(self, name=None):
         self.name = name or f"[{self.workflow}] {vs.get_time()}"

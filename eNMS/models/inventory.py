@@ -1,12 +1,12 @@
-from re import search, sub
+from itertools import batched
 from sqlalchemy import and_, Boolean, event, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, deferred, relationship
 from sqlalchemy.schema import UniqueConstraint
 
 from eNMS.controller import controller
-from eNMS.models.base import AbstractBase
 from eNMS.database import db
+from eNMS.models.base import AbstractBase
 from eNMS.variables import vs
 
 
@@ -15,7 +15,9 @@ class Object(AbstractBase):
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
+    persistent_id = db.Column(db.TinyString)
     creator = db.Column(db.SmallString)
+    creation_time = db.Column(db.TinyString)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     last_modified_by = db.Column(db.SmallString, info={"log_change": False})
     subtype = db.Column(db.SmallString)
@@ -24,12 +26,14 @@ class Object(AbstractBase):
     location = db.Column(db.SmallString)
     vendor = db.Column(db.SmallString)
 
-    def update(self, **kwargs):
-        super().update(**kwargs)
-        if not hasattr(self, "class_type") or self.class_type == "network":
-            return
-        if not kwargs.get("migration_import"):
-            self.update_last_modified_properties()
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if not self.persistent_id:
+            self.persistent_id = vs.get_persistent_id()
+
+    @property
+    def base_properties(self):
+        return {**super().base_properties, "persistent_id": self.persistent_id}
 
     def delete(self):
         number = f"{self.class_type}_number"
@@ -38,21 +42,24 @@ class Object(AbstractBase):
         for pool in self.pools:
             setattr(pool, number, getattr(pool, number) - 1)
 
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        if not hasattr(self, "class_type") or self.class_type == "network":
+            return
+
 
 class Device(Object):
     __tablename__ = class_type = export_type = "device"
     __mapper_args__ = {"polymorphic_identity": "device"}
-    pretty_name = "Device"
     parent_type = "object"
     id = db.Column(Integer, ForeignKey(Object.id), primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    positions = deferred(db.Column(db.Dict, info={"log_change": False}))
     latitude = db.Column(db.TinyString, default="0.0")
     longitude = db.Column(db.TinyString, default="0.0")
     icon = db.Column(db.TinyString, default="router")
     operating_system = db.Column(db.SmallString)
     os_version = db.Column(db.SmallString)
-    ip_address = db.Column(db.TinyString)
+    ip_address = db.Column(db.TinyString, index=True)
     port = db.Column(Integer, default=22)
     netmiko_driver = db.Column(db.TinyString, default="cisco_ios")
     napalm_driver = db.Column(db.TinyString, default="ios")
@@ -61,7 +68,6 @@ class Device(Object):
     configuration = deferred(db.Column(db.LargeString, info={"log_change": False}))
     operational_data = deferred(db.Column(db.LargeString, info={"log_change": False}))
     specialized_data = deferred(db.Column(db.LargeString, info={"log_change": False}))
-    serialized = deferred(db.Column(db.LargeString, info={"log_change": False}))
     gateways = relationship(
         "Gateway", secondary=db.device_gateway_table, back_populates="devices"
     )
@@ -87,20 +93,16 @@ class Device(Object):
     )
     logs = relationship("Changelog", back_populates="device")
 
-    def update(self, **kwargs):
-        if self.positions and "positions" in kwargs:
-            kwargs["positions"] = {**self.positions, **kwargs["positions"]}
-        super().update(**kwargs)
-        self.serialized = str(self.get_properties()).lower()
-
-    def post_update(self):
-        return self.to_dict(include_relations=["networks"])
+    def __repr__(self):
+        return f"{self.name} ({self.model})" if self.model else str(self.name)
 
     @classmethod
     def database_init(cls):
         for property in vs.configuration_properties:
             for timestamp in vs.timestamps:
-                column = db.Column(db.SmallString, default="Never")
+                column = db.Column(
+                    db.SmallString, default="Never", info={"log_change": False}
+                )
                 setattr(cls, f"last_{property}_{timestamp}", column)
         return cls
 
@@ -132,60 +134,20 @@ class Device(Object):
             )
 
     def table_properties(self, **kwargs):
-        columns = [column["data"] for column in kwargs["columns"]]
-        rest_api_request = kwargs.get("rest_api_request")
-        include_properties = columns if rest_api_request else None
-        properties = super().get_properties(include=include_properties)
-        context = int(kwargs["form"].get("context-lines", 0))
-        for property in vs.configuration_properties:
-            if rest_api_request:
-                if property in columns:
-                    properties[property] = getattr(self, property)
-                if f"{property}_matches" not in columns:
-                    continue
-            data = kwargs["form"].get(property)
-            regex_match = kwargs["form"].get(f"{property}_filter") == "regex"
-            if not data:
-                properties[property] = ""
-            else:
-                result = []
-                content, visited = getattr(self, property).splitlines(), set()
-                for index, line in enumerate(content):
-                    match_lines, merge = [], index - context - 1 in visited
-                    if (
-                        not search(data, line)
-                        if regex_match
-                        else data.lower() not in line.lower()
-                    ):
-                        continue
-                    for i in range(-context, context + 1):
-                        if index + i < 0 or index + i > len(content) - 1:
-                            continue
-                        if index + i in visited:
-                            merge = True
-                            continue
-                        visited.add(index + i)
-                        line = content[index + i].strip()
-                        if rest_api_request:
-                            match_lines.append(f"L{index + i + 1}: {line}")
-                            continue
-                        line = sub(f"(?i){data}", r"<mark>\g<0></mark>", line)
-                        match_lines.append(f"<b>L{index + i + 1}:</b> {line}")
-                    if rest_api_request:
-                        result.extend(match_lines)
-                    else:
-                        if merge:
-                            result[-1] += f"<br>{'<br>'.join(match_lines)}"
-                        else:
-                            result.append("<br>".join(match_lines))
-                if rest_api_request:
-                    properties[f"{property}_matches"] = result
-                else:
-                    properties[property] = "".join(
-                        f"<pre style='text-align: left'>{match}</pre>"
-                        for match in result
-                    )
-        return properties
+        properties = super().table_properties(**kwargs)
+        search_properties = super().table_search(vs.configuration_properties, **kwargs)
+        return {**properties, **search_properties}
+
+    @property
+    def ui_name(self):
+        return f"{self.name} ({self.model})" if self.model else str(self.name)
+
+    def update(self, **kwargs):
+        old_name = self.name
+        super().update(**kwargs)
+        if not kwargs.get("migration_import") and self.name != old_name:
+            for network in self.networks:
+                network.positions[self.name] = network.positions.pop(old_name, [0, 0])
 
     @property
     def view_properties(self):
@@ -199,25 +161,23 @@ class Device(Object):
         )
         return {property: getattr(self, property) for property in properties}
 
-    @property
-    def ui_name(self):
-        return f"{self.name} ({self.model})" if self.model else str(self.name)
-
-    def __repr__(self):
-        return f"{self.name} ({self.model})" if self.model else str(self.name)
-
 
 class Link(Object):
     __tablename__ = class_type = export_type = "link"
     __mapper_args__ = {"polymorphic_identity": "link"}
-    pretty_name = "Link"
     parent_type = "object"
     id = db.Column(Integer, ForeignKey("object.id"), primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     color = db.Column(db.TinyString, default="#000000")
-    source_id = db.Column(Integer, ForeignKey("device.id"), info={"log_change": False})
+    source_id = db.Column(
+        Integer,
+        ForeignKey("device.id", ondelete="SET NULL"),
+        info={"log_change": False},
+    )
     destination_id = db.Column(
-        Integer, ForeignKey("device.id"), info={"log_change": False}
+        Integer,
+        ForeignKey("device.id", ondelete="SET NULL"),
+        info={"log_change": False},
     )
     source = relationship(
         Device,
@@ -238,6 +198,20 @@ class Link(Object):
     logs = relationship("Changelog", back_populates="link")
     __table_args__ = (UniqueConstraint(name, source_id, destination_id),)
 
+    def update(self, **kwargs):
+        if "source_name" in kwargs:
+            kwargs["source"] = db.fetch(
+                "device", name=kwargs.pop("source_name"), rbac=kwargs.get("rbac")
+            ).id
+            kwargs["destination"] = db.fetch(
+                "device", name=kwargs.pop("destination_name"), rbac=kwargs.get("rbac")
+            ).id
+        if "source" in kwargs and "destination" in kwargs:
+            kwargs.update(
+                {"source_id": kwargs["source"], "destination_id": kwargs["destination"]}
+            )
+        super().update(**kwargs)
+
     @property
     def view_properties(self):
         node_properties = ("id", "longitude", "latitude")
@@ -256,18 +230,6 @@ class Link(Object):
             },
         }
 
-    def update(self, **kwargs):
-        if "source_name" in kwargs:
-            kwargs["source"] = db.fetch("device", name=kwargs.pop("source_name")).id
-            kwargs["destination"] = db.fetch(
-                "device", name=kwargs.pop("destination_name")
-            ).id
-        if "source" in kwargs and "destination" in kwargs:
-            kwargs.update(
-                {"source_id": kwargs["source"], "destination_id": kwargs["destination"]}
-            )
-        super().update(**kwargs)
-
 
 class Pool(AbstractBase):
     __tablename__ = type = class_type = "pool"
@@ -276,6 +238,7 @@ class Pool(AbstractBase):
     name = db.Column(db.SmallString, unique=True)
     manually_defined = db.Column(Boolean, default=False)
     creator = db.Column(db.SmallString)
+    creation_time = db.Column(db.TinyString)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     last_modified_by = db.Column(db.SmallString, info={"log_change": False})
     description = db.Column(db.LargeString)
@@ -293,6 +256,60 @@ class Pool(AbstractBase):
         back_populates="device_pools",
     )
     logs = relationship("Changelog", back_populates="pool")
+
+    def compute_pool(self, commit=False):
+        def transaction():
+            for model in self.models:
+                if not self.manually_defined:
+                    kwargs = {"bulk": "object", "rbac": None, "form": {}}
+                    for property in vs.properties["filtering"][model]:
+                        value = getattr(self, f"{model}_{property}")
+                        match_type = getattr(self, f"{model}_{property}_match")
+                        invert_type = getattr(self, f"{model}_{property}_invert")
+                        if not value and match_type != "empty":
+                            continue
+                        kwargs["form"].update(
+                            {
+                                property: value,
+                                f"{property}_filter": match_type,
+                                f"{property}_invert": invert_type,
+                            }
+                        )
+                    fast_compute = vs.settings["pool"]["fast_compute"]
+                    if kwargs["form"]:
+                        if model == "device" and not self.include_networks:
+                            kwargs["sql_contraints"] = [
+                                vs.models["device"].type != "network"
+                            ]
+                        if fast_compute:
+                            kwargs["properties"] = ["id"]
+                        instances = controller.filtering(model, **kwargs)
+                    else:
+                        instances = []
+                    if fast_compute:
+                        table = getattr(db, f"pool_{model}_table")
+                        db.session.execute(
+                            table.delete().where(table.c.pool_id == self.id)
+                        )
+                        if instances:
+                            values = [
+                                {"pool_id": self.id, f"{model}_id": instance.id}
+                                for instance in instances
+                            ]
+                            for batch in batched(
+                                values, vs.database["transactions"]["batch_size"]
+                            ):
+                                db.session.execute(table.insert(), batch)
+                    else:
+                        setattr(self, f"{model}s", instances)
+                else:
+                    instances = getattr(self, f"{model}s")
+                setattr(self, f"{model}_number", len(instances))
+
+        if commit:
+            db.try_commit(transaction)
+        else:
+            transaction()
 
     @classmethod
     def configure_events(cls):
@@ -348,60 +365,6 @@ class Pool(AbstractBase):
 
     def post_update(self):
         self.compute_pool()
-        return super().post_update()
-
-    def update(self, **kwargs):
-        super().update(**kwargs)
-        if not kwargs.get("migration_import"):
-            self.update_last_modified_properties()
-
-    def compute_pool(self):
-        def transaction():
-            for model in self.models:
-                if not self.manually_defined:
-                    kwargs = {"bulk": "object", "rbac": None, "form": {}}
-                    for property in vs.properties["filtering"][model]:
-                        value = getattr(self, f"{model}_{property}")
-                        match_type = getattr(self, f"{model}_{property}_match")
-                        invert_type = getattr(self, f"{model}_{property}_invert")
-                        if not value and match_type != "empty":
-                            continue
-                        kwargs["form"].update(
-                            {
-                                property: value,
-                                f"{property}_filter": match_type,
-                                f"{property}_invert": invert_type,
-                            }
-                        )
-                    fast_compute = vs.settings["pool"]["fast_compute"]
-                    if kwargs["form"]:
-                        if model == "device" and not self.include_networks:
-                            kwargs["sql_contraints"] = [
-                                vs.models["device"].type != "network"
-                            ]
-                        if fast_compute:
-                            kwargs["properties"] = ["id"]
-                        instances = controller.filtering(model, **kwargs)
-                    else:
-                        instances = []
-                    if fast_compute:
-                        table = getattr(db, f"pool_{model}_table")
-                        db.session.execute(
-                            table.delete().where(table.c.pool_id == self.id)
-                        )
-                        if instances:
-                            values = [
-                                {"pool_id": self.id, f"{model}_id": instance.id}
-                                for instance in instances
-                            ]
-                            db.session.execute(table.insert().values(values))
-                    else:
-                        setattr(self, f"{model}s", instances)
-                else:
-                    instances = getattr(self, f"{model}s")
-                setattr(self, f"{model}_number", len(instances))
-
-        db.try_commit(transaction)
 
 
 class Session(AbstractBase):
@@ -417,3 +380,17 @@ class Session(AbstractBase):
         "Device", back_populates="sessions", foreign_keys="Session.device_id"
     )
     device_name = association_proxy("device", "name")
+    server_id = db.Column(Integer, ForeignKey("server.id"))
+    server = relationship(
+        "Server", back_populates="sessions", foreign_keys="Session.server_id"
+    )
+    server_name = association_proxy("server", "name")
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.owners = [db.fetch("user", name=self.username)]
+
+    def table_properties(self, **kwargs):
+        properties = super().table_properties(**kwargs)
+        search_properties = super().table_search(("content",), **kwargs)
+        return {**properties, **search_properties}

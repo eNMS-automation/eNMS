@@ -1,0 +1,24 @@
+[
+  {
+    "authentication": "database",
+    "creation_time": "2025-02-07 07:55:14.602707",
+    "creator": "",
+    "delete_requests": [],
+    "description": "",
+    "display_tree": false,
+    "email": "admin@enms.io",
+    "get_requests": [],
+    "is_admin": true,
+    "landing_page": "/dashboard",
+    "last_modified": "",
+    "last_modified_by": "",
+    "menu": [],
+    "name": "admin",
+    "pages": [],
+    "password": "JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRNaWFrOVA3Zit6OW5qSEd1RmVLOGR3JEhLWk5VWnVpMnlObkt5QnRHNFR4WEE=",
+    "post_requests": [],
+    "small_menu": false,
+    "theme": "default",
+    "zoom_sensitivity": 1.0
+  }
+]

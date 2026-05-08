@@ -1,9 +1,20 @@
 {
+  "configuration_backup": {
+    "folder": "network_data"
+  },
   "connections": {
-    "enforce_threshold": false,
+    "enforce_threshold": true,
     "threshold": 100,
     "log_level": "warning",
     "raise_exception": false
+  },
+  "file_transfer": {
+    "load_known_host_keys": false
+  },
+  "notification": {
+    "mail": "Mail",
+    "slack": "Slack",
+    "mattermost": "Mattermost"
   },
   "napalm": {
     "getters": [
@@ -59,6 +70,7 @@
   ],
   "workflow": {
     "logs_refresh_rate": 1000,
+    "logs_rolling_window": 0,
     "builder_refresh_rate": {
       "min": 5000,
       "max": 60000,
@@ -68,14 +80,15 @@
       "delete": ["device", "link", "pool", "service"],
       "fetch": ["device", "link", "pool", "service", "run"],
       "fetch_all": ["device", "link", "pool", "service", "run"],
-      "factory": ["device", "link", "pool"]
+      "factory": ["device", "link", "pool"],
+      "filtering": ["device", "link", "pool"]
     },
-    "mandatory_man_minutes": false,
     "state_properties": {
       "run": ["id", "creator", "runtime", "status"],
       "service": [
         "dry_run",
         "id",
+        "persistent_id",
         "name",
         "scoped_name",
         "type",
@@ -89,7 +102,6 @@
   },
   "advanced": {
     "always_commit": false,
-    "refetch_after_process_fork": true,
     "disconnect_thread_timeout": 10,
     "task_jitter": 0,
     "truncate_logs": {

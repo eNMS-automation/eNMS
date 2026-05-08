@@ -1,4 +1,5 @@
 # Migrate Between Application Instances
+
 Allows you to migrate the service from one application instance to another provided they are on the same release
 
 **Method**: Post<br />
@@ -17,7 +18,8 @@ before importing.
 {
   "name": "test_project",
   "import_export_types": ["user", "group", "device", "file", "link", "service", "network", "workflow_edge", "task", "credential", "pool"],
-  "empty_database_before_import": true
+  "export_private_properties": true,
+  "empty_database_before_import": false
 }
 ```
 
@@ -33,6 +35,7 @@ post(
     json={
         "name": "Backup",
         "empty_database_before_import": False,
+        "export_private_properties": True,
         "import_export_types": ["user", "group", "device", "file", "link", "service", "network", "workflow_edge", "task", "credential", "pool"],
     },
     headers={'content-type': 'application/json'},
@@ -40,7 +43,7 @@ post(
 )
 ```
 
--   Topology Import / Export
+- Topology Import / Export
 
 The import and export loads or stores a `.xls` file containing the topology.
 This is triggered using a POST request to the following URLs:

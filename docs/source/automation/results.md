@@ -61,6 +61,15 @@ single Service and Device.
 
 ![Results Table](../_static/automation/results/results_viewer_3.png)
 
+## Result Color in the Workflow Builder
+
+In the Workflow Builder, results appear green if a service runs successfully, and red otherwise.
+You can customize the colors for each device by adding a "color" key in the results, either by specifying a color name (`"color": "red"`) or a hexadecimal code (`"color": "#123456"`).
+
+When you switch to Per-Device Result Display (by opening the Workflow Builder `Search` Panel and selecting a device from the `Device Filtering drop-down`), the results for that device will display using the specified color in the Workflow Builder.
+
+![Results Coloring](../_static/automation/results/results_coloring.jpg)
+
 ## Other ways to view results 
 
 Results can be also be viewed from: 

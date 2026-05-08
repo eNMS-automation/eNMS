@@ -125,12 +125,22 @@ block stylesheets %} {{ super() }}
           ><span class="glyphicon glyphicon-play"></span
         ></a>
       </li>
-      <li id="network-tree-btn">
+      <li
+        id="network-tree-btn"
+        {%
+        if
+        current_user.display_tree
+        %}
+        class="active"
+        {%
+        endif
+        %}
+      >
         <a
           onclick="eNMS.builder.toggleTree()"
           data-tooltip="Network Tree"
           style="cursor: pointer"
-          ><span class="fa fa-sitemap" style="transform: rotate(270deg)"></span
+          ><span class="fa fa-sitemap fa-rotate-270"></span
         ></a>
       </li>
       <li>
@@ -233,7 +243,17 @@ block stylesheets %} {{ super() }}
   </li>
 </ul>
 {% endblock left_frame %} {% block right_frame %}
-<div id="network-tree" style="display: none">
+<div
+  id="network-tree"
+  {%
+  if
+  not
+  current_user.display_tree
+  %}style="display: none"
+  {%
+  endif
+  %}
+>
   <div style="display: flex; flex-direction: column">
     <div id="network-tree-control" style="margin-top: 10px; margin-left: 30px"></div>
     <div

@@ -1,7 +1,7 @@
 <div class="modal-body">
   <div>
     <p>
-      The <b>pre-processing</b> parameter provides the ability to run Python code to
+      The <b>pre-processing</b> section provides the ability to run Python code to
       modify or check prior results.
     </p>
     <p>
@@ -21,10 +21,10 @@
         device=device.name)
   log("info", f"Data retrieved on device={device.name}"
       f"with ip={device.ip_address}, version={version}")
-  if (version != "1.0.1"):
+  if version != "1.0.1":
       set_var("target_version", "1.0.1", device=device.name)
       set_var("upgrade_needed", True, device=device.name)
-  else
+  else:
       set_var("upgrade_needed", False, device=device.name)</textarea
       >
     </p>
@@ -34,9 +34,9 @@
     <h3>Logging</h3>
     For best visibility, it is recommended that you use the 'log' function. You can also
     'import logging'; however, those logs are only seen in the server logs
-    <code>log(severity, message, logger=logger)</code> where severity is "info",
-    "error", "warning", or "critical" and logger is omitted (default), "security", or
-    some other user configured logger in settings
+    <code>log(severity, message, logger=logger)</code> where severity is "debug",
+    "info", "error", "warning", or "critical" and logger is optional, which can be
+    "root" (default), "security" or some other user configured logger in settings
     <p>
       Workflow Example:
       <textarea class="help-snippet" style="height: fit-content">
@@ -47,7 +47,7 @@
   </div>
 
   <div>
-    <h3>Retrieving previous results get_result</h3>
+    <h3>Retrieving previous results via get_result</h3>
     <textarea class="help-snippet" style="height: fit-content">
 r = get_result("previous_service", device=device.name)
 r = get_result("run_once_service")</textarea
@@ -77,6 +77,14 @@ set_var("ip_addresses", ["127.0.0.1", "192.168.0.1" ],
     >
   </div>
   <div>
+    <h3>Set 'Dry Run' mode programmatically</h3>
+    You can programatifally turn on (or off) the 'Dry Run' mode:
+    <textarea class="help-snippet" style="height: fit-content">
+self.dry_run = True</textarea
+    >
+    This enables setting the mode dynamically based on payload or other custom logic.
+  </div>
+  <div>
     <h3>Additional information on available variables</h3>
     See also: Using python code in the Service Editor Panel in the Automation->Services
     documentation section.
@@ -84,8 +92,8 @@ set_var("ip_addresses", ["127.0.0.1", "192.168.0.1" ],
   <div>
     <h3>Allowed imports</h3>
     <p>
-      For security reasons the Python modules 'os', 'sys', and 'subprocess' are not
-      allowed; other standard Python 3 libraries can be imported.
+      For security reasons, the Python modules 'os', 'sys', and 'subprocess' are not
+      allowed to be imported; other standard Python 3 libraries can be imported.
     </p>
   </div>
 </div>

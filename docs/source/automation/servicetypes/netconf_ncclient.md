@@ -48,7 +48,9 @@ is selected:
 
 - `Commit`: Commit now? (or make more changes).
 
-- `Unlock target`: Valid only for Edit Config Mode.
+- `Unlock target`: Locking prevents other users or applications
+  from changing the candidate configuration until the lock is released 
+  with the Unlock option.
 
 - `Error option`:
 
@@ -57,7 +59,9 @@ is selected:
     - `Rollback on error`
     - `None`
 
-- `Lock target`: Valid only for Edit Config Mode.
+- `Lock target`: Locking prevents other users or applications
+  from changing the candidate configuration until the lock is released 
+  with the Unlock option.
 
 - `Config test option`: 
 
@@ -113,7 +117,7 @@ is selected:
 
 ![Netconf Dispatch](../../_static/automation/service_types/netconf_dispatch.png)
 
-- `XML Filter`: XML content to send as a filter to the device.
+- `XML Filter`: Dispatch an RPC command to the device using this XML content as the payload.
 
 - `Convert XML result to dictionary`: Converts the Netconf xml response to dict
   using `xml2dict`.

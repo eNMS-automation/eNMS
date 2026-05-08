@@ -1,13 +1,13 @@
-from flask_login import current_user, UserMixin
 from datetime import datetime
+from flask_login import current_user, UserMixin
 from itertools import chain
 from os import kill, makedirs
-from os.path import exists, getmtime
+from os.path import exists, getmtime, getsize
 from passlib.hash import argon2
 from pathlib import Path
 from shutil import move, rmtree
 from signal import SIGTERM
-from sqlalchemy import Boolean, ForeignKey, Integer, Float
+from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import JSON
@@ -19,11 +19,27 @@ from eNMS.models.base import AbstractBase
 from eNMS.variables import vs
 
 
+class Snippet(AbstractBase):
+    __tablename__ = type = class_type = "snippet"
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    category = db.Column(db.SmallString)
+    creator = db.Column(db.SmallString)
+    creation_time = db.Column(db.TinyString)
+    code = db.Column(db.LargeString)
+    description = db.Column(db.LargeString)
+    version = db.Column(db.TinyString)
+    last_modified = db.Column(db.TinyString, info={"log_change": False})
+    last_modified_by = db.Column(db.SmallString, info={"log_change": False})
+    logs = relationship("Changelog", back_populates="snippet")
+
+
 class Server(AbstractBase):
     __tablename__ = type = class_type = "server"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     creator = db.Column(db.SmallString)
+    creation_time = db.Column(db.TinyString)
     description = db.Column(db.LargeString)
     role = db.Column(db.TinyString, default="primary")
     mac_address = db.Column(db.TinyString)
@@ -33,6 +49,8 @@ class Server(AbstractBase):
     location = db.Column(db.SmallString)
     version = db.Column(db.TinyString)
     commit_sha = db.Column(db.TinyString)
+    last_modified = db.Column(db.TinyString, info={"log_change": False})
+    last_modified_by = db.Column(db.SmallString, info={"log_change": False})
     last_restart = db.Column(db.TinyString)
     weight = db.Column(Integer, default=1)
     allowed_automation = db.Column(db.List)
@@ -40,6 +58,7 @@ class Server(AbstractBase):
     logs = relationship("Changelog", back_populates="server")
     runs = relationship("Run", back_populates="server")
     workers = relationship("Worker", back_populates="server")
+    sessions = relationship("Session", back_populates="server")
     model_properties = {"current_runs": "str"}
 
     @property
@@ -61,7 +80,7 @@ class Worker(AbstractBase):
     last_update = db.Column(db.TinyString)
     runs = relationship("Run", back_populates="worker")
     server_id = db.Column(Integer, ForeignKey("server.id"))
-    server = relationship("Server", back_populates="workers", lazy="joined")
+    server = relationship("Server", back_populates="workers")
     server_name = association_proxy("server", "name")
     model_properties = {"current_runs": "str", "server_properties": "dict"}
 
@@ -72,9 +91,9 @@ class Worker(AbstractBase):
     def delete(self):
         try:
             env.log("critical", f"Sending SIGTERM signal to process ID {self.name}")
-            kill(int(self.name), SIGTERM)
+            kill(int(self.process_id), SIGTERM)
         except Exception as exc:
-            return f"Failed to deleted process: {exc}"
+            return {"log": f"Failed to deleted process: {exc}"}
 
     @property
     def server_properties(self):
@@ -94,14 +113,18 @@ class User(AbstractBase, UserMixin):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     creator = db.Column(db.SmallString)
+    creation_time = db.Column(db.TinyString)
     description = db.Column(db.LargeString)
     groups = db.Column(db.LargeString)
     is_admin = db.Column(Boolean, default=False)
     last_login = db.Column(db.SmallString)
+    last_modified = db.Column(db.TinyString, info={"log_change": False})
+    last_modified_by = db.Column(db.SmallString, info={"log_change": False})
     email = db.Column(db.SmallString)
     landing_page = db.Column(
         db.SmallString, default=vs.settings["authentication"]["landing_page"]
     )
+    display_tree = db.Column(Boolean, default=False)
     password = db.Column(db.SmallString)
     authentication = db.Column(db.TinyString, default="database")
     small_menu = db.Column(Boolean, default=False, info={"log_change": False})
@@ -128,9 +151,17 @@ class User(AbstractBase, UserMixin):
 
     def post_update(self):
         self.update_rbac()
-        return self.get_properties()
 
     def update(self, **kwargs):
+        if not getattr(current_user, "is_admin", True):
+            properties = ["is_admin", "groups"]
+            allow_password_change = vs.settings["authentication"][
+                "allow_password_change"
+            ]
+            if not allow_password_change or self.authentication != "database":
+                properties.append("password")
+            for property in properties:
+                kwargs.pop(property, None)
         if kwargs.get("password") and not kwargs["password"].startswith("$argon2i"):
             kwargs["password"] = argon2.hash(kwargs["password"])
         super().update(**kwargs)
@@ -148,14 +179,14 @@ class Group(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     creator = db.Column(db.SmallString)
+    creation_time = db.Column(db.TinyString)
     admin_only = db.Column(Boolean, default=False)
     force_read_access = db.Column(Boolean, default=False)
     description = db.Column(db.LargeString)
     email = db.Column(db.SmallString)
+    last_modified = db.Column(db.TinyString, info={"log_change": False})
+    last_modified_by = db.Column(db.SmallString, info={"log_change": False})
     users = relationship("User", secondary=db.user_group_table, back_populates="groups")
-    credentials = relationship(
-        "Credential", secondary=db.credential_group_table, back_populates="groups"
-    )
     logs = relationship("Changelog", back_populates="group")
 
     @classmethod
@@ -169,7 +200,7 @@ class Group(AbstractBase):
                     cls,
                     f"{property}_{model}s",
                     relationship(
-                        model.capitalize(),
+                        "".join(word.capitalize() for word in model.split("_")),
                         secondary=getattr(db, f"{model}_{property}_table"),
                         back_populates=property,
                     ),
@@ -198,6 +229,7 @@ class Credential(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     creator = db.Column(db.SmallString)
+    creation_time = db.Column(db.TinyString)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     last_modified_by = db.Column(db.SmallString, info={"log_change": False})
     role = db.Column(db.SmallString, default="read-write")
@@ -213,17 +245,7 @@ class Credential(AbstractBase):
         secondary=db.credential_device_table,
         back_populates="credential_devices",
     )
-    groups = relationship(
-        "Group",
-        secondary=db.credential_group_table,
-        back_populates="credentials",
-    )
     logs = relationship("Changelog", back_populates="credential")
-
-    def update(self, **kwargs):
-        super().update(**kwargs)
-        if not kwargs.get("migration_import"):
-            self.update_last_modified_properties()
 
 
 class Changelog(AbstractBase):
@@ -232,12 +254,15 @@ class Changelog(AbstractBase):
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "changelog", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.MediumString)
     time = db.Column(db.TinyString, index=True)
     content = db.Column(db.LargeString)
     severity = db.Column(db.TinyString, default="debug")
     author = db.Column(db.SmallString)
     history = db.Column(JSON, default={})
+    is_revertible = db.Column(Boolean, default=False)
     source = db.Column(db.SmallString)
+    target_id = db.Column(Integer)
     target_type = db.Column(db.SmallString)
     target_name = db.Column(db.MediumString)
     workflows = relationship(
@@ -255,7 +280,13 @@ class Changelog(AbstractBase):
     def database_init(cls):
         for model, class_name in vs.database["changelog_models"].items():
             kwargs = {"back_populates": "logs", "foreign_keys": f"Changelog.{model}_id"}
-            setattr(cls, f"{model}_id", db.Column(Integer, ForeignKey(f"{model}.id")))
+            setattr(
+                cls,
+                f"{model}_id",
+                db.Column(
+                    Integer, ForeignKey(f"{model}.id", ondelete="SET NULL"), index=True
+                ),
+            )
             setattr(cls, model, relationship(class_name, **kwargs))
 
     def __repr__(self):
@@ -266,6 +297,8 @@ class Changelog(AbstractBase):
         if not kwargs.get("author"):
             kwargs["author"] = getattr(current_user, "name", "")
         super().update(**kwargs)
+        self.is_revertible = bool(self.history and self.author)
+        self.name = f"{self.target_name} updated by {self.author}"
 
 
 class Parameters(AbstractBase):
@@ -278,7 +311,7 @@ class Parameters(AbstractBase):
 
 
 class File(AbstractBase):
-    __tablename__ = type = class_type = "file"
+    __tablename__ = class_type = export_type = "file"
     log_change = vs.settings["files"]["log_events"]
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "file", "polymorphic_on": type}
@@ -288,35 +321,33 @@ class File(AbstractBase):
     filename = db.Column(db.SmallString, index=True)
     path = db.Column(db.SmallString, unique=True)
     full_path = db.Column(db.SmallString, unique=True, info={"log_change": False})
+    creation_time = db.Column(db.TinyString)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     last_updated = db.Column(db.TinyString)
+    size = db.Column(db.SmallString)
     status = db.Column(db.TinyString)
-    folder_id = db.Column(Integer, ForeignKey("folder.id"))
-    folder = relationship(
-        "Folder", foreign_keys="Folder.folder_id", back_populates="files"
-    )
-    folder_path = db.Column(db.SmallString, info={"log_change": False})
+    folder_path = db.Column(db.SmallString, index=True, info={"log_change": False})
     logs = relationship("Changelog", back_populates="file")
 
     def update(self, move_file=True, **kwargs):
         old_path = self.full_path
         self.full_path = f"{vs.file_path}{kwargs['path']}"
-        if not str(Path(self.full_path).resolve()).startswith(f"{vs.file_path}/"):
-            raise Exception("The path resolves outside of the files folder.")
         super().update(**kwargs)
-        if exists(str(old_path)) and not exists(self.full_path) and move_file:
-            move(old_path, self.full_path)
         self.name = self.path.replace("/", ">")
         *split_folder_path, self.filename = self.full_path.split("/")
         self.folder_path = "/".join(split_folder_path)
-        self.folder = db.fetch(
-            "folder", full_path=self.folder_path, allow_none=True, rbac=None
-        )
+        if kwargs.get("migration_import"):
+            return
+        if not str(Path(self.full_path).resolve()).startswith(f"{vs.file_path}/"):
+            raise Exception("The path resolves outside of the files folder.")
+        if exists(str(old_path)) and not exists(self.full_path) and move_file:
+            move(old_path, self.full_path)
         if exists(self.full_path) and not kwargs.get("migration_import"):
             last_modified = datetime.strptime(ctime(getmtime(self.full_path)), "%c")
-            self.last_modified = last_modified
+            self.last_modified = str(last_modified)
+            self.size = getsize(self.full_path)
         if not kwargs.get("migration_import"):
-            self.last_updated = datetime.strptime(ctime(), "%c")
+            self.last_updated = str(datetime.strptime(ctime(), "%c"))
         self.status = "Updated"
 
     def delete(self):
@@ -342,21 +373,19 @@ class File(AbstractBase):
                 move(self.full_path, f"{trash}/{filename}")
 
 
+class GenericFile(File):
+    __tablename__ = "generic_file"
+    __mapper_args__ = {"polymorphic_identity": "generic_file"}
+    pretty_name = "Generic File"
+    parent_type = "file"
+    id = db.Column(Integer, ForeignKey("file.id", ondelete="cascade"), primary_key=True)
+
+
 class Folder(File):
     __tablename__ = "folder"
+    __mapper_args__ = {"polymorphic_identity": "folder"}
     pretty_name = "Folder"
-    parent_type = "file"
-    id = db.Column(Integer, ForeignKey("file.id"), primary_key=True)
-    files = relationship(
-        "File",
-        back_populates="folder",
-        foreign_keys="File.folder_id",
-        cascade="all, delete-orphan",
-    )
-    __mapper_args__ = {
-        "polymorphic_identity": "folder",
-        "inherit_condition": id == File.id,
-    }
+    id = db.Column(Integer, ForeignKey("file.id", ondelete="cascade"), primary_key=True)
 
     def __init__(self, **kwargs):
         full_path = f"{vs.file_path}{kwargs['path']}"
@@ -365,17 +394,42 @@ class Folder(File):
             makedirs(full_path)
 
 
-class Secret(AbstractBase):
-    __tablename__ = type = class_type = "secret"
+class Data(AbstractBase):
+    __tablename__ = type = class_type = export_type = "data"
+    type = db.Column(db.SmallString)
+    __mapper_args__ = {"polymorphic_identity": "data", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
+    persistent_id = db.Column(db.TinyString)
     name = db.Column(db.SmallString, unique=True)
+    path = db.Column(db.SmallString, unique=True)
+    scoped_name = db.Column(db.SmallString, default="")
+    description = db.Column(db.LargeString)
     creator = db.Column(db.SmallString)
+    creation_time = db.Column(db.TinyString)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     last_modified_by = db.Column(db.SmallString, info={"log_change": False})
-    description = db.Column(db.LargeString)
-    secret_value = db.Column(db.LargeString)
+    store_id = db.Column(Integer, ForeignKey("store.id", ondelete="SET NULL"))
+    store = relationship("Store", back_populates="data", foreign_keys="Data.store_id")
+    logs = relationship("Changelog", back_populates="data")
+    model_properties = {"ui_name": "str"}
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if not self.persistent_id:
+            self.persistent_id = vs.get_persistent_id()
 
     def update(self, **kwargs):
         super().update(**kwargs)
         if not kwargs.get("migration_import"):
-            self.update_last_modified_properties()
+            self.post_update()
+
+    def post_update(self):
+        if self.store:
+            self.path = f"{self.store.path}/{self.scoped_name}"
+        else:
+            self.path = f"/{self.scoped_name}"
+        self.name = self.path.replace("/", ">")
+
+    @property
+    def ui_name(self):
+        return self.path

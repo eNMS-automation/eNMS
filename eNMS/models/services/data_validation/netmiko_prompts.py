@@ -23,12 +23,10 @@ class NetmikoPromptsService(ConnectionService):
     response3 = db.Column(db.SmallString)
     driver = db.Column(db.SmallString)
     read_timeout = db.Column(Float, default=10.0)
-    read_timeout_override = db.Column(Float, default=0.0)
     conn_timeout = db.Column(Float, default=10.0)
     auth_timeout = db.Column(Float, default=0.0)
     banner_timeout = db.Column(Float, default=15.0)
-    fast_cli = db.Column(Boolean, default=False)
-    global_delay_factor = db.Column(Float, default=1.0)
+    global_delay_factor = db.Column(Float, default=0.1)
     cmd_verify = db.Column(Boolean, default=False)
     jump_on_connect = db.Column(Boolean, default=False)
     jump_command = db.Column(db.SmallString)
@@ -42,6 +40,7 @@ class NetmikoPromptsService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_prompts_service"}
 
+    @staticmethod
     def job(self, run, device):
         send_strings = (run.command, run.response1, run.response2, run.response3)
         expect_strings = (run.confirmation1, run.confirmation2, run.confirmation3, None)
